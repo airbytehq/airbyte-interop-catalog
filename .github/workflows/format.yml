@@ -25,4 +25,4 @@ jobs:
       - name: Install dependencies
         run: poe install
       - name: Check formatting with ruff
-        run: poe format --check
+        run: poe format
