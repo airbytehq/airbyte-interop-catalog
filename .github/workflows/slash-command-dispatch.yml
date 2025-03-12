@@ -43,19 +43,22 @@ jobs:
           startsWith(github.event.comment.body, '/') &&
           !steps.dispatch.outputs.dispatched
         run: |
-          HELP_TEXT="The following slash commands are available:
-
-- \`/fix\` - Corrects any linting or formatting issues
-- \`/lock\` - Re-locks dependencies and updates the dependency lock file
-- \`/test\` - Runs tests that require credentials (useful for community PRs)
-- \`/help\` - Shows this help message"
-          
           if [[ "${{ github.event.comment.body }}" == "/help" ]]; then
-            echo "body=$HELP_TEXT" >> $GITHUB_OUTPUT
-          else
-            echo "body=It looks like you are trying to enter a slash command. Either the slash command is unrecognized or you don't have access to call it.
+            echo 'body=The following slash commands are available:
 
-$HELP_TEXT" >> $GITHUB_OUTPUT
+- `/fix` - Corrects any linting or formatting issues
+- `/lock` - Re-locks dependencies and updates the dependency lock file
+- `/test` - Runs tests that require credentials (useful for community PRs)
+- `/help` - Shows this help message' >> $GITHUB_OUTPUT
+          else
+            echo 'body=It looks like you are trying to enter a slash command. Either the slash command is unrecognized or you don't have access to call it.
+
+The following slash commands are available:
+
+- `/fix` - Corrects any linting or formatting issues
+- `/lock` - Re-locks dependencies and updates the dependency lock file
+- `/test` - Runs tests that require credentials (useful for community PRs)
+- `/help` - Shows this help message' >> $GITHUB_OUTPUT
           fi
 
       - name: Post help message
