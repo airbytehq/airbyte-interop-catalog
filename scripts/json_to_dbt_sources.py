@@ -127,7 +127,10 @@ def create_dbt_source(
     schema: str | None = None,
 ) -> dict[str, Any]:
     """Create a dbt source definition with tables."""
-    source = {"name": source_name, "tables": tables}
+    # Sort tables alphabetically by name
+    sorted_tables = sorted(tables, key=lambda x: x.get("name", ""))
+    
+    source = {"name": source_name, "tables": sorted_tables}
 
     if database:
         source["database"] = database
