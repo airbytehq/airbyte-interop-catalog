@@ -30,6 +30,9 @@ jobs:
       - name: Create virtual environment
         run: uv venv
 
+      - name: Install poethepoet
+        run: uv pip install poethepoet
+
       - name: Install dependencies
         run: poe install
 

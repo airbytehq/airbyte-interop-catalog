@@ -22,6 +22,8 @@ jobs:
           python-version: "3.12"
       - name: Create virtual environment
         run: uv venv
+      - name: Install poethepoet
+        run: uv pip install poethepoet
       - name: Install dependencies
         run: poe install
       - name: Lint with ruff

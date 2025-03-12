@@ -21,7 +21,7 @@ jobs:
         run: uv venv
       - name: Install dependencies
         run: |
-          uv pip install build twine
+          uv pip install build twine poethepoet
       - name: Build and publish
         env:
           TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
