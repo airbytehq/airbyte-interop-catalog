@@ -15,7 +15,7 @@ jobs:
         uses: peter-evans/slash-command-dispatch@v4
         with:
           repository: ${{ github.repository }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ github.token }}
           dispatch-type: workflow
           issue-type: pull-request
           commands: |
