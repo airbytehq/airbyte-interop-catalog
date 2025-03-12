@@ -1,0 +1,102 @@
+name: On-Demand Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: "PR Number"
+        type: string
+        required: true
+      comment-id:
+        description: "Comment ID (Optional)"
+        type: string
+        required: false
+
+jobs:
+  start-workflow:
+    name: Append 'Starting' Comment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create URL to the run output
+        id: vars
+        run: echo "run-url=https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> $GITHUB_OUTPUT
+      - name: Append comment with job run link
+        id: first-comment-action
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          comment-id: ${{ github.event.inputs.comment-id }}
+          issue-number: ${{ github.event.inputs.pr }}
+          body: |
+            > PR test job started... [Check job output.][1]
+
+            [1]: ${{ steps.vars.outputs.run-url }}
+
+  test-on-demand:
+    name: On-Demand PR Test
+    needs: [start-workflow]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v4
+        with:
+          token: ${{ github.token }}
+      - name: Checkout PR (${{ github.event.inputs.pr }})
+        uses: dawidd6/action-checkout-pr@v1
+        with:
+          pr: ${{ github.event.inputs.pr }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+          
+      - name: Create virtual environment
+        run: uv venv
+        
+      - name: Install poethepoet
+        run: uv pip install poethepoet
+        
+      - name: Install dependencies
+        run: poe install
+
+      - name: Run tests
+        run: |
+          # This would run tests that require credentials
+          # For community PRs, this is useful since the workflow has access to secrets
+          # that are not available to workflows triggered by PRs from forks
+          poe pytest
+
+  log-success-comment:
+    name: Append 'Success' Comment
+    needs: [test-on-demand]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Append success comment
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.inputs.pr }}
+          comment-id: ${{ github.event.inputs.comment-id }}
+          reactions: hooray
+          body: |
+            > ✅ Tests passed.
+
+  log-failure-comment:
+    name: Append 'Failure' Comment
+    # This job will only run if the workflow fails
+    needs: [test-on-demand, start-workflow]
+    if: always() && needs.test-on-demand.result == 'failure'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Append failure comment
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.inputs.pr }}
+          comment-id: ${{ github.event.inputs.comment-id }}
+          reactions: confused
+          body: |
+            > ❌ Tests failed.
