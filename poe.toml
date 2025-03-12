@@ -1,5 +1,6 @@
 [tool.poe.tasks]
 # Development tasks
+install = { cmd = "uv sync --all-extras --all-groups", "Install and sync project dependencies." }
 format = { cmd = "ruff format .", help = "Format code with ruff" }
 lint = { cmd = "ruff check .", help = "Lint code with ruff" }
 typecheck = { cmd = "python -m basedpyright morph", help = "Type check code with basedpyright" }
