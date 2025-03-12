@@ -1,3 +1,5 @@
+# Source schema file snapshotted from: https://github.com/fivetran/dbt_hubspot_source/blob/main/models/src_hubspot.yml
+
 version: 2
 
 sources:
