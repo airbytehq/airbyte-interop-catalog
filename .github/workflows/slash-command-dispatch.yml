@@ -40,8 +40,8 @@ jobs:
       - name: Generate help text
         id: help
         if: >
-          startsWith(github.event.comment.body, '/') &&
-          !steps.dispatch.outputs.dispatched
+          startsWith(github.event.comment.body, '/help') ||
+          (startsWith(github.event.comment.body, '/') && !steps.dispatch.outputs.dispatched)
         run: |
           if [[ "${{ github.event.comment.body }}" == "/help" ]]; then
             echo "body<<EOF" >> $GITHUB_OUTPUT
