@@ -1,0 +1,102 @@
+# Ruff configuration for the Morph project
+# See https://docs.astral.sh/ruff/rules/ for rule documentation
+
+# Target Python version
+target-version = "py310"
+
+# Line length configuration
+line-length = 100
+
+# Enable autofix for all enabled rules
+fix = true
+
+# Allow imports relative to the "src" and "test" directories
+src = ["morph"]
+
+# Exclude files and directories from linting
+exclude = [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "build",
+    "dist",
+]
+
+[lint]
+# Select enabled rules
+# Explicitly enable common rules that should be enforced immediately
+select = [
+    "E",    # pycodestyle errors
+    "F",    # pyflakes
+    "I",    # isort
+    "B",    # flake8-bugbear
+    "C4",   # flake8-comprehensions
+    "UP",   # pyupgrade
+    "N",    # pep8-naming
+    "COM",  # flake8-commas
+    "RET",  # flake8-return
+    "SIM",  # flake8-simplify
+    "ARG",  # flake8-unused-arguments
+    "PTH",  # use pathlib
+    "ERA",  # eradicate (commented out code)
+    "PL",   # pylint
+    "RUF",  # ruff-specific rules
+]
+
+# Ignore specific rules
+ignore = [
+    "E501",  # Line too long (handled by formatter)
+]
+
+# Rules that are candidates for future enablement (commented out)
+# Uncomment these as the codebase matures
+# "ANN",  # flake8-annotations (type annotations)
+# "D",    # pydocstyle
+# "FBT",  # flake8-boolean-trap
+# "S",    # flake8-bandit
+# "A",    # flake8-builtins
+# "ICN",  # flake8-import-conventions
+# "ISC",  # flake8-implicit-str-concat
+# "PIE",  # flake8-pie
+# "T20",  # flake8-print
+# "PT",   # flake8-pytest-style
+# "RSE",  # flake8-raise
+# "TRY",  # flake8-try-except-raise
+
+# Rules that are candidates for future enablement (commented out)
+# Uncomment these as the codebase matures
+# "ANN",  # flake8-annotations (type annotations)
+# "D",    # pydocstyle
+# "FBT",  # flake8-boolean-trap
+# "S",    # flake8-bandit
+# "A",    # flake8-builtins
+# "ICN",  # flake8-import-conventions
+# "ISC",  # flake8-implicit-str-concat
+# "PIE",  # flake8-pie
+# "T20",  # flake8-print
+# "PT",   # flake8-pytest-style
+# "RSE",  # flake8-raise
+# "TRY",  # flake8-try-except-raise
+
+[format]
+# Use double quotes for strings
+quote-style = "double"
+# Indent with 4 spaces
+indent-style = "space"
+# Respect magic trailing commas
+skip-magic-trailing-comma = false
+# Line ending style
+line-ending = "auto"
+
+[lint.isort]
+known-first-party = ["morph"]
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
+
+[lint.flake8-bugbear]
+extend-immutable-calls = ["click.argument", "click.option", "click.command", "click.group"]
+
+[lint.per-file-ignores]
+# Allow assert statements in tests
+"morph/tests/**/*.py" = ["S101"]
+# Allow print statements in CLI modules
+"morph/cli.py" = ["T201"]
