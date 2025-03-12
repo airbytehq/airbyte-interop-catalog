@@ -11,15 +11,19 @@ Example:
 
 import argparse
 import json
-import os
+from pathlib import Path
+from typing import Any
+
 import yaml
-from typing import Dict, List, Any, Optional
 
 
-def json_schema_to_dbt_column(property_name: str, property_schema: Dict[str, Any]) -> Dict[str, Any]:
+def json_schema_to_dbt_column(
+    property_name: str,
+    property_schema: dict[str, Any],
+) -> dict[str, Any]:
     """Convert a JSON schema property to a dbt column definition."""
     column = {"name": property_name}
-    
+
     # Map JSON schema types to dbt types
     type_mapping = {
         "string": "varchar",
@@ -29,7 +33,7 @@ def json_schema_to_dbt_column(property_name: str, property_schema: Dict[str, Any
         "object": "variant",
         "array": "array",
     }
-    
+
     if "type" in property_schema:
         json_type = property_schema["type"]
         if isinstance(json_type, list):
@@ -39,11 +43,11 @@ def json_schema_to_dbt_column(property_name: str, property_schema: Dict[str, Any
                 column["type"] = type_mapping.get(non_null_types[0], "varchar")
         else:
             column["type"] = type_mapping.get(json_type, "varchar")
-    
+
     # Add description if available
     if "description" in property_schema:
         column["description"] = property_schema["description"]
-    
+
     # Handle format for dates, timestamps, etc.
     if "format" in property_schema:
         format_mapping = {
@@ -53,63 +57,64 @@ def json_schema_to_dbt_column(property_name: str, property_schema: Dict[str, Any
             "email": "varchar",
             "uri": "varchar",
         }
-        column["type"] = format_mapping.get(property_schema["format"], column.get("type", "varchar"))
-    
+        column["type"] = format_mapping.get(
+            property_schema["format"],
+            column.get("type", "varchar"),
+        )
+
     return column
 
 
-def json_schema_to_dbt_table(schema_name: str, schema_data: Dict[str, Any]) -> Dict[str, Any]:
+def json_schema_to_dbt_table(schema_name: str, schema_data: dict[str, Any]) -> dict[str, Any]:
     """Convert a JSON schema to a dbt table definition."""
     table = {"name": schema_name}
-    
+
     # Add description if available
     if "description" in schema_data:
         table["description"] = schema_data["description"]
-    
+
     # Extract columns from properties
     if "properties" in schema_data:
         columns = []
         for prop_name, prop_schema in schema_data["properties"].items():
             columns.append(json_schema_to_dbt_column(prop_name, prop_schema))
-        
+
         if columns:
-            table["columns"] = columns
-    
+            table["columns"] = columns  # type: ignore
+
     return table
 
 
 def generate_dbt_sources_yml(
-    schema_files: List[str], 
-    source_name: str, 
-    database: Optional[str] = None,
-    schema: Optional[str] = None
-) -> Dict[str, Any]:
+    schema_files: list[str],
+    source_name: str,
+    database: str | None = None,
+    schema: str | None = None,
+) -> dict[str, Any]:
     """Generate a dbt sources.yml structure from JSON schema files."""
     tables = []
-    
+
     for schema_file in schema_files:
         try:
-            with open(schema_file, 'r') as f:
+            schema_path = Path(schema_file)
+            with schema_path.open() as f:
                 schema_data = json.load(f)
-            
+
             # Use filename without extension as table name
-            table_name = os.path.splitext(os.path.basename(schema_file))[0]
+            table_name = schema_path.stem
             table = json_schema_to_dbt_table(table_name, schema_data)
             tables.append(table)
         except Exception as e:
             print(f"Error processing {schema_file}: {e}")
-    
-    source = {
-        "name": source_name,
-        "tables": tables
-    }
-    
+
+    source = {"name": source_name, "tables": tables}
+
     if database:
         source["database"] = database
-    
+
     if schema:
         source["schema"] = schema
-    
+
     return {"version": 2, "sources": [source]}
 
 
@@ -120,37 +125,39 @@ def main():
     parser.add_argument("--database", help="Database name for the source")
     parser.add_argument("--schema", help="Schema name for the source")
     parser.add_argument("--output", default="sources.yml", help="Output file path")
-    
+
     args = parser.parse_args()
-    
+
     # Collect schema files
     schema_files = []
-    if os.path.isdir(args.schema_path):
-        for file in os.listdir(args.schema_path):
-            if file.endswith(".json"):
-                schema_files.append(os.path.join(args.schema_path, file))
-    elif os.path.isfile(args.schema_path) and args.schema_path.endswith(".json"):
+    schema_path = Path(args.schema_path)
+    if schema_path.is_dir():
+        for file in schema_path.iterdir():
+            if file.name.endswith(".json"):
+                schema_files.append(str(file))
+    elif schema_path.is_file() and schema_path.name.endswith(".json"):
         schema_files.append(args.schema_path)
     else:
         print(f"Error: {args.schema_path} is not a valid JSON file or directory")
         return
-    
+
     if not schema_files:
         print("No JSON schema files found")
         return
-    
+
     # Generate sources.yml content
     sources_yml = generate_dbt_sources_yml(
-        schema_files, 
+        schema_files,
         args.source_name,
         args.database,
-        args.schema
+        args.schema,
     )
-    
+
     # Write to output file
-    with open(args.output, 'w') as f:
+    output_path = Path(args.output)
+    with output_path.open("w") as f:
         yaml.dump(sources_yml, f, default_flow_style=False, sort_keys=False)
-    
+
     print(f"Generated dbt sources.yml at {args.output}")
 
 
