@@ -118,6 +118,38 @@ def generate_dbt_sources_yml(
     return {"version": 2, "sources": [source]}
 
 
+def generate_header_comment(command_args: argparse.Namespace) -> str:
+    """Generate a header comment for the output file with reproduction instructions."""
+    import sys
+    from datetime import datetime
+
+    # Reconstruct the command used to generate the file
+    script_name = Path(sys.argv[0]).name
+    command = f"python {script_name} {command_args.schema_path}"
+    
+    if command_args.source_name != "default_source":
+        command += f" --source-name {command_args.source_name}"
+    
+    if command_args.database:
+        command += f" --database {command_args.database}"
+    
+    if command_args.schema:
+        command += f" --schema {command_args.schema}"
+    
+    if command_args.output != "sources.yml":
+        command += f" --output {command_args.output}"
+    
+    # Create the header comment
+    header = (
+        "# This file is auto-generated. DO NOT EDIT MANUALLY.\n"
+        f"# Generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
+        "# To regenerate this file, run the following command:\n"
+        f"# {command}\n"
+    )
+    
+    return header
+
+
 def main():
     parser = argparse.ArgumentParser(description="Convert JSON schema files to dbt sources.yml")
     parser.add_argument("schema_path", help="Path to JSON schema file or directory")
@@ -153,9 +185,13 @@ def main():
         args.schema,
     )
 
-    # Write to output file
+    # Generate header comment
+    header_comment = generate_header_comment(args)
+    
+    # Write to output file with header comment
     output_path = Path(args.output)
     with output_path.open("w") as f:
+        f.write(header_comment)
         yaml.dump(sources_yml, f, default_flow_style=False, sort_keys=False)
 
     print(f"Generated dbt sources.yml at {args.output}")
