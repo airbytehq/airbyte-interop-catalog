@@ -1,0 +1,3202 @@
+# This file is auto-generated. DO NOT EDIT MANUALLY.
+# Generated on: 2025-03-12 17:46:00
+# To regenerate this file, run the following command:
+# python json_to_dbt_sources.py catalog/hubspot/airbyte-source/schemas/ --source-name hubspot --output catalog/hubspot/sources.yml
+version: 2
+sources:
+- name: hubspot
+  tables:
+  - name: deal_splits
+    columns:
+    - name: id
+      type: varchar
+      description: Unique identifier for the deal split
+    - name: properties
+      type: variant
+      description: Deal Split properties
+    - name: properties_hs_deal_split_amount
+      type: varchar
+      description: Total amount of the deal split
+    - name: properties_hs_deal_split_percentage
+      type: varchar
+      description: Total percentage of the deal split
+    - name: properties_hs_createdate
+      type: timestamp
+      description: Creation date of the deal
+    - name: properties_hs_deal_id
+      type: varchar
+      description: Object id of the deal
+    - name: properties_hs_object_id
+      type: varchar
+      description: Unique object ID for the deal split
+    - name: properties_hs_lastmodifieddate
+      type: timestamp
+      description: Last modified date of the deal
+    - name: properties_hubspot_owner_id
+      type: varchar
+      description: Owner ID of the deal split
+    - name: createdAt
+      type: timestamp
+      description: The date and time when the deal split was created
+    - name: updatedAt
+      type: timestamp
+      description: The date and time when the deal split was last updated
+    - name: archived
+      type: boolean
+      description: Indicates if the deal is archived
+  - name: engagements_tasks
+    columns:
+    - name: id
+      type: varchar
+      description: Unique identifier for the task
+    - name: properties
+      type: variant
+      description: Custom properties associated with the task.
+    - name: properties_hs_all_assigned_business_unit_ids
+      type: varchar
+      description: List of all business unit IDs assigned to this task.
+    - name: properties_hs_at_mentioned_owner_ids
+      type: varchar
+      description: List of user IDs mentioned in the task.
+    - name: properties_hs_attachment_ids
+      type: varchar
+      description: List of attachment IDs associated with the task.
+    - name: properties_hs_body_preview
+      type: varchar
+      description: Preview of the task body content.
+    - name: properties_hs_body_preview_html
+      type: varchar
+      description: HTML formatted preview of the task body content.
+    - name: properties_hs_body_preview_is_truncated
+      type: boolean
+      description: Flag indicating if the body preview is truncated.
+    - name: properties_hs_calendar_event_id
+      type: varchar
+      description: ID of the calendar event associated with the task.
+    - name: properties_hs_created_by
+      type: float
+      description: User who created the task.
+    - name: properties_hs_created_by_user_id
+      type: float
+      description: User ID of the task creator.
+    - name: properties_hs_createdate
+      type: timestamp
+      description: The date and time when the task was created
+    - name: properties_hs_engagement_source
+      type: varchar
+      description: Source of the task engagement.
+    - name: properties_hs_engagement_source_id
+      type: varchar
+      description: ID of the task engagement source.
+    - name: properties_hs_follow_up_action
+      type: varchar
+      description: Follow-up action associated with the task.
+    - name: properties_hs_gdpr_deleted
+      type: boolean
+      description: Flag indicating if the task is deleted due to GDPR compliance.
+    - name: properties_hs_lastmodifieddate
+      type: timestamp
+      description: The date and time when the task was last modified
+    - name: properties_hs_merged_object_ids
+      type: varchar
+      description: List of object IDs merged with this task.
+    - name: properties_hs_modified_by
+      type: float
+      description: User who last modified the task.
+    - name: properties_hs_msteams_message_id
+      type: varchar
+      description: ID of the Microsoft Teams message associated with the task.
+    - name: properties_hs_num_associated_companies
+      type: float
+      description: Number of companies associated with the task.
+    - name: properties_hs_num_associated_contacts
+      type: float
+      description: Number of contacts associated with the task.
+    - name: properties_hs_num_associated_deals
+      type: float
+      description: Number of deals associated with the task.
+    - name: properties_hs_num_associated_queue_objects
+      type: float
+      description: Number of queue objects associated with the task.
+    - name: properties_hs_num_associated_tickets
+      type: float
+      description: Number of tickets associated with the task.
+    - name: properties_hs_object_id
+      type: float
+      description: ID of the task object.
+    - name: properties_hs_product_name
+      type: varchar
+      description: Product name associated with the task.
+    - name: properties_hs_queue_membership_ids
+      type: varchar
+      description: List of queue membership IDs associated with the task.
+    - name: properties_hs_scheduled_tasks
+      type: varchar
+      description: Flag indicating if the task is scheduled.
+    - name: properties_hs_task_body
+      type: varchar
+      description: Full body content of the task.
+    - name: properties_hs_task_completion_date
+      type: timestamp
+      description: The date and time when the task was completed
+    - name: properties_hs_task_contact_timezone
+      type: varchar
+      description: Time zone of the contact associated with the task.
+    - name: properties_hs_task_for_object_type
+      type: varchar
+      description: Type of object the task is for (e.g., contact, deal).
+    - name: properties_hs_task_is_all_day
+      type: boolean
+      description: Flag indicating if the task is an all-day task.
+    - name: properties_hs_task_last_contact_outreach
+      type: timestamp
+      description: The date and time of the last contact outreach related to the task
+    - name: properties_hs_task_last_sales_activity_timestamp
+      type: timestamp
+      description: The date and time of the last sales activity related to the task
+    - name: properties_hs_task_priority
+      type: varchar
+      description: Priority level of the task.
+    - name: properties_hs_task_probability_to_complete
+      type: float
+      description: Probability of completing the task.
+    - name: properties_hs_task_relative_reminders
+      type: varchar
+      description: List of relative reminders set for the task.
+    - name: properties_hs_task_reminders
+      type: varchar
+      description: List of reminders set for the task.
+    - name: properties_hs_task_repeat_interval
+      type: varchar
+      description: Repeat interval for recurring tasks.
+    - name: properties_hs_task_send_default_reminder
+      type: boolean
+      description: Flag indicating if default reminders should be sent for the task.
+    - name: properties_hs_task_sequence_enrollment_active
+      type: boolean
+      description: Flag indicating if the task sequence enrollment is active.
+    - name: properties_hs_task_sequence_step_enrollment_id
+      type: varchar
+      description: ID of the task sequence step enrollment.
+    - name: properties_hs_task_sequence_step_order
+      type: float
+      description: Order of the task within the sequence step.
+    - name: properties_hs_task_status
+      type: varchar
+      description: Status of the task (e.g., open, closed).
+    - name: properties_hs_task_subject
+      type: varchar
+      description: Subject of the task.
+    - name: properties_hs_task_template_id
+      type: float
+      description: ID of the task template.
+    - name: properties_hs_task_type
+      type: varchar
+      description: Type of the task (e.g., call, email).
+    - name: properties_hs_timestamp
+      type: timestamp
+      description: The timestamp associated with the task
+    - name: properties_hs_unique_creation_key
+      type: varchar
+      description: Unique key for identifying task creation.
+    - name: properties_hs_unique_id
+      type: varchar
+      description: Unique ID for the task.
+    - name: properties_hs_updated_by_user_id
+      type: float
+      description: User ID of the user who last updated the task.
+    - name: properties_hs_user_ids_of_all_notification_followers
+      type: varchar
+      description: List of user IDs following notifications for the task.
+    - name: properties_hs_user_ids_of_all_notification_unfollowers
+      type: varchar
+      description: List of user IDs not following notifications for the task.
+    - name: properties_hs_user_ids_of_all_owners
+      type: varchar
+      description: List of user IDs who are owners of the task.
+    - name: properties_hubspot_owner_assigneddate
+      type: timestamp
+      description: The date and time when the task was assigned to an owner
+    - name: properties_hubspot_owner_id
+      type: varchar
+      description: ID of the HubSpot owner associated with the task.
+    - name: properties_hubspot_team_id
+      type: varchar
+      description: ID of the HubSpot team associated with the task.
+    - name: properties_hs_all_owner_ids
+      type: varchar
+      description: List of all user IDs who are owners of this task.
+    - name: properties_hs_all_team_ids
+      type: varchar
+      description: List of all team IDs assigned to this task.
+    - name: properties_hs_all_accessible_team_ids
+      type: varchar
+      description: List of all team IDs that have access to this task.
+    - name: createdAt
+      type: timestamp
+      description: The date and time when the task was created
+    - name: updatedAt
+      type: timestamp
+      description: The date and time when the task was last updated
+    - name: archived
+      type: boolean
+      description: Indicates if the task has been archived
+    - name: contacts
+      type: array
+      description: List of contacts associated with the task
+    - name: deals
+      type: array
+      description: List of deals associated with the task
+    - name: companies
+      type: array
+      description: List of companies associated with the task
+    - name: tickets
+      type: array
+      description: List of tickets associated with the task
+  - name: deal_pipelines
+    columns:
+    - name: label
+      type: varchar
+      description: The label or name of the deal pipeline.
+    - name: displayOrder
+      type: integer
+      description: The ordering of the deal pipeline for display.
+    - name: active
+      type: boolean
+      description: Indicates if the deal pipeline is currently active or not.
+    - name: stages
+      type: array
+      description: List of deal stages within the pipeline.
+    - name: objectType
+      type: varchar
+      description: The type of object this deal pipeline is associated with.
+    - name: objectTypeId
+      type: varchar
+      description: The ID of the object type this deal pipeline is associated with.
+    - name: pipelineId
+      type: varchar
+      description: The unique identifier of the deal pipeline.
+    - name: createdAt
+      type: integer
+      description: Timestamp for the creation date of the deal pipeline.
+    - name: updatedAt
+      type: integer
+      description: Timestamp for the last update to the deal pipeline.
+    - name: default
+      type: boolean
+      description: Indicates if this pipeline is the default one in the system.
+  - name: tickets
+    columns:
+    - name: id
+      type: varchar
+      description: Unique identifier for the ticket
+    - name: createdAt
+      type: timestamp
+      description: Date and time when the ticket was created
+    - name: updatedAt
+      type: timestamp
+      description: Date and time when the ticket was last updated
+    - name: archived
+      type: boolean
+      description: Indicates if the ticket is archived or not
+    - name: contacts
+      type: array
+      description: Contacts associated with the ticket
+    - name: companies
+      type: array
+      description: Companies associated with the ticket
+    - name: deals
+      type: array
+      description: Deals associated with the ticket
+  - name: contact_lists
+    columns:
+    - name: parentId
+      type: integer
+      description: The ID of the parent list, if applicable.
+    - name: metaData
+      type: variant
+      description: Additional metadata related to the fetched contact lists
+    - name: metaData_processing
+      type: varchar
+      description: Processing status related to list metadata.
+    - name: metaData_size
+      type: integer
+      description: Size of the list metadata.
+    - name: metaData_error
+      type: varchar
+      description: Error information related to list metadata.
+    - name: metaData_lastProcessingStateChangeAt
+      type: integer
+      description: Timestamp of the last processing state change for metadata.
+    - name: metaData_lastSizeChangeAt
+      type: integer
+      description: Timestamp of the last size change for metadata.
+    - name: metaData_listReferencesCount
+      type: integer
+      description: References count related to list metadata.
+    - name: metaData_parentFolderId
+      type: integer
+      description: Parent folder ID associated with list metadata.
+    - name: dynamic
+      type: boolean
+      description: Identifies if the contact list is dynamic in nature.
+    - name: name
+      type: varchar
+      description: The name or title of the contact list.
+    - name: filters
+      type: array
+      description: Contains filter criteria to fetch contact lists
+    - name: ilsFilterBranch
+      type: varchar
+      description: Indicates the branch of the filter applied.
+    - name: internal
+      type: boolean
+      description: Specifies if the contact list is internal (not accessible to customers).
+    - name: authorId
+      type: integer
+      description: The ID of the user who authored or created the contact list.
+    - name: limitExempt
+      type: boolean
+      description: Specifies if any limits are exempted for the contact list.
+    - name: teamIds
+      type: array
+      description: The IDs of teams that have access to the contact list.
+    - name: portalId
+      type: integer
+      description: The ID of the portal to which the contact list belongs.
+    - name: createdAt
+      type: integer
+      description: The timestamp when the contact list was created.
+    - name: listId
+      type: integer
+      description: The unique ID of the contact list.
+    - name: updatedAt
+      type: integer
+      description: The timestamp of the last update to the contact list.
+    - name: internalListId
+      type: integer
+      description: The internal ID of the contact list.
+    - name: readOnly
+      type: boolean
+      description: Specifies if the list is read-only or not.
+    - name: deleteable
+      type: boolean
+      description: Specifies if the contact list can be deleted.
+    - name: listType
+      type: varchar
+      description: Specifies the type of list, e.g., static or dynamic.
+    - name: archived
+      type: boolean
+      description: Indicates if the contact list is archived or not.
+  - name: email_events
+    columns:
+    - name: appId
+      type: integer
+      description: The unique identifier of the application associated with the email
+        event.
+    - name: appName
+      type: varchar
+      description: The name of the application associated with the email event.
+    - name: bcc
+      type: array
+      description: The blind carbon copy recipients of the email.
+    - name: cc
+      type: array
+      description: The carbon copy recipients of the email.
+    - name: attempt
+      type: integer
+      description: The number of attempts made to send the email.
+    - name: bounced
+      type: boolean
+      description: Indicates if the email bounced.
+    - name: browser
+      type: variant
+      description: Details about the email event recipient's browser.
+    - name: category
+      type: varchar
+      description: The category of the email event.
+    - name: causedBy
+      type: variant
+      description: Information about the action that caused the email event.
+    - name: created
+      type: integer
+      description: The timestamp of when the email event was created.
+    - name: deviceType
+      type: varchar
+      description: The type of device used by the recipient.
+    - name: dropMessage
+      type: varchar
+      description: The message associated with dropped email.
+    - name: dropReason
+      type: varchar
+      description: The reason for dropping the email.
+    - name: duration
+      type: integer
+      description: The duration of the email event.
+    - name: emailCampaignId
+      type: integer
+      description: The ID of the email campaign associated with the event.
+    - name: emailCampaignGroupId
+      type: integer
+      description: The group ID of the email campaign associated with the event.
+    - name: filteredEvent
+      type: boolean
+      description: Indicates if the event is filtered.
+    - name: from
+      type: varchar
+      description: The sender of the email.
+    - name: hmid
+      type: varchar
+      description: The HubSpot Marketing ID.
+    - name: id
+      type: varchar
+      description: The unique identifier of the email event.
+    - name: ipAddress
+      type: varchar
+      description: The IP address of the recipient.
+    - name: linkId
+      type: integer
+      description: The ID of the link in the email.
+    - name: location
+      type: variant
+      description: Details about the geographical location associated with the email
+        event.
+    - name: obsoletedBy
+      type: variant
+      description: Information about any email event that this event has made obsolete.
+    - name: portalId
+      type: integer
+      description: The ID of the HubSpot portal.
+    - name: portalSubscriptionStatus
+      type: varchar
+      description: The subscription status of the portal.
+    - name: recipient
+      type: varchar
+      description: The recipient of the email.
+    - name: referer
+      type: varchar
+      description: The referer URL of the email.
+    - name: replyTo
+      type: array
+      description: The email address to which replies should be directed.
+    - name: requestedBy
+      type: varchar
+      description: The entity that requested the email event.
+    - name: requestedByUserId
+      type: integer
+      description: The ID of the user who requested the email event.
+    - name: response
+      type: varchar
+      description: The response code related to the email event.
+    - name: sentBy
+      type: variant
+      description: Details about the entity that sent the email event.
+    - name: smtpId
+      type: varchar
+      description: The SMTP ID associated with email event.
+    - name: source
+      type: varchar
+      description: The source of the email event.
+    - name: sourceId
+      type: varchar
+      description: The unique identifier of the email event source.
+    - name: subscriptions
+      type: array
+      description: Information about the subscriptions associated with the email event.
+    - name: status
+      type: varchar
+      description: The status of the email event.
+    - name: subject
+      type: varchar
+      description: The subject of the email.
+    - name: type
+      type: varchar
+      description: The type of email event.
+    - name: url
+      type: varchar
+      description: The URL associated with the email event.
+    - name: userAgent
+      type: varchar
+      description: The user agent of the recipient.
+  - name: marketing_emails
+    columns:
+    - name: id
+      type: integer
+    - name: ab
+      type: boolean
+    - name: abHoursToWait
+      type: integer
+    - name: abSampleSizeDefault
+      type: varchar
+    - name: abSamplingDefault
+      type: varchar
+    - name: abStatus
+      type: varchar
+    - name: abSuccessMetric
+      type: varchar
+    - name: abTestPercentage
+      type: integer
+    - name: abVariation
+      type: boolean
+    - name: absoluteUrl
+      type: varchar
+    - name: aifeatures
+      type: variant
+    - name: allEmailCampaignIds
+      type: array
+    - name: analyticsPageId
+      type: varchar
+    - name: analyticsPageType
+      type: varchar
+    - name: archived
+      type: boolean
+    - name: authorAt
+      type: integer
+    - name: authorName
+      type: varchar
+    - name: authorUserId
+      type: integer
+    - name: blogEmailType
+      type: varchar
+    - name: campaign
+      type: varchar
+    - name: campaignName
+      type: varchar
+    - name: canSpamSettingsId
+      type: integer
+    - name: categoryId
+      type: integer
+    - name: clonedFrom
+      type: integer
+    - name: contentTypeCategory
+      type: integer
+    - name: createPage
+      type: boolean
+    - name: created
+      type: integer
+    - name: createdById
+      type: integer
+    - name: currentState
+      type: varchar
+    - name: currentlyPublished
+      type: boolean
+    - name: customReplyTo
+      type: varchar
+    - name: customReplyToEnabled
+      type: boolean
+    - name: domain
+      type: varchar
+    - name: emailBody
+      type: varchar
+    - name: emailNote
+      type: varchar
+    - name: emailTemplateMode
+      type: varchar
+    - name: emailType
+      type: varchar
+    - name: emailbodyPlaintext
+      type: varchar
+      description: Plain text version of the email body
+    - name: feedbackEmailCategory
+      type: varchar
+      description: Category for feedback related to the email
+    - name: feedbackSurveyId
+      type: integer
+      description: ID of the feedback survey linked to the email
+    - name: folderId
+      type: integer
+      description: ID of the folder where the email is stored
+    - name: freezeDate
+      type: integer
+      description: Date when the email content was finalized
+    - name: fromName
+      type: varchar
+      description: Name of the sender displayed in the email
+    - name: htmlTitle
+      type: varchar
+      description: HTML title of the email
+    - name: isGraymailSuppressionEnabled
+      type: boolean
+      description: Flag indicating if graymail suppression is enabled for the email
+    - name: isLocalTimezoneSend
+      type: boolean
+      description: Flag indicating if the email is sent based on the local timezone
+    - name: isPublished
+      type: boolean
+      description: Flag indicating if the email is published
+    - name: isRecipientFatigueSuppressionEnabled
+      type: boolean
+      description: Flag indicating if recipient fatigue suppression is enabled
+    - name: leadFlowId
+      type: integer
+      description: ID of the lead flow associated with the email
+    - name: liveDomain
+      type: varchar
+      description: Domain where the live version of the email is hosted
+    - name: mailingListsExcluded
+      type: array
+    - name: mailingListsIncluded
+      type: array
+    - name: maxRssEntries
+      type: integer
+      description: Maximum number of RSS entries to include in the email
+    - name: metaDescription
+      type: varchar
+      description: Meta description of the email content
+    - name: name
+      type: varchar
+      description: Name of the email
+    - name: pageExpiryEnabled
+      type: boolean
+      description: Flag indicating if page expiry is enabled for the email
+    - name: pageRedirected
+      type: boolean
+      description: Information about page redirection
+    - name: portalId
+      type: integer
+      description: ID of the HubSpot portal associated with the email
+    - name: previewKey
+      type: varchar
+      description: Key used for email preview
+    - name: primaryEmailCampaignId
+      type: integer
+      description: ID of the primary email campaign associated with the email
+    - name: processingStatus
+      type: varchar
+      description: Status of the email processing
+    - name: publishDate
+      type: integer
+      description: Date when the email is scheduled to be published
+    - name: publishedById
+      type: integer
+      description: ID of the user who published the email
+    - name: publishedByName
+      type: varchar
+      description: Name of the user who published the email
+    - name: publishImmediately
+      type: boolean
+      description: Flag indicating if the email should be published immediately
+    - name: publishedUrl
+      type: varchar
+      description: URL where the published email can be accessed
+    - name: replyTo
+      type: varchar
+      description: Email address for replies to the email
+    - name: resolvedDomain
+      type: varchar
+      description: Domain resolved for the email
+    - name: rootMicId
+      type: varchar
+      description: Root MIC ID associated with the email
+    - name: selected
+      type: integer
+      description: Flag indicating if the email is selected
+    - name: slug
+      type: varchar
+      description: Slug associated with the email
+    - name: smartEmailFields
+      type: variant
+      description: Fields related to smart email features
+    - name: state
+      type: varchar
+      description: Current state of the email
+    - name: stats
+      type: variant
+    - name: subcategory
+      type: varchar
+      description: Subcategory to which the email belongs
+    - name: subject
+      type: varchar
+      description: Subject line of the email
+    - name: subscription
+      type: integer
+      description: Information about email subscription
+    - name: subscriptionName
+      type: varchar
+      description: Name of the email subscription
+    - name: templatePath
+      type: varchar
+      description: Path of the email template
+    - name: transactional
+      type: boolean
+      description: Flag indicating if the email is transactional
+    - name: unpublishedAt
+      type: integer
+      description: Timestamp when the email was unpublished
+    - name: updated
+      type: integer
+      description: Timestamp of the last update to the email
+    - name: updatedById
+      type: integer
+      description: ID of the user who last updated the email
+    - name: url
+      type: varchar
+      description: URL associated with the email
+    - name: useRssHeadlineAsSubject
+      type: boolean
+      description: Flag indicating if the RSS headline should be used as the subject
+    - name: vidsExcluded
+      type: array
+    - name: vidsIncluded
+      type: array
+    - name: publishedByEmail
+      type: varchar
+      description: Email address of the user who published the email
+    - name: sections
+      type: variant
+      description: Sections within the email
+    - name: author
+      type: varchar
+      description: Author of the email
+    - name: isCreatedFomSandboxSync
+      type: boolean
+      description: Flag indicating if the email was created from a sandbox sync
+    - name: rssEmailUrl
+      type: varchar
+      description: URL for RSS emails
+    - name: teamPerms
+      type: array
+    - name: securityState
+      type: varchar
+      description: Security state of the email
+    - name: isInstanceLayoutPage
+      type: boolean
+      description: Flag indicating if the email is a layout page in an instance
+    - name: audienceAccess
+      type: varchar
+      description: Information about who has access to view the email
+    - name: campaignUtm
+      type: varchar
+      description: UTM parameters for campaign tracking
+    - name: contentAccessRuleTypes
+      type: array
+    - name: pastMabExperimentIds
+      type: array
+    - name: rssEmailClickThroughText
+      type: varchar
+      description: Text for click-through actions in RSS emails
+    - name: rssEmailImageMaxWidth
+      type: integer
+      description: Maximum width of images in RSS emails
+    - name: flexAreas
+      type: variant
+    - name: emailCampaignGroupId
+      type: integer
+      description: Group ID associated with the email campaign
+    - name: layoutSections
+      type: variant
+      description: Sections within the email layout
+    - name: blogRssSettings
+      type: varchar
+      description: Settings related to blog RSS integration
+    - name: archivedInDashboard
+      type: boolean
+      description: Flag indicating if the email was archived in the dashboard
+    - name: publishedAt
+      type: integer
+      description: Timestamp when the email was published
+    - name: lastEditUpdateId
+      type: integer
+      description: Update ID of the last edit made to the email
+    - name: lastEditSessionId
+      type: integer
+      description: Session ID of the last edit made to the email
+    - name: styleSettings
+      type: variant
+    - name: visibleToAll
+      type: boolean
+      description: Flag indicating if the email is visible to all users
+    - name: language
+      type: varchar
+      description: Language in which the email is written
+    - name: rssEmailByText
+      type: varchar
+      description: Text content related to RSS emails
+    - name: rssEmailCommentText
+      type: varchar
+      description: Text for comments in RSS emails
+    - name: hasContentAccessRules
+      type: boolean
+      description: Indicates if the email has content access rules applied
+    - name: archivedAt
+      type: integer
+      description: Timestamp when the email was archived
+    - name: translations
+      type: variant
+      description: Translations available for the email
+    - name: userPerms
+      type: array
+    - name: contentAccessRuleIds
+      type: array
+    - name: rssEmailEntryTemplateEnabled
+      type: boolean
+      description: Flag indicating if the RSS email entry template is enabled
+    - name: mailingIlsListsExcluded
+      type: array
+    - name: mailingIlsListsIncluded
+      type: array
+  - name: forms
+    columns:
+    - name: id
+      type: varchar
+      description: Unique identifier for the form.
+    - name: name
+      type: varchar
+      description: Name of the form.
+    - name: formType
+      type: varchar
+      description: Type of the form.
+    - name: createdAt
+      type: timestamp
+      description: Date and time when the form was created.
+    - name: updatedAt
+      type: timestamp
+      description: Date and time when the form was last updated.
+    - name: archived
+      type: boolean
+      description: Indicates whether the form is archived.
+    - name: deletedAt
+      type: varchar
+      description: Date and time when the form was deleted.
+    - name: fieldGroups
+      type: array
+      description: Groups containing fields of a form.
+    - name: configuration
+      type: variant
+      description: Configuration settings for the form.
+    - name: displayOptions
+      type: variant
+      description: Display options for the form.
+    - name: legalConsentOptions
+      type: variant
+      description: Legal consent options for the form.
+  - name: form_submissions
+    columns:
+    - name: submittedAt
+      type: integer
+      description: The timestamp when the form was submitted.
+    - name: updatedAt
+      type: integer
+      description: The timestamp when the form submission data was last updated.
+    - name: values
+      type: array
+      description: An array of form field values submitted in the form.
+    - name: pageUrl
+      type: varchar
+      description: The URL of the web page where the form was submitted.
+    - name: formId
+      type: varchar
+      description: The unique identifier of the form associated with the submission.
+  - name: contacts
+    columns:
+    - name: id
+      type: varchar
+      description: Unique identifier for the contact.
+    - name: createdAt
+      type: timestamp
+      description: Date and time when the contact was created.
+    - name: updatedAt
+      type: timestamp
+      description: Date and time when the contact was last updated.
+    - name: archived
+      type: boolean
+      description: Indicates if the contact is archived or not.
+    - name: companies
+      type: array
+      description: List of companies associated with the contact.
+  - name: campaigns
+    columns:
+    - name: appId
+      type: integer
+      description: The unique identifier of the application associated with the campaign
+        data.
+    - name: appName
+      type: varchar
+      description: The name of the application associated with the campaign data.
+    - name: contentId
+      type: integer
+      description: The unique identifier of the content associated with the campaign.
+    - name: counters
+      type: variant
+      description: Object containing different counters related to the campaign's
+        performance.
+    - name: counters_open
+      type: integer
+      description: Alias for the open counter value.
+    - name: counters_processed
+      type: integer
+      description: Alias for the processed counter value.
+    - name: counters_sent
+      type: integer
+      description: Alias for the sent counter value.
+    - name: counters_deferred
+      type: integer
+      description: Alias for the deferred counter value.
+    - name: counters_unsubscribed
+      type: integer
+      description: Alias for the unsubscribed counter value.
+    - name: counters_statuschange
+      type: integer
+      description: Alias for the status change counter value.
+    - name: counters_bounce
+      type: integer
+      description: Alias for the bounce counter value.
+    - name: counters_mta_dropped
+      type: integer
+      description: Alias for the MTA dropped counter value.
+    - name: counters_dropped
+      type: integer
+      description: Alias for the dropped counter value.
+    - name: counters_suppressed
+      type: integer
+      description: Alias for the suppressed counter value.
+    - name: counters_click
+      type: integer
+      description: Alias for the click counter value.
+    - name: counters_delivered
+      type: integer
+      description: Alias for the delivered counter value.
+    - name: counters_forward
+      type: integer
+      description: Alias for the forward counter value.
+    - name: counters_print
+      type: integer
+      description: Alias for the print counter value.
+    - name: counters_reply
+      type: integer
+      description: Alias for the reply counter value.
+    - name: counters_spamreport
+      type: integer
+      description: Alias for the spam report counter value.
+    - name: id
+      type: integer
+      description: The unique identifier of the campaign.
+    - name: lastProcessingFinishedAt
+      type: integer
+      description: Timestamp indicating when the last processing of the campaign was
+        finished.
+    - name: lastProcessingStateChangeAt
+      type: integer
+      description: Timestamp indicating the last state change time of the processing
+        state.
+    - name: lastProcessingStartedAt
+      type: integer
+      description: Timestamp indicating when the last processing of the campaign started.
+    - name: processingState
+      type: varchar
+      description: Current processing state of the campaign.
+    - name: name
+      type: varchar
+      description: The name of the campaign.
+    - name: numIncluded
+      type: integer
+      description: Number of recipients included in the campaign.
+    - name: numQueued
+      type: integer
+      description: Number of emails queued for sending.
+    - name: subType
+      type: varchar
+      description: Subtype of the campaign.
+    - name: subject
+      type: varchar
+      description: The subject line of the campaign.
+    - name: type
+      type: varchar
+      description: Type classification of the campaign.
+    - name: lastUpdatedTime
+      type: integer
+      description: Timestamp indicating when the campaign data was last updated.
+  - name: goals
+    columns:
+    - name: id
+      type: varchar
+      description: Unique identifier for the goal.
+    - name: properties
+      type: variant
+      description: Represents the properties associated with the goal
+    - name: properties_hs_created_by_user_id
+      type: varchar
+      description: ID of the user who created the goal.
+    - name: properties_hs_createdate
+      type: timestamp
+      description: Date and time when the goal was created.
+    - name: properties_hs_start_datetime
+      type: timestamp
+      description: Start date and time of the goal period.
+    - name: properties_hs_end_datetime
+      type: timestamp
+      description: End date and time of the goal period.
+    - name: properties_hs_goal_name
+      type: varchar
+      description: Name of the goal.
+    - name: properties_hs_lastmodifieddate
+      type: timestamp
+      description: Date and time when the goal was last modified.
+    - name: properties_hs_kpi_value_last_calculated_at
+      type: timestamp
+      description: Date and time when the KPI value was last calculated.
+    - name: properties_hs_object_id
+      type: varchar
+      description: ID of the object associated with the goal.
+    - name: properties_hs_target_amount
+      type: varchar
+      description: Target amount set for the goal.
+    - name: createdAt
+      type: timestamp
+      description: Date and time when the goal was created.
+    - name: updatedAt
+      type: timestamp
+      description: Date and time when the goal was last updated.
+    - name: archived
+      type: boolean
+      description: Indicates if the goal is archived or not.
+  - name: engagements
+    columns:
+    - name: id
+      type: integer
+      description: Unique ID of the engagement.
+    - name: uid
+      type: varchar
+      description: Unique identifier of the engagement.
+    - name: teamId
+      type: integer
+      description: ID of the team associated with the engagement.
+    - name: portalId
+      type: integer
+      description: ID of the portal associated with the engagement.
+    - name: queueMembershipIds
+      type: array
+      description: IDs of queue memberships related to the engagement.
+    - name: scheduledTasks
+      type: array
+      description: Scheduled tasks related to the engagement.
+    - name: active
+      type: boolean
+      description: Indicates if the engagement is currently active or not.
+    - name: createdAt
+      type: integer
+      description: Timestamp indicating when the engagement was created.
+    - name: createdBy
+      type: integer
+      description: ID of the user who created the engagement.
+    - name: modifiedBy
+      type: integer
+      description: ID of the user who last modified the engagement.
+    - name: lastUpdated
+      type: integer
+      description: Timestamp indicating when the engagement was last updated.
+    - name: ownerId
+      type: integer
+      description: ID of the owner of the engagement.
+    - name: type
+      type: varchar
+      description: Type of the engagement.
+    - name: timestamp
+      type: integer
+      description: Timestamp related to the engagement.
+    - name: bodyPreview
+      type: varchar
+      description: Preview of the body content.
+    - name: bodyPreviewHtml
+      type: varchar
+      description: HTML preview of the body content.
+    - name: bodyPreviewIsTruncated
+      type: boolean
+      description: Indicates if the body preview is truncated.
+    - name: allAccessibleTeamIds
+      type: array
+      description: IDs of all teams with access to this engagement.
+    - name: activityType
+      type: varchar
+      description: Type of activity associated with the engagement.
+    - name: gdprDeleted
+      type: boolean
+      description: Indicates if the engagement is deleted due to GDPR compliance.
+    - name: source
+      type: varchar
+      description: Source of the engagement data.
+    - name: sourceId
+      type: varchar
+      description: ID of the source associated with the engagement.
+    - name: associations
+      type: variant
+      description: Associations related to the engagement.
+    - name: associations_contactIds
+      type: array
+      description: List of contact IDs associated with the engagement
+    - name: associations_contentIds
+      type: array
+      description: List of content IDs associated with the engagement
+    - name: associations_companyIds
+      type: array
+      description: List of company IDs associated with the engagement
+    - name: associations_dealIds
+      type: array
+      description: List of deal IDs associated with the engagement
+    - name: associations_marketingEventIds
+      type: array
+      description: List of marketing event IDs associated with the engagement
+    - name: associations_ownerIds
+      type: array
+      description: List of owner IDs associated with the engagement
+    - name: associations_quoteIds
+      type: array
+      description: List of quote IDs associated with the engagement
+    - name: associations_workflowIds
+      type: array
+      description: List of workflow IDs associated with the engagement
+    - name: associations_ticketIds
+      type: array
+      description: List of ticket IDs associated with the engagement
+    - name: attachments
+      type: array
+      description: Attachments included in the engagement.
+    - name: metadata
+      type: variant
+      description: Metadata related to the engagement.
+    - name: metadata_attendeeOwnerIds
+      type: array
+      description: IDs of attendees' owners in metadata.
+    - name: metadata_calendarEventHash
+      type: varchar
+      description: Hash value for calendar event
+    - name: metadata_createdFromLinkId
+      type: integer
+      description: ID from which engagement was created
+    - name: metadata_meetingChangeId
+      type: varchar
+      description: ID of the meeting change
+    - name: ownerIdsBcc
+      type: array
+      description: IDs of BCC owners.
+    - name: ownerIdsFrom
+      type: array
+      description: IDs of 'from' owners.
+    - name: ownerIdsTo
+      type: array
+      description: IDs of 'to' owners.
+    - name: pendingInlineImageIds
+      type: array
+      description: IDs of pending inline image attachments.
+    - name: validationSkipped
+      type: array
+      description: Validation details skipped.
+    - name: ownerIdsCc
+      type: array
+      description: IDs of CC owners.
+    - name: metadata_guestEmails
+      type: array
+      description: Guest attendee emails in metadata.
+    - name: metadata_iCalUid
+      type: varchar
+      description: Unique ID for iCal
+    - name: metadata_includeDescriptionInReminder
+      type: boolean
+      description: Flag indicating if description should be included in reminder
+    - name: metadata_internalMeetingNotes
+      type: varchar
+      description: Internal meeting notes
+    - name: metadata_location
+      type: varchar
+      description: Location of the engagement
+    - name: metadata_locationType
+      type: varchar
+      description: Type of location for the engagement
+    - name: metadata_meetingOutcome
+      type: varchar
+      description: Outcome of the meeting
+    - name: metadata_timezone
+      type: varchar
+      description: Timezone of the engagement
+    - name: metadata_preMeetingProspectReminders
+      type: array
+      description: Pre-meeting prospect reminders in metadata.
+    - name: metadata_body
+      type: varchar
+      description: Engagement body content
+    - name: metadata_from
+      type: variant
+      description: Sender information in metadata.
+    - name: metadata_sender
+      type: variant
+      description: Sender's email information in metadata.
+    - name: metadata_to
+      type: array
+      description: Recipient information in metadata.
+    - name: metadata_cc
+      type: array
+      description: CC recipients in metadata.
+    - name: metadata_bounceErrorDetail
+      type: variant
+      description: Details of bounce errors, if any
+    - name: metadata_emailSendEventId
+      type: variant
+      description: ID of the email send event
+    - name: metadata_ownerIdsBcc
+      type: array
+      description: IDs of BCC owners in metadata.
+    - name: metadata_ownerIdsCc
+      type: array
+      description: IDs of CC owners in metadata.
+    - name: metadata_ownerIdsFrom
+      type: array
+      description: IDs of 'from' owners in metadata.
+    - name: metadata_ownerIdsTo
+      type: array
+      description: IDs of 'to' owners in metadata.
+    - name: metadata_pendingInlineImageIds
+      type: array
+      description: IDs of pending inline image attachments in metadata.
+    - name: metadata_validationSkipped
+      type: array
+      description: Validation details skipped in metadata.
+    - name: metadata_bcc
+      type: array
+      description: BCC recipients in metadata.
+    - name: metadata_subject
+      type: varchar
+      description: Subject of the engagement
+    - name: metadata_html
+      type: varchar
+      description: HTML content of the engagement
+    - name: metadata_text
+      type: varchar
+      description: Text content of the engagement
+    - name: metadata_status
+      type: varchar
+      description: Status of the engagement
+    - name: metadata_forObjectType
+      type: varchar
+      description: Type of object for which engagement is associated
+    - name: metadata_startTime
+      type: integer
+      description: Start time of the engagement
+    - name: metadata_endTime
+      type: integer
+      description: End time of the engagement
+    - name: metadata_title
+      type: varchar
+      description: Title of the engagement
+    - name: metadata_toNumber
+      type: varchar
+      description: Number to which engagement was sent
+    - name: metadata_fromNumber
+      type: varchar
+      description: Number from which engagement was sent
+    - name: metadata_externalId
+      type: varchar
+      description: External ID of the engagement
+    - name: metadata_durationMilliseconds
+      type: integer
+      description: Duration of the engagement in milliseconds
+    - name: metadata_externalAccountId
+      type: varchar
+      description: External account ID associated with the engagement
+    - name: metadata_recordingUrl
+      type: varchar
+      description: URL of the recording related to the engagement
+    - name: metadata_disposition
+      type: varchar
+      description: Engagement disposition
+    - name: metadata_completionDate
+      type: integer
+      description: Date when engagement was completed
+    - name: metadata_taskType
+      type: varchar
+      description: Type of engagement task
+    - name: metadata_reminders
+      type: array
+      description: Reminders in metadata.
+    - name: metadata_threadId
+      type: varchar
+      description: ID of the thread
+    - name: metadata_messageId
+      type: varchar
+      description: ID of the message
+    - name: metadata_loggedFrom
+      type: varchar
+      description: Source from which the engagement was logged
+    - name: metadata_attachedVideoOpened
+      type: boolean
+      description: Flag indicating if attached videos were opened
+    - name: metadata_attachedVideoWatched
+      type: boolean
+      description: Flag indicating if attached videos were watched
+    - name: metadata_trackerKey
+      type: varchar
+      description: Key for tracking engagement
+    - name: metadata_sendDefaultReminder
+      type: boolean
+      description: Default reminder settings for the engagement
+    - name: metadata_source
+      type: varchar
+      description: Source of the engagement
+    - name: metadata_unknownVisitorConversation
+      type: boolean
+      description: Conversation with unknown visitor
+    - name: metadata_facsimileSendId
+      type: varchar
+      description: ID of the facsimile send
+    - name: metadata_sentVia
+      type: varchar
+      description: Medium through which engagement was sent
+    - name: metadata_sequenceStepOrder
+      type: integer
+      description: Order of sequence step
+    - name: metadata_externalUrl
+      type: varchar
+      description: External URL related to the engagement
+    - name: metadata_postSendStatus
+      type: varchar
+      description: Status of post send operation
+    - name: metadata_errorMessage
+      type: varchar
+      description: Error message associated with the engagement
+    - name: metadata_recipientDropReasons
+      type: varchar
+      description: Reasons for recipient drop
+    - name: metadata_calleeObjectId
+      type: integer
+      description: ID of the callee object
+    - name: metadata_calleeObjectType
+      type: varchar
+      description: Type of the callee object
+    - name: metadata_mediaProcessingStatus
+      type: varchar
+      description: Status of media processing for the engagement
+    - name: metadata_sourceId
+      type: varchar
+      description: Source ID of the engagement
+    - name: metadata_priority
+      type: varchar
+      description: Priority of the engagement
+    - name: metadata_isAllDay
+      type: boolean
+      description: Flag indicating if engagement is for the whole day
+  - name: contacts_merged_audit
+    columns:
+    - name: canonical-vid
+      type: integer
+      description: The unique identifier for the merged contact in HubSpot's CRM.
+    - name: vid-to-merge
+      type: integer
+      description: "The contact\u2019s unique identifier to be merged."
+    - name: timestamp
+      type: integer
+      description: The timestamp of when the merge operation occurred.
+    - name: entity-id
+      type: varchar
+      description: The entity identifier for the merged contact.
+    - name: user-id
+      type: integer
+      description: The user ID responsible for the merge operation.
+    - name: num-properties-moved
+      type: integer
+      description: The number of properties moved during the merge process.
+    - name: merged_from_email
+      type: variant
+      description: Details of the email address from which the contact was merged
+        from.
+    - name: merged_from_email_source-vids
+      type: array
+      description: Array of unique identifiers of video sources.
+    - name: merged_from_email_updated-by-user-id
+      type: integer
+      description: The user ID of the user who updated the email address from which
+        the contact was merged from.
+    - name: merged_from_email_source-label
+      type: varchar
+      description: The source label of the email address from which the contact was
+        merged from.
+    - name: merged_from_email_source-type
+      type: varchar
+      description: The source type of the email address from which the contact was
+        merged from.
+    - name: merged_from_email_value
+      type: varchar
+      description: The email address value from which the contact was merged from.
+    - name: merged_from_email_source-id
+      type: varchar
+      description: The source ID of the email address from which the contact was merged
+        from.
+    - name: merged_from_email_selected
+      type: boolean
+      description: Indicates if the email address from which the contact was merged
+        from was selected.
+    - name: merged_from_email_timestamp
+      type: integer
+      description: The timestamp of the email address merge.
+    - name: merged_to_email
+      type: variant
+      description: Details of the email address to which the contact was merged to.
+    - name: merged_to_email_updated-by-user-id
+      type: integer
+      description: The user ID of the user who updated the email address to which
+        the contact was merged to.
+    - name: merged_to_email_source-label
+      type: varchar
+      description: The source label of the email address to which the contact was
+        merged to.
+    - name: merged_to_email_source-type
+      type: varchar
+      description: The source type of the email address to which the contact was merged
+        to.
+    - name: merged_to_email_value
+      type: varchar
+      description: The email address value to which the contact was merged to.
+    - name: merged_to_email_source-id
+      type: varchar
+      description: The source ID of the email address to which the contact was merged
+        to.
+    - name: merged_to_email_selected
+      type: boolean
+      description: Indicates if the email address to which the contact was merged
+        to was selected.
+    - name: merged_to_email_timestamp
+      type: integer
+      description: The timestamp of the email address merge.
+    - name: first-name
+      type: varchar
+      description: The first name of the merged contact.
+    - name: last-name
+      type: varchar
+      description: The last name of the merged contact.
+  - name: deals_archived
+    columns:
+    - name: id
+      type: varchar
+    - name: properties
+      type: variant
+    - name: properties_amount
+      type: varchar
+    - name: properties_amount_in_home_currency
+      type: varchar
+    - name: properties_closed_lost_reason
+      type: varchar
+    - name: properties_closed_won_reason
+      type: varchar
+    - name: properties_closedate
+      type: timestamp
+    - name: properties_createdate
+      type: timestamp
+    - name: properties_days_to_close
+      type: varchar
+    - name: properties_dealname
+      type: varchar
+    - name: properties_dealstage
+      type: varchar
+    - name: properties_dealtype
+      type: varchar
+    - name: properties_description
+      type: varchar
+    - name: properties_engagements_last_meeting_booked
+      type: varchar
+    - name: properties_engagements_last_meeting_booked_campaign
+      type: varchar
+    - name: properties_engagements_last_meeting_booked_medium
+      type: varchar
+    - name: properties_engagements_last_meeting_booked_source
+      type: varchar
+    - name: properties_hs_acv
+      type: varchar
+    - name: properties_hs_all_accessible_team_ids
+      type: varchar
+    - name: properties_hs_all_assigned_business_unit_ids
+      type: varchar
+    - name: properties_hs_all_owner_ids
+      type: varchar
+    - name: properties_hs_all_team_ids
+      type: varchar
+    - name: properties_hs_analytics_source
+      type: varchar
+    - name: properties_hs_analytics_source_data_1
+      type: varchar
+    - name: properties_hs_analytics_source_data_2
+      type: varchar
+    - name: properties_hs_arr
+      type: varchar
+    - name: properties_hs_closed_amount
+      type: varchar
+    - name: properties_hs_closed_amount_in_home_currency
+      type: varchar
+    - name: properties_hs_created_by_user_id
+      type: varchar
+    - name: properties_hs_createdate
+      type: timestamp
+    - name: properties_hs_date_entered_9567448
+      type: varchar
+    - name: properties_hs_date_entered_9567449
+      type: varchar
+    - name: properties_hs_date_entered_appointmentscheduled
+      type: timestamp
+    - name: properties_hs_date_entered_closedlost
+      type: timestamp
+    - name: properties_hs_date_entered_closedwon
+      type: timestamp
+    - name: properties_hs_date_entered_contractsent
+      type: timestamp
+    - name: properties_hs_date_entered_customclosedwonstage
+      type: timestamp
+    - name: properties_hs_date_entered_decisionmakerboughtin
+      type: timestamp
+    - name: properties_hs_date_entered_presentationscheduled
+      type: timestamp
+    - name: properties_hs_date_entered_qualifiedtobuy
+      type: timestamp
+    - name: properties_hs_date_exited_9567448
+      type: varchar
+    - name: properties_hs_date_exited_9567449
+      type: varchar
+    - name: properties_hs_date_exited_appointmentscheduled
+      type: timestamp
+    - name: properties_hs_date_exited_closedlost
+      type: timestamp
+    - name: properties_hs_date_exited_closedwon
+      type: timestamp
+    - name: properties_hs_date_exited_contractsent
+      type: timestamp
+    - name: properties_hs_date_exited_customclosedwonstage
+      type: timestamp
+    - name: properties_hs_date_exited_decisionmakerboughtin
+      type: timestamp
+    - name: properties_hs_date_exited_presentationscheduled
+      type: timestamp
+    - name: properties_hs_date_exited_qualifiedtobuy
+      type: timestamp
+    - name: properties_hs_deal_amount_calculation_preference
+      type: varchar
+    - name: properties_hs_deal_stage_probability
+      type: varchar
+    - name: properties_hs_deal_stage_probability_shadow
+      type: varchar
+    - name: properties_hs_forecast_amount
+      type: varchar
+    - name: properties_hs_forecast_probability
+      type: varchar
+    - name: properties_hs_is_closed
+      type: varchar
+    - name: properties_hs_is_closed_won
+      type: varchar
+    - name: properties_hs_lastmodifieddate
+      type: timestamp
+    - name: properties_hs_latest_meeting_activity
+      type: varchar
+    - name: properties_hs_likelihood_to_close
+      type: varchar
+    - name: properties_hs_line_item_global_term_hs_discount_percentage
+      type: varchar
+    - name: properties_hs_line_item_global_term_hs_discount_percentage_enabled
+      type: varchar
+    - name: properties_hs_line_item_global_term_hs_recurring_billing_period
+      type: varchar
+    - name: properties_hs_line_item_global_term_hs_recurring_billing_period_enabled
+      type: varchar
+    - name: properties_hs_line_item_global_term_hs_recurring_billing_start_date
+      type: varchar
+    - name: properties_hs_line_item_global_term_hs_recurring_billing_start_date_enabled
+      type: varchar
+    - name: properties_hs_line_item_global_term_recurringbillingfrequency
+      type: varchar
+    - name: properties_hs_line_item_global_term_recurringbillingfrequency_enabled
+      type: varchar
+    - name: properties_hs_manual_forecast_category
+      type: varchar
+    - name: properties_hs_merged_object_ids
+      type: varchar
+    - name: properties_hs_mrr
+      type: varchar
+    - name: properties_hs_next_step
+      type: varchar
+    - name: properties_hs_num_target_accounts
+      type: varchar
+    - name: properties_hs_object_id
+      type: varchar
+    - name: properties_hs_predicted_amount
+      type: varchar
+    - name: properties_hs_predicted_amount_in_home_currency
+      type: varchar
+    - name: properties_hs_priority
+      type: varchar
+    - name: properties_hs_projected_amount
+      type: varchar
+    - name: properties_hs_projected_amount_in_home_currency
+      type: varchar
+    - name: properties_hs_sales_email_last_replied
+      type: varchar
+    - name: properties_hs_tcv
+      type: varchar
+    - name: properties_hs_unique_creation_key
+      type: varchar
+    - name: properties_hs_updated_by_user_id
+      type: varchar
+    - name: properties_hs_user_ids_of_all_notification_followers
+      type: varchar
+    - name: properties_hs_user_ids_of_all_notification_unfollowers
+      type: varchar
+    - name: properties_hs_user_ids_of_all_owners
+      type: varchar
+    - name: properties_hubspot_owner_assigneddate
+      type: timestamp
+    - name: properties_hubspot_owner_id
+      type: varchar
+    - name: properties_hubspot_team_id
+      type: varchar
+    - name: properties_notes_last_contacted
+      type: varchar
+    - name: properties_notes_last_updated
+      type: varchar
+    - name: properties_notes_next_activity_date
+      type: varchar
+    - name: properties_num_associated_contacts
+      type: varchar
+    - name: properties_num_contacted_notes
+      type: varchar
+    - name: properties_num_notes
+      type: varchar
+    - name: properties_pipeline
+      type: varchar
+    - name: createdAt
+      type: timestamp
+    - name: updatedAt
+      type: timestamp
+    - name: archived
+      type: boolean
+    - name: archivedAt
+      type: timestamp
+      description: The date and time when the deal was archived
+    - name: companies
+      type: array
+    - name: contacts
+      type: array
+    - name: line_items
+      type: array
+  - name: engagements_notes
+    columns:
+    - name: id
+      type: varchar
+      description: Unique identifier for the engagement note
+    - name: properties
+      type: variant
+      description: Represents the properties associated with the engagement note
+    - name: properties_hs_all_assigned_business_unit_ids
+      type: varchar
+      description: Business unit ids assigned to the note
+    - name: properties_hs_at_mentioned_owner_ids
+      type: varchar
+      description: Owner ids mentioned in the note
+    - name: properties_hs_attachment_ids
+      type: varchar
+      description: Attachment ids linked to the note
+    - name: properties_hs_body_preview
+      type: varchar
+      description: Preview of the note body
+    - name: properties_hs_body_preview_html
+      type: varchar
+      description: HTML version of the note body preview
+    - name: properties_hs_body_preview_is_truncated
+      type: boolean
+      description: Indicates if the body preview is truncated
+    - name: properties_hs_created_by
+      type: float
+      description: User who created the note
+    - name: properties_hs_created_by_user_id
+      type: float
+      description: User id of the creator
+    - name: properties_hs_createdate
+      type: timestamp
+      description: Date and time of note creation
+    - name: properties_hs_engagement_source
+      type: varchar
+      description: Source of the engagement
+    - name: properties_hs_engagement_source_id
+      type: varchar
+      description: ID of the engagement source
+    - name: properties_hs_follow_up_action
+      type: varchar
+      description: Follow-up action specified in the note
+    - name: properties_hs_gdpr_deleted
+      type: boolean
+      description: Indicates if the note is GDPR deleted
+    - name: properties_hs_lastmodifieddate
+      type: timestamp
+      description: Date and time of the last modification
+    - name: properties_hs_merged_object_ids
+      type: varchar
+      description: IDs of objects merged in the note
+    - name: properties_hs_modified_by
+      type: float
+      description: User who last modified the note
+    - name: properties_hs_note_body
+      type: varchar
+      description: Body content of the note
+    - name: properties_hs_object_id
+      type: float
+      description: ID of the note object
+    - name: properties_hs_product_name
+      type: varchar
+      description: Product name associated with the note
+    - name: properties_hs_queue_membership_ids
+      type: varchar
+      description: Queue membership IDs related to the note
+    - name: properties_hs_timestamp
+      type: timestamp
+      description: Timestamp of the note
+    - name: properties_hs_unique_creation_key
+      type: varchar
+      description: Unique key for note creation
+    - name: properties_hs_unique_id
+      type: varchar
+      description: Unique ID of the note
+    - name: properties_hs_updated_by_user_id
+      type: float
+      description: User ID who last updated the note
+    - name: properties_hs_user_ids_of_all_notification_followers
+      type: varchar
+      description: User IDs of all notification followers
+    - name: properties_hs_user_ids_of_all_notification_unfollowers
+      type: varchar
+      description: User IDs of all notification unfollowers
+    - name: properties_hs_user_ids_of_all_owners
+      type: varchar
+      description: User IDs of all owners
+    - name: properties_hubspot_owner_assigneddate
+      type: timestamp
+      description: Date when owner was assigned to the note
+    - name: properties_hubspot_owner_id
+      type: varchar
+      description: Owner ID of the note
+    - name: properties_hubspot_team_id
+      type: varchar
+      description: Team ID associated with the note
+    - name: properties_hs_all_owner_ids
+      type: varchar
+      description: All owner ids associated with the note
+    - name: properties_hs_all_team_ids
+      type: varchar
+      description: All team ids associated with the note
+    - name: properties_hs_all_accessible_team_ids
+      type: varchar
+      description: All team ids that have access to the note
+    - name: createdAt
+      type: timestamp
+      description: The date and time when the note was created
+    - name: updatedAt
+      type: timestamp
+      description: Date and time when the note was last updated
+    - name: archived
+      type: boolean
+      description: Indicates if the note has been archived
+    - name: contacts
+      type: array
+      description: Contacts associated with the engagement note
+    - name: deals
+      type: array
+      description: Deals associated with the engagement note
+    - name: companies
+      type: array
+      description: Companies associated with the engagement note
+    - name: tickets
+      type: array
+      description: Tickets associated with the engagement note
+  - name: deals
+    columns:
+    - name: id
+      type: varchar
+      description: Unique identifier for the deal
+    - name: properties
+      type: variant
+      description: Deal properties
+    - name: properties_amount
+      type: varchar
+      description: Total amount of the deal
+    - name: properties_amount_in_home_currency
+      type: varchar
+      description: Total amount of the deal in home currency
+    - name: properties_closed_lost_reason
+      type: varchar
+      description: Reason for closing the deal as lost
+    - name: properties_closed_won_reason
+      type: varchar
+      description: Reason for closing the deal as won
+    - name: properties_closedate
+      type: timestamp
+      description: Date when the deal was closed
+    - name: properties_createdate
+      type: timestamp
+      description: Date when the deal was created
+    - name: properties_days_to_close
+      type: varchar
+      description: Number of days taken to close the deal
+    - name: properties_dealname
+      type: varchar
+      description: Name or title of the deal
+    - name: properties_dealstage
+      type: varchar
+      description: Current stage of the deal
+    - name: properties_dealtype
+      type: varchar
+      description: Type or category of the deal
+    - name: properties_description
+      type: varchar
+      description: Description of the deal
+    - name: properties_engagements_last_meeting_booked
+      type: varchar
+      description: Information about the last meeting booked for engagement
+    - name: properties_engagements_last_meeting_booked_campaign
+      type: varchar
+      description: Campaign related to the last booked meeting
+    - name: properties_engagements_last_meeting_booked_medium
+      type: varchar
+      description: Medium used for the last booked meeting
+    - name: properties_engagements_last_meeting_booked_source
+      type: varchar
+      description: Source of the last booked meeting
+    - name: properties_hs_acv
+      type: varchar
+      description: Annual Contract Value for the deal
+    - name: properties_hs_all_accessible_team_ids
+      type: varchar
+      description: IDs of all teams with access to the deal
+    - name: properties_hs_all_assigned_business_unit_ids
+      type: varchar
+      description: IDs of all assigned business units for the deal
+    - name: properties_hs_all_owner_ids
+      type: varchar
+      description: IDs of all owners of the deal
+    - name: properties_hs_all_team_ids
+      type: varchar
+      description: IDs of all teams associated with the deal
+    - name: properties_hs_analytics_source
+      type: varchar
+      description: Analytics source for the deal
+    - name: properties_hs_analytics_source_data_1
+      type: varchar
+      description: Additional analytics data for the deal
+    - name: properties_hs_analytics_source_data_2
+      type: varchar
+      description: More analytics data for the deal
+    - name: properties_hs_arr
+      type: varchar
+      description: ARR (Annual Recurring Revenue) for the deal
+    - name: properties_hs_closed_amount
+      type: varchar
+      description: Amount closed for the deal
+    - name: properties_hs_closed_amount_in_home_currency
+      type: varchar
+      description: Amount closed for the deal in home currency
+    - name: properties_hs_created_by_user_id
+      type: varchar
+      description: User ID who created the deal
+    - name: properties_hs_createdate
+      type: timestamp
+      description: Creation date of the deal
+    - name: properties_hs_date_entered_9567448
+      type: varchar
+      description: Date when the deal was created
+    - name: properties_hs_date_entered_9567449
+      type: varchar
+      description: Another date when the deal was created
+    - name: properties_hs_date_entered_appointmentscheduled
+      type: timestamp
+      description: Date when appointment was scheduled
+    - name: properties_hs_date_entered_closedlost
+      type: timestamp
+      description: Date when deal was marked as closed lost
+    - name: properties_hs_date_entered_closedwon
+      type: timestamp
+      description: Date when deal was marked as closed won
+    - name: properties_hs_date_entered_contractsent
+      type: timestamp
+      description: Date when contract was sent
+    - name: properties_hs_date_entered_customclosedwonstage
+      type: timestamp
+      description: Date entered custom closed won stage
+    - name: properties_hs_date_entered_decisionmakerboughtin
+      type: timestamp
+      description: Date decision maker bought in
+    - name: properties_hs_date_entered_presentationscheduled
+      type: timestamp
+      description: Date when presentation was scheduled
+    - name: properties_hs_date_entered_qualifiedtobuy
+      type: timestamp
+      description: Date when qualified to buy
+    - name: properties_hs_date_exited_9567448
+      type: varchar
+      description: Date when the deal was exited
+    - name: properties_hs_date_exited_9567449
+      type: varchar
+      description: Another date when the deal was exited
+    - name: properties_hs_date_exited_appointmentscheduled
+      type: timestamp
+      description: Date when appointment was exited
+    - name: properties_hs_date_exited_closedlost
+      type: timestamp
+      description: Date when deal was exited as closed lost
+    - name: properties_hs_date_exited_closedwon
+      type: timestamp
+      description: Date when deal was exited as closed won
+    - name: properties_hs_date_exited_contractsent
+      type: timestamp
+      description: Date when contract was exited
+    - name: properties_hs_date_exited_customclosedwonstage
+      type: timestamp
+      description: Date exited from custom closed won stage
+    - name: properties_hs_date_exited_decisionmakerboughtin
+      type: timestamp
+      description: Date decision maker bought in exited
+    - name: properties_hs_date_exited_presentationscheduled
+      type: timestamp
+      description: Date when presentation was exited
+    - name: properties_hs_date_exited_qualifiedtobuy
+      type: timestamp
+      description: Date when qualified to buy exited
+    - name: properties_hs_deal_amount_calculation_preference
+      type: varchar
+      description: Calculation preference for deal amount
+    - name: properties_hs_deal_stage_probability
+      type: varchar
+      description: Probability of winning the deal at current stage
+    - name: properties_hs_deal_stage_probability_shadow
+      type: varchar
+      description: Shadow probability of winning the deal at current stage
+    - name: properties_hs_forecast_amount
+      type: varchar
+      description: Forecasted amount for the deal
+    - name: properties_hs_forecast_probability
+      type: varchar
+      description: Forecasted probability of closing the deal
+    - name: properties_hs_is_closed
+      type: boolean
+      description: Flag indicating if the deal is closed
+    - name: properties_hs_is_closed_won
+      type: boolean
+      description: Flag indicating if the deal is closed and won
+    - name: properties_hs_lastmodifieddate
+      type: timestamp
+      description: Last modified date of the deal
+    - name: properties_hs_latest_meeting_activity
+      type: varchar
+      description: Information about the latest meeting activity related to the deal
+    - name: properties_hs_likelihood_to_close
+      type: varchar
+      description: Likelihood of closing the deal
+    - name: properties_hs_line_item_global_term_hs_discount_percentage
+      type: varchar
+      description: Global discount percentage for line items
+    - name: properties_hs_line_item_global_term_hs_discount_percentage_enabled
+      type: boolean
+      description: Flag indicating if global discount percentage for line items is
+        enabled
+    - name: properties_hs_line_item_global_term_hs_recurring_billing_period
+      type: varchar
+      description: Recurring billing period for line items
+    - name: properties_hs_line_item_global_term_hs_recurring_billing_period_enabled
+      type: boolean
+      description: Flag indicating if recurring billing period for line items is enabled
+    - name: properties_hs_line_item_global_term_hs_recurring_billing_start_date
+      type: varchar
+      description: Start date for recurring billing of line items
+    - name: properties_hs_line_item_global_term_hs_recurring_billing_start_date_enabled
+      type: boolean
+      description: Flag indicating if recurring billing start date for line items
+        is enabled
+    - name: properties_hs_line_item_global_term_recurringbillingfrequency
+      type: varchar
+      description: Recurring billing frequency for line items
+    - name: properties_hs_line_item_global_term_recurringbillingfrequency_enabled
+      type: boolean
+      description: Flag indicating if recurring billing frequency for line items is
+        enabled
+    - name: properties_hs_manual_forecast_category
+      type: varchar
+      description: Manual forecast category for the deal
+    - name: properties_hs_merged_object_ids
+      type: varchar
+      description: IDs of merged objects related to the deal
+    - name: properties_hs_mrr
+      type: varchar
+      description: MRR (Monthly Recurring Revenue) for the deal
+    - name: properties_hs_next_step
+      type: varchar
+      description: Next step planned for the deal
+    - name: properties_hs_num_target_accounts
+      type: varchar
+      description: Number of target accounts associated with the deal
+    - name: properties_hs_object_id
+      type: varchar
+      description: Unique object ID for the deal
+    - name: properties_hs_predicted_amount
+      type: varchar
+      description: Predicted amount for the deal
+    - name: properties_hs_predicted_amount_in_home_currency
+      type: varchar
+      description: Predicted amount for the deal in home currency
+    - name: properties_hs_priority
+      type: varchar
+      description: Priority level assigned to the deal
+    - name: properties_hs_projected_amount
+      type: varchar
+      description: Projected amount for the deal
+    - name: properties_hs_projected_amount_in_home_currency
+      type: varchar
+      description: Projected amount for the deal in home currency
+    - name: properties_hs_sales_email_last_replied
+      type: varchar
+      description: Last date the sales email was replied to
+    - name: properties_hs_tcv
+      type: varchar
+      description: Total Contract Value for the deal
+    - name: properties_hs_unique_creation_key
+      type: varchar
+      description: Unique key for creation of the deal
+    - name: properties_hs_updated_by_user_id
+      type: varchar
+      description: User ID who last updated the deal
+    - name: properties_hs_user_ids_of_all_notification_followers
+      type: varchar
+      description: User IDs of all notification followers for the deal
+    - name: properties_hs_user_ids_of_all_notification_unfollowers
+      type: varchar
+      description: User IDs of all notification unfollowers for the deal
+    - name: properties_hs_user_ids_of_all_owners
+      type: varchar
+      description: User IDs of all owners of the deal
+    - name: properties_hubspot_owner_assigneddate
+      type: timestamp
+      description: Date when the owner was assigned to the deal
+    - name: properties_hubspot_owner_id
+      type: varchar
+      description: Owner ID of the deal in HubSpot
+    - name: properties_hubspot_team_id
+      type: varchar
+      description: Team ID associated with the deal in HubSpot
+    - name: properties_notes_last_contacted
+      type: varchar
+      description: Date when the last contact was made
+    - name: properties_notes_last_updated
+      type: varchar
+      description: Date when the notes were last updated
+    - name: properties_notes_next_activity_date
+      type: varchar
+      description: Next planned activity date from notes
+    - name: properties_num_associated_contacts
+      type: varchar
+      description: Number of contacts associated with the deal
+    - name: properties_num_contacted_notes
+      type: varchar
+      description: Number of notes related to contacted activities
+    - name: properties_num_notes
+      type: varchar
+      description: Total number of notes attached to the deal
+    - name: properties_pipeline
+      type: varchar
+      description: Pipeline information the deal belongs to
+    - name: createdAt
+      type: timestamp
+      description: The date and time when the deal was created
+    - name: updatedAt
+      type: timestamp
+      description: The date and time when the deal was last updated
+    - name: archived
+      type: boolean
+      description: Indicates if the deal is archived
+    - name: companies
+      type: array
+      description: Information about companies associated with the deal
+    - name: contacts
+      type: array
+      description: Information about contacts associated with the deal
+    - name: line_items
+      type: array
+      description: Details of line items associated with the deal
+  - name: ticket_pipelines
+    columns:
+    - name: label
+      type: varchar
+      description: The label or name of the ticket pipeline.
+    - name: displayOrder
+      type: integer
+      description: The order in which the ticket pipeline is displayed.
+    - name: id
+      type: varchar
+      description: The unique identifier of the ticket pipeline.
+    - name: archived
+      type: boolean
+      description: Indicates if the ticket pipeline is archived or not.
+    - name: stages
+      type: array
+      description: List of stages within the ticket pipeline.
+    - name: createdAt
+      type: timestamp
+      description: The date and time when the ticket pipeline was created.
+    - name: updatedAt
+      type: timestamp
+      description: The date and time when the ticket pipeline was last updated.
+  - name: companies_property_history
+    columns:
+    - name: updatedByUserId
+      type: float
+      description: The user ID of the user who initiated the property update.
+    - name: timestamp
+      type: timestamp
+      description: The date and time when the property update occurred.
+    - name: property
+      type: varchar
+      description: The specific property that was updated in the company record.
+    - name: companyId
+      type: varchar
+      description: The unique identifier of the company to which the property history
+        record belongs.
+    - name: sourceType
+      type: varchar
+      description: The type of the source that updated the property in the company
+        record.
+    - name: sourceId
+      type: varchar
+      description: The identifier of the source that updated the property in the company
+        record.
+    - name: value
+      type: varchar
+      description: The new value of the property after the update.
+    - name: archived
+      type: boolean
+      description: Flag indicating if the company property history record is archived
+        or not.
+  - name: email_subscriptions
+    columns:
+    - name: active
+      type: boolean
+      description: Indicates whether the subscription is currently active or not
+    - name: portalId
+      type: integer
+      description: The unique identifier for the portal associated with the subscription
+    - name: description
+      type: varchar
+      description: Additional information or details about the subscription
+    - name: id
+      type: integer
+      description: The unique identifier for the subscription
+    - name: name
+      type: varchar
+      description: The display name of the subscription
+    - name: order
+      type: integer
+      description: The order in which the subscription is displayed or processed
+    - name: businessUnitId
+      type: integer
+      description: The unique identifier for the business unit associated with the
+        subscription
+    - name: internal
+      type: boolean
+      description: Indicates whether the subscription is for internal use only
+    - name: internalName
+      type: varchar
+      description: The internal name for the subscription
+    - name: category
+      type: varchar
+      description: The category to which the subscription belongs
+    - name: channel
+      type: varchar
+      description: The communication channel through which the subscription is managed
+  - name: engagements_emails
+    columns:
+    - name: id
+      type: varchar
+      description: Unique identifier for the engagement email
+    - name: properties
+      type: variant
+    - name: properties_hs_all_assigned_business_unit_ids
+      type: varchar
+      description: The IDs of all business units assigned to this engagement email
+    - name: properties_hs_at_mentioned_owner_ids
+      type: varchar
+      description: The IDs of owners mentioned in this engagement email
+    - name: properties_hs_attachment_ids
+      type: varchar
+      description: The IDs of attachments included in this engagement email
+    - name: properties_hs_body_preview
+      type: varchar
+      description: Preview text of the email body
+    - name: properties_hs_body_preview_html
+      type: varchar
+      description: HTML version of the preview text of the email body
+    - name: properties_hs_body_preview_is_truncated
+      type: boolean
+      description: Indicates if the body preview is truncated
+    - name: properties_hs_created_by
+      type: varchar
+      description: User who created the engagement email
+    - name: properties_hs_created_by_user_id
+      type: float
+      description: User ID of the creator of the engagement email
+    - name: properties_hs_createdate
+      type: timestamp
+      description: Date and time when the engagement email was created
+    - name: properties_hs_direction_and_unique_id
+      type: varchar
+      description: Direction and unique ID of the email
+    - name: properties_hs_email_attached_video_id
+      type: varchar
+      description: ID of the attached video in the email
+    - name: properties_hs_email_attached_video_name
+      type: varchar
+      description: Name of the attached video in the email
+    - name: properties_hs_email_attached_video_opened
+      type: boolean
+      description: Indicates if the attached video was opened
+    - name: properties_hs_email_attached_video_watched
+      type: boolean
+      description: Indicates if the attached video was watched
+    - name: properties_hs_email_bcc_email
+      type: varchar
+      description: Email address in BCC field of the email
+    - name: properties_hs_email_bcc_firstname
+      type: varchar
+      description: First name in BCC field of the email
+    - name: properties_hs_email_bcc_lastname
+      type: varchar
+      description: Last name in BCC field of the email
+    - name: properties_hs_email_bcc_raw
+      type: varchar
+      description: Raw data of BCC field of the email
+    - name: properties_hs_email_cc_email
+      type: varchar
+      description: Email address in CC field of the email
+    - name: properties_hs_email_cc_firstname
+      type: varchar
+      description: First name in CC field of the email
+    - name: properties_hs_email_cc_lastname
+      type: varchar
+      description: Last name in CC field of the email
+    - name: properties_hs_email_cc_raw
+      type: varchar
+      description: Raw data of CC field of the email
+    - name: properties_hs_email_direction
+      type: varchar
+      description: Direction of the email
+    - name: properties_hs_email_encoded_email_associations_request
+      type: varchar
+      description: Encoded email associations request
+    - name: properties_hs_email_error_message
+      type: varchar
+      description: Error message associated with the email
+    - name: properties_hs_email_facsimile_send_id
+      type: varchar
+      description: ID associated with the facsimile send
+    - name: properties_hs_email_from_email
+      type: varchar
+      description: Email address of the sender
+    - name: properties_hs_email_from_firstname
+      type: varchar
+      description: First name of the sender
+    - name: properties_hs_email_from_lastname
+      type: varchar
+      description: Last name of the sender
+    - name: properties_hs_email_from_raw
+      type: varchar
+      description: Raw data of the sender's email
+    - name: properties_hs_email_headers
+      type: varchar
+      description: Headers of the email
+    - name: properties_hs_email_html
+      type: varchar
+      description: HTML content of the email
+    - name: properties_hs_email_logged_from
+      type: varchar
+      description: Origin of the logged email
+    - name: properties_hs_email_media_processing_status
+      type: varchar
+      description: Status of media processing in the email
+    - name: properties_hs_email_member_of_forwarded_subthread
+      type: boolean
+      description: Indicates if the email is a member of a forwarded subthread
+    - name: properties_hs_email_message_id
+      type: varchar
+      description: Message ID of the email
+    - name: properties_hs_email_migrated_via_portal_data_migration
+      type: varchar
+      description: Indicates if the email was migrated via portal data migration
+    - name: properties_hs_email_pending_inline_image_ids
+      type: varchar
+      description: IDs of pending inline images in the email
+    - name: properties_hs_email_post_send_status
+      type: varchar
+      description: Status after sending the email
+    - name: properties_hs_email_recipient_drop_reasons
+      type: varchar
+      description: Reasons for dropping email recipients
+    - name: properties_hs_email_send_event_id
+      type: varchar
+      description: ID of the email send event
+    - name: properties_hs_email_send_event_id_created
+      type: timestamp
+      description: Date and time when the email send event was created
+    - name: properties_hs_email_sender_email
+      type: varchar
+      description: Email address of the sender of the email
+    - name: properties_hs_email_sender_firstname
+      type: varchar
+      description: First name of the sender of the email
+    - name: properties_hs_email_sender_lastname
+      type: varchar
+      description: Last name of the sender of the email
+    - name: properties_hs_email_sender_raw
+      type: varchar
+      description: Raw data of the sender of the email
+    - name: properties_hs_email_sent_via
+      type: varchar
+      description: Method through which the email was sent
+    - name: properties_hs_email_status
+      type: varchar
+      description: Status of the email
+    - name: properties_hs_email_subject
+      type: varchar
+      description: Subject of the email
+    - name: properties_hs_email_text
+      type: varchar
+      description: Text content of the email
+    - name: properties_hs_email_thread_id
+      type: varchar
+      description: Thread ID of the email
+    - name: properties_hs_email_to_email
+      type: varchar
+      description: Email address in 'To' field of the email
+    - name: properties_hs_email_to_firstname
+      type: varchar
+      description: First name in 'To' field of the email
+    - name: properties_hs_email_to_lastname
+      type: varchar
+      description: Last name in 'To' field of the email
+    - name: properties_hs_email_to_raw
+      type: varchar
+      description: Raw data of 'To' field of the email
+    - name: properties_hs_email_tracker_key
+      type: varchar
+      description: Key associated with email tracking
+    - name: properties_hs_email_validation_skipped
+      type: varchar
+      description: Indicates if email validation was skipped
+    - name: properties_hs_engagement_source
+      type: varchar
+      description: Source of engagement
+    - name: properties_hs_engagement_source_id
+      type: varchar
+      description: ID of the engagement source
+    - name: properties_hs_follow_up_action
+      type: varchar
+      description: Follow-up action related to the engagement
+    - name: properties_hs_gdpr_deleted
+      type: boolean
+      description: Indicates if the email has been GDPR deleted
+    - name: properties_hs_lastmodifieddate
+      type: timestamp
+      description: Date and time when the engagement email was last modified
+    - name: properties_hs_merged_object_ids
+      type: varchar
+      description: IDs of merged objects related to the email
+    - name: properties_hs_modified_by
+      type: varchar
+      description: User who last modified the email
+    - name: properties_hs_object_id
+      type: float
+      description: ID of the engagement email object
+    - name: properties_hs_product_name
+      type: varchar
+      description: Name of the product associated with the engagement email
+    - name: properties_hs_queue_membership_ids
+      type: varchar
+      description: IDs of queue memberships associated with this engagement email
+    - name: properties_hs_timestamp
+      type: timestamp
+      description: Date and time of the timestamp for the engagement email
+    - name: properties_hs_unique_creation_key
+      type: varchar
+      description: Unique key for the creation of the email
+    - name: properties_hs_unique_id
+      type: varchar
+      description: Unique ID of the engagement email
+    - name: properties_hs_updated_by_user_id
+      type: float
+      description: User ID of the user who last updated the email
+    - name: properties_hs_user_ids_of_all_notification_followers
+      type: varchar
+      description: User IDs of all notification followers of the email
+    - name: properties_hs_user_ids_of_all_notification_unfollowers
+      type: varchar
+      description: User IDs of all notification unfollowers of the email
+    - name: properties_hs_user_ids_of_all_owners
+      type: varchar
+      description: User IDs of all owners of the email
+    - name: properties_hubspot_owner_assigneddate
+      type: timestamp
+      description: Date and time when the owner was assigned to the engagement email
+    - name: properties_hubspot_owner_id
+      type: varchar
+      description: ID of the owner associated with the email
+    - name: properties_hubspot_team_id
+      type: varchar
+      description: ID of the team associated with the email
+    - name: properties_hs_all_owner_ids
+      type: varchar
+      description: The IDs of all owners associated with this engagement email
+    - name: properties_hs_all_team_ids
+      type: varchar
+      description: The IDs of all teams associated with this engagement email
+    - name: properties_hs_all_accessible_team_ids
+      type: varchar
+      description: The IDs of all the teams that have access to this engagement email
+    - name: createdAt
+      type: timestamp
+      description: Date and time when the engagement email was created
+    - name: updatedAt
+      type: timestamp
+      description: Date and time when the engagement email was last updated
+    - name: archived
+      type: boolean
+      description: Indicates if the engagement email is archived or not
+    - name: contacts
+      type: array
+      description: List of contacts associated with the engagement email
+    - name: deals
+      type: array
+      description: List of deals associated with the engagement email
+    - name: companies
+      type: array
+      description: List of companies associated with the engagement email
+    - name: tickets
+      type: array
+      description: List of tickets associated with the engagement email
+  - name: engagements_meetings
+    columns:
+    - name: id
+      type: varchar
+      description: Unique identifier for the meeting engagement.
+    - name: properties
+      type: variant
+      description: Additional properties related to the meeting engagement.
+    - name: properties_hs_activity_type
+      type: varchar
+      description: Type of activity associated with the meeting.
+    - name: properties_hs_all_assigned_business_unit_ids
+      type: varchar
+      description: IDs of all business units assigned to the meeting.
+    - name: properties_hs_at_mentioned_owner_ids
+      type: varchar
+      description: IDs of owners mentioned in the meeting.
+    - name: properties_hs_attachment_ids
+      type: varchar
+      description: IDs of attachments associated with the meeting.
+    - name: properties_hs_attendee_owner_ids
+      type: varchar
+      description: IDs of owners who are attendees in the meeting.
+    - name: properties_hs_body_preview
+      type: varchar
+      description: Preview of the meeting body.
+    - name: properties_hs_body_preview_html
+      type: varchar
+      description: HTML version of the meeting body preview.
+    - name: properties_hs_body_preview_is_truncated
+      type: boolean
+      description: Flag indicating if the body preview is truncated.
+    - name: properties_hs_created_by
+      type: float
+      description: User who created the meeting.
+    - name: properties_hs_created_by_user_id
+      type: float
+      description: User ID of the creator of the meeting.
+    - name: properties_hs_createdate
+      type: timestamp
+      description: Date and time when the meeting was created.
+    - name: properties_hs_engagement_source
+      type: varchar
+      description: Source of the meeting engagement.
+    - name: properties_hs_engagement_source_id
+      type: varchar
+      description: ID of the source of the meeting engagement.
+    - name: properties_hs_follow_up_action
+      type: varchar
+      description: Follow-up action related to the meeting.
+    - name: properties_hs_gdpr_deleted
+      type: boolean
+      description: Flag indicating if the meeting is deleted due to GDPR.
+    - name: properties_hs_i_cal_uid
+      type: varchar
+      description: Unique identifier for the meeting in iCalendar format.
+    - name: properties_hs_internal_meeting_notes
+      type: varchar
+      description: Internal notes related to the meeting.
+    - name: properties_hs_lastmodifieddate
+      type: timestamp
+      description: Date and time when the meeting was last modified.
+    - name: properties_hs_meeting_body
+      type: varchar
+      description: Full body of the meeting.
+    - name: properties_hs_meeting_calendar_event_hash
+      type: varchar
+      description: Unique hash for the meeting in the calendar event.
+    - name: properties_hs_meeting_change_id
+      type: varchar
+      description: Change ID associated with the meeting.
+    - name: properties_hs_meeting_created_from_link_id
+      type: varchar
+      description: ID of the link from which the meeting was created.
+    - name: properties_hs_meeting_end_time
+      type: timestamp
+      description: End time of the meeting.
+    - name: properties_hs_meeting_external_url
+      type: varchar
+      description: External URL associated with the meeting.
+    - name: properties_hs_meeting_location
+      type: varchar
+      description: Location where the meeting took place.
+    - name: properties_hs_meeting_location_type
+      type: varchar
+      description: Type of location where the meeting took place.
+    - name: properties_hs_meeting_outcome
+      type: varchar
+      description: Outcome of the meeting.
+    - name: properties_hs_meeting_pre_meeting_prospect_reminders
+      type: varchar
+      description: Prospect reminders before the meeting.
+    - name: properties_hs_meeting_source
+      type: varchar
+      description: Source of the meeting.
+    - name: properties_hs_meeting_source_id
+      type: varchar
+      description: ID of the source of the meeting.
+    - name: properties_hs_meeting_start_time
+      type: timestamp
+      description: Start time of the meeting.
+    - name: properties_hs_meeting_title
+      type: varchar
+      description: Title of the meeting.
+    - name: properties_hs_meeting_web_conference_meeting_id
+      type: varchar
+      description: Meeting ID for web conference.
+    - name: properties_hs_merged_object_ids
+      type: varchar
+      description: IDs of merged objects related to the meeting.
+    - name: properties_hs_modified_by
+      type: float
+      description: User who last modified the meeting.
+    - name: properties_hs_object_id
+      type: float
+      description: Object ID associated with the meeting.
+    - name: properties_hs_product_name
+      type: varchar
+      description: Name of the product associated with the meeting.
+    - name: properties_hs_queue_membership_ids
+      type: varchar
+      description: IDs of queues the meeting is associated with.
+    - name: properties_hs_scheduled_tasks
+      type: varchar
+      description: Scheduled tasks related to the meeting.
+    - name: properties_hs_timestamp
+      type: timestamp
+      description: Timestamp for the meeting engagement.
+    - name: properties_hs_unique_creation_key
+      type: varchar
+      description: Unique key associated with the creation of the meeting.
+    - name: properties_hs_unique_id
+      type: varchar
+      description: Unique ID associated with the meeting.
+    - name: properties_hs_updated_by_user_id
+      type: float
+      description: User ID of the user who last updated the meeting.
+    - name: properties_hs_user_ids_of_all_notification_followers
+      type: varchar
+      description: IDs of users following notifications for the meeting.
+    - name: properties_hs_user_ids_of_all_notification_unfollowers
+      type: varchar
+      description: IDs of users who have unfollowed notifications for the meeting.
+    - name: properties_hs_user_ids_of_all_owners
+      type: varchar
+      description: IDs of all owners associated with the meeting.
+    - name: properties_hubspot_owner_assigneddate
+      type: timestamp
+      description: Date and time when the owner was assigned to the meeting.
+    - name: properties_hubspot_owner_id
+      type: varchar
+      description: ID of the owner associated with the meeting.
+    - name: properties_hubspot_team_id
+      type: varchar
+      description: ID of the team associated with the meeting.
+    - name: properties_hs_all_owner_ids
+      type: varchar
+      description: IDs of all owners associated with the meeting.
+    - name: properties_hs_all_team_ids
+      type: varchar
+      description: IDs of all teams associated with the meeting.
+    - name: properties_hs_all_accessible_team_ids
+      type: varchar
+      description: IDs of all teams with access to the meeting.
+    - name: createdAt
+      type: timestamp
+      description: Timestamp indicating when the meeting engagement was created.
+    - name: updatedAt
+      type: timestamp
+      description: Timestamp indicating when the meeting engagement was last updated.
+    - name: archived
+      type: boolean
+      description: Indicates whether the meeting engagement is archived or not.
+    - name: contacts
+      type: array
+      description: Information about the contacts associated with the meeting engagement.
+    - name: deals
+      type: array
+      description: Information about the deals associated with the meeting engagement.
+    - name: companies
+      type: array
+      description: Information about the companies associated with the meeting engagement.
+    - name: tickets
+      type: array
+      description: Information about the tickets associated with the meeting engagement.
+  - name: deals_property_history
+    columns:
+    - name: updatedByUserId
+      type: float
+      description: The unique identifier of the user who made the update
+    - name: timestamp
+      type: timestamp
+      description: The date and time when the property was updated
+    - name: property
+      type: varchar
+      description: The name of the property that was updated
+    - name: dealId
+      type: varchar
+      description: The unique identifier of the deal associated with this property
+        history
+    - name: sourceType
+      type: varchar
+      description: The type of source that triggered this update
+    - name: sourceId
+      type: varchar
+      description: The unique identifier of the source of this update
+    - name: value
+      type: varchar
+      description: The new value of the property
+    - name: archived
+      type: boolean
+      description: Indicates if the deal property history is archived
+  - name: contacts_list_memberships
+    columns:
+    - name: canonical-vid
+      type: integer
+      description: The unique ID associated with the contact in the HubSpot CRM
+    - name: static-list-id
+      type: integer
+      description: The static ID assigned to the list of contacts within the HubSpot
+        CRM
+    - name: internal-list-id
+      type: integer
+      description: The internal ID assigned to the list of contacts within the HubSpot
+        CRM
+    - name: timestamp
+      type: integer
+      description: The timestamp when the contact was added to or removed from the
+        list
+    - name: vid
+      type: integer
+      description: The ID associated with the contact in the HubSpot CRM
+    - name: is-member
+      type: boolean
+      description: Flag indicating whether the contact is a member of the list or
+        not
+  - name: products
+    columns:
+    - name: id
+      type: varchar
+      description: The unique identifier of the product.
+    - name: createdAt
+      type: timestamp
+      description: The datetime when the product was created.
+    - name: updatedAt
+      type: timestamp
+      description: The datetime when the product was last updated.
+    - name: archived
+      type: boolean
+      description: Indicates whether the product is archived or active.
+  - name: contacts_form_submissions
+    columns:
+    - name: canonical-vid
+      type: integer
+      description: The canonical VID associated with the submission
+    - name: canonical-url
+      type: varchar
+      description: The canonical URL of the submitted form
+    - name: conversion-id
+      type: varchar
+      description: The conversion ID related to the form submission
+    - name: page-title
+      type: varchar
+      description: The title of the page where the form submission occurred
+    - name: timestamp
+      type: integer
+      description: The timestamp of when the form submission occurred
+    - name: form-id
+      type: varchar
+      description: The unique ID of the form submitted
+    - name: portal-id
+      type: integer
+      description: The ID of the portal where the form submission was made
+    - name: title
+      type: varchar
+      description: The title of the form submitted
+    - name: page-url
+      type: varchar
+      description: The URL of the page where the form was submitted
+    - name: form-type
+      type: varchar
+      description: The type of form that was submitted
+    - name: contact-associated-by
+      type: array
+      description: The specific contacts associated with the submission
+    - name: meta-data
+      type: array
+      description: Additional metadata associated with the submission
+  - name: companies
+    columns:
+    - name: id
+      type: varchar
+      description: Unique identifier for the company
+    - name: createdAt
+      type: timestamp
+      description: Date and time when the company was created
+    - name: updatedAt
+      type: timestamp
+      description: Date and time when the company was last updated
+    - name: archived
+      type: boolean
+      description: Indicates whether the company is archived or active
+    - name: contacts
+      type: array
+      description: List of contacts associated with the company
+  - name: owners_archived
+    columns:
+    - name: id
+      type: varchar
+      description: The unique identifier of the owner.
+    - name: email
+      type: varchar
+      description: The email address of the owner.
+    - name: firstName
+      type: varchar
+      description: The first name of the owner.
+    - name: lastName
+      type: varchar
+      description: The last name of the owner.
+    - name: userId
+      type: integer
+      description: The user ID associated with the owner.
+    - name: createdAt
+      type: timestamp
+      description: The date and time the owner was created.
+    - name: updatedAt
+      type: timestamp
+      description: The date and time the owner was last updated.
+    - name: archived
+      type: boolean
+      description: Indicates if the owner is archived or not.
+    - name: teams
+      type: array
+      description: A list of teams the owner belongs to.
+  - name: owners
+    columns:
+    - name: id
+      type: varchar
+      description: The unique identifier of the owner.
+    - name: email
+      type: varchar
+      description: The email address of the owner.
+    - name: firstName
+      type: varchar
+      description: The first name of the owner.
+    - name: lastName
+      type: varchar
+      description: The last name of the owner.
+    - name: userId
+      type: integer
+      description: The unique identifier of the user associated with the owner.
+    - name: createdAt
+      type: timestamp
+      description: The date and time when the owner was created.
+    - name: updatedAt
+      type: timestamp
+      description: The date and time when the owner was last updated.
+    - name: archived
+      type: boolean
+      description: Indicates if the owner is archived or not.
+    - name: teams
+      type: array
+      description: An array of teams the owner belongs to.
+  - name: workflows
+    columns:
+    - name: name
+      type: varchar
+      description: Name of the workflow
+    - name: id
+      type: integer
+      description: Unique identifier of the workflow
+    - name: type
+      type: varchar
+      description: Type of the workflow
+    - name: enabled
+      type: boolean
+      description: Flag indicating if the workflow is enabled
+    - name: insertedAt
+      type: integer
+      description: Timestamp when the workflow was inserted
+    - name: updatedAt
+      type: integer
+      description: Timestamp when the workflow was last updated
+    - name: personaTagIds
+      type: array
+      description: IDs of persona tags associated with the workflow
+    - name: contactListIds
+      type: variant
+      description: IDs of contact lists associated with the workflow
+    - name: contactListIds_enrolled
+      type: integer
+      description: ID of the contact list containing enrolled contacts
+    - name: contactListIds_active
+      type: integer
+      description: ID of the contact list containing active contacts
+    - name: contactListIds_completed
+      type: integer
+      description: ID of the contact list containing completed contacts
+    - name: contactListIds_succeeded
+      type: integer
+      description: ID of the contact list containing succeeded contacts
+    - name: contactListIds_steps
+      type: array
+      description: List of steps within the workflow
+    - name: lastUpdatedByUserId
+      type: integer
+      description: ID of the user who last updated the workflow
+    - name: contactCounts
+      type: variant
+      description: Counts of contacts in various stages within the workflow
+    - name: description
+      type: varchar
+      description: Description of the workflow
+    - name: originalAuthorUserId
+      type: integer
+      description: ID of the original author of the workflow
+    - name: migrationStatus
+      type: variant
+      description: Status and details of workflow migration
+    - name: updateSource
+      type: variant
+      description: Details of the workflow update source
+    - name: creationSource
+      type: variant
+      description: Details of the workflow creation source
+    - name: portalId
+      type: integer
+      description: ID of the portal associated with the workflow
+  - name: engagements_calls
+    columns:
+    - name: id
+      type: varchar
+      description: Unique identifier for the call engagement.
+    - name: properties
+      type: variant
+      description: Information related to the properties of the call engagement.
+    - name: properties_hs_activity_type
+      type: varchar
+      description: Type of activity associated with the call engagement.
+    - name: properties_hs_all_assigned_business_unit_ids
+      type: varchar
+      description: IDs of all business units assigned to the call engagement.
+    - name: properties_hs_at_mentioned_owner_ids
+      type: varchar
+      description: IDs of owners mentioned in the call engagement.
+    - name: properties_hs_attachment_ids
+      type: varchar
+      description: IDs of attachments associated with the call engagement.
+    - name: properties_hs_body_preview
+      type: varchar
+      description: Preview of the body content of the call engagement.
+    - name: properties_hs_body_preview_html
+      type: varchar
+      description: HTML-formatted preview of the body content of the call engagement.
+    - name: properties_hs_body_preview_is_truncated
+      type: boolean
+      description: Indicates if the body preview is truncated or not.
+    - name: properties_hs_call_app_id
+      type: float
+      description: App ID associated with the call engagement.
+    - name: properties_hs_call_authed_url_provider
+      type: varchar
+      description: Provider of the authenticated call URL.
+    - name: properties_hs_call_body
+      type: varchar
+      description: Body content of the call engagement.
+    - name: properties_hs_call_callee_object_id
+      type: float
+      description: Object ID of the callee associated with the call engagement.
+    - name: properties_hs_call_callee_object_type
+      type: varchar
+      description: Type of object of the callee associated with the call engagement.
+    - name: properties_hs_call_disposition
+      type: varchar
+      description: Disposition of the call engagement.
+    - name: properties_hs_call_duration
+      type: float
+      description: Duration of the call engagement.
+    - name: properties_hs_call_external_account_id
+      type: varchar
+      description: External account ID associated with the call engagement.
+    - name: properties_hs_call_external_id
+      type: varchar
+      description: External ID associated with the call engagement.
+    - name: properties_hs_call_from_number
+      type: varchar
+      description: Phone number from which the call was made.
+    - name: properties_hs_call_has_transcript
+      type: boolean
+      description: Indicates if the call has a transcript or not.
+    - name: properties_hs_call_recording_url
+      type: varchar
+      description: URL of the call recording.
+    - name: properties_hs_call_source
+      type: varchar
+      description: Source of the call engagement.
+    - name: properties_hs_call_status
+      type: varchar
+      description: Status of the call.
+    - name: properties_hs_call_title
+      type: varchar
+      description: Title of the call engagement.
+    - name: properties_hs_call_to_number
+      type: varchar
+      description: Phone number to which the call was made.
+    - name: properties_hs_call_transcription_id
+      type: float
+      description: Transcription ID of the call engagement.
+    - name: properties_hs_call_video_recording_url
+      type: varchar
+      description: URL of the video call recording.
+    - name: properties_hs_call_zoom_meeting_uuid
+      type: varchar
+      description: UUID of the Zoom meeting associated with the call engagement.
+    - name: properties_hs_calls_service_call_id
+      type: float
+      description: Service call ID associated with the call engagement.
+    - name: properties_hs_created_by
+      type: float
+      description: User who created the call engagement.
+    - name: properties_hs_created_by_user_id
+      type: float
+      description: User ID of the creator of the call engagement.
+    - name: properties_hs_createdate
+      type: timestamp
+      description: Date and time when the call engagement was created.
+    - name: properties_hs_engagement_source
+      type: varchar
+      description: Source of the engagement.
+    - name: properties_hs_engagement_source_id
+      type: varchar
+      description: ID of the source of the engagement.
+    - name: properties_hs_follow_up_action
+      type: varchar
+      description: Follow-up action required for the engagement.
+    - name: properties_hs_gdpr_deleted
+      type: boolean
+      description: Indicates if the engagement is deleted due to GDPR compliance.
+    - name: properties_hs_lastmodifieddate
+      type: timestamp
+      description: Date and time when the call engagement was last modified.
+    - name: properties_hs_merged_object_ids
+      type: varchar
+      description: IDs of merged objects associated with the engagement.
+    - name: properties_hs_modified_by
+      type: float
+      description: User who last modified the engagement.
+    - name: properties_hs_object_id
+      type: float
+      description: Object ID of the engagement.
+    - name: properties_hs_product_name
+      type: varchar
+      description: Name of the product associated with the engagement.
+    - name: properties_hs_queue_membership_ids
+      type: varchar
+      description: IDs of queue memberships associated with the engagement.
+    - name: properties_hs_timestamp
+      type: timestamp
+      description: Timestamp of the engagement.
+    - name: properties_hs_unique_creation_key
+      type: varchar
+      description: Unique key for creation of the engagement.
+    - name: properties_hs_unique_id
+      type: varchar
+      description: Unique ID associated with the engagement.
+    - name: properties_hs_unknown_visitor_conversation
+      type: boolean
+      description: Indicates if the conversation is with an unknown visitor.
+    - name: properties_hs_updated_by_user_id
+      type: float
+      description: User ID of the last user who updated the engagement.
+    - name: properties_hs_user_ids_of_all_notification_followers
+      type: varchar
+      description: User IDs of all notification followers.
+    - name: properties_hs_user_ids_of_all_notification_unfollowers
+      type: varchar
+      description: User IDs of all notification unfollowers.
+    - name: properties_hs_user_ids_of_all_owners
+      type: varchar
+      description: User IDs of all owners associated with the engagement.
+    - name: properties_hubspot_owner_assigneddate
+      type: timestamp
+      description: Date and time when the owner was assigned.
+    - name: properties_hubspot_owner_id
+      type: varchar
+      description: Owner ID associated with the engagement.
+    - name: properties_hubspot_team_id
+      type: varchar
+      description: Team ID associated with the engagement.
+    - name: properties_hs_all_owner_ids
+      type: varchar
+      description: IDs of all owners associated with the call engagement.
+    - name: properties_hs_all_team_ids
+      type: varchar
+      description: IDs of all teams associated with the call engagement.
+    - name: properties_hs_all_accessible_team_ids
+      type: varchar
+      description: IDs of all teams that have access to the call engagement.
+    - name: createdAt
+      type: timestamp
+      description: Date and time when the call engagement was created.
+    - name: updatedAt
+      type: timestamp
+      description: Date and time when the call engagement was last updated.
+    - name: archived
+      type: boolean
+      description: Indicates if the call engagement is archived or not.
+    - name: contacts
+      type: array
+      description: Contacts associated with the call engagement.
+    - name: deals
+      type: array
+      description: Deals associated with the call engagement.
+    - name: companies
+      type: array
+      description: Companies associated with the call engagement.
+    - name: tickets
+      type: array
+      description: Tickets associated with the call engagement.
+  - name: line_items
+    columns:
+    - name: id
+      type: varchar
+      description: The unique identifier for the line item.
+    - name: createdAt
+      type: timestamp
+      description: The date and time when the line item was created.
+    - name: updatedAt
+      type: timestamp
+      description: The date and time when the line item was last updated.
+    - name: archived
+      type: boolean
+      description: Indicates whether the line item is archived or not.
+  - name: leads
+    columns:
+    - name: id
+      type: varchar
+      description: Unique identifier for the lead
+    - name: createdAt
+      type: timestamp
+      description: Date and time when the lead was created
+    - name: updatedAt
+      type: timestamp
+      description: Date and time when the lead was last updated
+    - name: archived
+      type: boolean
+      description: Indicates whether the lead is archived or active
+    - name: contacts
+      type: array
+      description: List of contacts associated with the lead
+  - name: subscription_changes
+    columns:
+    - name: timestamp
+      type: integer
+      description: Timestamp when the subscription change data was fetched
+    - name: portalId
+      type: integer
+      description: ID of the portal related to the subscription changes
+    - name: recipient
+      type: varchar
+      description: Recipient of the subscription change notification
+    - name: normalizedEmailId
+      type: varchar
+      description: Normalized email identifier associated with the subscription
+    - name: changes
+      type: array
+      description: List of all subscription changes
+  - name: contacts_property_history
+    columns:
+    - name: value
+      type: varchar
+      description: The value of the property at the specified timestamp.
+    - name: source-type
+      type: varchar
+      description: The type or category of the data source.
+    - name: source-id
+      type: varchar
+      description: The identifier of the data source that generated this historical
+        entry.
+    - name: source-label
+      type: varchar
+      description: The label representing the source of the data.
+    - name: updated-by-user-id
+      type: integer
+      description: The identifier of the user who last updated the property value.
+    - name: timestamp
+      type: integer
+      description: The timestamp when the property value was last updated.
+    - name: selected
+      type: boolean
+      description: Indicates whether this property is currently selected or not.
+    - name: is-contact
+      type: boolean
+      description: Indicates whether the data is associated with a contact record.
+    - name: property
+      type: varchar
+      description: The specific property whose history is being tracked.
+    - name: vid
+      type: integer
+      description: The unique identifier for this historical data entry.
+    - name: canonical-vid
+      type: integer
+      description: The unique identifier for the contact record that this historical
+        data belongs to.
+    - name: portal-id
+      type: integer
+      description: The identifier for the HubSpot portal that the data belongs to.
+    - name: source-vids
+      type: array
+      description: List of unique identifiers of the sources associated with this
+        historical data.
+  - name: feedback_submissions
+    columns:
+    - name: id
+      type: varchar
+      description: Unique identifier for the feedback submission.
+    - name: properties
+      type: variant
+      description: Additional properties related to the feedback submission.
+    - name: createdAt
+      type: timestamp
+      description: The timestamp when the feedback submission was created.
+    - name: updatedAt
+      type: timestamp
+      description: The timestamp of the last update made to the feedback submission.
+    - name: archived
+      type: boolean
+      description: Indicates if the feedback submission is archived or not.
+    - name: archivedAt
+      type: timestamp
+      description: The timestamp when the feedback submission was archived.
+    - name: contacts
+      type: array
+      description: List of contacts associated with the feedback submission.
