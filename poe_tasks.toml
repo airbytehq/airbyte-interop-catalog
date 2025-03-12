@@ -1,0 +1,18 @@
+[tool.poe.tasks]
+# Development tasks
+install = { cmd = "uv sync --all-extras", help = "Install and sync project dependencies." }
+format = { cmd = "ruff format .", help = "Format code with ruff" }
+lint = { cmd = "ruff check .", help = "Lint code with ruff" }
+typecheck = { cmd = "python -m basedpyright morph", help = "Type check code with basedpyright" }
+pytest = { cmd = "pytest --cov=morph --cov-report=term-missing --cov-report=xml", help = "Run tests with coverage" }
+pytest-fast = { cmd = "pytest --exitfirst", help = "Run tests" }
+
+# Combined tasks
+check = { sequence = ["lint", "typecheck", "pytest"], help = "Run all checks" }
+fix = { sequence = ["format", "lint --fix"], help = "Auto-fix formatting and linting issues" }
+
+# Build tasks
+build = { cmd = "uv build", help = "Build package" }
+
+# Dependency management
+lock = { cmd = "uv lock", help = "Lock dependencies" }
