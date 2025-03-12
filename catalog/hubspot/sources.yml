@@ -1,3 +1,7 @@
+# This file is auto-generated. DO NOT EDIT MANUALLY.
+# Generated on: 2025-03-12 17:46:00
+# To regenerate this file, run the following command:
+# python json_to_dbt_sources.py catalog/hubspot/airbyte-source/schemas/ --source-name hubspot --output catalog/hubspot/sources.yml
 version: 2
 sources:
 - name: hubspot
