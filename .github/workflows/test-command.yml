@@ -39,7 +39,7 @@ jobs:
       - name: Checkout PR
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ github.token }}
       - name: Checkout PR (${{ github.event.inputs.pr }})
         uses: dawidd6/action-checkout-pr@v1
         with:
