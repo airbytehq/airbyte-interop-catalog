@@ -6,8 +6,15 @@ import pytest
 import yaml
 
 
-def _test_mapping(source_table, target_table, mapping_file):
-    """Helper function to test that a mapping covers all required fields."""
+@pytest.mark.parametrize(
+    "source_table,target_table,mapping_file",
+    [
+        ("tickets", "ticket", "ticket.yml"),
+        ("companies", "company", "company.yml"),
+    ],
+)
+def test_mapping(source_table, target_table, mapping_file):
+    """Test that the mapping covers all required fields."""
     # Paths to the relevant files
     base_dir = Path(__file__).parent.parent
     mapping_path = base_dir / "catalog" / "hubspot" / "transforms" / "fivetran-compat" / mapping_file
@@ -61,13 +68,3 @@ def _test_mapping(source_table, target_table, mapping_file):
             assert source_field in source_columns or source_field == "id", (
                 f"Field {source_field} from mapping is not in source schema"
             )
-
-
-def test_tickets_to_ticket_mapping():
-    """Test that the tickets to ticket mapping covers all required fields."""
-    _test_mapping("tickets", "ticket", "ticket.yml")
-
-
-def test_companies_to_company_mapping():
-    """Test that the companies to company mapping covers all required fields."""
-    _test_mapping("companies", "company", "company.yml")
