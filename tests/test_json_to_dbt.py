@@ -84,6 +84,7 @@ def test_cli_json_to_dbt_command() -> None:
     with tempfile.TemporaryDirectory() as tmpdir:
         # Create a sample JSON schema file
         schema_path = Path(tmpdir) / "test_schema.json"
+        output_path = Path(tmpdir) / "sources.yml"
         schema_content = {
             "type": "object",
             "properties": {
@@ -106,6 +107,8 @@ def test_cli_json_to_dbt_command() -> None:
                 "test_db",
                 "--schema",
                 "test_schema",
+                "--output",
+                str(output_path),
             ],
         )
 
@@ -113,7 +116,6 @@ def test_cli_json_to_dbt_command() -> None:
         assert "Generated dbt sources.yml" in result.output
 
         # Verify the output file exists and contains expected content
-        output_path = Path("sources.yml")
         assert output_path.exists()
 
         # Clean up
