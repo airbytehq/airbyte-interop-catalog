@@ -16,16 +16,13 @@ def test_tickets_to_ticket_mapping():
     )
 
     # Load the mapping file
-    with mapping_path.open("r") as f:
-        mapping = yaml.safe_load(f)
+    mapping = yaml.safe_load(mapping_path.read_text())
 
     # Load the target schema
-    with target_schema_path.open("r") as f:
-        target_schema = yaml.safe_load(f)
+    target_schema = yaml.safe_load(target_schema_path.read_text())
 
     # Load the source schema
-    with source_schema_path.open("r") as f:
-        source_schema = yaml.safe_load(f)
+    source_schema = yaml.safe_load(source_schema_path.read_text())
 
     # Find the ticket table in the target schema
     ticket_table = None
