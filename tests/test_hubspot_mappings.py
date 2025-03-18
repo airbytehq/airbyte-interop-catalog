@@ -9,7 +9,7 @@ def test_tickets_to_ticket_mapping():
     """Test that the tickets to ticket mapping covers all required fields."""
     # Paths to the relevant files
     base_dir = Path(__file__).parent.parent
-    mapping_path = base_dir / "catalog" / "hubspot" / "transforms" / "tickets_to_ticket.yml"
+    mapping_path = base_dir / "catalog" / "hubspot" / "transforms" / "fivetran-compat" / "ticket.yml"
     source_schema_path = base_dir / "catalog" / "hubspot" / "generated" / "src_airbyte_hubspot.yml"
     target_schema_path = (
         base_dir / "catalog" / "hubspot" / "target-schemas" / "fivetran" / "src_hubspot.yml"
