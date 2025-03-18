@@ -145,7 +145,7 @@ def generate_dbt_project(
         generate_dbt_package(catalog_dir, output_dir, mapping_dir)
         
         # Determine the actual output directory
-        actual_output_dir = output_dir if output_dir else str(catalog_path / "generated")
+        actual_output_dir = Path(output_dir) if output_dir else catalog_path / "generated"
         
         # Generate sources.yml from catalog.json
         sources_yml = parse_airbyte_catalog(
@@ -158,8 +158,7 @@ def generate_dbt_project(
         models_dir.mkdir(parents=True, exist_ok=True)
         
         sources_path = models_dir / "sources.yml"
-        with sources_path.open("w") as f:
-            yaml.dump(sources_yml, f, default_flow_style=False, sort_keys=False)
+        sources_path.write_text(yaml.dump(sources_yml, default_flow_style=False, sort_keys=False))
         
         # Create profiles.yml with duckdb and motherduck configurations
         profiles_dir = Path(actual_output_dir) / "dbt_project" / "profiles"
@@ -188,9 +187,10 @@ default:
         profiles_path = profiles_dir / "profiles.yml"
         profiles_path.write_text(profiles_content)
         
-        console.print(f"Generated dbt project at {actual_output_dir}/dbt_project")
+        project_dir = actual_output_dir / "dbt_project"
+        console.print(f"Generated dbt project at {project_dir}")
         console.print("To use the generated dbt project:")
-        console.print(f"  1. cd {actual_output_dir}/dbt_project")
+        console.print(f"  1. cd {project_dir}")
         console.print("  2. dbt deps --profiles-dir profiles")
         console.print("  3. dbt compile --profiles-dir profiles")
     except Exception as e:
