@@ -115,10 +115,10 @@ def test_cli_json_to_dbt_command() -> None:
         # Verify the output file exists and contains expected content
         with tempfile.NamedTemporaryFile(delete=False) as tmpfile:
             output_path = Path(tmpfile.name)
-        assert output_path.exists()
+            assert output_path.exists()
 
-        # Clean up
-        output_path.unlink()
+            # Clean up
+            output_path.unlink()
 
 
 def test_generate_dbt_sources_yml() -> None:
