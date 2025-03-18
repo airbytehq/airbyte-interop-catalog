@@ -7,20 +7,22 @@ transforms:
     fields:
       # Direct field mappings
       id: tickets.id
-      property_createdate: tickets.createdAt
-      property_lastmodifieddate: tickets.updatedAt
+      property_createdate: tickets.properties_createdate
+      property_lastmodifieddate: tickets.properties_hs_lastmodifieddate
       _fivetran_deleted: tickets.archived
+      
+      # Fields in target with direct source mapping
+      property_closed_date: tickets.properties_closed_date
+      property_first_agent_reply_date: tickets.properties_first_agent_reply_date
+      property_hs_pipeline: tickets.properties_hs_pipeline
+      property_hs_pipeline_stage: tickets.properties_hs_pipeline_stage
+      property_hs_ticket_priority: tickets.properties_hs_ticket_priority
+      property_hs_ticket_category: tickets.properties_hs_ticket_category
+      property_hubspot_owner_id: tickets.properties_hubspot_owner_id
+      property_subject: tickets.properties_hs_email_subject
+      property_content: tickets.properties_content
       
       # Fields in target with no direct source mapping
       _fivetran_synced: CURRENT_TIMESTAMP()
       is_deleted: false
       portal_id: MISSING
-      property_closed_date: MISSING
-      property_first_agent_reply_date: MISSING
-      property_hs_pipeline: MISSING
-      property_hs_pipeline_stage: MISSING
-      property_hs_ticket_priority: MISSING
-      property_hs_ticket_category: MISSING
-      property_hubspot_owner_id: MISSING
-      property_subject: MISSING
-      property_content: MISSING
