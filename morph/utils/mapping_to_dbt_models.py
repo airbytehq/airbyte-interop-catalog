@@ -83,10 +83,8 @@ WITH {% for source in sources %}
 ){% if not loop.last %},{% endif %}
 {% endfor %}
 
-SELECT
-{% for field in fields %}
-    {{ field.expression }} AS {{ field.name }}{% if field.description %} -- {{ field.description }}{% endif %}{% if not loop.last %},{% endif %}
-{% endfor %}
+SELECT{% for field in fields %}
+    {{ field.expression }} AS {{ field.name }}{% if field.description %} -- {{ field.description }}{% endif %}{% if not loop.last %},{% endif %}{% endfor %}
 FROM {% for source in sources %}{{ source.alias }}{% if not loop.last %}, {% endif %}{% endfor %}
 """
     
