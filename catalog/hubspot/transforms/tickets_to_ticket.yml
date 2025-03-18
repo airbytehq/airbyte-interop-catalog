@@ -3,13 +3,13 @@ transforms:
   - display_name: Fivetran Raw 'Ticket' Model
     
     from:
-      - airbyte_raw_hubspot
+      - tickets: airbyte_raw_hubspot.tickets
     fields:
       # Direct field mappings
       id: tickets.id
-      property_createdate: tickets.properties_createdate
-      property_lastmodifieddate: tickets.properties_hs_lastmodifieddate
-      _fivetran_deleted: tickets.archived
+      property_createdate: MISSING
+      property_lastmodifieddate: MISSING
+      _fivetran_deleted: MISSING
       
       # Fields in target with direct source mapping
       property_closed_date: tickets.properties_closed_date
