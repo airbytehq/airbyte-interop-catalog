@@ -64,13 +64,13 @@ jobs:
         uses: astral-sh/setup-uv@v5
         with:
           python-version: "3.12"
-          
+
       - name: Create virtual environment
         run: uv venv
-        
+
       - name: Install poethepoet
         run: uv pip install poethepoet
-        
+
       - name: Install dependencies
         run: poe install
 
@@ -82,7 +82,7 @@ jobs:
           git add .
           git diff --staged --quiet || git commit -m "Apply automatic fixes from /fix command"
           git push
-        
+
       - name: Append success comment
         uses: peter-evans/create-or-update-comment@v4
         if: success()

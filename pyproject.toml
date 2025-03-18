@@ -35,6 +35,7 @@ dev = [
     "basedpyright>=1.0.0",
     "poethepoet>=0.24.0",
     "pre-commit>=3.0.0",
+    "types-pyyaml>=6.0.12.20241230",
 ]
 
 [project.urls]

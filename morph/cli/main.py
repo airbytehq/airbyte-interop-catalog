@@ -1,5 +1,6 @@
 """Command-line interface for Morph."""
 
+import argparse
 from pathlib import Path
 
 import click
@@ -58,7 +59,7 @@ def json_to_dbt(
             schema,
         )
     else:
-        schema_files = []
+        schema_files: list[str] = []
         if schema_path_obj.is_dir():
             schema_files.extend(
                 str(f) for f in schema_path_obj.iterdir() if f.name.endswith(".json")
@@ -81,18 +82,14 @@ def json_to_dbt(
         )
 
     # Generate header comment
-    args = type(
-        "Args",
-        (),
-        {
-            "schema_path": schema_path,
-            "catalog": catalog,
-            "source_name": source_name,
-            "database": database,
-            "schema": schema,
-            "output": output,
-        },
-    )()
+    args = argparse.Namespace(
+        schema_path=schema_path,
+        catalog=catalog,
+        source_name=source_name,
+        database=database,
+        schema=schema,
+        output=output,
+    )
     header_comment = generate_header_comment(args)
 
     # Write to output file with header comment

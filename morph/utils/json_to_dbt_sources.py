@@ -1,6 +1,5 @@
-#!/usr/bin/env python3
 """
-A script to convert JSON schema files or Airbyte catalog to dbt sources.yml format.
+Code to convert JSON schema files or Airbyte catalog to dbt sources.yml format.
 
 Usage:
     python json_to_dbt_sources.py <json_schema_file_or_directory> [--source-name SOURCE_NAME] [--output OUTPUT_FILE]
@@ -15,8 +14,6 @@ import argparse
 import json
 from pathlib import Path
 from typing import Any
-
-import yaml
 
 
 def json_schema_to_dbt_column(
@@ -89,12 +86,8 @@ def json_schema_to_dbt_table(schema_name: str, schema_data: dict[str, Any]) -> d
 
 def generate_header_comment(command_args: argparse.Namespace) -> str:
     """Generate a header comment for the output file with reproduction instructions."""
-    import sys
-    from datetime import datetime
-
     # Reconstruct the command used to generate the file
-    script_name = Path(sys.argv[0]).name
-    command = f"python {script_name} {command_args.schema_path}"
+    command = "uv run morph json-to-dbt"
 
     if command_args.catalog:
         command += " --catalog"
@@ -111,13 +104,12 @@ def generate_header_comment(command_args: argparse.Namespace) -> str:
     if command_args.output != "sources.yml":
         command += f" --output {command_args.output}"
 
-    # Create the header comment
-    return (
-        "# This file is auto-generated. DO NOT EDIT MANUALLY.\n"
-        f"# Generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
-        "# To regenerate this file, run the following command:\n"
-        f"# {command}\n"
-    )
+    command += f" {command_args.schema_path}"
+
+    return f"""# This file was auto-generated using the following command:
+# {command}
+# To regenerate this file, run the command above.
+"""
 
 
 def create_dbt_source(
@@ -129,7 +121,7 @@ def create_dbt_source(
     """Create a dbt source definition with tables."""
     # Sort tables alphabetically by name
     sorted_tables = sorted(tables, key=lambda x: x.get("name", ""))
-    
+
     source = {"name": source_name, "tables": sorted_tables}
 
     if database:
@@ -201,76 +193,3 @@ def parse_airbyte_catalog(
     except Exception as e:
         print(f"Error processing Airbyte catalog {catalog_file}: {e}")
         return create_dbt_source([], source_name, database, schema)
-
-
-def main():
-    parser = argparse.ArgumentParser(description="Convert JSON schema files or Airbyte catalog to dbt sources.yml")
-    parser.add_argument("schema_path", help="Path to JSON schema file, directory, or Airbyte catalog file")
-    parser.add_argument("--catalog", action="store_true", help="Treat input as Airbyte catalog file")
-    parser.add_argument("--source-name", default="default_source", help="Name for the dbt source")
-    parser.add_argument("--database", help="Database name for the source")
-    parser.add_argument("--schema", help="Schema name for the source")
-    parser.add_argument("--output", default="sources.yml", help="Output file path")
-
-    args = parser.parse_args()
-
-    schema_path = Path(args.schema_path)
-    
-    # Validate input path exists
-    if not schema_path.exists():
-        print(f"Error: {args.schema_path} does not exist")
-        return
-        
-    # Process based on input type
-    if args.catalog:
-        # Process as Airbyte catalog
-        if not schema_path.is_file() or not schema_path.name.endswith(".json"):
-            print(f"Error: {args.schema_path} is not a valid JSON file")
-            return
-
-        # Generate sources.yml content from Airbyte catalog
-        sources_yml = parse_airbyte_catalog(
-            args.schema_path,
-            args.source_name,
-            args.database,
-            args.schema,
-        )
-    else:
-        # Process as schema files
-        schema_files = []
-        if schema_path.is_dir():
-            for file in schema_path.iterdir():
-                if file.name.endswith(".json"):
-                    schema_files.append(str(file))
-        elif schema_path.is_file() and schema_path.name.endswith(".json"):
-            schema_files.append(args.schema_path)
-        else:
-            print(f"Error: {args.schema_path} is not a valid JSON file or directory")
-            return
-
-        if not schema_files:
-            print("No JSON schema files found")
-            return
-
-        # Generate sources.yml content from schema files
-        sources_yml = generate_dbt_sources_yml(
-            schema_files,
-            args.source_name,
-            args.database,
-            args.schema,
-        )
-
-    # Generate header comment
-    header_comment = generate_header_comment(args)
-
-    # Write to output file with header comment
-    output_path = Path(args.output)
-    with output_path.open("w") as f:
-        f.write(header_comment)
-        yaml.dump(sources_yml, f, default_flow_style=False, sort_keys=False)
-
-    print(f"Generated dbt sources.yml at {args.output}")
-
-
-if __name__ == "__main__":
-    main()
