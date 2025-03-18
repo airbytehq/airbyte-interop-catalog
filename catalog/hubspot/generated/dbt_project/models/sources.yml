@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: hubspot
+    schema: airbyte_raw_hubspot
+    tables:
+      - name: companies
+      - name: tickets
