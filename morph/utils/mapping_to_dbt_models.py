@@ -1,0 +1,213 @@
+"""
+Code to convert mapping files to dbt models.
+
+This module provides functionality to generate dbt models from mapping files.
+The generated models will be placed in the 'generated' folder of the catalog.
+"""
+
+from pathlib import Path
+from typing import Any
+
+import yaml
+from jinja2 import Environment
+
+
+def load_mapping_file(mapping_file_path: str) -> dict[str, Any]:
+    """Load a mapping file and return its contents as a dictionary."""
+    return yaml.safe_load(Path(mapping_file_path).read_text())
+
+
+def _extract_transform(mapping: dict[str, Any], transform_id: str) -> dict[str, Any]:
+    """Extract a transform from a mapping by ID."""
+    for t in mapping.get("transforms", []):
+        if t.get("id") == transform_id:
+            return t
+    raise ValueError(f"Transform with ID '{transform_id}' not found in mapping")
+
+
+def _process_source_item(source_key: str, source_value: str) -> dict[str, str]:
+    """Process a single source item and return a source dict."""
+    if "." in source_value:
+        schema, table = source_value.split(".")
+        return {"alias": source_key, "schema": schema, "table": table}
+    return {"alias": source_key, "table": source_value}
+
+
+def _extract_sources(transform: dict[str, Any]) -> list[dict[str, str]]:
+    """Extract source tables from a transform."""
+    sources = []
+    from_data = transform.get("from", {})
+    
+    # Handle both list and dict formats for 'from' field
+    if isinstance(from_data, list):
+        for source_item in from_data:
+            for source_key, source_value in source_item.items():
+                sources.append(_process_source_item(source_key, source_value))
+    else:
+        for source_key, source_value in from_data.items():
+            sources.append(_process_source_item(source_key, source_value))
+    
+    return sources
+
+
+def _extract_fields(transform: dict[str, Any]) -> list[dict[str, str]]:
+    """Extract fields from a transform."""
+    fields = []
+    for field_name, field_config in transform.get("fields", {}).items():
+        fields.append({
+            "name": field_name,
+            "expression": field_config.get("expression"),
+            "description": field_config.get("description", ""),
+        })
+    return fields
+
+
+def generate_model_sql(mapping: dict[str, Any], transform_id: str) -> str:
+    """Generate SQL for a dbt model based on a mapping transform."""
+    # Extract the transform configuration
+    transform = _extract_transform(mapping, transform_id)
+    
+    # Extract source tables and fields
+    sources = _extract_sources(transform)
+    fields = _extract_fields(transform)
+    
+    # Generate SQL using a template
+    sql_template = """
+-- {{ model_name }} model
+-- Generated from mapping: {{ mapping_domain }}/{{ transform_id }}
+-- Description: {{ transform_display_name }}
+
+WITH {% for source in sources %}
+{{ source.alias }} AS (
+    SELECT * FROM {{ "{{" }} source('{{ source.schema.replace('airbyte_raw_', '') if 'schema' in source else 'default' }}', '{{ source.table }}') {{ "}}" }}
+){% if not loop.last %},{% endif %}
+{% endfor %}
+
+SELECT
+{% for field in fields %}
+    {{ field.expression }} AS {{ field.name }}{% if field.description %} -- {{ field.description }}{% endif %}{% if not loop.last %},{% endif %}
+{% endfor %}
+FROM {% for source in sources %}{{ source.alias }}{% if not loop.last %}, {% endif %}{% endfor %}
+"""
+    
+    # Create a simple template environment
+    env = Environment(autoescape=False)
+    template = env.from_string(sql_template)
+    
+    # Render the template
+    return template.render(
+        model_name=transform_id,
+        mapping_domain=mapping.get("domain", "unknown"),
+        transform_id=transform_id,
+        transform_display_name=transform.get("display_name", ""),
+        sources=sources,
+        fields=fields,
+    )
+
+
+def generate_dbt_project_yml(catalog_name: str, models: list[str]) -> str:
+    """Generate dbt_project.yml content."""
+    project_template = """
+name: 'airbyte_{{ catalog_name }}'
+version: '1.0.0'
+config-version: 2
+
+profile: 'default'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  airbyte_{{ catalog_name }}:
+    +materialized: view
+    {% for model in models %}
+    {{ model }}:
+      +materialized: table
+    {% endfor %}
+"""
+    env = Environment(autoescape=False)
+    template = env.from_string(project_template)
+    
+    return template.render(
+        catalog_name=catalog_name,
+        models=models,
+    )
+
+
+def generate_dbt_package(
+    catalog_dir: str,
+    output_dir: str | None = None,
+    mapping_dir: str | None = None,
+) -> None:
+    """Generate a dbt package from mapping files.
+    
+    Args:
+        catalog_dir: Path to the catalog directory (e.g., 'catalog/hubspot')
+        output_dir: Path to the output directory (defaults to '{catalog_dir}/generated')
+        mapping_dir: Path to the mapping directory (defaults to '{catalog_dir}/transforms')
+    """
+    catalog_path = Path(catalog_dir)
+    catalog_name = catalog_path.name
+    
+    # Set default directories if not provided
+    if not output_dir:
+        output_dir = str(catalog_path / "generated")
+    if not mapping_dir:
+        mapping_dir = str(catalog_path / "transforms")
+    
+    # Create output directories
+    models_dir = Path(output_dir) / "models"
+    models_dir.mkdir(parents=True, exist_ok=True)
+    
+    # Find all mapping files
+    mapping_files = []
+    mapping_path = Path(mapping_dir)
+    for yaml_file in list(mapping_path.glob("**/*.yml")) + list(mapping_path.glob("**/*.yaml")):
+        mapping_files.append(str(yaml_file))
+    
+    # Generate models for each mapping file
+    generated_models = []
+    for mapping_file in mapping_files:
+        mapping = load_mapping_file(mapping_file)
+        
+        # Process each transform in the mapping
+        for transform in mapping.get("transforms", []):
+            transform_id = transform.get("id")
+            if not transform_id:
+                continue
+            
+            # Generate SQL model
+            model_sql = generate_model_sql(mapping, transform_id)
+            
+            # Write model to file
+            model_path = models_dir / f"{transform_id}.sql"
+            model_path.write_text(model_sql)
+            
+            generated_models.append(transform_id)
+    
+    # Generate dbt_project.yml
+    project_yml = generate_dbt_project_yml(catalog_name, generated_models)
+    project_path = Path(output_dir) / "dbt_project.yml"
+    project_path.write_text(project_yml)
+    
+    # Generate packages.yml if needed
+    packages_yml = """
+packages:
+  - package: dbt-labs/dbt_utils
+    version: 1.1.1
+"""
+    packages_path = Path(output_dir) / "packages.yml"
+    packages_path.write_text(packages_yml)
+    
+    # Create an empty py.typed file to mark the package as type-hint compliant
+    py_typed_path = Path(output_dir) / "py.typed"
+    py_typed_path.touch()

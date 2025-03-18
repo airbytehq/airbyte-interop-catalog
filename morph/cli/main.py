@@ -12,6 +12,7 @@ from morph.utils.json_to_dbt_sources import (
     generate_header_comment,
     parse_airbyte_catalog,
 )
+from morph.utils.mapping_to_dbt_models import generate_dbt_package
 
 console = Console()
 
@@ -99,6 +100,72 @@ def json_to_dbt(
         yaml.dump(sources_yml, f, default_flow_style=False, sort_keys=False)
 
     console.print(f"Generated dbt sources.yml at {output}")
+
+
+@main.command()
+@click.argument("catalog_dir", type=click.Path(exists=True))
+@click.option("--output-dir", help="Output directory for generated dbt project (defaults to {catalog_dir}/generated)")
+@click.option("--mapping-dir", help="Directory containing mapping files (defaults to {catalog_dir}/transforms)")
+def generate_dbt_project(
+    catalog_dir: str,
+    output_dir: str | None = None,
+    mapping_dir: str | None = None,
+) -> None:
+    """Generate a dbt project from mapping files.
+    
+    This command generates a complete dbt project in the specified output directory,
+    including models for each transform defined in the mapping files.
+    
+    CATALOG_DIR: Path to the catalog directory (e.g., 'catalog/hubspot')
+    """
+    catalog_path = Path(catalog_dir)
+    
+    # Validate input path exists
+    if not catalog_path.exists():
+        console.print(f"Error: {catalog_dir} does not exist")
+        return
+    
+    # Generate dbt package
+    try:
+        generate_dbt_package(catalog_dir, output_dir, mapping_dir)
+        
+        # Determine the actual output directory
+        actual_output_dir = output_dir if output_dir else str(catalog_path / "generated")
+        
+        # Create profiles.yml with duckdb and motherduck configurations
+        profiles_dir = Path(actual_output_dir) / "profiles"
+        profiles_dir.mkdir(parents=True, exist_ok=True)
+        
+        profiles_content = """
+default:
+  target: duckdb
+  outputs:
+    duckdb:
+      type: duckdb
+      path: target/dbt.duckdb
+      extensions:
+        - httpfs
+        - parquet
+    motherduck:
+      type: duckdb
+      path: md:
+      extensions:
+        - httpfs
+        - parquet
+      settings:
+        motherduck_token: ${MOTHERDUCK_TOKEN}
+"""
+        
+        profiles_path = profiles_dir / "profiles.yml"
+        profiles_path.write_text(profiles_content)
+        
+        console.print(f"Generated dbt project at {actual_output_dir}")
+        console.print("To use the generated dbt project:")
+        console.print(f"  1. cd {actual_output_dir}")
+        console.print("  2. dbt deps")
+        console.print("  3. dbt run")
+    except Exception as e:
+        console.print(f"Error generating dbt project: {e}", style="bold red")
 
 
 if __name__ == "__main__":
