@@ -83,10 +83,8 @@ WITH {% for source in sources %}
 ){% if not loop.last %},{% endif %}
 {% endfor %}
 
-SELECT
-{% for field in fields %}
-    {{ field.expression }} AS {{ field.name }}{% if field.description %} -- {{ field.description }}{% endif %}{% if not loop.last %},{% endif %}
-{% endfor %}
+SELECT{% for field in fields %}
+    {{ field.expression }} AS {{ field.name }}{% if field.description %} -- {{ field.description }}{% endif %}{% if not loop.last %},{% endif %}{% endfor %}
 FROM {% for source in sources %}{{ source.alias }}{% if not loop.last %}, {% endif %}{% endfor %}
 """
     
@@ -165,7 +163,8 @@ def generate_dbt_package(
         mapping_dir = str(catalog_path / "transforms")
     
     # Create output directories
-    models_dir = Path(output_dir) / "models"
+    dbt_project_dir = Path(output_dir) / "dbt_project"
+    models_dir = dbt_project_dir / "models"
     models_dir.mkdir(parents=True, exist_ok=True)
     
     # Find all mapping files
@@ -196,7 +195,7 @@ def generate_dbt_package(
     
     # Generate dbt_project.yml
     project_yml = generate_dbt_project_yml(catalog_name, generated_models)
-    project_path = Path(output_dir) / "dbt_project.yml"
+    project_path = dbt_project_dir / "dbt_project.yml"
     project_path.write_text(project_yml)
     
     # Generate packages.yml if needed
@@ -205,9 +204,9 @@ packages:
   - package: dbt-labs/dbt_utils
     version: 1.1.1
 """
-    packages_path = Path(output_dir) / "packages.yml"
+    packages_path = dbt_project_dir / "packages.yml"
     packages_path.write_text(packages_yml)
     
     # Create an empty py.typed file to mark the package as type-hint compliant
-    py_typed_path = Path(output_dir) / "py.typed"
+    py_typed_path = dbt_project_dir / "py.typed"
     py_typed_path.touch()

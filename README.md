@@ -10,6 +10,8 @@ pip install morph
 
 ## Usage
 
+See the [Usage Guide](USAGE.md) for detailed instructions on how to use Morph, including examples for generating dbt projects from mapping files.
+
 ```python
 import morph
 

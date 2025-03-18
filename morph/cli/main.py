@@ -104,36 +104,64 @@ def json_to_dbt(
 
 @main.command()
 @click.argument("catalog_dir", type=click.Path(exists=True))
+@click.argument("catalog_file", type=click.Path(exists=True))
 @click.option("--output-dir", help="Output directory for generated dbt project (defaults to {catalog_dir}/generated)")
 @click.option("--mapping-dir", help="Directory containing mapping files (defaults to {catalog_dir}/transforms)")
+@click.option("--source-name", default=None, help="Name for the dbt source (defaults to catalog directory name)")
 def generate_dbt_project(
     catalog_dir: str,
+    catalog_file: str,
     output_dir: str | None = None,
     mapping_dir: str | None = None,
+    source_name: str | None = None,
 ) -> None:
-    """Generate a dbt project from mapping files.
+    """Generate a dbt project from mapping files and catalog.json.
     
     This command generates a complete dbt project in the specified output directory,
-    including models for each transform defined in the mapping files.
+    including models for each transform defined in the mapping files and a sources.yml
+    file generated from the catalog.json file.
     
     CATALOG_DIR: Path to the catalog directory (e.g., 'catalog/hubspot')
+    CATALOG_FILE: Path to the Airbyte catalog.json file
     """
     catalog_path = Path(catalog_dir)
     
-    # Validate input path exists
+    # Validate input paths exist
     if not catalog_path.exists():
         console.print(f"Error: {catalog_dir} does not exist")
         return
     
+    if not Path(catalog_file).exists():
+        console.print(f"Error: {catalog_file} does not exist")
+        return
+    
+    # Set default source name if not provided
+    if not source_name:
+        source_name = catalog_path.name
+    
     # Generate dbt package
     try:
+        # Generate dbt models from mapping files
         generate_dbt_package(catalog_dir, output_dir, mapping_dir)
         
         # Determine the actual output directory
-        actual_output_dir = output_dir if output_dir else str(catalog_path / "generated")
+        actual_output_dir = Path(output_dir) if output_dir else catalog_path / "generated"
+        
+        # Generate sources.yml from catalog.json
+        sources_yml = parse_airbyte_catalog(
+            catalog_file,
+            source_name,
+        )
+        
+        # Write sources.yml to models directory
+        models_dir = Path(actual_output_dir) / "dbt_project" / "models"
+        models_dir.mkdir(parents=True, exist_ok=True)
+        
+        sources_path = models_dir / "sources.yml"
+        sources_path.write_text(yaml.dump(sources_yml, default_flow_style=False, sort_keys=False))
         
         # Create profiles.yml with duckdb and motherduck configurations
-        profiles_dir = Path(actual_output_dir) / "profiles"
+        profiles_dir = Path(actual_output_dir) / "dbt_project" / "profiles"
         profiles_dir.mkdir(parents=True, exist_ok=True)
         
         profiles_content = """
@@ -148,7 +176,7 @@ default:
         - parquet
     motherduck:
       type: duckdb
-      path: md:
+      path: "md:"
       extensions:
         - httpfs
         - parquet
@@ -159,11 +187,12 @@ default:
         profiles_path = profiles_dir / "profiles.yml"
         profiles_path.write_text(profiles_content)
         
-        console.print(f"Generated dbt project at {actual_output_dir}")
+        project_dir = actual_output_dir / "dbt_project"
+        console.print(f"Generated dbt project at {project_dir}")
         console.print("To use the generated dbt project:")
-        console.print(f"  1. cd {actual_output_dir}")
-        console.print("  2. dbt deps")
-        console.print("  3. dbt run")
+        console.print(f"  1. cd {project_dir}")
+        console.print("  2. dbt deps --profiles-dir profiles")
+        console.print("  3. dbt compile --profiles-dir profiles")
     except Exception as e:
         console.print(f"Error generating dbt project: {e}", style="bold red")
 
