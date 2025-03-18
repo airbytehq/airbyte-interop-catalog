@@ -24,11 +24,13 @@ uv run morph json-to-dbt <schema_path> [--catalog] [--source-name SOURCE_NAME] [
 ### Examples
 
 Convert a directory of JSON schema files:
+
 ```bash
 uv run morph json-to-dbt schemas/ --source-name my_source --output models/src_my_source.yml
 ```
 
 Convert an Airbyte catalog file:
+
 ```bash
 uv run morph json-to-dbt catalog/hubspot/airbyte-source/catalog.json --catalog --source-name hubspot --output catalog/hubspot/generated/src_airbyte_hubspot.yml
 ```

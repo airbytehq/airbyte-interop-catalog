@@ -3,6 +3,7 @@
 from pathlib import Path
 
 import click
+import yaml
 from rich.console import Console
 
 from morph.utils.json_to_dbt_sources import (

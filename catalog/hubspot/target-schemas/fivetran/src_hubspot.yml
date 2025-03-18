@@ -153,8 +153,8 @@ sources:
       - name: contact
         identifier: "{{ var('hubspot_contact_identifier', 'contact')}}"
         freshness:
-          warn_after: {count: 84, period: hour}
-          error_after: {count: 168, period: hour}
+          warn_after: { count: 84, period: hour }
+          error_after: { count: 168, period: hour }
         description: Each record represents a contact in Hubspot.
         config:
           enabled: "{{ var('hubspot_marketing_enabled', true) and var('hubspot_contact_enabled', true) }}"
@@ -300,8 +300,8 @@ sources:
       - name: contact_property_history
         identifier: "{{ var('hubspot_contact_property_history_identifier', 'contact_property_history')}}"
         freshness:
-          warn_after: {count: 84, period: hour}
-          error_after: {count: 168, period: hour}
+          warn_after: { count: 84, period: hour }
+          error_after: { count: 168, period: hour }
         description: Each record represents a change to contact record in Hubspot.
         config:
           enabled: "{{ var('hubspot_marketing_enabled', true) and var('hubspot_contact_property_enabled', true) and var('hubspot_contact_property_history_enabled', true) }}"
@@ -338,7 +338,7 @@ sources:
           - name: deal_pipeline_stage_id
             description: The ID of the deal's pipeline stage.
           - name: owner_id
-            description: The ID of the deal's owner. 
+            description: The ID of the deal's owner.
           - name: property_dealname
             description: The name you have given this deal.
           - name: property_description
@@ -359,7 +359,7 @@ sources:
           - name: _fivetran_active
             description: Boolean indicating whether the deal stage is active.
           - name: _fivetran_end
-            description: The Fivetran calculated exist time of the deal stage. 
+            description: The Fivetran calculated exist time of the deal stage.
           - name: _fivetran_start
             description: The date the deal stage was entered.
           - name: _fivetran_synced
@@ -514,8 +514,8 @@ sources:
       - name: email_event
         identifier: "{{ var('hubspot_email_event_identifier', 'email_event')}}"
         freshness:
-          warn_after: {count: 84, period: hour}
-          error_after: {count: 168, period: hour}
+          warn_after: { count: 84, period: hour }
+          error_after: { count: 168, period: hour }
         description: Each record represents an email event in Hubspot.
         config:
           enabled: "{{ var('hubspot_marketing_enabled', true) and var('hubspot_email_event_enabled', true) }}"
@@ -861,16 +861,16 @@ sources:
             description: Boolean to mark rows that were deleted in the source database.
           - name: property_hs_createdate
             description: >
-              This field marks the call's time of creation and determines where the call sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
+              This field marks the call's time of creation and determines where the call sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format.
 
               PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
           - name: timestamp
-            description: > 
-              This field marks the call's time of occurrence and determines where the call sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
+            description: >
+              This field marks the call's time of occurrence and determines where the call sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format.
 
               PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
           - name: property_hubspot_owner_id
-            description: > 
+            description: >
               The ID of the owner associated with the call. This field determines the user listed as the call creator on the record timeline.
 
               PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
@@ -937,16 +937,16 @@ sources:
             description: The ID of the engagement.
           - name: property_hs_createdate
             description: >
-              This field marks the email's time of creation and determines where the email sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
+              This field marks the email's time of creation and determines where the email sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format.
 
               PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
           - name: timestamp
-            description: > 
-              This field marks the email's time of occurrence and determines where the email sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
+            description: >
+              This field marks the email's time of occurrence and determines where the email sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format.
 
               PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
           - name: property_hubspot_owner_id
-            description: > 
+            description: >
               The ID of the owner associated with the email. This field determines the user listed as the email creator on the record timeline.
 
               PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
@@ -998,16 +998,16 @@ sources:
             description: The ID of the engagement.
           - name: property_hs_createdate
             description: >
-              This field marks the meeting's time of creation and determines where the meeting sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
+              This field marks the meeting's time of creation and determines where the meeting sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format.
 
               PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
           - name: timestamp
-            description: > 
-              This field marks the meeting's time of occurrence and determines where the meeting sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
+            description: >
+              This field marks the meeting's time of occurrence and determines where the meeting sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format.
 
               PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
           - name: property_hubspot_owner_id
-            description: > 
+            description: >
               The ID of the owner associated with the meeting. This field determines the user listed as the meeting creator on the record timeline.
 
               PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
@@ -1031,16 +1031,16 @@ sources:
             description: The ID of the engagement.
           - name: property_hs_createdate
             description: >
-              This field marks the note's time of creation and determines where the note sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
+              This field marks the note's time of creation and determines where the note sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format.
 
               PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
           - name: timestamp
-            description: > 
-              This field marks the note's time of occurrence and determines where the note sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
+            description: >
+              This field marks the note's time of occurrence and determines where the note sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format.
 
               PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
           - name: property_hubspot_owner_id
-            description: > 
+            description: >
               The ID of the owner associated with the note. This field determines the user listed as the note creator on the record timeline.
 
               PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
@@ -1062,16 +1062,16 @@ sources:
             description: The ID of the engagement.
           - name: property_hs_createdate
             description: >
-              This field marks the task's time of creation and determines where the task sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
+              This field marks the task's time of creation and determines where the task sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format.
 
               PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
           - name: timestamp
-            description: > 
-              This field marks the task's time of occurrence and determines where the task sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
+            description: >
+              This field marks the task's time of occurrence and determines where the task sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format.
 
               PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
           - name: property_hubspot_owner_id
-            description: > 
+            description: >
               The ID of the owner associated with the task. This field determines the user listed as the task creator on the record timeline.
 
               PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
@@ -1140,7 +1140,7 @@ sources:
           - name: type
             description: The type of owner.
           - name: updated_at
-  
+
       - name: property
         identifier: "{{ var('hubspot_property_identifier', 'property')}}"
         description: Each record represents a property.
@@ -1156,7 +1156,7 @@ sources:
           - name: created_at
             description: Timestamp representing when the property was created.
           - name: description
-            description: A description of the property. 
+            description: A description of the property.
           - name: field_type
             description: One of textarea, text, date, file, number, select, radio, checkbox, or booleancheckbox.
           - name: group_name
@@ -1254,7 +1254,7 @@ sources:
             description: The ID of the related deal.
           - name: category
             description: The association category. Either HUBSPOT_DEFINED (default label) or USER_DEFINED (custom label).
-      
+
       - name: ticket_pipeline_stage
         identifier: "{{ var('hubspot_ticket_pipeline_stage_identifier', 'ticket_pipeline_stage')}}"
         description: Each record represents a ticket pipeline stage.
