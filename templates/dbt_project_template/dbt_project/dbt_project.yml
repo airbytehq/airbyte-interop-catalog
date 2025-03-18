@@ -19,3 +19,7 @@ clean-targets:
 models:
   airbyte_{{ catalog_name }}:
     +materialized: view
+
+# Variables
+vars:
+  {{ catalog_name }}_source_schema_name: main
