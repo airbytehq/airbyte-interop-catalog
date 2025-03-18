@@ -1,0 +1,26 @@
+domain: hubspot.fivetran-compat
+transforms:
+  - display_name: Fivetran Raw 'Ticket' Model
+    
+    from:
+      - airbyte_raw_hubspot
+    fields:
+      # Direct field mappings
+      id: tickets.id
+      property_createdate: tickets.createdAt
+      property_lastmodifieddate: tickets.updatedAt
+      _fivetran_deleted: tickets.archived
+      
+      # Fields in target with no direct source mapping
+      _fivetran_synced: CURRENT_TIMESTAMP()
+      is_deleted: false
+      portal_id: MISSING
+      property_closed_date: MISSING
+      property_first_agent_reply_date: MISSING
+      property_hs_pipeline: MISSING
+      property_hs_pipeline_stage: MISSING
+      property_hs_ticket_priority: MISSING
+      property_hs_ticket_category: MISSING
+      property_hubspot_owner_id: MISSING
+      property_subject: MISSING
+      property_content: MISSING
