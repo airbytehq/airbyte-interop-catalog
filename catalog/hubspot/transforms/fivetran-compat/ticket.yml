@@ -1,0 +1,242 @@
+domain: hubspot.fivetran-compat
+transforms:
+  - display_name: Fivetran Raw 'Ticket' Model
+    id: ticket
+    from:
+      - tickets: airbyte_raw_hubspot.tickets
+    fields:
+      # Fields in target schema order
+      _fivetran_synced:
+        expression: CURRENT_TIMESTAMP()
+        description: "Timestamp of when this record was last synced by Fivetran."
+      id:
+        expression: tickets.id
+        description: "ID of the ticket."
+      is_deleted:
+        expression: false
+        description: "Whether the record was deleted (v2 endpoint)."
+      _fivetran_deleted:
+        expression: MISSING
+        description: "Whether the record was deleted (v3 endpoint)."
+      portal_id:
+        expression: MISSING
+        description: "The HubSpot account ID."
+      property_closed_date:
+        expression: tickets.properties_closed_date
+        description: "The date the ticket was closed."
+      property_createdate:
+        expression: tickets.createdAt
+        description: "The date the ticket was created."
+      property_first_agent_reply_date:
+        expression: tickets.properties_first_agent_reply_date
+        description: "The date for the first agent reply on the ticket."
+      property_hs_pipeline:
+        expression: tickets.properties_hs_pipeline
+        description: "The ID of the ticket's pipeline."
+      property_hs_pipeline_stage:
+        expression: tickets.properties_hs_pipeline_stage
+        description: "The ID of the ticket's pipeline stage."
+      property_hs_ticket_priority:
+        expression: tickets.properties_hs_ticket_priority
+        description: "The priority of the ticket."
+      property_hs_ticket_category:
+        expression: tickets.properties_hs_ticket_category
+        description: "The category of the ticket."
+      property_hubspot_owner_id:
+        expression: tickets.properties_hubspot_owner_id
+        description: "The ID of the deal's owner."
+      property_subject:
+        expression: tickets.properties_hs_email_subject
+        description: "Short summary of ticket."
+      property_content:
+        expression: tickets.properties_content
+        description: "Text in body of the ticket."
+    
+    annotations:
+      unused_source_fields:
+        tickets:
+          # alpha-sorted list of unused properties from the tickets schema:
+          - archived
+          - companies
+          - contacts
+          - deals
+          - properties
+          - properties_created_by
+          - properties_hs_all_accessible_team_ids
+          - properties_hs_all_associated_contact_companies
+          - properties_hs_all_associated_contact_emails
+          - properties_hs_all_associated_contact_firstnames
+          - properties_hs_all_associated_contact_lastnames
+          - properties_hs_all_associated_contact_mobilephones
+          - properties_hs_all_associated_contact_phones
+          - properties_hs_all_conversation_mentions
+          - properties_hs_all_owner_ids
+          - properties_hs_all_team_ids
+          - properties_hs_applied_sla_rule_config_at
+          - properties_hs_applied_sla_rule_config_id
+          - properties_hs_assigned_team_ids
+          - properties_hs_assignment_method
+          - properties_hs_auto_generated_from_thread_id
+          - properties_hs_conversations_originating_message_id
+          - properties_hs_conversations_originating_thread_id
+          - properties_hs_created_by_user_id
+          - properties_hs_createdate
+          - properties_hs_custom_inbox
+          - properties_hs_date_entered_1
+          - properties_hs_date_entered_151692305
+          - properties_hs_date_entered_151692306
+          - properties_hs_date_entered_151692307
+          - properties_hs_date_entered_151692308
+          - properties_hs_date_entered_2
+          - properties_hs_date_entered_3
+          - properties_hs_date_entered_4
+          - properties_hs_date_exited_1
+          - properties_hs_date_exited_151692305
+          - properties_hs_date_exited_151692306
+          - properties_hs_date_exited_151692307
+          - properties_hs_date_exited_151692308
+          - properties_hs_date_exited_2
+          - properties_hs_date_exited_3
+          - properties_hs_date_exited_4
+          - properties_hs_email_subject
+          - properties_hs_external_object_ids
+          - properties_hs_feedback_last_ces_follow_up
+          - properties_hs_feedback_last_ces_rating
+          - properties_hs_feedback_last_survey_date
+          - properties_hs_file_upload
+          - properties_hs_first_agent_message_sent_at
+          - properties_hs_form_id
+          - properties_hs_form_submission_conversion_id
+          - properties_hs_help_desk_onboarding_ticket
+          - properties_hs_helpdesk_sort_timestamp
+          - properties_hs_in_helpdesk
+          - properties_hs_inbox_id
+          - properties_hs_is_latest_message_failed
+          - properties_hs_is_latest_message_hidden_from_all
+          - properties_hs_is_visible_in_help_desk
+          - properties_hs_last_closed_date
+          - properties_hs_last_email_activity
+          - properties_hs_last_email_date
+          - properties_hs_last_email_id
+          - properties_hs_last_email_type
+          - properties_hs_last_message_from_visitor
+          - properties_hs_last_message_received_at
+          - properties_hs_last_message_sent_at
+          - properties_hs_lastactivitydate
+          - properties_hs_lastcontacted
+          - properties_hs_lastmodifieddate
+          - properties_hs_latest_message_attachment_types
+          - properties_hs_latest_message_is_forwarded_email
+          - properties_hs_latest_message_seen_by_agent_ids
+          - properties_hs_latest_message_visible_to_visitor
+          - properties_hs_latest_message_visible_to_visitor_sent_at
+          - properties_hs_merged_object_ids
+          - properties_hs_most_relevant_sla_status
+          - properties_hs_most_relevant_sla_type
+          - properties_hs_msteams_message_id
+          - properties_hs_nextactivitydate
+          - properties_hs_notes_last_activity
+          - properties_hs_notes_next_activity_type
+          - properties_hs_num_associated_companies
+          - properties_hs_num_associated_conversations
+          - properties_hs_num_times_contacted
+          - properties_hs_object_id
+          - properties_hs_object_source
+          - properties_hs_object_source_detail_1
+          - properties_hs_object_source_detail_2
+          - properties_hs_object_source_detail_3
+          - properties_hs_object_source_id
+          - properties_hs_object_source_label
+          - properties_hs_object_source_user_id
+          - properties_hs_originating_channel_instance_id
+          - properties_hs_originating_email_engagement_id
+          - properties_hs_originating_generic_channel_id
+          - properties_hs_outbound_ticket
+          - properties_hs_pinned_engagement_id
+          - properties_hs_primary_company
+          - properties_hs_primary_company_id
+          - properties_hs_primary_company_name
+          - properties_hs_read_only
+          - properties_hs_resolution
+          - properties_hs_sales_email_last_replied
+          - properties_hs_seen_by_agent_ids
+          - properties_hs_shared_team_ids
+          - properties_hs_shared_user_ids
+          - properties_hs_sla_operating_hours
+          - properties_hs_tag_ids
+          - properties_hs_thread_ids_to_restore
+          - properties_hs_ticket_id
+          - properties_hs_time_in_1
+          - properties_hs_time_in_151692305
+          - properties_hs_time_in_151692306
+          - properties_hs_time_in_151692307
+          - properties_hs_time_in_151692308
+          - properties_hs_time_in_2
+          - properties_hs_time_in_3
+          - properties_hs_time_in_4
+          - properties_hs_time_to_close_in_operating_hours
+          - properties_hs_time_to_close_sla_at
+          - properties_hs_time_to_close_sla_status
+          - properties_hs_time_to_first_response_in_operating_hours
+          - properties_hs_time_to_first_response_sla_at
+          - properties_hs_time_to_first_response_sla_status
+          - properties_hs_time_to_next_response_sla_at
+          - properties_hs_time_to_next_response_sla_status
+          - properties_hs_unique_creation_key
+          - properties_hs_updated_by_user_id
+          - properties_hs_user_ids_of_all_notification_followers
+          - properties_hs_user_ids_of_all_notification_unfollowers
+          - properties_hs_user_ids_of_all_owners
+          - properties_hs_v2_cumulative_time_in_1
+          - properties_hs_v2_cumulative_time_in_151692305
+          - properties_hs_v2_cumulative_time_in_151692306
+          - properties_hs_v2_cumulative_time_in_151692307
+          - properties_hs_v2_cumulative_time_in_151692308
+          - properties_hs_v2_cumulative_time_in_2
+          - properties_hs_v2_cumulative_time_in_3
+          - properties_hs_v2_cumulative_time_in_4
+          - properties_hs_v2_date_entered_1
+          - properties_hs_v2_date_entered_151692305
+          - properties_hs_v2_date_entered_151692306
+          - properties_hs_v2_date_entered_151692307
+          - properties_hs_v2_date_entered_151692308
+          - properties_hs_v2_date_entered_2
+          - properties_hs_v2_date_entered_3
+          - properties_hs_v2_date_entered_4
+          - properties_hs_v2_date_exited_1
+          - properties_hs_v2_date_exited_151692305
+          - properties_hs_v2_date_exited_151692306
+          - properties_hs_v2_date_exited_151692307
+          - properties_hs_v2_date_exited_151692308
+          - properties_hs_v2_date_exited_2
+          - properties_hs_v2_date_exited_3
+          - properties_hs_v2_date_exited_4
+          - properties_hs_v2_latest_time_in_1
+          - properties_hs_v2_latest_time_in_151692305
+          - properties_hs_v2_latest_time_in_151692306
+          - properties_hs_v2_latest_time_in_151692307
+          - properties_hs_v2_latest_time_in_151692308
+          - properties_hs_v2_latest_time_in_2
+          - properties_hs_v2_latest_time_in_3
+          - properties_hs_v2_latest_time_in_4
+          - properties_hs_was_imported
+          - properties_hubspot_owner_assigneddate
+          - properties_hubspot_team_id
+          - properties_last_engagement_date
+          - properties_last_reply_date
+          - properties_notes_last_contacted
+          - properties_notes_last_updated
+          - properties_notes_next_activity_date
+          - properties_nps_follow_up_answer
+          - properties_nps_follow_up_question_version
+          - properties_nps_score
+          - properties_num_contacted_notes
+          - properties_num_notes
+          - properties_source_ref
+          - properties_source_thread_id
+          - properties_source_type
+          - properties_subject
+          - properties_tags
+          - properties_time_to_close
+          - properties_time_to_first_agent_reply
+          - updatedAt
