@@ -17,7 +17,9 @@ def test_mapping(source_table, target_table, mapping_file):
     """Test that the mapping covers all required fields."""
     # Paths to the relevant files
     base_dir = Path(__file__).parent.parent
-    mapping_path = base_dir / "catalog" / "hubspot" / "transforms" / "fivetran-compat" / mapping_file
+    mapping_path = (
+        base_dir / "catalog" / "hubspot" / "transforms" / "fivetran-compat" / mapping_file
+    )
     source_schema_path = base_dir / "catalog" / "hubspot" / "generated" / "src_airbyte_hubspot.yml"
     target_schema_path = (
         base_dir / "catalog" / "hubspot" / "target-schemas" / "fivetran" / "src_hubspot.yml"
@@ -40,14 +42,14 @@ def test_mapping(source_table, target_table, mapping_file):
             break
 
     assert target_table_def is not None, f"Could not find {target_table} table in target schema"
-    
+
     # Find the source table in the source schema
     source_table_def = None
     for table in source_schema.get("sources", [])[0].get("tables", []):
         if table.get("name") == source_table:
             source_table_def = table
             break
-    
+
     assert source_table_def is not None, f"Could not find {source_table} table in source schema"
 
     # Get all the fields from the mapping

@@ -29,19 +29,19 @@ def get_config(source_name="hubspot", secret_name: str | None = None) -> None:
 
 
 def get_source(source_name: str) -> ab.Source:
-    pip_url: str | None = None
+    docker_image: bool | None = None
     if source_name == "hubspot":
-        # Hubspot's CDK ref is not properly pinned in its pyproject.toml.
-        pip_url = " ".join(["airbyte-source-hubspot", "airbyte-cdk==2.4.0"])
+        # Hubspot's CDK ref is not properly pinned in its pyproject.toml (needs airbyte-cdk==2.4.0)
+        # AND it needs the old version of pendulum so it isn't compatible with Python 3.12
+        docker_image = True
     else:
         raise ValueError(f"Source {source_name} not supported")
 
     return ab.get_source(
         f"source-{source_name}",
         config=get_config(source_name),
-        docker_image=True,
+        docker_image=docker_image,
         streams="*",
-        # pip_url=pip_url,
     )
 
 
@@ -51,7 +51,7 @@ def get_duckdb_cache() -> ab.DuckDBCache:
     )
 
 
-def sync_source(source_name: str, cache_name: str) -> None:
+def sync_source(source_name: str) -> None:
     cache = get_duckdb_cache()
     source = get_source(source_name)
     source.check()

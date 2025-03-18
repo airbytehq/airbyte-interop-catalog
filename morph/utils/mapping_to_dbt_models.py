@@ -54,11 +54,13 @@ def _extract_fields(transform: dict[str, Any]) -> list[dict[str, str]]:
     """Extract fields from a transform."""
     fields = []
     for field_name, field_config in transform.get("fields", {}).items():
-        fields.append({
-            "name": field_name,
-            "expression": field_config.get("expression"),
-            "description": field_config.get("description", ""),
-        })
+        fields.append(
+            {
+                "name": field_name,
+                "expression": field_config.get("expression"),
+                "description": field_config.get("description", ""),
+            },
+        )
     return fields
 
 
