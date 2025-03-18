@@ -5,14 +5,14 @@ transforms:
     from:
       - tickets: airbyte_raw_hubspot.tickets
     fields:
-      # Direct field mappings
+      # Fields in target schema order
+      _fivetran_synced: CURRENT_TIMESTAMP()
       id: tickets.id
-      property_createdate: MISSING
-      property_lastmodifieddate: MISSING
+      is_deleted: false
       _fivetran_deleted: MISSING
-      
-      # Fields in target with direct source mapping
+      portal_id: MISSING
       property_closed_date: tickets.properties_closed_date
+      property_createdate: MISSING
       property_first_agent_reply_date: tickets.properties_first_agent_reply_date
       property_hs_pipeline: tickets.properties_hs_pipeline
       property_hs_pipeline_stage: tickets.properties_hs_pipeline_stage
@@ -21,8 +21,3 @@ transforms:
       property_hubspot_owner_id: tickets.properties_hubspot_owner_id
       property_subject: tickets.properties_hs_email_subject
       property_content: tickets.properties_content
-      
-      # Fields in target with no direct source mapping
-      _fivetran_synced: CURRENT_TIMESTAMP()
-      is_deleted: false
-      portal_id: MISSING
