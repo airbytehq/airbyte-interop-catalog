@@ -7,8 +7,4 @@ _exclude:
 # Template variables
 catalog_name:
   type: str
-  help: Name of the catalog
-
-models:
-  type: list
-  help: List of model names
+  help: Name of the catalog (e.g. 'hubspot')
