@@ -6,21 +6,51 @@ transforms:
       - tickets: airbyte_raw_hubspot.tickets
     fields:
       # Fields in target schema order
-      _fivetran_synced: CURRENT_TIMESTAMP()
-      id: tickets.id
-      is_deleted: false
-      _fivetran_deleted: MISSING
-      portal_id: MISSING
-      property_closed_date: tickets.properties_closed_date
-      property_createdate: MISSING
-      property_first_agent_reply_date: tickets.properties_first_agent_reply_date
-      property_hs_pipeline: tickets.properties_hs_pipeline
-      property_hs_pipeline_stage: tickets.properties_hs_pipeline_stage
-      property_hs_ticket_priority: tickets.properties_hs_ticket_priority
-      property_hs_ticket_category: tickets.properties_hs_ticket_category
-      property_hubspot_owner_id: tickets.properties_hubspot_owner_id
-      property_subject: tickets.properties_hs_email_subject
-      property_content: tickets.properties_content
+      _fivetran_synced:
+        expression: CURRENT_TIMESTAMP()
+        description: "Timestamp of when this record was last synced by Fivetran."
+      id:
+        expression: tickets.id
+        description: "ID of the ticket."
+      is_deleted:
+        expression: false
+        description: "Whether the record was deleted (v2 endpoint)."
+      _fivetran_deleted:
+        expression: MISSING
+        description: "Whether the record was deleted (v3 endpoint)."
+      portal_id:
+        expression: MISSING
+        description: "The HubSpot account ID."
+      property_closed_date:
+        expression: tickets.properties_closed_date
+        description: "The date the ticket was closed."
+      property_createdate:
+        expression: MISSING
+        description: "The date the ticket was created."
+      property_first_agent_reply_date:
+        expression: tickets.properties_first_agent_reply_date
+        description: "The date for the first agent reply on the ticket."
+      property_hs_pipeline:
+        expression: tickets.properties_hs_pipeline
+        description: "The ID of the ticket's pipeline."
+      property_hs_pipeline_stage:
+        expression: tickets.properties_hs_pipeline_stage
+        description: "The ID of the ticket's pipeline stage."
+      property_hs_ticket_priority:
+        expression: tickets.properties_hs_ticket_priority
+        description: "The priority of the ticket."
+      property_hs_ticket_category:
+        expression: tickets.properties_hs_ticket_category
+        description: "The category of the ticket."
+      property_hubspot_owner_id:
+        expression: tickets.properties_hubspot_owner_id
+        description: "The ID of the deal's owner."
+      property_subject:
+        expression: tickets.properties_hs_email_subject
+        description: "Short summary of ticket."
+      property_content:
+        expression: tickets.properties_content
+        description: "Text in body of the ticket."
     
     annotations:
       unused_source_fields:
