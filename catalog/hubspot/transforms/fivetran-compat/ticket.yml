@@ -51,7 +51,7 @@ transforms:
       property_content:
         expression: tickets.properties_content
         description: "Text in body of the ticket."
-    
+
     annotations:
       unused_source_fields:
         tickets:

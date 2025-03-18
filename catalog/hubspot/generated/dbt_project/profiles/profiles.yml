@@ -3,7 +3,9 @@ default:
   outputs:
     duckdb:
       type: duckdb
-      path: target/dbt-hubspot.duckdb
+      # Assume we are running from `morph/catalog/{source-name}/dbt_project/`
+      # and that repo root is 4 levels up.
+      path: ../../../../.data/hubspot.duckdb
       extensions:
         - httpfs
         - parquet

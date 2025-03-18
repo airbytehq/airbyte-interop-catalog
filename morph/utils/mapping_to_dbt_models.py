@@ -37,7 +37,7 @@ def _extract_sources(transform: dict[str, Any]) -> list[dict[str, str]]:
     """Extract source tables from a transform."""
     sources = []
     from_data = transform.get("from", {})
-    
+
     # Handle both list and dict formats for 'from' field
     if isinstance(from_data, list):
         for source_item in from_data:
@@ -46,7 +46,7 @@ def _extract_sources(transform: dict[str, Any]) -> list[dict[str, str]]:
     else:
         for source_key, source_value in from_data.items():
             sources.append(_process_source_item(source_key, source_value))
-    
+
     return sources
 
 
@@ -54,11 +54,13 @@ def _extract_fields(transform: dict[str, Any]) -> list[dict[str, str]]:
     """Extract fields from a transform."""
     fields = []
     for field_name, field_config in transform.get("fields", {}).items():
-        fields.append({
-            "name": field_name,
-            "expression": field_config.get("expression"),
-            "description": field_config.get("description", ""),
-        })
+        fields.append(
+            {
+                "name": field_name,
+                "expression": field_config.get("expression"),
+                "description": field_config.get("description", ""),
+            },
+        )
     return fields
 
 
@@ -66,11 +68,11 @@ def generate_model_sql(mapping: dict[str, Any], transform_id: str) -> str:
     """Generate SQL for a dbt model based on a mapping transform."""
     # Extract the transform configuration
     transform = _extract_transform(mapping, transform_id)
-    
+
     # Extract source tables and fields
     sources = _extract_sources(transform)
     fields = _extract_fields(transform)
-    
+
     # Generate SQL using a template
     sql_template = """
 -- {{ model_name }} model
@@ -84,14 +86,14 @@ WITH {% for source in sources %}
 {% endfor %}
 
 SELECT{% for field in fields %}
-    {{ field.expression }} AS {{ field.name }}{% if field.description %} -- {{ field.description }}{% endif %}{% if not loop.last %},{% endif %}{% endfor %}
+    {{ field.expression }} AS {{ field.name }}{% if field.description %}{% endif %}{% if not loop.last %},{% endif %} -- {{ field.description }}{% endfor %}
 FROM {% for source in sources %}{{ source.alias }}{% if not loop.last %}, {% endif %}{% endfor %}
 """
-    
+
     # Create a simple template environment
     env = Environment(autoescape=False)
     template = env.from_string(sql_template)
-    
+
     # Render the template
     return template.render(
         model_name=transform_id,
@@ -134,7 +136,7 @@ models:
 """
     env = Environment(autoescape=False)
     template = env.from_string(project_template)
-    
+
     return template.render(
         catalog_name=catalog_name,
         models=models,
@@ -147,56 +149,56 @@ def generate_dbt_package(
     mapping_dir: str | None = None,
 ) -> None:
     """Generate a dbt package from mapping files.
-    
+
     Args:
         catalog_dir: Path to the catalog directory (e.g., 'catalog/hubspot')
         output_dir: Path to the output directory (defaults to '{catalog_dir}/generated')
         mapping_dir: Path to the mapping directory (defaults to '{catalog_dir}/transforms')
     """
     from copier import run_copy
-    
+
     catalog_path = Path(catalog_dir)
     catalog_name = catalog_path.name
-    
+
     # Set default directories if not provided
     if not output_dir:
         output_dir = str(catalog_path / "generated")
     if not mapping_dir:
         mapping_dir = str(catalog_path / "transforms")
-    
+
     # Create output directories
     output_path = Path(output_dir)
     output_path.mkdir(parents=True, exist_ok=True)
-    
+
     # Find all mapping files
     mapping_files = []
     mapping_path = Path(mapping_dir)
     for yaml_file in list(mapping_path.glob("**/*.yml")) + list(mapping_path.glob("**/*.yaml")):
         mapping_files.append(str(yaml_file))
-    
+
     # Generate models for each mapping file
     generated_models = []
     for mapping_file in mapping_files:
         mapping = load_mapping_file(mapping_file)
-        
+
         # Process each transform in the mapping
         for transform in mapping.get("transforms", []):
             transform_id = transform.get("id")
             if not transform_id:
                 continue
-            
+
             # Add to list of generated models
             generated_models.append(transform_id)
-    
+
     # Use copier to generate the dbt project scaffolding
     template_dir = Path(__file__).parent.parent.parent / "templates" / "dbt_project_template"
-    
+
     # Prepare data for the template
     template_data = {
         "catalog_name": catalog_name,
         "models": generated_models,
     }
-    
+
     # Run copier to generate the project scaffolding
     run_copy(
         src_path=str(template_dir),
@@ -205,24 +207,24 @@ def generate_dbt_package(
         overwrite=True,
         unsafe=True,
     )
-    
+
     # Now generate the SQL models
     models_dir = output_path / "dbt_project" / "models"
     models_dir.mkdir(parents=True, exist_ok=True)
-    
+
     # Generate SQL for each model
     for mapping_file in mapping_files:
         mapping = load_mapping_file(mapping_file)
-        
+
         # Process each transform in the mapping
         for transform in mapping.get("transforms", []):
             transform_id = transform.get("id")
             if not transform_id:
                 continue
-            
+
             # Generate SQL model
             model_sql = generate_model_sql(mapping, transform_id)
-            
+
             # Write model to file
             model_path = models_dir / f"{transform_id}.sql"
             model_path.write_text(model_sql)

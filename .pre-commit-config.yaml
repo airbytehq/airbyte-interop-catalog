@@ -3,8 +3,11 @@ repos:
     rev: v4.5.0
     hooks:
       - id: trailing-whitespace
+        exclude: "(generated)/.*"
       - id: end-of-file-fixer
+        exclude: "(generated)/.*"
       - id: check-yaml
+        exclude: "(generated)/.*"
       - id: check-added-large-files
       - id: check-toml
       - id: check-json
@@ -22,6 +25,7 @@ repos:
     rev: v4.0.0-alpha.8
     hooks:
       - id: prettier
+        exclude: "(generated)/.*"
         types_or: [yaml, markdown, json]
 
   - repo: https://github.com/adrienverge/yamllint.git

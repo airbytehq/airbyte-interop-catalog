@@ -48,7 +48,7 @@ transforms:
       property_annualrevenue:
         expression: companies.properties_annualrevenue
         description: "The actual or estimated annual revenue of the company."
-    
+
     annotations:
       unused_source_fields:
         companies:

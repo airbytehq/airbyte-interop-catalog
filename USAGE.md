@@ -24,13 +24,14 @@ The following steps demonstrate how to generate a dbt project for HubSpot data:
    ```
 
    This command:
+
    - Takes the HubSpot catalog directory as the first argument
    - Takes the Airbyte catalog.json file as the second argument
    - Specifies the output directory for the generated dbt project
    - Points to the directory containing the mapping files
    - Sets the source name for the dbt project
 
-3. **Test the generated dbt project**
+2. **Test the generated dbt project**
 
    Install dbt and test the project:
 
@@ -61,6 +62,7 @@ uv run morph json-to-dbt \
 ```
 
 This command:
+
 - Converts an Airbyte catalog file to dbt sources
 - Names the source "hubspot"
 - Outputs the result to the specified file
