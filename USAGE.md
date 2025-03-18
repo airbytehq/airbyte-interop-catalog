@@ -15,7 +15,7 @@ The following steps demonstrate how to generate a dbt project for HubSpot data:
    Use the `generate-dbt-project` command to create a dbt project from the HubSpot mapping files and catalog:
 
    ```bash
-   python -m morph.cli.main generate-dbt-project \
+   uv run morph generate-dbt-project \
      catalog/hubspot \
      catalog/hubspot/airbyte-source/catalog.json \
      --output-dir catalog/hubspot/generated \
@@ -35,17 +35,17 @@ The following steps demonstrate how to generate a dbt project for HubSpot data:
    Install dbt and test the project:
 
    ```bash
-   # Install dbt
-   pip install dbt-core dbt-duckdb
-
    # Navigate to the generated project
    cd catalog/hubspot/generated/dbt_project
 
    # Install dependencies
-   dbt deps --profiles-dir profiles
+   uv sync --all-extras
+
+   # Install dependencies
+   uv run dbt deps --profiles-dir profiles
 
    # Compile the project
-   dbt compile --profiles-dir profiles
+   uv run dbt compile --profiles-dir profiles
    ```
 
 ## JSON Schema to dbt Sources
@@ -53,7 +53,7 @@ The following steps demonstrate how to generate a dbt project for HubSpot data:
 Morph can also convert JSON schema files to dbt source definitions:
 
 ```bash
-python -m morph.cli.main json-to-dbt \
+uv run morph json-to-dbt \
   --catalog \
   --source-name hubspot \
   --output catalog/hubspot/generated/src_airbyte_hubspot.yml \
@@ -70,7 +70,7 @@ This command:
 For more information on the available commands and options, use the `--help` flag:
 
 ```bash
-python -m morph.cli.main --help
-python -m morph.cli.main generate-dbt-project --help
-python -m morph.cli.main json-to-dbt --help
+uv run morph --help
+uv run morph generate-dbt-project --help
+uv run morph json-to-dbt --help
 ```
