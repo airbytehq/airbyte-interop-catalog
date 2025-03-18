@@ -89,8 +89,7 @@ def json_schema_to_dbt_table(schema_name: str, schema_data: dict[str, Any]) -> d
 def generate_header_comment(command_args: argparse.Namespace) -> str:
     """Generate a header comment for the output file with reproduction instructions."""
     # Reconstruct the command used to generate the file
-    script_name = Path(sys.argv[0]).name
-    command = f"python {script_name} {command_args.schema_path}"
+    command = "uv run morph json-to-dbt"
 
     if command_args.catalog:
         command += " --catalog"
@@ -107,13 +106,12 @@ def generate_header_comment(command_args: argparse.Namespace) -> str:
     if command_args.output != "sources.yml":
         command += f" --output {command_args.output}"
 
-    # Create the header comment
-    return (
-        "# This file is auto-generated. DO NOT EDIT MANUALLY.\n"
-        f"# Generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
-        "# To regenerate this file, run the following command:\n"
-        f"# {command}\n"
-    )
+    command += f" {command_args.schema_path}"
+
+    return f"""# This file was auto-generated using the following command:
+# {command}
+# To regenerate this file, run the command above.
+"""
 
 
 def create_dbt_source(
