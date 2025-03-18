@@ -1,4 +1,3 @@
-
 default:
   target: duckdb
   outputs:
@@ -10,7 +9,7 @@ default:
         - parquet
     motherduck:
       type: duckdb
-      path: md:
+      path: "md:"
       extensions:
         - httpfs
         - parquet
