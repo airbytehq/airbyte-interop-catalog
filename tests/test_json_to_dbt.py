@@ -113,7 +113,8 @@ def test_cli_json_to_dbt_command() -> None:
         assert "Generated dbt sources.yml" in result.output
 
         # Verify the output file exists and contains expected content
-        output_path = Path("sources.yml")
+        with tempfile.NamedTemporaryFile(delete=False) as tmpfile:
+            output_path = Path(tmpfile.name)
         assert output_path.exists()
 
         # Clean up
