@@ -25,7 +25,7 @@ transforms:
         expression: tickets.properties_closed_date
         description: "The date the ticket was closed."
       property_createdate:
-        expression: MISSING
+        expression: tickets.createdAt
         description: "The date the ticket was created."
       property_first_agent_reply_date:
         expression: tickets.properties_first_agent_reply_date
@@ -59,7 +59,6 @@ transforms:
           - archived
           - companies
           - contacts
-          - createdAt
           - deals
           - properties
           - properties_created_by
