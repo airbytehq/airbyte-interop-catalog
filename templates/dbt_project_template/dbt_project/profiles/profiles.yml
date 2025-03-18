@@ -1,0 +1,17 @@
+default:
+  target: duckdb
+  outputs:
+    duckdb:
+      type: duckdb
+      path: target/dbt.duckdb
+      extensions:
+        - httpfs
+        - parquet
+    motherduck:
+      type: duckdb
+      path: "md:"
+      extensions:
+        - httpfs
+        - parquet
+      settings:
+        motherduck_token: ${MOTHERDUCK_TOKEN}

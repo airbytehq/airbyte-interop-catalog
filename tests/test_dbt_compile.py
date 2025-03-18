@@ -49,29 +49,13 @@ transforms:
         generate_dbt_package(str(catalog_dir), str(output_dir), str(transforms_dir))
         
         # Verify the project was generated
-        assert (output_dir / "dbt_project.yml").exists()
-        assert (output_dir / "models" / "test_model.sql").exists()
-        
-        # Create profiles directory and profiles.yml
-        profiles_dir = output_dir / "profiles"
-        profiles_dir.mkdir(exist_ok=True)
-        
-        profiles_content = """
-default:
-  target: duckdb
-  outputs:
-    duckdb:
-      type: duckdb
-      path: target/dbt.duckdb
-      extensions:
-        - httpfs
-        - parquet
-"""
-        profiles_path = profiles_dir / "profiles.yml"
-        profiles_path.write_text(profiles_content)
+        assert (output_dir / "dbt_project" / "dbt_project.yml").exists()
+        assert (output_dir / "dbt_project" / "packages.yml").exists()
+        assert (output_dir / "dbt_project" / "profiles").exists()
+        assert (output_dir / "dbt_project" / "models" / "test_model.sql").exists()
         
         # Create sources.yml file
-        models_dir = output_dir / "models"
+        models_dir = output_dir / "dbt_project" / "models"
         sources_content = """
 version: 2
 

@@ -154,38 +154,11 @@ def generate_dbt_project(
         )
         
         # Write sources.yml to models directory
-        models_dir = Path(actual_output_dir) / "dbt_project" / "models"
+        models_dir = actual_output_dir / "dbt_project" / "models"
         models_dir.mkdir(parents=True, exist_ok=True)
         
         sources_path = models_dir / "sources.yml"
         sources_path.write_text(yaml.dump(sources_yml, default_flow_style=False, sort_keys=False))
-        
-        # Create profiles.yml with duckdb and motherduck configurations
-        profiles_dir = Path(actual_output_dir) / "dbt_project" / "profiles"
-        profiles_dir.mkdir(parents=True, exist_ok=True)
-        
-        profiles_content = """
-default:
-  target: duckdb
-  outputs:
-    duckdb:
-      type: duckdb
-      path: target/dbt.duckdb
-      extensions:
-        - httpfs
-        - parquet
-    motherduck:
-      type: duckdb
-      path: "md:"
-      extensions:
-        - httpfs
-        - parquet
-      settings:
-        motherduck_token: ${MOTHERDUCK_TOKEN}
-"""
-        
-        profiles_path = profiles_dir / "profiles.yml"
-        profiles_path.write_text(profiles_content)
         
         project_dir = actual_output_dir / "dbt_project"
         console.print(f"Generated dbt project at {project_dir}")

@@ -26,6 +26,7 @@ dependencies = [
     "click>=8.0.0",
     "rich>=10.0.0",
     "jinja2>=3.0.0",
+    "copier>=9.6.0",
 ]
 
 [project.optional-dependencies]
