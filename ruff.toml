@@ -22,7 +22,18 @@ exclude = [
     "dist",
 ]
 
+[format]
+# Use double quotes for strings
+quote-style = "double"
+# Indent with 4 spaces
+indent-style = "space"
+# Respect magic trailing commas
+skip-magic-trailing-comma = false
+# Line ending style
+line-ending = "auto"
+
 [lint]
+
 # Select enabled rules
 # Explicitly enable common rules that should be enforced immediately
 select = [
@@ -78,15 +89,8 @@ ignore = [
 # "RSE",  # flake8-raise
 # "TRY",  # flake8-try-except-raise
 
-[format]
-# Use double quotes for strings
-quote-style = "double"
-# Indent with 4 spaces
-indent-style = "space"
-# Respect magic trailing commas
-skip-magic-trailing-comma = false
-# Line ending style
-line-ending = "auto"
+[lint.pylint]
+max-args = 10
 
 [lint.isort]
 known-first-party = ["morph"]
