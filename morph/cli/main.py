@@ -1,7 +1,6 @@
 """Command-line interface for Morph."""
 
 import argparse
-import os
 from pathlib import Path
 
 import click
@@ -134,8 +133,8 @@ def generate_dbt_project(
         actual_output_dir = output_dir if output_dir else str(catalog_path / "generated")
         
         # Create profiles.yml with duckdb and motherduck configurations
-        profiles_dir = os.path.join(actual_output_dir, "profiles")
-        os.makedirs(profiles_dir, exist_ok=True)
+        profiles_dir = Path(actual_output_dir) / "profiles"
+        profiles_dir.mkdir(parents=True, exist_ok=True)
         
         profiles_content = """
 default:
@@ -157,14 +156,14 @@ default:
         motherduck_token: ${MOTHERDUCK_TOKEN}
 """
         
-        with open(os.path.join(profiles_dir, "profiles.yml"), "w") as f:
-            f.write(profiles_content)
+        profiles_path = profiles_dir / "profiles.yml"
+        profiles_path.write_text(profiles_content)
         
         console.print(f"Generated dbt project at {actual_output_dir}")
-        console.print(f"To use the generated dbt project:")
+        console.print("To use the generated dbt project:")
         console.print(f"  1. cd {actual_output_dir}")
-        console.print(f"  2. dbt deps")
-        console.print(f"  3. dbt run")
+        console.print("  2. dbt deps")
+        console.print("  3. dbt run")
     except Exception as e:
         console.print(f"Error generating dbt project: {e}", style="bold red")
 
