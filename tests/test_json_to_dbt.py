@@ -1,13 +1,20 @@
 """Tests for the JSON to dbt sources conversion functionality."""
 
+import argparse
 import json
 import tempfile
 from pathlib import Path
+from typing import Any
 
+import pytest
 from click.testing import CliRunner
 
 from morph.cli import main
-from morph.utils.json_to_dbt_sources import generate_dbt_sources_yml, json_schema_to_dbt_column
+from morph.utils.json_to_dbt_sources import (
+    generate_dbt_sources_yml,
+    generate_header_comment,
+    json_schema_to_dbt_column,
+)
 
 
 def test_json_schema_to_dbt_column() -> None:
@@ -28,6 +35,47 @@ def test_json_schema_to_dbt_column() -> None:
         "name": "int_col",
         "type": "integer",
     }
+
+
+@pytest.mark.parametrize(
+    "args,expected_command",
+    [
+        (
+            {
+                "schema_path": "catalog.json",
+                "catalog": True,
+                "source_name": "hubspot",
+                "database": "my_db",
+                "schema": "public",
+                "output": "src_hubspot.yml",
+            },
+            "uv run morph json-to-dbt --catalog --source-name hubspot --database my_db --schema public --output src_hubspot.yml catalog.json",
+        ),
+        (
+            {
+                "schema_path": "schemas/",
+                "catalog": False,
+                "source_name": "custom_source",
+                "database": None,
+                "schema": None,
+                "output": "models/sources.yml",
+            },
+            "uv run morph json-to-dbt --source-name custom_source --output models/sources.yml schemas/",
+        ),
+    ],
+)
+def test_generate_header_comment(args: dict[str, Any], expected_command: str) -> None:
+    """Test generation of header comments with various command arguments."""
+    # Create a Namespace object from the args dictionary
+    command_args = argparse.Namespace(**args)
+
+    # Generate the header comment
+    header = generate_header_comment(command_args)
+
+    # Verify the command in the header matches the expected command
+    assert expected_command in header
+    assert "# This file was auto-generated using the following command:" in header
+    assert "# To regenerate this file, run the command above." in header
 
 
 def test_cli_json_to_dbt_command() -> None:
