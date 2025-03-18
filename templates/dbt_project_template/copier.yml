@@ -1,0 +1,10 @@
+# copier.yml
+_templates_suffix: ""
+_exclude:
+  - copier.yml
+  - .git
+
+# Template variables
+catalog_name:
+  type: str
+  help: Name of the catalog (e.g. 'hubspot')

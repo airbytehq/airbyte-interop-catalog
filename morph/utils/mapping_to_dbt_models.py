@@ -153,6 +153,8 @@ def generate_dbt_package(
         output_dir: Path to the output directory (defaults to '{catalog_dir}/generated')
         mapping_dir: Path to the mapping directory (defaults to '{catalog_dir}/transforms')
     """
+    from copier import run_copy
+    
     catalog_path = Path(catalog_dir)
     catalog_name = catalog_path.name
     
@@ -163,9 +165,8 @@ def generate_dbt_package(
         mapping_dir = str(catalog_path / "transforms")
     
     # Create output directories
-    dbt_project_dir = Path(output_dir) / "dbt_project"
-    models_dir = dbt_project_dir / "models"
-    models_dir.mkdir(parents=True, exist_ok=True)
+    output_path = Path(output_dir)
+    output_path.mkdir(parents=True, exist_ok=True)
     
     # Find all mapping files
     mapping_files = []
@@ -184,29 +185,44 @@ def generate_dbt_package(
             if not transform_id:
                 continue
             
+            # Add to list of generated models
+            generated_models.append(transform_id)
+    
+    # Use copier to generate the dbt project scaffolding
+    template_dir = Path(__file__).parent.parent.parent / "templates" / "dbt_project_template"
+    
+    # Prepare data for the template
+    template_data = {
+        "catalog_name": catalog_name,
+        "models": generated_models,
+    }
+    
+    # Run copier to generate the project scaffolding
+    run_copy(
+        src_path=str(template_dir),
+        dst_path=str(output_path),
+        data=template_data,
+        overwrite=True,
+        unsafe=True,
+    )
+    
+    # Now generate the SQL models
+    models_dir = output_path / "dbt_project" / "models"
+    models_dir.mkdir(parents=True, exist_ok=True)
+    
+    # Generate SQL for each model
+    for mapping_file in mapping_files:
+        mapping = load_mapping_file(mapping_file)
+        
+        # Process each transform in the mapping
+        for transform in mapping.get("transforms", []):
+            transform_id = transform.get("id")
+            if not transform_id:
+                continue
+            
             # Generate SQL model
             model_sql = generate_model_sql(mapping, transform_id)
             
             # Write model to file
             model_path = models_dir / f"{transform_id}.sql"
             model_path.write_text(model_sql)
-            
-            generated_models.append(transform_id)
-    
-    # Generate dbt_project.yml
-    project_yml = generate_dbt_project_yml(catalog_name, generated_models)
-    project_path = dbt_project_dir / "dbt_project.yml"
-    project_path.write_text(project_yml)
-    
-    # Generate packages.yml if needed
-    packages_yml = """
-packages:
-  - package: dbt-labs/dbt_utils
-    version: 1.1.1
-"""
-    packages_path = dbt_project_dir / "packages.yml"
-    packages_path.write_text(packages_yml)
-    
-    # Create an empty py.typed file to mark the package as type-hint compliant
-    py_typed_path = dbt_project_dir / "py.typed"
-    py_typed_path.touch()
