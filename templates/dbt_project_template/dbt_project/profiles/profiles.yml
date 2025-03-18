@@ -3,13 +3,13 @@ default:
   outputs:
     duckdb:
       type: duckdb
-      path: target/dbt.duckdb
+      path: target/dbt-{{ catalog_name }}.duckdb
       extensions:
         - httpfs
         - parquet
     motherduck:
       type: duckdb
-      path: "md:"
+      path: "md:airbyte_{{ catalog_name }}"
       extensions:
         - httpfs
         - parquet
