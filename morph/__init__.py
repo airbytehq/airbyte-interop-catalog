@@ -1,3 +1,8 @@
 """Morph: A Python library for data transformation."""
 
-__version__ = "0.1.0"
+from importlib.metadata import version
+
+try:
+    __version__ = version("morph")
+except Exception:
+    __version__ = "unknown"
