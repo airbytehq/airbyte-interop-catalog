@@ -1,4 +1,3 @@
-
 name: 'airbyte_hubspot'
 version: '1.0.0'
 config-version: 2
@@ -20,10 +19,3 @@ clean-targets:
 models:
   airbyte_hubspot:
     +materialized: view
-    
-    company:
-      +materialized: table
-    
-    ticket:
-      +materialized: table
-    

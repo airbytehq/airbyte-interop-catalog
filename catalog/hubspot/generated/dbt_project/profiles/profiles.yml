@@ -3,13 +3,13 @@ default:
   outputs:
     duckdb:
       type: duckdb
-      path: target/dbt.duckdb
+      path: target/dbt-hubspot.duckdb
       extensions:
         - httpfs
         - parquet
     motherduck:
       type: duckdb
-      path: "md:"
+      path: "md:airbyte_hubspot"
       extensions:
         - httpfs
         - parquet
