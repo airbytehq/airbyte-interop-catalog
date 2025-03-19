@@ -187,6 +187,32 @@ def parse_airbyte_catalog(
 
             table_name = stream["name"]
             table = json_schema_to_dbt_table(table_name, stream["json_schema"])
+            
+            # Add the three additional Airbyte columns to all streams
+            airbyte_columns = [
+                {
+                    "name": "_airbyte_extracted_at",
+                    "type": "timestamp",
+                    "description": "Timestamp when the record was extracted from the source"
+                },
+                {
+                    "name": "_airbyte_meta",
+                    "type": "variant",
+                    "description": "Metadata about the record"
+                },
+                {
+                    "name": "_airbyte_raw_id",
+                    "type": "varchar",
+                    "description": "Unique identifier for the raw record"
+                }
+            ]
+            
+            # Add columns to the table if they don't already exist
+            if "columns" not in table:
+                table["columns"] = []
+            
+            table["columns"].extend(airbyte_columns)
+            
             tables.append(table)
 
         return create_dbt_source(tables, source_name, database, schema)
