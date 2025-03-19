@@ -11,13 +11,13 @@ contacts AS (
 
 SELECT
     contacts.archived AS _fivetran_deleted, -- Boolean to mark rows that were deleted in the source database.
-    MISSING AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
+    NULL AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
     contacts.id AS id, -- The ID of the contact.
-    MISSING AS portal_id, -- The HubSpot account ID.
+    NULL AS portal_id, -- The HubSpot account ID.
     contacts.properties_firstname AS property_firstname, -- The first name of the contact.
     contacts.properties_lastname AS property_lastname, -- The last name of the contact.
     contacts.properties_email AS property_email, -- The email address of the contact.
-    MISSING AS property_email_1, -- The secondary email address of the contact.
+    NULL AS property_email_1, -- The secondary email address of the contact.
     contacts.properties_phone AS property_phone, -- The phone number of the contact.
     contacts.properties_address AS property_address, -- The street address of the contact.
     contacts.properties_city AS property_city, -- The city where the contact is located.
@@ -30,6 +30,6 @@ SELECT
     contacts.properties_lastmodifieddate AS property_lastmodifieddate, -- The date the contact was last modified.
     contacts.properties_hubspot_owner_id AS property_hubspot_owner_id, -- The ID of the contact's owner.
     contacts.properties_lifecyclestage AS property_lifecyclestage, -- The lifecycle stage of the contact.
-    MISSING AS property_annualrevenue, -- The annual revenue of the contact's company.
-    MISSING AS property_hs_calculated_merged_vids -- The calculated merged visitor IDs for the contact.
+    NULL AS property_annualrevenue, -- The annual revenue of the contact's company.
+    NULL AS property_hs_calculated_merged_vids -- The calculated merged visitor IDs for the contact.
 FROM contacts

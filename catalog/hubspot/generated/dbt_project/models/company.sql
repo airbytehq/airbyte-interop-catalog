@@ -3,16 +3,16 @@
 -- Generated from mapping: hubspot.fivetran-compat/company
 -- Description: Fivetran Raw 'Company' Model
 
-WITH
+WITH 
 companies AS (
     SELECT * FROM {{ source('hubspot', 'companies') }}
 )
 
 
 SELECT
-    null AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
+    NULL AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
     companies.id AS id, -- The ID of the company.
-    null AS portal_id, -- The HubSpot account ID.
+    NULL AS portal_id, -- The HubSpot account ID.
     companies.archived AS is_deleted, -- Whether the record was deleted.
     companies.properties_name AS property_name, -- The name of the company.
     companies.properties_description AS property_description, -- A short statement about the company's mission and goals.

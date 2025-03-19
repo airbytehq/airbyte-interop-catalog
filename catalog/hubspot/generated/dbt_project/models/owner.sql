@@ -10,10 +10,10 @@ owners AS (
 
 
 SELECT
-    MISSING AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
+    NULL AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
     owners.id AS owner_id, -- The ID of the owner.
-    MISSING AS portal_id, -- The HubSpot account ID.
-    MISSING AS type, -- The type of owner.
+    NULL AS portal_id, -- The HubSpot account ID.
+    NULL AS type, -- The type of owner.
     False AS is_deleted, -- Whether the record was deleted.
     owners.email AS email, -- The email address of the owner.
     owners.firstName AS first_name, -- The first name of the owner.
