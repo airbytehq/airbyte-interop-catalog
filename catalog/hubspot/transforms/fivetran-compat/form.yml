@@ -51,6 +51,9 @@ transforms:
       is_published:
         expression: forms.archived = false
         description: "Whether the form is published."
+      follow_up_id:
+        expression: MISSING
+        description: "The ID of the follow-up form."
 
     annotations:
       unused_source_fields:

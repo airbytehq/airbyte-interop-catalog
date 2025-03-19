@@ -66,6 +66,9 @@ transforms:
       property_lifecyclestage:
         expression: contacts.properties_lifecyclestage
         description: "The lifecycle stage of the contact."
+      property_annualrevenue:
+        expression: MISSING
+        description: "The annual revenue of the contact's company."
 
     annotations:
       unused_source_fields:
