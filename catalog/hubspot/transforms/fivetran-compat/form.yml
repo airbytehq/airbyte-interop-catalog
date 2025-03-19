@@ -24,6 +24,9 @@ transforms:
       created_at:
         expression: forms.createdAt
         description: "The date the form was created."
+      css_class:
+        expression: MISSING
+        description: "The CSS class of the form."
       updated_at:
         expression: forms.updatedAt
         description: "The date the form was last updated."

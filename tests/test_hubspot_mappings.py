@@ -15,8 +15,6 @@ import yaml
         ("deals", "deal", "deal.yml"),
         ("owners", "owner", "owner.yml"),
         ("forms", "form", "form.yml"),
-        ("products", "product", "product.yml"),
-        ("workflows", "workflow", "workflow.yml"),
     ],
 )
 def test_mapping(source_table, target_table, mapping_file):

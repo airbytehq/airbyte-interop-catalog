@@ -27,6 +27,9 @@ transforms:
       property_email:
         expression: contacts.properties_email
         description: "The email address of the contact."
+      property_email_1:
+        expression: MISSING
+        description: "The secondary email address of the contact."
       property_phone:
         expression: contacts.properties_phone
         description: "The phone number of the contact."

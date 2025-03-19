@@ -15,6 +15,9 @@ transforms:
       portal_id:
         expression: MISSING
         description: "The HubSpot account ID."
+      type:
+        expression: MISSING
+        description: "The type of owner."
       is_deleted:
         expression: false
         description: "Whether the record was deleted."

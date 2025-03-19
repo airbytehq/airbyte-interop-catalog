@@ -15,6 +15,15 @@ transforms:
       portal_id:
         expression: MISSING
         description: "The HubSpot account ID."
+      deal_pipeline_id:
+        expression: deals.properties_pipeline
+        description: "The ID of the deal's pipeline."
+      deal_pipeline_stage_id:
+        expression: deals.properties_dealstage
+        description: "The ID of the deal's pipeline stage."
+      owner_id:
+        expression: deals.properties_hubspot_owner_id
+        description: "The ID of the deal's owner."
       _fivetran_synced:
         expression: CURRENT_TIMESTAMP()
         description: "Timestamp of when this record was last synced by Fivetran."
