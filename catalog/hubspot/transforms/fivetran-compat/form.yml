@@ -60,6 +60,9 @@ transforms:
       lead_nurturing_campaign_id:
         expression: MISSING
         description: "The ID of the lead nurturing campaign associated with the form."
+      method:
+        expression: MISSING
+        description: "The HTTP method used by the form."
 
     annotations:
       unused_source_fields:
