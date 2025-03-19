@@ -86,7 +86,7 @@ WITH {% for source in sources %}
 {% endfor %}
 
 SELECT{% for field in fields %}
-    {{ field.expression }} AS {{ field.name }}{% if field.description %}{% endif %}{% if not loop.last %},{% endif %} -- {{ field.description }}{% endfor %}
+    {% if field.expression == "MISSING" %}NULL{% else %}{{ field.expression }}{% endif %} AS {{ field.name }}{% if field.description %}{% endif %}{% if not loop.last %},{% endif %} -- {{ field.description }}{% endfor %}
 FROM {% for source in sources %}{{ source.alias }}{% if not loop.last %}, {% endif %}{% endfor %}
 """
 

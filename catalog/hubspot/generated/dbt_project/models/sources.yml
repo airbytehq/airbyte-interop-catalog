@@ -1,6 +1,8 @@
 version: 2
 sources:
 - name: hubspot
+  # # TODO: Need to build `schema` into the generation logic:
+  # schema: "{{ var('hubspot_source_schema_name') }}"
   schema: main
   tables:
   - name: campaigns

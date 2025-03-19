@@ -13,7 +13,12 @@ from airbyte.secrets import GoogleGSMSecretManager
 
 AIRBYTE_INTERNAL_GCP_PROJECT = "dataline-integration-testing"
 
-PATH_TO_DUCKDB_DB = ".data/hubspot.duckdb"
+SOURCE_NAME = "hubspot"
+PATH_TO_DUCKDB_DB = f".data/{SOURCE_NAME}.duckdb"
+STREAMS = [
+    "companies",
+    "tickets",
+]
 
 
 def get_config(source_name="hubspot", secret_name: str | None = None) -> None:
@@ -41,7 +46,7 @@ def get_source(source_name: str) -> ab.Source:
         f"source-{source_name}",
         config=get_config(source_name),
         docker_image=docker_image,
-        streams="*",
+        streams=STREAMS,
     )
 
 
@@ -60,7 +65,7 @@ def sync_source(source_name: str) -> None:
 
 def main() -> None:
     print("Hello from example.py!")
-    sync_source("hubspot", "hubspot")
+    sync_source("hubspot")
 
 
 if __name__ == "__main__":
