@@ -57,6 +57,9 @@ transforms:
       guid:
         expression: MISSING
         description: "The globally unique identifier for the form."
+      lead_nurturing_campaign_id:
+        expression: MISSING
+        description: "The ID of the lead nurturing campaign associated with the form."
 
     annotations:
       unused_source_fields:
