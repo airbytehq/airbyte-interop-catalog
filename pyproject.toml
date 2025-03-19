@@ -32,14 +32,14 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "airbyte>=0.23.0",
-    "basedpyright>=1.0.0",
+    "basedpyright>=1.28.2",
     "dbt-core>=1.9.3",
     "dbt-duckdb>=1.9.2",
-    "poethepoet>=0.24.0",
-    "pre-commit>=3.0.0",
-    "pytest-cov>=4.0.0",
-    "pytest>=7.0.0",
-    "ruff>=0.0.292",
+    "poethepoet>=0.33.1",
+    "pre-commit>=4.2.0",
+    "pytest-cov>=6.0.0",
+    "pytest>=8.3.5",
+    "ruff>=0.11.0",
     "types-pyyaml>=6.0.12.20241230",
 ]
 
@@ -49,7 +49,6 @@ Issues = "https://github.com/airbytehq/morph/issues"
 
 [project.scripts]
 morph = "morph.cli:main"
-dbt = "dbt:run"
 
 [tool.hatch.version]
 source = "uv-dynamic-versioning"
