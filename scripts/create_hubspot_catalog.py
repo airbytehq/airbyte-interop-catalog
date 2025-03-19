@@ -1,5 +1,5 @@
 # Usage:
-#   uv run --no-project scripts/create_hubspot_data.py
+#   uv run --no-project scripts/create_hubspot_catalog.py
 #
 # /// script
 # requires-python = ">=3.10"
@@ -8,6 +8,8 @@
 # ]
 # ///
 
+from pathlib import Path
+
 import airbyte as ab
 from airbyte.secrets import GoogleGSMSecretManager
 
@@ -15,6 +17,7 @@ AIRBYTE_INTERNAL_GCP_PROJECT = "dataline-integration-testing"
 
 SOURCE_NAME = "hubspot"
 PATH_TO_DUCKDB_DB = f".data/{SOURCE_NAME}.duckdb"
+OUTPUT_FILE_PATH = f"catalog/{SOURCE_NAME}/generated/airbyte-catalog.json"
 STREAMS = [
     "contacts",
     "deals",
@@ -54,23 +57,25 @@ def get_source(source_name: str, streams: list[str] | str = "*") -> ab.Source:
     )
 
 
-def get_duckdb_cache(schema_name: str) -> ab.DuckDBCache:
+def get_duckdb_cache() -> ab.DuckDBCache:
     return ab.DuckDBCache(
         db_path=PATH_TO_DUCKDB_DB,
-        schema_name=schema_name,
     )
 
 
-def sync_source(source_name: str, streams: list[str] | str = "*") -> None:
-    cache = get_duckdb_cache(schema_name=f"{source_name}_raw")
-    source = get_source(source_name, streams)
+def write_catalog_file(source_name: str, output_file_path: Path) -> None:
+    source = get_source(source_name, streams="*")
     source.check()
-    source.read(cache=cache)
+    catalog = source.discovered_catalog
+    output_file_path.write_text(catalog.model_dump_json(indent=2))
 
 
 def main() -> None:
     print("Syncing HubSpot data...")
-    sync_source("hubspot", STREAMS)
+    write_catalog_file(
+        "hubspot",
+        Path(OUTPUT_FILE_PATH),
+    )
 
 
 if __name__ == "__main__":

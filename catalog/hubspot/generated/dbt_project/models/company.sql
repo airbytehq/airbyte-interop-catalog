@@ -3,7 +3,7 @@
 -- Generated from mapping: hubspot.fivetran-interop/company
 -- Description: Fivetran Raw 'Company' Model
 
-WITH
+WITH 
 companies AS (
     SELECT * FROM {{ source('hubspot', 'companies') }}
 )

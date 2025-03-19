@@ -3,7 +3,7 @@
 -- Generated from mapping: hubspot.fivetran-interop/contact
 -- Description: Fivetran Raw 'Contact' Model
 
-WITH
+WITH 
 contacts AS (
     SELECT * FROM {{ source('hubspot', 'contacts') }}
 )

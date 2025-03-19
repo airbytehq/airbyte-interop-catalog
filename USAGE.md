@@ -10,14 +10,26 @@ Morph can generate dbt projects from mapping files that define transformations b
 
 The following steps demonstrate how to generate a dbt project for HubSpot data:
 
-1. **Generate the dbt project**
+1. **Generate the raw data**
+
+   ```bash
+   uv run --no-project scripts/create_hubspot_data.py
+   ```
+
+2. **Generate the Airbyte catalog**
+
+   ```bash
+   uv run --no-project scripts/create_hubspot_catalog.py
+   ```
+
+3. **Generate the dbt project**
 
    Use the `generate-dbt-project` command to create a dbt project from the HubSpot mapping files and catalog:
 
    ```bash
    uv run morph generate-dbt-project \
      catalog/hubspot \
-     catalog/hubspot/airbyte-catalog.json \
+     catalog/hubspot/generated/airbyte-catalog.json \
      --output-dir catalog/hubspot/generated \
      --mapping-dir catalog/hubspot/src/transforms/fivetran-interop \
      --source-name hubspot
@@ -31,7 +43,7 @@ The following steps demonstrate how to generate a dbt project for HubSpot data:
    - Points to the directory containing the mapping files
    - Sets the source name for the dbt project
 
-2. **Test the generated dbt project**
+4. **Test the generated dbt project**
 
    Install dbt and test the project:
 
