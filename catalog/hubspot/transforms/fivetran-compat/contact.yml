@@ -69,6 +69,9 @@ transforms:
       property_annualrevenue:
         expression: MISSING
         description: "The annual revenue of the contact's company."
+      property_hs_calculated_merged_vids:
+        expression: MISSING
+        description: "The calculated merged visitor IDs for the contact."
 
     annotations:
       unused_source_fields:

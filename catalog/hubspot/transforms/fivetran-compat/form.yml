@@ -54,6 +54,9 @@ transforms:
       follow_up_id:
         expression: MISSING
         description: "The ID of the follow-up form."
+      guid:
+        expression: MISSING
+        description: "The globally unique identifier for the form."
 
     annotations:
       unused_source_fields:
