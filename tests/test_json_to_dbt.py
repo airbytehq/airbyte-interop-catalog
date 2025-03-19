@@ -1,6 +1,7 @@
 """Tests for the JSON to dbt sources conversion functionality."""
 
 import json
+import os
 import tempfile
 from pathlib import Path
 
@@ -31,7 +32,10 @@ def test_json_schema_to_dbt_column() -> None:
     }
 
 
-@pytest.mark.skip("Works locally but fails in CI with 'No such file or directory")
+@pytest.mark.skipif(
+    os.environ.get("CI", None),
+    reason="Works locally but fails in CI with 'No such file or directory",
+)
 def test_cli_json_to_dbt_command() -> None:
     """Test the json-to-dbt CLI command with a sample schema."""
     runner = CliRunner()
