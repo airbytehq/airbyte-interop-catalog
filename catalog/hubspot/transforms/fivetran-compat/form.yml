@@ -6,6 +6,9 @@ transforms:
       - forms: airbyte_raw_hubspot.forms
     fields:
       # Fields in target schema order
+      _fivetran_deleted:
+        expression: false
+        description: "Boolean to mark rows that were deleted in the source database."
       _fivetran_synced:
         expression: CURRENT_TIMESTAMP()
         description: "Timestamp of when this record was last synced by Fivetran."
@@ -15,9 +18,6 @@ transforms:
       portal_id:
         expression: MISSING
         description: "The HubSpot account ID."
-      is_deleted:
-        expression: false
-        description: "Whether the record was deleted."
       name:
         expression: forms.name
         description: "The name of the form."

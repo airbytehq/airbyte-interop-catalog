@@ -9,7 +9,7 @@ transforms:
       _fivetran_synced:
         expression: CURRENT_TIMESTAMP()
         description: "Timestamp of when this record was last synced by Fivetran."
-      id:
+      owner_id:
         expression: owners.id
         description: "The ID of the owner."
       portal_id:
