@@ -28,7 +28,7 @@ def get_config(source_name="hubspot", secret_name: str | None = None) -> None:
     return next(iter(secret_manager.fetch_connector_secrets(connector_name)), None).parse_json()
 
 
-def get_source(source_name: str) -> ab.Source:
+def get_source(source_name: str, streams: list[str] | str = "*") -> ab.Source:
     docker_image: bool | None = None
     if source_name == "hubspot":
         # Hubspot's CDK ref is not properly pinned in its pyproject.toml (needs airbyte-cdk==2.4.0)
@@ -41,7 +41,7 @@ def get_source(source_name: str) -> ab.Source:
         f"source-{source_name}",
         config=get_config(source_name),
         docker_image=docker_image,
-        streams="*",
+        streams=streams,
     )
 
 
@@ -51,16 +51,30 @@ def get_duckdb_cache() -> ab.DuckDBCache:
     )
 
 
-def sync_source(source_name: str) -> None:
+# Canonical stream names for HubSpot
+HUBSPOT_STREAMS = [
+    "contacts",
+    "deals",
+    "owners",
+    "forms",
+    "products",
+    "workflows",
+    # Already implemented
+    "companies",
+    "tickets",
+]
+
+
+def sync_source(source_name: str, streams: list[str] | str = "*") -> None:
     cache = get_duckdb_cache()
-    source = get_source(source_name)
+    source = get_source(source_name, streams)
     source.check()
     source.read(cache=cache)
 
 
 def main() -> None:
-    print("Hello from example.py!")
-    sync_source("hubspot", "hubspot")
+    print("Syncing HubSpot data...")
+    sync_source("hubspot", HUBSPOT_STREAMS)
 
 
 if __name__ == "__main__":

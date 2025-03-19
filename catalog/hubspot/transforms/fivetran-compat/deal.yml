@@ -1,0 +1,61 @@
+domain: hubspot.fivetran-compat
+transforms:
+  - display_name: Fivetran Raw 'Deal' Model
+    id: deal
+    from:
+      - deals: airbyte_raw_hubspot.deals
+    fields:
+      # Fields in target schema order
+      _fivetran_synced:
+        expression: CURRENT_TIMESTAMP()
+        description: "Timestamp of when this record was last synced by Fivetran."
+      id:
+        expression: deals.id
+        description: "The ID of the deal."
+      portal_id:
+        expression: MISSING
+        description: "The HubSpot account ID."
+      is_deleted:
+        expression: deals.archived
+        description: "Whether the record was deleted."
+      property_dealname:
+        expression: deals.properties_dealname
+        description: "The name of the deal."
+      property_description:
+        expression: deals.properties_description
+        description: "A description of the deal."
+      property_createdate:
+        expression: deals.properties_createdate
+        description: "The date the deal was created in HubSpot."
+      property_closedate:
+        expression: deals.properties_closedate
+        description: "The date the deal was closed."
+      property_amount:
+        expression: deals.properties_amount
+        description: "The amount of the deal."
+      property_dealstage:
+        expression: deals.properties_dealstage
+        description: "The stage of the deal in the pipeline."
+      property_pipeline:
+        expression: deals.properties_pipeline
+        description: "The pipeline the deal is in."
+      property_hubspot_owner_id:
+        expression: deals.properties_hubspot_owner_id
+        description: "The ID of the deal's owner."
+      property_dealtype:
+        expression: deals.properties_dealtype
+        description: "The type of the deal."
+      property_hs_lastmodifieddate:
+        expression: deals.properties_hs_lastmodifieddate
+        description: "The date the deal was last modified."
+
+    annotations:
+      unused_source_fields:
+        deals:
+          # alpha-sorted list of unused properties from the deals schema:
+          - companies
+          - contacts
+          - createdAt
+          - line_items
+          - properties
+          - updatedAt
