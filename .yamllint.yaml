@@ -2,7 +2,7 @@ extends: default
 
 ignore: |
   **/generated/**
-  **/target-schemas/**
+  **/requirements/**
 
 rules:
   line-length:
