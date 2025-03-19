@@ -1,0 +1,83 @@
+domain: hubspot.fivetran-compat
+transforms:
+  - display_name: Fivetran Raw 'Contact' Model
+    id: contact
+    from:
+      - contacts: airbyte_raw_hubspot.contacts
+    fields:
+      # Fields in target schema order
+      _fivetran_deleted:
+        expression: contacts.archived
+        description: "Boolean to mark rows that were deleted in the source database."
+      _fivetran_synced:
+        expression: _airbyte_extracted_at
+        description: "Timestamp of when this record was last synced by Fivetran."
+      id:
+        expression: contacts.id
+        description: "The ID of the contact."
+      portal_id:
+        expression: MISSING
+        description: "The HubSpot account ID."
+      property_firstname:
+        expression: contacts.properties_firstname
+        description: "The first name of the contact."
+      property_lastname:
+        expression: contacts.properties_lastname
+        description: "The last name of the contact."
+      property_email:
+        expression: contacts.properties_email
+        description: "The email address of the contact."
+      property_email_1:
+        expression: MISSING
+        description: "The secondary email address of the contact."
+      property_phone:
+        expression: contacts.properties_phone
+        description: "The phone number of the contact."
+      property_address:
+        expression: contacts.properties_address
+        description: "The street address of the contact."
+      property_city:
+        expression: contacts.properties_city
+        description: "The city where the contact is located."
+      property_state:
+        expression: contacts.properties_state
+        description: "The state where the contact is located."
+      property_zip:
+        expression: contacts.properties_zip
+        description: "The zip code where the contact is located."
+      property_country:
+        expression: contacts.properties_country
+        description: "The country where the contact is located."
+      property_company:
+        expression: contacts.properties_company
+        description: "The company the contact works for."
+      property_jobtitle:
+        expression: contacts.properties_jobtitle
+        description: "The job title of the contact."
+      property_createdate:
+        expression: contacts.properties_createdate
+        description: "The date the contact was created in HubSpot."
+      property_lastmodifieddate:
+        expression: contacts.properties_lastmodifieddate
+        description: "The date the contact was last modified."
+      property_hubspot_owner_id:
+        expression: contacts.properties_hubspot_owner_id
+        description: "The ID of the contact's owner."
+      property_lifecyclestage:
+        expression: contacts.properties_lifecyclestage
+        description: "The lifecycle stage of the contact."
+      property_annualrevenue:
+        expression: MISSING
+        description: "The annual revenue of the contact's company."
+      property_hs_calculated_merged_vids:
+        expression: MISSING
+        description: "The calculated merged visitor IDs for the contact."
+
+    annotations:
+      unused_source_fields:
+        contacts:
+          # alpha-sorted list of unused properties from the contacts schema:
+          - companies
+          - createdAt
+          - properties
+          - updatedAt

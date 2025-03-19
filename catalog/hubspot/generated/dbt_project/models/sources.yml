@@ -1,9 +1,6 @@
 version: 2
 sources:
 - name: hubspot
-  # # TODO: Need to build `schema` into the generation logic:
-  # schema: "{{ var('hubspot_source_schema_name') }}"
-  schema: main
   tables:
   - name: campaigns
     columns:
@@ -107,6 +104,15 @@ sources:
     - name: lastUpdatedTime
       type: integer
       description: Timestamp indicating when the campaign data was last updated.
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: cars
     columns:
     - name: id
@@ -181,6 +187,15 @@ sources:
       type: varchar
     - name: properties_hubspot_team_id
       type: varchar
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: cars_web_analytics
     columns:
     - name: properties_hs_asset_description
@@ -281,6 +296,15 @@ sources:
       type: varchar
     - name: occurredAt
       type: timestamp
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: companies
     columns:
     - name: id
@@ -654,6 +678,15 @@ sources:
       type: varchar
     - name: properties_zip
       type: varchar
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: companies_property_history
     columns:
     - name: updatedByUserId
@@ -1040,6 +1073,15 @@ sources:
       type: varchar
     - name: properties_zip
       type: varchar
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: companies_web_analytics
     columns:
     - name: properties_hs_asset_description
@@ -1140,6 +1182,15 @@ sources:
       type: varchar
     - name: occurredAt
       type: timestamp
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: contact_lists
     columns:
     - name: parentId
@@ -1220,6 +1271,15 @@ sources:
     - name: archived
       type: boolean
       description: Indicates if the contact list is archived or not.
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: contacts
     columns:
     - name: id
@@ -1909,6 +1969,15 @@ sources:
       type: varchar
     - name: properties_zip
       type: varchar
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: contacts_form_submissions
     columns:
     - name: canonical-vid
@@ -1947,6 +2016,15 @@ sources:
     - name: meta-data
       type: array
       description: Additional metadata associated with the submission
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: contacts_list_memberships
     columns:
     - name: canonical-vid
@@ -1971,6 +2049,15 @@ sources:
       type: boolean
       description: Flag indicating whether the contact is a member of the list or
         not
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: contacts_merged_audit
     columns:
     - name: canonical-vid
@@ -2059,6 +2146,15 @@ sources:
     - name: last-name
       type: varchar
       description: The last name of the merged contact.
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: contacts_property_history
     columns:
     - name: value
@@ -2775,6 +2871,15 @@ sources:
       type: varchar
     - name: properties_zip
       type: varchar
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: contacts_web_analytics
     columns:
     - name: properties_hs_asset_description
@@ -2875,6 +2980,15 @@ sources:
       type: varchar
     - name: occurredAt
       type: timestamp
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: deal_pipelines
     columns:
     - name: label
@@ -2907,6 +3021,15 @@ sources:
     - name: default
       type: boolean
       description: Indicates if this pipeline is the default one in the system.
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: deal_splits
     columns:
     - name: id
@@ -3017,6 +3140,15 @@ sources:
       type: timestamp
     - name: properties_hubspot_team_id
       type: varchar
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: deals
     columns:
     - name: id
@@ -3449,6 +3581,15 @@ sources:
       type: boolean
     - name: properties_hs_date_entered_current_stage
       type: timestamp
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: deals_archived
     columns:
     - name: id
@@ -3876,6 +4017,15 @@ sources:
       type: boolean
     - name: properties_hs_date_entered_current_stage
       type: timestamp
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: deals_property_history
     columns:
     - name: updatedByUserId
@@ -4307,6 +4457,15 @@ sources:
       type: float
     - name: properties_pipeline
       type: varchar
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: deals_web_analytics
     columns:
     - name: properties_hs_asset_description
@@ -4407,6 +4566,15 @@ sources:
       type: varchar
     - name: occurredAt
       type: timestamp
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: email_events
     columns:
     - name: appId
@@ -4537,6 +4705,15 @@ sources:
     - name: userAgent
       type: varchar
       description: The user agent of the recipient.
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: email_subscriptions
     columns:
     - name: active
@@ -4573,6 +4750,15 @@ sources:
     - name: channel
       type: varchar
       description: The communication channel through which the subscription is managed
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: engagements
     columns:
     - name: id
@@ -4896,6 +5082,15 @@ sources:
     - name: metadata_isAllDay
       type: boolean
       description: Flag indicating if engagement is for the whole day
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: engagements_calls
     columns:
     - name: id
@@ -5096,6 +5291,15 @@ sources:
       type: float
     - name: properties_hs_was_imported
       type: boolean
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: engagements_calls_web_analytics
     columns:
     - name: properties_hs_asset_description
@@ -5196,6 +5400,15 @@ sources:
       type: varchar
     - name: occurredAt
       type: timestamp
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: engagements_emails
     columns:
     - name: id
@@ -5450,6 +5663,15 @@ sources:
       type: timestamp
     - name: properties_hs_was_imported
       type: boolean
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: engagements_emails_web_analytics
     columns:
     - name: properties_hs_asset_description
@@ -5550,6 +5772,15 @@ sources:
       type: varchar
     - name: occurredAt
       type: timestamp
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: engagements_meetings
     columns:
     - name: id
@@ -5740,6 +5971,15 @@ sources:
       type: varchar
     - name: properties_hs_was_imported
       type: boolean
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: engagements_meetings_web_analytics
     columns:
     - name: properties_hs_asset_description
@@ -5840,6 +6080,15 @@ sources:
       type: varchar
     - name: occurredAt
       type: timestamp
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: engagements_notes
     columns:
     - name: id
@@ -5958,6 +6207,15 @@ sources:
       type: varchar
     - name: properties_hs_was_imported
       type: boolean
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: engagements_notes_web_analytics
     columns:
     - name: properties_hs_asset_description
@@ -6058,6 +6316,15 @@ sources:
       type: varchar
     - name: occurredAt
       type: timestamp
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: engagements_tasks
     columns:
     - name: id
@@ -6301,6 +6568,15 @@ sources:
       type: float
     - name: properties_hs_was_imported
       type: boolean
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: engagements_tasks_web_analytics
     columns:
     - name: properties_hs_asset_description
@@ -6401,6 +6677,15 @@ sources:
       type: varchar
     - name: occurredAt
       type: timestamp
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: form_submissions
     columns:
     - name: submittedAt
@@ -6418,6 +6703,15 @@ sources:
     - name: formId
       type: varchar
       description: The unique identifier of the form associated with the submission.
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: forms
     columns:
     - name: id
@@ -6555,6 +6849,15 @@ sources:
       type: varchar
     - name: properties_hubspot_team_id
       type: varchar
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: goals
     columns:
     - name: id
@@ -6783,6 +7086,15 @@ sources:
       type: varchar
     - name: properties_hubspot_team_id
       type: varchar
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: goals_web_analytics
     columns:
     - name: properties_hs_asset_description
@@ -6883,6 +7195,15 @@ sources:
       type: varchar
     - name: occurredAt
       type: timestamp
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: leads
     columns:
     - name: id
@@ -7212,6 +7533,15 @@ sources:
       type: varchar
     - name: properties_hubspot_team_id
       type: varchar
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: line_items
     columns:
     - name: id
@@ -7394,6 +7724,15 @@ sources:
       type: date
     - name: properties_test_product_price
       type: date
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: line_items_web_analytics
     columns:
     - name: properties_hs_asset_description
@@ -7494,6 +7833,15 @@ sources:
       type: varchar
     - name: occurredAt
       type: timestamp
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: marketing_emails
     columns:
     - name: id
@@ -7811,6 +8159,15 @@ sources:
       type: array
     - name: mailingIlsListsIncluded
       type: array
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: owners
     columns:
     - name: id
@@ -7840,6 +8197,15 @@ sources:
     - name: teams
       type: array
       description: An array of teams the owner belongs to.
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: owners_archived
     columns:
     - name: id
@@ -7869,6 +8235,15 @@ sources:
     - name: teams
       type: array
       description: A list of teams the owner belongs to.
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: pets
     columns:
     - name: id
@@ -7943,6 +8318,15 @@ sources:
       type: varchar
     - name: properties_pet_type
       type: varchar
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: pets_web_analytics
     columns:
     - name: properties_hs_asset_description
@@ -8043,6 +8427,15 @@ sources:
       type: varchar
     - name: occurredAt
       type: timestamp
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: products
     columns:
     - name: id
@@ -8161,6 +8554,15 @@ sources:
       type: date
     - name: properties_test_product_price
       type: date
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: products_web_analytics
     columns:
     - name: properties_hs_asset_description
@@ -8261,6 +8663,15 @@ sources:
       type: varchar
     - name: occurredAt
       type: timestamp
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: subscription_changes
     columns:
     - name: timestamp
@@ -8278,6 +8689,15 @@ sources:
     - name: changes
       type: array
       description: List of all subscription changes
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: ticket_pipelines
     columns:
     - name: label
@@ -8301,6 +8721,15 @@ sources:
     - name: updatedAt
       type: timestamp
       description: The date and time when the ticket pipeline was last updated.
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: tickets
     columns:
     - name: id
@@ -8700,6 +9129,15 @@ sources:
       type: float
     - name: properties_time_to_first_agent_reply
       type: float
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: tickets_web_analytics
     columns:
     - name: properties_hs_asset_description
@@ -8800,6 +9238,15 @@ sources:
       type: varchar
     - name: occurredAt
       type: timestamp
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record
   - name: workflows
     columns:
     - name: name
@@ -8865,3 +9312,12 @@ sources:
     - name: portalId
       type: integer
       description: ID of the portal associated with the workflow
+    - name: _airbyte_extracted_at
+      type: timestamp
+      description: Timestamp when the record was extracted from the source
+    - name: _airbyte_meta
+      type: variant
+      description: Metadata about the record
+    - name: _airbyte_raw_id
+      type: varchar
+      description: Unique identifier for the raw record

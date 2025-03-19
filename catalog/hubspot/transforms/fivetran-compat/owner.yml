@@ -1,0 +1,53 @@
+domain: hubspot.fivetran-compat
+transforms:
+  - display_name: Fivetran Raw 'Owner' Model
+    id: owner
+    from:
+      - owners: airbyte_raw_hubspot.owners
+    fields:
+      # Fields in target schema order
+      _fivetran_synced:
+        expression: _airbyte_extracted_at
+        description: "Timestamp of when this record was last synced by Fivetran."
+      owner_id:
+        expression: owners.id
+        description: "The ID of the owner."
+      portal_id:
+        expression: MISSING
+        description: "The HubSpot account ID."
+      type:
+        expression: MISSING
+        description: "The type of owner."
+      is_deleted:
+        expression: false
+        description: "Whether the record was deleted."
+      email:
+        expression: owners.email
+        description: "The email address of the owner."
+      first_name:
+        expression: owners.firstName
+        description: "The first name of the owner."
+      last_name:
+        expression: owners.lastName
+        description: "The last name of the owner."
+      created_at:
+        expression: owners.createdAt
+        description: "The date the owner was created in HubSpot."
+      updated_at:
+        expression: owners.updatedAt
+        description: "The date the owner was last updated."
+      user_id:
+        expression: owners.userId
+        description: "The user ID of the owner."
+      is_active:
+        expression: owners.archived = false
+        description: "Whether the owner is active."
+      teams:
+        expression: owners.teams
+        description: "The teams the owner belongs to."
+
+    annotations:
+      unused_source_fields:
+        owners:
+          # alpha-sorted list of unused properties from the owners schema:
+          - archived

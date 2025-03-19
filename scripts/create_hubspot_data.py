@@ -16,9 +16,14 @@ AIRBYTE_INTERNAL_GCP_PROJECT = "dataline-integration-testing"
 SOURCE_NAME = "hubspot"
 PATH_TO_DUCKDB_DB = f".data/{SOURCE_NAME}.duckdb"
 STREAMS = [
+    "contacts",
+    "deals",
+    "owners",
+    "forms",
     "companies",
     "tickets",
 ]
+
 
 
 def get_config(source_name="hubspot", secret_name: str | None = None) -> None:
@@ -33,7 +38,7 @@ def get_config(source_name="hubspot", secret_name: str | None = None) -> None:
     return next(iter(secret_manager.fetch_connector_secrets(connector_name)), None).parse_json()
 
 
-def get_source(source_name: str) -> ab.Source:
+def get_source(source_name: str, streams: list[str] | str = "*") -> ab.Source:
     docker_image: bool | None = None
     if source_name == "hubspot":
         # Hubspot's CDK ref is not properly pinned in its pyproject.toml (needs airbyte-cdk==2.4.0)
@@ -46,7 +51,7 @@ def get_source(source_name: str) -> ab.Source:
         f"source-{source_name}",
         config=get_config(source_name),
         docker_image=docker_image,
-        streams=STREAMS,
+        streams=streams,
     )
 
 
@@ -55,17 +60,17 @@ def get_duckdb_cache() -> ab.DuckDBCache:
         db_path=PATH_TO_DUCKDB_DB,
     )
 
-
-def sync_source(source_name: str) -> None:
+ 
+def sync_source(source_name: str, streams: list[str] | str = "*") -> None:
     cache = get_duckdb_cache()
-    source = get_source(source_name)
+    source = get_source(source_name, streams)
     source.check()
     source.read(cache=cache)
 
 
 def main() -> None:
-    print("Hello from example.py!")
-    sync_source("hubspot")
+    print("Syncing HubSpot data...")
+    sync_source("hubspot", STREAMS)
 
 
 if __name__ == "__main__":

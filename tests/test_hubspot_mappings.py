@@ -11,6 +11,10 @@ import yaml
     [
         ("tickets", "ticket", "ticket.yml"),
         ("companies", "company", "company.yml"),
+        ("contacts", "contact", "contact.yml"),
+        ("deals", "deal", "deal.yml"),
+        ("owners", "owner", "owner.yml"),
+        ("forms", "form", "form.yml"),
     ],
 )
 def test_mapping(source_table, target_table, mapping_file):

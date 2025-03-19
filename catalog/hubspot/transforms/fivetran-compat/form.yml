@@ -1,0 +1,79 @@
+domain: hubspot.fivetran-compat
+transforms:
+  - display_name: Fivetran Raw 'Form' Model
+    id: form
+    from:
+      - forms: airbyte_raw_hubspot.forms
+    fields:
+      # Fields in target schema order
+      _fivetran_deleted:
+        expression: false
+        description: "Boolean to mark rows that were deleted in the source database."
+      _fivetran_synced:
+        expression: _airbyte_extracted_at
+        description: "Timestamp of when this record was last synced by Fivetran."
+      id:
+        expression: forms.id
+        description: "The ID of the form."
+      portal_id:
+        expression: MISSING
+        description: "The HubSpot account ID."
+      name:
+        expression: forms.name
+        description: "The name of the form."
+      created_at:
+        expression: forms.createdAt
+        description: "The date the form was created."
+      css_class:
+        expression: MISSING
+        description: "The CSS class of the form."
+      updated_at:
+        expression: forms.updatedAt
+        description: "The date the form was last updated."
+      published_at:
+        expression: forms.publishedAt
+        description: "The date the form was published."
+      archived_at:
+        expression: forms.archivedAt
+        description: "The date the form was archived."
+      style:
+        expression: forms.style
+        description: "The style settings of the form."
+      submit_text:
+        expression: forms.submitText
+        description: "The text displayed on the submit button."
+      redirect_url:
+        expression: forms.redirectUrl
+        description: "The URL to redirect to after form submission."
+      internal_title:
+        expression: forms.internalTitle
+        description: "The internal title of the form."
+      is_published:
+        expression: forms.archived = false
+        description: "Whether the form is published."
+      follow_up_id:
+        expression: MISSING
+        description: "The ID of the follow-up form."
+      guid:
+        expression: MISSING
+        description: "The globally unique identifier for the form."
+      lead_nurturing_campaign_id:
+        expression: MISSING
+        description: "The ID of the lead nurturing campaign associated with the form."
+      method:
+        expression: MISSING
+        description: "The HTTP method used by the form."
+      notify_recipients:
+        expression: MISSING
+        description: "Recipients to notify when the form is submitted."
+      redirect:
+        expression: MISSING
+        description: "Whether the form redirects after submission."
+
+    annotations:
+      unused_source_fields:
+        forms:
+          # alpha-sorted list of unused properties from the forms schema:
+          - archived
+          - formType
+          - thankYouMessageJson
