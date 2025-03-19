@@ -1,0 +1,8 @@
+# dbt-specific ignores
+target/
+.dbt/
+.dbt/logs/
+.dbt/data/
+.dbt/catalog.json
+.user.yml
+dbt_packages/
