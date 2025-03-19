@@ -4,6 +4,7 @@
 version: 2
 sources:
   - name: hubspot
+    schema: main
     tables:
       - name: campaigns
         columns:

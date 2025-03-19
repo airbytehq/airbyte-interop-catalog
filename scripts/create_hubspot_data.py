@@ -13,7 +13,19 @@ from airbyte.secrets import GoogleGSMSecretManager
 
 AIRBYTE_INTERNAL_GCP_PROJECT = "dataline-integration-testing"
 
-PATH_TO_DUCKDB_DB = ".data/hubspot.duckdb"
+SOURCE_NAME = "hubspot"
+PATH_TO_DUCKDB_DB = f".data/{SOURCE_NAME}.duckdb"
+STREAMS = [
+    "contacts",
+    "deals",
+    "owners",
+    "forms",
+    "products",
+    "workflows",
+    "companies",
+    "tickets",
+]
+
 
 
 def get_config(source_name="hubspot", secret_name: str | None = None) -> None:
@@ -50,21 +62,7 @@ def get_duckdb_cache() -> ab.DuckDBCache:
         db_path=PATH_TO_DUCKDB_DB,
     )
 
-
-# Canonical stream names for HubSpot
-HUBSPOT_STREAMS = [
-    "contacts",
-    "deals",
-    "owners",
-    "forms",
-    "products",
-    "workflows",
-    # Already implemented
-    "companies",
-    "tickets",
-]
-
-
+ 
 def sync_source(source_name: str, streams: list[str] | str = "*") -> None:
     cache = get_duckdb_cache()
     source = get_source(source_name, streams)
@@ -74,7 +72,7 @@ def sync_source(source_name: str, streams: list[str] | str = "*") -> None:
 
 def main() -> None:
     print("Syncing HubSpot data...")
-    sync_source("hubspot", HUBSPOT_STREAMS)
+    sync_source("hubspot", STREAMS)
 
 
 if __name__ == "__main__":

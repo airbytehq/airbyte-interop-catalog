@@ -3,18 +3,18 @@
 -- Generated from mapping: hubspot.fivetran-compat/ticket
 -- Description: Fivetran Raw 'Ticket' Model
 
-WITH 
+WITH
 tickets AS (
     SELECT * FROM {{ source('hubspot', 'tickets') }}
 )
 
 
 SELECT
-    MISSING AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
+    null AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
     tickets.id AS id, -- ID of the ticket.
     False AS is_deleted, -- Whether the record was deleted (v2 endpoint).
-    MISSING AS _fivetran_deleted, -- Whether the record was deleted (v3 endpoint).
-    MISSING AS portal_id, -- The HubSpot account ID.
+    null AS _fivetran_deleted, -- Whether the record was deleted (v3 endpoint).
+    null AS portal_id, -- The HubSpot account ID.
     tickets.properties_closed_date AS property_closed_date, -- The date the ticket was closed.
     tickets.createdAt AS property_createdate, -- The date the ticket was created.
     tickets.properties_first_agent_reply_date AS property_first_agent_reply_date, -- The date for the first agent reply on the ticket.
