@@ -45,7 +45,7 @@ def test_dbt_compile_generated_project() -> None:
 
     # Create a temporary directory for the test
     with tempfile.TemporaryDirectory(
-        delete=False,
+        ignore_cleanup_errors=True,
     ) as temp_dir:
         # Set up test directories
         catalog_dir = Path(temp_dir) / "catalog" / "hubspot"
