@@ -53,12 +53,47 @@ When implementing these streams in Morph, consider:
 
 4. **API Limitations**: Be aware of HubSpot API rate limits and pagination requirements.
 
+## Implementation
+
+The implementation of the recommended HubSpot streams in the Morph project followed a four-step process:
+
+1. **Added Canonical Stream Names**: Updated `scripts/create_hubspot_data.py` to include the canonical stream names for the six recommended streams (Contacts, Deals, Owners, Forms, Products, Workflows).
+   - Created a `HUBSPOT_STREAMS` list to centralize stream definitions
+   - Modified the `sync_source()` function to accept optional stream parameters
+   - Updated the `main()` function to use the canonical stream list
+
+2. **Created Schema Mappings**: Developed mapping files in `catalog/hubspot/transforms/fivetran-compat/` for each stream following the pattern established for existing streams.
+   - Created mapping files: `contact.yml`, `deal.yml`, `owner.yml`, `form.yml`, `product.yml`, `workflow.yml`
+   - Mapped Airbyte source fields to Fivetran target schema fields
+   - Used `MISSING` expression for fields not available in the source schema
+   - Documented field descriptions and annotations for unused source fields
+
+3. **Updated Unit Tests**: Extended the parametrized pytest unit test to include the new streams.
+   - Added new streams to the test parameters in `tests/test_hubspot_mappings.py`
+   - Verified mapping completeness against target schema requirements
+   - Iteratively fixed mapping files to include all required target fields
+
+4. **Regenerated DBT Project**: Used the Morph CLI to regenerate the dbt project with the new stream mappings.
+   - Generated SQL models for each stream: `contact.sql`, `deal.sql`, `owner.sql`, `form.sql`, `product.sql`, `workflow.sql`
+   - Updated `sources.yml` to include the new streams
+   - Verified the generated models follow the expected patterns
+
+### Implementation Challenges
+
+Several challenges were encountered during the implementation:
+
+1. **Schema Mapping Completeness**: The target schema required fields that weren't immediately obvious from the source schema. Multiple iterations were needed to identify and add all required fields.
+
+2. **Field Expression Mapping**: For some fields, determining the appropriate expression was challenging due to differences in naming conventions between Airbyte and Fivetran.
+
+3. **Missing Fields**: Some target schema fields had no direct equivalent in the source schema, requiring the use of `MISSING` expressions as placeholders.
+
 ## Next Steps
 
-1. Implement the recommended streams in the Morph project
-2. Create appropriate schema mappings for each stream
-3. Set up end-to-end integration tests
-4. Document the implementation for users
+1. Test the implementation with real HubSpot data
+2. Optimize the mappings based on performance metrics
+3. Document the implementation for users
+4. Consider adding more HubSpot streams in the future
 
 ## References
 
