@@ -10,7 +10,7 @@ products AS (
 
 
 SELECT
-    CURRENT_TIMESTAMP() AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
+    MISSING AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
     products.id AS id, -- The ID of the product.
     MISSING AS portal_id, -- The HubSpot account ID.
     products.archived AS is_deleted, -- Whether the record was deleted.

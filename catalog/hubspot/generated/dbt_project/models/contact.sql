@@ -11,7 +11,7 @@ contacts AS (
 
 SELECT
     contacts.archived AS _fivetran_deleted, -- Boolean to mark rows that were deleted in the source database.
-    CURRENT_TIMESTAMP() AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
+    MISSING AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
     contacts.id AS id, -- The ID of the contact.
     MISSING AS portal_id, -- The HubSpot account ID.
     contacts.properties_firstname AS property_firstname, -- The first name of the contact.

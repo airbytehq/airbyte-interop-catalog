@@ -16,7 +16,7 @@ SELECT
     deals.properties_pipeline AS deal_pipeline_id, -- The ID of the deal's pipeline.
     deals.properties_dealstage AS deal_pipeline_stage_id, -- The ID of the deal's pipeline stage.
     deals.properties_hubspot_owner_id AS owner_id, -- The ID of the deal's owner.
-    CURRENT_TIMESTAMP() AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
+    MISSING AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
     deals.properties_dealname AS property_dealname, -- The name of the deal.
     deals.properties_description AS property_description, -- A description of the deal.
     deals.properties_createdate AS property_createdate, -- The date the deal was created in HubSpot.

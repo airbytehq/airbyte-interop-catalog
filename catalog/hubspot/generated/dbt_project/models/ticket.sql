@@ -10,7 +10,7 @@ tickets AS (
 
 
 SELECT
-    CURRENT_TIMESTAMP() AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
+    MISSING AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
     tickets.id AS id, -- ID of the ticket.
     False AS is_deleted, -- Whether the record was deleted (v2 endpoint).
     MISSING AS _fivetran_deleted, -- Whether the record was deleted (v3 endpoint).

@@ -10,7 +10,7 @@ transforms:
         expression: false
         description: "Boolean to mark rows that were deleted in the source database."
       _fivetran_synced:
-        expression: CURRENT_TIMESTAMP()
+        expression: MISSING
         description: "Timestamp of when this record was last synced by Fivetran."
       id:
         expression: forms.id

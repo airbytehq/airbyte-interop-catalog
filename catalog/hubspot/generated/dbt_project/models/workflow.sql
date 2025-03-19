@@ -10,7 +10,7 @@ workflows AS (
 
 
 SELECT
-    CURRENT_TIMESTAMP() AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
+    MISSING AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
     workflows.id AS id, -- The ID of the workflow.
     MISSING AS portal_id, -- The HubSpot account ID.
     False AS is_deleted, -- Whether the record was deleted.

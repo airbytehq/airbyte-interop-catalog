@@ -10,7 +10,7 @@ owners AS (
 
 
 SELECT
-    CURRENT_TIMESTAMP() AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
+    MISSING AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
     owners.id AS owner_id, -- The ID of the owner.
     MISSING AS portal_id, -- The HubSpot account ID.
     MISSING AS type, -- The type of owner.
