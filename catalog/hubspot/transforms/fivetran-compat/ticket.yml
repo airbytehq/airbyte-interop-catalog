@@ -7,7 +7,7 @@ transforms:
     fields:
       # Fields in target schema order
       _fivetran_synced:
-        expression: MISSING
+        expression: _airbyte_extracted_at
         description: "Timestamp of when this record was last synced by Fivetran."
       id:
         expression: tickets.id
