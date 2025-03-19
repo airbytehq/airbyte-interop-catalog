@@ -25,7 +25,7 @@ transforms:
         expression: deals.properties_hubspot_owner_id
         description: "The ID of the deal's owner."
       _fivetran_synced:
-        expression: MISSING
+        expression: _airbyte_extracted_at
         description: "Timestamp of when this record was last synced by Fivetran."
       property_dealname:
         expression: deals.properties_dealname
