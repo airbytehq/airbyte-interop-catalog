@@ -20,8 +20,6 @@ STREAMS = [
     "deals",
     "owners",
     "forms",
-    "products",
-    "workflows",
     "companies",
     "tickets",
 ]
