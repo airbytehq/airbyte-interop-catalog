@@ -63,6 +63,9 @@ transforms:
       method:
         expression: MISSING
         description: "The HTTP method used by the form."
+      notify_recipients:
+        expression: MISSING
+        description: "Recipients to notify when the form is submitted."
 
     annotations:
       unused_source_fields:
