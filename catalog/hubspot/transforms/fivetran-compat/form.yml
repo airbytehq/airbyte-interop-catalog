@@ -66,6 +66,9 @@ transforms:
       notify_recipients:
         expression: MISSING
         description: "Recipients to notify when the form is submitted."
+      redirect:
+        expression: MISSING
+        description: "Whether the form redirects after submission."
 
     annotations:
       unused_source_fields:
