@@ -2,6 +2,21 @@
 
 This document provides instructions on how to use the Morph tool to generate and transform data schemas.
 
+## Core Installation
+
+```bash
+uv sync --all-extras
+```
+
+## Generating the Airbyte source.yml file
+
+```bash
+uv run morph generate-airbyte-source \
+  catalog/hubspot \
+  catalog/hubspot/airbyte-source/catalog.json \
+  --output catalog/hubspot/airbyte-source/source.yml
+```
+
 ## Generating dbt Projects from Mapping Files
 
 Morph can generate dbt projects from mapping files that define transformations between source and target schemas.
