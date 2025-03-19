@@ -12,12 +12,17 @@ import yaml
 from jinja2 import Environment
 
 
-def load_mapping_file(mapping_file_path: str) -> dict[str, Any]:
+def load_mapping_file(
+    mapping_file_path: str,
+) -> dict[str, Any]:
     """Load a mapping file and return its contents as a dictionary."""
     return yaml.safe_load(Path(mapping_file_path).read_text())
 
 
-def _extract_transform(mapping: dict[str, Any], transform_id: str) -> dict[str, Any]:
+def _extract_transform(
+    mapping: dict[str, Any],
+    transform_id: str,
+) -> dict[str, Any]:
     """Extract a transform from a mapping by ID."""
     for t in mapping.get("transforms", []):
         if t.get("id") == transform_id:
@@ -25,7 +30,10 @@ def _extract_transform(mapping: dict[str, Any], transform_id: str) -> dict[str, 
     raise ValueError(f"Transform with ID '{transform_id}' not found in mapping")
 
 
-def _process_source_item(source_key: str, source_value: str) -> dict[str, str]:
+def _process_source_item(
+    source_key: str,
+    source_value: str,
+) -> dict[str, str]:
     """Process a single source item and return a source dict."""
     if "." in source_value:
         schema, table = source_value.split(".")
@@ -33,7 +41,9 @@ def _process_source_item(source_key: str, source_value: str) -> dict[str, str]:
     return {"alias": source_key, "table": source_value}
 
 
-def _extract_sources(transform: dict[str, Any]) -> list[dict[str, str]]:
+def _extract_sources(
+    transform: dict[str, Any],
+) -> list[dict[str, str]]:
     """Extract source tables from a transform."""
     sources = []
     from_data = transform.get("from", {})
@@ -50,7 +60,9 @@ def _extract_sources(transform: dict[str, Any]) -> list[dict[str, str]]:
     return sources
 
 
-def _extract_fields(transform: dict[str, Any]) -> list[dict[str, str]]:
+def _extract_fields(
+    transform: dict[str, Any],
+) -> list[dict[str, str]]:
     """Extract fields from a transform."""
     fields = []
     for field_name, field_config in transform.get("fields", {}).items():
@@ -64,7 +76,10 @@ def _extract_fields(transform: dict[str, Any]) -> list[dict[str, str]]:
     return fields
 
 
-def generate_model_sql(mapping: dict[str, Any], transform_id: str) -> str:
+def generate_model_sql(
+    mapping: dict[str, Any],
+    transform_id: str,
+) -> str:
     """Generate SQL for a dbt model based on a mapping transform."""
     # Extract the transform configuration
     transform = _extract_transform(mapping, transform_id)
@@ -105,7 +120,10 @@ FROM {% for source in sources %}{{ source.alias }}{% if not loop.last %}, {% end
     )
 
 
-def generate_dbt_project_yml(catalog_name: str, models: list[str]) -> str:
+def generate_dbt_project_yml(
+    catalog_name: str,
+    models: list[str],
+) -> str:
     """Generate dbt_project.yml content."""
     project_template = """
 name: 'airbyte_{{ catalog_name }}'
@@ -144,9 +162,9 @@ models:
 
 
 def generate_dbt_package(
-    catalog_dir: str,
-    output_dir: str | None = None,
-    mapping_dir: str | None = None,
+    catalog_dir: Path,
+    output_dir: Path | None = None,
+    mapping_dir: Path | None = None,
 ) -> None:
     """Generate a dbt package from mapping files.
 
@@ -162,9 +180,9 @@ def generate_dbt_package(
 
     # Set default directories if not provided
     if not output_dir:
-        output_dir = str(catalog_path / "generated")
+        output_dir = catalog_path / "generated"
     if not mapping_dir:
-        mapping_dir = str(catalog_path / "transforms")
+        mapping_dir = catalog_path / "transforms"
 
     # Create output directories
     output_path = Path(output_dir)
