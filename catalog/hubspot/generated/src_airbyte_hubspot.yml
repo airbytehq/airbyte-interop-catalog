@@ -1,5 +1,5 @@
 # This file was auto-generated using the following command:
-# uv run morph json-to-dbt --catalog --source-name hubspot --output catalog/hubspot/generated/src_airbyte_hubspot.yml catalog/hubspot/airbyte-source/catalog.json
+# uv run morph json-to-dbt --catalog --source-name hubspot --output catalog/hubspot/generated/src_airbyte_hubspot.yml catalog/hubspot/airbyte-catalog.json
 # To regenerate this file, run the command above.
 version: 2
 sources:

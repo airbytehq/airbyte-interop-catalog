@@ -17,7 +17,7 @@ The following steps demonstrate how to generate a dbt project for HubSpot data:
    ```bash
    uv run morph generate-dbt-project \
      catalog/hubspot \
-     catalog/hubspot/airbyte-source/catalog.json \
+     catalog/hubspot/airbyte-catalog.json \
      --output-dir catalog/hubspot/generated \
      --mapping-dir catalog/hubspot/transforms/fivetran-compat \
      --source-name hubspot
@@ -58,7 +58,7 @@ uv run morph json-to-dbt \
   --catalog \
   --source-name hubspot \
   --output catalog/hubspot/generated/src_airbyte_hubspot.yml \
-  catalog/hubspot/airbyte-source/catalog.json
+  catalog/hubspot/airbyte-catalog.json
 ```
 
 This command:
