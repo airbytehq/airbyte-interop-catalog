@@ -35,7 +35,7 @@ def test_cli_json_to_dbt_command() -> None:
     runner = CliRunner()
     with tempfile.TemporaryDirectory() as tmpdir:
         # Create a sample JSON schema file
-        schema_path = Path(tmpdir) / "test_schema.json"
+        schema_path = (Path(tmpdir) / "test_schema.json").absolute()
         schema_content = {
             "type": "object",
             "properties": {
