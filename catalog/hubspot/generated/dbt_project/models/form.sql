@@ -1,9 +1,9 @@
 
 -- form model
--- Generated from mapping: hubspot.fivetran-compat/form
+-- Generated from mapping: hubspot.fivetran-interop/form
 -- Description: Fivetran Raw 'Form' Model
 
-WITH 
+WITH
 forms AS (
     SELECT * FROM {{ source('hubspot', 'forms') }}
 )
@@ -17,14 +17,14 @@ SELECT
     forms.name AS name, -- The name of the form.
     forms.createdAt AS created_at, -- The date the form was created.
     NULL AS css_class, -- The CSS class of the form.
-    forms.updatedAt AS updated_at, -- The date the form was last updated.
-    forms.publishedAt AS published_at, -- The date the form was published.
-    forms.archivedAt AS archived_at, -- The date the form was archived.
-    forms.style AS style, -- The style settings of the form.
-    forms.submitText AS submit_text, -- The text displayed on the submit button.
-    forms.redirectUrl AS redirect_url, -- The URL to redirect to after form submission.
-    forms.internalTitle AS internal_title, -- The internal title of the form.
-    forms.archived = false AS is_published, -- Whether the form is published.
+    NULL AS updated_at, -- The date the form was last updated.
+    NULL AS published_at, -- The date the form was published.
+    NULL AS archived_at, -- The date the form was archived.
+    NULL AS style, -- The style settings of the form.
+    NULL AS submit_text, -- The text displayed on the submit button.
+    NULL AS redirect_url, -- The URL to redirect to after form submission.
+    NULL AS internal_title, -- The internal title of the form.
+    NULL AS is_published, -- Whether the form is published.
     NULL AS follow_up_id, -- The ID of the follow-up form.
     NULL AS guid, -- The globally unique identifier for the form.
     NULL AS lead_nurturing_campaign_id, -- The ID of the lead nurturing campaign associated with the form.

@@ -79,7 +79,7 @@ def generate_model_sql(mapping: dict[str, Any], transform_id: str) -> str:
 -- Generated from mapping: {{ mapping_domain }}/{{ transform_id }}
 -- Description: {{ transform_display_name }}
 
-WITH {% for source in sources %}
+WITH{% for source in sources %}
 {{ source.alias }} AS (
     SELECT * FROM {{ "{{" }} source('{{ source.schema.replace('airbyte_raw_', '') if 'schema' in source else 'default' }}', '{{ source.table }}') {{ "}}" }}
 ){% if not loop.last %},{% endif %}
@@ -88,6 +88,7 @@ WITH {% for source in sources %}
 SELECT{% for field in fields %}
     {% if field.expression == "MISSING" %}NULL{% else %}{{ field.expression }}{% endif %} AS {{ field.name }}{% if field.description %}{% endif %}{% if not loop.last %},{% endif %} -- {{ field.description }}{% endfor %}
 FROM {% for source in sources %}{{ source.alias }}{% if not loop.last %}, {% endif %}{% endfor %}
+
 """
 
     # Create a simple template environment
@@ -153,7 +154,7 @@ def generate_dbt_package(
     Args:
         catalog_dir: Path to the catalog directory (e.g., 'catalog/hubspot')
         output_dir: Path to the output directory (defaults to '{catalog_dir}/generated')
-        mapping_dir: Path to the mapping directory (defaults to '{catalog_dir}/transforms')
+        mapping_dir: Path to the mapping directory (defaults to '{catalog_dir}/src/transforms')
     """
     from copier import run_copy
 
@@ -164,7 +165,7 @@ def generate_dbt_package(
     if not output_dir:
         output_dir = str(catalog_path / "generated")
     if not mapping_dir:
-        mapping_dir = str(catalog_path / "transforms")
+        mapping_dir = str(catalog_path / "src" / "transforms")
 
     # Create output directories
     output_path = Path(output_dir)

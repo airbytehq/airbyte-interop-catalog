@@ -1,9 +1,9 @@
 
 -- ticket model
--- Generated from mapping: hubspot.fivetran-compat/ticket
+-- Generated from mapping: hubspot.fivetran-interop/ticket
 -- Description: Fivetran Raw 'Ticket' Model
 
-WITH 
+WITH
 tickets AS (
     SELECT * FROM {{ source('hubspot', 'tickets') }}
 )

@@ -1,9 +1,9 @@
 
 -- owner model
--- Generated from mapping: hubspot.fivetran-compat/owner
+-- Generated from mapping: hubspot.fivetran-interop/owner
 -- Description: Fivetran Raw 'Owner' Model
 
-WITH 
+WITH
 owners AS (
     SELECT * FROM {{ source('hubspot', 'owners') }}
 )

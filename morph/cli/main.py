@@ -111,7 +111,7 @@ def json_to_dbt(
 )
 @click.option(
     "--mapping-dir",
-    help="Directory containing mapping files (defaults to {catalog_dir}/transforms)",
+    help="Directory containing mapping files (defaults to {catalog_dir}/src/transforms)",
 )
 @click.option(
     "--source-name",

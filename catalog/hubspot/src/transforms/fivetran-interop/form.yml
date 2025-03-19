@@ -1,4 +1,4 @@
-domain: hubspot.fivetran-compat
+domain: hubspot.fivetran-interop
 transforms:
   - display_name: Fivetran Raw 'Form' Model
     id: form
@@ -28,28 +28,28 @@ transforms:
         expression: MISSING
         description: "The CSS class of the form."
       updated_at:
-        expression: forms.updatedAt
+        expression: MISSING
         description: "The date the form was last updated."
       published_at:
-        expression: forms.publishedAt
+        expression: MISSING
         description: "The date the form was published."
       archived_at:
-        expression: forms.archivedAt
+        expression: MISSING
         description: "The date the form was archived."
       style:
-        expression: forms.style
+        expression: MISSING
         description: "The style settings of the form."
       submit_text:
-        expression: forms.submitText
+        expression: MISSING
         description: "The text displayed on the submit button."
       redirect_url:
-        expression: forms.redirectUrl
+        expression: MISSING
         description: "The URL to redirect to after form submission."
       internal_title:
-        expression: forms.internalTitle
+        expression: MISSING
         description: "The internal title of the form."
       is_published:
-        expression: forms.archived = false
+        expression: MISSING
         description: "Whether the form is published."
       follow_up_id:
         expression: MISSING

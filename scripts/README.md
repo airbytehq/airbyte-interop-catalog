@@ -32,7 +32,7 @@ uv run morph json-to-dbt schemas/ --source-name my_source --output models/src_my
 Convert an Airbyte catalog file:
 
 ```bash
-uv run morph json-to-dbt catalog/hubspot/airbyte-source/catalog.json --catalog --source-name hubspot --output catalog/hubspot/generated/src_airbyte_hubspot.yml
+uv run morph json-to-dbt catalog/hubspot/airbyte-catalog.json --catalog --source-name hubspot --output catalog/hubspot/generated/src_airbyte_hubspot.yml
 ```
 
 ### Features

@@ -1,9 +1,9 @@
 
 -- company model
--- Generated from mapping: hubspot.fivetran-compat/company
+-- Generated from mapping: hubspot.fivetran-interop/company
 -- Description: Fivetran Raw 'Company' Model
 
-WITH 
+WITH
 companies AS (
     SELECT * FROM {{ source('hubspot', 'companies') }}
 )
