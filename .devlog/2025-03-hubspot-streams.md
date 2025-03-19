@@ -62,7 +62,7 @@ The implementation of the recommended HubSpot streams in the Morph project follo
    - Modified the `sync_source()` function to accept optional stream parameters
    - Updated the `main()` function to use the canonical stream list
 
-2. **Created Schema Mappings**: Developed mapping files in `catalog/hubspot/transforms/fivetran-compat/` for each stream following the pattern established for existing streams.
+2. **Created Schema Mappings**: Developed mapping files in `catalog/hubspot/src/transforms/fivetran-interop/` for each stream following the pattern established for existing streams.
    - Created mapping files: `contact.yml`, `deal.yml`, `owner.yml`, `form.yml`, `product.yml`, `workflow.yml`
    - Mapped Airbyte source fields to Fivetran target schema fields
    - Used `MISSING` expression for fields not available in the source schema

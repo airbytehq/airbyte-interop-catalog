@@ -22,7 +22,7 @@ def test_dbt_compile_generated_project():
     with tempfile.TemporaryDirectory() as temp_dir:
         # Set up test directories
         catalog_dir = Path(temp_dir) / "catalog"
-        transforms_dir = catalog_dir / "transforms"
+        transforms_dir = catalog_dir / "src" / "transforms"
         transforms_dir.mkdir(parents=True)
 
         # Create a simple mapping file

@@ -1,9 +1,9 @@
 
 -- deal model
--- Generated from mapping: hubspot.fivetran-compat/deal
+-- Generated from mapping: hubspot.fivetran-interop/deal
 -- Description: Fivetran Raw 'Deal' Model
 
-WITH 
+WITH
 deals AS (
     SELECT * FROM {{ source('hubspot', 'deals') }}
 )

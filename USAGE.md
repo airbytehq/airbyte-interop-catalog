@@ -19,7 +19,7 @@ The following steps demonstrate how to generate a dbt project for HubSpot data:
      catalog/hubspot \
      catalog/hubspot/airbyte-catalog.json \
      --output-dir catalog/hubspot/generated \
-     --mapping-dir catalog/hubspot/transforms/fivetran-compat \
+     --mapping-dir catalog/hubspot/src/transforms/fivetran-interop \
      --source-name hubspot
    ```
 

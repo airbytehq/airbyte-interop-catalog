@@ -1,9 +1,9 @@
 
 -- form model
--- Generated from mapping: hubspot.fivetran-compat/form
+-- Generated from mapping: hubspot.fivetran-interop/form
 -- Description: Fivetran Raw 'Form' Model
 
-WITH 
+WITH
 forms AS (
     SELECT * FROM {{ source('hubspot', 'forms') }}
 )

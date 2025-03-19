@@ -1,4 +1,4 @@
-domain: hubspot.fivetran-compat
+domain: hubspot.fivetran-interop
 transforms:
   - display_name: Fivetran Raw 'Form' Model
     id: form

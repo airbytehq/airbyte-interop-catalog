@@ -153,7 +153,7 @@ def generate_dbt_package(
     Args:
         catalog_dir: Path to the catalog directory (e.g., 'catalog/hubspot')
         output_dir: Path to the output directory (defaults to '{catalog_dir}/generated')
-        mapping_dir: Path to the mapping directory (defaults to '{catalog_dir}/transforms')
+        mapping_dir: Path to the mapping directory (defaults to '{catalog_dir}/src/transforms')
     """
     from copier import run_copy
 
@@ -164,7 +164,7 @@ def generate_dbt_package(
     if not output_dir:
         output_dir = str(catalog_path / "generated")
     if not mapping_dir:
-        mapping_dir = str(catalog_path / "transforms")
+        mapping_dir = str(catalog_path / "src" / "transforms")
 
     # Create output directories
     output_path = Path(output_dir)

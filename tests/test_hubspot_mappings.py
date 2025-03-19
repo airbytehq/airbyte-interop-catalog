@@ -22,7 +22,7 @@ def test_mapping(source_table, target_table, mapping_file):
     # Paths to the relevant files
     base_dir = Path(__file__).parent.parent
     mapping_path = (
-        base_dir / "catalog" / "hubspot" / "transforms" / "fivetran-compat" / mapping_file
+        base_dir / "catalog" / "hubspot" / "src" / "transforms" / "fivetran-interop" / mapping_file
     )
     source_schema_path = base_dir / "catalog" / "hubspot" / "generated" / "src_airbyte_hubspot.yml"
     target_schema_path = (
