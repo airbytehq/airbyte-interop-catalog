@@ -113,3 +113,50 @@ def test_cli_json_to_dbt_help() -> None:
     result = runner.invoke(main, ["json-to-dbt", "--help"])
     assert result.exit_code == 0
     assert "Convert JSON schema files" in result.output
+
+
+def test_airbyte_catalog_with_additional_columns() -> None:
+    """Test that Airbyte catalog parsing adds the required additional columns."""
+    with tempfile.TemporaryDirectory() as tmpdir:
+        # Create a sample Airbyte catalog file
+        catalog_path = Path(tmpdir) / "catalog.json"
+        catalog_content = {
+            "streams": [
+                {
+                    "name": "test_stream",
+                    "json_schema": {
+                        "type": "object",
+                        "properties": {
+                            "id": {"type": "integer"},
+                            "name": {"type": "string"},
+                        },
+                    },
+                }
+            ]
+        }
+        with catalog_path.open("w") as f:
+            json.dump(catalog_content, f)
+
+        # Parse the catalog
+        from morph.utils.json_to_dbt_sources import parse_airbyte_catalog
+        result = parse_airbyte_catalog(
+            str(catalog_path),
+            source_name="test_source",
+        )
+
+        # Verify the structure and additional columns
+        assert "sources" in result
+        assert len(result["sources"]) == 1
+        source = result["sources"][0]
+        assert source["name"] == "test_source"
+        assert len(source["tables"]) == 1
+        table = source["tables"][0]
+        
+        # Check for the additional columns
+        columns = {col["name"]: col for col in table["columns"]}
+        assert "_airbyte_extracted_at" in columns
+        assert columns["_airbyte_extracted_at"]["type"] == "timestamp"
+        assert "_airbyte_meta" in columns
+        assert columns["_airbyte_meta"]["type"] == "variant"
+        assert "_airbyte_raw_id" in columns
+        assert columns["_airbyte_raw_id"]["type"] == "varchar"
