@@ -9,10 +9,15 @@ This project depends on the generated Airbyte HubSpot models. To use it:
 
 1. Install dependencies:
    ```
-   dbt deps --profiles-dir profiles
+   poe dbt-deps
    ```
 
 2. Compile the project:
    ```
-   dbt compile --profiles-dir profiles
+   poe dbt-compile
+   ```
+
+3. Run the project:
+   ```
+   poe dbt-run
    ```

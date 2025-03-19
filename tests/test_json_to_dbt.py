@@ -131,14 +131,15 @@ def test_airbyte_catalog_with_additional_columns() -> None:
                             "name": {"type": "string"},
                         },
                     },
-                }
-            ]
+                },
+            ],
         }
         with catalog_path.open("w") as f:
             json.dump(catalog_content, f)
 
         # Parse the catalog
         from morph.utils.json_to_dbt_sources import parse_airbyte_catalog
+
         result = parse_airbyte_catalog(
             str(catalog_path),
             source_name="test_source",
@@ -151,7 +152,7 @@ def test_airbyte_catalog_with_additional_columns() -> None:
         assert source["name"] == "test_source"
         assert len(source["tables"]) == 1
         table = source["tables"][0]
-        
+
         # Check for the additional columns
         columns = {col["name"]: col for col in table["columns"]}
         assert "_airbyte_extracted_at" in columns

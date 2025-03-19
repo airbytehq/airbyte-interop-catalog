@@ -5,6 +5,7 @@ This directory contains development logs documenting significant work, research,
 ## Purpose
 
 These logs serve to:
+
 1. Document technical decisions and their rationale
 2. Track research findings and exploration results
 3. Provide context for future developers
@@ -13,6 +14,7 @@ These logs serve to:
 ## Format
 
 Each log is a markdown file named with the format `YYYY-MM-description.md` and should include:
+
 - A clear title describing the work
 - An overview section explaining the purpose
 - Implementation details or research findings

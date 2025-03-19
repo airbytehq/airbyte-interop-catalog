@@ -25,7 +25,6 @@ STREAMS = [
 ]
 
 
-
 def get_config(source_name="hubspot", secret_name: str | None = None) -> None:
     connector_name = f"source-{source_name}"
     secret_manager = GoogleGSMSecretManager(
@@ -60,7 +59,7 @@ def get_duckdb_cache() -> ab.DuckDBCache:
         db_path=PATH_TO_DUCKDB_DB,
     )
 
- 
+
 def sync_source(source_name: str, streams: list[str] | str = "*") -> None:
     cache = get_duckdb_cache()
     source = get_source(source_name, streams)

@@ -9,10 +9,12 @@ The goal was to identify the most popular and widely used HubSpot streams that w
 ## Research Process
 
 1. **Source Code Analysis**: Examined the HubSpot connector source code in the Airbyte repository to identify all available streams.
+
    - Location: `/airbyte-integrations/connectors/source-hubspot/source_hubspot/streams.py`
    - Identified over 50 stream classes representing different HubSpot entities
 
 2. **Stream Classification**: Categorized streams based on their functionality and business domain:
+
    - Core CRM entities (Contacts, Companies, Deals, Tickets)
    - Marketing-related streams (Forms, Campaigns, Email Events)
    - Sales-related streams (Engagements, Line Items, Products)
@@ -58,17 +60,20 @@ When implementing these streams in Morph, consider:
 The implementation of the recommended HubSpot streams in the Morph project followed a four-step process:
 
 1. **Added Canonical Stream Names**: Updated `scripts/create_hubspot_data.py` to include the canonical stream names for the six recommended streams (Contacts, Deals, Owners, Forms, Products, Workflows).
+
    - Created a `HUBSPOT_STREAMS` list to centralize stream definitions
    - Modified the `sync_source()` function to accept optional stream parameters
    - Updated the `main()` function to use the canonical stream list
 
 2. **Created Schema Mappings**: Developed mapping files in `catalog/hubspot/src/transforms/fivetran-interop/` for each stream following the pattern established for existing streams.
+
    - Created mapping files: `contact.yml`, `deal.yml`, `owner.yml`, `form.yml`, `product.yml`, `workflow.yml`
    - Mapped Airbyte source fields to Fivetran target schema fields
    - Used `MISSING` expression for fields not available in the source schema
    - Documented field descriptions and annotations for unused source fields
 
 3. **Updated Unit Tests**: Extended the parametrized pytest unit test to include the new streams.
+
    - Added new streams to the test parameters in `tests/test_hubspot_mappings.py`
    - Verified mapping completeness against target schema requirements
    - Iteratively fixed mapping files to include all required target fields

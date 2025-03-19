@@ -1,0 +1,52 @@
+[tool.poe.tasks]
+
+# DBT Tasks
+[tool.poe.tasks.dbt-compile]
+cmd = "dbt compile"
+help = "Compile dbt models"
+env = { DBT_PROFILES_DIR = "${POE_ROOT}/profiles" }
+
+[tool.poe.tasks.dbt-run]
+cmd = "dbt run"
+help = "Run dbt models"
+env = { DBT_PROFILES_DIR = "${POE_ROOT}/profiles" }
+
+[tool.poe.tasks.dbt-test]
+cmd = "dbt test --profiles-dir ${POE_ROOT}/profiles"
+help = "Test dbt models"
+env = { DBT_PROFILES_DIR = "${POE_ROOT}/profiles" }
+
+[tool.poe.tasks.dbt-docs]
+cmd = "dbt docs --profiles-dir ${POE_ROOT}/profiles generate"
+help = "Generate dbt documentation"
+env = { DBT_PROFILES_DIR = "${POE_ROOT}/profiles" }
+
+[tool.poe.tasks.dbt-clean]
+cmd = "dbt clean --profiles-dir ${POE_ROOT}/profiles"
+help = "Clean dbt artifacts"
+env = { DBT_PROFILES_DIR = "${POE_ROOT}/profiles" }
+
+[tool.poe.tasks.dbt-debug]
+cmd = "dbt debug --profiles-dir ${POE_ROOT}/profiles"
+help = "Debug dbt connection"
+env = { DBT_PROFILES_DIR = "${POE_ROOT}/profiles" }
+
+[tool.poe.tasks.dbt-deps]
+cmd = "dbt deps --profiles-dir ${POE_ROOT}/profiles"
+help = "Install dbt dependencies"
+env = { DBT_PROFILES_DIR = "${POE_ROOT}/profiles" }
+
+# Combined Tasks
+[tool.poe.tasks.dbt-full]
+sequence = ["dbt-clean", "dbt-deps", "dbt-compile", "dbt-run", "dbt-test"]
+help = "Run full dbt pipeline"
+env = { DBT_PROFILES_DIR = "${POE_ROOT}/profiles" }
+
+# Schema Generation Tasks
+[tool.poe.tasks.gen-models]
+cmd = "uv run python -m morph.cli.json_to_dbt catalog/hubspot/airbyte-source/catalog.json --catalog --source-name hubspot --output catalog/hubspot/generated/src_airbyte_hubspot.yml"
+help = "Generate dbt models from Airbyte catalog"
+env = { DBT_PROFILES_DIR = "${POE_ROOT}/profiles" }
+
+# Variables can be passed to dbt commands like:
+# poe dbt-run --vars schema_name=custom_schema
