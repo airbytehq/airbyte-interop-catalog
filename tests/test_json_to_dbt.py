@@ -33,7 +33,7 @@ def test_json_schema_to_dbt_column() -> None:
 
 
 @pytest.mark.skipif(
-    os.environ.get("CI", None),
+    bool(os.environ.get("CI", None)),
     reason="Works locally but fails in CI with 'No such file or directory",
 )
 def test_cli_json_to_dbt_command() -> None:
