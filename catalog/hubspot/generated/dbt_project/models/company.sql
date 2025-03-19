@@ -10,7 +10,7 @@ companies AS (
 
 
 SELECT
-    NULL AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
+    _airbyte_extracted_at AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
     companies.id AS id, -- The ID of the company.
     NULL AS portal_id, -- The HubSpot account ID.
     companies.archived AS is_deleted, -- Whether the record was deleted.

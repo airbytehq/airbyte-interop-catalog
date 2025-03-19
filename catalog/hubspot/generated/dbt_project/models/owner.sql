@@ -10,7 +10,7 @@ owners AS (
 
 
 SELECT
-    NULL AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
+    _airbyte_extracted_at AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
     owners.id AS owner_id, -- The ID of the owner.
     NULL AS portal_id, -- The HubSpot account ID.
     NULL AS type, -- The type of owner.

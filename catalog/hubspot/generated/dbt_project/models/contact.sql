@@ -11,7 +11,7 @@ contacts AS (
 
 SELECT
     contacts.archived AS _fivetran_deleted, -- Boolean to mark rows that were deleted in the source database.
-    NULL AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
+    _airbyte_extracted_at AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
     contacts.id AS id, -- The ID of the contact.
     NULL AS portal_id, -- The HubSpot account ID.
     contacts.properties_firstname AS property_firstname, -- The first name of the contact.

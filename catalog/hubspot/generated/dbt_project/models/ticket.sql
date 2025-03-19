@@ -10,7 +10,7 @@ tickets AS (
 
 
 SELECT
-    NULL AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
+    _airbyte_extracted_at AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
     tickets.id AS id, -- ID of the ticket.
     False AS is_deleted, -- Whether the record was deleted (v2 endpoint).
     NULL AS _fivetran_deleted, -- Whether the record was deleted (v3 endpoint).

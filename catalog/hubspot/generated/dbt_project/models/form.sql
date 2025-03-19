@@ -11,7 +11,7 @@ forms AS (
 
 SELECT
     False AS _fivetran_deleted, -- Boolean to mark rows that were deleted in the source database.
-    NULL AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
+    _airbyte_extracted_at AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
     forms.id AS id, -- The ID of the form.
     NULL AS portal_id, -- The HubSpot account ID.
     forms.name AS name, -- The name of the form.
