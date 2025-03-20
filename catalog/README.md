@@ -19,10 +19,7 @@ catalog/hubspot/
 │       └── fivetran-interop/
 │           ├── company.yml
 │           ├── contact.yml
-│           ├── deal.yml
-│           ├── form.yml
-│           ├── owner.yml
-│           └── ticket.yml
+│       │   └── ...
 ├── requirements/
 │   └── fivetran-interop/
 │       └── src_hubspot.yml
@@ -33,11 +30,7 @@ catalog/hubspot/
 │       ├── models/
 │       │   ├── contact.sql
 │       │   ├── company.sql
-│       │   ├── deal.sql
-│       │   ├── form.sql
-│       │   ├── owner.sql
-│       │   ├── ticket.sql
-│       │   └── sources.yml
+│       │   └── ...
 │       ├── dbt_project.yml
 │       └── ...
 └── examples/
@@ -60,7 +53,8 @@ Contains YAML mapping files that define transformations from Airbyte source sche
 - Provides descriptions for each field
 - Documents unused source fields
 
-Example from contact.yml:
+Example from `contact.yml`:
+
 ```yaml
 domain: hubspot.fivetran-interop
 transforms:
@@ -106,49 +100,4 @@ Contains example projects demonstrating how to use the generated models:
 
 ## Adding a New Connector
 
-To add a new connector to the catalog:
-
-1. Create a directory structure following the pattern above:
-   ```
-   catalog/new_connector/
-   ├── src/transforms/
-   │   └── fivetran-interop/
-   ├── requirements/
-   │   └── fivetran-interop/
-   └── examples/
-   ```
-
-2. Add the target schema definition in `requirements/fivetran-interop/src_new_connector.yml`
-
-3. Create mapping files in `src/transforms/fivetran-interop/` for each table to transform:
-   - Define the domain (e.g., `new_connector.fivetran-interop`)
-   - Specify source tables and their aliasing
-   - Map fields from source to target schema
-   - Document field descriptions and unused fields
-
-4. Generate the dbt project using the morph CLI:
-   ```bash
-   python -m morph generate-dbt-project catalog/new_connector catalog/new_connector/airbyte-catalog.json
-   ```
-
-5. Create example projects in the `examples/` directory to demonstrate usage
-
-## Mapping File Structure
-
-Mapping files define how to transform source data to target schemas. Key components:
-
-- `domain`: Namespace for the transforms (e.g., `hubspot.fivetran-interop`)
-- `transforms`: List of transformations to apply
-  - `id`: Identifier for the transform (becomes the model name)
-  - `display_name`: Human-readable name for the transform
-  - `from`: Source tables to use in the transform
-  - `fields`: Target fields and how to populate them
-    - `expression`: SQL expression or source field reference
-    - `description`: Description of the field's purpose
-  - `annotations`: Additional metadata about the transform
-    - `unused_source_fields`: Fields in source not used in the transform
-
-When mapping fields:
-- Direct mappings use dot notation: `table_alias.field_name`
-- Missing fields use the `MISSING` placeholder to indicate NULL values
-- Field descriptions should match those in the target schema
+Check the [Usage Guide Docs](../USAGE.md) for information on creating and maintaining a new connector.
