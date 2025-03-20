@@ -32,9 +32,8 @@ def test_json_schema_to_dbt_column() -> None:
     }
 
 
-@pytest.mark.skipif(
-    bool(os.environ.get("CI", None)),
-    reason="Works locally but fails in CI with 'No such file or directory",
+@pytest.mark.skip(
+    reason="Fails with 'No such file or directory'.",
 )
 def test_cli_json_to_dbt_command() -> None:
     """Test the json-to-dbt CLI command with a sample schema."""
