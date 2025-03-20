@@ -1,0 +1,7 @@
+streams:
+  - company
+  - contact
+  - deal
+  - form
+  - owner
+  - ticket

@@ -146,15 +146,15 @@ models:
 
 def generate_dbt_package(
     catalog_dir: str,
-    output_dir: str | None = None,
-    mapping_dir: str | None = None,
+    output_dir: str,
+    mapping_dir: str,
 ) -> None:
     """Generate a dbt package from mapping files.
 
     Args:
-        catalog_dir: Path to the catalog directory (e.g., 'catalog/hubspot')
-        output_dir: Path to the output directory (defaults to '{catalog_dir}/generated')
-        mapping_dir: Path to the mapping directory (defaults to '{catalog_dir}/src/transforms')
+        catalog_dir: Path to the catalog directory (e.g., 'catalog/hubspot').
+        output_dir: Path to the output directory.
+        mapping_dir: Path to the mapping directory.
     """
     from copier import run_copy
 
@@ -163,9 +163,9 @@ def generate_dbt_package(
 
     # Set default directories if not provided
     if not output_dir:
-        output_dir = str(catalog_path / "generated")
+        raise ValueError("output_dir is required")
     if not mapping_dir:
-        mapping_dir = str(catalog_path / "src" / "transforms")
+        raise ValueError("mapping_dir is required")
 
     # Create output directories
     output_path = Path(output_dir)
