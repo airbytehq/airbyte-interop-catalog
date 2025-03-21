@@ -1,0 +1,1 @@
+# Facebook Marketing Airbyte Source Schemas\n\nThese schema files are copied from the Airbyte source-facebook-marketing connector.\n\nOriginal source: https://github.com/airbytehq/airbyte/tree/master/airbyte-integrations/connectors/source-facebook-marketing/source_facebook_marketing/schemas\n\nTo update these files, copy the latest schemas from the Airbyte repository.
