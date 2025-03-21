@@ -258,7 +258,8 @@ def create_airbyte_data(
 
     config = yaml.safe_load(config_path.read_text())
     source_streams = config.get("source_streams", [])
-    target_tables = config.get("target_tables", [])
+    # target_tables will be used in future implementations
+    _ = config.get("target_tables", [])
 
     console.print(f"Syncing {source_name} data for streams: {', '.join(source_streams)}...")
     sync_source(source_name, source_streams, db_path)
