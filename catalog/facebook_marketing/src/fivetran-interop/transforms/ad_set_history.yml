@@ -6,38 +6,38 @@ transforms:
   - ad_set: facebook_marketing.ad_sets
   fields:
     id:
-      expression: MISSING
+      expression: ad_set.id
       description: The ID of the ad set.
     account_id:
-      expression: MISSING
+      expression: ad_set.account_id
       description: The ID of the ad account that this ad set belongs to.
     campaign_id:
-      expression: MISSING
+      expression: ad_set.campaign_id
       description: Ad campaign that contains this ad set.
     name:
-      expression: MISSING
+      expression: ad_set.name
       description: The name of the ad set.
     _fivetran_synced:
       expression: _airbyte_extracted_at
       description: '{{ doc(''_fivetran_synced'') }}'
     updated_time:
-      expression: MISSING
+      expression: ad_set.updated_time
       description: '{{ doc(''updated_time'') }}'
     start_time:
-      expression: MISSING
+      expression: ad_set.start_time
       description: Timestamp of designated ad set start time.
     end_time:
-      expression: MISSING
+      expression: ad_set.end_time
       description: Timestamp of designated ad set end time.
     bid_strategy:
-      expression: MISSING
+      expression: ad_set.bid_strategy
       description: Bid strategy values are - 'LOWEST_COST_WITHOUT_CAP', 'LOWEST_COST_WITH_BID_CAP',
         'COST_CAP', 'LOWEST_COST_WITH_MIN_ROAS'.
     daily_budget:
-      expression: MISSING
+      expression: ad_set.daily_budget
       description: Daily budget of ad set.
     budget_remaining:
-      expression: MISSING
+      expression: ad_set.budget_remaining
       description: Remaining budget of ad set.
     status:
       expression: MISSING
@@ -46,3 +46,18 @@ transforms:
       expression: MISSING
       description: The optimization goal this ad set is using. Possible values defined
         [here](https://developers.facebook.com/docs/marketing-api/reference/ad-campaign/#fields).
+  annotations:
+    unused_source_fields:
+      ad_set:
+        - promoted_object
+        - created_time
+        - lifetime_budget
+        - targeting
+        - bid_info
+        - bid_amount
+        - bid_constraints
+        - adlabels
+        - learning_stage_info
+        - effective_status
+        - _airbyte_meta
+        - _airbyte_raw_id

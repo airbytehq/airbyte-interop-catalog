@@ -6,38 +6,50 @@ transforms:
   - campaign: facebook_marketing.campaigns
   fields:
     id:
-      expression: MISSING
+      expression: campaign.id
       description: The ID of the campaign.
     account_id:
-      expression: MISSING
+      expression: campaign.account_id
       description: The ID of the ad account that this campaign belongs to.
     name:
-      expression: MISSING
+      expression: campaign.name
       description: The name of the campaign.
     _fivetran_synced:
       expression: _airbyte_extracted_at
       description: '{{ doc(''_fivetran_synced'') }}'
     updated_time:
-      expression: MISSING
+      expression: campaign.updated_time
       description: '{{ doc(''updated_time'') }}'
     created_time:
-      expression: MISSING
+      expression: campaign.created_time
       description: The time the campaign was created.
     start_time:
-      expression: MISSING
+      expression: campaign.start_time
       description: Timestamp of designated campaign start time.
     stop_time:
-      expression: MISSING
+      expression: campaign.stop_time
       description: Timestamp of designated campaign end time.
     daily_budget:
-      expression: MISSING
+      expression: campaign.daily_budget
       description: Daily budget of campaign.
     budget_remaining:
-      expression: MISSING
+      expression: campaign.budget_remaining
       description: Remaining budget of campaign.
     lifetime_budget:
-      expression: MISSING
+      expression: campaign.lifetime_budget
       description: Lifetime budget of the campaign.
     status:
-      expression: MISSING
+      expression: campaign.status
       description: Status values are - 'ACTIVE', 'PAUSED', 'DELETED', 'ARCHIVED'.
+  annotations:
+    unused_source_fields:
+      campaign:
+        - _airbyte_meta
+        - _airbyte_raw_id
+        - effective_status
+        - objective
+        - special_ad_categories
+        - bid_strategy
+        - issues_info
+        - buying_type
+        - configured_status
