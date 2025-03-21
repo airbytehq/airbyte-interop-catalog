@@ -1,0 +1,7 @@
+project_id: shopify.fivetran-interop
+source_name: shopify
+source_streams: []
+
+# Target schema file snapshotted from: https://github.com/fivetran/dbt_shopify_source/blob/main/models/src_shopify.yml
+target_dbt_schema: https://raw.githubusercontent.com/fivetran/dbt_shopify_source/refs/heads/main/models/src_shopify.yml
+target_tables: []

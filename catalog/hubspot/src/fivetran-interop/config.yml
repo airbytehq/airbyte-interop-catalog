@@ -1,3 +1,6 @@
+project_id: hubspot.fivetran-interop
+
+source_name: hubspot
 source_streams:
   - companies
   - contacts
@@ -6,6 +9,8 @@ source_streams:
   - owners
   - tickets
 
+# Target schema file snapshotted from: https://github.com/fivetran/dbt_hubspot_source/blob/main/models/src_hubspot.yml
+target_dbt_schema: https://raw.githubusercontent.com/fivetran/dbt_hubspot_source/refs/heads/main/models/src_hubspot.yml
 target_tables:
   - company
   - contact

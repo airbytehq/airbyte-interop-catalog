@@ -1,0 +1,7 @@
+project_id: tiktok-marketing.fivetran-interop
+source_name: tiktok-marketing
+source_streams: []
+
+# Target schema file snapshotted from: https://github.com/fivetran/dbt_tiktok_ads_source/blob/main/models/src_tiktok_ads.yml
+target_dbt_schema: https://raw.githubusercontent.com/fivetran/dbt_tiktok_ads_source/refs/heads/main/models/src_tiktok_ads.yml
+target_tables: []
