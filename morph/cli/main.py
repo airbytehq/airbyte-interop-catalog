@@ -224,7 +224,11 @@ def create_airbyte_catalog(
 
 @main.command()
 @click.argument("source_name", type=str)
-@click.argument("project_name", type=str)
+@click.argument(
+    "project_name",
+    type=str,
+    default="fivetran-interop",
+)
 @click.option(
     "--config-file",
     help="Path to config.yml (defaults to catalog/{source_name}/src/{project_name}/config.yml)",

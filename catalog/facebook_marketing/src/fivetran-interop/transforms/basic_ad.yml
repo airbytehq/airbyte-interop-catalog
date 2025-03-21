@@ -1,0 +1,42 @@
+domain: facebook_marketing.fivetran-interop
+transforms:
+- display_name: Each record represents the daily performance of an ad in Facebook.
+  id: basic_ad
+  from:
+  - UNKNOWN: UNKNOWN
+  fields:
+    ad_id:
+      expression: MISSING
+      description: The ID of the ad the report relates to.
+    ad_name:
+      expression: MISSING
+      description: Name of the ad the report relates to.
+    adset_name:
+      expression: MISSING
+      description: Name of the ad set the report relates to.
+    date:
+      expression: MISSING
+      description: The date of the reported performance.
+    account_id:
+      expression: MISSING
+      description: The ID of the ad account that this ad belongs to.
+    impressions:
+      expression: MISSING
+      description: The number of impressions the ad had on the given day.
+    inline_link_clicks:
+      expression: MISSING
+      description: The number of clicks the ad had on the given day.
+    spend:
+      expression: MISSING
+      description: The spend on the ad in the given day.
+    reach:
+      expression: MISSING
+      description: The number of people who saw any content from your Page or about
+        your Page. This metric is estimated.
+    frequency:
+      expression: MISSING
+      description: The average number of times each person saw your ad; it is calculated
+        as impressions divided by reach.
+    _fivetran_synced:
+      expression: MISSING
+      description: '{{ doc(''_fivetran_synced'') }}'

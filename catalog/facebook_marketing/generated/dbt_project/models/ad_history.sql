@@ -4,8 +4,8 @@
 -- Description: Each record in this table reflects a version of a Facebook ad.
 
 WITH
-ad_historys AS (
-    SELECT * FROM {{ source('facebook_marketing', 'ad_historys') }}
+UNKNOWN AS (
+    SELECT * FROM {{ source('default', 'UNKNOWN') }}
 )
 
 
@@ -19,4 +19,4 @@ SELECT
     NULL AS _fivetran_synced, -- {{ doc('_fivetran_synced') }}
     NULL AS updated_time, -- {{ doc('updated_time') }}
     NULL AS conversion_domain -- The domain you've configured the ad to convert to.
-FROM ad_historys
+FROM UNKNOWN

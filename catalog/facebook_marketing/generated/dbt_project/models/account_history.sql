@@ -4,8 +4,8 @@
 -- Description: Each record in this table reflects a version of a Facebook ad account.
 
 WITH
-account_historys AS (
-    SELECT * FROM {{ source('facebook_marketing', 'account_historys') }}
+UNKNOWN AS (
+    SELECT * FROM {{ source('default', 'UNKNOWN') }}
 )
 
 
@@ -18,4 +18,4 @@ SELECT
     NULL AS created_time, -- The time account was created.
     NULL AS currency, -- Currency associated with account.
     NULL AS timezone_name -- Timezone associated with account.
-FROM account_historys
+FROM UNKNOWN

@@ -1,0 +1,48 @@
+domain: facebook_marketing.fivetran-interop
+transforms:
+- display_name: Each record in this table reflects a version of a Facebook ad set.
+  id: ad_set_history
+  from:
+  - UNKNOWN: UNKNOWN
+  fields:
+    id:
+      expression: MISSING
+      description: The ID of the ad set.
+    account_id:
+      expression: MISSING
+      description: The ID of the ad account that this ad set belongs to.
+    campaign_id:
+      expression: MISSING
+      description: Ad campaign that contains this ad set.
+    name:
+      expression: MISSING
+      description: The name of the ad set.
+    _fivetran_synced:
+      expression: MISSING
+      description: '{{ doc(''_fivetran_synced'') }}'
+    updated_time:
+      expression: MISSING
+      description: '{{ doc(''updated_time'') }}'
+    start_time:
+      expression: MISSING
+      description: Timestamp of designated ad set start time.
+    end_time:
+      expression: MISSING
+      description: Timestamp of designated ad set end time.
+    bid_strategy:
+      expression: MISSING
+      description: Bid strategy values are - 'LOWEST_COST_WITHOUT_CAP', 'LOWEST_COST_WITH_BID_CAP',
+        'COST_CAP', 'LOWEST_COST_WITH_MIN_ROAS'.
+    daily_budget:
+      expression: MISSING
+      description: Daily budget of ad set.
+    budget_remaining:
+      expression: MISSING
+      description: Remaining budget of ad set.
+    status:
+      expression: MISSING
+      description: Status values are - 'ACTIVE', 'PAUSED', 'DELETED', 'ARCHIVED'.
+    optimization_goal:
+      expression: MISSING
+      description: The optimization goal this ad set is using. Possible values defined
+        [here](https://developers.facebook.com/docs/marketing-api/reference/ad-campaign/#fields).

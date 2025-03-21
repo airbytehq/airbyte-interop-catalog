@@ -4,8 +4,8 @@
 -- Description: Each record in this table reflects a version of a Facebook campaign.
 
 WITH
-campaign_historys AS (
-    SELECT * FROM {{ source('facebook_marketing', 'campaign_historys') }}
+UNKNOWN AS (
+    SELECT * FROM {{ source('default', 'UNKNOWN') }}
 )
 
 
@@ -22,4 +22,4 @@ SELECT
     NULL AS budget_remaining, -- Remaining budget of campaign.
     NULL AS lifetime_budget, -- Lifetime budget of the campaign.
     NULL AS status -- Status values are - 'ACTIVE', 'PAUSED', 'DELETED', 'ARCHIVED'.
-FROM campaign_historys
+FROM UNKNOWN

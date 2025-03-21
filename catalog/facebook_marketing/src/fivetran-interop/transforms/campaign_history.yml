@@ -3,7 +3,7 @@ transforms:
 - display_name: Each record in this table reflects a version of a Facebook campaign.
   id: campaign_history
   from:
-  - campaign_historys: airbyte_raw_facebook_marketing.campaign_historys
+  - UNKNOWN: UNKNOWN
   fields:
     id:
       expression: MISSING
