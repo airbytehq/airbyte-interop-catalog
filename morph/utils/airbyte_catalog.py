@@ -8,6 +8,22 @@ import airbyte as ab
 from airbyte.secrets import GoogleGSMSecretManager
 
 AIRBYTE_INTERNAL_GCP_PROJECT = "dataline-integration-testing"
+USE_DOCKER_IMAGE = True
+
+
+def get_connector_id(source_name: str) -> str:
+    """Get the connector ID for an Airbyte source.
+
+    Args:
+        source_name: Name of the source. (e.g. "hubspot" or "facebook_marketing")
+
+    Returns:
+        The connector ID (e.g. "source-hubspot" or "source-facebook-marketing")
+    """
+    if source_name.startswith("source-"):
+        return source_name
+
+    return f"source-{source_name.replace('_', '-')}"
 
 
 def get_config(source_name: str, secret_name: str | None = None) -> dict:
@@ -20,7 +36,7 @@ def get_config(source_name: str, secret_name: str | None = None) -> dict:
     Returns:
         The source configuration as a dictionary
     """
-    connector_name = f"source-{source_name}"
+    connector_name = get_connector_id(source_name)
     secret_manager = GoogleGSMSecretManager(
         project=AIRBYTE_INTERNAL_GCP_PROJECT,
         credentials_json=ab.get_secret("GCP_GSM_CREDENTIALS"),
@@ -46,12 +62,10 @@ def get_source(source_name: str, streams: list[str] | str = "*") -> ab.Source:
     """
     # Hubspot's CDK ref is not properly pinned in its pyproject.toml (needs airbyte-cdk==2.4.0)
     # AND it needs the old version of pendulum so it isn't compatible with Python 3.12
-    docker_image = True if source_name == "hubspot" else None
-
     return ab.get_source(
-        f"source-{source_name}",
+        get_connector_id(source_name),
         config=get_config(source_name),
-        docker_image=docker_image,
+        docker_image=USE_DOCKER_IMAGE,
         streams=streams,
     )
 
@@ -63,10 +77,11 @@ def write_catalog_file(source_name: str, output_file_path: Path) -> None:
         source_name: Name of the source
         output_file_path: Path to the output file
     """
-    source = get_source(source_name, streams="*")
+    connector_name = get_connector_id(source_name)
+    source = get_source(connector_name, streams="*")
     source.check()
     catalog = source.discovered_catalog
-    
+
     # Ensure parent directories exist
     output_file_path.parent.mkdir(parents=True, exist_ok=True)
     output_file_path.write_text(catalog.model_dump_json(indent=2))
