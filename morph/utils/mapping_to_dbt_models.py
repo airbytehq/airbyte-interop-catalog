@@ -145,7 +145,8 @@ models:
 
 
 def generate_dbt_package(
-    catalog_dir: str,
+    source_name: str,
+    *,
     output_dir: str,
     mapping_dir: str,
 ) -> None:
@@ -158,14 +159,8 @@ def generate_dbt_package(
     """
     from copier import run_copy
 
-    catalog_path = Path(catalog_dir)
-    catalog_name = catalog_path.name
-
-    # Set default directories if not provided
-    if not output_dir:
-        raise ValueError("output_dir is required")
-    if not mapping_dir:
-        raise ValueError("mapping_dir is required")
+    output_dir = output_dir or Path("catalog") / source_name / "generated"
+    mapping_dir = mapping_dir or Path("catalog") / source_name / "src" / "transforms"
 
     # Create output directories
     output_path = Path(output_dir)
@@ -196,7 +191,7 @@ def generate_dbt_package(
 
     # Prepare data for the template
     template_data = {
-        "catalog_name": catalog_name,
+        "catalog_name": source_name,
         "models": generated_models,
     }
 

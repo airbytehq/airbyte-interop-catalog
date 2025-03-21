@@ -26,14 +26,12 @@ def load_config(config_file: str) -> tuple[dict[str, Any] | None, list[str] | No
     """
     config_path = Path(config_file)
     if not config_path.exists():
-        console.print(f"Error: Config file {config_file} does not exist", style="bold red")
-        return None, None
+        raise ValueError(f"Error: Config file {config_file} does not exist")
 
     config = yaml.safe_load(config_path.read_text())
     target_tables = config.get("target_tables", [])
     if not target_tables:
-        console.print(f"No target tables defined in {config_file}", style="bold yellow")
-        return config, None
+        raise ValueError(f"No target tables defined in {config_file}")
 
     return config, target_tables
 

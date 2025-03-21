@@ -42,14 +42,12 @@ def json_to_dbt(
 
     # Validate input path exists
     if not schema_path_obj.exists():
-        console.print(f"Error: {schema_path} does not exist")
-        return
+        raise ValueError(f"Error: {schema_path} does not exist")
 
     # Process based on input type
     if catalog:
         if not schema_path_obj.is_file() or not schema_path_obj.name.endswith(".json"):
-            console.print(f"Error: {schema_path} is not a valid JSON file")
-            return
+            raise ValueError(f"Error: {schema_path} is not a valid JSON file")
 
         sources_yml = parse_airbyte_catalog(
             schema_path,

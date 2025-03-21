@@ -2,6 +2,7 @@
 
 import argparse
 from pathlib import Path
+from typing import Any
 
 import click
 import yaml
@@ -44,14 +45,12 @@ def json_to_dbt(
 
     # Validate input path exists
     if not schema_path_obj.exists():
-        console.print(f"Error: {schema_path} does not exist")
-        return
+        raise ValueError(f"Error: {schema_path} does not exist")
 
     # Process based on input type
     if catalog:
         if not schema_path_obj.is_file() or not schema_path_obj.name.endswith(".json"):
-            console.print(f"Error: {schema_path} is not a valid JSON file")
-            return
+            raise ValueError(f"Error: {schema_path} is not a valid JSON file")
 
         sources_yml = parse_airbyte_catalog(
             schema_path,
@@ -103,6 +102,16 @@ def json_to_dbt(
 
 
 @main.command()
+@click.option(
+    "--source-name",
+    default=None,
+    help="Name for the dbt source (defaults to catalog directory name)",
+)
+@click.option(
+    "--project-name",
+    default=None,
+    help="Name for the dbt project (defaults to 'fivetran-interop')",
+)
 @click.argument("catalog_dir", type=click.Path(exists=True))
 @click.argument("catalog_file", type=click.Path(exists=True))
 @click.option(
@@ -113,17 +122,13 @@ def json_to_dbt(
     "--mapping-dir",
     help="Directory containing mapping files.",
 )
-@click.option(
-    "--source-name",
-    default=None,
-    help="Name for the dbt source (defaults to catalog directory name)",
-)
 def generate_dbt_project(
-    catalog_dir: str,
-    catalog_file: str,
+    source_name: str | None = None,
+    project_name: str = "fivetran-interop",
+    *,
+    catalog_file: str | None = None,
     output_dir: str | None = None,
     mapping_dir: str | None = None,
-    source_name: str | None = None,
 ) -> None:
     """Generate a dbt project from mapping files and catalog.json.
 
@@ -134,28 +139,34 @@ def generate_dbt_project(
     CATALOG_DIR: Path to the catalog directory (e.g., 'catalog/hubspot')
     CATALOG_FILE: Path to the Airbyte catalog.json file
     """
-    catalog_path = Path(catalog_dir)
+    _ = project_name  # Not used currently
+
+    catalog_dir = Path("catalog")
+    catalog_file = catalog_file or catalog_dir / source_name / "generated" / "airbyte-catalog.json"
 
     # Validate input paths exist
-    if not catalog_path.exists():
-        console.print(f"Error: {catalog_dir} does not exist")
-        return
+    if not catalog_dir.exists():
+        raise ValueError(f"Error: {catalog_dir} does not exist")
 
     if not Path(catalog_file).exists():
-        console.print(f"Error: {catalog_file} does not exist")
-        return
+        raise ValueError(f"Error: {catalog_file} does not exist")
 
-    # Set default source name if not provided
-    if not source_name:
-        source_name = catalog_path.name
+    output_dir = output_dir or catalog_dir / source_name / "generated"
+    mapping_dir = mapping_dir or catalog_dir / source_name / "src" / project_name / "transforms"
 
     # Generate dbt package
     try:
         # Generate dbt models from mapping files
-        generate_dbt_package(catalog_dir, output_dir, mapping_dir)
+        generate_dbt_package(
+            source_name=source_name,
+            output_dir=output_dir,
+            mapping_dir=mapping_dir,
+        )
 
         # Determine the actual output directory
-        actual_output_dir = Path(output_dir) if output_dir else catalog_path / "generated"
+        actual_output_dir = (
+            Path(output_dir) if output_dir else catalog_dir / source_name / "generated"
+        )
 
         # Generate sources.yml from catalog.json
         sources_yml = parse_airbyte_catalog(
@@ -177,19 +188,17 @@ def generate_dbt_project(
         console.print("  2. dbt deps --profiles-dir profiles")
         console.print("  3. dbt compile --profiles-dir profiles")
     except Exception as e:
-        console.print(f"Error generating dbt project: {e}", style="bold red")
+        raise ValueError(f"Error generating dbt project: {e}") from e
 
 
 @main.command()
 @click.argument("source_name", type=str)
-@click.argument("project_name", type=str)
 @click.option(
     "--output-file",
     help="Output file path (defaults to catalog/{source_name}/generated/airbyte-catalog.json)",
 )
 def create_airbyte_catalog(
     source_name: str,
-    _project_name: str,
     output_file: str | None = None,
 ) -> None:
     """Generate an Airbyte catalog JSON file for a source.
@@ -253,8 +262,7 @@ def create_airbyte_data(
     # Load streams from config.yml
     config_path = Path(config_file)
     if not config_path.exists():
-        console.print(f"Error: Config file {config_file} does not exist", style="bold red")
-        return
+        raise ValueError(f"Error: Config file {config_file} does not exist")
 
     config = yaml.safe_load(config_path.read_text())
     source_streams = config.get("source_streams", [])
@@ -328,6 +336,54 @@ def generate_transform_scaffold(
     )
 
     report_results(created_files)
+
+
+# Project Auto-Generation
+@main.command()
+@click.argument("source_name", type=str)
+@click.option("--project-name", type=str, default="fivetran-interop")
+@click.option("--no-airbyte-catalog", is_flag=True)
+@click.option("--no-transforms", is_flag=True)
+@click.option("--no-dbt-project", is_flag=True)
+def generate_project(
+    source_name: str,
+    project_name: str,
+    *,
+    no_airbyte_catalog: bool | None = None,
+    no_transforms: bool | None = None,
+    no_dbt_project: bool | None = None,
+) -> None:
+    """Generate a project scaffold for a new connector, or update an existing one."""
+
+    def _if_none(input: Any, default: bool | None, /) -> Any:
+        return input if input is not None else default
+
+    no_airbyte_catalog = _if_none(no_airbyte_catalog, False)
+    no_transforms = _if_none(no_transforms, False)
+    no_dbt_project = _if_none(no_dbt_project, False)
+
+    # Validate input arguments
+    if not source_name or not project_name:
+        console.print("Error: --source-name and --project-name are required", style="bold red")
+        return
+
+    # Generate Airbyte catalog
+    if not no_airbyte_catalog:
+        console.print(f"Generating Airbyte catalog for {source_name}...")
+        create_airbyte_catalog.callback(source_name)
+        console.print("Generated Airbyte catalog.")
+
+    # Generate transforms
+    if not no_transforms:
+        console.print(f"Generating transforms for {source_name}...")
+        generate_transform_scaffold.callback(source_name, project_name)
+        console.print(f"Generated transforms for {source_name}")
+
+    # Generate dbt project
+    if not no_dbt_project:
+        console.print(f"Generating dbt project for {source_name}...")
+        generate_dbt_project.callback(source_name, project_name)
+        console.print(f"Generated dbt project for {source_name}")
 
 
 if __name__ == "__main__":
