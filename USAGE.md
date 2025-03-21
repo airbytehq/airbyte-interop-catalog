@@ -28,7 +28,8 @@ To add a new connector to the catalog, follow these steps:
    ```yaml
    project_id: {new_connector}.fivetran-interop
    source_name: {new_connector}
-   source_streams: []  # Will be added later
+   source_streams:
+     # TODO: list streams to include in the source here
 
    # Target schema file snapshotted from: https://github.com/fivetran/dbt_{fivetran_source_name}_source/blob/main/models/src_{fivetran_source_name}.yml
    target_dbt_schema: https://raw.githubusercontent.com/fivetran/dbt_{fivetran_source_name}_source/refs/heads/main/models/src_{fivetran_source_name}.yml
