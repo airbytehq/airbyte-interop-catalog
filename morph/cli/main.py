@@ -180,5 +180,89 @@ def generate_dbt_project(
         console.print(f"Error generating dbt project: {e}", style="bold red")
 
 
+@main.command()
+@click.argument("source_name", type=str)
+@click.argument("project_name", type=str)
+@click.option(
+    "--output-file",
+    help="Output file path (defaults to catalog/{source_name}/generated/airbyte-catalog.json)",
+)
+def create_airbyte_catalog(
+    source_name: str,
+    _project_name: str,
+    output_file: str | None = None,
+) -> None:
+    """Generate an Airbyte catalog JSON file for a source.
+
+    This command generates an Airbyte catalog JSON file for the specified source.
+
+    SOURCE_NAME: Name of the source (e.g., 'hubspot')
+    PROJECT_NAME: Name of the project (e.g., 'fivetran-interop')
+    """
+    from pathlib import Path
+
+    from morph.utils.airbyte_catalog import write_catalog_file
+
+    # Set default output file path if not provided
+    if not output_file:
+        # We could use project_name in the future if needed
+        output_file = f"catalog/{source_name}/generated/airbyte-catalog.json"
+
+    console.print(f"Generating Airbyte catalog for {source_name}...")
+    write_catalog_file(source_name, Path(output_file))
+    console.print(f"Generated Airbyte catalog at {output_file}")
+
+
+@main.command()
+@click.argument("source_name", type=str)
+@click.argument("project_name", type=str)
+@click.option(
+    "--config-file",
+    help="Path to config.yml (defaults to catalog/{source_name}/src/{project_name}/config.yml)",
+)
+@click.option(
+    "--db-path",
+    help="Path to DuckDB database (defaults to .data/{source_name}.duckdb)",
+)
+def create_airbyte_data(
+    source_name: str,
+    project_name: str,
+    config_file: str | None = None,
+    db_path: str | None = None,
+) -> None:
+    """Sync data from an Airbyte source to a local database.
+
+    This command syncs data from an Airbyte source to a local DuckDB database.
+    The streams to sync are specified in the config.yml file.
+
+    SOURCE_NAME: Name of the source (e.g., 'hubspot')
+    PROJECT_NAME: Name of the project (e.g., 'fivetran-interop')
+    """
+    from pathlib import Path
+
+    import yaml
+
+    from morph.utils.airbyte_sync import sync_source
+
+    # Set default paths if not provided
+    if not config_file:
+        config_file = f"catalog/{source_name}/src/{project_name}/config.yml"
+    if not db_path:
+        db_path = f".data/{source_name}.duckdb"
+
+    # Load streams from config.yml
+    config_path = Path(config_file)
+    if not config_path.exists():
+        console.print(f"Error: Config file {config_file} does not exist", style="bold red")
+        return
+
+    config = yaml.safe_load(config_path.read_text())
+    streams = config.get("streams", [])
+
+    console.print(f"Syncing {source_name} data for streams: {', '.join(streams)}...")
+    sync_source(source_name, streams, db_path)
+    console.print(f"Synced {source_name} data to {db_path}")
+
+
 if __name__ == "__main__":
     main()
