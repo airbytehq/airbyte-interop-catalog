@@ -289,22 +289,28 @@ def generate_transform_scaffold(
     """
     from pathlib import Path
 
+    from morph.utils.transform_scaffold import (
+        generate_mapping_files,
+        get_target_schema,
+        load_config,
+        report_results,
+    )
 
     # Set default paths if not provided
     config_file = f"catalog/{source_name}/src/{project_name}/config.yml"
     if not output_dir:
         output_dir = f"catalog/{source_name}/src/{project_name}/transforms"
-    
+
     # Set path for local target schema file
     requirements_dir = f"catalog/{source_name}/requirements/{project_name}"
     Path(requirements_dir).mkdir(parents=True, exist_ok=True)
 
     # Load config and target schema
-    config, target_tables = _load_config(config_file)
+    config, target_tables = load_config(config_file)
     if not config or not target_tables:
         return
-    
-    target_schema = _get_target_schema(config, requirements_dir)
+
+    target_schema = get_target_schema(config, requirements_dir)
     if not target_schema:
         return
 
@@ -313,154 +319,15 @@ def generate_transform_scaffold(
     output_path.mkdir(parents=True, exist_ok=True)
 
     # Process each target table
-    created_files = _generate_mapping_files(
-        source_name, project_name, target_tables, target_schema, output_path,
+    created_files = generate_mapping_files(
+        source_name,
+        project_name,
+        target_tables,
+        target_schema,
+        output_path,
     )
 
-    _report_results(created_files)
-
-
-def _load_config(config_file):
-    """Load configuration file and extract target tables."""
-    from pathlib import Path
-
-    import yaml
-    
-    config_path = Path(config_file)
-    if not config_path.exists():
-        console.print(f"Error: Config file {config_file} does not exist", style="bold red")
-        return None, None
-
-    config = yaml.safe_load(config_path.read_text())
-    target_tables = config.get("target_tables", [])
-    if not target_tables:
-        console.print(f"No target tables defined in {config_file}", style="bold yellow")
-        return config, None
-    
-    return config, target_tables
-
-
-def _get_target_schema(config, requirements_dir):
-    """Download or load target schema file."""
-    from pathlib import Path
-
-    import requests
-    import yaml
-    
-    # Get target schema URL
-    target_schema_url = config.get("target_dbt_schema")
-    if not target_schema_url:
-        console.print("Error: target_dbt_schema not defined in config.yml", style="bold red")
-        return None
-    
-    # Determine target schema file name from URL
-    target_schema_filename = target_schema_url.split("/")[-1]
-    local_schema_path = Path(requirements_dir) / target_schema_filename
-    
-    # Download target schema if not already downloaded
-    if not local_schema_path.exists():
-        console.print(f"Downloading target schema to {local_schema_path}...")
-        try:
-            response = requests.get(target_schema_url)
-            response.raise_for_status()
-            local_schema_path.write_text(response.text)
-            console.print(f"Downloaded target schema to {local_schema_path}", style="green")
-            return yaml.safe_load(response.text)
-        except Exception as e:
-            console.print(f"Error downloading target schema: {e}", style="bold red")
-            return None
-    else:
-        console.print(f"Using existing target schema file: {local_schema_path}")
-        return yaml.safe_load(local_schema_path.read_text())
-
-
-def _find_table_schema(target_schema, table_name):
-    """Find table schema in target schema."""
-    for source in target_schema.get("sources", []):
-        for table in source.get("tables", []):
-            if table.get("name") == table_name:
-                return table
-    return None
-
-
-def _create_mapping_structure(source_name, project_name, table_name, table_schema):
-    """Create mapping structure for a table."""
-    return {
-        "domain": f"{source_name}.{project_name}",
-        "transforms": [
-            {
-                "display_name": f"{table_schema.get('description', table_name)}",
-                "id": table_name,
-                "from": [
-                    {f"{table_name}s": f"airbyte_raw_{source_name}.{table_name}s"},
-                ],
-                "fields": {},
-            },
-        ],
-    }
-
-
-def _add_fields_to_mapping(mapping, table_schema):
-    """Add fields with MISSING expressions to mapping."""
-    fields_dict = mapping["transforms"][0]["fields"]
-    for column in table_schema.get("columns", []):
-        field_name = column.get("name")
-        description = column.get("description", "")
-        
-        # Skip missing field names
-        if not field_name:
-            continue
-            
-        fields_dict[field_name] = {
-            "expression": "MISSING",
-            "description": description,
-        }
-    return mapping
-
-
-def _generate_mapping_files(source_name, project_name, target_tables, target_schema, output_path):
-    """Generate mapping files for target tables."""
-
-    import yaml
-    
-    created_files = []
-    for table_name in target_tables:
-        # Check if mapping file already exists
-        mapping_file = output_path / f"{table_name}.yml"
-        if mapping_file.exists():
-            console.print(f"Skipping {table_name}: Mapping file already exists", style="blue")
-            continue
-
-        # Find table schema in target_schema
-        table_schema = _find_table_schema(target_schema, table_name)
-        if not table_schema:
-            console.print(f"Warning: Schema not found for table {table_name}", style="yellow")
-            continue
-
-        # Create mapping structure
-        mapping = _create_mapping_structure(source_name, project_name, table_name, table_schema)
-        
-        # Add fields with MISSING expressions
-        mapping = _add_fields_to_mapping(mapping, table_schema)
-
-        # Write mapping file
-        with mapping_file.open("w") as f:
-            yaml.dump(mapping, f, default_flow_style=False, sort_keys=False)
-        
-        created_files.append(str(mapping_file))
-        console.print(f"Created mapping file for {table_name}", style="green")
-    
-    return created_files
-
-
-def _report_results(created_files):
-    """Report results of file generation."""
-    if created_files:
-        console.print(f"Generated {len(created_files)} mapping files:", style="bold green")
-        for file in created_files:
-            console.print(f"  - {file}")
-    else:
-        console.print("No new mapping files generated.", style="bold blue")
+    report_results(created_files)
 
 
 if __name__ == "__main__":
