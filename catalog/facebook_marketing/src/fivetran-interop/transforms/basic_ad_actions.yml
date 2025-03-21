@@ -4,7 +4,7 @@ transforms:
     Facebook. This is the prebuilt `basic_ad` report broken down by `action_type`.
   id: basic_ad_actions
   from:
-  - UNKNOWN: UNKNOWN
+  - actions: facebook_marketing.ads_insights_action_type
   fields:
     _1_d_view:
       expression: MISSING
@@ -27,7 +27,7 @@ transforms:
       expression: MISSING
       description: Defunct field.
     _fivetran_synced:
-      expression: MISSING
+      expression: _airbyte_extracted_at
       description: '{{ doc(''_fivetran_synced'') }}'
     action_type:
       expression: MISSING

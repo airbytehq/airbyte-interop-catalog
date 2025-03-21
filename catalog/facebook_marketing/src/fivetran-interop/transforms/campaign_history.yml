@@ -3,7 +3,7 @@ transforms:
 - display_name: Each record in this table reflects a version of a Facebook campaign.
   id: campaign_history
   from:
-  - UNKNOWN: UNKNOWN
+  - campaign: facebook_marketing.campaigns
   fields:
     id:
       expression: MISSING
@@ -15,7 +15,7 @@ transforms:
       expression: MISSING
       description: The name of the campaign.
     _fivetran_synced:
-      expression: MISSING
+      expression: _airbyte_extracted_at
       description: '{{ doc(''_fivetran_synced'') }}'
     updated_time:
       expression: MISSING

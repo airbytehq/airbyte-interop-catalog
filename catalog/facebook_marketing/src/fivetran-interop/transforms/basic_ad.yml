@@ -3,7 +3,7 @@ transforms:
 - display_name: Each record represents the daily performance of an ad in Facebook.
   id: basic_ad
   from:
-  - UNKNOWN: UNKNOWN
+  - insights: facebook_marketing.ads_insights
   fields:
     ad_id:
       expression: MISSING
@@ -38,5 +38,5 @@ transforms:
       description: The average number of times each person saw your ad; it is calculated
         as impressions divided by reach.
     _fivetran_synced:
-      expression: MISSING
+      expression: _airbyte_extracted_at
       description: '{{ doc(''_fivetran_synced'') }}'

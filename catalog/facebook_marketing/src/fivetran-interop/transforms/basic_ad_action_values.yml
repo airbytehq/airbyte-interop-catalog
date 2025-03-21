@@ -5,7 +5,7 @@ transforms:
     and `action_value`.
   id: basic_ad_action_values
   from:
-  - UNKNOWN: UNKNOWN
+  - action_values: facebook_marketing.ads_insights_action_type
   fields:
     _7_d_click:
       expression: MISSING
@@ -17,7 +17,7 @@ transforms:
       expression: MISSING
       description: Defunct field.
     _fivetran_synced:
-      expression: MISSING
+      expression: _airbyte_extracted_at
       description: '{{ doc(''_fivetran_synced'') }}'
     action_type:
       expression: MISSING

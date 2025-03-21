@@ -3,7 +3,7 @@ transforms:
 - display_name: Each record in this table reflects a version of a Facebook creative.
   id: creative_history
   from:
-  - UNKNOWN: UNKNOWN
+  - creative: facebook_marketing.ad_creatives
   fields:
     _fivetran_id:
       expression: MISSING
@@ -29,7 +29,7 @@ transforms:
         to urls clicked from page post ads, message of the post, and canvas app install
         creatives only.
     _fivetran_synced:
-      expression: MISSING
+      expression: _airbyte_extracted_at
       description: '{{ doc(''_fivetran_synced'') }}'
     asset_feed_spec_link_urls:
       expression: MISSING

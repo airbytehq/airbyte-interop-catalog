@@ -3,7 +3,7 @@ transforms:
 - display_name: Each record in this table reflects a version of a Facebook ad set.
   id: ad_set_history
   from:
-  - UNKNOWN: UNKNOWN
+  - ad_set: facebook_marketing.ad_sets
   fields:
     id:
       expression: MISSING
@@ -18,7 +18,7 @@ transforms:
       expression: MISSING
       description: The name of the ad set.
     _fivetran_synced:
-      expression: MISSING
+      expression: _airbyte_extracted_at
       description: '{{ doc(''_fivetran_synced'') }}'
     updated_time:
       expression: MISSING
