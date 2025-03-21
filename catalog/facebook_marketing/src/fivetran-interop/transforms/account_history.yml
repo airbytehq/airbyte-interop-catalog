@@ -1,0 +1,31 @@
+domain: facebook_marketing.fivetran-interop
+transforms:
+- display_name: Each record in this table reflects a version of a Facebook ad account.
+  id: account_history
+  from:
+  - account_historys: airbyte_raw_facebook_marketing.account_historys
+  fields:
+    id:
+      expression: MISSING
+      description: The ID of the ad account.
+    name:
+      expression: MISSING
+      description: Name of the account.
+    _fivetran_synced:
+      expression: MISSING
+      description: '{{ doc(''_fivetran_synced'') }}'
+    account_status:
+      expression: MISSING
+      description: Current status of account.
+    business_country_code:
+      expression: MISSING
+      description: Country code of business associated to account.
+    created_time:
+      expression: MISSING
+      description: The time account was created.
+    currency:
+      expression: MISSING
+      description: Currency associated with account.
+    timezone_name:
+      expression: MISSING
+      description: Timezone associated with account.

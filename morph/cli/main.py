@@ -266,5 +266,150 @@ def create_airbyte_data(
     console.print(f"Synced {source_name} data to {db_path}")
 
 
+@main.command()
+@click.argument("source_name", type=str)
+@click.argument("project_name", type=str)
+@click.option(
+    "--output-dir",
+    help="Output directory for generated transform files (defaults to catalog/{source_name}/src/{project_name}/transforms)",
+)
+def generate_transform_scaffold(
+    source_name: str,
+    project_name: str,
+    output_dir: str | None = None,
+) -> None:
+    """Generate scaffold mapping YAML files for target tables.
+
+    This command generates blank mapping YAML files for any target tables
+    that are not yet defined. The generated files will include all fields
+    from the target schema but with MISSING expressions.
+
+    SOURCE_NAME: Name of the source (e.g., 'hubspot')
+    PROJECT_NAME: Name of the project (e.g., 'fivetran-interop')
+    """
+    import os
+    import requests
+    from pathlib import Path
+    import yaml
+
+    # Set default paths if not provided
+    config_file = f"catalog/{source_name}/src/{project_name}/config.yml"
+    if not output_dir:
+        output_dir = f"catalog/{source_name}/src/{project_name}/transforms"
+    
+    # Set path for local target schema file
+    requirements_dir = f"catalog/{source_name}/requirements/{project_name}"
+    Path(requirements_dir).mkdir(parents=True, exist_ok=True)
+
+    # Load config.yml
+    config_path = Path(config_file)
+    if not config_path.exists():
+        console.print(f"Error: Config file {config_file} does not exist", style="bold red")
+        return
+
+    config = yaml.safe_load(config_path.read_text())
+    target_tables = config.get("target_tables", [])
+    if not target_tables:
+        console.print(f"No target tables defined in {config_file}", style="bold yellow")
+        return
+
+    # Get target schema URL
+    target_schema_url = config.get("target_dbt_schema")
+    if not target_schema_url:
+        console.print("Error: target_dbt_schema not defined in config.yml", style="bold red")
+        return
+    
+    # Determine target schema file name from URL
+    target_schema_filename = target_schema_url.split("/")[-1]
+    local_schema_path = Path(requirements_dir) / target_schema_filename
+    
+    # Download target schema if not already downloaded
+    if not local_schema_path.exists():
+        console.print(f"Downloading target schema to {local_schema_path}...")
+        try:
+            response = requests.get(target_schema_url)
+            response.raise_for_status()
+            local_schema_path.write_text(response.text)
+            console.print(f"Downloaded target schema to {local_schema_path}", style="green")
+            target_schema = yaml.safe_load(response.text)
+        except Exception as e:
+            console.print(f"Error downloading target schema: {e}", style="bold red")
+            return
+    else:
+        console.print(f"Using existing target schema file: {local_schema_path}")
+        target_schema = yaml.safe_load(local_schema_path.read_text())
+
+    # Create output directory
+    output_path = Path(output_dir)
+    output_path.mkdir(parents=True, exist_ok=True)
+
+    # Process each target table
+    created_files = []
+    for table_name in target_tables:
+        # Check if mapping file already exists
+        mapping_file = output_path / f"{table_name}.yml"
+        if mapping_file.exists():
+            console.print(f"Skipping {table_name}: Mapping file already exists", style="blue")
+            continue
+
+        # Find table schema in target_schema
+        table_schema = None
+        for source in target_schema.get("sources", []):
+            for table in source.get("tables", []):
+                if table.get("name") == table_name:
+                    table_schema = table
+                    break
+            if table_schema:
+                break
+
+        if not table_schema:
+            console.print(f"Warning: Schema not found for table {table_name}", style="yellow")
+            continue
+
+        # Create mapping structure
+        mapping = {
+            "domain": f"{source_name}.{project_name}",
+            "transforms": [
+                {
+                    "display_name": f"{table_schema.get('description', table_name)}",
+                    "id": table_name,
+                    "from": [
+                        {f"{table_name}s": f"airbyte_raw_{source_name}.{table_name}s"}
+                    ],
+                    "fields": {}
+                }
+            ]
+        }
+
+        # Add fields with MISSING expressions
+        fields_dict = mapping["transforms"][0]["fields"]
+        for column in table_schema.get("columns", []):
+            field_name = column.get("name")
+            description = column.get("description", "")
+            
+            # Skip missing field names
+            if not field_name:
+                continue
+                
+            fields_dict[field_name] = {
+                "expression": "MISSING",
+                "description": description
+            }
+
+        # Write mapping file
+        with mapping_file.open("w") as f:
+            yaml.dump(mapping, f, default_flow_style=False, sort_keys=False)
+        
+        created_files.append(str(mapping_file))
+        console.print(f"Created mapping file for {table_name}", style="green")
+
+    if created_files:
+        console.print(f"Generated {len(created_files)} mapping files:", style="bold green")
+        for file in created_files:
+            console.print(f"  - {file}")
+    else:
+        console.print("No new mapping files generated.", style="bold blue")
+
+
 if __name__ == "__main__":
     main()
