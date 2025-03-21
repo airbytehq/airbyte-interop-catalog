@@ -60,7 +60,7 @@ def test_dbt_compile_generated_project() -> None:
         # Generate the dbt project
         output_dir = catalog_dir / "generated" / "dbt_project"
         generate_dbt_package(
-            catalog_dir=catalog_dir,
+            source_name="hubspot",
             output_dir=output_dir,
             mapping_dir=transforms_dir,
         )

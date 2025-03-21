@@ -1024,6 +1024,12 @@
                   "string"
                 ]
               },
+              "hs_notes_next_activity": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
               "hs_notes_next_activity_type": {
                 "type": [
                   "null",
@@ -2135,6 +2141,12 @@
             ]
           },
           "properties_hs_notes_last_activity": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "properties_hs_notes_next_activity": {
             "type": [
               "null",
               "string"
@@ -4067,6 +4079,12 @@
                 ]
               },
               "hs_notes_last_activity": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "hs_notes_next_activity": {
                 "type": [
                   "null",
                   "string"
@@ -6119,6 +6137,12 @@
             ]
           },
           "properties_hs_notes_last_activity": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "properties_hs_notes_next_activity": {
             "type": [
               "null",
               "string"
@@ -9046,6 +9070,12 @@
                   "string"
                 ]
               },
+              "hs_notes_next_activity": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
               "hs_notes_next_activity_type": {
                 "type": [
                   "null",
@@ -10639,6 +10669,12 @@
               "string"
             ]
           },
+          "properties_hs_notes_next_activity": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
           "properties_hs_notes_next_activity_type": {
             "type": [
               "null",
@@ -11698,6 +11734,12 @@
                 "format": "date-time"
               },
               "hs_notes_last_activity": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "hs_notes_next_activity": {
                 "type": [
                   "null",
                   "string"
@@ -13292,6 +13334,12 @@
             "format": "date-time"
           },
           "properties_hs_notes_last_activity": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "properties_hs_notes_next_activity": {
             "type": [
               "null",
               "string"
@@ -31203,6 +31251,12 @@
                   "string"
                 ]
               },
+              "hs_notes_next_activity": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
               "hs_notes_next_activity_type": {
                 "type": [
                   "null",
@@ -33095,6 +33149,12 @@
               "string"
             ]
           },
+          "properties_hs_notes_next_activity": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
           "properties_hs_notes_next_activity_type": {
             "type": [
               "null",
@@ -34658,6 +34718,12 @@
                   "string"
                 ]
               },
+              "hs_notes_next_activity": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
               "hs_notes_next_activity_type": {
                 "type": [
                   "null",
@@ -35769,6 +35835,12 @@
             ]
           },
           "properties_hs_notes_last_activity": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "properties_hs_notes_next_activity": {
             "type": [
               "null",
               "string"
@@ -36930,6 +37002,12 @@
                   "string"
                 ]
               },
+              "hs_notes_next_activity": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
               "hs_notes_next_activity_type": {
                 "type": [
                   "null",
@@ -38060,6 +38138,12 @@
               "string"
             ]
           },
+          "properties_hs_notes_next_activity": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
           "properties_hs_notes_next_activity_type": {
             "type": [
               "null",
@@ -39030,6 +39114,12 @@
                   "number"
                 ]
               },
+              "hs_customer_agent_ticket_status": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
               "hs_date_entered_1": {
                 "type": [
                   "null",
@@ -39377,6 +39467,12 @@
                 "format": "date-time"
               },
               "hs_notes_last_activity": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "hs_notes_next_activity": {
                 "type": [
                   "null",
                   "string"
@@ -40213,6 +40309,12 @@
               "number"
             ]
           },
+          "properties_hs_customer_agent_ticket_status": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
           "properties_hs_date_entered_1": {
             "type": [
               "null",
@@ -40560,6 +40662,12 @@
             "format": "date-time"
           },
           "properties_hs_notes_last_activity": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "properties_hs_notes_next_activity": {
             "type": [
               "null",
               "string"

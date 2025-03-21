@@ -1475,9 +1475,10 @@ wheels = [
 
 [[package]]
 name = "morph"
-version = "0.0.0.post33.dev0+0cc00e5"
+version = "0.0.0.post35.dev0+a682254"
 source = { editable = "." }
 dependencies = [
+    { name = "airbyte" },
     { name = "click" },
     { name = "copier" },
     { name = "jinja2" },
@@ -1500,6 +1501,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "airbyte", specifier = ">=0.23.0" },
     { name = "airbyte", marker = "extra == 'dev'", specifier = ">=0.23.0" },
     { name = "basedpyright", marker = "extra == 'dev'", specifier = ">=1.28.2" },
     { name = "click", specifier = ">=8.0.0" },
