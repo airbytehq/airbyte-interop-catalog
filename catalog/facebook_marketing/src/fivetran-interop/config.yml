@@ -1,1 +1,7 @@
-streams: []
+project_id: facebook_marketing.fivetran-interop
+source_name: facebook_marketing
+
+# Target schema file snapshotted from: https://github.com/fivetran/dbt_facebook_ads_source/blob/main/models/src_facebook_ads.yml
+target_dbt_schema: https://raw.githubusercontent.com/fivetran/dbt_facebook_ads_source/refs/heads/main/models/src_facebook_ads.yml
+source_streams: []
+target_tables: []
