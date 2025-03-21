@@ -266,5 +266,69 @@ def create_airbyte_data(
     console.print(f"Synced {source_name} data to {db_path}")
 
 
+@main.command()
+@click.argument("source_name", type=str)
+@click.argument("project_name", type=str)
+@click.option(
+    "--output-dir",
+    help="Output directory for generated transform files (defaults to catalog/{source_name}/src/{project_name}/transforms)",
+)
+def generate_transform_scaffold(
+    source_name: str,
+    project_name: str,
+    output_dir: str | None = None,
+) -> None:
+    """Generate scaffold mapping YAML files for target tables.
+
+    This command generates blank mapping YAML files for any target tables
+    that are not yet defined. The generated files will include all fields
+    from the target schema but with MISSING expressions.
+
+    SOURCE_NAME: Name of the source (e.g., 'hubspot')
+    PROJECT_NAME: Name of the project (e.g., 'fivetran-interop')
+    """
+    from pathlib import Path
+
+    from morph.utils.transform_scaffold import (
+        generate_mapping_files,
+        get_target_schema,
+        load_config,
+        report_results,
+    )
+
+    # Set default paths if not provided
+    config_file = f"catalog/{source_name}/src/{project_name}/config.yml"
+    if not output_dir:
+        output_dir = f"catalog/{source_name}/src/{project_name}/transforms"
+
+    # Set path for local target schema file
+    requirements_dir = f"catalog/{source_name}/requirements/{project_name}"
+    Path(requirements_dir).mkdir(parents=True, exist_ok=True)
+
+    # Load config and target schema
+    config, target_tables = load_config(config_file)
+    if not config or not target_tables:
+        return
+
+    target_schema = get_target_schema(config, requirements_dir)
+    if not target_schema:
+        return
+
+    # Create output directory
+    output_path = Path(output_dir)
+    output_path.mkdir(parents=True, exist_ok=True)
+
+    # Process each target table
+    created_files = generate_mapping_files(
+        source_name,
+        project_name,
+        target_tables,
+        target_schema,
+        output_path,
+    )
+
+    report_results(created_files)
+
+
 if __name__ == "__main__":
     main()

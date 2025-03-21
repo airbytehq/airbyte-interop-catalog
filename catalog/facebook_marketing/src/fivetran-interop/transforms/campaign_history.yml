@@ -1,0 +1,43 @@
+domain: facebook_marketing.fivetran-interop
+transforms:
+- display_name: Each record in this table reflects a version of a Facebook campaign.
+  id: campaign_history
+  from:
+  - campaign_historys: airbyte_raw_facebook_marketing.campaign_historys
+  fields:
+    id:
+      expression: MISSING
+      description: The ID of the campaign.
+    account_id:
+      expression: MISSING
+      description: The ID of the ad account that this campaign belongs to.
+    name:
+      expression: MISSING
+      description: The name of the campaign.
+    _fivetran_synced:
+      expression: MISSING
+      description: '{{ doc(''_fivetran_synced'') }}'
+    updated_time:
+      expression: MISSING
+      description: '{{ doc(''updated_time'') }}'
+    created_time:
+      expression: MISSING
+      description: The time the campaign was created.
+    start_time:
+      expression: MISSING
+      description: Timestamp of designated campaign start time.
+    stop_time:
+      expression: MISSING
+      description: Timestamp of designated campaign end time.
+    daily_budget:
+      expression: MISSING
+      description: Daily budget of campaign.
+    budget_remaining:
+      expression: MISSING
+      description: Remaining budget of campaign.
+    lifetime_budget:
+      expression: MISSING
+      description: Lifetime budget of the campaign.
+    status:
+      expression: MISSING
+      description: Status values are - 'ACTIVE', 'PAUSED', 'DELETED', 'ARCHIVED'.
