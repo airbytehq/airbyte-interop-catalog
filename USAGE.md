@@ -43,6 +43,7 @@ To add a new connector to the catalog:
 4. Extract the data into a local DuckDB database for the source. You can see an example in the `scripts` directory.
 
 5. Create mapping files in `src/transforms/fivetran-interop/` for each table to transform:
+
    - Define the domain (e.g., `new_connector.fivetran-interop`)
    - Specify source tables and their aliasing
    - Map fields from source to target schema
@@ -80,13 +81,13 @@ When mapping fields:
 1. **Generate the raw data**
 
    ```bash
-   uv run --no-project scripts/create_hubspot_data.py
+   uv run morph create_airbyte_data hubspot fivetran-interop
    ```
 
 2. **Generate the Airbyte catalog**
 
    ```bash
-   uv run --no-project scripts/create_hubspot_catalog.py
+   uv run morph create_airbyte_catalog hubspot fivetran-interop
    ```
 
 3. **Generate the dbt project**
