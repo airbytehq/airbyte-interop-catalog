@@ -1,0 +1,49 @@
+{
+  "streams": [
+    {
+      "name": "ad_account",
+      "json_schema": {
+        "$ref": "../schemas/ad_account.json"
+      },
+      "supported_sync_modes": ["full_refresh", "incremental"],
+      "source_defined_cursor": true,
+      "default_cursor_field": ["updated_time"]
+    },
+    {
+      "name": "ads",
+      "json_schema": {
+        "$ref": "../schemas/ads.json"
+      },
+      "supported_sync_modes": ["full_refresh", "incremental"],
+      "source_defined_cursor": true,
+      "default_cursor_field": ["updated_time"]
+    },
+    {
+      "name": "campaigns",
+      "json_schema": {
+        "$ref": "../schemas/campaigns.json"
+      },
+      "supported_sync_modes": ["full_refresh", "incremental"],
+      "source_defined_cursor": true,
+      "default_cursor_field": ["updated_time"]
+    },
+    {
+      "name": "ad_creatives",
+      "json_schema": {
+        "$ref": "../schemas/ad_creatives.json"
+      },
+      "supported_sync_modes": ["full_refresh", "incremental"],
+      "source_defined_cursor": true,
+      "default_cursor_field": ["updated_time"]
+    },
+    {
+      "name": "ad_sets",
+      "json_schema": {
+        "$ref": "../schemas/ad_sets.json"
+      },
+      "supported_sync_modes": ["full_refresh", "incremental"],
+      "source_defined_cursor": true,
+      "default_cursor_field": ["updated_time"]
+    }
+  ]
+}

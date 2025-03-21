@@ -1,0 +1,106 @@
+version: 2
+
+sources:
+  - name: facebook_marketing
+    schema: "{{ var('facebook_marketing_schema', 'facebook_marketing') }}"
+    tables:
+      - name: ad_account
+        identifier: "{{ var('ad_account_identifier', 'ad_account') }}"
+        description: Facebook ad account data
+        columns:
+          - name: id
+            description: The ID of the ad account
+          - name: name
+            description: Name of the account
+          - name: account_status
+            description: Current status of account
+          - name: business_country_code
+            description: Country code of business associated to account
+          - name: created_time
+            description: The time account was created
+          - name: currency
+            description: Currency associated with account
+          - name: timezone_name
+            description: Timezone associated with account
+          - name: _airbyte_extracted_at
+            description: Timestamp of when the data was extracted from the source
+
+      - name: ads
+        identifier: "{{ var('ads_identifier', 'ads') }}"
+        description: Facebook ads data
+        columns:
+          - name: id
+            description: The ID of this ad
+          - name: account_id
+            description: The ID of the ad account that this ad belongs to
+          - name: adset_id
+            description: ID of the ad set that contains the ad
+          - name: campaign_id
+            description: Ad campaign that contains this ad
+          - name: creative
+            description: The ID of the ad creative to be used by this ad
+          - name: name
+            description: Name of the ad
+          - name: updated_time
+            description: Time the ad was last updated
+          - name: _airbyte_extracted_at
+            description: Timestamp of when the data was extracted from the source
+
+      - name: campaigns
+        identifier: "{{ var('campaigns_identifier', 'campaigns') }}"
+        description: Facebook campaigns data
+        columns:
+          - name: id
+            description: The ID of the campaign
+          - name: account_id
+            description: The ID of the ad account that this campaign belongs to
+          - name: name
+            description: The name of the campaign
+          - name: updated_time
+            description: Time the campaign was last updated
+          - name: created_time
+            description: The time the campaign was created
+          - name: start_time
+            description: Timestamp of designated campaign start time
+          - name: stop_time
+            description: Timestamp of designated campaign end time
+          - name: daily_budget
+            description: Daily budget of campaign
+          - name: budget_remaining
+            description: Remaining budget of campaign
+          - name: lifetime_budget
+            description: Lifetime budget of the campaign
+          - name: status
+            description: Status values are - 'ACTIVE', 'PAUSED', 'DELETED', 'ARCHIVED'
+          - name: _airbyte_extracted_at
+            description: Timestamp of when the data was extracted from the source
+
+      - name: ad_creatives
+        identifier: "{{ var('ad_creatives_identifier', 'ad_creatives') }}"
+        description: Facebook ad creatives data
+        columns:
+          - name: id
+            description: The ID of the ad creative
+          - name: name
+            description: The name of the ad creative
+          - name: object_story_link_data_link
+            description: Link data for the ad creative
+          - name: template_page_link
+            description: Template page link for the ad creative
+          - name: page_link
+            description: Page link for the ad creative
+          - name: _airbyte_extracted_at
+            description: Timestamp of when the data was extracted from the source
+
+      - name: ad_sets
+        identifier: "{{ var('ad_sets_identifier', 'ad_sets') }}"
+        description: Facebook ad sets data
+        columns:
+          - name: id
+            description: The ID of the ad set
+          - name: name
+            description: The name of the ad set
+          - name: campaign_id
+            description: The ID of the campaign that contains this ad set
+          - name: _airbyte_extracted_at
+            description: Timestamp of when the data was extracted from the source
