@@ -44,14 +44,9 @@ def get_source(source_name: str, streams: list[str] | str = "*") -> ab.Source:
     Returns:
         An Airbyte source instance
     """
-    docker_image: bool | None = None
-    if source_name == "hubspot":
-        # Hubspot's CDK ref is not properly pinned in its pyproject.toml (needs airbyte-cdk==2.4.0)
-        # AND it needs the old version of pendulum so it isn't compatible with Python 3.12
-        docker_image = True
-    else:
-        # For other sources, use default behavior
-        docker_image = None
+    # Hubspot's CDK ref is not properly pinned in its pyproject.toml (needs airbyte-cdk==2.4.0)
+    # AND it needs the old version of pendulum so it isn't compatible with Python 3.12
+    docker_image = True if source_name == "hubspot" else None
 
     return ab.get_source(
         f"source-{source_name}",
