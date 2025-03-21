@@ -257,10 +257,11 @@ def create_airbyte_data(
         return
 
     config = yaml.safe_load(config_path.read_text())
-    streams = config.get("streams", [])
+    source_streams = config.get("source_streams", [])
+    target_tables = config.get("target_tables", [])
 
-    console.print(f"Syncing {source_name} data for streams: {', '.join(streams)}...")
-    sync_source(source_name, streams, db_path)
+    console.print(f"Syncing {source_name} data for streams: {', '.join(source_streams)}...")
+    sync_source(source_name, source_streams, db_path)
     console.print(f"Synced {source_name} data to {db_path}")
 
 

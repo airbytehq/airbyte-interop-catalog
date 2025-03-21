@@ -1,4 +1,12 @@
-streams:
+source_streams:
+  - companies
+  - contacts
+  - deals
+  - forms
+  - owners
+  - tickets
+
+target_tables:
   - company
   - contact
   - deal
