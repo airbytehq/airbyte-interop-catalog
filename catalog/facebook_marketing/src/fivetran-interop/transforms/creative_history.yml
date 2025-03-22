@@ -3,28 +3,28 @@ transforms:
 - display_name: Each record in this table reflects a version of a Facebook creative.
   id: creative_history
   from:
-  - creative: facebook_marketing.ad_creatives
+  - ad_creatives: facebook_marketing.ad_creatives
   fields:
     _fivetran_id:
       expression: MISSING
       description: Unique record identifier
     page_link:
-      expression: creative.link_url
+      expression: ad_creatives.link_url
       description: URL destination of Facebook ads.
     template_page_link:
-      expression: creative.template_url
+      expression: ad_creatives.template_url
       description: URL destination of Facebook dynamic ads.
     id:
-      expression: creative.id
+      expression: ad_creatives.id
       description: Unique ID for an ad creative.
     account_id:
-      expression: creative.account_id
+      expression: ad_creatives.account_id
       description: Ad account ID for the account this ad creative belongs to.
     name:
-      expression: creative.name
+      expression: ad_creatives.name
       description: Name of this ad creative as seen in the ad account's library.
     url_tags:
-      expression: creative.url_tags
+      expression: ad_creatives.url_tags
       description: A set of query string parameters which will replace or be appended
         to urls clicked from page post ads, message of the post, and canvas app install
         creatives only.
@@ -63,7 +63,7 @@ transforms:
       description: Link of the template app for iphone
   annotations:
     unused_source_fields:
-      creative:
+      ad_creatives:
         - body
         - object_story_id
         - image_url

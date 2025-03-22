@@ -3,38 +3,38 @@ transforms:
 - display_name: Each record in this table reflects a version of a Facebook ad.
   id: ad_history
   from:
-  - ad: facebook_marketing.ads
+  - ads: facebook_marketing.ads
   fields:
     id:
-      expression: ad.id
+      expression: ads.id
       description: The ID of this ad.
     account_id:
-      expression: ad.account_id
+      expression: ads.account_id
       description: The ID of the ad account that this ad belongs to.
     ad_set_id:
-      expression: ad.adset_id
+      expression: ads.adset_id
       description: ID of the ad set that contains the ad.
     campaign_id:
-      expression: ad.campaign_id
+      expression: ads.campaign_id
       description: Ad campaign that contains this ad.
     creative_id:
       expression: MISSING
       description: The ID of the ad creative to be used by this ad.
     name:
-      expression: ad.name
+      expression: ads.name
       description: Name of the ad.
     _fivetran_synced:
       expression: _airbyte_extracted_at
       description: '{{ doc(''_fivetran_synced'') }}'
     updated_time:
-      expression: ad.updated_time
+      expression: ads.updated_time
       description: '{{ doc(''updated_time'') }}'
     conversion_domain:
       expression: MISSING
       description: The domain you've configured the ad to convert to.
   annotations:
     unused_source_fields:
-      ad:
+      ads:
         - bid_type
         - adlabels
         - bid_amount

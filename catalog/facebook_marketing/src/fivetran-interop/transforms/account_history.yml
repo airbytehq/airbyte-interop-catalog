@@ -3,35 +3,35 @@ transforms:
 - display_name: Each record in this table reflects a version of a Facebook ad account.
   id: account_history
   from:
-  - account: facebook_marketing.ad_account
+  - ad_account: facebook_marketing.ad_account
   fields:
     id:
-      expression: account.id
+      expression: ad_account.id
       description: The ID of the ad account.
     name:
-      expression: account.name
+      expression: ad_account.name
       description: Name of the account.
     _fivetran_synced:
       expression: _airbyte_extracted_at
       description: '{{ doc(''_fivetran_synced'') }}'
     account_status:
-      expression: account.account_status
+      expression: ad_account.account_status
       description: Current status of account.
     business_country_code:
-      expression: account.business_country_code
+      expression: ad_account.business_country_code
       description: Country code of business associated to account.
     created_time:
-      expression: account.created_time
+      expression: ad_account.created_time
       description: The time account was created.
     currency:
-      expression: account.currency
+      expression: ad_account.currency
       description: Currency associated with account.
     timezone_name:
-      expression: account.timezone_name
+      expression: ad_account.timezone_name
       description: Timezone associated with account.
   annotations:
     unused_source_fields:
-      account:
+      ad_account:
         - account_id
         - age
         - amount_spent
