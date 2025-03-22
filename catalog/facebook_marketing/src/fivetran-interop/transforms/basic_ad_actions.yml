@@ -4,7 +4,7 @@ transforms:
     Facebook. This is the prebuilt `basic_ad` report broken down by `action_type`.
   id: basic_ad_actions
   from:
-  - UNKNOWN: UNKNOWN
+  - ads_insights_action_type: facebook_marketing.ads_insights_action_type
   fields:
     _1_d_view:
       expression: MISSING
@@ -27,10 +27,10 @@ transforms:
       expression: MISSING
       description: Defunct field.
     _fivetran_synced:
-      expression: MISSING
+      expression: _airbyte_extracted_at
       description: '{{ doc(''_fivetran_synced'') }}'
     action_type:
-      expression: MISSING
+      expression: ads_insights_action_type.action_type
       description: 'The kind of actions taken on your ad, Page, app or event after
         your ad was served to someone, even if they didn''t click on it. Action types
         include Page likes, app installs, conversions, event responses and more. Actions
@@ -39,7 +39,7 @@ transforms:
 
         '
     ad_id:
-      expression: MISSING
+      expression: ads_insights_action_type.ad_id
       description: The ID of the ad the report relates to.
     date:
       expression: MISSING
@@ -54,5 +54,30 @@ transforms:
         on the ad itself. Not included in downstream models by default, but can be
         added using the `facebook_ads__basic_ad_actions_passthrough_metrics` var.
     value:
-      expression: MISSING
+      expression: ads_insights_action_type.value
       description: Conversion metric value using the default attribution window.
+  annotations:
+    unused_source_fields:
+      ads_insights_action_type:
+        - _airbyte_meta
+        - _airbyte_raw_id
+        - account_id
+        - account_name
+        - action_destination
+        - action_target_id
+        - action_attribution_windows
+        - action_carousel_card_id
+        - action_carousel_card_name
+        - action_converted_product_id
+        - action_device
+        - action_event_channel
+        - action_reaction
+        - action_video_sound
+        - action_video_type
+        - ad_name
+        - adset_id
+        - adset_name
+        - campaign_id
+        - campaign_name
+        - inline_link_clicks
+        - objective

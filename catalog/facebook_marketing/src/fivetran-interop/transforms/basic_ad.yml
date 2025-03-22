@@ -3,13 +3,13 @@ transforms:
 - display_name: Each record represents the daily performance of an ad in Facebook.
   id: basic_ad
   from:
-  - UNKNOWN: UNKNOWN
+  - ads_insights: facebook_marketing.ads_insights
   fields:
     ad_id:
-      expression: MISSING
+      expression: ads_insights.ad_id
       description: The ID of the ad the report relates to.
     ad_name:
-      expression: MISSING
+      expression: ads_insights.ad_name
       description: Name of the ad the report relates to.
     adset_name:
       expression: MISSING
@@ -18,25 +18,37 @@ transforms:
       expression: MISSING
       description: The date of the reported performance.
     account_id:
-      expression: MISSING
+      expression: ads_insights.account_id
       description: The ID of the ad account that this ad belongs to.
     impressions:
-      expression: MISSING
+      expression: ads_insights.impressions
       description: The number of impressions the ad had on the given day.
     inline_link_clicks:
       expression: MISSING
       description: The number of clicks the ad had on the given day.
     spend:
-      expression: MISSING
+      expression: ads_insights.spend
       description: The spend on the ad in the given day.
     reach:
-      expression: MISSING
+      expression: ads_insights.reach
       description: The number of people who saw any content from your Page or about
         your Page. This metric is estimated.
     frequency:
-      expression: MISSING
+      expression: ads_insights.frequency
       description: The average number of times each person saw your ad; it is calculated
         as impressions divided by reach.
     _fivetran_synced:
-      expression: MISSING
+      expression: _airbyte_extracted_at
       description: '{{ doc(''_fivetran_synced'') }}'
+  annotations:
+    unused_source_fields:
+      ads_insights:
+        - account_currency
+        - account_name
+        - action_values
+        - actions
+        - ad_click_actions
+        - ad_impression_actions
+        - adset_id
+        - _airbyte_meta
+        - _airbyte_raw_id
