@@ -100,4 +100,4 @@ Contains example projects demonstrating how to use the generated models:
 
 ## Adding a New Connector
 
-Check the [Usage Guide Docs](../USAGE.md) for information on creating and maintaining a new connector.
+Check the [Usage Guide Docs](../docs/USAGE.md) for information on creating and maintaining a new connector.
