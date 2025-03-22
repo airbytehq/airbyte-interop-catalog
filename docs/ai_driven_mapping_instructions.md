@@ -11,9 +11,9 @@ The guide is designed to be used by AI agents or developers who need to create o
 The mapping process involves the following high-level steps:
 
 1. **Identify Source and Target Schemas**: Locate the source schema (Airbyte connector) and target schema (Fivetran-compatible) YAML files.
-2. **Create Mapping Reference Chart**: Document the relationships between source streams and target tables.
-3. **Update Transform Files**: Modify the "from" clauses in transform files to correctly map source streams to target tables.
-4. **Update Field Expressions**: Map source fields to target fields, ensuring data types and semantics match.
+2. **Update Transform Files**: Modify the "from" clauses in transform files to correctly map source streams to target tables.
+3. **Update Field Expressions**: Map source fields to target fields, ensuring data types and semantics match.
+4. **Document Unused Fields**: Add annotations for unused source fields in the mapping YAML files.
 5. **Verify Mappings**: Ensure all mappings are complete and accurate.
 
 ## Source and Target Schema Analysis
@@ -70,7 +70,7 @@ For example, for the Facebook Marketing connector:
    - Similar field structures
    - Similar descriptions and purposes
 
-3. Document these mappings in a reference chart for clarity.
+3. Document these mappings directly in the transform YAML files, which serve as both the mapping configuration and documentation.
 
 ### Step 2: Update Transform Files
 
@@ -196,7 +196,7 @@ transforms:
 
 **Solution**:
 - Create consistent mapping patterns (e.g., `properties_firstname` → `property_firstname`)
-- Document these patterns in the mapping reference chart
+- Document these patterns in the transform files
 - Use explicit mappings rather than assuming patterns
 
 ### Challenge 3: Complex Transformations
