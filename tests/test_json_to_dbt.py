@@ -1,7 +1,6 @@
 """Tests for the JSON to dbt sources conversion functionality."""
 
 import json
-import os
 import tempfile
 from pathlib import Path
 

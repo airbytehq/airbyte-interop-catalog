@@ -1,96 +1,97 @@
 domain: facebook_marketing.fivetran-interop
 transforms:
-- display_name: Each record in this table reflects a version of a Facebook creative.
-  id: creative_history
-  from:
-  - ad_creatives: facebook_marketing.ad_creatives
-  fields:
-    _fivetran_id:
-      expression: MISSING
-      description: Unique record identifier
-    page_link:
-      expression: ad_creatives.link_url
-      description: URL destination of Facebook ads.
-    template_page_link:
-      expression: ad_creatives.template_url
-      description: URL destination of Facebook dynamic ads.
-    id:
-      expression: ad_creatives.id
-      description: Unique ID for an ad creative.
-    account_id:
-      expression: ad_creatives.account_id
-      description: Ad account ID for the account this ad creative belongs to.
-    name:
-      expression: ad_creatives.name
-      description: Name of this ad creative as seen in the ad account's library.
-    url_tags:
-      expression: ad_creatives.url_tags
-      description: A set of query string parameters which will replace or be appended
-        to urls clicked from page post ads, message of the post, and canvas app install
-        creatives only.
-    _fivetran_synced:
-      expression: _airbyte_extracted_at
-      description: '{{ doc(''_fivetran_synced'') }}'
-    asset_feed_spec_link_urls:
-      expression: MISSING
-      description: Link to the asset feed spec
-    object_story_link_data_child_attachments:
-      expression: MISSING
-      description: Link of the object story child attachments
-    object_story_link_data_caption:
-      expression: MISSING
-      description: Link of the object story caption
-    object_story_link_data_description:
-      expression: MISSING
-      description: Link of the object story description
-    object_story_link_data_link:
-      expression: MISSING
-      description: Link of the object story link
-    object_story_link_data_message:
-      expression: MISSING
-      description: Link of the object story message
-    template_app_link_spec_ios:
-      expression: MISSING
-      description: Link of the object story spec for ios
-    template_app_link_spec_ipad:
-      expression: MISSING
-      description: Link of the template app spec for ipad
-    template_app_link_spec_android:
-      expression: MISSING
-      description: Link of the template app for android
-    template_app_link_spec_iphone:
-      expression: MISSING
-      description: Link of the template app for iphone
-  annotations:
-    unused_source_fields:
-      ad_creatives:
-        - body
-        - object_story_id
-        - image_url
-        - actor_id
-        - adlabels
-        - applink_treatment
-        - asset_feed_spec
-        - call_to_action_type
-        - effective_instagram_story_id
-        - effective_object_story_id
-        - title
-        - image_crops
-        - instagram_actor_id
-        - instagram_permalink_url
-        - instagram_story_id
-        - link_og_id
-        - object_id
-        - object_story_spec
-        - object_type
-        - object_url
-        - product_set_id
-        - source_instagram_media_id
-        - status
-        - template_url_spec
-        - thumbnail_data_url
-        - thumbnail_url
-        - image_hash
-        - video_id
-        - _airbyte_meta
-        - _airbyte_raw_id
+  - display_name: Each record in this table reflects a version of a Facebook creative.
+    id: creative_history
+    from:
+      - ad_creatives: facebook_marketing.ad_creatives
+    fields:
+      _fivetran_id:
+        expression: MISSING
+        description: Unique record identifier
+      page_link:
+        expression: ad_creatives.link_url
+        description: URL destination of Facebook ads.
+      template_page_link:
+        expression: ad_creatives.template_url
+        description: URL destination of Facebook dynamic ads.
+      id:
+        expression: ad_creatives.id
+        description: Unique ID for an ad creative.
+      account_id:
+        expression: ad_creatives.account_id
+        description: Ad account ID for the account this ad creative belongs to.
+      name:
+        expression: ad_creatives.name
+        description: Name of this ad creative as seen in the ad account's library.
+      url_tags:
+        expression: ad_creatives.url_tags
+        description:
+          A set of query string parameters which will replace or be appended
+          to urls clicked from page post ads, message of the post, and canvas app install
+          creatives only.
+      _fivetran_synced:
+        expression: _airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      asset_feed_spec_link_urls:
+        expression: MISSING
+        description: Link to the asset feed spec
+      object_story_link_data_child_attachments:
+        expression: MISSING
+        description: Link of the object story child attachments
+      object_story_link_data_caption:
+        expression: MISSING
+        description: Link of the object story caption
+      object_story_link_data_description:
+        expression: MISSING
+        description: Link of the object story description
+      object_story_link_data_link:
+        expression: MISSING
+        description: Link of the object story link
+      object_story_link_data_message:
+        expression: MISSING
+        description: Link of the object story message
+      template_app_link_spec_ios:
+        expression: MISSING
+        description: Link of the object story spec for ios
+      template_app_link_spec_ipad:
+        expression: MISSING
+        description: Link of the template app spec for ipad
+      template_app_link_spec_android:
+        expression: MISSING
+        description: Link of the template app for android
+      template_app_link_spec_iphone:
+        expression: MISSING
+        description: Link of the template app for iphone
+    annotations:
+      unused_source_fields:
+        ad_creatives:
+          - body
+          - object_story_id
+          - image_url
+          - actor_id
+          - adlabels
+          - applink_treatment
+          - asset_feed_spec
+          - call_to_action_type
+          - effective_instagram_story_id
+          - effective_object_story_id
+          - title
+          - image_crops
+          - instagram_actor_id
+          - instagram_permalink_url
+          - instagram_story_id
+          - link_og_id
+          - object_id
+          - object_story_spec
+          - object_type
+          - object_url
+          - product_set_id
+          - source_instagram_media_id
+          - status
+          - template_url_spec
+          - thumbnail_data_url
+          - thumbnail_url
+          - image_hash
+          - video_id
+          - _airbyte_meta
+          - _airbyte_raw_id

@@ -8,11 +8,13 @@ It depends on the generated Airbyte HubSpot models and exposes them in a Fivetra
 This project depends on the generated Airbyte HubSpot models. To use it:
 
 1. Install dependencies:
+
    ```
    poe dbt-deps
    ```
 
 2. Compile the project:
+
    ```
    poe dbt-compile
    ```
