@@ -167,6 +167,25 @@ When mapping fields:
    uv run dbt compile --profiles-dir profiles
    ```
 
+## Lock Files
+
+When generating a project, Morph creates a `morph-lock.toml` file in the `catalog/{source_name}/src/` directory. This file tracks:
+
+- Unused source streams: Streams in the source schema that aren't used in any mapping files
+- Unused source fields: Fields in the source streams that aren't used in any mapping
+- Unmapped target tables: Tables in the target schema that don't have corresponding mapping files
+- Omitted target fields: Fields in the target schema that aren't mapped in the transformation
+
+The lock file helps identify gaps in your transformations and can be used for tracking and documentation purposes.
+
+To generate only the lock file without rebuilding the entire project, use the `lock` command:
+
+```bash
+uv run morph lock [source_name] [project_name]
+```
+
+To skip generating the lock file during project generation, use the `--no-lock-file` flag with the `generate-project` command.
+
 ## JSON Schema to dbt Sources
 
 Morph can also convert JSON schema files to dbt source definitions:

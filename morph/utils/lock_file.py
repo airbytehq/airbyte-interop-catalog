@@ -10,10 +10,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-import yaml
-
 import tomli_w as toml_writer
-
+import yaml
 from rich.console import Console
 
 console = Console()
@@ -149,14 +147,14 @@ def find_missing_target_fields(
         List of fields marked as MISSING
     """
     missing_fields = []
-    
+
     for field_name, field_config in fields.items():
         expression = field_config.get("expression")
-        
+
         # Check if expression is "MISSING"
         if expression == "MISSING":
             missing_fields.append(field_name)
-            
+
     return sorted(missing_fields)
 
 
@@ -172,7 +170,10 @@ def extract_source_streams(source_name: str) -> list[str]:
     # Try to load from generated source schema
     source_schema_path = Path(f"catalog/{source_name}/generated/src_airbyte_hubspot.yml")
     if not source_schema_path.exists():
-        console.print(f"Warning: Generated source schema file not found at {source_schema_path}", style="yellow")
+        console.print(
+            f"Warning: Generated source schema file not found at {source_schema_path}",
+            style="yellow",
+        )
         return []
 
     try:
@@ -202,7 +203,9 @@ def extract_target_tables(source_name: str, project_name: str) -> list[str]:
     # Try to load from requirements file
     requirements_path = Path(f"catalog/{source_name}/requirements/{project_name}/src_hubspot.yml")
     if not requirements_path.exists():
-        console.print(f"Warning: Requirements file not found at {requirements_path}", style="yellow")
+        console.print(
+            f"Warning: Requirements file not found at {requirements_path}", style="yellow",
+        )
         return []
 
     try:
@@ -294,7 +297,7 @@ def generate_lock_file_for_project(
     if not source_streams:
         console.print("Warning: Falling back to config file for source streams", style="yellow")
         source_streams = config.get("source_streams", [])
-    
+
     if not target_tables:
         console.print("Warning: Falling back to config file for target tables", style="yellow")
         target_tables = config.get("target_tables", [])

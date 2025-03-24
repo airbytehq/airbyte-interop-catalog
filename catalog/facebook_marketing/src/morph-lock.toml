@@ -1,0 +1,302 @@
+[project]
+source_name = "facebook_marketing"
+project_name = "fivetran-interop"
+generated_at = "2025-03-24T19:32:00Z"
+requirements_file = "requirements/fivetran-interop/src_hubspot.yml"
+requirements_file_hash = ""
+airbyte_source_file = "generated/src_airbyte_hubspot.yml"
+airbyte_source_file_hash = ""
+
+[coverage]
+unused_source_streams = [
+    "activities",
+    "custom_audiences",
+    "custom_conversions",
+    "images",
+    "videos",
+]
+unmapped_target_tables = []
+
+[mappings.account_history]
+source_file = "account_history.yml"
+source_file_hash = "39e57c1b8db975d6d3cf3d071b818bad2d5bf63c7b348139be2a9f4f5799b6a3"
+omitted_target_fields = []
+unmapped_target_fields = []
+
+[mappings.account_history.unused_source_fields]
+ad_account = [
+    "account_id",
+    "age",
+    "amount_spent",
+    "balance",
+    "business",
+    "business_city",
+    "business_name",
+    "business_state",
+    "business_street",
+    "business_street2",
+    "business_zip",
+    "can_create_brand_lift_study",
+    "capabilities",
+    "disable_reason",
+    "end_advertiser",
+    "end_advertiser_name",
+    "extended_credit_invoice_group",
+    "failed_delivery_checks",
+    "fb_entity",
+    "funding_source",
+    "funding_source_details",
+    "has_migrated_permissions",
+    "io_number",
+    "is_attribution_spec_system_default",
+    "is_direct_deals_enabled",
+    "is_in_3ds_authorization_enabled_market",
+    "is_notifications_enabled",
+    "is_personal",
+    "is_prepay_account",
+    "is_tax_id_required",
+    "line_numbers",
+    "media_agency",
+    "min_campaign_group_spend_cap",
+    "min_daily_budget",
+    "offsite_pixels_tos_accepted",
+    "owner",
+    "partner",
+    "rf_spec",
+    "spend_cap",
+    "tax_id",
+    "tax_id_status",
+    "tax_id_type",
+    "timezone_id",
+    "timezone_offset_hours_utc",
+    "tos_accepted",
+    "user_tasks",
+    "user_tos_accepted",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+]
+
+[mappings.creative_history]
+source_file = "creative_history.yml"
+source_file_hash = "76068e9c1a2606c007c87f827bab262a97e6d420dec5235aa78f7c7e3f02bd9d"
+omitted_target_fields = []
+unmapped_target_fields = [
+    "_fivetran_id",
+    "asset_feed_spec_link_urls",
+    "object_story_link_data_caption",
+    "object_story_link_data_child_attachments",
+    "object_story_link_data_description",
+    "object_story_link_data_link",
+    "object_story_link_data_message",
+    "template_app_link_spec_android",
+    "template_app_link_spec_ios",
+    "template_app_link_spec_ipad",
+    "template_app_link_spec_iphone",
+]
+
+[mappings.creative_history.unused_source_fields]
+ad_creatives = [
+    "body",
+    "object_story_id",
+    "image_url",
+    "actor_id",
+    "adlabels",
+    "applink_treatment",
+    "asset_feed_spec",
+    "call_to_action_type",
+    "effective_instagram_story_id",
+    "effective_object_story_id",
+    "title",
+    "image_crops",
+    "instagram_actor_id",
+    "instagram_permalink_url",
+    "instagram_story_id",
+    "link_og_id",
+    "object_id",
+    "object_story_spec",
+    "object_type",
+    "object_url",
+    "product_set_id",
+    "source_instagram_media_id",
+    "status",
+    "template_url_spec",
+    "thumbnail_data_url",
+    "thumbnail_url",
+    "image_hash",
+    "video_id",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+]
+
+[mappings.ad_set_history]
+source_file = "ad_set_history.yml"
+source_file_hash = "bf34f2354335b5cb325a91169c1f79b8c4e46aff4448bab2ec516cb91654eccd"
+omitted_target_fields = []
+unmapped_target_fields = [
+    "optimization_goal",
+    "status",
+]
+
+[mappings.ad_set_history.unused_source_fields]
+ad_sets = [
+    "promoted_object",
+    "created_time",
+    "lifetime_budget",
+    "targeting",
+    "bid_info",
+    "bid_amount",
+    "bid_constraints",
+    "adlabels",
+    "learning_stage_info",
+    "effective_status",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+]
+
+[mappings.basic_ad_actions]
+source_file = "basic_ad_actions.yml"
+source_file_hash = "3bfc05493526705a595eda467cd1d5971049967b012c09d2bdd7a767c1257a5c"
+omitted_target_fields = []
+unmapped_target_fields = [
+    "_1_d_view",
+    "_28_d_click",
+    "_7_d_click",
+    "_fivetran_id",
+    "date",
+    "index",
+    "inline",
+]
+
+[mappings.basic_ad_actions.unused_source_fields]
+ads_insights_action_type = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "account_id",
+    "account_name",
+    "action_destination",
+    "action_target_id",
+    "action_attribution_windows",
+    "action_carousel_card_id",
+    "action_carousel_card_name",
+    "action_converted_product_id",
+    "action_device",
+    "action_event_channel",
+    "action_reaction",
+    "action_video_sound",
+    "action_video_type",
+    "ad_name",
+    "adset_id",
+    "adset_name",
+    "campaign_id",
+    "campaign_name",
+    "inline_link_clicks",
+    "objective",
+]
+
+[mappings.basic_ad_action_values]
+source_file = "basic_ad_action_values.yml"
+source_file_hash = "039aa670f908725d535ffb7db089b17e11ce7a089b3d455116cada07e5eca06a"
+omitted_target_fields = []
+unmapped_target_fields = [
+    "_7_d_click",
+    "_fivetran_id",
+    "date",
+    "index",
+]
+
+[mappings.basic_ad_action_values.unused_source_fields]
+ads_insights_action_type = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "account_id",
+    "account_name",
+    "action_destination",
+    "action_target_id",
+    "action_attribution_windows",
+    "action_carousel_card_id",
+    "action_carousel_card_name",
+    "action_converted_product_id",
+    "action_device",
+    "action_event_channel",
+    "action_reaction",
+    "action_video_sound",
+    "action_video_type",
+    "ad_name",
+    "adset_id",
+    "adset_name",
+    "campaign_id",
+    "campaign_name",
+    "inline_link_clicks",
+    "objective",
+]
+
+[mappings.campaign_history]
+source_file = "campaign_history.yml"
+source_file_hash = "28bd37c74b9fd4dfe0fb09bf1ecf191012adbce336bdae1c6993c1eeb536cb9a"
+omitted_target_fields = []
+unmapped_target_fields = []
+
+[mappings.campaign_history.unused_source_fields]
+campaigns = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "effective_status",
+    "objective",
+    "special_ad_categories",
+    "bid_strategy",
+    "issues_info",
+    "buying_type",
+    "configured_status",
+]
+
+[mappings.ad_history]
+source_file = "ad_history.yml"
+source_file_hash = "32e29b34177247abc31839e34a5e0f3cd824fef1d05686524f96b4ed49746481"
+omitted_target_fields = []
+unmapped_target_fields = [
+    "conversion_domain",
+    "creative_id",
+]
+
+[mappings.ad_history.unused_source_fields]
+ads = [
+    "bid_type",
+    "adlabels",
+    "bid_amount",
+    "bid_info",
+    "status",
+    "creative",
+    "created_time",
+    "targeting",
+    "effective_status",
+    "last_updated_by_app_id",
+    "recommendations",
+    "source_ad_id",
+    "tracking_specs",
+    "conversion_specs",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+]
+
+[mappings.basic_ad]
+source_file = "basic_ad.yml"
+source_file_hash = "f1621416d8530a1318ee3832a09679edea70a19eee59dc4b1bfad82fc92b859c"
+omitted_target_fields = []
+unmapped_target_fields = [
+    "adset_name",
+    "date",
+    "inline_link_clicks",
+]
+
+[mappings.basic_ad.unused_source_fields]
+ads_insights = [
+    "account_currency",
+    "account_name",
+    "action_values",
+    "actions",
+    "ad_click_actions",
+    "ad_impression_actions",
+    "adset_id",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+]
