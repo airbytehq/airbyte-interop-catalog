@@ -5,9 +5,7 @@ ignore: |
   **/requirements/**
 
 rules:
-  line-length:
-    max: 100
-    level: warning
+  line-length: disable
   document-start: disable
   truthy:
     allowed-values: ["true", "false", "on", "off", "yes", "no"]
