@@ -8,7 +8,7 @@ import yaml
 from rich.console import Console
 from rich.table import Table
 
-from morph.ai import get_mapping_confidence
+from morph.ai.eval import get_mapping_confidence
 from morph.utils.json_to_dbt_sources import (
     parse_airbyte_catalog,
 )
