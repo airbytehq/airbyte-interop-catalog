@@ -12,10 +12,7 @@ from typing import Any
 
 import yaml
 
-try:
-    import tomli_w as toml_writer
-except ImportError:
-    import tomli_w as toml_writer
+import tomli_w as toml_writer
 
 from rich.console import Console
 
