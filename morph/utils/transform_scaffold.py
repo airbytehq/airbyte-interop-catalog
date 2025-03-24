@@ -91,7 +91,10 @@ def find_table_schema(target_schema: dict[str, Any], table_name: str) -> dict[st
 
 
 def create_mapping_structure(
-    source_name: str, project_name: str, table_name: str, table_schema: dict[str, Any],
+    source_name: str,
+    project_name: str,
+    table_name: str,
+    table_schema: dict[str, Any],
 ) -> dict[str, Any]:
     """Create mapping structure for a table.
 

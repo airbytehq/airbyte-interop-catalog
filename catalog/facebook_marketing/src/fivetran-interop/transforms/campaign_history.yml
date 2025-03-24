@@ -1,55 +1,55 @@
 domain: facebook_marketing.fivetran-interop
 transforms:
-- display_name: Each record in this table reflects a version of a Facebook campaign.
-  id: campaign_history
-  from:
-  - campaigns: facebook_marketing.campaigns
-  fields:
-    id:
-      expression: campaigns.id
-      description: The ID of the campaign.
-    account_id:
-      expression: campaigns.account_id
-      description: The ID of the ad account that this campaign belongs to.
-    name:
-      expression: campaigns.name
-      description: The name of the campaign.
-    _fivetran_synced:
-      expression: _airbyte_extracted_at
-      description: '{{ doc(''_fivetran_synced'') }}'
-    updated_time:
-      expression: campaigns.updated_time
-      description: '{{ doc(''updated_time'') }}'
-    created_time:
-      expression: campaigns.created_time
-      description: The time the campaign was created.
-    start_time:
-      expression: campaigns.start_time
-      description: Timestamp of designated campaign start time.
-    stop_time:
-      expression: campaigns.stop_time
-      description: Timestamp of designated campaign end time.
-    daily_budget:
-      expression: campaigns.daily_budget
-      description: Daily budget of campaign.
-    budget_remaining:
-      expression: campaigns.budget_remaining
-      description: Remaining budget of campaign.
-    lifetime_budget:
-      expression: campaigns.lifetime_budget
-      description: Lifetime budget of the campaign.
-    status:
-      expression: campaigns.status
-      description: Status values are - 'ACTIVE', 'PAUSED', 'DELETED', 'ARCHIVED'.
-  annotations:
-    unused_source_fields:
-      campaigns:
-        - _airbyte_meta
-        - _airbyte_raw_id
-        - effective_status
-        - objective
-        - special_ad_categories
-        - bid_strategy
-        - issues_info
-        - buying_type
-        - configured_status
+  - display_name: Each record in this table reflects a version of a Facebook campaign.
+    id: campaign_history
+    from:
+      - campaigns: facebook_marketing.campaigns
+    fields:
+      id:
+        expression: campaigns.id
+        description: The ID of the campaign.
+      account_id:
+        expression: campaigns.account_id
+        description: The ID of the ad account that this campaign belongs to.
+      name:
+        expression: campaigns.name
+        description: The name of the campaign.
+      _fivetran_synced:
+        expression: _airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      updated_time:
+        expression: campaigns.updated_time
+        description: "{{ doc('updated_time') }}"
+      created_time:
+        expression: campaigns.created_time
+        description: The time the campaign was created.
+      start_time:
+        expression: campaigns.start_time
+        description: Timestamp of designated campaign start time.
+      stop_time:
+        expression: campaigns.stop_time
+        description: Timestamp of designated campaign end time.
+      daily_budget:
+        expression: campaigns.daily_budget
+        description: Daily budget of campaign.
+      budget_remaining:
+        expression: campaigns.budget_remaining
+        description: Remaining budget of campaign.
+      lifetime_budget:
+        expression: campaigns.lifetime_budget
+        description: Lifetime budget of the campaign.
+      status:
+        expression: campaigns.status
+        description: Status values are - 'ACTIVE', 'PAUSED', 'DELETED', 'ARCHIVED'.
+    annotations:
+      unused_source_fields:
+        campaigns:
+          - _airbyte_meta
+          - _airbyte_raw_id
+          - effective_status
+          - objective
+          - special_ad_categories
+          - bid_strategy
+          - issues_info
+          - buying_type
+          - configured_status

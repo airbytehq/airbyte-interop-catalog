@@ -26,17 +26,20 @@ For a connector named `{connector_name}`, the key schema files are:
 - **Target Schema**: `catalog/{connector_name}/requirements/fivetran-interop/src_{target_name}.yml`
 
 For example, for the Facebook Marketing connector:
+
 - Source: `catalog/facebook_marketing/generated/dbt_project/models/sources.yml`
 - Target: `catalog/facebook_marketing/requirements/fivetran-interop/src_facebook_ads.yml`
 
 ### Analyzing Schema Structures
 
 1. **Source Schema Structure**:
+
    - Contains tables under `sources` > `tables`
    - Each table has columns with name, type, and description
    - Represents the raw data extracted by Airbyte
 
 2. **Target Schema Structure**:
+
    - Contains tables under `sources` > `tables`
    - Each table has columns with name and description
    - Represents the Fivetran-compatible schema
@@ -51,13 +54,14 @@ For example, for the Facebook Marketing connector:
 ### Step 1: Identify Source-to-Target Table Mappings
 
 1. Review the `config.yml` file to identify source streams and target tables:
+
    ```yaml
    source_streams:
      - activities
      - ad_account
      - ad_creatives
      # ...
-   
+
    target_tables:
      - account_history
      - ad_history
@@ -66,6 +70,7 @@ For example, for the Facebook Marketing connector:
    ```
 
 2. Match source streams to target tables based on:
+
    - Similar naming patterns (e.g., `ad_account` → `account_history`)
    - Similar field structures
    - Similar descriptions and purposes
@@ -77,6 +82,7 @@ For example, for the Facebook Marketing connector:
 1. Locate transform files in `catalog/{connector_name}/src/fivetran-interop/transforms/`.
 
 2. Update the "from" clause in each transform file to map to the correct source stream:
+
    ```yaml
    from:
      - account: facebook_marketing.ad_account
@@ -87,6 +93,7 @@ For example, for the Facebook Marketing connector:
 ### Step 3: Map Standard Fields
 
 1. Map standard Fivetran fields to Airbyte equivalents:
+
    - `_fivetran_synced` → `_airbyte_extracted_at`
    - `_fivetran_deleted` → Source deletion indicator (e.g., `archived`)
 
@@ -94,12 +101,13 @@ For example, for the Facebook Marketing connector:
    ```yaml
    _fivetran_synced:
      expression: _airbyte_extracted_at
-     description: '{{ doc(''_fivetran_synced'') }}'
+     description: "{{ doc('_fivetran_synced') }}"
    ```
 
 ### Step 4: Map Entity-Specific Fields
 
 1. Map ID fields directly:
+
    ```yaml
    id:
      expression: account.id
@@ -107,6 +115,7 @@ For example, for the Facebook Marketing connector:
    ```
 
 2. Map name fields directly:
+
    ```yaml
    name:
      expression: account.name
@@ -123,11 +132,13 @@ For example, for the Facebook Marketing connector:
 ## Verification and Testing Recommendations
 
 1. **Completeness Check**:
+
    - Ensure all transform files have updated "from" clauses
    - Ensure all `_fivetran_synced` fields are mapped to `_airbyte_extracted_at`
    - Ensure all required fields have expressions (not `MISSING`)
 
 2. **Consistency Check**:
+
    - Ensure consistent naming patterns for source aliases
    - Ensure consistent field mapping patterns across files
 
@@ -143,21 +154,21 @@ For example, for the Facebook Marketing connector:
 ```yaml
 domain: facebook_marketing.fivetran-interop
 transforms:
-- display_name: Each record in this table reflects a version of a Facebook ad account.
-  id: account_history
-  from:
-  - account: facebook_marketing.ad_account
-  fields:
-    id:
-      expression: account.id
-      description: The ID of the ad account.
-    name:
-      expression: account.name
-      description: Name of the account.
-    _fivetran_synced:
-      expression: _airbyte_extracted_at
-      description: '{{ doc(''_fivetran_synced'') }}'
-    # Additional fields...
+  - display_name: Each record in this table reflects a version of a Facebook ad account.
+    id: account_history
+    from:
+      - account: facebook_marketing.ad_account
+    fields:
+      id:
+        expression: account.id
+        description: The ID of the ad account.
+      name:
+        expression: account.name
+        description: Name of the account.
+      _fivetran_synced:
+        expression: _airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      # Additional fields...
 ```
 
 ### Example 2: Basic Ad Mapping
@@ -165,18 +176,18 @@ transforms:
 ```yaml
 domain: facebook_marketing.fivetran-interop
 transforms:
-- display_name: Each record represents the daily performance of an ad in Facebook.
-  id: basic_ad
-  from:
-  - insights: facebook_marketing.ads_insights
-  fields:
-    ad_id:
-      expression: insights.ad_id
-      description: The ID of the ad the report relates to.
-    # Additional fields...
-    _fivetran_synced:
-      expression: _airbyte_extracted_at
-      description: '{{ doc(''_fivetran_synced'') }}'
+  - display_name: Each record represents the daily performance of an ad in Facebook.
+    id: basic_ad
+    from:
+      - insights: facebook_marketing.ads_insights
+    fields:
+      ad_id:
+        expression: insights.ad_id
+        description: The ID of the ad the report relates to.
+      # Additional fields...
+      _fivetran_synced:
+        expression: _airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
 ```
 
 ## Common Challenges and Solutions
@@ -186,6 +197,7 @@ transforms:
 **Problem**: The target schema requires fields that don't exist in the source schema.
 
 **Solution**:
+
 - Mark these fields with `expression: MISSING`
 - Document them in the `annotations` section
 - Consider adding custom transformations if the data can be derived
@@ -195,6 +207,7 @@ transforms:
 **Problem**: Source and target schemas use different naming conventions.
 
 **Solution**:
+
 - Create consistent mapping patterns (e.g., `properties_firstname` → `property_firstname`)
 - Document these patterns in the transform files
 - Use explicit mappings rather than assuming patterns
@@ -204,6 +217,7 @@ transforms:
 **Problem**: Some fields require complex transformations beyond simple mapping.
 
 **Solution**:
+
 - Use SQL expressions in the mapping when needed
 - Break down complex transformations into multiple steps
 - Document the transformation logic

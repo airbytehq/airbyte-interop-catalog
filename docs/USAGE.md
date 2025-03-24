@@ -37,6 +37,7 @@ To add a new connector to the catalog, follow these steps:
    ```
 
 6. Generate the project scaffold using the morph CLI:
+
    - This will generate the Airbyte catalog, mapping files, and dbt project.
    - Optionally, you can skip certain steps by using the `--no-airbyte-catalog`, `--no-transforms`, or `--no-dbt-project` flags. (See `morph generate-project --help` for more information.)
 
@@ -45,6 +46,7 @@ To add a new connector to the catalog, follow these steps:
    ```
 
 7. Optionally, generate Airbyte data for the source.
+
    - This requires that you've selected one or more streams in the `config.yml` file.
 
    ```bash
