@@ -183,8 +183,7 @@ def generate_mapping_files(
         mapping = add_fields_to_mapping(mapping, table_schema)
 
         # Write mapping file
-        with mapping_file.open("w") as f:
-            yaml.dump(mapping, f, default_flow_style=False, sort_keys=False)
+        mapping_file.write_text(yaml.dump(mapping, default_flow_style=False, sort_keys=False))
 
         created_files.append(str(mapping_file))
         console.print(f"Created mapping file for {table_name}", style="green")

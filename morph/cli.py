@@ -95,9 +95,8 @@ def json_to_dbt(
 
     # Write to output file with header comment
     output_path = Path(output)
-    with output_path.open("w") as f:
-        f.write(header_comment)
-        yaml.dump(sources_yml, f, default_flow_style=False, sort_keys=False)
+    content = header_comment + yaml.dump(sources_yml, default_flow_style=False, sort_keys=False)
+    output_path.write_text(content)
 
     console.print(f"Generated dbt sources.yml at {output}")
 

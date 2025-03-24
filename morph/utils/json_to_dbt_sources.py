@@ -136,8 +136,7 @@ def create_dbt_source(
 def process_schema_file(schema_file: str) -> tuple[str, dict[str, Any]]:
     """Process a single schema file and return table name and table definition."""
     schema_path = Path(schema_file)
-    with schema_path.open() as f:
-        schema_data = json.load(f)
+    schema_data = json.loads(schema_path.read_text())
 
     # Use filename without extension as table name
     table_name = schema_path.stem
@@ -173,8 +172,7 @@ def parse_airbyte_catalog(
     """Generate a dbt sources.yml structure from an Airbyte catalog file."""
     try:
         catalog_path = Path(catalog_file)
-        with catalog_path.open() as f:
-            catalog = json.load(f)
+        catalog = json.loads(catalog_path.read_text())
 
         if "streams" not in catalog:
             raise ValueError(f"Invalid Airbyte catalog: 'streams' key not found in {catalog_file}")

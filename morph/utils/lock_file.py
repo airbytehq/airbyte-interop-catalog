@@ -42,7 +42,8 @@ def compute_file_hash(file_path: str) -> str:
 
 
 def find_unused_source_streams(
-    config_streams: list[str], mapping_files: list[dict[str, Any]],
+    config_streams: list[str],
+    mapping_files: list[dict[str, Any]],
 ) -> list[str]:
     """Find source streams that are not used in any mapping file.
 
@@ -72,7 +73,8 @@ def find_unused_source_streams(
 
 
 def find_unmapped_target_tables(
-    config_tables: list[str], mapping_files: list[dict[str, Any]],
+    config_tables: list[str],
+    mapping_files: list[dict[str, Any]],
 ) -> list[str]:
     """Find target tables that are not mapped in any transform.
 
@@ -97,7 +99,9 @@ def find_unmapped_target_tables(
 
 
 def find_unmapped_target_fields(
-    transform_id: str, target_schema: dict[str, Any], fields: dict[str, Any],
+    transform_id: str,
+    target_schema: dict[str, Any],
+    fields: dict[str, Any],
 ) -> list[str]:
     """Find target table fields that are not mapped in a transform.
 
@@ -137,7 +141,9 @@ def find_unmapped_target_fields(
 
 
 def validate_field_mappings(
-    transform_id: str, source_aliases: set[str], fields: dict[str, Any],
+    transform_id: str,
+    source_aliases: set[str],
+    fields: dict[str, Any],
 ) -> None:
     """Validate field mappings for fatal errors.
 
@@ -162,14 +168,18 @@ def validate_field_mappings(
             if "." in expression:
                 parts = expression.split(".")
                 table_ref = parts[0]
-                
+
                 # Skip if the table reference matches the source alias
                 if table_ref == source_alias:
                     continue
-                    
+
                 # Check for potential typos (e.g., 'contact' instead of 'contacts')
                 valid_refs = {source_alias, f"{source_alias}s"}
-                if table_ref and table_ref not in valid_refs and table_ref.startswith(source_alias[:-1]):
+                if (
+                    table_ref
+                    and table_ref not in valid_refs
+                    and table_ref.startswith(source_alias[:-1])
+                ):
                     raise ValueError(
                         f"Fatal error in transform '{transform_id}': "
                         f"Field '{field_name}' references '{table_ref}' but source alias is '{source_alias}'",
@@ -230,12 +240,16 @@ def generate_lock_file(
 
                 # Validate field mappings
                 validate_field_mappings(
-                    transform_id, source_aliases, transform.get("fields", {}),
+                    transform_id,
+                    source_aliases,
+                    transform.get("fields", {}),
                 )
 
                 # Find unmapped target fields
                 unmapped_fields = find_unmapped_target_fields(
-                    transform_id, target_schema, transform.get("fields", {}),
+                    transform_id,
+                    target_schema,
+                    transform.get("fields", {}),
                 )
 
                 # Extract unused source fields from annotations
@@ -287,7 +301,8 @@ def generate_lock_file(
     }
 
     # Write lock file
-    with Path(output_path).open("wb") as f:
-        toml_writer.dump(lock_data, f)
+    # Convert lock data to TOML string and write to file
+    toml_string = toml_writer.dumps(lock_data)
+    Path(output_path).write_bytes(toml_string.encode("utf-8"))
 
     console.print(f"Generated lock file at {output_path}", style="green")
