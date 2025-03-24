@@ -1,6 +1,5 @@
 """Command-line interface for Morph."""
 
-import json
 from pathlib import Path
 from typing import Any
 
@@ -444,7 +443,7 @@ def mapping_confidence(
     MAPPING_FILE should be a JSON file containing field mappings.
     """
     # Read mapping file
-    mapping_data = json.loads(mapping_file.read_text())
+    mapping_data = yaml.safe_load(mapping_file.read_text())
 
     # Get confidence score
     confidence = get_mapping_confidence(source_type, target_type, mapping_data)
