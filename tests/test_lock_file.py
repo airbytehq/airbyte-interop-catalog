@@ -10,8 +10,6 @@ import yaml
 
 from morph.utils.lock_file import (
     compute_file_hash,
-    extract_source_streams,
-    extract_target_tables,
     find_missing_target_fields,
     find_omitted_target_fields,
     find_unmapped_target_tables,
@@ -25,7 +23,7 @@ def test_compute_file_hash():
     # Create a temporary file with known content
     temp_file = Path(tempfile.mktemp())
     temp_file.write_bytes(b"test content")
-    
+
     # Compute hash
     file_hash = compute_file_hash(str(temp_file))
 
@@ -224,14 +222,14 @@ def test_generate_lock_file():
         # For testing, we'll just verify specific content exists in the file
         # since tomli_w is write-only and we can't easily parse the TOML
         lock_data_str = lock_file.read_text()
-        
+
         # Verify the mapping data exists
         assert "mappings.table1" in lock_data_str
-        
+
         # Verify omitted_target_fields
         assert "omitted_target_fields" in lock_data_str
         assert "field3" in lock_data_str
-        
+
         # Verify unmapped_target_fields (MISSING fields)
         assert "unmapped_target_fields" in lock_data_str
         assert "field2" in lock_data_str

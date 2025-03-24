@@ -12,11 +12,14 @@ def test_cli_version():
         text=True,
         check=False,
     )
-    
+
     # Check if the command was successful
     if result.returncode != 0:
         # In test environments, the package might not be installed, which is fine
-        assert "'morph' is not installed" in result.stderr or "'morph' is not installed" in result.stdout
+        assert (
+            "'morph' is not installed" in result.stderr
+            or "'morph' is not installed" in result.stdout
+        )
     else:
         # If successful, check that version info is in the output
         assert "version" in result.stdout.lower()
