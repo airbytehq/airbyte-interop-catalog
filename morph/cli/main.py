@@ -1,14 +1,16 @@
 """Command-line interface for Morph."""
 
+import json
 from pathlib import Path
 from typing import Any
 
 import click
 import yaml
 from rich.console import Console
+from rich.table import Table
 
+from morph.ai import get_mapping_confidence
 from morph.utils.json_to_dbt_sources import (
-    generate_header_comment,
     parse_airbyte_catalog,
 )
 from morph.utils.lock_file import generate_lock_file_for_project
@@ -413,6 +415,53 @@ def generate_project(
         console.print(f"Generating dbt project for {source_name}...")
         generate_dbt_project(source_name, project_name)
         console.print(f"Generated dbt project for {source_name}")
+
+
+@main.command()
+@click.argument(
+    "mapping_file",
+    type=click.Path(exists=True, path_type=Path),
+)
+@click.option(
+    "--source-type",
+    type=str,
+    default="JSON",
+    help="Source data type (e.g., JSON, CSV)",
+)
+@click.option(
+    "--target-type",
+    type=str,
+    default="dbt model",
+    help="Target data type (e.g., dbt model)",
+)
+def mapping_confidence(
+    mapping_file: Path,
+    source_type: str,
+    target_type: str,
+) -> None:
+    """Evaluate confidence of a mapping configuration.
+
+    MAPPING_FILE should be a JSON file containing field mappings.
+    """
+    # Read mapping file
+    mapping_data = json.loads(mapping_file.read_text())
+
+    # Get confidence score
+    confidence = get_mapping_confidence(source_type, target_type, mapping_data)
+
+    # Create results table
+    table = Table(title="Mapping Confidence Analysis")
+    table.add_column("Field", style="cyan")
+    table.add_column("Confidence", style="green", justify="right")
+
+    for field, score in confidence.field_scores.items():
+        table.add_row(field, f"{score:.2f}")
+
+    # Print results
+    console.print(f"\nOverall Confidence Score: [green]{confidence.score:.2f}[/green]")
+    console.print(f"\nExplanation: {confidence.explanation}")
+    console.print("\nField-by-Field Analysis:")
+    console.print(table)
 
 
 if __name__ == "__main__":
