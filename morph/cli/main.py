@@ -8,7 +8,6 @@ import yaml
 from rich.console import Console
 
 from morph.utils.json_to_dbt_sources import (
-    generate_header_comment,
     parse_airbyte_catalog,
 )
 from morph.utils.lock_file import generate_lock_file_for_project
@@ -67,7 +66,9 @@ def json_to_dbt(
 # uv run morph json-to-dbt {catalog_file} --source-name {source_name}
 # To regenerate this file, run the command above.
 """
-    sources_yml_with_header = f"{header}\n{yaml.dump(sources_yml, default_flow_style=False, sort_keys=False)}"
+    sources_yml_with_header = (
+        f"{header}\n{yaml.dump(sources_yml, default_flow_style=False, sort_keys=False)}"
+    )
 
     # Write to file
     output_path.write_text(sources_yml_with_header)
@@ -356,6 +357,28 @@ def generate_lock_file(
         )
     except ValueError as e:
         console.print(f"Error generating lock file: {e}", style="bold red")
+
+
+@main.command()
+@click.argument("source_name", type=str)
+@click.argument("project_name", type=str, default="fivetran-interop")
+def lock(
+    source_name: str,
+    project_name: str,
+) -> None:
+    """Generate a lock file tracking unused streams and fields for a project.
+
+    This command creates a morph-lock.toml file in the project's src directory
+    that tracks unused source streams, unused source fields, unmapped target tables,
+    and unmapped target table fields.
+
+    SOURCE_NAME: Name of the source (e.g., 'facebook_marketing')
+    PROJECT_NAME: Name of the project (e.g., 'fivetran-interop')
+    """
+    # Call the existing generate_lock_file function
+    console.print(f"Generating lock file for {source_name}...")
+    generate_lock_file(source_name, project_name)
+    console.print(f"Generated lock file for {source_name}")
 
 
 # Project Auto-Generation
