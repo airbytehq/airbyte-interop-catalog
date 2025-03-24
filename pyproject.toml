@@ -7,7 +7,7 @@ name = "morph"
 dynamic = ["version"]
 description = "A Python library for data transformation"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.10,<3.12"
 license = {file = "LICENSE"}
 authors = [
     {name = "Aaron Steers", email = "aaron.steers@airbyte.io"},
