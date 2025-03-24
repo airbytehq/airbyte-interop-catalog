@@ -115,7 +115,7 @@ def test_generate_lock_file():
 
         config_dir = Path(tmpdir) / "config"
         config_dir.mkdir()
-        with Path(config_dir / "config.yml", "w") as f:
+        with (config_dir / "config.yml").open("w") as f:
             yaml.dump(config, f)
 
         # Create mapping file
@@ -136,7 +136,7 @@ def test_generate_lock_file():
 
         mapping_dir = Path(tmpdir) / "transforms"
         mapping_dir.mkdir()
-        with Path(mapping_dir / "table1.yml", "w") as f:
+        with (mapping_dir / "table1.yml").open("w") as f:
             yaml.dump(mapping, f)
 
         # Create target schema

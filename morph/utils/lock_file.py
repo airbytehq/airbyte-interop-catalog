@@ -158,19 +158,24 @@ def validate_field_mappings(
 
         # Check for mismatched field names (e.g., issu.my_field when alias is 'issue')
         for source_alias in source_aliases:
-            for potential_alias in [source_alias, f"{source_alias}s"]:
-                # Look for the most common case: table.field notation
-                if "." in expression and potential_alias not in expression:
-                    parts = expression.split(".")
-                    if (
-                        parts[0]
-                        and parts[0] != potential_alias
-                        and parts[0].startswith(potential_alias[:-1])
-                    ):
-                        raise ValueError(
-                            f"Fatal error in transform '{transform_id}': "
-                            f"Field '{field_name}' references '{parts[0]}' but source alias is '{potential_alias}'",
-                        )
+            # Look for the most common case: table.field notation
+            if "." in expression:
+                parts = expression.split(".")
+                table_ref = parts[0]
+                
+                # Skip if the table reference matches the source alias
+                if table_ref == source_alias:
+                    continue
+                    
+                # Check for potential typos (e.g., 'contact' instead of 'contacts')
+                if (table_ref and 
+                    table_ref != source_alias and
+                    table_ref != f"{source_alias}s" and
+                    table_ref.startswith(source_alias[:-1])):
+                    raise ValueError(
+                        f"Fatal error in transform '{transform_id}': "
+                        f"Field '{field_name}' references '{table_ref}' but source alias is '{source_alias}'",
+                    )
 
 
 def generate_lock_file(
