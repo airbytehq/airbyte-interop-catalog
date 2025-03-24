@@ -28,6 +28,7 @@ dependencies = [
     "jinja2>=3.0.0",
     "copier>=9.6.0",
     "airbyte>=0.23.0",  # PyAirbyte
+    "tomli-w>=1.0.0",   # for writing TOML files
 ]
 
 [project.optional-dependencies]

@@ -23,17 +23,16 @@ def read_file(file_path: str | Path) -> dict[str, Any]:
     path = Path(file_path)
 
     if path.suffix.lower() == ".json":
-        with path.open() as f:
-            return json.load(f)
-    elif path.suffix.lower() == ".csv":
+        content = path.read_text()
+        return json.loads(content)
+    if path.suffix.lower() == ".csv":
         data = []
         with path.open(newline="") as f:
             reader = csv.DictReader(f)
             for row in reader:
                 data.append(dict(row))
         return {"data": data}
-    else:
-        raise ValueError(f"Unsupported file format: {path.suffix}")
+    raise ValueError(f"Unsupported file format: {path.suffix}")
 
 
 def write_file(data: dict[str, Any], file_path: str | Path | None = None) -> None:
@@ -51,8 +50,8 @@ def write_file(data: dict[str, Any], file_path: str | Path | None = None) -> Non
     path = Path(file_path)
 
     if path.suffix.lower() == ".json":
-        with path.open("w") as f:
-            json.dump(data, f, indent=2)
+        content = json.dumps(data, indent=2)
+        path.write_text(content)
     elif path.suffix.lower() == ".csv":
         if not isinstance(data.get("data"), list):
             raise ValueError("Data must contain a 'data' key with a list of records for CSV output")

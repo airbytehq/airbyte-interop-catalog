@@ -1,6 +1,5 @@
 """Command-line interface for Morph."""
 
-import argparse
 from pathlib import Path
 from typing import Any
 
@@ -9,140 +8,113 @@ import yaml
 from rich.console import Console
 
 from morph.utils.json_to_dbt_sources import (
-    generate_dbt_sources_yml,
     generate_header_comment,
     parse_airbyte_catalog,
 )
+from morph.utils.lock_file import generate_lock_file_for_project
 from morph.utils.mapping_to_dbt_models import generate_dbt_package
 
 console = Console()
 
 
 @click.group()
-@click.version_option()
+@click.version_option(package_name="morph", prog_name="morph")
 def main() -> None:
-    """Morph: A Python library for data transformation."""
+    """Morph CLI."""
     pass
 
 
 @main.command()
-@click.argument("schema_path", type=click.Path(exists=True))
-@click.option("--catalog", is_flag=True, help="Treat input as Airbyte catalog file")
-@click.option("--source-name", default="default_source", help="Name for the dbt source")
-@click.option("--database", help="Database name for the source")
-@click.option("--schema", help="Schema name for the source")
-@click.option("--output", default="sources.yml", help="Output file path")
+@click.argument("catalog_file", type=str)
+@click.option("--source-name", type=str, help="Name of the source (e.g., 'hubspot')")
+@click.option("--output-file", type=str, help="Output file path")
+@click.option("--database", type=str, help="Database name")
+@click.option("--schema", type=str, help="Schema name")
 def json_to_dbt(
-    schema_path: str,
-    catalog: bool,
-    source_name: str,
-    database: str | None,
-    schema: str | None,
-    output: str,
+    catalog_file: str,
+    source_name: str | None = None,
+    output_file: str | None = None,
+    database: str | None = None,
+    schema: str | None = None,
 ) -> None:
-    """Convert JSON schema files or Airbyte catalog to dbt sources.yml format."""
-    schema_path_obj = Path(schema_path)
+    """Convert JSON schema files or Airbyte catalogs to a dbt sources.yml file.
 
-    # Validate input path exists
-    if not schema_path_obj.exists():
-        raise ValueError(f"Error: {schema_path} does not exist")
+    This command converts a JSON schema or Airbyte catalog to a dbt sources.yml file.
+    The catalog file can be either a JSON schema or an Airbyte catalog.
 
-    # Process based on input type
-    if catalog:
-        if not schema_path_obj.is_file() or not schema_path_obj.name.endswith(".json"):
-            raise ValueError(f"Error: {schema_path} is not a valid JSON file")
+    CATALOG_FILE: Path to the JSON schema or Airbyte catalog file
+    """
+    # Validate input file exists
+    if not Path(catalog_file).exists():
+        raise ValueError(f"Error: {catalog_file} does not exist")
 
-        sources_yml = parse_airbyte_catalog(
-            schema_path,
-            source_name,
-            database,
-            schema,
-        )
-    else:
-        schema_files: list[str] = []
-        if schema_path_obj.is_dir():
-            schema_files.extend(
-                str(f) for f in schema_path_obj.iterdir() if f.name.endswith(".json")
-            )
-        elif schema_path_obj.is_file() and schema_path_obj.name.endswith(".json"):
-            schema_files.append(schema_path)
-        else:
-            console.print(f"Error: {schema_path} is not a valid JSON file or directory")
-            return
+    # Generate sources.yml from catalog.json
+    if source_name is None:
+        source_name = Path(catalog_file).stem
 
-        if not schema_files:
-            console.print("No JSON schema files found")
-            return
-
-        sources_yml = generate_dbt_sources_yml(
-            schema_files,
-            source_name,
-            database,
-            schema,
-        )
-
-    # Generate header comment
-    args = argparse.Namespace(
-        schema_path=schema_path,
-        catalog=catalog,
-        source_name=source_name,
-        database=database,
-        schema=schema,
-        output=output,
+    sources_yml = parse_airbyte_catalog(
+        catalog_file,
+        source_name,
+        database,
+        schema,
     )
-    header_comment = generate_header_comment(args)
 
-    # Write to output file with header comment
-    output_path = Path(output)
-    with output_path.open("w") as f:
-        f.write(header_comment)
-        yaml.dump(sources_yml, f, default_flow_style=False, sort_keys=False)
+    # Write sources.yml to output file
+    output_path = Path(output_file) if output_file else Path(f"sources_{source_name}.yml")
 
-    console.print(f"Generated dbt sources.yml at {output}")
+    # Create a simple header comment
+    header = f"""# This file was auto-generated using the following command:
+# uv run morph json-to-dbt {catalog_file} --source-name {source_name}
+# To regenerate this file, run the command above.
+"""
+    sources_yml_with_header = f"{header}\n{yaml.dump(sources_yml, default_flow_style=False, sort_keys=False)}"
+
+    # Write to file
+    output_path.write_text(sources_yml_with_header)
+    console.print(f"Generated sources.yml at {output_path}")
 
 
 @main.command()
-@click.option(
-    "--source-name",
-    default=None,
-    help="Name for the dbt source (defaults to catalog directory name)",
+@click.argument("source_name", type=str)
+@click.argument(
+    "project_name",
+    type=str,
+    default="fivetran-interop",
 )
 @click.option(
-    "--project-name",
-    default=None,
-    help="Name for the dbt project (defaults to 'fivetran-interop')",
+    "--catalog-file",
+    help="Path to Airbyte catalog JSON file (defaults to catalog/{source_name}/generated/airbyte-catalog.json)",
 )
-@click.argument("catalog_dir", type=click.Path(exists=True))
-@click.argument("catalog_file", type=click.Path(exists=True))
 @click.option(
     "--output-dir",
-    help="Output directory for generated dbt project (defaults to {catalog_dir}/generated)",
+    help="Output directory for generated dbt project (defaults to catalog/{source_name}/generated)",
 )
 @click.option(
     "--mapping-dir",
-    help="Directory containing mapping files.",
+    help="Directory containing mapping YAML files (defaults to catalog/{source_name}/src/{project_name}/transforms)",
 )
 def generate_dbt_project(
-    source_name: str | None = None,
-    project_name: str = "fivetran-interop",
-    *,
+    source_name: str,
+    project_name: str,
     catalog_file: str | None = None,
     output_dir: str | None = None,
     mapping_dir: str | None = None,
 ) -> None:
-    """Generate a dbt project from mapping files and catalog.json.
+    """Generate a dbt project from mapping files.
 
-    This command generates a complete dbt project in the specified output directory,
-    including models for each transform defined in the mapping files and a sources.yml
-    file generated from the catalog.json file.
+    This command generates a dbt project from mapping files. The mapping files
+    should be in YAML format and located in the mapping directory.
 
-    CATALOG_DIR: Path to the catalog directory (e.g., 'catalog/hubspot')
-    CATALOG_FILE: Path to the Airbyte catalog.json file
+    SOURCE_NAME: Name of the source (e.g., 'hubspot')
+    PROJECT_NAME: Name of the project (e.g., 'fivetran-interop')
     """
     _ = project_name  # Not used currently
 
     catalog_dir = Path("catalog")
-    catalog_file = catalog_file or catalog_dir / source_name / "generated" / "airbyte-catalog.json"
+    if source_name is not None:
+        catalog_file = catalog_file or str(
+            catalog_dir / source_name / "generated" / "airbyte-catalog.json",
+        )
 
     # Validate input paths exist
     if not catalog_dir.exists():
@@ -151,8 +123,11 @@ def generate_dbt_project(
     if not Path(catalog_file).exists():
         raise ValueError(f"Error: {catalog_file} does not exist")
 
-    output_dir = output_dir or catalog_dir / source_name / "generated"
-    mapping_dir = mapping_dir or catalog_dir / source_name / "src" / project_name / "transforms"
+    if source_name is not None:
+        output_dir = output_dir or str(catalog_dir / source_name / "generated")
+        mapping_dir = mapping_dir or str(
+            catalog_dir / source_name / "src" / project_name / "transforms",
+        )
 
     # Generate dbt package
     try:
@@ -172,31 +147,23 @@ def generate_dbt_project(
         sources_yml = parse_airbyte_catalog(
             catalog_file,
             source_name,
+            None,  # database
+            None,  # schema
         )
 
         # Write sources.yml to models directory
-        models_dir = actual_output_dir / "dbt_project" / "models"
-        models_dir.mkdir(parents=True, exist_ok=True)
-
-        sources_path = models_dir / "sources.yml"
+        sources_path = actual_output_dir / "models" / "src_airbyte_raw.yml"
+        # Ensure parent directory exists
+        sources_path.parent.mkdir(parents=True, exist_ok=True)
+        # Convert dict to YAML string before writing
         sources_path.write_text(yaml.dump(sources_yml, default_flow_style=False, sort_keys=False))
 
-        project_dir = actual_output_dir / "dbt_project"
-        console.print(f"Generated dbt project at {project_dir}")
-        console.print("To use the generated dbt project:")
-        console.print(f"  1. cd {project_dir}")
-        console.print("  2. dbt deps --profiles-dir profiles")
-        console.print("  3. dbt compile --profiles-dir profiles")
+        console.print(f"Generated dbt project at {actual_output_dir}")
     except Exception as e:
-        raise ValueError(f"Error generating dbt project: {e}") from e
+        console.print(f"Error generating dbt project: {e}", style="bold red")
 
 
 @main.command()
-@click.argument("source_name", type=str)
-@click.option(
-    "--output-file",
-    help="Output file path (defaults to catalog/{source_name}/generated/airbyte-catalog.json)",
-)
 def create_airbyte_catalog(
     source_name: str,
     output_file: str | None = None,
@@ -252,8 +219,6 @@ def create_airbyte_data(
     PROJECT_NAME: Name of the project (e.g., 'fivetran-interop')
     """
     from pathlib import Path
-
-    import yaml
 
     from morph.utils.airbyte_sync import sync_source
 
@@ -342,6 +307,57 @@ def generate_transform_scaffold(
     report_results(created_files)
 
 
+def generate_lock_file(
+    source_name: str,
+    project_name: str,
+) -> None:
+    """Generate a lock file for a project.
+
+    Args:
+        source_name: Name of the source
+        project_name: Name of the project
+    """
+    from pathlib import Path
+
+    from morph.utils.transform_scaffold import get_target_schema, load_config
+
+    # Set paths
+    config_file = f"catalog/{source_name}/src/{project_name}/config.yml"
+    mapping_dir = Path(f"catalog/{source_name}/src/{project_name}/transforms")
+    lock_file = Path(f"catalog/{source_name}/src/morph-lock.toml")
+
+    # Ensure parent directory exists
+    lock_file.parent.mkdir(parents=True, exist_ok=True)
+
+    # Set path for local target schema file
+    requirements_dir = f"catalog/{source_name}/requirements/{project_name}"
+    Path(requirements_dir).mkdir(parents=True, exist_ok=True)
+
+    # Load config and target schema
+    config, target_tables = load_config(config_file)
+    if not config or not target_tables:
+        console.print(f"Error: Could not load config from {config_file}", style="bold red")
+        return
+
+    target_schema = get_target_schema(config, requirements_dir)
+    if not target_schema:
+        console.print("Error: Could not load target schema", style="bold red")
+        return
+
+    # Generate lock file
+    try:
+        generate_lock_file_for_project(
+            source_name=source_name,
+            project_name=project_name,
+            config=config,
+            mapping_dir=mapping_dir,
+            target_schema=target_schema,
+            output_path=lock_file,
+        )
+    except ValueError as e:
+        console.print(f"Error generating lock file: {e}", style="bold red")
+
+
 # Project Auto-Generation
 @main.command()
 @click.argument("source_name", type=str)
@@ -349,6 +365,7 @@ def generate_transform_scaffold(
 @click.option("--no-airbyte-catalog", is_flag=True)
 @click.option("--no-transforms", is_flag=True)
 @click.option("--no-dbt-project", is_flag=True)
+@click.option("--no-lock-file", is_flag=True)
 def generate_project(
     source_name: str,
     project_name: str,
@@ -356,6 +373,7 @@ def generate_project(
     no_airbyte_catalog: bool | None = None,
     no_transforms: bool | None = None,
     no_dbt_project: bool | None = None,
+    no_lock_file: bool | None = None,
 ) -> None:
     """Generate a project scaffold for a new connector, or update an existing one."""
 
@@ -365,6 +383,7 @@ def generate_project(
     no_airbyte_catalog = _if_none(no_airbyte_catalog, False)
     no_transforms = _if_none(no_transforms, False)
     no_dbt_project = _if_none(no_dbt_project, False)
+    no_lock_file = _if_none(no_lock_file, False)
 
     # Validate input arguments
     if not source_name or not project_name:
@@ -374,19 +393,25 @@ def generate_project(
     # Generate Airbyte catalog
     if not no_airbyte_catalog:
         console.print(f"Generating Airbyte catalog for {source_name}...")
-        create_airbyte_catalog.callback(source_name)
+        create_airbyte_catalog(source_name)
         console.print("Generated Airbyte catalog.")
 
     # Generate transforms
     if not no_transforms:
         console.print(f"Generating transforms for {source_name}...")
-        generate_transform_scaffold.callback(source_name, project_name)
+        generate_transform_scaffold(source_name, project_name)
         console.print(f"Generated transforms for {source_name}")
+
+    # Generate lock file
+    if not no_lock_file:
+        console.print(f"Generating lock file for {source_name}...")
+        generate_lock_file(source_name, project_name)
+        console.print(f"Generated lock file for {source_name}")
 
     # Generate dbt project
     if not no_dbt_project:
         console.print(f"Generating dbt project for {source_name}...")
-        generate_dbt_project.callback(source_name, project_name)
+        generate_dbt_project(source_name, project_name)
         console.print(f"Generated dbt project for {source_name}")
 
 
