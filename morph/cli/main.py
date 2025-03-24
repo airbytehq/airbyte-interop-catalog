@@ -421,7 +421,7 @@ def generate_project(
     "mapping_file",
     type=click.Path(exists=True, path_type=Path),
 )
-def mapping_confidence(
+def eval_mapping_confidence(
     mapping_file: Path,
 ) -> None:
     """Evaluate confidence of a mapping configuration.

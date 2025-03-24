@@ -185,6 +185,94 @@ This command:
 - Names the source "hubspot"
 - Outputs the result to the specified file
 
+## Mapping Confidence Evaluation
+
+The mapping confidence evaluation tool uses AI to analyze field mappings and provide a confidence score for the transformation. This is particularly useful when working with complex data transformations or when you want to validate your mapping configurations.
+
+### Basic Usage
+
+```bash
+# Using poe
+poe eval-mapping-confidence path/to/mapping.json
+
+# Or directly
+uv run morph eval-mapping-confidence path/to/mapping.json
+```
+
+### Options
+
+- `--source-type`: Specify the source data type (default: "JSON")
+- `--target-type`: Specify the target data type (default: "dbt model")
+
+Example with custom types:
+```bash
+poe eval-mapping-confidence path/to/mapping.json --source-type CSV --target-type "PostgreSQL table"
+```
+
+### Input Format
+
+The mapping file should be a YAML file in dbt transform format. The file should contain:
+- `domain`: The namespace for the transforms
+- `transforms`: List of transformations, each containing:
+  - `id`: Identifier for the transform
+  - `display_name`: Human-readable name
+  - `from`: Source tables
+  - `fields`: Field mappings with:
+    - `expression`: SQL expression or source field reference
+    - `description`: Field description
+    - `tests`: (optional) Test configurations
+
+Example:
+```yaml
+domain: facebook_marketing.fivetran-interop
+transforms:
+  - display_name: Each record in this table reflects a version of a Facebook ad.
+    id: ad_history
+    from:
+      - ads: facebook_marketing.ads
+    fields:
+      id:
+        expression: ads.id
+        description: The ID of this ad.
+      name:
+        expression: ads.name
+        description: Name of the ad.
+```
+
+### Output
+
+The tool provides:
+1. Overall confidence score (0.00 to 1.00)
+2. Detailed explanation of the score
+3. Field-by-field confidence analysis including:
+   - Field name
+   - Confidence score
+   - Expression used
+   - Field description
+
+Example output:
+```
+Overall Confidence Score: 0.85
+
+Explanation: The mapping shows good field coverage and appropriate transformations...
+
+Field-by-Field Analysis:
+┌──────────┬────────────┬──────────────┬──────────────────────┐
+│ Field    │ Confidence │ Expression   │ Description          │
+├──────────┼────────────┼──────────────┼──────────────────────┤
+│ id       │ 0.95       │ ads.id       │ The ID of this ad    │
+│ name     │ 0.90       │ ads.name     │ Name of the ad       │
+└──────────┴────────────┴──────────────┴──────────────────────┘
+```
+
+### Best Practices
+
+1. Use descriptive field names and expressions
+2. Include field descriptions when possible
+3. Add appropriate tests for data quality
+4. Review the confidence scores and explanations
+5. Address any low-confidence mappings before deployment
+
 ## Additional Resources
 
 For more information on the available commands and options, use the `--help` flag:
