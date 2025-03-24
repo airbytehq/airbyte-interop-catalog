@@ -23,15 +23,11 @@ class MappingConfidence(BaseModel):
 
 @ai_fn
 def evaluate_mapping_confidence(
-    source_type: str,
-    target_type: str,
-    fields: list[FieldMapping],
+    mappings: list[FieldMapping],
 ) -> MappingConfidence:
     """Evaluate the confidence of a field mapping configuration.
 
     Args:
-        source_type: The source data type (e.g., "JSON", "CSV")
-        target_type: The target data type (e.g., "dbt model")
         fields: List of field mappings to evaluate
 
     Returns:
@@ -45,9 +41,7 @@ def evaluate_mapping_confidence(
 
 
 def get_mapping_confidence(
-    source_type: str,
-    target_type: str,
-    fields: list[dict],
+    mappings: list[dict],
 ) -> MappingConfidence:
     """Get confidence score for a mapping configuration.
 
@@ -59,5 +53,5 @@ def get_mapping_confidence(
     Returns:
         MappingConfidence object with confidence score and explanation
     """
-    field_mappings = [FieldMapping(**field) for field in fields]
-    return evaluate_mapping_confidence(source_type, target_type, field_mappings)
+    field_mappings = [FieldMapping(**mapping) for mapping in mappings]
+    return evaluate_mapping_confidence(field_mappings)

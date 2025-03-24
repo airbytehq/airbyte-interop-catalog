@@ -421,40 +421,51 @@ def generate_project(
     "mapping_file",
     type=click.Path(exists=True, path_type=Path),
 )
-@click.option(
-    "--source-type",
-    type=str,
-    default="JSON",
-    help="Source data type (e.g., JSON, CSV)",
-)
-@click.option(
-    "--target-type",
-    type=str,
-    default="dbt model",
-    help="Target data type (e.g., dbt model)",
-)
 def mapping_confidence(
     mapping_file: Path,
-    source_type: str,
-    target_type: str,
 ) -> None:
     """Evaluate confidence of a mapping configuration.
 
-    MAPPING_FILE should be a JSON file containing field mappings.
+    MAPPING_FILE should be a YAML file containing field mappings.
     """
     # Read mapping file
     mapping_data = yaml.safe_load(mapping_file.read_text())
 
+    # Extract fields from dbt transform format
+    fields = []
+    for transform in mapping_data.get("transforms", []):
+        for field_name, field_data in transform.get("fields", {}).items():
+            fields.append(
+                {
+                    "name": field_name,
+                    "expression": field_data.get("expression", ""),
+                    "description": field_data.get("description", ""),
+                    "tests": [],  # TODO: Extract tests if present
+                }
+            )
+
+    if not fields:
+        console.print("[red]No fields found in the mapping file.[/red]")
+        return
+
     # Get confidence score
-    confidence = get_mapping_confidence(source_type, target_type, mapping_data)
+    confidence = get_mapping_confidence(fields)
 
     # Create results table
     table = Table(title="Mapping Confidence Analysis")
     table.add_column("Field", style="cyan")
     table.add_column("Confidence", style="green", justify="right")
+    table.add_column("Expression", style="yellow")
+    table.add_column("Description", style="white")
 
     for field, score in confidence.field_scores.items():
-        table.add_row(field, f"{score:.2f}")
+        field_data = next((f for f in fields if f["name"] == field), {})
+        table.add_row(
+            field,
+            f"{score:.2f}",
+            field_data.get("expression", ""),
+            field_data.get("description", ""),
+        )
 
     # Print results
     console.print(f"\nOverall Confidence Score: [green]{confidence.score:.2f}[/green]")
