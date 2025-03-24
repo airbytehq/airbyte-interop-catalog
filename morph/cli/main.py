@@ -11,7 +11,7 @@ from morph.utils.json_to_dbt_sources import (
     generate_header_comment,
     parse_airbyte_catalog,
 )
-from morph.utils.lock_file import generate_lock_file
+from morph.utils.lock_file import generate_lock_file_for_project
 from morph.utils.mapping_to_dbt_models import generate_dbt_package
 
 console = Console()
@@ -307,7 +307,7 @@ def generate_transform_scaffold(
     report_results(created_files)
 
 
-def generate_lock_file_command(
+def generate_lock_file(
     source_name: str,
     project_name: str,
 ) -> None:
@@ -346,7 +346,7 @@ def generate_lock_file_command(
 
     # Generate lock file
     try:
-        generate_lock_file(
+        generate_lock_file_for_project(
             source_name=source_name,
             project_name=project_name,
             config=config,
@@ -405,7 +405,7 @@ def generate_project(
     # Generate lock file
     if not no_lock_file:
         console.print(f"Generating lock file for {source_name}...")
-        generate_lock_file_command(source_name, project_name)
+        generate_lock_file(source_name, project_name)
         console.print(f"Generated lock file for {source_name}")
 
     # Generate dbt project

@@ -186,7 +186,7 @@ def validate_field_mappings(
                     )
 
 
-def generate_lock_file(
+def generate_lock_file_for_project(
     source_name: str,
     project_name: str,
     config: dict[str, Any],

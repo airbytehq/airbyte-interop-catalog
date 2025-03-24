@@ -13,7 +13,7 @@ from morph.utils.lock_file import (
     find_unmapped_target_fields,
     find_unmapped_target_tables,
     find_unused_source_streams,
-    generate_lock_file,
+    generate_lock_file_for_project,
     validate_field_mappings,
 )
 
@@ -156,7 +156,7 @@ def test_generate_lock_file():
 
         # Call function
         lock_file = Path(tmpdir) / "morph-lock.toml"
-        generate_lock_file(
+        generate_lock_file_for_project(
             source_name="test",
             project_name="test",
             config=config,
