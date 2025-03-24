@@ -10,7 +10,10 @@ import yaml
 
 from morph.utils.lock_file import (
     compute_file_hash,
-    find_unmapped_target_fields,
+    extract_source_streams,
+    extract_target_tables,
+    find_missing_target_fields,
+    find_omitted_target_fields,
     find_unmapped_target_tables,
     find_unused_source_streams,
     generate_lock_file_for_project,
@@ -20,15 +23,14 @@ from morph.utils.lock_file import (
 
 def test_compute_file_hash():
     # Create a temporary file with known content
-    with tempfile.NamedTemporaryFile(delete=False) as f:
-        f.write(b"test content")
-        filename = f.name
-
+    temp_file = Path(tempfile.mktemp())
+    temp_file.write_bytes(b"test content")
+    
     # Compute hash
-    file_hash = compute_file_hash(filename)
+    file_hash = compute_file_hash(str(temp_file))
 
     # Clean up
-    Path(filename).unlink()
+    temp_file.unlink()
 
     # Hash should be consistent
     assert file_hash == "6ae8a75555209fd6c44157c0aed8016e763ff435a19cf186f76863140143ff72"
@@ -61,7 +63,7 @@ def test_find_unmapped_target_tables():
     assert unmapped_tables == ["table3"]
 
 
-def test_find_unmapped_target_fields():
+def test_find_omitted_target_fields():
     # Test data
     transform_id = "table1"
     target_schema = {
@@ -78,11 +80,27 @@ def test_find_unmapped_target_fields():
     }
     fields = {"field1": {"expression": "source.field1"}, "field2": {"expression": "source.field2"}}
 
-    # Find unmapped fields
-    unmapped_fields = find_unmapped_target_fields(transform_id, target_schema, fields)
+    # Find omitted fields
+    omitted_fields = find_omitted_target_fields(transform_id, target_schema, fields)
 
-    # Should find field3 as unmapped
-    assert unmapped_fields == ["field3"]
+    # Should find field3 as omitted
+    assert omitted_fields == ["field3"]
+
+
+def test_find_missing_target_fields():
+    # Test data
+    fields = {
+        "field1": {"expression": "source.field1"},
+        "field2": {"expression": "MISSING"},
+        "field3": {"expression": "source.field3"},
+        "field4": {"expression": "MISSING"},
+    }
+
+    # Find missing fields
+    missing_fields = find_missing_target_fields(fields)
+
+    # Should find field2 and field4 as missing
+    assert missing_fields == ["field2", "field4"]
 
 
 def test_validate_field_mappings():
@@ -115,8 +133,8 @@ def test_generate_lock_file():
 
         config_dir = Path(tmpdir) / "config"
         config_dir.mkdir()
-        with (config_dir / "config.yml").open("w") as f:
-            yaml.dump(config, f)
+        config_file = config_dir / "config.yml"
+        config_file.write_text(yaml.dump(config))
 
         # Create mapping file
         mapping = {
@@ -128,6 +146,7 @@ def test_generate_lock_file():
                     "fields": {
                         "field1": {"expression": "stream1.field1"},
                         "field2": {"expression": "MISSING"},
+                        "field4": {"expression": "MISSING"},
                     },
                     "annotations": {"unused_source_fields": {"stream1": ["unused1", "unused2"]}},
                 },
@@ -136,8 +155,8 @@ def test_generate_lock_file():
 
         mapping_dir = Path(tmpdir) / "transforms"
         mapping_dir.mkdir()
-        with (mapping_dir / "table1.yml").open("w") as f:
-            yaml.dump(mapping, f)
+        mapping_file = mapping_dir / "table1.yml"
+        mapping_file.write_text(yaml.dump(mapping))
 
         # Create target schema
         target_schema = {
@@ -154,6 +173,40 @@ def test_generate_lock_file():
             ],
         }
 
+        # Create source schema directory and file
+        source_schema_dir = Path(tmpdir) / "catalog" / "test" / "generated"
+        source_schema_dir.mkdir(parents=True)
+        source_schema_file = source_schema_dir / "src_airbyte_hubspot.yml"
+        source_schema = {
+            "sources": [
+                {
+                    "name": "test",
+                    "tables": [
+                        {"name": "stream1"},
+                        {"name": "stream2"},
+                    ],
+                },
+            ],
+        }
+        source_schema_file.write_text(yaml.dump(source_schema))
+
+        # Create requirements directory and file
+        requirements_dir = Path(tmpdir) / "catalog" / "test" / "requirements" / "test"
+        requirements_dir.mkdir(parents=True)
+        requirements_file = requirements_dir / "src_hubspot.yml"
+        requirements = {
+            "sources": [
+                {
+                    "name": "test",
+                    "tables": [
+                        {"name": "table1"},
+                        {"name": "table2"},
+                    ],
+                },
+            ],
+        }
+        requirements_file.write_text(yaml.dump(requirements))
+
         # Call function
         lock_file = Path(tmpdir) / "morph-lock.toml"
         generate_lock_file_for_project(
@@ -167,3 +220,25 @@ def test_generate_lock_file():
 
         # Verify lock file was created
         assert lock_file.exists()
+
+        # Import tomli to read the TOML file
+        try:
+            import tomli
+        except ImportError:
+            import tomli_w as tomli
+
+        # Read the lock file and verify its contents
+        lock_data = tomli.loads(lock_file.read_bytes().decode("utf-8"))
+        
+        # Verify the mapping data
+        assert "mappings" in lock_data
+        assert "table1" in lock_data["mappings"]
+        
+        # Verify omitted_target_fields
+        assert "omitted_target_fields" in lock_data["mappings"]["table1"]
+        assert "field3" in lock_data["mappings"]["table1"]["omitted_target_fields"]
+        
+        # Verify unmapped_target_fields (MISSING fields)
+        assert "unmapped_target_fields" in lock_data["mappings"]["table1"]
+        assert "field2" in lock_data["mappings"]["table1"]["unmapped_target_fields"]
+        assert "field4" in lock_data["mappings"]["table1"]["unmapped_target_fields"]

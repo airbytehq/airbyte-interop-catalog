@@ -98,7 +98,7 @@ def find_unmapped_target_tables(
     return sorted(set(config_tables) - mapped_tables)
 
 
-def find_unmapped_target_fields(
+def find_omitted_target_fields(
     transform_id: str,
     target_schema: dict[str, Any],
     fields: dict[str, Any],
@@ -111,7 +111,7 @@ def find_unmapped_target_fields(
         fields: Dictionary of fields in the transform
 
     Returns:
-        List of unmapped target fields
+        List of target fields that are omitted from the mapping
     """
     # Find table schema in target schema
     table_schema = None
@@ -136,8 +136,90 @@ def find_unmapped_target_fields(
     # Get all mapped field names
     mapped_fields = set(fields.keys())
 
-    # Find unmapped fields
+    # Find omitted fields
     return sorted(target_fields - mapped_fields)
+
+
+def find_missing_target_fields(
+    fields: dict[str, Any],
+) -> list[str]:
+    """Find target fields marked as MISSING in a transform.
+
+    Args:
+        fields: Dictionary of fields in the transform
+
+    Returns:
+        List of fields marked as MISSING
+    """
+    missing_fields = []
+    
+    for field_name, field_config in fields.items():
+        expression = field_config.get("expression")
+        
+        # Check if expression is "MISSING"
+        if expression == "MISSING":
+            missing_fields.append(field_name)
+            
+    return sorted(missing_fields)
+
+
+def extract_source_streams(source_name: str) -> list[str]:
+    """Extract source streams from the Airbyte dbt source file.
+
+    Args:
+        source_name: Name of the source
+
+    Returns:
+        List of source stream names
+    """
+    # Try to load from generated source schema
+    source_schema_path = Path(f"catalog/{source_name}/generated/src_airbyte_hubspot.yml")
+    if not source_schema_path.exists():
+        console.print(f"Warning: Generated source schema file not found at {source_schema_path}", style="yellow")
+        return []
+
+    try:
+        source_schema = yaml.safe_load(source_schema_path.read_text())
+        streams = []
+        for source in source_schema.get("sources", []):
+            for table in source.get("tables", []):
+                table_name = table.get("name")
+                if table_name:
+                    streams.append(table_name)
+        return streams
+    except Exception as e:
+        console.print(f"Error loading source schema: {e}", style="bold red")
+        return []
+
+
+def extract_target_tables(source_name: str, project_name: str) -> list[str]:
+    """Extract target tables from the requirements file.
+
+    Args:
+        source_name: Name of the source
+        project_name: Name of the project
+
+    Returns:
+        List of target table names
+    """
+    # Try to load from requirements file
+    requirements_path = Path(f"catalog/{source_name}/requirements/{project_name}/src_hubspot.yml")
+    if not requirements_path.exists():
+        console.print(f"Warning: Requirements file not found at {requirements_path}", style="yellow")
+        return []
+
+    try:
+        requirements = yaml.safe_load(requirements_path.read_text())
+        tables = []
+        for source in requirements.get("sources", []):
+            for table in source.get("tables", []):
+                table_name = table.get("name")
+                if table_name:
+                    tables.append(table_name)
+        return tables
+    except Exception as e:
+        console.print(f"Error loading requirements: {e}", style="bold red")
+        return []
 
 
 def validate_field_mappings(
@@ -207,9 +289,18 @@ def generate_lock_file_for_project(
     Raises:
         ValueError: If a fatal validation error is found
     """
-    # Get source streams and target tables from config
-    source_streams = config.get("source_streams", [])
-    target_tables = config.get("target_tables", [])
+    # Extract source streams and target tables from schema files instead of config
+    source_streams = extract_source_streams(source_name)
+    target_tables = extract_target_tables(source_name, project_name)
+
+    # Fallback to config if extraction failed
+    if not source_streams:
+        console.print("Warning: Falling back to config file for source streams", style="yellow")
+        source_streams = config.get("source_streams", [])
+    
+    if not target_tables:
+        console.print("Warning: Falling back to config file for target tables", style="yellow")
+        target_tables = config.get("target_tables", [])
 
     # Load all mapping files
     mapping_files = []
@@ -245,8 +336,8 @@ def generate_lock_file_for_project(
                     transform.get("fields", {}),
                 )
 
-                # Find unmapped target fields
-                unmapped_fields = find_unmapped_target_fields(
+                # Find omitted target fields
+                omitted_fields = find_omitted_target_fields(
                     transform_id,
                     target_schema,
                     transform.get("fields", {}),
@@ -258,13 +349,19 @@ def generate_lock_file_for_project(
                 if "unused_source_fields" in annotations:
                     unused_fields = annotations["unused_source_fields"]
 
+                # Find missing target fields (marked as MISSING)
+                missing_fields = find_missing_target_fields(
+                    transform.get("fields", {}),
+                )
+
                 # Add to mapping data
                 rel_path = Path(yaml_file).relative_to(mapping_dir)
                 mapping_data[transform_id] = {
                     "source_file": str(rel_path),
                     "source_file_hash": compute_file_hash(str(yaml_file)),
                     "unused_source_fields": unused_fields,
-                    "unmapped_target_fields": unmapped_fields,
+                    "omitted_target_fields": omitted_fields,
+                    "unmapped_target_fields": missing_fields,
                 }
         except Exception as e:
             console.print(f"Error loading mapping file {yaml_file}: {e}", style="bold red")
@@ -279,7 +376,7 @@ def generate_lock_file_for_project(
     requirements_file = f"requirements/{project_name}/src_hubspot.yml"
     requirements_path = Path(f"catalog/{source_name}/{requirements_file}")
 
-    airbyte_source_file = "generated/airbyte-catalog.json"
+    airbyte_source_file = "generated/src_airbyte_hubspot.yml"
     airbyte_source_path = Path(f"catalog/{source_name}/{airbyte_source_file}")
 
     # Create lock file structure
