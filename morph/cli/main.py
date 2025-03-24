@@ -18,6 +18,7 @@ console = Console()
 
 
 @click.group()
+@click.version_option(package_name="morph", prog_name="morph")
 def main() -> None:
     """Morph CLI."""
     pass
@@ -36,7 +37,7 @@ def json_to_dbt(
     database: str | None = None,
     schema: str | None = None,
 ) -> None:
-    """Convert a JSON schema or Airbyte catalog to a dbt sources.yml file.
+    """Convert JSON schema files or Airbyte catalogs to a dbt sources.yml file.
 
     This command converts a JSON schema or Airbyte catalog to a dbt sources.yml file.
     The catalog file can be either a JSON schema or an Airbyte catalog.
