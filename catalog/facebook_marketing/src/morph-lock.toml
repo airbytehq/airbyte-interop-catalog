@@ -1,7 +1,7 @@
 [project]
 source_name = "facebook_marketing"
 project_name = "fivetran-interop"
-generated_at = "2025-03-24T19:32:00Z"
+generated_at = "2025-03-24T20:58:29Z"
 requirements_file = "requirements/fivetran-interop/src_hubspot.yml"
 requirements_file_hash = ""
 airbyte_source_file = "generated/src_airbyte_hubspot.yml"
@@ -20,8 +20,18 @@ unmapped_target_tables = []
 [mappings.account_history]
 source_file = "account_history.yml"
 source_file_hash = "39e57c1b8db975d6d3cf3d071b818bad2d5bf63c7b348139be2a9f4f5799b6a3"
-omitted_target_fields = []
 unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.account_history.mapped_target_fields]
+id = "ad_account.id"
+name = "ad_account.name"
+_fivetran_synced = "_airbyte_extracted_at"
+account_status = "ad_account.account_status"
+business_country_code = "ad_account.business_country_code"
+created_time = "ad_account.created_time"
+currency = "ad_account.currency"
+timezone_name = "ad_account.timezone_name"
 
 [mappings.account_history.unused_source_fields]
 ad_account = [
@@ -79,7 +89,6 @@ ad_account = [
 [mappings.creative_history]
 source_file = "creative_history.yml"
 source_file_hash = "76068e9c1a2606c007c87f827bab262a97e6d420dec5235aa78f7c7e3f02bd9d"
-omitted_target_fields = []
 unmapped_target_fields = [
     "_fivetran_id",
     "asset_feed_spec_link_urls",
@@ -93,6 +102,16 @@ unmapped_target_fields = [
     "template_app_link_spec_ipad",
     "template_app_link_spec_iphone",
 ]
+omitted_target_fields = []
+
+[mappings.creative_history.mapped_target_fields]
+page_link = "ad_creatives.link_url"
+template_page_link = "ad_creatives.template_url"
+id = "ad_creatives.id"
+account_id = "ad_creatives.account_id"
+name = "ad_creatives.name"
+url_tags = "ad_creatives.url_tags"
+_fivetran_synced = "_airbyte_extracted_at"
 
 [mappings.creative_history.unused_source_fields]
 ad_creatives = [
@@ -131,11 +150,24 @@ ad_creatives = [
 [mappings.ad_set_history]
 source_file = "ad_set_history.yml"
 source_file_hash = "bf34f2354335b5cb325a91169c1f79b8c4e46aff4448bab2ec516cb91654eccd"
-omitted_target_fields = []
 unmapped_target_fields = [
     "optimization_goal",
     "status",
 ]
+omitted_target_fields = []
+
+[mappings.ad_set_history.mapped_target_fields]
+id = "ad_sets.id"
+account_id = "ad_sets.account_id"
+campaign_id = "ad_sets.campaign_id"
+name = "ad_sets.name"
+_fivetran_synced = "_airbyte_extracted_at"
+updated_time = "ad_sets.updated_time"
+start_time = "ad_sets.start_time"
+end_time = "ad_sets.end_time"
+bid_strategy = "ad_sets.bid_strategy"
+daily_budget = "ad_sets.daily_budget"
+budget_remaining = "ad_sets.budget_remaining"
 
 [mappings.ad_set_history.unused_source_fields]
 ad_sets = [
@@ -156,7 +188,6 @@ ad_sets = [
 [mappings.basic_ad_actions]
 source_file = "basic_ad_actions.yml"
 source_file_hash = "3bfc05493526705a595eda467cd1d5971049967b012c09d2bdd7a767c1257a5c"
-omitted_target_fields = []
 unmapped_target_fields = [
     "_1_d_view",
     "_28_d_click",
@@ -166,6 +197,13 @@ unmapped_target_fields = [
     "index",
     "inline",
 ]
+omitted_target_fields = []
+
+[mappings.basic_ad_actions.mapped_target_fields]
+_fivetran_synced = "_airbyte_extracted_at"
+action_type = "ads_insights_action_type.action_type"
+ad_id = "ads_insights_action_type.ad_id"
+value = "ads_insights_action_type.value"
 
 [mappings.basic_ad_actions.unused_source_fields]
 ads_insights_action_type = [
@@ -196,13 +234,19 @@ ads_insights_action_type = [
 [mappings.basic_ad_action_values]
 source_file = "basic_ad_action_values.yml"
 source_file_hash = "039aa670f908725d535ffb7db089b17e11ce7a089b3d455116cada07e5eca06a"
-omitted_target_fields = []
 unmapped_target_fields = [
     "_7_d_click",
     "_fivetran_id",
     "date",
     "index",
 ]
+omitted_target_fields = []
+
+[mappings.basic_ad_action_values.mapped_target_fields]
+_fivetran_synced = "_airbyte_extracted_at"
+action_type = "ads_insights_action_type.action_type"
+ad_id = "ads_insights_action_type.ad_id"
+value = "ads_insights_action_type.value"
 
 [mappings.basic_ad_action_values.unused_source_fields]
 ads_insights_action_type = [
@@ -233,8 +277,22 @@ ads_insights_action_type = [
 [mappings.campaign_history]
 source_file = "campaign_history.yml"
 source_file_hash = "28bd37c74b9fd4dfe0fb09bf1ecf191012adbce336bdae1c6993c1eeb536cb9a"
-omitted_target_fields = []
 unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.campaign_history.mapped_target_fields]
+id = "campaigns.id"
+account_id = "campaigns.account_id"
+name = "campaigns.name"
+_fivetran_synced = "_airbyte_extracted_at"
+updated_time = "campaigns.updated_time"
+created_time = "campaigns.created_time"
+start_time = "campaigns.start_time"
+stop_time = "campaigns.stop_time"
+daily_budget = "campaigns.daily_budget"
+budget_remaining = "campaigns.budget_remaining"
+lifetime_budget = "campaigns.lifetime_budget"
+status = "campaigns.status"
 
 [mappings.campaign_history.unused_source_fields]
 campaigns = [
@@ -252,11 +310,20 @@ campaigns = [
 [mappings.ad_history]
 source_file = "ad_history.yml"
 source_file_hash = "32e29b34177247abc31839e34a5e0f3cd824fef1d05686524f96b4ed49746481"
-omitted_target_fields = []
 unmapped_target_fields = [
     "conversion_domain",
     "creative_id",
 ]
+omitted_target_fields = []
+
+[mappings.ad_history.mapped_target_fields]
+id = "ads.id"
+account_id = "ads.account_id"
+ad_set_id = "ads.adset_id"
+campaign_id = "ads.campaign_id"
+name = "ads.name"
+_fivetran_synced = "_airbyte_extracted_at"
+updated_time = "ads.updated_time"
 
 [mappings.ad_history.unused_source_fields]
 ads = [
@@ -281,12 +348,22 @@ ads = [
 [mappings.basic_ad]
 source_file = "basic_ad.yml"
 source_file_hash = "f1621416d8530a1318ee3832a09679edea70a19eee59dc4b1bfad82fc92b859c"
-omitted_target_fields = []
 unmapped_target_fields = [
     "adset_name",
     "date",
     "inline_link_clicks",
 ]
+omitted_target_fields = []
+
+[mappings.basic_ad.mapped_target_fields]
+ad_id = "ads_insights.ad_id"
+ad_name = "ads_insights.ad_name"
+account_id = "ads_insights.account_id"
+impressions = "ads_insights.impressions"
+spend = "ads_insights.spend"
+reach = "ads_insights.reach"
+frequency = "ads_insights.frequency"
+_fivetran_synced = "_airbyte_extracted_at"
 
 [mappings.basic_ad.unused_source_fields]
 ads_insights = [

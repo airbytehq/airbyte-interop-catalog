@@ -158,6 +158,32 @@ def find_missing_target_fields(
     return sorted(missing_fields)
 
 
+def find_mapped_target_fields(
+    fields: dict[str, Any],
+) -> dict[str, str]:
+    """Find target fields and their expressions in a transform.
+
+    Args:
+        fields: Dictionary of fields in the transform
+
+    Returns:
+        Dictionary of field names to their expressions, excluding MISSING expressions
+    """
+    mapped_fields = {}
+
+    for field_name, field_config in fields.items():
+        expression = field_config.get("expression")
+
+        # Skip if expression is "MISSING"
+        if expression == "MISSING":
+            continue
+
+        # Add to mapped fields
+        mapped_fields[field_name] = expression
+
+    return mapped_fields
+
+
 def extract_source_streams(source_name: str) -> list[str]:
     """Extract source streams from the Airbyte dbt source file.
 
@@ -354,14 +380,20 @@ def generate_lock_file_for_project(
                     transform.get("fields", {}),
                 )
 
+                # Find mapped target fields (excluding MISSING expressions)
+                mapped_fields = find_mapped_target_fields(
+                    transform.get("fields", {}),
+                )
+
                 # Add to mapping data
                 rel_path = Path(yaml_file).relative_to(mapping_dir)
                 mapping_data[transform_id] = {
                     "source_file": str(rel_path),
                     "source_file_hash": compute_file_hash(str(yaml_file)),
-                    "unused_source_fields": unused_fields,
-                    "omitted_target_fields": omitted_fields,
+                    "mapped_target_fields": mapped_fields,
                     "unmapped_target_fields": missing_fields,
+                    "omitted_target_fields": omitted_fields,
+                    "unused_source_fields": unused_fields,
                 }
         except Exception as e:
             console.print(f"Error loading mapping file {yaml_file}: {e}", style="bold red")

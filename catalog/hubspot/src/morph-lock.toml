@@ -1,7 +1,7 @@
 [project]
 source_name = "hubspot"
 project_name = "fivetran-interop"
-generated_at = "2025-03-24T19:13:59Z"
+generated_at = "2025-03-24T20:58:28Z"
 requirements_file = "requirements/fivetran-interop/src_hubspot.yml"
 requirements_file_hash = "e64baeee0fecf68e9ce3084b0ae8d7a28a69e45ea1d1a9d881e9963bf5eb685a"
 airbyte_source_file = "generated/src_airbyte_hubspot.yml"
@@ -110,13 +110,33 @@ unmapped_target_tables = [
 [mappings.contact]
 source_file = "contact.yml"
 source_file_hash = "c01860d960e4d4287e4c0d3939c5b81272afde6287af507eaadb798c68d6d926"
-omitted_target_fields = []
 unmapped_target_fields = [
     "portal_id",
     "property_annualrevenue",
     "property_email_1",
     "property_hs_calculated_merged_vids",
 ]
+omitted_target_fields = []
+
+[mappings.contact.mapped_target_fields]
+_fivetran_deleted = "contacts.archived"
+_fivetran_synced = "_airbyte_extracted_at"
+id = "contacts.id"
+property_firstname = "contacts.properties_firstname"
+property_lastname = "contacts.properties_lastname"
+property_email = "contacts.properties_email"
+property_phone = "contacts.properties_phone"
+property_address = "contacts.properties_address"
+property_city = "contacts.properties_city"
+property_state = "contacts.properties_state"
+property_zip = "contacts.properties_zip"
+property_country = "contacts.properties_country"
+property_company = "contacts.properties_company"
+property_jobtitle = "contacts.properties_jobtitle"
+property_createdate = "contacts.properties_createdate"
+property_lastmodifieddate = "contacts.properties_lastmodifieddate"
+property_hubspot_owner_id = "contacts.properties_hubspot_owner_id"
+property_lifecyclestage = "contacts.properties_lifecyclestage"
 
 [mappings.contact.unused_source_fields]
 contacts = [
@@ -129,10 +149,25 @@ contacts = [
 [mappings.company]
 source_file = "company.yml"
 source_file_hash = "ffcae37de6c2efcd09fd61f000ce561c152388ea73e3317a9bde18d19c86a65b"
-omitted_target_fields = []
 unmapped_target_fields = [
     "portal_id",
 ]
+omitted_target_fields = []
+
+[mappings.company.mapped_target_fields]
+_fivetran_synced = "_airbyte_extracted_at"
+id = "companies.id"
+is_deleted = "companies.archived"
+property_name = "companies.properties_name"
+property_description = "companies.properties_description"
+property_createdate = "companies.properties_createdate"
+property_industry = "companies.properties_industry"
+property_address = "companies.properties_address"
+property_address_2 = "companies.properties_address2"
+property_city = "companies.properties_city"
+property_state = "companies.properties_state"
+property_country = "companies.properties_country"
+property_annualrevenue = "companies.properties_annualrevenue"
 
 [mappings.company.unused_source_fields]
 companies = [
@@ -312,10 +347,28 @@ companies = [
 [mappings.deal]
 source_file = "deal.yml"
 source_file_hash = "25d2d66794ce3a53d66ddac8655dc8cc02b0a9c1587addfd9c92b6d3366f5008"
-omitted_target_fields = []
 unmapped_target_fields = [
     "portal_id",
 ]
+omitted_target_fields = []
+
+[mappings.deal.mapped_target_fields]
+deal_id = "deals.id"
+is_deleted = "deals.archived"
+deal_pipeline_id = "deals.properties_pipeline"
+deal_pipeline_stage_id = "deals.properties_dealstage"
+owner_id = "deals.properties_hubspot_owner_id"
+_fivetran_synced = "_airbyte_extracted_at"
+property_dealname = "deals.properties_dealname"
+property_description = "deals.properties_description"
+property_createdate = "deals.properties_createdate"
+property_closedate = "deals.properties_closedate"
+property_amount = "deals.properties_amount"
+property_dealstage = "deals.properties_dealstage"
+property_pipeline = "deals.properties_pipeline"
+property_hubspot_owner_id = "deals.properties_hubspot_owner_id"
+property_dealtype = "deals.properties_dealtype"
+property_hs_lastmodifieddate = "deals.properties_hs_lastmodifieddate"
 
 [mappings.deal.unused_source_fields]
 deals = [
