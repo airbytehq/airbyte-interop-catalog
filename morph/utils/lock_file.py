@@ -68,7 +68,7 @@ def find_unused_source_streams(
                 used_streams.update(from_data.keys())
 
     # Find unused streams
-    return sorted(set(config_streams) - used_streams))
+    return sorted(set(config_streams) - used_streams)
 
 
 def find_unmapped_target_tables(
@@ -93,7 +93,7 @@ def find_unmapped_target_tables(
                 mapped_tables.add(transform_id)
 
     # Find unmapped tables
-    return sorted(set(config_tables) - mapped_tables))
+    return sorted(set(config_tables) - mapped_tables)
 
 
 def find_unmapped_target_fields(
@@ -133,7 +133,7 @@ def find_unmapped_target_fields(
     mapped_fields = set(fields.keys())
 
     # Find unmapped fields
-    return sorted(target_fields - mapped_fields))
+    return sorted(target_fields - mapped_fields)
 
 
 def validate_field_mappings(

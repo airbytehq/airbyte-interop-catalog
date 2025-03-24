@@ -2,7 +2,6 @@
 Tests for lock file generation.
 """
 
-import os
 import tempfile
 from pathlib import Path
 
