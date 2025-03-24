@@ -54,17 +54,19 @@ def json_to_dbt(
     sources_yml = parse_airbyte_catalog(
         catalog_file,
         source_name,
+        database,
+        schema,
     )
 
     # Write sources.yml to output file
-    if output_file:
-        output_path = Path(output_file)
-    else:
-        output_path = Path(f"sources_{source_name}.yml")
+    output_path = Path(output_file) if output_file else Path(f"sources_{source_name}.yml")
 
-    # Add header comment
-    header = generate_header_comment(catalog_file)
-    sources_yml_with_header = f"{header}\n{sources_yml}"
+    # Create a simple header comment
+    header = f"""# This file was auto-generated using the following command:
+# uv run morph json-to-dbt {catalog_file} --source-name {source_name}
+# To regenerate this file, run the command above.
+"""
+    sources_yml_with_header = f"{header}\n{yaml.dump(sources_yml, default_flow_style=False, sort_keys=False)}"
 
     # Write to file
     output_path.write_text(sources_yml_with_header)
@@ -144,11 +146,16 @@ def generate_dbt_project(
         sources_yml = parse_airbyte_catalog(
             catalog_file,
             source_name,
+            None,  # database
+            None,  # schema
         )
 
         # Write sources.yml to models directory
         sources_path = actual_output_dir / "models" / "src_airbyte_raw.yml"
-        sources_path.write_text(sources_yml)
+        # Ensure parent directory exists
+        sources_path.parent.mkdir(parents=True, exist_ok=True)
+        # Convert dict to YAML string before writing
+        sources_path.write_text(yaml.dump(sources_yml, default_flow_style=False, sort_keys=False))
 
         console.print(f"Generated dbt project at {actual_output_dir}")
     except Exception as e:

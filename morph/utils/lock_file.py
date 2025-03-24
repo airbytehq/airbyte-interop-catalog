@@ -35,9 +35,9 @@ def compute_file_hash(file_path: str) -> str:
         return ""
 
     sha256_hash = hashlib.sha256()
-    with Path(file_path).open("rb") as f:
-        for byte_block in iter(lambda: f.read(4096), b""):
-            sha256_hash.update(byte_block)
+    # Read file in binary mode using pathlib
+    content = Path(file_path).read_bytes()
+    sha256_hash.update(content)
     return sha256_hash.hexdigest()
 
 
@@ -168,10 +168,8 @@ def validate_field_mappings(
                     continue
                     
                 # Check for potential typos (e.g., 'contact' instead of 'contacts')
-                if (table_ref and 
-                    table_ref != source_alias and
-                    table_ref != f"{source_alias}s" and
-                    table_ref.startswith(source_alias[:-1])):
+                valid_refs = {source_alias, f"{source_alias}s"}
+                if table_ref and table_ref not in valid_refs and table_ref.startswith(source_alias[:-1]):
                     raise ValueError(
                         f"Fatal error in transform '{transform_id}': "
                         f"Field '{field_name}' references '{table_ref}' but source alias is '{source_alias}'",
@@ -208,53 +206,54 @@ def generate_lock_file(
     mapping_data = {}
 
     for yaml_file in list(mapping_dir.glob("**/*.yml")) + list(mapping_dir.glob("**/*.yaml")):
-        with Path(yaml_file).open() as f:
-            try:
-                mapping = yaml.safe_load(f)
-                mapping_files.append(mapping)
+        try:
+            # Use pathlib to read file content
+            content = Path(yaml_file).read_text()
+            mapping = yaml.safe_load(content)
+            mapping_files.append(mapping)
 
-                # Process each transform
-                for transform in mapping.get("transforms", []):
-                    transform_id = transform.get("id")
-                    if not transform_id:
-                        continue
+            # Process each transform
+            for transform in mapping.get("transforms", []):
+                transform_id = transform.get("id")
+                if not transform_id:
+                    continue
 
-                    # Extract source aliases from "from" section
-                    source_aliases = set()
-                    from_data = transform.get("from", {})
+                # Extract source aliases from "from" section
+                source_aliases = set()
+                from_data = transform.get("from", {})
 
-                    if isinstance(from_data, list):
-                        for source_item in from_data:
-                            source_aliases.update(source_item.keys())
-                    else:
-                        source_aliases.update(from_data.keys())
+                if isinstance(from_data, list):
+                    for source_item in from_data:
+                        source_aliases.update(source_item.keys())
+                else:
+                    source_aliases.update(from_data.keys())
 
-                    # Validate field mappings
-                    validate_field_mappings(
-                        transform_id, source_aliases, transform.get("fields", {}),
-                    )
+                # Validate field mappings
+                validate_field_mappings(
+                    transform_id, source_aliases, transform.get("fields", {}),
+                )
 
-                    # Find unmapped target fields
-                    unmapped_fields = find_unmapped_target_fields(
-                        transform_id, target_schema, transform.get("fields", {}),
-                    )
+                # Find unmapped target fields
+                unmapped_fields = find_unmapped_target_fields(
+                    transform_id, target_schema, transform.get("fields", {}),
+                )
 
-                    # Extract unused source fields from annotations
-                    unused_fields = {}
-                    annotations = transform.get("annotations", {})
-                    if "unused_source_fields" in annotations:
-                        unused_fields = annotations["unused_source_fields"]
+                # Extract unused source fields from annotations
+                unused_fields = {}
+                annotations = transform.get("annotations", {})
+                if "unused_source_fields" in annotations:
+                    unused_fields = annotations["unused_source_fields"]
 
-                    # Add to mapping data
-                    rel_path = Path(yaml_file).relative_to(mapping_dir)
-                    mapping_data[transform_id] = {
-                        "source_file": str(rel_path),
-                        "source_file_hash": compute_file_hash(str(yaml_file)),
-                        "unused_source_fields": unused_fields,
-                        "unmapped_target_fields": unmapped_fields,
-                    }
-            except Exception as e:
-                console.print(f"Error loading mapping file {yaml_file}: {e}", style="bold red")
+                # Add to mapping data
+                rel_path = Path(yaml_file).relative_to(mapping_dir)
+                mapping_data[transform_id] = {
+                    "source_file": str(rel_path),
+                    "source_file_hash": compute_file_hash(str(yaml_file)),
+                    "unused_source_fields": unused_fields,
+                    "unmapped_target_fields": unmapped_fields,
+                }
+        except Exception as e:
+            console.print(f"Error loading mapping file {yaml_file}: {e}", style="bold red")
 
     # Find unused source streams
     unused_streams = find_unused_source_streams(source_streams, mapping_files)
