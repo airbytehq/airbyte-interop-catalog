@@ -48,14 +48,13 @@ def get_mapping_confidence(
     
     for attempt in range(max_retries):
         try:
-            result = client.chat.completions.create(
+            return client.chat.completions.create(
                 model="gpt-4",  # Choose appropriate model
                 response_model=MappingConfidence,
                 messages=[
                     {"role": "user", "content": prompt}
                 ],
             )
-            return result
         except Exception as e:
             latest_exception = e
             if attempt == max_retries - 1:  # Last attempt
