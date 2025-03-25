@@ -10,8 +10,7 @@ import yaml
 
 from morph.utils.lock_file import (
     compute_file_hash,
-    extract_source_streams,
-    extract_target_tables,
+    find_mapped_target_fields,
     find_missing_target_fields,
     find_omitted_target_fields,
     find_unmapped_target_tables,
@@ -25,7 +24,7 @@ def test_compute_file_hash():
     # Create a temporary file with known content
     temp_file = Path(tempfile.mktemp())
     temp_file.write_bytes(b"test content")
-    
+
     # Compute hash
     file_hash = compute_file_hash(str(temp_file))
 
@@ -101,6 +100,27 @@ def test_find_missing_target_fields():
 
     # Should find field2 and field4 as missing
     assert missing_fields == ["field2", "field4"]
+
+
+def test_find_mapped_target_fields():
+    # Test data
+    fields = {
+        "field1": {"expression": "source.field1"},
+        "field2": {"expression": "MISSING"},
+        "field3": {"expression": "source.field3"},
+        "field4": {"expression": "MISSING"},
+        "field5": {"expression": "concat(source.field5, ' suffix')"},
+    }
+
+    # Find mapped fields
+    mapped_fields = find_mapped_target_fields(fields)
+
+    # Should find field1, field3, and field5 with their expressions
+    assert mapped_fields == {
+        "field1": "source.field1",
+        "field3": "source.field3",
+        "field5": "concat(source.field5, ' suffix')",
+    }
 
 
 def test_validate_field_mappings():
@@ -224,15 +244,19 @@ def test_generate_lock_file():
         # For testing, we'll just verify specific content exists in the file
         # since tomli_w is write-only and we can't easily parse the TOML
         lock_data_str = lock_file.read_text()
-        
+
         # Verify the mapping data exists
         assert "mappings.table1" in lock_data_str
-        
+
         # Verify omitted_target_fields
         assert "omitted_target_fields" in lock_data_str
         assert "field3" in lock_data_str
-        
+
         # Verify unmapped_target_fields (MISSING fields)
         assert "unmapped_target_fields" in lock_data_str
         assert "field2" in lock_data_str
         assert "field4" in lock_data_str
+        
+        # Verify mapped_target_fields
+        assert "mapped_target_fields" in lock_data_str
+        assert "stream1.field1" in lock_data_str
