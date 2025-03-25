@@ -193,10 +193,10 @@ The mapping confidence evaluation tool uses AI to analyze field mappings and pro
 
 ```bash
 # Using poe
-poe eval-mapping-confidence path/to/mapping.json
+poe eval-mapping path/to/mapping.json
 
 # Or directly
-uv run morph eval-mapping-confidence path/to/mapping.json
+uv run morph eval-mapping path/to/mapping.json
 ```
 
 ### Options
@@ -206,7 +206,7 @@ uv run morph eval-mapping-confidence path/to/mapping.json
 
 Example with custom types:
 ```bash
-poe eval-mapping-confidence path/to/mapping.json --source-type CSV --target-type "PostgreSQL table"
+poe eval-mapping path/to/mapping.json --source-type CSV --target-type "PostgreSQL table"
 ```
 
 ### Input Format
