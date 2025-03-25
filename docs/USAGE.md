@@ -246,9 +246,9 @@ The tool provides:
 2. Detailed explanation of the score
 3. Field-by-field confidence analysis including:
    - Field name
-   - Confidence score
    - Expression used
    - Field description
+   - Confidence score
 
 Example output:
 ```
@@ -257,12 +257,12 @@ Overall Confidence Score: 0.85
 Explanation: The mapping shows good field coverage and appropriate transformations...
 
 Field-by-Field Analysis:
-┌──────────┬────────────┬──────────────┬──────────────────────┐
-│ Field    │ Confidence │ Expression   │ Description          │
-├──────────┼────────────┼──────────────┼──────────────────────┤
-│ id       │ 0.95       │ ads.id       │ The ID of this ad    │
-│ name     │ 0.90       │ ads.name     │ Name of the ad       │
-└──────────┴────────────┴──────────────┴──────────────────────┘
+┌──────────┬──────────────┬──────────────────────┬────────────┐
+│ Field    │ Expression   │ Description          │ Confidence │
+├──────────┼──────────────┼──────────────────────┼────────────┤
+│ id       │ ads.id       │ The ID of this ad    │ 0.95       │
+│ name     │ ads.name     │ Name of the ad       │ 0.90       │
+└──────────┴──────────────┴──────────────────────┴────────────┘
 ```
 
 ### Best Practices

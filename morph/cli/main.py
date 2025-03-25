@@ -14,6 +14,7 @@ from morph.utils.json_to_dbt_sources import (
 )
 from morph.utils.lock_file import generate_lock_file_for_project
 from morph.utils.mapping_to_dbt_models import generate_dbt_package
+from morph.utils.rich_utils import rich_formatted_confidence
 
 console = Console()
 
@@ -530,22 +531,25 @@ def eval_project_mappings(
         # Create results table
         table = Table(title=f"Mapping Confidence Analysis - {yaml_file.name}")
         table.add_column("Field", style="cyan")
-        table.add_column("Confidence", style="green", justify="right")
         table.add_column("Expression", style="yellow")
         table.add_column("Description", style="white")
+        table.add_column("Confidence", justify="right")
 
         for field, score in confidence.field_scores.items():
             field_data = next((f for f in fields if f["name"] == field), {})
+
+            # Color code the confidence score based on thresholds
             table.add_row(
-                field,
-                f"{score:.2f}",
+                str(field),
                 str(field_data.get("expression", "")),
                 field_data.get("description", ""),
+                rich_formatted_confidence(score),
             )
 
         # Print results
-        console.print(f"\nOverall Confidence Score: [green]{confidence.score:.2f}[/green]")
-        console.print(f"\nExplanation: {confidence.explanation}")
+        console.print(f"\nOverall Confidence Score: {rich_formatted_confidence(confidence.score)}")
+        console.print("\nExplanation:")
+        console.print(f"\n_{confidence.explanation}_")
         console.print("\nField-by-Field Analysis:")
         console.print(table)
 
