@@ -23,18 +23,19 @@ classifiers = [
     "Typing :: Typed",
 ]
 dependencies = [
-    "airbyte>=0.23.0",
+    "airbyte>=0.23.0,<0.24.0",
     "click>=8.0.0",
     "copier>=9.6.0",
     "jinja2>=3.0.0",
     "pydantic-ai==0.0.42",
     "rich>=10.0.0",
     "tomli-w>=1.0.0",
+    "requests>=2.32.3",
 ]
 
 [project.optional-dependencies]
 dev = [
-    "airbyte>=0.23.0",
+    "airbyte>=0.23.0,<0.24.0",
     "basedpyright>=1.28.2",
     "dbt-core>=1.9.3",
     "dbt-duckdb>=1.9.2",
