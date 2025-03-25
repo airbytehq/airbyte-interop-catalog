@@ -6,12 +6,15 @@ from typing import Any
 import click
 import yaml
 from rich.console import Console
+from rich.table import Table
 
+from morph.ai.eval import get_mapping_confidence
 from morph.utils.json_to_dbt_sources import (
     parse_airbyte_catalog,
 )
 from morph.utils.lock_file import generate_lock_file_for_project
 from morph.utils.mapping_to_dbt_models import generate_dbt_package
+from morph.utils.rich_utils import rich_formatted_confidence
 
 console = Console()
 
@@ -436,6 +439,143 @@ def generate_project(
         console.print(f"Generating dbt project for {source_name}...")
         generate_dbt_project(source_name, project_name)
         console.print(f"Generated dbt project for {source_name}")
+
+
+@main.command()
+@click.argument(
+    "mapping_file",
+    type=click.Path(exists=True, path_type=Path),
+)
+def eval_mapping(
+    mapping_file: Path,
+) -> None:
+    """Evaluate confidence of a mapping configuration.
+
+    MAPPING_FILE should be a YAML file containing field mappings.
+    """
+    # Read mapping file
+    mapping_data = yaml.safe_load(mapping_file.read_text())
+
+    # Extract fields from dbt transform format
+    fields = []
+    for transform in mapping_data.get("transforms", []):
+        for field_name, field_data in transform.get("fields", {}).items():
+            fields.append(
+                {
+                    "name": field_name,
+                    "expression": field_data.get("expression", ""),
+                    "description": field_data.get("description", ""),
+                    "tests": [],  # TODO: Extract tests if present
+                },
+            )
+
+    if not fields:
+        console.print("[red]No fields found in the mapping file.[/red]")
+        return
+
+    # Get confidence score
+    confidence = get_mapping_confidence(fields)
+
+    # Create results table
+    table = Table(title="Mapping Confidence Analysis")
+    table.add_column("Field", style="cyan")
+    table.add_column("Confidence", style="green", justify="right")
+    table.add_column("Expression", style="yellow")
+    table.add_column("Description", style="white")
+
+    for field, score in confidence.field_scores.items():
+        field_data = next((f for f in fields if f["name"] == field), {})
+        table.add_row(
+            field,
+            f"{score:.2f}",
+            field_data.get("expression", ""),
+            field_data.get("description", ""),
+        )
+
+    # Print results
+    console.print(f"\nOverall Confidence Score: [green]{confidence.score:.2f}[/green]")
+    console.print(f"\nExplanation: {confidence.explanation}")
+    console.print("\nField-by-Field Analysis:")
+    console.print(table)
+
+
+@main.command()
+@click.argument("source_name")
+@click.argument("project_name", default="fivetran-interop")
+def eval_project_mappings(
+    source_name: str,
+    project_name: str = "fivetran-interop",
+) -> None:
+    """Evaluate confidence of all mapping files in a project.
+
+    SOURCE_NAME is the name of the source (e.g., hubspot, shopify)
+    PROJECT_NAME is the name of the project (defaults to fivetran-interop)
+    """
+    # Construct the path to the transforms directory
+    transforms_dir = Path("catalog") / source_name / "src" / project_name / "transforms"
+
+    if not transforms_dir.exists():
+        console.print(f"[red]Error: Transforms directory not found at {transforms_dir}[/red]")
+        return
+
+    # Find all YAML files
+    yaml_files = list(transforms_dir.glob("**/*.yml")) + list(transforms_dir.glob("**/*.yaml"))
+
+    if not yaml_files:
+        console.print(f"[yellow]No YAML files found in {transforms_dir}[/yellow]")
+        return
+
+    # Process each YAML file
+    for yaml_file in yaml_files:
+        console.print(f"\n[bold]Evaluating {yaml_file}[/bold]")
+
+        # Read mapping file
+        mapping_data = yaml.safe_load(yaml_file.read_text())
+
+        # Extract fields from dbt transform format
+        fields = []
+        for transform in mapping_data.get("transforms", []):
+            for field_name, field_data in transform.get("fields", {}).items():
+                fields.append(
+                    {
+                        "name": field_name,
+                        "expression": field_data.get("expression", ""),
+                        "description": field_data.get("description", ""),
+                        "tests": [],  # TODO: Extract tests if present
+                    },
+                )
+
+        if not fields:
+            console.print("[yellow]No fields found in the mapping file.[/yellow]")
+            continue
+
+        # Get confidence score
+        confidence = get_mapping_confidence(fields)
+
+        # Create results table
+        table = Table(title=f"Mapping Confidence Analysis - {yaml_file.name}")
+        table.add_column("Field", style="cyan")
+        table.add_column("Expression", style="yellow")
+        table.add_column("Description", style="white")
+        table.add_column("Confidence", justify="right")
+
+        for field, score in confidence.field_scores.items():
+            field_data = next((f for f in fields if f["name"] == field), {})
+
+            # Color code the confidence score based on thresholds
+            table.add_row(
+                str(field),
+                str(field_data.get("expression", "")),
+                field_data.get("description", ""),
+                rich_formatted_confidence(score),
+            )
+
+        # Print results
+        console.print(f"\nOverall Confidence Score: {rich_formatted_confidence(confidence.score)}")
+        console.print("\nExplanation:")
+        console.print(f"\n_{confidence.explanation}_")
+        console.print("\nField-by-Field Analysis:")
+        console.print(table)
 
 
 if __name__ == "__main__":

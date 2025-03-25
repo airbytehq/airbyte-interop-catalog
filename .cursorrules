@@ -1,0 +1,81 @@
+# Morph Project Cursor Rules
+
+# Type Hints
+
+- Use modern type hints:
+  - `list` instead of `List`
+  - `dict` instead of `Dict`
+  - `str | None` instead of `Optional[str]`
+  - `tuple` instead of `Tuple`
+  - `set` instead of `Set`
+  - `|` instead of `Union`
+  - `Any` is still valid when needed
+
+# Code Style
+
+- Follow modern PEP guidelines.
+- Use double quotes for strings.
+- Use triple quotes for docstrings.
+- Use type hints for all function parameters and return values.
+- Use descriptive variable names.
+- Keep functions focused and small.
+- Use meaningful docstrings with Args/Returns sections.
+
+# Project Structure
+
+- TODO
+
+# Testing
+
+- Write unit tests for new functionality.
+- Use pytest fixtures for test setup.
+- Mock external dependencies.
+- Use meaningful test names that describe the behavior being tested.
+- Include both positive and negative test cases.
+
+# Documentation
+
+- Keep `README.md`, `docs/CONTRIBUTING.md`, and `docs/USAGE.md` up to date.
+- Include examples in docstrings when appropriate.
+- Keep documentation in `docs/` directory
+
+# Git Practices
+
+- Write clear commit messages using conventional commit structure.
+- Keep commits focused and atomic.
+- Use feature branches for new development.
+- Assume dynamic versioning, with changelog info in the text of GitHub Releases.
+
+# Dependencies
+
+- Use `uv` for dependency management.
+- Use `pyproject.toml` for project metadata.
+- Document all dependencies in `pyproject.toml`.
+
+# Error Handling
+
+- Use custom exceptions for project-specific errors.
+- Include meaningful error messages.
+
+# Performance
+
+- TBD
+
+# Security
+
+- Never commit sensitive data.
+- Use environment variables for secrets.
+- Validate user input.
+- Follow security best practices.
+
+# Code Review
+
+- Review code for:
+  - Type safety
+  - Error handling
+  - Test coverage
+  - Documentation
+  - Performance
+  - Security
+  - Accessibility
+  - Internationalization
