@@ -46,8 +46,6 @@ def get_mapping_confidence(
     """Get confidence score for a mapping configuration.
 
     Args:
-        source_type: The source data type
-        target_type: The target data type
         fields: List of field mappings
 
     Returns:
