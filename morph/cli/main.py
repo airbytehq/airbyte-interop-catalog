@@ -88,18 +88,6 @@ def airbyte_catalog_to_dbt_sources_yml(
     type=str,
     default="fivetran-interop",
 )
-@click.option(
-    "--catalog-file",
-    help="Path to Airbyte catalog JSON file (defaults to catalog/{source_name}/generated/airbyte-catalog.json)",
-)
-@click.option(
-    "--output-dir",
-    help="Output directory for generated dbt project (defaults to catalog/{source_name}/generated)",
-)
-@click.option(
-    "--mapping-dir",
-    help="Directory containing mapping YAML files (defaults to catalog/{source_name}/src/{project_name}/transforms)",
-)
 def generate_dbt_project(
     source_name: str,
     project_name: str,
@@ -421,13 +409,13 @@ def generate_project(
     # Generate Airbyte catalog
     if not no_airbyte_catalog:
         console.print(f"Generating Airbyte catalog for {source_name}...")
-        create_airbyte_catalog(source_name)
+        create_airbyte_catalog.callback(source_name)
         console.print("Generated Airbyte catalog.")
 
     # Generate transforms
     if not no_transforms:
         console.print(f"Generating transforms for {source_name}...")
-        generate_transform_scaffold(source_name, project_name)
+        generate_transform_scaffold.callback(source_name, project_name)
         console.print(f"Generated transforms for {source_name}")
 
     # Generate lock file
@@ -439,7 +427,7 @@ def generate_project(
     # Generate dbt project
     if not no_dbt_project:
         console.print(f"Generating dbt project for {source_name}...")
-        generate_dbt_project(source_name, project_name)
+        generate_dbt_project.callback(source_name, project_name)
         console.print(f"Generated dbt project for {source_name}")
 
 
