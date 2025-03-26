@@ -1,11 +1,11 @@
 [project]
 source_name = "facebook_marketing"
 project_name = "fivetran-interop"
-generated_at = "2025-03-26T22:27:58Z"
-requirements_file = "requirements/fivetran-interop/src_hubspot.yml"
-requirements_file_hash = ""
-airbyte_source_file = "generated/src_airbyte_hubspot.yml"
-airbyte_source_file_hash = ""
+generated_at = "2025-03-26T22:44:18Z"
+requirements_file = "catalog/facebook_marketing/requirements/fivetran-interop/src_dbt_requirements.yml"
+requirements_file_hash = "27ce201f199e67f819154c22c20d7f418bcfb57ccd5586a05461e273ee895340"
+airbyte_source_file = "catalog/facebook_marketing/generated/src_airbyte_facebook_marketing.yml"
+airbyte_source_file_hash = "4601fc46a0390483cd76f46b5838b612ce51e71574ea258f117c5d78baf1ecb1"
 
 [coverage]
 unused_source_streams = [

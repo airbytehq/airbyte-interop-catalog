@@ -1,11 +1,11 @@
 [project]
 source_name = "hubspot"
 project_name = "fivetran-interop"
-generated_at = "2025-03-26T22:27:38Z"
-requirements_file = "requirements/fivetran-interop/src_hubspot.yml"
-requirements_file_hash = ""
-airbyte_source_file = "generated/src_airbyte_hubspot.yml"
-airbyte_source_file_hash = "357e83b8e656a76b190de7b00699207773400623ff79819f35eaa279c273ca4e"
+generated_at = "2025-03-26T22:43:45Z"
+requirements_file = "catalog/hubspot/requirements/fivetran-interop/src_dbt_requirements.yml"
+requirements_file_hash = "e64baeee0fecf68e9ce3084b0ae8d7a28a69e45ea1d1a9d881e9963bf5eb685a"
+airbyte_source_file = "catalog/hubspot/generated/src_airbyte_hubspot.yml"
+airbyte_source_file_hash = "b0e1470f7c99fc948ab2de59d7f76f35c84f3d4191a71ea3f0fcae54e60181d1"
 
 [coverage]
 unused_source_streams = [
