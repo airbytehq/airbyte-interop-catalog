@@ -573,7 +573,7 @@ def eval_project_mappings(
         # Print results
         console.print(f"\nOverall Confidence Score: {rich_formatted_confidence(confidence.score)}")
         console.print("\nExplanation:")
-        console.print(f"\n_{confidence.explanation}_")
+        console.print(f"\n{confidence.explanation}")
         console.print("\nField-by-Field Analysis:")
         console.print(table)
 

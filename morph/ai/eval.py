@@ -1,30 +1,14 @@
 """Mapping confidence evaluation using Marvin AI."""
 
 from marvin import ai_fn
-from pydantic import BaseModel
 
-
-class FieldMapping(BaseModel):
-    """Represents a field mapping with its properties."""
-
-    name: str
-    expression: str | bool | float | int
-    description: str | None = None
-    tests: list[dict[str, str]] | None = None
-
-
-class MappingConfidence(BaseModel):
-    """Represents the confidence score and explanation for a mapping."""
-
-    score: float
-    explanation: str
-    field_scores: dict[str, float]
+from morph.ai import models
 
 
 @ai_fn
 def evaluate_mapping_confidence(
-    mappings: list[FieldMapping],
-) -> MappingConfidence:
+    mappings: list[models.FieldMapping],
+) -> models.MappingConfidence:
     """Evaluate the confidence of a field mapping configuration.
 
     Args:
@@ -42,7 +26,7 @@ def evaluate_mapping_confidence(
 
 def get_mapping_confidence(
     mappings: list[dict],
-) -> MappingConfidence:
+) -> models.MappingConfidence:
     """Get confidence score for a mapping configuration.
 
     Args:
@@ -54,7 +38,7 @@ def get_mapping_confidence(
     Raises:
         Exception: If all retries fail
     """
-    field_mappings = [FieldMapping(**mapping) for mapping in mappings]
+    field_mappings = [models.FieldMapping(**mapping) for mapping in mappings]
     latest_exception = None
 
     # TODO: We should enforce "strict" mode here, so that the LLM always generates valid JSON output.
