@@ -65,6 +65,19 @@ class FieldMapping(BaseModel):
     """A description of the field."""
 
 
+class TableMapping(BaseModel):
+    """Represents a table mapping with its properties."""
+
+    source_stream_name: str
+    """The name of the source table."""
+
+    target_table_name: str
+    """The name of the target table."""
+
+    field_mappings: list[FieldMapping]
+    """The field mappings for the table."""
+
+
 class FieldMappingEval(BaseModel):
     """Represents the confidence score for a field mapping."""
 
@@ -82,16 +95,19 @@ class FieldMappingEval(BaseModel):
     # """A short explanation of the score."""
 
 
-class MappingConfidence(BaseModel):
-    """Represents the confidence score and explanation for a mapping."""
+class TableMappingEval(BaseModel):
+    """Represents the confidence score and explanation for a table mapping."""
 
     score: float
     """The overall confidence score (0.00 to 1.00)."""
 
+    name_match_score: float
+    """The confidence score for the name match between the source and target tables."""
+
     explanation: str
     """A detailed explanation of the overall score."""
 
-    field_evals: list[FieldMappingEval]
+    field_mapping_evals: list[FieldMappingEval]
     """A dictionary of field names and their confidence scores."""
 
 
@@ -126,8 +142,8 @@ def print_mapping_eval(
         )
 
 
-def print_mapping_analysis(
-    confidence: MappingConfidence,
+def print_table_mapping_analysis(
+    table_mapping_eval: TableMappingEval,
     fields: list[FieldMapping],
     title: str = "Mapping Confidence Analysis",
 ) -> None:
@@ -146,7 +162,7 @@ def print_mapping_analysis(
     table.add_column("Confidence", justify="right")
 
     # Print each field evaluation
-    for field_eval in confidence.field_evals:
+    for field_eval in table_mapping_eval.field_mapping_evals:
         field_data = next((f for f in fields if f.name == field_eval.name), {})
         print_mapping_eval(
             field_data,
@@ -155,8 +171,10 @@ def print_mapping_analysis(
         )
 
     # Print results
-    console.print(f"\nOverall Confidence Score: {rich_formatted_confidence(confidence.score)}")
+    console.print(
+        f"\nOverall Confidence Score: {rich_formatted_confidence(table_mapping_eval.score)}"
+    )
     console.print("\nExplanation:")
-    console.print(f"\n{confidence.explanation}", style="italic")
+    console.print(f"\n{table_mapping_eval.explanation}", style="italic")
     console.print("\nField-by-Field Analysis:")
     console.print(table)

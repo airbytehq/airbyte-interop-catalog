@@ -28,14 +28,14 @@ def select_best_match_source_schema(
 def generate_mapping(
     target_schema: models.DbtSourceTable,
     source_schemas: list[models.DbtSourceTable],
-) -> models.MappingConfidence:
+) -> models.TableMappingEval:
     """Evaluate the confidence of a field mapping configuration.
 
     Args:
         fields: List of field mappings to evaluate
 
     Returns:
-        MappingConfidence object containing:
+        TableMappingEval object containing:
         - score: Overall confidence score (0.00 to 1.00)
         - explanation: Detailed explanation of the score
         - field_scores: Individual confidence scores per field

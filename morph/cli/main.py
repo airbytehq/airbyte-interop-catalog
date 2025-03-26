@@ -7,8 +7,8 @@ import click
 import yaml
 from rich.console import Console
 
-from morph.ai.eval import get_mapping_confidence
-from morph.ai.models import FieldMapping, print_mapping_analysis
+from morph.ai.eval import get_table_mapping_eval
+from morph.ai.models import FieldMapping, print_table_mapping_analysis
 from morph.utils.json_to_dbt_sources import (
     parse_airbyte_catalog,
 )
@@ -490,11 +490,11 @@ def eval_project_mappings(
             continue
 
         # Get confidence score
-        confidence = get_mapping_confidence(fields)
+        table_mapping_eval = get_table_mapping_eval(fields)
 
         # Print analysis
-        print_mapping_analysis(
-            confidence=confidence,
+        print_table_mapping_analysis(
+            table_mapping_eval=table_mapping_eval,
             fields=fields,
             title=f"Mapping Confidence Analysis - {yaml_file.name}",
         )

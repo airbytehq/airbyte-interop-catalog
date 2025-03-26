@@ -18,33 +18,33 @@ MAX_RETRIES = 3
 @ai_fn
 def ai_fn_evaluate_mapping_confidence(
     mappings: list[models.FieldMapping],
-) -> models.MappingConfidence:
+) -> models.TableMappingEval:
     """Evaluate the confidence of a field mapping configuration.
 
     Args:
         fields: List of field mappings to evaluate
 
     Returns:
-        MappingConfidence object containing:
+        TableMappingEval object containing:
         - score: Overall confidence score (0.00 to 1.00)
         - explanation: Detailed explanation of the score
-        - field_evals: Individual confidence scores per field
+        - field_mapping_evals: Individual confidence scores per field
     """
     # This function will be implemented by Marvin AI
     pass
 
 
 @with_retry()
-def get_mapping_confidence(
+def get_table_mapping_eval(
     field_mappings: list[models.FieldMapping],
-) -> models.MappingConfidence:
+) -> models.TableMappingEval:
     """Get confidence score for a mapping configuration.
 
     Args:
         fields: List of field mappings
 
     Returns:
-        MappingConfidence object with confidence score and explanation
+        TableMappingEval object with confidence score and explanation
 
     Raises:
         Exception: If all retries fail
