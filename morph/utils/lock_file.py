@@ -401,6 +401,9 @@ def generate_lock_file_for_project(
                 "unused_source_fields": unused_fields,
             }
 
+    # Sort mapping data by transform ID
+    mapping_data = dict(sorted(mapping_data.items()))
+
     # Find unused source streams
     unused_streams = find_unused_source_streams(source_streams, mapping_files)
 
