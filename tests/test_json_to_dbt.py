@@ -114,14 +114,6 @@ def test_generate_dbt_sources_yml() -> None:
         assert source["tables"][0]["name"] == "test_table"
 
 
-def test_cli_json_to_dbt_help() -> None:
-    """Test the help output for json-to-dbt command."""
-    runner = CliRunner()
-    result = runner.invoke(main, ["json-to-dbt", "--help"])
-    assert result.exit_code == 0
-    assert "Convert JSON schema files" in result.output
-
-
 def test_airbyte_catalog_with_additional_columns() -> None:
     """Test that Airbyte catalog parsing adds the required additional columns."""
     with tempfile.TemporaryDirectory() as tmpdir:

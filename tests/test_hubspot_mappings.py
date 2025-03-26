@@ -5,6 +5,8 @@ from pathlib import Path
 import pytest
 import yaml
 
+from morph.utils import resource_paths
+
 
 @pytest.mark.parametrize(
     "source_table,target_table,mapping_file",
@@ -26,7 +28,12 @@ def test_mapping(source_table, target_table, mapping_file):
     )
     source_schema_path = base_dir / "catalog" / "hubspot" / "generated" / "src_airbyte_hubspot.yml"
     target_schema_path = (
-        base_dir / "catalog" / "hubspot" / "requirements" / "fivetran-interop" / "src_hubspot.yml"
+        base_dir
+        / "catalog"
+        / "hubspot"
+        / "requirements"
+        / "fivetran-interop"
+        / "src_dbt_requirements.yml"
     )
 
     # Load the mapping file
