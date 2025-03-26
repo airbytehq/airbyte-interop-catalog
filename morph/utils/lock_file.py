@@ -14,6 +14,8 @@ import tomli_w as toml_writer
 import yaml
 from rich.console import Console
 
+from morph.utils import resource_paths
+
 console = Console()
 
 
@@ -194,7 +196,7 @@ def extract_source_streams(source_name: str) -> list[str]:
         List of source stream names
     """
     # Try to load from generated source schema
-    source_schema_path = Path(f"catalog/{source_name}/generated/src_airbyte_hubspot.yml")
+    source_schema_path = Path(f"catalog/{source_name}/generated/src_airbyte_{source_name}.yml")
     if not source_schema_path.exists():
         console.print(
             f"Warning: Generated source schema file not found at {source_schema_path}",
@@ -227,7 +229,10 @@ def extract_target_tables(source_name: str, project_name: str) -> list[str]:
         List of target table names
     """
     # Try to load from requirements file
-    requirements_path = Path(f"catalog/{source_name}/requirements/{project_name}/src_hubspot.yml")
+    requirements_path = resource_paths.get_dbt_sources_requirements_path(
+        source_name=source_name,
+        project_name=project_name,
+    )
     if not requirements_path.exists():
         console.print(
             f"Warning: Requirements file not found at {requirements_path}",
@@ -274,7 +279,7 @@ def validate_field_mappings(
         # Check for mismatched field names (e.g., issu.my_field when alias is 'issue')
         for source_alias in source_aliases:
             # Look for the most common case: table.field notation
-            if "." in expression:
+            if "." in str(expression):
                 parts = expression.split(".")
                 table_ref = parts[0]
 
@@ -334,70 +339,70 @@ def generate_lock_file_for_project(
     mapping_data = {}
 
     for yaml_file in list(mapping_dir.glob("**/*.yml")) + list(mapping_dir.glob("**/*.yaml")):
-        try:
-            # Use pathlib to read file content
-            content = Path(yaml_file).read_text()
-            mapping = yaml.safe_load(content)
-            mapping_files.append(mapping)
+        # Use pathlib to read file content
+        content = Path(yaml_file).read_text()
+        mapping = yaml.safe_load(content)
+        mapping_files.append(mapping)
 
-            # Process each transform
-            for transform in mapping.get("transforms", []):
-                transform_id = transform.get("id")
-                if not transform_id:
-                    continue
+        # Process each transform
+        for transform in mapping.get("transforms", []):
+            transform_id = transform.get("id")
+            if not transform_id:
+                continue
 
-                # Extract source aliases from "from" section
-                source_aliases = set()
-                from_data = transform.get("from", {})
+            # Extract source aliases from "from" section
+            source_aliases = set()
+            from_data = transform.get("from", {})
 
-                if isinstance(from_data, list):
-                    for source_item in from_data:
-                        source_aliases.update(source_item.keys())
-                else:
-                    source_aliases.update(from_data.keys())
+            if isinstance(from_data, list):
+                for source_item in from_data:
+                    source_aliases.update(source_item.keys())
+            else:
+                source_aliases.update(from_data.keys())
 
-                # Validate field mappings
-                validate_field_mappings(
-                    transform_id,
-                    source_aliases,
-                    transform.get("fields", {}),
-                )
+            # Validate field mappings
+            validate_field_mappings(
+                transform_id,
+                source_aliases,
+                transform.get("fields", {}),
+            )
 
-                # Find omitted target fields
-                omitted_fields = find_omitted_target_fields(
-                    transform_id,
-                    target_schema,
-                    transform.get("fields", {}),
-                )
+            # Find omitted target fields
+            omitted_fields = find_omitted_target_fields(
+                transform_id,
+                target_schema,
+                transform.get("fields", {}),
+            )
 
-                # Extract unused source fields from annotations
-                unused_fields = {}
-                annotations = transform.get("annotations", {})
-                if "unused_source_fields" in annotations:
-                    unused_fields = annotations["unused_source_fields"]
+            # Extract unused source fields from annotations
+            unused_fields = {}
+            annotations = transform.get("annotations", {})
+            if "unused_source_fields" in annotations:
+                unused_fields = annotations["unused_source_fields"]
 
-                # Find missing target fields (marked as MISSING)
-                missing_fields = find_missing_target_fields(
-                    transform.get("fields", {}),
-                )
+            # Find missing target fields (marked as MISSING)
+            missing_fields = find_missing_target_fields(
+                transform.get("fields", {}),
+            )
 
-                # Find mapped target fields (excluding MISSING expressions)
-                mapped_fields = find_mapped_target_fields(
-                    transform.get("fields", {}),
-                )
+            # Find mapped target fields (excluding MISSING expressions)
+            mapped_fields = find_mapped_target_fields(
+                transform.get("fields", {}),
+            )
 
-                # Add to mapping data
-                rel_path = Path(yaml_file).relative_to(mapping_dir)
-                mapping_data[transform_id] = {
-                    "source_file": str(rel_path),
-                    "source_file_hash": compute_file_hash(str(yaml_file)),
-                    "mapped_target_fields": mapped_fields,
-                    "unmapped_target_fields": missing_fields,
-                    "omitted_target_fields": omitted_fields,
-                    "unused_source_fields": unused_fields,
-                }
-        except Exception as e:
-            console.print(f"Error loading mapping file {yaml_file}: {e}", style="bold red")
+            # Add to mapping data
+            rel_path = Path(yaml_file).relative_to(mapping_dir)
+            mapping_data[transform_id] = {
+                "source_file": str(rel_path),
+                "source_file_hash": compute_file_hash(str(yaml_file)),
+                "mapped_target_fields": mapped_fields,
+                "unmapped_target_fields": missing_fields,
+                "omitted_target_fields": omitted_fields,
+                "unused_source_fields": unused_fields,
+            }
+
+    # Sort mapping data by transform ID
+    mapping_data = dict(sorted(mapping_data.items()))
 
     # Find unused source streams
     unused_streams = find_unused_source_streams(source_streams, mapping_files)

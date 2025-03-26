@@ -2,13 +2,16 @@
 Utilities for generating Airbyte catalog files.
 """
 
-from pathlib import Path
+from __future__ import annotations
 
-import airbyte as ab
-from airbyte.secrets import GoogleGSMSecretManager
+from pathlib import Path
+from typing import TYPE_CHECKING
 
 AIRBYTE_INTERNAL_GCP_PROJECT = "dataline-integration-testing"
 USE_DOCKER_IMAGE = True
+
+if TYPE_CHECKING:
+    import airbyte as ab
 
 
 def get_connector_id(source_name: str) -> str:
@@ -36,6 +39,9 @@ def get_config(source_name: str, secret_name: str | None = None) -> dict:
     Returns:
         The source configuration as a dictionary
     """
+    import airbyte as ab
+    from airbyte.secrets import GoogleGSMSecretManager
+
     connector_name = get_connector_id(source_name)
     secret_manager = GoogleGSMSecretManager(
         project=AIRBYTE_INTERNAL_GCP_PROJECT,
@@ -60,6 +66,8 @@ def get_source(source_name: str, streams: list[str] | str = "*") -> ab.Source:
     Returns:
         An Airbyte source instance
     """
+    import airbyte as ab
+
     # Hubspot's CDK ref is not properly pinned in its pyproject.toml (needs airbyte-cdk==2.4.0)
     # AND it needs the old version of pendulum so it isn't compatible with Python 3.12
     return ab.get_source(

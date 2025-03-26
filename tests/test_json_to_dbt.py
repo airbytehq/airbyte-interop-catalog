@@ -8,7 +8,10 @@ import pytest
 from click.testing import CliRunner
 
 from morph.cli import main
-from morph.utils.json_to_dbt_sources import generate_dbt_sources_yml, json_schema_to_dbt_column
+from morph.utils.dbt_source_files import (
+    generate_dbt_sources_yml_from_schema_files,
+    json_schema_to_dbt_column,
+)
 
 
 def test_json_schema_to_dbt_column() -> None:
@@ -92,11 +95,11 @@ def test_generate_dbt_sources_yml() -> None:
             json.dump(schema_content, f)
 
         # Generate sources.yml content
-        result = generate_dbt_sources_yml(
-            [str(schema_path)],
+        result = generate_dbt_sources_yml_from_schema_files(
             source_name="test_source",
             database="test_db",
             schema="test_schema",
+            schema_files=[str(schema_path)],
         )
 
         # Verify the structure
@@ -109,14 +112,6 @@ def test_generate_dbt_sources_yml() -> None:
         assert source["schema"] == "test_schema"
         assert len(source["tables"]) == 1
         assert source["tables"][0]["name"] == "test_table"
-
-
-def test_cli_json_to_dbt_help() -> None:
-    """Test the help output for json-to-dbt command."""
-    runner = CliRunner()
-    result = runner.invoke(main, ["json-to-dbt", "--help"])
-    assert result.exit_code == 0
-    assert "Convert JSON schema files" in result.output
 
 
 def test_airbyte_catalog_with_additional_columns() -> None:
@@ -142,9 +137,9 @@ def test_airbyte_catalog_with_additional_columns() -> None:
             json.dump(catalog_content, f)
 
         # Parse the catalog
-        from morph.utils.json_to_dbt_sources import parse_airbyte_catalog
+        from morph.utils.dbt_source_files import parse_airbyte_catalog_to_dbt_sources_format
 
-        result = parse_airbyte_catalog(
+        result = parse_airbyte_catalog_to_dbt_sources_format(
             str(catalog_path),
             source_name="test_source",
         )

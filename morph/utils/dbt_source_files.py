@@ -2,18 +2,29 @@
 Code to convert JSON schema files or Airbyte catalog to dbt sources.yml format.
 
 Usage:
-    python json_to_dbt_sources.py <json_schema_file_or_directory> [--source-name SOURCE_NAME] [--output OUTPUT_FILE]
-    python json_to_dbt_sources.py <airbyte_catalog_file> --catalog [--source-name SOURCE_NAME] [--output OUTPUT_FILE]
+    python dbt_source_files.py <json_schema_file_or_directory> [--source-name SOURCE_NAME] [--output OUTPUT_FILE]
+    python dbt_source_files.py <airbyte_catalog_file> --catalog [--source-name SOURCE_NAME] [--output OUTPUT_FILE]
 
 Example:
-    python json_to_dbt_sources.py schemas/ --source-name my_source --output models/sources.yml
-    python json_to_dbt_sources.py catalog.json --catalog --source-name my_source --output models/sources.yml
+    python dbt_source_files.py schemas/ --source-name my_source --output models/sources.yml
+    python dbt_source_files.py catalog.json --catalog --source-name my_source --output models/sources.yml
 """
 
-import argparse
 import json
 from pathlib import Path
 from typing import Any
+
+import yaml
+from rich.console import Console
+
+from morph.utils import resource_paths
+
+console = Console()
+
+
+HEADER_COMMENT = """# This file was auto-generated using the morph cli.
+# Please do not edit manually.
+"""
 
 
 def json_schema_to_dbt_column(
@@ -84,34 +95,6 @@ def json_schema_to_dbt_table(schema_name: str, schema_data: dict[str, Any]) -> d
     return table
 
 
-def generate_header_comment(command_args: argparse.Namespace) -> str:
-    """Generate a header comment for the output file with reproduction instructions."""
-    # Reconstruct the command used to generate the file
-    command = "uv run morph json-to-dbt"
-
-    if command_args.catalog:
-        command += " --catalog"
-
-    if command_args.source_name != "default_source":
-        command += f" --source-name {command_args.source_name}"
-
-    if command_args.database:
-        command += f" --database {command_args.database}"
-
-    if command_args.schema:
-        command += f" --schema {command_args.schema}"
-
-    if command_args.output != "sources.yml":
-        command += f" --output {command_args.output}"
-
-    command += f" {command_args.schema_path}"
-
-    return f"""# This file was auto-generated using the following command:
-# {command}
-# To regenerate this file, run the command above.
-"""
-
-
 def create_dbt_source(
     tables: list[dict[str, Any]],
     source_name: str,
@@ -144,7 +127,7 @@ def process_schema_file(schema_file: str) -> tuple[str, dict[str, Any]]:
     return table_name, table
 
 
-def generate_dbt_sources_yml(
+def generate_dbt_sources_yml_from_schema_files(
     schema_files: list[str],
     source_name: str,
     database: str | None = None,
@@ -163,7 +146,50 @@ def generate_dbt_sources_yml(
     return create_dbt_source(tables, source_name, database, schema)
 
 
-def parse_airbyte_catalog(
+def generate_dbt_sources_yml_from_airbyte_catalog(
+    source_name: str,
+    *,
+    project_name: str = "fivetran-interop",
+    catalog_file: Path | None = None,
+    output_file: Path | None = None,
+    database: str | None = None,
+    schema: str | None = None,
+) -> dict[str, Any]:
+    """Generate a dbt sources.yml structure from an Airbyte catalog file."""
+    if not catalog_file:
+        catalog_file = resource_paths.get_generated_catalog_path(source_name, project_name)
+
+    # Validate input file exists
+    if not Path(catalog_file).exists():
+        raise ValueError(f"Error: {catalog_file} does not exist")
+
+    # Calculate output path
+    output_path = (
+        Path(output_file)
+        if output_file
+        else resource_paths.get_generated_sources_yml_path(
+            source_name=source_name,
+            project_name=project_name,
+        )
+    )
+
+    sources_yml = parse_airbyte_catalog_to_dbt_sources_format(
+        catalog_file,
+        source_name,
+        database,
+        schema,
+    )
+
+    sources_yml_with_header = (
+        f"{HEADER_COMMENT}\n{yaml.dump(sources_yml, default_flow_style=False, sort_keys=False)}"
+    )
+
+    # Write to file
+    output_path.write_text(sources_yml_with_header)
+    console.print(f"Generated sources.yml at {output_path}")
+
+
+def parse_airbyte_catalog_to_dbt_sources_format(
     catalog_file: str,
     source_name: str,
     database: str | None = None,
@@ -217,3 +243,12 @@ def parse_airbyte_catalog(
     except Exception as e:
         print(f"Error processing Airbyte catalog {catalog_file}: {e}")
         return create_dbt_source([], source_name, database, schema)
+
+
+def get_dbt_sources_requirements(
+    source_name: str,
+    project_name: str = "fivetran-interop",
+) -> dict[str, Any]:
+    """Get the parsed dbt sources.yml requirements file content."""
+    catalog_file = resource_paths.get_generated_catalog_path(source_name, project_name)
+    return parse_airbyte_catalog_to_dbt_sources_format(catalog_file, source_name)

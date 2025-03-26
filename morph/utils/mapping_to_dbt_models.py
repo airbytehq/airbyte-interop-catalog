@@ -11,6 +11,10 @@ from typing import Any
 import yaml
 from jinja2 import Environment
 
+from morph.utils import resource_paths
+
+DEFAULT_PROJECT_NAME = "fivetran-interop"
+
 
 def load_mapping_file(mapping_file_path: str) -> dict[str, Any]:
     """Load a mapping file and return its contents as a dictionary."""
@@ -145,8 +149,9 @@ models:
 def generate_dbt_package(
     source_name: str,
     *,
-    output_dir: str,
-    mapping_dir: str,
+    project_name: str = DEFAULT_PROJECT_NAME,
+    output_dir: str | None = None,
+    mapping_dir: str | None = None,
 ) -> None:
     """Generate a dbt package from mapping files.
 
@@ -157,8 +162,8 @@ def generate_dbt_package(
     """
     from copier import run_copy
 
-    output_dir = output_dir or Path("catalog") / source_name / "generated"
-    mapping_dir = mapping_dir or Path("catalog") / source_name / "src" / "transforms"
+    output_dir = output_dir or resource_paths.get_generated_dir_root(source_name)
+    mapping_dir = mapping_dir or resource_paths.get_transforms_dir(source_name, project_name)
 
     # Create output directories
     output_path = Path(output_dir)
