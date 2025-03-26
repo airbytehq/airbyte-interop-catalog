@@ -8,7 +8,10 @@ import pytest
 from click.testing import CliRunner
 
 from morph.cli import main
-from morph.utils.dbt_source_files import generate_dbt_sources_yml, json_schema_to_dbt_column
+from morph.utils.dbt_source_files import (
+    generate_dbt_sources_yml_from_airbyte_catalog,
+    json_schema_to_dbt_column,
+)
 
 
 def test_json_schema_to_dbt_column() -> None:
@@ -92,7 +95,7 @@ def test_generate_dbt_sources_yml() -> None:
             json.dump(schema_content, f)
 
         # Generate sources.yml content
-        result = generate_dbt_sources_yml(
+        result = generate_dbt_sources_yml_from_airbyte_catalog(
             [str(schema_path)],
             source_name="test_source",
             database="test_db",

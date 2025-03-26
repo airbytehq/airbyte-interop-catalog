@@ -7,7 +7,7 @@ import yaml
 from rich.console import Console
 
 from morph.utils.dbt_source_files import (
-    generate_dbt_sources_yml,
+    generate_dbt_sources_yml_from_airbyte_catalog,
     generate_header_comment,
     parse_airbyte_catalog_to_dbt_sources_format,
 )
@@ -71,7 +71,7 @@ def json_to_dbt(
             console.print("No JSON schema files found")
             return
 
-        sources_yml = generate_dbt_sources_yml(
+        sources_yml = generate_dbt_sources_yml_from_airbyte_catalog(
             schema_files,
             source_name,
             database,
