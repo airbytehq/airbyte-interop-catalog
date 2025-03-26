@@ -8,13 +8,13 @@ ads AS (
 
 
 SELECT
-    ads.id AS id, -- The ID of this ad.
+    ads._airbyte_extracted_at AS _fivetran_synced, -- {{ doc('_fivetran_synced') }}
     ads.account_id AS account_id, -- The ID of the ad account that this ad belongs to.
     ads.adset_id AS ad_set_id, -- ID of the ad set that contains the ad.
     ads.campaign_id AS campaign_id, -- Ad campaign that contains this ad.
-    NULL AS creative_id, -- The ID of the ad creative to be used by this ad.
+    ads.conversion_specs AS conversion_domain, -- The domain you've configured the ad to convert to.
+    ads.creative AS creative_id, -- The ID of the ad creative to be used by this ad.
+    ads.id AS id, -- The ID of this ad.
     ads.name AS name, -- Name of the ad.
-    _airbyte_extracted_at AS _fivetran_synced, -- {{ doc('_fivetran_synced') }}
-    ads.updated_time AS updated_time, -- {{ doc('updated_time') }}
-    NULL AS conversion_domain -- The domain you've configured the ad to convert to.
+    ads.updated_time AS updated_time -- {{ doc('updated_time') }}
 FROM ads
