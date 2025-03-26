@@ -10,7 +10,7 @@ source_streams:
   - tickets
 
 # Target schema file snapshotted from: https://github.com/fivetran/dbt_hubspot_source/blob/main/models/src_hubspot.yml
-target_dbt_schema: https://raw.githubusercontent.com/fivetran/dbt_hubspot_source/refs/heads/main/models/src_hubspot.yml
+target_dbt_schema_url: https://raw.githubusercontent.com/fivetran/dbt_hubspot_source/refs/heads/main/models/src_hubspot.yml
 target_tables:
   - company
   - contact

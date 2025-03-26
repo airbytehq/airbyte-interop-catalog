@@ -12,6 +12,8 @@ import requests
 import yaml
 from rich.console import Console
 
+from morph.utils import resource_paths
+
 console = Console()
 
 
@@ -36,7 +38,12 @@ def load_config(config_file: str) -> tuple[dict[str, Any] | None, list[str] | No
     return config, target_tables
 
 
-def get_target_schema(config: dict[str, Any], requirements_dir: str) -> dict[str, Any] | None:
+def get_target_schema(
+    source_name: str,
+    project_name: str,
+    config: dict[str, Any],
+    requirements_dir: str,
+) -> dict[str, Any] | None:
     """Download or load target schema file.
 
     Args:
@@ -47,14 +54,16 @@ def get_target_schema(config: dict[str, Any], requirements_dir: str) -> dict[str
         Target schema dictionary or None if not found
     """
     # Get target schema URL
-    target_schema_url = config.get("target_dbt_schema")
+    target_schema_url = config.get("target_dbt_schema_url")
     if not target_schema_url:
-        console.print("Error: target_dbt_schema not defined in config.yml", style="bold red")
+        console.print("Error: target_dbt_schema_url not defined in config.yml", style="bold red")
         return None
 
     # Determine target schema file name from URL
-    target_schema_filename = target_schema_url.split("/")[-1]
-    local_schema_path = Path(requirements_dir) / target_schema_filename
+    local_schema_path = resource_paths.get_dbt_sources_requirements_path(
+        source_name=source_name,
+        project_name=project_name,
+    )
 
     # Download target schema if not already downloaded
     if not local_schema_path.exists():

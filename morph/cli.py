@@ -6,10 +6,10 @@ import click
 import yaml
 from rich.console import Console
 
-from morph.utils.json_to_dbt_sources import (
+from morph.utils.dbt_source_files import (
     generate_dbt_sources_yml,
     generate_header_comment,
-    parse_airbyte_catalog,
+    parse_airbyte_catalog_to_dbt_sources_format,
 )
 
 console = Console()
@@ -49,7 +49,7 @@ def json_to_dbt(
         if not schema_path_obj.is_file() or not schema_path_obj.name.endswith(".json"):
             raise ValueError(f"Error: {schema_path} is not a valid JSON file")
 
-        sources_yml = parse_airbyte_catalog(
+        sources_yml = parse_airbyte_catalog_to_dbt_sources_format(
             schema_path,
             source_name,
             database,

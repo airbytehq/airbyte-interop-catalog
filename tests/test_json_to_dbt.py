@@ -8,7 +8,7 @@ import pytest
 from click.testing import CliRunner
 
 from morph.cli import main
-from morph.utils.json_to_dbt_sources import generate_dbt_sources_yml, json_schema_to_dbt_column
+from morph.utils.dbt_source_files import generate_dbt_sources_yml, json_schema_to_dbt_column
 
 
 def test_json_schema_to_dbt_column() -> None:
@@ -142,9 +142,9 @@ def test_airbyte_catalog_with_additional_columns() -> None:
             json.dump(catalog_content, f)
 
         # Parse the catalog
-        from morph.utils.json_to_dbt_sources import parse_airbyte_catalog
+        from morph.utils.dbt_source_files import parse_airbyte_catalog_to_dbt_sources_format
 
-        result = parse_airbyte_catalog(
+        result = parse_airbyte_catalog_to_dbt_sources_format(
             str(catalog_path),
             source_name="test_source",
         )

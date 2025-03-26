@@ -1,8 +1,13 @@
 """Models for AI-related functionality."""
 
+from pathlib import Path
+
+import rich
+import yaml
 from pydantic import BaseModel
 from rich.console import Console
 from rich.table import Table
+from typing_extensions import Self
 
 from morph.utils.rich_utils import rich_formatted_confidence
 
@@ -64,9 +69,36 @@ class FieldMapping(BaseModel):
     description: str | None = None
     """A description of the field."""
 
+class FieldMappingSuggestion(BaseModel):
+    """A suggestion for a field mapping."""
+
+    target_field_name: str
+    """The name of the target field."""
+
+    source_field_name: str
+    """The name of the source field or the text'MISSING' if the field cannot be mapped."""
+
+    confidence_score: float
+    """The confidence score for the field mapping, or 0.00 if the field cannot be mapped."""
+
+    next_best_source_field_name: str | None = None
+    """The next-best source field name, or 'MISSING' if the field cannot be mapped."""
+
+    next_best_source_field_confidence_score: float | None = None
+    """The confidence score for the next-best source field, or None if the field cannot be mapped."""
+
 
 class TableMapping(BaseModel):
     """Represents a table mapping with its properties."""
+
+    source_name: str
+    """The name of the source."""
+
+    project_name: str
+    """The name of the project."""
+
+    transform_name: str
+    """The name of the transform."""
 
     source_stream_name: str
     """The name of the source table."""
@@ -76,6 +108,74 @@ class TableMapping(BaseModel):
 
     field_mappings: list[FieldMapping]
     """The field mappings for the table."""
+
+    @classmethod
+    def read_from_transform_file(cls, transform_file: Path) -> Self:
+        """Create a TableMapping from a transform file."""
+        file_data = yaml.safe_load(transform_file.read_text())
+        source_name = file_data.get("domain", ".").split(".")[0]
+        project_name = file_data.get("domain", ".").split(".")[1]
+        transform_name = transform_file.stem
+
+        mapping_data = file_data["transforms"][0]
+
+        target_table_name = transform_file.stem
+
+        source_stream_expression: dict[str, str] = mapping_data["from"][0]
+        # Will be like:
+        # {"source_stream_alias": "domain.source_stream_name"}  # noqa: ERA001
+        source_stream_alias = next(iter(source_stream_expression.keys()))
+        _ = source_stream_alias  # Unused for now
+        source_stream_name = next(iter(source_stream_expression.values())).split(".")[-1]
+
+        if not target_table_name:
+            raise ValueError("target_table_name is required")
+
+        fields: list[DbtSourceColumn] = []
+        for field_name, field_data in mapping_data.get("fields", {}).items():
+            fields.append(
+                FieldMapping(
+                    name=field_name,
+                    expression=field_data.get("expression", ""),
+                    description=field_data.get("description", ""),
+                ),
+            )
+
+        return cls(
+            source_name=source_name,
+            project_name=project_name,
+            transform_name=transform_name,
+            source_stream_name=source_stream_name,
+            target_table_name=target_table_name,
+            field_mappings=fields,
+        )
+
+    def write_to_transform_file(self, transform_file: Path) -> None:
+        """Write the TableMapping to a transform file."""
+        output_dict = {
+            "domain": f"{self.source_name}.{self.project_name}",
+            "transforms": [
+                {
+                    "name": self.transform_name,
+                    "from": [
+                        {self.source_stream_name: f"{self.source_name}.{self.source_stream_name}"},
+                    ],
+                    "fields": {
+                        field.name: {
+                            "expression": field.expression,
+                            "description": field.description,
+                        }
+                        for field in self.field_mappings
+                    },
+                },
+            ],
+        }
+        transform_file.write_text(
+            yaml.dump(
+                output_dict,
+                sort_keys=False,
+            ),
+        )
 
 
 class FieldMappingEval(BaseModel):
@@ -93,6 +193,22 @@ class FieldMappingEval(BaseModel):
     # Not used yet, so hiding to reduce cost:
     # explanation: str  # noqa: ERA001
     # """A short explanation of the score."""
+
+
+class TableMappingSuggestion(BaseModel):
+    """A suggestion for a table mapping."""
+
+    source_stream_name: str
+    """The name of the source stream."""
+
+    target_table_name: str
+    """The name of the target table."""
+
+    name_match_confidence_score: float
+    """The confidence score for the mapping of source stream name to target table name."""
+
+    field_mapping_confidence_scores: list[float]
+    """The confidence scores for the mapping of fields from the source stream to the target table."""
 
 
 class TableMappingEval(BaseModel):
@@ -178,3 +294,73 @@ def print_table_mapping_analysis(
     console.print(f"\n{table_mapping_eval.explanation}", style="italic")
     console.print("\nField-by-Field Analysis:")
     console.print(table)
+
+
+class SourceTableSummary(BaseModel):
+    """A summary of a source table."""
+
+    name: str
+    description: str | None = None
+    column_names: list[str]
+
+    @classmethod
+    def from_dbt_source_file(
+        cls,
+        source_file: Path,
+    ) -> list[Self]:
+        """Create a SourceStreamSummary from a DbtSourceTable."""
+        source_tables = yaml.safe_load(source_file.read_text())["sources"][0]["tables"]
+        return [
+            cls(
+                name=table["name"],
+                description=table.get("description", None),
+                column_names=[column["name"] for column in table["columns"]],
+            )
+            for table in source_tables
+        ]
+
+
+class SourceTableMappingSuggestion(BaseModel):
+    """A suggestion for a source table mapping.
+
+    Optionally, the next-best match for the source table can also be provided.
+    """
+
+    target_table_name: str
+    """The name of the target table."""
+
+    suggested_source_table_name: str
+    """The name of the source table suggested by the AI."""
+
+    confidence_score: float
+    """The confidence score for the mapping of the source table to the target table."""
+
+    explanation: str
+    """A detailed explanation of the confidence score."""
+
+    next_best_source_table_name: str | None = None
+    """The next-best match for the source table."""
+
+    next_best_source_table_confidence_score: float | None = None
+    """The confidence score for the next-best match for the source table."""
+
+    next_best_source_table_explanation: str | None = None
+    """The explanation for the next-best match for the source table."""
+
+    def as_rich_table(self) -> rich.table.Table:
+        """Return a rich representation of the object as a Rich Table."""
+        table = Table(
+            title="Source Table Mapping Suggestion",
+            show_header=False,
+        )
+        table.add_row("Target Table", self.target_table_name)
+        table.add_row("Suggested Source Table", self.suggested_source_table_name)
+        table.add_row("Confidence Score", rich_formatted_confidence(self.confidence_score))
+        table.add_row("Explanation", self.explanation)
+        table.add_row("Next Best Source Table", self.next_best_source_table_name)
+        table.add_row(
+            "Next Best Source Table Confidence Score",
+            rich_formatted_confidence(self.next_best_source_table_confidence_score),
+        )
+        table.add_row("Next Best Source Table Explanation", self.next_best_source_table_explanation)
+        return table
