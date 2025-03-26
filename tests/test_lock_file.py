@@ -256,7 +256,7 @@ def test_generate_lock_file():
         assert "unmapped_target_fields" in lock_data_str
         assert "field2" in lock_data_str
         assert "field4" in lock_data_str
-        
+
         # Verify mapped_target_fields
         assert "mapped_target_fields" in lock_data_str
         assert "stream1.field1" in lock_data_str

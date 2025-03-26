@@ -6,15 +6,13 @@ from typing import Any
 import click
 import yaml
 from rich.console import Console
-from rich.table import Table
 
-from morph.ai.eval import get_mapping_confidence
+from morph.ai.eval import FieldMapping, get_mapping_confidence, print_mapping_analysis
 from morph.utils.json_to_dbt_sources import (
     parse_airbyte_catalog,
 )
 from morph.utils.lock_file import generate_lock_file_for_project
 from morph.utils.mapping_to_dbt_models import generate_dbt_package
-from morph.utils.rich_utils import rich_formatted_confidence
 
 console = Console()
 
@@ -457,16 +455,15 @@ def eval_mapping(
     mapping_data = yaml.safe_load(mapping_file.read_text())
 
     # Extract fields from dbt transform format
-    fields = []
+    fields: list[FieldMapping] = []
     for transform in mapping_data.get("transforms", []):
         for field_name, field_data in transform.get("fields", {}).items():
             fields.append(
-                {
-                    "name": field_name,
-                    "expression": field_data.get("expression", ""),
-                    "description": field_data.get("description", ""),
-                    "tests": [],  # TODO: Extract tests if present
-                },
+                FieldMapping(
+                    name=field_name,
+                    expression=field_data.get("expression", ""),
+                    description=field_data.get("description", ""),
+                ),
             )
 
     if not fields:
@@ -476,27 +473,12 @@ def eval_mapping(
     # Get confidence score
     confidence = get_mapping_confidence(fields)
 
-    # Create results table
-    table = Table(title="Mapping Confidence Analysis")
-    table.add_column("Field", style="cyan")
-    table.add_column("Confidence", style="green", justify="right")
-    table.add_column("Expression", style="yellow")
-    table.add_column("Description", style="white")
-
-    for field, score in confidence.field_scores.items():
-        field_data = next((f for f in fields if f["name"] == field), {})
-        table.add_row(
-            field,
-            f"{score:.2f}",
-            field_data.get("expression", ""),
-            field_data.get("description", ""),
-        )
-
-    # Print results
-    console.print(f"\nOverall Confidence Score: [green]{confidence.score:.2f}[/green]")
-    console.print(f"\nExplanation: {confidence.explanation}")
-    console.print("\nField-by-Field Analysis:")
-    console.print(table)
+    # Print analysis
+    print_mapping_analysis(
+        confidence=confidence,
+        fields=fields,
+        title="Mapping Confidence Analysis",
+    )
 
 
 @main.command()
@@ -527,22 +509,21 @@ def eval_project_mappings(
 
     # Process each YAML file
     for yaml_file in yaml_files:
-        console.print(f"\n[bold]Evaluating {yaml_file}[/bold]")
+        console.print(f"\n[bold]Evaluating {yaml_file}[/bold]\n")
 
         # Read mapping file
         mapping_data = yaml.safe_load(yaml_file.read_text())
 
         # Extract fields from dbt transform format
-        fields = []
+        fields: list[FieldMapping] = []
         for transform in mapping_data.get("transforms", []):
             for field_name, field_data in transform.get("fields", {}).items():
                 fields.append(
-                    {
-                        "name": field_name,
-                        "expression": field_data.get("expression", ""),
-                        "description": field_data.get("description", ""),
-                        "tests": [],  # TODO: Extract tests if present
-                    },
+                    FieldMapping(
+                        name=field_name,
+                        expression=field_data.get("expression", ""),
+                        description=field_data.get("description", ""),
+                    ),
                 )
 
         if not fields:
@@ -552,30 +533,12 @@ def eval_project_mappings(
         # Get confidence score
         confidence = get_mapping_confidence(fields)
 
-        # Create results table
-        table = Table(title=f"Mapping Confidence Analysis - {yaml_file.name}")
-        table.add_column("Field", style="cyan")
-        table.add_column("Expression", style="yellow")
-        table.add_column("Description", style="white")
-        table.add_column("Confidence", justify="right")
-
-        for field, score in confidence.field_scores.items():
-            field_data = next((f for f in fields if f["name"] == field), {})
-
-            # Color code the confidence score based on thresholds
-            table.add_row(
-                str(field),
-                str(field_data.get("expression", "")),
-                field_data.get("description", ""),
-                rich_formatted_confidence(score),
-            )
-
-        # Print results
-        console.print(f"\nOverall Confidence Score: {rich_formatted_confidence(confidence.score)}")
-        console.print("\nExplanation:")
-        console.print(f"\n_{confidence.explanation}_")
-        console.print("\nField-by-Field Analysis:")
-        console.print(table)
+        # Print analysis
+        print_mapping_analysis(
+            confidence=confidence,
+            fields=fields,
+            title=f"Mapping Confidence Analysis - {yaml_file.name}",
+        )
 
 
 if __name__ == "__main__":
