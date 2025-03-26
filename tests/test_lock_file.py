@@ -161,7 +161,7 @@ def test_generate_lock_file():
             "domain": "test.test",
             "transforms": [
                 {
-                    "id": "table1",
+                    "name": "table1",
                     "from": [{"stream1": "source.stream1"}],
                     "fields": {
                         "field1": {"expression": "stream1.field1"},

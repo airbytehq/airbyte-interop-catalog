@@ -119,8 +119,8 @@ def create_mapping_structure(
         "domain": f"{source_name}.{project_name}",
         "transforms": [
             {
+                "name": table_name,
                 "display_name": f"{table_schema.get('description', table_name)}",
-                "id": table_name,
                 "from": [{f"{table_name}s": f"airbyte_raw_{source_name}.{table_name}s"}],
                 "fields": {},
             },

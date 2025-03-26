@@ -12,7 +12,7 @@ from morph.utils.mapping_to_dbt_models import generate_dbt_package
 MAPPING_CONTENT = """
 domain: test
 transforms:
-  - id: test_model
+  - name: test_model
     display_name: Test Model
     from:
       source_table: test_source.test_table

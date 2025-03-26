@@ -24,7 +24,7 @@ def load_mapping_file(mapping_file_path: str) -> dict[str, Any]:
 def _extract_transform(mapping: dict[str, Any], transform_id: str) -> dict[str, Any]:
     """Extract a transform from a mapping by ID."""
     for t in mapping.get("transforms", []):
-        if t.get("id") == transform_id:
+        if t.get("name") == transform_id:
             return t
     raise ValueError(f"Transform with ID '{transform_id}' not found in mapping")
 
@@ -182,7 +182,7 @@ def generate_dbt_package(
 
         # Process each transform in the mapping
         for transform in mapping.get("transforms", []):
-            transform_id = transform.get("id")
+            transform_id = transform.get("name")
             if not transform_id:
                 continue
 
@@ -217,7 +217,7 @@ def generate_dbt_package(
 
         # Process each transform in the mapping
         for transform in mapping.get("transforms", []):
-            transform_id = transform.get("id")
+            transform_id = transform.get("name")
             if not transform_id:
                 continue
 

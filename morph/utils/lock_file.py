@@ -87,7 +87,7 @@ def find_unmapped_target_tables(
     # Extract all transform IDs
     for mapping in mapping_files:
         for transform in mapping.get("transforms", []):
-            transform_id = transform.get("id")
+            transform_id = transform.get("name")
             if transform_id:
                 mapped_tables.add(transform_id)
 
@@ -346,7 +346,7 @@ def generate_lock_file_for_project(
 
         # Process each transform
         for transform in mapping.get("transforms", []):
-            transform_id = transform.get("id")
+            transform_id = transform.get("name")
             if not transform_id:
                 continue
 
