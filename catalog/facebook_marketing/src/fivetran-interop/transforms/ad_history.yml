@@ -1,33 +1,33 @@
 domain: facebook_marketing.fivetran-interop
 transforms:
-- name: ad_history
-  from:
-  - ads: facebook_marketing.ads
-  fields:
-    _fivetran_synced:
-      expression: ads._airbyte_extracted_at
-      description: '{{ doc(''_fivetran_synced'') }}'
-    account_id:
-      expression: ads.account_id
-      description: The ID of the ad account that this ad belongs to.
-    ad_set_id:
-      expression: ads.adset_id
-      description: ID of the ad set that contains the ad.
-    campaign_id:
-      expression: ads.campaign_id
-      description: Ad campaign that contains this ad.
-    conversion_domain:
-      expression: ads.conversion_specs
-      description: The domain you've configured the ad to convert to.
-    creative_id:
-      expression: ads.creative
-      description: The ID of the ad creative to be used by this ad.
-    id:
-      expression: ads.id
-      description: The ID of this ad.
-    name:
-      expression: ads.name
-      description: Name of the ad.
-    updated_time:
-      expression: ads.updated_time
-      description: '{{ doc(''updated_time'') }}'
+  - name: ad_history
+    from:
+      - ads: facebook_marketing.ads
+    fields:
+      _fivetran_synced:
+        expression: ads._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      account_id:
+        expression: ads.account_id
+        description: The ID of the ad account that this ad belongs to.
+      ad_set_id:
+        expression: ads.adset_id
+        description: ID of the ad set that contains the ad.
+      campaign_id:
+        expression: ads.campaign_id
+        description: Ad campaign that contains this ad.
+      conversion_domain:
+        expression: ads.conversion_specs
+        description: The domain you've configured the ad to convert to.
+      creative_id:
+        expression: ads.creative
+        description: The ID of the ad creative to be used by this ad.
+      id:
+        expression: ads.id
+        description: The ID of this ad.
+      name:
+        expression: ads.name
+        description: Name of the ad.
+      updated_time:
+        expression: ads.updated_time
+        description: "{{ doc('updated_time') }}"
