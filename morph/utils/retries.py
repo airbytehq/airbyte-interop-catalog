@@ -1,8 +1,9 @@
 """Utilities for retries."""
 
+from collections.abc import Callable
 from functools import wraps
 from time import sleep, time
-from typing import Any, Callable, TypeVar
+from typing import Any, TypeVar
 
 from rich.console import Console
 

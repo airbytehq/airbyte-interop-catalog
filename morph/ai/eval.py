@@ -4,18 +4,15 @@ from typing import TypeVar
 
 from marvin import ai_fn
 from rich.console import Console
-from rich.table import Table
 
 from morph.ai import models
 from morph.utils.retries import with_retry
-from morph.utils.rich_utils import rich_formatted_confidence
 
 console = Console()
 
 T = TypeVar("T")
 
 MAX_RETRIES = 3
-
 
 
 @ai_fn
@@ -66,7 +63,7 @@ def get_mapping_confidence(
             latest_exception = e
             if attempt == max_retries - 1:  # Last attempt
                 raise Exception(
-                    f"Failed to evaluate mapping confidence after {max_retries} attempts"
+                    f"Failed to evaluate mapping confidence after {max_retries} attempts",
                 ) from e
 
     if not result:
