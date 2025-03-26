@@ -1,6 +1,12 @@
 """Models for AI-related functionality."""
 
 from pydantic import BaseModel
+from rich.console import Console
+from rich.table import Table
+
+from morph.utils.rich_utils import rich_formatted_confidence
+
+console = Console()
 
 
 class NoConfidenceChoice(BaseModel):
@@ -59,14 +65,98 @@ class FieldMapping(BaseModel):
     """A description of the field."""
 
 
+class FieldMappingEval(BaseModel):
+    """Represents the confidence score for a field mapping."""
+
+    name: str
+    """The name of the field."""
+
+    score: float
+    """The confidence score (0.00 to 1.00).
+
+    Values defined as `MISSING` should receive a score of 0.00.
+    """
+
+    # Not used yet, so hiding to reduce cost:
+    # explanation: str  # noqa: ERA001
+    # """A short explanation of the score."""
+
+
 class MappingConfidence(BaseModel):
     """Represents the confidence score and explanation for a mapping."""
 
     score: float
-    """The confidence score for the mapping."""
+    """The overall confidence score (0.00 to 1.00)."""
 
     explanation: str
-    """An explanation of the confidence score."""
+    """A detailed explanation of the overall score."""
 
-    field_scores: dict[str, float]
+    field_evals: list[FieldMappingEval]
     """A dictionary of field names and their confidence scores."""
+
+
+def print_mapping_eval(
+    mapping: FieldMapping,
+    eval_result: FieldMappingEval,
+    table: Table | None = None,
+) -> None:
+    """Print a mapping evaluation result.
+
+    Args:
+        mapping: The field mapping definition
+        eval_result: The evaluation result
+        table: Optional table to add the row to instead of printing directly
+    """
+    # Color code the confidence score based on thresholds
+    confidence_str = rich_formatted_confidence(eval_result.score)
+
+    if table:
+        table.add_row(
+            mapping.name,
+            str(mapping.expression),
+            mapping.description or "",
+            confidence_str,
+        )
+    else:
+        console.print(
+            f"Field: [cyan]{mapping.name}[/cyan]"
+            f" Expression: [yellow]{mapping.expression}[/yellow]"
+            f" Description: [white]{mapping.description or ''}[/white]"
+            f" Confidence: {confidence_str}",
+        )
+
+
+def print_mapping_analysis(
+    confidence: MappingConfidence,
+    fields: list[FieldMapping],
+    title: str = "Mapping Confidence Analysis",
+) -> None:
+    """Print a complete mapping confidence analysis.
+
+    Args:
+        confidence: The confidence evaluation results
+        fields: List of field mappings
+        title: Optional title for the analysis table
+    """
+    # Create results table
+    table = Table(title=title)
+    table.add_column("Field", style="cyan")
+    table.add_column("Expression", style="yellow")
+    table.add_column("Description", style="white")
+    table.add_column("Confidence", justify="right")
+
+    # Print each field evaluation
+    for field_eval in confidence.field_evals:
+        field_data = next((f for f in fields if f.name == field_eval.name), {})
+        print_mapping_eval(
+            field_data,
+            field_eval,
+            table,
+        )
+
+    # Print results
+    console.print(f"\nOverall Confidence Score: {rich_formatted_confidence(confidence.score)}")
+    console.print("\nExplanation:")
+    console.print(f"\n{confidence.explanation}", style="italic")
+    console.print("\nField-by-Field Analysis:")
+    console.print(table)

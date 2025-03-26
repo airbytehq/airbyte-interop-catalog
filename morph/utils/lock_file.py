@@ -230,7 +230,8 @@ def extract_target_tables(source_name: str, project_name: str) -> list[str]:
     requirements_path = Path(f"catalog/{source_name}/requirements/{project_name}/src_hubspot.yml")
     if not requirements_path.exists():
         console.print(
-            f"Warning: Requirements file not found at {requirements_path}", style="yellow",
+            f"Warning: Requirements file not found at {requirements_path}",
+            style="yellow",
         )
         return []
 

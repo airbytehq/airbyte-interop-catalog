@@ -1,12 +1,25 @@
 """Mapping confidence evaluation using Marvin AI."""
 
+from typing import TypeVar
+
 from marvin import ai_fn
+from rich.console import Console
+from rich.table import Table
 
 from morph.ai import models
+from morph.utils.retries import with_retry
+from morph.utils.rich_utils import rich_formatted_confidence
+
+console = Console()
+
+T = TypeVar("T")
+
+MAX_RETRIES = 3
+
 
 
 @ai_fn
-def evaluate_mapping_confidence(
+def ai_fn_evaluate_mapping_confidence(
     mappings: list[models.FieldMapping],
 ) -> models.MappingConfidence:
     """Evaluate the confidence of a field mapping configuration.
@@ -18,14 +31,15 @@ def evaluate_mapping_confidence(
         MappingConfidence object containing:
         - score: Overall confidence score (0.00 to 1.00)
         - explanation: Detailed explanation of the score
-        - field_scores: Individual confidence scores per field
+        - field_evals: Individual confidence scores per field
     """
     # This function will be implemented by Marvin AI
     pass
 
 
+@with_retry()
 def get_mapping_confidence(
-    mappings: list[dict],
+    field_mappings: list[models.FieldMapping],
 ) -> models.MappingConfidence:
     """Get confidence score for a mapping configuration.
 
@@ -38,7 +52,6 @@ def get_mapping_confidence(
     Raises:
         Exception: If all retries fail
     """
-    field_mappings = [models.FieldMapping(**mapping) for mapping in mappings]
     latest_exception = None
 
     # TODO: We should enforce "strict" mode here, so that the LLM always generates valid JSON output.
@@ -47,7 +60,7 @@ def get_mapping_confidence(
     result = None
     for attempt in range(max_retries):
         try:
-            result = evaluate_mapping_confidence(field_mappings)
+            result = ai_fn_evaluate_mapping_confidence(field_mappings)
             break
         except Exception as e:
             latest_exception = e
