@@ -3,7 +3,7 @@ transforms:
   - display_name:
       Each record represents the daily conversion performance of an ad in
       Facebook. This is the prebuilt `basic_ad` report broken down by `action_type`.
-    id: basic_ad_actions
+    name: basic_ad_actions
     from:
       - ads_insights_action_type: facebook_marketing.ads_insights_action_type
     fields:

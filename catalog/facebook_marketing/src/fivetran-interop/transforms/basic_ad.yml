@@ -1,7 +1,7 @@
 domain: facebook_marketing.fivetran-interop
 transforms:
   - display_name: Each record represents the daily performance of an ad in Facebook.
-    id: basic_ad
+    name: basic_ad
     from:
       - MISSING: facebook_marketing.ads_insights
     fields:

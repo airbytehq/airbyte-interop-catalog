@@ -1,7 +1,7 @@
 domain: hubspot.fivetran-interop
 transforms:
   - display_name: Fivetran Raw 'Ticket' Model
-    id: ticket
+    name: ticket
     from:
       - tickets: airbyte_raw_hubspot.tickets
     fields:

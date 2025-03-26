@@ -1,7 +1,7 @@
 domain: hubspot.fivetran-interop
 transforms:
   - display_name: Fivetran Raw 'Company' Model
-    id: company
+    name: company
     from:
       - companies: airbyte_raw_hubspot.companies
     fields:

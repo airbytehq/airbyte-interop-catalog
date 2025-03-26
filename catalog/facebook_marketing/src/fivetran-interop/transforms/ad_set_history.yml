@@ -1,7 +1,7 @@
 domain: facebook_marketing.fivetran-interop
 transforms:
   - display_name: Each record in this table reflects a version of a Facebook ad set.
-    id: ad_set_history
+    name: ad_set_history
     from:
       - ad_sets: facebook_marketing.ad_sets
     fields:
