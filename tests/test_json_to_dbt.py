@@ -10,6 +10,7 @@ from click.testing import CliRunner
 from morph.cli import main
 from morph.utils.dbt_source_files import (
     generate_dbt_sources_yml_from_airbyte_catalog,
+    generate_dbt_sources_yml_from_schema_files,
     json_schema_to_dbt_column,
 )
 
@@ -95,11 +96,11 @@ def test_generate_dbt_sources_yml() -> None:
             json.dump(schema_content, f)
 
         # Generate sources.yml content
-        result = generate_dbt_sources_yml_from_airbyte_catalog(
-            [str(schema_path)],
+        result = generate_dbt_sources_yml_from_schema_files(
             source_name="test_source",
             database="test_db",
             schema="test_schema",
+            schema_files=[str(schema_path)],
         )
 
         # Verify the structure
