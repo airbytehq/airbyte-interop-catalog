@@ -224,6 +224,7 @@ uv run morph eval-mapping path/to/mapping.json
 - `--target-type`: Specify the target data type (default: "dbt model")
 
 Example with custom types:
+
 ```bash
 poe eval-mapping path/to/mapping.json --source-type CSV --target-type "PostgreSQL table"
 ```
@@ -231,6 +232,7 @@ poe eval-mapping path/to/mapping.json --source-type CSV --target-type "PostgreSQ
 ### Input Format
 
 The mapping file should be a YAML file in dbt transform format. The file should contain:
+
 - `domain`: The namespace for the transforms
 - `transforms`: List of transformations, each containing:
   - `id`: Identifier for the transform
@@ -242,6 +244,7 @@ The mapping file should be a YAML file in dbt transform format. The file should 
     - `tests`: (optional) Test configurations
 
 Example:
+
 ```yaml
 domain: facebook_marketing.fivetran-interop
 transforms:
@@ -261,6 +264,7 @@ transforms:
 ### Output
 
 The tool provides:
+
 1. Overall confidence score (0.00 to 1.00)
 2. Detailed explanation of the score
 3. Field-by-field confidence analysis including:
@@ -270,6 +274,7 @@ The tool provides:
    - Confidence score
 
 Example output:
+
 ```
 Overall Confidence Score: 0.85
 
