@@ -5,8 +5,6 @@ from pathlib import Path
 import pytest
 import yaml
 
-from morph.utils import resource_paths
-
 
 @pytest.mark.parametrize(
     "source_table,target_table,mapping_file",

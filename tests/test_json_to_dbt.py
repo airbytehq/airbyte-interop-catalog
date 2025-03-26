@@ -9,7 +9,6 @@ from click.testing import CliRunner
 
 from morph.cli import main
 from morph.utils.dbt_source_files import (
-    generate_dbt_sources_yml_from_airbyte_catalog,
     generate_dbt_sources_yml_from_schema_files,
     json_schema_to_dbt_column,
 )

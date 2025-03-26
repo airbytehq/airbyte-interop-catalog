@@ -42,7 +42,6 @@ def get_target_schema(
     source_name: str,
     project_name: str,
     config: dict[str, Any],
-    requirements_dir: str,
 ) -> dict[str, Any] | None:
     """Download or load target schema file.
 

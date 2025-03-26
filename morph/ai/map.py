@@ -81,7 +81,9 @@ def change_mapping_source_table(
         target_table_name=transform_name,
         field_mappings=[
             models.FieldMapping(
-                name=field.name, expression="MISSING", description=field.description
+                name=field.name,
+                expression="MISSING",
+                description=field.description,
             )
             for field in transform_parsed.field_mappings
         ],

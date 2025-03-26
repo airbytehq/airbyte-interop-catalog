@@ -69,6 +69,7 @@ class FieldMapping(BaseModel):
     description: str | None = None
     """A description of the field."""
 
+
 class FieldMappingSuggestion(BaseModel):
     """A suggestion for a field mapping."""
 
@@ -288,7 +289,7 @@ def print_table_mapping_analysis(
 
     # Print results
     console.print(
-        f"\nOverall Confidence Score: {rich_formatted_confidence(table_mapping_eval.score)}"
+        f"\nOverall Confidence Score: {rich_formatted_confidence(table_mapping_eval.score)}",
     )
     console.print("\nExplanation:")
     console.print(f"\n{table_mapping_eval.explanation}", style="italic")

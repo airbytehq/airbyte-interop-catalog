@@ -550,7 +550,7 @@ def suggest_table_mappings(
 
     if not dbt_source_file_path.exists():
         console.print(
-            f"[red]Error: Could not generate dbt sources.yml file at {dbt_source_file_path}[/red]"
+            f"[red]Error: Could not generate dbt sources.yml file at {dbt_source_file_path}[/red]",
         )
         return
 
@@ -565,7 +565,8 @@ def suggest_table_mappings(
             / "src_facebook_ads.yml",  # TODO: Make this dynamic
         )
         target_table_schema = next(
-            (t for t in target_table_schemas if t.name == target_table), None
+            (t for t in target_table_schemas if t.name == target_table),
+            None,
         )
         if not target_table_schema:
             console.print(f"[red]Error: Could not find target table {target_table}[/red]")
@@ -590,7 +591,7 @@ def suggest_table_mappings(
             f"The table is currently mapped to `{current_mapping.source_stream_name}`. "
             f"Do you want to apply the proposed mapping to use `{source_table}` instead? "
             "All existing mappings will be reset to `MISSING` and a new set of mappings will be generated. "
-            "Continue? (y/n)"
+            "Continue? (y/n)",
         )
 
     if confirm_mapping == "y":
