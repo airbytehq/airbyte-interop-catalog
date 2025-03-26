@@ -280,7 +280,6 @@ def generate_transform_scaffold(
         source_name=source_name,
         project_name=project_name,
         config=config,
-        requirements_dir=requirements_dir,
     )
     if not target_schema:
         return
@@ -336,7 +335,6 @@ def generate_lock_file(
         source_name=source_name,
         project_name=project_name,
         config=config,
-        requirements_dir=requirements_dir,
     )
     if not target_schema:
         console.print("Error: Could not load target schema", style="bold red")

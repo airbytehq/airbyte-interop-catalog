@@ -1,7 +1,7 @@
 [project]
 source_name = "hubspot"
 project_name = "fivetran-interop"
-generated_at = "2025-03-26T20:48:25Z"
+generated_at = "2025-03-26T22:27:38Z"
 requirements_file = "requirements/fivetran-interop/src_hubspot.yml"
 requirements_file_hash = ""
 airbyte_source_file = "generated/src_airbyte_hubspot.yml"
@@ -109,7 +109,7 @@ unmapped_target_tables = [
 
 [mappings.company]
 source_file = "company.yml"
-source_file_hash = "ffcae37de6c2efcd09fd61f000ce561c152388ea73e3317a9bde18d19c86a65b"
+source_file_hash = "dcd9a83c3102946cc7c8d39abd9ee3a4ccb8fd6b1653f6b41cf3f10946d452b2"
 unmapped_target_fields = [
     "portal_id",
 ]
@@ -307,7 +307,7 @@ companies = [
 
 [mappings.contact]
 source_file = "contact.yml"
-source_file_hash = "c01860d960e4d4287e4c0d3939c5b81272afde6287af507eaadb798c68d6d926"
+source_file_hash = "b0d3c2180bf4520866fc32f7bc790a1c2c6f091489812be2deee5524134b97dd"
 unmapped_target_fields = [
     "portal_id",
     "property_annualrevenue",
@@ -346,7 +346,7 @@ contacts = [
 
 [mappings.deal]
 source_file = "deal.yml"
-source_file_hash = "25d2d66794ce3a53d66ddac8655dc8cc02b0a9c1587addfd9c92b6d3366f5008"
+source_file_hash = "010e445a321c9a4fc40c00138746e62b5653da90ddc1a647e4af7e012c221fb8"
 unmapped_target_fields = [
     "portal_id",
 ]
@@ -382,7 +382,7 @@ deals = [
 
 [mappings.form]
 source_file = "form.yml"
-source_file_hash = "0698e651154d59a0781d7d42d79402609ec53fb60c5de0f1d49975580cfcf4dd"
+source_file_hash = "ad915766f9e00dcb999cc31d76856793d7c31846ece96215ffa11a608bd8d61e"
 unmapped_target_fields = [
     "archived_at",
     "css_class",
@@ -419,7 +419,7 @@ forms = [
 
 [mappings.owner]
 source_file = "owner.yml"
-source_file_hash = "715dd28114e2f3e635b2acbc0ed95da528cee385a51664062214c2c34399d7b9"
+source_file_hash = "5a034d0fa2c13d763bc083c7b8fd273883708ced258c53bdc20ad1fa08cf74cb"
 unmapped_target_fields = [
     "portal_id",
     "type",
@@ -446,7 +446,7 @@ owners = [
 
 [mappings.ticket]
 source_file = "ticket.yml"
-source_file_hash = "c500094f215ab118ceb2a13d1271c7054b2897969561e4e9ee070b8b69cb02d8"
+source_file_hash = "1981943e21d7bc002fea534aeaaa8800e8a4f7657a79a7736e671ad68d6cb7a3"
 unmapped_target_fields = [
     "_fivetran_deleted",
     "portal_id",
