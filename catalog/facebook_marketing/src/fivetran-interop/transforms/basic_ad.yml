@@ -3,7 +3,7 @@ transforms:
   - display_name: Each record represents the daily performance of an ad in Facebook.
     name: basic_ad
     from:
-      - MISSING: facebook_marketing.ads_insights
+      - ad_insights: facebook_marketing.ads_insights
     fields:
       ad_id:
         expression: ads_insights.ad_id

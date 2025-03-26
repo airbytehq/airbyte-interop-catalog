@@ -1,7 +1,7 @@
 [project]
 source_name = "facebook_marketing"
 project_name = "fivetran-interop"
-generated_at = "2025-03-26T22:46:33Z"
+generated_at = "2025-03-26T22:56:23Z"
 requirements_file = "catalog/facebook_marketing/requirements/fivetran-interop/src_dbt_requirements.yml"
 requirements_file_hash = "27ce201f199e67f819154c22c20d7f418bcfb57ccd5586a05461e273ee895340"
 airbyte_source_file = "catalog/facebook_marketing/generated/src_airbyte_facebook_marketing.yml"
