@@ -1,6 +1,6 @@
-# This file was auto-generated using the following command:
-# uv run morph json-to-dbt --catalog --source-name hubspot --output catalog/hubspot/generated/src_airbyte_hubspot.yml catalog/hubspot/airbyte-catalog.json
-# To regenerate this file, run the command above.
+# This file was auto-generated using the morph cli.
+# Please do not edit manually.
+
 version: 2
 sources:
 - name: hubspot
@@ -515,6 +515,8 @@ sources:
       type: varchar
     - name: properties_hs_notes_last_activity
       type: varchar
+    - name: properties_hs_notes_next_activity
+      type: varchar
     - name: properties_hs_notes_next_activity_type
       type: varchar
     - name: properties_hs_num_blockers
@@ -909,6 +911,8 @@ sources:
     - name: properties_hs_merged_object_ids
       type: varchar
     - name: properties_hs_notes_last_activity
+      type: varchar
+    - name: properties_hs_notes_next_activity
       type: varchar
     - name: properties_hs_notes_next_activity_type
       type: varchar
@@ -1458,38 +1462,6 @@ sources:
       type: float
     - name: properties_hs_createdate
       type: timestamp
-    - name: properties_hs_date_entered_customer
-      type: timestamp
-    - name: properties_hs_date_entered_evangelist
-      type: timestamp
-    - name: properties_hs_date_entered_lead
-      type: timestamp
-    - name: properties_hs_date_entered_marketingqualifiedlead
-      type: timestamp
-    - name: properties_hs_date_entered_opportunity
-      type: timestamp
-    - name: properties_hs_date_entered_other
-      type: timestamp
-    - name: properties_hs_date_entered_salesqualifiedlead
-      type: timestamp
-    - name: properties_hs_date_entered_subscriber
-      type: timestamp
-    - name: properties_hs_date_exited_customer
-      type: timestamp
-    - name: properties_hs_date_exited_evangelist
-      type: timestamp
-    - name: properties_hs_date_exited_lead
-      type: timestamp
-    - name: properties_hs_date_exited_marketingqualifiedlead
-      type: timestamp
-    - name: properties_hs_date_exited_opportunity
-      type: timestamp
-    - name: properties_hs_date_exited_other
-      type: timestamp
-    - name: properties_hs_date_exited_salesqualifiedlead
-      type: timestamp
-    - name: properties_hs_date_exited_subscriber
-      type: timestamp
     - name: properties_hs_document_last_revisited
       type: timestamp
     - name: properties_hs_email_bad_address
@@ -1638,22 +1610,6 @@ sources:
       type: varchar
     - name: properties_hs_legal_basis
       type: varchar
-    - name: properties_hs_lifecyclestage_customer_date
-      type: timestamp
-    - name: properties_hs_lifecyclestage_evangelist_date
-      type: timestamp
-    - name: properties_hs_lifecyclestage_lead_date
-      type: timestamp
-    - name: properties_hs_lifecyclestage_marketingqualifiedlead_date
-      type: timestamp
-    - name: properties_hs_lifecyclestage_opportunity_date
-      type: timestamp
-    - name: properties_hs_lifecyclestage_other_date
-      type: timestamp
-    - name: properties_hs_lifecyclestage_salesqualifiedlead_date
-      type: timestamp
-    - name: properties_hs_lifecyclestage_subscriber_date
-      type: timestamp
     - name: properties_hs_linkedin_ad_clicked
       type: varchar
     - name: properties_hs_linkedin_url
@@ -1677,6 +1633,8 @@ sources:
     - name: properties_hs_mobile_sdk_push_tokens
       type: varchar
     - name: properties_hs_notes_last_activity
+      type: varchar
+    - name: properties_hs_notes_next_activity
       type: varchar
     - name: properties_hs_notes_next_activity_type
       type: varchar
@@ -1763,22 +1721,6 @@ sources:
     - name: properties_hs_time_between_contact_creation_and_deal_close
       type: float
     - name: properties_hs_time_between_contact_creation_and_deal_creation
-      type: float
-    - name: properties_hs_time_in_customer
-      type: float
-    - name: properties_hs_time_in_evangelist
-      type: float
-    - name: properties_hs_time_in_lead
-      type: float
-    - name: properties_hs_time_in_marketingqualifiedlead
-      type: float
-    - name: properties_hs_time_in_opportunity
-      type: float
-    - name: properties_hs_time_in_other
-      type: float
-    - name: properties_hs_time_in_salesqualifiedlead
-      type: float
-    - name: properties_hs_time_in_subscriber
       type: float
     - name: properties_hs_time_to_first_engagement
       type: float
@@ -1972,6 +1914,54 @@ sources:
       type: varchar
     - name: properties_zip
       type: varchar
+    - name: properties_hs_lifecyclestage_customer_date
+      type: timestamp
+    - name: properties_hs_lifecyclestage_evangelist_date
+      type: timestamp
+    - name: properties_hs_lifecyclestage_lead_date
+      type: timestamp
+    - name: properties_hs_lifecyclestage_marketingqualifiedlead_date
+      type: timestamp
+    - name: properties_hs_lifecyclestage_opportunity_date
+      type: timestamp
+    - name: properties_hs_lifecyclestage_other_date
+      type: timestamp
+    - name: properties_hs_lifecyclestage_salesqualifiedlead_date
+      type: timestamp
+    - name: properties_hs_lifecyclestage_subscriber_date
+      type: timestamp
+    - name: properties_hs_date_exited_customer
+      type: timestamp
+    - name: properties_hs_date_exited_evangelist
+      type: timestamp
+    - name: properties_hs_date_exited_lead
+      type: timestamp
+    - name: properties_hs_date_exited_marketingqualifiedlead
+      type: timestamp
+    - name: properties_hs_date_exited_opportunity
+      type: timestamp
+    - name: properties_hs_date_exited_other
+      type: timestamp
+    - name: properties_hs_date_exited_salesqualifiedlead
+      type: timestamp
+    - name: properties_hs_date_exited_subscriber
+      type: timestamp
+    - name: properties_hs_time_in_customer
+      type: float
+    - name: properties_hs_time_in_evangelist
+      type: float
+    - name: properties_hs_time_in_lead
+      type: float
+    - name: properties_hs_time_in_marketingqualifiedlead
+      type: float
+    - name: properties_hs_time_in_opportunity
+      type: float
+    - name: properties_hs_time_in_other
+      type: float
+    - name: properties_hs_time_in_salesqualifiedlead
+      type: float
+    - name: properties_hs_time_in_subscriber
+      type: float
     - name: _airbyte_extracted_at
       type: timestamp
       description: Timestamp when the record was extracted from the source
@@ -2360,38 +2350,6 @@ sources:
       type: float
     - name: properties_hs_createdate
       type: timestamp
-    - name: properties_hs_date_entered_customer
-      type: timestamp
-    - name: properties_hs_date_entered_evangelist
-      type: timestamp
-    - name: properties_hs_date_entered_lead
-      type: timestamp
-    - name: properties_hs_date_entered_marketingqualifiedlead
-      type: timestamp
-    - name: properties_hs_date_entered_opportunity
-      type: timestamp
-    - name: properties_hs_date_entered_other
-      type: timestamp
-    - name: properties_hs_date_entered_salesqualifiedlead
-      type: timestamp
-    - name: properties_hs_date_entered_subscriber
-      type: timestamp
-    - name: properties_hs_date_exited_customer
-      type: timestamp
-    - name: properties_hs_date_exited_evangelist
-      type: timestamp
-    - name: properties_hs_date_exited_lead
-      type: timestamp
-    - name: properties_hs_date_exited_marketingqualifiedlead
-      type: timestamp
-    - name: properties_hs_date_exited_opportunity
-      type: timestamp
-    - name: properties_hs_date_exited_other
-      type: timestamp
-    - name: properties_hs_date_exited_salesqualifiedlead
-      type: timestamp
-    - name: properties_hs_date_exited_subscriber
-      type: timestamp
     - name: properties_hs_document_last_revisited
       type: timestamp
     - name: properties_hs_email_bad_address
@@ -2540,22 +2498,6 @@ sources:
       type: varchar
     - name: properties_hs_legal_basis
       type: varchar
-    - name: properties_hs_lifecyclestage_customer_date
-      type: timestamp
-    - name: properties_hs_lifecyclestage_evangelist_date
-      type: timestamp
-    - name: properties_hs_lifecyclestage_lead_date
-      type: timestamp
-    - name: properties_hs_lifecyclestage_marketingqualifiedlead_date
-      type: timestamp
-    - name: properties_hs_lifecyclestage_opportunity_date
-      type: timestamp
-    - name: properties_hs_lifecyclestage_other_date
-      type: timestamp
-    - name: properties_hs_lifecyclestage_salesqualifiedlead_date
-      type: timestamp
-    - name: properties_hs_lifecyclestage_subscriber_date
-      type: timestamp
     - name: properties_hs_linkedin_ad_clicked
       type: varchar
     - name: properties_hs_linkedin_url
@@ -2579,6 +2521,8 @@ sources:
     - name: properties_hs_mobile_sdk_push_tokens
       type: varchar
     - name: properties_hs_notes_last_activity
+      type: varchar
+    - name: properties_hs_notes_next_activity
       type: varchar
     - name: properties_hs_notes_next_activity_type
       type: varchar
@@ -2665,22 +2609,6 @@ sources:
     - name: properties_hs_time_between_contact_creation_and_deal_close
       type: float
     - name: properties_hs_time_between_contact_creation_and_deal_creation
-      type: float
-    - name: properties_hs_time_in_customer
-      type: float
-    - name: properties_hs_time_in_evangelist
-      type: float
-    - name: properties_hs_time_in_lead
-      type: float
-    - name: properties_hs_time_in_marketingqualifiedlead
-      type: float
-    - name: properties_hs_time_in_opportunity
-      type: float
-    - name: properties_hs_time_in_other
-      type: float
-    - name: properties_hs_time_in_salesqualifiedlead
-      type: float
-    - name: properties_hs_time_in_subscriber
       type: float
     - name: properties_hs_time_to_first_engagement
       type: float
@@ -3434,6 +3362,8 @@ sources:
       type: timestamp
     - name: properties_hs_notes_last_activity
       type: varchar
+    - name: properties_hs_notes_next_activity
+      type: varchar
     - name: properties_hs_notes_next_activity_type
       type: varchar
     - name: properties_hs_num_associated_deal_splits
@@ -3472,21 +3402,7 @@ sources:
       type: float
     - name: properties_hs_time_in_9567449
       type: float
-    - name: properties_hs_time_in_appointmentscheduled
-      type: float
-    - name: properties_hs_time_in_closedlost
-      type: float
-    - name: properties_hs_time_in_closedwon
-      type: float
-    - name: properties_hs_time_in_contractsent
-      type: float
     - name: properties_hs_time_in_customclosedwonstage
-      type: float
-    - name: properties_hs_time_in_decisionmakerboughtin
-      type: float
-    - name: properties_hs_time_in_presentationscheduled
-      type: float
-    - name: properties_hs_time_in_qualifiedtobuy
       type: float
     - name: properties_hs_v2_cumulative_time_in_66894120
       type: float
@@ -3584,6 +3500,20 @@ sources:
       type: boolean
     - name: properties_hs_date_entered_current_stage
       type: timestamp
+    - name: properties_hs_time_in_appointmentscheduled
+      type: float
+    - name: properties_hs_time_in_closedlost
+      type: float
+    - name: properties_hs_time_in_closedwon
+      type: float
+    - name: properties_hs_time_in_contractsent
+      type: float
+    - name: properties_hs_time_in_decisionmakerboughtin
+      type: float
+    - name: properties_hs_time_in_presentationscheduled
+      type: float
+    - name: properties_hs_time_in_qualifiedtobuy
+      type: float
     - name: _airbyte_extracted_at
       type: timestamp
       description: Timestamp when the record was extracted from the source
@@ -3870,6 +3800,8 @@ sources:
       type: timestamp
     - name: properties_hs_notes_last_activity
       type: varchar
+    - name: properties_hs_notes_next_activity
+      type: varchar
     - name: properties_hs_notes_next_activity_type
       type: varchar
     - name: properties_hs_num_associated_deal_splits
@@ -3908,21 +3840,7 @@ sources:
       type: float
     - name: properties_hs_time_in_9567449
       type: float
-    - name: properties_hs_time_in_appointmentscheduled
-      type: float
-    - name: properties_hs_time_in_closedlost
-      type: float
-    - name: properties_hs_time_in_closedwon
-      type: float
-    - name: properties_hs_time_in_contractsent
-      type: float
     - name: properties_hs_time_in_customclosedwonstage
-      type: float
-    - name: properties_hs_time_in_decisionmakerboughtin
-      type: float
-    - name: properties_hs_time_in_presentationscheduled
-      type: float
-    - name: properties_hs_time_in_qualifiedtobuy
       type: float
     - name: properties_hs_v2_cumulative_time_in_66894120
       type: float
@@ -4020,6 +3938,20 @@ sources:
       type: boolean
     - name: properties_hs_date_entered_current_stage
       type: timestamp
+    - name: properties_hs_time_in_appointmentscheduled
+      type: float
+    - name: properties_hs_time_in_closedlost
+      type: float
+    - name: properties_hs_time_in_closedwon
+      type: float
+    - name: properties_hs_time_in_contractsent
+      type: float
+    - name: properties_hs_time_in_decisionmakerboughtin
+      type: float
+    - name: properties_hs_time_in_presentationscheduled
+      type: float
+    - name: properties_hs_time_in_qualifiedtobuy
+      type: float
     - name: _airbyte_extracted_at
       type: timestamp
       description: Timestamp when the record was extracted from the source
@@ -4156,21 +4088,7 @@ sources:
       type: timestamp
     - name: properties_hs_date_entered_9567449
       type: timestamp
-    - name: properties_hs_date_entered_appointmentscheduled
-      type: timestamp
-    - name: properties_hs_date_entered_closedlost
-      type: timestamp
-    - name: properties_hs_date_entered_closedwon
-      type: timestamp
-    - name: properties_hs_date_entered_contractsent
-      type: timestamp
     - name: properties_hs_date_entered_customclosedwonstage
-      type: timestamp
-    - name: properties_hs_date_entered_decisionmakerboughtin
-      type: timestamp
-    - name: properties_hs_date_entered_presentationscheduled
-      type: timestamp
-    - name: properties_hs_date_entered_qualifiedtobuy
       type: timestamp
     - name: properties_hs_date_exited_66894120
       type: timestamp
@@ -4178,21 +4096,7 @@ sources:
       type: timestamp
     - name: properties_hs_date_exited_9567449
       type: timestamp
-    - name: properties_hs_date_exited_appointmentscheduled
-      type: timestamp
-    - name: properties_hs_date_exited_closedlost
-      type: timestamp
-    - name: properties_hs_date_exited_closedwon
-      type: timestamp
-    - name: properties_hs_date_exited_contractsent
-      type: timestamp
     - name: properties_hs_date_exited_customclosedwonstage
-      type: timestamp
-    - name: properties_hs_date_exited_decisionmakerboughtin
-      type: timestamp
-    - name: properties_hs_date_exited_presentationscheduled
-      type: timestamp
-    - name: properties_hs_date_exited_qualifiedtobuy
       type: timestamp
     - name: properties_hs_days_to_close_raw
       type: float
@@ -4264,6 +4168,8 @@ sources:
       type: timestamp
     - name: properties_hs_notes_last_activity
       type: varchar
+    - name: properties_hs_notes_next_activity
+      type: varchar
     - name: properties_hs_notes_next_activity_type
       type: varchar
     - name: properties_hs_num_associated_deal_splits
@@ -4320,21 +4226,7 @@ sources:
       type: float
     - name: properties_hs_time_in_9567449
       type: float
-    - name: properties_hs_time_in_appointmentscheduled
-      type: float
-    - name: properties_hs_time_in_closedlost
-      type: float
-    - name: properties_hs_time_in_closedwon
-      type: float
-    - name: properties_hs_time_in_contractsent
-      type: float
     - name: properties_hs_time_in_customclosedwonstage
-      type: float
-    - name: properties_hs_time_in_decisionmakerboughtin
-      type: float
-    - name: properties_hs_time_in_presentationscheduled
-      type: float
-    - name: properties_hs_time_in_qualifiedtobuy
       type: float
     - name: properties_hs_unique_creation_key
       type: varchar
@@ -6186,6 +6078,8 @@ sources:
     - name: tickets
       type: array
       description: Tickets associated with the engagement note
+    - name: properties_hs_hd_ticket_ids
+      type: float
     - name: properties_hs_note_ms_teams_payload
       type: varchar
     - name: properties_hs_object_source
@@ -8808,6 +8702,8 @@ sources:
       type: timestamp
     - name: properties_hs_custom_inbox
       type: float
+    - name: properties_hs_customer_agent_ticket_status
+      type: varchar
     - name: properties_hs_date_entered_1
       type: timestamp
     - name: properties_hs_date_entered_151692305
@@ -8915,6 +8811,8 @@ sources:
     - name: properties_hs_nextactivitydate
       type: timestamp
     - name: properties_hs_notes_last_activity
+      type: varchar
+    - name: properties_hs_notes_next_activity
       type: varchar
     - name: properties_hs_notes_next_activity_type
       type: varchar

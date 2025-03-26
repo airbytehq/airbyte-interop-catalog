@@ -1,11 +1,11 @@
 [project]
 source_name = "facebook_marketing"
 project_name = "fivetran-interop"
-generated_at = "2025-03-26T20:47:49Z"
-requirements_file = "requirements/fivetran-interop/src_hubspot.yml"
-requirements_file_hash = ""
-airbyte_source_file = "generated/src_airbyte_hubspot.yml"
-airbyte_source_file_hash = ""
+generated_at = "2025-03-26T22:56:23Z"
+requirements_file = "catalog/facebook_marketing/requirements/fivetran-interop/src_dbt_requirements.yml"
+requirements_file_hash = "27ce201f199e67f819154c22c20d7f418bcfb57ccd5586a05461e273ee895340"
+airbyte_source_file = "catalog/facebook_marketing/generated/src_airbyte_facebook_marketing.yml"
+airbyte_source_file_hash = "4601fc46a0390483cd76f46b5838b612ce51e71574ea258f117c5d78baf1ecb1"
 
 [coverage]
 unused_source_streams = [
@@ -35,13 +35,11 @@ unused_source_streams = [
     "images",
     "videos",
 ]
-unmapped_target_tables = [
-    "ad_history",
-]
+unmapped_target_tables = []
 
 [mappings.account_history]
 source_file = "account_history.yml"
-source_file_hash = "39e57c1b8db975d6d3cf3d071b818bad2d5bf63c7b348139be2a9f4f5799b6a3"
+source_file_hash = "ae310628d0e6f315116ddbfc3fd48bc251466d5858382985663bc1d9c1d7db11"
 unmapped_target_fields = []
 omitted_target_fields = []
 
@@ -108,9 +106,28 @@ ad_account = [
     "_airbyte_raw_id",
 ]
 
+[mappings.ad_history]
+source_file = "ad_history.yml"
+source_file_hash = "73743ccfa74179caaa95c05144787ea8cd054427f117c8fcaa35b724650fae5f"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.ad_history.mapped_target_fields]
+_fivetran_synced = "ads._airbyte_extracted_at"
+account_id = "ads.account_id"
+ad_set_id = "ads.adset_id"
+campaign_id = "ads.campaign_id"
+conversion_domain = "ads.conversion_specs"
+creative_id = "ads.creative"
+id = "ads.id"
+name = "ads.name"
+updated_time = "ads.updated_time"
+
+[mappings.ad_history.unused_source_fields]
+
 [mappings.ad_set_history]
 source_file = "ad_set_history.yml"
-source_file_hash = "bf34f2354335b5cb325a91169c1f79b8c4e46aff4448bab2ec516cb91654eccd"
+source_file_hash = "2e00f30f0a557ce9bd1fb4d9bfc18d54fc456a3aead8a01e73aaeaa57b420803"
 unmapped_target_fields = [
     "optimization_goal",
     "status",
@@ -148,7 +165,7 @@ ad_sets = [
 
 [mappings.basic_ad]
 source_file = "basic_ad.yml"
-source_file_hash = "98789e254d5f88cbe247e79cd651eb491e2ba399b566f16b8c8c37ce496ee239"
+source_file_hash = "49c060c8e6457aef05962b997d545c537addbbbf8e8f516e10b7084758fa2463"
 unmapped_target_fields = [
     "adset_name",
     "date",
@@ -181,7 +198,7 @@ ads_insights = [
 
 [mappings.basic_ad_action_values]
 source_file = "basic_ad_action_values.yml"
-source_file_hash = "039aa670f908725d535ffb7db089b17e11ce7a089b3d455116cada07e5eca06a"
+source_file_hash = "7bc7a7a4ebf886a74fd0760f3feb718e38ad73c4b6fb2906f683b5d9c581fe53"
 unmapped_target_fields = [
     "_7_d_click",
     "_fivetran_id",
@@ -224,7 +241,7 @@ ads_insights_action_type = [
 
 [mappings.basic_ad_actions]
 source_file = "basic_ad_actions.yml"
-source_file_hash = "3bfc05493526705a595eda467cd1d5971049967b012c09d2bdd7a767c1257a5c"
+source_file_hash = "b5d9a40441cebdda5374e2a1b3e62fe0956ec022349c3566bea6ed6cb2677da0"
 unmapped_target_fields = [
     "_1_d_view",
     "_28_d_click",
@@ -270,7 +287,7 @@ ads_insights_action_type = [
 
 [mappings.campaign_history]
 source_file = "campaign_history.yml"
-source_file_hash = "28bd37c74b9fd4dfe0fb09bf1ecf191012adbce336bdae1c6993c1eeb536cb9a"
+source_file_hash = "32ac4c76fbf27a37f854eb283f6172bafbbcc99a1bf6746f98c1e1bafcdfb0ac"
 unmapped_target_fields = []
 omitted_target_fields = []
 
@@ -303,7 +320,7 @@ campaigns = [
 
 [mappings.creative_history]
 source_file = "creative_history.yml"
-source_file_hash = "76068e9c1a2606c007c87f827bab262a97e6d420dec5235aa78f7c7e3f02bd9d"
+source_file_hash = "21cd62d841a0778db5cec706f4757bdd75edd306b6f66457eb153d729eab3188"
 unmapped_target_fields = [
     "_fivetran_id",
     "asset_feed_spec_link_urls",

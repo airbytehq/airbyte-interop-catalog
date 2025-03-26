@@ -1,7 +1,9 @@
+# This file was auto-generated using the morph cli.
+# Please do not edit manually.
+
 version: 2
 sources:
 - name: hubspot
-  schema: '{{ var("hubspot_source_schema_name") }}'
   tables:
   - name: campaigns
     columns:
@@ -513,6 +515,8 @@ sources:
       type: varchar
     - name: properties_hs_notes_last_activity
       type: varchar
+    - name: properties_hs_notes_next_activity
+      type: varchar
     - name: properties_hs_notes_next_activity_type
       type: varchar
     - name: properties_hs_num_blockers
@@ -907,6 +911,8 @@ sources:
     - name: properties_hs_merged_object_ids
       type: varchar
     - name: properties_hs_notes_last_activity
+      type: varchar
+    - name: properties_hs_notes_next_activity
       type: varchar
     - name: properties_hs_notes_next_activity_type
       type: varchar
@@ -1627,6 +1633,8 @@ sources:
     - name: properties_hs_mobile_sdk_push_tokens
       type: varchar
     - name: properties_hs_notes_last_activity
+      type: varchar
+    - name: properties_hs_notes_next_activity
       type: varchar
     - name: properties_hs_notes_next_activity_type
       type: varchar
@@ -2514,6 +2522,8 @@ sources:
       type: varchar
     - name: properties_hs_notes_last_activity
       type: varchar
+    - name: properties_hs_notes_next_activity
+      type: varchar
     - name: properties_hs_notes_next_activity_type
       type: varchar
     - name: properties_hs_object_id
@@ -3352,6 +3362,8 @@ sources:
       type: timestamp
     - name: properties_hs_notes_last_activity
       type: varchar
+    - name: properties_hs_notes_next_activity
+      type: varchar
     - name: properties_hs_notes_next_activity_type
       type: varchar
     - name: properties_hs_num_associated_deal_splits
@@ -3788,6 +3800,8 @@ sources:
       type: timestamp
     - name: properties_hs_notes_last_activity
       type: varchar
+    - name: properties_hs_notes_next_activity
+      type: varchar
     - name: properties_hs_notes_next_activity_type
       type: varchar
     - name: properties_hs_num_associated_deal_splits
@@ -4153,6 +4167,8 @@ sources:
     - name: properties_hs_next_step_updated_at
       type: timestamp
     - name: properties_hs_notes_last_activity
+      type: varchar
+    - name: properties_hs_notes_next_activity
       type: varchar
     - name: properties_hs_notes_next_activity_type
       type: varchar
@@ -8686,6 +8702,8 @@ sources:
       type: timestamp
     - name: properties_hs_custom_inbox
       type: float
+    - name: properties_hs_customer_agent_ticket_status
+      type: varchar
     - name: properties_hs_date_entered_1
       type: timestamp
     - name: properties_hs_date_entered_151692305
@@ -8793,6 +8811,8 @@ sources:
     - name: properties_hs_nextactivitydate
       type: timestamp
     - name: properties_hs_notes_last_activity
+      type: varchar
+    - name: properties_hs_notes_next_activity
       type: varchar
     - name: properties_hs_notes_next_activity_type
       type: varchar

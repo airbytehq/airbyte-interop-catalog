@@ -4,7 +4,7 @@ transforms:
       Each record represents the daily conversion values associated with
       an ad in Facebook. This is the prebuilt `basic_ad` report broken down by `action_type`
       and `action_value`.
-    id: basic_ad_action_values
+    name: basic_ad_action_values
     from:
       - ads_insights_action_type: facebook_marketing.ads_insights_action_type
     fields:

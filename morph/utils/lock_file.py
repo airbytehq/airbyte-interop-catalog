@@ -19,7 +19,7 @@ from morph.utils import resource_paths
 console = Console()
 
 
-def compute_file_hash(file_path: str) -> str:
+def compute_file_hash(file_path: Path) -> str:
     """Compute the SHA-256 hash of a file.
 
     Args:
@@ -28,12 +28,13 @@ def compute_file_hash(file_path: str) -> str:
     Returns:
         Hexadecimal hash string
     """
-    if not Path(file_path).exists():
+    file_path = Path(file_path)
+    if not file_path.exists():
         return ""
 
     sha256_hash = hashlib.sha256()
     # Read file in binary mode using pathlib
-    content = Path(file_path).read_bytes()
+    content = file_path.read_bytes()
     sha256_hash.update(content)
     return sha256_hash.hexdigest()
 
@@ -87,7 +88,7 @@ def find_unmapped_target_tables(
     # Extract all transform IDs
     for mapping in mapping_files:
         for transform in mapping.get("transforms", []):
-            transform_id = transform.get("id")
+            transform_id = transform.get("name")
             if transform_id:
                 mapped_tables.add(transform_id)
 
@@ -346,7 +347,7 @@ def generate_lock_file_for_project(
 
         # Process each transform
         for transform in mapping.get("transforms", []):
-            transform_id = transform.get("id")
+            transform_id = transform.get("name")
             if not transform_id:
                 continue
 
@@ -411,11 +412,15 @@ def generate_lock_file_for_project(
     unmapped_tables = find_unmapped_target_tables(target_tables, mapping_files)
 
     # Get paths to requirements file and Airbyte source file
-    requirements_file = f"requirements/{project_name}/src_hubspot.yml"
-    requirements_path = Path(f"catalog/{source_name}/{requirements_file}")
+    requirements_file = resource_paths.get_dbt_sources_requirements_path(
+        source_name=source_name,
+        project_name=project_name,
+    )
 
-    airbyte_source_file = "generated/src_airbyte_hubspot.yml"
-    airbyte_source_path = Path(f"catalog/{source_name}/{airbyte_source_file}")
+    airbyte_source_file = resource_paths.get_generated_sources_yml_path(
+        source_name=source_name,
+        project_name=project_name,
+    )
 
     # Create lock file structure
     lock_data = {
@@ -423,10 +428,10 @@ def generate_lock_file_for_project(
             "source_name": source_name,
             "project_name": project_name,
             "generated_at": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
-            "requirements_file": requirements_file,
-            "requirements_file_hash": compute_file_hash(str(requirements_path)),
-            "airbyte_source_file": airbyte_source_file,
-            "airbyte_source_file_hash": compute_file_hash(str(airbyte_source_path)),
+            "requirements_file": str(requirements_file),
+            "requirements_file_hash": compute_file_hash(requirements_file),
+            "airbyte_source_file": str(airbyte_source_file),
+            "airbyte_source_file_hash": compute_file_hash(airbyte_source_file),
         },
         "coverage": {
             "unused_source_streams": unused_streams,

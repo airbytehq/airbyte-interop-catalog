@@ -53,7 +53,7 @@ def test_find_unused_source_streams():
 def test_find_unmapped_target_tables():
     # Test data
     config_tables = ["table1", "table2", "table3"]
-    mapping_files = [{"transforms": [{"id": "table1"}]}, {"transforms": [{"id": "table2"}]}]
+    mapping_files = [{"transforms": [{"name": "table1"}]}, {"transforms": [{"name": "table2"}]}]
 
     # Find unmapped tables
     unmapped_tables = find_unmapped_target_tables(config_tables, mapping_files)
@@ -161,7 +161,7 @@ def test_generate_lock_file():
             "domain": "test.test",
             "transforms": [
                 {
-                    "id": "table1",
+                    "name": "table1",
                     "from": [{"stream1": "source.stream1"}],
                     "fields": {
                         "field1": {"expression": "stream1.field1"},

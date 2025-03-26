@@ -45,10 +45,6 @@ def get_target_schema(
 ) -> dict[str, Any] | None:
     """Download or load target schema file.
 
-    Args:
-        config: Configuration dictionary
-        requirements_dir: Directory to store downloaded schema files
-
     Returns:
         Target schema dictionary or None if not found
     """
@@ -119,8 +115,8 @@ def create_mapping_structure(
         "domain": f"{source_name}.{project_name}",
         "transforms": [
             {
+                "name": table_name,
                 "display_name": f"{table_schema.get('description', table_name)}",
-                "id": table_name,
                 "from": [{f"{table_name}s": f"airbyte_raw_{source_name}.{table_name}s"}],
                 "fields": {},
             },

@@ -6,7 +6,7 @@ transforms:
     fields:
       _fivetran_synced:
         expression: ads._airbyte_extracted_at
-        description: '{{ doc(''_fivetran_synced'') }}'
+        description: "{{ doc('_fivetran_synced') }}"
       account_id:
         expression: ads.account_id
         description: The ID of the ad account that this ad belongs to.
@@ -30,4 +30,4 @@ transforms:
         description: Name of the ad.
       updated_time:
         expression: ads.updated_time
-        description: '{{ doc(''updated_time'') }}'
+        description: "{{ doc('updated_time') }}"

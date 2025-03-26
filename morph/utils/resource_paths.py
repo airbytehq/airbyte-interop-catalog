@@ -46,6 +46,29 @@ def get_generated_catalog_path(
     )
 
 
+def get_generated_dbt_project_dir(
+    source_name: str,
+    project_name: str = DEFAULT_PROJECT_NAME,
+) -> Path:
+    """Get the path to the generated dbt project.yml file."""
+    _ = project_name  # Unused for now
+    return (
+        get_generated_dir_root(
+            source_name=source_name,
+        )
+        / "dbt_project"
+    )
+
+
+def get_generated_dbt_project_models_dir(
+    source_name: str,
+    project_name: str = DEFAULT_PROJECT_NAME,
+) -> Path:
+    """Get the path to the generated dbt project models directory."""
+    _ = project_name  # Unused for now
+    return get_generated_dbt_project_dir(source_name, project_name) / "models"
+
+
 def get_generated_sources_yml_path(
     source_name: str,
     project_name: str = DEFAULT_PROJECT_NAME,

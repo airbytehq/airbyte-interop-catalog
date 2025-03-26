@@ -1,7 +1,7 @@
 domain: hubspot.fivetran-interop
 transforms:
   - display_name: Fivetran Raw 'Deal' Model
-    id: deal
+    name: deal
     from:
       - deals: airbyte_raw_hubspot.deals
     fields:

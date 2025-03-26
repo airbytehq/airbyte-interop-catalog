@@ -149,7 +149,14 @@ def generate_dbt_project(
             )
 
         # Get sources.yml path in dbt project models directory
-        new_sources_path = actual_output_dir / "models" / "src_airbyte_raw.yml"
+        new_sources_path = (
+            resource_paths.get_generated_dbt_project_models_dir(
+                source_name,
+                project_name,
+            )
+            / "src_airbyte_raw.yml"
+        )
+
         # Ensure parent directory exists
         new_sources_path.parent.mkdir(parents=True, exist_ok=True)
         # Convert dict to YAML string before writing
@@ -280,7 +287,6 @@ def generate_transform_scaffold(
         source_name=source_name,
         project_name=project_name,
         config=config,
-        requirements_dir=requirements_dir,
     )
     if not target_schema:
         return
@@ -336,7 +342,6 @@ def generate_lock_file(
         source_name=source_name,
         project_name=project_name,
         config=config,
-        requirements_dir=requirements_dir,
     )
     if not target_schema:
         console.print("Error: Could not load target schema", style="bold red")

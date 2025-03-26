@@ -1,7 +1,7 @@
 domain: hubspot.fivetran-interop
 transforms:
   - display_name: Fivetran Raw 'Form' Model
-    id: form
+    name: form
     from:
       - forms: airbyte_raw_hubspot.forms
     fields:
