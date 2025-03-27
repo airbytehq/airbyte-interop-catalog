@@ -214,19 +214,12 @@ def infer_best_match_source_stream_name(
     return ai_fn_select_best_match_source_schema(target_schema, source_tables)
 
 
-def create_mappings_from_source_schema(
-    target_schema: models.DbtSourceTable,
-    source_schema: models.DbtSourceTable,
-) -> list[models.FieldMapping]:
-    """Create a list of field mappings from a source schema."""
-
-
 def populate_missing_mappings(
     source_name: str,
     project_name: str,
     transform_name: str,
 ) -> None:
-    """Populate missing mappings from a source schema."""
+    """Populate missing mappings for a single target table."""
     transform_file = resource_paths.get_transform_file(
         source_name=source_name,
         project_name=project_name,
