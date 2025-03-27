@@ -157,33 +157,33 @@ def _add_fields_to_mapping(
 def generate_empty_mapping_file(
     source_name: str,
     project_name: str,
-    table_name: str,
+    transform_name: str,
     *,
     parent_folder: Path,
     if_not_exists: bool = False,
 ) -> Path | None:
     """Generate a scaffold mapping file for a table."""
-    mapping_file = parent_folder / f"{table_name}.yml"
+    mapping_file = parent_folder / f"{transform_name}.yml"
     if mapping_file.exists() and if_not_exists:
-        console.print(f"Skipping {table_name}: Mapping file already exists", style="blue")
+        console.print(f"Skipping '{transform_name}': Mapping file already exists", style="blue")
         return None
 
-    dbt_source_file_path = resource_paths.get_dbt_sources_requirements_path(
+    dbt_source_requirements_file = resource_paths.get_dbt_sources_requirements_path(
         source_name=source_name,
         project_name=project_name,
     )
     # Find table schema in target_schema
     table_schema: models.DbtSourceFile = models.DbtSourceFile.from_file(
-        dbt_source_file_path,
-    ).get_table(table_name)
+        dbt_source_requirements_file,
+    ).get_table(transform_name)
 
     # Create mapping structure
-    mapping = create_mapping_structure(source_name, project_name, table_name, table_schema)
+    mapping = create_mapping_structure(source_name, project_name, transform_name, table_schema)
 
     # Write mapping file
     text_utils.dump_yaml_file(mapping, mapping_file)
 
-    console.print(f"Created mapping file scaffold for `{table_name}`", style="green")
+    console.print(f"Created mapping file scaffold for `{transform_name}`", style="green")
     return mapping_file
 
 
@@ -199,8 +199,6 @@ def generate_mapping_files(
         source_name: Name of the source
         project_name: Name of the project
         target_tables: List of target table names
-        target_schema: Target schema dictionary
-        output_path: Path to output directory
 
     Returns:
         List of created file paths
@@ -210,9 +208,9 @@ def generate_mapping_files(
     for table_name in target_tables:
         # Check if mapping file already exists
         mapping_file = generate_empty_mapping_file(
-            source_name,
-            project_name,
-            table_name,
+            source_name=source_name,
+            project_name=project_name,
+            transform_name=table_name,
             parent_folder=parent_folder,
         )
         if mapping_file:
@@ -233,3 +231,60 @@ def report_results(created_files: list[str]) -> None:
             console.print(f"  - {file}")
     else:
         console.print("No new mapping files generated.", style="bold blue")
+
+
+def generate_transform_scaffold(
+    source_name: str,
+    project_name: str,
+    output_dir: str | None = None,
+) -> None:
+    """Generate scaffold mapping YAML files for target tables.
+
+    This command generates blank mapping YAML files for any target tables
+    that are not yet defined. The generated files will include all fields
+    from the target schema but with MISSING expressions.
+    """
+
+    # Set default paths if not provided
+    config_file = f"catalog/{source_name}/src/{project_name}/config.yml"
+    if not output_dir:
+        output_dir = f"catalog/{source_name}/src/{project_name}/transforms"
+
+    # Set path for local target schema file
+    requirements_dir = f"catalog/{source_name}/requirements/{project_name}"
+    Path(requirements_dir).mkdir(parents=True, exist_ok=True)
+
+    # Load config and target schema
+    config = load_config(config_file)
+    if not config:
+        return
+
+    download_target_schema(
+        source_name=source_name,
+        project_name=project_name,
+        config=config,
+        if_not_exists=True,
+    )
+    target_schema = text_utils.load_yaml_file(
+        resource_paths.get_dbt_sources_requirements_path(
+            source_name=source_name,
+            project_name=project_name,
+        ),
+    )
+
+    if not target_schema:
+        return
+
+    # Create output directory
+    output_path = Path(output_dir)
+    output_path.mkdir(parents=True, exist_ok=True)
+
+    # Process each target table
+    created_files = generate_mapping_files(
+        source_name=source_name,
+        project_name=project_name,
+        target_tables=target_schema.get("tables", []),
+        parent_folder=output_path,
+    )
+
+    report_results(created_files)

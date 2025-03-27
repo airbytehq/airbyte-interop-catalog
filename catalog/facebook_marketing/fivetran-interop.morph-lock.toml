@@ -1,7 +1,7 @@
 [project]
 source_name = "facebook_marketing"
 project_name = "fivetran-interop"
-generated_at = "2025-03-27T17:48:38Z"
+generated_at = "2025-03-27T22:26:09Z"
 requirements_file = "catalog/facebook_marketing/requirements/fivetran-interop/src_dbt_requirements.yml"
 requirements_file_hash = "063605bbc7f806dd4d69ca40db1bf87e3031484feebd1e9e5bc52c905b52bba7"
 airbyte_source_file = "catalog/facebook_marketing/generated/src_airbyte_facebook_marketing.yml"
@@ -56,20 +56,20 @@ timezone_name = "ad_account.timezone_name"
 
 [mappings.ad_history]
 source_file = "ad_history.yml"
-source_file_hash = "8cd3bc712280e46c9e4215bc27678619776861bd4dd0e3319bbfdbcc25d601a0"
+source_file_hash = "f56ad019b6df6f7c8b9f216e58b4a8036e7e7859c50a5143051758cb4225eadc"
 unmapped_target_fields = []
 omitted_target_fields = []
 
 [mappings.ad_history.mapped_target_fields]
-_fivetran_synced = "ads._airbyte_extracted_at"
+id = "ads.id"
 account_id = "ads.account_id"
 ad_set_id = "ads.adset_id"
 campaign_id = "ads.campaign_id"
-conversion_domain = "ads.conversion_specs"
 creative_id = "ads.creative"
-id = "ads.id"
 name = "ads.name"
+_fivetran_synced = "ads._airbyte_extracted_at"
 updated_time = "ads.updated_time"
+conversion_domain = "ads.source_ad_id"
 
 [mappings.ad_history.unused_source_fields]
 

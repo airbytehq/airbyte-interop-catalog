@@ -399,7 +399,7 @@ def infer_table_mappings(  # noqa: PLR0912 (too many branches)
         generate_empty_mapping_file(
             source_name=source_name,
             project_name=project_name,
-            table_name=transform_name,
+            transform_name=transform_name,
             parent_folder=resource_paths.get_transforms_dir(
                 source_name=source_name,
                 project_name=project_name,

@@ -101,7 +101,8 @@ class DbtSourceFile(BaseModel):
             None,
         )
         if not table:
-            raise ValueError(f"Table {table_name} not found in source file")
+            table_names = [table.name for table in self.source_tables]
+            raise ValueError(f"Table '{table_name}' not found in source file. Found: {table_names}")
 
         return table
 
