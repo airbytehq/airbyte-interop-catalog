@@ -10,7 +10,7 @@ ad_account AS (
 SELECT
     ad_account.id AS id, -- The ID of the ad account.
     ad_account.name AS name, -- Name of the account.
-    _airbyte_extracted_at AS _fivetran_synced, -- {{ doc('_fivetran_synced') }}
+    ad_account._airbyte_extracted_at AS _fivetran_synced, -- {{ doc('_fivetran_synced') }}
     ad_account.account_status AS account_status, -- Current status of account.
     ad_account.business_country_code AS business_country_code, -- Country code of business associated to account.
     ad_account.created_time AS created_time, -- The time account was created.

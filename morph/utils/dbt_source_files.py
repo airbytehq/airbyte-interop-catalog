@@ -14,17 +14,12 @@ import json
 from pathlib import Path
 from typing import Any
 
-import yaml
 from rich.console import Console
 
-from morph.utils import resource_paths
+from morph.constants import DEFAULT_PROJECT_NAME, HEADER_COMMENT
+from morph.utils import resource_paths, text_utils
 
 console = Console()
-
-
-HEADER_COMMENT = """# This file was auto-generated using the morph cli.
-# Please do not edit manually.
-"""
 
 
 def json_schema_to_dbt_column(
@@ -149,7 +144,7 @@ def generate_dbt_sources_yml_from_schema_files(
 def generate_dbt_sources_yml_from_airbyte_catalog(
     source_name: str,
     *,
-    project_name: str = "fivetran-interop",
+    project_name: str = DEFAULT_PROJECT_NAME,
     catalog_file: Path | None = None,
     output_file: Path | None = None,
     database: str | None = None,
@@ -167,7 +162,7 @@ def generate_dbt_sources_yml_from_airbyte_catalog(
     output_path = (
         Path(output_file)
         if output_file
-        else resource_paths.get_generated_sources_yml_path(
+        else resource_paths.get_generated_source_yml_path(
             source_name=source_name,
             project_name=project_name,
         )
@@ -180,9 +175,7 @@ def generate_dbt_sources_yml_from_airbyte_catalog(
         schema,
     )
 
-    sources_yml_with_header = (
-        f"{HEADER_COMMENT}\n{yaml.dump(sources_yml, default_flow_style=False, sort_keys=False)}"
-    )
+    sources_yml_with_header = f"{HEADER_COMMENT}\n{text_utils.dump_yaml_str(sources_yml)}"
 
     # Write to file
     output_path.write_text(sources_yml_with_header)
@@ -247,7 +240,7 @@ def parse_airbyte_catalog_to_dbt_sources_format(
 
 def get_dbt_sources_requirements(
     source_name: str,
-    project_name: str = "fivetran-interop",
+    project_name: str = DEFAULT_PROJECT_NAME,
 ) -> dict[str, Any]:
     """Get the parsed dbt sources.yml requirements file content."""
     catalog_file = resource_paths.get_generated_catalog_path(source_name, project_name)

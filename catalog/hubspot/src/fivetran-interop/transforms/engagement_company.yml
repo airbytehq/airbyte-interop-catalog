@@ -1,0 +1,20 @@
+domain: hubspot.fivetran-interop
+transforms:
+  - name: engagement_company
+    from:
+      - engagements: hubspot.engagements
+    fields:
+      _fivetran_synced:
+        expression: engagements._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      company_id:
+        expression: engagements.associations_companyIds
+        description: The ID of the related company.
+      engagement_id:
+        expression: engagements.id
+        description: The ID of the related engagement.
+      category:
+        expression: engagements.type
+        description:
+          The association category. Either HUBSPOT_DEFINED (default label)
+          or USER_DEFINED (custom label).

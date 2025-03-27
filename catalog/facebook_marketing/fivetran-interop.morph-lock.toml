@@ -1,16 +1,15 @@
 [project]
 source_name = "facebook_marketing"
 project_name = "fivetran-interop"
-generated_at = "2025-03-26T22:56:23Z"
+generated_at = "2025-03-27T22:26:09Z"
 requirements_file = "catalog/facebook_marketing/requirements/fivetran-interop/src_dbt_requirements.yml"
-requirements_file_hash = "27ce201f199e67f819154c22c20d7f418bcfb57ccd5586a05461e273ee895340"
+requirements_file_hash = "063605bbc7f806dd4d69ca40db1bf87e3031484feebd1e9e5bc52c905b52bba7"
 airbyte_source_file = "catalog/facebook_marketing/generated/src_airbyte_facebook_marketing.yml"
 airbyte_source_file_hash = "4601fc46a0390483cd76f46b5838b612ce51e71574ea258f117c5d78baf1ecb1"
 
 [coverage]
 unused_source_streams = [
     "activities",
-    "ads_insights",
     "ads_insights_action_carousel_card",
     "ads_insights_action_conversion_device",
     "ads_insights_action_product_id",
@@ -39,14 +38,14 @@ unmapped_target_tables = []
 
 [mappings.account_history]
 source_file = "account_history.yml"
-source_file_hash = "ae310628d0e6f315116ddbfc3fd48bc251466d5858382985663bc1d9c1d7db11"
+source_file_hash = "554d26ec9d2c503167a82c3317d6add807e591bd10849c3059051f8f80a55207"
 unmapped_target_fields = []
 omitted_target_fields = []
 
 [mappings.account_history.mapped_target_fields]
 id = "ad_account.id"
 name = "ad_account.name"
-_fivetran_synced = "_airbyte_extracted_at"
+_fivetran_synced = "ad_account._airbyte_extracted_at"
 account_status = "ad_account.account_status"
 business_country_code = "ad_account.business_country_code"
 created_time = "ad_account.created_time"
@@ -54,74 +53,23 @@ currency = "ad_account.currency"
 timezone_name = "ad_account.timezone_name"
 
 [mappings.account_history.unused_source_fields]
-ad_account = [
-    "account_id",
-    "age",
-    "amount_spent",
-    "balance",
-    "business",
-    "business_city",
-    "business_name",
-    "business_state",
-    "business_street",
-    "business_street2",
-    "business_zip",
-    "can_create_brand_lift_study",
-    "capabilities",
-    "disable_reason",
-    "end_advertiser",
-    "end_advertiser_name",
-    "extended_credit_invoice_group",
-    "failed_delivery_checks",
-    "fb_entity",
-    "funding_source",
-    "funding_source_details",
-    "has_migrated_permissions",
-    "io_number",
-    "is_attribution_spec_system_default",
-    "is_direct_deals_enabled",
-    "is_in_3ds_authorization_enabled_market",
-    "is_notifications_enabled",
-    "is_personal",
-    "is_prepay_account",
-    "is_tax_id_required",
-    "line_numbers",
-    "media_agency",
-    "min_campaign_group_spend_cap",
-    "min_daily_budget",
-    "offsite_pixels_tos_accepted",
-    "owner",
-    "partner",
-    "rf_spec",
-    "spend_cap",
-    "tax_id",
-    "tax_id_status",
-    "tax_id_type",
-    "timezone_id",
-    "timezone_offset_hours_utc",
-    "tos_accepted",
-    "user_tasks",
-    "user_tos_accepted",
-    "_airbyte_meta",
-    "_airbyte_raw_id",
-]
 
 [mappings.ad_history]
 source_file = "ad_history.yml"
-source_file_hash = "73743ccfa74179caaa95c05144787ea8cd054427f117c8fcaa35b724650fae5f"
+source_file_hash = "f56ad019b6df6f7c8b9f216e58b4a8036e7e7859c50a5143051758cb4225eadc"
 unmapped_target_fields = []
 omitted_target_fields = []
 
 [mappings.ad_history.mapped_target_fields]
-_fivetran_synced = "ads._airbyte_extracted_at"
+id = "ads.id"
 account_id = "ads.account_id"
 ad_set_id = "ads.adset_id"
 campaign_id = "ads.campaign_id"
-conversion_domain = "ads.conversion_specs"
 creative_id = "ads.creative"
-id = "ads.id"
 name = "ads.name"
+_fivetran_synced = "ads._airbyte_extracted_at"
 updated_time = "ads.updated_time"
+conversion_domain = "ads.source_ad_id"
 
 [mappings.ad_history.unused_source_fields]
 
@@ -165,7 +113,7 @@ ad_sets = [
 
 [mappings.basic_ad]
 source_file = "basic_ad.yml"
-source_file_hash = "49c060c8e6457aef05962b997d545c537addbbbf8e8f516e10b7084758fa2463"
+source_file_hash = "72049684647ef1ff2f4a05d9587a8947cf1f9133af47b42a1ba0eb90d231cb27"
 unmapped_target_fields = [
     "adset_name",
     "date",
@@ -241,49 +189,24 @@ ads_insights_action_type = [
 
 [mappings.basic_ad_actions]
 source_file = "basic_ad_actions.yml"
-source_file_hash = "b5d9a40441cebdda5374e2a1b3e62fe0956ec022349c3566bea6ed6cb2677da0"
-unmapped_target_fields = [
-    "_1_d_view",
-    "_28_d_click",
-    "_7_d_click",
-    "_fivetran_id",
-    "date",
-    "index",
-    "inline",
-]
+source_file_hash = "de4d0a63ee3965cf9f992dc5e940920f32632f694bf0199a91816c0bc2314081"
+unmapped_target_fields = []
 omitted_target_fields = []
 
 [mappings.basic_ad_actions.mapped_target_fields]
-_fivetran_synced = "_airbyte_extracted_at"
-action_type = "ads_insights_action_type.action_type"
-ad_id = "ads_insights_action_type.ad_id"
-value = "ads_insights_action_type.value"
+_1_d_view = "ads_insights.actions"
+_7_d_click = "ads_insights.actions"
+_28_d_click = "ads_insights.actions"
+_fivetran_id = "ads_insights._airbyte_raw_id"
+_fivetran_synced = "ads_insights._airbyte_extracted_at"
+action_type = "ads_insights.action_values"
+ad_id = "ads_insights.ad_id"
+date = "ads_insights.date_start"
+index = "ads_insights.converted_product_value"
+inline = "ads_insights.inline_link_clicks"
+value = "ads_insights.conversion_values"
 
 [mappings.basic_ad_actions.unused_source_fields]
-ads_insights_action_type = [
-    "_airbyte_meta",
-    "_airbyte_raw_id",
-    "account_id",
-    "account_name",
-    "action_destination",
-    "action_target_id",
-    "action_attribution_windows",
-    "action_carousel_card_id",
-    "action_carousel_card_name",
-    "action_converted_product_id",
-    "action_device",
-    "action_event_channel",
-    "action_reaction",
-    "action_video_sound",
-    "action_video_type",
-    "ad_name",
-    "adset_id",
-    "adset_name",
-    "campaign_id",
-    "campaign_name",
-    "inline_link_clicks",
-    "objective",
-]
 
 [mappings.campaign_history]
 source_file = "campaign_history.yml"

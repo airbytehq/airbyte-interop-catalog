@@ -1,7 +1,6 @@
 domain: facebook_marketing.fivetran-interop
 transforms:
-  - display_name: Each record in this table reflects a version of a Facebook ad account.
-    name: account_history
+  - name: account_history
     from:
       - ad_account: facebook_marketing.ad_account
     fields:
@@ -12,7 +11,7 @@ transforms:
         expression: ad_account.name
         description: Name of the account.
       _fivetran_synced:
-        expression: _airbyte_extracted_at
+        expression: ad_account._airbyte_extracted_at
         description: "{{ doc('_fivetran_synced') }}"
       account_status:
         expression: ad_account.account_status
@@ -29,55 +28,3 @@ transforms:
       timezone_name:
         expression: ad_account.timezone_name
         description: Timezone associated with account.
-    annotations:
-      unused_source_fields:
-        ad_account:
-          - account_id
-          - age
-          - amount_spent
-          - balance
-          - business
-          - business_city
-          - business_name
-          - business_state
-          - business_street
-          - business_street2
-          - business_zip
-          - can_create_brand_lift_study
-          - capabilities
-          - disable_reason
-          - end_advertiser
-          - end_advertiser_name
-          - extended_credit_invoice_group
-          - failed_delivery_checks
-          - fb_entity
-          - funding_source
-          - funding_source_details
-          - has_migrated_permissions
-          - io_number
-          - is_attribution_spec_system_default
-          - is_direct_deals_enabled
-          - is_in_3ds_authorization_enabled_market
-          - is_notifications_enabled
-          - is_personal
-          - is_prepay_account
-          - is_tax_id_required
-          - line_numbers
-          - media_agency
-          - min_campaign_group_spend_cap
-          - min_daily_budget
-          - offsite_pixels_tos_accepted
-          - owner
-          - partner
-          - rf_spec
-          - spend_cap
-          - tax_id
-          - tax_id_status
-          - tax_id_type
-          - timezone_id
-          - timezone_offset_hours_utc
-          - tos_accepted
-          - user_tasks
-          - user_tos_accepted
-          - _airbyte_meta
-          - _airbyte_raw_id

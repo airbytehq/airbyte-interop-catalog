@@ -1,0 +1,21 @@
+domain: hubspot.fivetran-interop
+transforms:
+  - name: contact_list_member
+    from:
+      - contacts_list_memberships: hubspot.contacts_list_memberships
+    fields:
+      _fivetran_deleted:
+        expression: contacts_list_memberships._airbyte_extracted_at
+        description: '{{ doc("_fivetran_deleted") }}'
+      _fivetran_synced:
+        expression: contacts_list_memberships._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      added_at:
+        expression: contacts_list_memberships.timestamp
+        description: The timestamp a contact was added to a list.
+      contact_id:
+        expression: contacts_list_memberships.canonical-vid
+        description: The ID of the related contact.
+      contact_list_id:
+        expression: contacts_list_memberships.static-list-id
+        description: The ID of the related contact list.

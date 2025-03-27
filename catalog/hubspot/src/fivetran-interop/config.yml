@@ -1,5 +1,4 @@
 project_id: hubspot.fivetran-interop
-
 source_name: hubspot
 source_streams:
   - companies
@@ -8,13 +7,31 @@ source_streams:
   - forms
   - owners
   - tickets
-
-# Target schema file snapshotted from: https://github.com/fivetran/dbt_hubspot_source/blob/main/models/src_hubspot.yml
 target_dbt_schema_url: https://raw.githubusercontent.com/fivetran/dbt_hubspot_source/refs/heads/main/models/src_hubspot.yml
-target_tables:
-  - company
-  - contact
-  - deal
-  - form
-  - owner
-  - ticket
+target_tables_skipped:
+  - calendar_event
+  - deal_company
+  - deal_contact
+  - deal_pipeline_stage
+  - deal_stage
+  - email_campaign
+  - email_event_bounce
+  - email_event_click
+  - email_event_deferred
+  - email_event_dropped
+  - email_event_forward
+  - email_event_open
+  - email_event_sent
+  - email_event_spam_report
+  - email_event_status_change
+  - engagement_contact
+  - engagement_deal
+  - engagement_email_cc
+  - engagement_email_to
+  - merged_deal
+  - property
+  - property_option
+  - ticket_company
+  - ticket_deal
+  - ticket_pipeline_stage
+  - ticket_property_history

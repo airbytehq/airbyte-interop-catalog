@@ -8,17 +8,16 @@ The generated models will be placed in the 'generated' folder of the catalog.
 from pathlib import Path
 from typing import Any
 
-import yaml
+from copier import run_copy
 from jinja2 import Environment
 
-from morph.utils import resource_paths
-
-DEFAULT_PROJECT_NAME = "fivetran-interop"
+from morph.constants import DEFAULT_PROJECT_NAME
+from morph.utils import resource_paths, text_utils
 
 
 def load_mapping_file(mapping_file_path: str) -> dict[str, Any]:
     """Load a mapping file and return its contents as a dictionary."""
-    return yaml.safe_load(Path(mapping_file_path).read_text())
+    return text_utils.load_yaml_file(Path(mapping_file_path))
 
 
 def _extract_transform(mapping: dict[str, Any], transform_id: str) -> dict[str, Any]:
@@ -160,8 +159,6 @@ def generate_dbt_package(
         output_dir: Path to the output directory.
         mapping_dir: Path to the mapping directory.
     """
-    from copier import run_copy
-
     output_dir = output_dir or resource_paths.get_generated_dir_root(source_name)
     mapping_dir = mapping_dir or resource_paths.get_transforms_dir(source_name, project_name)
 
@@ -203,8 +200,6 @@ def generate_dbt_package(
         src_path=str(template_dir),
         dst_path=str(output_path),
         data=template_data,
-        overwrite=True,
-        unsafe=True,
     )
 
     # Now generate the SQL models

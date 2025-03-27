@@ -1,0 +1,18 @@
+domain: hubspot.fivetran-interop
+transforms:
+  - name: email_event_delivered
+    from:
+      - email_events: hubspot.email_events
+    fields:
+      _fivetran_synced:
+        expression: email_events._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      id:
+        expression: email_events.id
+        description: The ID of the event.
+      response:
+        expression: email_events.response
+        description: The full response from the recipient's email server.
+      smtp_id:
+        expression: email_events.smtpId
+        description: An ID attached to the message by HubSpot.

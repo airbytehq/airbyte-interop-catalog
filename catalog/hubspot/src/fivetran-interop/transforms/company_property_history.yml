@@ -1,0 +1,27 @@
+domain: hubspot.fivetran-interop
+transforms:
+  - name: company_property_history
+    from:
+      - companies_property_history: hubspot.companies_property_history
+    fields:
+      _fivetran_synced:
+        expression: companies_property_history.updatedByUserId
+        description: '{{ doc("_fivetran_synced") }}'
+      company_id:
+        expression: companies_property_history.companyId
+        description: The ID of the related company record.
+      name:
+        expression: companies_property_history.properties_name
+        description: '{{ doc("history_name") }}'
+      source:
+        expression: companies_property_history.sourceType
+        description: '{{ doc("history_source") }}'
+      source_id:
+        expression: companies_property_history.sourceId
+        description: '{{ doc("history_source_id") }}'
+      timestamp:
+        expression: companies_property_history.timestamp
+        description: '{{ doc("history_timestamp") }}'
+      value:
+        expression: companies_property_history.value
+        description: '{{ doc("history_value") }}'

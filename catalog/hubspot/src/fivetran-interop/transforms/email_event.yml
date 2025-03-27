@@ -1,0 +1,59 @@
+domain: hubspot.fivetran-interop
+transforms:
+  - name: email_event
+    from:
+      - email_events: hubspot.email_events
+    fields:
+      _fivetran_synced:
+        expression: email_events._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      app_id:
+        expression: email_events.appId
+        description: The ID of the app that sent the email.
+      caused_by_created:
+        expression: email_events.causedBy
+        description: The timestamp of the event that caused this event.
+      caused_by_id:
+        expression: MISSING
+        description:
+          The event ID which uniquely identifies the event which directly
+          caused this event. If not applicable, this property is omitted.
+      created:
+        expression: email_events.created
+        description: The created timestamp of the event.
+      email_campaign_id:
+        expression: email_events.emailCampaignId
+        description: The ID of the related email campaign.
+      filtered_event:
+        expression: email_events.filteredEvent
+        description:
+          A boolean representing whether the event has been filtered out
+          of reporting based on customer reports settings or not.
+      id:
+        expression: email_events.id
+        description: The ID of the event.
+      obsoleted_by_created:
+        expression: email_events.obsoletedBy
+        description: The timestamp of the event that made the current event obsolete.
+      obsoleted_by_id:
+        expression: MISSING
+        description:
+          The event ID which uniquely identifies the follow-on event which
+          makes this current event obsolete. If not applicable, this property is omitted.
+      portal_id:
+        expression: email_events.portalId
+        description: '{{ doc("portal_id") }}'
+      recipient:
+        expression: email_events.recipient
+        description: The email address of the contact related to the event.
+      sent_by_created:
+        expression: email_events.sentBy
+        description: The timestamp of the SENT event related to this event.
+      sent_by_id:
+        expression: MISSING
+        description:
+          The event ID which uniquely identifies the email message's SENT
+          event. If not applicable, this property is omitted.
+      type:
+        expression: email_events.type
+        description: The type of event.

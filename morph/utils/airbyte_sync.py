@@ -3,13 +3,15 @@ Utilities for syncing data from Airbyte sources.
 """
 
 from pathlib import Path
-
-import airbyte as ab
+from typing import TYPE_CHECKING
 
 from morph.utils.airbyte_catalog import get_source
 
+if TYPE_CHECKING:
+    import airbyte as ab
 
-def get_duckdb_cache(db_path: str, source_name: str) -> ab.DuckDBCache:
+
+def get_duckdb_cache(db_path: str, source_name: str) -> "ab.DuckDBCache":
     """Get a DuckDB cache instance.
 
     Args:
@@ -19,6 +21,8 @@ def get_duckdb_cache(db_path: str, source_name: str) -> ab.DuckDBCache:
     Returns:
         A DuckDB cache instance
     """
+    import airbyte as ab
+
     return ab.DuckDBCache(
         db_path=db_path,
         schema_name=f"{source_name}_raw",

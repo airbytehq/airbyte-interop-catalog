@@ -1,0 +1,32 @@
+domain: hubspot.fivetran-interop
+transforms:
+  - name: contact_form_submission
+    from:
+      - contacts_form_submissions: hubspot.contacts_form_submissions
+    fields:
+      _fivetran_synced:
+        expression: contacts_form_submissions._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      contact_id:
+        expression: contacts_form_submissions.canonical-vid
+        description: The ID of the related contact.
+      conversion_id:
+        expression: contacts_form_submissions.conversion-id
+        description: A Unique ID for the specific form conversion.
+      form_id:
+        expression: contacts_form_submissions.form-id
+        description: The GUID of the form that the submission belongs to.
+      page_url:
+        expression: contacts_form_submissions.page-url
+        description: The URL that the form was submitted on, if applicable.
+      portal_id:
+        expression: contacts_form_submissions.portal-id
+        description: '{{ doc("portal_id") }}'
+      timestamp:
+        expression: contacts_form_submissions.timestamp
+        description: A Unix timestamp in milliseconds of the time the submission occurred.
+      title:
+        expression: contacts_form_submissions.title
+        description:
+          The title of the page that the form was submitted on. This will
+          default to the name of the form if no title is provided.

@@ -2,44 +2,29 @@
 
 import shutil
 from pathlib import Path
-from typing import Any
 
 import click
-import yaml
 from rich.console import Console
 
-from morph.ai import models
+from morph import models
+from morph.ai import map
 from morph.ai.eval import get_table_mapping_eval
-from morph.ai.map import (
-    change_mapping_source_table,
-    get_best_match_source_stream_name,
-    populate_missing_mappings,
-)
-from morph.ai.models import (
-    FieldMapping,
-    TableMapping,
-    print_table_mapping_analysis,
-)
-from morph.utils import resource_paths
+from morph.constants import DEFAULT_PROJECT_NAME
+from morph.utils import resource_paths, text_utils
 from morph.utils.airbyte_catalog import write_catalog_file
 from morph.utils.dbt_source_files import (
     generate_dbt_sources_yml_from_airbyte_catalog,
 )
 from morph.utils.lock_file import generate_lock_file_for_project
+from morph.utils.logic import if_none
 from morph.utils.mapping_to_dbt_models import generate_dbt_package
 from morph.utils.transform_scaffold import (
-    generate_mapping_files,
-    get_target_schema,
+    download_target_schema,
+    generate_transform_scaffold,
     load_config,
-    report_results,
 )
 
 console = Console()
-
-
-def _if_none(input: Any, default: bool | None, /) -> Any:
-    """Helper function to return input if it is not None, otherwise return default."""
-    return input if input is not None else default
 
 
 @click.group()
@@ -57,7 +42,7 @@ def main() -> None:
 @click.option("--schema", type=str, help="Schema name")
 def airbyte_catalog_to_dbt_sources_yml(
     source_name: str,
-    project_name: str = "fivetran-interop",
+    project_name: str = DEFAULT_PROJECT_NAME,
     *,
     catalog_file: str | None = None,
     output_file: str | None = None,
@@ -86,7 +71,7 @@ def airbyte_catalog_to_dbt_sources_yml(
 @click.argument(
     "project_name",
     type=str,
-    default="fivetran-interop",
+    default=DEFAULT_PROJECT_NAME,
 )
 def generate_dbt_project(
     source_name: str,
@@ -132,7 +117,7 @@ def generate_dbt_project(
         actual_output_dir = output_dir or resource_paths.get_generated_dir_root(source_name)
 
         # Get sources.yml path from generated directory
-        generated_sources_path = resource_paths.get_generated_sources_yml_path(
+        generated_sources_path = resource_paths.get_generated_source_yml_path(
             source_name,
             project_name,
         )
@@ -161,7 +146,7 @@ def generate_dbt_project(
         new_sources_path.parent.mkdir(parents=True, exist_ok=True)
         # Convert dict to YAML string before writing
         #
-        # new_sources_path.write_text(yaml.dump(sources_yml, default_flow_style=False, sort_keys=False)) # noqa: ERA001
+        # new_sources_path.write_text(yaml.dump(sources_yml, default_flow_style=False, sort_keys=False))
 
         # Copy sources.yml into the generated directory
         shutil.copy(generated_sources_path, new_sources_path)
@@ -198,7 +183,7 @@ def create_airbyte_catalog(
 @click.argument(
     "project_name",
     type=str,
-    default="fivetran-interop",
+    default=DEFAULT_PROJECT_NAME,
 )
 @click.option(
     "--config-file",
@@ -237,7 +222,7 @@ def create_airbyte_data(
     if not config_path.exists():
         raise ValueError(f"Error: Config file {config_file} does not exist")
 
-    config = yaml.safe_load(config_path.read_text())
+    config = text_utils.load_yaml_file(config_path)
     source_streams = config.get("source_streams", [])
     # target_tables will be used in future implementations
     _ = config.get("target_tables", [])
@@ -245,66 +230,6 @@ def create_airbyte_data(
     console.print(f"Syncing {source_name} data for streams: {', '.join(source_streams)}...")
     sync_source(source_name, source_streams, db_path)
     console.print(f"Synced {source_name} data to {db_path}")
-
-
-@main.command()
-@click.argument("source_name", type=str)
-@click.argument("project_name", type=str)
-@click.option(
-    "--output-dir",
-    help="Output directory for generated transform files (defaults to catalog/{source_name}/src/{project_name}/transforms)",
-)
-def generate_transform_scaffold(
-    source_name: str,
-    project_name: str,
-    output_dir: str | None = None,
-) -> None:
-    """Generate scaffold mapping YAML files for target tables.
-
-    This command generates blank mapping YAML files for any target tables
-    that are not yet defined. The generated files will include all fields
-    from the target schema but with MISSING expressions.
-
-    SOURCE_NAME: Name of the source (e.g., 'hubspot')
-    PROJECT_NAME: Name of the project (e.g., 'fivetran-interop')
-    """
-
-    # Set default paths if not provided
-    config_file = f"catalog/{source_name}/src/{project_name}/config.yml"
-    if not output_dir:
-        output_dir = f"catalog/{source_name}/src/{project_name}/transforms"
-
-    # Set path for local target schema file
-    requirements_dir = f"catalog/{source_name}/requirements/{project_name}"
-    Path(requirements_dir).mkdir(parents=True, exist_ok=True)
-
-    # Load config and target schema
-    config, target_tables = load_config(config_file)
-    if not config or not target_tables:
-        return
-
-    target_schema = get_target_schema(
-        source_name=source_name,
-        project_name=project_name,
-        config=config,
-    )
-    if not target_schema:
-        return
-
-    # Create output directory
-    output_path = Path(output_dir)
-    output_path.mkdir(parents=True, exist_ok=True)
-
-    # Process each target table
-    created_files = generate_mapping_files(
-        source_name,
-        project_name,
-        target_tables,
-        target_schema,
-        output_path,
-    )
-
-    report_results(created_files)
 
 
 def generate_lock_file(
@@ -333,16 +258,24 @@ def generate_lock_file(
     Path(requirements_dir).mkdir(parents=True, exist_ok=True)
 
     # Load config and target schema
-    config, target_tables = load_config(config_file)
-    if not config or not target_tables:
+    config = load_config(config_file)
+    if not config:
         console.print(f"Error: Could not load config from {config_file}", style="bold red")
         return
 
-    target_schema = get_target_schema(
+    download_target_schema(
         source_name=source_name,
         project_name=project_name,
         config=config,
+        if_not_exists=True,
     )
+    target_schema = text_utils.load_yaml_file(
+        resource_paths.get_dbt_sources_requirements_path(
+            source_name=source_name,
+            project_name=project_name,
+        ),
+    )
+
     if not target_schema:
         console.print("Error: Could not load target schema", style="bold red")
         return
@@ -352,7 +285,6 @@ def generate_lock_file(
         generate_lock_file_for_project(
             source_name=source_name,
             project_name=project_name,
-            config=config,
             mapping_dir=mapping_dir,
             target_schema=target_schema,
             output_path=lock_file,
@@ -363,7 +295,7 @@ def generate_lock_file(
 
 @main.command()
 @click.argument("source_name", type=str)
-@click.argument("project_name", type=str, default="fivetran-interop")
+@click.argument("project_name", type=str, default=DEFAULT_PROJECT_NAME)
 def lock(
     source_name: str,
     project_name: str,
@@ -386,8 +318,12 @@ def lock(
 # Project Auto-Generation
 @main.command()
 @click.argument("source_name", type=str)
-@click.option("--project-name", type=str, default="fivetran-interop")
-@click.option("--no-airbyte-catalog", is_flag=True)
+@click.option("--project-name", type=str, default=DEFAULT_PROJECT_NAME)
+@click.option(
+    "--no-airbyte-catalog",
+    is_flag=True,
+    default=True,  # TODO: Revert to False once we resolve the serpyco-rs issue
+)
 @click.option("--no-transforms", is_flag=True)
 @click.option("--no-dbt-project", is_flag=True)
 @click.option("--no-lock-file", is_flag=True)
@@ -401,10 +337,10 @@ def generate_project(
     no_lock_file: bool | None = None,
 ) -> None:
     """Generate a project scaffold for a new connector, or update an existing one."""
-    no_airbyte_catalog = _if_none(no_airbyte_catalog, False)
-    no_transforms = _if_none(no_transforms, False)
-    no_dbt_project = _if_none(no_dbt_project, False)
-    no_lock_file = _if_none(no_lock_file, False)
+    no_airbyte_catalog = if_none(no_airbyte_catalog, False)
+    no_transforms = if_none(no_transforms, False)
+    no_dbt_project = if_none(no_dbt_project, False)
+    no_lock_file = if_none(no_lock_file, False)
 
     # Validate input arguments
     if not source_name or not project_name:
@@ -420,7 +356,7 @@ def generate_project(
     # Generate transforms
     if not no_transforms:
         console.print(f"Generating transforms for {source_name}...")
-        generate_transform_scaffold.callback(source_name, project_name)
+        generate_transform_scaffold(source_name, project_name)
         console.print(f"Generated transforms for {source_name}")
 
     # Generate lock file
@@ -438,10 +374,10 @@ def generate_project(
 
 @main.command()
 @click.argument("source_name")
-@click.argument("project_name", default="fivetran-interop")
+@click.argument("project_name", default=DEFAULT_PROJECT_NAME)
 def eval_project_mappings(
     source_name: str,
-    project_name: str = "fivetran-interop",
+    project_name: str = DEFAULT_PROJECT_NAME,
 ) -> None:
     """Evaluate confidence of all mapping files in a project.
 
@@ -467,14 +403,14 @@ def eval_project_mappings(
         console.print(f"\n[bold]Evaluating {yaml_file}[/bold]\n")
 
         # Read mapping file
-        mapping_data = yaml.safe_load(yaml_file.read_text())
+        mapping_data = text_utils.load_yaml_file(yaml_file)
 
         # Extract fields from dbt transform format
-        fields: list[FieldMapping] = []
+        fields: list[models.FieldMapping] = []
         for transform in mapping_data.get("transforms", []):
             for field_name, field_data in transform.get("fields", {}).items():
                 fields.append(
-                    FieldMapping(
+                    models.FieldMapping(
                         name=field_name,
                         expression=field_data.get("expression", ""),
                         description=field_data.get("description", ""),
@@ -489,7 +425,7 @@ def eval_project_mappings(
         table_mapping_eval = get_table_mapping_eval(fields)
 
         # Print analysis
-        print_table_mapping_analysis(
+        models.print_table_mapping_analysis(
             table_mapping_eval=table_mapping_eval,
             fields=fields,
             title=f"Mapping Confidence Analysis - {yaml_file.name}",
@@ -498,7 +434,7 @@ def eval_project_mappings(
 
 @main.command()
 @click.argument("source_name")
-@click.argument("project_name", default="fivetran-interop")
+@click.argument("project_name", default=DEFAULT_PROJECT_NAME)
 @click.option("--target-table", type=str, help="Name of the target table to suggest mappings for")
 @click.option(
     "--source-table",
@@ -509,7 +445,7 @@ def eval_project_mappings(
 @click.option("--auto-confirm", is_flag=True, help="Automatically confirm mappings")
 def suggest_table_mappings(
     source_name: str,
-    project_name: str = "fivetran-interop",
+    project_name: str = DEFAULT_PROJECT_NAME,
     *,
     target_table: str,
     source_table: str | None = None,
@@ -521,103 +457,114 @@ def suggest_table_mappings(
     PROJECT_NAME is the name of the project (defaults to fivetran-interop)
     TARGET_TABLE is the name of the target table to suggest mappings for
     """
-    auto_confirm = _if_none(auto_confirm, False)
-
-    if not target_table:
-        console.print("Error: --target-table is required", style="bold red")
-        return
-
-    # Find the YAML file
-    yaml_file = resource_paths.get_transform_file(
+    map.infer_table_mappings(
         source_name,
-        project_name=project_name,
+        project_name,
         transform_name=target_table,
+        source_table=source_table,
+        auto_confirm=auto_confirm,
     )
 
-    if not yaml_file.exists():
-        console.print(f"[yellow]No YAML file found for target table {target_table}[/yellow]")
-        return
 
-    # Extract fields from dbt transform format
-    current_mapping = TableMapping.read_from_transform_file(yaml_file)
-    print(current_mapping)
-
-    # Get all source schemas
-    dbt_source_file_path = resource_paths.get_generated_sources_yml_path(
+@main.command()
+@click.argument("source_name")
+@click.argument("project_name", default=DEFAULT_PROJECT_NAME)
+@click.option("--auto-confirm", is_flag=True, help="Automatically confirm mappings")
+@click.option(
+    "--include-skipped-tables",
+    is_flag=True,
+    help="Include skipped tables in the generation",
+    type=bool,
+    default=False,
+)
+def generate_missing_mappings(
+    source_name: str,
+    project_name: str = DEFAULT_PROJECT_NAME,
+    *,
+    auto_confirm: bool | None = None,
+    include_skipped_tables: bool = False,
+) -> None:
+    """Generate missing mappings for a project."""
+    requirements_dbt_source_file = resource_paths.get_dbt_sources_requirements_path(
         source_name=source_name,
         project_name=project_name,
     )
-    if not dbt_source_file_path.exists():
-        generate_dbt_sources_yml_from_airbyte_catalog(
-            source_name=source_name,
-            project_name=project_name,
-        )
-
-    if not dbt_source_file_path.exists():
-        console.print(
-            f"[red]Error: Could not generate dbt sources.yml file at {dbt_source_file_path}[/red]",
-        )
+    if not requirements_dbt_source_file.exists():
+        console.print(f"Error: {requirements_dbt_source_file} does not exist", style="bold red")
         return
 
-    if not source_table:
-        # We need the AI to suggest a source table
-
-        target_table_schemas = models.SourceTableSummary.from_dbt_source_file(
-            resource_paths.get_requirements_dir(
-                source_name=source_name,
-                project_name=project_name,
+    console.print(
+        f"Reading target tables list from '{requirements_dbt_source_file}' dbt source file...",
+        style="green",
+    )
+    dbt_requirements_file: models.DbtSourceFile = models.DbtSourceFile.from_file(
+        requirements_dbt_source_file,
+    )
+    config_file_content = text_utils.load_yaml_file(
+        resource_paths.get_config_file_path(
+            source_name=source_name,
+            project_name=project_name,
+        ),
+    )
+    target_tables: list[str] = []
+    skipped_tables: list[str] = config_file_content.get("target_tables_skipped", [])
+    for target_table in dbt_requirements_file.source_tables:
+        console.print(f"Evaluating '{target_table.name}'...")
+        include_table = True
+        transform_file = resource_paths.get_transform_file(
+            source_name=source_name,
+            project_name=project_name,
+            transform_name=target_table.name,
+        )
+        if transform_file.exists():
+            include_table = False
+            console.print(
+                f"Skipping '{target_table.name}' because it already has mappings.",
+                style="yellow",
             )
-            / "src_facebook_ads.yml",  # TODO: Make this dynamic
-        )
-        target_table_schema = next(
-            (t for t in target_table_schemas if t.name == target_table),
-            None,
-        )
-        if not target_table_schema:
-            console.print(f"[red]Error: Could not find target table {target_table}[/red]")
-            return
 
-        source_tables: list[models.SourceTableSummary] = (
-            models.SourceTableSummary.from_dbt_source_file(
-                dbt_source_file_path,
+        if include_table and transform_file in skipped_tables:
+            include_table = False
+            console.print(
+                f"Skipping '{target_table.name}' because it was found in the skipped tables list.",
+                style="yellow",
             )
-        )
 
-        suggested_source_table = get_best_match_source_stream_name(
-            target_schema=target_table,
-            source_tables=source_tables,
-        )
-        source_table = suggested_source_table.suggested_source_table_name
+        if include_table:
+            console.print(
+                f"Found '{target_table.name}' target table with missing mappings ...",
+                style="green",
+            )
+            target_tables.append(target_table.name)
 
-    # Ask user to confirm mapping
-    confirm_mapping = "y"
-    if not auto_confirm:
-        confirm_mapping = input(
-            f"The table is currently mapped to `{current_mapping.source_stream_name}`. "
-            f"Do you want to apply the proposed mapping to use `{source_table}` instead? "
-            "All existing mappings will be reset to `MISSING` and a new set of mappings will be generated. "
-            "Continue? (y/n)",
-        )
+    if not target_tables:
+        console.print("All tables are up to date. Exiting.", style="bold green")
+        return
 
-    if confirm_mapping == "y":
-        print("Mapping confirmed.")
-        # Apply mapping
-        # Update transform file
-        change_mapping_source_table(
+    console.print(
+        f"Generating missing mappings for {len(target_tables)} tables: {', '.join(target_tables)}...",
+    )
+
+    for target_table in target_tables:
+        if not include_skipped_tables and (
+            target_table
+            in map.get_skipped_target_tables(
+                source_name,
+                project_name,
+            )
+        ):
+            console.print(
+                f"Skipping '{target_table}' because it was found in the skipped tables list.",
+            )
+            continue
+
+        console.print(f"Generating missing mappings for '{target_table}'...")
+        map.infer_table_mappings(
             source_name=source_name,
             project_name=project_name,
             transform_name=target_table,
-            new_source_table=source_table,
+            auto_confirm=auto_confirm,
         )
-        populate_missing_mappings(
-            source_name=source_name,
-            project_name=project_name,
-            transform_name=target_table,
-        )
-        # Update lock file
-        # Update dbt project
-    else:
-        print("Mapping rejected.")
 
 
 if __name__ == "__main__":
