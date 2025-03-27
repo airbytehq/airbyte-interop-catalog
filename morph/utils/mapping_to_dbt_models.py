@@ -4,6 +4,7 @@ Code to convert mapping files to dbt models.
 This module provides functionality to generate dbt models from mapping files.
 The generated models will be placed in the 'generated' folder of the catalog.
 """
+
 from pathlib import Path
 from typing import Any
 

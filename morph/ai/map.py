@@ -15,7 +15,6 @@ console = Console()
 MAX_SOURCE_TABLE_PER_MAPPING_INFERENCE = 5
 
 
-
 def change_mapping_source_table(
     source_name: str,
     project_name: str,
@@ -225,7 +224,7 @@ def infer_table_mappings(  # noqa: PLR0912 (too many branches)
         current_mapping_source_stream_name = constants.MISSING
     else:
         current_mapping_source_stream_name = models.TableMapping.read_from_transform_file(
-            yaml_file
+            yaml_file,
         ).source_stream_name
 
     # Get all source schemas

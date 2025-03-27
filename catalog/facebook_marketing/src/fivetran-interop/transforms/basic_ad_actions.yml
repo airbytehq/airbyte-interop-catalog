@@ -6,19 +6,22 @@ transforms:
     fields:
       _1_d_view:
         expression: ads_insights.actions
-        description: Conversion metric value using an attribution window of "1 day
+        description:
+          Conversion metric value using an attribution window of "1 day
           after viewing the ad". Not included in downstream models by default, but
           can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics`
           var.
       _7_d_click:
         expression: ads_insights.actions
-        description: Conversion metric value using an attribution window of "7 days
+        description:
+          Conversion metric value using an attribution window of "7 days
           after clicking the ad". Not included in downstream models by default, but
           can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics`
           var.
       _28_d_click:
         expression: ads_insights.actions
-        description: Conversion metric value using an attribution window of "28 days
+        description:
+          Conversion metric value using an attribution window of "28 days
           after clicking the ad". Deprecated by Facebook due to digital privacy initiatives.
           Not included in downstream models by default, but can be added using the
           `facebook_ads__basic_ad_actions_passthrough_metrics` var.
@@ -30,7 +33,8 @@ transforms:
         description: "{{ doc('_fivetran_synced') }}"
       action_type:
         expression: ads_insights.action_values
-        description: "The kind of actions taken on your ad, Page, app or event after
+        description:
+          "The kind of actions taken on your ad, Page, app or event after
           your ad was served to someone, even if they didn't click on it. Action types
           include Page likes, app installs, conversions, event responses and more.
           Actions prepended by app_custom_event come from mobile app events and actions
@@ -43,11 +47,13 @@ transforms:
         description: The date of the reported performance.
       index:
         expression: ads_insights.converted_product_value
-        description: Index reflecting the `action_type` tracked for this ad on this
+        description:
+          Index reflecting the `action_type` tracked for this ad on this
           day. Column of not much consequence.
       inline:
         expression: ads_insights.inline_link_clicks
-        description: Conversion metric value using the attribution window that occurs
+        description:
+          Conversion metric value using the attribution window that occurs
           on the ad itself. Not included in downstream models by default, but can
           be added using the `facebook_ads__basic_ad_actions_passthrough_metrics`
           var.

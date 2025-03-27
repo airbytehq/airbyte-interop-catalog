@@ -519,7 +519,8 @@ def generate_missing_mappings(
         if transform_file.exists():
             include_table = False
             console.print(
-                f"Skipping '{target_table.name}' because it already has mappings.", style="yellow"
+                f"Skipping '{target_table.name}' because it already has mappings.",
+                style="yellow",
             )
 
         if include_table and transform_file in skipped_tables:
@@ -535,7 +536,6 @@ def generate_missing_mappings(
                 style="green",
             )
             target_tables.append(target_table.name)
-
 
     if not target_tables:
         console.print("All tables are up to date. Exiting.", style="bold green")

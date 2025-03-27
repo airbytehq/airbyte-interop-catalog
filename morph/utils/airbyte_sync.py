@@ -22,6 +22,7 @@ def get_duckdb_cache(db_path: str, source_name: str) -> "ab.DuckDBCache":
         A DuckDB cache instance
     """
     import airbyte as ab
+
     return ab.DuckDBCache(
         db_path=db_path,
         schema_name=f"{source_name}_raw",
