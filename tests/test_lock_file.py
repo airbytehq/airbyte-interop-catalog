@@ -232,7 +232,6 @@ def test_generate_lock_file():
         generate_lock_file_for_project(
             source_name="test",
             project_name="test",
-            config=config,
             mapping_dir=mapping_dir,
             target_schema=target_schema,
             output_path=lock_file,
