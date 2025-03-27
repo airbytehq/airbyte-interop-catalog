@@ -6,7 +6,8 @@ from pathlib import Path
 import click
 from rich.console import Console
 
-from morph.ai import map, models
+from morph import models
+from morph.ai import map
 from morph.ai.eval import get_table_mapping_eval
 from morph.constants import DEFAULT_PROJECT_NAME
 from morph.utils import resource_paths, text_utils

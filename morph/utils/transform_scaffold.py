@@ -11,7 +11,7 @@ from typing import Any
 import requests
 from rich.console import Console
 
-from morph.ai import models
+from morph import models
 from morph.constants import HEADER_COMMENT
 from morph.utils import resource_paths, text_utils
 
