@@ -4,10 +4,10 @@ Code to convert mapping files to dbt models.
 This module provides functionality to generate dbt models from mapping files.
 The generated models will be placed in the 'generated' folder of the catalog.
 """
-
 from pathlib import Path
 from typing import Any
 
+from copier import run_copy
 from jinja2 import Environment
 
 from morph.constants import DEFAULT_PROJECT_NAME
@@ -150,7 +150,6 @@ def generate_dbt_package(
     project_name: str = DEFAULT_PROJECT_NAME,
     output_dir: str | None = None,
     mapping_dir: str | None = None,
-    force_replace: bool = False,
 ) -> None:
     """Generate a dbt package from mapping files.
 
@@ -159,8 +158,6 @@ def generate_dbt_package(
         output_dir: Path to the output directory.
         mapping_dir: Path to the mapping directory.
     """
-    from copier import run_copy, run_update
-
     output_dir = output_dir or resource_paths.get_generated_dir_root(source_name)
     mapping_dir = mapping_dir or resource_paths.get_transforms_dir(source_name, project_name)
 
@@ -197,20 +194,12 @@ def generate_dbt_package(
         "models": generated_models,
     }
 
-    if force_replace or not output_path.exists():
-        # Run copier to generate the project scaffolding
-        run_copy(
-            src_path=str(template_dir),
-            dst_path=str(output_path),
-            data=template_data,
-        )
-    else:
-        # Run copier to update the project scaffolding
-        run_update(
-            src_path=str(template_dir),
-            dst_path=str(output_path),
-            data=template_data,
-        )
+    # Run copier to generate the project scaffolding
+    run_copy(
+        src_path=str(template_dir),
+        dst_path=str(output_path),
+        data=template_data,
+    )
 
     # Now generate the SQL models
     models_dir = output_path / "dbt_project" / "models"

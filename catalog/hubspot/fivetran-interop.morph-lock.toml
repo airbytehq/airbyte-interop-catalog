@@ -1,7 +1,7 @@
 [project]
 source_name = "hubspot"
 project_name = "fivetran-interop"
-generated_at = "2025-03-27T08:02:21Z"
+generated_at = "2025-03-27T22:30:22Z"
 requirements_file = "catalog/hubspot/requirements/fivetran-interop/src_dbt_requirements.yml"
 requirements_file_hash = "5b432bf8082036e0a36457e3b5ce7e6450a2492634d212a22718ad50510352a9"
 airbyte_source_file = "catalog/hubspot/generated/src_airbyte_hubspot.yml"
@@ -322,7 +322,7 @@ contacts = [
 
 [mappings.contact_form_submission]
 source_file = "contact_form_submission.yml"
-source_file_hash = "f821f6906e4b148d4545444b40231f6f107e87f2c358c8e37f192c9a80f4cedf"
+source_file_hash = "caaab2433f3915582f87c9c3f1d26bb07693fc1589ec0fbe827d7a2217e10461"
 unmapped_target_fields = []
 omitted_target_fields = []
 
@@ -340,7 +340,7 @@ title = "contacts_form_submissions.title"
 
 [mappings.contact_list]
 source_file = "contact_list.yml"
-source_file_hash = "14aaa1b43a336869205b36ad217aca4731689e76799926e25ea6ba67ec63b444"
+source_file_hash = "bc6eda02af887ef5b0d207c6d7e48ed8a802bca9868e6beabcbe4fca4a0179ab"
 unmapped_target_fields = [
     "created_by_id",
     "filters_updated_at",
@@ -386,7 +386,7 @@ contact_list_id = "contacts_list_memberships.static-list-id"
 
 [mappings.contact_merge_audit]
 source_file = "contact_merge_audit.yml"
-source_file_hash = "fe4aa3d98974d3276307af645e9ab8c804adc12de4e2687477b9983265990e97"
+source_file_hash = "4178107e1568a45a325b8b5214822bb9c550d4428926145de49252dda23f3cf0"
 unmapped_target_fields = [
     "contact_id",
 ]
@@ -460,7 +460,7 @@ deals = [
 
 [mappings.deal_pipeline]
 source_file = "deal_pipeline.yml"
-source_file_hash = "59aa9e5ad2759bf81b9b271200ac2b31c7521351a045fe3833f16f0109719537"
+source_file_hash = "3d0532b10b8403a917013a54247a300cb15ed37e10401808f7169e09bedbab9b"
 unmapped_target_fields = [
     "_fivetran_deleted",
     "_fivetran_synced",
@@ -496,7 +496,7 @@ value = "deals_property_history.value"
 
 [mappings.email_event]
 source_file = "email_event.yml"
-source_file_hash = "aa1f0b6e0fe2d6025586313dea8eea3269dfa8ae637527b758ee845dede76a20"
+source_file_hash = "60e966bdb94132eb6ef7f2efe5e6509c4b85752eaf5e6a94744ceb35c3de436c"
 unmapped_target_fields = [
     "caused_by_id",
     "obsoleted_by_id",
@@ -522,7 +522,7 @@ type = "email_events.type"
 
 [mappings.email_event_delivered]
 source_file = "email_event_delivered.yml"
-source_file_hash = "a2260e3bfa67d31cd5628ec7dd2d8907f12481d0e469735c45cedce9939adf1b"
+source_file_hash = "0f76f9790884df390fda76d7269c13d62d09f4d769f8fde8249c667d3dc41997"
 unmapped_target_fields = []
 omitted_target_fields = []
 
@@ -536,7 +536,7 @@ smtp_id = "email_events.smtpId"
 
 [mappings.email_event_print]
 source_file = "email_event_print.yml"
-source_file_hash = "656e99ea77c0f438a9bab72d716520bc6964852ac073d1faa41869871dfc08f4"
+source_file_hash = "49263dd24044d726793832c35946497a166762b8694850aef91bbd1ed8c6b40b"
 unmapped_target_fields = []
 omitted_target_fields = []
 
@@ -568,7 +568,7 @@ portal_id = "email_subscriptions.portalId"
 
 [mappings.email_subscription_change]
 source_file = "email_subscription_change.yml"
-source_file_hash = "4c0e3c6ea9ac04edd2024457726978a96d081a0d3d5058e8d688083d1734c205"
+source_file_hash = "9a06ce4572ce83e1d38ea22a81b97b32f4d02a645aa6d5f16497c698c9091ccb"
 unmapped_target_fields = []
 omitted_target_fields = []
 
@@ -587,7 +587,7 @@ timestamp = "subscription_changes.timestamp"
 
 [mappings.engagement]
 source_file = "engagement.yml"
-source_file_hash = "2bcbc5e85fb96ebeb6e3246fd1fcb4579aace02a667e77352f18833b025474a8"
+source_file_hash = "c1e5ae11a73f5a37d47b801ab163e37daafdf0823c78f072c27de0f39a53f144"
 unmapped_target_fields = []
 omitted_target_fields = []
 
@@ -605,7 +605,7 @@ type = "engagements.type"
 
 [mappings.engagement_call]
 source_file = "engagement_call.yml"
-source_file_hash = "221993e74a532b526fcac12f50ea03eaf3a610f5626dfb41dc0e373c090e8e42"
+source_file_hash = "fbeb6fdc9040a86077733f7dd95dc009106868440fb08f7e6a66c2e28e436e76"
 unmapped_target_fields = []
 omitted_target_fields = []
 
@@ -622,7 +622,7 @@ property_hubspot_team_id = "engagements_calls.properties_hubspot_team_id"
 
 [mappings.engagement_company]
 source_file = "engagement_company.yml"
-source_file_hash = "ce991eeda52250507ef151ebeef3c9076122d2546ea797e7dfcc6eabce0b301f"
+source_file_hash = "542f42201f366e865b70b5baf8a819a796910ca4de046722412f1d514f598fbe"
 unmapped_target_fields = []
 omitted_target_fields = []
 
@@ -636,7 +636,7 @@ category = "engagements.type"
 
 [mappings.engagement_email]
 source_file = "engagement_email.yml"
-source_file_hash = "697793211ee29938e3338cd8b13eebb3231dd11deb27457053027a7528e637e5"
+source_file_hash = "9c3c1722dd1046b972834a2d9f2d07e258573d9ab4a16f285b4898e40f259917"
 unmapped_target_fields = []
 omitted_target_fields = []
 
@@ -652,7 +652,7 @@ property_hubspot_team_id = "engagements_emails.properties_hubspot_team_id"
 
 [mappings.engagement_meeting]
 source_file = "engagement_meeting.yml"
-source_file_hash = "2817f0bda26d4811f1aa1bce2b06d0237b1dabffff1df426d74cd56789fda87e"
+source_file_hash = "d551cc3a20098056f41ed5aef90573387179f0e8e1a4cf9a41d6df395cf9a919"
 unmapped_target_fields = []
 omitted_target_fields = []
 
@@ -668,7 +668,7 @@ property_hubspot_team_id = "engagements_meetings.properties_hubspot_team_id"
 
 [mappings.engagement_note]
 source_file = "engagement_note.yml"
-source_file_hash = "c8053526fe55b2ac1b0c69097ba1e0f7fca211f7ae099d2edcd7e8995b95a34d"
+source_file_hash = "8e7ba622a4f65eb290a64e0611c3025d0379079269a20a130ec460f0e49234b7"
 unmapped_target_fields = []
 omitted_target_fields = []
 
@@ -685,7 +685,7 @@ property_hubspot_team_id = "engagements_notes.properties_hubspot_team_id"
 
 [mappings.engagement_task]
 source_file = "engagement_task.yml"
-source_file_hash = "5cec2779e41bd158a5b6730bf22d8da1473ba216d72427be19778a1040d1998c"
+source_file_hash = "66d033af507da21b8d73ed2de452d7e2e1c48d53c5d727cc8a7617bf7a00c13d"
 unmapped_target_fields = []
 omitted_target_fields = []
 
@@ -977,7 +977,7 @@ tickets = [
 
 [mappings.ticket_contact]
 source_file = "ticket_contact.yml"
-source_file_hash = "a4e13391f0f76acbd0bdf81656225c33147d801d297c28daeab854433569f84c"
+source_file_hash = "a7415f92f9e787e7f154640eef4038de627103f908e37e89d4944ce962413d2f"
 unmapped_target_fields = []
 omitted_target_fields = []
 
@@ -991,7 +991,7 @@ category = "tickets.properties_hs_ticket_category"
 
 [mappings.ticket_engagement]
 source_file = "ticket_engagement.yml"
-source_file_hash = "7ef576338754cbf4dd4a5c5570cec0b55ad11d82a2b4d40f9aa9312e98a3f21a"
+source_file_hash = "0d2bd850cdeac616cbdd11c87a9eddd0b4be91d8eb1fb068ec56e9d3961fb491"
 unmapped_target_fields = []
 omitted_target_fields = []
 
@@ -1005,7 +1005,7 @@ category = "engagements.metadata_forObjectType"
 
 [mappings.ticket_pipeline]
 source_file = "ticket_pipeline.yml"
-source_file_hash = "0b7eeef654756cda364c4cc9067d99f6784c891e5b332f174457faa63a835f4b"
+source_file_hash = "c59b703adf506806d59fa933a20c880425d59fad7e24f0a0bb1b937494bc6a61"
 unmapped_target_fields = [
     "_fivetran_deleted",
     "_fivetran_synced",
