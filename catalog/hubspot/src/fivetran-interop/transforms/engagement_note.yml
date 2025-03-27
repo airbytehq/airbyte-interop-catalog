@@ -1,0 +1,52 @@
+domain: hubspot.fivetran-interop
+transforms:
+  - name: engagement_note
+    from:
+      - engagements_notes: hubspot.engagements_notes
+    fields:
+      _fivetran_synced:
+        expression: engagements_notes._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      body:
+        expression: engagements_notes.properties_hs_note_body
+        description: The body of the note. The body has a limit of 65536 characters.
+      engagement_id:
+        expression: engagements_notes.id
+        description: The ID of the engagement.
+      property_hs_createdate:
+        expression: engagements_notes.properties_hs_createdate
+        description:
+          "This field marks the note's time of creation and determines where\
+          \ the note sits on the record timeline. You can use either a Unix timestamp\
+          \ in milliseconds or UTC format. \nPLEASE NOTE: This field will only be populated\
+          \ for connectors utilizing the HubSpot v3 API version. For the pre HubSpot\
+          \ v3 versions, this value may be found within the parent `engagement` table.\n"
+      timestamp:
+        expression: engagements_notes.properties_hs_timestamp
+        description:
+          "This field marks the note's time of occurrence and determines\
+          \ where the note sits on the record timeline. You can use either a Unix timestamp\
+          \ in milliseconds or UTC format. \nPLEASE NOTE: This field will only be populated\
+          \ for connectors utilizing the HubSpot v3 API version. For the pre HubSpot\
+          \ v3 versions, this value may be found within the parent `engagement` table.\n"
+      property_hubspot_owner_id:
+        expression: engagements_notes.properties_hubspot_owner_id
+        description:
+          "The ID of the owner associated with the note. This field determines
+          the user listed as the note creator on the record timeline.
+
+          PLEASE NOTE: This field will only be populated for connectors utilizing the
+          HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be
+          found within the parent `engagement` table.
+
+          "
+      property_hubspot_team_id:
+        expression: engagements_notes.properties_hubspot_team_id
+        description:
+          "The ID of the team associated with the note. This field determines
+          the team listed as the note creator on the record timeline.
+
+          PLEASE NOTE: This field will only be populated for connectors utilizing the
+          HubSpot v3 API version.
+
+          "

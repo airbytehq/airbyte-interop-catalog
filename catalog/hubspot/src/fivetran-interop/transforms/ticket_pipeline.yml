@@ -1,0 +1,37 @@
+domain: hubspot.fivetran-interop
+transforms:
+  - name: ticket_pipeline
+    from:
+      - ticket_pipelines: hubspot.ticket_pipelines
+    fields:
+      _fivetran_deleted:
+        expression: MISSING
+        description: '{{ doc("_fivetran_deleted") }}'
+      _fivetran_synced:
+        expression: MISSING
+        description: '{{ doc("_fivetran_synced") }}'
+      active:
+        expression: MISSING
+        description: Boolean indicating whether the pipeline is active.
+      display_order:
+        expression: MISSING
+        description:
+          Used to determine the order in which the stages appear when viewed
+          in HubSpot.
+      label:
+        expression: MISSING
+        description:
+          The human-readable label for the stage. The label is used when
+          showing the stage in HubSpot.
+      object_type_id:
+        expression: MISSING
+        description: Reference to the object type.
+      pipeline_id:
+        expression: MISSING
+        description: Reference to the pipeline.
+      created_at:
+        expression: MISSING
+        description: A timestamp representing when the record was created.
+      updated_at:
+        expression: MISSING
+        description: A timestamp representing when the record was updated.

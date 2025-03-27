@@ -8,17 +8,15 @@ The generated models will be placed in the 'generated' folder of the catalog.
 from pathlib import Path
 from typing import Any
 
-import yaml
 from jinja2 import Environment
 
-from morph.utils import resource_paths
-
-DEFAULT_PROJECT_NAME = "fivetran-interop"
+from morph.constants import DEFAULT_PROJECT_NAME
+from morph.utils import resource_paths, text_utils
 
 
 def load_mapping_file(mapping_file_path: str) -> dict[str, Any]:
     """Load a mapping file and return its contents as a dictionary."""
-    return yaml.safe_load(Path(mapping_file_path).read_text())
+    return text_utils.load_yaml_file(Path(mapping_file_path))
 
 
 def _extract_transform(mapping: dict[str, Any], transform_id: str) -> dict[str, Any]:

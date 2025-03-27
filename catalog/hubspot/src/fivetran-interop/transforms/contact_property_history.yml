@@ -1,0 +1,27 @@
+domain: hubspot.fivetran-interop
+transforms:
+  - name: contact_property_history
+    from:
+      - contacts_property_history: hubspot.contacts_property_history
+    fields:
+      _fivetran_synced:
+        expression: contacts_property_history._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      contact_id:
+        expression: contacts_property_history.vid
+        description: The ID of the related contact record.
+      name:
+        expression: contacts_property_history.source-label
+        description: '{{ doc("history_name") }}'
+      source:
+        expression: contacts_property_history.source-type
+        description: '{{ doc("history_source") }}'
+      source_id:
+        expression: contacts_property_history.source-id
+        description: '{{ doc("history_source_id") }}'
+      timestamp:
+        expression: contacts_property_history.timestamp
+        description: '{{ doc("history_timestamp") }}'
+      value:
+        expression: contacts_property_history.value
+        description: '{{ doc("history_value") }}'

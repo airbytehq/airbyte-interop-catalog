@@ -11,10 +11,9 @@ from pathlib import Path
 from typing import Any
 
 import tomli_w as toml_writer
-import yaml
 from rich.console import Console
 
-from morph.utils import resource_paths
+from morph.utils import resource_paths, text_utils
 
 console = Console()
 
@@ -206,7 +205,7 @@ def extract_source_streams(source_name: str) -> list[str]:
         return []
 
     try:
-        source_schema = yaml.safe_load(source_schema_path.read_text())
+        source_schema = text_utils.load_yaml_file(source_schema_path)
         streams = []
         for source in source_schema.get("sources", []):
             for table in source.get("tables", []):
@@ -242,7 +241,7 @@ def extract_target_tables(source_name: str, project_name: str) -> list[str]:
         return []
 
     try:
-        requirements = yaml.safe_load(requirements_path.read_text())
+        requirements = text_utils.load_yaml_file(requirements_path)
         tables = []
         for source in requirements.get("sources", []):
             for table in source.get("tables", []):
@@ -304,7 +303,6 @@ def validate_field_mappings(
 def generate_lock_file_for_project(
     source_name: str,
     project_name: str,
-    config: dict[str, Any],
     mapping_dir: Path,
     target_schema: dict[str, Any],
     output_path: Path,
@@ -327,13 +325,13 @@ def generate_lock_file_for_project(
     target_tables = extract_target_tables(source_name, project_name)
 
     # Fallback to config if extraction failed
-    if not source_streams:
-        console.print("Warning: Falling back to config file for source streams", style="yellow")
-        source_streams = config.get("source_streams", [])
+    # if not source_streams:
+    #     console.print("Warning: Falling back to config file for source streams", style="yellow")
+    #     source_streams = config.get("source_streams", [])
 
-    if not target_tables:
-        console.print("Warning: Falling back to config file for target tables", style="yellow")
-        target_tables = config.get("target_tables", [])
+    # if not target_tables:
+    #     console.print("Warning: Falling back to config file for target tables", style="yellow")
+    #     target_tables = config.get("target_tables", [])
 
     # Load all mapping files
     mapping_files = []
@@ -341,8 +339,7 @@ def generate_lock_file_for_project(
 
     for yaml_file in list(mapping_dir.glob("**/*.yml")) + list(mapping_dir.glob("**/*.yaml")):
         # Use pathlib to read file content
-        content = Path(yaml_file).read_text()
-        mapping = yaml.safe_load(content)
+        mapping = text_utils.load_yaml_file(yaml_file)
         mapping_files.append(mapping)
 
         # Process each transform
@@ -417,7 +414,7 @@ def generate_lock_file_for_project(
         project_name=project_name,
     )
 
-    airbyte_source_file = resource_paths.get_generated_sources_yml_path(
+    airbyte_source_file = resource_paths.get_generated_source_yml_path(
         source_name=source_name,
         project_name=project_name,
     )

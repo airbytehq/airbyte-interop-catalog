@@ -1,0 +1,98 @@
+domain: hubspot.fivetran-interop
+transforms:
+  - name: contact_list
+    from:
+      - contact_lists: hubspot.contact_lists
+    fields:
+      _fivetran_deleted:
+        expression: contact_lists._airbyte_raw_id
+        description: '{{ doc("_fivetran_deleted") }}'
+      _fivetran_synced:
+        expression: contact_lists._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      created_at:
+        expression: contact_lists.createdAt
+        description: A timestamp of the time the list was created.
+      id:
+        expression: MISSING
+        description: The ID of the contact list.
+      name:
+        expression: contact_lists.name
+        description: The name of the contact list.
+      updated_at:
+        expression: contact_lists.updatedAt
+        description: A timestamp of the time that the list was last modified.
+      created_by_id:
+        expression: MISSING
+        description: The unique identifier of the user who created the contact list.
+      object_type_id:
+        expression: MISSING
+        description: The ID that corresponds to the type of object stored by the list.
+      processing_status:
+        expression: MISSING
+        description:
+          Indicates the current status of the list's processing, such as
+          'COMPLETE', 'PROCESSING', 'DONE', or 'FAILED'.
+      processing_type:
+        expression: MISSING
+        description:
+          Specifies the type of processing applied to the list, for example,
+          'STATIC' for static lists or 'DYNAMIC' for dynamic lists.
+      list_version:
+        expression: MISSING
+        description:
+          Represents the version number of the list, incrementing with
+          each modification.
+      filters_updated_at:
+        expression: MISSING
+        description: The timestamp indicating when the list's filters were last updated.
+      metadata_error:
+        expression: contact_lists.metaData_error
+        description:
+          "Any errors that happened the last time the list was processed.\n
+          NOTE: This field is deprecated and will not be populated for connectors
+          utilizing the HubSpot v3 API. This field will be removed in a future release.\n"
+      metadata_last_processing_state_change_at:
+        expression: contact_lists.metaData_lastProcessingStateChangeAt
+        description:
+          "A timestamp of the last time that the processing state changed.\n
+          NOTE: This field is deprecated and will not be populated for connectors
+          utilizing the HubSpot v3 API. This field will be removed in a future release.\n"
+      metadata_last_size_change_at:
+        expression: contact_lists.metaData_lastSizeChangeAt
+        description:
+          "A timestamp of the last time that the size of the list changed.\n
+          NOTE: This field is deprecated and will not be populated for connectors
+          utilizing the HubSpot v3 API. This field will be removed in a future release.\n"
+      metadata_processing:
+        expression: contact_lists.metaData_processing
+        description:
+          "One of DONE, REFRESHING, INITIALIZING, or PROCESSING. DONE indicates
+          the list has finished processing, any other value indicates that list membership
+          is being evaluated.\nNOTE: This field is deprecated and will not be populated
+          for connectors utilizing the HubSpot v3 API. This field will be removed
+          in a future release.\n"
+      metadata_size:
+        expression: contact_lists.metaData_size
+        description:
+          "The approximate number of contacts in the list.\nNOTE: This
+          field is deprecated and will not be populated for connectors utilizing the
+          HubSpot v3 API. This field will be removed in a future release.\n"
+      portal_id:
+        expression: contact_lists.portalId
+        description:
+          "'{{ doc(\"portal_id\") }}'\nNOTE: This field is deprecated and
+          will not be populated for connectors utilizing the HubSpot v3 API. This
+          field will be removed in a future release.\n"
+      deleteable:
+        expression: contact_lists.deleteable
+        description:
+          "If this is false, this is a system list and cannot be deleted.\n
+          NOTE: This field is deprecated and will not be populated for connectors
+          utilizing the HubSpot v3 API. This field will be removed in a future release.\n"
+      dynamic:
+        expression: contact_lists.dynamic
+        description:
+          "Whether the contact list is dynamic.\nNOTE: This field is deprecated
+          and will not be populated for connectors utilizing the HubSpot v3 API. This
+          field will be removed in a future release.\n"

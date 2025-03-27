@@ -1,9 +1,9 @@
 [project]
 source_name = "hubspot"
 project_name = "fivetran-interop"
-generated_at = "2025-03-27T00:39:15Z"
+generated_at = "2025-03-27T08:02:21Z"
 requirements_file = "catalog/hubspot/requirements/fivetran-interop/src_dbt_requirements.yml"
-requirements_file_hash = "7aa6fd95a34bace84cd8b3db61aa1003614a40852b35abf918f5646b7202777b"
+requirements_file_hash = "5b432bf8082036e0a36457e3b5ce7e6450a2492634d212a22718ad50510352a9"
 airbyte_source_file = "catalog/hubspot/generated/src_airbyte_hubspot.yml"
 airbyte_source_file_hash = "b0e1470f7c99fc948ab2de59d7f76f35c84f3d4191a71ea3f0fcae54e60181d1"
 
@@ -12,31 +12,15 @@ unused_source_streams = [
     "campaigns",
     "cars",
     "cars_web_analytics",
-    "companies_property_history",
     "companies_web_analytics",
-    "contact_lists",
-    "contacts_form_submissions",
-    "contacts_list_memberships",
-    "contacts_merged_audit",
-    "contacts_property_history",
     "contacts_web_analytics",
-    "deal_pipelines",
     "deal_splits",
     "deals_archived",
-    "deals_property_history",
     "deals_web_analytics",
-    "email_events",
-    "email_subscriptions",
-    "engagements",
-    "engagements_calls",
     "engagements_calls_web_analytics",
-    "engagements_emails",
     "engagements_emails_web_analytics",
-    "engagements_meetings",
     "engagements_meetings_web_analytics",
-    "engagements_notes",
     "engagements_notes_web_analytics",
-    "engagements_tasks",
     "engagements_tasks_web_analytics",
     "form_submissions",
     "goals",
@@ -50,91 +34,37 @@ unused_source_streams = [
     "pets_web_analytics",
     "products",
     "products_web_analytics",
-    "subscription_changes",
-    "ticket_pipelines",
     "tickets_web_analytics",
     "workflows",
 ]
 unmapped_target_tables = [
-    "contact_list",
-    "contact_list_member",
-    "contact_property_history",
+    "calendar_event",
     "deal_company",
     "deal_contact",
-    "deal_pipeline",
     "deal_pipeline_stage",
-    "deal_property_history",
     "deal_stage",
     "email_campaign",
-    "email_event",
     "email_event_bounce",
     "email_event_click",
     "email_event_deferred",
-    "email_event_delivered",
     "email_event_dropped",
     "email_event_forward",
     "email_event_open",
-    "email_event_print",
     "email_event_sent",
     "email_event_spam_report",
     "email_event_status_change",
-    "email_subscription",
-    "email_subscription_change",
-    "engagement",
-    "engagement_call",
-    "engagement_company",
     "engagement_contact",
     "engagement_deal",
-    "engagement_email",
     "engagement_email_cc",
     "engagement_email_to",
-    "engagement_meeting",
-    "engagement_note",
-    "engagement_task",
     "merged_deal",
     "property",
     "property_option",
     "ticket_company",
-    "ticket_contact",
     "ticket_deal",
-    "ticket_engagement",
-    "ticket_pipeline",
     "ticket_pipeline_stage",
     "ticket_property_history",
 ]
-
-[mappings.calendar_event]
-source_file = "calendar_event.yml"
-source_file_hash = "e9297b65428facb0a048a32a7acdd0440b6a4d2d635312951faa14834e20881d"
-unmapped_target_fields = [
-    "_fivetran_synced",
-    "avatar_url",
-    "campaign_guid",
-    "category",
-    "category_id",
-    "content_group_id",
-    "content_id",
-    "created_by",
-    "description",
-    "event_date",
-    "event_type",
-    "id",
-    "is_recurring",
-    "name",
-    "owner_id",
-    "portal_id",
-    "preview_key",
-    "social_display_name",
-    "social_username",
-    "state",
-    "topic_ids",
-    "url",
-]
-omitted_target_fields = []
-
-[mappings.calendar_event.mapped_target_fields]
-
-[mappings.calendar_event.unused_source_fields]
 
 [mappings.company]
 source_file = "company.yml"
@@ -336,19 +266,18 @@ companies = [
 
 [mappings.company_property_history]
 source_file = "company_property_history.yml"
-source_file_hash = "524947f64c8d8a5d452e9df369bcafe46994e4a1a6ca5e37f1a17674b86a79fc"
-unmapped_target_fields = [
-    "_fivetran_synced",
-    "company_id",
-    "name",
-    "source",
-    "source_id",
-    "timestamp",
-    "value",
-]
+source_file_hash = "5ad10980bf7269b7fd555366af0db4ad74c94187df192755ce50f2f47a565408"
+unmapped_target_fields = []
 omitted_target_fields = []
 
 [mappings.company_property_history.mapped_target_fields]
+_fivetran_synced = "companies_property_history.updatedByUserId"
+company_id = "companies_property_history.companyId"
+name = "companies_property_history.properties_name"
+source = "companies_property_history.sourceType"
+source_id = "companies_property_history.sourceId"
+timestamp = "companies_property_history.timestamp"
+value = "companies_property_history.value"
 
 [mappings.company_property_history.unused_source_fields]
 
@@ -393,43 +322,105 @@ contacts = [
 
 [mappings.contact_form_submission]
 source_file = "contact_form_submission.yml"
-source_file_hash = "487cf92ae583374b240cb2fb66b3f6cb5c3e8927fd384ba4007833e2bdaf5e22"
-unmapped_target_fields = [
-    "_fivetran_synced",
-    "contact_id",
-    "conversion_id",
-    "form_id",
-    "page_url",
-    "portal_id",
-    "timestamp",
-    "title",
-]
+source_file_hash = "f821f6906e4b148d4545444b40231f6f107e87f2c358c8e37f192c9a80f4cedf"
+unmapped_target_fields = []
 omitted_target_fields = []
 
 [mappings.contact_form_submission.mapped_target_fields]
+_fivetran_synced = "contacts_form_submissions._airbyte_extracted_at"
+contact_id = "contacts_form_submissions.canonical-vid"
+conversion_id = "contacts_form_submissions.conversion-id"
+form_id = "contacts_form_submissions.form-id"
+page_url = "contacts_form_submissions.page-url"
+portal_id = "contacts_form_submissions.portal-id"
+timestamp = "contacts_form_submissions.timestamp"
+title = "contacts_form_submissions.title"
 
 [mappings.contact_form_submission.unused_source_fields]
 
+[mappings.contact_list]
+source_file = "contact_list.yml"
+source_file_hash = "14aaa1b43a336869205b36ad217aca4731689e76799926e25ea6ba67ec63b444"
+unmapped_target_fields = [
+    "created_by_id",
+    "filters_updated_at",
+    "id",
+    "list_version",
+    "object_type_id",
+    "processing_status",
+    "processing_type",
+]
+omitted_target_fields = []
+
+[mappings.contact_list.mapped_target_fields]
+_fivetran_deleted = "contact_lists._airbyte_raw_id"
+_fivetran_synced = "contact_lists._airbyte_extracted_at"
+created_at = "contact_lists.createdAt"
+name = "contact_lists.name"
+updated_at = "contact_lists.updatedAt"
+metadata_error = "contact_lists.metaData_error"
+metadata_last_processing_state_change_at = "contact_lists.metaData_lastProcessingStateChangeAt"
+metadata_last_size_change_at = "contact_lists.metaData_lastSizeChangeAt"
+metadata_processing = "contact_lists.metaData_processing"
+metadata_size = "contact_lists.metaData_size"
+portal_id = "contact_lists.portalId"
+deleteable = "contact_lists.deleteable"
+dynamic = "contact_lists.dynamic"
+
+[mappings.contact_list.unused_source_fields]
+
+[mappings.contact_list_member]
+source_file = "contact_list_member.yml"
+source_file_hash = "6ab2ca19cb343a17465a908f1cf5d8967a89f1a274503307b8c2f2d397611e14"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.contact_list_member.mapped_target_fields]
+_fivetran_deleted = "contacts_list_memberships._airbyte_extracted_at"
+_fivetran_synced = "contacts_list_memberships._airbyte_extracted_at"
+added_at = "contacts_list_memberships.timestamp"
+contact_id = "contacts_list_memberships.canonical-vid"
+contact_list_id = "contacts_list_memberships.static-list-id"
+
+[mappings.contact_list_member.unused_source_fields]
+
 [mappings.contact_merge_audit]
 source_file = "contact_merge_audit.yml"
-source_file_hash = "883d9b631ba8796aacbf5dd6f9b0804b09e88e9b67366208ee3fc5354143a08e"
+source_file_hash = "fe4aa3d98974d3276307af645e9ab8c804adc12de4e2687477b9983265990e97"
 unmapped_target_fields = [
-    "_fivetran_synced",
-    "canonical_vid",
     "contact_id",
-    "entity_id",
-    "first_name",
-    "last_name",
-    "num_properties_moved",
-    "timestamp",
-    "user_id",
-    "vid_to_merge",
 ]
 omitted_target_fields = []
 
 [mappings.contact_merge_audit.mapped_target_fields]
+_fivetran_synced = "contacts_merged_audit._airbyte_extracted_at"
+canonical_vid = "contacts_merged_audit.canonical-vid"
+entity_id = "contacts_merged_audit.entity-id"
+first_name = "contacts_merged_audit.first-name"
+last_name = "contacts_merged_audit.last-name"
+num_properties_moved = "contacts_merged_audit.num-properties-moved"
+timestamp = "contacts_merged_audit.timestamp"
+user_id = "contacts_merged_audit.user-id"
+vid_to_merge = "contacts_merged_audit.vid-to-merge"
 
 [mappings.contact_merge_audit.unused_source_fields]
+
+[mappings.contact_property_history]
+source_file = "contact_property_history.yml"
+source_file_hash = "82f8a695c83f16660c01e8daba1a943a69521a5604121db9722a373c18ead532"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.contact_property_history.mapped_target_fields]
+_fivetran_synced = "contacts_property_history._airbyte_extracted_at"
+contact_id = "contacts_property_history.vid"
+name = "contacts_property_history.source-label"
+source = "contacts_property_history.source-type"
+source_id = "contacts_property_history.source-id"
+timestamp = "contacts_property_history.timestamp"
+value = "contacts_property_history.value"
+
+[mappings.contact_property_history.unused_source_fields]
 
 [mappings.deal]
 source_file = "deal.yml"
@@ -466,6 +457,247 @@ deals = [
     "properties",
     "updatedAt",
 ]
+
+[mappings.deal_pipeline]
+source_file = "deal_pipeline.yml"
+source_file_hash = "59aa9e5ad2759bf81b9b271200ac2b31c7521351a045fe3833f16f0109719537"
+unmapped_target_fields = [
+    "_fivetran_deleted",
+    "_fivetran_synced",
+    "active",
+    "created_at",
+    "display_order",
+    "label",
+    "pipeline_id",
+    "updated_at",
+]
+omitted_target_fields = []
+
+[mappings.deal_pipeline.mapped_target_fields]
+
+[mappings.deal_pipeline.unused_source_fields]
+
+[mappings.deal_property_history]
+source_file = "deal_property_history.yml"
+source_file_hash = "7418fabac1f655a4420ea2dbfe19bcec9ee57f3f481c98cbf4fce8bdd0f428f7"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.deal_property_history.mapped_target_fields]
+_fivetran_synced = "deals_property_history._airbyte_extracted_at"
+deal_id = "deals_property_history.dealId"
+name = "deals_property_history.properties_dealname"
+source = "deals_property_history.sourceType"
+source_id = "deals_property_history.sourceId"
+timestamp = "deals_property_history.timestamp"
+value = "deals_property_history.value"
+
+[mappings.deal_property_history.unused_source_fields]
+
+[mappings.email_event]
+source_file = "email_event.yml"
+source_file_hash = "aa1f0b6e0fe2d6025586313dea8eea3269dfa8ae637527b758ee845dede76a20"
+unmapped_target_fields = [
+    "caused_by_id",
+    "obsoleted_by_id",
+    "sent_by_id",
+]
+omitted_target_fields = []
+
+[mappings.email_event.mapped_target_fields]
+_fivetran_synced = "email_events._airbyte_extracted_at"
+app_id = "email_events.appId"
+caused_by_created = "email_events.causedBy"
+created = "email_events.created"
+email_campaign_id = "email_events.emailCampaignId"
+filtered_event = "email_events.filteredEvent"
+id = "email_events.id"
+obsoleted_by_created = "email_events.obsoletedBy"
+portal_id = "email_events.portalId"
+recipient = "email_events.recipient"
+sent_by_created = "email_events.sentBy"
+type = "email_events.type"
+
+[mappings.email_event.unused_source_fields]
+
+[mappings.email_event_delivered]
+source_file = "email_event_delivered.yml"
+source_file_hash = "a2260e3bfa67d31cd5628ec7dd2d8907f12481d0e469735c45cedce9939adf1b"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.email_event_delivered.mapped_target_fields]
+_fivetran_synced = "email_events._airbyte_extracted_at"
+id = "email_events.id"
+response = "email_events.response"
+smtp_id = "email_events.smtpId"
+
+[mappings.email_event_delivered.unused_source_fields]
+
+[mappings.email_event_print]
+source_file = "email_event_print.yml"
+source_file_hash = "656e99ea77c0f438a9bab72d716520bc6964852ac073d1faa41869871dfc08f4"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.email_event_print.mapped_target_fields]
+_fivetran_synced = "email_events._airbyte_extracted_at"
+browser = "email_events.browser"
+id = "email_events.id"
+ip_address = "email_events.ipAddress"
+location = "email_events.location"
+user_agent = "email_events.userAgent"
+
+[mappings.email_event_print.unused_source_fields]
+
+[mappings.email_subscription]
+source_file = "email_subscription.yml"
+source_file_hash = "f3369540c21b1a026e51a06cd7bcc25f7a82f36f163f68b636b26953a54e9730"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.email_subscription.mapped_target_fields]
+_fivetran_synced = "email_subscriptions._airbyte_extracted_at"
+active = "email_subscriptions.active"
+description = "email_subscriptions.description"
+id = "email_subscriptions.id"
+name = "email_subscriptions.name"
+portal_id = "email_subscriptions.portalId"
+
+[mappings.email_subscription.unused_source_fields]
+
+[mappings.email_subscription_change]
+source_file = "email_subscription_change.yml"
+source_file_hash = "4c0e3c6ea9ac04edd2024457726978a96d081a0d3d5058e8d688083d1734c205"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.email_subscription_change.mapped_target_fields]
+_fivetran_synced = "subscription_changes._airbyte_extracted_at"
+caused_by_event_id = "subscription_changes.normalizedEmailId"
+change = "subscription_changes.changes"
+change_type = "subscription_changes.changes"
+email_subscription_id = "subscription_changes.normalizedEmailId"
+portal_id = "subscription_changes.portalId"
+recipient = "subscription_changes.recipient"
+source = "subscription_changes._airbyte_meta"
+timestamp = "subscription_changes.timestamp"
+
+[mappings.email_subscription_change.unused_source_fields]
+
+[mappings.engagement]
+source_file = "engagement.yml"
+source_file_hash = "2bcbc5e85fb96ebeb6e3246fd1fcb4579aace02a667e77352f18833b025474a8"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.engagement.mapped_target_fields]
+_fivetran_synced = "engagements._airbyte_extracted_at"
+active = "engagements.active"
+created_at = "engagements.createdAt"
+id = "engagements.id"
+owner_id = "engagements.ownerId"
+portal_id = "engagements.portalId"
+timestamp = "engagements.timestamp"
+type = "engagements.type"
+
+[mappings.engagement.unused_source_fields]
+
+[mappings.engagement_call]
+source_file = "engagement_call.yml"
+source_file_hash = "221993e74a532b526fcac12f50ea03eaf3a610f5626dfb41dc0e373c090e8e42"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.engagement_call.mapped_target_fields]
+_fivetran_synced = "engagements_calls._airbyte_extracted_at"
+engagement_id = "engagements_calls.id"
+_fivetran_deleted = "engagements_calls._airbyte_meta"
+property_hs_createdate = "engagements_calls.properties_hs_createdate"
+timestamp = "engagements_calls.properties_hs_timestamp"
+property_hubspot_owner_id = "engagements_calls.properties_hubspot_owner_id"
+property_hubspot_team_id = "engagements_calls.properties_hubspot_team_id"
+
+[mappings.engagement_call.unused_source_fields]
+
+[mappings.engagement_company]
+source_file = "engagement_company.yml"
+source_file_hash = "ce991eeda52250507ef151ebeef3c9076122d2546ea797e7dfcc6eabce0b301f"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.engagement_company.mapped_target_fields]
+_fivetran_synced = "engagements._airbyte_extracted_at"
+company_id = "engagements.associations_companyIds"
+engagement_id = "engagements.id"
+category = "engagements.type"
+
+[mappings.engagement_company.unused_source_fields]
+
+[mappings.engagement_email]
+source_file = "engagement_email.yml"
+source_file_hash = "697793211ee29938e3338cd8b13eebb3231dd11deb27457053027a7528e637e5"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.engagement_email.mapped_target_fields]
+_fivetran_synced = "engagements_emails._airbyte_extracted_at"
+engagement_id = "engagements_emails.id"
+property_hs_createdate = "engagements_emails.properties_hs_createdate"
+timestamp = "engagements_emails.properties_hs_timestamp"
+property_hubspot_owner_id = "engagements_emails.properties_hubspot_owner_id"
+property_hubspot_team_id = "engagements_emails.properties_hubspot_team_id"
+
+[mappings.engagement_email.unused_source_fields]
+
+[mappings.engagement_meeting]
+source_file = "engagement_meeting.yml"
+source_file_hash = "2817f0bda26d4811f1aa1bce2b06d0237b1dabffff1df426d74cd56789fda87e"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.engagement_meeting.mapped_target_fields]
+_fivetran_synced = "engagements_meetings._airbyte_extracted_at"
+engagement_id = "engagements_meetings.id"
+property_hs_createdate = "engagements_meetings.properties_hs_createdate"
+timestamp = "engagements_meetings.properties_hs_timestamp"
+property_hubspot_owner_id = "engagements_meetings.properties_hubspot_owner_id"
+property_hubspot_team_id = "engagements_meetings.properties_hubspot_team_id"
+
+[mappings.engagement_meeting.unused_source_fields]
+
+[mappings.engagement_note]
+source_file = "engagement_note.yml"
+source_file_hash = "c8053526fe55b2ac1b0c69097ba1e0f7fca211f7ae099d2edcd7e8995b95a34d"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.engagement_note.mapped_target_fields]
+_fivetran_synced = "engagements_notes._airbyte_extracted_at"
+body = "engagements_notes.properties_hs_note_body"
+engagement_id = "engagements_notes.id"
+property_hs_createdate = "engagements_notes.properties_hs_createdate"
+timestamp = "engagements_notes.properties_hs_timestamp"
+property_hubspot_owner_id = "engagements_notes.properties_hubspot_owner_id"
+property_hubspot_team_id = "engagements_notes.properties_hubspot_team_id"
+
+[mappings.engagement_note.unused_source_fields]
+
+[mappings.engagement_task]
+source_file = "engagement_task.yml"
+source_file_hash = "5cec2779e41bd158a5b6730bf22d8da1473ba216d72427be19778a1040d1998c"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.engagement_task.mapped_target_fields]
+_fivetran_synced = "engagements_tasks._airbyte_extracted_at"
+engagement_id = "engagements_tasks.id"
+property_hs_createdate = "engagements_tasks.properties_hs_createdate"
+timestamp = "engagements_tasks.properties_hs_timestamp"
+property_hubspot_owner_id = "engagements_tasks.properties_hubspot_owner_id"
+property_hubspot_team_id = "engagements_tasks.properties_hubspot_team_id"
+
+[mappings.engagement_task.unused_source_fields]
 
 [mappings.form]
 source_file = "form.yml"
@@ -742,3 +974,51 @@ tickets = [
     "properties_time_to_first_agent_reply",
     "updatedAt",
 ]
+
+[mappings.ticket_contact]
+source_file = "ticket_contact.yml"
+source_file_hash = "a4e13391f0f76acbd0bdf81656225c33147d801d297c28daeab854433569f84c"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.ticket_contact.mapped_target_fields]
+_fivetran_synced = "tickets._airbyte_extracted_at"
+ticket_id = "tickets.properties_hs_ticket_id"
+contact_id = "tickets.properties_hs_all_associated_contact_emails"
+category = "tickets.properties_hs_ticket_category"
+
+[mappings.ticket_contact.unused_source_fields]
+
+[mappings.ticket_engagement]
+source_file = "ticket_engagement.yml"
+source_file_hash = "7ef576338754cbf4dd4a5c5570cec0b55ad11d82a2b4d40f9aa9312e98a3f21a"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.ticket_engagement.mapped_target_fields]
+_fivetran_synced = "engagements._airbyte_extracted_at"
+ticket_id = "engagements.associations_ticketIds"
+engagement_id = "engagements.id"
+category = "engagements.metadata_forObjectType"
+
+[mappings.ticket_engagement.unused_source_fields]
+
+[mappings.ticket_pipeline]
+source_file = "ticket_pipeline.yml"
+source_file_hash = "0b7eeef654756cda364c4cc9067d99f6784c891e5b332f174457faa63a835f4b"
+unmapped_target_fields = [
+    "_fivetran_deleted",
+    "_fivetran_synced",
+    "active",
+    "created_at",
+    "display_order",
+    "label",
+    "object_type_id",
+    "pipeline_id",
+    "updated_at",
+]
+omitted_target_fields = []
+
+[mappings.ticket_pipeline.mapped_target_fields]
+
+[mappings.ticket_pipeline.unused_source_fields]

@@ -1,90 +1,56 @@
 domain: facebook_marketing.fivetran-interop
 transforms:
-  - display_name:
-      Each record represents the daily conversion performance of an ad in
-      Facebook. This is the prebuilt `basic_ad` report broken down by `action_type`.
-    name: basic_ad_actions
+  - name: basic_ad_actions
     from:
-      - ads_insights_action_type: facebook_marketing.ads_insights_action_type
+      - ads_insights: facebook_marketing.ads_insights
     fields:
       _1_d_view:
-        expression: MISSING
-        description:
-          Conversion metric value using an attribution window of "1 day after
-          viewing the ad". Not included in downstream models by default, but can be
-          added using the `facebook_ads__basic_ad_actions_passthrough_metrics` var.
+        expression: ads_insights.actions
+        description: Conversion metric value using an attribution window of "1 day
+          after viewing the ad". Not included in downstream models by default, but
+          can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics`
+          var.
       _7_d_click:
-        expression: MISSING
-        description:
-          Conversion metric value using an attribution window of "7 days
+        expression: ads_insights.actions
+        description: Conversion metric value using an attribution window of "7 days
           after clicking the ad". Not included in downstream models by default, but
           can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics`
           var.
       _28_d_click:
-        expression: MISSING
-        description:
-          Conversion metric value using an attribution window of "28 days
+        expression: ads_insights.actions
+        description: Conversion metric value using an attribution window of "28 days
           after clicking the ad". Deprecated by Facebook due to digital privacy initiatives.
-          Not included in downstream models by default, but can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics`
-          var.
+          Not included in downstream models by default, but can be added using the
+          `facebook_ads__basic_ad_actions_passthrough_metrics` var.
       _fivetran_id:
-        expression: MISSING
+        expression: ads_insights._airbyte_raw_id
         description: Defunct field.
       _fivetran_synced:
-        expression: _airbyte_extracted_at
+        expression: ads_insights._airbyte_extracted_at
         description: "{{ doc('_fivetran_synced') }}"
       action_type:
-        expression: ads_insights_action_type.action_type
-        description:
-          "The kind of actions taken on your ad, Page, app or event after
+        expression: ads_insights.action_values
+        description: "The kind of actions taken on your ad, Page, app or event after
           your ad was served to someone, even if they didn't click on it. Action types
-          include Page likes, app installs, conversions, event responses and more. Actions
-          prepended by app_custom_event come from mobile app events and actions prepended
-          by offsite_conversion come from the Facebook Pixel.
-
-          "
+          include Page likes, app installs, conversions, event responses and more.
+          Actions prepended by app_custom_event come from mobile app events and actions
+          prepended by offsite_conversion come from the Facebook Pixel.\n"
       ad_id:
-        expression: ads_insights_action_type.ad_id
+        expression: ads_insights.ad_id
         description: The ID of the ad the report relates to.
       date:
-        expression: MISSING
+        expression: ads_insights.date_start
         description: The date of the reported performance.
       index:
-        expression: MISSING
-        description:
-          Index reflecting the `action_type` tracked for this ad on this
+        expression: ads_insights.converted_product_value
+        description: Index reflecting the `action_type` tracked for this ad on this
           day. Column of not much consequence.
       inline:
-        expression: MISSING
-        description:
-          Conversion metric value using the attribution window that occurs
-          on the ad itself. Not included in downstream models by default, but can be
-          added using the `facebook_ads__basic_ad_actions_passthrough_metrics` var.
+        expression: ads_insights.inline_link_clicks
+        description: Conversion metric value using the attribution window that occurs
+          on the ad itself. Not included in downstream models by default, but can
+          be added using the `facebook_ads__basic_ad_actions_passthrough_metrics`
+          var.
       value:
-        expression: ads_insights_action_type.value
+        expression: ads_insights.conversion_values
         description: Conversion metric value using the default attribution window.
-    annotations:
-      unused_source_fields:
-        ads_insights_action_type:
-          - _airbyte_meta
-          - _airbyte_raw_id
-          - account_id
-          - account_name
-          - action_destination
-          - action_target_id
-          - action_attribution_windows
-          - action_carousel_card_id
-          - action_carousel_card_name
-          - action_converted_product_id
-          - action_device
-          - action_event_channel
-          - action_reaction
-          - action_video_sound
-          - action_video_type
-          - ad_name
-          - adset_id
-          - adset_name
-          - campaign_id
-          - campaign_name
-          - inline_link_clicks
-          - objective

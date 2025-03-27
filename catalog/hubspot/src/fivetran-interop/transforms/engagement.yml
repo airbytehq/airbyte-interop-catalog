@@ -1,0 +1,43 @@
+domain: hubspot.fivetran-interop
+transforms:
+  - name: engagement
+    from:
+      - engagements: hubspot.engagements
+    fields:
+      _fivetran_synced:
+        expression: engagements._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      active:
+        expression: engagements.active
+        description:
+          "Whether the engagement is currently being shown in the UI.\n
+          PLEASE NOTE: This field will not be populated for connectors utilizing the
+          HubSpot v3 API version. This field will be deprecated in a future release.\n"
+      created_at:
+        expression: engagements.createdAt
+        description:
+          "A timestamp representing when the engagement was created.\n
+          PLEASE NOTE: This field will not be populated for connectors utilizing the
+          HubSpot v3 API version. This field will be deprecated in a future release.\n"
+      id:
+        expression: engagements.id
+        description: The ID of the engagement.
+      owner_id:
+        expression: engagements.ownerId
+        description:
+          "The ID of the engagement's owner.\nPLEASE NOTE: This field will
+          not be populated for connectors utilizing the HubSpot v3 API version. This
+          field will be deprecated in a future release.\n"
+      portal_id:
+        expression: engagements.portalId
+        description: '{{ doc("portal_id") }}'
+      timestamp:
+        expression: engagements.timestamp
+        description:
+          "A timestamp in representing the time that the engagement should
+          appear in the timeline.\nPLEASE NOTE: This field will not be populated for
+          connectors utilizing the HubSpot v3 API version. This field will be deprecated
+          in a future release.\n"
+      type:
+        expression: engagements.type
+        description: One of NOTE, EMAIL, TASK, MEETING, or CALL, the type of the engagement.

@@ -1,0 +1,34 @@
+domain: hubspot.fivetran-interop
+transforms:
+  - name: deal_pipeline
+    from:
+      - deal_pipelines: hubspot.deal_pipelines
+    fields:
+      _fivetran_deleted:
+        expression: MISSING
+        description: '{{ doc("_fivetran_deleted") }}'
+      _fivetran_synced:
+        expression: MISSING
+        description: '{{ doc("_fivetran_synced") }}'
+      active:
+        expression: MISSING
+        description: Whether the stage is currently in use.
+      display_order:
+        expression: MISSING
+        description:
+          Used to determine the order in which the pipelines appear when
+          viewed in HubSpot.
+      label:
+        expression: MISSING
+        description:
+          The human-readable label for the pipeline. The label is used
+          when showing the pipeline in HubSpot.
+      pipeline_id:
+        expression: MISSING
+        description: The ID of the pipeline.
+      created_at:
+        expression: MISSING
+        description: A timestamp representing when the record was created.
+      updated_at:
+        expression: MISSING
+        description: A timestamp representing when the record was updated.

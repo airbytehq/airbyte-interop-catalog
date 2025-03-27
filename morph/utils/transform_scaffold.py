@@ -9,16 +9,16 @@ from pathlib import Path
 from typing import Any
 
 import requests
-import yaml
 from rich.console import Console
 
 from morph.ai import models
-from morph.utils import resource_paths
+from morph.constants import HEADER_COMMENT
+from morph.utils import resource_paths, text_utils
 
 console = Console()
 
 
-def load_config(config_file: str) -> tuple[dict[str, Any] | None, list[str] | None]:
+def load_config(config_file: str) -> dict[str, Any] | None:
     """Load configuration file and extract target tables.
 
     Args:
@@ -31,12 +31,13 @@ def load_config(config_file: str) -> tuple[dict[str, Any] | None, list[str] | No
     if not config_path.exists():
         raise ValueError(f"Error: Config file {config_file} does not exist")
 
-    config = yaml.safe_load(config_path.read_text())
-    target_tables = config.get("target_tables", [])
-    if not target_tables:
-        raise ValueError(f"No target tables defined in {config_file}")
+    config = text_utils.load_yaml_file(config_path)
+    return config  # noqa: RET504  (unnecessary assignment)
+    # target_tables = config.get("target_tables", [])
+    # if not target_tables:
+    #     raise ValueError(f"No target tables defined in {config_file}")
 
-    return config, target_tables
+    # return config, target_tables
 
 
 def download_target_schema(
@@ -59,7 +60,7 @@ def download_target_schema(
     if not local_schema_path.exists() and if_not_exists:
         # Nothing to do
         console.print(f"Using existing target schema file: {local_schema_path}")
-        return None
+        return
 
     # Get target schema URL
     target_schema_url = config.get("target_dbt_schema_url")
@@ -71,7 +72,7 @@ def download_target_schema(
     try:
         response = requests.get(target_schema_url)
         response.raise_for_status()
-        local_schema_path.write_text(response.text)
+        local_schema_path.write_text(HEADER_COMMENT + response.text)
         console.print(f"Downloaded target schema to {local_schema_path}", style="green")
         return
 
@@ -153,7 +154,7 @@ def _add_fields_to_mapping(
     return mapping
 
 
-def generate_mapping_file(
+def generate_empty_mapping_file(
     source_name: str,
     project_name: str,
     table_name: str,
@@ -180,9 +181,9 @@ def generate_mapping_file(
     mapping = create_mapping_structure(source_name, project_name, table_name, table_schema)
 
     # Write mapping file
-    mapping_file.write_text(yaml.dump(mapping, default_flow_style=False, sort_keys=False))
+    text_utils.dump_yaml_file(mapping, mapping_file)
 
-    console.print(f"Created mapping file for {table_name}", style="green")
+    console.print(f"Created mapping file scaffold for `{table_name}`", style="green")
     return mapping_file
 
 
@@ -190,7 +191,6 @@ def generate_mapping_files(
     source_name: str,
     project_name: str,
     target_tables: list[str],
-    target_schema: dict[str, Any],
     parent_folder: Path,
 ) -> list[str]:
     """Generate mapping files for target tables.
@@ -205,14 +205,14 @@ def generate_mapping_files(
     Returns:
         List of created file paths
     """
+
     created_files = []
     for table_name in target_tables:
         # Check if mapping file already exists
-        mapping_file = generate_mapping_file(
+        mapping_file = generate_empty_mapping_file(
             source_name,
             project_name,
             table_name,
-            table_schema=find_table_schema(target_schema, table_name),
             parent_folder=parent_folder,
         )
         if mapping_file:

@@ -3,7 +3,9 @@
 from pathlib import Path
 
 import pytest
-import yaml
+
+from morph.constants import DEFAULT_PROJECT_NAME
+from morph.utils import text_utils
 
 
 @pytest.mark.parametrize(
@@ -22,7 +24,13 @@ def test_mapping(source_table, target_table, mapping_file):
     # Paths to the relevant files
     base_dir = Path(__file__).parent.parent
     mapping_path = (
-        base_dir / "catalog" / "hubspot" / "src" / "fivetran-interop" / "transforms" / mapping_file
+        base_dir
+        / "catalog"
+        / "hubspot"
+        / "src"
+        / DEFAULT_PROJECT_NAME
+        / "transforms"
+        / mapping_file
     )
     source_schema_path = base_dir / "catalog" / "hubspot" / "generated" / "src_airbyte_hubspot.yml"
     target_schema_path = (
@@ -30,18 +38,18 @@ def test_mapping(source_table, target_table, mapping_file):
         / "catalog"
         / "hubspot"
         / "requirements"
-        / "fivetran-interop"
+        / DEFAULT_PROJECT_NAME
         / "src_dbt_requirements.yml"
     )
 
     # Load the mapping file
-    mapping = yaml.safe_load(mapping_path.read_text())
+    mapping = text_utils.load_yaml_file(mapping_path)
 
     # Load the target schema
-    target_schema = yaml.safe_load(target_schema_path.read_text())
+    target_schema = text_utils.load_yaml_file(target_schema_path)
 
     # Load the source schema
-    source_schema = yaml.safe_load(source_schema_path.read_text())
+    source_schema = text_utils.load_yaml_file(source_schema_path)
 
     # Find the target table in the target schema
     target_table_def = None

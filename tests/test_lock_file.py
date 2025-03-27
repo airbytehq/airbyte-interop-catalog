@@ -6,8 +6,8 @@ import tempfile
 from pathlib import Path
 
 import pytest
-import yaml
 
+from morph.utils import text_utils
 from morph.utils.lock_file import (
     compute_file_hash,
     find_mapped_target_fields,
@@ -154,7 +154,7 @@ def test_generate_lock_file():
         config_dir = Path(tmpdir) / "config"
         config_dir.mkdir()
         config_file = config_dir / "config.yml"
-        config_file.write_text(yaml.dump(config))
+        text_utils.dump_yaml_file(config, config_file)
 
         # Create mapping file
         mapping = {
@@ -176,7 +176,7 @@ def test_generate_lock_file():
         mapping_dir = Path(tmpdir) / "transforms"
         mapping_dir.mkdir()
         mapping_file = mapping_dir / "table1.yml"
-        mapping_file.write_text(yaml.dump(mapping))
+        text_utils.dump_yaml_file(mapping, mapping_file)
 
         # Create target schema
         target_schema = {
@@ -208,7 +208,7 @@ def test_generate_lock_file():
                 },
             ],
         }
-        source_schema_file.write_text(yaml.dump(source_schema))
+        text_utils.dump_yaml_file(source_schema, source_schema_file)
 
         # Create requirements directory and file
         requirements_dir = Path(tmpdir) / "catalog" / "test" / "requirements" / "test"
@@ -225,7 +225,7 @@ def test_generate_lock_file():
                 },
             ],
         }
-        requirements_file.write_text(yaml.dump(requirements))
+        text_utils.dump_yaml_file(requirements, requirements_file)
 
         # Call function
         lock_file = Path(tmpdir) / "morph-lock.toml"

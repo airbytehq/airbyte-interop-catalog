@@ -9,7 +9,7 @@ construct the path to the resource. If `project_name` is not provided, it defaul
 
 from pathlib import Path
 
-DEFAULT_PROJECT_NAME = "fivetran-interop"
+from morph.constants import DEFAULT_PROJECT_NAME
 
 
 def get_catalog_root_dir() -> Path:
@@ -69,7 +69,7 @@ def get_generated_dbt_project_models_dir(
     return get_generated_dbt_project_dir(source_name, project_name) / "models"
 
 
-def get_generated_sources_yml_path(
+def get_generated_source_yml_path(
     source_name: str,
     project_name: str = DEFAULT_PROJECT_NAME,
 ) -> Path:

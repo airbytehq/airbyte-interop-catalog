@@ -3,9 +3,9 @@
 from pathlib import Path
 
 import click
-import yaml
 from rich.console import Console
 
+from morph.utils import text_utils
 from morph.utils.dbt_source_files import (
     generate_dbt_sources_yml_from_airbyte_catalog,
     generate_header_comment,
@@ -95,8 +95,7 @@ def json_to_dbt(
 
     # Write to output file with header comment
     output_path = Path(output)
-    content = header_comment + yaml.dump(sources_yml, default_flow_style=False, sort_keys=False)
-    output_path.write_text(content)
+    output_path.write_text(header_comment + text_utils.dump_yaml_str(sources_yml))
 
     console.print(f"Generated dbt sources.yml at {output}")
 

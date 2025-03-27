@@ -1,0 +1,27 @@
+domain: hubspot.fivetran-interop
+transforms:
+  - name: deal_property_history
+    from:
+      - deals_property_history: hubspot.deals_property_history
+    fields:
+      _fivetran_synced:
+        expression: deals_property_history._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      deal_id:
+        expression: deals_property_history.dealId
+        description: The ID of the related deal record.
+      name:
+        expression: deals_property_history.properties_dealname
+        description: '{{ doc("history_name") }}'
+      source:
+        expression: deals_property_history.sourceType
+        description: '{{ doc("history_source") }}'
+      source_id:
+        expression: deals_property_history.sourceId
+        description: '{{ doc("history_source_id") }}'
+      timestamp:
+        expression: deals_property_history.timestamp
+        description: '{{ doc("history_timestamp") }}'
+      value:
+        expression: deals_property_history.value
+        description: '{{ doc("history_value") }}'
