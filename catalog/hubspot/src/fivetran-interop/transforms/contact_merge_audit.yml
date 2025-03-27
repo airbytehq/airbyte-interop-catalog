@@ -1,0 +1,42 @@
+domain: hubspot.fivetran-interop
+transforms:
+- name: contact_merge_audit
+  display_name: 'DEPRECATED FOR NON-BIGQUERY USERS (will be deprecated on BigQuery
+    as well). Each record contains a contact merge event and the contacts effected
+    by the merge.
+
+    '
+  from:
+  - MISSING: MISSING
+  fields:
+    _fivetran_synced:
+      expression: MISSING
+      description: '{{ doc("_fivetran_synced") }}'
+    canonical_vid:
+      expression: MISSING
+      description: The contact ID of the contact which the vid_to_merge contact was
+        merged into.
+    contact_id:
+      expression: MISSING
+      description: The ID of the contact.
+    entity_id:
+      expression: MISSING
+      description: The ID of the related entity.
+    first_name:
+      expression: MISSING
+      description: The contact's first name.
+    last_name:
+      expression: MISSING
+      description: The contact's last name.
+    num_properties_moved:
+      expression: MISSING
+      description: The number of properties which were removed from the merged contact.
+    timestamp:
+      expression: MISSING
+      description: Timestamp of when the contacts were merged.
+    user_id:
+      expression: MISSING
+      description: The ID of the user.
+    vid_to_merge:
+      expression: MISSING
+      description: The ID of the contact which was merged.

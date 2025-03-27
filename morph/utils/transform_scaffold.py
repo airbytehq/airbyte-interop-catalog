@@ -12,6 +12,7 @@ import requests
 import yaml
 from rich.console import Console
 
+from morph.ai import models
 from morph.utils import resource_paths
 
 console = Console()
@@ -38,43 +39,44 @@ def load_config(config_file: str) -> tuple[dict[str, Any] | None, list[str] | No
     return config, target_tables
 
 
-def get_target_schema(
+def download_target_schema(
     source_name: str,
     project_name: str,
     config: dict[str, Any],
-) -> dict[str, Any] | None:
+    *,
+    if_not_exists: bool = False,
+) -> None:
     """Download or load target schema file.
 
     Returns:
         Target schema dictionary or None if not found
     """
-    # Get target schema URL
-    target_schema_url = config.get("target_dbt_schema_url")
-    if not target_schema_url:
-        console.print("Error: target_dbt_schema_url not defined in config.yml", style="bold red")
-        return None
-
-    # Determine target schema file name from URL
+    # Determine target schema file name
     local_schema_path = resource_paths.get_dbt_sources_requirements_path(
         source_name=source_name,
         project_name=project_name,
     )
-
-    # Download target schema if not already downloaded
-    if not local_schema_path.exists():
-        console.print(f"Downloading target schema to {local_schema_path}...")
-        try:
-            response = requests.get(target_schema_url)
-            response.raise_for_status()
-            local_schema_path.write_text(response.text)
-            console.print(f"Downloaded target schema to {local_schema_path}", style="green")
-            return yaml.safe_load(response.text)
-        except Exception as e:
-            console.print(f"Error downloading target schema: {e}", style="bold red")
-            return None
-    else:
+    if not local_schema_path.exists() and if_not_exists:
+        # Nothing to do
         console.print(f"Using existing target schema file: {local_schema_path}")
-        return yaml.safe_load(local_schema_path.read_text())
+        return None
+
+    # Get target schema URL
+    target_schema_url = config.get("target_dbt_schema_url")
+    if not target_schema_url:
+        raise ValueError("Error: target_dbt_schema_url not defined in config.yml")
+
+    # Download target schema
+    console.print(f"Downloading target schema to {local_schema_path}...")
+    try:
+        response = requests.get(target_schema_url)
+        response.raise_for_status()
+        local_schema_path.write_text(response.text)
+        console.print(f"Downloaded target schema to {local_schema_path}", style="green")
+        return
+
+    except Exception as e:
+        raise FileNotFoundError(f"Error downloading target schema: {e}") from e
 
 
 def find_table_schema(target_schema: dict[str, Any], table_name: str) -> dict[str, Any] | None:
@@ -98,7 +100,7 @@ def create_mapping_structure(
     source_name: str,
     project_name: str,
     table_name: str,
-    table_schema: dict[str, Any],
+    table_schema: models.DbtSourceTable,
 ) -> dict[str, Any]:
     """Create mapping structure for a table.
 
@@ -111,20 +113,24 @@ def create_mapping_structure(
     Returns:
         Mapping structure dictionary
     """
-    return {
+    result = {
         "domain": f"{source_name}.{project_name}",
         "transforms": [
             {
                 "name": table_name,
-                "display_name": f"{table_schema.get('description', table_name)}",
-                "from": [{f"{table_name}s": f"airbyte_raw_{source_name}.{table_name}s"}],
+                "display_name": f"{table_schema.description}",
+                "from": [{"MISSING": "MISSING"}],
                 "fields": {},
             },
         ],
     }
+    return _add_fields_to_mapping(result, table_schema)
 
 
-def add_fields_to_mapping(mapping: dict[str, Any], table_schema: dict[str, Any]) -> dict[str, Any]:
+def _add_fields_to_mapping(
+    mapping: dict[str, Any],
+    table_schema: models.DbtSourceTable,
+) -> dict[str, Any]:
     """Add fields with MISSING expressions to mapping.
 
     Args:
@@ -135,9 +141,9 @@ def add_fields_to_mapping(mapping: dict[str, Any], table_schema: dict[str, Any])
         Updated mapping dictionary with fields added
     """
     fields_dict = mapping["transforms"][0]["fields"]
-    for column in table_schema.get("columns", []):
-        field_name = column.get("name")
-        description = column.get("description", "")
+    for column in table_schema.columns:
+        field_name = column.name
+        description = column.description
 
         # Skip missing field names
         if not field_name:
@@ -147,12 +153,45 @@ def add_fields_to_mapping(mapping: dict[str, Any], table_schema: dict[str, Any])
     return mapping
 
 
+def generate_mapping_file(
+    source_name: str,
+    project_name: str,
+    table_name: str,
+    *,
+    parent_folder: Path,
+    if_not_exists: bool = False,
+) -> Path | None:
+    """Generate a scaffold mapping file for a table."""
+    mapping_file = parent_folder / f"{table_name}.yml"
+    if mapping_file.exists() and if_not_exists:
+        console.print(f"Skipping {table_name}: Mapping file already exists", style="blue")
+        return None
+
+    dbt_source_file_path = resource_paths.get_dbt_sources_requirements_path(
+        source_name=source_name,
+        project_name=project_name,
+    )
+    # Find table schema in target_schema
+    table_schema: models.DbtSourceFile = models.DbtSourceFile.from_file(
+        dbt_source_file_path,
+    ).get_table(table_name)
+
+    # Create mapping structure
+    mapping = create_mapping_structure(source_name, project_name, table_name, table_schema)
+
+    # Write mapping file
+    mapping_file.write_text(yaml.dump(mapping, default_flow_style=False, sort_keys=False))
+
+    console.print(f"Created mapping file for {table_name}", style="green")
+    return mapping_file
+
+
 def generate_mapping_files(
     source_name: str,
     project_name: str,
     target_tables: list[str],
     target_schema: dict[str, Any],
-    output_path: Path,
+    parent_folder: Path,
 ) -> list[str]:
     """Generate mapping files for target tables.
 
@@ -169,28 +208,15 @@ def generate_mapping_files(
     created_files = []
     for table_name in target_tables:
         # Check if mapping file already exists
-        mapping_file = output_path / f"{table_name}.yml"
-        if mapping_file.exists():
-            console.print(f"Skipping {table_name}: Mapping file already exists", style="blue")
-            continue
-
-        # Find table schema in target_schema
-        table_schema = find_table_schema(target_schema, table_name)
-        if not table_schema:
-            console.print(f"Warning: Schema not found for table {table_name}", style="yellow")
-            continue
-
-        # Create mapping structure
-        mapping = create_mapping_structure(source_name, project_name, table_name, table_schema)
-
-        # Add fields with MISSING expressions
-        mapping = add_fields_to_mapping(mapping, table_schema)
-
-        # Write mapping file
-        mapping_file.write_text(yaml.dump(mapping, default_flow_style=False, sort_keys=False))
-
-        created_files.append(str(mapping_file))
-        console.print(f"Created mapping file for {table_name}", style="green")
+        mapping_file = generate_mapping_file(
+            source_name,
+            project_name,
+            table_name,
+            table_schema=find_table_schema(target_schema, table_name),
+            parent_folder=parent_folder,
+        )
+        if mapping_file:
+            created_files.append(mapping_file)
 
     return created_files
 

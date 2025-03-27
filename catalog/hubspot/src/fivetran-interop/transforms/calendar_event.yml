@@ -1,0 +1,102 @@
+domain: hubspot.fivetran-interop
+transforms:
+- name: calendar_event
+  display_name: Each record represents a calendar event.
+  from:
+  - MISSING: MISSING
+  fields:
+    _fivetran_synced:
+      expression: MISSING
+      description: '{{ doc("_fivetran_synced") }}'
+    avatar_url:
+      expression: MISSING
+      description: URL of image associated with social media event.
+    campaign_guid:
+      expression: MISSING
+      description: Value of campaign GUID associated with Task.
+    category:
+      expression: MISSING
+      description: 'Type of event. If the event type is PUBLISHING_TASK, it is one
+        of BLOG_POST, EMAIL, LANDING_PAGE, CUSTOM.
+
+        If event type is SOCIAL, it is one of twitter, facebook, linkedin, googlepluspages.
+
+        If event type is CONTENT, it is one of email, recurring-email, blog-post,
+        landing-page, legacy-page, site-page.
+
+        '
+    category_id:
+      expression: MISSING
+      description: 'For event type of PUBLISHING_TASK, a numeric value corresponding
+        to the type of task; one of 3 (BLOG_POST), 2 (EMAIL), 1 (LANDING_PAGE), 0
+        (CUSTOM).
+
+        For event type of SOCIAL, this is 0.
+
+        If event type is CONTENT, it is one of 2 (email, recurring-email), 3 (blog-post),
+        1 (landing-page), 5 (legacy-page), 4 (site-page).
+
+        '
+    content_group_id:
+      expression: MISSING
+      description: 'The ID of the content group (aka blog) that the associated Blog
+        Post belongs to, if any.
+
+        Otherwise null. Only populated for single task GETs and for Blog Post Tasks.
+
+        '
+    content_id:
+      expression: MISSING
+      description: ID value of the COS content object associated with the event, null
+        for social or if nothing associated.
+    created_by:
+      expression: MISSING
+      description: HubSpot ID of the user that the event was created by.
+    description:
+      expression: MISSING
+      description: Description of Event.
+    event_date:
+      expression: MISSING
+      description: If task, When the task is set to be due, otherwise when the event
+        is/ was scheduled for; in milliseconds since the epoch.
+    event_type:
+      expression: MISSING
+      description: Type of calendar event; for tasks this is PUBLISHING_TASK, for
+        COS Items, this is CONTENT, for social media events, this is SOCIAL
+    id:
+      expression: MISSING
+      description: The unique ID of the task.
+    is_recurring:
+      expression: MISSING
+      description: Whether the event is recurring.
+    name:
+      expression: MISSING
+      description: Name of Event.
+    owner_id:
+      expression: MISSING
+      description: TASK - HubSpot ID of the user that the task is assigned to.
+    portal_id:
+      expression: MISSING
+      description: '{{ doc("portal_id") }}'
+    preview_key:
+      expression: MISSING
+      description: Preview key of content object; used for showing previews of unpublished
+        items.
+    social_display_name:
+      expression: MISSING
+      description: Social media full name associate with event.
+    social_username:
+      expression: MISSING
+      description: Social media user name associated with event.
+    state:
+      expression: MISSING
+      description: For type publishing task, value of TODO or DONE, for others, a
+        value of SCHEDULED, PUBLISHED, PUBLISHED_OR_SCHEDULED.
+    topic_ids:
+      expression: MISSING
+      description: The list of IDs of topics associated with the associated Blog Post,
+        if any. Otherwise null. Only populated for single task GETs and for Blog Post
+        Tasks.
+    url:
+      expression: MISSING
+      description: Public URL of content item.

@@ -37,7 +37,7 @@ class DbtSourceColumn(BaseModel):
     description: str | None = None
     """A description of the column."""
 
-    data_type: str
+    data_type: str | None = None
     """The data type of the column."""
 
 
@@ -52,6 +52,58 @@ class DbtSourceTable(BaseModel):
 
     columns: list[DbtSourceColumn]
     """The columns in the table."""
+
+    @classmethod
+    def from_dict(cls, data: dict) -> Self:
+        """Create a DbtSourceTable from a dictionary."""
+        return cls(
+            name=data["name"],
+            description=data.get("description", None),  # noqa: SIM910  # I disagree with this rule
+            columns=[DbtSourceColumn(**column) for column in data["columns"]],
+        )
+
+    def to_dict(self) -> dict:
+        """Convert the DbtSourceTable to a dictionary."""
+        return {
+            "name": self.name,
+            "description": self.description,
+            "columns": [column.model_dump() for column in self.columns],
+        }
+
+
+class DbtSourceFile(BaseModel):
+    """Represents a dbt source file."""
+
+    source_name: str
+    """The name of the source."""
+
+    source_tables: list[DbtSourceTable]
+    """The sources in the file."""
+
+    @classmethod
+    def from_file(cls, file_path: Path) -> Self:
+        """Create a DbtSourceFile from a file."""
+        file_data = yaml.safe_load(file_path.read_text())
+        sources = file_data["sources"]
+        if len(sources) != 1:
+            raise ValueError("Expected exactly one source in the file")
+
+        source = sources[0]
+        return cls(
+            source_name=source["name"],
+            source_tables=[DbtSourceTable.from_dict(table) for table in source["tables"]],
+        )
+
+    def get_table(self, table_name: str) -> DbtSourceTable:
+        """Get a table from the source file."""
+        table = next(
+            (table for table in self.source_tables if table.name == table_name),
+            None,
+        )
+        if not table:
+            raise ValueError(f"Table {table_name} not found in source file")
+
+        return table
 
 
 class FieldMapping(BaseModel):

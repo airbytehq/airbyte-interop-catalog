@@ -2,44 +2,29 @@
 
 import shutil
 from pathlib import Path
-from typing import Any
 
 import click
 import yaml
 from rich.console import Console
 
-from morph.ai import models
+from morph.ai import map, models
 from morph.ai.eval import get_table_mapping_eval
-from morph.ai.map import (
-    change_mapping_source_table,
-    get_best_match_source_stream_name,
-    populate_missing_mappings,
-)
-from morph.ai.models import (
-    FieldMapping,
-    TableMapping,
-    print_table_mapping_analysis,
-)
 from morph.utils import resource_paths
 from morph.utils.airbyte_catalog import write_catalog_file
 from morph.utils.dbt_source_files import (
     generate_dbt_sources_yml_from_airbyte_catalog,
 )
 from morph.utils.lock_file import generate_lock_file_for_project
+from morph.utils.logic import if_none
 from morph.utils.mapping_to_dbt_models import generate_dbt_package
 from morph.utils.transform_scaffold import (
+    download_target_schema,
     generate_mapping_files,
-    get_target_schema,
     load_config,
     report_results,
 )
 
 console = Console()
-
-
-def _if_none(input: Any, default: bool | None, /) -> Any:
-    """Helper function to return input if it is not None, otherwise return default."""
-    return input if input is not None else default
 
 
 @click.group()
@@ -283,11 +268,19 @@ def generate_transform_scaffold(
     if not config or not target_tables:
         return
 
-    target_schema = get_target_schema(
+    download_target_schema(
         source_name=source_name,
         project_name=project_name,
         config=config,
+        if_not_exists=True,
     )
+    target_schema = yaml.safe_load(
+        resource_paths.get_dbt_sources_requirements_path(
+            source_name=source_name,
+            project_name=project_name,
+        ).read_text(),
+    )
+
     if not target_schema:
         return
 
@@ -338,11 +331,19 @@ def generate_lock_file(
         console.print(f"Error: Could not load config from {config_file}", style="bold red")
         return
 
-    target_schema = get_target_schema(
+    download_target_schema(
         source_name=source_name,
         project_name=project_name,
         config=config,
+        if_not_exists=True,
     )
+    target_schema = yaml.safe_load(
+        resource_paths.get_dbt_sources_requirements_path(
+            source_name=source_name,
+            project_name=project_name,
+        ).read_text(),
+    )
+
     if not target_schema:
         console.print("Error: Could not load target schema", style="bold red")
         return
@@ -401,10 +402,10 @@ def generate_project(
     no_lock_file: bool | None = None,
 ) -> None:
     """Generate a project scaffold for a new connector, or update an existing one."""
-    no_airbyte_catalog = _if_none(no_airbyte_catalog, False)
-    no_transforms = _if_none(no_transforms, False)
-    no_dbt_project = _if_none(no_dbt_project, False)
-    no_lock_file = _if_none(no_lock_file, False)
+    no_airbyte_catalog = if_none(no_airbyte_catalog, False)
+    no_transforms = if_none(no_transforms, False)
+    no_dbt_project = if_none(no_dbt_project, False)
+    no_lock_file = if_none(no_lock_file, False)
 
     # Validate input arguments
     if not source_name or not project_name:
@@ -470,11 +471,11 @@ def eval_project_mappings(
         mapping_data = yaml.safe_load(yaml_file.read_text())
 
         # Extract fields from dbt transform format
-        fields: list[FieldMapping] = []
+        fields: list[models.FieldMapping] = []
         for transform in mapping_data.get("transforms", []):
             for field_name, field_data in transform.get("fields", {}).items():
                 fields.append(
-                    FieldMapping(
+                    models.FieldMapping(
                         name=field_name,
                         expression=field_data.get("expression", ""),
                         description=field_data.get("description", ""),
@@ -489,7 +490,7 @@ def eval_project_mappings(
         table_mapping_eval = get_table_mapping_eval(fields)
 
         # Print analysis
-        print_table_mapping_analysis(
+        models.print_table_mapping_analysis(
             table_mapping_eval=table_mapping_eval,
             fields=fields,
             title=f"Mapping Confidence Analysis - {yaml_file.name}",
@@ -521,104 +522,63 @@ def suggest_table_mappings(
     PROJECT_NAME is the name of the project (defaults to fivetran-interop)
     TARGET_TABLE is the name of the target table to suggest mappings for
     """
-    auto_confirm = _if_none(auto_confirm, False)
-
-    if not target_table:
-        console.print("Error: --target-table is required", style="bold red")
-        return
-
-    # Find the YAML file
-    yaml_file = resource_paths.get_transform_file(
+    map.generate_table_mappings(
         source_name,
-        project_name=project_name,
-        transform_name=target_table,
+        project_name,
+        target_table=target_table,
+        source_table=source_table,
+        auto_confirm=auto_confirm,
     )
 
-    if not yaml_file.exists():
-        console.print(f"[yellow]No YAML file found for target table {target_table}[/yellow]")
-        return
 
-    # Extract fields from dbt transform format
-    current_mapping = TableMapping.read_from_transform_file(yaml_file)
-    print(current_mapping)
-
-    # Get all source schemas
-    dbt_source_file_path = resource_paths.get_generated_sources_yml_path(
+@main.command()
+@click.argument("source_name")
+@click.argument("project_name", default="fivetran-interop")
+@click.option("--auto-confirm", is_flag=True, help="Automatically confirm mappings")
+def generate_missing_mappings(
+    source_name: str,
+    project_name: str = "fivetran-interop",
+    *,
+    auto_confirm: bool | None = None,
+) -> None:
+    """Generate missing mappings for a project."""
+    requirements_dbt_source_file = resource_paths.get_dbt_sources_requirements_path(
         source_name=source_name,
         project_name=project_name,
     )
-    if not dbt_source_file_path.exists():
-        generate_dbt_sources_yml_from_airbyte_catalog(
-            source_name=source_name,
-            project_name=project_name,
-        )
-
-    if not dbt_source_file_path.exists():
-        console.print(
-            f"[red]Error: Could not generate dbt sources.yml file at {dbt_source_file_path}[/red]",
-        )
+    if not requirements_dbt_source_file.exists():
+        console.print(f"Error: {requirements_dbt_source_file} does not exist", style="bold red")
         return
 
-    if not source_table:
-        # We need the AI to suggest a source table
-
-        target_table_schemas = models.SourceTableSummary.from_dbt_source_file(
-            resource_paths.get_requirements_dir(
-                source_name=source_name,
-                project_name=project_name,
-            )
-            / "src_facebook_ads.yml",  # TODO: Make this dynamic
+    dbt_requirements_file: models.DbtSourceFile = models.DbtSourceFile.from_file(
+        requirements_dbt_source_file,
+    )
+    target_tables: list[str] = []
+    for target_table in dbt_requirements_file.source_tables:
+        transform_file = resource_paths.get_transform_file(
+            source_name=source_name,
+            project_name=project_name,
+            transform_name=target_table.name,
         )
-        target_table_schema = next(
-            (t for t in target_table_schemas if t.name == target_table),
-            None,
-        )
-        if not target_table_schema:
-            console.print(f"[red]Error: Could not find target table {target_table}[/red]")
-            return
+        if not transform_file.exists():
+            target_tables.append(target_table.name)
 
-        source_tables: list[models.SourceTableSummary] = (
-            models.SourceTableSummary.from_dbt_source_file(
-                dbt_source_file_path,
-            )
-        )
+    if not target_tables:
+        console.print("All tables are up to date. Exiting.", style="bold green")
+        return
 
-        suggested_source_table = get_best_match_source_stream_name(
-            target_schema=target_table,
-            source_tables=source_tables,
-        )
-        source_table = suggested_source_table.suggested_source_table_name
+    console.print(
+        f"Generating missing mappings for {len(target_tables)} tables: {', '.join(target_tables)}..."
+    )
 
-    # Ask user to confirm mapping
-    confirm_mapping = "y"
-    if not auto_confirm:
-        confirm_mapping = input(
-            f"The table is currently mapped to `{current_mapping.source_stream_name}`. "
-            f"Do you want to apply the proposed mapping to use `{source_table}` instead? "
-            "All existing mappings will be reset to `MISSING` and a new set of mappings will be generated. "
-            "Continue? (y/n)",
-        )
-
-    if confirm_mapping == "y":
-        print("Mapping confirmed.")
-        # Apply mapping
-        # Update transform file
-        change_mapping_source_table(
+    for target_table in target_tables:
+        console.print(f"Generating missing mappings for {target_table}...")
+        map.generate_table_mappings(
             source_name=source_name,
             project_name=project_name,
             transform_name=target_table,
-            new_source_table=source_table,
+            auto_confirm=auto_confirm,
         )
-        populate_missing_mappings(
-            source_name=source_name,
-            project_name=project_name,
-            transform_name=target_table,
-        )
-        # Update lock file
-        # Update dbt project
-    else:
-        print("Mapping rejected.")
-
 
 if __name__ == "__main__":
     main()
