@@ -1,17 +1,19 @@
-from marvin import ai_fn
+"""AI functions for Morph."""
+
+from marvin import ai_fn  # type: ignore
 
 from morph import models
 from morph.utils.retries import with_retry
 
 
 @ai_fn
-def _evaluate_mapping_confidence(
+def evaluate_mapping_confidence(
     mappings: list[models.FieldMapping],
 ) -> models.TableMappingEval:
     """Evaluate the confidence of a field mapping configuration.
 
     Args:
-        fields: List of field mappings to evaluate
+        mappings: List of field mappings to evaluate
 
     Returns:
         TableMappingEval object containing:
@@ -20,7 +22,7 @@ def _evaluate_mapping_confidence(
         - field_mapping_evals: Individual confidence scores per field
     """
     # This function will be implemented by Marvin AI
-    pass
+    ...
 
 
 @ai_fn
@@ -41,7 +43,7 @@ def select_best_match_source_schema(
         A SourceTableMappingTopTwoSuggestions object.
     """
     # This function will be implemented by Marvin AI
-    pass
+    ...
 
 
 @with_retry(max_retries=3)
@@ -64,7 +66,7 @@ def generate_mappings(
         - field_mapping_confidence_scores: The confidence scores for the mapping of fields from the source stream to the target table.
     """
     # This function will be implemented by Marvin AI
-    pass
+    ...
 
 
 @ai_fn
@@ -78,4 +80,4 @@ def infer_best_match_source_stream_name_short_list(
     meaning, and structure.
     """
     # This function will be implemented by Marvin AI
-    pass
+    ...

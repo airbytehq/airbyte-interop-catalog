@@ -218,8 +218,6 @@ class DbtSourceFile(BaseModel):
         Returns:
             A DbtSourceFile instance
         """
-        import json
-
         catalog_path = Path(catalog_file)
         catalog = json.loads(catalog_path.read_text())
 

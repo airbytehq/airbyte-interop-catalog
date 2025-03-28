@@ -32,7 +32,6 @@ def json_schema_to_dbt_column(
     This function is maintained for backward compatibility.
     New code should use DbtSourceColumn.from_json_schema() instead.
     """
-    from morph.models import DbtSourceColumn
 
     dbt_column = DbtSourceColumn.from_json_schema(property_name, property_schema)
     return dbt_column.model_dump(exclude={"subcolumns": True})
@@ -40,7 +39,6 @@ def json_schema_to_dbt_column(
 
 def json_schema_to_dbt_table(schema_name: str, schema_data: dict[str, Any]) -> dict[str, Any]:
     """Convert a JSON schema to a dbt table definition."""
-    from morph.models import DbtSourceColumn, DbtSourceTable
 
     table = {"name": schema_name}
 
@@ -123,41 +121,32 @@ def generate_dbt_sources_yml_from_airbyte_catalog(
     project_name: str = DEFAULT_PROJECT_NAME,
     catalog_file: Path | None = None,
     output_file: Path | None = None,
-    database: str | None = None,
-    schema: str | None = None,
-) -> dict[str, Any]:
+) -> None:
     """Generate a dbt sources.yml structure from an Airbyte catalog file."""
     if not catalog_file:
         catalog_file = resource_paths.get_generated_catalog_path(source_name, project_name)
 
-    # Validate input file exists
-    if not Path(catalog_file).exists():
+    # Validate input path exists
+    if not catalog_file.exists():
         raise ValueError(f"Error: {catalog_file} does not exist")
 
+    if not catalog_file.name.endswith(".json"):
+        raise ValueError(f"Error: {catalog_file} is not a valid JSON file")
+
+    dbt_file: DbtSourceFile = DbtSourceFile.from_airbyte_catalog_json(
+        catalog_file=catalog_file,
+        source_name=source_name,
+    )
+
     # Calculate output path
-    output_path = (
-        Path(output_file)
-        if output_file
-        else resource_paths.get_generated_source_yml_path(
-            source_name=source_name,
-            project_name=project_name,
-        )
+    output_path = output_file or resource_paths.get_generated_source_yml_path(
+        source_name=source_name,
+        project_name=project_name,
     )
-
-    sources_yml = parse_airbyte_catalog_to_dbt_sources_format(
-        catalog_file,
-        source_name,
-        database,
-        schema,
-    )
-
-    sources_yml_with_header = f"{HEADER_COMMENT}\n{text_utils.dump_yaml_str(sources_yml)}"
 
     # Write to file
-    output_path.write_text(sources_yml_with_header)
+    output_path.write_text(f"{HEADER_COMMENT}\n{text_utils.dump_yaml_str(dbt_file.to_dict())}")
     console.print(f"Generated sources.yml at {output_path}")
-
-    return sources_yml
 
 
 def parse_airbyte_catalog_to_dbt_sources_format(
@@ -172,8 +161,6 @@ def parse_airbyte_catalog_to_dbt_sources_format(
     New code should use DbtSourceFile.from_airbyte_catalog_json() instead.
     """
     try:
-        from morph.models import DbtSourceFile
-
         dbt_file = DbtSourceFile.from_airbyte_catalog_json(
             catalog_file=catalog_file,
             source_name=source_name,

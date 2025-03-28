@@ -9,7 +9,7 @@ from rich.console import Console
 from morph import models
 from morph.ai import map
 from morph.ai.eval import get_table_mapping_eval
-from morph.constants import DEFAULT_PROJECT_NAME, HEADER_COMMENT
+from morph.constants import DEFAULT_PROJECT_NAME
 from morph.utils import resource_paths, text_utils
 from morph.utils.airbyte_catalog import write_catalog_file
 from morph.utils.dbt_source_files import (
@@ -35,26 +35,26 @@ def main() -> None:
 
 
 @main.command()
-@click.argument(
-    "catalog_file",
+@click.argument("source-name", type=str)
+@click.option(
+    "--project-name",
+    type=str,
+    default=DEFAULT_PROJECT_NAME,
+)
+@click.option(
+    "--catalog_file",
     type=click.Path(exists=True, path_type=Path),
 )
-@click.option("--source-name", type=str, help="Name of the source (e.g., 'hubspot')")
 @click.option(
     "--output-file",
-    help="Output file path",
     type=click.Path(path_type=Path),
 )
-@click.option("--database", type=str, help="Database name")
-@click.option("--schema", type=str, help="Schema name")
-def airbyte_catalog_to_dbt_sources_yml(
+def generate_airbyte_dbt_sources_yml(
     source_name: str,
     project_name: str = DEFAULT_PROJECT_NAME,
     *,
     catalog_file: Path | None = None,
     output_file: Path | None = None,
-    database: str | None = None,
-    schema: str | None = None,
 ) -> None:
     """Convert JSON schema files or Airbyte catalogs to a dbt sources.yml file.
 
@@ -68,8 +68,6 @@ def airbyte_catalog_to_dbt_sources_yml(
         project_name=project_name,
         catalog_file=catalog_file,
         output_file=output_file,
-        database=database,
-        schema=schema,
     )
 
 
@@ -572,51 +570,6 @@ def generate_missing_mappings(
             transform_name=target_table,
             auto_confirm=auto_confirm,
         )
-
-
-@main.command()
-@click.argument("catalog_path", type=click.Path(exists=True))
-@click.option("--source-name", default="default_source", help="Name for the dbt source")
-@click.option("--database", help="Database name for the source")
-@click.option("--schema", help="Schema name for the source")
-@click.option("--output", default="sources.yml", help="Output file path")
-def airbyte_catalog_to_dbt(
-    catalog_path: str,
-    source_name: str,
-    database: str | None,
-    schema: str | None,
-    output: str,
-) -> None:
-    """Convert JSON schema files or Airbyte catalog to dbt sources.yml format."""
-    catalog_path_obj = Path(catalog_path)
-
-    # Validate input path exists
-    if not catalog_path_obj.exists():
-        raise ValueError(f"Error: {catalog_path} does not exist")
-
-    if not catalog_path_obj.is_file() or not catalog_path_obj.name.endswith(".json"):
-        raise ValueError(f"Error: {catalog_path} is not a valid JSON file")
-
-    from morph.models import DbtSourceFile
-
-    dbt_file = DbtSourceFile.from_airbyte_catalog_json(
-        catalog_file=catalog_path,
-        source_name=source_name,
-    )
-
-    sources_yml = dbt_file.to_dict()
-
-    if (database or schema) and sources_yml.get("sources"):
-        if database:
-            sources_yml["sources"][0]["database"] = database
-        if schema:
-            sources_yml["sources"][0]["schema"] = schema
-
-    # Write to output file with header comment
-    output_path = Path(output)
-    output_path.write_text(HEADER_COMMENT + text_utils.dump_yaml_str(sources_yml))
-
-    console.print(f"Generated dbt sources.yml at {output}")
 
 
 if __name__ == "__main__":
