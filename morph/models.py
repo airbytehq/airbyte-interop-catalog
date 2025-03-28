@@ -9,7 +9,7 @@ from rich.console import Console
 from rich.table import Table
 from typing_extensions import Self
 
-from morph.utils import text_utils
+from morph.utils import resource_paths, text_utils
 from morph.utils.rich_utils import rich_formatted_confidence
 
 console = Console()
@@ -135,6 +135,35 @@ class DbtSourceTable(BaseModel):
     columns: list[DbtSourceColumn]
     """The columns in the table."""
 
+    @property
+    def columns_and_subcolumns(self) -> list[DbtSourceColumn]:
+        """Get all columns and subcolumns in the table."""
+
+        def get_columns_and_subcolumns(
+            column: DbtSourceColumn,
+            parent_str: str = "",
+        ) -> list[DbtSourceColumn]:
+            """Recursively get all columns and subcolumns."""
+            columns: list[DbtSourceColumn] = [
+                column.model_copy(update={"name": parent_str + column.name}),
+            ]
+            for subcolumn in column.subcolumns or []:
+                columns.extend(
+                    get_columns_and_subcolumns(
+                        column=subcolumn,
+                        parent_str=parent_str + column.name + ".",
+                    ),
+                )
+            return columns
+
+        result: list[DbtSourceColumn] = []
+        for column in self.columns:
+            result.extend(
+                get_columns_and_subcolumns(column),
+            )
+
+        return result
+
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> Self:
         """Create a DbtSourceTable from a dictionary."""
@@ -192,6 +221,14 @@ class DbtSourceFile(BaseModel):
 
     source_tables: list[DbtSourceTable]
     """The sources in the file."""
+
+    def get_source_table(self, table_name: str) -> DbtSourceTable:
+        """Get a source table by name."""
+        matches = [table for table in self.source_tables if table.name == table_name]
+        if not matches:
+            raise ValueError(f"Table '{table_name}' not found in source file.")
+
+        return matches[0]
 
     @classmethod
     def from_file(cls, file_path: Path) -> Self:
@@ -365,6 +402,14 @@ class TableMapping(BaseModel):
     field_mappings: list[FieldMapping]
     """The field mappings for the table."""
 
+    def get_file_path(self) -> Path:
+        """Get the file path for the transform file."""
+        return resource_paths.get_transform_file(
+            source_name=self.source_name,
+            project_name=self.project_name,
+            transform_name=self.transform_name,
+        )
+
     @classmethod
     def from_file(cls, transform_file: Path) -> Self:
         """Create a TableMapping from a transform file."""
@@ -430,6 +475,50 @@ class TableMapping(BaseModel):
             output_dict,
             transform_file,
         )
+
+    def get_missing_field_mappings(
+        self,
+    ) -> list[str]:
+        """Find names of target fields marked as 'MISSING' in a transform.
+
+        Returns:
+            List of fields marked as 'MISSING'.
+        """
+        missing_fields: list[str] = []
+
+        for field in self.field_mappings:
+            expression = field.expression
+
+            # Check if expression is "MISSING"
+            if expression == "MISSING":
+                missing_fields.append(field.name)
+
+        return sorted(missing_fields)
+
+    def get_mapped_fields(
+        self,
+        *,
+        source_alias: str | None = None,
+    ) -> list[FieldMapping]:
+        """Find mapped fields, optionally filtered by source alias.
+
+        Fields that are marked as 'MISSING' are always excluded.
+
+        Args:
+            source_alias: Optional source alias to filter field mappings
+
+        Returns:
+            List of mapped field mappings, excluding MISSING expressions
+        """
+        if source_alias:
+            return [
+                f
+                for f in self.field_mappings
+                if str(f.expression) != "MISSING"
+                and str(f.expression).startswith(f"{source_alias}.")
+            ]
+
+        return [f for f in self.field_mappings if str(f.expression) != "MISSING"]
 
 
 class FieldMappingEval(BaseModel):
@@ -497,12 +586,13 @@ class SourceTableSummary(BaseModel):
         source_file: Path,
     ) -> list[Self]:
         """Create a SourceStreamSummary from a DbtSourceTable."""
-        source_tables = text_utils.load_yaml_file(source_file)["sources"][0]["tables"]
+        dbt_source_file: DbtSourceFile = DbtSourceFile.from_file(file_path=source_file)
+        source_tables: list[DbtSourceTable] = dbt_source_file.source_tables
         return [
             cls(
-                name=table["name"],
-                description=table.get("description", None),
-                column_names=[column["name"] for column in table["columns"]],
+                name=table.name,
+                description=table.description,
+                column_names=[column.name for column in table.columns_and_subcolumns],
             )
             for table in source_tables
         ]

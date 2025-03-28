@@ -74,7 +74,7 @@ def infer_best_match_source_stream_name(
     source_tables: list[models.SourceTableSummary],
     *,
     auto_confirm: bool | None = None,
-) -> models.SourceTableMappingSuggestion:
+) -> models.SourceTableMappingTopTwoSuggestions:
     """Get the name of the best match source table based on the source and target table summaries.
 
     Args:
@@ -82,7 +82,7 @@ def infer_best_match_source_stream_name(
         source_tables: A list of source tables to choose from
 
     Returns:
-        A SourceTableMappingSuggestion object.
+        A SourceTableMappingTopTwoSuggestions object.
 
     Raises:
         Exception: If all retries fail
@@ -244,16 +244,19 @@ def infer_table_mappings(  # noqa: PLR0912 (too many branches)
         )
         return
 
+    summary_text = ""
     if not source_table:
         # We need the AI to suggest a source table
 
-        target_table_schemas = models.SourceTableSummary.from_dbt_source_file(
-            resource_paths.get_dbt_sources_requirements_path(
-                source_name=source_name,
-                project_name=project_name,
-            ),
+        target_table_schemas: list[models.SourceTableSummary] = (
+            models.SourceTableSummary.from_dbt_source_file(
+                resource_paths.get_dbt_sources_requirements_path(
+                    source_name=source_name,
+                    project_name=project_name,
+                ),
+            )
         )
-        target_table_schema = next(
+        target_table_schema: models.SourceTableSummary | None = next(
             (t for t in target_table_schemas if t.name == transform_name),
             None,
         )

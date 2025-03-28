@@ -12,14 +12,14 @@ transforms:
           can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics`
           var.
       _7_d_click:
-        expression: ads_insights.actions
+        expression: ads_insights.ad_click_actions
         description:
           Conversion metric value using an attribution window of "7 days
           after clicking the ad". Not included in downstream models by default, but
           can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics`
           var.
       _28_d_click:
-        expression: ads_insights.actions
+        expression: ads_insights.action_values
         description:
           Conversion metric value using an attribution window of "28 days
           after clicking the ad". Deprecated by Facebook due to digital privacy initiatives.
@@ -46,7 +46,7 @@ transforms:
         expression: ads_insights.date_start
         description: The date of the reported performance.
       index:
-        expression: ads_insights.converted_product_value
+        expression: ads_insights.auction_max_competitor_bid
         description:
           Index reflecting the `action_type` tracked for this ad on this
           day. Column of not much consequence.
