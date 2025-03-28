@@ -14,6 +14,8 @@ from morph.utils.rich_utils import rich_formatted_confidence
 
 console = Console()
 
+COMPLEX_DATA_TYPE = "json"  # Type for complex objects with subcolumns
+
 
 class NoConfidenceChoice(BaseModel):
     """Represents a choice to not make a selection.
@@ -66,7 +68,7 @@ class DbtSourceColumn(BaseModel):
             "integer": "integer",
             "number": "float",
             "boolean": "boolean",
-            "object": "variant",
+            "object": COMPLEX_DATA_TYPE,
             "array": "array",
         }
 
@@ -251,7 +253,7 @@ class DbtSourceFile(BaseModel):
                 ),
                 DbtSourceColumn(
                     name="_airbyte_meta",
-                    data_type="variant",
+                    data_type=COMPLEX_DATA_TYPE,
                     description="Metadata about the record",
                 ),
                 DbtSourceColumn(
