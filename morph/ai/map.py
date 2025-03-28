@@ -5,7 +5,7 @@ from rich.prompt import Prompt
 
 from morph import constants, models
 from morph.ai import functions as ai_fn
-from morph.utils import resource_paths, text_utils
+from morph.utils import dbt_source_files, resource_paths, text_utils
 from morph.utils.logic import if_none
 from morph.utils.retries import with_retry
 from morph.utils.transform_scaffold import generate_empty_mapping_file
@@ -233,7 +233,7 @@ def infer_table_mappings(  # noqa: PLR0912 (too many branches)
         project_name=project_name,
     )
     if not dbt_source_file_path.exists():
-        models.generate_dbt_sources_yml_from_airbyte_catalog(
+        dbt_source_files.generate_dbt_sources_yml_from_airbyte_catalog(
             source_name=source_name,
             project_name=project_name,
         )

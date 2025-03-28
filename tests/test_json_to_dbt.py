@@ -22,7 +22,7 @@ def test_json_schema_to_dbt_column() -> None:
     assert result == {
         "name": "text_col",
         "description": "A text column",
-        "type": "varchar",
+        "data_type": "varchar",
     }
 
     # Test integer type
@@ -30,7 +30,8 @@ def test_json_schema_to_dbt_column() -> None:
     result = json_schema_to_dbt_column("int_col", integer_schema)
     assert result == {
         "name": "int_col",
-        "type": "integer",
+        "data_type": "integer",
+        "description": None,
     }
 
 
@@ -136,13 +137,14 @@ def test_airbyte_catalog_with_additional_columns() -> None:
         with catalog_path.open("w") as f:
             json.dump(catalog_content, f)
 
-        # Parse the catalog
-        from morph.utils.dbt_source_files import parse_airbyte_catalog_to_dbt_sources_format
+        from morph.models import DbtSourceFile
 
-        result = parse_airbyte_catalog_to_dbt_sources_format(
-            str(catalog_path),
+        dbt_file = DbtSourceFile.from_airbyte_catalog_json(
+            catalog_file=catalog_path,
             source_name="test_source",
         )
+
+        result = dbt_file.to_dict()
 
         # Verify the structure and additional columns
         assert "sources" in result
@@ -155,8 +157,8 @@ def test_airbyte_catalog_with_additional_columns() -> None:
         # Check for the additional columns
         columns = {col["name"]: col for col in table["columns"]}
         assert "_airbyte_extracted_at" in columns
-        assert columns["_airbyte_extracted_at"]["type"] == "timestamp"
+        assert columns["_airbyte_extracted_at"]["data_type"] == "timestamp"
         assert "_airbyte_meta" in columns
-        assert columns["_airbyte_meta"]["type"] == "variant"
+        assert columns["_airbyte_meta"]["data_type"] == "json"
         assert "_airbyte_raw_id" in columns
-        assert columns["_airbyte_raw_id"]["type"] == "varchar"
+        assert columns["_airbyte_raw_id"]["data_type"] == "varchar"

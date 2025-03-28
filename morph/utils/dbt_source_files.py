@@ -17,6 +17,7 @@ from typing import Any
 from rich.console import Console
 
 from morph.constants import DEFAULT_PROJECT_NAME, HEADER_COMMENT
+from morph.models import DbtSourceColumn, DbtSourceFile, DbtSourceTable
 from morph.utils import resource_paths, text_utils
 
 console = Console()
@@ -26,52 +27,19 @@ def json_schema_to_dbt_column(
     property_name: str,
     property_schema: dict[str, Any],
 ) -> dict[str, Any]:
-    """Convert a JSON schema property to a dbt column definition."""
-    column = {"name": property_name}
+    """Convert a JSON schema property to a dbt column definition.
 
-    # Map JSON schema types to dbt types
-    type_mapping = {
-        "string": "varchar",
-        "integer": "integer",
-        "number": "float",
-        "boolean": "boolean",
-        "object": "variant",
-        "array": "array",
-    }
+    This function is maintained for backward compatibility.
+    New code should use DbtSourceColumn.from_json_schema() instead.
+    """
 
-    if "type" in property_schema:
-        json_type = property_schema["type"]
-        if isinstance(json_type, list):
-            # Handle multiple types (e.g., ["string", "null"])
-            non_null_types = [t for t in json_type if t != "null"]
-            if non_null_types:
-                column["type"] = type_mapping.get(non_null_types[0], "varchar")
-        else:
-            column["type"] = type_mapping.get(json_type, "varchar")
-
-    # Add description if available
-    if "description" in property_schema:
-        column["description"] = property_schema["description"]
-
-    # Handle format for dates, timestamps, etc.
-    if "format" in property_schema:
-        format_mapping = {
-            "date": "date",
-            "date-time": "timestamp",
-            "time": "time",
-            "email": "varchar",
-            "uri": "varchar",
-        }
-        column["type"] = format_mapping.get(
-            property_schema["format"],
-            column.get("type", "varchar"),
-        )
-
-    return column
+    dbt_column = DbtSourceColumn.from_json_schema(property_name, property_schema)
+    return dbt_column.model_dump(exclude={"subcolumns": True})
 
 
 def json_schema_to_dbt_table(schema_name: str, schema_data: dict[str, Any]) -> dict[str, Any]:
     """Convert a JSON schema to a dbt table definition."""
+
     table = {"name": schema_name}
 
     # Add description if available
@@ -82,10 +50,16 @@ def json_schema_to_dbt_table(schema_name: str, schema_data: dict[str, Any]) -> d
     if "properties" in schema_data:
         columns = []
         for prop_name, prop_schema in schema_data["properties"].items():
-            columns.append(json_schema_to_dbt_column(prop_name, prop_schema))
+            dbt_column = DbtSourceColumn.from_json_schema(prop_name, prop_schema)
+            columns.append(dbt_column)
 
         if columns:
-            table["columns"] = columns  # type: ignore
+            dbt_table = DbtSourceTable(
+                name=schema_name,
+                description=table.get("description"),
+                columns=columns,
+            )
+            return dbt_table.to_dict()
 
     return table
 
@@ -147,92 +121,60 @@ def generate_dbt_sources_yml_from_airbyte_catalog(
     project_name: str = DEFAULT_PROJECT_NAME,
     catalog_file: Path | None = None,
     output_file: Path | None = None,
-    database: str | None = None,
-    schema: str | None = None,
-) -> dict[str, Any]:
+) -> None:
     """Generate a dbt sources.yml structure from an Airbyte catalog file."""
     if not catalog_file:
         catalog_file = resource_paths.get_generated_catalog_path(source_name, project_name)
 
-    # Validate input file exists
-    if not Path(catalog_file).exists():
+    # Validate input path exists
+    if not catalog_file.exists():
         raise ValueError(f"Error: {catalog_file} does not exist")
 
+    if not catalog_file.name.endswith(".json"):
+        raise ValueError(f"Error: {catalog_file} is not a valid JSON file")
+
+    dbt_file: DbtSourceFile = DbtSourceFile.from_airbyte_catalog_json(
+        catalog_file=catalog_file,
+        source_name=source_name,
+    )
+
     # Calculate output path
-    output_path = (
-        Path(output_file)
-        if output_file
-        else resource_paths.get_generated_source_yml_path(
-            source_name=source_name,
-            project_name=project_name,
-        )
+    output_path = output_file or resource_paths.get_generated_source_yml_path(
+        source_name=source_name,
+        project_name=project_name,
     )
-
-    sources_yml = parse_airbyte_catalog_to_dbt_sources_format(
-        catalog_file,
-        source_name,
-        database,
-        schema,
-    )
-
-    sources_yml_with_header = f"{HEADER_COMMENT}\n{text_utils.dump_yaml_str(sources_yml)}"
 
     # Write to file
-    output_path.write_text(sources_yml_with_header)
+    output_path.write_text(f"{HEADER_COMMENT}\n{text_utils.dump_yaml_str(dbt_file.to_dict())}")
     console.print(f"Generated sources.yml at {output_path}")
 
 
 def parse_airbyte_catalog_to_dbt_sources_format(
-    catalog_file: str,
+    catalog_file: str | Path,
     source_name: str,
     database: str | None = None,
     schema: str | None = None,
 ) -> dict[str, Any]:
-    """Generate a dbt sources.yml structure from an Airbyte catalog file."""
+    """Generate a dbt sources.yml structure from an Airbyte catalog file.
+
+    This function is maintained for backward compatibility.
+    New code should use DbtSourceFile.from_airbyte_catalog_json() instead.
+    """
     try:
-        catalog_path = Path(catalog_file)
-        catalog = json.loads(catalog_path.read_text())
+        dbt_file = DbtSourceFile.from_airbyte_catalog_json(
+            catalog_file=catalog_file,
+            source_name=source_name,
+        )
 
-        if "streams" not in catalog:
-            raise ValueError(f"Invalid Airbyte catalog: 'streams' key not found in {catalog_file}")
+        source_dict = dbt_file.to_dict()
 
-        tables = []
-        for stream in catalog["streams"]:
-            if "name" not in stream or "json_schema" not in stream:
-                print(f"Warning: Stream missing required fields in {catalog_file}, skipping")
-                continue
+        if (database or schema) and source_dict.get("sources"):
+            if database:
+                source_dict["sources"][0]["database"] = database
+            if schema:
+                source_dict["sources"][0]["schema"] = schema
 
-            table_name = stream["name"]
-            table = json_schema_to_dbt_table(table_name, stream["json_schema"])
-
-            # Add the three additional Airbyte columns to all streams
-            airbyte_columns = [
-                {
-                    "name": "_airbyte_extracted_at",
-                    "type": "timestamp",
-                    "description": "Timestamp when the record was extracted from the source",
-                },
-                {
-                    "name": "_airbyte_meta",
-                    "type": "variant",
-                    "description": "Metadata about the record",
-                },
-                {
-                    "name": "_airbyte_raw_id",
-                    "type": "varchar",
-                    "description": "Unique identifier for the raw record",
-                },
-            ]
-
-            # Add columns to the table if they don't already exist
-            if "columns" not in table:
-                table["columns"] = []
-
-            table["columns"].extend(airbyte_columns)
-
-            tables.append(table)
-
-        return create_dbt_source(tables, source_name, database, schema)
+        return source_dict
     except Exception as e:
         print(f"Error processing Airbyte catalog {catalog_file}: {e}")
         return create_dbt_source([], source_name, database, schema)

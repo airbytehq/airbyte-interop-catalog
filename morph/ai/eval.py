@@ -32,27 +32,7 @@ def get_table_mapping_eval(
     Raises:
         Exception: If all retries fail
     """
-    latest_exception = None
-
-    # TODO: We should enforce "strict" mode here, so that the LLM always generates valid JSON output.
-    # For now, we retry blindly because the AI is not always reliable at generating the JSON output.
-    max_retries = 5
-    result = None
-    for attempt in range(max_retries):
-        try:
-            result = ai_fn.evaluate_mapping_confidence(field_mappings)
-            break
-        except Exception as e:
-            latest_exception = e
-            if attempt == max_retries - 1:  # Last attempt
-                raise Exception(
-                    f"Failed to evaluate mapping confidence after {max_retries} attempts",
-                ) from e
-
-    if not result:
-        raise latest_exception
-
-    return result
+    return ai_fn.evaluate_mapping_confidence(field_mappings)
 
 
 def print_mapping_eval(
@@ -109,9 +89,9 @@ def print_table_mapping_analysis(
     for field_eval in table_mapping_eval.field_mapping_evals:
         field_data = next((f for f in fields if f.name == field_eval.name), {})
         print_mapping_eval(
-            field_data,
-            field_eval,
-            table,
+            mapping=field_data,
+            eval_result=field_eval,
+            table=table,
         )
 
     # Print results
