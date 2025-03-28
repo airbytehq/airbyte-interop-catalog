@@ -8,7 +8,7 @@ transforms:
         expression: MISSING
         description: '{{ doc("_fivetran_deleted") }}'
       _fivetran_synced:
-        expression: MISSING
+        expression: ticket_pipelines._airbyte_extracted_at
         description: '{{ doc("_fivetran_synced") }}'
       active:
         expression: MISSING
@@ -19,7 +19,7 @@ transforms:
           Used to determine the order in which the stages appear when viewed
           in HubSpot.
       label:
-        expression: MISSING
+        expression: ticket_pipelines.label
         description:
           The human-readable label for the stage. The label is used when
           showing the stage in HubSpot.
@@ -30,8 +30,8 @@ transforms:
         expression: MISSING
         description: Reference to the pipeline.
       created_at:
-        expression: MISSING
+        expression: ticket_pipelines.createdAt
         description: A timestamp representing when the record was created.
       updated_at:
-        expression: MISSING
+        expression: ticket_pipelines.updatedAt
         description: A timestamp representing when the record was updated.

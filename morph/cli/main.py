@@ -522,11 +522,13 @@ def generate_missing_mappings(
             transform_name=target_table.name,
         )
         if transform_file.exists():
-            include_table = False
-            console.print(
-                f"Skipping '{target_table.name}' because it already has mappings.",
-                style="yellow",
-            )
+            transform_def = models.TableMapping.from_file(transform_file)
+            if transform_def.get_mapped_fields():  # Skip if at least some fields are mapped
+                include_table = False
+                console.print(
+                    f"Skipping '{target_table.name}' because it already has mappings.",
+                    style="yellow",
+                )
 
         if include_table and transform_file in skipped_tables:
             include_table = False

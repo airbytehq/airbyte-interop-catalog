@@ -1,226 +1,48 @@
 domain: hubspot.fivetran-interop
 transforms:
-  - display_name: Fivetran Raw 'Company' Model
-    name: company
+  - name: company
     from:
-      - companies: airbyte_raw_hubspot.companies
+      - companies: hubspot.companies
     fields:
-      # Fields in target schema order
       _fivetran_synced:
-        expression: _airbyte_extracted_at
-        description: "Timestamp of when this record was last synced by Fivetran."
+        expression: companies._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
       id:
         expression: companies.id
-        description: "The ID of the company."
+        description: The ID of the company.
       portal_id:
         expression: MISSING
-        description: "The HubSpot account ID."
+        description: '{{ doc("portal_id") }}'
       is_deleted:
         expression: companies.archived
-        description: "Whether the record was deleted."
+        description: '{{ doc("is_deleted") }}'
       property_name:
-        expression: companies.properties_name
-        description: "The name of the company."
+        expression: companies.properties.name
+        description: The name of the company.
       property_description:
-        expression: companies.properties_description
-        description: "A short statement about the company's mission and goals."
+        expression: companies.properties.description
+        description: A short statement about the company's mission and goals.
       property_createdate:
-        expression: companies.properties_createdate
-        description: "The date the company was added to your account."
+        expression: companies.properties.createdate
+        description: The date the company was added to your account.
       property_industry:
-        expression: companies.properties_industry
-        description: "The type of business the company performs."
+        expression: companies.properties.industry
+        description: The type of business the company performs.
       property_address:
-        expression: companies.properties_address
-        description: "The street address of the company."
+        expression: companies.properties.address
+        description: The street address of the company.
       property_address_2:
-        expression: companies.properties_address2
-        description: "Additional address information for the company."
+        expression: companies.properties.address2
+        description: Additional address information for the company.
       property_city:
-        expression: companies.properties_city
-        description: "The city where the company is located."
+        expression: companies.properties.city
+        description: The city where the company is located.
       property_state:
-        expression: companies.properties_state
-        description: "The state where the company is located."
+        expression: companies.properties.state
+        description: The state where the company is located.
       property_country:
-        expression: companies.properties_country
-        description: "The country where the company is located."
+        expression: companies.properties.country
+        description: The country where the company is located.
       property_annualrevenue:
-        expression: companies.properties_annualrevenue
-        description: "The actual or estimated annual revenue of the company."
-
-    annotations:
-      unused_source_fields:
-        companies:
-          # alpha-sorted list of unused properties from the companies schema:
-          - contacts
-          - createdAt
-          - properties
-          - properties_about_us
-          - properties_closedate
-          - properties_custom_company_property
-          - properties_days_to_close
-          - properties_domain
-          - properties_engagements_last_meeting_booked
-          - properties_engagements_last_meeting_booked_campaign
-          - properties_engagements_last_meeting_booked_medium
-          - properties_engagements_last_meeting_booked_source
-          - properties_facebook_company_page
-          - properties_facebookfans
-          - properties_first_contact_createdate
-          - properties_first_contact_createdate_timestamp_earliest_value_78b50eea
-          - properties_first_conversion_date
-          - properties_first_conversion_event_name
-          - properties_first_deal_created_date
-          - properties_founded_year
-          - properties_googleplus_page
-          - properties_hs_additional_domains
-          - properties_hs_all_accessible_team_ids
-          - properties_hs_all_owner_ids
-          - properties_hs_all_team_ids
-          - properties_hs_analytics_first_timestamp
-          - properties_hs_analytics_first_touch_converting_campaign
-          - properties_hs_analytics_first_visit_timestamp
-          - properties_hs_analytics_last_timestamp
-          - properties_hs_analytics_last_timestamp_timestamp_latest_value_4e16365a
-          - properties_hs_analytics_last_touch_converting_campaign
-          - properties_hs_analytics_last_touch_converting_campaign_timestamp_latest_value_81a64e30
-          - properties_hs_analytics_last_visit_timestamp
-          - properties_hs_analytics_last_visit_timestamp_timestamp_latest_value_999a0fce
-          - properties_hs_analytics_latest_source
-          - properties_hs_analytics_latest_source_data_1
-          - properties_hs_analytics_latest_source_data_2
-          - properties_hs_analytics_latest_source_timestamp
-          - properties_hs_analytics_num_page_views
-          - properties_hs_analytics_num_page_views_cardinality_sum_e46e85b0
-          - properties_hs_analytics_num_visits
-          - properties_hs_analytics_num_visits_cardinality_sum_53d952a6
-          - properties_hs_analytics_source
-          - properties_hs_analytics_source_data_1
-          - properties_hs_analytics_source_data_2
-          - properties_hs_annual_revenue_currency_code
-          - properties_hs_avatar_filemanager_key
-          - properties_hs_country_code
-          - properties_hs_created_by_user_id
-          - properties_hs_createdate
-          - properties_hs_csm_sentiment
-          - properties_hs_customer_success_ticket_sentiment
-          - properties_hs_date_entered_customer
-          - properties_hs_date_entered_evangelist
-          - properties_hs_date_entered_lead
-          - properties_hs_date_entered_marketingqualifiedlead
-          - properties_hs_date_entered_opportunity
-          - properties_hs_date_entered_other
-          - properties_hs_date_entered_salesqualifiedlead
-          - properties_hs_date_entered_subscriber
-          - properties_hs_date_exited_customer
-          - properties_hs_date_exited_evangelist
-          - properties_hs_date_exited_lead
-          - properties_hs_date_exited_marketingqualifiedlead
-          - properties_hs_date_exited_opportunity
-          - properties_hs_date_exited_other
-          - properties_hs_date_exited_salesqualifiedlead
-          - properties_hs_date_exited_subscriber
-          - properties_hs_employee_range
-          - properties_hs_ideal_customer_profile
-          - properties_hs_industry_group
-          - properties_hs_is_enriched
-          - properties_hs_is_target_account
-          - properties_hs_keywords
-          - properties_hs_last_booked_meeting_date
-          - properties_hs_last_logged_call_date
-          - properties_hs_last_logged_outgoing_email_date
-          - properties_hs_last_metered_enrichment_timestamp
-          - properties_hs_last_open_task_date
-          - properties_hs_last_sales_activity_date
-          - properties_hs_last_sales_activity_timestamp
-          - properties_hs_last_sales_activity_type
-          - properties_hs_lastmodifieddate
-          - properties_hs_latest_createdate_of_active_subscriptions
-          - properties_hs_latest_meeting_activity
-          - properties_hs_lead_status
-          - properties_hs_linkedin_handle
-          - properties_hs_logo_url
-          - properties_hs_merged_object_ids
-          - properties_hs_notes_last_activity
-          - properties_hs_notes_next_activity_type
-          - properties_hs_num_blockers
-          - properties_hs_num_child_companies
-          - properties_hs_num_contacts_with_buying_roles
-          - properties_hs_num_decision_makers
-          - properties_hs_num_open_deals
-          - properties_hs_object_id
-          - properties_hs_object_source
-          - properties_hs_object_source_detail_1
-          - properties_hs_object_source_detail_2
-          - properties_hs_object_source_detail_3
-          - properties_hs_object_source_id
-          - properties_hs_object_source_label
-          - properties_hs_object_source_user_id
-          - properties_hs_parent_company_id
-          - properties_hs_pinned_engagement_id
-          - properties_hs_pipeline
-          - properties_hs_predictivecontactscore_v2
-          - properties_hs_predictivecontactscore_v2_next_max_max_d4e58c1e
-          - properties_hs_quick_context
-          - properties_hs_read_only
-          - properties_hs_revenue_range
-          - properties_hs_sales_email_last_replied
-          - properties_hs_shared_team_ids
-          - properties_hs_shared_user_ids
-          - properties_hs_target_account
-          - properties_hs_target_account_probability
-          - properties_hs_target_account_recommendation_snooze_time
-          - properties_hs_target_account_recommendation_state
-          - properties_hs_task_label
-          - properties_hs_time_in_customer
-          - properties_hs_time_in_evangelist
-          - properties_hs_time_in_lead
-          - properties_hs_time_in_marketingqualifiedlead
-          - properties_hs_time_in_opportunity
-          - properties_hs_time_in_other
-          - properties_hs_time_in_salesqualifiedlead
-          - properties_hs_time_in_subscriber
-          - properties_hs_total_deal_value
-          - properties_hs_unique_creation_key
-          - properties_hs_updated_by_user_id
-          - properties_hs_user_ids_of_all_notification_followers
-          - properties_hs_user_ids_of_all_notification_unfollowers
-          - properties_hs_user_ids_of_all_owners
-          - properties_hs_was_imported
-          - properties_hubspot_owner_assigneddate
-          - properties_hubspot_owner_id
-          - properties_hubspot_team_id
-          - properties_hubspotscore
-          - properties_is_public
-          - properties_lifecyclestage
-          - properties_linkedin_company_page
-          - properties_linkedinbio
-          - properties_notes_last_contacted
-          - properties_notes_last_updated
-          - properties_notes_next_activity_date
-          - properties_num_associated_contacts
-          - properties_num_associated_deals
-          - properties_num_contacted_notes
-          - properties_num_conversion_events
-          - properties_num_conversion_events_cardinality_sum_d095f14b
-          - properties_num_notes
-          - properties_numberofemployees
-          - properties_phone
-          - properties_recent_conversion_date
-          - properties_recent_conversion_date_timestamp_latest_value_72856da1
-          - properties_recent_conversion_event_name
-          - properties_recent_conversion_event_name_timestamp_latest_value_66c820bf
-          - properties_recent_deal_amount
-          - properties_recent_deal_close_date
-          - properties_timezone
-          - properties_total_money_raised
-          - properties_total_revenue
-          - properties_twitterbio
-          - properties_twitterfollowers
-          - properties_twitterhandle
-          - properties_type
-          - properties_web_technologies
-          - properties_website
-          - properties_zip
-          - updatedAt
+        expression: companies.properties.annualrevenue
+        description: The actual or estimated annual revenue of the company.

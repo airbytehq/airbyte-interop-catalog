@@ -15,6 +15,11 @@ def evaluate_mapping_confidence(
     Args:
         mappings: List of field mappings to evaluate
 
+    When evaluating confidence:
+      - Consider "MISSING" to be a 0.0 confidence score.
+      - Highest confidence score is 1.0, meaning the mapping is perfect.
+      - Never give a score above 0.7 if the two columns could likely be referring to different things.
+
     Returns:
         TableMappingEval object containing:
         - score: Overall confidence score (0.00 to 1.00)
@@ -54,6 +59,16 @@ def generate_mappings(
 ) -> list[models.FieldMappingSuggestion]:
     """Generate mappings for a list of fields.
 
+    Keep in mind this guidance:
+    - You should always map `_fivetran_synced` to a source stream's `_airbyte_extracted_at` column.
+    - If you cannot find a good match for a specific column, set it's expression to exactly
+      "MISSING" with no table prefix.
+
+    When evaluating confidence:
+      - Consider "MISSING" to be a 0.0 confidence score.
+      - Never give a score above 0.7 if the two columns could be referring to different things.
+      - Don't suggest mappings for fields that are not 0.6 or higher.
+
     Args:
         fields_to_populate: A list of fields to populate.
         source_schema: The source schema to populate the fields from.
@@ -63,7 +78,8 @@ def generate_mappings(
         - name: The name of the field.
         - expression: The expression to populate the field with.
         - description: The description of the field.
-        - field_mapping_confidence_scores: The confidence scores for the mapping of fields from the source stream to the target table.
+        - field_mapping_confidence_scores: The confidence scores for the mapping of fields from the
+          source stream to the target table.
     """
     # This function will be implemented by Marvin AI
     ...

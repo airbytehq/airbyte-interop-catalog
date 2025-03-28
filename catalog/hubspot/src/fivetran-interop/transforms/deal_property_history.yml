@@ -11,13 +11,13 @@ transforms:
         expression: deals_property_history.dealId
         description: The ID of the related deal record.
       name:
-        expression: deals_property_history.properties_dealname
+        expression: deals_property_history.properties.dealname
         description: '{{ doc("history_name") }}'
       source:
-        expression: deals_property_history.sourceType
+        expression: deals_property_history.properties.hs_object_source
         description: '{{ doc("history_source") }}'
       source_id:
-        expression: deals_property_history.sourceId
+        expression: deals_property_history.properties.hs_object_source_id
         description: '{{ doc("history_source_id") }}'
       timestamp:
         expression: deals_property_history.timestamp

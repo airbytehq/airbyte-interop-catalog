@@ -1,5 +1,7 @@
 """Mapping confidence evaluation using Marvin AI."""
 
+from typing import cast
+
 from rich.console import Console
 from rich.prompt import Prompt
 
@@ -74,7 +76,7 @@ def infer_best_match_source_stream_name(
     source_tables: list[models.SourceTableSummary],
     *,
     auto_confirm: bool | None = None,
-) -> models.SourceTableMappingSuggestion:
+) -> models.SourceTableMappingTopTwoSuggestions:
     """Get the name of the best match source table based on the source and target table summaries.
 
     Args:
@@ -82,7 +84,7 @@ def infer_best_match_source_stream_name(
         source_tables: A list of source tables to choose from
 
     Returns:
-        A SourceTableMappingSuggestion object.
+        A SourceTableMappingTopTwoSuggestions object.
 
     Raises:
         Exception: If all retries fail
@@ -159,6 +161,8 @@ def populate_missing_mappings(
     source_name: str,
     project_name: str,
     transform_name: str,
+    *,
+    auto_confirm: bool = False,
 ) -> None:
     """Populate missing mappings for a single target table."""
     transform_file = resource_paths.get_transform_file(
@@ -196,10 +200,31 @@ def populate_missing_mappings(
         for existing_field in transform_parsed.field_mappings:
             if existing_field.name == suggested_field.target_field_name:
                 existing_field.expression = (
-                    f"{source_schema.name}.{suggested_field.source_field_name}"
+                    constants.MISSING
+                    if suggested_field.source_field_name == constants.MISSING
+                    else f"{source_schema.name}.{suggested_field.source_field_name}"
                 )
 
-    transform_parsed.to_file(transform_file)
+    # Evaluate the mappings
+    new_mapping_eval: models.TableMappingEval = ai_fn.evaluate_mapping_confidence(
+        transform_parsed.field_mappings,
+    )
+    new_mapping_eval.print_as_rich_table(
+        transform_parsed,
+    )
+    if auto_confirm or (
+        Prompt.ask(
+            "[yellow]Do you want to apply the new mappings?[/yellow]",
+            console=console,
+            choices=["Y", "n"],
+            default="Y",
+            case_sensitive=False,
+        ).lower()
+        == "y"
+    ):
+        transform_parsed.to_file(transform_file)
+    else:
+        console.print("New mappings were not applied.", style="yellow")
 
 
 def infer_table_mappings(  # noqa: PLR0912 (too many branches)
@@ -210,7 +235,7 @@ def infer_table_mappings(  # noqa: PLR0912 (too many branches)
     source_table: str | None = None,
     auto_confirm: bool | None = None,
 ) -> None:
-    auto_confirm = if_none(auto_confirm, False)
+    auto_confirm = cast(bool, if_none(auto_confirm, False))
 
     # Find the YAML file
     yaml_file = resource_paths.get_transform_file(
@@ -244,16 +269,19 @@ def infer_table_mappings(  # noqa: PLR0912 (too many branches)
         )
         return
 
+    summary_text = ""
     if not source_table:
         # We need the AI to suggest a source table
 
-        target_table_schemas = models.SourceTableSummary.from_dbt_source_file(
-            resource_paths.get_dbt_sources_requirements_path(
-                source_name=source_name,
-                project_name=project_name,
-            ),
+        target_table_schemas: list[models.SourceTableSummary] = (
+            models.SourceTableSummary.from_dbt_source_file(
+                resource_paths.get_dbt_sources_requirements_path(
+                    source_name=source_name,
+                    project_name=project_name,
+                ),
+            )
         )
-        target_table_schema = next(
+        target_table_schema: models.SourceTableSummary | None = next(
             (t for t in target_table_schemas if t.name == transform_name),
             None,
         )
@@ -357,6 +385,7 @@ def infer_table_mappings(  # noqa: PLR0912 (too many branches)
         source_name=source_name,
         project_name=project_name,
         transform_name=transform_name,
+        auto_confirm=auto_confirm,
     )
     # Update lock file
     # Update dbt project

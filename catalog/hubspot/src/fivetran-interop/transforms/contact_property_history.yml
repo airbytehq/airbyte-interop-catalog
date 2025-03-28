@@ -8,13 +8,13 @@ transforms:
         expression: contacts_property_history._airbyte_extracted_at
         description: '{{ doc("_fivetran_synced") }}'
       contact_id:
-        expression: contacts_property_history.vid
+        expression: contacts_property_history.hs_object_id
         description: The ID of the related contact record.
       name:
         expression: contacts_property_history.source-label
         description: '{{ doc("history_name") }}'
       source:
-        expression: contacts_property_history.source-type
+        expression: contacts_property_history.source
         description: '{{ doc("history_source") }}'
       source_id:
         expression: contacts_property_history.source-id

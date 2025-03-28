@@ -1,7 +1,7 @@
 [project]
 source_name = "facebook_marketing"
 project_name = "fivetran-interop"
-generated_at = "2025-03-27T23:30:35Z"
+generated_at = "2025-03-28T19:12:28Z"
 requirements_file = "catalog/facebook_marketing/requirements/fivetran-interop/src_dbt_requirements.yml"
 requirements_file_hash = "063605bbc7f806dd4d69ca40db1bf87e3031484feebd1e9e5bc52c905b52bba7"
 airbyte_source_file = "catalog/facebook_marketing/generated/src_airbyte_facebook_marketing.yml"
@@ -37,7 +37,7 @@ unused_source_streams = [
 unmapped_target_tables = []
 
 [mappings.account_history]
-source_file = "account_history.yml"
+source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/account_history.yml"
 source_file_hash = "554d26ec9d2c503167a82c3317d6add807e591bd10849c3059051f8f80a55207"
 unmapped_target_fields = []
 omitted_target_fields = []
@@ -53,9 +53,59 @@ currency = "ad_account.currency"
 timezone_name = "ad_account.timezone_name"
 
 [mappings.account_history.unused_source_fields]
+ad_account = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "account_id",
+    "age",
+    "amount_spent",
+    "balance",
+    "business_city",
+    "business_name",
+    "business_state",
+    "business_street",
+    "business_street2",
+    "business_zip",
+    "can_create_brand_lift_study",
+    "capabilities",
+    "disable_reason",
+    "end_advertiser",
+    "end_advertiser_name",
+    "extended_credit_invoice_group",
+    "failed_delivery_checks",
+    "fb_entity",
+    "funding_source",
+    "funding_source_details",
+    "has_migrated_permissions",
+    "io_number",
+    "is_attribution_spec_system_default",
+    "is_direct_deals_enabled",
+    "is_in_3ds_authorization_enabled_market",
+    "is_notifications_enabled",
+    "is_personal",
+    "is_prepay_account",
+    "is_tax_id_required",
+    "line_numbers",
+    "media_agency",
+    "min_campaign_group_spend_cap",
+    "min_daily_budget",
+    "offsite_pixels_tos_accepted",
+    "owner",
+    "partner",
+    "rf_spec",
+    "spend_cap",
+    "tax_id",
+    "tax_id_status",
+    "tax_id_type",
+    "timezone_id",
+    "timezone_offset_hours_utc",
+    "tos_accepted",
+    "user_tasks",
+    "user_tos_accepted",
+]
 
 [mappings.ad_history]
-source_file = "ad_history.yml"
+source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/ad_history.yml"
 source_file_hash = "f56ad019b6df6f7c8b9f216e58b4a8036e7e7859c50a5143051758cb4225eadc"
 unmapped_target_fields = []
 omitted_target_fields = []
@@ -72,9 +122,25 @@ updated_time = "ads.updated_time"
 conversion_domain = "ads.source_ad_id"
 
 [mappings.ad_history.unused_source_fields]
+ads = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "adlabels",
+    "bid_amount",
+    "bid_info",
+    "bid_type",
+    "conversion_specs",
+    "created_time",
+    "effective_status",
+    "last_updated_by_app_id",
+    "recommendations",
+    "status",
+    "targeting",
+    "tracking_specs",
+]
 
 [mappings.ad_set_history]
-source_file = "ad_set_history.yml"
+source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/ad_set_history.yml"
 source_file_hash = "2e00f30f0a557ce9bd1fb4d9bfc18d54fc456a3aead8a01e73aaeaa57b420803"
 unmapped_target_fields = [
     "optimization_goal",
@@ -97,22 +163,23 @@ budget_remaining = "ad_sets.budget_remaining"
 
 [mappings.ad_set_history.unused_source_fields]
 ad_sets = [
-    "promoted_object",
-    "created_time",
-    "lifetime_budget",
-    "targeting",
-    "bid_info",
-    "bid_amount",
-    "bid_constraints",
-    "adlabels",
-    "learning_stage_info",
-    "effective_status",
+    "_airbyte_extracted_at",
     "_airbyte_meta",
     "_airbyte_raw_id",
+    "adlabels",
+    "bid_amount",
+    "bid_constraints",
+    "bid_info",
+    "created_time",
+    "effective_status",
+    "learning_stage_info",
+    "lifetime_budget",
+    "promoted_object",
+    "targeting",
 ]
 
 [mappings.basic_ad]
-source_file = "basic_ad.yml"
+source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/basic_ad.yml"
 source_file_hash = "72049684647ef1ff2f4a05d9587a8947cf1f9133af47b42a1ba0eb90d231cb27"
 unmapped_target_fields = [
     "adset_name",
@@ -133,6 +200,9 @@ _fivetran_synced = "_airbyte_extracted_at"
 
 [mappings.basic_ad.unused_source_fields]
 ads_insights = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
     "account_currency",
     "account_name",
     "action_values",
@@ -140,12 +210,98 @@ ads_insights = [
     "ad_click_actions",
     "ad_impression_actions",
     "adset_id",
-    "_airbyte_meta",
-    "_airbyte_raw_id",
+    "adset_name",
+    "attribution_setting",
+    "auction_bid",
+    "auction_competitiveness",
+    "auction_max_competitor_bid",
+    "buying_type",
+    "campaign_id",
+    "campaign_name",
+    "canvas_avg_view_percent",
+    "canvas_avg_view_time",
+    "catalog_segment_actions",
+    "catalog_segment_value",
+    "catalog_segment_value_mobile_purchase_roas",
+    "catalog_segment_value_omni_purchase_roas",
+    "catalog_segment_value_website_purchase_roas",
+    "clicks",
+    "conversion_rate_ranking",
+    "conversion_values",
+    "conversions",
+    "converted_product_quantity",
+    "converted_product_value",
+    "cost_per_15_sec_video_view",
+    "cost_per_2_sec_continuous_video_view",
+    "cost_per_action_type",
+    "cost_per_ad_click",
+    "cost_per_conversion",
+    "cost_per_estimated_ad_recallers",
+    "cost_per_inline_link_click",
+    "cost_per_inline_post_engagement",
+    "cost_per_outbound_click",
+    "cost_per_thruplay",
+    "cost_per_unique_action_type",
+    "cost_per_unique_click",
+    "cost_per_unique_inline_link_click",
+    "cost_per_unique_outbound_click",
+    "cpc",
+    "cpm",
+    "cpp",
+    "created_time",
+    "ctr",
+    "date_start",
+    "date_stop",
+    "engagement_rate_ranking",
+    "estimated_ad_recallers",
+    "full_view_impressions",
+    "full_view_reach",
+    "inline_link_click_ctr",
+    "inline_link_clicks",
+    "inline_post_engagement",
+    "instant_experience_clicks_to_open",
+    "instant_experience_clicks_to_start",
+    "instant_experience_outbound_clicks",
+    "mobile_app_purchase_roas",
+    "objective",
+    "optimization_goal",
+    "outbound_clicks",
+    "outbound_clicks_ctr",
+    "purchase_roas",
+    "qualifying_question_qualify_answer_rate",
+    "quality_ranking",
+    "social_spend",
+    "unique_actions",
+    "unique_clicks",
+    "unique_ctr",
+    "unique_inline_link_click_ctr",
+    "unique_inline_link_clicks",
+    "unique_link_clicks_ctr",
+    "unique_outbound_clicks",
+    "unique_outbound_clicks_ctr",
+    "updated_time",
+    "video_15_sec_watched_actions",
+    "video_30_sec_watched_actions",
+    "video_avg_time_watched_actions",
+    "video_continuous_2_sec_watched_actions",
+    "video_p100_watched_actions",
+    "video_p25_watched_actions",
+    "video_p50_watched_actions",
+    "video_p75_watched_actions",
+    "video_p95_watched_actions",
+    "video_play_actions",
+    "video_play_curve_actions",
+    "video_play_retention_0_to_15s_actions",
+    "video_play_retention_20_to_60s_actions",
+    "video_play_retention_graph_actions",
+    "video_time_watched_actions",
+    "website_ctr",
+    "website_purchase_roas",
+    "wish_bid",
 ]
 
 [mappings.basic_ad_action_values]
-source_file = "basic_ad_action_values.yml"
+source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/basic_ad_action_values.yml"
 source_file_hash = "7bc7a7a4ebf886a74fd0760f3feb718e38ad73c4b6fb2906f683b5d9c581fe53"
 unmapped_target_fields = [
     "_7_d_click",
@@ -163,53 +319,232 @@ value = "ads_insights_action_type.value"
 
 [mappings.basic_ad_action_values.unused_source_fields]
 ads_insights_action_type = [
+    "_airbyte_extracted_at",
     "_airbyte_meta",
     "_airbyte_raw_id",
+    "account_currency",
     "account_id",
     "account_name",
-    "action_destination",
-    "action_target_id",
-    "action_attribution_windows",
-    "action_carousel_card_id",
-    "action_carousel_card_name",
-    "action_converted_product_id",
-    "action_device",
-    "action_event_channel",
-    "action_reaction",
-    "action_video_sound",
-    "action_video_type",
+    "action_values",
+    "actions",
+    "ad_click_actions",
+    "ad_impression_actions",
     "ad_name",
     "adset_id",
     "adset_name",
+    "attribution_setting",
+    "auction_bid",
+    "auction_competitiveness",
+    "auction_max_competitor_bid",
+    "buying_type",
     "campaign_id",
     "campaign_name",
+    "canvas_avg_view_percent",
+    "canvas_avg_view_time",
+    "catalog_segment_actions",
+    "catalog_segment_value",
+    "catalog_segment_value_mobile_purchase_roas",
+    "catalog_segment_value_omni_purchase_roas",
+    "catalog_segment_value_website_purchase_roas",
+    "clicks",
+    "conversion_rate_ranking",
+    "conversion_values",
+    "conversions",
+    "converted_product_quantity",
+    "converted_product_value",
+    "cost_per_15_sec_video_view",
+    "cost_per_2_sec_continuous_video_view",
+    "cost_per_action_type",
+    "cost_per_ad_click",
+    "cost_per_conversion",
+    "cost_per_estimated_ad_recallers",
+    "cost_per_inline_link_click",
+    "cost_per_inline_post_engagement",
+    "cost_per_outbound_click",
+    "cost_per_thruplay",
+    "cost_per_unique_action_type",
+    "cost_per_unique_click",
+    "cost_per_unique_inline_link_click",
+    "cost_per_unique_outbound_click",
+    "cpc",
+    "cpm",
+    "cpp",
+    "created_time",
+    "ctr",
+    "date_start",
+    "date_stop",
+    "engagement_rate_ranking",
+    "estimated_ad_recallers",
+    "frequency",
+    "full_view_impressions",
+    "full_view_reach",
+    "impressions",
+    "inline_link_click_ctr",
     "inline_link_clicks",
+    "inline_post_engagement",
+    "instant_experience_clicks_to_open",
+    "instant_experience_clicks_to_start",
+    "instant_experience_outbound_clicks",
+    "mobile_app_purchase_roas",
     "objective",
+    "optimization_goal",
+    "outbound_clicks",
+    "outbound_clicks_ctr",
+    "purchase_roas",
+    "qualifying_question_qualify_answer_rate",
+    "quality_ranking",
+    "reach",
+    "social_spend",
+    "spend",
+    "unique_actions",
+    "unique_clicks",
+    "unique_ctr",
+    "unique_inline_link_click_ctr",
+    "unique_inline_link_clicks",
+    "unique_link_clicks_ctr",
+    "unique_outbound_clicks",
+    "unique_outbound_clicks_ctr",
+    "updated_time",
+    "video_15_sec_watched_actions",
+    "video_30_sec_watched_actions",
+    "video_avg_time_watched_actions",
+    "video_continuous_2_sec_watched_actions",
+    "video_p100_watched_actions",
+    "video_p25_watched_actions",
+    "video_p50_watched_actions",
+    "video_p75_watched_actions",
+    "video_p95_watched_actions",
+    "video_play_actions",
+    "video_play_curve_actions",
+    "video_play_retention_0_to_15s_actions",
+    "video_play_retention_20_to_60s_actions",
+    "video_play_retention_graph_actions",
+    "video_time_watched_actions",
+    "website_ctr",
+    "website_purchase_roas",
+    "wish_bid",
 ]
 
 [mappings.basic_ad_actions]
-source_file = "basic_ad_actions.yml"
-source_file_hash = "6750152ccaf7edef23e9d3264eaebf709bd26e7493b040056b3be95a75d762b9"
+source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/basic_ad_actions.yml"
+source_file_hash = "fb641da297466392968c06a1cbf797ac740a2ecf07239cc127e9bd2b1209f3c0"
 unmapped_target_fields = []
 omitted_target_fields = []
 
 [mappings.basic_ad_actions.mapped_target_fields]
 _1_d_view = "ads_insights.actions"
-_7_d_click = "ads_insights.actions"
-_28_d_click = "ads_insights.actions"
+_7_d_click = "ads_insights.ad_click_actions"
+_28_d_click = "ads_insights.action_values"
 _fivetran_id = "ads_insights._airbyte_raw_id"
 _fivetran_synced = "ads_insights._airbyte_extracted_at"
 action_type = "ads_insights.action_values"
 ad_id = "ads_insights.ad_id"
 date = "ads_insights.date_start"
-index = "ads_insights.converted_product_value"
+index = "ads_insights.auction_max_competitor_bid"
 inline = "ads_insights.inline_link_clicks"
 value = "ads_insights.conversion_values"
 
 [mappings.basic_ad_actions.unused_source_fields]
+ads_insights = [
+    "_airbyte_meta",
+    "account_currency",
+    "account_id",
+    "account_name",
+    "ad_impression_actions",
+    "ad_name",
+    "adset_id",
+    "adset_name",
+    "attribution_setting",
+    "auction_bid",
+    "auction_competitiveness",
+    "buying_type",
+    "campaign_id",
+    "campaign_name",
+    "canvas_avg_view_percent",
+    "canvas_avg_view_time",
+    "catalog_segment_actions",
+    "catalog_segment_value",
+    "catalog_segment_value_mobile_purchase_roas",
+    "catalog_segment_value_omni_purchase_roas",
+    "catalog_segment_value_website_purchase_roas",
+    "clicks",
+    "conversion_rate_ranking",
+    "conversions",
+    "converted_product_quantity",
+    "converted_product_value",
+    "cost_per_15_sec_video_view",
+    "cost_per_2_sec_continuous_video_view",
+    "cost_per_action_type",
+    "cost_per_ad_click",
+    "cost_per_conversion",
+    "cost_per_estimated_ad_recallers",
+    "cost_per_inline_link_click",
+    "cost_per_inline_post_engagement",
+    "cost_per_outbound_click",
+    "cost_per_thruplay",
+    "cost_per_unique_action_type",
+    "cost_per_unique_click",
+    "cost_per_unique_inline_link_click",
+    "cost_per_unique_outbound_click",
+    "cpc",
+    "cpm",
+    "cpp",
+    "created_time",
+    "ctr",
+    "date_stop",
+    "engagement_rate_ranking",
+    "estimated_ad_recallers",
+    "frequency",
+    "full_view_impressions",
+    "full_view_reach",
+    "impressions",
+    "inline_link_click_ctr",
+    "inline_post_engagement",
+    "instant_experience_clicks_to_open",
+    "instant_experience_clicks_to_start",
+    "instant_experience_outbound_clicks",
+    "mobile_app_purchase_roas",
+    "objective",
+    "optimization_goal",
+    "outbound_clicks",
+    "outbound_clicks_ctr",
+    "purchase_roas",
+    "qualifying_question_qualify_answer_rate",
+    "quality_ranking",
+    "reach",
+    "social_spend",
+    "spend",
+    "unique_actions",
+    "unique_clicks",
+    "unique_ctr",
+    "unique_inline_link_click_ctr",
+    "unique_inline_link_clicks",
+    "unique_link_clicks_ctr",
+    "unique_outbound_clicks",
+    "unique_outbound_clicks_ctr",
+    "updated_time",
+    "video_15_sec_watched_actions",
+    "video_30_sec_watched_actions",
+    "video_avg_time_watched_actions",
+    "video_continuous_2_sec_watched_actions",
+    "video_p100_watched_actions",
+    "video_p25_watched_actions",
+    "video_p50_watched_actions",
+    "video_p75_watched_actions",
+    "video_p95_watched_actions",
+    "video_play_actions",
+    "video_play_curve_actions",
+    "video_play_retention_0_to_15s_actions",
+    "video_play_retention_20_to_60s_actions",
+    "video_play_retention_graph_actions",
+    "video_time_watched_actions",
+    "website_ctr",
+    "website_purchase_roas",
+    "wish_bid",
+]
 
 [mappings.campaign_history]
-source_file = "campaign_history.yml"
+source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/campaign_history.yml"
 source_file_hash = "32ac4c76fbf27a37f854eb283f6172bafbbcc99a1bf6746f98c1e1bafcdfb0ac"
 unmapped_target_fields = []
 omitted_target_fields = []
@@ -230,20 +565,28 @@ status = "campaigns.status"
 
 [mappings.campaign_history.unused_source_fields]
 campaigns = [
+    "_airbyte_extracted_at",
     "_airbyte_meta",
     "_airbyte_raw_id",
-    "effective_status",
-    "objective",
-    "special_ad_categories",
+    "adlabels",
     "bid_strategy",
-    "issues_info",
+    "boosted_object_id",
+    "budget_rebalance_flag",
     "buying_type",
     "configured_status",
+    "effective_status",
+    "issues_info",
+    "objective",
+    "smart_promotion_type",
+    "source_campaign_id",
+    "special_ad_category",
+    "special_ad_category_country",
+    "spend_cap",
 ]
 
 [mappings.creative_history]
-source_file = "creative_history.yml"
-source_file_hash = "21cd62d841a0778db5cec706f4757bdd75edd306b6f66457eb153d729eab3188"
+source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/creative_history.yml"
+source_file_hash = "3db4e1714b06f7354360fbf9e6ff2f11cad06e36d3fa172873367e2368105422"
 unmapped_target_fields = [
     "_fivetran_id",
     "asset_feed_spec_link_urls",
@@ -266,27 +609,29 @@ id = "ad_creatives.id"
 account_id = "ad_creatives.account_id"
 name = "ad_creatives.name"
 url_tags = "ad_creatives.url_tags"
-_fivetran_synced = "_airbyte_extracted_at"
+_fivetran_synced = "ad_creatives._airbyte_extracted_at"
 
 [mappings.creative_history.unused_source_fields]
 ad_creatives = [
-    "body",
-    "object_story_id",
-    "image_url",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
     "actor_id",
     "adlabels",
     "applink_treatment",
     "asset_feed_spec",
+    "body",
     "call_to_action_type",
     "effective_instagram_story_id",
     "effective_object_story_id",
-    "title",
     "image_crops",
+    "image_hash",
+    "image_url",
     "instagram_actor_id",
     "instagram_permalink_url",
     "instagram_story_id",
     "link_og_id",
     "object_id",
+    "object_story_id",
     "object_story_spec",
     "object_type",
     "object_url",
@@ -296,8 +641,6 @@ ad_creatives = [
     "template_url_spec",
     "thumbnail_data_url",
     "thumbnail_url",
-    "image_hash",
+    "title",
     "video_id",
-    "_airbyte_meta",
-    "_airbyte_raw_id",
 ]

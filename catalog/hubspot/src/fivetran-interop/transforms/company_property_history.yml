@@ -5,13 +5,13 @@ transforms:
       - companies_property_history: hubspot.companies_property_history
     fields:
       _fivetran_synced:
-        expression: companies_property_history.updatedByUserId
+        expression: companies_property_history._airbyte_extracted_at
         description: '{{ doc("_fivetran_synced") }}'
       company_id:
         expression: companies_property_history.companyId
         description: The ID of the related company record.
       name:
-        expression: companies_property_history.properties_name
+        expression: companies_property_history.properties.name
         description: '{{ doc("history_name") }}'
       source:
         expression: companies_property_history.sourceType

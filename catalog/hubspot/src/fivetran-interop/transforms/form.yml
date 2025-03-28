@@ -1,79 +1,53 @@
 domain: hubspot.fivetran-interop
 transforms:
-  - display_name: Fivetran Raw 'Form' Model
-    name: form
+  - name: form
     from:
-      - forms: airbyte_raw_hubspot.forms
+      - forms: hubspot.forms
     fields:
-      # Fields in target schema order
       _fivetran_deleted:
-        expression: false
-        description: "Boolean to mark rows that were deleted in the source database."
+        expression: MISSING
+        description: '{{ doc("_fivetran_deleted") }}'
       _fivetran_synced:
-        expression: _airbyte_extracted_at
-        description: "Timestamp of when this record was last synced by Fivetran."
-      id:
-        expression: forms.id
-        description: "The ID of the form."
-      portal_id:
-        expression: MISSING
-        description: "The HubSpot account ID."
-      name:
-        expression: forms.name
-        description: "The name of the form."
+        expression: forms._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
       created_at:
-        expression: forms.createdAt
-        description: "The date the form was created."
+        expression: forms.properties.hs_createdate
+        description: A timestamp for when the form was created.
       css_class:
-        expression: MISSING
-        description: "The CSS class of the form."
-      updated_at:
-        expression: MISSING
-        description: "The date the form was last updated."
-      published_at:
-        expression: MISSING
-        description: "The date the form was published."
-      archived_at:
-        expression: MISSING
-        description: "The date the form was archived."
-      style:
-        expression: MISSING
-        description: "The style settings of the form."
-      submit_text:
-        expression: MISSING
-        description: "The text displayed on the submit button."
-      redirect_url:
-        expression: MISSING
-        description: "The URL to redirect to after form submission."
-      internal_title:
-        expression: MISSING
-        description: "The internal title of the form."
-      is_published:
-        expression: MISSING
-        description: "Whether the form is published."
+        expression: forms.displayOptions.cssClass
+        description: The CSS classes assigned to the form.
       follow_up_id:
         expression: MISSING
-        description: "The ID of the follow-up form."
+        description: This field is no longer used.
       guid:
         expression: MISSING
-        description: "The globally unique identifier for the form."
+        description: The internal ID of the form.
       lead_nurturing_campaign_id:
         expression: MISSING
-        description: "The ID of the lead nurturing campaign associated with the form."
+        description: TBD
       method:
         expression: MISSING
-        description: "The HTTP method used by the form."
+        description: This field is no longer used.
+      name:
+        expression: forms.name
+        description: The name of the form.
       notify_recipients:
-        expression: MISSING
-        description: "Recipients to notify when the form is submitted."
+        expression: forms.configuration.notifyRecipients
+        description:
+          "A comma-separated list of user IDs that should receive submission
+          notifications.\nEmail addresses will be returned for individuals who aren't
+          users.\n"
+      portal_id:
+        expression: forms.id
+        description: '{{ doc("portal_id") }}'
       redirect:
         expression: MISSING
-        description: "Whether the form redirects after submission."
-
-    annotations:
-      unused_source_fields:
-        forms:
-          # alpha-sorted list of unused properties from the forms schema:
-          - archived
-          - formType
-          - thankYouMessageJson
+        description:
+          The URL that the visitor will be redirected to after filling
+          out the form.
+      submit_text:
+        expression: forms.displayOptions.submitButtonText
+        description: The text used for the submit button.
+      updated_at:
+        expression: forms.properties.hs_lastmodifieddate
+        description: A timestamp for when the form was last updated.

@@ -30,7 +30,7 @@ transforms:
           to urls clicked from page post ads, message of the post, and canvas app install
           creatives only.
       _fivetran_synced:
-        expression: _airbyte_extracted_at
+        expression: ad_creatives._airbyte_extracted_at
         description: "{{ doc('_fivetran_synced') }}"
       asset_feed_spec_link_urls:
         expression: MISSING
