@@ -22,7 +22,7 @@ sources:
           - name: counters
             description: Object containing different counters related to the campaign's
               performance.
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: open
@@ -165,7 +165,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -180,7 +180,7 @@ sources:
           - name: archived
             data_type: boolean
           - name: properties
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: car_id
@@ -312,7 +312,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -421,7 +421,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -443,7 +443,7 @@ sources:
             description: List of contacts associated with the company
             data_type: array
           - name: properties
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: about_us
@@ -1164,7 +1164,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -1199,7 +1199,7 @@ sources:
               archived or not.
             data_type: boolean
           - name: properties
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: about_us
@@ -1920,7 +1920,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -2029,7 +2029,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -2040,7 +2040,7 @@ sources:
             data_type: integer
           - name: metaData
             description: Additional metadata related to the fetched contact lists
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: processing
@@ -2142,7 +2142,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -2164,7 +2164,7 @@ sources:
             description: List of companies associated with the contact.
             data_type: array
           - name: properties
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: address
@@ -3484,7 +3484,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -3531,7 +3531,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -3565,7 +3565,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -3593,7 +3593,7 @@ sources:
           - name: merged_from_email
             description: Details of the email address from which the contact was merged
               from.
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: source-vids
@@ -3654,7 +3654,7 @@ sources:
           - name: merged_to_email
             description: Details of the email address to which the contact was merged
               to.
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: updated-by-user-id
@@ -3716,7 +3716,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -3768,7 +3768,7 @@ sources:
               this historical data.
             data_type: array
           - name: properties
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: address
@@ -4992,7 +4992,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -5101,7 +5101,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -5143,7 +5143,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -5153,7 +5153,7 @@ sources:
             description: Unique identifier for the deal split
             data_type: varchar
           - name: properties
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: hs_all_accessible_team_ids
@@ -5358,7 +5358,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -5368,7 +5368,7 @@ sources:
             description: Unique identifier for the deal
             data_type: varchar
           - name: properties
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: amount
@@ -6209,7 +6209,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -6218,7 +6218,7 @@ sources:
           - name: id
             data_type: varchar
           - name: properties
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: amount
@@ -7055,7 +7055,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -7087,7 +7087,7 @@ sources:
             description: Indicates if the deal property history is archived
             data_type: boolean
           - name: properties
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: amount
@@ -7819,7 +7819,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -7928,7 +7928,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -7955,7 +7955,7 @@ sources:
             data_type: boolean
           - name: browser
             description: Details about the email event recipient's browser.
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: family
@@ -7984,7 +7984,7 @@ sources:
             data_type: varchar
           - name: causedBy
             description: Information about the action that caused the email event.
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: created
@@ -8035,7 +8035,7 @@ sources:
           - name: location
             description: Details about the geographical location associated with the
               email event.
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: city
@@ -8059,7 +8059,7 @@ sources:
           - name: obsoletedBy
             description: Information about any email event that this event has made
               obsolete.
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: created
@@ -8094,7 +8094,7 @@ sources:
             data_type: varchar
           - name: sentBy
             description: Details about the entity that sent the email event.
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: created
@@ -8136,7 +8136,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -8184,7 +8184,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -8258,7 +8258,7 @@ sources:
             data_type: varchar
           - name: associations
             description: Associations related to the engagement.
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: contactIds
@@ -8320,7 +8320,7 @@ sources:
             data_type: array
           - name: metadata
             description: Metadata related to the engagement.
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: body
@@ -8372,7 +8372,7 @@ sources:
                   data_type: array
                 - name: from
                   description: Sender information.
-                  data_type: variant
+                  data_type: json
                   subcolumns:
                     - name: email
                       data_type: varchar
@@ -8384,7 +8384,7 @@ sources:
                       data_type: varchar
                 - name: sender
                   description: Sender's email information.
-                  data_type: variant
+                  data_type: json
                   subcolumns:
                     - name: email
                       description: Email of the sender.
@@ -8446,9 +8446,9 @@ sources:
                 - name: attachedVideoOpened
                   data_type: boolean
                 - name: bounceErrorDetail
-                  data_type: variant
+                  data_type: json
                 - name: emailSendEventId
-                  data_type: variant
+                  data_type: json
                 - name: attachedVideoWatched
                   data_type: boolean
                 - name: trackerKey
@@ -8547,7 +8547,7 @@ sources:
             data_type: varchar
           - name: metadata_from
             description: Sender information in metadata.
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: email
@@ -8560,7 +8560,7 @@ sources:
                   data_type: varchar
           - name: metadata_sender
             description: Sender's email information in metadata.
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: email
@@ -8574,10 +8574,10 @@ sources:
             data_type: array
           - name: metadata_bounceErrorDetail
             description: Details of bounce errors, if any
-            data_type: variant
+            data_type: json
           - name: metadata_emailSendEventId
             description: ID of the email send event
-            data_type: variant
+            data_type: json
           - name: metadata_ownerIdsBcc
             description: IDs of BCC owners in metadata.
             data_type: array
@@ -8724,7 +8724,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -8734,7 +8734,7 @@ sources:
             description: Unique identifier for the call engagement.
             data_type: varchar
           - name: properties
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: hs_activity_type
@@ -9107,7 +9107,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -9216,7 +9216,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -9226,7 +9226,7 @@ sources:
             description: Unique identifier for the engagement email
             data_type: varchar
           - name: properties
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: hs_all_accessible_team_ids
@@ -9707,7 +9707,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -9816,7 +9816,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -9826,7 +9826,7 @@ sources:
             description: Unique identifier for the meeting engagement.
             data_type: varchar
           - name: properties
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: hs_activity_type
@@ -10183,7 +10183,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -10292,7 +10292,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -10302,7 +10302,7 @@ sources:
             description: Unique identifier for the engagement note
             data_type: varchar
           - name: properties
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: hs_all_accessible_team_ids
@@ -10515,7 +10515,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -10624,7 +10624,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -10634,7 +10634,7 @@ sources:
             description: Unique identifier for the task
             data_type: varchar
           - name: properties
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: hs_all_accessible_team_ids
@@ -11078,7 +11078,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -11187,7 +11187,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -11213,7 +11213,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -11245,7 +11245,7 @@ sources:
             data_type: array
           - name: configuration
             description: Configuration settings for the form.
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: language
@@ -11256,7 +11256,7 @@ sources:
                   data_type: boolean
                 - name: postSubmitAction
                   description: Action to be taken after form submission.
-                  data_type: variant
+                  data_type: json
                   subcolumns:
                     - name: type
                       description: Type of post-submit action.
@@ -11293,7 +11293,7 @@ sources:
                   data_type: array
           - name: displayOptions
             description: Display options for the form.
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: renderRawHtml
@@ -11307,7 +11307,7 @@ sources:
                   data_type: varchar
                 - name: style
                   description: Style settings for the form.
-                  data_type: variant
+                  data_type: json
                   subcolumns:
                     - name: fontFamily
                       description: Font family style.
@@ -11350,9 +11350,9 @@ sources:
                   data_type: varchar
           - name: legalConsentOptions
             description: Legal consent options for the form.
-            data_type: variant
+            data_type: json
           - name: properties
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: hs_all_accessible_team_ids
@@ -11560,7 +11560,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -11570,7 +11570,7 @@ sources:
             description: Unique identifier for the goal.
             data_type: varchar
           - name: properties
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: hs__migration_soft_delete
@@ -12011,7 +12011,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -12120,7 +12120,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -12142,7 +12142,7 @@ sources:
             description: List of contacts associated with the lead
             data_type: array
           - name: properties
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: hs_all_accessible_team_ids
@@ -12770,7 +12770,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -12789,7 +12789,7 @@ sources:
             description: Indicates whether the line item is archived or not.
             data_type: boolean
           - name: properties
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: amount
@@ -13129,7 +13129,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -13238,7 +13238,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -13265,7 +13265,7 @@ sources:
           - name: absoluteUrl
             data_type: varchar
           - name: aifeatures
-            data_type: variant
+            data_type: json
           - name: allEmailCampaignIds
             data_type: array
           - name: analyticsPageId
@@ -13421,16 +13421,16 @@ sources:
             data_type: varchar
           - name: smartEmailFields
             description: Fields related to smart email features
-            data_type: variant
+            data_type: json
           - name: state
             description: Current state of the email
             data_type: varchar
           - name: stats
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: counters
-                  data_type: variant
+                  data_type: json
                   subcolumns:
                     - name: sent
                       data_type: integer
@@ -13465,10 +13465,10 @@ sources:
                     - name: notsent
                       data_type: integer
                 - name: deviceBreakdown
-                  data_type: variant
+                  data_type: json
                   subcolumns:
                     - name: open_device_type
-                      data_type: variant
+                      data_type: json
                       subcolumns:
                         - name: computer
                           data_type: integer
@@ -13477,7 +13477,7 @@ sources:
                         - name: unknown
                           data_type: integer
                     - name: click_device_type
-                      data_type: variant
+                      data_type: json
                       subcolumns:
                         - name: computer
                           data_type: integer
@@ -13488,9 +13488,9 @@ sources:
                 - name: failedToLoad
                   data_type: boolean
                 - name: qualifierStats
-                  data_type: variant
+                  data_type: json
                 - name: ratios
-                  data_type: variant
+                  data_type: json
                   subcolumns:
                     - name: clickratio
                       data_type: float
@@ -13561,7 +13561,7 @@ sources:
             data_type: varchar
           - name: sections
             description: Sections within the email
-            data_type: variant
+            data_type: json
           - name: author
             description: Author of the email
             data_type: varchar
@@ -13596,11 +13596,11 @@ sources:
             description: Maximum width of images in RSS emails
             data_type: integer
           - name: flexAreas
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: main
-                  data_type: variant
+                  data_type: json
                   subcolumns:
                     - name: boxed
                       data_type: boolean
@@ -13613,7 +13613,7 @@ sources:
             data_type: integer
           - name: layoutSections
             description: Sections within the email layout
-            data_type: variant
+            data_type: json
           - name: blogRssSettings
             description: Settings related to blog RSS integration
             data_type: varchar
@@ -13630,7 +13630,7 @@ sources:
             description: Session ID of the last edit made to the email
             data_type: integer
           - name: styleSettings
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: background_color
@@ -13664,7 +13664,7 @@ sources:
                 - name: email_body_width
                   data_type: varchar
                 - name: heading_one_font
-                  data_type: variant
+                  data_type: json
                   subcolumns:
                     - name: bold
                       data_type: boolean
@@ -13673,7 +13673,7 @@ sources:
                     - name: font
                       data_type: varchar
                     - name: font_style
-                      data_type: variant
+                      data_type: json
                     - name: italic
                       data_type: boolean
                     - name: size
@@ -13681,7 +13681,7 @@ sources:
                     - name: underline
                       data_type: boolean
                 - name: heading_two_font
-                  data_type: variant
+                  data_type: json
                   subcolumns:
                     - name: bold
                       data_type: boolean
@@ -13690,7 +13690,7 @@ sources:
                     - name: font
                       data_type: varchar
                     - name: font_style
-                      data_type: variant
+                      data_type: json
                     - name: italic
                       data_type: boolean
                     - name: size
@@ -13698,7 +13698,7 @@ sources:
                     - name: underline
                       data_type: boolean
                 - name: links_font
-                  data_type: variant
+                  data_type: json
                   subcolumns:
                     - name: bold
                       data_type: boolean
@@ -13707,7 +13707,7 @@ sources:
                     - name: font
                       data_type: varchar
                     - name: font_style
-                      data_type: variant
+                      data_type: json
                     - name: italic
                       data_type: boolean
                     - name: size
@@ -13737,10 +13737,10 @@ sources:
                 - name: use_email_client_default_settings
                   data_type: boolean
                 - name: user_module_defaults
-                  data_type: variant
+                  data_type: json
                   subcolumns:
                     - name: button_email
-                      data_type: variant
+                      data_type: json
                       subcolumns:
                         - name: background_color
                           data_type: varchar
@@ -13753,12 +13753,12 @@ sources:
                         - name: font_size
                           data_type: integer
                         - name: font_style
-                          data_type: variant
+                          data_type: json
                     - name: email_divider
-                      data_type: variant
+                      data_type: json
                       subcolumns:
                         - name: color
-                          data_type: variant
+                          data_type: json
                         - name: height
                           data_type: integer
                         - name: line_type
@@ -13783,7 +13783,7 @@ sources:
             data_type: integer
           - name: translations
             description: Translations available for the email
-            data_type: variant
+            data_type: json
           - name: userPerms
             data_type: array
           - name: contentAccessRuleIds
@@ -13800,7 +13800,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -13838,7 +13838,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -13876,7 +13876,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -13891,7 +13891,7 @@ sources:
           - name: archived
             data_type: boolean
           - name: properties
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: hs_all_accessible_team_ids
@@ -14023,7 +14023,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -14132,7 +14132,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -14151,7 +14151,7 @@ sources:
             description: Indicates whether the product is archived or active.
             data_type: boolean
           - name: properties
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: amount
@@ -14363,7 +14363,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -14472,7 +14472,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -14498,7 +14498,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -14530,7 +14530,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -14558,7 +14558,7 @@ sources:
             description: Deals associated with the ticket
             data_type: array
           - name: properties
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: closed_date
@@ -15322,7 +15322,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -15431,7 +15431,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar
@@ -15460,7 +15460,7 @@ sources:
             data_type: array
           - name: contactListIds
             description: IDs of contact lists associated with the workflow
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: enrolled
@@ -15498,7 +15498,7 @@ sources:
             data_type: integer
           - name: contactCounts
             description: Counts of contacts in various stages within the workflow
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: active
@@ -15515,7 +15515,7 @@ sources:
             data_type: integer
           - name: migrationStatus
             description: Status and details of workflow migration
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: enrollmentMigrationStatus
@@ -15544,12 +15544,12 @@ sources:
                   data_type: integer
           - name: updateSource
             description: Details of the workflow update source
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: sourceApplication
                   description: Application details of the workflow update source
-                  data_type: variant
+                  data_type: json
                   subcolumns:
                     - name: serviceName
                       description: Name of the service
@@ -15562,7 +15562,7 @@ sources:
                   data_type: integer
                 - name: updatedByUser
                   description: Details of the user who updated the workflow
-                  data_type: variant
+                  data_type: json
                   subcolumns:
                     - name: userEmail
                       description: Email address of the user
@@ -15572,7 +15572,7 @@ sources:
                       data_type: integer
           - name: creationSource
             description: Details of the workflow creation source
-            data_type: variant
+            data_type: json
             meta:
               subcolumns:
                 - name: clonedFromWorkflowId
@@ -15583,7 +15583,7 @@ sources:
                   data_type: integer
                 - name: createdByUser
                   description: Details of the user who created the workflow
-                  data_type: variant
+                  data_type: json
                   subcolumns:
                     - name: userEmail
                       description: Email address of the user
@@ -15593,7 +15593,7 @@ sources:
                       data_type: integer
                 - name: sourceApplication
                   description: Application details of the workflow source
-                  data_type: variant
+                  data_type: json
                   subcolumns:
                     - name: serviceName
                       description: Name of the service
@@ -15609,7 +15609,7 @@ sources:
             data_type: timestamp
           - name: _airbyte_meta
             description: Metadata about the record
-            data_type: variant
+            data_type: json
           - name: _airbyte_raw_id
             description: Unique identifier for the raw record
             data_type: varchar

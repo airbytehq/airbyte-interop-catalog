@@ -159,6 +159,6 @@ def test_airbyte_catalog_with_additional_columns() -> None:
         assert "_airbyte_extracted_at" in columns
         assert columns["_airbyte_extracted_at"]["data_type"] == "timestamp"
         assert "_airbyte_meta" in columns
-        assert columns["_airbyte_meta"]["data_type"] == "variant"
+        assert columns["_airbyte_meta"]["data_type"] == "json"
         assert "_airbyte_raw_id" in columns
         assert columns["_airbyte_raw_id"]["data_type"] == "varchar"
