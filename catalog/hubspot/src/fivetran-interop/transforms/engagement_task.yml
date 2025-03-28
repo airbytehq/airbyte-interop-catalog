@@ -11,7 +11,7 @@ transforms:
         expression: engagements_tasks.id
         description: The ID of the engagement.
       property_hs_createdate:
-        expression: engagements_tasks.properties_hs_createdate
+        expression: engagements_tasks.properties.hs_createdate
         description:
           "This field marks the task's time of creation and determines
           where the task sits on the record timeline. You can use either a Unix timestamp
@@ -19,7 +19,7 @@ transforms:
           for connectors utilizing the HubSpot v3 API version. For the pre HubSpot
           v3 versions, this value may be found within the parent `engagement` table.\n"
       timestamp:
-        expression: engagements_tasks.properties_hs_timestamp
+        expression: engagements_tasks.properties.hs_timestamp
         description:
           "This field marks the task's time of occurrence and determines
           where the task sits on the record timeline. You can use either a Unix timestamp

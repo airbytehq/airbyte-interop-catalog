@@ -11,10 +11,10 @@ transforms:
         expression: email_events.appId
         description: The ID of the app that sent the email.
       caused_by_created:
-        expression: email_events.causedBy
+        expression: email_events.causedBy.created
         description: The timestamp of the event that caused this event.
       caused_by_id:
-        expression: MISSING
+        expression: email_events.causedBy.id
         description:
           The event ID which uniquely identifies the event which directly
           caused this event. If not applicable, this property is omitted.
@@ -33,10 +33,10 @@ transforms:
         expression: email_events.id
         description: The ID of the event.
       obsoleted_by_created:
-        expression: email_events.obsoletedBy
+        expression: email_events.obsoletedBy.created
         description: The timestamp of the event that made the current event obsolete.
       obsoleted_by_id:
-        expression: MISSING
+        expression: email_events.obsoletedBy.id
         description:
           The event ID which uniquely identifies the follow-on event which
           makes this current event obsolete. If not applicable, this property is omitted.
@@ -47,10 +47,10 @@ transforms:
         expression: email_events.recipient
         description: The email address of the contact related to the event.
       sent_by_created:
-        expression: email_events.sentBy
+        expression: email_events.sentBy.created
         description: The timestamp of the SENT event related to this event.
       sent_by_id:
-        expression: MISSING
+        expression: email_events.sentBy.id
         description:
           The event ID which uniquely identifies the email message's SENT
           event. If not applicable, this property is omitted.

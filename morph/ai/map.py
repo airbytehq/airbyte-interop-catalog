@@ -1,5 +1,7 @@
 """Mapping confidence evaluation using Marvin AI."""
 
+from typing import cast
+
 from rich.console import Console
 from rich.prompt import Prompt
 
@@ -159,6 +161,8 @@ def populate_missing_mappings(
     source_name: str,
     project_name: str,
     transform_name: str,
+    *,
+    auto_confirm: bool = False,
 ) -> None:
     """Populate missing mappings for a single target table."""
     transform_file = resource_paths.get_transform_file(
@@ -196,10 +200,31 @@ def populate_missing_mappings(
         for existing_field in transform_parsed.field_mappings:
             if existing_field.name == suggested_field.target_field_name:
                 existing_field.expression = (
-                    f"{source_schema.name}.{suggested_field.source_field_name}"
+                    constants.MISSING
+                    if suggested_field.source_field_name == constants.MISSING
+                    else f"{source_schema.name}.{suggested_field.source_field_name}"
                 )
 
-    transform_parsed.to_file(transform_file)
+    # Evaluate the mappings
+    new_mapping_eval: models.TableMappingEval = ai_fn.evaluate_mapping_confidence(
+        transform_parsed.field_mappings,
+    )
+    new_mapping_eval.print_as_rich_table(
+        transform_parsed,
+    )
+    if auto_confirm or (
+        Prompt.ask(
+            "[yellow]Do you want to apply the new mappings?[/yellow]",
+            console=console,
+            choices=["Y", "n"],
+            default="Y",
+            case_sensitive=False,
+        ).lower()
+        == "y"
+    ):
+        transform_parsed.to_file(transform_file)
+    else:
+        console.print("New mappings were not applied.", style="yellow")
 
 
 def infer_table_mappings(  # noqa: PLR0912 (too many branches)
@@ -210,7 +235,7 @@ def infer_table_mappings(  # noqa: PLR0912 (too many branches)
     source_table: str | None = None,
     auto_confirm: bool | None = None,
 ) -> None:
-    auto_confirm = if_none(auto_confirm, False)
+    auto_confirm = cast(bool, if_none(auto_confirm, False))
 
     # Find the YAML file
     yaml_file = resource_paths.get_transform_file(
@@ -360,6 +385,7 @@ def infer_table_mappings(  # noqa: PLR0912 (too many branches)
         source_name=source_name,
         project_name=project_name,
         transform_name=transform_name,
+        auto_confirm=auto_confirm,
     )
     # Update lock file
     # Update dbt project

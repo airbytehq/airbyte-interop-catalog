@@ -533,9 +533,8 @@ class FieldMappingEval(BaseModel):
     Values defined as `MISSING` should receive a score of 0.00.
     """
 
-    # Not used yet, so hiding to reduce cost:
-    # explanation: str
-    # """A short explanation of the score."""
+    explanation: str
+    """A short explanation of the score."""
 
 
 class TableMappingSuggestion(BaseModel):
@@ -571,6 +570,47 @@ class TableMappingEval(BaseModel):
 
     field_mapping_evals: list[FieldMappingEval]
     """A dictionary of field names and their confidence scores."""
+
+    def print_as_rich_table(
+        self,
+        from_transform: TableMapping,
+    ) -> None:
+        """Print a complete mapping confidence analysis.
+
+        Args:
+            confidence: The confidence evaluation results
+            fields: List of field mappings
+            title: Optional title for the analysis table
+        """
+        # Create results table
+        table = Table(title="Table Mapping Eval")
+        table.add_column("Field", style="cyan")
+        table.add_column("Expression", style="yellow")
+        table.add_column("Description")
+        table.add_column("Confidence", justify="right")
+        table.add_column("Evaluation", style="italic")
+        # Print results
+        console.print(
+            f"\nOverall Confidence Score: {rich_formatted_confidence(self.score)}",
+        )
+        console.print("\nExplanation:")
+        console.print(f"\n{self.explanation}", style="italic")
+        console.print("\nField-by-Field Analysis:")
+
+        # Print each field evaluation
+        for field_eval in self.field_mapping_evals:
+            field_ref: FieldMapping = next(
+                f for f in from_transform.field_mappings if f.name == field_eval.name
+            )
+            table.add_row(
+                field_eval.name,
+                str(field_ref.expression),
+                field_ref.description or "",
+                rich_formatted_confidence(field_eval.score),
+                field_eval.explanation,
+            )
+
+        console.print(table)
 
 
 class SourceTableSummary(BaseModel):
