@@ -8,10 +8,10 @@ transforms:
         expression: engagements_calls._airbyte_extracted_at
         description: '{{ doc("_fivetran_synced") }}'
       engagement_id:
-        expression: engagements_calls.
+        expression: engagements_calls.id
         description: The ID of the engagement.
       _fivetran_deleted:
-        expression: engagements_calls.
+        expression: engagements_calls.properties.hs_gdpr_deleted
         description: Boolean to mark rows that were deleted in the source database.
       property_hs_createdate:
         expression: engagements_calls.properties.hs_createdate
