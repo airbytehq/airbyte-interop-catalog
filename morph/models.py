@@ -195,6 +195,93 @@ class DbtSourceFile(BaseModel):
             source_name=source["name"],
             source_tables=[DbtSourceTable.from_dict(table) for table in source["tables"]],
         )
+    
+    @classmethod
+    def from_airbyte_catalog_json(
+        cls,
+        catalog_file: Path | str,
+        source_name: str,
+        database: str | None = None,
+        schema: str | None = None,
+    ) -> Self:
+        """Create a DbtSourceFile from an Airbyte catalog JSON file.
+        
+        Args:
+            catalog_file: Path to the Airbyte catalog JSON file
+            source_name: Name of the source
+            database: Optional database name
+            schema: Optional schema name
+            
+        Returns:
+            A DbtSourceFile instance
+        """
+        import json
+        
+        catalog_path = Path(catalog_file)
+        catalog = json.loads(catalog_path.read_text())
+        
+        if "streams" not in catalog:
+            raise ValueError(f"Invalid Airbyte catalog: 'streams' key not found in {catalog_file}")
+        
+        tables = []
+        for stream in catalog["streams"]:
+            if "name" not in stream or "json_schema" not in stream:
+                continue
+                
+            table_name = stream["name"]
+            
+            columns = []
+            if "properties" in stream["json_schema"]:
+                for prop_name, prop_schema in stream["json_schema"]["properties"].items():
+                    dbt_column = DbtSourceColumn.from_json_schema(prop_name, prop_schema)
+                    columns.append(dbt_column)
+            
+            airbyte_columns = [
+                DbtSourceColumn(
+                    name="_airbyte_extracted_at",
+                    data_type="timestamp",
+                    description="Timestamp when the record was extracted from the source",
+                ),
+                DbtSourceColumn(
+                    name="_airbyte_meta",
+                    data_type="variant",
+                    description="Metadata about the record",
+                ),
+                DbtSourceColumn(
+                    name="_airbyte_raw_id",
+                    data_type="varchar",
+                    description="Unique identifier for the raw record",
+                ),
+            ]
+            
+            columns.extend(airbyte_columns)
+            
+            table = DbtSourceTable(
+                name=table_name,
+                description=stream["json_schema"].get("description"),
+                columns=columns,
+            )
+            tables.append(table)
+        
+        sorted_tables = sorted(tables, key=lambda x: x.name)
+        
+        return cls(
+            source_name=source_name,
+            source_tables=sorted_tables,
+        )
+    
+    def to_dict(self) -> dict[str, Any]:
+        """Convert the DbtSourceFile to a dictionary.
+        
+        Returns:
+            A dictionary representation of the DbtSourceFile
+        """
+        source = {
+            "name": self.source_name,
+            "tables": [table.to_dict() for table in self.source_tables],
+        }
+        
+        return {"version": 2, "sources": [source]}
 
     def get_table(self, table_name: str) -> DbtSourceTable:
         """Get a table from the source file."""

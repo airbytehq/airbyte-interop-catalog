@@ -14,7 +14,6 @@ from morph.utils import resource_paths, text_utils
 from morph.utils.airbyte_catalog import write_catalog_file
 from morph.utils.dbt_source_files import (
     generate_dbt_sources_yml_from_airbyte_catalog,
-    parse_airbyte_catalog_to_dbt_sources_format,
 )
 from morph.utils.lock_file import generate_lock_file_for_project
 from morph.utils.logic import if_none
@@ -598,12 +597,21 @@ def airbyte_catalog_to_dbt(
     if not catalog_path_obj.is_file() or not catalog_path_obj.name.endswith(".json"):
         raise ValueError(f"Error: {catalog_path} is not a valid JSON file")
 
-    sources_yml = parse_airbyte_catalog_to_dbt_sources_format(
+    from morph.models import DbtSourceFile
+    
+    dbt_file = DbtSourceFile.from_airbyte_catalog_json(
         catalog_file=catalog_path,
         source_name=source_name,
-        database=database,
-        schema=schema,
     )
+    
+    sources_yml = dbt_file.to_dict()
+    
+    if database or schema:
+        if "sources" in sources_yml and sources_yml["sources"]:
+            if database:
+                sources_yml["sources"][0]["database"] = database
+            if schema:
+                sources_yml["sources"][0]["schema"] = schema
 
     # Write to output file with header comment
     output_path = Path(output)

@@ -165,51 +165,29 @@ def parse_airbyte_catalog_to_dbt_sources_format(
     database: str | None = None,
     schema: str | None = None,
 ) -> dict[str, Any]:
-    """Generate a dbt sources.yml structure from an Airbyte catalog file."""
+    """Generate a dbt sources.yml structure from an Airbyte catalog file.
+    
+    This function is maintained for backward compatibility.
+    New code should use DbtSourceFile.from_airbyte_catalog_json() instead.
+    """
     try:
-        catalog_path = Path(catalog_file)
-        catalog = json.loads(catalog_path.read_text())
-
-        if "streams" not in catalog:
-            raise ValueError(f"Invalid Airbyte catalog: 'streams' key not found in {catalog_file}")
-
-        tables = []
-        for stream in catalog["streams"]:
-            if "name" not in stream or "json_schema" not in stream:
-                print(f"Warning: Stream missing required fields in {catalog_file}, skipping")
-                continue
-
-            table_name = stream["name"]
-            table = json_schema_to_dbt_table(table_name, stream["json_schema"])
-
-            # Add the three additional Airbyte columns to all streams
-            airbyte_columns = [
-                {
-                    "name": "_airbyte_extracted_at",
-                    "type": "timestamp",
-                    "description": "Timestamp when the record was extracted from the source",
-                },
-                {
-                    "name": "_airbyte_meta",
-                    "type": "variant",
-                    "description": "Metadata about the record",
-                },
-                {
-                    "name": "_airbyte_raw_id",
-                    "type": "varchar",
-                    "description": "Unique identifier for the raw record",
-                },
-            ]
-
-            # Add columns to the table if they don't already exist
-            if "columns" not in table:
-                table["columns"] = []
-
-            table["columns"].extend(airbyte_columns)
-
-            tables.append(table)
-
-        return create_dbt_source(tables, source_name, database, schema)
+        from morph.models import DbtSourceFile
+        
+        dbt_file = DbtSourceFile.from_airbyte_catalog_json(
+            catalog_file=catalog_file,
+            source_name=source_name,
+        )
+        
+        source_dict = dbt_file.to_dict()
+        
+        if database or schema:
+            if "sources" in source_dict and source_dict["sources"]:
+                if database:
+                    source_dict["sources"][0]["database"] = database
+                if schema:
+                    source_dict["sources"][0]["schema"] = schema
+        
+        return source_dict
     except Exception as e:
         print(f"Error processing Airbyte catalog {catalog_file}: {e}")
         return create_dbt_source([], source_name, database, schema)
