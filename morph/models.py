@@ -156,24 +156,30 @@ class DbtSourceTable(BaseModel):
             columns=columns,
         )
 
-    def to_dict(self) -> dict[str, str | list[dict[str, Any]] | None]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert the DbtSourceTable to a dictionary."""
         columns = []
         for column in self.columns:
-            col_dict = column.model_dump()
+            col_dict = column.model_dump(exclude_none=True, exclude_unset=True)
+
+            if "description" in col_dict and not col_dict["description"]:
+                col_dict.pop("description")
 
             if col_dict.get("subcolumns"):
                 if "meta" not in col_dict:
                     col_dict["meta"] = {}
                 col_dict["meta"]["subcolumns"] = col_dict.pop("subcolumns")
+                if not col_dict["meta"]["subcolumns"]:
+                    col_dict.pop("meta")
 
             columns.append(col_dict)
 
-        return {
-            "name": self.name,
-            "description": self.description,
-            "columns": columns,
-        }
+        result = {"name": self.name, "columns": columns}
+
+        if self.description:
+            result["description"] = self.description
+
+        return result
 
 
 class DbtSourceFile(BaseModel):
