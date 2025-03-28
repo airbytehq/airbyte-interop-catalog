@@ -1,5 +1,6 @@
 """Models for AI-related functionality."""
 
+import json
 from pathlib import Path
 from typing import Any
 

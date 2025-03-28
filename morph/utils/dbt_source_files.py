@@ -17,6 +17,7 @@ from typing import Any
 from rich.console import Console
 
 from morph.constants import DEFAULT_PROJECT_NAME, HEADER_COMMENT
+from morph.models import DbtSourceColumn, DbtSourceFile, DbtSourceTable
 from morph.utils import resource_paths, text_utils
 
 console = Console()
