@@ -1,6 +1,7 @@
 """Script to regenerate Hubspot dbt sources file with subcolumns support using DbtSourceFile."""
 
 from pathlib import Path
+
 from morph.constants import HEADER_COMMENT
 from morph.models import DbtSourceFile
 from morph.utils import text_utils

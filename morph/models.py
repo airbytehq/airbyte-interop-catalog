@@ -39,10 +39,10 @@ class DbtSourceColumn(BaseModel):
 
     data_type: str | None = None
     """The data type of the column."""
-    
+
     subcolumns: list["DbtSourceColumn"] | None = None
     """Nested subcolumns for complex data types (variant/object columns)."""
-    
+
     @classmethod
     def from_json_schema(
         cls,
@@ -51,12 +51,12 @@ class DbtSourceColumn(BaseModel):
         nesting_level: int = 0,
     ) -> "DbtSourceColumn":
         """Convert a JSON schema property to a DbtSourceColumn.
-        
+
         Args:
             property_name: The name of the property.
             property_schema: The JSON schema for the property.
             nesting_level: The current nesting level (0 for top-level properties).
-            
+
         Returns:
             A DbtSourceColumn instance representing the column.
         """
@@ -91,22 +91,24 @@ class DbtSourceColumn(BaseModel):
                 property_schema["format"],
                 data_type,
             )
-        
+
         description = property_schema.get("description")
-        
+
         subcolumns = None
         if json_type := property_schema.get("type"):
-            is_object = json_type == "object" or (isinstance(json_type, list) and "object" in json_type)
+            is_object = json_type == "object" or (
+                isinstance(json_type, list) and "object" in json_type
+            )
             if is_object and "properties" in property_schema:
                 nested_columns = []
                 for prop_name, prop_schema in property_schema["properties"].items():
                     nested_column = cls.from_json_schema(
-                        prop_name, 
+                        prop_name,
                         prop_schema,
                         nesting_level + 1,
                     )
                     nested_columns.append(nested_column)
-                
+
                 if nested_columns:
                     subcolumns = nested_columns
 
@@ -136,17 +138,17 @@ class DbtSourceTable(BaseModel):
         columns = []
         for column_data in data["columns"]:
             column = column_data.copy()
-            
+
             if "type" in column and column.get("data_type") is None:
                 column["data_type"] = column.pop("type")
-                
+
             if column.get("meta") and "subcolumns" in column["meta"]:
                 column["subcolumns"] = column["meta"].pop("subcolumns")
                 if not column["meta"]:  # Clean up empty meta dict
                     column.pop("meta")
-            
+
             columns.append(DbtSourceColumn(**column))
-        
+
         return cls(
             name=data["name"],
             description=data.get("description", None),  # noqa: SIM910  # I disagree with this rule
@@ -158,14 +160,14 @@ class DbtSourceTable(BaseModel):
         columns = []
         for column in self.columns:
             col_dict = column.model_dump()
-            
+
             if col_dict.get("subcolumns"):
                 if "meta" not in col_dict:
                     col_dict["meta"] = {}
                 col_dict["meta"]["subcolumns"] = col_dict.pop("subcolumns")
-            
+
             columns.append(col_dict)
-        
+
         return {
             "name": self.name,
             "description": self.description,
@@ -195,47 +197,47 @@ class DbtSourceFile(BaseModel):
             source_name=source["name"],
             source_tables=[DbtSourceTable.from_dict(table) for table in source["tables"]],
         )
-    
+
     @classmethod
     def from_airbyte_catalog_json(
         cls,
         catalog_file: Path | str,
         source_name: str,
-        database: str | None = None,
-        schema: str | None = None,
+        database: str | None = None,  # noqa: ARG003
+        schema: str | None = None,  # noqa: ARG003
     ) -> Self:
         """Create a DbtSourceFile from an Airbyte catalog JSON file.
-        
+
         Args:
             catalog_file: Path to the Airbyte catalog JSON file
             source_name: Name of the source
             database: Optional database name
             schema: Optional schema name
-            
+
         Returns:
             A DbtSourceFile instance
         """
         import json
-        
+
         catalog_path = Path(catalog_file)
         catalog = json.loads(catalog_path.read_text())
-        
+
         if "streams" not in catalog:
             raise ValueError(f"Invalid Airbyte catalog: 'streams' key not found in {catalog_file}")
-        
+
         tables = []
         for stream in catalog["streams"]:
             if "name" not in stream or "json_schema" not in stream:
                 continue
-                
+
             table_name = stream["name"]
-            
+
             columns = []
             if "properties" in stream["json_schema"]:
                 for prop_name, prop_schema in stream["json_schema"]["properties"].items():
                     dbt_column = DbtSourceColumn.from_json_schema(prop_name, prop_schema)
                     columns.append(dbt_column)
-            
+
             airbyte_columns = [
                 DbtSourceColumn(
                     name="_airbyte_extracted_at",
@@ -253,26 +255,26 @@ class DbtSourceFile(BaseModel):
                     description="Unique identifier for the raw record",
                 ),
             ]
-            
+
             columns.extend(airbyte_columns)
-            
+
             table = DbtSourceTable(
                 name=table_name,
                 description=stream["json_schema"].get("description"),
                 columns=columns,
             )
             tables.append(table)
-        
+
         sorted_tables = sorted(tables, key=lambda x: x.name)
-        
+
         return cls(
             source_name=source_name,
             source_tables=sorted_tables,
         )
-    
+
     def to_dict(self) -> dict[str, Any]:
         """Convert the DbtSourceFile to a dictionary.
-        
+
         Returns:
             A dictionary representation of the DbtSourceFile
         """
@@ -280,7 +282,7 @@ class DbtSourceFile(BaseModel):
             "name": self.source_name,
             "tables": [table.to_dict() for table in self.source_tables],
         }
-        
+
         return {"version": 2, "sources": [source]}
 
     def get_table(self, table_name: str) -> DbtSourceTable:

@@ -598,20 +598,19 @@ def airbyte_catalog_to_dbt(
         raise ValueError(f"Error: {catalog_path} is not a valid JSON file")
 
     from morph.models import DbtSourceFile
-    
+
     dbt_file = DbtSourceFile.from_airbyte_catalog_json(
         catalog_file=catalog_path,
         source_name=source_name,
     )
-    
+
     sources_yml = dbt_file.to_dict()
-    
-    if database or schema:
-        if "sources" in sources_yml and sources_yml["sources"]:
-            if database:
-                sources_yml["sources"][0]["database"] = database
-            if schema:
-                sources_yml["sources"][0]["schema"] = schema
+
+    if (database or schema) and sources_yml.get("sources"):
+        if database:
+            sources_yml["sources"][0]["database"] = database
+        if schema:
+            sources_yml["sources"][0]["schema"] = schema
 
     # Write to output file with header comment
     output_path = Path(output)

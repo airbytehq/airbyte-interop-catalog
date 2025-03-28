@@ -27,12 +27,12 @@ def json_schema_to_dbt_column(
     property_schema: dict[str, Any],
 ) -> dict[str, Any]:
     """Convert a JSON schema property to a dbt column definition.
-    
+
     This function is maintained for backward compatibility.
     New code should use DbtSourceColumn.from_json_schema() instead.
     """
     from morph.models import DbtSourceColumn
-    
+
     dbt_column = DbtSourceColumn.from_json_schema(property_name, property_schema)
     return dbt_column.model_dump(exclude={"subcolumns": True})
 
@@ -40,7 +40,7 @@ def json_schema_to_dbt_column(
 def json_schema_to_dbt_table(schema_name: str, schema_data: dict[str, Any]) -> dict[str, Any]:
     """Convert a JSON schema to a dbt table definition."""
     from morph.models import DbtSourceColumn, DbtSourceTable
-    
+
     table = {"name": schema_name}
 
     # Add description if available
@@ -155,7 +155,7 @@ def generate_dbt_sources_yml_from_airbyte_catalog(
     # Write to file
     output_path.write_text(sources_yml_with_header)
     console.print(f"Generated sources.yml at {output_path}")
-    
+
     return sources_yml
 
 
@@ -166,27 +166,26 @@ def parse_airbyte_catalog_to_dbt_sources_format(
     schema: str | None = None,
 ) -> dict[str, Any]:
     """Generate a dbt sources.yml structure from an Airbyte catalog file.
-    
+
     This function is maintained for backward compatibility.
     New code should use DbtSourceFile.from_airbyte_catalog_json() instead.
     """
     try:
         from morph.models import DbtSourceFile
-        
+
         dbt_file = DbtSourceFile.from_airbyte_catalog_json(
             catalog_file=catalog_file,
             source_name=source_name,
         )
-        
+
         source_dict = dbt_file.to_dict()
-        
-        if database or schema:
-            if "sources" in source_dict and source_dict["sources"]:
-                if database:
-                    source_dict["sources"][0]["database"] = database
-                if schema:
-                    source_dict["sources"][0]["schema"] = schema
-        
+
+        if (database or schema) and source_dict.get("sources"):
+            if database:
+                source_dict["sources"][0]["database"] = database
+            if schema:
+                source_dict["sources"][0]["schema"] = schema
+
         return source_dict
     except Exception as e:
         print(f"Error processing Airbyte catalog {catalog_file}: {e}")

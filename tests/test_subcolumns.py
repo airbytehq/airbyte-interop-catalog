@@ -1,7 +1,5 @@
 """Tests for the subcolumns functionality in dbt source files."""
 
-
-
 from morph.models import DbtSourceColumn, DbtSourceTable
 from morph.utils.dbt_source_files import json_schema_to_dbt_table
 
@@ -28,26 +26,26 @@ def test_dbt_source_column_from_json_schema_with_subcolumns() -> None:
             },
         },
     }
-    
+
     result = DbtSourceColumn.from_json_schema("user", object_schema)
-    
+
     assert result.name == "user"
     assert result.description == "A variant column with nested fields"
     assert result.data_type == "variant"
-    
+
     assert result.subcolumns is not None
     assert len(result.subcolumns) == EXPECTED_TOP_LEVEL_SUBCOLUMNS
-    
+
     subcolumn_names = [col.name for col in result.subcolumns]
     assert "id" in subcolumn_names
     assert "name" in subcolumn_names
     assert "nested_again" in subcolumn_names
-    
+
     nested_again = next(col for col in result.subcolumns if col.name == "nested_again")
     assert nested_again.description == "Further nested data"
     assert nested_again.subcolumns is not None
     assert len(nested_again.subcolumns) == EXPECTED_NESTED_SUBCOLUMNS
-    
+
     nested_subcolumn_names = [col.name for col in nested_again.subcolumns]
     assert "child_id" in nested_subcolumn_names
     assert "child_name" in nested_subcolumn_names
@@ -57,57 +55,57 @@ def test_dbt_source_table_serialization_with_subcolumns() -> None:
     """Test serialization of DbtSourceTable with subcolumns."""
     nested_subcolumns = [
         DbtSourceColumn(
-            name="child_id", 
-            description="Child ID", 
+            name="child_id",
+            description="Child ID",
             data_type="integer",
         ),
         DbtSourceColumn(
-            name="child_name", 
-            description="Child name", 
+            name="child_name",
+            description="Child name",
             data_type="varchar",
         ),
     ]
-    
+
     nested_column = DbtSourceColumn(
         name="nested_again",
         description="Further nested data",
         data_type="variant",
         subcolumns=nested_subcolumns,
     )
-    
+
     subcolumns = [
         DbtSourceColumn(
-            name="id", 
-            description="User ID extracted from the variant", 
+            name="id",
+            description="User ID extracted from the variant",
             data_type="varchar",
         ),
         DbtSourceColumn(
-            name="name", 
-            description="User name extracted from the variant", 
+            name="name",
+            description="User name extracted from the variant",
             data_type="varchar",
         ),
         nested_column,
     ]
-    
+
     column = DbtSourceColumn(
         name="user",
         description="A variant column with nested fields",
         data_type="variant",
         subcolumns=subcolumns,
     )
-    
+
     table = DbtSourceTable(
         name="test_table",
         description="Test table",
         columns=[column],
     )
-    
+
     serialized = table.to_dict()
-    
+
     assert "columns" in serialized
     assert isinstance(serialized["columns"], list)
     assert len(serialized["columns"]) > 0
-    
+
     column_dict = serialized["columns"][0]
     assert isinstance(column_dict, dict)
     assert "meta" in column_dict
@@ -115,13 +113,13 @@ def test_dbt_source_table_serialization_with_subcolumns() -> None:
     assert "subcolumns" in column_dict["meta"]
     assert isinstance(column_dict["meta"]["subcolumns"], list)
     assert len(column_dict["meta"]["subcolumns"]) == EXPECTED_TOP_LEVEL_SUBCOLUMNS
-    
+
     nested_again_dict = None
     for col in column_dict["meta"]["subcolumns"]:
         if col["name"] == "nested_again":
             nested_again_dict = col
             break
-    
+
     assert nested_again_dict is not None
     assert "subcolumns" in nested_again_dict
     assert isinstance(nested_again_dict["subcolumns"], list)
@@ -154,37 +152,37 @@ def test_json_schema_to_dbt_table_with_subcolumns() -> None:
             },
         },
     }
-    
+
     table = json_schema_to_dbt_table("test_table", schema_data)
-    
+
     assert table["name"] == "test_table"
     assert table["description"] == "A test table"
     assert "columns" in table
-    
+
     assert "columns" in table
     assert isinstance(table["columns"], list)
-    
+
     columns = {}
     for col in table["columns"]:
         assert isinstance(col, dict)
         assert "name" in col
         columns[col["name"]] = col
-    
+
     assert "user_data" in columns
     user_data = columns["user_data"]
-    
+
     assert "meta" in user_data
     assert isinstance(user_data["meta"], dict)
     assert "subcolumns" in user_data["meta"]
     assert isinstance(user_data["meta"]["subcolumns"], list)
     assert len(user_data["meta"]["subcolumns"]) == EXPECTED_NESTED_SUBCOLUMNS
-    
+
     address = None
     for col in user_data["meta"]["subcolumns"]:
         if col["name"] == "address":
             address = col
             break
-    
+
     assert address is not None
     assert "subcolumns" in address
     assert isinstance(address["subcolumns"], list)
@@ -235,21 +233,21 @@ def test_dbt_source_table_deserialization_with_subcolumns() -> None:
             },
         ],
     }
-    
+
     table = DbtSourceTable.from_dict(serialized_table)
-    
+
     assert table.name == "test_table"
     assert table.description == "Test table"
     assert len(table.columns) == 1
-    
+
     column = table.columns[0]
     assert column.name == "user"
     assert column.description == "A variant column with nested fields"
     assert column.data_type == "variant"
-    
+
     assert column.subcolumns is not None
     assert len(column.subcolumns) == EXPECTED_TOP_LEVEL_SUBCOLUMNS
-    
+
     nested_again = next(col for col in column.subcolumns if col.name == "nested_again")
     assert nested_again.subcolumns is not None
     assert len(nested_again.subcolumns) == EXPECTED_NESTED_SUBCOLUMNS

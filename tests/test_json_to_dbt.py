@@ -22,7 +22,7 @@ def test_json_schema_to_dbt_column() -> None:
     assert result == {
         "name": "text_col",
         "description": "A text column",
-        "type": "varchar",
+        "data_type": "varchar",
     }
 
     # Test integer type
@@ -30,7 +30,8 @@ def test_json_schema_to_dbt_column() -> None:
     result = json_schema_to_dbt_column("int_col", integer_schema)
     assert result == {
         "name": "int_col",
-        "type": "integer",
+        "data_type": "integer",
+        "description": None,
     }
 
 
@@ -142,7 +143,7 @@ def test_airbyte_catalog_with_additional_columns() -> None:
             catalog_file=catalog_path,
             source_name="test_source",
         )
-        
+
         result = dbt_file.to_dict()
 
         # Verify the structure and additional columns
