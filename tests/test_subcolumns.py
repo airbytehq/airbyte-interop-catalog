@@ -31,7 +31,7 @@ def test_dbt_source_column_from_json_schema_with_subcolumns() -> None:
 
     assert result.name == "user"
     assert result.description == "A variant column with nested fields"
-    assert result.data_type == "variant"
+    assert result.data_type == "json"
 
     assert result.subcolumns is not None
     assert len(result.subcolumns) == EXPECTED_TOP_LEVEL_SUBCOLUMNS
@@ -69,7 +69,7 @@ def test_dbt_source_table_serialization_with_subcolumns() -> None:
     nested_column = DbtSourceColumn(
         name="nested_again",
         description="Further nested data",
-        data_type="variant",
+        data_type="json",
         subcolumns=nested_subcolumns,
     )
 
@@ -90,7 +90,7 @@ def test_dbt_source_table_serialization_with_subcolumns() -> None:
     column = DbtSourceColumn(
         name="user",
         description="A variant column with nested fields",
-        data_type="variant",
+        data_type="json",
         subcolumns=subcolumns,
     )
 
@@ -198,7 +198,7 @@ def test_dbt_source_table_deserialization_with_subcolumns() -> None:
             {
                 "name": "user",
                 "description": "A variant column with nested fields",
-                "type": "variant",
+                "type": "json",
                 "meta": {
                     "subcolumns": [
                         {
@@ -214,7 +214,7 @@ def test_dbt_source_table_deserialization_with_subcolumns() -> None:
                         {
                             "name": "nested_again",
                             "description": "Further nested data",
-                            "type": "variant",
+                            "type": "json",
                             "subcolumns": [
                                 {
                                     "name": "child_id",
@@ -243,7 +243,7 @@ def test_dbt_source_table_deserialization_with_subcolumns() -> None:
     column = table.columns[0]
     assert column.name == "user"
     assert column.description == "A variant column with nested fields"
-    assert column.data_type == "variant"
+    assert column.data_type == "json"
 
     assert column.subcolumns is not None
     assert len(column.subcolumns) == EXPECTED_TOP_LEVEL_SUBCOLUMNS
