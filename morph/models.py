@@ -39,6 +39,83 @@ class DbtSourceColumn(BaseModel):
 
     data_type: str | None = None
     """The data type of the column."""
+    
+    subcolumns: list["DbtSourceColumn"] | None = None
+    """Nested subcolumns for complex data types (variant/object columns)."""
+    
+    @classmethod
+    def from_json_schema(
+        cls,
+        property_name: str,
+        property_schema: dict[str, Any],
+        nesting_level: int = 0,
+    ) -> "DbtSourceColumn":
+        """Convert a JSON schema property to a DbtSourceColumn.
+        
+        Args:
+            property_name: The name of the property.
+            property_schema: The JSON schema for the property.
+            nesting_level: The current nesting level (0 for top-level properties).
+            
+        Returns:
+            A DbtSourceColumn instance representing the column.
+        """
+        type_mapping = {
+            "string": "varchar",
+            "integer": "integer",
+            "number": "float",
+            "boolean": "boolean",
+            "object": "variant",
+            "array": "array",
+        }
+
+        data_type = "varchar"  # Default
+        if "type" in property_schema:
+            json_type = property_schema["type"]
+            if isinstance(json_type, list):
+                non_null_types = [t for t in json_type if t != "null"]
+                if non_null_types:
+                    data_type = type_mapping.get(non_null_types[0], "varchar")
+            else:
+                data_type = type_mapping.get(json_type, "varchar")
+
+        if "format" in property_schema:
+            format_mapping = {
+                "date": "date",
+                "date-time": "timestamp",
+                "time": "time",
+                "email": "varchar",
+                "uri": "varchar",
+            }
+            data_type = format_mapping.get(
+                property_schema["format"],
+                data_type
+            )
+        
+        description = property_schema.get("description")
+        
+        subcolumns = None
+        if json_type := property_schema.get("type"):
+            is_object = json_type == "object" or (isinstance(json_type, list) and "object" in json_type)
+            if is_object and "properties" in property_schema:
+                nested_columns = []
+                for prop_name, prop_schema in property_schema["properties"].items():
+                    nested_column = cls.from_json_schema(
+                        prop_name, 
+                        prop_schema,
+                        nesting_level + 1
+                    )
+                    nested_columns.append(nested_column)
+                
+                if nested_columns:
+                    subcolumns = nested_columns
+
+        return cls(
+            name=property_name,
+            description=description,
+            data_type=data_type,
+            subcolumns=subcolumns
+        )
 
 
 class DbtSourceTable(BaseModel):
@@ -56,18 +133,43 @@ class DbtSourceTable(BaseModel):
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> Self:
         """Create a DbtSourceTable from a dictionary."""
+        columns = []
+        for column_data in data["columns"]:
+            column = column_data.copy()
+            
+            if "type" in column and column.get("data_type") is None:
+                column["data_type"] = column.pop("type")
+                
+            if column.get("meta") and "subcolumns" in column["meta"]:
+                column["subcolumns"] = column["meta"].pop("subcolumns")
+                if not column["meta"]:  # Clean up empty meta dict
+                    column.pop("meta")
+            
+            columns.append(DbtSourceColumn(**column))
+        
         return cls(
             name=data["name"],
             description=data.get("description", None),  # noqa: SIM910  # I disagree with this rule
-            columns=[DbtSourceColumn(**column) for column in data["columns"]],
+            columns=columns,
         )
 
-    def to_dict(self) -> dict[str, str | list[dict[str, str]] | None]:
+    def to_dict(self) -> dict[str, str | list[dict[str, Any]] | None]:
         """Convert the DbtSourceTable to a dictionary."""
+        columns = []
+        for column in self.columns:
+            col_dict = column.model_dump()
+            
+            if col_dict.get("subcolumns"):
+                if "meta" not in col_dict:
+                    col_dict["meta"] = {}
+                col_dict["meta"]["subcolumns"] = col_dict.pop("subcolumns")
+            
+            columns.append(col_dict)
+        
         return {
             "name": self.name,
             "description": self.description,
-            "columns": [column.model_dump() for column in self.columns],
+            "columns": columns,
         }
 
 

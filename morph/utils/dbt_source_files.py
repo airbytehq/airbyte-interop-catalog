@@ -26,52 +26,21 @@ def json_schema_to_dbt_column(
     property_name: str,
     property_schema: dict[str, Any],
 ) -> dict[str, Any]:
-    """Convert a JSON schema property to a dbt column definition."""
-    column = {"name": property_name}
-
-    # Map JSON schema types to dbt types
-    type_mapping = {
-        "string": "varchar",
-        "integer": "integer",
-        "number": "float",
-        "boolean": "boolean",
-        "object": "variant",
-        "array": "array",
-    }
-
-    if "type" in property_schema:
-        json_type = property_schema["type"]
-        if isinstance(json_type, list):
-            # Handle multiple types (e.g., ["string", "null"])
-            non_null_types = [t for t in json_type if t != "null"]
-            if non_null_types:
-                column["type"] = type_mapping.get(non_null_types[0], "varchar")
-        else:
-            column["type"] = type_mapping.get(json_type, "varchar")
-
-    # Add description if available
-    if "description" in property_schema:
-        column["description"] = property_schema["description"]
-
-    # Handle format for dates, timestamps, etc.
-    if "format" in property_schema:
-        format_mapping = {
-            "date": "date",
-            "date-time": "timestamp",
-            "time": "time",
-            "email": "varchar",
-            "uri": "varchar",
-        }
-        column["type"] = format_mapping.get(
-            property_schema["format"],
-            column.get("type", "varchar"),
-        )
-
-    return column
+    """Convert a JSON schema property to a dbt column definition.
+    
+    This function is maintained for backward compatibility.
+    New code should use DbtSourceColumn.from_json_schema() instead.
+    """
+    from morph.models import DbtSourceColumn
+    
+    dbt_column = DbtSourceColumn.from_json_schema(property_name, property_schema)
+    return dbt_column.model_dump(exclude={"subcolumns": True})
 
 
 def json_schema_to_dbt_table(schema_name: str, schema_data: dict[str, Any]) -> dict[str, Any]:
     """Convert a JSON schema to a dbt table definition."""
+    from morph.models import DbtSourceColumn, DbtSourceTable
+    
     table = {"name": schema_name}
 
     # Add description if available
@@ -82,10 +51,16 @@ def json_schema_to_dbt_table(schema_name: str, schema_data: dict[str, Any]) -> d
     if "properties" in schema_data:
         columns = []
         for prop_name, prop_schema in schema_data["properties"].items():
-            columns.append(json_schema_to_dbt_column(prop_name, prop_schema))
+            dbt_column = DbtSourceColumn.from_json_schema(prop_name, prop_schema)
+            columns.append(dbt_column)
 
         if columns:
-            table["columns"] = columns  # type: ignore
+            dbt_table = DbtSourceTable(
+                name=schema_name,
+                description=table.get("description"),
+                columns=columns
+            )
+            return dbt_table.to_dict()
 
     return table
 
@@ -180,10 +155,12 @@ def generate_dbt_sources_yml_from_airbyte_catalog(
     # Write to file
     output_path.write_text(sources_yml_with_header)
     console.print(f"Generated sources.yml at {output_path}")
+    
+    return sources_yml
 
 
 def parse_airbyte_catalog_to_dbt_sources_format(
-    catalog_file: str,
+    catalog_file: str | Path,
     source_name: str,
     database: str | None = None,
     schema: str | None = None,
