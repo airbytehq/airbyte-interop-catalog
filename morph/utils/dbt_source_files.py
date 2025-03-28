@@ -58,7 +58,7 @@ def json_schema_to_dbt_table(schema_name: str, schema_data: dict[str, Any]) -> d
             dbt_table = DbtSourceTable(
                 name=schema_name,
                 description=table.get("description"),
-                columns=columns
+                columns=columns,
             )
             return dbt_table.to_dict()
 

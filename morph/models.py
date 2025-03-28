@@ -89,7 +89,7 @@ class DbtSourceColumn(BaseModel):
             }
             data_type = format_mapping.get(
                 property_schema["format"],
-                data_type
+                data_type,
             )
         
         description = property_schema.get("description")
@@ -103,7 +103,7 @@ class DbtSourceColumn(BaseModel):
                     nested_column = cls.from_json_schema(
                         prop_name, 
                         prop_schema,
-                        nesting_level + 1
+                        nesting_level + 1,
                     )
                     nested_columns.append(nested_column)
                 
@@ -114,7 +114,7 @@ class DbtSourceColumn(BaseModel):
             name=property_name,
             description=description,
             data_type=data_type,
-            subcolumns=subcolumns
+            subcolumns=subcolumns,
         )
 
 
