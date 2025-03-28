@@ -1,7 +1,7 @@
 [project]
 source_name = "facebook_marketing"
 project_name = "fivetran-interop"
-generated_at = "2025-03-28T17:22:58Z"
+generated_at = "2025-03-28T19:12:28Z"
 requirements_file = "catalog/facebook_marketing/requirements/fivetran-interop/src_dbt_requirements.yml"
 requirements_file_hash = "063605bbc7f806dd4d69ca40db1bf87e3031484feebd1e9e5bc52c905b52bba7"
 airbyte_source_file = "catalog/facebook_marketing/generated/src_airbyte_facebook_marketing.yml"
@@ -427,7 +427,7 @@ ads_insights_action_type = [
 
 [mappings.basic_ad_actions]
 source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/basic_ad_actions.yml"
-source_file_hash = "5faa3af8559a7933586033a17defb6ad49af9a21257911c9bd6bbda4bf411b7e"
+source_file_hash = "fb641da297466392968c06a1cbf797ac740a2ecf07239cc127e9bd2b1209f3c0"
 unmapped_target_fields = []
 omitted_target_fields = []
 
