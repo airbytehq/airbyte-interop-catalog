@@ -21,7 +21,7 @@ def get_duckdb_cache(db_path: str, source_name: str) -> "ab.DuckDBCache":
     Returns:
         A DuckDB cache instance
     """
-    import airbyte as ab
+    import airbyte as ab  # Problem with imports
 
     return ab.DuckDBCache(
         db_path=db_path,
@@ -32,7 +32,7 @@ def get_duckdb_cache(db_path: str, source_name: str) -> "ab.DuckDBCache":
 def sync_source(
     source_name: str,
     streams: list[str] | str = "*",
-    db_path: str | None = None,
+    db_path: Path | None = None,
 ) -> None:
     """Sync data from an Airbyte source to a local database.
 
@@ -42,12 +42,14 @@ def sync_source(
         db_path: Optional path to the DuckDB database
     """
     if db_path is None:
-        db_path = f".data/{source_name}.duckdb"
+        db_path = Path(f".data/{source_name}.duckdb")
+
+    db_path.parent.mkdir(parents=True, exist_ok=True)
 
     # Ensure the .data directory exists
     Path(db_path).parent.mkdir(parents=True, exist_ok=True)
 
-    cache = get_duckdb_cache(db_path, source_name)
+    cache = get_duckdb_cache(str(db_path), source_name)
     source = get_source(source_name, streams)
     source.check()
     source.read(cache=cache)
