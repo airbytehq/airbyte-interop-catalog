@@ -5,7 +5,6 @@ This module provides functionality to generate lock files that track unused stre
 unused stream fields, unmapped target tables, and unmapped target table fields.
 """
 
-import hashlib
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -13,29 +12,11 @@ from typing import Any
 import tomli_w as toml_writer
 from rich.console import Console
 
+from morph.models import DbtSourceFile
 from morph.utils import resource_paths, text_utils
+from morph.utils.file_utils import compute_file_hash
 
 console = Console()
-
-
-def compute_file_hash(file_path: Path) -> str:
-    """Compute the SHA-256 hash of a file.
-
-    Args:
-        file_path: Path to the file
-
-    Returns:
-        Hexadecimal hash string
-    """
-    file_path = Path(file_path)
-    if not file_path.exists():
-        return ""
-
-    sha256_hash = hashlib.sha256()
-    # Read file in binary mode using pathlib
-    content = file_path.read_bytes()
-    sha256_hash.update(content)
-    return sha256_hash.hexdigest()
 
 
 def find_unused_source_streams(
@@ -51,7 +32,7 @@ def find_unused_source_streams(
     Returns:
         List of unused source streams
     """
-    used_streams = set()
+    used_streams: set[str] = set()
 
     # Extract all stream names from "from" sections
     for mapping in mapping_files:
@@ -82,7 +63,7 @@ def find_unmapped_target_tables(
     Returns:
         List of unmapped target tables
     """
-    mapped_tables = set()
+    mapped_tables: set[str] = set()
 
     # Extract all transform IDs
     for mapping in mapping_files:
@@ -124,14 +105,14 @@ def find_omitted_target_fields(
         return []
 
     # Get all field names from the target schema
-    target_fields = set()
+    target_fields: set[str] = set()
     for column in table_schema.get("columns", []):
         field_name = column.get("name")
         if field_name:
             target_fields.add(field_name)
 
     # Get all mapped field names
-    mapped_fields = set(fields.keys())
+    mapped_fields: set[str] = set(fields.keys())
 
     # Find omitted fields
     return sorted(target_fields - mapped_fields)
@@ -148,7 +129,7 @@ def find_missing_target_fields(
     Returns:
         List of fields marked as MISSING
     """
-    missing_fields = []
+    missing_fields: list[str] = []
 
     for field_name, field_config in fields.items():
         expression = field_config.get("expression")
@@ -195,7 +176,6 @@ def extract_source_streams(source_name: str) -> list[str]:
     Returns:
         List of source stream names
     """
-    # Try to load from generated source schema
     source_schema_path = Path(f"catalog/{source_name}/generated/src_airbyte_{source_name}.yml")
     if not source_schema_path.exists():
         console.print(
@@ -205,14 +185,8 @@ def extract_source_streams(source_name: str) -> list[str]:
         return []
 
     try:
-        source_schema = text_utils.load_yaml_file(source_schema_path)
-        streams = []
-        for source in source_schema.get("sources", []):
-            for table in source.get("tables", []):
-                table_name = table.get("name")
-                if table_name:
-                    streams.append(table_name)
-        return streams
+        source_file = DbtSourceFile.from_file(source_schema_path)
+        return [table.name for table in source_file.source_tables]
     except Exception as e:
         console.print(f"Error loading source schema: {e}", style="bold red")
         return []
@@ -228,7 +202,6 @@ def extract_target_tables(source_name: str, project_name: str) -> list[str]:
     Returns:
         List of target table names
     """
-    # Try to load from requirements file
     requirements_path = resource_paths.get_dbt_sources_requirements_path(
         source_name=source_name,
         project_name=project_name,
@@ -241,14 +214,8 @@ def extract_target_tables(source_name: str, project_name: str) -> list[str]:
         return []
 
     try:
-        requirements = text_utils.load_yaml_file(requirements_path)
-        tables = []
-        for source in requirements.get("sources", []):
-            for table in source.get("tables", []):
-                table_name = table.get("name")
-                if table_name:
-                    tables.append(table_name)
-        return tables
+        source_file = DbtSourceFile.from_file(requirements_path)
+        return [table.name for table in source_file.source_tables]
     except Exception as e:
         console.print(f"Error loading requirements: {e}", style="bold red")
         return []

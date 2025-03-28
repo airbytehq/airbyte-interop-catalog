@@ -1,8 +1,8 @@
 """Models for AI-related functionality."""
 
 from pathlib import Path
+from typing import Any
 
-import rich
 from pydantic import BaseModel
 from rich.console import Console
 from rich.table import Table
@@ -54,7 +54,7 @@ class DbtSourceTable(BaseModel):
     """The columns in the table."""
 
     @classmethod
-    def from_dict(cls, data: dict) -> Self:
+    def from_dict(cls, data: dict[str, Any]) -> Self:
         """Create a DbtSourceTable from a dictionary."""
         return cls(
             name=data["name"],
@@ -62,7 +62,7 @@ class DbtSourceTable(BaseModel):
             columns=[DbtSourceColumn(**column) for column in data["columns"]],
         )
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, str | list[dict[str, str]] | None]:
         """Convert the DbtSourceTable to a dictionary."""
         return {
             "name": self.name,
@@ -105,6 +105,10 @@ class DbtSourceFile(BaseModel):
             raise ValueError(f"Table '{table_name}' not found in source file. Found: {table_names}")
 
         return table
+
+    def get_table_names(self) -> list[str]:
+        """Get the names of all tables in the source file."""
+        return [table.name for table in self.source_tables]
 
 
 class FieldMapping(BaseModel):
@@ -164,7 +168,7 @@ class TableMapping(BaseModel):
     """The field mappings for the table."""
 
     @classmethod
-    def read_from_transform_file(cls, transform_file: Path) -> Self:
+    def from_file(cls, transform_file: Path) -> Self:
         """Create a TableMapping from a transform file."""
         file_data = text_utils.load_yaml_file(transform_file)
         source_name = file_data.get("domain", ".").split(".")[0]
@@ -185,7 +189,7 @@ class TableMapping(BaseModel):
         if not target_table_name:
             raise ValueError("target_table_name is required")
 
-        fields: list[DbtSourceColumn] = []
+        fields: list[FieldMapping] = []
         for field_name, field_data in mapping_data.get("fields", {}).items():
             fields.append(
                 FieldMapping(
@@ -204,7 +208,7 @@ class TableMapping(BaseModel):
             field_mappings=fields,
         )
 
-    def write_to_transform_file(self, transform_file: Path) -> None:
+    def to_file(self, transform_file: Path) -> None:
         """Write the TableMapping to a transform file."""
         output_dict = {
             "domain": f"{self.source_name}.{self.project_name}",
@@ -324,7 +328,7 @@ class SourceTableMappingSuggestion(BaseModel):
     explanation: str
     """A detailed explanation of the confidence score."""
 
-    def as_rich_table(self) -> rich.table.Table:
+    def as_rich_table(self) -> Table:
         """Return a rich representation of the object as a Rich Table."""
         table = Table(
             title="Source Table Mapping Suggestion",

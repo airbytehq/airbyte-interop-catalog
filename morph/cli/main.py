@@ -1,5 +1,6 @@
 """Command-line interface for Morph."""
 
+from os import path
 import shutil
 from pathlib import Path
 
@@ -9,11 +10,12 @@ from rich.console import Console
 from morph import models
 from morph.ai import map
 from morph.ai.eval import get_table_mapping_eval
-from morph.constants import DEFAULT_PROJECT_NAME
+from morph.constants import DEFAULT_PROJECT_NAME, HEADER_COMMENT
 from morph.utils import resource_paths, text_utils
 from morph.utils.airbyte_catalog import write_catalog_file
 from morph.utils.dbt_source_files import (
     generate_dbt_sources_yml_from_airbyte_catalog,
+    parse_airbyte_catalog_to_dbt_sources_format,
 )
 from morph.utils.lock_file import generate_lock_file_for_project
 from morph.utils.logic import if_none
@@ -35,17 +37,24 @@ def main() -> None:
 
 
 @main.command()
-@click.argument("catalog_file", type=str)
+@click.argument(
+    "catalog_file",
+    type=click.Path(exists=True, path_type=Path),
+)
 @click.option("--source-name", type=str, help="Name of the source (e.g., 'hubspot')")
-@click.option("--output-file", type=str, help="Output file path")
+@click.option(
+    "--output-file",
+    help="Output file path",
+    type=click.Path(path_type=Path),
+)
 @click.option("--database", type=str, help="Database name")
 @click.option("--schema", type=str, help="Schema name")
 def airbyte_catalog_to_dbt_sources_yml(
     source_name: str,
     project_name: str = DEFAULT_PROJECT_NAME,
     *,
-    catalog_file: str | None = None,
-    output_file: str | None = None,
+    catalog_file: Path | None = None,
+    output_file: Path | None = None,
     database: str | None = None,
     schema: str | None = None,
 ) -> None:
@@ -57,12 +66,12 @@ def airbyte_catalog_to_dbt_sources_yml(
     CATALOG_FILE: Path to the JSON schema or Airbyte catalog file
     """
     generate_dbt_sources_yml_from_airbyte_catalog(
-        source_name,
-        project_name,
-        catalog_file,
-        output_file,
-        database,
-        schema,
+        source_name=source_name,
+        project_name=project_name,
+        catalog_file=catalog_file,
+        output_file=output_file,
+        database=database,
+        schema=schema,
     )
 
 
@@ -187,17 +196,19 @@ def create_airbyte_catalog(
 )
 @click.option(
     "--config-file",
+    type=click.Path(path_type=Path),
     help="Path to config.yml (defaults to catalog/{source_name}/src/{project_name}/config.yml)",
 )
 @click.option(
     "--db-path",
     help="Path to DuckDB database (defaults to .data/{source_name}.duckdb)",
+    type=click.Path(path_type=Path),
 )
 def create_airbyte_data(
     source_name: str,
     project_name: str,
-    config_file: str | None = None,
-    db_path: str | None = None,
+    config_file: Path | None = None,
+    db_path: Path | None = None,
 ) -> None:
     """Sync data from an Airbyte source to a local database.
 
@@ -207,15 +218,13 @@ def create_airbyte_data(
     SOURCE_NAME: Name of the source (e.g., 'hubspot')
     PROJECT_NAME: Name of the project (e.g., 'fivetran-interop')
     """
-    from pathlib import Path
-
     from morph.utils.airbyte_sync import sync_source
 
     # Set default paths if not provided
     if not config_file:
-        config_file = f"catalog/{source_name}/src/{project_name}/config.yml"
+        config_file = Path(f"catalog/{source_name}/src/{project_name}/config.yml")
     if not db_path:
-        db_path = f".data/{source_name}.duckdb"
+        db_path = Path(f".data/{source_name}.duckdb")
 
     # Load streams from config.yml
     config_path = Path(config_file)
@@ -565,6 +574,42 @@ def generate_missing_mappings(
             transform_name=target_table,
             auto_confirm=auto_confirm,
         )
+
+@main.command()
+@click.argument("catalog_path", type=click.Path(exists=True))
+@click.option("--source-name", default="default_source", help="Name for the dbt source")
+@click.option("--database", help="Database name for the source")
+@click.option("--schema", help="Schema name for the source")
+@click.option("--output", default="sources.yml", help="Output file path")
+def airbyte_catalog_to_dbt(
+    catalog_path: str,
+    source_name: str,
+    database: str | None,
+    schema: str | None,
+    output: str,
+) -> None:
+    """Convert JSON schema files or Airbyte catalog to dbt sources.yml format."""
+    catalog_path_obj = Path(catalog_path)
+
+    # Validate input path exists
+    if not catalog_path_obj.exists():
+        raise ValueError(f"Error: {catalog_path} does not exist")
+
+    if not catalog_path_obj.is_file() or not catalog_path_obj.name.endswith(".json"):
+        raise ValueError(f"Error: {catalog_path} is not a valid JSON file")
+
+    sources_yml = parse_airbyte_catalog_to_dbt_sources_format(
+        catalog_file=catalog_path,
+        source_name=source_name,
+        database=database,
+        schema=schema,
+    )
+
+    # Write to output file with header comment
+    output_path = Path(output)
+    output_path.write_text(HEADER_COMMENT + text_utils.dump_yaml_str(sources_yml))
+
+    console.print(f"Generated dbt sources.yml at {output}")
 
 
 if __name__ == "__main__":
