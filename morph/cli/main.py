@@ -1,6 +1,5 @@
 """Command-line interface for Morph."""
 
-from os import path
 import shutil
 from pathlib import Path
 
@@ -574,6 +573,7 @@ def generate_missing_mappings(
             transform_name=target_table,
             auto_confirm=auto_confirm,
         )
+
 
 @main.command()
 @click.argument("catalog_path", type=click.Path(exists=True))

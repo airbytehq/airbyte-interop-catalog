@@ -21,7 +21,7 @@ def get_duckdb_cache(db_path: str, source_name: str) -> "ab.DuckDBCache":
     Returns:
         A DuckDB cache instance
     """
-    import airbyte as ab  # noqa: PLC0415  # Problem with imports
+    import airbyte as ab  # Problem with imports
 
     return ab.DuckDBCache(
         db_path=db_path,
