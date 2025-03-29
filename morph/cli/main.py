@@ -327,7 +327,7 @@ def lock(
 @click.option(
     "--no-airbyte-catalog",
     is_flag=True,
-    default=False,  # Resolved the serpyco-rs issue by adding from __future__ import annotations
+    default=False,
 )
 @click.option("--no-transforms", is_flag=True)
 @click.option("--no-dbt-project", is_flag=True)
