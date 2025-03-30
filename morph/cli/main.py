@@ -208,6 +208,7 @@ def create_airbyte_db(
     """
     # We could use project_name in the future if needed
     catalog_path = f"catalog/{source_name}/generated/airbyte-catalog.json"
+    _ = project_name  # Not used currently
 
     if not no_catalog:
         console.print(f"Generating Airbyte catalog for {source_name}...")
@@ -217,27 +218,12 @@ def create_airbyte_db(
         )
         console.print(f"Generated Airbyte catalog at {catalog_path}")
 
-    # Set default paths if not provided
-    config_file = Path(f"catalog/{source_name}/src/{project_name}/config.yml")
-    if not db_path:
-        db_path = Path(f".data/{source_name}.duckdb")
-
-    # Load streams from config.yml
-    config_path = Path(config_file)
-    if not config_path.exists():
-        raise ValueError(f"Error: Config file {config_file} does not exist")
-
-    config = text_utils.load_yaml_file(config_path)
-    source_streams = config.get("source_streams", [])
-    # target_tables will be used in future implementations
-    _ = config.get("target_tables", [])
-
     console.print(
         f"Syncing '{source_name}' database...",
     )
     sync_source(
         source_name=source_name,
-        streams=source_streams,
+        streams="*",
         db_path=db_path,
         no_data=no_data,
         no_creds=no_creds,
