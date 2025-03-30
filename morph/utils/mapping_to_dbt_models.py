@@ -109,7 +109,7 @@ def _apply_traversal_format(base: str, path: list[str], traversal_method: str) -
     Returns:
         The formatted expression
     """
-    if traversal_method == "bracket_notation" or traversal_method == "default":
+    if traversal_method in ["bracket_notation", "default"]:
         return _format_bracket_notation(base, path)
     elif traversal_method == "portable":
         return _format_portable(base, path)
