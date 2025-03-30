@@ -67,7 +67,6 @@ class DbtSourceColumn(BaseModel):
         Returns:
             A DbtSourceColumn instance representing the column.
         """
-        from morph.utils.text_utils import normalize_field_name
 
         type_mapping = {
             "string": "varchar",
