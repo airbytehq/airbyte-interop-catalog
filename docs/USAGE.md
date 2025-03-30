@@ -45,12 +45,20 @@ To add a new connector to the catalog, follow these steps:
    uv run morph generate-project {new_connector}
    ```
 
-7. Optionally, generate Airbyte data for the source.
+7. Generated Airbyte schema for the source.
 
-   - This requires that you've selected one or more streams in the `config.yml` file.
+   - The first time you run this it will require creds in a `GCP_GSM_CREDENTIALS` env var.
+     ```bash
+     uv run morph create-airbyte-db {new_connector} --no-data
+     ```
+   - Subsequent executions can be run without creds, using the generated catalog.
+     ```bash
+     uv run morph create-airbyte-db {new_connector} --no-data --no-creds
+     ```
 
+8. Optionally extract the raw data. This will require creds and may take a while.
    ```bash
-   uv run morph create-airbyte-data {new_connector}
+   uv run morph create-airbyte-db {new_connector}
    ```
 
 ## Generating dbt Projects from Mapping Files

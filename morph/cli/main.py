@@ -1,5 +1,7 @@
 """Command-line interface for Morph."""
 
+from __future__ import annotations
+
 import shutil
 from pathlib import Path
 
@@ -12,6 +14,7 @@ from morph.ai.eval import get_table_mapping_eval
 from morph.constants import DEFAULT_PROJECT_NAME
 from morph.utils import resource_paths, text_utils
 from morph.utils.airbyte_catalog import write_catalog_file
+from morph.utils.airbyte_sync import sync_source
 from morph.utils.dbt_source_files import (
     generate_dbt_sources_yml_from_airbyte_catalog,
 )
@@ -134,8 +137,6 @@ def generate_dbt_project(
                 project_name=project_name,
                 catalog_file=catalog_file,
                 output_file=generated_sources_path,
-                database=None,  # database
-                schema=None,  # schema
             )
 
         # Get sources.yml path in dbt project models directory
@@ -162,28 +163,6 @@ def generate_dbt_project(
 
 
 @main.command()
-def create_airbyte_catalog(
-    source_name: str,
-    output_file: str | None = None,
-) -> None:
-    """Generate an Airbyte catalog JSON file for a source.
-
-    This command generates an Airbyte catalog JSON file for the specified source.
-
-    SOURCE_NAME: Name of the source (e.g., 'hubspot')
-    PROJECT_NAME: Name of the project (e.g., 'fivetran-interop')
-    """
-    # Set default output file path if not provided
-    if not output_file:
-        # We could use project_name in the future if needed
-        output_file = f"catalog/{source_name}/generated/airbyte-catalog.json"
-
-    console.print(f"Generating Airbyte catalog for {source_name}...")
-    write_catalog_file(source_name, Path(output_file))
-    console.print(f"Generated Airbyte catalog at {output_file}")
-
-
-@main.command()
 @click.argument("source_name", type=str)
 @click.argument(
     "project_name",
@@ -191,20 +170,33 @@ def create_airbyte_catalog(
     default=DEFAULT_PROJECT_NAME,
 )
 @click.option(
-    "--config-file",
-    type=click.Path(path_type=Path),
-    help="Path to config.yml (defaults to catalog/{source_name}/src/{project_name}/config.yml)",
-)
-@click.option(
     "--db-path",
     help="Path to DuckDB database (defaults to .data/{source_name}.duckdb)",
     type=click.Path(path_type=Path),
 )
-def create_airbyte_data(
+@click.option(
+    "--no-catalog",
+    is_flag=True,
+    help="Skip catalog generation",
+)
+@click.option(
+    "--no-data",
+    is_flag=True,
+    help="Skip data extraction",
+)
+@click.option(
+    "--no-creds",
+    is_flag=True,
+    help="Skip credentials",
+)
+def create_airbyte_db(
     source_name: str,
     project_name: str,
-    config_file: Path | None = None,
     db_path: Path | None = None,
+    *,
+    no_catalog: bool = False,
+    no_data: bool = False,
+    no_creds: bool = False,
 ) -> None:
     """Sync data from an Airbyte source to a local database.
 
@@ -214,27 +206,29 @@ def create_airbyte_data(
     SOURCE_NAME: Name of the source (e.g., 'hubspot')
     PROJECT_NAME: Name of the project (e.g., 'fivetran-interop')
     """
-    from morph.utils.airbyte_sync import sync_source
+    # We could use project_name in the future if needed
+    catalog_path = f"catalog/{source_name}/generated/airbyte-catalog.json"
+    _ = project_name  # Not used currently
 
-    # Set default paths if not provided
-    if not config_file:
-        config_file = Path(f"catalog/{source_name}/src/{project_name}/config.yml")
-    if not db_path:
-        db_path = Path(f".data/{source_name}.duckdb")
+    if not no_catalog:
+        console.print(f"Generating Airbyte catalog for {source_name}...")
+        write_catalog_file(
+            source_name=source_name,
+            output_file_path=Path(catalog_path),
+        )
+        console.print(f"Generated Airbyte catalog at {catalog_path}")
 
-    # Load streams from config.yml
-    config_path = Path(config_file)
-    if not config_path.exists():
-        raise ValueError(f"Error: Config file {config_file} does not exist")
-
-    config = text_utils.load_yaml_file(config_path)
-    source_streams = config.get("source_streams", [])
-    # target_tables will be used in future implementations
-    _ = config.get("target_tables", [])
-
-    console.print(f"Syncing {source_name} data for streams: {', '.join(source_streams)}...")
-    sync_source(source_name, source_streams, db_path)
-    console.print(f"Synced {source_name} data to {db_path}")
+    console.print(
+        f"Syncing '{source_name}' database...",
+    )
+    sync_source(
+        source_name=source_name,
+        streams="*",
+        db_path=db_path,
+        no_data=no_data,
+        no_creds=no_creds,
+    )
+    console.print(f"Synced '{source_name}' database: {db_path}")
 
 
 def generate_lock_file(
@@ -355,7 +349,7 @@ def generate_project(
     # Generate Airbyte catalog
     if not no_airbyte_catalog:
         console.print(f"Generating Airbyte catalog for {source_name}...")
-        create_airbyte_catalog.callback(source_name)
+        create_airbyte_db.callback(source_name)
         console.print("Generated Airbyte catalog.")
 
     # Generate transforms
