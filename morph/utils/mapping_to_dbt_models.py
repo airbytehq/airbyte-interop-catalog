@@ -74,7 +74,9 @@ def _format_json_path(
     Returns:
         The formatted expression for the specified database type
     """
-    if "." not in expression:
+    dot_count = expression.count(".")
+    
+    if dot_count < 2:
         return expression
 
     if subcolumn_traversal == "default":
