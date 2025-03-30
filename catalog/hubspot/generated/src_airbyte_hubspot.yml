@@ -3490,42 +3490,62 @@ sources:
             data_type: varchar
       - name: contacts_form_submissions
         columns:
-          - name: canonical-vid
+          - name: canonical_vid
             description: The canonical VID associated with the submission
             data_type: integer
-          - name: canonical-url
+            meta:
+              original_field_name: canonical-vid
+          - name: canonical_url
             description: The canonical URL of the submitted form
             data_type: varchar
-          - name: conversion-id
+            meta:
+              original_field_name: canonical-url
+          - name: conversion_id
             description: The conversion ID related to the form submission
             data_type: varchar
-          - name: page-title
+            meta:
+              original_field_name: conversion-id
+          - name: page_title
             description: The title of the page where the form submission occurred
             data_type: varchar
+            meta:
+              original_field_name: page-title
           - name: timestamp
             description: The timestamp of when the form submission occurred
             data_type: integer
-          - name: form-id
+          - name: form_id
             description: The unique ID of the form submitted
             data_type: varchar
-          - name: portal-id
+            meta:
+              original_field_name: form-id
+          - name: portal_id
             description: The ID of the portal where the form submission was made
             data_type: integer
+            meta:
+              original_field_name: portal-id
           - name: title
             description: The title of the form submitted
             data_type: varchar
-          - name: page-url
+          - name: page_url
             description: The URL of the page where the form was submitted
             data_type: varchar
-          - name: form-type
+            meta:
+              original_field_name: page-url
+          - name: form_type
             description: The type of form that was submitted
             data_type: varchar
-          - name: contact-associated-by
+            meta:
+              original_field_name: form-type
+          - name: contact_associated_by
             description: The specific contacts associated with the submission
             data_type: array
-          - name: meta-data
+            meta:
+              original_field_name: contact-associated-by
+          - name: meta_data
             description: Additional metadata associated with the submission
             data_type: array
+            meta:
+              original_field_name: meta-data
           - name: _airbyte_extracted_at
             description: Timestamp when the record was extracted from the source
             data_type: timestamp
@@ -3537,18 +3557,24 @@ sources:
             data_type: varchar
       - name: contacts_list_memberships
         columns:
-          - name: canonical-vid
+          - name: canonical_vid
             description: The unique ID associated with the contact in the HubSpot
               CRM
             data_type: integer
-          - name: static-list-id
+            meta:
+              original_field_name: canonical-vid
+          - name: static_list_id
             description: The static ID assigned to the list of contacts within the
               HubSpot CRM
             data_type: integer
-          - name: internal-list-id
+            meta:
+              original_field_name: static-list-id
+          - name: internal_list_id
             description: The internal ID assigned to the list of contacts within the
               HubSpot CRM
             data_type: integer
+            meta:
+              original_field_name: internal-list-id
           - name: timestamp
             description: The timestamp when the contact was added to or removed from
               the list
@@ -3556,10 +3582,12 @@ sources:
           - name: vid
             description: The ID associated with the contact in the HubSpot CRM
             data_type: integer
-          - name: is-member
+          - name: is_member
             description: Flag indicating whether the contact is a member of the list
               or not
             data_type: boolean
+            meta:
+              original_field_name: is-member
           - name: _airbyte_extracted_at
             description: Timestamp when the record was extracted from the source
             data_type: timestamp
@@ -3571,49 +3599,64 @@ sources:
             data_type: varchar
       - name: contacts_merged_audit
         columns:
-          - name: canonical-vid
+          - name: canonical_vid
             description: The unique identifier for the merged contact in HubSpot's
               CRM.
             data_type: integer
-          - name: vid-to-merge
+            meta:
+              original_field_name: canonical-vid
+          - name: vid_to_merge
             description: The contact’s unique identifier to be merged.
             data_type: integer
+            meta:
+              original_field_name: vid-to-merge
           - name: timestamp
             description: The timestamp of when the merge operation occurred.
             data_type: integer
-          - name: entity-id
+          - name: entity_id
             description: The entity identifier for the merged contact.
             data_type: varchar
-          - name: user-id
+            meta:
+              original_field_name: entity-id
+          - name: user_id
             description: The user ID responsible for the merge operation.
             data_type: integer
-          - name: num-properties-moved
+            meta:
+              original_field_name: user-id
+          - name: num_properties_moved
             description: The number of properties moved during the merge process.
             data_type: integer
+            meta:
+              original_field_name: num-properties-moved
           - name: merged_from_email
             description: Details of the email address from which the contact was merged
               from.
             data_type: json
             meta:
               subcolumns:
-                - name: source-vids
+                - name: source_vids
                   description: Array of unique identifiers of video sources.
                   data_type: array
-                - name: updated-by-user-id
+                  original_field_name: source-vids
+                - name: updated_by_user_id
                   description: The user ID of the user who updated the email address.
                   data_type: integer
-                - name: source-label
+                  original_field_name: updated-by-user-id
+                - name: source_label
                   description: The label of the source of the email address.
                   data_type: varchar
-                - name: source-type
+                  original_field_name: source-label
+                - name: source_type
                   description: The type of the source of the email address.
                   data_type: varchar
+                  original_field_name: source-type
                 - name: value
                   description: The email address value.
                   data_type: varchar
-                - name: source-id
+                - name: source_id
                   description: The unique identifier of the source of the email address.
                   data_type: varchar
+                  original_field_name: source-id
                 - name: selected
                   description: Indicates if this email address was selected during
                     the merge process.
@@ -3621,29 +3664,39 @@ sources:
                 - name: timestamp
                   description: The timestamp of when the merge occurred.
                   data_type: integer
-          - name: merged_from_email_source-vids
+          - name: merged_from_email_source_vids
             description: Array of unique identifiers of video sources.
             data_type: array
-          - name: merged_from_email_updated-by-user-id
+            meta:
+              original_field_name: merged_from_email_source-vids
+          - name: merged_from_email_updated_by_user_id
             description: The user ID of the user who updated the email address from
               which the contact was merged from.
             data_type: integer
-          - name: merged_from_email_source-label
+            meta:
+              original_field_name: merged_from_email_updated-by-user-id
+          - name: merged_from_email_source_label
             description: The source label of the email address from which the contact
               was merged from.
             data_type: varchar
-          - name: merged_from_email_source-type
+            meta:
+              original_field_name: merged_from_email_source-label
+          - name: merged_from_email_source_type
             description: The source type of the email address from which the contact
               was merged from.
             data_type: varchar
+            meta:
+              original_field_name: merged_from_email_source-type
           - name: merged_from_email_value
             description: The email address value from which the contact was merged
               from.
             data_type: varchar
-          - name: merged_from_email_source-id
+          - name: merged_from_email_source_id
             description: The source ID of the email address from which the contact
               was merged from.
             data_type: varchar
+            meta:
+              original_field_name: merged_from_email_source-id
           - name: merged_from_email_selected
             description: Indicates if the email address from which the contact was
               merged from was selected.
@@ -3657,21 +3710,25 @@ sources:
             data_type: json
             meta:
               subcolumns:
-                - name: updated-by-user-id
+                - name: updated_by_user_id
                   description: The user ID of the user who updated the email address.
                   data_type: integer
-                - name: source-label
+                  original_field_name: updated-by-user-id
+                - name: source_label
                   description: The label of the source of the email address.
                   data_type: varchar
-                - name: source-type
+                  original_field_name: source-label
+                - name: source_type
                   description: The type of the source of the email address.
                   data_type: varchar
+                  original_field_name: source-type
                 - name: value
                   description: The email address value.
                   data_type: varchar
-                - name: source-id
+                - name: source_id
                   description: The unique identifier of the source of the email address.
                   data_type: varchar
+                  original_field_name: source-id
                 - name: selected
                   description: Indicates if this email address was selected during
                     the merge process.
@@ -3679,25 +3736,33 @@ sources:
                 - name: timestamp
                   description: The timestamp of when the merge occurred.
                   data_type: integer
-          - name: merged_to_email_updated-by-user-id
+          - name: merged_to_email_updated_by_user_id
             description: The user ID of the user who updated the email address to
               which the contact was merged to.
             data_type: integer
-          - name: merged_to_email_source-label
+            meta:
+              original_field_name: merged_to_email_updated-by-user-id
+          - name: merged_to_email_source_label
             description: The source label of the email address to which the contact
               was merged to.
             data_type: varchar
-          - name: merged_to_email_source-type
+            meta:
+              original_field_name: merged_to_email_source-label
+          - name: merged_to_email_source_type
             description: The source type of the email address to which the contact
               was merged to.
             data_type: varchar
+            meta:
+              original_field_name: merged_to_email_source-type
           - name: merged_to_email_value
             description: The email address value to which the contact was merged to.
             data_type: varchar
-          - name: merged_to_email_source-id
+          - name: merged_to_email_source_id
             description: The source ID of the email address to which the contact was
               merged to.
             data_type: varchar
+            meta:
+              original_field_name: merged_to_email_source-id
           - name: merged_to_email_selected
             description: Indicates if the email address to which the contact was merged
               to was selected.
@@ -3705,12 +3770,16 @@ sources:
           - name: merged_to_email_timestamp
             description: The timestamp of the email address merge.
             data_type: integer
-          - name: first-name
+          - name: first_name
             description: The first name of the merged contact.
             data_type: varchar
-          - name: last-name
+            meta:
+              original_field_name: first-name
+          - name: last_name
             description: The last name of the merged contact.
             data_type: varchar
+            meta:
+              original_field_name: last-name
           - name: _airbyte_extracted_at
             description: Timestamp when the record was extracted from the source
             data_type: timestamp
@@ -3725,20 +3794,28 @@ sources:
           - name: value
             description: The value of the property at the specified timestamp.
             data_type: varchar
-          - name: source-type
+          - name: source_type
             description: The type or category of the data source.
             data_type: varchar
-          - name: source-id
+            meta:
+              original_field_name: source-type
+          - name: source_id
             description: The identifier of the data source that generated this historical
               entry.
             data_type: varchar
-          - name: source-label
+            meta:
+              original_field_name: source-id
+          - name: source_label
             description: The label representing the source of the data.
             data_type: varchar
-          - name: updated-by-user-id
+            meta:
+              original_field_name: source-label
+          - name: updated_by_user_id
             description: The identifier of the user who last updated the property
               value.
             data_type: integer
+            meta:
+              original_field_name: updated-by-user-id
           - name: timestamp
             description: The timestamp when the property value was last updated.
             data_type: integer
@@ -3746,27 +3823,35 @@ sources:
             description: Indicates whether this property is currently selected or
               not.
             data_type: boolean
-          - name: is-contact
+          - name: is_contact
             description: Indicates whether the data is associated with a contact record.
             data_type: boolean
+            meta:
+              original_field_name: is-contact
           - name: property
             description: The specific property whose history is being tracked.
             data_type: varchar
           - name: vid
             description: The unique identifier for this historical data entry.
             data_type: integer
-          - name: canonical-vid
+          - name: canonical_vid
             description: The unique identifier for the contact record that this historical
               data belongs to.
             data_type: integer
-          - name: portal-id
+            meta:
+              original_field_name: canonical-vid
+          - name: portal_id
             description: The identifier for the HubSpot portal that the data belongs
               to.
             data_type: integer
-          - name: source-vids
+            meta:
+              original_field_name: portal-id
+          - name: source_vids
             description: List of unique identifiers of the sources associated with
               this historical data.
             data_type: array
+            meta:
+              original_field_name: source-vids
           - name: properties
             data_type: json
             meta:
