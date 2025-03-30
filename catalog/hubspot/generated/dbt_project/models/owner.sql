@@ -8,17 +8,13 @@ owners AS (
 
 
 SELECT
-    _airbyte_extracted_at AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
-    owners.id AS owner_id, -- The ID of the owner.
-    NULL AS portal_id, -- The HubSpot account ID.
-    NULL AS type, -- The type of owner.
-    False AS is_deleted, -- Whether the record was deleted.
+    owners._airbyte_extracted_at AS _fivetran_synced, -- {{ doc("_fivetran_synced") }}
+    owners.createdAt AS created_at, -- A timestamp for when the owner was created.
     owners.email AS email, -- The email address of the owner.
     owners.firstName AS first_name, -- The first name of the owner.
     owners.lastName AS last_name, -- The last name of the owner.
-    owners.createdAt AS created_at, -- The date the owner was created in HubSpot.
-    owners.updatedAt AS updated_at, -- The date the owner was last updated.
-    owners.userId AS user_id, -- The user ID of the owner.
-    owners.archived = false AS is_active, -- Whether the owner is active.
-    owners.teams AS teams -- The teams the owner belongs to.
+    owners.id AS owner_id, -- The ID of the owner.
+    NULL AS portal_id, -- {{ doc("portal_id") }}
+    NULL AS type, -- The type of owner.
+    owners.updatedAt AS updated_at -- None
 FROM owners

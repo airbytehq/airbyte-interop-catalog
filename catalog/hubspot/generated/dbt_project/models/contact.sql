@@ -8,26 +8,17 @@ contacts AS (
 
 
 SELECT
-    contacts.archived AS _fivetran_deleted, -- Boolean to mark rows that were deleted in the source database.
-    _airbyte_extracted_at AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
+    NULL AS _fivetran_deleted, -- {{ doc("_fivetran_deleted") }}
+    contacts._airbyte_extracted_at AS _fivetran_synced, -- {{ doc("_fivetran_synced") }}
     contacts.id AS id, -- The ID of the contact.
-    NULL AS portal_id, -- The HubSpot account ID.
-    contacts.properties_firstname AS property_firstname, -- The first name of the contact.
-    contacts.properties_lastname AS property_lastname, -- The last name of the contact.
-    contacts.properties_email AS property_email, -- The email address of the contact.
-    NULL AS property_email_1, -- The secondary email address of the contact.
-    contacts.properties_phone AS property_phone, -- The phone number of the contact.
-    contacts.properties_address AS property_address, -- The street address of the contact.
-    contacts.properties_city AS property_city, -- The city where the contact is located.
-    contacts.properties_state AS property_state, -- The state where the contact is located.
-    contacts.properties_zip AS property_zip, -- The zip code where the contact is located.
-    contacts.properties_country AS property_country, -- The country where the contact is located.
-    contacts.properties_company AS property_company, -- The company the contact works for.
-    contacts.properties_jobtitle AS property_jobtitle, -- The job title of the contact.
-    contacts.properties_createdate AS property_createdate, -- The date the contact was created in HubSpot.
-    contacts.properties_lastmodifieddate AS property_lastmodifieddate, -- The date the contact was last modified.
-    contacts.properties_hubspot_owner_id AS property_hubspot_owner_id, -- The ID of the contact's owner.
-    contacts.properties_lifecyclestage AS property_lifecyclestage, -- The lifecycle stage of the contact.
-    NULL AS property_annualrevenue, -- The annual revenue of the contact's company.
-    NULL AS property_hs_calculated_merged_vids -- The calculated merged visitor IDs for the contact.
+    contacts['properties']['email'] AS property_email_1, -- The email address of the contact.
+    contacts['properties']['company'] AS property_company, -- The name of the contact's company.
+    contacts['properties']['firstname'] AS property_firstname, -- The contact's first name.
+    contacts['properties']['lastname'] AS property_lastname, -- The contact's last name.
+    contacts['properties']['email'] AS property_email, -- The contact's email.
+    contacts['properties']['createdate'] AS property_createdate, -- The date that the contact was created in your HubSpot account.
+    contacts['properties']['jobtitle'] AS property_jobtitle, -- The contact's job title.
+    contacts['properties']['annualrevenue'] AS property_annualrevenue, -- The contact's annual company revenue.
+    contacts['properties']['hs_calculated_merged_vids'] AS property_hs_calculated_merged_vids -- List of mappings representing contact IDs that have been merged into the contact at hand. Format: <merged_contact_id>:<merged_at_in_epoch_time>;<second_merged_contact_id>:<merged_at_in_epoch_time> This field has replaced the `CONTACT_MERGE_AUDIT` table, which was deprecated by the Hubspot v3 CRM API.
+
 FROM contacts
