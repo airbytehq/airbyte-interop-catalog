@@ -95,37 +95,70 @@ def _format_json_path(
     base = parts[0]
     path = parts[1:]
 
-    if subcolumn_traversal == "bracket_notation":
-        formatted = base
-        for part in path:
-            formatted += f"['{part}']"
-        return formatted
-    elif subcolumn_traversal == "json_path":
-        path_str = ".".join(path)
-        return f"JSON_EXTRACT({base}, '$.{path_str}')"
-    elif subcolumn_traversal == "colon_notation":
-        formatted = base
-        for part in path:
-            formatted += f":{part}"
-        return formatted
-    elif subcolumn_traversal == "arrow_notation":
-        formatted = base
-        for i, part in enumerate(path):
-            if i == len(path) - 1:
-                formatted += f"->>'{part}'"
-            else:
-                formatted += f"->'{part}'"
-        return formatted
-    elif subcolumn_traversal == "dot_notation":
-        return expression
-    elif subcolumn_traversal == "portable":
-        path_str = ", ".join([f"'{p}'" for p in path])
-        return f"{{{{ json_extract({base}, [{path_str}]) }}}}"
-    else:
-        formatted = base
-        for part in path:
-            formatted += f"['{part}']"
-        return formatted
+    return _apply_traversal_format(base, path, subcolumn_traversal)
+
+
+def _apply_traversal_format(base: str, path: list[str], traversal_method: str) -> str:
+    """Apply the specified traversal format to the base and path.
+    
+    Args:
+        base: The base column name
+        path: The path components
+        traversal_method: The traversal method to use
+        
+    Returns:
+        The formatted expression
+    """
+    format_methods = {
+        "bracket_notation": _format_bracket_notation,
+        "json_path": _format_json_extract,
+        "colon_notation": _format_colon_notation,
+        "arrow_notation": _format_arrow_notation,
+        "dot_notation": lambda b, p: ".".join([b] + p),
+        "portable": _format_portable,
+    }
+    
+    formatter = format_methods.get(traversal_method, _format_bracket_notation)
+    return formatter(base, path)
+
+
+def _format_bracket_notation(base: str, path: list[str]) -> str:
+    """Format using bracket notation."""
+    formatted = base
+    for part in path:
+        formatted += f"['{part}']"
+    return formatted
+
+
+def _format_json_extract(base: str, path: list[str]) -> str:
+    """Format using JSON_EXTRACT function."""
+    path_str = ".".join(path)
+    return f"JSON_EXTRACT({base}, '$.{path_str}')"
+
+
+def _format_colon_notation(base: str, path: list[str]) -> str:
+    """Format using colon notation."""
+    formatted = base
+    for part in path:
+        formatted += f":{part}"
+    return formatted
+
+
+def _format_arrow_notation(base: str, path: list[str]) -> str:
+    """Format using arrow notation."""
+    formatted = base
+    for i, part in enumerate(path):
+        if i == len(path) - 1:
+            formatted += f"->>'{part}'"
+        else:
+            formatted += f"->'{part}'"
+    return formatted
+
+
+def _format_portable(base: str, path: list[str]) -> str:
+    """Format using portable dbt macro."""
+    path_str = ", ".join([f"'{p}'" for p in path])
+    return f"{{{{ json_extract({base}, [{path_str}]) }}}}"
 
 
 def _extract_fields(transform: dict[str, Any], config: dict[str, Any] | None = None) -> list[dict[str, str]]:
