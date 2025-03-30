@@ -14,23 +14,23 @@ def test_format_json_path_no_dots():
 
 def test_format_json_path_bracket_notation():
     """Test bracket notation formatting."""
-    expression = "user.profile.name"
+    expression = "hubspot.user.profile.name"
     result = _format_json_path(expression, "duckdb", "bracket_notation")
-    assert result == "user['profile']['name']"
+    assert result == "hubspot['user']['profile']['name']"
 
 
 def test_format_json_path_portable():
     """Test portable (dbt macro) formatting."""
-    expression = "user.profile.name"
+    expression = "hubspot.user.profile.name"
     result = _format_json_path(expression, "duckdb", "portable")
-    assert result == "{{ json_extract(user, ['profile', 'name']) }}"
+    assert result == "{{ json_extract(hubspot, ['user', 'profile', 'name']) }}"
 
 
 def test_format_json_path_default():
     """Test default formatting uses bracket notation."""
-    expression = "user.profile.name"
+    expression = "hubspot.user.profile.name"
     result = _format_json_path(expression, "duckdb", "default")
-    assert result == "user['profile']['name']"
+    assert result == "hubspot['user']['profile']['name']"
 
 
 def test_format_json_path_unimplemented_traversal():
@@ -46,7 +46,7 @@ def test_format_json_path_unimplemented_traversal():
 
 def test_format_json_path_invalid_traversal():
     """Test that invalid traversal method raises ValueError."""
-    expression = "user.profile.name"
+    expression = "hubspot.user.profile.name"
     with pytest.raises(ValueError) as excinfo:
         _format_json_path(expression, "postgres", "bracket_notation")
     assert "not valid for SQL dialect" in str(excinfo.value)

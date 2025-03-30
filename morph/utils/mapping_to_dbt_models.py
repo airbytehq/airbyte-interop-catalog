@@ -105,24 +105,27 @@ def _format_json_path(
     column = parts[1]
     path = parts[2:]
 
-    return _apply_traversal_format(base, path, subcolumn_traversal)
+    if not path:
+        return expression
+
+    return _apply_traversal_format(table_alias, [column] + path, subcolumn_traversal)
 
 
-def _apply_traversal_format(base: str, path: list[str], traversal_method: str) -> str:
-    """Apply the specified traversal format to the base and path.
+def _apply_traversal_format(table_alias: str, path: list[str], traversal_method: str) -> str:
+    """Apply the specified traversal format to the table alias and path.
 
     Args:
-        base: The base column name
-        path: The path components
+        table_alias: The table alias
+        path: The path components (including column name and nested fields)
         traversal_method: The traversal method to use
 
     Returns:
         The formatted expression
     """
     if traversal_method in ["bracket_notation", "default"]:
-        return _format_bracket_notation(base, path)
+        return _format_bracket_notation(table_alias, path)
     if traversal_method == "portable":
-        return _format_portable(base, path)
+        return _format_portable(table_alias, path)
     raise NotImplementedError(
         f"Traversal method '{traversal_method}' is not implemented yet. "
         "Currently only 'bracket_notation', 'portable', and 'default' are supported.",
