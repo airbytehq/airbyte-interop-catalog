@@ -214,17 +214,12 @@ To regenerate source files with normalized field names for existing connectors:
 # For Hubspot
 uv run morph json-to-dbt \
   --catalog \
-  --source-name hubspot \
-  --output catalog/hubspot/generated/src_airbyte_hubspot.yml \
-  catalog/hubspot/generated/airbyte-catalog.json
+  --source-name hubspot
 
 # For Facebook Marketing
 uv run morph json-to-dbt \
   --catalog \
-  --source-name facebook_marketing \
-  --output catalog/facebook_marketing/generated/src_airbyte_facebook_marketing.yml \
-  catalog/facebook_marketing/generated/airbyte-catalog.json
-```
+  --source-name facebook_marketing
 
 ## Mapping Confidence Evaluation
 
