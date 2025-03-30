@@ -220,6 +220,7 @@ uv run morph json-to-dbt \
 uv run morph json-to-dbt \
   --catalog \
   --source-name facebook_marketing
+```
 
 ## Mapping Confidence Evaluation
 
