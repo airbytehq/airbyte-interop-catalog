@@ -101,8 +101,9 @@ def _format_json_path(
         )
 
     parts = expression.split(".")
-    base = parts[0]
-    path = parts[1:]
+    table_alias = parts[0]
+    column = parts[1]
+    path = parts[2:]
 
     return _apply_traversal_format(base, path, subcolumn_traversal)
 
