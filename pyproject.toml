@@ -54,7 +54,3 @@ morph = "morph.cli:main"
 
 [tool.hatch.version]
 source = "uv-dynamic-versioning"
-
-# [tool.uv.sources]
-# # serpyco-rs = {git = "https://github.com/ermakov-oleg/serpyco-rs", branch = "master"}
-# airbyte = {git = "https://github.com/airbytehq/PyAirbyte", branch = "devin/1743207676-threaded-stream-finalization"}
