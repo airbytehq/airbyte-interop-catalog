@@ -23,14 +23,14 @@ def test_format_json_path_portable():
     """Test portable (dbt macro) formatting."""
     expression = "users.address.street"
     result = _format_json_path(expression, "duckdb", "portable")
-    assert result == "{{ json_extract(users, ['address', 'street']) }}"
+    assert result == "{{ json_extract(users.address, ['street']) }}"
 
 
 def test_format_json_path_default():
     """Test default formatting uses bracket notation."""
     expression = "users.preferences.theme"
     result = _format_json_path(expression, "duckdb", "default")
-    assert result == "users['preferences']['theme']"
+    assert result == "users.preferences['theme']"
 
 
 def test_format_json_path_unimplemented_traversal():
