@@ -37,7 +37,7 @@ def test_format_json_path_unimplemented_traversal():
     """Test that unimplemented traversal methods raise NotImplementedError."""
     expression = "user.profile.name"
     unimplemented_methods = ["json_path", "colon_notation", "arrow_notation", "dot_notation"]
-    
+
     for method in unimplemented_methods:
         with pytest.raises(NotImplementedError) as excinfo:
             _format_json_path(expression, "duckdb", method)

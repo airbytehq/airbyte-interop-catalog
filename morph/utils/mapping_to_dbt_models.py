@@ -15,7 +15,6 @@ from morph.constants import (
     DEFAULT_PROJECT_NAME,
     DEFAULT_SQL_DIALECT,
     SQL_DIALECT_OPTIONS,
-    SUBCOLUMN_TRAVERSAL_OPTIONS,
     VALID_TRAVERSAL_BY_DIALECT,
 )
 from morph.utils import resource_paths, text_utils
@@ -74,29 +73,31 @@ def _format_json_path(
     Returns:
         The formatted expression for the specified database type
     """
+    min_dots_for_nested_field = 2
     dot_count = expression.count(".")
-    
-    if dot_count < 2:
+
+    if dot_count < min_dots_for_nested_field:
         return expression
 
     if subcolumn_traversal == "default":
         subcolumn_traversal = SQL_DIALECT_OPTIONS.get(sql_dialect, {}).get(
-            "default_subcolumn_traversal", "bracket_notation"
+            "default_subcolumn_traversal",
+            "bracket_notation",
         )
 
     if subcolumn_traversal not in ["bracket_notation", "default", "portable"]:
         raise NotImplementedError(
             f"Traversal method '{subcolumn_traversal}' is not implemented yet. "
-            "Currently only 'bracket_notation', 'portable', and 'default' are supported."
+            "Currently only 'bracket_notation', 'portable', and 'default' are supported.",
         )
-        
+
     if (
         sql_dialect in VALID_TRAVERSAL_BY_DIALECT
         and subcolumn_traversal not in VALID_TRAVERSAL_BY_DIALECT[sql_dialect]
     ):
         raise ValueError(
             f"Subcolumn traversal method '{subcolumn_traversal}' is not valid for SQL dialect '{sql_dialect}'. "
-            f"Valid options are: {', '.join(VALID_TRAVERSAL_BY_DIALECT[sql_dialect])}"
+            f"Valid options are: {', '.join(VALID_TRAVERSAL_BY_DIALECT[sql_dialect])}",
         )
 
     parts = expression.split(".")
@@ -108,24 +109,23 @@ def _format_json_path(
 
 def _apply_traversal_format(base: str, path: list[str], traversal_method: str) -> str:
     """Apply the specified traversal format to the base and path.
-    
+
     Args:
         base: The base column name
         path: The path components
         traversal_method: The traversal method to use
-        
+
     Returns:
         The formatted expression
     """
     if traversal_method in ["bracket_notation", "default"]:
         return _format_bracket_notation(base, path)
-    elif traversal_method == "portable":
+    if traversal_method == "portable":
         return _format_portable(base, path)
-    else:
-        raise NotImplementedError(
-            f"Traversal method '{traversal_method}' is not implemented yet. "
-            "Currently only 'bracket_notation', 'portable', and 'default' are supported."
-        )
+    raise NotImplementedError(
+        f"Traversal method '{traversal_method}' is not implemented yet. "
+        "Currently only 'bracket_notation', 'portable', and 'default' are supported.",
+    )
 
 
 def _format_bracket_notation(base: str, path: list[str]) -> str:
@@ -142,7 +142,10 @@ def _format_portable(base: str, path: list[str]) -> str:
     return f"{{{{ json_extract({base}, [{path_str}]) }}}}"
 
 
-def _extract_fields(transform: dict[str, Any], config: dict[str, Any] | None = None) -> list[dict[str, str]]:
+def _extract_fields(
+    transform: dict[str, Any],
+    config: dict[str, Any] | None = None,
+) -> list[dict[str, str]]:
     """Extract fields from a transform.
 
     Args:
@@ -159,10 +162,10 @@ def _extract_fields(transform: dict[str, Any], config: dict[str, Any] | None = N
     fields = []
     for field_name, field_config in transform.get("fields", {}).items():
         expression = field_config.get("expression")
-        
+
         if expression and isinstance(expression, str) and "." in expression:
             expression = _format_json_path(expression, sql_dialect, subcolumn_traversal)
-        
+
         fields.append(
             {
                 "name": field_name,
@@ -173,14 +176,18 @@ def _extract_fields(transform: dict[str, Any], config: dict[str, Any] | None = N
     return fields
 
 
-def generate_model_sql(mapping: dict[str, Any], transform_id: str, config: dict[str, Any] | None = None) -> str:
+def generate_model_sql(
+    mapping: dict[str, Any],
+    transform_id: str,
+    config: dict[str, Any] | None = None,
+) -> str:
     """Generate SQL for a dbt model based on a mapping transform.
-    
+
     Args:
         mapping: The mapping configuration
         transform_id: The ID of the transform to generate SQL for
         config: The project configuration (from config.yml)
-        
+
     Returns:
         The generated SQL for the dbt model
     """

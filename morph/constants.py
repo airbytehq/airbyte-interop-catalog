@@ -39,12 +39,12 @@ DEFAULT_SQL_DIALECT = "duckdb"
 
 SUBCOLUMN_TRAVERSAL_OPTIONS = [
     "bracket_notation",  # column['property']['nested']
-    "json_path",         # JSON_EXTRACT(column, '$.property.nested')
-    "colon_notation",    # column:property:nested
-    "arrow_notation",    # column->'property'->>'nested'
-    "dot_notation",      # column.property.nested (only supported in some dialects)
-    "portable",          # Uses dbt macro for cross-database compatibility
-    "default",           # Uses the default for the selected SQL dialect
+    "json_path",  # JSON_EXTRACT(column, '$.property.nested')
+    "colon_notation",  # column:property:nested
+    "arrow_notation",  # column->'property'->>'nested'
+    "dot_notation",  # column.property.nested (only supported in some dialects)
+    "portable",  # Uses dbt macro for cross-database compatibility
+    "default",  # Uses the default for the selected SQL dialect
 ]
 
 VALID_TRAVERSAL_BY_DIALECT = {
