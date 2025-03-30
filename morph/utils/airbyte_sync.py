@@ -1,6 +1,7 @@
 """
 Utilities for syncing data from Airbyte sources.
 """
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -8,7 +9,6 @@ from typing import cast
 
 import airbyte as ab
 from airbyte_cdk.models.airbyte_protocol import (
-    AirbyteCatalog,
     AirbyteStream,
     ConfiguredAirbyteCatalog,
     ConfiguredAirbyteStream,
@@ -18,7 +18,6 @@ from airbyte_cdk.models.airbyte_protocol import (
 from airbyte_protocol.models import (
     AirbyteCatalog,
 )
-from copier import Literal
 from rich.console import Console
 
 from morph.utils import resource_paths, text_utils
@@ -87,8 +86,9 @@ def sync_source(
 
             def get_configured_catalog(
                 self,
-                streams: list[str] | Literal["*"] | None = None,
+                streams: list[str] | str | None = None,
             ) -> ConfiguredAirbyteCatalog:
+                _ = streams
                 return ConfiguredAirbyteCatalog(
                     streams=[
                         ConfiguredAirbyteStream(

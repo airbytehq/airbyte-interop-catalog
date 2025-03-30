@@ -363,7 +363,7 @@ def generate_project(
     # Generate Airbyte catalog
     if not no_airbyte_catalog:
         console.print(f"Generating Airbyte catalog for {source_name}...")
-        create_airbyte_catalog.callback(source_name)
+        create_airbyte_db.callback(source_name)
         console.print("Generated Airbyte catalog.")
 
     # Generate transforms
