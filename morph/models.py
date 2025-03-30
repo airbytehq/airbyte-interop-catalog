@@ -11,6 +11,7 @@ from typing_extensions import Self
 
 from morph.utils import resource_paths, text_utils
 from morph.utils.rich_utils import rich_formatted_confidence
+from morph.utils.text_utils import normalize_field_name
 
 console = Console()
 
@@ -46,6 +47,9 @@ class DbtSourceColumn(BaseModel):
     subcolumns: list["DbtSourceColumn"] | None = None
     """Nested subcolumns for complex data types (variant/object columns)."""
 
+    original_name: str | None = None
+    """The original field name before normalization, if different from name."""
+
     @classmethod
     def from_json_schema(
         cls,
@@ -63,6 +67,8 @@ class DbtSourceColumn(BaseModel):
         Returns:
             A DbtSourceColumn instance representing the column.
         """
+        from morph.utils.text_utils import normalize_field_name
+
         type_mapping = {
             "string": "varchar",
             "integer": "integer",
@@ -115,11 +121,20 @@ class DbtSourceColumn(BaseModel):
                 if nested_columns:
                     subcolumns = nested_columns
 
+        name = property_name
+        original_name = None
+        if nesting_level == 0:
+            normalized_name = normalize_field_name(property_name)
+            if normalized_name != property_name:
+                name = normalized_name
+                original_name = property_name
+
         return cls(
-            name=property_name,
+            name=name,
             description=description,
             data_type=data_type,
             subcolumns=subcolumns,
+            original_name=original_name,
         )
 
 
@@ -196,12 +211,18 @@ class DbtSourceTable(BaseModel):
             if "description" in col_dict and not col_dict["description"]:
                 col_dict.pop("description")
 
+            if "original_name" in col_dict:
+                if "meta" not in col_dict:
+                    col_dict["meta"] = {}
+                col_dict["meta"]["original_name"] = col_dict.pop("original_name")
+
             if col_dict.get("subcolumns"):
                 if "meta" not in col_dict:
                     col_dict["meta"] = {}
                 col_dict["meta"]["subcolumns"] = col_dict.pop("subcolumns")
-                if not col_dict["meta"]["subcolumns"]:
-                    col_dict.pop("meta")
+
+            if not col_dict.get("meta"):
+                col_dict.pop("meta", None)
 
             columns.append(col_dict)
 

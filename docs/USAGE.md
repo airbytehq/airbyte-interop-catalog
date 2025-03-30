@@ -188,7 +188,7 @@ To skip generating the lock file during project generation, use the `--no-lock-f
 
 ## JSON Schema to dbt Sources
 
-Morph can also convert JSON schema files to dbt source definitions:
+Morph can convert JSON schema files to dbt source definitions with field name normalization:
 
 ```bash
 uv run morph json-to-dbt \
@@ -203,6 +203,24 @@ This command:
 - Converts an Airbyte catalog file to dbt sources
 - Names the source "hubspot"
 - Outputs the result to the specified file
+- Automatically normalizes field names (replacing special characters with underscores)
+- Preserves original field names in the meta section when normalization changes the name
+
+### Regenerating Source Files
+
+To regenerate source files with normalized field names for existing connectors:
+
+```bash
+# For Hubspot
+uv run morph json-to-dbt \
+  --catalog \
+  --source-name hubspot
+
+# For Facebook Marketing
+uv run morph json-to-dbt \
+  --catalog \
+  --source-name facebook_marketing
+```
 
 ## Mapping Confidence Evaluation
 
