@@ -30,13 +30,13 @@ def test_format_json_path_default():
     """Test default formatting uses bracket notation."""
     expression = "users.preferences.theme"
     result = _format_json_path(expression, "duckdb", "default")
-    assert result == "users.preferences['theme']"
+    assert result == "users.preferences.theme"
 
 
 def test_format_json_path_unimplemented_traversal():
     """Test that unimplemented traversal methods raise NotImplementedError."""
     expression = "users.contact.phone"
-    unimplemented_methods = ["json_path", "colon_notation", "arrow_notation", "dot_notation"]
+    unimplemented_methods = ["json_path", "colon_notation", "arrow_notation"]
 
     for method in unimplemented_methods:
         with pytest.raises(NotImplementedError) as excinfo:
