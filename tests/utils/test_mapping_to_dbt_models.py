@@ -50,3 +50,12 @@ def test_format_json_path_invalid_traversal():
     with pytest.raises(ValueError) as excinfo:
         _format_json_path(expression, "postgres", "bracket_notation")
     assert "not valid for SQL dialect" in str(excinfo.value)
+
+
+def test_format_json_path_table_column():
+    """Test that table.column expressions are returned unchanged."""
+    expression = "users.id"
+    result = _format_json_path(expression, "duckdb", "bracket_notation")
+    assert result == expression
+    result = _format_json_path(expression, "duckdb", "portable")
+    assert result == expression
