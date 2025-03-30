@@ -1,4 +1,5 @@
 import io
+import re
 from pathlib import Path
 from typing import Any
 
@@ -28,3 +29,15 @@ def load_yaml_file(file_path: Path, /) -> dict[str, Any]:
 def load_yaml_str(data: str, /) -> dict[str, Any]:
     """Load data from a YAML string."""
     return yaml.load(data)
+
+
+def normalize_field_name(name: str) -> str:
+    """Normalize a field name by replacing special characters with underscores.
+
+    Args:
+        name: The original field name to normalize.
+
+    Returns:
+        The normalized field name, with special characters replaced by underscores.
+    """
+    return re.sub(r"[^a-zA-Z0-9_]", "_", name)

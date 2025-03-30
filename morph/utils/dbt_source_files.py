@@ -34,7 +34,12 @@ def json_schema_to_dbt_column(
     """
 
     dbt_column = DbtSourceColumn.from_json_schema(property_name, property_schema)
-    return dbt_column.model_dump(exclude={"subcolumns": True})
+    result = dbt_column.model_dump(exclude={"subcolumns": True})
+
+    if result.get("original_name") is None:
+        result.pop("original_name", None)
+
+    return result
 
 
 def json_schema_to_dbt_table(schema_name: str, schema_data: dict[str, Any]) -> dict[str, Any]:
