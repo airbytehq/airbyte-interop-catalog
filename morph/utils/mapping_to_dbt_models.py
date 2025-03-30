@@ -82,6 +82,12 @@ def _format_json_path(
             "default_subcolumn_traversal", "bracket_notation"
         )
 
+    if subcolumn_traversal not in ["bracket_notation", "default", "portable"]:
+        raise NotImplementedError(
+            f"Traversal method '{subcolumn_traversal}' is not implemented yet. "
+            "Currently only 'bracket_notation', 'portable', and 'default' are supported."
+        )
+        
     if (
         sql_dialect in VALID_TRAVERSAL_BY_DIALECT
         and subcolumn_traversal not in VALID_TRAVERSAL_BY_DIALECT[sql_dialect]
