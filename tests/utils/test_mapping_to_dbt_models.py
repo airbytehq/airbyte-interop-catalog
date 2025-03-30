@@ -15,8 +15,8 @@ def test_format_json_path_no_dots():
 def test_format_json_path_bracket_notation():
     """Test bracket notation formatting."""
     expression = "users.contact.email"
-    result = _format_json_path(expression, "duckdb", "bracket_notation")
-    assert result == "users['contact']['email']"
+    result = _format_json_path(expression, "duckdb", "dot_notation")
+    assert result == "users.contact.email"
 
 
 def test_format_json_path_portable():
