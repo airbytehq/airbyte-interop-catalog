@@ -109,17 +109,15 @@ def _apply_traversal_format(base: str, path: list[str], traversal_method: str) -
     Returns:
         The formatted expression
     """
-    format_methods = {
-        "bracket_notation": _format_bracket_notation,
-        "json_path": _format_json_extract,
-        "colon_notation": _format_colon_notation,
-        "arrow_notation": _format_arrow_notation,
-        "dot_notation": lambda b, p: ".".join([b] + p),
-        "portable": _format_portable,
-    }
-    
-    formatter = format_methods.get(traversal_method, _format_bracket_notation)
-    return formatter(base, path)
+    if traversal_method == "bracket_notation" or traversal_method == "default":
+        return _format_bracket_notation(base, path)
+    elif traversal_method == "portable":
+        return _format_portable(base, path)
+    else:
+        raise NotImplementedError(
+            f"Traversal method '{traversal_method}' is not implemented yet. "
+            "Currently only 'bracket_notation', 'portable', and 'default' are supported."
+        )
 
 
 def _format_bracket_notation(base: str, path: list[str]) -> str:
@@ -127,31 +125,6 @@ def _format_bracket_notation(base: str, path: list[str]) -> str:
     formatted = base
     for part in path:
         formatted += f"['{part}']"
-    return formatted
-
-
-def _format_json_extract(base: str, path: list[str]) -> str:
-    """Format using JSON_EXTRACT function."""
-    path_str = ".".join(path)
-    return f"JSON_EXTRACT({base}, '$.{path_str}')"
-
-
-def _format_colon_notation(base: str, path: list[str]) -> str:
-    """Format using colon notation."""
-    formatted = base
-    for part in path:
-        formatted += f":{part}"
-    return formatted
-
-
-def _format_arrow_notation(base: str, path: list[str]) -> str:
-    """Format using arrow notation."""
-    formatted = base
-    for i, part in enumerate(path):
-        if i == len(path) - 1:
-            formatted += f"->>'{part}'"
-        else:
-            formatted += f"->'{part}'"
     return formatted
 
 
