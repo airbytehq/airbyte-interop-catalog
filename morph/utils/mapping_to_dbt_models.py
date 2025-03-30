@@ -66,7 +66,7 @@ def _format_json_path(
     """Format a dot notation expression for the specified database type and traversal method.
 
     Args:
-        expression: The field expression with dot notation (e.g., "contacts.properties.email")
+        expression: The field expression with dot notation (e.g., "hubspot.contacts.properties.email")
         sql_dialect: The SQL dialect to use (e.g., "duckdb", "bigquery")
         subcolumn_traversal: The subcolumn traversal method to use
 
