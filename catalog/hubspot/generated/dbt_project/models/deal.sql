@@ -10,19 +10,13 @@ deals AS (
 SELECT
     deals.id AS deal_id, -- The ID of the deal.
     deals.archived AS is_deleted, -- Whether the record was deleted.
-    NULL AS portal_id, -- The HubSpot account ID.
-    deals.properties_pipeline AS deal_pipeline_id, -- The ID of the deal's pipeline.
-    deals.properties_dealstage AS deal_pipeline_stage_id, -- The ID of the deal's pipeline stage.
-    deals.properties_hubspot_owner_id AS owner_id, -- The ID of the deal's owner.
-    _airbyte_extracted_at AS _fivetran_synced, -- Timestamp of when this record was last synced by Fivetran.
-    deals.properties_dealname AS property_dealname, -- The name of the deal.
-    deals.properties_description AS property_description, -- A description of the deal.
-    deals.properties_createdate AS property_createdate, -- The date the deal was created in HubSpot.
-    deals.properties_closedate AS property_closedate, -- The date the deal was closed.
-    deals.properties_amount AS property_amount, -- The amount of the deal.
-    deals.properties_dealstage AS property_dealstage, -- The stage of the deal in the pipeline.
-    deals.properties_pipeline AS property_pipeline, -- The pipeline the deal is in.
-    deals.properties_hubspot_owner_id AS property_hubspot_owner_id, -- The ID of the deal's owner.
-    deals.properties_dealtype AS property_dealtype, -- The type of the deal.
-    deals.properties_hs_lastmodifieddate AS property_hs_lastmodifieddate -- The date the deal was last modified.
+    NULL AS portal_id, -- {{ doc("portal_id") }}
+    deals.pipeline AS deal_pipeline_id, -- The ID of the deal's pipeline.
+    deals['properties']['dealstage'] AS deal_pipeline_stage_id, -- The ID of the deal's pipeline stage.
+    deals['properties']['hs_all_owner_ids'] AS owner_id, -- The ID of the deal's owner.
+    deals['properties']['dealname'] AS property_dealname, -- The name you have given this deal.
+    deals['properties']['description'] AS property_description, -- A brief description of the deal.
+    deals['properties']['amount'] AS property_amount, -- The total value of the deal in the deal's currency.
+    deals['properties']['closedate'] AS property_closedate, -- The day the deal is expected to close, or was closed.
+    deals['properties']['createdate'] AS property_createdate -- The date the deal was created. This property is set automatically by HubSpot.
 FROM deals

@@ -11,7 +11,12 @@ from typing import Any
 from copier import run_copy
 from jinja2 import Environment
 
-from morph.constants import DEFAULT_PROJECT_NAME
+from morph.constants import (
+    DEFAULT_PROJECT_NAME,
+    DEFAULT_SQL_DIALECT,
+    SQL_DIALECT_OPTIONS,
+    VALID_TRAVERSAL_BY_DIALECT,
+)
 from morph.utils import resource_paths, text_utils
 
 
@@ -53,28 +58,149 @@ def _extract_sources(transform: dict[str, Any]) -> list[dict[str, str]]:
     return sources
 
 
-def _extract_fields(transform: dict[str, Any]) -> list[dict[str, str]]:
-    """Extract fields from a transform."""
+def _format_json_path(
+    expression: str,
+    sql_dialect: str = DEFAULT_SQL_DIALECT,
+    subcolumn_traversal: str = "default",
+) -> str:
+    """Format a dot notation expression for the specified database type and traversal method.
+
+    Args:
+        expression: The field expression with dot notation (e.g., "hubspot.contacts.properties.email")
+        sql_dialect: The SQL dialect to use (e.g., "duckdb", "bigquery")
+        subcolumn_traversal: The subcolumn traversal method to use
+
+    Returns:
+        The formatted expression for the specified database type
+    """
+    min_dots_for_nested_field = 2
+    dot_count = expression.count(".")
+
+    if dot_count < min_dots_for_nested_field:
+        return expression
+
+    if subcolumn_traversal == "default":
+        subcolumn_traversal = SQL_DIALECT_OPTIONS.get(sql_dialect, {}).get(
+            "default_subcolumn_traversal",
+            "bracket_notation",
+        )
+
+    if subcolumn_traversal not in ["bracket_notation", "default", "portable"]:
+        raise NotImplementedError(
+            f"Traversal method '{subcolumn_traversal}' is not implemented yet. "
+            "Currently only 'bracket_notation', 'portable', and 'default' are supported.",
+        )
+
+    if (
+        sql_dialect in VALID_TRAVERSAL_BY_DIALECT
+        and subcolumn_traversal not in VALID_TRAVERSAL_BY_DIALECT[sql_dialect]
+    ):
+        raise ValueError(
+            f"Subcolumn traversal method '{subcolumn_traversal}' is not valid for SQL dialect '{sql_dialect}'. "
+            f"Valid options are: {', '.join(VALID_TRAVERSAL_BY_DIALECT[sql_dialect])}",
+        )
+
+    parts = expression.split(".")
+    table_alias = parts[0]
+    column = parts[1]
+    path = parts[2:]
+
+    if not path:
+        return expression
+
+    return _apply_traversal_format(table_alias, [column, *path], subcolumn_traversal)
+
+
+def _apply_traversal_format(table_alias: str, path: list[str], traversal_method: str) -> str:
+    """Apply the specified traversal format to the table alias and path.
+
+    Args:
+        table_alias: The table alias
+        path: The path components (including column name and nested fields)
+        traversal_method: The traversal method to use
+
+    Returns:
+        The formatted expression
+    """
+    if traversal_method in ["bracket_notation", "default"]:
+        return _format_bracket_notation(table_alias, path)
+    if traversal_method == "portable":
+        return _format_portable(table_alias, path)
+    raise NotImplementedError(
+        f"Traversal method '{traversal_method}' is not implemented yet. "
+        "Currently only 'bracket_notation', 'portable', and 'default' are supported.",
+    )
+
+
+def _format_bracket_notation(base: str, path: list[str]) -> str:
+    """Format using bracket notation."""
+    formatted = base
+    for part in path:
+        formatted += f"['{part}']"
+    return formatted
+
+
+def _format_portable(base: str, path: list[str]) -> str:
+    """Format using portable dbt macro."""
+    path_str = ", ".join([f"'{p}'" for p in path])
+    return f"{{{{ json_extract({base}, [{path_str}]) }}}}"
+
+
+def _extract_fields(
+    transform: dict[str, Any],
+    config: dict[str, Any] | None = None,
+) -> list[dict[str, str]]:
+    """Extract fields from a transform.
+
+    Args:
+        transform: The transform configuration
+        config: The project configuration (from config.yml)
+
+    Returns:
+        List of field dictionaries with name, expression, and description
+    """
+    config = config or {}
+    sql_dialect = config.get("sql_dialect", DEFAULT_SQL_DIALECT)
+    subcolumn_traversal = config.get("subcolumn_traversal", "default")
+
     fields = []
     for field_name, field_config in transform.get("fields", {}).items():
+        expression = field_config.get("expression")
+
+        if expression and isinstance(expression, str) and "." in expression:
+            expression = _format_json_path(expression, sql_dialect, subcolumn_traversal)
+
         fields.append(
             {
                 "name": field_name,
-                "expression": field_config.get("expression"),
+                "expression": expression,
                 "description": field_config.get("description", ""),
             },
         )
     return fields
 
 
-def generate_model_sql(mapping: dict[str, Any], transform_id: str) -> str:
-    """Generate SQL for a dbt model based on a mapping transform."""
+def generate_model_sql(
+    mapping: dict[str, Any],
+    transform_id: str,
+    config: dict[str, Any] | None = None,
+) -> str:
+    """Generate SQL for a dbt model based on a mapping transform.
+
+    Args:
+        mapping: The mapping configuration
+        transform_id: The ID of the transform to generate SQL for
+        config: The project configuration (from config.yml)
+
+    Returns:
+        The generated SQL for the dbt model
+    """
     # Extract the transform configuration
     transform = _extract_transform(mapping, transform_id)
 
     # Extract source tables and fields
     sources = _extract_sources(transform)
-    fields = _extract_fields(transform)
+    fields = _extract_fields(transform, config)
 
     # Generate SQL using a template
     sql_template = """
@@ -155,20 +281,26 @@ def generate_dbt_package(
     """Generate a dbt package from mapping files.
 
     Args:
-        catalog_dir: Path to the catalog directory (e.g., 'catalog/hubspot').
+        source_name: Name of the source (e.g., 'hubspot').
+        project_name: Name of the project (e.g., 'fivetran-interop').
         output_dir: Path to the output directory.
         mapping_dir: Path to the mapping directory.
     """
-    output_dir = output_dir or resource_paths.get_generated_dir_root(source_name)
-    mapping_dir = mapping_dir or resource_paths.get_transforms_dir(source_name, project_name)
+    output_dir_path = output_dir or resource_paths.get_generated_dir_root(source_name)
+    mapping_dir_path = mapping_dir or resource_paths.get_transforms_dir(source_name, project_name)
+    config_path = resource_paths.get_config_file_path(source_name, project_name)
 
     # Create output directories
-    output_path = Path(output_dir)
+    output_path = Path(output_dir_path)
     output_path.mkdir(parents=True, exist_ok=True)
+
+    config = {}
+    if config_path.exists():
+        config = text_utils.load_yaml_file(config_path)
 
     # Find all mapping files
     mapping_files = []
-    mapping_path = Path(mapping_dir)
+    mapping_path = Path(mapping_dir_path)
     for yaml_file in list(mapping_path.glob("**/*.yml")) + list(mapping_path.glob("**/*.yaml")):
         mapping_files.append(str(yaml_file))
 
@@ -217,7 +349,7 @@ def generate_dbt_package(
                 continue
 
             # Generate SQL model
-            model_sql = generate_model_sql(mapping, transform_id)
+            model_sql = generate_model_sql(mapping, transform_id, config)
 
             # Write model to file
             model_path = models_dir / f"{transform_id}.sql"
