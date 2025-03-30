@@ -2,8 +2,8 @@ version = 1
 revision = 1
 requires-python = ">=3.10, <3.12"
 resolution-markers = [
-    "python_full_version < '3.11'",
     "python_full_version >= '3.11'",
+    "python_full_version < '3.11'",
 ]
 
 [[package]]
@@ -26,7 +26,7 @@ wheels = [
 
 [[package]]
 name = "airbyte"
-version = "0.23.0"
+version = "0.24.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "airbyte-api" },
@@ -62,9 +62,9 @@ dependencies = [
     { name = "typing-extensions" },
     { name = "uuid7" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/9f/58/c50620dcc7c3d129d8ee320106519934e558bfb90dfa9d2af961fba673d0/airbyte-0.23.0.tar.gz", hash = "sha256:06ed22a055e9e92c3b887edfe205f5e1dd73f764ede626f7578f1f1a496d9926", size = 139659 }
+sdist = { url = "https://files.pythonhosted.org/packages/39/49/2bf2ae1e9538042fdbbdabfd7bd0f1eeeca71a8f692bb0341054b4c06182/airbyte-0.24.1.tar.gz", hash = "sha256:ec38e2ad4153128ba27a96066dc3de4b411e50b1588646ef2f90b22f6479c5f5", size = 140972 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/40/5b/4b368b3a8459f08e2891da62ef88b0c1a452b9e553bcb927513c5f6a51b0/airbyte-0.23.0-py3-none-any.whl", hash = "sha256:ac22c524f816af002b3f9f3f8245128378c9cdc53a358ba25936c74d8644eb57", size = 182915 },
+    { url = "https://files.pythonhosted.org/packages/09/f9/763154f2c0b23778939a776bb7588a32412cc18938be100d9ecf9be2392a/airbyte-0.24.1-py3-none-any.whl", hash = "sha256:bed45ce3a8123632b2b83e22e62951222130571e563830452a9785f644300531", size = 184464 },
 ]
 
 [[package]]
@@ -1389,7 +1389,6 @@ dependencies = [
 
 [package.optional-dependencies]
 dev = [
-    { name = "airbyte" },
     { name = "basedpyright" },
     { name = "dbt-core" },
     { name = "dbt-duckdb" },
@@ -1402,8 +1401,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "airbyte", specifier = ">=0.23.0" },
-    { name = "airbyte", marker = "extra == 'dev'", specifier = ">=0.23.0" },
+    { name = "airbyte", specifier = "==0.24.1" },
     { name = "basedpyright", marker = "extra == 'dev'", specifier = ">=1.28.2" },
     { name = "click", specifier = ">=8.0.0" },
     { name = "copier", specifier = ">=9.6.0" },
