@@ -3,7 +3,7 @@ source_name: hubspot
 target_dbt_schema_url: https://raw.githubusercontent.com/fivetran/dbt_hubspot_source/refs/heads/main/models/src_hubspot.yml
 # SQL dialect configuration
 sql_dialect: duckdb
-subcolumn_traversal: bracket_notation
+subcolumn_traversal: dot_notation
 target_tables_skipped:
   - calendar_event
   - deal_company

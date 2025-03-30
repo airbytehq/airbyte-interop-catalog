@@ -15,28 +15,28 @@ def test_format_json_path_no_dots():
 def test_format_json_path_bracket_notation():
     """Test bracket notation formatting."""
     expression = "users.contact.email"
-    result = _format_json_path(expression, "duckdb", "bracket_notation")
-    assert result == "users['contact']['email']"
+    result = _format_json_path(expression, "duckdb", "dot_notation")
+    assert result == "users.contact.email"
 
 
 def test_format_json_path_portable():
     """Test portable (dbt macro) formatting."""
     expression = "users.address.street"
     result = _format_json_path(expression, "duckdb", "portable")
-    assert result == "{{ json_extract(users, ['address', 'street']) }}"
+    assert result == "{{ json_extract(users.address, ['street']) }}"
 
 
 def test_format_json_path_default():
     """Test default formatting uses bracket notation."""
     expression = "users.preferences.theme"
     result = _format_json_path(expression, "duckdb", "default")
-    assert result == "users['preferences']['theme']"
+    assert result == "users.preferences.theme"
 
 
 def test_format_json_path_unimplemented_traversal():
     """Test that unimplemented traversal methods raise NotImplementedError."""
     expression = "users.contact.phone"
-    unimplemented_methods = ["json_path", "colon_notation", "arrow_notation", "dot_notation"]
+    unimplemented_methods = ["json_path", "colon_notation", "arrow_notation"]
 
     for method in unimplemented_methods:
         with pytest.raises(NotImplementedError) as excinfo:

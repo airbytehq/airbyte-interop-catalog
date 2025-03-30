@@ -19,3 +19,7 @@ clean-targets:
 models:
   airbyte_facebook_marketing:
     +materialized: view
+
+vars:
+  airbyte_facebook_marketing_database: "facebook_marketing"
+  airbyte_facebook_marketing_schema: "facebook_marketing_raw"

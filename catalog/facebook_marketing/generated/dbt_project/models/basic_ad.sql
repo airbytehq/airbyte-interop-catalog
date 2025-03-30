@@ -8,15 +8,15 @@ ad_insights AS (
 
 
 SELECT
-    ads_insights.ad_id AS ad_id, -- The ID of the ad the report relates to.
-    ads_insights.ad_name AS ad_name, -- Name of the ad the report relates to.
-    NULL AS adset_name, -- Name of the ad set the report relates to.
-    NULL AS date, -- The date of the reported performance.
-    ads_insights.account_id AS account_id, -- The ID of the ad account that this ad belongs to.
-    ads_insights.impressions AS impressions, -- The number of impressions the ad had on the given day.
-    NULL AS inline_link_clicks, -- The number of clicks the ad had on the given day.
-    ads_insights.spend AS spend, -- The spend on the ad in the given day.
-    ads_insights.reach AS reach, -- The number of people who saw any content from your Page or about your Page. This metric is estimated.
-    ads_insights.frequency AS frequency, -- The average number of times each person saw your ad; it is calculated as impressions divided by reach.
-    _airbyte_extracted_at AS _fivetran_synced -- {{ doc('_fivetran_synced') }}
+    ads_insights.ad_id AS ad_id,
+    ads_insights.ad_name AS ad_name,
+    NULL AS adset_name,
+    NULL AS date,
+    ads_insights.account_id AS account_id,
+    ads_insights.impressions AS impressions,
+    NULL AS inline_link_clicks,
+    ads_insights.spend AS spend,
+    ads_insights.reach AS reach,
+    ads_insights.frequency AS frequency,
+    _airbyte_extracted_at AS _fivetran_synced
 FROM ad_insights

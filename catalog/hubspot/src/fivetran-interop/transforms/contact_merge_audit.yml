@@ -8,7 +8,7 @@ transforms:
         expression: contacts_merged_audit._airbyte_extracted_at
         description: '{{ doc("_fivetran_synced") }}'
       canonical_vid:
-        expression: contacts_merged_audit.canonical-vid
+        expression: contacts_merged_audit.canonical_vid
         description:
           The contact ID of the contact which the vid_to_merge contact
           was merged into.
@@ -16,23 +16,23 @@ transforms:
         expression: MISSING
         description: The ID of the contact.
       entity_id:
-        expression: contacts_merged_audit.entity-id
+        expression: contacts_merged_audit.entity_id
         description: The ID of the related entity.
       first_name:
-        expression: contacts_merged_audit.first-name
+        expression: contacts_merged_audit.first_name
         description: The contact's first name.
       last_name:
-        expression: contacts_merged_audit.last-name
+        expression: contacts_merged_audit.last_name
         description: The contact's last name.
       num_properties_moved:
-        expression: contacts_merged_audit.num-properties-moved
+        expression: contacts_merged_audit.num_properties_moved
         description: The number of properties which were removed from the merged contact.
       timestamp:
         expression: contacts_merged_audit.timestamp
         description: Timestamp of when the contacts were merged.
       user_id:
-        expression: contacts_merged_audit.user-id
+        expression: contacts_merged_audit.user_id
         description: The ID of the user.
       vid_to_merge:
-        expression: contacts_merged_audit.vid-to-merge
+        expression: contacts_merged_audit.vid_to_merge
         description: The ID of the contact which was merged.

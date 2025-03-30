@@ -8,13 +8,13 @@ owners AS (
 
 
 SELECT
-    owners._airbyte_extracted_at AS _fivetran_synced, -- {{ doc("_fivetran_synced") }}
-    owners.createdAt AS created_at, -- A timestamp for when the owner was created.
-    owners.email AS email, -- The email address of the owner.
-    owners.firstName AS first_name, -- The first name of the owner.
-    owners.lastName AS last_name, -- The last name of the owner.
-    owners.id AS owner_id, -- The ID of the owner.
-    NULL AS portal_id, -- {{ doc("portal_id") }}
-    NULL AS type, -- The type of owner.
-    owners.updatedAt AS updated_at -- None
+    owners._airbyte_extracted_at AS _fivetran_synced,
+    owners.createdAt AS created_at,
+    owners.email AS email,
+    owners.firstName AS first_name,
+    owners.lastName AS last_name,
+    owners.id AS owner_id,
+    NULL AS portal_id,
+    NULL AS type,
+    owners.updatedAt AS updated_at
 FROM owners

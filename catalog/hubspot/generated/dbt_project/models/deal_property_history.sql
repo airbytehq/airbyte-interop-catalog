@@ -8,11 +8,11 @@ deals_property_history AS (
 
 
 SELECT
-    deals_property_history._airbyte_extracted_at AS _fivetran_synced, -- {{ doc("_fivetran_synced") }}
-    deals_property_history.dealId AS deal_id, -- The ID of the related deal record.
-    deals_property_history['properties']['dealname'] AS name, -- {{ doc("history_name") }}
-    deals_property_history['properties']['hs_object_source'] AS source, -- {{ doc("history_source") }}
-    deals_property_history['properties']['hs_object_source_id'] AS source_id, -- {{ doc("history_source_id") }}
-    deals_property_history.timestamp AS timestamp, -- {{ doc("history_timestamp") }}
-    deals_property_history.value AS value -- {{ doc("history_value") }}
+    deals_property_history._airbyte_extracted_at AS _fivetran_synced,
+    deals_property_history.dealId AS deal_id,
+    deals_property_history.properties.dealname AS name,
+    deals_property_history.properties.hs_object_source AS source,
+    deals_property_history.properties.hs_object_source_id AS source_id,
+    deals_property_history.timestamp AS timestamp,
+    deals_property_history.value AS value
 FROM deals_property_history

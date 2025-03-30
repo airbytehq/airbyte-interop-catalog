@@ -19,3 +19,7 @@ clean-targets:
 models:
   airbyte_{{ catalog_name }}:
     +materialized: view
+
+vars:
+  airbyte_{{ catalog_name }}_database: "{{ catalog_name }}"
+  airbyte_{{ catalog_name }}_schema: "{{ catalog_name }}_raw"

@@ -344,6 +344,12 @@ class DbtSourceFile(BaseModel):
         """
         source = {
             "name": self.source_name,
+            "schema": "{{ "
+            + f"var('airbyte_{self.source_name}_schema', default='{self.source_name}_raw')"
+            + " }}",
+            "database": "{{ "
+            + f"var('airbyte_{self.source_name}_database', default='{self.source_name}')"
+            + " }}",
             "tables": [table.to_dict() for table in self.source_tables],
         }
 

@@ -11,7 +11,7 @@ MISSING = "MISSING"
 SQL_DIALECT_OPTIONS = {
     "duckdb": {
         "name": "DuckDB",
-        "default_subcolumn_traversal": "bracket_notation",
+        "default_subcolumn_traversal": "dot_notation",
     },
     "bigquery": {
         "name": "BigQuery",
@@ -47,8 +47,8 @@ SUBCOLUMN_TRAVERSAL_OPTIONS = [
     "default",  # Uses the default for the selected SQL dialect
 ]
 
-VALID_TRAVERSAL_BY_DIALECT = {
-    "duckdb": ["bracket_notation", "json_path", "portable", "default"],
+VALID_TRAVERSAL_BY_DIALECT: dict[str, list[str]] = {
+    "duckdb": ["dot_notation", "json_path", "portable", "default"],
     "bigquery": ["json_path", "dot_notation", "portable", "default"],
     "snowflake": ["colon_notation", "bracket_notation", "json_path", "portable", "default"],
     "postgres": ["arrow_notation", "json_path", "portable", "default"],

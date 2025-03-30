@@ -45972,446 +45972,6 @@
       "is_resumable": true
     },
     {
-      "name": "cars",
-      "json_schema": {
-        "$schema": "http://json-schema.org/draft-07/schema#",
-        "type": [
-          "null",
-          "object"
-        ],
-        "additionalProperties": true,
-        "properties": {
-          "id": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "createdAt": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "date-time"
-          },
-          "updatedAt": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "date-time"
-          },
-          "archived": {
-            "type": [
-              "null",
-              "boolean"
-            ]
-          },
-          "properties": {
-            "type": [
-              "null",
-              "object"
-            ],
-            "properties": {
-              "car_id": {
-                "type": [
-                  "null",
-                  "number"
-                ]
-              },
-              "car_name": {
-                "type": [
-                  "null",
-                  "number"
-                ]
-              },
-              "hs_all_accessible_team_ids": {
-                "type": [
-                  "null",
-                  "string"
-                ]
-              },
-              "hs_all_assigned_business_unit_ids": {
-                "type": [
-                  "null",
-                  "string"
-                ]
-              },
-              "hs_all_owner_ids": {
-                "type": [
-                  "null",
-                  "string"
-                ]
-              },
-              "hs_all_team_ids": {
-                "type": [
-                  "null",
-                  "string"
-                ]
-              },
-              "hs_created_by_user_id": {
-                "type": [
-                  "null",
-                  "number"
-                ]
-              },
-              "hs_createdate": {
-                "type": [
-                  "null",
-                  "string"
-                ],
-                "format": "date-time"
-              },
-              "hs_lastmodifieddate": {
-                "type": [
-                  "null",
-                  "string"
-                ],
-                "format": "date-time"
-              },
-              "hs_merged_object_ids": {
-                "type": [
-                  "null",
-                  "string"
-                ]
-              },
-              "hs_object_id": {
-                "type": [
-                  "null",
-                  "number"
-                ]
-              },
-              "hs_object_source": {
-                "type": [
-                  "null",
-                  "string"
-                ]
-              },
-              "hs_object_source_detail_1": {
-                "type": [
-                  "null",
-                  "string"
-                ]
-              },
-              "hs_object_source_detail_2": {
-                "type": [
-                  "null",
-                  "string"
-                ]
-              },
-              "hs_object_source_detail_3": {
-                "type": [
-                  "null",
-                  "string"
-                ]
-              },
-              "hs_object_source_id": {
-                "type": [
-                  "null",
-                  "string"
-                ]
-              },
-              "hs_object_source_label": {
-                "type": [
-                  "null",
-                  "string"
-                ]
-              },
-              "hs_object_source_user_id": {
-                "type": [
-                  "null",
-                  "number"
-                ]
-              },
-              "hs_pinned_engagement_id": {
-                "type": [
-                  "null",
-                  "number"
-                ]
-              },
-              "hs_read_only": {
-                "type": [
-                  "null",
-                  "boolean"
-                ]
-              },
-              "hs_shared_team_ids": {
-                "type": [
-                  "null",
-                  "string"
-                ]
-              },
-              "hs_shared_user_ids": {
-                "type": [
-                  "null",
-                  "string"
-                ]
-              },
-              "hs_unique_creation_key": {
-                "type": [
-                  "null",
-                  "string"
-                ]
-              },
-              "hs_updated_by_user_id": {
-                "type": [
-                  "null",
-                  "number"
-                ]
-              },
-              "hs_user_ids_of_all_notification_followers": {
-                "type": [
-                  "null",
-                  "string"
-                ]
-              },
-              "hs_user_ids_of_all_notification_unfollowers": {
-                "type": [
-                  "null",
-                  "string"
-                ]
-              },
-              "hs_user_ids_of_all_owners": {
-                "type": [
-                  "null",
-                  "string"
-                ]
-              },
-              "hs_was_imported": {
-                "type": [
-                  "null",
-                  "boolean"
-                ]
-              },
-              "hubspot_owner_assigneddate": {
-                "type": [
-                  "null",
-                  "string"
-                ],
-                "format": "date-time"
-              },
-              "hubspot_owner_id": {
-                "type": [
-                  "null",
-                  "string"
-                ]
-              },
-              "hubspot_team_id": {
-                "type": [
-                  "null",
-                  "string"
-                ]
-              }
-            }
-          },
-          "properties_car_id": {
-            "type": [
-              "null",
-              "number"
-            ]
-          },
-          "properties_car_name": {
-            "type": [
-              "null",
-              "number"
-            ]
-          },
-          "properties_hs_all_accessible_team_ids": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "properties_hs_all_assigned_business_unit_ids": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "properties_hs_all_owner_ids": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "properties_hs_all_team_ids": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "properties_hs_created_by_user_id": {
-            "type": [
-              "null",
-              "number"
-            ]
-          },
-          "properties_hs_createdate": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "date-time"
-          },
-          "properties_hs_lastmodifieddate": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "date-time"
-          },
-          "properties_hs_merged_object_ids": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "properties_hs_object_id": {
-            "type": [
-              "null",
-              "number"
-            ]
-          },
-          "properties_hs_object_source": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "properties_hs_object_source_detail_1": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "properties_hs_object_source_detail_2": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "properties_hs_object_source_detail_3": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "properties_hs_object_source_id": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "properties_hs_object_source_label": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "properties_hs_object_source_user_id": {
-            "type": [
-              "null",
-              "number"
-            ]
-          },
-          "properties_hs_pinned_engagement_id": {
-            "type": [
-              "null",
-              "number"
-            ]
-          },
-          "properties_hs_read_only": {
-            "type": [
-              "null",
-              "boolean"
-            ]
-          },
-          "properties_hs_shared_team_ids": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "properties_hs_shared_user_ids": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "properties_hs_unique_creation_key": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "properties_hs_updated_by_user_id": {
-            "type": [
-              "null",
-              "number"
-            ]
-          },
-          "properties_hs_user_ids_of_all_notification_followers": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "properties_hs_user_ids_of_all_notification_unfollowers": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "properties_hs_user_ids_of_all_owners": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "properties_hs_was_imported": {
-            "type": [
-              "null",
-              "boolean"
-            ]
-          },
-          "properties_hubspot_owner_assigneddate": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "date-time"
-          },
-          "properties_hubspot_owner_id": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "properties_hubspot_team_id": {
-            "type": [
-              "null",
-              "string"
-            ]
-          }
-        }
-      },
-      "supported_sync_modes": [
-        "full_refresh",
-        "incremental"
-      ],
-      "source_defined_cursor": true,
-      "default_cursor_field": [
-        "updatedAt"
-      ],
-      "source_defined_primary_key": [
-        [
-          "id"
-        ]
-      ],
-      "namespace": null,
-      "is_resumable": true
-    },
-    {
       "name": "pets",
       "json_schema": {
         "$schema": "http://json-schema.org/draft-07/schema#",
@@ -46852,7 +46412,447 @@
       "is_resumable": true
     },
     {
-      "name": "cars_web_analytics",
+      "name": "cars",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "archived": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "properties": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "car_id": {
+                "type": [
+                  "null",
+                  "number"
+                ]
+              },
+              "car_name": {
+                "type": [
+                  "null",
+                  "number"
+                ]
+              },
+              "hs_all_accessible_team_ids": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "hs_all_assigned_business_unit_ids": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "hs_all_owner_ids": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "hs_all_team_ids": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "hs_created_by_user_id": {
+                "type": [
+                  "null",
+                  "number"
+                ]
+              },
+              "hs_createdate": {
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "hs_lastmodifieddate": {
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "hs_merged_object_ids": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "hs_object_id": {
+                "type": [
+                  "null",
+                  "number"
+                ]
+              },
+              "hs_object_source": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "hs_object_source_detail_1": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "hs_object_source_detail_2": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "hs_object_source_detail_3": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "hs_object_source_id": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "hs_object_source_label": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "hs_object_source_user_id": {
+                "type": [
+                  "null",
+                  "number"
+                ]
+              },
+              "hs_pinned_engagement_id": {
+                "type": [
+                  "null",
+                  "number"
+                ]
+              },
+              "hs_read_only": {
+                "type": [
+                  "null",
+                  "boolean"
+                ]
+              },
+              "hs_shared_team_ids": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "hs_shared_user_ids": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "hs_unique_creation_key": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "hs_updated_by_user_id": {
+                "type": [
+                  "null",
+                  "number"
+                ]
+              },
+              "hs_user_ids_of_all_notification_followers": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "hs_user_ids_of_all_notification_unfollowers": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "hs_user_ids_of_all_owners": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "hs_was_imported": {
+                "type": [
+                  "null",
+                  "boolean"
+                ]
+              },
+              "hubspot_owner_assigneddate": {
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "hubspot_owner_id": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "hubspot_team_id": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              }
+            }
+          },
+          "properties_car_id": {
+            "type": [
+              "null",
+              "number"
+            ]
+          },
+          "properties_car_name": {
+            "type": [
+              "null",
+              "number"
+            ]
+          },
+          "properties_hs_all_accessible_team_ids": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "properties_hs_all_assigned_business_unit_ids": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "properties_hs_all_owner_ids": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "properties_hs_all_team_ids": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "properties_hs_created_by_user_id": {
+            "type": [
+              "null",
+              "number"
+            ]
+          },
+          "properties_hs_createdate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "properties_hs_lastmodifieddate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "properties_hs_merged_object_ids": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "properties_hs_object_id": {
+            "type": [
+              "null",
+              "number"
+            ]
+          },
+          "properties_hs_object_source": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "properties_hs_object_source_detail_1": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "properties_hs_object_source_detail_2": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "properties_hs_object_source_detail_3": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "properties_hs_object_source_id": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "properties_hs_object_source_label": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "properties_hs_object_source_user_id": {
+            "type": [
+              "null",
+              "number"
+            ]
+          },
+          "properties_hs_pinned_engagement_id": {
+            "type": [
+              "null",
+              "number"
+            ]
+          },
+          "properties_hs_read_only": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "properties_hs_shared_team_ids": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "properties_hs_shared_user_ids": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "properties_hs_unique_creation_key": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "properties_hs_updated_by_user_id": {
+            "type": [
+              "null",
+              "number"
+            ]
+          },
+          "properties_hs_user_ids_of_all_notification_followers": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "properties_hs_user_ids_of_all_notification_unfollowers": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "properties_hs_user_ids_of_all_owners": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "properties_hs_was_imported": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "properties_hubspot_owner_assigneddate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "properties_hubspot_owner_id": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "properties_hubspot_team_id": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "updatedAt"
+      ],
+      "source_defined_primary_key": [
+        [
+          "id"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "pets_web_analytics",
       "json_schema": {
         "$schema": "http://json-schema.org/draft-07/schema#",
         "type": [
@@ -47171,7 +47171,7 @@
       "is_resumable": true
     },
     {
-      "name": "pets_web_analytics",
+      "name": "cars_web_analytics",
       "json_schema": {
         "$schema": "http://json-schema.org/draft-07/schema#",
         "type": [

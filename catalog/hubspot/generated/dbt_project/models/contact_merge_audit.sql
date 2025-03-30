@@ -8,14 +8,14 @@ contacts_merged_audit AS (
 
 
 SELECT
-    contacts_merged_audit._airbyte_extracted_at AS _fivetran_synced, -- {{ doc("_fivetran_synced") }}
-    contacts_merged_audit.canonical-vid AS canonical_vid, -- The contact ID of the contact which the vid_to_merge contact was merged into.
-    NULL AS contact_id, -- The ID of the contact.
-    contacts_merged_audit.entity-id AS entity_id, -- The ID of the related entity.
-    contacts_merged_audit.first-name AS first_name, -- The contact's first name.
-    contacts_merged_audit.last-name AS last_name, -- The contact's last name.
-    contacts_merged_audit.num-properties-moved AS num_properties_moved, -- The number of properties which were removed from the merged contact.
-    contacts_merged_audit.timestamp AS timestamp, -- Timestamp of when the contacts were merged.
-    contacts_merged_audit.user-id AS user_id, -- The ID of the user.
-    contacts_merged_audit.vid-to-merge AS vid_to_merge -- The ID of the contact which was merged.
+    contacts_merged_audit._airbyte_extracted_at AS _fivetran_synced,
+    contacts_merged_audit.canonical_vid AS canonical_vid,
+    NULL AS contact_id,
+    contacts_merged_audit.entity_id AS entity_id,
+    contacts_merged_audit.first_name AS first_name,
+    contacts_merged_audit.last_name AS last_name,
+    contacts_merged_audit.num_properties_moved AS num_properties_moved,
+    contacts_merged_audit.timestamp AS timestamp,
+    contacts_merged_audit.user_id AS user_id,
+    contacts_merged_audit.vid_to_merge AS vid_to_merge
 FROM contacts_merged_audit

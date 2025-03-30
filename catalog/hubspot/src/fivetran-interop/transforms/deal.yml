@@ -14,7 +14,7 @@ transforms:
         expression: MISSING
         description: '{{ doc("portal_id") }}'
       deal_pipeline_id:
-        expression: deals.pipeline
+        expression: deals.properties.pipeline
         description: The ID of the deal's pipeline.
       deal_pipeline_stage_id:
         expression: deals.properties.dealstage

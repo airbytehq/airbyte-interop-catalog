@@ -4,6 +4,8 @@
 version: 2
 sources:
   - name: hubspot
+    schema: "{{ var('airbyte_hubspot_schema', 'main') }}"
+    database: "{{ var('airbyte_hubspot_database', 'main') }}"
     tables:
       - name: campaigns
         columns:
@@ -872,7 +874,7 @@ sources:
             data_type: timestamp
           - name: properties_hs_analytics_last_touch_converting_campaign
             data_type: varchar
-          - name: 
+          - name:
               properties_hs_analytics_last_touch_converting_campaign_timestamp_latest_value_81a64e30
             data_type: timestamp
           - name: properties_hs_analytics_last_visit_timestamp
@@ -1628,7 +1630,7 @@ sources:
             data_type: timestamp
           - name: properties_hs_analytics_last_touch_converting_campaign
             data_type: varchar
-          - name: 
+          - name:
               properties_hs_analytics_last_touch_converting_campaign_timestamp_latest_value_81a64e30
             data_type: timestamp
           - name: properties_hs_analytics_last_visit_timestamp

@@ -8,20 +8,18 @@ forms AS (
 
 
 SELECT
-    NULL AS _fivetran_deleted, -- {{ doc("_fivetran_deleted") }}
-    forms._airbyte_extracted_at AS _fivetran_synced, -- {{ doc("_fivetran_synced") }}
-    forms['properties']['hs_createdate'] AS created_at, -- A timestamp for when the form was created.
-    forms['displayOptions']['cssClass'] AS css_class, -- The CSS classes assigned to the form.
-    NULL AS follow_up_id, -- This field is no longer used.
-    NULL AS guid, -- The internal ID of the form.
-    NULL AS lead_nurturing_campaign_id, -- TBD
-    NULL AS method, -- This field is no longer used.
-    forms.name AS name, -- The name of the form.
-    forms['configuration']['notifyRecipients'] AS notify_recipients, -- A comma-separated list of user IDs that should receive submission notifications.
-Email addresses will be returned for individuals who aren't users.
-
-    forms.id AS portal_id, -- {{ doc("portal_id") }}
-    NULL AS redirect, -- The URL that the visitor will be redirected to after filling out the form.
-    forms['displayOptions']['submitButtonText'] AS submit_text, -- The text used for the submit button.
-    forms['properties']['hs_lastmodifieddate'] AS updated_at -- A timestamp for when the form was last updated.
+    NULL AS _fivetran_deleted,
+    forms._airbyte_extracted_at AS _fivetran_synced,
+    forms.properties.hs_createdate AS created_at,
+    forms.displayOptions.cssClass AS css_class,
+    NULL AS follow_up_id,
+    NULL AS guid,
+    NULL AS lead_nurturing_campaign_id,
+    NULL AS method,
+    forms.name AS name,
+    forms.configuration.notifyRecipients AS notify_recipients,
+    forms.id AS portal_id,
+    NULL AS redirect,
+    forms.displayOptions.submitButtonText AS submit_text,
+    forms.properties.hs_lastmodifieddate AS updated_at
 FROM forms

@@ -8,11 +8,11 @@ contacts_property_history AS (
 
 
 SELECT
-    contacts_property_history._airbyte_extracted_at AS _fivetran_synced, -- {{ doc("_fivetran_synced") }}
-    contacts_property_history.hs_object_id AS contact_id, -- The ID of the related contact record.
-    contacts_property_history.source-label AS name, -- {{ doc("history_name") }}
-    contacts_property_history.source AS source, -- {{ doc("history_source") }}
-    contacts_property_history.source-id AS source_id, -- {{ doc("history_source_id") }}
-    contacts_property_history.timestamp AS timestamp, -- {{ doc("history_timestamp") }}
-    contacts_property_history.value AS value -- {{ doc("history_value") }}
+    contacts_property_history._airbyte_extracted_at AS _fivetran_synced,
+    NULL AS contact_id,
+    NULL AS name,
+    NULL AS source,
+    contacts_property_history.source_id AS source_id,
+    contacts_property_history.timestamp AS timestamp,
+    contacts_property_history.value AS value
 FROM contacts_property_history

@@ -8,40 +8,24 @@ contact_lists AS (
 
 
 SELECT
-    NULL AS _fivetran_deleted, -- {{ doc("_fivetran_deleted") }}
-    contact_lists._airbyte_extracted_at AS _fivetran_synced, -- {{ doc("_fivetran_synced") }}
-    contact_lists.createdAt AS created_at, -- A timestamp of the time the list was created.
-    contact_lists.listId AS id, -- The ID of the contact list.
-    contact_lists.name AS name, -- The name of the contact list.
-    contact_lists.updatedAt AS updated_at, -- A timestamp of the time that the list was last modified.
-    contact_lists.authorId AS created_by_id, -- The unique identifier of the user who created the contact list.
-    contact_lists.listType AS object_type_id, -- The ID that corresponds to the type of object stored by the list.
-    contact_lists['metaData']['processing'] AS processing_status, -- Indicates the current status of the list's processing, such as 'COMPLETE', 'PROCESSING', 'DONE', or 'FAILED'.
-    contact_lists.listType AS processing_type, -- Specifies the type of processing applied to the list, for example, 'STATIC' for static lists or 'DYNAMIC' for dynamic lists.
-    NULL AS list_version, -- Represents the version number of the list, incrementing with each modification.
-    contact_lists.filters AS filters_updated_at, -- The timestamp indicating when the list's filters were last updated.
-    contact_lists['metaData']['error'] AS metadata_error, -- Any errors that happened the last time the list was processed.
- NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.
-
-    contact_lists['metaData']['lastProcessingStateChangeAt'] AS metadata_last_processing_state_change_at, -- A timestamp of the last time that the processing state changed.
- NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.
-
-    contact_lists['metaData']['lastSizeChangeAt'] AS metadata_last_size_change_at, -- A timestamp of the last time that the size of the list changed.
- NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.
-
-    contact_lists.metaData_processing AS metadata_processing, -- One of DONE, REFRESHING, INITIALIZING, or PROCESSING. DONE indicates the list has finished processing, any other value indicates that list membership is being evaluated.
-NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.
-
-    contact_lists.metaData_size AS metadata_size, -- The approximate number of contacts in the list.
-NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.
-
-    contact_lists.portalId AS portal_id, -- '{{ doc("portal_id") }}'
-NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.
-
-    contact_lists.deleteable AS deleteable, -- If this is false, this is a system list and cannot be deleted.
- NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.
-
-    contact_lists.dynamic AS dynamic -- Whether the contact list is dynamic.
-NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.
-
+    NULL AS _fivetran_deleted,
+    contact_lists._airbyte_extracted_at AS _fivetran_synced,
+    contact_lists.createdAt AS created_at,
+    contact_lists.listId AS id,
+    contact_lists.name AS name,
+    contact_lists.updatedAt AS updated_at,
+    contact_lists.authorId AS created_by_id,
+    contact_lists.listType AS object_type_id,
+    contact_lists.metaData.processing AS processing_status,
+    contact_lists.listType AS processing_type,
+    NULL AS list_version,
+    contact_lists.filters AS filters_updated_at,
+    contact_lists.metaData.error AS metadata_error,
+    contact_lists.metaData.lastProcessingStateChangeAt AS metadata_last_processing_state_change_at,
+    contact_lists.metaData.lastSizeChangeAt AS metadata_last_size_change_at,
+    contact_lists.metaData_processing AS metadata_processing,
+    contact_lists.metaData_size AS metadata_size,
+    contact_lists.portalId AS portal_id,
+    contact_lists.deleteable AS deleteable,
+    contact_lists.dynamic AS dynamic
 FROM contact_lists

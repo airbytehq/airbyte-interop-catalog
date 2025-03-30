@@ -8,20 +8,12 @@ engagements AS (
 
 
 SELECT
-    engagements._airbyte_extracted_at AS _fivetran_synced, -- {{ doc("_fivetran_synced") }}
-    engagements.active AS active, -- Whether the engagement is currently being shown in the UI.
- PLEASE NOTE: This field will not be populated for connectors utilizing the HubSpot v3 API version. This field will be deprecated in a future release.
-
-    engagements.createdAt AS created_at, -- A timestamp representing when the engagement was created.
- PLEASE NOTE: This field will not be populated for connectors utilizing the HubSpot v3 API version. This field will be deprecated in a future release.
-
-    engagements.id AS id, -- The ID of the engagement.
-    engagements.ownerId AS owner_id, -- The ID of the engagement's owner.
-PLEASE NOTE: This field will not be populated for connectors utilizing the HubSpot v3 API version. This field will be deprecated in a future release.
-
-    engagements.portalId AS portal_id, -- {{ doc("portal_id") }}
-    engagements.timestamp AS timestamp, -- A timestamp in representing the time that the engagement should appear in the timeline.
-PLEASE NOTE: This field will not be populated for connectors utilizing the HubSpot v3 API version. This field will be deprecated in a future release.
-
-    engagements.type AS type -- One of NOTE, EMAIL, TASK, MEETING, or CALL, the type of the engagement.
+    engagements._airbyte_extracted_at AS _fivetran_synced,
+    engagements.active AS active,
+    engagements.createdAt AS created_at,
+    engagements.id AS id,
+    engagements.ownerId AS owner_id,
+    engagements.portalId AS portal_id,
+    engagements.timestamp AS timestamp,
+    engagements.type AS type
 FROM engagements

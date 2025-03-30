@@ -8,12 +8,12 @@ deal_pipelines AS (
 
 
 SELECT
-    NULL AS _fivetran_deleted, -- {{ doc("_fivetran_deleted") }}
-    deal_pipelines._airbyte_extracted_at AS _fivetran_synced, -- {{ doc("_fivetran_synced") }}
-    deal_pipelines.active AS active, -- Whether the stage is currently in use.
-    deal_pipelines.displayOrder AS display_order, -- Used to determine the order in which the pipelines appear when viewed in HubSpot.
-    deal_pipelines.label AS label, -- The human-readable label for the pipeline. The label is used when showing the pipeline in HubSpot.
-    deal_pipelines.pipelineId AS pipeline_id, -- The ID of the pipeline.
-    deal_pipelines.createdAt AS created_at, -- A timestamp representing when the record was created.
-    deal_pipelines.updatedAt AS updated_at -- A timestamp representing when the record was updated.
+    NULL AS _fivetran_deleted,
+    deal_pipelines._airbyte_extracted_at AS _fivetran_synced,
+    deal_pipelines.active AS active,
+    deal_pipelines.displayOrder AS display_order,
+    deal_pipelines.label AS label,
+    deal_pipelines.pipelineId AS pipeline_id,
+    deal_pipelines.createdAt AS created_at,
+    deal_pipelines.updatedAt AS updated_at
 FROM deal_pipelines
