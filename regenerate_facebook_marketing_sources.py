@@ -6,8 +6,12 @@ from morph.constants import HEADER_COMMENT
 from morph.models import DbtSourceFile
 from morph.utils import text_utils
 
-catalog_file = Path("/home/ubuntu/repos/morph/catalog/facebook_marketing/generated/airbyte-catalog.json")
-output_file = Path("/home/ubuntu/repos/morph/catalog/facebook_marketing/generated/src_airbyte_facebook_marketing_new.yml")
+catalog_file = Path(
+    "/home/ubuntu/repos/morph/catalog/facebook_marketing/generated/airbyte-catalog.json",
+)
+output_file = Path(
+    "/home/ubuntu/repos/morph/catalog/facebook_marketing/generated/src_airbyte_facebook_marketing.yml",
+)
 
 dbt_file = DbtSourceFile.from_airbyte_catalog_json(
     catalog_file=catalog_file,

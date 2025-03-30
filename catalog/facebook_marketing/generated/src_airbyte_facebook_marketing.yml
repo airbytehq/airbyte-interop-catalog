@@ -824,9 +824,8 @@ sources:
                               data_type: array
                             - name: country_groups
                               data_type: array
-                            - name: geo_markets
+                            - name: geo-markets
                               data_type: array
-                              original_field_name: geo-markets
                         - name: excluded_geo_locations
                           data_type: json
                           subcolumns:
@@ -844,9 +843,8 @@ sources:
                               data_type: array
                             - name: country_groups
                               data_type: array
-                            - name: geo_markets
+                            - name: geo-markets
                               data_type: array
-                              original_field_name: geo-markets
                         - name: work_positions
                           data_type: array
                         - name: education_statuses
@@ -1176,9 +1174,8 @@ sources:
                       data_type: array
                     - name: country_groups
                       data_type: array
-                    - name: geo_markets
+                    - name: geo-markets
                       data_type: array
-                      original_field_name: geo-markets
                 - name: excluded_geo_locations
                   data_type: json
                   subcolumns:
@@ -1196,9 +1193,8 @@ sources:
                       data_type: array
                     - name: country_groups
                       data_type: array
-                    - name: geo_markets
+                    - name: geo-markets
                       data_type: array
-                      original_field_name: geo-markets
                 - name: work_positions
                   data_type: array
                 - name: education_statuses
@@ -1488,9 +1484,8 @@ sources:
                       data_type: array
                     - name: country_groups
                       data_type: array
-                    - name: geo_markets
+                    - name: geo-markets
                       data_type: array
-                      original_field_name: geo-markets
                 - name: excluded_geo_locations
                   data_type: json
                   subcolumns:
@@ -1508,9 +1503,8 @@ sources:
                       data_type: array
                     - name: country_groups
                       data_type: array
-                    - name: geo_markets
+                    - name: geo-markets
                       data_type: array
-                      original_field_name: geo-markets
                 - name: work_positions
                   data_type: array
                 - name: education_statuses

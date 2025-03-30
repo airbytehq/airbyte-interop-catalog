@@ -46,7 +46,7 @@ class DbtSourceColumn(BaseModel):
     subcolumns: list["DbtSourceColumn"] | None = None
     """Nested subcolumns for complex data types (variant/object columns)."""
 
-    original_field_name: str | None = None
+    original_name: str | None = None
     """The original field name before normalization, if different from name."""
 
     @classmethod
@@ -110,28 +110,30 @@ class DbtSourceColumn(BaseModel):
             if is_object and "properties" in property_schema:
                 nested_columns = []
                 for prop_name, prop_schema in property_schema["properties"].items():
-                    normalized_prop_name = normalize_field_name(prop_name)
                     nested_column = cls.from_json_schema(
-                        normalized_prop_name,
+                        prop_name,
                         prop_schema,
                         nesting_level + 1,
                     )
-                    if normalized_prop_name != prop_name:
-                        nested_column.original_field_name = prop_name
                     nested_columns.append(nested_column)
 
                 if nested_columns:
                     subcolumns = nested_columns
 
-        normalized_name = normalize_field_name(property_name)
-        original_field_name = property_name if normalized_name != property_name else None
+        name = property_name
+        original_name = None
+        if nesting_level == 0:
+            normalized_name = normalize_field_name(property_name)
+            if normalized_name != property_name:
+                name = normalized_name
+                original_name = property_name
 
         return cls(
-            name=normalized_name,
+            name=name,
             description=description,
             data_type=data_type,
             subcolumns=subcolumns,
-            original_field_name=original_field_name,
+            original_name=original_name,
         )
 
 
@@ -208,10 +210,10 @@ class DbtSourceTable(BaseModel):
             if "description" in col_dict and not col_dict["description"]:
                 col_dict.pop("description")
 
-            if "original_field_name" in col_dict:
+            if "original_name" in col_dict:
                 if "meta" not in col_dict:
                     col_dict["meta"] = {}
-                col_dict["meta"]["original_field_name"] = col_dict.pop("original_field_name")
+                col_dict["meta"]["original_name"] = col_dict.pop("original_name")
 
             if col_dict.get("subcolumns"):
                 if "meta" not in col_dict:

@@ -1,4 +1,4 @@
-"""Script to regenerate Hubspot dbt sources file with subcolumns support using DbtSourceFile."""
+"""Script to regenerate Hubspot dbt sources file with normalized field names."""
 
 from pathlib import Path
 
@@ -7,7 +7,7 @@ from morph.models import DbtSourceFile
 from morph.utils import text_utils
 
 catalog_file = Path("/home/ubuntu/repos/morph/catalog/hubspot/generated/airbyte-catalog.json")
-output_file = Path("/home/ubuntu/repos/morph/catalog/hubspot/generated/src_airbyte_hubspot_new.yml")
+output_file = Path("/home/ubuntu/repos/morph/catalog/hubspot/generated/src_airbyte_hubspot.yml")
 
 dbt_file = DbtSourceFile.from_airbyte_catalog_json(
     catalog_file=catalog_file,
