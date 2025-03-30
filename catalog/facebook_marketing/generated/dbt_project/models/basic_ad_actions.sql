@@ -8,16 +8,15 @@ ads_insights AS (
 
 
 SELECT
-    ads_insights.actions AS _1_d_view, -- Conversion metric value using an attribution window of "1 day after viewing the ad". Not included in downstream models by default, but can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics` var.
-    ads_insights.actions AS _7_d_click, -- Conversion metric value using an attribution window of "7 days after clicking the ad". Not included in downstream models by default, but can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics` var.
-    ads_insights.actions AS _28_d_click, -- Conversion metric value using an attribution window of "28 days after clicking the ad". Deprecated by Facebook due to digital privacy initiatives. Not included in downstream models by default, but can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics` var.
-    ads_insights._airbyte_raw_id AS _fivetran_id, -- Defunct field.
-    ads_insights._airbyte_extracted_at AS _fivetran_synced, -- {{ doc('_fivetran_synced') }}
-    ads_insights.action_values AS action_type, -- The kind of actions taken on your ad, Page, app or event after your ad was served to someone, even if they didn't click on it. Action types include Page likes, app installs, conversions, event responses and more. Actions prepended by app_custom_event come from mobile app events and actions prepended by offsite_conversion come from the Facebook Pixel.
-
-    ads_insights.ad_id AS ad_id, -- The ID of the ad the report relates to.
-    ads_insights.date_start AS date, -- The date of the reported performance.
-    ads_insights.converted_product_value AS index, -- Index reflecting the `action_type` tracked for this ad on this day. Column of not much consequence.
-    ads_insights.inline_link_clicks AS inline, -- Conversion metric value using the attribution window that occurs on the ad itself. Not included in downstream models by default, but can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics` var.
-    ads_insights.conversion_values AS value -- Conversion metric value using the default attribution window.
+    ads_insights.actions AS _1_d_view,
+    ads_insights.ad_click_actions AS _7_d_click,
+    ads_insights.action_values AS _28_d_click,
+    ads_insights._airbyte_raw_id AS _fivetran_id,
+    ads_insights._airbyte_extracted_at AS _fivetran_synced,
+    ads_insights.action_values AS action_type,
+    ads_insights.ad_id AS ad_id,
+    ads_insights.date_start AS date,
+    ads_insights.auction_max_competitor_bid AS index,
+    ads_insights.inline_link_clicks AS inline,
+    ads_insights.conversion_values AS value
 FROM ads_insights

@@ -8,17 +8,17 @@ ad_sets AS (
 
 
 SELECT
-    ad_sets.id AS id, -- The ID of the ad set.
-    ad_sets.account_id AS account_id, -- The ID of the ad account that this ad set belongs to.
-    ad_sets.campaign_id AS campaign_id, -- Ad campaign that contains this ad set.
-    ad_sets.name AS name, -- The name of the ad set.
-    _airbyte_extracted_at AS _fivetran_synced, -- {{ doc('_fivetran_synced') }}
-    ad_sets.updated_time AS updated_time, -- {{ doc('updated_time') }}
-    ad_sets.start_time AS start_time, -- Timestamp of designated ad set start time.
-    ad_sets.end_time AS end_time, -- Timestamp of designated ad set end time.
-    ad_sets.bid_strategy AS bid_strategy, -- Bid strategy values are - 'LOWEST_COST_WITHOUT_CAP', 'LOWEST_COST_WITH_BID_CAP', 'COST_CAP', 'LOWEST_COST_WITH_MIN_ROAS'.
-    ad_sets.daily_budget AS daily_budget, -- Daily budget of ad set.
-    ad_sets.budget_remaining AS budget_remaining, -- Remaining budget of ad set.
-    NULL AS status, -- Status values are - 'ACTIVE', 'PAUSED', 'DELETED', 'ARCHIVED'.
-    NULL AS optimization_goal -- The optimization goal this ad set is using. Possible values defined [here](https://developers.facebook.com/docs/marketing-api/reference/ad-campaign/#fields).
+    ad_sets.id AS id,
+    ad_sets.account_id AS account_id,
+    ad_sets.campaign_id AS campaign_id,
+    ad_sets.name AS name,
+    _airbyte_extracted_at AS _fivetran_synced,
+    ad_sets.updated_time AS updated_time,
+    ad_sets.start_time AS start_time,
+    ad_sets.end_time AS end_time,
+    ad_sets.bid_strategy AS bid_strategy,
+    ad_sets.daily_budget AS daily_budget,
+    ad_sets.budget_remaining AS budget_remaining,
+    NULL AS status,
+    NULL AS optimization_goal
 FROM ad_sets

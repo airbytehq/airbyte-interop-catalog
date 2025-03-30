@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from email.policy import default
 import shutil
 import subprocess
 from pathlib import Path
@@ -187,6 +186,7 @@ def generate_dbt_project(
             print(f"Command output: {result.stdout}")
 
         console.print("DBT tests completed.")
+
 
 @main.command()
 @click.argument("source_name", type=str)
