@@ -108,7 +108,7 @@ def _format_json_path(
     if not path:
         return expression
 
-    return _apply_traversal_format(table_alias, [column] + path, subcolumn_traversal)
+    return _apply_traversal_format(table_alias, [column, *path], subcolumn_traversal)
 
 
 def _apply_traversal_format(table_alias: str, path: list[str], traversal_method: str) -> str:
