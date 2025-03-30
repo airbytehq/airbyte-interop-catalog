@@ -8,8 +8,8 @@ email_events AS (
 
 
 SELECT
-    email_events._airbyte_extracted_at AS _fivetran_synced, -- {{ doc("_fivetran_synced") }}
-    email_events.id AS id, -- The ID of the event.
-    email_events.response AS response, -- The full response from the recipient's email server.
-    email_events.smtpId AS smtp_id -- An ID attached to the message by HubSpot.
+    email_events._airbyte_extracted_at AS _fivetran_synced,
+    email_events.id AS id,
+    email_events.response AS response,
+    email_events.smtpId AS smtp_id
 FROM email_events

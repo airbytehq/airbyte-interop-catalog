@@ -8,19 +8,19 @@ transforms:
         expression: contacts_form_submissions._airbyte_extracted_at
         description: '{{ doc("_fivetran_synced") }}'
       contact_id:
-        expression: contacts_form_submissions.canonical-vid
+        expression: contacts_form_submissions.canonical_vid
         description: The ID of the related contact.
       conversion_id:
-        expression: contacts_form_submissions.conversion-id
+        expression: contacts_form_submissions.conversion_id
         description: A Unique ID for the specific form conversion.
       form_id:
-        expression: contacts_form_submissions.form-id
+        expression: contacts_form_submissions.form_id
         description: The GUID of the form that the submission belongs to.
       page_url:
-        expression: contacts_form_submissions.page-url
+        expression: contacts_form_submissions.page_url
         description: The URL that the form was submitted on, if applicable.
       portal_id:
-        expression: contacts_form_submissions.portal-id
+        expression: contacts_form_submissions.portal_id
         description: '{{ doc("portal_id") }}'
       timestamp:
         expression: contacts_form_submissions.timestamp

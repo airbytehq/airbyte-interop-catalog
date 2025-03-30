@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+from email.policy import default
 import shutil
+import subprocess
 from pathlib import Path
 
 import click
@@ -81,9 +83,17 @@ def generate_airbyte_dbt_sources_yml(
     type=str,
     default=DEFAULT_PROJECT_NAME,
 )
+@click.option(
+    "--run-tests",
+    is_flag=True,
+    help="Run tests after generating the dbt project",
+    default=True,
+)
 def generate_dbt_project(
     source_name: str,
     project_name: str,
+    *,
+    run_tests: bool = True,
 ) -> None:
     """Generate a dbt project from mapping files.
 
@@ -111,8 +121,10 @@ def generate_dbt_project(
     if not Path(catalog_file).exists():
         raise ValueError(f"Error: {catalog_file} does not exist")
 
-    output_dir = resource_paths.get_generated_dir_root(source_name)
-
+    dbt_project_dir = resource_paths.get_generated_dbt_project_dir(
+        source_name=source_name,
+        project_name=project_name,
+    )
     # Generate dbt package
     try:
         # Generate dbt models from mapping files
@@ -121,13 +133,10 @@ def generate_dbt_project(
             project_name=project_name,
         )
 
-        # Determine the actual output directory
-        actual_output_dir = output_dir or resource_paths.get_generated_dir_root(source_name)
-
         # Get sources.yml path from generated directory
         generated_sources_path = resource_paths.get_generated_source_yml_path(
-            source_name,
-            project_name,
+            source_name=source_name,
+            project_name=project_name,
         )
         if not generated_sources_path.exists():
             # Only generate sources.yml if it doesn't exist.
@@ -157,10 +166,27 @@ def generate_dbt_project(
         # Copy sources.yml into the generated directory
         shutil.copy(generated_sources_path, new_sources_path)
 
-        console.print(f"Generated dbt project at {actual_output_dir}")
+        console.print(f"Generated dbt project at {dbt_project_dir}")
     except Exception as e:
         console.print(f"Error generating dbt project: {e}", style="bold red")
 
+    if run_tests:
+        console.print("Running dbt tests...")
+        result = subprocess.run(
+            ["uv", "run", "dbt", "run", "--profiles-dir", "profiles"],
+            cwd=dbt_project_dir,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if result.returncode == 0:
+            print(result.stdout.replace("\\n", "\n"))
+            console.print("DBT tests completed.")
+        else:
+            print(f"Error running dbt tests: {result.stderr}")
+            print(f"Command output: {result.stdout}")
+
+        console.print("DBT tests completed.")
 
 @main.command()
 @click.argument("source_name", type=str)
@@ -318,11 +344,7 @@ def lock(
 @main.command()
 @click.argument("source_name", type=str)
 @click.option("--project-name", type=str, default=DEFAULT_PROJECT_NAME)
-@click.option(
-    "--no-airbyte-catalog",
-    is_flag=True,
-    default=True,  # TODO: Revert to False once we resolve the serpyco-rs issue
-)
+@click.option("--no-airbyte-catalog", is_flag=True)
 @click.option("--no-transforms", is_flag=True)
 @click.option("--no-dbt-project", is_flag=True)
 @click.option("--no-lock-file", is_flag=True)

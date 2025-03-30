@@ -85,7 +85,12 @@ def _format_json_path(
             "bracket_notation",
         )
 
-    if subcolumn_traversal not in ["bracket_notation", "default", "portable"]:
+    if subcolumn_traversal not in {
+        "bracket_notation",
+        "dot_notation",
+        "default",
+        "portable",
+    }:
         raise NotImplementedError(
             f"Traversal method '{subcolumn_traversal}' is not implemented yet. "
             "Currently only 'bracket_notation', 'portable', and 'default' are supported.",
@@ -108,42 +113,72 @@ def _format_json_path(
     if not path:
         return expression
 
-    return _apply_traversal_format(table_alias, [column, *path], subcolumn_traversal)
+    return _apply_traversal_format(
+        table_alias=table_alias,
+        column=column,
+        path=path,
+        traversal_method=subcolumn_traversal,
+    )
 
 
-def _apply_traversal_format(table_alias: str, path: list[str], traversal_method: str) -> str:
+def _apply_traversal_format(
+    table_alias: str,
+    column: str,
+    path: list[str],
+    traversal_method: str,
+) -> str:
     """Apply the specified traversal format to the table alias and path.
 
     Args:
         table_alias: The table alias
-        path: The path components (including column name and nested fields)
+        column: The column name
+        path: The path components (including nested fields)
         traversal_method: The traversal method to use
 
     Returns:
         The formatted expression
     """
-    if traversal_method in ["bracket_notation", "default"]:
-        return _format_bracket_notation(table_alias, path)
+    if traversal_method in {"dot_notation", "default"}:
+        return _format_dot_notation(table_alias, column, path)
+    if traversal_method in {"bracket_notation", "default"}:
+        return _format_bracket_notation(table_alias, column, path)
     if traversal_method == "portable":
-        return _format_portable(table_alias, path)
+        return _format_portable(table_alias, column, path)
     raise NotImplementedError(
         f"Traversal method '{traversal_method}' is not implemented yet. "
         "Currently only 'bracket_notation', 'portable', and 'default' are supported.",
     )
 
 
-def _format_bracket_notation(base: str, path: list[str]) -> str:
+def _format_bracket_notation(
+    table_alias: str,
+    column: str,
+    path: list[str],
+) -> str:
     """Format using bracket notation."""
-    formatted = base
+    formatted = table_alias
+    formatted += f".{column}"
     for part in path:
         formatted += f"['{part}']"
     return formatted
 
 
-def _format_portable(base: str, path: list[str]) -> str:
+def _format_dot_notation(
+    table_alias: str,
+    column: str,
+    path: list[str],
+) -> str:
+    return ".".join([table_alias, column, *path])
+
+
+def _format_portable(
+    table_alias: str,
+    column: str,
+    path: list[str],
+) -> str:
     """Format using portable dbt macro."""
     path_str = ", ".join([f"'{p}'" for p in path])
-    return f"{{{{ json_extract({base}, [{path_str}]) }}}}"
+    return f"{{{{ json_extract({table_alias}.{column}, [{path_str}]) }}}}"
 
 
 def _extract_fields(
@@ -168,7 +203,11 @@ def _extract_fields(
         expression = field_config.get("expression")
 
         if expression and isinstance(expression, str) and "." in expression:
-            expression = _format_json_path(expression, sql_dialect, subcolumn_traversal)
+            expression = _format_json_path(
+                expression=expression,
+                sql_dialect=sql_dialect,
+                subcolumn_traversal=subcolumn_traversal,
+            )
 
         fields.append(
             {
@@ -213,7 +252,7 @@ WITH{% for source in sources %}
 {% endfor %}
 
 SELECT{% for field in fields %}
-    {% if field.expression == "MISSING" %}NULL{% else %}{{ field.expression }}{% endif %} AS {{ field.name }}{% if field.description %}{% endif %}{% if not loop.last %},{% endif %} -- {{ field.description }}{% endfor %}
+    {% if field.expression == "MISSING" %}NULL{% else %}{{ field.expression }}{% endif %} AS {{ field.name }}{% if field.description %}{% endif %}{% if not loop.last %},{% endif %}{% endfor %}
 FROM {% for source in sources %}{{ source.alias }}{% if not loop.last %}, {% endif %}{% endfor %}
 
 """
@@ -233,7 +272,10 @@ FROM {% for source in sources %}{{ source.alias }}{% if not loop.last %}, {% end
     )
 
 
-def generate_dbt_project_yml(catalog_name: str, models: list[str]) -> str:
+def generate_dbt_project_yml(
+    catalog_name: str,
+    models: list[str],
+) -> str:
     """Generate dbt_project.yml content."""
     project_template = """
 name: 'airbyte_{{ catalog_name }}'
@@ -261,6 +303,10 @@ models:
     {{ model }}:
       +materialized: table
     {% endfor %}
+
+vars:
+  airbyte_{{ catalog_name }}_schema: "{{ catalog_name }}"
+  airbyte_{{ catalog_name }}_database: "{{ catalog_name }}"
 """
     env = Environment(autoescape=False)
     template = env.from_string(project_template)

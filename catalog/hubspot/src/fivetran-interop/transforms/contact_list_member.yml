@@ -17,5 +17,5 @@ transforms:
         expression: contacts_list_memberships.vid
         description: The ID of the related contact.
       contact_list_id:
-        expression: contacts_list_memberships.static-list-id
+        expression: contacts_list_memberships.static_list_id
         description: The ID of the related contact list.

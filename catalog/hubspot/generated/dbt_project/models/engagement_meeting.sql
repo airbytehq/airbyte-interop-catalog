@@ -8,18 +8,10 @@ engagements_meetings AS (
 
 
 SELECT
-    engagements_meetings._airbyte_extracted_at AS _fivetran_synced, -- {{ doc("_fivetran_synced") }}
-    engagements_meetings.id AS engagement_id, -- The ID of the engagement.
-    engagements_meetings['properties']['hs_createdate'] AS property_hs_createdate, -- This field marks the meeting's time of creation and determines where the meeting sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
-PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
-
-    engagements_meetings['properties']['hs_timestamp'] AS timestamp, -- This field marks the meeting's time of occurrence and determines where the meeting sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
-PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
-
-    engagements_meetings['properties']['hubspot_owner_id'] AS property_hubspot_owner_id, -- The ID of the owner associated with the meeting. This field determines the user listed as the meeting creator on the record timeline.
- PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
-
-    engagements_meetings['properties']['hubspot_team_id'] AS property_hubspot_team_id -- The ID of the team associated with the meeting. This field determines the team listed as the meeting creator on the record timeline.
-PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version.
-
+    engagements_meetings._airbyte_extracted_at AS _fivetran_synced,
+    engagements_meetings.id AS engagement_id,
+    engagements_meetings.properties.hs_createdate AS property_hs_createdate,
+    engagements_meetings.properties.hs_timestamp AS timestamp,
+    engagements_meetings.properties.hubspot_owner_id AS property_hubspot_owner_id,
+    engagements_meetings.properties.hubspot_team_id AS property_hubspot_team_id
 FROM engagements_meetings

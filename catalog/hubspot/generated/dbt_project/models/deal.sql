@@ -8,15 +8,15 @@ deals AS (
 
 
 SELECT
-    deals.id AS deal_id, -- The ID of the deal.
-    deals.archived AS is_deleted, -- Whether the record was deleted.
-    NULL AS portal_id, -- {{ doc("portal_id") }}
-    deals.pipeline AS deal_pipeline_id, -- The ID of the deal's pipeline.
-    deals['properties']['dealstage'] AS deal_pipeline_stage_id, -- The ID of the deal's pipeline stage.
-    deals['properties']['hs_all_owner_ids'] AS owner_id, -- The ID of the deal's owner.
-    deals['properties']['dealname'] AS property_dealname, -- The name you have given this deal.
-    deals['properties']['description'] AS property_description, -- A brief description of the deal.
-    deals['properties']['amount'] AS property_amount, -- The total value of the deal in the deal's currency.
-    deals['properties']['closedate'] AS property_closedate, -- The day the deal is expected to close, or was closed.
-    deals['properties']['createdate'] AS property_createdate -- The date the deal was created. This property is set automatically by HubSpot.
+    deals.id AS deal_id,
+    deals.archived AS is_deleted,
+    NULL AS portal_id,
+    deals.properties.pipeline AS deal_pipeline_id,
+    deals.properties.dealstage AS deal_pipeline_stage_id,
+    deals.properties.hs_all_owner_ids AS owner_id,
+    deals.properties.dealname AS property_dealname,
+    deals.properties.description AS property_description,
+    deals.properties.amount AS property_amount,
+    deals.properties.closedate AS property_closedate,
+    deals.properties.createdate AS property_createdate
 FROM deals

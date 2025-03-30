@@ -8,16 +8,16 @@ transforms:
         expression: contacts_property_history._airbyte_extracted_at
         description: '{{ doc("_fivetran_synced") }}'
       contact_id:
-        expression: contacts_property_history.hs_object_id
+        expression: MISSING
         description: The ID of the related contact record.
       name:
-        expression: contacts_property_history.source-label
+        expression: MISSING
         description: '{{ doc("history_name") }}'
       source:
-        expression: contacts_property_history.source
+        expression: MISSING
         description: '{{ doc("history_source") }}'
       source_id:
-        expression: contacts_property_history.source-id
+        expression: contacts_property_history.source_id
         description: '{{ doc("history_source_id") }}'
       timestamp:
         expression: contacts_property_history.timestamp

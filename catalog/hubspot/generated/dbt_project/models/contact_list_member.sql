@@ -8,9 +8,9 @@ contacts_list_memberships AS (
 
 
 SELECT
-    NULL AS _fivetran_deleted, -- {{ doc("_fivetran_deleted") }}
-    contacts_list_memberships._airbyte_extracted_at AS _fivetran_synced, -- {{ doc("_fivetran_synced") }}
-    NULL AS added_at, -- The timestamp a contact was added to a list.
-    contacts_list_memberships.vid AS contact_id, -- The ID of the related contact.
-    contacts_list_memberships.static-list-id AS contact_list_id -- The ID of the related contact list.
+    NULL AS _fivetran_deleted,
+    contacts_list_memberships._airbyte_extracted_at AS _fivetran_synced,
+    NULL AS added_at,
+    contacts_list_memberships.vid AS contact_id,
+    contacts_list_memberships.static_list_id AS contact_list_id
 FROM contacts_list_memberships

@@ -8,17 +8,16 @@ contacts AS (
 
 
 SELECT
-    NULL AS _fivetran_deleted, -- {{ doc("_fivetran_deleted") }}
-    contacts._airbyte_extracted_at AS _fivetran_synced, -- {{ doc("_fivetran_synced") }}
-    contacts.id AS id, -- The ID of the contact.
-    contacts['properties']['email'] AS property_email_1, -- The email address of the contact.
-    contacts['properties']['company'] AS property_company, -- The name of the contact's company.
-    contacts['properties']['firstname'] AS property_firstname, -- The contact's first name.
-    contacts['properties']['lastname'] AS property_lastname, -- The contact's last name.
-    contacts['properties']['email'] AS property_email, -- The contact's email.
-    contacts['properties']['createdate'] AS property_createdate, -- The date that the contact was created in your HubSpot account.
-    contacts['properties']['jobtitle'] AS property_jobtitle, -- The contact's job title.
-    contacts['properties']['annualrevenue'] AS property_annualrevenue, -- The contact's annual company revenue.
-    contacts['properties']['hs_calculated_merged_vids'] AS property_hs_calculated_merged_vids -- List of mappings representing contact IDs that have been merged into the contact at hand. Format: <merged_contact_id>:<merged_at_in_epoch_time>;<second_merged_contact_id>:<merged_at_in_epoch_time> This field has replaced the `CONTACT_MERGE_AUDIT` table, which was deprecated by the Hubspot v3 CRM API.
-
+    NULL AS _fivetran_deleted,
+    contacts._airbyte_extracted_at AS _fivetran_synced,
+    contacts.id AS id,
+    contacts.properties.email AS property_email_1,
+    contacts.properties.company AS property_company,
+    contacts.properties.firstname AS property_firstname,
+    contacts.properties.lastname AS property_lastname,
+    contacts.properties.email AS property_email,
+    contacts.properties.createdate AS property_createdate,
+    contacts.properties.jobtitle AS property_jobtitle,
+    contacts.properties.annualrevenue AS property_annualrevenue,
+    contacts.properties.hs_calculated_merged_vids AS property_hs_calculated_merged_vids
 FROM contacts

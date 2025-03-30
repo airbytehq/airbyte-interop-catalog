@@ -19,3 +19,7 @@ clean-targets:
 models:
   airbyte_hubspot:
     +materialized: view
+
+vars:
+  airbyte_hubspot_database: "hubspot"
+  airbyte_hubspot_schema: "hubspot_raw"

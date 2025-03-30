@@ -8,12 +8,12 @@ contacts_form_submissions AS (
 
 
 SELECT
-    contacts_form_submissions._airbyte_extracted_at AS _fivetran_synced, -- {{ doc("_fivetran_synced") }}
-    contacts_form_submissions.canonical-vid AS contact_id, -- The ID of the related contact.
-    contacts_form_submissions.conversion-id AS conversion_id, -- A Unique ID for the specific form conversion.
-    contacts_form_submissions.form-id AS form_id, -- The GUID of the form that the submission belongs to.
-    contacts_form_submissions.page-url AS page_url, -- The URL that the form was submitted on, if applicable.
-    contacts_form_submissions.portal-id AS portal_id, -- {{ doc("portal_id") }}
-    contacts_form_submissions.timestamp AS timestamp, -- A Unix timestamp in milliseconds of the time the submission occurred.
-    contacts_form_submissions.title AS title -- The title of the page that the form was submitted on. This will default to the name of the form if no title is provided.
+    contacts_form_submissions._airbyte_extracted_at AS _fivetran_synced,
+    contacts_form_submissions.canonical_vid AS contact_id,
+    contacts_form_submissions.conversion_id AS conversion_id,
+    contacts_form_submissions.form_id AS form_id,
+    contacts_form_submissions.page_url AS page_url,
+    contacts_form_submissions.portal_id AS portal_id,
+    contacts_form_submissions.timestamp AS timestamp,
+    contacts_form_submissions.title AS title
 FROM contacts_form_submissions

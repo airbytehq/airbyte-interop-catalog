@@ -8,11 +8,11 @@ companies_property_history AS (
 
 
 SELECT
-    companies_property_history._airbyte_extracted_at AS _fivetran_synced, -- {{ doc("_fivetran_synced") }}
-    companies_property_history.companyId AS company_id, -- The ID of the related company record.
-    companies_property_history['properties']['name'] AS name, -- {{ doc("history_name") }}
-    companies_property_history.sourceType AS source, -- {{ doc("history_source") }}
-    companies_property_history.sourceId AS source_id, -- {{ doc("history_source_id") }}
-    companies_property_history.timestamp AS timestamp, -- {{ doc("history_timestamp") }}
-    companies_property_history.value AS value -- {{ doc("history_value") }}
+    companies_property_history._airbyte_extracted_at AS _fivetran_synced,
+    companies_property_history.companyId AS company_id,
+    companies_property_history.properties.name AS name,
+    companies_property_history.sourceType AS source,
+    companies_property_history.sourceId AS source_id,
+    companies_property_history.timestamp AS timestamp,
+    companies_property_history.value AS value
 FROM companies_property_history

@@ -8,18 +8,10 @@ engagements_tasks AS (
 
 
 SELECT
-    engagements_tasks._airbyte_extracted_at AS _fivetran_synced, -- {{ doc("_fivetran_synced") }}
-    engagements_tasks.id AS engagement_id, -- The ID of the engagement.
-    engagements_tasks['properties']['hs_createdate'] AS property_hs_createdate, -- This field marks the task's time of creation and determines where the task sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
-PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
-
-    engagements_tasks['properties']['hs_timestamp'] AS timestamp, -- This field marks the task's time of occurrence and determines where the task sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
-PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
-
-    engagements_tasks.properties_hubspot_owner_id AS property_hubspot_owner_id, -- The ID of the owner associated with the task. This field determines the user listed as the task creator on the record timeline.
-PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
-
-    engagements_tasks.properties_hubspot_team_id AS property_hubspot_team_id -- The ID of the team associated with the task. This field determines the team listed as the task creator on the record timeline.
-PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version.
-
+    engagements_tasks._airbyte_extracted_at AS _fivetran_synced,
+    engagements_tasks.id AS engagement_id,
+    engagements_tasks.properties.hs_createdate AS property_hs_createdate,
+    engagements_tasks.properties.hs_timestamp AS timestamp,
+    engagements_tasks.properties_hubspot_owner_id AS property_hubspot_owner_id,
+    engagements_tasks.properties_hubspot_team_id AS property_hubspot_team_id
 FROM engagements_tasks

@@ -52,12 +52,7 @@ def get_generated_dbt_project_dir(
 ) -> Path:
     """Get the path to the generated dbt project.yml file."""
     _ = project_name  # Unused for now
-    return (
-        get_generated_dir_root(
-            source_name=source_name,
-        )
-        / "dbt_project"
-    )
+    return get_generated_dir_root(source_name=source_name) / "dbt_project"
 
 
 def get_generated_dbt_project_models_dir(
