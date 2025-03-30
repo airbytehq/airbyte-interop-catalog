@@ -11,6 +11,7 @@ from typing_extensions import Self
 
 from morph.utils import resource_paths, text_utils
 from morph.utils.rich_utils import rich_formatted_confidence
+from morph.utils.text_utils import normalize_field_name
 
 console = Console()
 
