@@ -2,10 +2,10 @@ domain: shopify.fivetran-interop
 transforms:
   - name: tax_line
     from:
-      - transactions: shopify.transactions
+      - orders: shopify.orders
     fields:
       _fivetran_synced:
-        expression: transactions._airbyte_extracted_at
+        expression: orders._airbyte_extracted_at
         description: "{{ doc('_fivetran_synced') }}"
       index:
         expression: MISSING
@@ -14,11 +14,11 @@ transforms:
         expression: MISSING
         description: The order line that this tax line is associated with.
       price:
-        expression: transactions.amount
+        expression: MISSING
         description: The amount of tax, in shop currency, after discounts and before
           returns.
       price_set:
-        expression: transactions.amount_set
+        expression: MISSING
         description: The amount of tax, in shop and presentment currencies, after
           discounts and before returns.
       rate:
