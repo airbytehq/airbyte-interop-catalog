@@ -1,9 +1,8 @@
 domain: facebook_marketing.fivetran-interop
 transforms:
-  - display_name: Each record represents the daily performance of an ad in Facebook.
-    name: basic_ad
+  - name: basic_ad
     from:
-      - ad_insights: facebook_marketing.ads_insights
+      - ads_insights: facebook_marketing.ads_insights
     fields:
       ad_id:
         expression: ads_insights.ad_id
@@ -42,15 +41,64 @@ transforms:
       _fivetran_synced:
         expression: _airbyte_extracted_at
         description: "{{ doc('_fivetran_synced') }}"
-    annotations:
-      unused_source_fields:
-        ads_insights:
-          - account_currency
-          - account_name
-          - action_values
-          - actions
-          - ad_click_actions
-          - ad_impression_actions
-          - adset_id
-          - _airbyte_meta
-          - _airbyte_raw_id
+annotations:
+  approved: false
+  missing_fields:
+    - adset_name
+    - date
+    - inline_link_clicks
+  evaluation:
+    source_stream_name: ads_insights
+    target_table_name: basic_ad
+    name_match_score: 0.7
+    score: 0.6
+    explanation:
+      The overall confidence score reflects the presence of several mappings
+      that matched perfectly, while some were missing or partially incomplete.
+    field_mapping_evals:
+      - name: ad_id
+        expression: ads_insights.ad_id
+        score: 1.0
+        explanation: Expression matches expected source column perfectly.
+      - name: ad_name
+        expression: ads_insights.ad_name
+        score: 1.0
+        explanation: Expression matches expected source column perfectly.
+      - name: adset_name
+        expression: MISSING
+        score: 0.0
+        explanation: The expression is MISSING for this field.
+      - name: date
+        expression: MISSING
+        score: 0.0
+        explanation: The expression is MISSING for this field.
+      - name: account_id
+        expression: ads_insights.account_id
+        score: 1.0
+        explanation: Expression matches expected source column perfectly.
+      - name: impressions
+        expression: ads_insights.impressions
+        score: 1.0
+        explanation: Expression matches expected source column perfectly.
+      - name: inline_link_clicks
+        expression: MISSING
+        score: 0.0
+        explanation: The expression is MISSING for this field.
+      - name: spend
+        expression: ads_insights.spend
+        score: 1.0
+        explanation: Expression matches expected source column perfectly.
+      - name: reach
+        expression: ads_insights.reach
+        score: 1.0
+        explanation: Expression matches expected source column perfectly.
+      - name: frequency
+        expression: ads_insights.frequency
+        score: 1.0
+        explanation: Expression matches expected source column perfectly.
+      - name: _fivetran_synced
+        expression: _airbyte_extracted_at
+        score: 1.0
+        explanation:
+          Mapped to the source stream's '_airbyte_extracted_at' column
+          as expected.

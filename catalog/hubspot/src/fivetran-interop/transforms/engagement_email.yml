@@ -41,3 +41,56 @@ transforms:
           the team listed as the email creator on the record timeline.\nPLEASE NOTE:
           This field will only be populated for connectors utilizing the HubSpot v3
           API version.\n"
+annotations:
+  approved: false
+  missing_fields: []
+  evaluation:
+    source_stream_name: engagements_emails
+    target_table_name: engagement_email
+    name_match_score: 0.7
+    score: 0.65
+    explanation:
+      The fields generally match well with their expressions but are not
+      perfect. The '_fivetran_synced' to '_airbyte_extracted_at' is a direct match.
+      Other fields like 'engagement_id', 'property_hs_createdate', 'timestamp', 'property_hubspot_owner_id',
+      and 'property_hubspot_team_id' match well with respective expressions indicating
+      a decent transformation, but not perfect due to intrinsic complexities of their
+      mappings.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: engagements_emails._airbyte_extracted_at
+        score: 1.0
+        explanation:
+          The `_fivetran_synced` field correctly maps to a source stream's
+          `_airbyte_extracted_at` column, achieving maximum confidence.
+      - name: engagement_id
+        expression: engagements_emails.id
+        score: 0.7
+        explanation:
+          The 'engagement_id' maps to 'engagements_emails.id', which seems
+          correct, but without additional context, there's a slight chance of misunderstanding.
+      - name: property_hs_createdate
+        expression: engagements_emails.properties.hs_createdate
+        score: 0.6
+        explanation:
+          There's a good mapping with 'engagements_emails.properties.hs_createdate',
+          however, the potential for different timestamp formats imposes limitations
+          on confidence.
+      - name: timestamp
+        expression: engagements_emails.properties.hs_timestamp
+        score: 0.6
+        explanation:
+          Maps accurately to 'engagements_emails.properties.hs_timestamp',
+          though attention to timestamp format must be considered.
+      - name: property_hubspot_owner_id
+        expression: engagements_emails.properties.hubspot_owner_id
+        score: 0.6
+        explanation:
+          Maps logically to 'engagements_emails.properties.hubspot_owner_id';
+          however, variance with API versions suggests caution.
+      - name: property_hubspot_team_id
+        expression: engagements_emails.properties.hubspot_team_id
+        score: 0.6
+        explanation:
+          Mapping is reasonable to 'engagements_emails.properties.hubspot_team_id'
+          considering API nuances, but not perfect.

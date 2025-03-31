@@ -96,3 +96,100 @@ transforms:
           "Whether the contact list is dynamic.\nNOTE: This field is deprecated
           and will not be populated for connectors utilizing the HubSpot v3 API. This
           field will be removed in a future release.\n"
+annotations:
+  approved: true
+  missing_fields:
+    - _fivetran_deleted
+    - list_version
+  evaluation:
+    source_stream_name: contact_lists
+    target_table_name: contact_list
+    name_match_score: 0.9
+    score: 0.72
+    explanation:
+      The evaluation of the table mapping confidence is based on individual
+      field mappings, where each mapping is assessed for relevance and accuracy against
+      expected expressions. Missing expressions result in reduced scores.
+    field_mapping_evals:
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING', hence lacks confidence.
+      - name: _fivetran_synced
+        expression: contact_lists._airbyte_extracted_at
+        score: 1.0
+        explanation: Correct mapping of '_fivetran_synced' to '_airbyte_extracted_at'.
+      - name: created_at
+        expression: contact_lists.createdAt
+        score: 0.9
+        explanation: Field matches well with expression 'contact_lists.createdAt'.
+      - name: id
+        expression: contact_lists.listId
+        score: 0.8
+        explanation: Field matches well with expression 'contact_lists.listId'.
+      - name: name
+        expression: contact_lists.name
+        score: 0.8
+        explanation: Field matches well with expression 'contact_lists.name'.
+      - name: updated_at
+        expression: contact_lists.updatedAt
+        score: 0.9
+        explanation: Field matches well with expression 'contact_lists.updatedAt'.
+      - name: created_by_id
+        expression: contact_lists.authorId
+        score: 0.7
+        explanation: Field matches well with expression 'contact_lists.authorId'.
+      - name: object_type_id
+        expression: contact_lists.listType
+        score: 0.7
+        explanation: Field matches well with expression 'contact_lists.listType'.
+      - name: processing_status
+        expression: contact_lists.metaData.processing
+        score: 0.65
+        explanation: Relevant mapping with expression 'contact_lists.metaData.processing'.
+      - name: processing_type
+        expression: contact_lists.listType
+        score: 0.6
+        explanation:
+          Relevant mapping but expression shares similarity with 'object_type_id',
+          limiting confidence.
+      - name: list_version
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING', hence lacks confidence.
+      - name: filters_updated_at
+        expression: contact_lists.filters
+        score: 0.7
+        explanation: Relevant mapping with expression 'contact_lists.filters'.
+      - name: metadata_error
+        expression: contact_lists.metaData.error
+        score: 0.3
+        explanation: Mapping is deprecated and lacks full confidence.
+      - name: metadata_last_processing_state_change_at
+        expression: contact_lists.metaData.lastProcessingStateChangeAt
+        score: 0.3
+        explanation: Mapping is deprecated and lacks full confidence.
+      - name: metadata_last_size_change_at
+        expression: contact_lists.metaData.lastSizeChangeAt
+        score: 0.3
+        explanation: Mapping is deprecated and lacks full confidence.
+      - name: metadata_processing
+        expression: contact_lists.metaData_processing
+        score: 0.3
+        explanation: Mapping is deprecated and lacks full confidence.
+      - name: metadata_size
+        expression: contact_lists.metaData_size
+        score: 0.3
+        explanation: Mapping is deprecated and lacks full confidence.
+      - name: portal_id
+        expression: contact_lists.portalId
+        score: 0.3
+        explanation: Mapping is deprecated and lacks full confidence.
+      - name: deleteable
+        expression: contact_lists.deleteable
+        score: 0.3
+        explanation: Mapping is deprecated and lacks full confidence.
+      - name: dynamic
+        expression: contact_lists.dynamic
+        score: 0.3
+        explanation: Mapping is deprecated and lacks full confidence.

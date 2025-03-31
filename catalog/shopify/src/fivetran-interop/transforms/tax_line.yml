@@ -31,3 +31,51 @@ transforms:
       title:
         expression: MISSING
         description: The name of the tax.
+annotations:
+  approved: false
+  missing_fields:
+    - index
+    - order_line_id
+    - price
+    - price_set
+    - rate
+    - title
+  evaluation:
+    source_stream_name: orders
+    target_table_name: tax_line
+    name_match_score: 0.1
+    score: 0.14285714285714285
+    explanation:
+      Only one field has a valid expression with a perfect mapping (_fivetran_synced
+      to _airbyte_extracted_at). The rest are marked as MISSING, indicating a lack
+      of confidence in the mapping. The overall score reflects the average confidence
+      across all mappings.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: orders._airbyte_extracted_at
+        score: 1.0
+        explanation: Perfect mapping with _airbyte_extracted_at column.
+      - name: index
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is MISSING, indicating no valid mapping.
+      - name: order_line_id
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is MISSING, indicating no valid mapping.
+      - name: price
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is MISSING, indicating no valid mapping.
+      - name: price_set
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is MISSING, indicating no valid mapping.
+      - name: rate
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is MISSING, indicating no valid mapping.
+      - name: title
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is MISSING, indicating no valid mapping.

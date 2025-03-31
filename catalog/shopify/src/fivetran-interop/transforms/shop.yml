@@ -218,3 +218,244 @@ transforms:
       zip:
         expression: shop.zip
         description: The shop's zip or postal code.
+annotations:
+  approved: true
+  missing_fields:
+    - _fivetran_deleted
+  evaluation:
+    source_stream_name: shop
+    target_table_name: shop
+    name_match_score: 0.9
+    score: 0.87
+    explanation:
+      Overall confidence score of 0.87 is based on the evaluation of individual
+      field mappings. High name match score of 0.9 indicates good alignment of names
+      between source and target fields. Field Mapping Evals indicate how well each
+      specific field was mapped.
+    field_mapping_evals:
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: Missing expression leads to a confidence score of 0.0.
+      - name: _fivetran_synced
+        expression: shop._airbyte_extracted_at
+        score: 1.0
+        explanation:
+          Mapped to '_airbyte_extracted_at', expected mapping with a perfect
+          score.
+      - name: address_1
+        expression: shop.address1
+        score: 0.9
+        explanation:
+          The field name 'address_1' and expression 'shop.address1' are
+          well-aligned.
+      - name: address_2
+        expression: shop.address2
+        score: 0.9
+        explanation:
+          The field name 'address_2' and expression 'shop.address2' are
+          well-aligned.
+      - name: checkout_api_supported
+        expression: shop.checkout_api_supported
+        score: 0.95
+        explanation: The boolean nature and description match well with the field.
+      - name: city
+        expression: shop.city
+        score: 0.95
+        explanation: Name 'city' matches well with expression 'shop.city'.
+      - name: cookie_consent_level
+        expression: shop.cookie_consent_level
+        score: 0.9
+        explanation: Well-defined field and expression, aligned with its description.
+      - name: country
+        expression: shop.country
+        score: 0.95
+        explanation: High confidence on 'country' with corresponding expression.
+      - name: country_code
+        expression: shop.country_code
+        score: 0.95
+        explanation: High confidence in matching 'country_code' to its expression.
+      - name: country_name
+        expression: shop.country_name
+        score: 0.9
+        explanation: Good alignment between country name and expression.
+      - name: county_taxes
+        expression: shop.county_taxes
+        score: 0.9
+        explanation: Boolean representation matches the field's description well.
+      - name: created_at
+        expression: shop.created_at
+        score: 0.95
+        explanation: "'created_at' field aligned with expression with high confidence."
+      - name: currency
+        expression: shop.currency
+        score: 0.9
+        explanation: ISO code alignment supports high confidence score.
+      - name: customer_email
+        expression: shop.customer_email
+        score: 0.9
+        explanation: Field name and expression match strongly.
+      - name: domain
+        expression: shop.domain
+        score: 0.95
+        explanation: High confidence due to direct name match.
+      - name: eligible_for_card_reader_giveaway
+        expression: shop.eligible_for_card_reader_giveaway
+        score: 0.9
+        explanation: Field aligned as expected, matching high confidence requirements.
+      - name: eligible_for_payments
+        expression: shop.eligible_for_payments
+        score: 0.9
+        explanation: Matches well with description, high confidence.
+      - name: email
+        expression: shop.email
+        score: 0.95
+        explanation: Contact email aligns perfectly with field name.
+      - name: enabled_presentment_currencies
+        expression: shop.enabled_presentment_currencies
+        score: 0.9
+        explanation: Array handling expected in field mapping.
+      - name: force_ssl
+        expression: shop.force_ssl
+        score: 0.0
+        explanation: Deprecated field leads to a score of 0.0.
+      - name: google_apps_domain
+        expression: shop.google_apps_domain
+        score: 0.9
+        explanation: Matches expected usage of domain.
+      - name: google_apps_login_enabled
+        expression: shop.google_apps_login_enabled
+        score: 0.9
+        explanation: Correct boolean mapping ensures high confidence.
+      - name: has_discounts
+        expression: shop.has_discounts
+        score: 0.9
+        explanation: Boolean nature aligns with field mapping.
+      - name: has_gift_cards
+        expression: shop.has_gift_cards
+        score: 0.9
+        explanation: Boolean representation matches well.
+      - name: has_storefront
+        expression: shop.has_storefront
+        score: 0.95
+        explanation: Field name and expression directly align.
+      - name: iana_timezone
+        expression: shop.iana_timezone
+        score: 0.95
+        explanation: IANA timezone name is properly matched.
+      - name: id
+        expression: shop.id
+        score: 0.95
+        explanation: Good match for shop identifier field.
+      - name: latitude
+        expression: shop.latitude
+        score: 0.9
+        explanation: Numeric match ensures confidence.
+      - name: longitude
+        expression: shop.longitude
+        score: 0.9
+        explanation: Numeric match ensures confidence.
+      - name: money_format
+        expression: shop.money_format
+        score: 0.9
+        explanation: Currency format aligns with description.
+      - name: money_in_emails_format
+        expression: shop.money_in_emails_format
+        score: 0.9
+        explanation: Currency formatting aligns well.
+      - name: money_with_currency_format
+        expression: shop.money_with_currency_format
+        score: 0.9
+        explanation: Strong alignment due to proper formatting.
+      - name: money_with_currency_in_emails_format
+        expression: shop.money_with_currency_in_emails_format
+        score: 0.9
+        explanation: Matching and formatting increase confidence.
+      - name: multi_location_enabled
+        expression: shop.multi_location_enabled
+        score: 0.0
+        explanation: Deprecated and unchangeable.
+      - name: myshopify_domain
+        expression: shop.myshopify_domain
+        score: 0.95
+        explanation: Direct match with shop's domain.
+      - name: name
+        expression: shop.name
+        score: 0.9
+        explanation: Matches direct naming scheme of the shop.
+      - name: password_enabled
+        expression: shop.password_enabled
+        score: 0.9
+        explanation: Boolean representation and field match description.
+      - name: phone
+        expression: shop.phone
+        score: 0.9
+        explanation: Contact number aligns well.
+      - name: plan_display_name
+        expression: shop.plan_display_name
+        score: 0.9
+        explanation: Naming convention match.
+      - name: plan_name
+        expression: shop.plan_name
+        score: 0.9
+        explanation: Field and expression alignment strong.
+      - name: pre_launch_enabled
+        expression: shop.pre_launch_enabled
+        score: 0.9
+        explanation: Boolean field matches description purpose.
+      - name: primary_locale
+        expression: shop.primary_locale
+        score: 0.9
+        explanation: Locale matches with high confidence.
+      - name: primary_location_id
+        expression: shop.primary_location_id
+        score: 0.0
+        explanation: Deprecated field reduces confidence.
+      - name: province
+        expression: shop.province
+        score: 0.9
+        explanation: State name matches field expectation.
+      - name: province_code
+        expression: shop.province_code
+        score: 0.9
+        explanation: Code matches expected two-letter representation.
+      - name: requires_extra_payments_agreement
+        expression: shop.requires_extra_payments_agreement
+        score: 0.9
+        explanation: Field description and boolean match.
+      - name: setup_required
+        expression: shop.setup_required
+        score: 0.9
+        explanation: Boolean field matches set-up requirements.
+      - name: shop_owner
+        expression: shop.shop_owner
+        score: 0.95
+        explanation: Owner name properly matched to field.
+      - name: source
+        expression: shop.source
+        score: 0.9
+        explanation: Referral source matches documentation.
+      - name: tax_shipping
+        expression: shop.tax_shipping
+        score: 0.9
+        explanation: Boolean representation matches expectation.
+      - name: taxes_included
+        expression: shop.taxes_included
+        score: 0.9
+        explanation: Boolean matches field purpose.
+      - name: timezone
+        expression: shop.timezone
+        score: 0.95
+        explanation: Timezone name precisely matched.
+      - name: updated_at
+        expression: shop.updated_at
+        score: 0.95
+        explanation: Aligned with update time field representation.
+      - name: weight_unit
+        expression: shop.weight_unit
+        score: 0.9
+        explanation: Matches expected unit of measurement.
+      - name: zip
+        expression: shop.zip
+        score: 0.95
+        explanation: Postal code aligned with expression.

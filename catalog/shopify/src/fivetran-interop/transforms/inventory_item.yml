@@ -88,3 +88,120 @@ transforms:
       unit_cost_currency_code:
         expression: MISSING
         description: Currency of the unit cost associated with the inventory item.
+annotations:
+  approved: false
+  missing_fields:
+    - _fivetran_deleted
+    - inventory_history_url
+    - legacy_resource_id
+    - measurement_id
+    - measurement_weight_unit
+    - measurement_weight_value
+    - tracked_editable_locked
+    - tracked_editable_reason
+    - unit_cost_amount
+    - unit_cost_currency_code
+  evaluation:
+    source_stream_name: inventory_items
+    target_table_name: inventory_item
+    name_match_score: 0.55
+    score: 0.35
+    explanation:
+      The average confidence score reflects a mix of high confidence in
+      some correctly mapped fields and very low (0.0) scores for fields missing expression
+      data. The '_fivetran_synced' field has a perfect match with '_airbyte_extracted_at'.
+    field_mapping_evals:
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: Missing expression to match the field.
+      - name: _fivetran_synced
+        expression: inventory_items._airbyte_extracted_at
+        score: 1.0
+        explanation:
+          Correctly mapped to '_airbyte_extracted_at' which is a standard
+          practice.
+      - name: country_code_of_origin
+        expression: inventory_items.country_code_of_origin
+        score: 0.7
+        explanation: The field expression and name closely match expected patterns.
+      - name: created_at
+        expression: inventory_items.created_at
+        score: 0.7
+        explanation:
+          The field expression and name closely match expected patterns
+          for creation timestamps.
+      - name: id
+        expression: inventory_items.id
+        score: 0.7
+        explanation:
+          The field expression and name closely match expected patterns
+          for identifiers.
+      - name: province_code_of_origin
+        expression: inventory_items.province_code_of_origin
+        score: 0.6
+        explanation: The field expression and name somewhat match the expected patterns.
+      - name: requires_shipping
+        expression: inventory_items.requires_shipping
+        score: 0.7
+        explanation: Correctly represents a boolean field related to shipping.
+      - name: sku
+        expression: inventory_items.sku
+        score: 0.7
+        explanation: Field expression and name are correctly mapped for SKU identification.
+      - name: tracked
+        expression: inventory_items.tracked
+        score: 0.7
+        explanation: Represents boolean tracking status effectively.
+      - name: updated_at
+        expression: inventory_items.updated_at
+        score: 0.7
+        explanation: Matches the expected pattern for update timestamps.
+      - name: duplicate_sku_count
+        expression: inventory_items.duplicate_sku_count
+        score: 0.7
+        explanation:
+          Field expression and name match the expected pattern for counting
+          duplicates.
+      - name: harmonized_system_code
+        expression: inventory_items.harmonized_system_code
+        score: 0.7
+        explanation:
+          The expression and name are well matched to expected patterns
+          for system codes.
+      - name: inventory_history_url
+        expression: MISSING
+        score: 0.0
+        explanation: Missing expression to match the field.
+      - name: legacy_resource_id
+        expression: MISSING
+        score: 0.0
+        explanation: Missing expression to match the field.
+      - name: measurement_id
+        expression: MISSING
+        score: 0.0
+        explanation: Missing expression to match the field.
+      - name: measurement_weight_value
+        expression: MISSING
+        score: 0.0
+        explanation: Missing expression to match the field.
+      - name: measurement_weight_unit
+        expression: MISSING
+        score: 0.0
+        explanation: Missing expression to match the field.
+      - name: tracked_editable_locked
+        expression: MISSING
+        score: 0.0
+        explanation: Missing expression to match the field.
+      - name: tracked_editable_reason
+        expression: MISSING
+        score: 0.0
+        explanation: Missing expression to match the field.
+      - name: unit_cost_amount
+        expression: MISSING
+        score: 0.0
+        explanation: Missing expression to match the field.
+      - name: unit_cost_currency_code
+        expression: MISSING
+        score: 0.0
+        explanation: Missing expression to match the field.

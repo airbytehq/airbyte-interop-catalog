@@ -18,3 +18,45 @@ transforms:
       value:
         expression: MISSING
         description: Value of the tag.
+annotations:
+  approved: false
+  missing_fields:
+    - value
+  evaluation:
+    source_stream_name: product_variants
+    target_table_name: product_tag
+    name_match_score: 0.0
+    score: 0.55
+    explanation:
+      The overall confidence score is calculated based on the individual
+      field mapping evaluations. The '_fivetran_synced' field has been ideally mapped,
+      which boosts its score, but the 'value' field with expression 'MISSING' considerably
+      reduces it. Other fields are reasonably matched. No field has achieved the maximum
+      confidence score due to potential ambiguities or missing expressions.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: product_variants._airbyte_extracted_at
+        score: 1.0
+        explanation:
+          The '_fivetran_synced' field is mapped to the expected 'product_variants._airbyte_extracted_at',
+          which is a perfect match based on instructions.
+      - name: index
+        expression: product_variants.position
+        score: 0.7
+        explanation:
+          The 'index' field is accurately mapped to 'product_variants.position'
+          as both descriptions suggest ordinal positioning which likely corresponds
+          though some ambiguity may remain.
+      - name: product_id
+        expression: product_variants.product_id
+        score: 0.7
+        explanation:
+          The 'product_id' field is a reasonable match to 'product_variants.product_id'
+          considering 'ID of the product being tagged', however, there could be different
+          types of IDs.
+      - name: value
+        expression: MISSING
+        score: 0.0
+        explanation:
+          The 'value' field could not be mapped as the expression is 'MISSING',
+          indicating no valid source for mapping was found.

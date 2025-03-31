@@ -43,3 +43,47 @@ transforms:
           the team listed as the meeting creator on the record timeline.\nPLEASE NOTE:
           This field will only be populated for connectors utilizing the HubSpot v3
           API version.\n"
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: engagements_meetings
+    target_table_name: engagement_meeting
+    name_match_score: 0.9
+    score: 0.8
+    explanation:
+      Overall confident mapping with logical expressions and patterns.
+      Mappings align with known entities and expected pattern matches.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: engagements_meetings._airbyte_extracted_at
+        score: 1.0
+        explanation:
+          Mapping aligns perfectly with source stream's _airbyte_extracted_at
+          column.
+      - name: engagement_id
+        expression: engagements_meetings.id
+        score: 0.9
+        explanation: Expression matches expected entity for engagement ID.
+      - name: property_hs_createdate
+        expression: engagements_meetings.properties.hs_createdate
+        score: 0.8
+        explanation:
+          Expression seems appropriate for marking meeting's creation time.
+          Matches documented needs.
+      - name: timestamp
+        expression: engagements_meetings.properties.hs_timestamp
+        score: 0.8
+        explanation:
+          Expression is aligned with expected format for meeting occurrence
+          time. Matches timeline expectations.
+      - name: property_hubspot_owner_id
+        expression: engagements_meetings.properties.hubspot_owner_id
+        score: 0.7
+        explanation:
+          Mapping is likely correct based on context, although complex
+          API version dependencies.
+      - name: property_hubspot_team_id
+        expression: engagements_meetings.properties.hubspot_team_id
+        score: 0.7
+        explanation: Mapping is reasonable, but API versioning limits full confidence.

@@ -43,3 +43,58 @@ transforms:
         description:
           The ID of the user logged into the Shopify POS device that processed
           the tender transaction, if applicable.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: tender_transactions
+    target_table_name: tender_transaction
+    name_match_score: 0.9
+    score: 0.85
+    explanation:
+      The field mappings have been evaluated with high confidence. Most
+      fields are directly matched with their counterparts, resulting in a strong alignment,
+      especially for '_fivetran_synced'.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: tender_transactions._airbyte_extracted_at
+        score: 1.0
+        explanation: Confident mapping of '_fivetran_synced' to '_airbyte_extracted_at'.
+      - name: amount
+        expression: tender_transactions.amount
+        score: 0.9
+        explanation: The expression matches the expected content for 'amount' field.
+      - name: currency
+        expression: tender_transactions.currency
+        score: 0.9
+        explanation: Currency code matches ISO standards with 'currency' field.
+      - name: id
+        expression: tender_transactions.id
+        score: 0.95
+        explanation: High confidence in mapping 'id' to 'id'.
+      - name: order_id
+        expression: tender_transactions.order_id
+        score: 0.9
+        explanation: Good match between 'order_id' expressions.
+      - name: payment_method
+        expression: tender_transactions.payment_method
+        score: 0.85
+        explanation: Mapping aligns well with valid payment methods.
+      - name: processed_at
+        expression: tender_transactions.processed_at
+        score: 0.9
+        explanation: Correct use of 'processed_at' in timestamp format.
+      - name: remote_reference
+        expression: tender_transactions.remote_reference
+        score: 0.9
+        explanation: High confidence mapping for 'remote_reference' field.
+      - name: test
+        expression: tender_transactions.test
+        score: 0.88
+        explanation: Appropriate mapping for 'test' indicator of transactions.
+      - name: user_id
+        expression: tender_transactions.user_id
+        score: 0.9
+        explanation:
+          Mapping 'user_id' appears to correctly match user identification
+          field.

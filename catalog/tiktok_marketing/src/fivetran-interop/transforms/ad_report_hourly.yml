@@ -231,3 +231,191 @@ transforms:
         description:
           The monetary worth or potential value assigned to a lead generated
           through ads.
+annotations:
+  approved: true
+  missing_fields:
+    - cpm
+    - total_sales_lead_value
+  evaluation:
+    source_stream_name: ads_reports_hourly
+    target_table_name: ad_report_hourly
+    name_match_score: 0.8
+    score: 0.79
+    explanation:
+      The table mappings are mostly accurate, with minor discrepancies,
+      particularly with fields marked as 'MISSING'. Fields with specific mappings
+      are well-matched to their descriptions and expressions, leading to a relatively
+      high overall confidence score with a few exceptions.
+    field_mapping_evals:
+      - name: ad_id
+        expression: ads_reports_hourly.ad_id
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: stat_time_hour
+        expression: ads_reports_hourly.stat_time_hour
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: cost_per_conversion
+        expression: ads_reports_hourly.metrics.cost_per_conversion
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: real_time_conversion
+        expression: ads_reports_hourly.metrics.real_time_conversion
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: cpc
+        expression: ads_reports_hourly.metrics.cpc
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: video_play_actions
+        expression: ads_reports_hourly.metrics.video_play_actions
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: conversion_rate
+        expression: ads_reports_hourly.metrics.conversion_rate
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: video_views_p_75
+        expression: ads_reports_hourly.metrics.video_views_p75
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: result
+        expression: ads_reports_hourly.metrics.result
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: video_views_p_50
+        expression: ads_reports_hourly.metrics.video_views_p50
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: impressions
+        expression: ads_reports_hourly.metrics.impressions
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: comments
+        expression: ads_reports_hourly.metrics.comments
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: real_time_cost_per_result
+        expression: ads_reports_hourly.metrics.real_time_cost_per_result
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: conversion
+        expression: ads_reports_hourly.metrics.conversion
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: real_time_result
+        expression: ads_reports_hourly.metrics.real_time_result
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: video_view_p_100
+        expression: ads_reports_hourly.metrics.video_views_p100
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: shares
+        expression: ads_reports_hourly.metrics.shares
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: real_time_conversion_rate
+        expression: ads_reports_hourly.metrics.real_time_conversion_rate
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: cost_per_secondary_goal_result
+        expression: ads_reports_hourly.metrics.cost_per_secondary_goal_result
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: secondary_goal_result_rate
+        expression: ads_reports_hourly.metrics.secondary_goal_result_rate
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: clicks
+        expression: ads_reports_hourly.metrics.clicks
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: cost_per_1000_reached
+        expression: ads_reports_hourly.metrics.cost_per_1000_reached
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: video_views_p_25
+        expression: ads_reports_hourly.metrics.video_views_p25
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: reach
+        expression: ads_reports_hourly.metrics.reach
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: real_time_cost_per_conversion
+        expression: ads_reports_hourly.metrics.real_time_cost_per_conversion
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: profile_visits_rate
+        expression: ads_reports_hourly.metrics.profile_visits_rate
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: average_video_play
+        expression: ads_reports_hourly.metrics.average_video_play
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: profile_visits
+        expression: ads_reports_hourly.metrics.profile_visits
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: cpm
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is MISSING.
+      - name: ctr
+        expression: ads_reports_hourly.metrics.ctr
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: video_watched_2_s
+        expression: ads_reports_hourly.metrics.video_watched_2s
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: follows
+        expression: ads_reports_hourly.metrics.follows
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: result_rate
+        expression: ads_reports_hourly.metrics.result_rate
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: video_watched_6_s
+        expression: ads_reports_hourly.metrics.video_watched_6s
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: secondary_goal_result
+        expression: ads_reports_hourly.metrics.secondary_goal_result
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: cost_per_result
+        expression: ads_reports_hourly.metrics.cost_per_result
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: average_video_play_per_user
+        expression: ads_reports_hourly.metrics.average_video_play_per_user
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: real_time_result_rate
+        expression: ads_reports_hourly.metrics.real_time_result_rate
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: spend
+        expression: ads_reports_hourly.metrics.spend
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: likes
+        expression: ads_reports_hourly.metrics.likes
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: _fivetran_synced
+        expression: ads_reports_hourly._airbyte_extracted_at
+        score: 1.0
+        explanation: _fivetran_synced is mapped to _airbyte_extracted_at as required.
+      - name: total_purchase_value
+        expression: ads_reports_hourly.metrics.total_purchase_value
+        score: 1.0
+        explanation: Mapping is perfect.
+      - name: total_sales_lead_value
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is MISSING.

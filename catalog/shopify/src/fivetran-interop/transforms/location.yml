@@ -81,3 +81,105 @@ transforms:
       zip:
         expression: locations.zip
         description: The zip or postal code.
+annotations:
+  approved: false
+  missing_fields:
+    - _fivetran_deleted
+  evaluation:
+    source_stream_name: locations
+    target_table_name: location
+    name_match_score: 0.9
+    score: 0.63
+    explanation:
+      Overall fairly confident with mappings, except for those marked 'MISSING'.
+      The mapping `_fivetran_synced` is perfectly mapped to `locations._airbyte_extracted_at`.
+      However, `_fivetran_deleted` lacks a proper source expression.
+    field_mapping_evals:
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation:
+          Expression is marked as 'MISSING', cannot determine a meaningful
+          mapping.
+      - name: _fivetran_synced
+        expression: locations._airbyte_extracted_at
+        score: 1.0
+        explanation: Perfect mapping to source stream's `_airbyte_extracted_at` column.
+      - name: active
+        expression: locations.active
+        score: 0.8
+        explanation: Mapping expression seems matching the field context closely.
+      - name: address_1
+        expression: locations.address1
+        score: 0.9
+        explanation: Directly and clearly maps to the location's street address.
+      - name: address_2
+        expression: locations.address2
+        score: 0.9
+        explanation:
+          Directly maps to the optional second line of the location's street
+          address.
+      - name: city
+        expression: locations.city
+        score: 0.85
+        explanation: Directly maps to the city of the location.
+      - name: country
+        expression: locations.country
+        score: 0.85
+        explanation: Maps to the country (two-letter code) of the location.
+      - name: country_code
+        expression: locations.country_code
+        score: 0.85
+        explanation: Every expression match to a two-letter code for country.
+      - name: country_name
+        expression: locations.country_name
+        score: 0.8
+        explanation: Effectively maps to the full name of the location's country.
+      - name: created_at
+        expression: locations.created_at
+        score: 0.9
+        explanation: Accurately matches the location creation timestamp.
+      - name: id
+        expression: locations.id
+        score: 0.85
+        explanation: Correctly aligns with the ID of the location.
+      - name: legacy
+        expression: locations.legacy
+        score: 0.8
+        explanation:
+          Mapped field distinctly represents a fulfillment service location
+          indicator.
+      - name: localized_country_name
+        expression: locations.localized_country_name
+        score: 0.8
+        explanation: Appropriately maps to the localized country's name.
+      - name: localized_province_name
+        expression: locations.localized_province_name
+        score: 0.7
+        explanation: Matches with the localized name of the location region.
+      - name: name
+        expression: locations.name
+        score: 0.95
+        explanation: Best match for the name of the location.
+      - name: phone
+        expression: locations.phone
+        score: 0.85
+        explanation:
+          Mapping corresponds to the phone number of the location with
+          expected special characters.
+      - name: province
+        expression: locations.province
+        score: 0.8
+        explanation: Maps correctly to the province or state of the location.
+      - name: province_code
+        expression: locations.province_code
+        score: 0.8
+        explanation: Accurately maps to province or state's code.
+      - name: updated_at
+        expression: locations.updated_at
+        score: 0.9
+        explanation: Effectively captures the last updated timestamp for the location.
+      - name: zip
+        expression: locations.zip
+        score: 0.85
+        explanation: Directly matches with the postal code of the location.

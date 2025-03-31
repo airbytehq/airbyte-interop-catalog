@@ -35,3 +35,60 @@ transforms:
         description:
           The timestamp when this change occurred. If 'causedByEvent' is
           present, this will be absent.
+annotations:
+  approved: false
+  missing_fields:
+    - caused_by_event_id
+    - change_type
+    - email_subscription_id
+    - source
+  evaluation:
+    source_stream_name: subscription_changes
+    target_table_name: email_subscription_change
+    name_match_score: 0.7
+    score: 0.45
+    explanation:
+      This table mapping evaluation reflects a mixed confidence in the
+      field mappings. Several mappings are missing expressions resulting in lower
+      confidence. The mapping for `_fivetran_synced` to `_airbyte_extracted_at` is
+      high confidence. Fields with `MISSING` expressions directly affect the overall
+      score negatively.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: subscription_changes._airbyte_extracted_at
+        score: 0.9
+        explanation:
+          Mapped to the correct and expected source `_airbyte_extracted_at`,
+          highly confident.
+      - name: caused_by_event_id
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING', no confidence in mapping.
+      - name: change
+        expression: subscription_changes.changes
+        score: 0.6
+        explanation: Has a sensible mapping to `subscription_changes.changes`.
+      - name: change_type
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING', no confidence in mapping.
+      - name: email_subscription_id
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING', no confidence in mapping.
+      - name: portal_id
+        expression: subscription_changes.portalId
+        score: 0.7
+        explanation: Mapped to `subscription_changes.portalId`, which appears appropriate.
+      - name: recipient
+        expression: subscription_changes.recipient
+        score: 0.7
+        explanation: Mapped to `subscription_changes.recipient`, which seems appropriate.
+      - name: source
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING', no confidence in mapping.
+      - name: timestamp
+        expression: subscription_changes.timestamp
+        score: 0.6
+        explanation: Appropriately mapped to `subscription_changes.timestamp`.

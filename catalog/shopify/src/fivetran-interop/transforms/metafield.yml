@@ -56,3 +56,65 @@ transforms:
         description:
           DEPRECATED as of [June 2022](https://fivetran.com/docs/applications/shopify/changelog#june2022).
           Use `type` instead.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: metafield_articles
+    target_table_name: metafield
+    name_match_score: 1.0
+    score: 0.9
+    explanation:
+      All fields in the mappings are perfectly matched to the expected
+      expressions, with '_fivetran_synced' receiving a perfect match to '_airbyte_extracted_at'
+      as advised. Other core fields are directly matched to their respective expressions
+      in metafield_articles.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: metafield_articles._airbyte_extracted_at
+        score: 1.0
+        explanation: Mapped to '_airbyte_extracted_at' as advised, perfect match.
+      - name: created_at
+        expression: metafield_articles.created_at
+        score: 1.0
+        explanation: Matches the expression for the creation time.
+      - name: description
+        expression: metafield_articles.description
+        score: 1.0
+        explanation: Matches the expression for the description content.
+      - name: id
+        expression: metafield_articles.id
+        score: 1.0
+        explanation: Unique ID mapping is exact.
+      - name: key
+        expression: metafield_articles.key
+        score: 1.0
+        explanation: Key mapping matches without discrepancies.
+      - name: namespace
+        expression: metafield_articles.namespace
+        score: 1.0
+        explanation: Namespace is correctly mapped.
+      - name: owner_id
+        expression: metafield_articles.owner_id
+        score: 1.0
+        explanation: Mapping for owner ID is accurate.
+      - name: owner_resource
+        expression: metafield_articles.owner_resource
+        score: 1.0
+        explanation: Resource type mapping is exact.
+      - name: type
+        expression: metafield_articles.type
+        score: 1.0
+        explanation: Correct type mapping based on metafield value.
+      - name: updated_at
+        expression: metafield_articles.updated_at
+        score: 1.0
+        explanation: Updated at timestamp is correctly matched.
+      - name: value
+        expression: metafield_articles.value
+        score: 1.0
+        explanation: Value is stored correctly as per expression.
+      - name: value_type
+        expression: metafield_articles.value_type
+        score: 0.0
+        explanation: DEPRECATED; no current mapping needed or appropriate.

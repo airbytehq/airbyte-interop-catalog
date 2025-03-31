@@ -44,3 +44,55 @@ transforms:
           the team listed as the note creator on the record timeline.\nPLEASE NOTE:
           This field will only be populated for connectors utilizing the HubSpot v3
           API version.\n"
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: engagements_notes
+    target_table_name: engagement_note
+    name_match_score: 0.8
+    score: 0.85
+    explanation:
+      The mappings have high confidence due to accurate and contextually
+      appropriate correlations found between source and target fields. '_fivetran_synced'
+      correctly maps to '_airbyte_extracted_at', while other fields like 'body', 'engagement_id',
+      and timestamp fields align closely with the source fields based on context.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: engagements_notes._airbyte_extracted_at
+        score: 1.0
+        explanation:
+          "'_fivetran_synced' is correctly mapped to the source stream's
+          '_airbyte_extracted_at' with perfect confidence."
+      - name: body
+        expression: engagements_notes.properties.hs_note_body
+        score: 0.9
+        explanation:
+          The expression aligns with a detailed description, indicating
+          a high confidence mapping.
+      - name: engagement_id
+        expression: engagements_notes.id
+        score: 0.85
+        explanation:
+          Id mapping corresponds well between the fields with sufficient
+          context.
+      - name: property_hs_createdate
+        expression: engagements_notes.properties.hs_createdate
+        score: 0.8
+        explanation:
+          The time-of-creation mapping holds due to matching timestamp
+          descriptions.
+      - name: timestamp
+        expression: engagements_notes.properties.hs_timestamp
+        score: 0.8
+        explanation:
+          The occurrence time mapping corresponds accurately with the source
+          field's description.
+      - name: property_hubspot_owner_id
+        expression: engagements_notes.properties.hubspot_owner_id
+        score: 0.75
+        explanation: Owner ID fields match thanks to the appropriate use of context.
+      - name: property_hubspot_team_id
+        expression: engagements_notes.properties.hubspot_team_id
+        score: 0.75
+        explanation: Team ID fields are accurately related due to corresponding descriptions.

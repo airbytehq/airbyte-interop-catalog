@@ -60,3 +60,67 @@ transforms:
       value:
         expression: ads_insights.conversion_values
         description: Conversion metric value using the default attribution window.
+annotations:
+  approved: false
+  missing_fields: []
+  evaluation:
+    source_stream_name: ads_insights
+    target_table_name: basic_ad_actions
+    name_match_score: 0.7
+    score: 0.65
+    explanation: Evaluation of field mapping confidence for Facebook Ads data fields.
+    field_mapping_evals:
+      - name: _1_d_view
+        expression: ads_insights.actions
+        score: 0.6
+        explanation:
+          The name and expression match well, pointing to conversion metrics
+          with a specific attribution window.
+      - name: _7_d_click
+        expression: ads_insights.ad_click_actions
+        score: 0.6
+        explanation:
+          The name and expression suggest a conversion metric based on
+          an appropriate attribution window.
+      - name: _28_d_click
+        expression: ads_insights.action_values
+        score: 0.4
+        explanation:
+          This field is deprecated and less relevant due to digital privacy
+          initiatives.
+      - name: _fivetran_id
+        expression: ads_insights._airbyte_raw_id
+        score: 0.0
+        explanation: Defunct field with no corresponding mapping.
+      - name: _fivetran_synced
+        expression: ads_insights._airbyte_extracted_at
+        score: 0.7
+        explanation:
+          Mapped to source stream's `_airbyte_extracted_at` column, matching
+          the requirement.
+      - name: action_type
+        expression: ads_insights.action_values
+        score: 0.7
+        explanation:
+          Well-matching expression for a diverse set of action types related
+          to ads.
+      - name: ad_id
+        expression: ads_insights.ad_id
+        score: 0.7
+        explanation: Direct match for ad identification across the dataset.
+      - name: date
+        expression: ads_insights.date_start
+        score: 0.7
+        explanation: Accurate and important match for tracking performance by date.
+      - name: index
+        expression: ads_insights.auction_max_competitor_bid
+        score: 0.3
+        explanation: Not much consequence as described, resulting in low confidence.
+      - name: inline
+        expression: ads_insights.inline_link_clicks
+        score: 0.6
+        explanation: Matches conversion metric with specific attribution criteria.
+      - name: value
+        expression: ads_insights.conversion_values
+        score: 0.5
+        explanation: General conversion metric value, but less specific than others.

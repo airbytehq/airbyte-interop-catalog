@@ -40,3 +40,56 @@ transforms:
         description:
           Provides an alert message when the inventory item is deactivated
           at the location.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: inventory_levels
+    target_table_name: inventory_level
+    name_match_score: 0.85
+    score: 0.8
+    explanation:
+      Most field mappings have high confidence, adhering closely to the
+      required mappings and descriptions. However, some mappings have lower scores
+      due to potential mismatch in field semantics or deprecations.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: inventory_levels._airbyte_extracted_at
+        score: 1.0
+        explanation: Perfect match with special mapping to '_airbyte_extracted_at'.
+      - name: available
+        expression: inventory_levels.available
+        score: 0.5
+        explanation: Potential mismatch due to deprecation warning in description.
+      - name: inventory_item_id
+        expression: inventory_levels.inventory_item_id
+        score: 0.9
+        explanation: Strong match based on ID association with the inventory level.
+      - name: location_id
+        expression: inventory_levels.location_id
+        score: 0.9
+        explanation: Strong match based on ID of the location association.
+      - name: updated_at
+        expression: inventory_levels.updated_at
+        score: 0.85
+        explanation: Strong match with time-based modification tracking.
+      - name: id
+        expression: inventory_levels.id
+        score: 0.8
+        explanation:
+          Good match, though could be confused with other identifiers if
+          not uniquely defined.
+      - name: can_deactivate
+        expression: inventory_levels.can_deactivate
+        score: 0.7
+        explanation:
+          Match exists but could be context-specific based on deactivation
+          semantics.
+      - name: created_at
+        expression: inventory_levels.created_at
+        score: 0.85
+        explanation: Strong match for a time-based creation tracking field.
+      - name: deactivation_alert
+        expression: inventory_levels.deactivation_alert
+        score: 0.65
+        explanation: Reasonable match for alerts but context could alter meaning slightly.

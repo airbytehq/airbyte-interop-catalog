@@ -65,3 +65,85 @@ transforms:
       url:
         expression: product_images.shop_url
         description: The URL of the product image.
+annotations:
+  approved: false
+  missing_fields:
+    - _fivetran_deleted
+    - media_id
+    - status
+  evaluation:
+    source_stream_name: product_images
+    target_table_name: product_image
+    name_match_score: 0.7
+    score: 0.64
+    explanation:
+      Most fields mapped successfully with high confidence, but there are
+      some mappings with missing expressions and deprecated fields lowering overall
+      confidence.
+    field_mapping_evals:
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation:
+          The expression is 'MISSING', leading to a confidence score of
+          0.0.
+      - name: _fivetran_synced
+        expression: product_images._airbyte_extracted_at
+        score: 1.0
+        explanation: Mapped to '_airbyte_extracted_at', which is the standard mapping.
+      - name: created_at
+        expression: product_images.created_at
+        score: 0.7
+        explanation: Mapped correctly but is deprecated, slightly lowering confidence.
+      - name: height
+        expression: product_images.height
+        score: 0.7
+        explanation: Height dimension mappings are clear and precise.
+      - name: id
+        expression: product_images.id
+        score: 0.7
+        explanation: Field maps directly with unique identifier, high confidence.
+      - name: position
+        expression: product_images.position
+        score: 0.7
+        explanation: Mapped correctly but deprecated, confidence reduced slightly.
+      - name: product_id
+        expression: product_images.product_id
+        score: 0.7
+        explanation: Mapped appropriately to product ID.
+      - name: src
+        expression: product_images.src
+        score: 0.7
+        explanation: Mapped correctly but deprecated, confidence reduced slightly.
+      - name: updated_at
+        expression: product_images.updated_at
+        score: 0.7
+        explanation: Mapped correctly but deprecated, confidence reduced slightly.
+      - name: variant_ids
+        expression: product_images.variant_ids
+        score: 0.7
+        explanation: Mapped correctly but deprecated, confidence reduced slightly.
+      - name: width
+        expression: product_images.width
+        score: 0.7
+        explanation: Width dimension mappings are clear and precise.
+      - name: alt_text
+        expression: product_images.alt
+        score: 0.7
+        explanation: Alt text is specific and appropriate.
+      - name: media_id
+        expression: MISSING
+        score: 0.0
+        explanation:
+          The expression is 'MISSING', leading to a confidence score of
+          0.0.
+      - name: status
+        expression: MISSING
+        score: 0.0
+        explanation:
+          The expression is 'MISSING', leading to a confidence score of
+          0.0.
+      - name: url
+        expression: product_images.shop_url
+        score: 0.7
+        explanation: Mapped correctly and specifically to the shop URL.

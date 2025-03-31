@@ -57,3 +57,87 @@ transforms:
       title:
         expression: MISSING
         description: Returns the title of the shipping line.
+annotations:
+  approved: false
+  missing_fields:
+    - carrier_identifier
+    - code
+    - delivery_category
+    - discounted_price
+    - discounted_price_set
+    - order_id
+    - price
+    - price_set
+    - requested_fulfillment_service_id
+    - source
+    - title
+  evaluation:
+    source_stream_name: orders
+    target_table_name: order_shipping_line
+    name_match_score: 0.2
+    score: 0.2
+    explanation:
+      The overall confidence score is low due to many fields having 'MISSING'
+      expressions, indicating a lack of mapping. '_fivetran_synced' is mapped correctly,
+      contributing positively to the score.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: orders._airbyte_extracted_at
+        score: 1.0
+        explanation: Successfully mapped to '_airbyte_extracted_at'.
+      - name: carrier_identifier
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: code
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: delivery_category
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: discounted_price
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: discounted_price_set
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: id
+        expression: orders.id
+        score: 0.7
+        explanation:
+          Mapped to 'orders.id' which is likely the correct unique identifier
+          mapping.
+      - name: order_id
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: phone
+        expression: orders.phone
+        score: 0.7
+        explanation:
+          Mapped to 'orders.phone', likely correct as both deal with phone
+          numbers.
+      - name: price
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: price_set
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: requested_fulfillment_service_id
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: source
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: title
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.

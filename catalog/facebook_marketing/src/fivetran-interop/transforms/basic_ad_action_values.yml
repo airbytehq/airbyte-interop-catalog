@@ -1,10 +1,6 @@
 domain: facebook_marketing.fivetran-interop
 transforms:
-  - display_name:
-      Each record represents the daily conversion values associated with
-      an ad in Facebook. This is the prebuilt `basic_ad` report broken down by `action_type`
-      and `action_value`.
-    name: basic_ad_action_values
+  - name: basic_ad_action_values
     from:
       - ads_insights_action_type: facebook_marketing.ads_insights_action_type
     fields:
@@ -26,11 +22,9 @@ transforms:
         description:
           "The kind of actions taken on your ad, Page, app or event after
           your ad was served to someone, even if they didn't click on it. Action types
-          include Page likes, app installs, conversions, event responses and more. Actions
-          prepended by app_custom_event come from mobile app events and actions prepended
-          by offsite_conversion come from the Facebook Pixel.
-
-          "
+          include Page likes, app installs, conversions, event responses and more.
+          Actions prepended by app_custom_event come from mobile app events and actions
+          prepended by offsite_conversion come from the Facebook Pixel.\n"
       ad_id:
         expression: ads_insights_action_type.ad_id
         description: The ID of the ad the report relates to.
@@ -45,30 +39,65 @@ transforms:
       value:
         expression: ads_insights_action_type.value
         description:
-          Monetary value associated with the convesion action using the default
-          attribution window.
-    annotations:
-      unused_source_fields:
-        ads_insights_action_type:
-          - _airbyte_meta
-          - _airbyte_raw_id
-          - account_id
-          - account_name
-          - action_destination
-          - action_target_id
-          - action_attribution_windows
-          - action_carousel_card_id
-          - action_carousel_card_name
-          - action_converted_product_id
-          - action_device
-          - action_event_channel
-          - action_reaction
-          - action_video_sound
-          - action_video_type
-          - ad_name
-          - adset_id
-          - adset_name
-          - campaign_id
-          - campaign_name
-          - inline_link_clicks
-          - objective
+          Monetary value associated with the convesion action using the
+          default attribution window.
+annotations:
+  approved: false
+  missing_fields:
+    - _7_d_click
+    - _fivetran_id
+    - date
+    - index
+  evaluation:
+    source_stream_name: ads_insights_action_type
+    target_table_name: basic_ad_action_values
+    name_match_score: 0.5
+    score: 0.4375
+    explanation:
+      The table mapping evaluation reflects an overall moderate confidence
+      score due to several fields having 'MISSING' expressions, which were assigned
+      a 0.0 score. '_fivetran_synced' is correctly mapped to '_airbyte_extracted_at',
+      giving it a high confidence score. A moderate name match score was assigned
+      due to imperfect matches. Fields with potential name mismatches or missing expressions
+      were kept below a confidence of 0.7.
+    field_mapping_evals:
+      - name: _7_d_click
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING' leading to a low confidence score.
+      - name: _fivetran_id
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING', indicating no confidence in mapping.
+      - name: _fivetran_synced
+        expression: _airbyte_extracted_at
+        score: 1.0
+        explanation:
+          Correctly mapped to '_airbyte_extracted_at', following given
+          instructions.
+      - name: action_type
+        expression: ads_insights_action_type.action_type
+        score: 0.6
+        explanation:
+          Expression matches description reasonably well, though there
+          might be slight uncertainties.
+      - name: ad_id
+        expression: ads_insights_action_type.ad_id
+        score: 0.6
+        explanation:
+          Expression matches well with description, slight name mismatch
+          might exist.
+      - name: date
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING' leading to a low confidence score.
+      - name: index
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING', indicating no confidence in mapping.
+      - name: value
+        expression: ads_insights_action_type.value
+        score: 0.6
+        explanation:
+          Expression likely aligns with description, with some uncertainties
+          involved.

@@ -16,3 +16,41 @@ transforms:
       value:
         expression: metafield_orders.value
         description: Value of the tag.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: metafield_orders
+    target_table_name: order_url_tag
+    name_match_score: 0.8
+    score: 0.75
+    explanation:
+      The overall confidence score reflects a generally good mapping with
+      some room for improvement. The name match score is high due to close alignment
+      of mapped attributes to their intended purpose. However, it’s important to consider
+      the specific matching scores for each field.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: metafield_orders._airbyte_extracted_at
+        score: 1.0
+        explanation:
+          Mapped perfectly to '_airbyte_extracted_at', which is a standard
+          and expected mapping.
+      - name: key
+        expression: metafield_orders.key
+        score: 0.7
+        explanation:
+          The expression 'metafield_orders.key' matches well with the expected
+          functionality of a key in a tag pair.
+      - name: order_id
+        expression: metafield_orders.id
+        score: 0.7
+        explanation:
+          The expression 'metafield_orders.id' aligns with identifying
+          an order, though 'id' can be ambiguous.
+      - name: value
+        expression: metafield_orders.value
+        score: 0.7
+        explanation:
+          The expression 'metafield_orders.value' correctly represents
+          a value within a tag pair context.

@@ -1,7 +1,6 @@
 domain: facebook_marketing.fivetran-interop
 transforms:
-  - display_name: Each record in this table reflects a version of a Facebook creative.
-    name: creative_history
+  - name: creative_history
     from:
       - ad_creatives: facebook_marketing.ad_creatives
     fields:
@@ -27,8 +26,8 @@ transforms:
         expression: ad_creatives.url_tags
         description:
           A set of query string parameters which will replace or be appended
-          to urls clicked from page post ads, message of the post, and canvas app install
-          creatives only.
+          to urls clicked from page post ads, message of the post, and canvas app
+          install creatives only.
       _fivetran_synced:
         expression: ad_creatives._airbyte_extracted_at
         description: "{{ doc('_fivetran_synced') }}"
@@ -62,36 +61,103 @@ transforms:
       template_app_link_spec_iphone:
         expression: MISSING
         description: Link of the template app for iphone
-    annotations:
-      unused_source_fields:
-        ad_creatives:
-          - body
-          - object_story_id
-          - image_url
-          - actor_id
-          - adlabels
-          - applink_treatment
-          - asset_feed_spec
-          - call_to_action_type
-          - effective_instagram_story_id
-          - effective_object_story_id
-          - title
-          - image_crops
-          - instagram_actor_id
-          - instagram_permalink_url
-          - instagram_story_id
-          - link_og_id
-          - object_id
-          - object_story_spec
-          - object_type
-          - object_url
-          - product_set_id
-          - source_instagram_media_id
-          - status
-          - template_url_spec
-          - thumbnail_data_url
-          - thumbnail_url
-          - image_hash
-          - video_id
-          - _airbyte_meta
-          - _airbyte_raw_id
+annotations:
+  approved: false
+  missing_fields:
+    - _fivetran_id
+    - asset_feed_spec_link_urls
+    - object_story_link_data_caption
+    - object_story_link_data_child_attachments
+    - object_story_link_data_description
+    - object_story_link_data_link
+    - object_story_link_data_message
+    - template_app_link_spec_android
+    - template_app_link_spec_ios
+    - template_app_link_spec_ipad
+    - template_app_link_spec_iphone
+  evaluation:
+    source_stream_name: ad_creatives
+    target_table_name: creative_history
+    name_match_score: 0.6
+    score: 0.3611764705882353
+    explanation:
+      The overall confidence score is based on the evaluation of each field
+      mapping. Several fields have 'MISSING' as their expression, which results in
+      a lower confidence score. Others like '_fivetran_synced' are correctly matched
+      to '_airbyte_extracted_at' with high confidence. The score is averaged across
+      all fields, reducing the overall confidence due to low or missing matches.
+    field_mapping_evals:
+      - name: _fivetran_id
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING', resulting in zero confidence.
+      - name: page_link
+        expression: ad_creatives.link_url
+        score: 0.7
+        explanation: Field and expression have a clear match, score is capped at 0.7.
+      - name: template_page_link
+        expression: ad_creatives.template_url
+        score: 0.7
+        explanation: Field and expression have a clear match, score is capped at 0.7.
+      - name: id
+        expression: ad_creatives.id
+        score: 0.7
+        explanation: Field and expression have a clear match, score is capped at 0.7.
+      - name: account_id
+        expression: ad_creatives.account_id
+        score: 0.7
+        explanation: Field and expression have a clear match, score is capped at 0.7.
+      - name: name
+        expression: ad_creatives.name
+        score: 0.7
+        explanation: Field and expression have a clear match, score is capped at 0.7.
+      - name: url_tags
+        expression: ad_creatives.url_tags
+        score: 0.7
+        explanation: Field and expression have a clear match, score is capped at 0.7.
+      - name: _fivetran_synced
+        expression: ad_creatives._airbyte_extracted_at
+        score: 1.0
+        explanation:
+          Properly mapped to '_airbyte_extracted_at', indicating a perfect
+          match.
+      - name: asset_feed_spec_link_urls
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING', resulting in zero confidence.
+      - name: object_story_link_data_child_attachments
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING', resulting in zero confidence.
+      - name: object_story_link_data_caption
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING', resulting in zero confidence.
+      - name: object_story_link_data_description
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING', resulting in zero confidence.
+      - name: object_story_link_data_link
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING', resulting in zero confidence.
+      - name: object_story_link_data_message
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING', resulting in zero confidence.
+      - name: template_app_link_spec_ios
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING', resulting in zero confidence.
+      - name: template_app_link_spec_ipad
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING', resulting in zero confidence.
+      - name: template_app_link_spec_android
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING', resulting in zero confidence.
+      - name: template_app_link_spec_iphone
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING', resulting in zero confidence.

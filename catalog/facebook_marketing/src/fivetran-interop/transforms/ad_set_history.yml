@@ -1,7 +1,6 @@
 domain: facebook_marketing.fivetran-interop
 transforms:
-  - display_name: Each record in this table reflects a version of a Facebook ad set.
-    name: ad_set_history
+  - name: ad_set_history
     from:
       - ad_sets: facebook_marketing.ad_sets
     fields:
@@ -48,18 +47,79 @@ transforms:
         description:
           The optimization goal this ad set is using. Possible values defined
           [here](https://developers.facebook.com/docs/marketing-api/reference/ad-campaign/#fields).
-    annotations:
-      unused_source_fields:
-        ad_sets:
-          - promoted_object
-          - created_time
-          - lifetime_budget
-          - targeting
-          - bid_info
-          - bid_amount
-          - bid_constraints
-          - adlabels
-          - learning_stage_info
-          - effective_status
-          - _airbyte_meta
-          - _airbyte_raw_id
+annotations:
+  approved: false
+  missing_fields:
+    - optimization_goal
+    - status
+  evaluation:
+    source_stream_name: ad_sets
+    target_table_name: ad_set_history
+    name_match_score: 0.6
+    score: 0.55
+    explanation:
+      The mappings have an overall satisfactory confidence level. However,
+      there are issues with the fields 'status' and 'optimization_goal', as their
+      expressions are marked 'MISSING', indicating a confidence score of 0.0 for these
+      fields. The other mappings have acceptable expression matches, particularly
+      '_fivetran_synced' mapped to '_airbyte_extracted_at', which is strongly advised.
+      The overall confidence score is reduced due to the missing fields.
+    field_mapping_evals:
+      - name: id
+        expression: ad_sets.id
+        score: 1.0
+        explanation: The expression 'ad_sets.id' perfectly matches the description.
+      - name: account_id
+        expression: ad_sets.account_id
+        score: 1.0
+        explanation: The expression 'ad_sets.account_id' perfectly matches the description.
+      - name: campaign_id
+        expression: ad_sets.campaign_id
+        score: 1.0
+        explanation: The expression 'ad_sets.campaign_id' perfectly matches the description.
+      - name: name
+        expression: ad_sets.name
+        score: 1.0
+        explanation: The expression 'ad_sets.name' perfectly matches the description.
+      - name: _fivetran_synced
+        expression: _airbyte_extracted_at
+        score: 1.0
+        explanation:
+          _fivetran_synced is mapped to the correct '_airbyte_extracted_at'
+          column.
+      - name: updated_time
+        expression: ad_sets.updated_time
+        score: 0.8
+        explanation: The expression 'ad_sets.updated_time' mostly matches the description.
+      - name: start_time
+        expression: ad_sets.start_time
+        score: 1.0
+        explanation: The expression 'ad_sets.start_time' perfectly matches the description.
+      - name: end_time
+        expression: ad_sets.end_time
+        score: 1.0
+        explanation: The expression 'ad_sets.end_time' perfectly matches the description.
+      - name: bid_strategy
+        expression: ad_sets.bid_strategy
+        score: 1.0
+        explanation:
+          The expression 'ad_sets.bid_strategy' correctly lists the bid
+          strategy values.
+      - name: daily_budget
+        expression: ad_sets.daily_budget
+        score: 1.0
+        explanation: The expression 'ad_sets.daily_budget' perfectly matches the description.
+      - name: budget_remaining
+        expression: ad_sets.budget_remaining
+        score: 1.0
+        explanation:
+          The expression 'ad_sets.budget_remaining' perfectly matches the
+          description.
+      - name: status
+        expression: MISSING
+        score: 0.0
+        explanation: The expression is 'MISSING', cannot determine the correct mapping.
+      - name: optimization_goal
+        expression: MISSING
+        score: 0.0
+        explanation: The expression is 'MISSING', unable to evaluate confidence.

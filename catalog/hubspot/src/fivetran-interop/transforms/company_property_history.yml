@@ -25,3 +25,55 @@ transforms:
       value:
         expression: companies_property_history.value
         description: '{{ doc("history_value") }}'
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: companies_property_history
+    target_table_name: company_property_history
+    name_match_score: 0.9
+    score: 0.85
+    explanation:
+      Overall confidence score evaluated by checking name matches and field
+      mappings. All mappings aligned well with expected expressions.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: companies_property_history._airbyte_extracted_at
+        score: 1.0
+        explanation: "`_fivetran_synced` mapped perfectly to `_airbyte_extracted_at`."
+      - name: company_id
+        expression: companies_property_history.companyId
+        score: 0.9
+        explanation:
+          "`company_id` correctly matches to `companyId` based on naming
+          and context."
+      - name: name
+        expression: companies_property_history.properties.name
+        score: 0.8
+        explanation:
+          "`name` maps to `properties.name`. Matching is good; fields seem
+          aligned by purpose."
+      - name: source
+        expression: companies_property_history.sourceType
+        score: 0.7
+        explanation:
+          "`source` maps to `sourceType`. Potential alignment, but possible
+          variance in meaning."
+      - name: source_id
+        expression: companies_property_history.sourceId
+        score: 0.9
+        explanation:
+          "`source_id` clearly matches `sourceId`. Strong naming and contextual
+          match."
+      - name: timestamp
+        expression: companies_property_history.timestamp
+        score: 0.85
+        explanation:
+          "`timestamp` correctly maps to `timestamp`. Consistent naming
+          across fields."
+      - name: value
+        expression: companies_property_history.value
+        score: 0.85
+        explanation:
+          "`value` successfully maps to `value`. Consistent naming indicates
+          likely correct match."

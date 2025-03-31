@@ -31,3 +31,47 @@ transforms:
       title:
         expression: orders.name
         description: The name of the tax.
+annotations:
+  approved: false
+  missing_fields:
+    - index
+    - order_shipping_line_id
+    - rate
+  evaluation:
+    source_stream_name: orders
+    target_table_name: order_shipping_tax_line
+    name_match_score: 0.5714285714285715
+    score: 0.4333333333333333
+    explanation:
+      The overall mapping confidence is average due to the presence of
+      multiple fields with MISSING expressions. While '_fivetran_synced' is perfectly
+      mapped, other fields could not be matched reliably.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: orders._airbyte_extracted_at
+        score: 1.0
+        explanation: Perfect mapping to '_airbyte_extracted_at' column.
+      - name: index
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is MISSING, indicating no mapping.
+      - name: order_shipping_line_id
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is MISSING, indicating no mapping.
+      - name: price
+        expression: orders.current_total_tax
+        score: 0.7
+        explanation: Mapping likely but not perfect, potential match with 'current_total_tax'.
+      - name: price_set
+        expression: orders.subtotal_price_set
+        score: 0.6
+        explanation: Potential match with 'subtotal_price_set', but not confident.
+      - name: rate
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is MISSING, indicating no mapping.
+      - name: title
+        expression: orders.name
+        score: 0.7
+        explanation: Good match with 'name', representing similar concepts.

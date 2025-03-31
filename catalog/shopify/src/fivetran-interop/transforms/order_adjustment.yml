@@ -38,3 +38,62 @@ transforms:
       _fivetran_synced:
         expression: transactions._airbyte_extracted_at
         description: "{{ doc('_fivetran_synced') }}"
+annotations:
+  approved: false
+  missing_fields:
+    - reason
+    - refund_id
+    - tax_amount
+    - tax_amount_set
+  evaluation:
+    source_stream_name: transactions
+    target_table_name: order_adjustment
+    name_match_score: 0.57
+    score: 0.57
+    explanation:
+      The overall confidence score is based on the individual field mapping
+      evaluations. Fields with 'MISSING' expressions were given a 0.0 score, and the
+      rest were evaluated based on their match likelihood.
+    field_mapping_evals:
+      - name: id
+        expression: transactions.id
+        score: 0.9
+        explanation: The field 'id' is confidently mapped to 'transactions.id'.
+      - name: order_id
+        expression: transactions.order_id
+        score: 0.9
+        explanation: The field 'order_id' is mapped with high confidence to 'transactions.order_id'.
+      - name: refund_id
+        expression: MISSING
+        score: 0.0
+        explanation:
+          The field 'refund_id' has an expression 'MISSING', so the confidence
+          score is 0.0.
+      - name: amount
+        expression: transactions.amount
+        score: 0.9
+        explanation: The field 'amount' matches confidently to 'transactions.amount'.
+      - name: tax_amount
+        expression: MISSING
+        score: 0.0
+        explanation: The field 'tax_amount' is missing, thus the score is 0.0.
+      - name: kind
+        expression: transactions.kind
+        score: 0.9
+        explanation: The field 'kind' is mapped confidently to 'transactions.kind'.
+      - name: reason
+        expression: MISSING
+        score: 0.0
+        explanation: The field 'reason' is missing, scoring 0.0.
+      - name: amount_set
+        expression: transactions.amount_set
+        score: 0.9
+        explanation: Amount set field is mapped with confidence to 'transactions.amount_set'.
+      - name: tax_amount_set
+        expression: MISSING
+        score: 0.0
+        explanation: Tax amount set field is missing, resulting in a 0.0 score.
+      - name: _fivetran_synced
+        expression: transactions._airbyte_extracted_at
+        score: 1.0
+        explanation: Field '_fivetran_synced' is confidently mapped to 'transactions._airbyte_extracted_at'.

@@ -49,3 +49,81 @@ transforms:
       property_content:
         expression: tickets.properties.content
         description: Text in body of the ticket.
+annotations:
+  approved: false
+  missing_fields:
+    - portal_id
+  evaluation:
+    source_stream_name: tickets
+    target_table_name: ticket
+    name_match_score: 0.7
+    score: 0.55
+    explanation:
+      Overall confidence score calculated based on individual field mapping
+      evaluations. The presence of a MISSING expression significantly reduces confidence,
+      and care is taken to ensure named fields correspond correctly.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: tickets._airbyte_extracted_at
+        score: 1.0
+        explanation: Mapped to source stream's '_airbyte_extracted_at', which is correct.
+      - name: id
+        expression: tickets.id
+        score: 0.7
+        explanation: Direct mapping is likely correct, but has potential ambiguity.
+      - name: is_deleted
+        expression: tickets.archived
+        score: 0.7
+        explanation:
+          Could mean the same as 'archived', but context likely suggests
+          correct mapping.
+      - name: _fivetran_deleted
+        expression: tickets.archived
+        score: 0.7
+        explanation:
+          Could mean the same as 'archived', but context likely suggests
+          correct mapping.
+      - name: portal_id
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is MISSING, indicating no valid mapping.
+      - name: property_closed_date
+        expression: tickets.properties.closed_date
+        score: 0.7
+        explanation: Likely a correct mapping based on name and context matching.
+      - name: property_createdate
+        expression: tickets.properties.createdate
+        score: 0.7
+        explanation: Likely a correct mapping based on name and context matching.
+      - name: property_first_agent_reply_date
+        expression: tickets.properties.first_agent_reply_date
+        score: 0.7
+        explanation: Likely a correct mapping based on name and context matching.
+      - name: property_hs_pipeline
+        expression: tickets.properties.hs_pipeline
+        score: 0.7
+        explanation: Likely a correct mapping based on name and context matching.
+      - name: property_hs_pipeline_stage
+        expression: tickets.properties.hs_pipeline_stage
+        score: 0.7
+        explanation: Likely a correct mapping based on name and context matching.
+      - name: property_hs_ticket_priority
+        expression: tickets.properties.hs_ticket_priority
+        score: 0.7
+        explanation: Likely a correct mapping based on name and context matching.
+      - name: property_hs_ticket_category
+        expression: tickets.properties.hs_ticket_category
+        score: 0.7
+        explanation: Likely a correct mapping based on name and context matching.
+      - name: property_hubspot_owner_id
+        expression: tickets.properties.hubspot_owner_id
+        score: 0.7
+        explanation: Likely a correct mapping based on name and context matching.
+      - name: property_subject
+        expression: tickets.properties.subject
+        score: 0.7
+        explanation: Likely a correct mapping based on name and context matching.
+      - name: property_content
+        expression: tickets.properties.content
+        score: 0.7
+        explanation: Likely a correct mapping based on name and context matching.

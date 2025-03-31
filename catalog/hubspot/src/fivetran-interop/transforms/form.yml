@@ -51,3 +51,78 @@ transforms:
       updated_at:
         expression: forms.properties.hs_lastmodifieddate
         description: A timestamp for when the form was last updated.
+annotations:
+  approved: false
+  missing_fields:
+    - _fivetran_deleted
+    - follow_up_id
+    - guid
+    - lead_nurturing_campaign_id
+    - method
+    - redirect
+  evaluation:
+    source_stream_name: forms
+    target_table_name: form
+    name_match_score: 0.0
+    score: 0.42857142857142855
+    explanation:
+      The overall confidence is based on the presence of valid mappings.
+      MISSING expressions reduce the confidence score. The `_fivetran_synced` mapping
+      receives a high confidence score due to its specific requirement alignment.
+    field_mapping_evals:
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: Field expression is MISSING, indicating no valid mapping found.
+      - name: _fivetran_synced
+        expression: forms._airbyte_extracted_at
+        score: 0.7
+        explanation: Mapped correctly to the _airbyte_extracted_at column.
+      - name: created_at
+        expression: forms.properties.hs_createdate
+        score: 0.6
+        explanation: Valid timestamp mapping detected.
+      - name: css_class
+        expression: forms.displayOptions.cssClass
+        score: 0.6
+        explanation: Correct mapping for CSS class designation.
+      - name: follow_up_id
+        expression: MISSING
+        score: 0.0
+        explanation: Field expression is MISSING, indicating no valid mapping found.
+      - name: guid
+        expression: MISSING
+        score: 0.0
+        explanation: Field expression is MISSING, indicating no valid mapping found.
+      - name: lead_nurturing_campaign_id
+        expression: MISSING
+        score: 0.0
+        explanation: Field expression is MISSING, indicating no valid mapping found.
+      - name: method
+        expression: MISSING
+        score: 0.0
+        explanation: Field expression is MISSING, indicating no valid mapping found.
+      - name: name
+        expression: forms.name
+        score: 0.7
+        explanation: Good mapping for form name detected.
+      - name: notify_recipients
+        expression: forms.configuration.notifyRecipients
+        score: 0.6
+        explanation: Valid mapping for notification recipients list.
+      - name: portal_id
+        expression: forms.id
+        score: 0.6
+        explanation: Correct portal identifier mapping detected.
+      - name: redirect
+        expression: MISSING
+        score: 0.0
+        explanation: Field expression is MISSING, indicating no valid mapping found.
+      - name: submit_text
+        expression: forms.displayOptions.submitButtonText
+        score: 0.6
+        explanation: Correctly mapped to submit button text.
+      - name: updated_at
+        expression: forms.properties.hs_lastmodifieddate
+        score: 0.6
+        explanation: Valid mapping for last modified timestamp.

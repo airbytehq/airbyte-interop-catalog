@@ -36,3 +36,57 @@ transforms:
       vid_to_merge:
         expression: contacts_merged_audit.vid_to_merge
         description: The ID of the contact which was merged.
+annotations:
+  approved: false
+  missing_fields:
+    - contact_id
+  evaluation:
+    source_stream_name: contacts_merged_audit
+    target_table_name: contact_merge_audit
+    name_match_score: 0.85
+    score: 0.68
+    explanation:
+      Overall mapping confidence is high. '_fivetran_synced' maps perfectly
+      to '_airbyte_extracted_at'. Most fields are mapped correctly except for 'contact_id',
+      which is missing.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: contacts_merged_audit._airbyte_extracted_at
+        score: 1.0
+        explanation: This field maps perfectly to the '_airbyte_extracted_at' column.
+      - name: canonical_vid
+        expression: contacts_merged_audit.canonical_vid
+        score: 0.9
+        explanation: "'canonical_vid' is a good match to 'contacts_merged_audit.canonical_vid'."
+      - name: contact_id
+        expression: MISSING
+        score: 0.0
+        explanation: "'contact_id' is missing an expression."
+      - name: entity_id
+        expression: contacts_merged_audit.entity_id
+        score: 0.9
+        explanation: "'entity_id' matches well with 'contacts_merged_audit.entity_id'."
+      - name: first_name
+        expression: contacts_merged_audit.first_name
+        score: 0.9
+        explanation: "'first_name' matches well with 'contacts_merged_audit.first_name'."
+      - name: last_name
+        expression: contacts_merged_audit.last_name
+        score: 0.9
+        explanation: "'last_name' matches well with 'contacts_merged_audit.last_name'."
+      - name: num_properties_moved
+        expression: contacts_merged_audit.num_properties_moved
+        score: 0.9
+        explanation: "'num_properties_moved' matches well with 'contacts_merged_audit.num_properties_moved'."
+      - name: timestamp
+        expression: contacts_merged_audit.timestamp
+        score: 0.9
+        explanation: "'timestamp' matches well with 'contacts_merged_audit.timestamp'."
+      - name: user_id
+        expression: contacts_merged_audit.user_id
+        score: 0.9
+        explanation: "'user_id' is a good match to 'contacts_merged_audit.user_id'."
+      - name: vid_to_merge
+        expression: contacts_merged_audit.vid_to_merge
+        score: 0.9
+        explanation: "'vid_to_merge' is a good match to 'contacts_merged_audit.vid_to_merge'."

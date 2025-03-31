@@ -179,6 +179,7 @@ def build(
 def eval(
     source_name: str,
     project_name: str = DEFAULT_PROJECT_NAME,
+    do_source_annotations: bool = True,
 ) -> None:
     """Use AI to evaluated the quality of transform logic.
 
@@ -203,7 +204,7 @@ def eval(
         return
 
     # Process each YAML file
-    for yaml_file in yaml_files:
+    for yaml_file in sorted(yaml_files):
         console.print(f"\n[bold]Evaluating {yaml_file}[/bold]\n")
         transform_obj = models.TableMapping.from_file(yaml_file)
 
@@ -213,9 +214,11 @@ def eval(
         )
 
         # Print analysis
-        table_mapping_eval.print_as_rich_table(
-            from_transform=transform_obj,
-        )
+        transform_obj.attach_evaluation(table_mapping_eval)
+        transform_obj.print_as_rich_table()
+
+        if do_source_annotations:
+            transform_obj.to_file()
 
 
 @main.command()

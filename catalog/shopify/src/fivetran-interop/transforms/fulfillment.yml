@@ -79,3 +79,97 @@ transforms:
         description:
           The date and time (ISO 8601 format) when the fulfillment was
           last modified.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: fulfillments
+    target_table_name: fulfillment
+    name_match_score: 0.95
+    score: 0.85
+    explanation:
+      The table mapping was evaluated based on the given field mappings.
+      The overall score is derived from individual field evaluations and the coherence
+      of the mapped fields. The name match score indicates the general alignment of
+      field names between the source and target, which was strong in this case.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: fulfillments._airbyte_extracted_at
+        score: 1.0
+        explanation:
+          Successfully mapped to source stream's '_airbyte_extracted_at'
+          column, which was perfectly aligned with the expected field.
+      - name: created_at
+        expression: fulfillments.created_at
+        score: 0.8
+        explanation:
+          The 'created_at' field mapped well to a corresponding timestamp
+          field in the source.
+      - name: id
+        expression: fulfillments.id
+        score: 0.8
+        explanation: The 'id' matched a unique identifier column with high confidence.
+      - name: location_id
+        expression: fulfillments.location_id
+        score: 0.8
+        explanation:
+          The 'location_id' field was mapped to a unique location identifier
+          with good confidence.
+      - name: name
+        expression: fulfillments.name
+        score: 0.6
+        explanation:
+          The 'name' field had a reasonable match, though less certain
+          due to possible differences in naming conventions.
+      - name: order_id
+        expression: fulfillments.order_id
+        score: 0.8
+        explanation:
+          The 'order_id' field was correctly mapped to a corresponding
+          unique order identifier.
+      - name: receipt_authorization
+        expression: fulfillments.receipt.authorization
+        score: 0.75
+        explanation:
+          The 'receipt_authorization' was closely matched to an authorization
+          code field.
+      - name: service
+        expression: fulfillments.service
+        score: 0.7
+        explanation:
+          The 'service' field was moderately matched, potential slight
+          variations in service names.
+      - name: shipment_status
+        expression: fulfillments.shipment_status
+        score: 0.65
+        explanation:
+          The 'shipment_status' was matched with consideration for multiple
+          valid states.
+      - name: status
+        expression: fulfillments.status
+        score: 0.65
+        explanation:
+          The 'status' field alignment was fairly good, with understanding
+          of status values.
+      - name: tracking_company
+        expression: fulfillments.tracking_company
+        score: 0.7
+        explanation: Matched with a carrier or company name field for tracking.
+      - name: tracking_number
+        expression: fulfillments.tracking_number
+        score: 0.7
+        explanation: Mapped to a primary tracking number with decent accuracy.
+      - name: tracking_numbers
+        expression: fulfillments.tracking_numbers
+        score: 0.65
+        explanation: Mapped to a list of tracking numbers.
+      - name: tracking_urls
+        expression: fulfillments.tracking_urls
+        score: 0.65
+        explanation: Mapped to URLs correlating to tracking information.
+      - name: updated_at
+        expression: fulfillments.updated_at
+        score: 0.8
+        explanation:
+          The 'updated_at' field aligned well with a timestamp of last
+          modification.

@@ -46,3 +46,73 @@ transforms:
       property_annualrevenue:
         expression: companies.properties.annualrevenue
         description: The actual or estimated annual revenue of the company.
+annotations:
+  approved: true
+  missing_fields:
+    - portal_id
+  evaluation:
+    source_stream_name: companies
+    target_table_name: company
+    name_match_score: 0.8
+    score: 0.75
+    explanation:
+      The overall mapping has a high degree of confidence due to consistent
+      naming and appropriate field mappings. However, the presence of a 'MISSING'
+      expression negatively impacts the score.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: companies._airbyte_extracted_at
+        score: 1.0
+        explanation: Correctly maps to a source stream's _airbyte_extracted_at column.
+      - name: id
+        expression: companies.id
+        score: 0.9
+        explanation: Maps to the expected 'id' column.
+      - name: portal_id
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING', mapping confidence is zero.
+      - name: is_deleted
+        expression: companies.archived
+        score: 0.85
+        explanation: Maps to the correct archived column, which seems to fit logically.
+      - name: property_name
+        expression: companies.properties.name
+        score: 0.8
+        explanation: Maps to a logical column name for a property name.
+      - name: property_description
+        expression: companies.properties.description
+        score: 0.8
+        explanation: The expression matches the intended purpose.
+      - name: property_createdate
+        expression: companies.properties.createdate
+        score: 0.8
+        explanation: Matches the intended 'createdate' field.
+      - name: property_industry
+        expression: companies.properties.industry
+        score: 0.8
+        explanation: Appropriately matches industry description.
+      - name: property_address
+        expression: companies.properties.address
+        score: 0.8
+        explanation: The address is appropriately mapped.
+      - name: property_address_2
+        expression: companies.properties.address2
+        score: 0.8
+        explanation: The additional address information seems correct.
+      - name: property_city
+        expression: companies.properties.city
+        score: 0.8
+        explanation: The city mapping is logical and consistent.
+      - name: property_state
+        expression: companies.properties.state
+        score: 0.8
+        explanation: The state mapping appears correct.
+      - name: property_country
+        expression: companies.properties.country
+        score: 0.8
+        explanation: The country field is suitably matched.
+      - name: property_annualrevenue
+        expression: companies.properties.annualrevenue
+        score: 0.8
+        explanation: Matches the context of annual revenue accurately.

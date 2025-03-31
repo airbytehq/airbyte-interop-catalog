@@ -32,3 +32,48 @@ transforms:
       updated_at:
         expression: deal_pipelines.updatedAt
         description: A timestamp representing when the record was updated.
+annotations:
+  approved: false
+  missing_fields:
+    - _fivetran_deleted
+  evaluation:
+    source_stream_name: deal_pipelines
+    target_table_name: deal_pipeline
+    name_match_score: 0.8
+    score: 0.6125
+    explanation:
+      Overall confidence score is calculated based on individual field
+      mappings.
+    field_mapping_evals:
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: Mapping uses 'MISSING'. No confidence in this mapping.
+      - name: _fivetran_synced
+        expression: deal_pipelines._airbyte_extracted_at
+        score: 1.0
+        explanation: Correctly mapped to '_airbyte_extracted_at' column.
+      - name: active
+        expression: deal_pipelines.active
+        score: 0.7
+        explanation: Likely accurate mapping based on name and context.
+      - name: display_order
+        expression: deal_pipelines.displayOrder
+        score: 0.7
+        explanation: Likely accurate mapping based on typical usage.
+      - name: label
+        expression: deal_pipelines.label
+        score: 0.7
+        explanation: Likely accurate mapping based on name and context.
+      - name: pipeline_id
+        expression: deal_pipelines.pipelineId
+        score: 0.7
+        explanation: Likely accurate mapping based on name and context.
+      - name: created_at
+        expression: deal_pipelines.createdAt
+        score: 0.7
+        explanation: Likely accurate mapping based on typical usage.
+      - name: updated_at
+        expression: deal_pipelines.updatedAt
+        score: 0.7
+        explanation: Likely accurate mapping based on typical usage.

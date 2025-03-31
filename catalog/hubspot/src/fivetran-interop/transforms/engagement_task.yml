@@ -41,3 +41,53 @@ transforms:
           the team listed as the task creator on the record timeline.\nPLEASE NOTE:
           This field will only be populated for connectors utilizing the HubSpot v3
           API version.\n"
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: engagements_tasks
+    target_table_name: engagement_task
+    name_match_score: 0.9
+    score: 0.85
+    explanation:
+      The overall mapping is quite strong, with most fields matching well
+      with their intended expressions. However, care was taken to ensure that mappings
+      that could refer to different entities were scored lower. The mappings collectively
+      represent a robust configuration for tracking engagement tasks.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: engagements_tasks._airbyte_extracted_at
+        score: 1.0
+        explanation:
+          Perfect mapping as _fivetran_synced properly maps to _airbyte_extracted_at,
+          which is intended for synchronization timestamp.
+      - name: engagement_id
+        expression: engagements_tasks.id
+        score: 0.9
+        explanation:
+          Strong mapping, as 'id' usually represents identifiers and matches
+          the intended use.
+      - name: property_hs_createdate
+        expression: engagements_tasks.properties.hs_createdate
+        score: 0.85
+        explanation:
+          Good match with 'hs_createdate'. Potential mismatch in format
+          or context, so not a perfect match.
+      - name: timestamp
+        expression: engagements_tasks.properties.hs_timestamp
+        score: 0.85
+        explanation:
+          Good mapping for time of occurrence, though 'timestamp' might
+          imply a broader usage.
+      - name: property_hubspot_owner_id
+        expression: engagements_tasks.properties_hubspot_owner_id
+        score: 0.8
+        explanation:
+          Fair mapping for owner identification, taking into consideration
+          possible differences in data representations.
+      - name: property_hubspot_team_id
+        expression: engagements_tasks.properties_hubspot_team_id
+        score: 0.7
+        explanation:
+          Reasonable mapping, assuming the task team association is consistent
+          across all data points.

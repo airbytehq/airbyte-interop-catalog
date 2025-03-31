@@ -155,3 +155,169 @@ transforms:
       _fivetran_synced:
         expression: product_variants._airbyte_extracted_at
         description: "{{ doc('_fivetran_synced') }}"
+annotations:
+  approved: false
+  missing_fields:
+    - fulfillment_service
+    - inventory_management
+    - legacy_resource_id
+    - metafield
+    - requires_components
+    - sellable_online_quantity
+    - title
+  evaluation:
+    source_stream_name: product_variants
+    target_table_name: product_variant
+    name_match_score: 0.8
+    score: 0.48
+    explanation:
+      The overall mapping confidence score is computed based on individual
+      field mappings. Fields with 'MISSING' expression receive 0.0 confidence. Scores
+      for matching expressions range up to 1.0 based on perceived accuracy and relevance.
+    field_mapping_evals:
+      - name: barcode
+        expression: product_variants.barcode
+        score: 0.9
+        explanation: The expression matches a unique identifier for the product variant.
+      - name: compare_at_price
+        expression: product_variants.compare_at_price
+        score: 0.9
+        explanation:
+          The expression represents a relevant field that matches the intended
+          use.
+      - name: created_at
+        expression: product_variants.created_at
+        score: 0.9
+        explanation:
+          The field correctly identifies the creation timestamp with proper
+          format.
+      - name: fulfillment_service
+        expression: MISSING
+        score: 0.0
+        explanation: The expression 'MISSING' denotes no matching mapping was found.
+      - name: grams
+        expression: product_variants.grams
+        score: 0.8
+        explanation:
+          The expression maps correctly to a product weight field, consistent
+          with the unit specified.
+      - name: id
+        expression: product_variants.id
+        score: 1.0
+        explanation: The expression matches a unique numeric identifier exactly.
+      - name: image_id
+        expression: product_variants.image_id
+        score: 1.0
+        explanation:
+          The mapping correctly identifies the image identifier related
+          to the product.
+      - name: inventory_item_id
+        expression: product_variants.inventory_item_id
+        score: 1.0
+        explanation:
+          The mapping accurately captures the inventory item ID required
+          for querying inventory.
+      - name: inventory_management
+        expression: MISSING
+        score: 0.0
+        explanation:
+          The expression 'MISSING' indicates no appropriate mapping was
+          found.
+      - name: inventory_policy
+        expression: product_variants.inventory_policy
+        score: 0.8
+        explanation: The mapping correctly signifies inventory policy conditions.
+      - name: inventory_quantity
+        expression: product_variants.inventory_quantity
+        score: 0.8
+        explanation: The mapping accurately reflects inventory quantities across locations.
+      - name: old_inventory_quantity
+        expression: product_variants.old_inventory_quantity
+        score: 0.7
+        explanation:
+          This deprecated mapping still correctly points to relevant historical
+          data.
+      - name: option_1
+        expression: product_variants.option1
+        score: 0.8
+        explanation: The mapping aligns well with customizable properties for variants.
+      - name: option_2
+        expression: product_variants.option2
+        score: 0.8
+        explanation: The mapping aligns well with customizable properties for variants.
+      - name: option_3
+        expression: product_variants.option3
+        score: 0.8
+        explanation: The mapping aligns well with customizable properties for variants.
+      - name: position
+        expression: product_variants.position
+        score: 0.9
+        explanation: The mapping correctly represents the list position.
+      - name: price
+        expression: product_variants.price
+        score: 1.0
+        explanation: The expression precisely matches the product variant's price.
+      - name: product_id
+        expression: product_variants.product_id
+        score: 1.0
+        explanation: Maps accurately to the unique product identifier.
+      - name: requires_shipping
+        expression: product_variants.requires_shipping
+        score: 0.6
+        explanation: The deprecated field maps to the correct shipping requirement.
+      - name: sku
+        expression: product_variants.sku
+        score: 0.9
+        explanation: Represents the product variant's SKU as intended.
+      - name: taxable
+        expression: product_variants.taxable
+        score: 0.7
+        explanation: Appropriate mapping for tax charge status.
+      - name: tax_code
+        expression: product_variants.tax_code
+        score: 0.8
+        explanation: The mapping captures enhanced tax code referencing Avalara integration.
+      - name: title
+        expression: MISSING
+        score: 0.0
+        explanation: The expression 'MISSING' results in no mapping.
+      - name: updated_at
+        expression: product_variants.updated_at
+        score: 0.9
+        explanation: Correctly captures the modification timestamp.
+      - name: weight
+        expression: product_variants.weight
+        score: 0.7
+        explanation: The mapping aligns with the deprecated weight field.
+      - name: weight_unit
+        expression: product_variants.weight_unit
+        score: 0.8
+        explanation: Correctly addresses the unit of measurement for weight.
+      - name: available_for_sale
+        expression: product_variants.available_for_sale
+        score: 0.7
+        explanation: Accurate mapping denoting availability status.
+      - name: display_name
+        expression: product_variants.display_name
+        score: 0.8
+        explanation: Logical mapping for displaying combined product and variant titles.
+      - name: legacy_resource_id
+        expression: MISSING
+        score: 0.0
+        explanation: The expression 'MISSING' leads to no match.
+      - name: metafield
+        expression: MISSING
+        score: 0.0
+        explanation: The expression 'MISSING' suggests absence of a proper mapping.
+      - name: requires_components
+        expression: MISSING
+        score: 0.0
+        explanation: The expression 'MISSING' indicates no mapping was possible.
+      - name: sellable_online_quantity
+        expression: MISSING
+        score: 0.0
+        explanation: The expression 'MISSING' yields no mapping capability.
+      - name: _fivetran_synced
+        expression: product_variants._airbyte_extracted_at
+        score: 1.0
+        explanation: Correct mapping to the source stream's extraction timestamp.

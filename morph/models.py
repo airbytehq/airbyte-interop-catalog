@@ -1,5 +1,7 @@
 """Models for AI-related functionality."""
 
+from __future__ import annotations
+
 import json
 from pathlib import Path
 from typing import Any
@@ -9,7 +11,7 @@ from rich.console import Console
 from rich.table import Table
 from typing_extensions import Self
 
-from morph import resources
+from morph import constants, resources
 from morph.utils import text_utils
 from morph.utils.rich_utils import rich_formatted_confidence
 from morph.utils.text_utils import normalize_field_name
@@ -45,7 +47,7 @@ class DbtSourceColumn(BaseModel):
     data_type: str | None = None
     """The data type of the column."""
 
-    subcolumns: list["DbtSourceColumn"] | None = None
+    subcolumns: list[DbtSourceColumn] | None = None
     """Nested subcolumns for complex data types (variant/object columns)."""
 
     original_name: str | None = None
@@ -57,7 +59,7 @@ class DbtSourceColumn(BaseModel):
         property_name: str,
         property_schema: dict[str, Any],
         nesting_level: int = 0,
-    ) -> "DbtSourceColumn":
+    ) -> DbtSourceColumn:
         """Convert a JSON schema property to a DbtSourceColumn.
 
         Args:
@@ -429,6 +431,9 @@ class TableMapping(BaseModel):
     field_mappings: list[FieldMapping]
     """The field mappings for the table."""
 
+    _attached_evaluation: TableMappingEval | None = None
+    """The evaluation of the table mapping."""
+
     def get_file_path(self) -> Path:
         """Get the file path for the transform file."""
         return resources.get_transform_file(
@@ -436,6 +441,10 @@ class TableMapping(BaseModel):
             project_name=self.project_name,
             transform_name=self.transform_name,
         )
+
+    def attach_evaluation(self, evaluation: TableMappingEval) -> None:
+        """Attach an evaluation to the table mapping."""
+        self._attached_evaluation = evaluation
 
     @classmethod
     def from_file(cls, transform_file: Path) -> Self:
@@ -478,9 +487,14 @@ class TableMapping(BaseModel):
             field_mappings=fields,
         )
 
-    def to_file(self, transform_file: Path) -> None:
+    def to_file(self, transform_file: Path | None = None) -> None:
         """Write the TableMapping to a transform file."""
-        output_dict = {
+        transform_file = transform_file or resources.get_transform_file(
+            source_name=self.source_name,
+            project_name=self.project_name,
+            transform_name=self.transform_name,
+        )
+        output_dict: dict[str, Any] = {
             "domain": f"{self.source_name}.{self.project_name}",
             "transforms": [
                 {
@@ -498,10 +512,60 @@ class TableMapping(BaseModel):
                 },
             ],
         }
+        if self._attached_evaluation:
+            output_dict["annotations"] = {}
+            if (
+                self._attached_evaluation.score >= constants.MIN_APPROVAL_SCORE
+                and len(self.get_missing_field_mappings()) <= constants.MAX_MISSING_FIELDS
+            ):
+                output_dict["annotations"]["approved"] = True
+            else:
+                output_dict["annotations"]["approved"] = False
+
+            output_dict["annotations"]["missing_fields"] = self.get_missing_field_mappings()
+            output_dict["annotations"]["evaluation"] = self._get_evaluation_as_dict()
+
         text_utils.dump_yaml_file(
             output_dict,
             transform_file,
         )
+
+    def _get_evaluation_as_dict(
+        self,
+    ) -> dict[str, Any]:
+        if not self._attached_evaluation:
+            raise ValueError("No evaluation attached to the table mapping")
+
+        def _to_dict(field_eval: FieldMappingEval) -> dict[str, Any]:
+            """Add the expression to the field evaluation."""
+            field_ref: FieldMapping | None = next(
+                (f for f in self.field_mappings if f.name == field_eval.name),
+                None,
+            )
+            result = field_eval.model_dump(exclude_none=True, exclude_unset=True)
+
+            if field_ref:
+                ordered_dict = {
+                    "name": result.pop("name"),
+                    "expression": str(field_ref.expression),
+                    "score": result.pop("score", None),
+                    "explanation": result.pop("explanation", None),
+                }
+                ordered_dict.update(result)
+                result = ordered_dict
+
+            return result
+
+        return {
+            "source_stream_name": self.source_stream_name,
+            "target_table_name": self.target_table_name,
+            "name_match_score": self._attached_evaluation.name_match_score,
+            "score": self._attached_evaluation.score,
+            "explanation": self._attached_evaluation.explanation,
+            "field_mapping_evals": [
+                _to_dict(field_eval) for field_eval in self._attached_evaluation.field_mapping_evals
+            ],
+        }
 
     def get_missing_field_mappings(
         self,
@@ -546,6 +610,49 @@ class TableMapping(BaseModel):
             ]
 
         return [f for f in self.field_mappings if str(f.expression) != "MISSING"]
+
+    def print_as_rich_table(self) -> None:
+        """Print a complete mapping confidence analysis.
+
+        Args:
+            confidence: The confidence evaluation results
+            fields: List of field mappings
+            title: Optional title for the analysis table
+        """
+        if not self._attached_evaluation:
+            raise ValueError("No evaluation attached to the table mapping")
+
+        # Create results table
+        table = Table(
+            title=f"Table Mapping Eval: '{self.source_stream_name}->{self.target_table_name}'",
+        )
+        table.add_column("Field", style="cyan", overflow="fold")
+        table.add_column("Expression", style="yellow", overflow="fold")
+        table.add_column("Description", overflow="fold")
+        table.add_column("Confidence", justify="right")
+        table.add_column("Evaluation", style="italic", overflow="fold")
+        # Print results
+        console.print(
+            f"\nOverall Confidence Score: {rich_formatted_confidence(self._attached_evaluation.score)}",
+        )
+        console.print("\nExplanation:")
+        console.print(f"\n{self._attached_evaluation.explanation}", style="italic")
+        console.print("\nField-by-Field Analysis:")
+
+        # Print each field evaluation
+        for field_eval in self._attached_evaluation.field_mapping_evals:
+            field_ref: FieldMapping = next(
+                f for f in self.field_mappings if f.name == field_eval.name
+            )
+            table.add_row(
+                field_eval.name,
+                str(field_ref.expression),
+                field_ref.description or "",
+                rich_formatted_confidence(field_eval.score),
+                field_eval.explanation,
+            )
+
+        console.print(table)
 
 
 class FieldMappingEval(BaseModel):
@@ -597,49 +704,6 @@ class TableMappingEval(BaseModel):
 
     field_mapping_evals: list[FieldMappingEval]
     """A dictionary of field names and their confidence scores."""
-
-    def print_as_rich_table(
-        self,
-        from_transform: TableMapping,
-    ) -> None:
-        """Print a complete mapping confidence analysis.
-
-        Args:
-            confidence: The confidence evaluation results
-            fields: List of field mappings
-            title: Optional title for the analysis table
-        """
-        # Create results table
-        table = Table(
-            title=f"Table Mapping Eval: '{from_transform.source_stream_name}->{from_transform.target_table_name}'",
-        )
-        table.add_column("Field", style="cyan")
-        table.add_column("Expression", style="yellow", overflow="fold")
-        table.add_column("Description")
-        table.add_column("Confidence", justify="right")
-        table.add_column("Evaluation", style="italic")
-        # Print results
-        console.print(
-            f"\nOverall Confidence Score: {rich_formatted_confidence(self.score)}",
-        )
-        console.print("\nExplanation:")
-        console.print(f"\n{self.explanation}", style="italic")
-        console.print("\nField-by-Field Analysis:")
-
-        # Print each field evaluation
-        for field_eval in self.field_mapping_evals:
-            field_ref: FieldMapping = next(
-                f for f in from_transform.field_mappings if f.name == field_eval.name
-            )
-            table.add_row(
-                field_eval.name,
-                str(field_ref.expression),
-                field_ref.description or "",
-                rich_formatted_confidence(field_eval.score),
-                field_eval.explanation,
-            )
-
-        console.print(table)
 
 
 class SourceTableSummary(BaseModel):
