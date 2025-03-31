@@ -276,7 +276,7 @@ transforms:
         expression: orders.total_price_set
         description: The total price of the order in shop and presentment currencies.
       is_confirmed:
-        expression: orders.is_confirmed
+        expression: MISSING
         description: Whether the order is confirmed.
       source_identifier:
         expression: orders.source_identifier
