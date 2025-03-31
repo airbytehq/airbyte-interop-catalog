@@ -610,7 +610,9 @@ class TableMappingEval(BaseModel):
             title: Optional title for the analysis table
         """
         # Create results table
-        table = Table(title="Table Mapping Eval")
+        table = Table(
+            title=f"Table Mapping Eval: '{from_transform.source_stream_name}->{from_transform.target_table_name}'",
+        )
         table.add_column("Field", style="cyan")
         table.add_column("Expression", style="yellow", overflow="fold")
         table.add_column("Description")
