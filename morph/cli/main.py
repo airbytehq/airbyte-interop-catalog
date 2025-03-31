@@ -406,7 +406,10 @@ def eval_project_mappings(
     PROJECT_NAME is the name of the project (defaults to fivetran-interop)
     """
     # Construct the path to the transforms directory
-    transforms_dir = Path("catalog") / source_name / "src" / project_name / "transforms"
+    transforms_dir = resource_paths.get_transforms_dir(
+        source_name=source_name,
+        project_name=project_name,
+    )
 
     if not transforms_dir.exists():
         console.print(f"[red]Error: Transforms directory not found at {transforms_dir}[/red]")
@@ -422,34 +425,16 @@ def eval_project_mappings(
     # Process each YAML file
     for yaml_file in yaml_files:
         console.print(f"\n[bold]Evaluating {yaml_file}[/bold]\n")
-
-        # Read mapping file
-        mapping_data = text_utils.load_yaml_file(yaml_file)
-
-        # Extract fields from dbt transform format
-        fields: list[models.FieldMapping] = []
-        for transform in mapping_data.get("transforms", []):
-            for field_name, field_data in transform.get("fields", {}).items():
-                fields.append(
-                    models.FieldMapping(
-                        name=field_name,
-                        expression=field_data.get("expression", ""),
-                        description=field_data.get("description", ""),
-                    ),
-                )
-
-        if not fields:
-            console.print("[yellow]No fields found in the mapping file.[/yellow]")
-            continue
+        transform_obj = models.TableMapping.from_file(yaml_file)
 
         # Get confidence score
-        table_mapping_eval = get_table_mapping_eval(fields)
+        table_mapping_eval: models.TableMappingEval = get_table_mapping_eval(
+            transform_obj.field_mappings,
+        )
 
         # Print analysis
-        models.print_table_mapping_analysis(
-            table_mapping_eval=table_mapping_eval,
-            fields=fields,
-            title=f"Mapping Confidence Analysis - {yaml_file.name}",
+        table_mapping_eval.print_as_rich_table(
+            from_transform=transform_obj,
         )
 
 

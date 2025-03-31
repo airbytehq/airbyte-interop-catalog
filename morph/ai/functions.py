@@ -1,12 +1,44 @@
 """AI functions for Morph."""
 
-from marvin import ai_fn  # type: ignore
+import marvin
 
 from morph import models
 from morph.utils.retries import with_retry
 
+CONFIDENCE_INSTRUCTIONS = """
+When evaluating confidence:
+  - Consider "MISSING" to be a 0.0 confidence score.
+  - Highest confidence score is 1.0, meaning the mapping is perfect.
+  - Never give a score above 0.7 if the two columns could likely be referring to different things.
+  - If you cannot find a good match for a specific column, set its expression to "MISSING".
+  - Don't suggest mappings for fields that are not 0.6 or higher.
+  - You should always map `_fivetran_synced` to a source stream's `_airbyte_extracted_at` column.
+"""
 
-@ai_fn
+FIELD_MAPPING_INSTRUCTIONS = """
+When generating mappings:
+    - You should always map `_fivetran_synced` to a source stream's `_airbyte_extracted_at` column.
+    - If you cannot find a good match for a specific column, set its expression to "MISSING".
+    - Don't suggest mappings for fields that are not 0.6 or higher.
+    - If you have identical options at top-level or nested level, you should return the top one.
+      For instance, between `property_company_id` and `property.company.id`, you should choose
+      `property_company_id`.
+    - Do not penalize confidence scores for differences in casing, such as camel case vs snake case.
+"""
+
+TABLE_MAPPING_INSTRUCTIONS = """
+When evaluating the mapping configuration:
+    - Consider "MISSING" to be a 0.0 confidence score.
+    - Highest confidence score is 1.0, meaning the mapping is perfect.
+    - Never give a score above 0.7 if the two tables could likely be referring to different things.
+    - Do not penalize confidence scores for differences in singular vs plural of the same terms.
+    - Do not penalize confidence scores for differences in casing, such as camel case vs snake case.
+"""
+
+
+@marvin.fn(
+    instructions=CONFIDENCE_INSTRUCTIONS,
+)  # pyright: ignore [reportUntypedFunctionDecorator]
 def evaluate_mapping_confidence(
     mappings: list[models.FieldMapping],
 ) -> models.TableMappingEval:
@@ -14,11 +46,6 @@ def evaluate_mapping_confidence(
 
     Args:
         mappings: List of field mappings to evaluate
-
-    When evaluating confidence:
-      - Consider "MISSING" to be a 0.0 confidence score.
-      - Highest confidence score is 1.0, meaning the mapping is perfect.
-      - Never give a score above 0.7 if the two columns could likely be referring to different things.
 
     Returns:
         TableMappingEval object containing:
@@ -30,7 +57,7 @@ def evaluate_mapping_confidence(
     ...
 
 
-@ai_fn
+@marvin.fn
 def select_best_match_source_schema(
     target_schema: models.DbtSourceTable,
     source_schemas: list[models.DbtSourceTable],
@@ -52,7 +79,7 @@ def select_best_match_source_schema(
 
 
 @with_retry(max_retries=3)
-@ai_fn
+@marvin.fn(instructions=FIELD_MAPPING_INSTRUCTIONS)  # pyright: ignore [reportUntypedFunctionDecorator]
 def generate_mappings(
     fields_to_populate: list[models.FieldMapping],
     source_schema: models.DbtSourceTable,
@@ -63,11 +90,6 @@ def generate_mappings(
     - You should always map `_fivetran_synced` to a source stream's `_airbyte_extracted_at` column.
     - If you cannot find a good match for a specific column, set it's expression to exactly
       "MISSING" with no table prefix.
-
-    When evaluating confidence:
-      - Consider "MISSING" to be a 0.0 confidence score.
-      - Never give a score above 0.7 if the two columns could be referring to different things.
-      - Don't suggest mappings for fields that are not 0.6 or higher.
 
     Args:
         fields_to_populate: A list of fields to populate.
@@ -85,7 +107,7 @@ def generate_mappings(
     ...
 
 
-@ai_fn
+@marvin.fn(instructions=TABLE_MAPPING_INSTRUCTIONS)  # pyright: ignore [reportUntypedFunctionDecorator]
 def infer_best_match_source_stream_name_short_list(
     target_schema: models.SourceTableSummary,
     source_tables: list[models.SourceTableSummary],
