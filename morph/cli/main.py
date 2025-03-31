@@ -146,7 +146,7 @@ def build(
     # Generate Airbyte catalog and schema artifacts
     if not any([no_airbyte_catalog, no_creds]):
         console.print(f"Generating Airbyte catalog for {source_name}...")
-        sync.callback(
+        sync_source(
             source_name,
             no_catalog=no_airbyte_catalog,
             no_creds=no_creds,

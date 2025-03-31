@@ -52,8 +52,8 @@ def sync_source(
     streams: list[str] | str = "*",
     db_path: Path | None = None,
     *,
-    no_catalog: bool = False,
-    no_creds: bool = False,
+    no_catalog: bool | None = None,
+    no_creds: bool | None = None,
     with_data: bool | None = None,
 ) -> None:
     """Sync data from an Airbyte source to a local database.
@@ -65,6 +65,10 @@ def sync_source(
         no_data: If True, only create empty tables without syncing data
         no_creds: If True, do not use credentials for the source
     """
+    no_catalog = if_none(no_catalog, False)
+    no_creds = if_none(no_creds, False)
+    with_data = if_none(with_data, False)
+
     if not no_catalog:
         console.print(f"Generating Airbyte catalog for '{source_name}'...")
         write_catalog_file(
@@ -77,7 +81,6 @@ def sync_source(
         )
         console.print(f"Generated Airbyte catalog and dbt source file for {source_name}.")
 
-    with_data = if_none(with_data, False)
     if db_path is None:
         db_path = Path(f".data/{source_name}.duckdb")
 
