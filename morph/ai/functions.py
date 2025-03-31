@@ -5,6 +5,12 @@ import marvin
 from morph import models
 from morph.utils.retries import with_retry
 
+VERBOSE_MODE = False
+
+if not VERBOSE_MODE:
+    marvin.settings.enable_default_print_handler = False
+
+
 CONFIDENCE_INSTRUCTIONS = """
 When evaluating confidence:
   - Consider "MISSING" to be a 0.0 confidence score.
