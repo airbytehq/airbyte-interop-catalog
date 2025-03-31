@@ -17,16 +17,16 @@ transforms:
         expression: ad_groups.campaign_id
         description: The Ad group's campaign ID.
       action_categories:
-        expression: ad_groups.action_category_ids
+        expression: MISSING
         description: IDs of the action categories (behaviors) that you want to target.
       action_days:
-        expression: ad_groups.action_days
+        expression: MISSING
         description: The number of days of the time period to include action from.
       adgroup_name:
         expression: ad_groups.adgroup_name
         description: Ad group name. Character limit is 512 and cannot contain emoji.
       age_groups:
-        expression: ad_groups.age_groups
+        expression: MISSING
         description: "Age groups you want to target. This is the newest version of
           the field `age`, which was renamed after the Tiktok Ads v1.3 API release.\n"
       android_osv:
@@ -39,22 +39,22 @@ transforms:
         expression: ad_groups.app_id
         description: The Application id of the promoted app
       app_name:
-        expression: ad_groups.package
+        expression: MISSING
         description: App name.
       app_type:
         expression: ad_groups.app_type
         description: App type.
       audience:
-        expression: ad_groups.audience_ids
+        expression: MISSING
         description: A list of audience IDs.
       audience_type:
         expression: ad_groups.audience_type
         description: Audience Type
       bid:
-        expression: ad_groups.bid_price
+        expression: MISSING
         description: CPC, CPM bidding, oCPM learning bidding
       bid_type:
-        expression: ad_groups.bid_type
+        expression: MISSING
         description: Bidding Strategy
       billing_event:
         expression: ad_groups.billing_event
@@ -74,16 +74,16 @@ transforms:
         expression: ad_groups.category_id
         description: Ad group category.
       click_tracking_url:
-        expression: ad_groups.click_tracking_url
+        expression: MISSING
         description: Click monitoring URL.
       connection_type:
-        expression: ad_groups.network_types
+        expression: MISSING
         description: Device connection types that you want to target. Default; unlimited.
       conversion_bid:
-        expression: ad_groups.conversion_bid_price
+        expression: MISSING
         description: oCPM conversion bid
       cpv_video_duration:
-        expression: ad_groups.cpv_video_duration
+        expression: MISSING
         description: "Video playback duration, required if optimize_goal is VIDEO_VIEW.\
           \  Allowed values; SIX_SECONDS (video playback 6s), TWO_SECONDS (video playback
           2s)\n"
@@ -91,7 +91,7 @@ transforms:
         expression: ad_groups.creative_material_mode
         description: Creative delivery mode.
       dayparting:
-        expression: ad_groups.dayparting
+        expression: MISSING
         description: Ad delivery period, the default is always and the format is 48
           * 7 character string, represented by 0 or 1. > That is, with half an hour
           as the minimum granularity, a day (24 hours) is divided by the minimum granularity(30
@@ -99,29 +99,29 @@ transforms:
           to be delivered, 1 represents delivery. no transmission, full transmission
           0, full transmission 1 all represent full time delivery
       deep_bid_type:
-        expression: ad_groups.deep_bid_type
+        expression: MISSING
         description: Bidding strategy for in-app events.
       deep_cpabid:
-        expression: ad_groups.deep_cpa_bid
+        expression: MISSING
         description: Deep bid
       deep_external_action:
-        expression: ad_groups.deep_external_action
+        expression: MISSING
         description: Deep conversion event.
       display_name:
-        expression: ad_groups.adgroup_name
+        expression: MISSING
         description: Display name of ad group.
       enable_inventory_filter:
         expression: ad_groups.inventory_filter_enabled
         description: Inventory filtering (Unsafe videos will not be displayed).
       excluded_audience:
-        expression: ad_groups.excluded_audience_ids
+        expression: MISSING
         description: A list of audience ID to be excluded.
       external_action:
-        expression: ad_groups.external_action
+        expression: MISSING
         description: Conversion event for the ad group. It is required when the promoted
           object is an app with tracking urls, or when pixel_id is specified.
       fallback_type:
-        expression: ad_groups.fallback_type
+        expression: MISSING
         description: "Fallback Type. If the audience do not have the app installed,
           you can have them fall back to install the app, or to view a specific web
           page. Not applicable for Deferred Deeplink. Allowed values; APP_INSTALL,
@@ -141,7 +141,7 @@ transforms:
         expression: ad_groups.gender
         description: Gender that you want to target.
       impression_tracking_url:
-        expression: ad_groups.impression_tracking_url
+        expression: MISSING
         description: Display monitoring URL.
       interest_category_v2:
         expression: ad_groups.interest_category_ids
@@ -164,7 +164,7 @@ transforms:
         expression: ad_groups.keywords
         description: Keywords used.
       landing_page_url:
-        expression: ad_groups.landing_page_url
+        expression: MISSING
         description: Landing page URL.
       languages:
         expression: ad_groups.languages
@@ -173,11 +173,11 @@ transforms:
         expression: ad_groups.location_ids
         description: IDs of the locations that you want to target.
       open_url:
-        expression: ad_groups.open_url
+        expression: ad_groups.promotion_website_type
         description: The specific location where you want your audience to go if they
           have your app installed.
       open_url_type:
-        expression: ad_groups.open_url_type
+        expression: MISSING
         description: The open URL type.
       operation_system:
         expression: ad_groups.operating_systems
@@ -195,22 +195,22 @@ transforms:
           time.  PACING_MODE_FAST would consume budget and produce results as soon
           as possible. \n"
       package:
-        expression: ad_groups.package
+        expression: MISSING
         description: Package name.
       pangle_block_app_list_id:
-        expression: ad_groups.blocked_pangle_app_ids
+        expression: MISSING
         description: Pangle app block list ID.
       pixel_id:
         expression: ad_groups.pixel_id
         description: Pixel ID. Only application for landing pages.
       placement:
-        expression: ad_groups.placements
+        expression: MISSING
         description: The apps where you want to deliver your ads.
       placement_type:
         expression: ad_groups.placement_type
         description: Placement type.
       profile_image:
-        expression: ad_groups.profile_image
+        expression: MISSING
         description: Avatar URL.
       schedule_end_time:
         expression: ad_groups.schedule_end_time
@@ -223,13 +223,13 @@ transforms:
         description: The schedule type, which can be either SCHEDULE_START_END or
           SCHEDULE_FROM_NOW.
       skip_learning_phase:
-        expression: ad_groups.skip_learning_phase
+        expression: MISSING
         description: Whether to skip the learning stage.
       statistic_type:
-        expression: ad_groups.statistic_type
+        expression: MISSING
         description: conversion bid statistic type
       status:
-        expression: ad_groups.operation_status
+        expression: MISSING
         description: Ad group status
       video_actions:
         expression: ad_groups.video_actions

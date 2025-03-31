@@ -1,7 +1,7 @@
 [project]
 source_name = "tiktok_marketing"
 project_name = "fivetran-interop"
-generated_at = "2025-03-31T06:55:50Z"
+generated_at = "2025-03-31T07:10:15Z"
 requirements_file = "catalog/tiktok_marketing/requirements/fivetran-interop/src_dbt_requirements.yml"
 requirements_file_hash = "0d922b54ab642a78c4671b74ac4047442ceaa90062bc509a93b6c4474f421eaa"
 airbyte_source_file = "catalog/tiktok_marketing/generated/src_airbyte_tiktok_marketing.yml"
@@ -259,8 +259,38 @@ ads_reports_hourly = [
 
 [mappings.adgroup_history]
 source_file = "catalog/tiktok_marketing/src/fivetran-interop/transforms/adgroup_history.yml"
-source_file_hash = "f01f3bd49c74c44b6e3c29846b703886d9f2fa2267805b5bcd166904890cbb56"
-unmapped_target_fields = []
+source_file_hash = "22dfd7f3323e573db3913a45dd0652f4b2b2b49445fad6c0d00410f9d1371684"
+unmapped_target_fields = [
+    "action_categories",
+    "action_days",
+    "age_groups",
+    "app_name",
+    "audience",
+    "bid",
+    "bid_type",
+    "click_tracking_url",
+    "connection_type",
+    "conversion_bid",
+    "cpv_video_duration",
+    "dayparting",
+    "deep_bid_type",
+    "deep_cpabid",
+    "deep_external_action",
+    "display_name",
+    "excluded_audience",
+    "external_action",
+    "fallback_type",
+    "impression_tracking_url",
+    "landing_page_url",
+    "open_url_type",
+    "package",
+    "pangle_block_app_list_id",
+    "placement",
+    "profile_image",
+    "skip_learning_phase",
+    "statistic_type",
+    "status",
+]
 omitted_target_fields = []
 
 [mappings.adgroup_history.mapped_target_fields]
@@ -268,69 +298,40 @@ adgroup_id = "ad_groups.adgroup_id"
 updated_at = "ad_groups.modify_time"
 advertiser_id = "ad_groups.advertiser_id"
 campaign_id = "ad_groups.campaign_id"
-action_categories = "ad_groups.action_category_ids"
-action_days = "ad_groups.action_days"
 adgroup_name = "ad_groups.adgroup_name"
-age_groups = "ad_groups.age_groups"
 android_osv = "ad_groups.min_android_version"
 app_download_url = "ad_groups.app_download_url"
 app_id = "ad_groups.app_id"
-app_name = "ad_groups.package"
 app_type = "ad_groups.app_type"
-audience = "ad_groups.audience_ids"
 audience_type = "ad_groups.audience_type"
-bid = "ad_groups.bid_price"
-bid_type = "ad_groups.bid_type"
 billing_event = "ad_groups.billing_event"
 budget = "ad_groups.budget"
 budget_mode = "ad_groups.budget_mode"
 carriers = "ad_groups.carriers"
 category = "ad_groups.category_id"
-click_tracking_url = "ad_groups.click_tracking_url"
-connection_type = "ad_groups.network_types"
-conversion_bid = "ad_groups.conversion_bid_price"
-cpv_video_duration = "ad_groups.cpv_video_duration"
 creative_material_mode = "ad_groups.creative_material_mode"
-dayparting = "ad_groups.dayparting"
-deep_bid_type = "ad_groups.deep_bid_type"
-deep_cpabid = "ad_groups.deep_cpa_bid"
-deep_external_action = "ad_groups.deep_external_action"
-display_name = "ad_groups.adgroup_name"
 enable_inventory_filter = "ad_groups.inventory_filter_enabled"
-excluded_audience = "ad_groups.excluded_audience_ids"
-external_action = "ad_groups.external_action"
-fallback_type = "ad_groups.fallback_type"
 frequency = "ad_groups.frequency"
 frequency_schedule = "ad_groups.frequency_schedule"
 gender = "ad_groups.gender"
-impression_tracking_url = "ad_groups.impression_tracking_url"
 interest_category_v2 = "ad_groups.interest_category_ids"
 ios_osv = "ad_groups.min_ios_version"
 is_comment_disable = "ad_groups.comment_disabled"
 is_hfss = "ad_groups.is_hfss"
 is_new_structure = "ad_groups.is_new_structure"
 keywords = "ad_groups.keywords"
-landing_page_url = "ad_groups.landing_page_url"
 languages = "ad_groups.languages"
 location = "ad_groups.location_ids"
-open_url = "ad_groups.open_url"
-open_url_type = "ad_groups.open_url_type"
+open_url = "ad_groups.promotion_website_type"
 operation_system = "ad_groups.operating_systems"
 opt_status = "ad_groups.operation_status"
 optimize_goal = "ad_groups.optimization_goal"
 pacing = "ad_groups.pacing"
-package = "ad_groups.package"
-pangle_block_app_list_id = "ad_groups.blocked_pangle_app_ids"
 pixel_id = "ad_groups.pixel_id"
-placement = "ad_groups.placements"
 placement_type = "ad_groups.placement_type"
-profile_image = "ad_groups.profile_image"
 schedule_end_time = "ad_groups.schedule_end_time"
 schedule_start_time = "ad_groups.schedule_start_time"
 schedule_type = "ad_groups.schedule_type"
-skip_learning_phase = "ad_groups.skip_learning_phase"
-statistic_type = "ad_groups.statistic_type"
-status = "ad_groups.operation_status"
 video_actions = "ad_groups.video_actions"
 video_download = "ad_groups.video_download_disabled"
 
@@ -339,11 +340,18 @@ ad_groups = [
     "_airbyte_extracted_at",
     "_airbyte_meta",
     "_airbyte_raw_id",
+    "action_category_ids",
+    "action_days",
     "actions",
     "adgroup_app_profile_page_state",
+    "age_groups",
+    "audience_ids",
     "audience_rule",
     "auto_targeting_enabled",
     "bid_display_mode",
+    "bid_price",
+    "bid_type",
+    "blocked_pangle_app_ids",
     "brand_safety_partner",
     "brand_safety_type",
     "campaign_name",
@@ -352,11 +360,17 @@ ad_groups = [
     "catalog_id",
     "category_exclusion_ids",
     "contextual_tag_ids",
+    "conversion_bid_price",
     "conversion_window",
+    "cpv_video_duration",
     "create_time",
+    "dayparting",
+    "deep_bid_type",
+    "deep_cpa_bid",
     "delivery_mode",
     "device_model_ids",
     "device_price_ranges",
+    "excluded_audience_ids",
     "excluded_custom_actions",
     "excluded_pangle_audience_package_ids",
     "feed_type",
@@ -369,11 +383,13 @@ ad_groups = [
     "ios_quota_type",
     "is_smart_performance_campaign",
     "isp_ids",
+    "network_types",
     "next_day_retention",
     "optimization_event",
+    "package",
+    "placements",
     "product_set_id",
     "promotion_type",
-    "promotion_website_type",
     "purchased_impression",
     "purchased_reach",
     "rf_estimated_cpr",
@@ -387,8 +403,10 @@ ad_groups = [
     "secondary_status",
     "share_disabled",
     "shopping_ads_retargeting_type",
+    "skip_learning_phase",
     "spending_power",
     "split_test_adgroup_ids",
+    "statistic_type",
     "targeting_expansion",
     "targeting_expansion.expansion_enabled",
     "targeting_expansion.expansion_types",
