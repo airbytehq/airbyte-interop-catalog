@@ -24,7 +24,8 @@ transforms:
         description: Name of this ad creative as seen in the ad account's library.
       url_tags:
         expression: ad_creatives.url_tags
-        description: A set of query string parameters which will replace or be appended
+        description:
+          A set of query string parameters which will replace or be appended
           to urls clicked from page post ads, message of the post, and canvas app
           install creatives only.
       _fivetran_synced:
@@ -61,90 +62,102 @@ transforms:
         expression: MISSING
         description: Link of the template app for iphone
 annotations:
+  approved: false
+  missing_fields:
+    - _fivetran_id
+    - asset_feed_spec_link_urls
+    - object_story_link_data_caption
+    - object_story_link_data_child_attachments
+    - object_story_link_data_description
+    - object_story_link_data_link
+    - object_story_link_data_message
+    - template_app_link_spec_android
+    - template_app_link_spec_ios
+    - template_app_link_spec_ipad
+    - template_app_link_spec_iphone
   evaluation:
     source_stream_name: ad_creatives
     target_table_name: creative_history
-    name_match_score: 0.2
-    score: 0.35
-    explanation: The overall mapping confidence is based on the number of fields with
-      correct expressions as opposed to MISSING. Fields with MISSING expressions were
-      assigned a 0.0 score, greatly affecting the overall score. The mapping has many
-      fields with MISSING expressions which pulls down the overall score significantly.
+    name_match_score: 0.6
+    score: 0.3611764705882353
+    explanation:
+      The overall confidence score is based on the evaluation of each field
+      mapping. Several fields have 'MISSING' as their expression, which results in
+      a lower confidence score. Others like '_fivetran_synced' are correctly matched
+      to '_airbyte_extracted_at' with high confidence. The score is averaged across
+      all fields, reducing the overall confidence due to low or missing matches.
     field_mapping_evals:
       - name: _fivetran_id
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', indicating no match was found.
+        explanation: Expression is 'MISSING', resulting in zero confidence.
       - name: page_link
         expression: ad_creatives.link_url
         score: 0.7
-        explanation: Matching to 'ad_creatives.link_url' is acceptable within context.
+        explanation: Field and expression have a clear match, score is capped at 0.7.
       - name: template_page_link
         expression: ad_creatives.template_url
         score: 0.7
-        explanation: Matching to 'ad_creatives.template_url' is acceptable within
-          context.
+        explanation: Field and expression have a clear match, score is capped at 0.7.
       - name: id
         expression: ad_creatives.id
         score: 0.7
-        explanation: Matching to 'ad_creatives.id' is correct since both refer to
-          ad creative ID.
+        explanation: Field and expression have a clear match, score is capped at 0.7.
       - name: account_id
         expression: ad_creatives.account_id
         score: 0.7
-        explanation: Matching to 'ad_creatives.account_id' as both refer to account
-          identification.
+        explanation: Field and expression have a clear match, score is capped at 0.7.
       - name: name
         expression: ad_creatives.name
         score: 0.7
-        explanation: Matching to 'ad_creatives.name' is correct as both represent
-          the ad creative name.
+        explanation: Field and expression have a clear match, score is capped at 0.7.
       - name: url_tags
         expression: ad_creatives.url_tags
         score: 0.7
-        explanation: Matching to 'ad_creatives.url_tags' is valid for the URL-related
-          context.
+        explanation: Field and expression have a clear match, score is capped at 0.7.
       - name: _fivetran_synced
         expression: ad_creatives._airbyte_extracted_at
-        score: 0.7
-        explanation: Correct mapping to 'ad_creatives._airbyte_extracted_at'.
+        score: 1.0
+        explanation:
+          Properly mapped to '_airbyte_extracted_at', indicating a perfect
+          match.
       - name: asset_feed_spec_link_urls
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', indicating no match was found.
+        explanation: Expression is 'MISSING', resulting in zero confidence.
       - name: object_story_link_data_child_attachments
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', indicating no match was found.
+        explanation: Expression is 'MISSING', resulting in zero confidence.
       - name: object_story_link_data_caption
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', indicating no match was found.
+        explanation: Expression is 'MISSING', resulting in zero confidence.
       - name: object_story_link_data_description
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', indicating no match was found.
+        explanation: Expression is 'MISSING', resulting in zero confidence.
       - name: object_story_link_data_link
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', indicating no match was found.
+        explanation: Expression is 'MISSING', resulting in zero confidence.
       - name: object_story_link_data_message
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', indicating no match was found.
+        explanation: Expression is 'MISSING', resulting in zero confidence.
       - name: template_app_link_spec_ios
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', indicating no match was found.
+        explanation: Expression is 'MISSING', resulting in zero confidence.
       - name: template_app_link_spec_ipad
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', indicating no match was found.
+        explanation: Expression is 'MISSING', resulting in zero confidence.
       - name: template_app_link_spec_android
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', indicating no match was found.
+        explanation: Expression is 'MISSING', resulting in zero confidence.
       - name: template_app_link_spec_iphone
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', indicating no match was found.
+        explanation: Expression is 'MISSING', resulting in zero confidence.

@@ -35,3 +35,62 @@ transforms:
       updated_at:
         expression: ticket_pipelines.updatedAt
         description: A timestamp representing when the record was updated.
+annotations:
+  approved: false
+  missing_fields:
+    - _fivetran_deleted
+    - active
+    - display_order
+    - object_type_id
+    - pipeline_id
+  evaluation:
+    source_stream_name: ticket_pipelines
+    target_table_name: ticket_pipeline
+    name_match_score: 0.25
+    score: 0.44
+    explanation:
+      The overall table mapping confidence score is calculated based on
+      individual field mapping scores. Mappings with 'MISSING' expressions are given
+      a score of 0.0, which significantly impacts the overall score. High confidence
+      mappings such as '_fivetran_synced' contribute positively.
+    field_mapping_evals:
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: Mapping is 'MISSING', hence confidence score is 0.0.
+      - name: _fivetran_synced
+        expression: ticket_pipelines._airbyte_extracted_at
+        score: 0.7
+        explanation: Mapped to '_airbyte_extracted_at', which is a recommended mapping.
+      - name: active
+        expression: MISSING
+        score: 0.0
+        explanation: Mapping is 'MISSING', hence confidence score is 0.0.
+      - name: display_order
+        expression: MISSING
+        score: 0.0
+        explanation: Mapping is 'MISSING', hence confidence score is 0.0.
+      - name: label
+        expression: ticket_pipelines.label
+        score: 0.6
+        explanation: Mapped to 'ticket_pipelines.label', which is likely a good match.
+      - name: object_type_id
+        expression: MISSING
+        score: 0.0
+        explanation: Mapping is 'MISSING', hence confidence score is 0.0.
+      - name: pipeline_id
+        expression: MISSING
+        score: 0.0
+        explanation: Mapping is 'MISSING', hence confidence score is 0.0.
+      - name: created_at
+        expression: ticket_pipelines.createdAt
+        score: 0.6
+        explanation:
+          Mapped to 'ticket_pipelines.createdAt', which is a likely match
+          for a creation timestamp.
+      - name: updated_at
+        expression: ticket_pipelines.updatedAt
+        score: 0.6
+        explanation:
+          Mapped to 'ticket_pipelines.updatedAt', which is a likely match
+          for an update timestamp.

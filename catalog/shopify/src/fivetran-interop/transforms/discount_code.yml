@@ -31,3 +31,49 @@ transforms:
       usage_count:
         expression: discount_codes.usage_count
         description: The number of times that the discount code has been redeemed.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: discount_codes
+    target_table_name: discount_code
+    name_match_score: 0.9
+    score: 0.86
+    explanation:
+      The table mapping shows a high confidence level based on the provided
+      mappings. All fields have appropriate expressions with high confidence scores.
+      The name match score is based on the consistency of naming conventions across
+      the mappings.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: discount_codes._airbyte_extracted_at
+        score: 1.0
+        explanation: Perfect match with source stream's '_airbyte_extracted_at' column.
+      - name: code
+        expression: discount_codes.code
+        score: 0.9
+        explanation:
+          Expression correctly matches the intended functionality of the
+          discount code.
+      - name: created_at
+        expression: discount_codes.created_at
+        score: 0.9
+        explanation: Field captures correct timestamp as per the description.
+      - name: id
+        expression: discount_codes.id
+        score: 0.9
+        explanation: Field properly identifies the unique ID for the discount code.
+      - name: price_rule_id
+        expression: discount_codes.price_rule_id
+        score: 0.8
+        explanation: Expression correctly associates discount code with a price rule.
+      - name: updated_at
+        expression: discount_codes.updated_at
+        score: 0.8
+        explanation: Field correctly captures timestamp for code updates.
+      - name: usage_count
+        expression: discount_codes.usage_count
+        score: 0.8
+        explanation:
+          Expression accurately reflects the redemption frequency of the
+          discount code.

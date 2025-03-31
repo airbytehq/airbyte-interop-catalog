@@ -31,3 +31,56 @@ transforms:
       updated_at:
         expression: owners.updatedAt
         description:
+annotations:
+  approved: true
+  missing_fields:
+    - portal_id
+    - type
+  evaluation:
+    source_stream_name: owners
+    target_table_name: owner
+    name_match_score: 0.6666666666666666
+    score: 0.7777777777777778
+    explanation:
+      The overall table mapping score is an aggregation of individual field
+      mappings. Each field's confidence is evaluated based on provided guidelines
+      and summed up for the overall score.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: owners._airbyte_extracted_at
+        score: 1.0
+        explanation:
+          _fivetran_synced is correctly mapped to a source stream's _airbyte_extracted_at
+          column.
+      - name: created_at
+        expression: owners.createdAt
+        score: 0.7
+        explanation: created_at is likely correctly mapped to a timestamp field.
+      - name: email
+        expression: owners.email
+        score: 0.7
+        explanation: email is likely correctly mapped to an email field.
+      - name: first_name
+        expression: owners.firstName
+        score: 0.7
+        explanation: first_name is likely correctly mapped to a first name field.
+      - name: last_name
+        expression: owners.lastName
+        score: 0.7
+        explanation: last_name is likely correctly mapped to a last name field.
+      - name: owner_id
+        expression: owners.id
+        score: 0.7
+        explanation: owner_id is likely correctly mapped to an ID field.
+      - name: portal_id
+        expression: MISSING
+        score: 0.0
+        explanation: portal_id is missing, hence confidence score is 0.0.
+      - name: type
+        expression: MISSING
+        score: 0.0
+        explanation: type is missing, hence confidence score is 0.0.
+      - name: updated_at
+        expression: owners.updatedAt
+        score: 0.7
+        explanation: updated_at is likely correctly mapped to a timestamp field.

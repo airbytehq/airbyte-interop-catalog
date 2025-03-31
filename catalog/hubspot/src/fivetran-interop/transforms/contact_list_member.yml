@@ -19,3 +19,44 @@ transforms:
       contact_list_id:
         expression: contacts_list_memberships.static_list_id
         description: The ID of the related contact list.
+annotations:
+  approved: false
+  missing_fields:
+    - _fivetran_deleted
+    - added_at
+  evaluation:
+    source_stream_name: contacts_list_memberships
+    target_table_name: contact_list_member
+    name_match_score: 0.7
+    score: 0.54
+    explanation:
+      The overall confidence score is based on individual field scores.
+      Two fields have mappings (contact_id, contact_list_id) which appear correctly
+      mapped with other fields receiving lower scores due to either being 'MISSING'
+      or not having a clear perfect match. '_fivetran_synced' field is perfectly mapped
+      as per guideline.
+    field_mapping_evals:
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING', indicating no confidence in mapping.
+      - name: _fivetran_synced
+        expression: contacts_list_memberships._airbyte_extracted_at
+        score: 1.0
+        explanation: Perfectly mapped as per guideline to source stream's '_airbyte_extracted_at'.
+      - name: added_at
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING', indicating no confidence in mapping.
+      - name: contact_id
+        expression: contacts_list_memberships.vid
+        score: 0.7
+        explanation:
+          The expression 'contacts_list_memberships.vid' matches the description,
+          providing a good, but not perfect, match.
+      - name: contact_list_id
+        expression: contacts_list_memberships.static_list_id
+        score: 0.7
+        explanation:
+          The expression 'contacts_list_memberships.static_list_id' matches
+          the description, providing a good, but not perfect, match.

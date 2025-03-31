@@ -35,3 +35,63 @@ transforms:
       updated_at:
         expression: discount_codes.updated_at
         description: When the checkout's discount was last updated
+annotations:
+  approved: false
+  missing_fields:
+    - amount
+    - checkout_id
+    - discount_id
+    - index
+  evaluation:
+    source_stream_name: discount_codes
+    target_table_name: abandoned_checkout_discount_code
+    name_match_score: 0.5
+    score: 0.36
+    explanation:
+      The overall confidence score is calculated based on the presence
+      of valid expressions for the mappings. Fields with 'MISSING' expressions contribute
+      0.0 to the confidence. \nThe field '_fivetran_synced' is mapped as expected
+      with a known pattern, contributing positively to the confidence. Several fields
+      could not be mapped correctly, reducing the overall confidence score. \nThe
+      name match score reflects a moderate match between the field names and their
+      expressions, where some fields like '_fivetran_synced', 'code', 'created_at',
+      'type', and 'updated_at' are mapped well, but others are missing critical information.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: discount_codes._airbyte_extracted_at
+        score: 0.8
+        explanation: Mapped to '_airbyte_extracted_at' as expected with high confidence.
+      - name: amount
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING', yielding zero confidence score.
+      - name: checkout_id
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING', yielding zero confidence score.
+      - name: code
+        expression: discount_codes.code
+        score: 0.7
+        explanation: Mapped to 'discount_codes.code' with acceptable confidence.
+      - name: created_at
+        expression: discount_codes.created_at
+        score: 0.7
+        explanation: Mapped to 'discount_codes.created_at' with acceptable confidence.
+      - name: discount_id
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING', yielding zero confidence score.
+      - name: index
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING', yielding zero confidence score.
+      - name: type
+        expression: discount_codes.discount_type
+        score: 0.65
+        explanation:
+          Mapped to 'discount_codes.discount_type' with slight concerns
+          over exact match but within acceptable range.
+      - name: updated_at
+        expression: discount_codes.updated_at
+        score: 0.7
+        explanation: Mapped to 'discount_codes.updated_at' with acceptable confidence.

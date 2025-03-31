@@ -44,3 +44,53 @@ transforms:
           the team listed as the call creator on the record timeline.\nPLEASE NOTE:
           This field will only be populated for connectors utilizing the HubSpot v3
           API version.\n"
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: engagements_calls
+    target_table_name: engagement_call
+    name_match_score: 0.8
+    score: 0.75
+    explanation:
+      The overall confidence score is based on the high quality of the
+      mappings. The essential field `_fivetran_synced` is accurately matched to the
+      source's `_airbyte_extracted_at`. Other fields have appropriate corresponding
+      expressions and descriptions that show clear relation to their intended use.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: engagements_calls._airbyte_extracted_at
+        score: 1.0
+        explanation:
+          The mapping for `_fivetran_synced` to `engagements_calls._airbyte_extracted_at`
+          is perfect and as expected.
+      - name: engagement_id
+        expression: engagements_calls.id
+        score: 0.9
+        explanation: The expression matches the engagement ID perfectly.
+      - name: _fivetran_deleted
+        expression: engagements_calls.properties.hs_gdpr_deleted
+        score: 0.85
+        explanation: Boolean fields are mapped correctly and serve the correct function.
+      - name: property_hs_createdate
+        expression: engagements_calls.properties.hs_createdate
+        score: 0.7
+        explanation:
+          The mapping for the call's time of creation is accurate but has
+          dependencies on API versioning which could introduce inconsistency.
+      - name: timestamp
+        expression: engagements_calls.properties.hs_timestamp
+        score: 0.7
+        explanation:
+          Similar to `property_hs_createdate`, the timestamp mapping accuracy
+          is affected by its dependency on API versions.
+      - name: property_hubspot_owner_id
+        expression: engagements_calls.properties.hubspot_owner_id
+        score: 0.7
+        explanation: The owner ID is mapped correctly but conditional on API usage.
+      - name: property_hubspot_team_id
+        expression: engagements_calls.properties.hubspot_team_id
+        score: 0.7
+        explanation:
+          The team ID mapping is also dependent on the API version being
+          used.

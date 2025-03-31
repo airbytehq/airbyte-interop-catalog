@@ -97,3 +97,112 @@ transforms:
           The three-letter code (ISO 4217 format) for the currency that
           the customer used when they paid for their last order. Defaults to the shop
           currency. Returns the shop currency for test orders.
+annotations:
+  approved: true
+  missing_fields:
+    - _fivetran_deleted
+  evaluation:
+    source_stream_name: customers
+    target_table_name: customer
+    name_match_score: 0.8
+    score: 0.75
+    explanation:
+      Most fields have direct mapping with highly plausible expression
+      matches. One field has a missing expression, which lowered the overall score.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: customers._airbyte_extracted_at
+        score: 1.0
+        explanation:
+          Correctly mapped to a source stream's '_airbyte_extracted_at'
+          column.
+      - name: accepts_marketing
+        expression: customers.accepts_marketing
+        score: 0.6
+        explanation:
+          The field seems deprecated but has a logical description and
+          expression match.
+      - name: created_at
+        expression: customers.created_at
+        score: 0.9
+        explanation: Direct and highly plausible field match for creation date.
+      - name: default_address_id
+        expression: customers.default_address.id
+        score: 0.8
+        explanation: Reasonable match for default address id.
+      - name: email
+        expression: customers.email
+        score: 0.9
+        explanation: Correct match as a unique identifier.
+      - name: first_name
+        expression: customers.first_name
+        score: 0.9
+        explanation: Name fields have a direct match.
+      - name: id
+        expression: customers.id
+        score: 0.9
+        explanation: Direct match for unique identifier.
+      - name: last_name
+        expression: customers.last_name
+        score: 0.9
+        explanation: Name fields have a direct match.
+      - name: orders_count
+        expression: customers.orders_count
+        score: 0.8
+        explanation: Logical match with expression description.
+      - name: phone
+        expression: customers.phone
+        score: 0.8
+        explanation: Reasonable match for unique identifier.
+      - name: state
+        expression: customers.state
+        score: 0.7
+        explanation: Uncertain match; could refer to different account statuses.
+      - name: tax_exempt
+        expression: customers.tax_exempt
+        score: 0.8
+        explanation: Clear logical match for tax exemption.
+      - name: total_spent
+        expression: customers.total_spent
+        score: 0.9
+        explanation: High confidence with purchase history total amount.
+      - name: updated_at
+        expression: customers.updated_at
+        score: 0.9
+        explanation: Matches well with last update timestamp.
+      - name: verified_email
+        expression: customers.verified_email
+        score: 0.7
+        explanation: Budget fittings for verified email status might vary.
+      - name: email_marketing_consent_state
+        expression: customers.email_marketing_consent.state
+        score: 0.7
+        explanation: New version field match that may vary slightly.
+      - name: email_marketing_consent_opt_in_level
+        expression: customers.email_marketing_consent.opt_in_level
+        score: 0.7
+        explanation: Logical but might differ in specifics.
+      - name: email_marketing_consent_consent_updated_at
+        expression: customers.email_marketing_consent.consent_updated_at
+        score: 0.7
+        explanation: Correct temporal context but could vary slightly.
+      - name: accepts_marketing_updated_at
+        expression: customers.accepts_marketing_updated_at
+        score: 0.6
+        explanation: Deprecated field with review needed.
+      - name: marketing_opt_in_level
+        expression: customers.marketing_opt_in_level
+        score: 0.6
+        explanation: Deprecated field with review needed.
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: Missing expression leads to zero confidence.
+      - name: note
+        expression: customers.note
+        score: 0.8
+        explanation: Adequate match for a note about the customer.
+      - name: currency
+        expression: customers.currency
+        score: 0.8
+        explanation: Adequate description and expression match with currency code.

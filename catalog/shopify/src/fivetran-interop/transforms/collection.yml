@@ -68,3 +68,70 @@ transforms:
         description:
           The date and time (ISO 8601 format) when the collection was last
           modified.
+annotations:
+  approved: false
+  missing_fields:
+    - _fivetran_deleted
+  evaluation:
+    source_stream_name: smart_collections
+    target_table_name: collection
+    name_match_score: 0.6
+    score: 0.68
+    explanation:
+      Confidence evaluation considers 'MISSING' as 0.0, with highest confidence
+      at 1.0 for perfect mappings. '_fivetran_synced' is correctly mapped to '_airbyte_extracted_at'.
+    field_mapping_evals:
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING', indicating no mapping found.
+      - name: _fivetran_synced
+        expression: smart_collections._airbyte_extracted_at
+        score: 0.7
+        explanation:
+          Correctly mapped to 'smart_collections._airbyte_extracted_at'
+          as expected for '_fivetran_synced' fields.
+      - name: disjunctive
+        expression: smart_collections.disjunctive
+        score: 0.6
+        explanation:
+          Likely referring to the field correctly with necessary logical
+          description.
+      - name: handle
+        expression: smart_collections.handle
+        score: 0.7
+        explanation:
+          Mapping seems accurate with description matching expected unique
+          string identifier.
+      - name: id
+        expression: smart_collections.id
+        score: 0.7
+        explanation: ID mapping is usually straightforward and correct.
+      - name: published_at
+        expression: smart_collections.published_at
+        score: 0.7
+        explanation:
+          Field aligns with the expected published date and time in ISO
+          format.
+      - name: published_scope
+        expression: smart_collections.published_scope
+        score: 0.7
+        explanation: Matches valid values for publishing channels.
+      - name: rules
+        expression: smart_collections.rules
+        score: 0.7
+        explanation:
+          Rules description aligns with expected structure for smart collection
+          logic.
+      - name: sort_order
+        expression: smart_collections.sort_order
+        score: 0.7
+        explanation: Description matches expected sort order values.
+      - name: title
+        expression: smart_collections.title
+        score: 0.7
+        explanation: Title mapping aligns with the name of the collection.
+      - name: updated_at
+        expression: smart_collections.updated_at
+        score: 0.7
+        explanation: Field corresponds to expected date and time of last modification.

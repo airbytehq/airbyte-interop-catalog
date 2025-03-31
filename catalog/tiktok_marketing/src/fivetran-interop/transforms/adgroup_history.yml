@@ -253,3 +253,322 @@ transforms:
         description:
           Whether users can download your video ads on TikTok(cannot be
           updated once created).
+annotations:
+  approved: false
+  missing_fields:
+    - action_categories
+    - action_days
+    - age_groups
+    - app_name
+    - audience
+    - bid
+    - bid_type
+    - click_tracking_url
+    - connection_type
+    - conversion_bid
+    - cpv_video_duration
+    - dayparting
+    - deep_bid_type
+    - deep_cpabid
+    - deep_external_action
+    - display_name
+    - excluded_audience
+    - external_action
+    - fallback_type
+    - impression_tracking_url
+    - landing_page_url
+    - open_url_type
+    - package
+    - pangle_block_app_list_id
+    - placement
+    - profile_image
+    - skip_learning_phase
+    - statistic_type
+    - status
+  evaluation:
+    source_stream_name: ad_groups
+    target_table_name: adgroup_history
+    name_match_score: 0.7
+    score: 0.65
+    explanation:
+      Overall confidence score is moderate due to the presence of several
+      fields with missing mappings. Perfect mappings contributed significantly to
+      the confidence score. However, numerous fields lacked appropriate mappings which
+      impacted the overall score negatively.
+    field_mapping_evals:
+      - name: adgroup_id
+        expression: ad_groups.adgroup_id
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: updated_at
+        expression: ad_groups.modify_time
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: advertiser_id
+        expression: ad_groups.advertiser_id
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: campaign_id
+        expression: ad_groups.campaign_id
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: action_categories
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: action_days
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: adgroup_name
+        expression: ad_groups.adgroup_name
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: age_groups
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: android_osv
+        expression: ad_groups.min_android_version
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: app_download_url
+        expression: ad_groups.app_download_url
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: app_id
+        expression: ad_groups.app_id
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: app_name
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: app_type
+        expression: ad_groups.app_type
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: audience
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: audience_type
+        expression: ad_groups.audience_type
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: bid
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: bid_type
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: billing_event
+        expression: ad_groups.billing_event
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: budget
+        expression: ad_groups.budget
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: budget_mode
+        expression: ad_groups.budget_mode
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: carriers
+        expression: ad_groups.carriers
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: category
+        expression: ad_groups.category_id
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: click_tracking_url
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: connection_type
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: conversion_bid
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: cpv_video_duration
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: creative_material_mode
+        expression: ad_groups.creative_material_mode
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: dayparting
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: deep_bid_type
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: deep_cpabid
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: deep_external_action
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: display_name
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: enable_inventory_filter
+        expression: ad_groups.inventory_filter_enabled
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: excluded_audience
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: external_action
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: fallback_type
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: frequency
+        expression: ad_groups.frequency
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: frequency_schedule
+        expression: ad_groups.frequency_schedule
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: gender
+        expression: ad_groups.gender
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: impression_tracking_url
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: interest_category_v2
+        expression: ad_groups.interest_category_ids
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: ios_osv
+        expression: ad_groups.min_ios_version
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: is_comment_disable
+        expression: ad_groups.comment_disabled
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: is_hfss
+        expression: ad_groups.is_hfss
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: is_new_structure
+        expression: ad_groups.is_new_structure
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: keywords
+        expression: ad_groups.keywords
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: landing_page_url
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: languages
+        expression: ad_groups.languages
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: location
+        expression: ad_groups.location_ids
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: open_url
+        expression: ad_groups.promotion_website_type
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: open_url_type
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: operation_system
+        expression: ad_groups.operating_systems
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: opt_status
+        expression: ad_groups.operation_status
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: optimize_goal
+        expression: ad_groups.optimization_goal
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: pacing
+        expression: ad_groups.pacing
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: package
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: pangle_block_app_list_id
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: pixel_id
+        expression: ad_groups.pixel_id
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: placement
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: placement_type
+        expression: ad_groups.placement_type
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: profile_image
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: schedule_end_time
+        expression: ad_groups.schedule_end_time
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: schedule_start_time
+        expression: ad_groups.schedule_start_time
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: schedule_type
+        expression: ad_groups.schedule_type
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: skip_learning_phase
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: statistic_type
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: status
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: video_actions
+        expression: ad_groups.video_actions
+        score: 1.0
+        explanation: Perfect mapping.
+      - name: video_download
+        expression: ad_groups.video_download_disabled
+        score: 1.0
+        explanation: Perfect mapping.

@@ -231,3 +231,193 @@ transforms:
         description:
           The monetary worth or potential value assigned to a lead generated
           through ads.
+annotations:
+  approved: false
+  missing_fields:
+    - cpm
+    - total_sales_lead_value
+  evaluation:
+    source_stream_name: ads_reports_hourly
+    target_table_name: ad_report_hourly
+    name_match_score: 0.55
+    score: 0.6
+    explanation:
+      The overall confidence score is calculated based on the individual
+      field mappings. Fields with expression 'MISSING' are assigned a score of 0.0.
+      The average of all valid mapping scores provides the table's confidence score.
+      Some fields could not be matched perfectly, and as per additional instructions,
+      no mapping above 0.7 is suggested for columns that could refer to different
+      things.
+    field_mapping_evals:
+      - name: ad_id
+        expression: ads_reports_hourly.ad_id
+        score: 0.95
+        explanation: Direct match between field name and expression.
+      - name: stat_time_hour
+        expression: ads_reports_hourly.stat_time_hour
+        score: 0.85
+        explanation: Strong match with field and expression name.
+      - name: cost_per_conversion
+        expression: ads_reports_hourly.metrics.cost_per_conversion
+        score: 0.8
+        explanation: High relevance between name and expression.
+      - name: real_time_conversion
+        expression: ads_reports_hourly.metrics.real_time_conversion
+        score: 0.8
+        explanation: Relevant mapping based on similar context.
+      - name: cpc
+        expression: ads_reports_hourly.metrics.cpc
+        score: 0.85
+        explanation: Expression accurately matches expected field.
+      - name: video_play_actions
+        expression: ads_reports_hourly.metrics.video_play_actions
+        score: 0.8
+        explanation: Field and expression context align well.
+      - name: conversion_rate
+        expression: ads_reports_hourly.metrics.conversion_rate
+        score: 0.75
+        explanation: Field name closely matches with expression.
+      - name: video_views_p_75
+        expression: ads_reports_hourly.metrics.video_views_p75
+        score: 0.75
+        explanation: Matches expression closely regarding video metrics.
+      - name: result
+        expression: ads_reports_hourly.metrics.result
+        score: 0.7
+        explanation: Fair match with expression meaning.
+      - name: video_views_p_50
+        expression: ads_reports_hourly.metrics.video_views_p50
+        score: 0.75
+        explanation: Matches expression closely regarding video metrics.
+      - name: impressions
+        expression: ads_reports_hourly.metrics.impressions
+        score: 0.9
+        explanation: Strong content match between field and expression.
+      - name: comments
+        expression: ads_reports_hourly.metrics.comments
+        score: 0.85
+        explanation: Field name and expression are relevant to each other.
+      - name: real_time_cost_per_result
+        expression: ads_reports_hourly.metrics.real_time_cost_per_result
+        score: 0.7
+        explanation: Fair match between field name and expression meaning.
+      - name: conversion
+        expression: ads_reports_hourly.metrics.conversion
+        score: 0.75
+        explanation: Matches expression closely regarding conversion metrics.
+      - name: real_time_result
+        expression: ads_reports_hourly.metrics.real_time_result
+        score: 0.7
+        explanation: Matches expression closely regarding real-time results.
+      - name: video_view_p_100
+        expression: ads_reports_hourly.metrics.video_views_p100
+        score: 0.75
+        explanation: Close correlation with video percentage view expression.
+      - name: shares
+        expression: ads_reports_hourly.metrics.shares
+        score: 0.75
+        explanation: Expression seems to fit expected field meaning.
+      - name: real_time_conversion_rate
+        expression: ads_reports_hourly.metrics.real_time_conversion_rate
+        score: 0.7
+        explanation: Decent match considering click percentages.
+      - name: cost_per_secondary_goal_result
+        expression: ads_reports_hourly.metrics.cost_per_secondary_goal_result
+        score: 0.7
+        explanation: Matches expression context for cost and goal achievements.
+      - name: secondary_goal_result_rate
+        expression: ads_reports_hourly.metrics.secondary_goal_result_rate
+        score: 0.7
+        explanation: Close correlation with goal and rate metrics.
+      - name: clicks
+        expression: ads_reports_hourly.metrics.clicks
+        score: 0.9
+        explanation: Perfect match between clicks in field and expression.
+      - name: cost_per_1000_reached
+        expression: ads_reports_hourly.metrics.cost_per_1000_reached
+        score: 0.8
+        explanation: Good match considering cost and reach metrics.
+      - name: video_views_p_25
+        expression: ads_reports_hourly.metrics.video_views_p25
+        score: 0.75
+        explanation: Close match with video percentage metrics.
+      - name: reach
+        expression: ads_reports_hourly.metrics.reach
+        score: 0.85
+        explanation: Expression and field exhibit a very strong match.
+      - name: real_time_cost_per_conversion
+        expression: ads_reports_hourly.metrics.real_time_cost_per_conversion
+        score: 0.7
+        explanation: Fair match between cost metrics and conversion.
+      - name: profile_visits_rate
+        expression: ads_reports_hourly.metrics.profile_visits_rate
+        score: 0.7
+        explanation: Matches expression related to profile and rate metrics.
+      - name: average_video_play
+        expression: ads_reports_hourly.metrics.average_video_play
+        score: 0.8
+        explanation: Good match between average play and expression context.
+      - name: profile_visits
+        expression: ads_reports_hourly.metrics.profile_visits
+        score: 0.8
+        explanation: Strong relevance between ad-driven visits and expression.
+      - name: cpm
+        expression: MISSING
+        score: 0.0
+        explanation: Missing source expression to map.
+      - name: ctr
+        expression: ads_reports_hourly.metrics.ctr
+        score: 0.85
+        explanation: Percentage match accuracy is strong.
+      - name: video_watched_2_s
+        expression: ads_reports_hourly.metrics.video_watched_2s
+        score: 0.9
+        explanation: Expression strongly aligned with field name.
+      - name: follows
+        expression: ads_reports_hourly.metrics.follows
+        score: 0.85
+        explanation: High relevancy to expected field context.
+      - name: result_rate
+        expression: ads_reports_hourly.metrics.result_rate
+        score: 0.85
+        explanation: Percentage based calculations provide a strong match.
+      - name: video_watched_6_s
+        expression: ads_reports_hourly.metrics.video_watched_6s
+        score: 0.9
+        explanation: Expression is well-aligned with time metric.
+      - name: secondary_goal_result
+        expression: ads_reports_hourly.metrics.secondary_goal_result
+        score: 0.7
+        explanation: Matches expression closely regarding secondary goals.
+      - name: cost_per_result
+        expression: ads_reports_hourly.metrics.cost_per_result
+        score: 0.7
+        explanation: Fair relation to cost results within expressions.
+      - name: average_video_play_per_user
+        expression: ads_reports_hourly.metrics.average_video_play_per_user
+        score: 0.8
+        explanation: Strong match with expression context.
+      - name: real_time_result_rate
+        expression: ads_reports_hourly.metrics.real_time_result_rate
+        score: 0.7
+        explanation: Decent correlation for real-time and rate metrics.
+      - name: spend
+        expression: ads_reports_hourly.metrics.spend
+        score: 0.9
+        explanation: Direct match within expected financial context.
+      - name: likes
+        expression: ads_reports_hourly.metrics.likes
+        score: 0.85
+        explanation: Relevance of expression and field is quite strong.
+      - name: _fivetran_synced
+        expression: ads_reports_hourly._airbyte_extracted_at
+        score: 1.0
+        explanation: Direct mapping to a required standard field.
+      - name: total_purchase_value
+        expression: ads_reports_hourly.metrics.total_purchase_value
+        score: 0.8
+        explanation: Expressive meaning and field targets align.
+      - name: total_sales_lead_value
+        expression: MISSING
+        score: 0.0
+        explanation: Missing source expression.

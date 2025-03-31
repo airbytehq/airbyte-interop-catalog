@@ -25,3 +25,58 @@ transforms:
       value:
         expression: deals_property_history.value
         description: '{{ doc("history_value") }}'
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: deals_property_history
+    target_table_name: deal_property_history
+    name_match_score: 0.88
+    score: 0.85
+    explanation:
+      The mapping configuration was found to be generally accurate, with
+      most fields having a clear and correct match. Some fields like '_fivetran_synced'
+      had a perfect, pre-defined mapping match. Other fields had an adequate match
+      based on their names and context. No fields were deemed confusingly mismatched.
+      Adjustments to certain field expressions are suggested for improved confidence.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: deals_property_history._airbyte_extracted_at
+        score: 1.0
+        explanation:
+          The '_fivetran_synced' was correctly mapped to '_airbyte_extracted_at'
+          as per predefined rules.
+      - name: deal_id
+        expression: deals_property_history.dealId
+        score: 0.95
+        explanation:
+          The 'deal_id' field had a strong match based on its name and
+          context.
+      - name: name
+        expression: deals_property_history.properties.dealname
+        score: 0.65
+        explanation:
+          The 'name' field has a reasonable match, but ambiguity about
+          potential context differences slightly lowered the score.
+      - name: source
+        expression: deals_property_history.properties.hs_object_source
+        score: 0.7
+        explanation:
+          The 'source' field matches well but could be interpreted differently
+          in distinct contexts.
+      - name: source_id
+        expression: deals_property_history.properties.hs_object_source_id
+        score: 0.9
+        explanation: The 'source_id' matches strongly with the respective column identification.
+      - name: timestamp
+        expression: deals_property_history.timestamp
+        score: 0.85
+        explanation:
+          The 'timestamp' has a high confidence score as it appropriately
+          matches time-based data.
+      - name: value
+        expression: deals_property_history.value
+        score: 0.8
+        explanation:
+          The 'value' has a good match but the complexity of possible interpretations
+          reduced the certainty slightly.

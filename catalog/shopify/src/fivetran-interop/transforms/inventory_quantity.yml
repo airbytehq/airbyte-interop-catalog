@@ -28,3 +28,59 @@ transforms:
       _fivetran_synced:
         expression: inventory_levels._airbyte_extracted_at
         description: "{{ doc('_fivetran_synced') }}"
+annotations:
+  approved: false
+  missing_fields: []
+  evaluation:
+    source_stream_name: inventory_levels
+    target_table_name: inventory_quantity
+    name_match_score: 0.65
+    score: 0.63
+    explanation:
+      The overall confidence score is computed based on the matching of
+      field names and their corresponding expressions. The mappings have a mix of
+      good and partial matches.
+    field_mapping_evals:
+      - name: id
+        expression: inventory_levels.id
+        score: 0.9
+        explanation:
+          The field 'id' matches the expression 'inventory_levels.id' very
+          well because the names and context indicate a direct correlation.
+      - name: inventory_item_id
+        expression: inventory_levels.inventory_item_id
+        score: 0.85
+        explanation:
+          The field 'inventory_item_id' has a good match with 'inventory_levels.inventory_item_id'
+          in terms of name and meaning.
+      - name: inventory_level_id
+        expression: inventory_levels.location_id
+        score: 0.7
+        explanation:
+          The field 'inventory_level_id' matches 'inventory_levels.location_id',
+          but the differing terms 'level' and 'location' imply a possible mismatch.
+      - name: name
+        expression: inventory_levels.deactivation_alert
+        score: 0.5
+        explanation:
+          The field 'name' associates with 'inventory_levels.deactivation_alert',
+          which might represent a related inventory state, but the naming does not
+          match directly.
+      - name: quantity
+        expression: inventory_levels.quantities
+        score: 0.4
+        explanation:
+          The field 'quantity' does not exactly match 'inventory_levels.quantities'
+          as expected due to term pluralization and possible value mismatch.
+      - name: updated_at
+        expression: inventory_levels.updated_at
+        score: 0.95
+        explanation:
+          The field 'updated_at' precisely matches 'inventory_levels.updated_at',
+          indicating a near-perfect correlation of both time-related context and naming.
+      - name: _fivetran_synced
+        expression: inventory_levels._airbyte_extracted_at
+        score: 1.0
+        explanation:
+          The field '_fivetran_synced' is properly matched to 'inventory_levels._airbyte_extracted_at',
+          which is the expected mapping.

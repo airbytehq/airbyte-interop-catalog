@@ -18,3 +18,43 @@ transforms:
       value:
         expression: metafield_customers.value
         description: Value of the tag.
+annotations:
+  approved: false
+  missing_fields:
+    - index
+  evaluation:
+    source_stream_name: metafield_customers
+    target_table_name: customer_tag
+    name_match_score: 0.6
+    score: 0.625
+    explanation:
+      Overall confidence score is calculated based on the individual field
+      mappings' scores. The column '_fivetran_synced' is perfectly mapped with a score
+      of 1.0, while 'index' is missing a valid expression, resulting in a score of
+      0.0. The other fields have reasonable expressions resulting in a lower confidence
+      score.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: metafield_customers._airbyte_extracted_at
+        score: 1.0
+        explanation:
+          The field '_fivetran_synced' is mapped to '_airbyte_extracted_at',
+          which is considered a perfect mapping.
+      - name: index
+        expression: MISSING
+        score: 0.0
+        explanation:
+          The 'index' field has a missing expression, resulting in a confidence
+          score of 0.0.
+      - name: customer_id
+        expression: metafield_customers.owner_id
+        score: 0.7
+        explanation:
+          The 'customer_id' field expression 'metafield_customers.owner_id'
+          seems appropriate, but we are cautious and not exceeding 0.7.
+      - name: value
+        expression: metafield_customers.value
+        score: 0.7
+        explanation:
+          The 'value' field expression 'metafield_customers.value' seems
+          appropriate, but we are cautious and not exceeding 0.7.

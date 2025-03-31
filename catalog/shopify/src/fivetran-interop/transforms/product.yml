@@ -56,3 +56,89 @@ transforms:
           sales channels and apps. - draft: The product isn't ready to sell and is
           unavailable to customers on sales channels and apps. By default, duplicated
           and unarchived products are set to draft.\n"
+annotations:
+  approved: true
+  missing_fields:
+    - _fivetran_deleted
+  evaluation:
+    source_stream_name: products
+    target_table_name: product
+    name_match_score: 0.8
+    score: 0.72
+    explanation:
+      The overall table mapping evaluation considers the individual field
+      mapping scores and the adherence to expected mapping patterns. Fields without
+      valid expressions, like 'MISSING', receive a score of 0.0, negatively impacting
+      the overall score. The table scores well due to accurate mappings for critical
+      fields.
+    field_mapping_evals:
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation:
+          Expression is 'MISSING', indicating the mapping is missing or
+          uncertain.
+      - name: _fivetran_synced
+        expression: products._airbyte_extracted_at
+        score: 0.7
+        explanation:
+          Mapped correctly to '_airbyte_extracted_at', as expected for
+          fivetran synchronization fields.
+      - name: created_at
+        expression: products.created_at
+        score: 1.0
+        explanation:
+          Perfect mapping, 'products.created_at' matches perfectly with
+          'created_at' description.
+      - name: handle
+        expression: products.handle
+        score: 1.0
+        explanation:
+          Perfect mapping, 'products.handle' is well-matched with 'handle'
+          description.
+      - name: id
+        expression: products.id
+        score: 1.0
+        explanation: Perfect mapping, 'products.id' is well-matched with 'id' description.
+      - name: product_type
+        expression: products.product_type
+        score: 1.0
+        explanation:
+          Perfect mapping, 'products.product_type' is well-matched with
+          'product_type' description.
+      - name: published_at
+        expression: products.published_at
+        score: 1.0
+        explanation:
+          Perfect mapping, 'products.published_at' is well-matched with
+          'published_at' description.
+      - name: published_scope
+        expression: products.published_scope
+        score: 1.0
+        explanation:
+          Perfect mapping, 'products.published_scope' is well-matched with
+          'published_scope' description.
+      - name: title
+        expression: products.title
+        score: 1.0
+        explanation:
+          Perfect mapping, 'products.title' is well-matched with 'title'
+          description.
+      - name: updated_at
+        expression: products.updated_at
+        score: 1.0
+        explanation:
+          Perfect mapping, 'products.updated_at' is well-matched with 'updated_at'
+          description.
+      - name: vendor
+        expression: products.vendor
+        score: 1.0
+        explanation:
+          Perfect mapping, 'products.vendor' is well-matched with 'vendor'
+          description.
+      - name: status
+        expression: products.status
+        score: 1.0
+        explanation:
+          Perfect mapping, 'products.status' is well-matched with 'status'
+          description.

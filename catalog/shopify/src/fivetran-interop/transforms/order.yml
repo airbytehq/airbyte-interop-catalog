@@ -312,3 +312,80 @@ transforms:
           The ID of the order placed on the originating platform. This
           value doesn't correspond to the Shopify ID that's generated from a completed
           draft.
+annotations:
+  approved: false
+  missing_fields:
+    - billing_address_address_1
+    - billing_address_address_2
+    - billing_address_city
+    - billing_address_company
+    - billing_address_country
+    - billing_address_country_code
+    - billing_address_first_name
+    - billing_address_last_name
+    - billing_address_latitude
+    - billing_address_longitude
+    - billing_address_name
+    - billing_address_phone
+    - billing_address_province
+    - billing_address_province_code
+    - billing_address_zip
+    - is_confirmed
+    - shipping_address_address_1
+    - shipping_address_address_2
+    - shipping_address_city
+    - shipping_address_company
+    - shipping_address_country
+    - shipping_address_country_code
+    - shipping_address_first_name
+    - shipping_address_last_name
+    - shipping_address_latitude
+    - shipping_address_longitude
+    - shipping_address_name
+    - shipping_address_phone
+    - shipping_address_province
+    - shipping_address_province_code
+    - shipping_address_zip
+  evaluation:
+    source_stream_name: orders
+    target_table_name: order
+    name_match_score: 0.5
+    score: 0.25
+    explanation:
+      The evaluation primarily faced challenges due to many 'MISSING' expressions,
+      contributing significantly to the low overall score. Accurately mapped fields
+      such as '_fivetran_synced' to 'orders._airbyte_extracted_at' provided confidence,
+      but missing mappings for critical fields such as billing and shipping addresses
+      reduced the score. While some fields like 'app_id', 'browser_ip', 'buyer_accepts_marketing',
+      etc. mapped well, a substantial number of required fields were missing, contributing
+      to a reduced confidence score. Overall, incomplete and missing mappings negatively
+      affected the confidence score.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: orders._airbyte_extracted_at
+        score: 1.0
+        explanation: Mapped to 'orders._airbyte_extracted_at', perfect match by convention.
+      - name: app_id
+        expression: orders.app_id
+        score: 0.8
+        explanation: Mapped to 'orders.app_id', likely correct.
+      - name: billing_address_address_1
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'.
+      - name: browser_ip
+        expression: orders.browser_ip
+        score: 0.8
+        explanation: Mapped to 'orders.browser_ip', likely correct.
+      - name: buyer_accepts_marketing
+        expression: orders.customer.accepts_marketing
+        score: 0.8
+        explanation: Mapped to 'orders.customer.accepts_marketing', likely correct.
+      - name: cancel_reason
+        expression: orders.cancel_reason
+        score: 0.8
+        explanation: Mapped to 'orders.cancel_reason', likely correct.
+      - name: cancelled_at
+        expression: orders.cancelled_at
+        score: 0.8
+        explanation: Mapped to 'orders.cancelled_at', likely correct.

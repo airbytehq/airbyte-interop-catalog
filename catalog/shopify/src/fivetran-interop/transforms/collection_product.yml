@@ -13,3 +13,35 @@ transforms:
       product_id:
         expression: collects.product_id
         description: ID referencing the `product`.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: collects
+    target_table_name: collection_product
+    name_match_score: 0.8
+    score: 0.71
+    explanation:
+      The mapping has an overall confidence score of 0.71. The _fivetran_synced
+      mapping to _airbyte_extracted_at is strong. Other mappings are typical, but
+      not perfect, leading to a lower score overall. Be cautious of potential mismatches
+      in naming conventions.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: collects._airbyte_extracted_at
+        score: 1.0
+        explanation:
+          Perfect match with the source stream's _airbyte_extracted_at
+          column.
+      - name: collection_id
+        expression: collects.collection_id
+        score: 0.6
+        explanation:
+          Moderate confidence due to typical convention in referencing
+          collection IDs.
+      - name: product_id
+        expression: collects.product_id
+        score: 0.65
+        explanation:
+          Typical and expected mapping for product reference, but not perfect
+          due to potential naming differences.

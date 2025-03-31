@@ -31,3 +31,58 @@ transforms:
       order_id:
         expression: order_refunds.order_id
         description: Reference to the order which the refund is associated.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: order_refunds
+    target_table_name: refund
+    name_match_score: 0.9
+    score: 0.85
+    explanation:
+      The table mapping evaluation demonstrates generally high confidence,
+      with key fields showing strong alignment between source and target. Minor discrepancies
+      exist but are not significant.
+    field_mapping_evals:
+      - name: id
+        expression: order_refunds.id
+        score: 1.0
+        explanation: Field 'id' perfectly matches the source field 'order_refunds.id'.
+      - name: created_at
+        expression: order_refunds.created_at
+        score: 1.0
+        explanation: Field 'created_at' perfectly matches the source field 'order_refunds.created_at'.
+      - name: processed_at
+        expression: order_refunds.processed_at
+        score: 1.0
+        explanation: Field 'processed_at' perfectly matches the source field 'order_refunds.processed_at'.
+      - name: note
+        expression: order_refunds.note
+        score: 1.0
+        explanation: Field 'note' perfectly matches the source field 'order_refunds.note'.
+      - name: restock
+        expression: order_refunds.restock
+        score: 0.7
+        explanation:
+          Field 'restock' moderately matches the source field 'order_refunds.restock',
+          likely representing a boolean field.
+      - name: user_id
+        expression: order_refunds.user_id
+        score: 1.0
+        explanation: Field 'user_id' perfectly matches the source field 'order_refunds.user_id'.
+      - name: _fivetran_synced
+        expression: order_refunds._airbyte_extracted_at
+        score: 1.0
+        explanation:
+          Mapped '_fivetran_synced' to '_airbyte_extracted_at' as instructed,
+          ensuring synchronization accuracy.
+      - name: total_duties_set
+        expression: order_refunds.total_duties_set
+        score: 0.6
+        explanation:
+          Field 'total_duties_set' has a low-confidence match, requiring
+          further verification of reference integrity.
+      - name: order_id
+        expression: order_refunds.order_id
+        score: 1.0
+        explanation: Field 'order_id' perfectly matches the source field 'order_refunds.order_id'.

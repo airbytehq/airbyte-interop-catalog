@@ -41,3 +41,58 @@ transforms:
       type:
         expression: engagements.type
         description: One of NOTE, EMAIL, TASK, MEETING, or CALL, the type of the engagement.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: engagements
+    target_table_name: engagement
+    name_match_score: 0.9
+    score: 0.85
+    explanation:
+      The mappings were evaluated for confidence based on the likelihood
+      of accurate data alignment between the source and destination fields. All fields
+      provided were assessed for logical and practical correlation.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: engagements._airbyte_extracted_at
+        score: 1.0
+        explanation:
+          Mapped to source stream's _airbyte_extracted_at column as a standard
+          practice.
+      - name: active
+        expression: engagements.active
+        score: 0.65
+        explanation:
+          Direct expression match with 'engagements.active', but noted
+          for deprecation risks with HubSpot v3.
+      - name: created_at
+        expression: engagements.createdAt
+        score: 0.65
+        explanation:
+          Exact mapping with 'engagements.createdAt', though noted potential
+          deprecation risk.
+      - name: id
+        expression: engagements.id
+        score: 0.8
+        explanation: ID fields are critical and generally map with high confidence.
+      - name: owner_id
+        expression: engagements.ownerId
+        score: 0.65
+        explanation:
+          Exact mapping with 'engagements.ownerId', but noted for possible
+          deprecation.
+      - name: portal_id
+        expression: engagements.portalId
+        score: 0.7
+        explanation: Mapped with documentation support indicating standard usage.
+      - name: timestamp
+        expression: engagements.timestamp
+        score: 0.65
+        explanation:
+          Mapped with 'engagements.timestamp', but noted potential deprecation
+          risks.
+      - name: type
+        expression: engagements.type
+        score: 0.75
+        explanation: Mapped with 'engagements.type', a clear categorical match.

@@ -25,3 +25,63 @@ transforms:
       value:
         expression: contacts_property_history.value
         description: '{{ doc("history_value") }}'
+annotations:
+  approved: false
+  missing_fields:
+    - contact_id
+    - name
+    - source
+  evaluation:
+    source_stream_name: contacts_property_history
+    target_table_name: contact_property_history
+    name_match_score: 0.0
+    score: 0.3714285714285714
+    explanation:
+      The overall score is calculated based on individual field mapping
+      confidence scores. 'MISSING' expressions drastically reduce the score as they
+      indicate a lack of mapping. '_fivetran_synced' was perfectly mapped, contributing
+      positively to the score. Other mappings suffered due to 'MISSING' expressions.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: contacts_property_history._airbyte_extracted_at
+        score: 1.0
+        explanation:
+          "'_fivetran_synced' is correctly mapped to 'contacts_property_history._airbyte_extracted_at',
+          which fits well as expected."
+      - name: contact_id
+        expression: MISSING
+        score: 0.0
+        explanation:
+          The expression is 'MISSING', indicating a lack of mapping for
+          the 'contact_id' field.
+      - name: name
+        expression: MISSING
+        score: 0.0
+        explanation:
+          The expression is 'MISSING', showing no mapping for the 'name'
+          field.
+      - name: source
+        expression: MISSING
+        score: 0.0
+        explanation:
+          The expression is 'MISSING', indicating no mapping for the 'source'
+          field.
+      - name: source_id
+        expression: contacts_property_history.source_id
+        score: 0.7
+        explanation:
+          "'source_id' is mapped to 'contacts_property_history.source_id'.
+          Although not perfect, it's a potential match, yielding a decent score of
+          0.7."
+      - name: timestamp
+        expression: contacts_property_history.timestamp
+        score: 0.7
+        explanation:
+          "'timestamp' maps to 'contacts_property_history.timestamp', which
+          is a plausible mapping, leading to a score of 0.7."
+      - name: value
+        expression: contacts_property_history.value
+        score: 0.7
+        explanation:
+          "'value' matches with 'contacts_property_history.value', which
+          is a suitable mapping, scoring 0.7."

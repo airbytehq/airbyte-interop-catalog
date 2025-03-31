@@ -91,3 +91,123 @@ transforms:
       _fivetran_synced:
         expression: advertisers._airbyte_extracted_at
         description: Timestamp of when Fivetran synced a record.
+annotations:
+  approved: false
+  missing_fields:
+    - phone_number
+    - telephone
+  evaluation:
+    source_stream_name: advertisers
+    target_table_name: advertiser
+    name_match_score: 0.75
+    score: 0.928
+    explanation:
+      The table mapping confidence score is calculated based on individual
+      field mappings. MAPPED fields to actual data source receive high scores, while
+      'MISSING' fields receive a 0 score. The 'name_match_score' represents how well
+      the names of fields match the expected names.
+    field_mapping_evals:
+      - name: id
+        expression: advertisers.advertiser_id
+        score: 1.0
+        explanation: Perfect mapping to 'advertisers.advertiser_id'.
+      - name: address
+        expression: advertisers.address
+        score: 1.0
+        explanation: Perfect mapping to 'advertisers.address'.
+      - name: balance
+        expression: advertisers.balance
+        score: 1.0
+        explanation: Perfect mapping to 'advertisers.balance'.
+      - name: cellphone_number
+        expression: advertisers.cellphone_number
+        score: 1.0
+        explanation: Field correctly mapped despite renaming.
+      - name: company
+        expression: advertisers.company
+        score: 1.0
+        explanation: Perfect mapping to 'advertisers.company'.
+      - name: contacter
+        expression: advertisers.contacter
+        score: 1.0
+        explanation: Perfect mapping to 'advertisers.contacter'.
+      - name: country
+        expression: advertisers.country
+        score: 1.0
+        explanation: Perfect mapping to 'advertisers.country'.
+      - name: create_time
+        expression: advertisers.create_time
+        score: 1.0
+        explanation: Perfect mapping to 'advertisers.create_time'.
+      - name: currency
+        expression: advertisers.currency
+        score: 1.0
+        explanation: Perfect mapping to 'advertisers.currency'.
+      - name: description
+        expression: advertisers.description
+        score: 1.0
+        explanation: Perfect mapping to 'advertisers.description'.
+      - name: email
+        expression: advertisers.email
+        score: 1.0
+        explanation: Perfect mapping to 'advertisers.email'.
+      - name: industry
+        expression: advertisers.industry
+        score: 1.0
+        explanation: Perfect mapping to 'advertisers.industry'.
+      - name: language
+        expression: advertisers.language
+        score: 1.0
+        explanation: Perfect mapping to 'advertisers.language'.
+      - name: license_no
+        expression: advertisers.license_no
+        score: 1.0
+        explanation: Perfect mapping to 'advertisers.license_no'.
+      - name: license_url
+        expression: advertisers.license_url
+        score: 1.0
+        explanation: Perfect mapping to 'advertisers.license_url'.
+      - name: name
+        expression: advertisers.name
+        score: 1.0
+        explanation: Perfect mapping to 'advertisers.name'.
+      - name: phone_number
+        expression: MISSING
+        score: 0.0
+        explanation:
+          Field is considered 'MISSING' due to name change, not populated
+          with Tiktok Ads v1.3 API.
+      - name: promotion_area
+        expression: advertisers.promotion_area
+        score: 1.0
+        explanation: Perfect mapping to 'advertisers.promotion_area'.
+      - name: reason
+        expression: advertisers.rejection_reason
+        score: 1.0
+        explanation: Perfect mapping to 'advertisers.rejection_reason'.
+      - name: role
+        expression: advertisers.role
+        score: 1.0
+        explanation: Perfect mapping to 'advertisers.role'.
+      - name: status
+        expression: advertisers.status
+        score: 1.0
+        explanation: Perfect mapping to 'advertisers.status'.
+      - name: telephone
+        expression: MISSING
+        score: 0.0
+        explanation:
+          Field is considered 'MISSING' due to name change, not populated
+          with Tiktok Ads v1.3 API.
+      - name: telephone_number
+        expression: advertisers.telephone_number
+        score: 1.0
+        explanation: Field correctly mapped despite renaming.
+      - name: timezone
+        expression: advertisers.timezone
+        score: 1.0
+        explanation: Perfect mapping to 'advertisers.timezone'.
+      - name: _fivetran_synced
+        expression: advertisers._airbyte_extracted_at
+        score: 1.0
+        explanation: Correctly mapped to '_airbyte_extracted_at', as required.
