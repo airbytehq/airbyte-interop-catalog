@@ -279,7 +279,7 @@ def generate_lock_file_for_project(
         "project": {
             "source_name": source_name,
             "project_name": project_name,
-            "generated_at": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
+            # "generated_at": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),  # Temporarily removed due to noisy diffs
             "requirements_file": str(dbt_requirements_source_file_path),
             "requirements_file_hash": compute_file_hash(dbt_requirements_source_file_path),
             "airbyte_source_file": str(dbt_source_file_path),

@@ -1,7 +1,6 @@
 [project]
 source_name = "tiktok_marketing"
 project_name = "fivetran-interop"
-generated_at = "2025-03-31T07:10:15Z"
 requirements_file = "catalog/tiktok_marketing/requirements/fivetran-interop/src_dbt_requirements.yml"
 requirements_file_hash = "0d922b54ab642a78c4671b74ac4047442ceaa90062bc509a93b6c4474f421eaa"
 airbyte_source_file = "catalog/tiktok_marketing/generated/src_airbyte_tiktok_marketing.yml"

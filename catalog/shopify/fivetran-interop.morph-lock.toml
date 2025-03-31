@@ -1,7 +1,6 @@
 [project]
 source_name = "shopify"
 project_name = "fivetran-interop"
-generated_at = "2025-03-31T17:13:14Z"
 requirements_file = "catalog/shopify/requirements/fivetran-interop/src_dbt_requirements.yml"
 requirements_file_hash = "f022b53cac87e62f4af57a4a9e491e879843c5e70fd63b0ba0451f94c85fb0b3"
 airbyte_source_file = "catalog/shopify/generated/src_airbyte_shopify.yml"
@@ -37,7 +36,7 @@ unmapped_target_tables = []
 
 [mappings.abandoned_checkout]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/abandoned_checkout.yml"
-source_file_hash = "c6df5b876837409f837510dc05f636b7865607527d394d8c8f2622a29431fa86"
+source_file_hash = "83b51b117214922ae1cafd754a4b9c33fe1771a88a8356c858577485e33d1b9d"
 unmapped_target_fields = [
     "customer_id",
     "total_duties",
@@ -163,7 +162,7 @@ abandoned_checkouts = [
 
 [mappings.abandoned_checkout_discount_code]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/abandoned_checkout_discount_code.yml"
-source_file_hash = "6267b7866512d75a76ee9bfe5c4fc3b70e7ec44c4b230f6d38939ce7987d267b"
+source_file_hash = "e7e586d486a58f63d317d39b6db70617766858af9d30624037d0760e2a40e68c"
 unmapped_target_fields = [
     "amount",
     "checkout_id",
@@ -209,7 +208,7 @@ discount_codes = [
 
 [mappings.abandoned_checkout_shipping_line]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/abandoned_checkout_shipping_line.yml"
-source_file_hash = "7acd5bb94b840b334f71fd73d942515c1e4a1b15edd1edd755165cf5cdccbf13"
+source_file_hash = "3fd17d4eed46452d209e520d8c974d10a6381ca579690a3c6458fba6d98324fd"
 unmapped_target_fields = [
     "carrier_identifier",
     "checkout_id",
@@ -351,7 +350,7 @@ abandoned_checkouts = [
 
 [mappings.collection]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/collection.yml"
-source_file_hash = "6905941e1d9bd2440ee04bdecd5d299c2cfa926690ebbb1e351e3e46b9510feb"
+source_file_hash = "e1b39f08f921420e9b8981d78d159e50aa5ed74224e581e19d4a1ffb50685cf0"
 unmapped_target_fields = [
     "_fivetran_deleted",
 ]
@@ -404,7 +403,7 @@ collects = [
 
 [mappings.customer]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/customer.yml"
-source_file_hash = "1a57d147303b9872d3f1dd4be3de72a7b404ac17063eb615e083250e0e532541"
+source_file_hash = "909b505b45e8aa7b84d3913cf565bcd9e47fd1822b36139c9144c0d180192d76"
 unmapped_target_fields = [
     "_fivetran_deleted",
 ]
@@ -471,7 +470,7 @@ customers = [
 
 [mappings.customer_tag]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/customer_tag.yml"
-source_file_hash = "7483d91e92aaf33d50215430dba2df54c646692c00874aee8bbc89d167346042"
+source_file_hash = "0700e1cfb6a6f755ef897b483616a5ca6cf2fe4f1e41d99d9e3a3980846dc763"
 unmapped_target_fields = [
     "index",
 ]
@@ -501,7 +500,7 @@ metafield_customers = [
 
 [mappings.discount_code]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/discount_code.yml"
-source_file_hash = "9cce7c6ee54655e53438db4264ead3e3ff73a19bc797d19fb318abf782c279b3"
+source_file_hash = "bc6281844a5be05dff8618a2dcd60367bbd4ab0cfd24b8b0af7bdc3771580d8c"
 unmapped_target_fields = []
 omitted_target_fields = []
 
@@ -542,7 +541,7 @@ discount_codes = [
 
 [mappings.fulfillment]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/fulfillment.yml"
-source_file_hash = "3475395d397d029cd62c8e6900395d0341da37c3d6434b8b9f7785e2baea14bb"
+source_file_hash = "846d0201637cbbb51cd1d13ab5494fe91db12d014400ecdc79e5281e2439bffb"
 unmapped_target_fields = []
 omitted_target_fields = []
 
@@ -585,7 +584,7 @@ fulfillments = [
 
 [mappings.fulfillment_event]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/fulfillment_event.yml"
-source_file_hash = "2891d92b654c5f0a2d6e79f5916a178c45e52969c103ad84745ad188e1287d4a"
+source_file_hash = "7c5765bcac6072c4010dd854989137bb882ea90a3f71cb1dbade40bb69c46881"
 unmapped_target_fields = [
     "_fivetran_deleted",
     "address_1",
@@ -646,7 +645,7 @@ fulfillments = [
 
 [mappings.inventory_item]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/inventory_item.yml"
-source_file_hash = "a55057a7b0d27b22a593fd62a5534053ca537dfd865abe8af06af7f6b3656c6f"
+source_file_hash = "4496240955fbac251cdf4fdd7d33fbe42ddc1c6b2be5addb6e89c4e0e1fec152"
 unmapped_target_fields = [
     "_fivetran_deleted",
     "inventory_history_url",
@@ -687,7 +686,7 @@ inventory_items = [
 
 [mappings.inventory_level]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/inventory_level.yml"
-source_file_hash = "a3cf38dd08d68d30b3e8e225375f1ba8f5ae80aa33b0732bac5a799d9b98bec3"
+source_file_hash = "f33f8854692880d9baa437e3e73bfae1cd26461b3eead9a8959e5b95a1f371a7"
 unmapped_target_fields = []
 omitted_target_fields = []
 
@@ -716,7 +715,7 @@ inventory_levels = [
 
 [mappings.inventory_quantity]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/inventory_quantity.yml"
-source_file_hash = "3d66b6b9a43e37edfd1f7278aee8ddc73366b44b44f50c24e11800a78017a082"
+source_file_hash = "843b044d9af318de4e688ade1210222dc3c0924676648355ecbd3640d6f259bf"
 unmapped_target_fields = []
 omitted_target_fields = []
 
@@ -745,7 +744,7 @@ inventory_levels = [
 
 [mappings.location]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/location.yml"
-source_file_hash = "b1e8cf764e251beb0074383fdbdde0b2c53eb3d18eb8ba1b6a799fc20358069d"
+source_file_hash = "7d69915d8f30054ce607a9f8e5977822fa278a78f14c65b2f0ed3ea3749fcf24"
 unmapped_target_fields = [
     "_fivetran_deleted",
 ]
@@ -782,7 +781,7 @@ locations = [
 
 [mappings.metafield]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/metafield.yml"
-source_file_hash = "218d559d4e8ea0600c6967218ed191c47c0f090ddacef7331cd3724477219b4d"
+source_file_hash = "3ff6f684c83f2acf49bff793a15019c2b19794266e652e34df1daf6cf1676fc5"
 unmapped_target_fields = []
 omitted_target_fields = []
 
@@ -810,7 +809,7 @@ metafield_articles = [
 
 [mappings.order]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/order.yml"
-source_file_hash = "de8a3cbf2911e30305129281c8ef2572425b493e1b4f16513a2bbdf4d8c8105d"
+source_file_hash = "87c6edd6c504f1e8f7c87ea63a0beba510dbd9f412d7c67d36a0aab4b7f5c6a6"
 unmapped_target_fields = [
     "billing_address_address_1",
     "billing_address_address_2",
@@ -1117,7 +1116,7 @@ orders = [
 
 [mappings.order_adjustment]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/order_adjustment.yml"
-source_file_hash = "6563fc6e7d08ca837c6e7e0d89d36a89447fbc3405686dc42d1dc28084cd95f2"
+source_file_hash = "4bbb923a27df896b0162c8841290ab26bad5a94d371d793c34783ed9b0c36d23"
 unmapped_target_fields = [
     "reason",
     "refund_id",
@@ -1187,7 +1186,7 @@ transactions = [
 
 [mappings.order_discount_code]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/order_discount_code.yml"
-source_file_hash = "cd778dc8fda85d6e0bc3ddb896bf86d175fe674b3274a4c09d00d24906db27d9"
+source_file_hash = "63ea9eb78815310d3ca9cb929e141716cb9f9e0eb7c2f737c11a426280bcfe07"
 unmapped_target_fields = [
     "index",
     "order_id",
@@ -1230,7 +1229,7 @@ discount_codes = [
 
 [mappings.order_line]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/order_line.yml"
-source_file_hash = "9f0c0e45eb04c4cac2251493e0db980402acf84b53c30d75b8b93988c99030bf"
+source_file_hash = "e97797e7d462e572ed9f37fea47c79755519c9c7f8c640b9b5e8feece8d6edea"
 unmapped_target_fields = [
     "fulfillable_quantity",
     "fulfillment_status",
@@ -1293,7 +1292,7 @@ order_refunds = [
 
 [mappings.order_line_refund]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/order_line_refund.yml"
-source_file_hash = "7746ca0df70b541a1547b9b52ac34b8725b825abd7d4568cd6fe4f044121f55b"
+source_file_hash = "960d2b351409b18212c2b69edc02d08edc73fe578d7c211f4c45101630deec40"
 unmapped_target_fields = [
     "location_id",
     "order_line_id",
@@ -1370,7 +1369,7 @@ order_risks = [
 
 [mappings.order_shipping_line]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/order_shipping_line.yml"
-source_file_hash = "49a21e4fc030dced89c21a4696b85c9d648dbf42e5e19b4d693093e95e27e6f2"
+source_file_hash = "7f91cce0f0f477512250ec94ef3dbc8db46f2865ff35d9fbdb4c5298d7ee3133"
 unmapped_target_fields = [
     "carrier_identifier",
     "code",
@@ -1659,7 +1658,7 @@ orders = [
 
 [mappings.order_shipping_tax_line]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/order_shipping_tax_line.yml"
-source_file_hash = "1d572302b0ff7f2a889ed1143fd74a49a8e88d0db0f129db2c2bd094366e230a"
+source_file_hash = "efb1a246eabcb2fc500905178e742f40cf4bc16b5fbfa55afbbac06b227af049"
 unmapped_target_fields = [
     "index",
     "order_shipping_line_id",
@@ -1939,7 +1938,7 @@ orders = [
 
 [mappings.order_tag]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/order_tag.yml"
-source_file_hash = "41245c33bcd0627d494692ed0f496a53c42606dd3d2476676be0b054185414cd"
+source_file_hash = "9d3013d7991366ea9b042d060b19efeeaa2e430291d6c696d3ad7c1da91a02ff"
 unmapped_target_fields = [
     "index",
     "value",
@@ -1999,7 +1998,7 @@ metafield_orders = [
 
 [mappings.price_rule]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/price_rule.yml"
-source_file_hash = "b43a082f2b094d658f2353f4bd91d5dd6fc5c11e9c460081a20020e984b4bfe2"
+source_file_hash = "2bf43d00babd2ea2b76c7259b67a18dd481a0de2010e15a46d6c0d58fb474da1"
 unmapped_target_fields = []
 omitted_target_fields = []
 
@@ -2053,7 +2052,7 @@ price_rules = [
 
 [mappings.product]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/product.yml"
-source_file_hash = "794e508c7506a591feeee91d6648384a361769e0d4e28f33a5d458a77a4a47c1"
+source_file_hash = "5f0778b1284aa52127b5856d09135ccb6426ec2064d15b962cd9e4b2aa3c5e8b"
 unmapped_target_fields = [
     "_fivetran_deleted",
 ]
@@ -2154,7 +2153,7 @@ products = [
 
 [mappings.product_image]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/product_image.yml"
-source_file_hash = "de86f29e823110e3deb4b6c78031feeaf6d8ab63abc11e6eedd5f116d01e410d"
+source_file_hash = "a5e28fd9673738cf6064f45c58c41524242498555f7fb4dcbda649d7552b693a"
 unmapped_target_fields = [
     "_fivetran_deleted",
     "media_id",
@@ -2185,7 +2184,7 @@ product_images = [
 
 [mappings.product_tag]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/product_tag.yml"
-source_file_hash = "17e5c24df223414ff3ad1f105be0b044d4c3fa5fbb5dfa1099a912fe155a6394"
+source_file_hash = "029edb3dfd33a980917d2dd20a6e5087d9f60a7a43afe77323ab8096f6bda20b"
 unmapped_target_fields = [
     "value",
 ]
@@ -2235,7 +2234,7 @@ product_variants = [
 
 [mappings.product_variant]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/product_variant.yml"
-source_file_hash = "8922cd77bbfeec41041e1a728545abe295b32dddbc165a174aaaf4ad2e76cdd6"
+source_file_hash = "9a56f481313a3a36534f5760f11a56168f84ad96e88307eba2a4ee3b8d31d131"
 unmapped_target_fields = [
     "fulfillment_service",
     "inventory_management",
@@ -2329,7 +2328,7 @@ order_refunds = [
 
 [mappings.shop]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/shop.yml"
-source_file_hash = "1b8f9db1ab4b84ec3927ebc7f98598c8a01ca221e61632c98dadc9400d644c96"
+source_file_hash = "50f95203689df4d5bee81f6ceff9a3d2ec590a4a68477ccd20d424cfd2dd5e06"
 unmapped_target_fields = [
     "_fivetran_deleted",
 ]
@@ -2405,7 +2404,7 @@ shop = [
 
 [mappings.tax_line]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/tax_line.yml"
-source_file_hash = "f9c601950bb062fab33b1549546e92eb6f38ee8f1280c4fd5955019461c9d08f"
+source_file_hash = "79d3aad46285eda7de2898ca8e5c810ab2892acb938be7da4ac1407e0561921c"
 unmapped_target_fields = [
     "index",
     "order_line_id",
@@ -2689,7 +2688,7 @@ orders = [
 
 [mappings.tender_transaction]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/tender_transaction.yml"
-source_file_hash = "54b98eda74c47792e1ffe07f6cbc60591534581faff896bb5cd58ff1c00acbc0"
+source_file_hash = "b6c9e9345710ba6e85ddba23ef8f96a0f630b8f87837a864bd3297dfb02f34c4"
 unmapped_target_fields = []
 omitted_target_fields = []
 
@@ -2717,7 +2716,7 @@ tender_transactions = [
 
 [mappings.transaction]
 source_file = "catalog/shopify/src/fivetran-interop/transforms/transaction.yml"
-source_file_hash = "fdfd035fbffa4db1c1fb59c26b8ca0e6ee152459879a3cdeb1fc9bee20ff01b5"
+source_file_hash = "2cabb21366efeeabd65203e47f8d1b67f74d3692591c1c2ccf08f08bb6c0023c"
 unmapped_target_fields = [
     "authorization_expires_at",
     "currency_exchange_adjustment",
