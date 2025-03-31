@@ -612,7 +612,7 @@ class TableMappingEval(BaseModel):
         # Create results table
         table = Table(title="Table Mapping Eval")
         table.add_column("Field", style="cyan")
-        table.add_column("Expression", style="yellow")
+        table.add_column("Expression", style="yellow", overflow="fold")
         table.add_column("Description")
         table.add_column("Confidence", justify="right")
         table.add_column("Evaluation", style="italic")

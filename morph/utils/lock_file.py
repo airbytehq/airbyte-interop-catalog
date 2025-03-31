@@ -15,6 +15,8 @@ from rich.console import Console
 from morph import models, resources
 from morph.models import DbtSourceFile, FieldMapping
 from morph.utils import text_utils
+from morph.utils.airbyte_catalog import write_catalog_file
+from morph.utils.airbyte_sync import sync_source
 from morph.utils.file_utils import compute_file_hash
 from morph.utils.transform_scaffold import download_target_schema
 
@@ -166,10 +168,25 @@ def generate_lock_file_for_project(
         dbt_requirements_source_file_path,
     )
 
+    airbyte_catalog_file = resources.get_generated_catalog_path(
+        source_name=source_name,
+        project_name=project_name,
+    )
     dbt_source_file_path: Path = resources.get_generated_source_yml_path(
         source_name=source_name,
         project_name=project_name,
     )
+    if not dbt_source_file_path.is_file():
+        write_catalog_file(
+            source_name=source_name,
+        )
+        sync_source(
+            source_name=source_name,
+            streams="*",
+            no_data=True,
+            no_creds=True if airbyte_catalog_file.is_file() else False,
+        )
+
     dbt_source_file: DbtSourceFile = DbtSourceFile.from_file(
         dbt_source_file_path,
     )

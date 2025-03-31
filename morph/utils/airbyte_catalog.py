@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 from morph import resources
+from morph.utils.dbt_source_files import generate_dbt_sources_yml_from_airbyte_catalog
 
 AIRBYTE_INTERNAL_GCP_PROJECT = "dataline-integration-testing"
 USE_DOCKER_IMAGE = True
@@ -101,5 +102,9 @@ def write_catalog_file(
     # Ensure parent directories exist
     output_file_path.parent.mkdir(parents=True, exist_ok=True)
     output_file_path.write_text(catalog.model_dump_json(indent=2))
+
+    generate_dbt_sources_yml_from_airbyte_catalog(
+        source_name=source_name,
+    )
 
     return output_file_path
