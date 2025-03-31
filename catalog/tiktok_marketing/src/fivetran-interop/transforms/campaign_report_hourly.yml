@@ -232,190 +232,192 @@ transforms:
           The monetary worth or potential value assigned to a lead generated
           through ads.
 annotations:
-  approved: false
+  approved: true
   missing_fields:
     - profile_visits_rate
     - total_sales_lead_value
   evaluation:
     source_stream_name: campaigns_reports_hourly
     target_table_name: campaign_report_hourly
-    name_match_score: 1.0
+    name_match_score: 0.9
     score: 0.75
     explanation:
-      The table mappings include mostly detailed expressions with a few
-      'MISSING' entries which lower the confidence for those fields. Most fields are
-      mapped correctly and their intended use is clear. '__fivetran_synced' was manually
-      set to `_airbyte_extracted_at`.
+      The overall mapping confidence is compromised by the presence of
+      some 'MISSING' expressions that indicate missing field assignments or low confidence
+      mappings. The presence of a significant number of valid expressions and reasonable
+      field matches has kept the confidence score relatively high.
     field_mapping_evals:
       - name: campaign_id
         expression: campaigns_reports_hourly.campaign_id
         score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.campaign_id.
+        explanation:
+          The expression accurately maps to the campaign's report field
+          for campaign id.
       - name: stat_time_hour
         expression: campaigns_reports_hourly.stat_time_hour
         score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.stat_time_hour.
+        explanation: The stat_time_hour is correctly mapped.
       - name: cost_per_conversion
         expression: campaigns_reports_hourly.metrics.cost_per_conversion
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.cost_per_conversion.
+        score: 0.85
+        explanation: Expression aligns with field description of spending per conversion.
       - name: real_time_conversion
         expression: campaigns_reports_hourly.metrics.real_time_conversion
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.real_time_conversion.
+        score: 0.85
+        explanation: Maps accurately to real time conversion events.
       - name: cpc
         expression: campaigns_reports_hourly.metrics.cpc
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.cpc.
+        score: 0.8
+        explanation: Expression correctly reflects cost-per-click.
       - name: video_play_actions
         expression: campaigns_reports_hourly.metrics.video_play_actions
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.video_play_actions.
+        score: 0.8
+        explanation: Correctly maps to video play actions.
       - name: conversion_rate
         expression: campaigns_reports_hourly.metrics.conversion_rate
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.conversion_rate.
+        score: 0.85
+        explanation: The conversion rate aligns well with the described metric.
       - name: video_views_p_75
         expression: campaigns_reports_hourly.metrics.video_views_p75
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.video_views_p75.
+        score: 0.8
+        explanation: Sufficient description match for views at 75%.
       - name: result
         expression: campaigns_reports_hourly.metrics.result
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.result.
+        score: 0.8
+        explanation: Correctly corresponds to ad results.
       - name: video_views_p_50
         expression: campaigns_reports_hourly.metrics.video_views_p50
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.video_views_p50.
+        score: 0.8
+        explanation: Maps well to video views at 50%.
       - name: impressions
         expression: campaigns_reports_hourly.metrics.impressions
         score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.impressions.
+        explanation: High confidence in impressions mapping.
       - name: comments
         expression: campaigns_reports_hourly.metrics.comments
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.comments.
+        score: 0.8
+        explanation: Accurate representation of comments received.
       - name: real_time_cost_per_result
         expression: campaigns_reports_hourly.metrics.real_time_cost_per_result
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.real_time_cost_per_result.
+        score: 0.75
+        explanation: Costs per result in real time maps sufficiently well.
       - name: conversion
         expression: campaigns_reports_hourly.metrics.conversion
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.conversion.
+        score: 0.75
+        explanation: Conversion mapping is sufficiently accurate.
       - name: real_time_result
         expression: campaigns_reports_hourly.metrics.real_time_result
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.real_time_result.
+        score: 0.75
+        explanation: Real time result mapping is adequately matched.
       - name: video_view_p_100
         expression: campaigns_reports_hourly.metrics.video_views_p100
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.video_views_p100.
+        score: 0.8
+        explanation: Proper mapping to video views at 100%.
       - name: shares
         expression: campaigns_reports_hourly.metrics.shares
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.shares.
+        score: 0.75
+        explanation: Expression reflects shares accurately.
       - name: real_time_conversion_rate
         expression: campaigns_reports_hourly.metrics.real_time_conversion_rate
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.real_time_conversion_rate.
+        score: 0.75
+        explanation: Proper alignment with the real time conversion rate.
       - name: cost_per_secondary_goal_result
         expression: campaigns_reports_hourly.metrics.cost_per_secondary_goal_result
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.cost_per_secondary_goal_result.
+        score: 0.65
+        explanation: Satisfactory mapping for secondary goal results.
       - name: secondary_goal_result_rate
         expression: campaigns_reports_hourly.metrics.secondary_goal_result_rate
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.secondary_goal_result_rate.
+        score: 0.6
+        explanation: Barely satisfactory calculation of goal result rate.
       - name: clicks
         expression: campaigns_reports_hourly.metrics.clicks
         score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.clicks.
+        explanation: Strong confidence in mapping clicks.
       - name: cost_per_1000_reached
         expression: campaigns_reports_hourly.metrics.cost_per_1000_reached
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.cost_per_1000_reached.
+        score: 0.75
+        explanation: Cost mapping per reach analysis is acceptable.
       - name: video_views_p_25
         expression: campaigns_reports_hourly.metrics.video_views_p25
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.video_views_p25.
+        score: 0.7
+        explanation: Slightly underconfidence in mapping views at 25%.
       - name: reach
         expression: campaigns_reports_hourly.metrics.reach
         score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.reach.
+        explanation: Accurate representation of number of users reached.
       - name: real_time_cost_per_conversion
         expression: campaigns_reports_hourly.metrics.real_time_cost_per_conversion
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.real_time_cost_per_conversion.
+        score: 0.65
+        explanation: Under-confident mapping for real-time conversion cost.
       - name: profile_visits_rate
         expression: MISSING
         score: 0.0
-        explanation: Expression missing for profile_visits_rate.
+        explanation: Mapping missing for profile visit rate.
       - name: average_video_play
         expression: campaigns_reports_hourly.metrics.average_video_play
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.average_video_play.
+        score: 0.7
+        explanation: Acceptable video play time mapping.
       - name: profile_visits
         expression: campaigns_reports_hourly.metrics.profile_visits
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.profile_visits.
+        score: 0.75
+        explanation: Partial confidence in profile visits data.
       - name: cpm
         expression: campaigns_reports_hourly.metrics.cpm
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.cpm.
+        score: 0.8
+        explanation: Approximate but high confidence in CPM mapping.
       - name: ctr
         expression: campaigns_reports_hourly.metrics.ctr
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.ctr.
+        score: 0.85
+        explanation: Strong confidence in Click Through Rate mapping.
       - name: video_watched_2_s
         expression: campaigns_reports_hourly.metrics.video_watched_2s
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.video_watched_2s.
+        score: 0.7
+        explanation: Moderate mapping confidence for 2-second views.
       - name: follows
         expression: campaigns_reports_hourly.metrics.follows
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.follows.
+        score: 0.7
+        explanation: Estimated follower engagement mapping.
       - name: result_rate
         expression: campaigns_reports_hourly.metrics.result_rate
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.result_rate.
+        score: 0.75
+        explanation: Result rate mapped with adequate confidence.
       - name: video_watched_6_s
         expression: campaigns_reports_hourly.metrics.video_watched_6s
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.video_watched_6s.
+        score: 0.75
+        explanation: Reasonable match for video watched up to 6 seconds.
       - name: secondary_goal_result
         expression: campaigns_reports_hourly.metrics.secondary_goal_result
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.secondary_goal_result.
+        score: 0.75
+        explanation: Mapping sufficiently captures secondary goal results.
       - name: cost_per_result
         expression: campaigns_reports_hourly.metrics.cost_per_result
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.cost_per_result.
+        score: 0.8
+        explanation: Cost per result maps to a high level of fidelity.
       - name: average_video_play_per_user
         expression: campaigns_reports_hourly.metrics.average_video_play_per_user
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.average_video_play_per_user.
+        score: 0.75
+        explanation: Expected average video play metrics noted.
       - name: real_time_result_rate
         expression: campaigns_reports_hourly.metrics.real_time_result_rate
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.real_time_result_rate.
+        score: 0.7
+        explanation: Acceptable score for real time result rate alignment.
       - name: spend
         expression: campaigns_reports_hourly.metrics.spend
         score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.spend.
+        explanation: Spending data mappings are reliably depicted.
       - name: likes
         expression: campaigns_reports_hourly.metrics.likes
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.likes.
+        score: 0.8
+        explanation: Mapping coincides well with the concept of likes.
       - name: _fivetran_synced
         expression: campaigns_reports_hourly._airbyte_extracted_at
         score: 1.0
-        explanation: Manually mapped to _airbyte_extracted_at with high confidence.
+        explanation: Successfully mapped Fivetran sync times effectively.
       - name: total_purchase_value
         expression: campaigns_reports_hourly.metrics.total_purchase_value
-        score: 0.9
-        explanation: Mapped with high confidence to campaigns_reports_hourly.metrics.total_purchase_value.
+        score: 0.7
+        explanation: Appropriately maps the total purchase value metric.
       - name: total_sales_lead_value
         expression: MISSING
         score: 0.0
-        explanation: Expression missing for total_sales_lead_value.
+        explanation: Field mapping is MISSING and hence, unreliable.

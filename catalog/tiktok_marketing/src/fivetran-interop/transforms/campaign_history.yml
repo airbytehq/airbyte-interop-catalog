@@ -57,63 +57,68 @@ annotations:
   evaluation:
     source_stream_name: campaigns
     target_table_name: campaign_history
-    name_match_score: 0.6
-    score: 0.6
+    name_match_score: 0.7
+    score: 0.69
     explanation:
-      The overall confidence score is influenced by the presence of MISSING
-      expressions, which are given a 0.0 confidence score. Most mappings appear correct,
-      but opt_status and status fields have missing expressions leading to reduced
-      confidence.
+      The overall confidence score was calculated by evaluating individual
+      mappings. Most mappings matched perfectly with applicable expressions like 'campaigns.campaign_id'
+      for 'campaign_id'. However, fields like 'opt_status' and 'status' were marked
+      'MISSING', resulting in a score of 0.0 for these fields and affecting the overall
+      score. The mapping '_airbyte_extracted_at' was appropriately aligned with 'updated_at'
+      though '_fivetran_synced' was not present. If expressions are missing or non-applicable,
+      they heavily impact the overall confidence below the score threshold of 0.7.
     field_mapping_evals:
       - name: campaign_id
         expression: campaigns.campaign_id
         score: 1.0
-        explanation: Direct and exact match with campaigns.campaign_id.
+        explanation: Perfect match with expression 'campaigns.campaign_id'.
       - name: updated_at
         expression: campaigns._airbyte_extracted_at
-        score: 0.7
-        explanation: Decent match but not perfect mapping rules.
+        score: 1.0
+        explanation:
+          Expression matched with '_airbyte_extracted_at', as expected
+          for time tracking.
       - name: advertiser_id
         expression: campaigns.advertiser_id
         score: 1.0
-        explanation: Direct and exact match with campaigns.advertiser_id.
+        explanation: Perfect match with expression 'campaigns.advertiser_id'.
       - name: budget
         expression: campaigns.budget
         score: 1.0
-        explanation: Direct and exact match with campaigns.budget.
+        explanation: Perfect match with expression 'campaigns.budget'.
       - name: budget_mode
         expression: campaigns.budget_mode
         score: 1.0
-        explanation: Direct and exact match with campaigns.budget_mode.
+        explanation: Perfect match with expression 'campaigns.budget_mode'.
       - name: campaign_name
         expression: campaigns.campaign_name
         score: 1.0
-        explanation: Direct and exact match with campaigns.campaign_name.
+        explanation: Perfect match with expression 'campaigns.campaign_name'.
       - name: campaign_type
         expression: campaigns.campaign_type
         score: 1.0
-        explanation: Direct and exact match with campaigns.campaign_type.
+        explanation: Perfect match with expression 'campaigns.campaign_type'.
       - name: create_time
         expression: campaigns.create_time
         score: 1.0
-        explanation: Direct and exact match with campaigns.create_time.
+        explanation: Perfect match with expression 'campaigns.create_time'.
       - name: is_new_structure
         expression: campaigns.is_new_structure
         score: 1.0
-        explanation: Direct and exact match with campaigns.is_new_structure.
+        explanation: Perfect match with expression 'campaigns.is_new_structure'.
       - name: objective_type
         expression: campaigns.objective_type
         score: 1.0
-        explanation: Direct and exact match with campaigns.objective_type.
+        explanation: Perfect match with expression 'campaigns.objective_type'.
       - name: opt_status
         expression: MISSING
         score: 0.0
-        explanation: No mapping expression provided, thus marked as MISSING.
+        explanation: Expression for 'opt_status' is 'MISSING', indicating no match.
       - name: status
         expression: MISSING
         score: 0.0
-        explanation: No mapping expression provided, thus marked as MISSING.
+        explanation: Expression for 'status' is 'MISSING', indicating no match.
       - name: split_test_variable
         expression: campaigns.split_test_variable
         score: 1.0
-        explanation: Direct and exact match with campaigns.split_test_variable.
+        explanation: Perfect match with expression 'campaigns.split_test_variable'.
