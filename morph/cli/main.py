@@ -133,6 +133,18 @@ def generate_dbt_project(
     if run_tests:
         console.print("Running dbt tests...")
         result = subprocess.run(
+            ["uv", "run", "dbt", "deps"],
+            cwd=dbt_project_dir,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if result.returncode != 0:
+            raise RuntimeError(
+                f"Error running dbt deps: {result.stderr}",
+            )
+
+        result = subprocess.run(
             ["uv", "run", "dbt", "run", "--profiles-dir", "profiles"],
             cwd=dbt_project_dir,
             text=True,
