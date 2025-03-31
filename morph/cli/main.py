@@ -499,7 +499,9 @@ def generate_missing_mappings(
             )
             continue
 
-        console.print(f"Generating missing mappings for '{target_table}'...")
+        console.print(
+            f"Generating missing mappings for '{target_table}'...", style="bold white on blue"
+        )
         map.infer_table_mappings(
             source_name=source_name,
             project_name=project_name,
