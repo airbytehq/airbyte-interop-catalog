@@ -102,8 +102,6 @@ def infer_best_match_source_stream_name(
         raise ValueError("source_tables must be a list of SourceTableSummary objects")
 
     console.print(f"Inferring best match source stream name for {target_schema.name}...")
-    console.print(f"Source tables ({len(source_tables)}): {[s.name for s in source_tables]}")
-    console.print(f"Target schema: {target_schema}")
 
     if len(source_tables) > MAX_SOURCE_TABLE_PER_MAPPING_INFERENCE:
         console.print(
@@ -142,12 +140,14 @@ def infer_best_match_source_stream_name(
             )
             short_list_names = short_list_names[:MAX_SOURCE_TABLE_PER_MAPPING_INFERENCE]
         else:
+            console.line()
+            delim = "'\n - '"
             console.print(
+                f"[blue][bold]{target_schema.name}[/bold][/blue]\n\n"
                 f"The following {len(short_list_names)} source tables were returned "
-                f"as potential matches for the '{target_schema.name}' target table: "
-                f"[green]{', '.join(short_list_names)}[/green]",
+                f"as potential matches for the '{target_schema.name}' target table:\n - '[green]"
+                f"{delim.join(short_list_names)}[/green]'",
                 "\nWe will now proceed with inferring the best match from these options.",
-                style="yellow",
             )
 
         source_tables = [s for s in source_tables if s.name in short_list_names]
@@ -400,6 +400,7 @@ def get_skipped_target_tables(
         source_name=source_name,
         project_name=project_name,
         key="target_tables_skipped",
+        default=[],
     )
 
 

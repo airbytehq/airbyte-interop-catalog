@@ -218,7 +218,6 @@ def create_airbyte_db(
     console.print(f"Synced '{source_name}' database: {db_path}")
 
 
-
 @main.command()
 @click.argument("source_name", type=str)
 @click.argument("project_name", type=str, default=DEFAULT_PROJECT_NAME)
@@ -459,8 +458,9 @@ def generate_missing_mappings(
         console.print("All tables are up to date. Exiting.", style="bold green")
         return
 
+    delim = "'\n - '"
     console.print(
-        f"Generating missing mappings for {len(target_tables)} tables: {', '.join(target_tables)}...",
+        f"Generating missing mappings for {len(target_tables)} tables:\n - '{delim.join(target_tables)}'",
     )
 
     for target_table in target_tables:
