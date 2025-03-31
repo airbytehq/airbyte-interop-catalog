@@ -12,7 +12,8 @@ transforms:
         description: The unique identifier of the line item in the refund.
       location_id:
         expression: MISSING
-        description: TThe unique identifier of the location where the items will be
+        description:
+          TThe unique identifier of the location where the items will be
           restockedBD
       order_line_id:
         expression: MISSING
@@ -34,7 +35,8 @@ transforms:
         description: The total tax applied to the refund in shop currency.
       subtotal_set:
         expression: MISSING
-        description: The subtotal of the refund line item in shop and presentment
+        description:
+          The subtotal of the refund line item in shop and presentment
           currencies.
       total_tax_set:
         expression: MISSING

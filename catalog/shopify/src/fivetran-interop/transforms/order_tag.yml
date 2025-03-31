@@ -9,7 +9,8 @@ transforms:
         description: "{{ doc('_fivetran_synced') }}"
       index:
         expression: MISSING
-        description: Index (starting from 1) represnting when the tag was placed on
+        description:
+          Index (starting from 1) represnting when the tag was placed on
           the order.
       order_id:
         expression: order_risks.order_id

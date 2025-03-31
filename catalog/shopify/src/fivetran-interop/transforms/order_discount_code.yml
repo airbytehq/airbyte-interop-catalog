@@ -12,7 +12,8 @@ transforms:
         description: The amount that's deducted from the order total.
       code:
         expression: discount_codes.code
-        description: This property returns the discount code that was entered at checkout.
+        description:
+          This property returns the discount code that was entered at checkout.
           Otherwise this property returns the title of the discount that was applied.
       order_id:
         expression: MISSING
@@ -22,5 +23,6 @@ transforms:
         description: The type of discount - `fixed_amount`, `percentage`, or `shipping`.
       index:
         expression: MISSING
-        description: Pairs with `order_id` to provide unique identifier for order
+        description:
+          Pairs with `order_id` to provide unique identifier for order
           discount code.

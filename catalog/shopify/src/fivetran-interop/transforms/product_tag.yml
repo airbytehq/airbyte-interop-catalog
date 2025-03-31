@@ -9,7 +9,8 @@ transforms:
         description: "{{ doc('_fivetran_synced') }}"
       index:
         expression: product_variants.position
-        description: Index (starting from 1) represnting when the tag was placed on
+        description:
+          Index (starting from 1) represnting when the tag was placed on
           the product.
       product_id:
         expression: product_variants.product_id

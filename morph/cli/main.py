@@ -5,9 +5,10 @@ from __future__ import annotations
 import shutil
 import subprocess
 from pathlib import Path
-from rich.table import Table
+
 import click
 from rich.console import Console
+from rich.table import Table
 
 from morph import models, resources
 from morph.ai import map
@@ -500,7 +501,8 @@ def generate_missing_mappings(
             continue
 
         console.print(
-            f"Generating missing mappings for '{target_table}'...", style="bold white on blue"
+            f"Generating missing mappings for '{target_table}'...",
+            style="bold white on blue",
         )
         map.infer_table_mappings(
             source_name=source_name,

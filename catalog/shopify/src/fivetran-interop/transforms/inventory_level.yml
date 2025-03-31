@@ -9,7 +9,8 @@ transforms:
         description: "{{ doc('_fivetran_synced') }}"
       available:
         expression: inventory_levels.available
-        description: (DEPRECATED 2025-01-06) The available quantity of an inventory
+        description:
+          (DEPRECATED 2025-01-06) The available quantity of an inventory
           item at the inventory level's associated location. Returns null if the inventory
           item is not tracked.
       inventory_item_id:
@@ -20,19 +21,22 @@ transforms:
         description: The ID of the location that the inventory level belongs to.
       updated_at:
         expression: inventory_levels.updated_at
-        description: The date and time (ISO 8601 format) when the inventory level
+        description:
+          The date and time (ISO 8601 format) when the inventory level
           was last modified.
       id:
         expression: inventory_levels.id
         description: A globally unique identifier for the inventory level.
       can_deactivate:
         expression: inventory_levels.can_deactivate
-        description: Indicates whether the inventory item can be deactivated at the
+        description:
+          Indicates whether the inventory item can be deactivated at the
           location.
       created_at:
         expression: inventory_levels.created_at
         description: The date and time when the inventory level was created.
       deactivation_alert:
         expression: inventory_levels.deactivation_alert
-        description: Provides an alert message when the inventory item is deactivated
+        description:
+          Provides an alert message when the inventory item is deactivated
           at the location.

@@ -51,7 +51,8 @@ transforms:
         description: Whether the ad is an automated ad.
       is_creative_authorized:
         expression: ads.creative_authorized
-        description: "Whether you grant displaying some of your ads in our TikTok
+        description:
+          "Whether you grant displaying some of your ads in our TikTok
           For Business Creative Center. Only valid for non-US advertisers, the default
           value is false.\n"
       is_new_structure:
@@ -62,7 +63,8 @@ transforms:
         description: Landing page URL.
       open_url:
         expression: ads.deeplink
-        description: The specific location where you want your audience to go if they
+        description:
+          The specific location where you want your audience to go if they
           have your app installed.
       opt_status:
         expression: ads.operation_status

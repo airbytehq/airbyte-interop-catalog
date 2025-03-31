@@ -24,11 +24,13 @@ transforms:
         description: ID of the discount. Deprecated, use `code` instead.
       index:
         expression: MISSING
-        description: Index (from 1) representing the application of the discount to
+        description:
+          Index (from 1) representing the application of the discount to
           the checkout. Use the latest (highest index)
       type:
         expression: discount_codes.discount_type
-        description: The type of discount. Valid values - percentage, shipping, fixed_amount.
+        description:
+          The type of discount. Valid values - percentage, shipping, fixed_amount.
           (default - fixed_amount)
       updated_at:
         expression: discount_codes.updated_at

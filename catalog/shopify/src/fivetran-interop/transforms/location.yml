@@ -12,7 +12,8 @@ transforms:
         description: "{{ doc('_fivetran_synced') }}"
       active:
         expression: locations.active
-        description: "Boolean representing whether the location is active. If true,
+        description:
+          "Boolean representing whether the location is active. If true,
           then the location can be used to sell products, stock inventory, and fulfill
           orders.\n"
       address_1:
@@ -29,7 +30,8 @@ transforms:
         description: The country the location is in (two-letter code).
       country_code:
         expression: locations.country_code
-        description: The two-letter code (ISO 3166-1 alpha-2 format) corresponding
+        description:
+          The two-letter code (ISO 3166-1 alpha-2 format) corresponding
           to country the location is in.
       country_name:
         expression: locations.country_name
@@ -42,7 +44,8 @@ transforms:
         description: The ID of the location.
       legacy:
         expression: locations.legacy
-        description: "Boolean representing whether this is a fulfillment service location.
+        description:
+          "Boolean representing whether this is a fulfillment service location.
           If true, then the location is a fulfillment service location.  If false,
           then the location was created by the merchant and isn't tied to a fulfillment
           service.\n"
@@ -51,25 +54,29 @@ transforms:
         description: The localized name of the location's country.
       localized_province_name:
         expression: locations.localized_province_name
-        description: The localized name of the location's region. Typically a province,
+        description:
+          The localized name of the location's region. Typically a province,
           state, or district.
       name:
         expression: locations.name
         description: The name of the location.
       phone:
         expression: locations.phone
-        description: The phone number of the location. This value can contain special
+        description:
+          The phone number of the location. This value can contain special
           characters, such as - or +.
       province:
         expression: locations.province
         description: The province, state, or district of the location.
       province_code:
         expression: locations.province_code
-        description: The province, state, or district code (ISO 3166-2 alpha-2 format)
+        description:
+          The province, state, or district code (ISO 3166-2 alpha-2 format)
           of the location.
       updated_at:
         expression: locations.updated_at
-        description: The date and time (ISO 8601 format) when the location was last
+        description:
+          The date and time (ISO 8601 format) when the location was last
           updated.
       zip:
         expression: locations.zip

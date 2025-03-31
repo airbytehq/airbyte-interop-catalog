@@ -9,7 +9,8 @@ transforms:
         description: "{{ doc('_fivetran_synced') }}"
       carrier_identifier:
         expression: MISSING
-        description: A reference to the carrier service that provided the rate. Present
+        description:
+          A reference to the carrier service that provided the rate. Present
           when the rate was computed by a third-party carrier service.
       code:
         expression: MISSING
@@ -19,11 +20,13 @@ transforms:
         description: The general classification of the delivery method.
       discounted_price:
         expression: MISSING
-        description: The pre-tax shipping price with discounts applied in the shop
+        description:
+          The pre-tax shipping price with discounts applied in the shop
           currency.
       discounted_price_set:
         expression: MISSING
-        description: The pre-tax shipping price with discounts applied (JSON) in presentment
+        description:
+          The pre-tax shipping price with discounts applied (JSON) in presentment
           and shop currencies.
       id:
         expression: orders.id
@@ -39,11 +42,13 @@ transforms:
         description: Returns the price of the shipping line in shop currency.
       price_set:
         expression: MISSING
-        description: Returns the price of the shipping line (JSON) in presentment
+        description:
+          Returns the price of the shipping line (JSON) in presentment
           and shop currencies.
       requested_fulfillment_service_id:
         expression: MISSING
-        description: The fulfillment service requested for the shipping method. Present
+        description:
+          The fulfillment service requested for the shipping method. Present
           if the shipping method requires processing by a third party fulfillment
           service.
       source:

@@ -12,38 +12,45 @@ transforms:
         description: "{{ doc('_fivetran_synced') }}"
       country_code_of_origin:
         expression: inventory_items.country_code_of_origin
-        description: The country code (ISO 3166-1 alpha-2) of where the item came
+        description:
+          The country code (ISO 3166-1 alpha-2) of where the item came
           from.
       created_at:
         expression: inventory_items.created_at
-        description: The date and time (ISO 8601 format) when the inventory item was
+        description:
+          The date and time (ISO 8601 format) when the inventory item was
           created.
       id:
         expression: inventory_items.id
         description: The ID of the inventory item.
       province_code_of_origin:
         expression: inventory_items.province_code_of_origin
-        description: The province code (ISO 3166-2 alpha-2) of where the item came
+        description:
+          The province code (ISO 3166-2 alpha-2) of where the item came
           from. The province code is only used if the shipping provider for the inventory
           item is Canada Post.
       requires_shipping:
         expression: inventory_items.requires_shipping
-        description: Boolean representing whether a customer needs to provide a shipping
+        description:
+          Boolean representing whether a customer needs to provide a shipping
           address when placing an order containing the inventory item.
       sku:
         expression: inventory_items.sku
         description: The unique SKU (stock keeping unit) of the inventory item.
       tracked:
         expression: inventory_items.tracked
-        description: Boolean representing whether inventory levels are tracked for
+        description:
+          Boolean representing whether inventory levels are tracked for
           the item. If true, then the inventory quantity changes are tracked by Shopify.
       updated_at:
         expression: inventory_items.updated_at
-        description: The date and time (ISO 8601 format) when the inventory item was
+        description:
+          The date and time (ISO 8601 format) when the inventory item was
           last modified.
       duplicate_sku_count:
         expression: inventory_items.duplicate_sku_count
-        description: The number of inventory items that share the same SKU with this
+        description:
+          The number of inventory items that share the same SKU with this
           item.
       harmonized_system_code:
         expression: inventory_items.harmonized_system_code
@@ -65,15 +72,18 @@ transforms:
         description: The unit of measurement for the inventory item's weight.
       tracked_editable_locked:
         expression: MISSING
-        description: Indicates whether the 'tracked' field for the inventory item
+        description:
+          Indicates whether the 'tracked' field for the inventory item
           is locked from editing.
       tracked_editable_reason:
         expression: MISSING
-        description: Provides the reason why the 'tracked' field for the inventory
+        description:
+          Provides the reason why the 'tracked' field for the inventory
           item is locked from editing.
       unit_cost_amount:
         expression: MISSING
-        description: Decimal money amount of the unit cost associated with the inventory
+        description:
+          Decimal money amount of the unit cost associated with the inventory
           item.
       unit_cost_currency_code:
         expression: MISSING

@@ -9,64 +9,77 @@ transforms:
         description: The barcode, UPC, or ISBN number for the product.
       compare_at_price:
         expression: product_variants.compare_at_price
-        description: The original price of the item before an adjustment or a sale
+        description:
+          The original price of the item before an adjustment or a sale
           in shop currency.
       created_at:
         expression: product_variants.created_at
-        description: The date and time (ISO 8601 format) when the product variant
+        description:
+          The date and time (ISO 8601 format) when the product variant
           was created.
       fulfillment_service:
         expression: MISSING
-        description: (DEPRECATED 2025-01-06) The fulfillment service associated with
+        description:
+          (DEPRECATED 2025-01-06) The fulfillment service associated with
           the product variant.
       grams:
         expression: product_variants.grams
-        description: (DEPRECATED 2025-01-06) The weight of the product variant in
+        description:
+          (DEPRECATED 2025-01-06) The weight of the product variant in
           grams.
       id:
         expression: product_variants.id
         description: The unique numeric identifier for the product variant.
       image_id:
         expression: product_variants.image_id
-        description: The unique numeric identifier for a product's image. The image
+        description:
+          The unique numeric identifier for a product's image. The image
           must be associated to the same product as the variant.
       inventory_item_id:
         expression: product_variants.inventory_item_id
-        description: The unique identifier for the inventory item, which is used in
+        description:
+          The unique identifier for the inventory item, which is used in
           the Inventory API to query for inventory information.
       inventory_management:
         expression: MISSING
-        description: (DEPRECATED 2025-01-06) The fulfillment service that tracks the
+        description:
+          (DEPRECATED 2025-01-06) The fulfillment service that tracks the
           number of items in stock for the product variant.
       inventory_policy:
         expression: product_variants.inventory_policy
-        description: Whether customers are allowed to place an order for the product
+        description:
+          Whether customers are allowed to place an order for the product
           variant when it's out of stock.
       inventory_quantity:
         expression: product_variants.inventory_quantity
-        description: An aggregate of inventory across all locations. To adjust inventory
+        description:
+          An aggregate of inventory across all locations. To adjust inventory
           at a specific location, use the InventoryLevel resource.
       old_inventory_quantity:
         expression: product_variants.old_inventory_quantity
         description: (DEPRECATED 2025-01-06) Use the InventoryLevel resource instead.
       option_1:
         expression: product_variants.option1
-        description: "(DEPRECATED 2025-01-06) The custom properties that a shop owner
+        description:
+          "(DEPRECATED 2025-01-06) The custom properties that a shop owner
           uses to define product variants. You can define three options for a product
           variant: option1, option2, option3.\n"
       option_2:
         expression: product_variants.option2
-        description: "(DEPRECATED 2025-01-06) The custom properties that a shop owner
+        description:
+          "(DEPRECATED 2025-01-06) The custom properties that a shop owner
           uses to define product variants. You can define three options for a product
           variant: option1, option2, option3.\n"
       option_3:
         expression: product_variants.option3
-        description: "(DEPRECATED 2025-01-06) The custom properties that a shop owner
+        description:
+          "(DEPRECATED 2025-01-06) The custom properties that a shop owner
           uses to define product variants. You can define three options for a product
           variant: option1, option2, option3.\n"
       position:
         expression: product_variants.position
-        description: The order of the product variant in the list of product variants.
+        description:
+          The order of the product variant in the list of product variants.
           The first position in the list is 1. The position of variants is indicated
           by the order in which they are listed.
       price:
@@ -77,35 +90,42 @@ transforms:
         description: The unique numeric identifier for the product.
       requires_shipping:
         expression: product_variants.requires_shipping
-        description: (DEPRECATED 2025-01-06) Use the `requires_shipping` property
+        description:
+          (DEPRECATED 2025-01-06) Use the `requires_shipping` property
           on the InventoryItem resource instead.
       sku:
         expression: product_variants.sku
-        description: A unique identifier for the product variant in the shop. Required
+        description:
+          A unique identifier for the product variant in the shop. Required
           in order to connect to a FulfillmentService.
       taxable:
         expression: product_variants.taxable
         description: Whether a tax is charged when the product variant is sold.
       tax_code:
         expression: product_variants.tax_code
-        description: This parameter applies only to the stores that have the Avalara
+        description:
+          This parameter applies only to the stores that have the Avalara
           AvaTax app installed. Specifies the Avalara tax code for the product variant.
       title:
         expression: MISSING
-        description: The title of the product variant. The title field is a concatenation
+        description:
+          The title of the product variant. The title field is a concatenation
           of the option1, option2, and option3 fields. You can only update title indirectly
           using the option fields.
       updated_at:
         expression: product_variants.updated_at
-        description: The date and time when the product variant was last modified.
+        description:
+          The date and time when the product variant was last modified.
           Gets returned in ISO 8601 format.
       weight:
         expression: product_variants.weight
-        description: (DEPRECATED 2025-01-06) The weight of the product variant in
+        description:
+          (DEPRECATED 2025-01-06) The weight of the product variant in
           the unit system specified with weight_unit.
       weight_unit:
         expression: product_variants.weight_unit
-        description: "(DEPRECATED 2025-01-06) The unit of measurement that applies
+        description:
+          "(DEPRECATED 2025-01-06) The unit of measurement that applies
           to the product variant's weight. If you don't specify a value for weight_unit,
           then the shop's default unit of measurement is applied. Valid values: g,
           kg, oz, and lb.\n"
@@ -114,14 +134,16 @@ transforms:
         description: Indicates whether the product variant is available for sale.
       display_name:
         expression: product_variants.display_name
-        description: The display name of the variant, based on the product's title
+        description:
+          The display name of the variant, based on the product's title
           and variant's title.
       legacy_resource_id:
         expression: MISSING
         description: The ID of the corresponding resource in the REST Admin API.
       metafield:
         expression: MISSING
-        description: A custom field, including its namespace and key, that's associated
+        description:
+          A custom field, including its namespace and key, that's associated
           with a Shopify resource for the purposes of adding and storing additional
           information.
       requires_components:

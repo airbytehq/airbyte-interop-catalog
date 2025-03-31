@@ -27,11 +27,13 @@ transforms:
         description: The reason for the order adjustment.
       amount_set:
         expression: transactions.amount_set
-        description: Amount set towards the order adjustment in shop and presentment
+        description:
+          Amount set towards the order adjustment in shop and presentment
           currencies.
       tax_amount_set:
         expression: MISSING
-        description: Tax amount set towards the order adjustment in shop and presentment
+        description:
+          Tax amount set towards the order adjustment in shop and presentment
           currencies.
       _fivetran_synced:
         expression: transactions._airbyte_extracted_at

@@ -12,14 +12,16 @@ transforms:
         description: "{{ doc('_fivetran_synced') }}"
       abandoned_checkout_url:
         expression: abandoned_checkouts.abandoned_checkout_url
-        description: The recovery URL that's sent to a customer so they can recover
+        description:
+          The recovery URL that's sent to a customer so they can recover
           their checkout.
       billing_address_address_1:
         expression: abandoned_checkouts.billing_address.address1
         description: The street address of the billing address.
       billing_address_address_2:
         expression: abandoned_checkouts.billing_address.address2
-        description: An optional additional field for the street address of the billing
+        description:
+          An optional additional field for the street address of the billing
           address.
       billing_address_city:
         expression: abandoned_checkouts.billing_address.city
@@ -32,7 +34,8 @@ transforms:
         description: The name of the country of the billing address.
       billing_address_country_code:
         expression: abandoned_checkouts.billing_address.country_code
-        description: The two-letter code (ISO 3166-1 alpha-2 format) for the country
+        description:
+          The two-letter code (ISO 3166-1 alpha-2 format) for the country
           of the billing address.
       billing_address_first_name:
         expression: abandoned_checkouts.billing_address.first_name
@@ -57,14 +60,16 @@ transforms:
         description: The name of the state or province of the billing address.
       billing_address_province_code:
         expression: abandoned_checkouts.billing_address.province_code
-        description: The two-letter abbreviation of the state or province of the billing
+        description:
+          The two-letter abbreviation of the state or province of the billing
           address.
       billing_address_zip:
         expression: abandoned_checkouts.billing_address.zip
         description: The zip or postal code of the billing address.
       buyer_accepts_marketing:
         expression: abandoned_checkouts.buyer_accepts_marketing
-        description: Whether the customer would like to receive email updates from
+        description:
+          Whether the customer would like to receive email updates from
           the shop. This is set by the 'I want to receive occasional emails about
           new products, promotions and other news' checkbox during checkout.
       cart_token:
@@ -72,14 +77,16 @@ transforms:
         description: The ID for the cart that's attached to the checkout.
       closed_at:
         expression: abandoned_checkouts.closed_at
-        description: The date and time (ISO 8601 format) when the checkout was closed.
+        description:
+          The date and time (ISO 8601 format) when the checkout was closed.
           If the checkout was not closed, then this value is null.
       created_at:
         expression: abandoned_checkouts.created_at
         description: The date and time (ISO 8601 format) when the checkout was created.
       currency:
         expression: abandoned_checkouts.currency
-        description: The three-letter code (ISO 4217 format) of the shop's default
+        description:
+          The three-letter code (ISO 4217 format) of the shop's default
           currency at the time of checkout. For the currency that the customer used
           at checkout, see `presentment_currency`.
       customer_id:
@@ -87,7 +94,8 @@ transforms:
         description: ID of the customer with the abandoned checkout.
       customer_locale:
         expression: abandoned_checkouts.customer_locale
-        description: The two or three-letter language code, optionally followed by
+        description:
+          The two or three-letter language code, optionally followed by
           a region modifier. Example values - en, en-CA.
       device_id:
         expression: abandoned_checkouts.device_id
@@ -112,14 +120,16 @@ transforms:
         description: Checkout order number.
       note:
         expression: abandoned_checkouts.note
-        description: The text of an optional note that a shop owner can attach to
+        description:
+          The text of an optional note that a shop owner can attach to
           the order.
       phone:
         expression: abandoned_checkouts.phone
         description: The customer's phone number for receiving SMS notifications.
       presentment_currency:
         expression: abandoned_checkouts.presentment_currency
-        description: The three-letter code (ISO 4217 format) of the currency that
+        description:
+          The three-letter code (ISO 4217 format) of the currency that
           the customer used at checkout. For the shop's default currency, see `currency`.
       referring_site:
         expression: abandoned_checkouts.referring_site
@@ -129,7 +139,8 @@ transforms:
         description: The street address of the shipping address.
       shipping_address_address_2:
         expression: abandoned_checkouts.shipping_address.address2
-        description: An optional additional field for the street address of the shipping
+        description:
+          An optional additional field for the street address of the shipping
           address.
       shipping_address_city:
         expression: abandoned_checkouts.shipping_address.city
@@ -142,7 +153,8 @@ transforms:
         description: The name of the country of the shipping address.
       shipping_address_country_code:
         expression: abandoned_checkouts.shipping_address.country_code
-        description: The two-letter code (ISO 3166-1 alpha-2 format) for the country
+        description:
+          The two-letter code (ISO 3166-1 alpha-2 format) for the country
           of the shipping address.
       shipping_address_first_name:
         expression: abandoned_checkouts.shipping_address.first_name
@@ -167,18 +179,21 @@ transforms:
         description: The name of the state or province of the shipping address.
       shipping_address_province_code:
         expression: abandoned_checkouts.shipping_address.province_code
-        description: The two-letter abbreviation of the state or province of the shipping
+        description:
+          The two-letter abbreviation of the state or province of the shipping
           address.
       shipping_address_zip:
         expression: abandoned_checkouts.shipping_address.zip
         description: The zip or postal code of the shipping address.
       source_name:
         expression: abandoned_checkouts.source_name
-        description: Where the checkout originated. Valid values include `web`, `pos`,
+        description:
+          Where the checkout originated. Valid values include `web`, `pos`,
           `iphone`, `android`.
       subtotal_price:
         expression: abandoned_checkouts.subtotal_price
-        description: The price of the checkout in _presentment_ (customer) currency
+        description:
+          The price of the checkout in _presentment_ (customer) currency
           before shipping and taxes.
       taxes_included:
         expression: abandoned_checkouts.taxes_included
@@ -194,23 +209,28 @@ transforms:
         description: The total duties of the checkout in presentment currency.
       total_line_items_price:
         expression: abandoned_checkouts.total_line_items_price
-        description: The sum of the prices of all line items in the checkout in _presentment_
+        description:
+          The sum of the prices of all line items in the checkout in _presentment_
           (customer) currency.
       total_price:
         expression: abandoned_checkouts.total_price
-        description: The sum of line item prices, all discounts, shipping costs, and
+        description:
+          The sum of line item prices, all discounts, shipping costs, and
           taxes for the checkout in _presentment_ (customer) currency.
       total_tax:
         expression: abandoned_checkouts.total_tax
-        description: The sum of all the taxes applied to the checkout in _presentment_
+        description:
+          The sum of all the taxes applied to the checkout in _presentment_
           (customer) currency.
       total_weight:
         expression: abandoned_checkouts.total_weight
-        description: The sum of all the weights in grams of the line items in the
+        description:
+          The sum of all the weights in grams of the line items in the
           checkout.
       updated_at:
         expression: abandoned_checkouts.updated_at
-        description: The date and time (ISO 8601 format) when the checkout was last
+        description:
+          The date and time (ISO 8601 format) when the checkout was last
           modified.
       user_id:
         expression: abandoned_checkouts.user_id

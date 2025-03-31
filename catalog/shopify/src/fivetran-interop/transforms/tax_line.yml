@@ -15,15 +15,18 @@ transforms:
         description: The order line that this tax line is associated with.
       price:
         expression: MISSING
-        description: The amount of tax, in shop currency, after discounts and before
+        description:
+          The amount of tax, in shop currency, after discounts and before
           returns.
       price_set:
         expression: MISSING
-        description: The amount of tax, in shop and presentment currencies, after
+        description:
+          The amount of tax, in shop and presentment currencies, after
           discounts and before returns.
       rate:
         expression: MISSING
-        description: The proportion of the line item price that the tax represents
+        description:
+          The proportion of the line item price that the tax represents
           as a decimal.
       title:
         expression: MISSING

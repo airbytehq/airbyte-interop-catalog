@@ -9,11 +9,13 @@ transforms:
         description: "{{ doc('_fivetran_synced') }}"
       code:
         expression: discount_codes.code
-        description: The case-insensitive discount code that customers use at checkout.
+        description:
+          The case-insensitive discount code that customers use at checkout.
           Shopify recommends this map onto the associated `price_rule.title`.
       created_at:
         expression: discount_codes.created_at
-        description: The date and time (ISO 8601 format) when the discount code was
+        description:
+          The date and time (ISO 8601 format) when the discount code was
           created.
       id:
         expression: discount_codes.id
@@ -23,7 +25,8 @@ transforms:
         description: The ID for the price rule that this discount code belongs to.
       updated_at:
         expression: discount_codes.updated_at
-        description: The date and time (ISO 8601 format) when the discount code was
+        description:
+          The date and time (ISO 8601 format) when the discount code was
           updated.
       usage_count:
         expression: discount_codes.usage_count

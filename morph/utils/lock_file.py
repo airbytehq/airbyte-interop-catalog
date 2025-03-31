@@ -184,7 +184,7 @@ def generate_lock_file_for_project(
             source_name=source_name,
             streams="*",
             no_data=True,
-            no_creds=True if airbyte_catalog_file.is_file() else False,
+            no_creds=airbyte_catalog_file.is_file(),  # Don't use creds if we already have a catalog
         )
 
     dbt_source_file: DbtSourceFile = DbtSourceFile.from_file(

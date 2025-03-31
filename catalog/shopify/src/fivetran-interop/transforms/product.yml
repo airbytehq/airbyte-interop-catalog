@@ -15,20 +15,24 @@ transforms:
         description: The date and time when the product was created.
       handle:
         expression: products.handle
-        description: A unique human-friendly string for the product. Automatically
+        description:
+          A unique human-friendly string for the product. Automatically
           generated from the product's title.
       id:
         expression: products.id
-        description: An unsigned 64-bit integer that's used as a unique identifier
+        description:
+          An unsigned 64-bit integer that's used as a unique identifier
           for the product. Each id is unique across the Shopify system. No two products
           will have the same id, even if they're from different shops.
       product_type:
         expression: products.product_type
-        description: A categorization for the product used for filtering and searching
+        description:
+          A categorization for the product used for filtering and searching
           products.
       published_at:
         expression: products.published_at
-        description: The date and time (ISO 8601 format) when the product was published.
+        description:
+          The date and time (ISO 8601 format) when the product was published.
           Can be set to null to unpublish the product from the Online Store channel.
       published_scope:
         expression: products.published_scope
@@ -44,7 +48,8 @@ transforms:
         description: The name of the product's vendor.
       status:
         expression: products.status
-        description: "The status of the product. Valid values: - active: The product
+        description:
+          "The status of the product. Valid values: - active: The product
           is ready to sell and is available to customers on the online store, sales
           channels, and apps. By default, existing products are set to active. - archived:
           The product is no longer being sold and isn't available to customers on

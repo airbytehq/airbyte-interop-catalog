@@ -15,8 +15,9 @@ transforms:
         description: The ID of the inventory level where this item is stored.
       name:
         expression: inventory_levels.deactivation_alert
-        description: The name of the inventory state associated with the record. [Link
-          to list of expected 
+        description:
+          The name of the inventory state associated with the record. [Link
+          to list of expected
           values](https://shopify.dev/docs/apps/build/orders-fulfillment/inventory-management-apps#inventory-states).
       quantity:
         expression: inventory_levels.quantities
