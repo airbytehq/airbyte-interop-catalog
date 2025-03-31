@@ -28,3 +28,54 @@ transforms:
       timezone_name:
         expression: ad_account.timezone_name
         description: Timezone associated with account.
+annotations:
+  evaluation:
+    source_stream_name: ad_account
+    target_table_name: account_history
+    name_match_score: 0.9
+    score: 0.8
+    explanation: The overall confidence score reflects strong alignment between the
+      source and target fields. _fivetran_synced was correctly mapped to _airbyte_extracted_at,
+      and other fields show high compatibility based on naming conventions and field
+      types.
+    field_mapping_evals:
+      - name: id
+        expression: ad_account.id
+        score: 0.9
+        explanation: The mapping for 'id' is precise as it aligns well with 'ad_account.id',
+          representing the account ID.
+      - name: name
+        expression: ad_account.name
+        score: 0.8
+        explanation: The mapping for 'name' shows high confidence as it corresponds
+          to 'ad_account.name', capturing the account's identity.
+      - name: _fivetran_synced
+        expression: ad_account._airbyte_extracted_at
+        score: 1.0
+        explanation: The mapping for '_fivetran_synced' is perfectly aligned to '_airbyte_extracted_at'
+          as per the instructions.
+      - name: account_status
+        expression: ad_account.account_status
+        score: 0.75
+        explanation: The 'account_status' field mapping is reliable, reflecting the
+          status directly from 'ad_account.account_status'.
+      - name: business_country_code
+        expression: ad_account.business_country_code
+        score: 0.7
+        explanation: Mapping for 'business_country_code' aligns reasonably well with
+          'ad_account.business_country_code', capturing business's country info.
+      - name: created_time
+        expression: ad_account.created_time
+        score: 0.85
+        explanation: The 'created_time' field accurately captures creation time from
+          'ad_account.created_time'.
+      - name: currency
+        expression: ad_account.currency
+        score: 0.7
+        explanation: Mapping for 'currency' is adequate as it represents the currency
+          info from 'ad_account.currency'.
+      - name: timezone_name
+        expression: ad_account.timezone_name
+        score: 0.6
+        explanation: Mapping for 'timezone_name' is satisfactory but less precise,
+          relating to 'ad_account.timezone_name'.

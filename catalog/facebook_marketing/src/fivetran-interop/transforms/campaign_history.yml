@@ -1,7 +1,6 @@
 domain: facebook_marketing.fivetran-interop
 transforms:
-  - display_name: Each record in this table reflects a version of a Facebook campaign.
-    name: campaign_history
+  - name: campaign_history
     from:
       - campaigns: facebook_marketing.campaigns
     fields:
@@ -41,15 +40,70 @@ transforms:
       status:
         expression: campaigns.status
         description: Status values are - 'ACTIVE', 'PAUSED', 'DELETED', 'ARCHIVED'.
-    annotations:
-      unused_source_fields:
-        campaigns:
-          - _airbyte_meta
-          - _airbyte_raw_id
-          - effective_status
-          - objective
-          - special_ad_categories
-          - bid_strategy
-          - issues_info
-          - buying_type
-          - configured_status
+annotations:
+  evaluation:
+    source_stream_name: campaigns
+    target_table_name: campaign_history
+    name_match_score: 0.95
+    score: 0.85
+    explanation: The table mapping evaluation resulted in a high confidence score
+      due to strong matches between source columns and mappings provided. Name match
+      score is particularly high as most fields have direct matches in both description
+      and expression. Exceptions were made for '_fivetran_synced', which is correctly
+      mapped to '_airbyte_extracted_at'.
+    field_mapping_evals:
+      - name: id
+        expression: campaigns.id
+        score: 1.0
+        explanation: The mapping for 'id' to 'campaigns.id' is perfect.
+      - name: account_id
+        expression: campaigns.account_id
+        score: 1.0
+        explanation: The mapping for 'account_id' to 'campaigns.account_id' is perfect.
+      - name: name
+        expression: campaigns.name
+        score: 1.0
+        explanation: The mapping for 'name' to 'campaigns.name' is perfect.
+      - name: _fivetran_synced
+        expression: _airbyte_extracted_at
+        score: 1.0
+        explanation: The mapping for '_fivetran_synced' to '_airbyte_extracted_at'
+          is always considered perfect.
+      - name: updated_time
+        expression: campaigns.updated_time
+        score: 0.7
+        explanation: Mapping 'updated_time' to 'campaigns.updated_time' is likely
+          correct but not guaranteed.
+      - name: created_time
+        expression: campaigns.created_time
+        score: 1.0
+        explanation: The mapping for 'created_time' to 'campaigns.created_time' is
+          perfect.
+      - name: start_time
+        expression: campaigns.start_time
+        score: 1.0
+        explanation: The mapping for 'start_time' to 'campaigns.start_time' is perfect.
+      - name: stop_time
+        expression: campaigns.stop_time
+        score: 1.0
+        explanation: The mapping for 'stop_time' to 'campaigns.stop_time' is perfect.
+      - name: daily_budget
+        expression: campaigns.daily_budget
+        score: 1.0
+        explanation: The mapping for 'daily_budget' to 'campaigns.daily_budget' is
+          perfect.
+      - name: budget_remaining
+        expression: campaigns.budget_remaining
+        score: 1.0
+        explanation: The mapping for 'budget_remaining' to 'campaigns.budget_remaining'
+          is perfect.
+      - name: lifetime_budget
+        expression: campaigns.lifetime_budget
+        score: 1.0
+        explanation: The mapping for 'lifetime_budget' to 'campaigns.lifetime_budget'
+          is perfect.
+      - name: status
+        expression: campaigns.status
+        score: 0.8
+        explanation: The mapping for 'status' to 'campaigns.status' is high confidence
+          but less than perfect due to potential for differing status values.

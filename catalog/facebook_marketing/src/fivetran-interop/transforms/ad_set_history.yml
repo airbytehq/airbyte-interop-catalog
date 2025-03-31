@@ -1,7 +1,6 @@
 domain: facebook_marketing.fivetran-interop
 transforms:
-  - display_name: Each record in this table reflects a version of a Facebook ad set.
-    name: ad_set_history
+  - name: ad_set_history
     from:
       - ad_sets: facebook_marketing.ad_sets
     fields:
@@ -31,8 +30,7 @@ transforms:
         description: Timestamp of designated ad set end time.
       bid_strategy:
         expression: ad_sets.bid_strategy
-        description:
-          Bid strategy values are - 'LOWEST_COST_WITHOUT_CAP', 'LOWEST_COST_WITH_BID_CAP',
+        description: Bid strategy values are - 'LOWEST_COST_WITHOUT_CAP', 'LOWEST_COST_WITH_BID_CAP',
           'COST_CAP', 'LOWEST_COST_WITH_MIN_ROAS'.
       daily_budget:
         expression: ad_sets.daily_budget
@@ -45,21 +43,80 @@ transforms:
         description: Status values are - 'ACTIVE', 'PAUSED', 'DELETED', 'ARCHIVED'.
       optimization_goal:
         expression: MISSING
-        description:
-          The optimization goal this ad set is using. Possible values defined
+        description: The optimization goal this ad set is using. Possible values defined
           [here](https://developers.facebook.com/docs/marketing-api/reference/ad-campaign/#fields).
-    annotations:
-      unused_source_fields:
-        ad_sets:
-          - promoted_object
-          - created_time
-          - lifetime_budget
-          - targeting
-          - bid_info
-          - bid_amount
-          - bid_constraints
-          - adlabels
-          - learning_stage_info
-          - effective_status
-          - _airbyte_meta
-          - _airbyte_raw_id
+annotations:
+  evaluation:
+    source_stream_name: ad_sets
+    target_table_name: ad_set_history
+    name_match_score: 0.75
+    score: 0.68
+    explanation: Overall confidence score is derived from individual field mapping
+      evaluations. 'MISSING' expressions were scored at 0.0 while mappings with clear
+      and direct matches scored above 0.6. '_fivetran_synced' mapping to '_airbyte_extracted_at'
+      carries a default confidence boost. The average considers 'MISSING' mappings
+      severely impacting the overall score.
+    field_mapping_evals:
+      - name: id
+        expression: ad_sets.id
+        score: 0.9
+        explanation: Field 'id' maps directly to 'ad_sets.id' with high confidence.
+      - name: account_id
+        expression: ad_sets.account_id
+        score: 0.9
+        explanation: Field 'account_id' maps directly to 'ad_sets.account_id' with
+          high confidence.
+      - name: campaign_id
+        expression: ad_sets.campaign_id
+        score: 0.9
+        explanation: Field 'campaign_id' maps directly to 'ad_sets.campaign_id' with
+          high confidence.
+      - name: name
+        expression: ad_sets.name
+        score: 0.9
+        explanation: Field 'name' maps directly to 'ad_sets.name' with high confidence.
+      - name: _fivetran_synced
+        expression: _airbyte_extracted_at
+        score: 1.0
+        explanation: Field '_fivetran_synced' correctly maps to '_airbyte_extracted_at'
+          with full confidence.
+      - name: updated_time
+        expression: ad_sets.updated_time
+        score: 0.9
+        explanation: Field 'updated_time' maps directly to 'ad_sets.updated_time'
+          with high confidence.
+      - name: start_time
+        expression: ad_sets.start_time
+        score: 0.9
+        explanation: Field 'start_time' maps directly to 'ad_sets.start_time' with
+          high confidence.
+      - name: end_time
+        expression: ad_sets.end_time
+        score: 0.9
+        explanation: Field 'end_time' maps directly to 'ad_sets.end_time' with high
+          confidence.
+      - name: bid_strategy
+        expression: ad_sets.bid_strategy
+        score: 0.9
+        explanation: Field 'bid_strategy' maps directly to 'ad_sets.bid_strategy'
+          with high confidence.
+      - name: daily_budget
+        expression: ad_sets.daily_budget
+        score: 0.9
+        explanation: Field 'daily_budget' maps directly to 'ad_sets.daily_budget'
+          with high confidence.
+      - name: budget_remaining
+        expression: ad_sets.budget_remaining
+        score: 0.9
+        explanation: Field 'budget_remaining' maps directly to 'ad_sets.budget_remaining'
+          with high confidence.
+      - name: status
+        expression: MISSING
+        score: 0.0
+        explanation: Expression 'MISSING' indicates no valid mapping for 'status',
+          scored 0.0.
+      - name: optimization_goal
+        expression: MISSING
+        score: 0.0
+        explanation: Expression 'MISSING' indicates no valid mapping for 'optimization_goal',
+          scored 0.0.

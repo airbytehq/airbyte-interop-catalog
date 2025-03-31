@@ -1,9 +1,8 @@
 domain: facebook_marketing.fivetran-interop
 transforms:
-  - display_name: Each record represents the daily performance of an ad in Facebook.
-    name: basic_ad
+  - name: basic_ad
     from:
-      - ad_insights: facebook_marketing.ads_insights
+      - ads_insights: facebook_marketing.ads_insights
     fields:
       ad_id:
         expression: ads_insights.ad_id
@@ -31,26 +30,74 @@ transforms:
         description: The spend on the ad in the given day.
       reach:
         expression: ads_insights.reach
-        description:
-          The number of people who saw any content from your Page or about
+        description: The number of people who saw any content from your Page or about
           your Page. This metric is estimated.
       frequency:
         expression: ads_insights.frequency
-        description:
-          The average number of times each person saw your ad; it is calculated
+        description: The average number of times each person saw your ad; it is calculated
           as impressions divided by reach.
       _fivetran_synced:
         expression: _airbyte_extracted_at
         description: "{{ doc('_fivetran_synced') }}"
-    annotations:
-      unused_source_fields:
-        ads_insights:
-          - account_currency
-          - account_name
-          - action_values
-          - actions
-          - ad_click_actions
-          - ad_impression_actions
-          - adset_id
-          - _airbyte_meta
-          - _airbyte_raw_id
+annotations:
+  evaluation:
+    source_stream_name: ads_insights
+    target_table_name: basic_ad
+    name_match_score: 0.55
+    score: 0.5399999999999999
+    explanation: The overall scoring is based on the evaluation of each field mapping's
+      confidence score. Scores are affected by missing expressions and likelihood
+      of correct mapping.
+    field_mapping_evals:
+      - name: ad_id
+        expression: ads_insights.ad_id
+        score: 0.7
+        explanation: Mapping 'ad_id' to 'ads_insights.ad_id' seems likely correct
+          based on naming conventions.
+      - name: ad_name
+        expression: ads_insights.ad_name
+        score: 0.7
+        explanation: Mapping 'ad_name' to 'ads_insights.ad_name' seems likely correct
+          based on naming conventions.
+      - name: adset_name
+        expression: MISSING
+        score: 0.0
+        explanation: No expression provided for 'adset_name'. Set to MISSING.
+      - name: date
+        expression: MISSING
+        score: 0.0
+        explanation: No expression provided for 'date'. Set to MISSING.
+      - name: account_id
+        expression: ads_insights.account_id
+        score: 0.7
+        explanation: Mapping 'account_id' to 'ads_insights.account_id' seems correct
+          based on naming conventions.
+      - name: impressions
+        expression: ads_insights.impressions
+        score: 0.7
+        explanation: Mapping 'impressions' to 'ads_insights.impressions' seems correct
+          based on naming conventions.
+      - name: inline_link_clicks
+        expression: MISSING
+        score: 0.0
+        explanation: No expression provided for 'inline_link_clicks'. Set to MISSING.
+      - name: spend
+        expression: ads_insights.spend
+        score: 0.7
+        explanation: Mapping 'spend' to 'ads_insights.spend' seems correct based on
+          naming conventions.
+      - name: reach
+        expression: ads_insights.reach
+        score: 0.7
+        explanation: Mapping 'reach' to 'ads_insights.reach' seems correct based on
+          naming conventions.
+      - name: frequency
+        expression: ads_insights.frequency
+        score: 0.7
+        explanation: Mapping 'frequency' to 'ads_insights.frequency' seems correct
+          based on naming conventions.
+      - name: _fivetran_synced
+        expression: _airbyte_extracted_at
+        score: 0.7
+        explanation: Mapping '_fivetran_synced' to '_airbyte_extracted_at' is expected
+          and seems correct.
