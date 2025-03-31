@@ -16,6 +16,7 @@ from morph import models, resources
 from morph.models import DbtSourceFile, FieldMapping
 from morph.utils import text_utils
 from morph.utils.file_utils import compute_file_hash
+from morph.utils.transform_scaffold import download_target_schema
 
 console = Console()
 
@@ -282,3 +283,42 @@ def generate_lock_file_for_project(
     ).write_bytes(toml_string.encode("utf-8"))
 
     console.print(f"Generated lock file for {source_name}", style="green")
+
+
+def generate_lock_file(
+    source_name: str,
+    project_name: str,
+) -> None:
+    """Generate a lock file for a project.
+
+    Args:
+        source_name: Name of the source
+        project_name: Name of the project
+    """
+    # Set paths
+    lock_file = resources.get_lock_file_path(
+        source_name=source_name,
+        project_name=project_name,
+    )
+
+    # Ensure parent directory exists
+    lock_file.parent.mkdir(parents=True, exist_ok=True)
+
+    # Set path for local target schema file
+    requirements_dir = f"catalog/{source_name}/requirements/{project_name}"
+    Path(requirements_dir).mkdir(parents=True, exist_ok=True)
+
+    download_target_schema(
+        source_name=source_name,
+        project_name=project_name,
+        if_not_exists=True,
+    )
+
+    # Generate lock file
+    try:
+        generate_lock_file_for_project(
+            source_name=source_name,
+            project_name=project_name,
+        )
+    except ValueError as e:
+        console.print(f"Error generating lock file: {e}", style="bold red")
