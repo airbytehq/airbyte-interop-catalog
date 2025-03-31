@@ -21,8 +21,11 @@ from airbyte_protocol.models import (
 from rich.console import Console
 
 from morph import resources
+from morph.constants import DEFAULT_PROJECT_NAME
 from morph.utils import text_utils
-from morph.utils.airbyte_catalog import get_source
+from morph.utils.airbyte_catalog import get_source, write_catalog_file
+from morph.utils.dbt_source_files import generate_dbt_sources_yml_from_airbyte_catalog
+from morph.utils.logic import if_none
 
 console = Console()
 
@@ -45,11 +48,13 @@ def get_duckdb_cache(db_path: str, source_name: str) -> ab.DuckDBCache:
 
 def sync_source(
     source_name: str,
+    project_name: str = DEFAULT_PROJECT_NAME,
     streams: list[str] | str = "*",
     db_path: Path | None = None,
     *,
-    no_data: bool = False,
-    no_creds: bool = False,
+    no_catalog: bool | None = None,
+    no_creds: bool | None = None,
+    with_data: bool | None = None,
 ) -> None:
     """Sync data from an Airbyte source to a local database.
 
@@ -60,6 +65,22 @@ def sync_source(
         no_data: If True, only create empty tables without syncing data
         no_creds: If True, do not use credentials for the source
     """
+    no_catalog = if_none(no_catalog, False)
+    no_creds = if_none(no_creds, False)
+    with_data = if_none(with_data, False)
+
+    if not no_catalog:
+        console.print(f"Generating Airbyte catalog for '{source_name}'...")
+        write_catalog_file(
+            source_name=source_name,
+        )
+        console.print(f"Generating dbt source file for '{source_name}'.")
+        generate_dbt_sources_yml_from_airbyte_catalog(
+            source_name=source_name,
+            project_name=project_name,
+        )
+        console.print(f"Generated Airbyte catalog and dbt source file for {source_name}.")
+
     if db_path is None:
         db_path = Path(f".data/{source_name}.duckdb")
 
@@ -124,6 +145,6 @@ def sync_source(
     cache.create_source_tables(source)
     console.print("Completed creating empty tables.")
 
-    if not no_data and not no_creds:
+    if with_data and not no_creds:
         console.print(f"Syncing '{source_name}' raw data...")
         source.read(cache=cache, streams="*")

@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import shutil
-import subprocess
 from pathlib import Path
 
 import click
@@ -15,14 +13,10 @@ from morph.ai import map
 from morph.ai.eval import get_table_mapping_eval
 from morph.constants import DEFAULT_PROJECT_NAME
 from morph.utils import text_utils
-from morph.utils.airbyte_catalog import write_catalog_file
 from morph.utils.airbyte_sync import sync_source
-from morph.utils.dbt_source_files import (
-    generate_dbt_sources_yml_from_airbyte_catalog,
-)
+from morph.utils.dbt_build import generate_dbt_project
 from morph.utils.lock_file import generate_lock_file
 from morph.utils.logic import if_none
-from morph.utils.mapping_to_dbt_models import generate_dbt_package
 from morph.utils.transform_scaffold import (
     generate_transform_scaffold,
 )
@@ -45,131 +39,6 @@ def main() -> None:
     default=DEFAULT_PROJECT_NAME,
 )
 @click.option(
-    "--run-tests",
-    is_flag=True,
-    help="Run tests after generating the dbt project",
-    default=True,
-)
-def generate_dbt_project(
-    source_name: str,
-    project_name: str,
-    *,
-    run_tests: bool = True,
-) -> None:
-    """Generate a dbt project from mapping files.
-
-    This command generates a dbt project from mapping files. The mapping files
-    should be in YAML format and located in the mapping directory.
-
-    SOURCE_NAME: Name of the source (e.g., 'hubspot')
-    PROJECT_NAME: Name of the project (e.g., 'fivetran-interop')
-    """
-    _ = project_name  # Not used currently
-
-    catalog_dir = resources.get_catalog_root_dir()
-    if source_name is None:
-        raise ValueError("Error: --source-name is required")
-
-    catalog_file = resources.get_generated_catalog_path(
-        source_name,
-        project_name,
-    )
-
-    # Validate input paths exist
-    if not catalog_dir.exists():
-        raise ValueError(f"Error: {catalog_dir} does not exist")
-
-    if not Path(catalog_file).exists():
-        raise ValueError(f"Error: {catalog_file} does not exist")
-
-    dbt_project_dir = resources.get_generated_dbt_project_dir(
-        source_name=source_name,
-        project_name=project_name,
-    )
-    # Generate dbt package
-    try:
-        # Generate dbt models from mapping files
-        generate_dbt_package(
-            source_name=source_name,
-            project_name=project_name,
-        )
-
-        # Get sources.yml path from generated directory
-        generated_sources_path = resources.get_generated_source_yml_path(
-            source_name=source_name,
-            project_name=project_name,
-        )
-        if not generated_sources_path.exists():
-            # Only generate sources.yml if it doesn't exist.
-            # Otherwise, we'll copy the existing sources.yml into the generated directory.
-            generate_dbt_sources_yml_from_airbyte_catalog(
-                source_name=source_name,
-                project_name=project_name,
-                catalog_file=catalog_file,
-                output_file=generated_sources_path,
-            )
-
-        # Get sources.yml path in dbt project models directory
-        new_sources_path = (
-            resources.get_generated_dbt_project_models_dir(
-                source_name,
-                project_name,
-            )
-            / "src_airbyte_raw.yml"
-        )
-
-        # Ensure parent directory exists
-        new_sources_path.parent.mkdir(parents=True, exist_ok=True)
-        # Convert dict to YAML string before writing
-        #
-        # new_sources_path.write_text(yaml.dump(sources_yml, default_flow_style=False, sort_keys=False))
-
-        # Copy sources.yml into the generated directory
-        shutil.copy(generated_sources_path, new_sources_path)
-
-        console.print(f"Generated dbt project at {dbt_project_dir}")
-    except Exception as e:
-        console.print(f"Error generating dbt project: {e}", style="bold red")
-
-    if run_tests:
-        console.print("Running dbt tests...")
-        result = subprocess.run(
-            ["uv", "run", "dbt", "deps"],
-            cwd=dbt_project_dir,
-            text=True,
-            capture_output=True,
-            check=False,
-        )
-        if result.returncode != 0:
-            raise RuntimeError(
-                f"Error running dbt deps: {result.stderr}",
-            )
-
-        result = subprocess.run(
-            ["uv", "run", "dbt", "run", "--profiles-dir", "profiles"],
-            cwd=dbt_project_dir,
-            text=True,
-            capture_output=True,
-            check=False,
-        )
-        if result.returncode == 0:
-            print(result.stdout.replace("\\n", "\n"))
-            console.print("DBT tests completed.")
-        else:
-            print(f"Error running dbt tests: {result.stderr}")
-            print(f"Command output: {result.stdout}")
-
-        console.print("DBT tests completed.")
-
-
-@main.command()
-@click.argument("source_name", type=str)
-@click.argument(
-    "project_name",
-    type=str,
-    default=DEFAULT_PROJECT_NAME,
-)
-@click.option(
     "--db-path",
     help="Path to DuckDB database (defaults to .data/{source_name}.duckdb)",
     type=click.Path(path_type=Path),
@@ -180,23 +49,24 @@ def generate_dbt_project(
     help="Skip catalog generation",
 )
 @click.option(
-    "--no-data",
-    is_flag=True,
-    help="Skip data extraction",
-)
-@click.option(
     "--no-creds",
     is_flag=True,
     help="Skip credentials",
 )
-def create_airbyte_db(
+@click.option(
+    "--with-data",
+    is_flag=True,
+    default=None,
+    help="Include data extraction",
+)
+def sync(
     source_name: str,
     project_name: str = DEFAULT_PROJECT_NAME,
     db_path: Path | None = None,
     *,
     no_catalog: bool = False,
-    no_data: bool = False,
     no_creds: bool = False,
+    with_data: bool | None = None,
 ) -> None:
     """Sync data from an Airbyte source to a local database.
 
@@ -206,29 +76,19 @@ def create_airbyte_db(
     SOURCE_NAME: Name of the source (e.g., 'hubspot')
     PROJECT_NAME: Name of the project (e.g., 'fivetran-interop')
     """
-    if not no_catalog:
-        console.print(f"Generating Airbyte catalog for '{source_name}'...")
-        write_catalog_file(
-            source_name=source_name,
-        )
-        console.print(f"Generating dbt source file for '{source_name}'.")
-        generate_dbt_sources_yml_from_airbyte_catalog(
-            source_name=source_name,
-            project_name=project_name,
-        )
-        console.print(f"Generated Airbyte catalog and dbt source file for {source_name}.")
-
     console.print(
         f"Syncing '{source_name}' database...",
     )
     sync_source(
         source_name=source_name,
+        project_name=project_name,
         streams="*",
         db_path=db_path,
-        no_data=no_data,
+        with_data=with_data,
+        no_catalog=no_catalog,
         no_creds=no_creds,
     )
-    console.print(f"Synced '{source_name}' database: {db_path}")
+    console.print(f"Synced '{source_name}' database.")
 
 
 @main.command()
@@ -238,7 +98,7 @@ def lock(
     source_name: str,
     project_name: str,
 ) -> None:
-    """Generate a lock file tracking unused streams and fields for a project.
+    """Update the project's lock file.
 
     This command creates a morph-lock.toml file in the project's src directory
     that tracks unused source streams, unused source fields, unmapped target tables,
@@ -258,23 +118,21 @@ def lock(
 @click.argument("source_name", type=str)
 @click.option("--project-name", type=str, default=DEFAULT_PROJECT_NAME)
 @click.option("--no-airbyte-catalog", is_flag=True)
-@click.option("--no-data", is_flag=True)
 @click.option("--no-creds", is_flag=True)
 @click.option("--no-transforms", is_flag=True)
 @click.option("--no-dbt-project", is_flag=True)
 @click.option("--no-lock-file", is_flag=True)
-def generate_project(
+def build(
     source_name: str,
     project_name: str,
     *,
     no_airbyte_catalog: bool | None = None,
-    no_data: bool | None = None,
     no_creds: bool | None = None,
     no_transforms: bool | None = None,
     no_dbt_project: bool | None = None,
     no_lock_file: bool | None = None,
 ) -> None:
-    """Generate a project scaffold for a new connector, or update an existing one."""
+    """Build auto-generated source and project artifacts."""
     no_airbyte_catalog = if_none(no_airbyte_catalog, False)
     no_transforms = if_none(no_transforms, False)
     no_dbt_project = if_none(no_dbt_project, False)
@@ -285,15 +143,15 @@ def generate_project(
         console.print("Error: --source-name and --project-name are required", style="bold red")
         return
 
-    # Generate Airbyte catalog
-    if not any([no_airbyte_catalog, no_data, no_creds]):
+    # Generate Airbyte catalog and schema artifacts
+    if not any([no_airbyte_catalog, no_creds]):
         console.print(f"Generating Airbyte catalog for {source_name}...")
-        create_airbyte_db.callback(
+        sync_source(
             source_name,
             no_catalog=no_airbyte_catalog,
-            no_data=no_data,
             no_creds=no_creds,
-        )  # type: ignore  (mypy doesn't recognize the callback signature)
+            with_data=False,
+        )
         console.print("Generated Airbyte catalog.")
 
     # Generate transforms
@@ -311,18 +169,18 @@ def generate_project(
     # Generate dbt project
     if not no_dbt_project:
         console.print(f"Generating dbt project for {source_name}...")
-        generate_dbt_project.callback(source_name, project_name)  # type: ignore  (mypy doesn't recognize the callback signature)
+        generate_dbt_project(source_name, project_name)
         console.print(f"Generated dbt project for {source_name}")
 
 
 @main.command()
 @click.argument("source_name")
 @click.argument("project_name", default=DEFAULT_PROJECT_NAME)
-def eval_project_mappings(
+def eval(
     source_name: str,
     project_name: str = DEFAULT_PROJECT_NAME,
 ) -> None:
-    """Evaluate confidence of all mapping files in a project.
+    """Use AI to evaluated the quality of transform logic.
 
     SOURCE_NAME is the name of the source (e.g., hubspot, shopify)
     PROJECT_NAME is the name of the project (defaults to fivetran-interop)
@@ -363,40 +221,6 @@ def eval_project_mappings(
 @main.command()
 @click.argument("source_name")
 @click.argument("project_name", default=DEFAULT_PROJECT_NAME)
-@click.option("--target-table", type=str, help="Name of the target table to suggest mappings for")
-@click.option(
-    "--source-table",
-    type=str,
-    help="Optional name of the source table to suggest mappings for."
-    "If not provided, the AI will suggest a source table.",
-)
-@click.option("--auto-confirm", is_flag=True, help="Automatically confirm mappings")
-def suggest_table_mappings(
-    source_name: str,
-    project_name: str = DEFAULT_PROJECT_NAME,
-    *,
-    target_table: str,
-    source_table: str | None = None,
-    auto_confirm: bool | None = None,
-) -> None:
-    """Suggest table mappings for a project.
-
-    SOURCE_NAME is the name of the source (e.g., hubspot, shopify)
-    PROJECT_NAME is the name of the project (defaults to fivetran-interop)
-    TARGET_TABLE is the name of the target table to suggest mappings for
-    """
-    map.infer_table_mappings(
-        source_name,
-        project_name,
-        transform_name=target_table,
-        source_table=source_table,
-        auto_confirm=auto_confirm,
-    )
-
-
-@main.command()
-@click.argument("source_name")
-@click.argument("project_name", default=DEFAULT_PROJECT_NAME)
 @click.option("--auto-confirm", is_flag=True, help="Automatically confirm mappings")
 @click.option(
     "--include-skipped-tables",
@@ -405,14 +229,14 @@ def suggest_table_mappings(
     type=bool,
     default=False,
 )
-def generate_missing_mappings(
+def generate(
     source_name: str,
     project_name: str = DEFAULT_PROJECT_NAME,
     *,
     auto_confirm: bool | None = None,
     include_skipped_tables: bool = False,
 ) -> None:
-    """Generate missing mappings for a project."""
+    """Use AI to generate new transform code for a project."""
     requirements_dbt_source_file = resources.get_dbt_sources_requirements_path(
         source_name=source_name,
         project_name=project_name,

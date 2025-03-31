@@ -1,7 +1,6 @@
 [project]
 source_name = "hubspot"
 project_name = "fivetran-interop"
-generated_at = "2025-03-28T19:12:18Z"
 requirements_file = "catalog/hubspot/requirements/fivetran-interop/src_dbt_requirements.yml"
 requirements_file_hash = "5b432bf8082036e0a36457e3b5ce7e6450a2492634d212a22718ad50510352a9"
 airbyte_source_file = "catalog/hubspot/generated/src_airbyte_hubspot.yml"
