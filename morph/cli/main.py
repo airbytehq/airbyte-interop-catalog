@@ -204,7 +204,7 @@ def eval(
         return
 
     # Process each YAML file
-    for yaml_file in yaml_files:
+    for yaml_file in sorted(yaml_files):
         console.print(f"\n[bold]Evaluating {yaml_file}[/bold]\n")
         transform_obj = models.TableMapping.from_file(yaml_file)
 
