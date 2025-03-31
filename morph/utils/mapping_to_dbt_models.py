@@ -11,13 +11,14 @@ from typing import Any
 from copier import run_copy
 from jinja2 import Environment
 
+from morph import resources
 from morph.constants import (
     DEFAULT_PROJECT_NAME,
     DEFAULT_SQL_DIALECT,
     SQL_DIALECT_OPTIONS,
     VALID_TRAVERSAL_BY_DIALECT,
 )
-from morph.utils import resource_paths, text_utils
+from morph.utils import text_utils
 
 
 def load_mapping_file(mapping_file_path: str) -> dict[str, Any]:
@@ -332,9 +333,9 @@ def generate_dbt_package(
         output_dir: Path to the output directory.
         mapping_dir: Path to the mapping directory.
     """
-    output_dir_path = output_dir or resource_paths.get_generated_dir_root(source_name)
-    mapping_dir_path = mapping_dir or resource_paths.get_transforms_dir(source_name, project_name)
-    config_path = resource_paths.get_config_file_path(source_name, project_name)
+    output_dir_path = output_dir or resources.get_generated_dir_root(source_name)
+    mapping_dir_path = mapping_dir or resources.get_transforms_dir(source_name, project_name)
+    config_path = resources.get_config_file_path(source_name, project_name)
 
     # Create output directories
     output_path = Path(output_dir_path)

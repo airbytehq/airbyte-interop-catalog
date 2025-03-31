@@ -12,10 +12,11 @@ from typing import Any
 import tomli_w as toml_writer
 from rich.console import Console
 
-from morph import models
+from morph import models, resources
 from morph.models import DbtSourceFile, FieldMapping
-from morph.utils import resource_paths
+from morph.utils import text_utils
 from morph.utils.file_utils import compute_file_hash
+from morph.utils.transform_scaffold import download_target_schema
 
 console = Console()
 
@@ -143,19 +144,12 @@ def validate_field_mappings(
 def generate_lock_file_for_project(
     source_name: str,
     project_name: str,
-    mapping_dir: Path,
-    target_schema: dict[str, Any],
-    output_path: Path,
 ) -> None:
     """Generate a lock file for a project.
 
     Args:
         source_name: Name of the source
         project_name: Name of the project
-        config: Configuration dictionary
-        mapping_dir: Directory containing mapping files
-        target_schema: Target schema dictionary
-        output_path: Path to output the lock file
 
     Raises:
         ValueError: If a fatal validation error is found
@@ -164,7 +158,7 @@ def generate_lock_file_for_project(
     lock_file_mapping_data: dict[str, Any] = {}  # What we will write to the lock file
 
     # Extract source streams and target tables from schema files instead of config
-    dbt_requirements_source_file_path: Path = resource_paths.get_dbt_sources_requirements_path(
+    dbt_requirements_source_file_path: Path = resources.get_dbt_sources_requirements_path(
         source_name=source_name,
         project_name=project_name,
     )
@@ -172,7 +166,7 @@ def generate_lock_file_for_project(
         dbt_requirements_source_file_path,
     )
 
-    dbt_source_file_path: Path = resource_paths.get_generated_source_yml_path(
+    dbt_source_file_path: Path = resources.get_generated_source_yml_path(
         source_name=source_name,
         project_name=project_name,
     )
@@ -181,7 +175,9 @@ def generate_lock_file_for_project(
     )
 
     transform_files: list[Path] = list(
-        mapping_dir.glob("**/*.yml"),
+        resources.get_transforms_dir(
+            source_name=source_name,
+        ).glob("**/*.yml"),
     )
     transforms: list[models.TableMapping] = [
         models.TableMapping.from_file(yaml_file) for yaml_file in transform_files
@@ -212,7 +208,6 @@ def generate_lock_file_for_project(
                 source_aliases=source_aliases,
                 fields=transform.field_mappings,
             )
-
             # Add to mapping data
             lock_file_mapping_data[transform_id] = {
                 "source_file": str(transform.get_file_path()),
@@ -223,7 +218,12 @@ def generate_lock_file_for_project(
                 "unmapped_target_fields": transform_obj.get_missing_field_mappings(),
                 "omitted_target_fields": find_omitted_target_fields(
                     transform_id=transform_id,
-                    target_schema=target_schema,
+                    target_schema=text_utils.load_yaml_file(
+                        resources.get_dbt_sources_requirements_path(
+                            source_name=source_name,
+                            project_name=project_name,
+                        ),
+                    ),
                     fields=transform.field_mappings,
                 ),
             }
@@ -278,6 +278,47 @@ def generate_lock_file_for_project(
     # Write lock file
     # Convert lock data to TOML string and write to file
     toml_string = toml_writer.dumps(lock_data)
-    Path(output_path).write_bytes(toml_string.encode("utf-8"))
+    resources.get_lock_file_path(
+        source_name=source_name,
+    ).write_bytes(toml_string.encode("utf-8"))
 
-    console.print(f"Generated lock file at {output_path}", style="green")
+    console.print(f"Generated lock file for {source_name}", style="green")
+
+
+def generate_lock_file(
+    source_name: str,
+    project_name: str,
+) -> None:
+    """Generate a lock file for a project.
+
+    Args:
+        source_name: Name of the source
+        project_name: Name of the project
+    """
+    # Set paths
+    lock_file = resources.get_lock_file_path(
+        source_name=source_name,
+        project_name=project_name,
+    )
+
+    # Ensure parent directory exists
+    lock_file.parent.mkdir(parents=True, exist_ok=True)
+
+    # Set path for local target schema file
+    requirements_dir = f"catalog/{source_name}/requirements/{project_name}"
+    Path(requirements_dir).mkdir(parents=True, exist_ok=True)
+
+    download_target_schema(
+        source_name=source_name,
+        project_name=project_name,
+        if_not_exists=True,
+    )
+
+    # Generate lock file
+    try:
+        generate_lock_file_for_project(
+            source_name=source_name,
+            project_name=project_name,
+        )
+    except ValueError as e:
+        console.print(f"Error generating lock file: {e}", style="bold red")

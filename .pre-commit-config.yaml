@@ -18,6 +18,7 @@ repos:
       - id: check-yaml
         exclude: "(generated)/.*"
       - id: check-added-large-files
+        exclude: "(generated)/.*"
       - id: check-toml
       - id: check-json
 

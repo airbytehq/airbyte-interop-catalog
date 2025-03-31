@@ -1,0 +1,48 @@
+domain: tiktok_marketing.fivetran-interop
+transforms:
+  - name: campaign_history
+    from:
+      - campaigns: tiktok_marketing.campaigns
+    fields:
+      campaign_id:
+        expression: campaigns.campaign_id
+        description: Campaign ID
+      updated_at:
+        expression: campaigns._airbyte_extracted_at
+        description: Time the record was updated.
+      advertiser_id:
+        expression: campaigns.advertiser_id
+        description: Advertiser ID
+      budget:
+        expression: campaigns.budget
+        description: Campaign budget
+      budget_mode:
+        expression: campaigns.budget_mode
+        description: Budget type
+      campaign_name:
+        expression: campaigns.campaign_name
+        description: Campaign name
+      campaign_type:
+        expression: campaigns.campaign_type
+        description: Campaign Type, indicates the campaign is a regular campaign or
+          iOS 14 campaign.
+      create_time:
+        expression: campaigns.create_time
+        description: Time at which the campaign was created.
+      is_new_structure:
+        expression: campaigns.is_new_structure
+        description: Whether the campaign is a new structure (for the same campaign,
+          the structure of campaign, adgroups and ads are the same)
+      objective_type:
+        expression: campaigns.objective_type
+        description: Advertising objective.
+      opt_status:
+        expression: MISSING
+        description: Operation status.
+      status:
+        expression: MISSING
+        description: Campaign status
+      split_test_variable:
+        expression: campaigns.split_test_variable
+        description: Split Test variables. Optional values; TARGETING, BIDDING_OPTIMIZATION
+          , CREATIVE.

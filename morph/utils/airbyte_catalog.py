@@ -7,6 +7,8 @@ from __future__ import annotations
 from pathlib import Path
 from typing import TYPE_CHECKING
 
+from morph import resources
+
 AIRBYTE_INTERNAL_GCP_PROJECT = "dataline-integration-testing"
 USE_DOCKER_IMAGE = True
 
@@ -78,13 +80,19 @@ def get_source(source_name: str, streams: list[str] | str = "*") -> ab.Source:
     )
 
 
-def write_catalog_file(source_name: str, output_file_path: Path) -> None:
+def write_catalog_file(
+    source_name: str,
+    output_file_path: Path | None = None,
+) -> Path:
     """Write the Airbyte catalog to a file.
 
     Args:
         source_name: Name of the source
         output_file_path: Path to the output file
     """
+    output_file_path = output_file_path or resources.get_generated_catalog_path(
+        source_name=source_name,
+    )
     connector_name = get_connector_id(source_name)
     source = get_source(connector_name, streams="*")
     source.check()
@@ -93,3 +101,5 @@ def write_catalog_file(source_name: str, output_file_path: Path) -> None:
     # Ensure parent directories exist
     output_file_path.parent.mkdir(parents=True, exist_ok=True)
     output_file_path.write_text(catalog.model_dump_json(indent=2))
+
+    return output_file_path

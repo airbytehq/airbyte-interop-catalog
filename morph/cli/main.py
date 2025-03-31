@@ -9,23 +9,21 @@ from pathlib import Path
 import click
 from rich.console import Console
 
-from morph import models
+from morph import models, resources
 from morph.ai import map
 from morph.ai.eval import get_table_mapping_eval
 from morph.constants import DEFAULT_PROJECT_NAME
-from morph.utils import resource_paths, text_utils
+from morph.utils import text_utils
 from morph.utils.airbyte_catalog import write_catalog_file
 from morph.utils.airbyte_sync import sync_source
 from morph.utils.dbt_source_files import (
     generate_dbt_sources_yml_from_airbyte_catalog,
 )
-from morph.utils.lock_file import generate_lock_file_for_project
+from morph.utils.lock_file import generate_lock_file
 from morph.utils.logic import if_none
 from morph.utils.mapping_to_dbt_models import generate_dbt_package
 from morph.utils.transform_scaffold import (
-    download_target_schema,
     generate_transform_scaffold,
-    load_config,
 )
 
 console = Console()
@@ -36,43 +34,6 @@ console = Console()
 def main() -> None:
     """Morph CLI."""
     pass
-
-
-@main.command()
-@click.argument("source-name", type=str)
-@click.option(
-    "--project-name",
-    type=str,
-    default=DEFAULT_PROJECT_NAME,
-)
-@click.option(
-    "--catalog_file",
-    type=click.Path(exists=True, path_type=Path),
-)
-@click.option(
-    "--output-file",
-    type=click.Path(path_type=Path),
-)
-def generate_airbyte_dbt_sources_yml(
-    source_name: str,
-    project_name: str = DEFAULT_PROJECT_NAME,
-    *,
-    catalog_file: Path | None = None,
-    output_file: Path | None = None,
-) -> None:
-    """Convert JSON schema files or Airbyte catalogs to a dbt sources.yml file.
-
-    This command converts a JSON schema or Airbyte catalog to a dbt sources.yml file.
-    The catalog file can be either a JSON schema or an Airbyte catalog.
-
-    CATALOG_FILE: Path to the JSON schema or Airbyte catalog file
-    """
-    generate_dbt_sources_yml_from_airbyte_catalog(
-        source_name=source_name,
-        project_name=project_name,
-        catalog_file=catalog_file,
-        output_file=output_file,
-    )
 
 
 @main.command()
@@ -104,11 +65,11 @@ def generate_dbt_project(
     """
     _ = project_name  # Not used currently
 
-    catalog_dir = resource_paths.get_catalog_root_dir()
+    catalog_dir = resources.get_catalog_root_dir()
     if source_name is None:
         raise ValueError("Error: --source-name is required")
 
-    catalog_file = resource_paths.get_generated_catalog_path(
+    catalog_file = resources.get_generated_catalog_path(
         source_name,
         project_name,
     )
@@ -120,7 +81,7 @@ def generate_dbt_project(
     if not Path(catalog_file).exists():
         raise ValueError(f"Error: {catalog_file} does not exist")
 
-    dbt_project_dir = resource_paths.get_generated_dbt_project_dir(
+    dbt_project_dir = resources.get_generated_dbt_project_dir(
         source_name=source_name,
         project_name=project_name,
     )
@@ -133,7 +94,7 @@ def generate_dbt_project(
         )
 
         # Get sources.yml path from generated directory
-        generated_sources_path = resource_paths.get_generated_source_yml_path(
+        generated_sources_path = resources.get_generated_source_yml_path(
             source_name=source_name,
             project_name=project_name,
         )
@@ -149,7 +110,7 @@ def generate_dbt_project(
 
         # Get sources.yml path in dbt project models directory
         new_sources_path = (
-            resource_paths.get_generated_dbt_project_models_dir(
+            resources.get_generated_dbt_project_models_dir(
                 source_name,
                 project_name,
             )
@@ -171,6 +132,18 @@ def generate_dbt_project(
 
     if run_tests:
         console.print("Running dbt tests...")
+        result = subprocess.run(
+            ["uv", "run", "dbt", "deps"],
+            cwd=dbt_project_dir,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if result.returncode != 0:
+            raise RuntimeError(
+                f"Error running dbt deps: {result.stderr}",
+            )
+
         result = subprocess.run(
             ["uv", "run", "dbt", "run", "--profiles-dir", "profiles"],
             cwd=dbt_project_dir,
@@ -217,7 +190,7 @@ def generate_dbt_project(
 )
 def create_airbyte_db(
     source_name: str,
-    project_name: str,
+    project_name: str = DEFAULT_PROJECT_NAME,
     db_path: Path | None = None,
     *,
     no_catalog: bool = False,
@@ -232,17 +205,17 @@ def create_airbyte_db(
     SOURCE_NAME: Name of the source (e.g., 'hubspot')
     PROJECT_NAME: Name of the project (e.g., 'fivetran-interop')
     """
-    # We could use project_name in the future if needed
-    catalog_path = f"catalog/{source_name}/generated/airbyte-catalog.json"
-    _ = project_name  # Not used currently
-
     if not no_catalog:
-        console.print(f"Generating Airbyte catalog for {source_name}...")
+        console.print(f"Generating Airbyte catalog for '{source_name}'...")
         write_catalog_file(
             source_name=source_name,
-            output_file_path=Path(catalog_path),
         )
-        console.print(f"Generated Airbyte catalog at {catalog_path}")
+        console.print(f"Generating dbt source file for '{source_name}'.")
+        generate_dbt_sources_yml_from_airbyte_catalog(
+            source_name=source_name,
+            project_name=project_name,
+        )
+        console.print(f"Generated Airbyte catalog and dbt source file for {source_name}.")
 
     console.print(
         f"Syncing '{source_name}' database...",
@@ -255,67 +228,6 @@ def create_airbyte_db(
         no_creds=no_creds,
     )
     console.print(f"Synced '{source_name}' database: {db_path}")
-
-
-def generate_lock_file(
-    source_name: str,
-    project_name: str,
-) -> None:
-    """Generate a lock file for a project.
-
-    Args:
-        source_name: Name of the source
-        project_name: Name of the project
-    """
-    # Set paths
-    config_file = f"catalog/{source_name}/src/{project_name}/config.yml"
-    mapping_dir = Path(f"catalog/{source_name}/src/{project_name}/transforms")
-    lock_file = resource_paths.get_lock_file_path(
-        source_name=source_name,
-        project_name=project_name,
-    )
-
-    # Ensure parent directory exists
-    lock_file.parent.mkdir(parents=True, exist_ok=True)
-
-    # Set path for local target schema file
-    requirements_dir = f"catalog/{source_name}/requirements/{project_name}"
-    Path(requirements_dir).mkdir(parents=True, exist_ok=True)
-
-    # Load config and target schema
-    config = load_config(config_file)
-    if not config:
-        console.print(f"Error: Could not load config from {config_file}", style="bold red")
-        return
-
-    download_target_schema(
-        source_name=source_name,
-        project_name=project_name,
-        config=config,
-        if_not_exists=True,
-    )
-    target_schema = text_utils.load_yaml_file(
-        resource_paths.get_dbt_sources_requirements_path(
-            source_name=source_name,
-            project_name=project_name,
-        ),
-    )
-
-    if not target_schema:
-        console.print("Error: Could not load target schema", style="bold red")
-        return
-
-    # Generate lock file
-    try:
-        generate_lock_file_for_project(
-            source_name=source_name,
-            project_name=project_name,
-            mapping_dir=mapping_dir,
-            target_schema=target_schema,
-            output_path=lock_file,
-        )
-    except ValueError as e:
-        console.print(f"Error generating lock file: {e}", style="bold red")
 
 
 @main.command()
@@ -345,6 +257,8 @@ def lock(
 @click.argument("source_name", type=str)
 @click.option("--project-name", type=str, default=DEFAULT_PROJECT_NAME)
 @click.option("--no-airbyte-catalog", is_flag=True)
+@click.option("--no-data", is_flag=True)
+@click.option("--no-creds", is_flag=True)
 @click.option("--no-transforms", is_flag=True)
 @click.option("--no-dbt-project", is_flag=True)
 @click.option("--no-lock-file", is_flag=True)
@@ -353,6 +267,8 @@ def generate_project(
     project_name: str,
     *,
     no_airbyte_catalog: bool | None = None,
+    no_data: bool | None = None,
+    no_creds: bool | None = None,
     no_transforms: bool | None = None,
     no_dbt_project: bool | None = None,
     no_lock_file: bool | None = None,
@@ -369,9 +285,14 @@ def generate_project(
         return
 
     # Generate Airbyte catalog
-    if not no_airbyte_catalog:
+    if not any([no_airbyte_catalog, no_data, no_creds]):
         console.print(f"Generating Airbyte catalog for {source_name}...")
-        create_airbyte_db.callback(source_name)
+        create_airbyte_db.callback(
+            source_name,
+            no_catalog=no_airbyte_catalog,
+            no_data=no_data,
+            no_creds=no_creds,
+        )  # type: ignore  (mypy doesn't recognize the callback signature)
         console.print("Generated Airbyte catalog.")
 
     # Generate transforms
@@ -389,7 +310,7 @@ def generate_project(
     # Generate dbt project
     if not no_dbt_project:
         console.print(f"Generating dbt project for {source_name}...")
-        generate_dbt_project.callback(source_name, project_name)
+        generate_dbt_project.callback(source_name, project_name)  # type: ignore  (mypy doesn't recognize the callback signature)
         console.print(f"Generated dbt project for {source_name}")
 
 
@@ -406,7 +327,7 @@ def eval_project_mappings(
     PROJECT_NAME is the name of the project (defaults to fivetran-interop)
     """
     # Construct the path to the transforms directory
-    transforms_dir = resource_paths.get_transforms_dir(
+    transforms_dir = resources.get_transforms_dir(
         source_name=source_name,
         project_name=project_name,
     )
@@ -491,7 +412,7 @@ def generate_missing_mappings(
     include_skipped_tables: bool = False,
 ) -> None:
     """Generate missing mappings for a project."""
-    requirements_dbt_source_file = resource_paths.get_dbt_sources_requirements_path(
+    requirements_dbt_source_file = resources.get_dbt_sources_requirements_path(
         source_name=source_name,
         project_name=project_name,
     )
@@ -507,7 +428,7 @@ def generate_missing_mappings(
         requirements_dbt_source_file,
     )
     config_file_content = text_utils.load_yaml_file(
-        resource_paths.get_config_file_path(
+        resources.get_config_file_path(
             source_name=source_name,
             project_name=project_name,
         ),
@@ -517,7 +438,7 @@ def generate_missing_mappings(
     for target_table in dbt_requirements_file.source_tables:
         console.print(f"Evaluating '{target_table.name}'...")
         include_table = True
-        transform_file = resource_paths.get_transform_file(
+        transform_file = resources.get_transform_file(
             source_name=source_name,
             project_name=project_name,
             transform_name=target_table.name,
@@ -549,8 +470,9 @@ def generate_missing_mappings(
         console.print("All tables are up to date. Exiting.", style="bold green")
         return
 
+    delim = "'\n - '"
     console.print(
-        f"Generating missing mappings for {len(target_tables)} tables: {', '.join(target_tables)}...",
+        f"Generating missing mappings for {len(target_tables)} tables:\n - '{delim.join(target_tables)}'",
     )
 
     for target_table in target_tables:

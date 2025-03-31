@@ -1,0 +1,89 @@
+domain: tiktok_marketing.fivetran-interop
+transforms:
+  - name: advertiser
+    from:
+      - advertisers: tiktok_marketing.advertisers
+    fields:
+      id:
+        expression: advertisers.advertiser_id
+        description: Advertiser ID
+      address:
+        expression: advertisers.address
+        description: Advertiser address information
+      balance:
+        expression: advertisers.balance
+        description: Account available balance
+      cellphone_number:
+        expression: advertisers.cellphone_number
+        description: "Contact mobile number, desensitised data. This is the newest
+          version of the field `phone_number`, which was renamed after the Tiktok
+          Ads v1.3 API release.\n"
+      company:
+        expression: advertisers.company
+        description: Advertiser's company name
+      contacter:
+        expression: advertisers.contacter
+        description: Contact Person
+      country:
+        expression: advertisers.country
+        description: The advertiser's country
+      create_time:
+        expression: advertisers.create_time
+        description: Advertiser's create time
+      currency:
+        expression: advertisers.currency
+        description: Type of currency used by advertisers
+      description:
+        expression: advertisers.description
+        description: Brand description, i.e. promotional content
+      email:
+        expression: advertisers.email
+        description: Advertiser contact email, desensitised data
+      industry:
+        expression: advertisers.industry
+        description: Advertiser industry category
+      language:
+        expression: advertisers.language
+        description: Language used by advertisers
+      license_no:
+        expression: advertisers.license_no
+        description: License number
+      license_url:
+        expression: advertisers.license_url
+        description: License preview address, the link is valid for an hour by default.
+      name:
+        expression: advertisers.name
+        description: Advertiser name
+      phone_number:
+        expression: MISSING
+        description: "Contact mobile number, desensitised data. IMPORTANT: This field
+          will not be populated for connectors utilizing the Tiktok Ads v1.3 API version,
+          as the column was renamed.  The new column name is `cellphone_number`.\n"
+      promotion_area:
+        expression: advertisers.promotion_area
+        description: Operation area
+      reason:
+        expression: advertisers.rejection_reason
+        description: Reason for rejection
+      role:
+        expression: advertisers.role
+        description: Advertiser role
+      status:
+        expression: advertisers.status
+        description: Advertiser status
+      telephone:
+        expression: MISSING
+        description: "Fixed phone number, desensitised data IMPORTANT: This field
+          will not be populated for connectors utilizing the Tiktok Ads v1.3 API version,
+          as the column was renamed.  The new column name is `telephone_number`.\n"
+      telephone_number:
+        expression: advertisers.telephone_number
+        description: "Fixed phone number, desensitised data This is the newest version
+          of the field `telephone`, which was renamed after the Tiktok Ads v1.3 API
+          release.\n"
+      timezone:
+        expression: advertisers.timezone
+        description: Ad account time zone including GMT offset
+      _fivetran_synced:
+        expression: advertisers._airbyte_extracted_at
+        description: Timestamp of when Fivetran synced a record.

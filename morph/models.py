@@ -9,7 +9,8 @@ from rich.console import Console
 from rich.table import Table
 from typing_extensions import Self
 
-from morph.utils import resource_paths, text_utils
+from morph import resources
+from morph.utils import text_utils
 from morph.utils.rich_utils import rich_formatted_confidence
 from morph.utils.text_utils import normalize_field_name
 
@@ -430,7 +431,7 @@ class TableMapping(BaseModel):
 
     def get_file_path(self) -> Path:
         """Get the file path for the transform file."""
-        return resource_paths.get_transform_file(
+        return resources.get_transform_file(
             source_name=self.source_name,
             project_name=self.project_name,
             transform_name=self.transform_name,
