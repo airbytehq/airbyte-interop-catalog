@@ -49,11 +49,11 @@ To add a new connector to the catalog, follow these steps:
 
    - The first time you run this it will require creds in a `GCP_GSM_CREDENTIALS` env var.
      ```bash
-     uv run morph sync {source_name} --no-data
+     uv run morph sync {source_name} --with-data
      ```
    - Subsequent executions can be run without creds, using the generated catalog.
      ```bash
-     uv run morph sync {source_name} --no-data --no-creds
+     uv run morph sync {source_name} --with-data --no-creds
      ```
 
 8. Optionally extract the raw data. This will require creds and may take a while.

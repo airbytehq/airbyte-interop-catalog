@@ -5,7 +5,6 @@ This module provides functionality to generate lock files that track unused stre
 unused stream fields, unmapped target tables, and unmapped target table fields.
 """
 
-from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -183,7 +182,7 @@ def generate_lock_file_for_project(
         sync_source(
             source_name=source_name,
             streams="*",
-            no_data=True,
+            with_data=False,
             no_creds=airbyte_catalog_file.is_file(),  # Don't use creds if we already have a catalog
         )
 

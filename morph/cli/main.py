@@ -13,12 +13,8 @@ from morph.ai import map
 from morph.ai.eval import get_table_mapping_eval
 from morph.constants import DEFAULT_PROJECT_NAME
 from morph.utils import text_utils
-from morph.utils.airbyte_catalog import write_catalog_file
 from morph.utils.airbyte_sync import sync_source
 from morph.utils.dbt_build import generate_dbt_project
-from morph.utils.dbt_source_files import (
-    generate_dbt_sources_yml_from_airbyte_catalog,
-)
 from morph.utils.lock_file import generate_lock_file
 from morph.utils.logic import if_none
 from morph.utils.transform_scaffold import (
@@ -53,14 +49,15 @@ def main() -> None:
     help="Skip catalog generation",
 )
 @click.option(
-    "--no-data",
-    is_flag=True,
-    help="Skip data extraction",
-)
-@click.option(
     "--no-creds",
     is_flag=True,
     help="Skip credentials",
+)
+@click.option(
+    "--with-data",
+    is_flag=True,
+    default=None,
+    help="Include data extraction",
 )
 def sync(
     source_name: str,
@@ -68,8 +65,8 @@ def sync(
     db_path: Path | None = None,
     *,
     no_catalog: bool = False,
-    no_data: bool = False,
     no_creds: bool = False,
+    with_data: bool | None = None,
 ) -> None:
     """Sync data from an Airbyte source to a local database.
 
@@ -79,29 +76,19 @@ def sync(
     SOURCE_NAME: Name of the source (e.g., 'hubspot')
     PROJECT_NAME: Name of the project (e.g., 'fivetran-interop')
     """
-    if not no_catalog:
-        console.print(f"Generating Airbyte catalog for '{source_name}'...")
-        write_catalog_file(
-            source_name=source_name,
-        )
-        console.print(f"Generating dbt source file for '{source_name}'.")
-        generate_dbt_sources_yml_from_airbyte_catalog(
-            source_name=source_name,
-            project_name=project_name,
-        )
-        console.print(f"Generated Airbyte catalog and dbt source file for {source_name}.")
-
     console.print(
         f"Syncing '{source_name}' database...",
     )
     sync_source(
         source_name=source_name,
+        project_name=project_name,
         streams="*",
         db_path=db_path,
-        no_data=no_data,
+        with_data=with_data,
+        no_catalog=no_catalog,
         no_creds=no_creds,
     )
-    console.print(f"Synced '{source_name}' database: {db_path}")
+    console.print(f"Synced '{source_name}' database.")
 
 
 @main.command()
@@ -131,7 +118,6 @@ def lock(
 @click.argument("source_name", type=str)
 @click.option("--project-name", type=str, default=DEFAULT_PROJECT_NAME)
 @click.option("--no-airbyte-catalog", is_flag=True)
-@click.option("--no-data", is_flag=True)
 @click.option("--no-creds", is_flag=True)
 @click.option("--no-transforms", is_flag=True)
 @click.option("--no-dbt-project", is_flag=True)
@@ -141,7 +127,6 @@ def build(
     project_name: str,
     *,
     no_airbyte_catalog: bool | None = None,
-    no_data: bool | None = None,
     no_creds: bool | None = None,
     no_transforms: bool | None = None,
     no_dbt_project: bool | None = None,
@@ -158,14 +143,14 @@ def build(
         console.print("Error: --source-name and --project-name are required", style="bold red")
         return
 
-    # Generate Airbyte catalog
-    if not any([no_airbyte_catalog, no_data, no_creds]):
+    # Generate Airbyte catalog and schema artifacts
+    if not any([no_airbyte_catalog, no_creds]):
         console.print(f"Generating Airbyte catalog for {source_name}...")
         sync.callback(
             source_name,
             no_catalog=no_airbyte_catalog,
-            no_data=no_data,
             no_creds=no_creds,
+            with_data=False,
         )  # type: ignore  (mypy doesn't recognize the callback signature)
         console.print("Generated Airbyte catalog.")
 
