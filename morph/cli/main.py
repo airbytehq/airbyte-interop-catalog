@@ -151,7 +151,7 @@ def build(
             no_catalog=no_airbyte_catalog,
             no_creds=no_creds,
             with_data=False,
-        )  # type: ignore  (mypy doesn't recognize the callback signature)
+        )
         console.print("Generated Airbyte catalog.")
 
     # Generate transforms
@@ -169,7 +169,7 @@ def build(
     # Generate dbt project
     if not no_dbt_project:
         console.print(f"Generating dbt project for {source_name}...")
-        generate_dbt_project(source_name, project_name)  # type: ignore  (mypy doesn't recognize the callback signature)
+        generate_dbt_project(source_name, project_name)
         console.print(f"Generated dbt project for {source_name}")
 
 
