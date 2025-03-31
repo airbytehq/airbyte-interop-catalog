@@ -11,39 +11,16 @@ from typing import Any
 import requests
 from rich.console import Console
 
-from morph import models
+from morph import models, resources
 from morph.constants import HEADER_COMMENT
-from morph.utils import resource_paths, text_utils
+from morph.utils import text_utils
 
 console = Console()
-
-
-def load_config(config_file: str) -> dict[str, Any] | None:
-    """Load configuration file and extract target tables.
-
-    Args:
-        config_file: Path to the config file
-
-    Returns:
-        Tuple containing the config dictionary and list of target tables
-    """
-    config_path = Path(config_file)
-    if not config_path.exists():
-        raise ValueError(f"Error: Config file {config_file} does not exist")
-
-    config = text_utils.load_yaml_file(config_path)
-    return config  # noqa: RET504  (unnecessary assignment)
-    # target_tables = config.get("target_tables", [])
-    # if not target_tables:
-    #     raise ValueError(f"No target tables defined in {config_file}")
-
-    # return config, target_tables
 
 
 def download_target_schema(
     source_name: str,
     project_name: str,
-    config: dict[str, Any],
     *,
     if_not_exists: bool = False,
 ) -> None:
@@ -53,17 +30,19 @@ def download_target_schema(
         Target schema dictionary or None if not found
     """
     # Determine target schema file name
-    local_schema_path = resource_paths.get_dbt_sources_requirements_path(
+    local_schema_path = resources.get_dbt_sources_requirements_path(
         source_name=source_name,
         project_name=project_name,
     )
-    if not local_schema_path.exists() and if_not_exists:
+    if local_schema_path.exists() and if_not_exists:
         # Nothing to do
         console.print(f"Using existing target schema file: {local_schema_path}")
         return
 
     # Get target schema URL
-    target_schema_url = config.get("target_dbt_schema_url")
+    target_schema_url: dict[str, str] = resources.get_source_config(
+        source_name=source_name,
+    )["target_dbt_schema_url"]
     if not target_schema_url:
         raise ValueError("Error: target_dbt_schema_url not defined in config.yml")
 
@@ -168,7 +147,7 @@ def generate_empty_mapping_file(
         console.print(f"Skipping '{transform_name}': Mapping file already exists", style="blue")
         return None
 
-    dbt_source_requirements_file = resource_paths.get_dbt_sources_requirements_path(
+    dbt_source_requirements_file = resources.get_dbt_sources_requirements_path(
         source_name=source_name,
         project_name=project_name,
     )
@@ -236,7 +215,7 @@ def report_results(created_files: list[str]) -> None:
 def generate_transform_scaffold(
     source_name: str,
     project_name: str,
-    output_dir: str | None = None,
+    output_dir: Path | None = None,
 ) -> None:
     """Generate scaffold mapping YAML files for target tables.
 
@@ -246,27 +225,24 @@ def generate_transform_scaffold(
     """
 
     # Set default paths if not provided
-    config_file = f"catalog/{source_name}/src/{project_name}/config.yml"
     if not output_dir:
-        output_dir = f"catalog/{source_name}/src/{project_name}/transforms"
-
-    # Set path for local target schema file
-    requirements_dir = f"catalog/{source_name}/requirements/{project_name}"
-    Path(requirements_dir).mkdir(parents=True, exist_ok=True)
+        output_dir = resources.get_transforms_dir(
+            source_name=source_name,
+            project_name=project_name,
+        )
 
     # Load config and target schema
-    config = load_config(config_file)
+    config = resources.get_source_config(source_name)
     if not config:
         return
 
     download_target_schema(
         source_name=source_name,
         project_name=project_name,
-        config=config,
         if_not_exists=True,
     )
     target_schema = text_utils.load_yaml_file(
-        resource_paths.get_dbt_sources_requirements_path(
+        resources.get_dbt_sources_requirements_path(
             source_name=source_name,
             project_name=project_name,
         ),

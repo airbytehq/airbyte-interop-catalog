@@ -1,0 +1,63 @@
+[project]
+source_name = "tiktok_marketing"
+project_name = "fivetran-interop"
+generated_at = "2025-03-31T05:48:11Z"
+requirements_file = "catalog/tiktok_marketing/requirements/fivetran-interop/src_dbt_requirements.yml"
+requirements_file_hash = "0d922b54ab642a78c4671b74ac4047442ceaa90062bc509a93b6c4474f421eaa"
+airbyte_source_file = "catalog/tiktok_marketing/generated/src_airbyte_tiktok_marketing.yml"
+airbyte_source_file_hash = "7137ea3aa0637950e73249fa034ddd13922bd6fdbee7eda48eefd5fa646f0abc"
+
+[coverage]
+unused_source_streams = [
+    "ad_group_audience_reports_by_country_daily",
+    "ad_group_audience_reports_by_platform_daily",
+    "ad_group_audience_reports_daily",
+    "ad_groups",
+    "ad_groups_reports_daily",
+    "ad_groups_reports_hourly",
+    "ad_groups_reports_lifetime",
+    "ads",
+    "ads_audience_reports_by_country_daily",
+    "ads_audience_reports_by_platform_daily",
+    "ads_audience_reports_by_province_daily",
+    "ads_audience_reports_daily",
+    "ads_reports_daily",
+    "ads_reports_hourly",
+    "ads_reports_lifetime",
+    "advertiser_ids",
+    "advertisers",
+    "advertisers_audience_reports_by_country_daily",
+    "advertisers_audience_reports_by_platform_daily",
+    "advertisers_audience_reports_daily",
+    "advertisers_audience_reports_lifetime",
+    "advertisers_reports_daily",
+    "advertisers_reports_hourly",
+    "advertisers_reports_lifetime",
+    "audiences",
+    "campaigns",
+    "campaigns_audience_reports_by_country_daily",
+    "campaigns_audience_reports_by_platform_daily",
+    "campaigns_audience_reports_daily",
+    "campaigns_reports_daily",
+    "campaigns_reports_hourly",
+    "campaigns_reports_lifetime",
+    "creative_assets_images",
+    "creative_assets_music",
+    "creative_assets_portfolios",
+    "creative_assets_videos",
+    "pixel_events_statistics",
+    "pixel_instant_page_events",
+    "pixels",
+    "spark_ads",
+]
+unmapped_target_tables = [
+    "ad_history",
+    "ad_report_hourly",
+    "adgroup_history",
+    "adgroup_report_hourly",
+    "advertiser",
+    "campaign_history",
+    "campaign_report_hourly",
+]
+
+[mappings]

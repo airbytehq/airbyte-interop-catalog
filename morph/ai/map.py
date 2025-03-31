@@ -5,9 +5,9 @@ from typing import cast
 from rich.console import Console
 from rich.prompt import Prompt
 
-from morph import constants, models
+from morph import constants, models, resources
 from morph.ai import functions as ai_fn
-from morph.utils import dbt_source_files, resource_paths, text_utils
+from morph.utils import dbt_source_files, text_utils
 from morph.utils.logic import if_none
 from morph.utils.retries import with_retry
 from morph.utils.transform_scaffold import generate_empty_mapping_file
@@ -27,7 +27,7 @@ def change_mapping_source_table(
 
     This will also reset the field mappings to the default `MISSING`.
     """
-    transform_file = resource_paths.get_transform_file(
+    transform_file = resources.get_transform_file(
         source_name=source_name,
         project_name=project_name,
         transform_name=transform_name,
@@ -165,7 +165,7 @@ def populate_missing_mappings(
     auto_confirm: bool = False,
 ) -> None:
     """Populate missing mappings for a single target table."""
-    transform_file = resource_paths.get_transform_file(
+    transform_file = resources.get_transform_file(
         source_name=source_name,
         project_name=project_name,
         transform_name=transform_name,
@@ -174,7 +174,7 @@ def populate_missing_mappings(
     fields_to_populate = []
 
     source_table_info = models.SourceTableSummary.from_dbt_source_file(
-        source_file=resource_paths.get_generated_source_yml_path(
+        source_file=resources.get_generated_source_yml_path(
             source_name=source_name,
             project_name=project_name,
         ),
@@ -238,7 +238,7 @@ def infer_table_mappings(  # noqa: PLR0912 (too many branches)
     auto_confirm = cast(bool, if_none(auto_confirm, False))
 
     # Find the YAML file
-    yaml_file = resource_paths.get_transform_file(
+    yaml_file = resources.get_transform_file(
         source_name,
         project_name=project_name,
         transform_name=transform_name,
@@ -253,7 +253,7 @@ def infer_table_mappings(  # noqa: PLR0912 (too many branches)
         ).source_stream_name
 
     # Get all source schemas
-    dbt_source_file_path = resource_paths.get_generated_source_yml_path(
+    dbt_source_file_path = resources.get_generated_source_yml_path(
         source_name=source_name,
         project_name=project_name,
     )
@@ -275,7 +275,7 @@ def infer_table_mappings(  # noqa: PLR0912 (too many branches)
 
         target_table_schemas: list[models.SourceTableSummary] = (
             models.SourceTableSummary.from_dbt_source_file(
-                resource_paths.get_dbt_sources_requirements_path(
+                resources.get_dbt_sources_requirements_path(
                     source_name=source_name,
                     project_name=project_name,
                 ),
@@ -369,7 +369,7 @@ def infer_table_mappings(  # noqa: PLR0912 (too many branches)
             source_name=source_name,
             project_name=project_name,
             transform_name=transform_name,
-            parent_folder=resource_paths.get_transforms_dir(
+            parent_folder=resources.get_transforms_dir(
                 source_name=source_name,
                 project_name=project_name,
             ),
@@ -396,12 +396,11 @@ def get_skipped_target_tables(
     project_name: str,
 ) -> list[str]:
     """Get the list of skipped tables from the config file."""
-    config_file = resource_paths.get_config_file_path(
+    return resources.get_source_config(
         source_name=source_name,
         project_name=project_name,
+        key="target_tables_skipped",
     )
-    config = text_utils.load_yaml_file(config_file)
-    return config.get("target_tables_skipped", [])
 
 
 def add_skipped_target_table(
@@ -410,7 +409,7 @@ def add_skipped_target_table(
     transform_name: str,
 ) -> None:
     """Add a skipped table to the config file."""
-    config_file = resource_paths.get_config_file_path(
+    config_file = resources.get_config_file_path(
         source_name=source_name,
         project_name=project_name,
     )

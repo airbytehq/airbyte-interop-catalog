@@ -16,9 +16,10 @@ from typing import Any
 
 from rich.console import Console
 
+from morph import resources
 from morph.constants import DEFAULT_PROJECT_NAME, HEADER_COMMENT
 from morph.models import DbtSourceColumn, DbtSourceFile, DbtSourceTable
-from morph.utils import resource_paths, text_utils
+from morph.utils import text_utils
 
 console = Console()
 
@@ -129,7 +130,7 @@ def generate_dbt_sources_yml_from_airbyte_catalog(
 ) -> None:
     """Generate a dbt sources.yml structure from an Airbyte catalog file."""
     if not catalog_file:
-        catalog_file = resource_paths.get_generated_catalog_path(source_name, project_name)
+        catalog_file = resources.get_generated_catalog_path(source_name, project_name)
 
     # Validate input path exists
     if not catalog_file.exists():
@@ -144,7 +145,7 @@ def generate_dbt_sources_yml_from_airbyte_catalog(
     )
 
     # Calculate output path
-    output_path = output_file or resource_paths.get_generated_source_yml_path(
+    output_path = output_file or resources.get_generated_source_yml_path(
         source_name=source_name,
         project_name=project_name,
     )
@@ -190,5 +191,5 @@ def get_dbt_sources_requirements(
     project_name: str = DEFAULT_PROJECT_NAME,
 ) -> dict[str, Any]:
     """Get the parsed dbt sources.yml requirements file content."""
-    catalog_file = resource_paths.get_generated_catalog_path(source_name, project_name)
+    catalog_file = resources.get_generated_catalog_path(source_name, project_name)
     return parse_airbyte_catalog_to_dbt_sources_format(catalog_file, source_name)

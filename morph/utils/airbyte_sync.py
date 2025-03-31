@@ -20,7 +20,8 @@ from airbyte_protocol.models import (
 )
 from rich.console import Console
 
-from morph.utils import resource_paths, text_utils
+from morph import resources
+from morph.utils import text_utils
 from morph.utils.airbyte_catalog import get_source
 
 console = Console()
@@ -69,7 +70,7 @@ def sync_source(
 
     if no_creds:
         # Get the catalog file path
-        catalog_file = resource_paths.get_generated_catalog_path(
+        catalog_file = resources.get_generated_catalog_path(
             source_name=source_name,
         )
         # Load the catalog from the file
