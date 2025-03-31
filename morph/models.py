@@ -610,9 +610,11 @@ class TableMappingEval(BaseModel):
             title: Optional title for the analysis table
         """
         # Create results table
-        table = Table(title="Table Mapping Eval")
+        table = Table(
+            title=f"Table Mapping Eval: '{from_transform.source_stream_name}->{from_transform.target_table_name}'",
+        )
         table.add_column("Field", style="cyan")
-        table.add_column("Expression", style="yellow")
+        table.add_column("Expression", style="yellow", overflow="fold")
         table.add_column("Description")
         table.add_column("Confidence", justify="right")
         table.add_column("Evaluation", style="italic")
@@ -686,10 +688,9 @@ class SourceTableMappingSuggestion(BaseModel):
     def as_rich_table(self) -> Table:
         """Return a rich representation of the object as a Rich Table."""
         table = Table(
-            title="Source Table Mapping Suggestion",
+            title=f"Table Matching Suggestion for '{self.target_table_name}'",
             show_header=False,
         )
-        table.add_row("Target Table", self.target_table_name)
         table.add_row("Suggested Source Table", self.suggested_source_table_name)
         table.add_row("Confidence Score", rich_formatted_confidence(self.confidence_score))
         table.add_row("Explanation", self.explanation)

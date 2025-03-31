@@ -1,0 +1,28 @@
+domain: shopify.fivetran-interop
+transforms:
+  - name: order_discount_code
+    from:
+      - discount_codes: shopify.discount_codes
+    fields:
+      _fivetran_synced:
+        expression: discount_codes._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      amount:
+        expression: discount_codes.total_sales.amount
+        description: The amount that's deducted from the order total.
+      code:
+        expression: discount_codes.code
+        description:
+          This property returns the discount code that was entered at checkout.
+          Otherwise this property returns the title of the discount that was applied.
+      order_id:
+        expression: MISSING
+        description: Associated order ID.
+      type:
+        expression: discount_codes.discount_type
+        description: The type of discount - `fixed_amount`, `percentage`, or `shipping`.
+      index:
+        expression: MISSING
+        description:
+          Pairs with `order_id` to provide unique identifier for order
+          discount code.

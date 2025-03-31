@@ -1,0 +1,15 @@
+domain: shopify.fivetran-interop
+transforms:
+  - name: collection_product
+    from:
+      - collects: shopify.collects
+    fields:
+      _fivetran_synced:
+        expression: collects._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      collection_id:
+        expression: collects.collection_id
+        description: ID referencing the `collection` the product belongs to.
+      product_id:
+        expression: collects.product_id
+        description: ID referencing the `product`.

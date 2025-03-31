@@ -24,14 +24,16 @@ transforms:
         description: Campaign name
       campaign_type:
         expression: campaigns.campaign_type
-        description: Campaign Type, indicates the campaign is a regular campaign or
+        description:
+          Campaign Type, indicates the campaign is a regular campaign or
           iOS 14 campaign.
       create_time:
         expression: campaigns.create_time
         description: Time at which the campaign was created.
       is_new_structure:
         expression: campaigns.is_new_structure
-        description: Whether the campaign is a new structure (for the same campaign,
+        description:
+          Whether the campaign is a new structure (for the same campaign,
           the structure of campaign, adgroups and ads are the same)
       objective_type:
         expression: campaigns.objective_type
@@ -44,5 +46,6 @@ transforms:
         description: Campaign status
       split_test_variable:
         expression: campaigns.split_test_variable
-        description: Split Test variables. Optional values; TARGETING, BIDDING_OPTIMIZATION
+        description:
+          Split Test variables. Optional values; TARGETING, BIDDING_OPTIMIZATION
           , CREATIVE.

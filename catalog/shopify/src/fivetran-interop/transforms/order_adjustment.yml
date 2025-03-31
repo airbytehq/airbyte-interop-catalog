@@ -1,0 +1,40 @@
+domain: shopify.fivetran-interop
+transforms:
+  - name: order_adjustment
+    from:
+      - transactions: shopify.transactions
+    fields:
+      id:
+        expression: transactions.id
+        description: The unique numeric identifier for the order adjustment.
+      order_id:
+        expression: transactions.order_id
+        description: Reference to the order which the adjustment is associated.
+      refund_id:
+        expression: MISSING
+        description: Reference to the refund which the adjustment is associated.
+      amount:
+        expression: transactions.amount
+        description: Amount of the adjustment.
+      tax_amount:
+        expression: MISSING
+        description: Tax amount applied to the order adjustment in shop currency.
+      kind:
+        expression: transactions.kind
+        description: The kind of order adjustment (eg. refund, restock, etc.).
+      reason:
+        expression: MISSING
+        description: The reason for the order adjustment.
+      amount_set:
+        expression: transactions.amount_set
+        description:
+          Amount set towards the order adjustment in shop and presentment
+          currencies.
+      tax_amount_set:
+        expression: MISSING
+        description:
+          Tax amount set towards the order adjustment in shop and presentment
+          currencies.
+      _fivetran_synced:
+        expression: transactions._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"

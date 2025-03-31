@@ -30,7 +30,7 @@ def download_target_schema(
         Target schema dictionary or None if not found
     """
     # Determine target schema file name
-    local_schema_path = resources.get_dbt_sources_requirements_path(
+    local_schema_path: Path = resources.get_dbt_sources_requirements_path(
         source_name=source_name,
         project_name=project_name,
     )
@@ -40,7 +40,7 @@ def download_target_schema(
         return
 
     # Get target schema URL
-    target_schema_url: dict[str, str] = resources.get_source_config(
+    target_schema_url: str = resources.get_source_config(
         source_name=source_name,
     )["target_dbt_schema_url"]
     if not target_schema_url:
@@ -51,6 +51,7 @@ def download_target_schema(
     try:
         response = requests.get(target_schema_url)
         response.raise_for_status()
+        local_schema_path.parent.mkdir(parents=True, exist_ok=True)
         local_schema_path.write_text(HEADER_COMMENT + response.text)
         console.print(f"Downloaded target schema to {local_schema_path}", style="green")
         return

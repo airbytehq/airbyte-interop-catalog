@@ -8,6 +8,7 @@ from pathlib import Path
 
 import click
 from rich.console import Console
+from rich.table import Table
 
 from morph import models, resources
 from morph.ai import map
@@ -471,10 +472,21 @@ def generate_missing_mappings(
         return
 
     delim = "'\n - '"
-    console.print(
-        f"Generating missing mappings for {len(target_tables)} tables:\n - '{delim.join(target_tables)}'",
+    table = Table(
+        title="Mapping Tables",
+        show_lines=True,
     )
-
+    table.add_column(
+        "Source Tables",
+    )
+    table.add_column(
+        "Target Tables",
+    )
+    table.add_row(
+        f" - '{delim.join([s.name for s in dbt_requirements_file.source_tables])}'",
+        f" - '{delim.join(target_tables)}'",
+    )
+    console.print(table)
     for target_table in target_tables:
         if not include_skipped_tables and (
             target_table
@@ -488,7 +500,10 @@ def generate_missing_mappings(
             )
             continue
 
-        console.print(f"Generating missing mappings for '{target_table}'...")
+        console.print(
+            f"Generating missing mappings for '{target_table}'...",
+            style="bold white on blue",
+        )
         map.infer_table_mappings(
             source_name=source_name,
             project_name=project_name,

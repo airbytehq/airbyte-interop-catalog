@@ -1,0 +1,81 @@
+domain: shopify.fivetran-interop
+transforms:
+  - name: fulfillment
+    from:
+      - fulfillments: shopify.fulfillments
+    fields:
+      _fivetran_synced:
+        expression: fulfillments._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      created_at:
+        expression: fulfillments.created_at
+        description:
+          The date and time when the fulfillment was created. The API returns
+          this value in ISO 8601 format.
+      id:
+        expression: fulfillments.id
+        description: The ID for the fulfillment.
+      location_id:
+        expression: fulfillments.location_id
+        description:
+          The unique identifier of the location that the fulfillment was
+          processed at.
+      name:
+        expression: fulfillments.name
+        description:
+          "The uniquely identifying fulfillment name, consisting of two
+          parts separated by a .. The first part represents the order name and the
+          second part represents the fulfillment number.  The fulfillment number automatically
+          increments depending on how many fulfillments are in an order (e.g. #1001.1,
+          #1001.2).\n"
+      order_id:
+        expression: fulfillments.order_id
+        description: The unique numeric identifier for the order.
+      receipt_authorization:
+        expression: fulfillments.receipt.authorization
+        description: The authorization code from the receipt.
+      service:
+        expression: fulfillments.service
+        description: The fulfillment service associated with the fulfillment.
+      shipment_status:
+        expression: fulfillments.shipment_status
+        description:
+          "The current shipment status of the fulfillment. Valid values
+          include: - label_printed: A label for the shipment was purchased and printed.
+          - label_purchased: A label for the shipment was purchased, but not printed.
+          - attempted_delivery: Delivery of the shipment was attempted, but unable
+          to be completed. - ready_for_pickup: The shipment is ready for pickup at
+          a shipping depot. - confirmed: The carrier is aware of the shipment, but
+          hasn't received it yet. - in_transit: The shipment is being transported
+          between shipping facilities on the way to its destination. - out_for_delivery:
+          The shipment is being delivered to its final destination. - delivered: The
+          shipment was succesfully delivered. - failure: Something went wrong when
+          pulling tracking information for the shipment, such as the tracking number
+          was invalid or the shipment was canceled.\n"
+      status:
+        expression: fulfillments.status
+        description:
+          "The status of the fulfillment. Valid values include: - pending:
+          Shopify has created the fulfillment and is waiting for the third-party fulfillment
+          service to transition it to 'open' or 'success'. - open: The fulfillment
+          has been acknowledged by the service and is in processing. - success: The
+          fulfillment was successful. - cancelled: The fulfillment was cancelled.
+          - error: There was an error with the fulfillment request. - failure: The
+          fulfillment request failed.\n"
+      tracking_company:
+        expression: fulfillments.tracking_company
+        description: The name of the tracking company.
+      tracking_number:
+        expression: fulfillments.tracking_number
+        description: Primary tracking number for the order.
+      tracking_numbers:
+        expression: fulfillments.tracking_numbers
+        description: A list of tracking numbers, provided by the shipping company.
+      tracking_urls:
+        expression: fulfillments.tracking_urls
+        description: The URLs of tracking pages for the fulfillment.
+      updated_at:
+        expression: fulfillments.updated_at
+        description:
+          The date and time (ISO 8601 format) when the fulfillment was
+          last modified.

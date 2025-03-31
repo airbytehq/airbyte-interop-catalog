@@ -1,0 +1,33 @@
+domain: shopify.fivetran-interop
+transforms:
+  - name: refund
+    from:
+      - order_refunds: shopify.order_refunds
+    fields:
+      id:
+        expression: order_refunds.id
+        description: The unique numeric identifier for the refund.
+      created_at:
+        expression: order_refunds.created_at
+        description: Timestamp of the date when the refund was created.
+      processed_at:
+        expression: order_refunds.processed_at
+        description: Timestamp of the date when the refund was processed.
+      note:
+        expression: order_refunds.note
+        description: User generated note attached to the refund.
+      restock:
+        expression: order_refunds.restock
+        description: Boolean indicating if the refund is a result of a restock.
+      user_id:
+        expression: order_refunds.user_id
+        description: Reference to the user id which generated the refund.
+      _fivetran_synced:
+        expression: order_refunds._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      total_duties_set:
+        expression: order_refunds.total_duties_set
+        description: Record representing total duties set for the refund.
+      order_id:
+        expression: order_refunds.order_id
+        description: Reference to the order which the refund is associated.

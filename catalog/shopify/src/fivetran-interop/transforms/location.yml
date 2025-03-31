@@ -1,0 +1,83 @@
+domain: shopify.fivetran-interop
+transforms:
+  - name: location
+    from:
+      - locations: shopify.locations
+    fields:
+      _fivetran_deleted:
+        expression: MISSING
+        description: "{{ doc('_fivetran_deleted') }}"
+      _fivetran_synced:
+        expression: locations._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      active:
+        expression: locations.active
+        description:
+          "Boolean representing whether the location is active. If true,
+          then the location can be used to sell products, stock inventory, and fulfill
+          orders.\n"
+      address_1:
+        expression: locations.address1
+        description: The location's street address.
+      address_2:
+        expression: locations.address2
+        description: The optional second line of the location's street address.
+      city:
+        expression: locations.city
+        description: The city the location is in.
+      country:
+        expression: locations.country
+        description: The country the location is in (two-letter code).
+      country_code:
+        expression: locations.country_code
+        description:
+          The two-letter code (ISO 3166-1 alpha-2 format) corresponding
+          to country the location is in.
+      country_name:
+        expression: locations.country_name
+        description: Full name of the location's country.
+      created_at:
+        expression: locations.created_at
+        description: The date and time (ISO 8601 format) when the location was created.
+      id:
+        expression: locations.id
+        description: The ID of the location.
+      legacy:
+        expression: locations.legacy
+        description:
+          "Boolean representing whether this is a fulfillment service location.
+          If true, then the location is a fulfillment service location.  If false,
+          then the location was created by the merchant and isn't tied to a fulfillment
+          service.\n"
+      localized_country_name:
+        expression: locations.localized_country_name
+        description: The localized name of the location's country.
+      localized_province_name:
+        expression: locations.localized_province_name
+        description:
+          The localized name of the location's region. Typically a province,
+          state, or district.
+      name:
+        expression: locations.name
+        description: The name of the location.
+      phone:
+        expression: locations.phone
+        description:
+          The phone number of the location. This value can contain special
+          characters, such as - or +.
+      province:
+        expression: locations.province
+        description: The province, state, or district of the location.
+      province_code:
+        expression: locations.province_code
+        description:
+          The province, state, or district code (ISO 3166-2 alpha-2 format)
+          of the location.
+      updated_at:
+        expression: locations.updated_at
+        description:
+          The date and time (ISO 8601 format) when the location was last
+          updated.
+      zip:
+        expression: locations.zip
+        description: The zip or postal code.

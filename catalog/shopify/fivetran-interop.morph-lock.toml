@@ -1,0 +1,2788 @@
+[project]
+source_name = "shopify"
+project_name = "fivetran-interop"
+generated_at = "2025-03-31T17:13:14Z"
+requirements_file = "catalog/shopify/requirements/fivetran-interop/src_dbt_requirements.yml"
+requirements_file_hash = "f022b53cac87e62f4af57a4a9e491e879843c5e70fd63b0ba0451f94c85fb0b3"
+airbyte_source_file = "catalog/shopify/generated/src_airbyte_shopify.yml"
+airbyte_source_file_hash = "4bf1aea92cc927f957a8271e56602fb1bdc93c2e827b581177f3b42a5d21caa4"
+
+[coverage]
+unused_source_streams = [
+    "articles",
+    "balance_transactions",
+    "blogs",
+    "collections",
+    "countries",
+    "custom_collections",
+    "customer_address",
+    "customer_journey_summary",
+    "disputes",
+    "draft_orders",
+    "fulfillment_orders",
+    "metafield_blogs",
+    "metafield_collections",
+    "metafield_draft_orders",
+    "metafield_locations",
+    "metafield_pages",
+    "metafield_product_images",
+    "metafield_product_variants",
+    "metafield_products",
+    "metafield_shops",
+    "metafield_smart_collections",
+    "order_agreements",
+    "pages",
+]
+unmapped_target_tables = []
+
+[mappings.abandoned_checkout]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/abandoned_checkout.yml"
+source_file_hash = "c6df5b876837409f837510dc05f636b7865607527d394d8c8f2622a29431fa86"
+unmapped_target_fields = [
+    "customer_id",
+    "total_duties",
+]
+omitted_target_fields = []
+
+[mappings.abandoned_checkout.mapped_target_fields]
+_fivetran_deleted = "abandoned_checkouts._airbyte_raw_id"
+_fivetran_synced = "abandoned_checkouts._airbyte_extracted_at"
+abandoned_checkout_url = "abandoned_checkouts.abandoned_checkout_url"
+billing_address_address_1 = "abandoned_checkouts.billing_address.address1"
+billing_address_address_2 = "abandoned_checkouts.billing_address.address2"
+billing_address_city = "abandoned_checkouts.billing_address.city"
+billing_address_company = "abandoned_checkouts.billing_address.company"
+billing_address_country = "abandoned_checkouts.billing_address.country"
+billing_address_country_code = "abandoned_checkouts.billing_address.country_code"
+billing_address_first_name = "abandoned_checkouts.billing_address.first_name"
+billing_address_last_name = "abandoned_checkouts.billing_address.last_name"
+billing_address_latitude = "abandoned_checkouts.billing_address.latitude"
+billing_address_longitude = "abandoned_checkouts.billing_address.longitude"
+billing_address_name = "abandoned_checkouts.billing_address.name"
+billing_address_phone = "abandoned_checkouts.billing_address.phone"
+billing_address_province = "abandoned_checkouts.billing_address.province"
+billing_address_province_code = "abandoned_checkouts.billing_address.province_code"
+billing_address_zip = "abandoned_checkouts.billing_address.zip"
+buyer_accepts_marketing = "abandoned_checkouts.buyer_accepts_marketing"
+cart_token = "abandoned_checkouts.cart_token"
+closed_at = "abandoned_checkouts.closed_at"
+created_at = "abandoned_checkouts.created_at"
+currency = "abandoned_checkouts.currency"
+customer_locale = "abandoned_checkouts.customer_locale"
+device_id = "abandoned_checkouts.device_id"
+email = "abandoned_checkouts.email"
+gateway = "abandoned_checkouts.gateway"
+id = "abandoned_checkouts.id"
+landing_site_base_url = "abandoned_checkouts.landing_site"
+location_id = "abandoned_checkouts.location_id"
+name = "abandoned_checkouts.name"
+note = "abandoned_checkouts.note"
+phone = "abandoned_checkouts.phone"
+presentment_currency = "abandoned_checkouts.presentment_currency"
+referring_site = "abandoned_checkouts.referring_site"
+shipping_address_address_1 = "abandoned_checkouts.shipping_address.address1"
+shipping_address_address_2 = "abandoned_checkouts.shipping_address.address2"
+shipping_address_city = "abandoned_checkouts.shipping_address.city"
+shipping_address_company = "abandoned_checkouts.shipping_address.company"
+shipping_address_country = "abandoned_checkouts.shipping_address.country"
+shipping_address_country_code = "abandoned_checkouts.shipping_address.country_code"
+shipping_address_first_name = "abandoned_checkouts.shipping_address.first_name"
+shipping_address_last_name = "abandoned_checkouts.shipping_address.last_name"
+shipping_address_latitude = "abandoned_checkouts.shipping_address.latitude"
+shipping_address_longitude = "abandoned_checkouts.shipping_address.longitude"
+shipping_address_name = "abandoned_checkouts.shipping_address.name"
+shipping_address_phone = "abandoned_checkouts.shipping_address.phone"
+shipping_address_province = "abandoned_checkouts.shipping_address.province"
+shipping_address_province_code = "abandoned_checkouts.shipping_address.province_code"
+shipping_address_zip = "abandoned_checkouts.shipping_address.zip"
+source_name = "abandoned_checkouts.source_name"
+subtotal_price = "abandoned_checkouts.subtotal_price"
+taxes_included = "abandoned_checkouts.taxes_included"
+token = "abandoned_checkouts.token"
+total_discounts = "abandoned_checkouts.total_discounts"
+total_line_items_price = "abandoned_checkouts.total_line_items_price"
+total_price = "abandoned_checkouts.total_price"
+total_tax = "abandoned_checkouts.total_tax"
+total_weight = "abandoned_checkouts.total_weight"
+updated_at = "abandoned_checkouts.updated_at"
+user_id = "abandoned_checkouts.user_id"
+
+[mappings.abandoned_checkout.unused_source_fields]
+abandoned_checkouts = [
+    "_airbyte_meta",
+    "completed_at",
+    "customer.accepts_marketing",
+    "customer.accepts_marketing_updated_at",
+    "customer.addresses",
+    "customer.admin_graphql_api_id",
+    "customer.created_at",
+    "customer.currency",
+    "customer.default_address",
+    "customer.default_address.address1",
+    "customer.default_address.address2",
+    "customer.default_address.city",
+    "customer.default_address.company",
+    "customer.default_address.country",
+    "customer.default_address.country_code",
+    "customer.default_address.country_name",
+    "customer.default_address.customer_id",
+    "customer.default_address.default",
+    "customer.default_address.first_name",
+    "customer.default_address.id",
+    "customer.default_address.last_name",
+    "customer.default_address.name",
+    "customer.default_address.phone",
+    "customer.default_address.province",
+    "customer.default_address.province_code",
+    "customer.default_address.zip",
+    "customer.email",
+    "customer.first_name",
+    "customer.id",
+    "customer.last_name",
+    "customer.last_order_id",
+    "customer.last_order_name",
+    "customer.multipass_identifier",
+    "customer.note",
+    "customer.orders_count",
+    "customer.phone",
+    "customer.state",
+    "customer.tags",
+    "customer.tax_exemptions",
+    "customer.total_spent",
+    "customer.updated_at",
+    "customer.verified_email",
+    "discount_codes",
+    "line_items",
+    "note_attributes",
+    "shipping_lines",
+    "shop_url",
+    "source_identifier",
+    "source_url",
+    "tax_lines",
+]
+
+[mappings.abandoned_checkout_discount_code]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/abandoned_checkout_discount_code.yml"
+source_file_hash = "6267b7866512d75a76ee9bfe5c4fc3b70e7ec44c4b230f6d38939ce7987d267b"
+unmapped_target_fields = [
+    "amount",
+    "checkout_id",
+    "discount_id",
+    "index",
+]
+omitted_target_fields = []
+
+[mappings.abandoned_checkout_discount_code.mapped_target_fields]
+_fivetran_synced = "discount_codes._airbyte_extracted_at"
+code = "discount_codes.code"
+created_at = "discount_codes.created_at"
+type = "discount_codes.discount_type"
+updated_at = "discount_codes.updated_at"
+
+[mappings.abandoned_checkout_discount_code.unused_source_fields]
+discount_codes = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "admin_graphql_api_id",
+    "applies_once_per_customer",
+    "async_usage_count",
+    "codes_count",
+    "codes_count.count",
+    "createdBy",
+    "createdBy.id",
+    "createdBy.title",
+    "ends_at",
+    "id",
+    "price_rule_id",
+    "shop_url",
+    "starts_at",
+    "status",
+    "summary",
+    "title",
+    "total_sales",
+    "total_sales.amount",
+    "total_sales.currency_code",
+    "typename",
+    "usage_count",
+    "usage_limit",
+]
+
+[mappings.abandoned_checkout_shipping_line]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/abandoned_checkout_shipping_line.yml"
+source_file_hash = "7acd5bb94b840b334f71fd73d942515c1e4a1b15edd1edd755165cf5cdccbf13"
+unmapped_target_fields = [
+    "carrier_identifier",
+    "checkout_id",
+    "code",
+    "delivery_category",
+    "delivery_expectation_range",
+    "delivery_expectation_range_max",
+    "delivery_expectation_range_min",
+    "delivery_expectation_type",
+    "discounted_price",
+    "index",
+    "original_shop_price",
+    "price",
+    "requested_fulfillment_service_id",
+    "title",
+]
+omitted_target_fields = []
+
+[mappings.abandoned_checkout_shipping_line.mapped_target_fields]
+_fivetran_synced = "abandoned_checkouts._airbyte_extracted_at"
+id = "abandoned_checkouts.id"
+phone = "abandoned_checkouts.phone"
+source = "abandoned_checkouts.source"
+
+[mappings.abandoned_checkout_shipping_line.unused_source_fields]
+abandoned_checkouts = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "abandoned_checkout_url",
+    "billing_address",
+    "billing_address.address1",
+    "billing_address.address2",
+    "billing_address.city",
+    "billing_address.company",
+    "billing_address.country",
+    "billing_address.country_code",
+    "billing_address.first_name",
+    "billing_address.last_name",
+    "billing_address.latitude",
+    "billing_address.longitude",
+    "billing_address.name",
+    "billing_address.phone",
+    "billing_address.province",
+    "billing_address.province_code",
+    "billing_address.zip",
+    "buyer_accepts_marketing",
+    "cart_token",
+    "closed_at",
+    "completed_at",
+    "created_at",
+    "currency",
+    "customer",
+    "customer.accepts_marketing",
+    "customer.accepts_marketing_updated_at",
+    "customer.addresses",
+    "customer.admin_graphql_api_id",
+    "customer.created_at",
+    "customer.currency",
+    "customer.default_address",
+    "customer.default_address.address1",
+    "customer.default_address.address2",
+    "customer.default_address.city",
+    "customer.default_address.company",
+    "customer.default_address.country",
+    "customer.default_address.country_code",
+    "customer.default_address.country_name",
+    "customer.default_address.customer_id",
+    "customer.default_address.default",
+    "customer.default_address.first_name",
+    "customer.default_address.id",
+    "customer.default_address.last_name",
+    "customer.default_address.name",
+    "customer.default_address.phone",
+    "customer.default_address.province",
+    "customer.default_address.province_code",
+    "customer.default_address.zip",
+    "customer.email",
+    "customer.first_name",
+    "customer.id",
+    "customer.last_name",
+    "customer.last_order_id",
+    "customer.last_order_name",
+    "customer.multipass_identifier",
+    "customer.note",
+    "customer.orders_count",
+    "customer.phone",
+    "customer.state",
+    "customer.tags",
+    "customer.tax_exemptions",
+    "customer.total_spent",
+    "customer.updated_at",
+    "customer.verified_email",
+    "customer_locale",
+    "device_id",
+    "discount_codes",
+    "email",
+    "gateway",
+    "landing_site",
+    "line_items",
+    "location_id",
+    "name",
+    "note",
+    "note_attributes",
+    "presentment_currency",
+    "referring_site",
+    "shipping_address",
+    "shipping_address.address1",
+    "shipping_address.address2",
+    "shipping_address.city",
+    "shipping_address.company",
+    "shipping_address.country",
+    "shipping_address.country_code",
+    "shipping_address.first_name",
+    "shipping_address.last_name",
+    "shipping_address.latitude",
+    "shipping_address.longitude",
+    "shipping_address.name",
+    "shipping_address.phone",
+    "shipping_address.province",
+    "shipping_address.province_code",
+    "shipping_address.zip",
+    "shipping_lines",
+    "shop_url",
+    "source_identifier",
+    "source_name",
+    "source_url",
+    "subtotal_price",
+    "tax_lines",
+    "taxes_included",
+    "token",
+    "total_discounts",
+    "total_line_items_price",
+    "total_price",
+    "total_tax",
+    "total_weight",
+    "updated_at",
+    "user_id",
+]
+
+[mappings.collection]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/collection.yml"
+source_file_hash = "6905941e1d9bd2440ee04bdecd5d299c2cfa926690ebbb1e351e3e46b9510feb"
+unmapped_target_fields = [
+    "_fivetran_deleted",
+]
+omitted_target_fields = []
+
+[mappings.collection.mapped_target_fields]
+_fivetran_synced = "smart_collections._airbyte_extracted_at"
+disjunctive = "smart_collections.disjunctive"
+handle = "smart_collections.handle"
+id = "smart_collections.id"
+published_at = "smart_collections.published_at"
+published_scope = "smart_collections.published_scope"
+rules = "smart_collections.rules"
+sort_order = "smart_collections.sort_order"
+title = "smart_collections.title"
+updated_at = "smart_collections.updated_at"
+
+[mappings.collection.unused_source_fields]
+smart_collections = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "admin_graphql_api_id",
+    "body_html",
+    "shop_url",
+    "template_suffix",
+]
+
+[mappings.collection_product]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/collection_product.yml"
+source_file_hash = "8f2abc7339f2228004d50796f1189e9b2ae8dfb19184f802926fe6ce2ddc89aa"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.collection_product.mapped_target_fields]
+_fivetran_synced = "collects._airbyte_extracted_at"
+collection_id = "collects.collection_id"
+product_id = "collects.product_id"
+
+[mappings.collection_product.unused_source_fields]
+collects = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "created_at",
+    "id",
+    "position",
+    "shop_url",
+    "sort_value",
+    "updated_at",
+]
+
+[mappings.customer]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/customer.yml"
+source_file_hash = "1a57d147303b9872d3f1dd4be3de72a7b404ac17063eb615e083250e0e532541"
+unmapped_target_fields = [
+    "_fivetran_deleted",
+]
+omitted_target_fields = []
+
+[mappings.customer.mapped_target_fields]
+_fivetran_synced = "customers._airbyte_extracted_at"
+accepts_marketing = "customers.accepts_marketing"
+created_at = "customers.created_at"
+default_address_id = "customers.default_address.id"
+email = "customers.email"
+first_name = "customers.first_name"
+id = "customers.id"
+last_name = "customers.last_name"
+orders_count = "customers.orders_count"
+phone = "customers.phone"
+state = "customers.state"
+tax_exempt = "customers.tax_exempt"
+total_spent = "customers.total_spent"
+updated_at = "customers.updated_at"
+verified_email = "customers.verified_email"
+email_marketing_consent_state = "customers.email_marketing_consent.state"
+email_marketing_consent_opt_in_level = "customers.email_marketing_consent.opt_in_level"
+email_marketing_consent_consent_updated_at = "customers.email_marketing_consent.consent_updated_at"
+accepts_marketing_updated_at = "customers.accepts_marketing_updated_at"
+marketing_opt_in_level = "customers.marketing_opt_in_level"
+note = "customers.note"
+currency = "customers.currency"
+
+[mappings.customer.unused_source_fields]
+customers = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "addresses",
+    "admin_graphql_api_id",
+    "default_address.address1",
+    "default_address.address2",
+    "default_address.city",
+    "default_address.company",
+    "default_address.country",
+    "default_address.country_code",
+    "default_address.country_name",
+    "default_address.customer_id",
+    "default_address.default",
+    "default_address.first_name",
+    "default_address.last_name",
+    "default_address.name",
+    "default_address.phone",
+    "default_address.province",
+    "default_address.province_code",
+    "default_address.zip",
+    "last_order_id",
+    "last_order_name",
+    "multipass_identifier",
+    "shop_url",
+    "sms_marketing_consent",
+    "sms_marketing_consent.consent_collected_from",
+    "sms_marketing_consent.consent_updated_at",
+    "sms_marketing_consent.opt_in_level",
+    "sms_marketing_consent.state",
+    "tags",
+    "tax_exemptions",
+]
+
+[mappings.customer_tag]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/customer_tag.yml"
+source_file_hash = "7483d91e92aaf33d50215430dba2df54c646692c00874aee8bbc89d167346042"
+unmapped_target_fields = [
+    "index",
+]
+omitted_target_fields = []
+
+[mappings.customer_tag.mapped_target_fields]
+_fivetran_synced = "metafield_customers._airbyte_extracted_at"
+customer_id = "metafield_customers.owner_id"
+value = "metafield_customers.value"
+
+[mappings.customer_tag.unused_source_fields]
+metafield_customers = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "admin_graphql_api_id",
+    "created_at",
+    "description",
+    "id",
+    "key",
+    "namespace",
+    "owner_resource",
+    "shop_url",
+    "type",
+    "updated_at",
+    "value_type",
+]
+
+[mappings.discount_code]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/discount_code.yml"
+source_file_hash = "9cce7c6ee54655e53438db4264ead3e3ff73a19bc797d19fb318abf782c279b3"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.discount_code.mapped_target_fields]
+_fivetran_synced = "discount_codes._airbyte_extracted_at"
+code = "discount_codes.code"
+created_at = "discount_codes.created_at"
+id = "discount_codes.id"
+price_rule_id = "discount_codes.price_rule_id"
+updated_at = "discount_codes.updated_at"
+usage_count = "discount_codes.usage_count"
+
+[mappings.discount_code.unused_source_fields]
+discount_codes = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "admin_graphql_api_id",
+    "applies_once_per_customer",
+    "async_usage_count",
+    "codes_count",
+    "codes_count.count",
+    "createdBy",
+    "createdBy.id",
+    "createdBy.title",
+    "discount_type",
+    "ends_at",
+    "shop_url",
+    "starts_at",
+    "status",
+    "summary",
+    "title",
+    "total_sales",
+    "total_sales.amount",
+    "total_sales.currency_code",
+    "typename",
+    "usage_limit",
+]
+
+[mappings.fulfillment]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/fulfillment.yml"
+source_file_hash = "3475395d397d029cd62c8e6900395d0341da37c3d6434b8b9f7785e2baea14bb"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.fulfillment.mapped_target_fields]
+_fivetran_synced = "fulfillments._airbyte_extracted_at"
+created_at = "fulfillments.created_at"
+id = "fulfillments.id"
+location_id = "fulfillments.location_id"
+name = "fulfillments.name"
+order_id = "fulfillments.order_id"
+receipt_authorization = "fulfillments.receipt.authorization"
+service = "fulfillments.service"
+shipment_status = "fulfillments.shipment_status"
+status = "fulfillments.status"
+tracking_company = "fulfillments.tracking_company"
+tracking_number = "fulfillments.tracking_number"
+tracking_numbers = "fulfillments.tracking_numbers"
+tracking_urls = "fulfillments.tracking_urls"
+updated_at = "fulfillments.updated_at"
+
+[mappings.fulfillment.unused_source_fields]
+fulfillments = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "admin_graphql_api_id",
+    "duties",
+    "line_items",
+    "notify_customer",
+    "origin_address",
+    "origin_address.address1",
+    "origin_address.address2",
+    "origin_address.city",
+    "origin_address.country_code",
+    "origin_address.province_code",
+    "origin_address.zip",
+    "receipt.testcase",
+    "shop_url",
+    "variant_inventory_management",
+]
+
+[mappings.fulfillment_event]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/fulfillment_event.yml"
+source_file_hash = "2891d92b654c5f0a2d6e79f5916a178c45e52969c103ad84745ad188e1287d4a"
+unmapped_target_fields = [
+    "_fivetran_deleted",
+    "address_1",
+    "city",
+    "country",
+    "estimated_delivery_at",
+    "fulfillment_id",
+    "happened_at",
+    "id",
+    "latitude",
+    "longitude",
+    "message",
+    "province",
+    "shop_id",
+    "status",
+    "zip",
+]
+omitted_target_fields = []
+
+[mappings.fulfillment_event.mapped_target_fields]
+_fivetran_synced = "fulfillments._airbyte_extracted_at"
+created_at = "fulfillments.created_at"
+order_id = "fulfillments.order_id"
+updated_at = "fulfillments.updated_at"
+
+[mappings.fulfillment_event.unused_source_fields]
+fulfillments = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "admin_graphql_api_id",
+    "duties",
+    "id",
+    "line_items",
+    "location_id",
+    "name",
+    "notify_customer",
+    "origin_address",
+    "origin_address.address1",
+    "origin_address.address2",
+    "origin_address.city",
+    "origin_address.country_code",
+    "origin_address.province_code",
+    "origin_address.zip",
+    "receipt",
+    "receipt.authorization",
+    "receipt.testcase",
+    "service",
+    "shipment_status",
+    "shop_url",
+    "status",
+    "tracking_company",
+    "tracking_number",
+    "tracking_numbers",
+    "tracking_url",
+    "tracking_urls",
+    "variant_inventory_management",
+]
+
+[mappings.inventory_item]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/inventory_item.yml"
+source_file_hash = "a55057a7b0d27b22a593fd62a5534053ca537dfd865abe8af06af7f6b3656c6f"
+unmapped_target_fields = [
+    "_fivetran_deleted",
+    "inventory_history_url",
+    "legacy_resource_id",
+    "measurement_id",
+    "measurement_weight_unit",
+    "measurement_weight_value",
+    "tracked_editable_locked",
+    "tracked_editable_reason",
+    "unit_cost_amount",
+    "unit_cost_currency_code",
+]
+omitted_target_fields = []
+
+[mappings.inventory_item.mapped_target_fields]
+_fivetran_synced = "inventory_items._airbyte_extracted_at"
+country_code_of_origin = "inventory_items.country_code_of_origin"
+created_at = "inventory_items.created_at"
+id = "inventory_items.id"
+province_code_of_origin = "inventory_items.province_code_of_origin"
+requires_shipping = "inventory_items.requires_shipping"
+sku = "inventory_items.sku"
+tracked = "inventory_items.tracked"
+updated_at = "inventory_items.updated_at"
+duplicate_sku_count = "inventory_items.duplicate_sku_count"
+harmonized_system_code = "inventory_items.harmonized_system_code"
+
+[mappings.inventory_item.unused_source_fields]
+inventory_items = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "admin_graphql_api_id",
+    "cost",
+    "country_harmonized_system_codes",
+    "currency_code",
+    "shop_url",
+]
+
+[mappings.inventory_level]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/inventory_level.yml"
+source_file_hash = "a3cf38dd08d68d30b3e8e225375f1ba8f5ae80aa33b0732bac5a799d9b98bec3"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.inventory_level.mapped_target_fields]
+_fivetran_synced = "inventory_levels._airbyte_extracted_at"
+available = "inventory_levels.available"
+inventory_item_id = "inventory_levels.inventory_item_id"
+location_id = "inventory_levels.location_id"
+updated_at = "inventory_levels.updated_at"
+id = "inventory_levels.id"
+can_deactivate = "inventory_levels.can_deactivate"
+created_at = "inventory_levels.created_at"
+deactivation_alert = "inventory_levels.deactivation_alert"
+
+[mappings.inventory_level.unused_source_fields]
+inventory_levels = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "admin_graphql_api_id",
+    "inventory_history_url",
+    "locations_count",
+    "locations_count.count",
+    "quantities",
+    "shop_url",
+]
+
+[mappings.inventory_quantity]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/inventory_quantity.yml"
+source_file_hash = "3d66b6b9a43e37edfd1f7278aee8ddc73366b44b44f50c24e11800a78017a082"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.inventory_quantity.mapped_target_fields]
+id = "inventory_levels.id"
+inventory_item_id = "inventory_levels.inventory_item_id"
+inventory_level_id = "inventory_levels.location_id"
+name = "inventory_levels.deactivation_alert"
+quantity = "inventory_levels.quantities"
+updated_at = "inventory_levels.updated_at"
+_fivetran_synced = "inventory_levels._airbyte_extracted_at"
+
+[mappings.inventory_quantity.unused_source_fields]
+inventory_levels = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "admin_graphql_api_id",
+    "available",
+    "can_deactivate",
+    "created_at",
+    "inventory_history_url",
+    "locations_count",
+    "locations_count.count",
+    "shop_url",
+]
+
+[mappings.location]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/location.yml"
+source_file_hash = "b1e8cf764e251beb0074383fdbdde0b2c53eb3d18eb8ba1b6a799fc20358069d"
+unmapped_target_fields = [
+    "_fivetran_deleted",
+]
+omitted_target_fields = []
+
+[mappings.location.mapped_target_fields]
+_fivetran_synced = "locations._airbyte_extracted_at"
+active = "locations.active"
+address_1 = "locations.address1"
+address_2 = "locations.address2"
+city = "locations.city"
+country = "locations.country"
+country_code = "locations.country_code"
+country_name = "locations.country_name"
+created_at = "locations.created_at"
+id = "locations.id"
+legacy = "locations.legacy"
+localized_country_name = "locations.localized_country_name"
+localized_province_name = "locations.localized_province_name"
+name = "locations.name"
+phone = "locations.phone"
+province = "locations.province"
+province_code = "locations.province_code"
+updated_at = "locations.updated_at"
+zip = "locations.zip"
+
+[mappings.location.unused_source_fields]
+locations = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "admin_graphql_api_id",
+    "shop_url",
+]
+
+[mappings.metafield]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/metafield.yml"
+source_file_hash = "218d559d4e8ea0600c6967218ed191c47c0f090ddacef7331cd3724477219b4d"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.metafield.mapped_target_fields]
+_fivetran_synced = "metafield_articles._airbyte_extracted_at"
+created_at = "metafield_articles.created_at"
+description = "metafield_articles.description"
+id = "metafield_articles.id"
+key = "metafield_articles.key"
+namespace = "metafield_articles.namespace"
+owner_id = "metafield_articles.owner_id"
+owner_resource = "metafield_articles.owner_resource"
+type = "metafield_articles.type"
+updated_at = "metafield_articles.updated_at"
+value = "metafield_articles.value"
+value_type = "metafield_articles.value_type"
+
+[mappings.metafield.unused_source_fields]
+metafield_articles = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "admin_graphql_api_id",
+    "shop_url",
+]
+
+[mappings.order]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/order.yml"
+source_file_hash = "de8a3cbf2911e30305129281c8ef2572425b493e1b4f16513a2bbdf4d8c8105d"
+unmapped_target_fields = [
+    "billing_address_address_1",
+    "billing_address_address_2",
+    "billing_address_city",
+    "billing_address_company",
+    "billing_address_country",
+    "billing_address_country_code",
+    "billing_address_first_name",
+    "billing_address_last_name",
+    "billing_address_latitude",
+    "billing_address_longitude",
+    "billing_address_name",
+    "billing_address_phone",
+    "billing_address_province",
+    "billing_address_province_code",
+    "billing_address_zip",
+    "is_confirmed",
+    "shipping_address_address_1",
+    "shipping_address_address_2",
+    "shipping_address_city",
+    "shipping_address_company",
+    "shipping_address_country",
+    "shipping_address_country_code",
+    "shipping_address_first_name",
+    "shipping_address_last_name",
+    "shipping_address_latitude",
+    "shipping_address_longitude",
+    "shipping_address_name",
+    "shipping_address_phone",
+    "shipping_address_province",
+    "shipping_address_province_code",
+    "shipping_address_zip",
+]
+omitted_target_fields = []
+
+[mappings.order.mapped_target_fields]
+_fivetran_synced = "orders._airbyte_extracted_at"
+app_id = "orders.app_id"
+browser_ip = "orders.browser_ip"
+buyer_accepts_marketing = "orders.customer.accepts_marketing"
+cancel_reason = "orders.cancel_reason"
+cancelled_at = "orders.cancelled_at"
+cart_token = "orders.cart_token"
+closed_at = "orders.closed_at"
+created_at = "orders.created_at"
+currency = "orders.currency"
+customer_id = "orders.customer.id"
+email = "orders.customer.email"
+financial_status = "orders.financial_status"
+fulfillment_status = "orders.fulfillment_status"
+id = "orders.id"
+landing_site_base_url = "orders.landing_site"
+location_id = "orders.location_id"
+name = "orders.name"
+note = "orders.note"
+number = "orders.number"
+order_number = "orders.order_number"
+processed_at = "orders.processed_at"
+referring_site = "orders.referring_site"
+source_name = "orders.source_name"
+subtotal_price = "orders.subtotal_price"
+taxes_included = "orders.taxes_included"
+test = "orders.test"
+token = "orders.token"
+total_discounts = "orders.total_discounts"
+total_line_items_price = "orders.total_line_items_price"
+total_price = "orders.total_price"
+total_tax = "orders.total_tax"
+total_weight = "orders.total_weight"
+updated_at = "orders.updated_at"
+user_id = "orders.user_id"
+checkout_token = "orders.checkout_token"
+confirmed = "orders.confirmed"
+customer_locale = "orders.customer_locale"
+checkout_id = "orders.checkout_id"
+order_status_url = "orders.order_status_url"
+_fivetran_deleted = "orders.deleted_at"
+total_tip_received = "orders.total_tip_received"
+device_id = "orders.device_id"
+presentment_currency = "orders.presentment_currency"
+total_shipping_price_set = "orders.total_shipping_price_set"
+client_details_user_agent = "orders.client_details.user_agent"
+total_tax_set = "orders.total_tax_set"
+total_discounts_set = "orders.total_discounts_set"
+total_line_items_price_set = "orders.total_line_items_price_set"
+total_price_set = "orders.total_price_set"
+source_identifier = "orders.source_identifier"
+
+[mappings.order.unused_source_fields]
+orders = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "admin_graphql_api_id",
+    "billing_address",
+    "billing_address.address1",
+    "billing_address.address2",
+    "billing_address.city",
+    "billing_address.company",
+    "billing_address.country",
+    "billing_address.country_code",
+    "billing_address.first_name",
+    "billing_address.last_name",
+    "billing_address.latitude",
+    "billing_address.longitude",
+    "billing_address.name",
+    "billing_address.phone",
+    "billing_address.province",
+    "billing_address.province_code",
+    "billing_address.zip",
+    "buyer_accepts_marketing",
+    "client_details.accept_language",
+    "client_details.browser_height",
+    "client_details.browser_ip",
+    "client_details.browser_width",
+    "client_details.session_hash",
+    "company",
+    "confirmation_number",
+    "contact_email",
+    "current_subtotal_price",
+    "current_subtotal_price_set",
+    "current_subtotal_price_set.presentment_money",
+    "current_subtotal_price_set.presentment_money.amount",
+    "current_subtotal_price_set.presentment_money.currency_code",
+    "current_subtotal_price_set.shop_money",
+    "current_subtotal_price_set.shop_money.amount",
+    "current_subtotal_price_set.shop_money.currency_code",
+    "current_total_additional_fees_set",
+    "current_total_additional_fees_set.presentment_money",
+    "current_total_additional_fees_set.presentment_money.amount",
+    "current_total_additional_fees_set.presentment_money.currency_code",
+    "current_total_additional_fees_set.shop_money",
+    "current_total_additional_fees_set.shop_money.amount",
+    "current_total_additional_fees_set.shop_money.currency_code",
+    "current_total_discounts",
+    "current_total_discounts_set",
+    "current_total_discounts_set.presentment_money",
+    "current_total_discounts_set.presentment_money.amount",
+    "current_total_discounts_set.presentment_money.currency_code",
+    "current_total_discounts_set.shop_money",
+    "current_total_discounts_set.shop_money.amount",
+    "current_total_discounts_set.shop_money.currency_code",
+    "current_total_duties_set",
+    "current_total_price",
+    "current_total_price_set",
+    "current_total_price_set.presentment_money",
+    "current_total_price_set.presentment_money.amount",
+    "current_total_price_set.presentment_money.currency_code",
+    "current_total_price_set.shop_money",
+    "current_total_price_set.shop_money.amount",
+    "current_total_price_set.shop_money.currency_code",
+    "current_total_tax",
+    "current_total_tax_set",
+    "current_total_tax_set.presentment_money",
+    "current_total_tax_set.presentment_money.amount",
+    "current_total_tax_set.presentment_money.currency_code",
+    "current_total_tax_set.shop_money",
+    "current_total_tax_set.shop_money.amount",
+    "current_total_tax_set.shop_money.currency_code",
+    "customer.accepts_marketing_updated_at",
+    "customer.admin_graphql_api_id",
+    "customer.created_at",
+    "customer.currency",
+    "customer.default_address",
+    "customer.default_address.address1",
+    "customer.default_address.address2",
+    "customer.default_address.city",
+    "customer.default_address.company",
+    "customer.default_address.country",
+    "customer.default_address.country_code",
+    "customer.default_address.country_name",
+    "customer.default_address.customer_id",
+    "customer.default_address.default",
+    "customer.default_address.first_name",
+    "customer.default_address.id",
+    "customer.default_address.last_name",
+    "customer.default_address.name",
+    "customer.default_address.phone",
+    "customer.default_address.province",
+    "customer.default_address.province_code",
+    "customer.default_address.zip",
+    "customer.email_marketing_consent",
+    "customer.email_marketing_consent.consent_collected_from",
+    "customer.email_marketing_consent.consent_updated_at",
+    "customer.email_marketing_consent.opt_in_level",
+    "customer.email_marketing_consent.state",
+    "customer.first_name",
+    "customer.last_name",
+    "customer.last_order_id",
+    "customer.last_order_name",
+    "customer.marketing_opt_in_level",
+    "customer.multipass_identifier",
+    "customer.note",
+    "customer.orders_count",
+    "customer.phone",
+    "customer.sms_marketing_consent",
+    "customer.sms_marketing_consent.consent_collected_from",
+    "customer.sms_marketing_consent.consent_updated_at",
+    "customer.sms_marketing_consent.opt_in_level",
+    "customer.sms_marketing_consent.state",
+    "customer.state",
+    "customer.tags",
+    "customer.tax_exempt",
+    "customer.tax_exemptions",
+    "customer.total_spent",
+    "customer.updated_at",
+    "customer.verified_email",
+    "deleted_description",
+    "deleted_message",
+    "discount_allocations",
+    "discount_applications",
+    "discount_codes",
+    "duties_included",
+    "email",
+    "estimated_taxes",
+    "fulfillments",
+    "landing_site_ref",
+    "line_items",
+    "merchant_business_entity_id",
+    "merchant_of_record_app_id",
+    "note_attributes",
+    "original_total_additional_fees_set",
+    "original_total_additional_fees_set.presentment_money",
+    "original_total_additional_fees_set.presentment_money.amount",
+    "original_total_additional_fees_set.presentment_money.currency_code",
+    "original_total_additional_fees_set.shop_money",
+    "original_total_additional_fees_set.shop_money.amount",
+    "original_total_additional_fees_set.shop_money.currency_code",
+    "original_total_duties_set",
+    "payment_gateway_names",
+    "payment_terms",
+    "phone",
+    "po_number",
+    "reference",
+    "refunds",
+    "shipping_address",
+    "shipping_address.address1",
+    "shipping_address.address2",
+    "shipping_address.city",
+    "shipping_address.company",
+    "shipping_address.country",
+    "shipping_address.country_code",
+    "shipping_address.first_name",
+    "shipping_address.last_name",
+    "shipping_address.latitude",
+    "shipping_address.longitude",
+    "shipping_address.name",
+    "shipping_address.phone",
+    "shipping_address.province",
+    "shipping_address.province_code",
+    "shipping_address.zip",
+    "shipping_lines",
+    "shop_url",
+    "source_url",
+    "subtotal_price_set",
+    "subtotal_price_set.presentment_money",
+    "subtotal_price_set.presentment_money.amount",
+    "subtotal_price_set.presentment_money.currency_code",
+    "subtotal_price_set.shop_money",
+    "subtotal_price_set.shop_money.amount",
+    "subtotal_price_set.shop_money.currency_code",
+    "tags",
+    "tax_exempt",
+    "tax_lines",
+    "total_cash_rounding_payment_adjustment_set",
+    "total_cash_rounding_payment_adjustment_set.presentment_money",
+    "total_cash_rounding_payment_adjustment_set.presentment_money.amount",
+    "total_cash_rounding_payment_adjustment_set.presentment_money.currency_code",
+    "total_cash_rounding_payment_adjustment_set.shop_money",
+    "total_cash_rounding_payment_adjustment_set.shop_money.amount",
+    "total_cash_rounding_payment_adjustment_set.shop_money.currency_code",
+    "total_discounts_set.presentment_money",
+    "total_discounts_set.presentment_money.amount",
+    "total_discounts_set.presentment_money.currency_code",
+    "total_discounts_set.shop_money",
+    "total_discounts_set.shop_money.amount",
+    "total_discounts_set.shop_money.currency_code",
+    "total_line_items_price_set.presentment_money",
+    "total_line_items_price_set.presentment_money.amount",
+    "total_line_items_price_set.presentment_money.currency_code",
+    "total_line_items_price_set.shop_money",
+    "total_line_items_price_set.shop_money.amount",
+    "total_line_items_price_set.shop_money.currency_code",
+    "total_outstanding",
+    "total_price_set.presentment_money",
+    "total_price_set.presentment_money.amount",
+    "total_price_set.presentment_money.currency_code",
+    "total_price_set.shop_money",
+    "total_price_set.shop_money.amount",
+    "total_price_set.shop_money.currency_code",
+    "total_price_usd",
+    "total_shipping_price_set.presentment_money",
+    "total_shipping_price_set.presentment_money.amount",
+    "total_shipping_price_set.presentment_money.currency_code",
+    "total_shipping_price_set.shop_money",
+    "total_shipping_price_set.shop_money.amount",
+    "total_shipping_price_set.shop_money.currency_code",
+    "total_tax_set.presentment_money",
+    "total_tax_set.presentment_money.amount",
+    "total_tax_set.presentment_money.currency_code",
+    "total_tax_set.shop_money",
+    "total_tax_set.shop_money.amount",
+    "total_tax_set.shop_money.currency_code",
+]
+
+[mappings.order_adjustment]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/order_adjustment.yml"
+source_file_hash = "6563fc6e7d08ca837c6e7e0d89d36a89447fbc3405686dc42d1dc28084cd95f2"
+unmapped_target_fields = [
+    "reason",
+    "refund_id",
+    "tax_amount",
+    "tax_amount_set",
+]
+omitted_target_fields = []
+
+[mappings.order_adjustment.mapped_target_fields]
+id = "transactions.id"
+order_id = "transactions.order_id"
+amount = "transactions.amount"
+kind = "transactions.kind"
+amount_set = "transactions.amount_set"
+_fivetran_synced = "transactions._airbyte_extracted_at"
+
+[mappings.order_adjustment.unused_source_fields]
+transactions = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "accountNumber",
+    "admin_graphql_api_id",
+    "amount_set.shop_money",
+    "amount_set.shop_money.amount",
+    "amount_set.shop_money.currency",
+    "authorization",
+    "created_at",
+    "currency",
+    "device_id",
+    "error_code",
+    "fees",
+    "formattedGateway",
+    "gateway",
+    "location_id",
+    "manuallyCapturable",
+    "message",
+    "parent_id",
+    "payment_details",
+    "payment_details.avs_result_code",
+    "payment_details.buyer_action_info",
+    "payment_details.credit_card_bin",
+    "payment_details.credit_card_company",
+    "payment_details.credit_card_expiration_month",
+    "payment_details.credit_card_expiration_year",
+    "payment_details.credit_card_name",
+    "payment_details.credit_card_number",
+    "payment_details.credit_card_wallet",
+    "payment_details.cvv_result_code",
+    "payment_id",
+    "processed_at",
+    "receipt",
+    "shop_url",
+    "source_name",
+    "status",
+    "test",
+    "total_unsettled_set",
+    "total_unsettled_set.presentment_money",
+    "total_unsettled_set.presentment_money.amount",
+    "total_unsettled_set.presentment_money.currency",
+    "total_unsettled_set.presentment_money.currency_code",
+    "total_unsettled_set.shop_money",
+    "total_unsettled_set.shop_money.amount",
+    "total_unsettled_set.shop_money.currency",
+    "total_unsettled_set.shop_money.currency_code",
+    "user_id",
+]
+
+[mappings.order_discount_code]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/order_discount_code.yml"
+source_file_hash = "cd778dc8fda85d6e0bc3ddb896bf86d175fe674b3274a4c09d00d24906db27d9"
+unmapped_target_fields = [
+    "index",
+    "order_id",
+]
+omitted_target_fields = []
+
+[mappings.order_discount_code.mapped_target_fields]
+_fivetran_synced = "discount_codes._airbyte_extracted_at"
+amount = "discount_codes.total_sales.amount"
+code = "discount_codes.code"
+type = "discount_codes.discount_type"
+
+[mappings.order_discount_code.unused_source_fields]
+discount_codes = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "admin_graphql_api_id",
+    "applies_once_per_customer",
+    "async_usage_count",
+    "codes_count",
+    "codes_count.count",
+    "createdBy",
+    "createdBy.id",
+    "createdBy.title",
+    "created_at",
+    "ends_at",
+    "id",
+    "price_rule_id",
+    "shop_url",
+    "starts_at",
+    "status",
+    "summary",
+    "title",
+    "total_sales.currency_code",
+    "typename",
+    "updated_at",
+    "usage_count",
+    "usage_limit",
+]
+
+[mappings.order_line]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/order_line.yml"
+source_file_hash = "9f0c0e45eb04c4cac2251493e0db980402acf84b53c30d75b8b93988c99030bf"
+unmapped_target_fields = [
+    "fulfillable_quantity",
+    "fulfillment_status",
+    "gift_card",
+    "grams",
+    "index",
+    "name",
+    "pre_tax_price",
+    "pre_tax_price_set",
+    "price",
+    "price_set",
+    "product_id",
+    "properties",
+    "quantity",
+    "requires_shipping",
+    "sku",
+    "tax_code",
+    "taxable",
+    "title",
+    "total_discount",
+    "total_discount_set",
+    "variant_id",
+    "variant_inventory_management",
+    "variant_title",
+    "vendor",
+]
+omitted_target_fields = []
+
+[mappings.order_line.mapped_target_fields]
+_fivetran_synced = "order_refunds._airbyte_extracted_at"
+id = "order_refunds.id"
+order_id = "order_refunds.order_id"
+
+[mappings.order_line.unused_source_fields]
+order_refunds = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "admin_graphql_api_id",
+    "created_at",
+    "duties",
+    "note",
+    "order_adjustments",
+    "processed_at",
+    "refund_line_items",
+    "restock",
+    "return",
+    "return.admin_graphql_api_id",
+    "return.id",
+    "shop_url",
+    "total_duties_set",
+    "total_duties_set.presentment_money",
+    "total_duties_set.presentment_money.amount",
+    "total_duties_set.presentment_money.currency_code",
+    "total_duties_set.shop_money",
+    "total_duties_set.shop_money.amount",
+    "total_duties_set.shop_money.currency_code",
+    "transactions",
+    "user_id",
+]
+
+[mappings.order_line_refund]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/order_line_refund.yml"
+source_file_hash = "7746ca0df70b541a1547b9b52ac34b8725b825abd7d4568cd6fe4f044121f55b"
+unmapped_target_fields = [
+    "location_id",
+    "order_line_id",
+    "quantity",
+    "refund_id",
+    "restock_type",
+    "subtotal",
+    "subtotal_set",
+    "total_tax",
+    "total_tax_set",
+]
+omitted_target_fields = []
+
+[mappings.order_line_refund.mapped_target_fields]
+_fivetran_synced = "order_refunds._airbyte_extracted_at"
+id = "order_refunds.id"
+
+[mappings.order_line_refund.unused_source_fields]
+order_refunds = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "admin_graphql_api_id",
+    "created_at",
+    "duties",
+    "note",
+    "order_adjustments",
+    "order_id",
+    "processed_at",
+    "refund_line_items",
+    "restock",
+    "return",
+    "return.admin_graphql_api_id",
+    "return.id",
+    "shop_url",
+    "total_duties_set",
+    "total_duties_set.presentment_money",
+    "total_duties_set.presentment_money.amount",
+    "total_duties_set.presentment_money.currency_code",
+    "total_duties_set.shop_money",
+    "total_duties_set.shop_money.amount",
+    "total_duties_set.shop_money.currency_code",
+    "transactions",
+    "user_id",
+]
+
+[mappings.order_note_attribute]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/order_note_attribute.yml"
+source_file_hash = "3c418edebe9c86dbae9ee81e0ee06ddef423b8623ee662367bc9d4d3b31ff1e4"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.order_note_attribute.mapped_target_fields]
+_fivetran_synced = "order_risks._airbyte_extracted_at"
+name = "order_risks.source"
+order_id = "order_risks.order_id"
+value = "order_risks.score"
+
+[mappings.order_note_attribute.unused_source_fields]
+order_risks = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "admin_graphql_api_id",
+    "assessments",
+    "cause_cancel",
+    "checkout_id",
+    "display",
+    "id",
+    "merchant_message",
+    "message",
+    "recommendation",
+    "shop_url",
+    "updated_at",
+]
+
+[mappings.order_shipping_line]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/order_shipping_line.yml"
+source_file_hash = "49a21e4fc030dced89c21a4696b85c9d648dbf42e5e19b4d693093e95e27e6f2"
+unmapped_target_fields = [
+    "carrier_identifier",
+    "code",
+    "delivery_category",
+    "discounted_price",
+    "discounted_price_set",
+    "order_id",
+    "price",
+    "price_set",
+    "requested_fulfillment_service_id",
+    "source",
+    "title",
+]
+omitted_target_fields = []
+
+[mappings.order_shipping_line.mapped_target_fields]
+_fivetran_synced = "orders._airbyte_extracted_at"
+id = "orders.id"
+phone = "orders.phone"
+
+[mappings.order_shipping_line.unused_source_fields]
+orders = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "admin_graphql_api_id",
+    "app_id",
+    "billing_address",
+    "billing_address.address1",
+    "billing_address.address2",
+    "billing_address.city",
+    "billing_address.company",
+    "billing_address.country",
+    "billing_address.country_code",
+    "billing_address.first_name",
+    "billing_address.last_name",
+    "billing_address.latitude",
+    "billing_address.longitude",
+    "billing_address.name",
+    "billing_address.phone",
+    "billing_address.province",
+    "billing_address.province_code",
+    "billing_address.zip",
+    "browser_ip",
+    "buyer_accepts_marketing",
+    "cancel_reason",
+    "cancelled_at",
+    "cart_token",
+    "checkout_id",
+    "checkout_token",
+    "client_details",
+    "client_details.accept_language",
+    "client_details.browser_height",
+    "client_details.browser_ip",
+    "client_details.browser_width",
+    "client_details.session_hash",
+    "client_details.user_agent",
+    "closed_at",
+    "company",
+    "confirmation_number",
+    "confirmed",
+    "contact_email",
+    "created_at",
+    "currency",
+    "current_subtotal_price",
+    "current_subtotal_price_set",
+    "current_subtotal_price_set.presentment_money",
+    "current_subtotal_price_set.presentment_money.amount",
+    "current_subtotal_price_set.presentment_money.currency_code",
+    "current_subtotal_price_set.shop_money",
+    "current_subtotal_price_set.shop_money.amount",
+    "current_subtotal_price_set.shop_money.currency_code",
+    "current_total_additional_fees_set",
+    "current_total_additional_fees_set.presentment_money",
+    "current_total_additional_fees_set.presentment_money.amount",
+    "current_total_additional_fees_set.presentment_money.currency_code",
+    "current_total_additional_fees_set.shop_money",
+    "current_total_additional_fees_set.shop_money.amount",
+    "current_total_additional_fees_set.shop_money.currency_code",
+    "current_total_discounts",
+    "current_total_discounts_set",
+    "current_total_discounts_set.presentment_money",
+    "current_total_discounts_set.presentment_money.amount",
+    "current_total_discounts_set.presentment_money.currency_code",
+    "current_total_discounts_set.shop_money",
+    "current_total_discounts_set.shop_money.amount",
+    "current_total_discounts_set.shop_money.currency_code",
+    "current_total_duties_set",
+    "current_total_price",
+    "current_total_price_set",
+    "current_total_price_set.presentment_money",
+    "current_total_price_set.presentment_money.amount",
+    "current_total_price_set.presentment_money.currency_code",
+    "current_total_price_set.shop_money",
+    "current_total_price_set.shop_money.amount",
+    "current_total_price_set.shop_money.currency_code",
+    "current_total_tax",
+    "current_total_tax_set",
+    "current_total_tax_set.presentment_money",
+    "current_total_tax_set.presentment_money.amount",
+    "current_total_tax_set.presentment_money.currency_code",
+    "current_total_tax_set.shop_money",
+    "current_total_tax_set.shop_money.amount",
+    "current_total_tax_set.shop_money.currency_code",
+    "customer",
+    "customer.accepts_marketing",
+    "customer.accepts_marketing_updated_at",
+    "customer.admin_graphql_api_id",
+    "customer.created_at",
+    "customer.currency",
+    "customer.default_address",
+    "customer.default_address.address1",
+    "customer.default_address.address2",
+    "customer.default_address.city",
+    "customer.default_address.company",
+    "customer.default_address.country",
+    "customer.default_address.country_code",
+    "customer.default_address.country_name",
+    "customer.default_address.customer_id",
+    "customer.default_address.default",
+    "customer.default_address.first_name",
+    "customer.default_address.id",
+    "customer.default_address.last_name",
+    "customer.default_address.name",
+    "customer.default_address.phone",
+    "customer.default_address.province",
+    "customer.default_address.province_code",
+    "customer.default_address.zip",
+    "customer.email",
+    "customer.email_marketing_consent",
+    "customer.email_marketing_consent.consent_collected_from",
+    "customer.email_marketing_consent.consent_updated_at",
+    "customer.email_marketing_consent.opt_in_level",
+    "customer.email_marketing_consent.state",
+    "customer.first_name",
+    "customer.id",
+    "customer.last_name",
+    "customer.last_order_id",
+    "customer.last_order_name",
+    "customer.marketing_opt_in_level",
+    "customer.multipass_identifier",
+    "customer.note",
+    "customer.orders_count",
+    "customer.phone",
+    "customer.sms_marketing_consent",
+    "customer.sms_marketing_consent.consent_collected_from",
+    "customer.sms_marketing_consent.consent_updated_at",
+    "customer.sms_marketing_consent.opt_in_level",
+    "customer.sms_marketing_consent.state",
+    "customer.state",
+    "customer.tags",
+    "customer.tax_exempt",
+    "customer.tax_exemptions",
+    "customer.total_spent",
+    "customer.updated_at",
+    "customer.verified_email",
+    "customer_locale",
+    "deleted_at",
+    "deleted_description",
+    "deleted_message",
+    "device_id",
+    "discount_allocations",
+    "discount_applications",
+    "discount_codes",
+    "duties_included",
+    "email",
+    "estimated_taxes",
+    "financial_status",
+    "fulfillment_status",
+    "fulfillments",
+    "landing_site",
+    "landing_site_ref",
+    "line_items",
+    "location_id",
+    "merchant_business_entity_id",
+    "merchant_of_record_app_id",
+    "name",
+    "note",
+    "note_attributes",
+    "number",
+    "order_number",
+    "order_status_url",
+    "original_total_additional_fees_set",
+    "original_total_additional_fees_set.presentment_money",
+    "original_total_additional_fees_set.presentment_money.amount",
+    "original_total_additional_fees_set.presentment_money.currency_code",
+    "original_total_additional_fees_set.shop_money",
+    "original_total_additional_fees_set.shop_money.amount",
+    "original_total_additional_fees_set.shop_money.currency_code",
+    "original_total_duties_set",
+    "payment_gateway_names",
+    "payment_terms",
+    "po_number",
+    "presentment_currency",
+    "processed_at",
+    "reference",
+    "referring_site",
+    "refunds",
+    "shipping_address",
+    "shipping_address.address1",
+    "shipping_address.address2",
+    "shipping_address.city",
+    "shipping_address.company",
+    "shipping_address.country",
+    "shipping_address.country_code",
+    "shipping_address.first_name",
+    "shipping_address.last_name",
+    "shipping_address.latitude",
+    "shipping_address.longitude",
+    "shipping_address.name",
+    "shipping_address.phone",
+    "shipping_address.province",
+    "shipping_address.province_code",
+    "shipping_address.zip",
+    "shipping_lines",
+    "shop_url",
+    "source_identifier",
+    "source_name",
+    "source_url",
+    "subtotal_price",
+    "subtotal_price_set",
+    "subtotal_price_set.presentment_money",
+    "subtotal_price_set.presentment_money.amount",
+    "subtotal_price_set.presentment_money.currency_code",
+    "subtotal_price_set.shop_money",
+    "subtotal_price_set.shop_money.amount",
+    "subtotal_price_set.shop_money.currency_code",
+    "tags",
+    "tax_exempt",
+    "tax_lines",
+    "taxes_included",
+    "test",
+    "token",
+    "total_cash_rounding_payment_adjustment_set",
+    "total_cash_rounding_payment_adjustment_set.presentment_money",
+    "total_cash_rounding_payment_adjustment_set.presentment_money.amount",
+    "total_cash_rounding_payment_adjustment_set.presentment_money.currency_code",
+    "total_cash_rounding_payment_adjustment_set.shop_money",
+    "total_cash_rounding_payment_adjustment_set.shop_money.amount",
+    "total_cash_rounding_payment_adjustment_set.shop_money.currency_code",
+    "total_discounts",
+    "total_discounts_set",
+    "total_discounts_set.presentment_money",
+    "total_discounts_set.presentment_money.amount",
+    "total_discounts_set.presentment_money.currency_code",
+    "total_discounts_set.shop_money",
+    "total_discounts_set.shop_money.amount",
+    "total_discounts_set.shop_money.currency_code",
+    "total_line_items_price",
+    "total_line_items_price_set",
+    "total_line_items_price_set.presentment_money",
+    "total_line_items_price_set.presentment_money.amount",
+    "total_line_items_price_set.presentment_money.currency_code",
+    "total_line_items_price_set.shop_money",
+    "total_line_items_price_set.shop_money.amount",
+    "total_line_items_price_set.shop_money.currency_code",
+    "total_outstanding",
+    "total_price",
+    "total_price_set",
+    "total_price_set.presentment_money",
+    "total_price_set.presentment_money.amount",
+    "total_price_set.presentment_money.currency_code",
+    "total_price_set.shop_money",
+    "total_price_set.shop_money.amount",
+    "total_price_set.shop_money.currency_code",
+    "total_price_usd",
+    "total_shipping_price_set",
+    "total_shipping_price_set.presentment_money",
+    "total_shipping_price_set.presentment_money.amount",
+    "total_shipping_price_set.presentment_money.currency_code",
+    "total_shipping_price_set.shop_money",
+    "total_shipping_price_set.shop_money.amount",
+    "total_shipping_price_set.shop_money.currency_code",
+    "total_tax",
+    "total_tax_set",
+    "total_tax_set.presentment_money",
+    "total_tax_set.presentment_money.amount",
+    "total_tax_set.presentment_money.currency_code",
+    "total_tax_set.shop_money",
+    "total_tax_set.shop_money.amount",
+    "total_tax_set.shop_money.currency_code",
+    "total_tip_received",
+    "total_weight",
+    "updated_at",
+    "user_id",
+]
+
+[mappings.order_shipping_tax_line]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/order_shipping_tax_line.yml"
+source_file_hash = "1d572302b0ff7f2a889ed1143fd74a49a8e88d0db0f129db2c2bd094366e230a"
+unmapped_target_fields = [
+    "index",
+    "order_shipping_line_id",
+    "rate",
+]
+omitted_target_fields = []
+
+[mappings.order_shipping_tax_line.mapped_target_fields]
+_fivetran_synced = "orders._airbyte_extracted_at"
+price = "orders.current_total_tax"
+price_set = "orders.subtotal_price_set"
+title = "orders.name"
+
+[mappings.order_shipping_tax_line.unused_source_fields]
+orders = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "admin_graphql_api_id",
+    "app_id",
+    "billing_address",
+    "billing_address.address1",
+    "billing_address.address2",
+    "billing_address.city",
+    "billing_address.company",
+    "billing_address.country",
+    "billing_address.country_code",
+    "billing_address.first_name",
+    "billing_address.last_name",
+    "billing_address.latitude",
+    "billing_address.longitude",
+    "billing_address.name",
+    "billing_address.phone",
+    "billing_address.province",
+    "billing_address.province_code",
+    "billing_address.zip",
+    "browser_ip",
+    "buyer_accepts_marketing",
+    "cancel_reason",
+    "cancelled_at",
+    "cart_token",
+    "checkout_id",
+    "checkout_token",
+    "client_details",
+    "client_details.accept_language",
+    "client_details.browser_height",
+    "client_details.browser_ip",
+    "client_details.browser_width",
+    "client_details.session_hash",
+    "client_details.user_agent",
+    "closed_at",
+    "company",
+    "confirmation_number",
+    "confirmed",
+    "contact_email",
+    "created_at",
+    "currency",
+    "current_subtotal_price",
+    "current_subtotal_price_set",
+    "current_subtotal_price_set.presentment_money",
+    "current_subtotal_price_set.presentment_money.amount",
+    "current_subtotal_price_set.presentment_money.currency_code",
+    "current_subtotal_price_set.shop_money",
+    "current_subtotal_price_set.shop_money.amount",
+    "current_subtotal_price_set.shop_money.currency_code",
+    "current_total_additional_fees_set",
+    "current_total_additional_fees_set.presentment_money",
+    "current_total_additional_fees_set.presentment_money.amount",
+    "current_total_additional_fees_set.presentment_money.currency_code",
+    "current_total_additional_fees_set.shop_money",
+    "current_total_additional_fees_set.shop_money.amount",
+    "current_total_additional_fees_set.shop_money.currency_code",
+    "current_total_discounts",
+    "current_total_discounts_set",
+    "current_total_discounts_set.presentment_money",
+    "current_total_discounts_set.presentment_money.amount",
+    "current_total_discounts_set.presentment_money.currency_code",
+    "current_total_discounts_set.shop_money",
+    "current_total_discounts_set.shop_money.amount",
+    "current_total_discounts_set.shop_money.currency_code",
+    "current_total_duties_set",
+    "current_total_price",
+    "current_total_price_set",
+    "current_total_price_set.presentment_money",
+    "current_total_price_set.presentment_money.amount",
+    "current_total_price_set.presentment_money.currency_code",
+    "current_total_price_set.shop_money",
+    "current_total_price_set.shop_money.amount",
+    "current_total_price_set.shop_money.currency_code",
+    "current_total_tax_set",
+    "current_total_tax_set.presentment_money",
+    "current_total_tax_set.presentment_money.amount",
+    "current_total_tax_set.presentment_money.currency_code",
+    "current_total_tax_set.shop_money",
+    "current_total_tax_set.shop_money.amount",
+    "current_total_tax_set.shop_money.currency_code",
+    "customer",
+    "customer.accepts_marketing",
+    "customer.accepts_marketing_updated_at",
+    "customer.admin_graphql_api_id",
+    "customer.created_at",
+    "customer.currency",
+    "customer.default_address",
+    "customer.default_address.address1",
+    "customer.default_address.address2",
+    "customer.default_address.city",
+    "customer.default_address.company",
+    "customer.default_address.country",
+    "customer.default_address.country_code",
+    "customer.default_address.country_name",
+    "customer.default_address.customer_id",
+    "customer.default_address.default",
+    "customer.default_address.first_name",
+    "customer.default_address.id",
+    "customer.default_address.last_name",
+    "customer.default_address.name",
+    "customer.default_address.phone",
+    "customer.default_address.province",
+    "customer.default_address.province_code",
+    "customer.default_address.zip",
+    "customer.email",
+    "customer.email_marketing_consent",
+    "customer.email_marketing_consent.consent_collected_from",
+    "customer.email_marketing_consent.consent_updated_at",
+    "customer.email_marketing_consent.opt_in_level",
+    "customer.email_marketing_consent.state",
+    "customer.first_name",
+    "customer.id",
+    "customer.last_name",
+    "customer.last_order_id",
+    "customer.last_order_name",
+    "customer.marketing_opt_in_level",
+    "customer.multipass_identifier",
+    "customer.note",
+    "customer.orders_count",
+    "customer.phone",
+    "customer.sms_marketing_consent",
+    "customer.sms_marketing_consent.consent_collected_from",
+    "customer.sms_marketing_consent.consent_updated_at",
+    "customer.sms_marketing_consent.opt_in_level",
+    "customer.sms_marketing_consent.state",
+    "customer.state",
+    "customer.tags",
+    "customer.tax_exempt",
+    "customer.tax_exemptions",
+    "customer.total_spent",
+    "customer.updated_at",
+    "customer.verified_email",
+    "customer_locale",
+    "deleted_at",
+    "deleted_description",
+    "deleted_message",
+    "device_id",
+    "discount_allocations",
+    "discount_applications",
+    "discount_codes",
+    "duties_included",
+    "email",
+    "estimated_taxes",
+    "financial_status",
+    "fulfillment_status",
+    "fulfillments",
+    "id",
+    "landing_site",
+    "landing_site_ref",
+    "line_items",
+    "location_id",
+    "merchant_business_entity_id",
+    "merchant_of_record_app_id",
+    "note",
+    "note_attributes",
+    "number",
+    "order_number",
+    "order_status_url",
+    "original_total_additional_fees_set",
+    "original_total_additional_fees_set.presentment_money",
+    "original_total_additional_fees_set.presentment_money.amount",
+    "original_total_additional_fees_set.presentment_money.currency_code",
+    "original_total_additional_fees_set.shop_money",
+    "original_total_additional_fees_set.shop_money.amount",
+    "original_total_additional_fees_set.shop_money.currency_code",
+    "original_total_duties_set",
+    "payment_gateway_names",
+    "payment_terms",
+    "phone",
+    "po_number",
+    "presentment_currency",
+    "processed_at",
+    "reference",
+    "referring_site",
+    "refunds",
+    "shipping_address",
+    "shipping_address.address1",
+    "shipping_address.address2",
+    "shipping_address.city",
+    "shipping_address.company",
+    "shipping_address.country",
+    "shipping_address.country_code",
+    "shipping_address.first_name",
+    "shipping_address.last_name",
+    "shipping_address.latitude",
+    "shipping_address.longitude",
+    "shipping_address.name",
+    "shipping_address.phone",
+    "shipping_address.province",
+    "shipping_address.province_code",
+    "shipping_address.zip",
+    "shipping_lines",
+    "shop_url",
+    "source_identifier",
+    "source_name",
+    "source_url",
+    "subtotal_price_set.presentment_money",
+    "subtotal_price_set.presentment_money.amount",
+    "subtotal_price_set.presentment_money.currency_code",
+    "subtotal_price_set.shop_money",
+    "subtotal_price_set.shop_money.amount",
+    "subtotal_price_set.shop_money.currency_code",
+    "tags",
+    "tax_exempt",
+    "tax_lines",
+    "taxes_included",
+    "test",
+    "token",
+    "total_cash_rounding_payment_adjustment_set",
+    "total_cash_rounding_payment_adjustment_set.presentment_money",
+    "total_cash_rounding_payment_adjustment_set.presentment_money.amount",
+    "total_cash_rounding_payment_adjustment_set.presentment_money.currency_code",
+    "total_cash_rounding_payment_adjustment_set.shop_money",
+    "total_cash_rounding_payment_adjustment_set.shop_money.amount",
+    "total_cash_rounding_payment_adjustment_set.shop_money.currency_code",
+    "total_discounts",
+    "total_discounts_set",
+    "total_discounts_set.presentment_money",
+    "total_discounts_set.presentment_money.amount",
+    "total_discounts_set.presentment_money.currency_code",
+    "total_discounts_set.shop_money",
+    "total_discounts_set.shop_money.amount",
+    "total_discounts_set.shop_money.currency_code",
+    "total_line_items_price",
+    "total_line_items_price_set",
+    "total_line_items_price_set.presentment_money",
+    "total_line_items_price_set.presentment_money.amount",
+    "total_line_items_price_set.presentment_money.currency_code",
+    "total_line_items_price_set.shop_money",
+    "total_line_items_price_set.shop_money.amount",
+    "total_line_items_price_set.shop_money.currency_code",
+    "total_outstanding",
+    "total_price",
+    "total_price_set",
+    "total_price_set.presentment_money",
+    "total_price_set.presentment_money.amount",
+    "total_price_set.presentment_money.currency_code",
+    "total_price_set.shop_money",
+    "total_price_set.shop_money.amount",
+    "total_price_set.shop_money.currency_code",
+    "total_price_usd",
+    "total_shipping_price_set",
+    "total_shipping_price_set.presentment_money",
+    "total_shipping_price_set.presentment_money.amount",
+    "total_shipping_price_set.presentment_money.currency_code",
+    "total_shipping_price_set.shop_money",
+    "total_shipping_price_set.shop_money.amount",
+    "total_shipping_price_set.shop_money.currency_code",
+    "total_tax",
+    "total_tax_set",
+    "total_tax_set.presentment_money",
+    "total_tax_set.presentment_money.amount",
+    "total_tax_set.presentment_money.currency_code",
+    "total_tax_set.shop_money",
+    "total_tax_set.shop_money.amount",
+    "total_tax_set.shop_money.currency_code",
+    "total_tip_received",
+    "total_weight",
+    "updated_at",
+    "user_id",
+]
+
+[mappings.order_tag]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/order_tag.yml"
+source_file_hash = "41245c33bcd0627d494692ed0f496a53c42606dd3d2476676be0b054185414cd"
+unmapped_target_fields = [
+    "index",
+    "value",
+]
+omitted_target_fields = []
+
+[mappings.order_tag.mapped_target_fields]
+_fivetran_synced = "order_risks._airbyte_extracted_at"
+order_id = "order_risks.order_id"
+
+[mappings.order_tag.unused_source_fields]
+order_risks = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "admin_graphql_api_id",
+    "assessments",
+    "cause_cancel",
+    "checkout_id",
+    "display",
+    "id",
+    "merchant_message",
+    "message",
+    "recommendation",
+    "score",
+    "shop_url",
+    "source",
+    "updated_at",
+]
+
+[mappings.order_url_tag]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/order_url_tag.yml"
+source_file_hash = "6ec5b1beaed468731c3480f7b10615334d14b15875ba11cd39792269b8731574"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.order_url_tag.mapped_target_fields]
+_fivetran_synced = "metafield_orders._airbyte_extracted_at"
+key = "metafield_orders.key"
+order_id = "metafield_orders.id"
+value = "metafield_orders.value"
+
+[mappings.order_url_tag.unused_source_fields]
+metafield_orders = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "admin_graphql_api_id",
+    "created_at",
+    "description",
+    "namespace",
+    "owner_id",
+    "owner_resource",
+    "shop_url",
+    "type",
+    "updated_at",
+    "value_type",
+]
+
+[mappings.price_rule]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/price_rule.yml"
+source_file_hash = "b43a082f2b094d658f2353f4bd91d5dd6fc5c11e9c460081a20020e984b4bfe2"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.price_rule.mapped_target_fields]
+_fivetran_synced = "price_rules._airbyte_extracted_at"
+allocation_limit = "price_rules.allocation_limit"
+allocation_method = "price_rules.allocation_method"
+created_at = "price_rules.created_at"
+customer_selection = "price_rules.customer_selection"
+ends_at = "price_rules.ends_at"
+id = "price_rules.id"
+once_per_customer = "price_rules.once_per_customer"
+prerequisite_quantity_range = "price_rules.prerequisite_quantity_range"
+prerequisite_shipping_price_range = "price_rules.prerequisite_shipping_price_range"
+prerequisite_subtotal_range = "price_rules.prerequisite_subtotal_range"
+prerequisite_to_entitlement_purchase_prerequisite_amount = "price_rules.prerequisite_to_entitlement_purchase.prerequisite_amount"
+quantity_ratio_entitled_quantity = "price_rules.prerequisite_to_entitlement_quantity_ratio.entitled_quantity"
+quantity_ratio_prerequisite_quantity = "price_rules.prerequisite_to_entitlement_quantity_ratio.prerequisite_quantity"
+starts_at = "price_rules.starts_at"
+target_selection = "price_rules.target_selection"
+target_type = "price_rules.target_type"
+title = "price_rules.title"
+updated_at = "price_rules.updated_at"
+usage_limit = "price_rules.usage_limit"
+value = "price_rules.value"
+value_type = "price_rules.value_type"
+
+[mappings.price_rule.unused_source_fields]
+price_rules = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "admin_graphql_api_id",
+    "customer_segment_prerequisite_ids",
+    "deleted_at",
+    "deleted_description",
+    "deleted_message",
+    "entitled_collection_ids",
+    "entitled_country_ids",
+    "entitled_product_ids",
+    "entitled_variant_ids",
+    "prerequisite_collection_ids",
+    "prerequisite_customer_ids",
+    "prerequisite_product_ids",
+    "prerequisite_quantity_range.greater_than_or_equal_to",
+    "prerequisite_saved_search_ids",
+    "prerequisite_shipping_price_range.less_than_or_equal_to",
+    "prerequisite_subtotal_range.greater_than_or_equal_to",
+    "prerequisite_variant_ids",
+    "shop_url",
+]
+
+[mappings.product]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/product.yml"
+source_file_hash = "794e508c7506a591feeee91d6648384a361769e0d4e28f33a5d458a77a4a47c1"
+unmapped_target_fields = [
+    "_fivetran_deleted",
+]
+omitted_target_fields = []
+
+[mappings.product.mapped_target_fields]
+_fivetran_synced = "products._airbyte_extracted_at"
+created_at = "products.created_at"
+handle = "products.handle"
+id = "products.id"
+product_type = "products.product_type"
+published_at = "products.published_at"
+published_scope = "products.published_scope"
+title = "products.title"
+updated_at = "products.updated_at"
+vendor = "products.vendor"
+status = "products.status"
+
+[mappings.product.unused_source_fields]
+products = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "admin_graphql_api_id",
+    "body_html",
+    "deleted_at",
+    "deleted_description",
+    "deleted_message",
+    "description",
+    "description_html",
+    "featured_image",
+    "featured_image.alt_text",
+    "featured_image.height",
+    "featured_image.id",
+    "featured_image.url",
+    "featured_image.width",
+    "featured_media",
+    "featured_media.alt",
+    "featured_media.id",
+    "featured_media.media_content_type",
+    "featured_media.media_errors",
+    "featured_media.media_warnings",
+    "featured_media.preview",
+    "featured_media.preview.image",
+    "featured_media.preview.image.alt_text",
+    "featured_media.preview.image.id",
+    "featured_media.preview.status",
+    "featured_media.status",
+    "feedback",
+    "feedback.details",
+    "feedback.details.app",
+    "feedback.details.app.id",
+    "feedback.details.link",
+    "feedback.details.link.url",
+    "feedback.details.messages",
+    "feedback.details.messages.field",
+    "feedback.details.messages.message",
+    "feedback.summary",
+    "has_only_default_variant",
+    "has_out_of_stock_variants",
+    "image",
+    "image.admin_graphql_api_id",
+    "image.alt",
+    "image.created_at",
+    "image.height",
+    "image.id",
+    "image.position",
+    "image.product_id",
+    "image.src",
+    "image.updated_at",
+    "image.variant_ids",
+    "image.width",
+    "images",
+    "is_gift_card",
+    "legacy_resource_id",
+    "media_count",
+    "online_store_preview_url",
+    "online_store_url",
+    "options",
+    "price_range_v2",
+    "price_range_v2.max_variant_price",
+    "price_range_v2.max_variant_price.amount",
+    "price_range_v2.max_variant_price.currency_code",
+    "price_range_v2.min_variant_price",
+    "price_range_v2.min_variant_price.amount",
+    "price_range_v2.min_variant_price.currency_code",
+    "requires_sellin_plan",
+    "seo",
+    "seo.description",
+    "seo.title",
+    "shop_url",
+    "tags",
+    "template_suffix",
+    "total_inventory",
+    "total_variants",
+    "tracks_inventory",
+    "variants",
+]
+
+[mappings.product_image]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/product_image.yml"
+source_file_hash = "de86f29e823110e3deb4b6c78031feeaf6d8ab63abc11e6eedd5f116d01e410d"
+unmapped_target_fields = [
+    "_fivetran_deleted",
+    "media_id",
+    "status",
+]
+omitted_target_fields = []
+
+[mappings.product_image.mapped_target_fields]
+_fivetran_synced = "product_images._airbyte_extracted_at"
+created_at = "product_images.created_at"
+height = "product_images.height"
+id = "product_images.id"
+position = "product_images.position"
+product_id = "product_images.product_id"
+src = "product_images.src"
+updated_at = "product_images.updated_at"
+variant_ids = "product_images.variant_ids"
+width = "product_images.width"
+alt_text = "product_images.alt"
+url = "product_images.shop_url"
+
+[mappings.product_image.unused_source_fields]
+product_images = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "admin_graphql_api_id",
+]
+
+[mappings.product_tag]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/product_tag.yml"
+source_file_hash = "17e5c24df223414ff3ad1f105be0b044d4c3fa5fbb5dfa1099a912fe155a6394"
+unmapped_target_fields = [
+    "value",
+]
+omitted_target_fields = []
+
+[mappings.product_tag.mapped_target_fields]
+_fivetran_synced = "product_variants._airbyte_extracted_at"
+index = "product_variants.position"
+product_id = "product_variants.product_id"
+
+[mappings.product_tag.unused_source_fields]
+product_variants = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "admin_graphql_api_id",
+    "available_for_sale",
+    "barcode",
+    "compare_at_price",
+    "created_at",
+    "display_name",
+    "grams",
+    "id",
+    "image_id",
+    "image_src",
+    "image_url",
+    "inventory_item_id",
+    "inventory_policy",
+    "inventory_quantity",
+    "old_inventory_quantity",
+    "option1",
+    "option2",
+    "option3",
+    "options",
+    "presentment_prices",
+    "price",
+    "requires_shipping",
+    "shop_url",
+    "sku",
+    "tax_code",
+    "taxable",
+    "title",
+    "tracked",
+    "updated_at",
+    "weight",
+    "weight_unit",
+]
+
+[mappings.product_variant]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/product_variant.yml"
+source_file_hash = "8922cd77bbfeec41041e1a728545abe295b32dddbc165a174aaaf4ad2e76cdd6"
+unmapped_target_fields = [
+    "fulfillment_service",
+    "inventory_management",
+    "legacy_resource_id",
+    "metafield",
+    "requires_components",
+    "sellable_online_quantity",
+    "title",
+]
+omitted_target_fields = []
+
+[mappings.product_variant.mapped_target_fields]
+barcode = "product_variants.barcode"
+compare_at_price = "product_variants.compare_at_price"
+created_at = "product_variants.created_at"
+grams = "product_variants.grams"
+id = "product_variants.id"
+image_id = "product_variants.image_id"
+inventory_item_id = "product_variants.inventory_item_id"
+inventory_policy = "product_variants.inventory_policy"
+inventory_quantity = "product_variants.inventory_quantity"
+old_inventory_quantity = "product_variants.old_inventory_quantity"
+option_1 = "product_variants.option1"
+option_2 = "product_variants.option2"
+option_3 = "product_variants.option3"
+position = "product_variants.position"
+price = "product_variants.price"
+product_id = "product_variants.product_id"
+requires_shipping = "product_variants.requires_shipping"
+sku = "product_variants.sku"
+taxable = "product_variants.taxable"
+tax_code = "product_variants.tax_code"
+updated_at = "product_variants.updated_at"
+weight = "product_variants.weight"
+weight_unit = "product_variants.weight_unit"
+available_for_sale = "product_variants.available_for_sale"
+display_name = "product_variants.display_name"
+_fivetran_synced = "product_variants._airbyte_extracted_at"
+
+[mappings.product_variant.unused_source_fields]
+product_variants = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "admin_graphql_api_id",
+    "image_src",
+    "image_url",
+    "options",
+    "presentment_prices",
+    "shop_url",
+    "title",
+    "tracked",
+]
+
+[mappings.refund]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/refund.yml"
+source_file_hash = "cfa199c0229e9f3a95d877075d1c74cc18f124e979843ec22345fa71d1681772"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.refund.mapped_target_fields]
+id = "order_refunds.id"
+created_at = "order_refunds.created_at"
+processed_at = "order_refunds.processed_at"
+note = "order_refunds.note"
+restock = "order_refunds.restock"
+user_id = "order_refunds.user_id"
+_fivetran_synced = "order_refunds._airbyte_extracted_at"
+total_duties_set = "order_refunds.total_duties_set"
+order_id = "order_refunds.order_id"
+
+[mappings.refund.unused_source_fields]
+order_refunds = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "admin_graphql_api_id",
+    "duties",
+    "order_adjustments",
+    "refund_line_items",
+    "return",
+    "return.admin_graphql_api_id",
+    "return.id",
+    "shop_url",
+    "total_duties_set.presentment_money",
+    "total_duties_set.presentment_money.amount",
+    "total_duties_set.presentment_money.currency_code",
+    "total_duties_set.shop_money",
+    "total_duties_set.shop_money.amount",
+    "total_duties_set.shop_money.currency_code",
+    "transactions",
+]
+
+[mappings.shop]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/shop.yml"
+source_file_hash = "1b8f9db1ab4b84ec3927ebc7f98598c8a01ca221e61632c98dadc9400d644c96"
+unmapped_target_fields = [
+    "_fivetran_deleted",
+]
+omitted_target_fields = []
+
+[mappings.shop.mapped_target_fields]
+_fivetran_synced = "shop._airbyte_extracted_at"
+address_1 = "shop.address1"
+address_2 = "shop.address2"
+checkout_api_supported = "shop.checkout_api_supported"
+city = "shop.city"
+cookie_consent_level = "shop.cookie_consent_level"
+country = "shop.country"
+country_code = "shop.country_code"
+country_name = "shop.country_name"
+county_taxes = "shop.county_taxes"
+created_at = "shop.created_at"
+currency = "shop.currency"
+customer_email = "shop.customer_email"
+domain = "shop.domain"
+eligible_for_card_reader_giveaway = "shop.eligible_for_card_reader_giveaway"
+eligible_for_payments = "shop.eligible_for_payments"
+email = "shop.email"
+enabled_presentment_currencies = "shop.enabled_presentment_currencies"
+force_ssl = "shop.force_ssl"
+google_apps_domain = "shop.google_apps_domain"
+google_apps_login_enabled = "shop.google_apps_login_enabled"
+has_discounts = "shop.has_discounts"
+has_gift_cards = "shop.has_gift_cards"
+has_storefront = "shop.has_storefront"
+iana_timezone = "shop.iana_timezone"
+id = "shop.id"
+latitude = "shop.latitude"
+longitude = "shop.longitude"
+money_format = "shop.money_format"
+money_in_emails_format = "shop.money_in_emails_format"
+money_with_currency_format = "shop.money_with_currency_format"
+money_with_currency_in_emails_format = "shop.money_with_currency_in_emails_format"
+multi_location_enabled = "shop.multi_location_enabled"
+myshopify_domain = "shop.myshopify_domain"
+name = "shop.name"
+password_enabled = "shop.password_enabled"
+phone = "shop.phone"
+plan_display_name = "shop.plan_display_name"
+plan_name = "shop.plan_name"
+pre_launch_enabled = "shop.pre_launch_enabled"
+primary_locale = "shop.primary_locale"
+primary_location_id = "shop.primary_location_id"
+province = "shop.province"
+province_code = "shop.province_code"
+requires_extra_payments_agreement = "shop.requires_extra_payments_agreement"
+setup_required = "shop.setup_required"
+shop_owner = "shop.shop_owner"
+source = "shop.source"
+tax_shipping = "shop.tax_shipping"
+taxes_included = "shop.taxes_included"
+timezone = "shop.timezone"
+updated_at = "shop.updated_at"
+weight_unit = "shop.weight_unit"
+zip = "shop.zip"
+
+[mappings.shop.unused_source_fields]
+shop = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "auto_configure_tax_inclusivity",
+    "finances",
+    "marketing_sms_consent_enabled_at_checkout",
+    "shop_url",
+    "transactional_sms_disabled",
+    "visitor_tracking_consent_preference",
+]
+
+[mappings.tax_line]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/tax_line.yml"
+source_file_hash = "f9c601950bb062fab33b1549546e92eb6f38ee8f1280c4fd5955019461c9d08f"
+unmapped_target_fields = [
+    "index",
+    "order_line_id",
+    "price",
+    "price_set",
+    "rate",
+    "title",
+]
+omitted_target_fields = []
+
+[mappings.tax_line.mapped_target_fields]
+_fivetran_synced = "orders._airbyte_extracted_at"
+
+[mappings.tax_line.unused_source_fields]
+orders = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "admin_graphql_api_id",
+    "app_id",
+    "billing_address",
+    "billing_address.address1",
+    "billing_address.address2",
+    "billing_address.city",
+    "billing_address.company",
+    "billing_address.country",
+    "billing_address.country_code",
+    "billing_address.first_name",
+    "billing_address.last_name",
+    "billing_address.latitude",
+    "billing_address.longitude",
+    "billing_address.name",
+    "billing_address.phone",
+    "billing_address.province",
+    "billing_address.province_code",
+    "billing_address.zip",
+    "browser_ip",
+    "buyer_accepts_marketing",
+    "cancel_reason",
+    "cancelled_at",
+    "cart_token",
+    "checkout_id",
+    "checkout_token",
+    "client_details",
+    "client_details.accept_language",
+    "client_details.browser_height",
+    "client_details.browser_ip",
+    "client_details.browser_width",
+    "client_details.session_hash",
+    "client_details.user_agent",
+    "closed_at",
+    "company",
+    "confirmation_number",
+    "confirmed",
+    "contact_email",
+    "created_at",
+    "currency",
+    "current_subtotal_price",
+    "current_subtotal_price_set",
+    "current_subtotal_price_set.presentment_money",
+    "current_subtotal_price_set.presentment_money.amount",
+    "current_subtotal_price_set.presentment_money.currency_code",
+    "current_subtotal_price_set.shop_money",
+    "current_subtotal_price_set.shop_money.amount",
+    "current_subtotal_price_set.shop_money.currency_code",
+    "current_total_additional_fees_set",
+    "current_total_additional_fees_set.presentment_money",
+    "current_total_additional_fees_set.presentment_money.amount",
+    "current_total_additional_fees_set.presentment_money.currency_code",
+    "current_total_additional_fees_set.shop_money",
+    "current_total_additional_fees_set.shop_money.amount",
+    "current_total_additional_fees_set.shop_money.currency_code",
+    "current_total_discounts",
+    "current_total_discounts_set",
+    "current_total_discounts_set.presentment_money",
+    "current_total_discounts_set.presentment_money.amount",
+    "current_total_discounts_set.presentment_money.currency_code",
+    "current_total_discounts_set.shop_money",
+    "current_total_discounts_set.shop_money.amount",
+    "current_total_discounts_set.shop_money.currency_code",
+    "current_total_duties_set",
+    "current_total_price",
+    "current_total_price_set",
+    "current_total_price_set.presentment_money",
+    "current_total_price_set.presentment_money.amount",
+    "current_total_price_set.presentment_money.currency_code",
+    "current_total_price_set.shop_money",
+    "current_total_price_set.shop_money.amount",
+    "current_total_price_set.shop_money.currency_code",
+    "current_total_tax",
+    "current_total_tax_set",
+    "current_total_tax_set.presentment_money",
+    "current_total_tax_set.presentment_money.amount",
+    "current_total_tax_set.presentment_money.currency_code",
+    "current_total_tax_set.shop_money",
+    "current_total_tax_set.shop_money.amount",
+    "current_total_tax_set.shop_money.currency_code",
+    "customer",
+    "customer.accepts_marketing",
+    "customer.accepts_marketing_updated_at",
+    "customer.admin_graphql_api_id",
+    "customer.created_at",
+    "customer.currency",
+    "customer.default_address",
+    "customer.default_address.address1",
+    "customer.default_address.address2",
+    "customer.default_address.city",
+    "customer.default_address.company",
+    "customer.default_address.country",
+    "customer.default_address.country_code",
+    "customer.default_address.country_name",
+    "customer.default_address.customer_id",
+    "customer.default_address.default",
+    "customer.default_address.first_name",
+    "customer.default_address.id",
+    "customer.default_address.last_name",
+    "customer.default_address.name",
+    "customer.default_address.phone",
+    "customer.default_address.province",
+    "customer.default_address.province_code",
+    "customer.default_address.zip",
+    "customer.email",
+    "customer.email_marketing_consent",
+    "customer.email_marketing_consent.consent_collected_from",
+    "customer.email_marketing_consent.consent_updated_at",
+    "customer.email_marketing_consent.opt_in_level",
+    "customer.email_marketing_consent.state",
+    "customer.first_name",
+    "customer.id",
+    "customer.last_name",
+    "customer.last_order_id",
+    "customer.last_order_name",
+    "customer.marketing_opt_in_level",
+    "customer.multipass_identifier",
+    "customer.note",
+    "customer.orders_count",
+    "customer.phone",
+    "customer.sms_marketing_consent",
+    "customer.sms_marketing_consent.consent_collected_from",
+    "customer.sms_marketing_consent.consent_updated_at",
+    "customer.sms_marketing_consent.opt_in_level",
+    "customer.sms_marketing_consent.state",
+    "customer.state",
+    "customer.tags",
+    "customer.tax_exempt",
+    "customer.tax_exemptions",
+    "customer.total_spent",
+    "customer.updated_at",
+    "customer.verified_email",
+    "customer_locale",
+    "deleted_at",
+    "deleted_description",
+    "deleted_message",
+    "device_id",
+    "discount_allocations",
+    "discount_applications",
+    "discount_codes",
+    "duties_included",
+    "email",
+    "estimated_taxes",
+    "financial_status",
+    "fulfillment_status",
+    "fulfillments",
+    "id",
+    "landing_site",
+    "landing_site_ref",
+    "line_items",
+    "location_id",
+    "merchant_business_entity_id",
+    "merchant_of_record_app_id",
+    "name",
+    "note",
+    "note_attributes",
+    "number",
+    "order_number",
+    "order_status_url",
+    "original_total_additional_fees_set",
+    "original_total_additional_fees_set.presentment_money",
+    "original_total_additional_fees_set.presentment_money.amount",
+    "original_total_additional_fees_set.presentment_money.currency_code",
+    "original_total_additional_fees_set.shop_money",
+    "original_total_additional_fees_set.shop_money.amount",
+    "original_total_additional_fees_set.shop_money.currency_code",
+    "original_total_duties_set",
+    "payment_gateway_names",
+    "payment_terms",
+    "phone",
+    "po_number",
+    "presentment_currency",
+    "processed_at",
+    "reference",
+    "referring_site",
+    "refunds",
+    "shipping_address",
+    "shipping_address.address1",
+    "shipping_address.address2",
+    "shipping_address.city",
+    "shipping_address.company",
+    "shipping_address.country",
+    "shipping_address.country_code",
+    "shipping_address.first_name",
+    "shipping_address.last_name",
+    "shipping_address.latitude",
+    "shipping_address.longitude",
+    "shipping_address.name",
+    "shipping_address.phone",
+    "shipping_address.province",
+    "shipping_address.province_code",
+    "shipping_address.zip",
+    "shipping_lines",
+    "shop_url",
+    "source_identifier",
+    "source_name",
+    "source_url",
+    "subtotal_price",
+    "subtotal_price_set",
+    "subtotal_price_set.presentment_money",
+    "subtotal_price_set.presentment_money.amount",
+    "subtotal_price_set.presentment_money.currency_code",
+    "subtotal_price_set.shop_money",
+    "subtotal_price_set.shop_money.amount",
+    "subtotal_price_set.shop_money.currency_code",
+    "tags",
+    "tax_exempt",
+    "tax_lines",
+    "taxes_included",
+    "test",
+    "token",
+    "total_cash_rounding_payment_adjustment_set",
+    "total_cash_rounding_payment_adjustment_set.presentment_money",
+    "total_cash_rounding_payment_adjustment_set.presentment_money.amount",
+    "total_cash_rounding_payment_adjustment_set.presentment_money.currency_code",
+    "total_cash_rounding_payment_adjustment_set.shop_money",
+    "total_cash_rounding_payment_adjustment_set.shop_money.amount",
+    "total_cash_rounding_payment_adjustment_set.shop_money.currency_code",
+    "total_discounts",
+    "total_discounts_set",
+    "total_discounts_set.presentment_money",
+    "total_discounts_set.presentment_money.amount",
+    "total_discounts_set.presentment_money.currency_code",
+    "total_discounts_set.shop_money",
+    "total_discounts_set.shop_money.amount",
+    "total_discounts_set.shop_money.currency_code",
+    "total_line_items_price",
+    "total_line_items_price_set",
+    "total_line_items_price_set.presentment_money",
+    "total_line_items_price_set.presentment_money.amount",
+    "total_line_items_price_set.presentment_money.currency_code",
+    "total_line_items_price_set.shop_money",
+    "total_line_items_price_set.shop_money.amount",
+    "total_line_items_price_set.shop_money.currency_code",
+    "total_outstanding",
+    "total_price",
+    "total_price_set",
+    "total_price_set.presentment_money",
+    "total_price_set.presentment_money.amount",
+    "total_price_set.presentment_money.currency_code",
+    "total_price_set.shop_money",
+    "total_price_set.shop_money.amount",
+    "total_price_set.shop_money.currency_code",
+    "total_price_usd",
+    "total_shipping_price_set",
+    "total_shipping_price_set.presentment_money",
+    "total_shipping_price_set.presentment_money.amount",
+    "total_shipping_price_set.presentment_money.currency_code",
+    "total_shipping_price_set.shop_money",
+    "total_shipping_price_set.shop_money.amount",
+    "total_shipping_price_set.shop_money.currency_code",
+    "total_tax",
+    "total_tax_set",
+    "total_tax_set.presentment_money",
+    "total_tax_set.presentment_money.amount",
+    "total_tax_set.presentment_money.currency_code",
+    "total_tax_set.shop_money",
+    "total_tax_set.shop_money.amount",
+    "total_tax_set.shop_money.currency_code",
+    "total_tip_received",
+    "total_weight",
+    "updated_at",
+    "user_id",
+]
+
+[mappings.tender_transaction]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/tender_transaction.yml"
+source_file_hash = "54b98eda74c47792e1ffe07f6cbc60591534581faff896bb5cd58ff1c00acbc0"
+unmapped_target_fields = []
+omitted_target_fields = []
+
+[mappings.tender_transaction.mapped_target_fields]
+_fivetran_synced = "tender_transactions._airbyte_extracted_at"
+amount = "tender_transactions.amount"
+currency = "tender_transactions.currency"
+id = "tender_transactions.id"
+order_id = "tender_transactions.order_id"
+payment_method = "tender_transactions.payment_method"
+processed_at = "tender_transactions.processed_at"
+remote_reference = "tender_transactions.remote_reference"
+test = "tender_transactions.test"
+user_id = "tender_transactions.user_id"
+
+[mappings.tender_transaction.unused_source_fields]
+tender_transactions = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "payment_details",
+    "payment_details.credit_card_company",
+    "payment_details.credit_card_number",
+    "shop_url",
+]
+
+[mappings.transaction]
+source_file = "catalog/shopify/src/fivetran-interop/transforms/transaction.yml"
+source_file_hash = "fdfd035fbffa4db1c1fb59c26b8ca0e6ee152459879a3cdeb1fc9bee20ff01b5"
+unmapped_target_fields = [
+    "authorization_expires_at",
+    "currency_exchange_adjustment",
+    "currency_exchange_currency",
+    "currency_exchange_final_amount",
+    "currency_exchange_id",
+    "currency_exchange_original_amount",
+    "refund_id",
+]
+omitted_target_fields = []
+
+[mappings.transaction.mapped_target_fields]
+id = "transactions.id"
+order_id = "transactions.order_id"
+amount = "transactions.amount"
+authorization = "transactions.authorization"
+created_at = "transactions.created_at"
+processed_at = "transactions.processed_at"
+device_id = "transactions.device_id"
+gateway = "transactions.gateway"
+source_name = "transactions.source_name"
+message = "transactions.message"
+currency = "transactions.currency"
+location_id = "transactions.location_id"
+parent_id = "transactions.parent_id"
+payment_avs_result_code = "transactions.payment_details.avs_result_code"
+payment_credit_card_bin = "transactions.payment_details.credit_card_bin"
+payment_cvv_result_code = "transactions.payment_details.cvv_result_code"
+payment_credit_card_number = "transactions.payment_details.credit_card_number"
+payment_credit_card_company = "transactions.payment_details.credit_card_company"
+kind = "transactions.kind"
+receipt = "transactions.receipt"
+error_code = "transactions.error_code"
+status = "transactions.status"
+test = "transactions.test"
+user_id = "transactions.user_id"
+_fivetran_synced = "transactions._airbyte_extracted_at"
+
+[mappings.transaction.unused_source_fields]
+transactions = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "accountNumber",
+    "admin_graphql_api_id",
+    "amount_set",
+    "amount_set.shop_money",
+    "amount_set.shop_money.amount",
+    "amount_set.shop_money.currency",
+    "fees",
+    "formattedGateway",
+    "manuallyCapturable",
+    "payment_details.buyer_action_info",
+    "payment_details.credit_card_expiration_month",
+    "payment_details.credit_card_expiration_year",
+    "payment_details.credit_card_name",
+    "payment_details.credit_card_wallet",
+    "payment_id",
+    "shop_url",
+    "total_unsettled_set",
+    "total_unsettled_set.presentment_money",
+    "total_unsettled_set.presentment_money.amount",
+    "total_unsettled_set.presentment_money.currency",
+    "total_unsettled_set.presentment_money.currency_code",
+    "total_unsettled_set.shop_money",
+    "total_unsettled_set.shop_money.amount",
+    "total_unsettled_set.shop_money.currency",
+    "total_unsettled_set.shop_money.currency_code",
+]

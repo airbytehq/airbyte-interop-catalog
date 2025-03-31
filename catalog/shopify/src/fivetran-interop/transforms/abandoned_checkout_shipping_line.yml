@@ -1,0 +1,71 @@
+domain: shopify.fivetran-interop
+transforms:
+  - name: abandoned_checkout_shipping_line
+    from:
+      - abandoned_checkouts: shopify.abandoned_checkouts
+    fields:
+      _fivetran_synced:
+        expression: abandoned_checkouts._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      carrier_identifier:
+        expression: MISSING
+        description:
+          A reference to the carrier service that provided the rate. Present
+          when the rate was computed by a third-party carrier service.
+      checkout_id:
+        expression: MISSING
+        description: ID of the checkout that was abandoned.
+      code:
+        expression: MISSING
+        description: A reference to the shipping method.
+      delivery_category:
+        expression: MISSING
+        description: The general classification of the delivery method.
+      delivery_expectation_range:
+        expression: MISSING
+        description: Expected delivery date range.
+      delivery_expectation_range_max:
+        expression: MISSING
+        description: Latest expected delivery date.
+      delivery_expectation_range_min:
+        expression: MISSING
+        description: Earliest possible expected delivery date.
+      delivery_expectation_type:
+        expression: MISSING
+        description: Type of expected delivery.
+      discounted_price:
+        expression: MISSING
+        description:
+          The pre-tax shipping price with discounts applied in _presentment_
+          (customer) currency.
+      id:
+        expression: abandoned_checkouts.id
+        description: Unique ID of the abandoned checkout shipping line.
+      index:
+        expression: MISSING
+        description: Index of the line amongst shipping lines for this checkout.
+      original_shop_price:
+        expression: MISSING
+        description:
+          The pre-tax shipping price without any discounts applied in _presentment_
+          (customer) currency.
+      phone:
+        expression: abandoned_checkouts.phone
+        description: The phone number at the shipping address.
+      price:
+        expression: MISSING
+        description: The price of the shipping method in presentment currency.
+      requested_fulfillment_service_id:
+        expression: MISSING
+        description:
+          The fulfillment service requested for the shipping method. Present
+          if the shipping method requires processing by a third party fulfillment
+          service.
+      source:
+        expression: abandoned_checkouts.source
+        description: The channel where the checkout originated. Example value - shopify.
+      title:
+        expression: MISSING
+        description:
+          The title of the shipping method. Example value - International
+          Shipping.

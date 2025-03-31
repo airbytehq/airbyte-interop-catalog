@@ -1,0 +1,99 @@
+domain: shopify.fivetran-interop
+transforms:
+  - name: customer
+    from:
+      - customers: shopify.customers
+    fields:
+      _fivetran_synced:
+        expression: customers._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      accepts_marketing:
+        expression: customers.accepts_marketing
+        description:
+          Whether the customer has consented to receive marketing material
+          via email. Deprecated and will be coalesced with `email_marketing_consent_state`.
+      created_at:
+        expression: customers.created_at
+        description: The date and time when the customer was created.
+      default_address_id:
+        expression: customers.default_address.id
+        description: The default address for the customer.
+      email:
+        expression: customers.email
+        description:
+          The unique email address of the customer. Attempting to assign
+          the same email address to multiple customers returns an error.
+      first_name:
+        expression: customers.first_name
+        description: The customer's first name.
+      id:
+        expression: customers.id
+        description: A unique identifier for the customer.
+      last_name:
+        expression: customers.last_name
+        description: The customer's last name.
+      orders_count:
+        expression: customers.orders_count
+        description: The number of orders associated with this customer.
+      phone:
+        expression: customers.phone
+        description:
+          The unique phone number (E.164 format) for this customer. Attempting
+          to assign the same phone number to multiple customers returns an error.
+      state:
+        expression: customers.state
+        description: The state of the customer's account with a shop.
+      tax_exempt:
+        expression: customers.tax_exempt
+        description:
+          Whether the customer is exempt from paying taxes on their order.
+          If true, then taxes won't be applied to an order at checkout. If false,
+          then taxes will be applied at checkout.
+      total_spent:
+        expression: customers.total_spent
+        description:
+          The total amount of money that the customer has spent across
+          their order history.
+      updated_at:
+        expression: customers.updated_at
+        description: The date and time when the customer information was last updated.
+      verified_email:
+        expression: customers.verified_email
+        description: Whether the customer has verified their email address.
+      email_marketing_consent_state:
+        expression: customers.email_marketing_consent.state
+        description:
+          The current email marketing state for the customer. New version
+          of `accepts_marketing` field.
+      email_marketing_consent_opt_in_level:
+        expression: customers.email_marketing_consent.opt_in_level
+        description:
+          The marketing subscription opt-in level, as described in the
+          M3AAWG Sender Best Common Practices, that the customer gave when they consented
+          to receive marketing material by email. New version of `marketing_opt_in_level`
+          field.
+      email_marketing_consent_consent_updated_at:
+        expression: customers.email_marketing_consent.consent_updated_at
+        description:
+          The date and time when the customer consented to receive marketing
+          material by email. If no date is provided, then the date and time when the
+          consent information was sent is used. New version of `accepts_marketing_updated_at`
+          field.
+      accepts_marketing_updated_at:
+        expression: customers.accepts_marketing_updated_at
+        description: Deprecated. The package will coalesce with `email_marketing_consent_consent_updated_at`.
+      marketing_opt_in_level:
+        expression: customers.marketing_opt_in_level
+        description: Deprecated. The package will coalesce with `email_marketing_consent_opt_in_level`.
+      _fivetran_deleted:
+        expression: MISSING
+        description: "{{ doc('_fivetran_deleted') }}"
+      note:
+        expression: customers.note
+        description: A note about the customer.
+      currency:
+        expression: customers.currency
+        description:
+          The three-letter code (ISO 4217 format) for the currency that
+          the customer used when they paid for their last order. Defaults to the shop
+          currency. Returns the shop currency for test orders.

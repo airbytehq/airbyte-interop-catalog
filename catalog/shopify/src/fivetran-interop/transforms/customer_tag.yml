@@ -1,0 +1,20 @@
+domain: shopify.fivetran-interop
+transforms:
+  - name: customer_tag
+    from:
+      - metafield_customers: shopify.metafield_customers
+    fields:
+      _fivetran_synced:
+        expression: metafield_customers._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      index:
+        expression: MISSING
+        description:
+          Index (starting from 1) represnting when the tag was placed on
+          the customer.
+      customer_id:
+        expression: metafield_customers.owner_id
+        description: ID of the customer being tagged.
+      value:
+        expression: metafield_customers.value
+        description: Value of the tag.

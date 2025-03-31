@@ -1,0 +1,25 @@
+name: "airbyte_shopify"
+version: "1.0.0"
+config-version: 2
+
+profile: "default"
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  airbyte_shopify:
+    +materialized: view
+
+vars:
+  airbyte_shopify_database: "shopify"
+  airbyte_shopify_schema: "shopify_raw"

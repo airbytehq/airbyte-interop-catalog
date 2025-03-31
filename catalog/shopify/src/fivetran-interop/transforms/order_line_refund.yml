@@ -1,0 +1,43 @@
+domain: shopify.fivetran-interop
+transforms:
+  - name: order_line_refund
+    from:
+      - order_refunds: shopify.order_refunds
+    fields:
+      _fivetran_synced:
+        expression: order_refunds._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      id:
+        expression: order_refunds.id
+        description: The unique identifier of the line item in the refund.
+      location_id:
+        expression: MISSING
+        description:
+          TThe unique identifier of the location where the items will be
+          restockedBD
+      order_line_id:
+        expression: MISSING
+        description: The ID of the related line item in the order.
+      quantity:
+        expression: MISSING
+        description: The quantity of the associated line item that was returned.
+      refund_id:
+        expression: MISSING
+        description: The ID of the related refund.
+      restock_type:
+        expression: MISSING
+        description: How this refund line item affects inventory levels.
+      subtotal:
+        expression: MISSING
+        description: Subtotal amount of the order line refund in shop currency.
+      total_tax:
+        expression: MISSING
+        description: The total tax applied to the refund in shop currency.
+      subtotal_set:
+        expression: MISSING
+        description:
+          The subtotal of the refund line item in shop and presentment
+          currencies.
+      total_tax_set:
+        expression: MISSING
+        description: The total tax of the line item in shop and presentment currencies.
