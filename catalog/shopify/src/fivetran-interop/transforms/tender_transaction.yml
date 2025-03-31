@@ -1,0 +1,41 @@
+domain: shopify.fivetran-interop
+transforms:
+  - name: tender_transaction
+    from:
+      - tender_transactions: shopify.tender_transactions
+    fields:
+      _fivetran_synced:
+        expression: tender_transactions._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      amount:
+        expression: tender_transactions.amount
+        description: The amount of the tender transaction in the shop's currency.
+      currency:
+        expression: tender_transactions.currency
+        description: The three-letter code (ISO 4217 format) for the currency used
+          for the tender transaction.
+      id:
+        expression: tender_transactions.id
+        description: The ID of the transaction.
+      order_id:
+        expression: tender_transactions.order_id
+        description: The ID of the order that the tender transaction belongs to.
+      payment_method:
+        expression: tender_transactions.payment_method
+        description: "Information about the payment method used for this transaction.
+          Valid values include: - credit_card - cash - android_pay - apple_pay - google_pay
+          - samsung_pay - shopify_pay - amazon - klarna - paypal - unknown - other\n"
+      processed_at:
+        expression: tender_transactions.processed_at
+        description: The date and time (ISO 8601 format) when the tender transaction
+          was processed.
+      remote_reference:
+        expression: tender_transactions.remote_reference
+        description: The remote (gateway) reference associated with the tender.
+      test:
+        expression: tender_transactions.test
+        description: Whether the tender transaction is a test transaction.
+      user_id:
+        expression: tender_transactions.user_id
+        description: The ID of the user logged into the Shopify POS device that processed
+          the tender transaction, if applicable.

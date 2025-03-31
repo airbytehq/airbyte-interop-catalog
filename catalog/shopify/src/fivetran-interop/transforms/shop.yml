@@ -1,0 +1,197 @@
+domain: shopify.fivetran-interop
+transforms:
+  - name: shop
+    from:
+      - shop: shopify.shop
+    fields:
+      _fivetran_deleted:
+        expression: MISSING
+        description: "{{ doc('_fivetran_deleted') }}"
+      _fivetran_synced:
+        expression: shop._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      address_1:
+        expression: shop.address1
+        description: The shop's street address.
+      address_2:
+        expression: shop.address2
+        description: The optional second line of the shop's street address.
+      checkout_api_supported:
+        expression: shop.checkout_api_supported
+        description: Boolean representing whether the shop is capable of accepting
+          payments directly through the Checkout API.
+      city:
+        expression: shop.city
+        description: The shop's city.
+      cookie_consent_level:
+        expression: shop.cookie_consent_level
+        description: The cookie consent level defined on the shop's online store.
+      country:
+        expression: shop.country
+        description: The shop's country. In most cases, this value matches the country_code.
+      country_code:
+        expression: shop.country_code
+        description: The two-letter country code corresponding to the shop's country.
+      country_name:
+        expression: shop.country_name
+        description: The shop's normalized country name.
+      county_taxes:
+        expression: shop.county_taxes
+        description: Boolean representing whether the shop is applying taxes on a
+          per-county basis. Only applicable to shops based in the US. Either `true`
+          or `null` (not false, according to Shopify API docs).
+      created_at:
+        expression: shop.created_at
+        description: The date and time (ISO 8601) when the shop was created.
+      currency:
+        expression: shop.currency
+        description: The three-letter code (ISO 4217 format) for the shop's default
+          currency.
+      customer_email:
+        expression: shop.customer_email
+        description: The contact email used for communication between the shop owner
+          and the customer.
+      domain:
+        expression: shop.domain
+        description: The shop's domain.
+      eligible_for_card_reader_giveaway:
+        expression: shop.eligible_for_card_reader_giveaway
+        description: Boolean representing whether the shop is eligible to receive
+          a free credit card reader from Shopify.
+      eligible_for_payments:
+        expression: shop.eligible_for_payments
+        description: Boolean representing whether the shop is eligible to use Shopify
+          Payments.
+      email:
+        expression: shop.email
+        description: The contact email used for communication between Shopify and
+          the shop owner.
+      enabled_presentment_currencies:
+        expression: shop.enabled_presentment_currencies
+        description: An array of of enabled currencies (ISO 4217 format) that the
+          shop accepts. Merchants can enable currencies from their Shopify Payments
+          settings in the Shopify Admin.
+      force_ssl:
+        expression: shop.force_ssl
+        description: DEPRECATED.
+      google_apps_domain:
+        expression: shop.google_apps_domain
+        description: The GSuite URL for the store, if applicable.
+      google_apps_login_enabled:
+        expression: shop.google_apps_login_enabled
+        description: Boolean representing whether the GSuite login is enabled. Shops
+          with this feature will be able to log in through the GSuite login page.
+          Valid values are `true` and `null`.
+      has_discounts:
+        expression: shop.has_discounts
+        description: Boolean representing whether any active discounts exist for the
+          shop.
+      has_gift_cards:
+        expression: shop.has_gift_cards
+        description: Boolean representing whether any active gift cards exist for
+          the shop.
+      has_storefront:
+        expression: shop.has_storefront
+        description: Boolean representing whether this shop has an online store.
+      iana_timezone:
+        expression: shop.iana_timezone
+        description: The name of the timezone assigned by the [IANA](https://www.iana.org/time-zones).
+      id:
+        expression: shop.id
+        description: The ID for the shop. A 64-bit unsigned integer.
+      latitude:
+        expression: shop.latitude
+        description: The latitude of the shop's location.
+      longitude:
+        expression: shop.longitude
+        description: The longitude of the shop's location.
+      money_format:
+        expression: shop.money_format
+        description: A string representing the way currency is formatted when the
+          currency isn't specified.
+      money_in_emails_format:
+        expression: shop.money_in_emails_format
+        description: A string representing the way currency is formatted in email
+          notifications when the currency isn't specified.
+      money_with_currency_format:
+        expression: shop.money_with_currency_format
+        description: A string representing the way currency is formatted when the
+          currency is specified.
+      money_with_currency_in_emails_format:
+        expression: shop.money_with_currency_in_emails_format
+        description: A string representing the way currency is formatted in email
+          notifications when the currency is specified.
+      multi_location_enabled:
+        expression: shop.multi_location_enabled
+        description: DEPRECATED and hard-coded to `true`.
+      myshopify_domain:
+        expression: shop.myshopify_domain
+        description: The shop's .myshopify.com domain.
+      name:
+        expression: shop.name
+        description: The name of the shop.
+      password_enabled:
+        expression: shop.password_enabled
+        description: Boolean representing whether the password protection page is
+          enabled on the shop's online store.
+      phone:
+        expression: shop.phone
+        description: The contact phone number for the shop.
+      plan_display_name:
+        expression: shop.plan_display_name
+        description: The display name of the Shopify plan the shop is on.
+      plan_name:
+        expression: shop.plan_name
+        description: The name of the Shopify plan the shop is on.
+      pre_launch_enabled:
+        expression: shop.pre_launch_enabled
+        description: Boolen representing whether the pre-launch page is enabled on
+          the shop's online store.
+      primary_locale:
+        expression: shop.primary_locale
+        description: The shop's primary locale, as configured in the language settings
+          of the shop's theme.
+      primary_location_id:
+        expression: shop.primary_location_id
+        description: DEPRECATED. Formerly used for the ID of the shipping origin location.
+      province:
+        expression: shop.province
+        description: The shop's normalized province or state name.
+      province_code:
+        expression: shop.province_code
+        description: The two- or three-letter code for the shop's province or state.
+      requires_extra_payments_agreement:
+        expression: shop.requires_extra_payments_agreement
+        description: Boolean representing whether the shop requires an extra Shopify
+          Payments agreement.
+      setup_required:
+        expression: shop.setup_required
+        description: Boolean representing whether the shop has any outstanding setup
+          steps.
+      shop_owner:
+        expression: shop.shop_owner
+        description: The username of the shop owner.
+      source:
+        expression: shop.source
+        description: The handle of the partner account that referred the merchant
+          to Shopify, if applicable.
+      tax_shipping:
+        expression: shop.tax_shipping
+        description: Boolean representing whether taxes are charged for shipping.
+          Valid values are true or false.
+      taxes_included:
+        expression: shop.taxes_included
+        description: Boolean representing whether applicable taxes are included in
+          product prices. Valid values are true or null.
+      timezone:
+        expression: shop.timezone
+        description: The name of the timezone the shop is in.
+      updated_at:
+        expression: shop.updated_at
+        description: The date and time (ISO 8601) when the shop was last updated.
+      weight_unit:
+        expression: shop.weight_unit
+        description: The default unit of weight measurement for the shop.
+      zip:
+        expression: shop.zip
+        description: The shop's zip or postal code.

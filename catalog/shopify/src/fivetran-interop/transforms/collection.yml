@@ -1,0 +1,63 @@
+domain: shopify.fivetran-interop
+transforms:
+  - name: collection
+    from:
+      - smart_collections: shopify.smart_collections
+    fields:
+      _fivetran_deleted:
+        expression: MISSING
+        description: "{{ doc('_fivetran_deleted') }}"
+      _fivetran_synced:
+        expression: smart_collections._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      disjunctive:
+        expression: smart_collections.disjunctive
+        description: Boolean representing whether the `rules` or disjuctive (logical
+          `OR`) or not. True = disjuctive, false = conjunctive (logical `AND`).
+      handle:
+        expression: smart_collections.handle
+        description: A unique, human-readable string for the collection automatically
+          generated from its title. This is used in themes by the Liquid templating
+          language to refer to the collection.
+      id:
+        expression: smart_collections.id
+        description: The ID for the collection.
+      published_at:
+        expression: smart_collections.published_at
+        description: The time and date (ISO 8601 format) when the collection was made
+          visible. Returns null for a hidden collection.
+      published_scope:
+        expression: smart_collections.published_scope
+        description: "Whether the collection is published to the Point of Sale channel.
+          Valid values `web` (the collection is published to the Online Store channel
+          but not published to the Point of Sale channel) and `global` (the collection
+          is published to both the Online Store channel and the Point of Sale channel).\n"
+      rules:
+        expression: smart_collections.rules
+        description: "An array of rules that define what products go into the smart
+          collection. Each rule (`column` -- `relation` --> `condition`) has these
+          properties: - `column`: the property of a product being used to populate
+          the smart collection. Ex: 'tag', 'type', 'vendor', 'variant_price', etc.
+          - `relation`: The comparitive relationship between the column choice, and
+          the condition ('equals', 'contains', 'greater_than', etc.) - condition:
+          Select products for a smart collection using a condition. Values are either
+          strings or numbers, depending on the relation value. See the [Shopify docs](https://shopify.dev/api/admin-rest/2022-10/resources/smartcollection#resource-object)
+          for more.\n"
+      sort_order:
+        expression: smart_collections.sort_order
+        description: "The order of the products in the collection. Valid values inclide
+          - `alpha-asc`: The products are sorted alphabetically from A to Z. - `alpha-des`:
+          The products are sorted alphabetically from Z to A. - `best-selling`: The
+          products are sorted by number of sales. - `created`: The products are sorted
+          by the date they were created, from oldest to newest. - `created-desc`:
+          The products are sorted by the date they were created, from newest to oldest.
+          - `manual`: The products are manually sorted by the shop owner. - `price-asc`:
+          The products are sorted by price from lowest to highest. - `price-desc`:
+          The products are sorted by price from highest to lowest.\n"
+      title:
+        expression: smart_collections.title
+        description: The name of the collection
+      updated_at:
+        expression: smart_collections.updated_at
+        description: The date and time (ISO 8601 format) when the collection was last
+          modified.

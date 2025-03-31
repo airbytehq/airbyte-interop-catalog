@@ -1,0 +1,85 @@
+domain: shopify.fivetran-interop
+transforms:
+  - name: fulfillment_event
+    from:
+      - fulfillments: shopify.fulfillments
+    fields:
+      _fivetran_deleted:
+        expression: MISSING
+        description: "{{ doc('_fivetran_deleted') }}"
+      _fivetran_synced:
+        expression: fulfillments._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      address_1:
+        expression: MISSING
+        description: The street address where the fulfillment event occurred.
+      city:
+        expression: MISSING
+        description: The city where the fulfillment event occurred.
+      country:
+        expression: MISSING
+        description: The country where the fulfillment event occurred.
+      created_at:
+        expression: fulfillments.created_at
+        description: The date and time (ISO 8601 format) when the fulfillment event
+          was created.
+      estimated_delivery_at:
+        expression: MISSING
+        description: "The estimated delivery date based on the fulfillment's tracking
+          number, as long as it's provided by one of the following carriers: USPS,
+          FedEx, UPS, or Canada Post (Canada only).  Value is `null` if no tracking
+          number is available or if the tracking number is from an unsupported carrier.
+          This property is available only when carrier calculated rates are in use.\n"
+      fulfillment_id:
+        expression: MISSING
+        description: An ID for the fulfillment that's associated with the fulfillment
+          event.
+      happened_at:
+        expression: MISSING
+        description: The date and time (ISO 8601 format) when the fulfillment event
+          occurred.
+      id:
+        expression: MISSING
+        description: An ID for the fulfillment event.
+      latitude:
+        expression: MISSING
+        description: A geographic coordinate specifying the latitude of the fulfillment
+          event.
+      longitude:
+        expression: MISSING
+        description: A geographic coordinate specifying the longitude of the fulfillment
+          event.
+      message:
+        expression: MISSING
+        description: An arbitrary message describing the status. Can be provided by
+          a shipping carrier.
+      order_id:
+        expression: fulfillments.order_id
+        description: The ID of the order that's associated with the fulfillment event.
+      province:
+        expression: MISSING
+        description: The province where the fulfillment event occurred.
+      shop_id:
+        expression: MISSING
+        description: An ID for the shop that's associated with the fulfillment event.
+      status:
+        expression: MISSING
+        description: "The status of the fulfillment event. Valid values: - label_printed:
+          A label for the shipment was purchased and printed. - label_purchased: A
+          label for the shipment was purchased, but not printed. - attempted_delivery:
+          Delivery of the shipment was attempted, but unable to be completed. - ready_for_pickup:
+          The shipment is ready for pickup at a shipping depot. - picked_up: The fulfillment
+          was successfully picked up. - confirmed: The carrier is aware of the shipment,
+          but hasn't received it yet. - in_transit: The shipment is being transported
+          between shipping facilities on the way to its destination. - out_for_delivery:
+          The shipment is being delivered to its final destination. - delivered: The
+          shipment was successfully delivered. - failure: Something went wrong when
+          pulling tracking information for the shipment, such as the tracking number
+          was invalid or the shipment was canceled.\n"
+      updated_at:
+        expression: fulfillments.updated_at
+        description: The date and time (ISO 8601 format) when the fulfillment event
+          was updated.
+      zip:
+        expression: MISSING
+        description: The zip code of the location where the fulfillment event occurred.

@@ -1,0 +1,115 @@
+domain: shopify.fivetran-interop
+transforms:
+  - name: price_rule
+    from:
+      - price_rules: shopify.price_rules
+    fields:
+      _fivetran_synced:
+        expression: price_rules._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      allocation_limit:
+        expression: price_rules.allocation_limit
+        description: "The number of times the discount can be allocated on the cart
+          - if eligible. For example a Buy 1 hat Get 1 hat for free discount can be
+          applied 3 times on a cart having more than 6 hats,  where maximum of 3 hats
+          get discounted - if the allocation_limit is 3. Empty (null) allocation_limit
+          means unlimited number of allocations.\n"
+      allocation_method:
+        expression: price_rules.allocation_method
+        description: "The allocation method of the price rule. Valid values include
+          `each` (the discount is applied to each of the entitled items. For example,
+          for a price rule that takes $15 off, each entitled line item in a checkout
+          will be discounted by $15) and `across` (the calculated discount amount
+          will be applied across the entitled items. For example, for a price rule
+          that takes $15 off, the discount will be applied across all the entitled
+          items).\n"
+      created_at:
+        expression: price_rules.created_at
+        description: The date and time (ISO 8601 format) when the price rule was created.
+      customer_selection:
+        expression: price_rules.customer_selection
+        description: "The customer selection for the price rule. Valid values include
+          `all` (the price rule is valid for all customers) and `prerequisite`  (the
+          customer must either belong to one of the customer segments specified by
+          customer_segment_prerequisite_ids, or be one of the customers specified
+          by prerequisite_customer_ids).\n"
+      ends_at:
+        expression: price_rules.ends_at
+        description: The date and time (ISO 8601 format) when the price rule ends.
+          Must be after starts_at.
+      id:
+        expression: price_rules.id
+        description: The ID for the price rule.
+      once_per_customer:
+        expression: price_rules.once_per_customer
+        description: Boolean representing whether the generated discount code will
+          be valid only for a single use per customer. This is tracked using customer
+          ID.
+      prerequisite_quantity_range:
+        expression: price_rules.prerequisite_quantity_range
+        description: If `customer_selection` is `prerequisite`, the minimum number
+          of items for the price rule to be applicable. The quantity of an entitled
+          cart item must be greater than or equal to this value.
+      prerequisite_shipping_price_range:
+        expression: price_rules.prerequisite_shipping_price_range
+        description: If `customer_selection` is `prerequisite`, the maximum shipping
+          price for the price rule to be applicable. The shipping price must be less
+          than or equal to this value
+      prerequisite_subtotal_range:
+        expression: price_rules.prerequisite_subtotal_range
+        description: If `customer_selection` is `prerequisite`, the minimum subtotal
+          for the price rule to be applicable. The subtotal of the entitled cart items
+          must be greater than or equal to this value for the discount to apply.
+      prerequisite_to_entitlement_purchase_prerequisite_amount:
+        expression: price_rules.prerequisite_to_entitlement_purchase.prerequisite_amount
+        description: If `customer_selection` is `prerequisite`, the prerequisite purchase
+          for a Buy X Get Y discount. The minimum purchase amount required to be entitled
+          to the discount.
+      quantity_ratio_entitled_quantity:
+        expression: price_rules.prerequisite_to_entitlement_quantity_ratio.entitled_quantity
+        description: If `customer_selection` is `prerequisite`, in a Buy/Get ratio
+          for a Buy X Get Y discount, this is the offered 'get' quantity.
+      quantity_ratio_prerequisite_quantity:
+        expression: price_rules.prerequisite_to_entitlement_quantity_ratio.prerequisite_quantity
+        description: If `customer_selection` is `prerequisite`, in a Buy/Get ratio
+          for a Buy X Get Y discount, this defines the necessary 'buy' quantity.
+      starts_at:
+        expression: price_rules.starts_at
+        description: The date and time (ISO 8601 format) when the price rule starts.
+      target_selection:
+        expression: price_rules.target_selection
+        description: "The target selection method of the price rule. Valid values
+          include `all` (the price rule applies the discount to all line items in
+          the checkout) and  `entitled` (the price rule applies the discount to selected
+          entitlements only).\n"
+      target_type:
+        expression: price_rules.target_type
+        description: The target type that the price rule applies to. Valid values
+          include `line_item` (the price rule applies to the cart's line items) and
+          `shipping_line` (the price rule applies to the cart's shipping lines).
+      title:
+        expression: price_rules.title
+        description: "The title of the price rule. This is used by the Shopify admin
+          search to retrieve discounts. It is also displayed on the Discounts page
+          of the Shopify admin for bulk discounts.  Shopify recommends that this map
+          onto the associated `discount_code.code`.\n"
+      updated_at:
+        expression: price_rules.updated_at
+        description: The date and time (ISO 8601 format) when the price rule was updated.
+      usage_limit:
+        expression: price_rules.usage_limit
+        description: The maximum number of times the price rule can be used, per discount
+          code.
+      value:
+        expression: price_rules.value
+        description: The value of the price rule. If if the value of `target_type`
+          is `shipping_line`, then only -100 is accepted. The value must be negative.
+      value_type:
+        expression: price_rules.value_type
+        description: "The value type of the price rule. Valid values include `fixed_amount`
+          (applies a discount of value as a unit of the store's currency. For example,
+          if value is -30 and the store's currency is USD, then $30 USD is deducted
+          when the discount is applied) and `percentage` (applies a percentage discount
+          of value. For example, if value is -30, then 30% will be deducted when the
+          discount is applied).\nIf `target_type` is `shipping_line`, then only `percentage`
+          is accepted.\n"

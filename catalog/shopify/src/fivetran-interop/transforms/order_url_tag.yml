@@ -1,0 +1,18 @@
+domain: shopify.fivetran-interop
+transforms:
+  - name: order_url_tag
+    from:
+      - metafield_orders: shopify.metafield_orders
+    fields:
+      _fivetran_synced:
+        expression: metafield_orders._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      key:
+        expression: metafield_orders.key
+        description: Key of the tag pair.
+      order_id:
+        expression: metafield_orders.id
+        description: ID of the order url being tagged.
+      value:
+        expression: metafield_orders.value
+        description: Value of the tag.

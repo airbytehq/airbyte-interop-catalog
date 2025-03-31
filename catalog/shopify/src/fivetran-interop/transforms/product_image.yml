@@ -1,0 +1,60 @@
+domain: shopify.fivetran-interop
+transforms:
+  - name: product_image
+    from:
+      - product_images: shopify.product_images
+    fields:
+      _fivetran_deleted:
+        expression: MISSING
+        description: "{{ doc('_fivetran_deleted') }}"
+      _fivetran_synced:
+        expression: product_images._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      created_at:
+        expression: product_images.created_at
+        description: (DEPRECATED 2025-01-06) The date and time when the product image
+          was created. The API returns this value in ISO 8601 format.
+      height:
+        expression: product_images.height
+        description: Height dimension of the image which is determined on upload.
+      id:
+        expression: product_images.id
+        description: Unique numeric identifier of the product image.
+      position:
+        expression: product_images.position
+        description: (DEPRECATED 2025-01-06) The order of the product image in the
+          list. The first product image is at position 1 and is the "main" image for
+          the product.
+      product_id:
+        expression: product_images.product_id
+        description: The id of the product associated with the image.
+      src:
+        expression: product_images.src
+        description: (DEPRECATED 2025-01-06) Specifies the location of the product
+          image. This parameter supports URL filters that you can use to retrieve
+          modified copies of the image.
+      updated_at:
+        expression: product_images.updated_at
+        description: (DEPRECATED 2025-01-06) The date and time when the product image
+          was last modified. The API returns this value in ISO 8601 format.
+      variant_ids:
+        expression: product_images.variant_ids
+        description: (DEPRECATED 2025-01-06) An array of variant ids associated with
+          the image.
+      width:
+        expression: product_images.width
+        description: Width dimension of the image which is determined on upload.
+      alt_text:
+        expression: product_images.alt
+        description: A word or phrase to share the nature or contents of an image.
+      media_id:
+        expression: MISSING
+        description: The unique identifier for the media associated with the product
+          image.
+      status:
+        expression: MISSING
+        description: The status of the product image, indicating its availability
+          or processing state.
+      url:
+        expression: product_images.shop_url
+        description: The URL of the product image.

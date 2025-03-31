@@ -1,0 +1,30 @@
+domain: shopify.fivetran-interop
+transforms:
+  - name: order_shipping_tax_line
+    from:
+      - orders: shopify.orders
+    fields:
+      _fivetran_synced:
+        expression: orders._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      index:
+        expression: MISSING
+        description: Index (from 1) representing the order of shipping lines per order.
+      order_shipping_line_id:
+        expression: MISSING
+        description: ID of the order shipping line this recod is associated with.
+      price:
+        expression: orders.current_total_tax
+        description: The amount of tax, in shop currency, after discounts and before
+          returns.
+      price_set:
+        expression: orders.subtotal_price_set
+        description: The amount of tax, in shop and presentment currencies, after
+          discounts and before returns (JSON).
+      rate:
+        expression: MISSING
+        description: The proportion of the line item price that the tax represents
+          as a decimal.
+      title:
+        expression: orders.name
+        description: The name of the tax.

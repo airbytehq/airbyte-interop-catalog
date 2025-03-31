@@ -1,0 +1,54 @@
+domain: shopify.fivetran-interop
+transforms:
+  - name: order_shipping_line
+    from:
+      - orders: shopify.orders
+    fields:
+      _fivetran_synced:
+        expression: orders._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      carrier_identifier:
+        expression: MISSING
+        description: A reference to the carrier service that provided the rate. Present
+          when the rate was computed by a third-party carrier service.
+      code:
+        expression: MISSING
+        description: A reference to the shipping method.
+      delivery_category:
+        expression: MISSING
+        description: The general classification of the delivery method.
+      discounted_price:
+        expression: MISSING
+        description: The pre-tax shipping price with discounts applied in the shop
+          currency.
+      discounted_price_set:
+        expression: MISSING
+        description: The pre-tax shipping price with discounts applied (JSON) in presentment
+          and shop currencies.
+      id:
+        expression: orders.id
+        description: A globally-unique identifier.
+      order_id:
+        expression: MISSING
+        description: ID of the associated order.
+      phone:
+        expression: orders.phone
+        description: The phone number at the shipping address.
+      price:
+        expression: MISSING
+        description: Returns the price of the shipping line in shop currency.
+      price_set:
+        expression: MISSING
+        description: Returns the price of the shipping line (JSON) in presentment
+          and shop currencies.
+      requested_fulfillment_service_id:
+        expression: MISSING
+        description: The fulfillment service requested for the shipping method. Present
+          if the shipping method requires processing by a third party fulfillment
+          service.
+      source:
+        expression: MISSING
+        description: Returns the rate source for the shipping line.
+      title:
+        expression: MISSING
+        description: Returns the title of the shipping line.

@@ -1,0 +1,35 @@
+domain: shopify.fivetran-interop
+transforms:
+  - name: abandoned_checkout_discount_code
+    from:
+      - discount_codes: shopify.discount_codes
+    fields:
+      _fivetran_synced:
+        expression: discount_codes._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      amount:
+        expression: MISSING
+        description: The amount of the discount in presentment currency.
+      checkout_id:
+        expression: MISSING
+        description: ID of the checkout.
+      code:
+        expression: discount_codes.code
+        description: The discount code.
+      created_at:
+        expression: discount_codes.created_at
+        description: When the checkout discount application was created.
+      discount_id:
+        expression: MISSING
+        description: ID of the discount. Deprecated, use `code` instead.
+      index:
+        expression: MISSING
+        description: Index (from 1) representing the application of the discount to
+          the checkout. Use the latest (highest index)
+      type:
+        expression: discount_codes.discount_type
+        description: The type of discount. Valid values - percentage, shipping, fixed_amount.
+          (default - fixed_amount)
+      updated_at:
+        expression: discount_codes.updated_at
+        description: When the checkout's discount was last updated

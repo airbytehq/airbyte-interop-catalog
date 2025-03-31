@@ -1,0 +1,51 @@
+domain: shopify.fivetran-interop
+transforms:
+  - name: metafield
+    from:
+      - metafield_articles: shopify.metafield_articles
+    fields:
+      _fivetran_synced:
+        expression: metafield_articles._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      created_at:
+        expression: metafield_articles.created_at
+        description: The date and time (ISO 8601 format) when the metafield was created.
+      description:
+        expression: metafield_articles.description
+        description: A description of the information that the metafield contains.
+      id:
+        expression: metafield_articles.id
+        description: The unique ID of the metafield.
+      key:
+        expression: metafield_articles.key
+        description: The key of the metafield. Keys can be up to 64 characters long
+          and can contain alphanumeric characters, hyphens, underscores, and periods.
+      namespace:
+        expression: metafield_articles.namespace
+        description: A container for a group of metafields. Grouping metafields within
+          a namespace prevents your metafields from conflicting with other metafields
+          with the same key name. Must have between 3-255 characters.
+      owner_id:
+        expression: metafield_articles.owner_id
+        description: The unique ID of the resource that the metafield is attached
+          to.
+      owner_resource:
+        expression: metafield_articles.owner_resource
+        description: The type of resource (table) that the metafield is attached to.
+      type:
+        expression: metafield_articles.type
+        description: The type of data that the metafield stores in the `value` field.
+          Refer to the [list](https://shopify.dev/apps/metafields/types) of supported
+          types. Use this instead of `value_type`.
+      updated_at:
+        expression: metafield_articles.updated_at
+        description: The date and time (ISO 8601 format) when the metafield was last
+          updated.
+      value:
+        expression: metafield_articles.value
+        description: The data to store in the metafield. The value is always stored
+          as a string, regardless of the metafield's type.
+      value_type:
+        expression: metafield_articles.value_type
+        description: DEPRECATED as of [June 2022](https://fivetran.com/docs/applications/shopify/changelog#june2022).
+          Use `type` instead.
