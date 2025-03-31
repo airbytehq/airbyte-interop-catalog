@@ -39,26 +39,26 @@ To add a new connector to the catalog, follow these steps:
 6. Generate the project scaffold using the morph CLI:
 
    - This will generate the Airbyte catalog, mapping files, and dbt project.
-   - Optionally, you can skip certain steps by using the `--no-airbyte-catalog`, `--no-transforms`, or `--no-dbt-project` flags. (See `morph generate-project --help` for more information.)
+   - Optionally, you can skip certain steps by using the `--no-airbyte-catalog`, `--no-transforms`, or `--no-dbt-project` flags. (See `morph build --help` for more information.)
 
    ```bash
-   uv run morph generate-project {new_connector}
+   uv run morph build {source_name}
    ```
 
 7. Generated Airbyte schema for the source.
 
    - The first time you run this it will require creds in a `GCP_GSM_CREDENTIALS` env var.
      ```bash
-     uv run morph create-airbyte-db {new_connector} --no-data
+     uv run morph sync {source_name} --no-data
      ```
    - Subsequent executions can be run without creds, using the generated catalog.
      ```bash
-     uv run morph create-airbyte-db {new_connector} --no-data --no-creds
+     uv run morph sync {source_name} --no-data --no-creds
      ```
 
 8. Optionally extract the raw data. This will require creds and may take a while.
    ```bash
-   uv run morph create-airbyte-db {new_connector}
+   uv run morph sync {source_name}
    ```
 
 ## Generating dbt Projects from Mapping Files
@@ -192,7 +192,7 @@ To generate only the lock file without rebuilding the entire project, use the `l
 uv run morph lock [source_name] [project_name]
 ```
 
-To skip generating the lock file during project generation, use the `--no-lock-file` flag with the `generate-project` command.
+To skip generating the lock file during project generation, use the `--no-lock-file` flag with the `build` command.
 
 ## JSON Schema to dbt Sources
 

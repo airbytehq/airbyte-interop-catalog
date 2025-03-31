@@ -22,5 +22,6 @@ lock = { cmd = "uv lock", help = "Lock dependencies" }
 pre-commit = { cmd = "pre-commit run --all-files", help = "Run pre-commit hooks" }
 
 # Mapping tasks
-eval-mapping = { cmd = "uv run morph eval-mapping", help = "Evaluate mapping confidence" }
-eval-project-mappings = { cmd = "uv run morph eval-project-mappings", help = "Evaluate all mapping files in a project" }
+morph-eval = { cmd = "uv run morph eval", help = "Evaluate mapping files in a project" }
+morph-build = { cmd = "uv run morph build", help = "Build mapping files in a project" }
+morph-lock = { cmd = "uv run morph lock", help = "Lock mapping files in a project" }
