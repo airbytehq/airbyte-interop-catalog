@@ -209,9 +209,8 @@ def populate_missing_mappings(
     new_mapping_eval: models.TableMappingEval = ai_fn.evaluate_mapping_confidence(
         transform_parsed.field_mappings,
     )
-    new_mapping_eval.print_as_rich_table(
-        transform_parsed,
-    )
+    transform_parsed.attach_evaluation(new_mapping_eval)
+    transform_parsed.print_as_rich_table()
     if auto_confirm or (
         Prompt.ask(
             "[yellow]Do you want to apply the new mappings?[/yellow]",
