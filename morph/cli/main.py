@@ -98,7 +98,7 @@ def lock(
     source_name: str,
     project_name: str,
 ) -> None:
-    """Generate a lock file tracking unused streams and fields for a project.
+    """Update the project's lock file.
 
     This command creates a morph-lock.toml file in the project's src directory
     that tracks unused source streams, unused source fields, unmapped target tables,
@@ -132,7 +132,7 @@ def build(
     no_dbt_project: bool | None = None,
     no_lock_file: bool | None = None,
 ) -> None:
-    """Generate a project scaffold for a new connector, or update an existing one."""
+    """Build auto-generated source and project artifacts."""
     no_airbyte_catalog = if_none(no_airbyte_catalog, False)
     no_transforms = if_none(no_transforms, False)
     no_dbt_project = if_none(no_dbt_project, False)
@@ -180,7 +180,7 @@ def eval(
     source_name: str,
     project_name: str = DEFAULT_PROJECT_NAME,
 ) -> None:
-    """Evaluate confidence of all mapping files in a project.
+    """Use AI to evaluated the quality of transform logic.
 
     SOURCE_NAME is the name of the source (e.g., hubspot, shopify)
     PROJECT_NAME is the name of the project (defaults to fivetran-interop)
@@ -236,7 +236,7 @@ def generate(
     auto_confirm: bool | None = None,
     include_skipped_tables: bool = False,
 ) -> None:
-    """Generate missing mappings for a project."""
+    """Use AI to generate new transform code for a project."""
     requirements_dbt_source_file = resources.get_dbt_sources_requirements_path(
         source_name=source_name,
         project_name=project_name,
