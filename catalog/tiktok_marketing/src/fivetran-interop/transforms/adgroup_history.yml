@@ -1,0 +1,240 @@
+domain: tiktok_marketing.fivetran-interop
+transforms:
+  - name: adgroup_history
+    from:
+      - ad_groups: tiktok_marketing.ad_groups
+    fields:
+      adgroup_id:
+        expression: ad_groups.adgroup_id
+        description: Ad group ID
+      updated_at:
+        expression: ad_groups.modify_time
+        description: Time the record was updated.
+      advertiser_id:
+        expression: ad_groups.advertiser_id
+        description: Advertiser ID
+      campaign_id:
+        expression: ad_groups.campaign_id
+        description: The Ad group's campaign ID.
+      action_categories:
+        expression: ad_groups.action_category_ids
+        description: IDs of the action categories (behaviors) that you want to target.
+      action_days:
+        expression: ad_groups.action_days
+        description: The number of days of the time period to include action from.
+      adgroup_name:
+        expression: ad_groups.adgroup_name
+        description: Ad group name. Character limit is 512 and cannot contain emoji.
+      age_groups:
+        expression: ad_groups.age_groups
+        description: "Age groups you want to target. This is the newest version of
+          the field `age`, which was renamed after the Tiktok Ads v1.3 API release.\n"
+      android_osv:
+        expression: ad_groups.min_android_version
+        description: Minimum Android version.
+      app_download_url:
+        expression: ad_groups.app_download_url
+        description: App download link
+      app_id:
+        expression: ad_groups.app_id
+        description: The Application id of the promoted app
+      app_name:
+        expression: ad_groups.package
+        description: App name.
+      app_type:
+        expression: ad_groups.app_type
+        description: App type.
+      audience:
+        expression: ad_groups.audience_ids
+        description: A list of audience IDs.
+      audience_type:
+        expression: ad_groups.audience_type
+        description: Audience Type
+      bid:
+        expression: ad_groups.bid_price
+        description: CPC, CPM bidding, oCPM learning bidding
+      bid_type:
+        expression: ad_groups.bid_type
+        description: Bidding Strategy
+      billing_event:
+        expression: ad_groups.billing_event
+        description: Bid method.
+      budget:
+        expression: ad_groups.budget
+        description: Ad budget. Returns 0.0 when Campaign Budget Optimization (budget_optimize_switch)
+          is on.
+      budget_mode:
+        expression: ad_groups.budget_mode
+        description: Budget mode. This field will be ignored when Campaign Budget
+          Optimization (budget_optimize_switch) is enabled.
+      carriers:
+        expression: ad_groups.carriers
+        description: Carriers that you want to target.
+      category:
+        expression: ad_groups.category_id
+        description: Ad group category.
+      click_tracking_url:
+        expression: ad_groups.click_tracking_url
+        description: Click monitoring URL.
+      connection_type:
+        expression: ad_groups.network_types
+        description: Device connection types that you want to target. Default; unlimited.
+      conversion_bid:
+        expression: ad_groups.conversion_bid_price
+        description: oCPM conversion bid
+      cpv_video_duration:
+        expression: ad_groups.cpv_video_duration
+        description: "Video playback duration, required if optimize_goal is VIDEO_VIEW.\
+          \  Allowed values; SIX_SECONDS (video playback 6s), TWO_SECONDS (video playback
+          2s)\n"
+      creative_material_mode:
+        expression: ad_groups.creative_material_mode
+        description: Creative delivery mode.
+      dayparting:
+        expression: ad_groups.dayparting
+        description: Ad delivery period, the default is always and the format is 48
+          * 7 character string, represented by 0 or 1. > That is, with half an hour
+          as the minimum granularity, a day (24 hours) is divided by the minimum granularity(30
+          mins) from Monday to Sunday. Resulting in a 48*7 format.0 represents not
+          to be delivered, 1 represents delivery. no transmission, full transmission
+          0, full transmission 1 all represent full time delivery
+      deep_bid_type:
+        expression: ad_groups.deep_bid_type
+        description: Bidding strategy for in-app events.
+      deep_cpabid:
+        expression: ad_groups.deep_cpa_bid
+        description: Deep bid
+      deep_external_action:
+        expression: ad_groups.deep_external_action
+        description: Deep conversion event.
+      display_name:
+        expression: ad_groups.adgroup_name
+        description: Display name of ad group.
+      enable_inventory_filter:
+        expression: ad_groups.inventory_filter_enabled
+        description: Inventory filtering (Unsafe videos will not be displayed).
+      excluded_audience:
+        expression: ad_groups.excluded_audience_ids
+        description: A list of audience ID to be excluded.
+      external_action:
+        expression: ad_groups.external_action
+        description: Conversion event for the ad group. It is required when the promoted
+          object is an app with tracking urls, or when pixel_id is specified.
+      fallback_type:
+        expression: ad_groups.fallback_type
+        description: "Fallback Type. If the audience do not have the app installed,
+          you can have them fall back to install the app, or to view a specific web
+          page. Not applicable for Deferred Deeplink. Allowed values; APP_INSTALL,
+          WEBSITE, UNSET. If website is chosen, you need to specify the url via landing_page_url
+          field.\n"
+      frequency:
+        expression: ad_groups.frequency
+        description: "frequency, together with frequency_schedule, controls how often
+          people see your ad (only available for REACH ads).  For example, frequency
+          = 2 frequency_schedule = 3 means \"show ads no more than twice every 3 day\"\
+          .\n"
+      frequency_schedule:
+        expression: ad_groups.frequency_schedule
+        description: frequency, together with frequency, controls how often people
+          see your ad (only available for REACH ads).
+      gender:
+        expression: ad_groups.gender
+        description: Gender that you want to target.
+      impression_tracking_url:
+        expression: ad_groups.impression_tracking_url
+        description: Display monitoring URL.
+      interest_category_v2:
+        expression: ad_groups.interest_category_ids
+        description: Interest classification. If the interest is specified, users
+          that do not meet interest target will be excluded during delivery.
+      ios_osv:
+        expression: ad_groups.min_ios_version
+        description: Minimum iOS version.
+      is_comment_disable:
+        expression: ad_groups.comment_disabled
+        description: Whether to allow comments on your ads on TikTok, Vigo, Helo.
+      is_hfss:
+        expression: ad_groups.is_hfss
+        description: Whether the promoted content is HFSS foods (foods that are high
+          in fat, salt, or sugar).
+      is_new_structure:
+        expression: ad_groups.is_new_structure
+        description: Whether the campaign is a new structure.
+      keywords:
+        expression: ad_groups.keywords
+        description: Keywords used.
+      landing_page_url:
+        expression: ad_groups.landing_page_url
+        description: Landing page URL.
+      languages:
+        expression: ad_groups.languages
+        description: Codes of the languages that you want to target.
+      location:
+        expression: ad_groups.location_ids
+        description: IDs of the locations that you want to target.
+      open_url:
+        expression: ad_groups.open_url
+        description: The specific location where you want your audience to go if they
+          have your app installed.
+      open_url_type:
+        expression: ad_groups.open_url_type
+        description: The open URL type.
+      operation_system:
+        expression: ad_groups.operating_systems
+        description: Device operating systems that you want to target.
+      opt_status:
+        expression: ad_groups.operation_status
+        description: Operation status.
+      optimize_goal:
+        expression: ad_groups.optimization_goal
+        description: Optimization goal.
+      pacing:
+        expression: ad_groups.pacing
+        description: "You can choose between PACING_MODE_SMOOTH and PACING_MODE_FAST.
+          For PACING_MODE_SMOOTH, the budget is allocated evenly within the scheduled
+          time.  PACING_MODE_FAST would consume budget and produce results as soon
+          as possible. \n"
+      package:
+        expression: ad_groups.package
+        description: Package name.
+      pangle_block_app_list_id:
+        expression: ad_groups.blocked_pangle_app_ids
+        description: Pangle app block list ID.
+      pixel_id:
+        expression: ad_groups.pixel_id
+        description: Pixel ID. Only application for landing pages.
+      placement:
+        expression: ad_groups.placements
+        description: The apps where you want to deliver your ads.
+      placement_type:
+        expression: ad_groups.placement_type
+        description: Placement type.
+      profile_image:
+        expression: ad_groups.profile_image
+        description: Avatar URL.
+      schedule_end_time:
+        expression: ad_groups.schedule_end_time
+        description: Ad delivery end time (UTC+0). Format should be YYYY-MM-DD HH:MM:SS
+      schedule_start_time:
+        expression: ad_groups.schedule_start_time
+        description: Ad delivery start time (UTC+0). Format should be YYYY-MM-DD HH:MM:SS
+      schedule_type:
+        expression: ad_groups.schedule_type
+        description: The schedule type, which can be either SCHEDULE_START_END or
+          SCHEDULE_FROM_NOW.
+      skip_learning_phase:
+        expression: ad_groups.skip_learning_phase
+        description: Whether to skip the learning stage.
+      statistic_type:
+        expression: ad_groups.statistic_type
+        description: conversion bid statistic type
+      status:
+        expression: ad_groups.operation_status
+        description: Ad group status
+      video_actions:
+        expression: ad_groups.video_actions
+        description: Number of video actions.
+      video_download:
+        expression: ad_groups.video_download_disabled
+        description: Whether users can download your video ads on TikTok(cannot be
+          updated once created).
