@@ -11,7 +11,7 @@ from rich.console import Console
 from rich.table import Table
 from typing_extensions import Self
 
-from morph import resources
+from morph import constants, resources
 from morph.utils import text_utils
 from morph.utils.rich_utils import rich_formatted_confidence
 from morph.utils.text_utils import normalize_field_name
@@ -513,9 +513,17 @@ class TableMapping(BaseModel):
             ],
         }
         if self._attached_evaluation:
-            output_dict["annotations"] = {
-                "evaluation": self._get_evaluation_as_dict(),
-            }
+            output_dict["annotations"] = {}
+            if (
+                self._attached_evaluation.score >= constants.MIN_APPROVAL_SCORE
+                and len(self.get_missing_field_mappings()) <= constants.MAX_MISSING_FIELDS
+            ):
+                output_dict["annotations"]["approved"] = True
+            else:
+                output_dict["annotations"]["approved"] = False
+
+            output_dict["annotations"]["missing_fields"] = self.get_missing_field_mappings()
+            output_dict["annotations"]["evaluation"] = self._get_evaluation_as_dict()
 
         text_utils.dump_yaml_file(
             output_dict,
@@ -618,11 +626,11 @@ class TableMapping(BaseModel):
         table = Table(
             title=f"Table Mapping Eval: '{self.source_stream_name}->{self.target_table_name}'",
         )
-        table.add_column("Field", style="cyan")
+        table.add_column("Field", style="cyan", overflow="fold")
         table.add_column("Expression", style="yellow", overflow="fold")
-        table.add_column("Description")
+        table.add_column("Description", overflow="fold")
         table.add_column("Confidence", justify="right")
-        table.add_column("Evaluation", style="italic")
+        table.add_column("Evaluation", style="italic", overflow="fold")
         # Print results
         console.print(
             f"\nOverall Confidence Score: {rich_formatted_confidence(self._attached_evaluation.score)}",
@@ -696,7 +704,6 @@ class TableMappingEval(BaseModel):
 
     field_mapping_evals: list[FieldMappingEval]
     """A dictionary of field names and their confidence scores."""
-
 
 
 class SourceTableSummary(BaseModel):

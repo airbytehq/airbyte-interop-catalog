@@ -55,3 +55,6 @@ VALID_TRAVERSAL_BY_DIALECT: dict[str, list[str]] = {
     "sqlserver": ["json_path", "portable", "default"],
     "portable": ["portable", "default"],
 }
+
+MIN_APPROVAL_SCORE = 0.7
+MAX_MISSING_FIELDS = 2
