@@ -32,9 +32,9 @@ def change_mapping_source_table(
         project_name=project_name,
         transform_name=transform_name,
     )
-    transform_parsed = models.TableMapping.from_file(transform_file)
+    transform_parsed = models.TransformDefinition.from_file(transform_file)
     transform_parsed.source_stream_name = new_source_table
-    new_transform_file_content = models.TableMapping(
+    new_transform_file_content = models.TransformDefinition(
         source_name=source_name,
         project_name=project_name,
         transform_name=transform_name,
@@ -125,7 +125,7 @@ def infer_best_match_source_stream_name(
             )
             for s in source_tables
         ]
-        short_list: models.SourceTableMappingSuggestionShortList = (
+        short_list: models.SourceTableMatchingSuggestionShortList = (
             ai_fn.infer_best_match_source_stream_name_short_list(
                 target_schema=target_schema,
                 source_tables=source_tables_without_columns,
@@ -170,7 +170,7 @@ def populate_missing_mappings(
         project_name=project_name,
         transform_name=transform_name,
     )
-    transform_parsed = models.TableMapping.from_file(transform_file)
+    transform_parsed = models.TransformDefinition.from_file(transform_file)
     fields_to_populate = []
 
     source_table_info = models.SourceTableSummary.from_dbt_source_file(
@@ -247,7 +247,7 @@ def infer_table_mappings(  # noqa: PLR0912 (too many branches)
     if not yaml_file.exists():
         current_mapping_source_stream_name = constants.MISSING
     else:
-        current_mapping_source_stream_name = models.TableMapping.from_file(
+        current_mapping_source_stream_name = models.TransformDefinition.from_file(
             yaml_file,
         ).source_stream_name
 

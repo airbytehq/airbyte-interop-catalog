@@ -195,8 +195,8 @@ def generate_lock_file_for_project(
             source_name=source_name,
         ).glob("**/*.yml"),
     )
-    transforms: list[models.TableMapping] = [
-        models.TableMapping.from_file(yaml_file) for yaml_file in transform_files
+    transforms: list[models.TransformDefinition] = [
+        models.TransformDefinition.from_file(yaml_file) for yaml_file in transform_files
     ]
     used_source_streams: list[str] = sorted(
         {transform.source_stream_name for transform in transforms},

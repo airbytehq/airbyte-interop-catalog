@@ -410,7 +410,7 @@ class FieldMappingSuggestion(BaseModel):
     """The confidence score for the next-best source field, or None if the field cannot be mapped."""
 
 
-class TableMapping(BaseModel):
+class TransformDefinition(BaseModel):
     """Represents a table mapping with its properties."""
 
     source_name: str
@@ -448,7 +448,7 @@ class TableMapping(BaseModel):
 
     @classmethod
     def from_file(cls, transform_file: Path) -> Self:
-        """Create a TableMapping from a transform file."""
+        """Create a TransformDefinition from a transform file."""
         file_data = text_utils.load_yaml_file(transform_file)
         source_name = file_data.get("domain", ".").split(".")[0]
         project_name = file_data.get("domain", ".").split(".")[1]
@@ -488,7 +488,7 @@ class TableMapping(BaseModel):
         )
 
     def to_file(self, transform_file: Path | None = None) -> None:
-        """Write the TableMapping to a transform file."""
+        """Write the TransformDefinition to a transform file."""
         transform_file = transform_file or resources.get_transform_file(
             source_name=self.source_name,
             project_name=self.project_name,
@@ -761,8 +761,10 @@ class SourceTableMappingSuggestion(BaseModel):
         return table
 
 
-class SourceTableMappingSuggestionShortList(BaseModel):
+class SourceTableMatchingSuggestionShortList(BaseModel):
     """A short list of source table mapping suggestions."""
+
+    exact_match: SourceTableMappingSuggestion | None = None
 
     suggestions: list[SourceTableMappingSuggestion]
     """The suggestions for the source table mapping.

@@ -42,6 +42,7 @@ When evaluating the mapping configuration:
 """
 
 
+@with_retry(max_retries=2)
 @marvin.fn(
     instructions=CONFIDENCE_INSTRUCTIONS,
 )  # pyright: ignore [reportUntypedFunctionDecorator]
@@ -117,7 +118,7 @@ def generate_mappings(
 def infer_best_match_source_stream_name_short_list(
     target_schema: models.SourceTableSummary,
     source_tables: list[models.SourceTableSummary],
-) -> models.SourceTableMappingSuggestionShortList:
+) -> models.SourceTableMatchingSuggestionShortList:
     """Get the name of the top 3-5 source tables based on the source and target table summaries.
 
     You are trying to find the source tables which are most similar to the target table in content,

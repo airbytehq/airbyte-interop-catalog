@@ -10,7 +10,7 @@ from rich.table import Table
 
 from morph import models, resources
 from morph.ai import map
-from morph.ai.eval import get_table_mapping_eval
+from morph.ai.eval import evaluate_transforms
 from morph.constants import DEFAULT_PROJECT_NAME
 from morph.utils import text_utils
 from morph.utils.airbyte_sync import sync_source
@@ -179,6 +179,7 @@ def build(
 def eval(
     source_name: str,
     project_name: str = DEFAULT_PROJECT_NAME,
+    *,
     do_source_annotations: bool = True,
 ) -> None:
     """Use AI to evaluated the quality of transform logic.
@@ -186,39 +187,11 @@ def eval(
     SOURCE_NAME is the name of the source (e.g., hubspot, shopify)
     PROJECT_NAME is the name of the project (defaults to fivetran-interop)
     """
-    # Construct the path to the transforms directory
-    transforms_dir = resources.get_transforms_dir(
+    evaluate_transforms(
         source_name=source_name,
         project_name=project_name,
+        do_source_annotations=do_source_annotations,
     )
-
-    if not transforms_dir.exists():
-        console.print(f"[red]Error: Transforms directory not found at {transforms_dir}[/red]")
-        return
-
-    # Find all YAML files
-    yaml_files = list(transforms_dir.glob("**/*.yml")) + list(transforms_dir.glob("**/*.yaml"))
-
-    if not yaml_files:
-        console.print(f"[yellow]No YAML files found in {transforms_dir}[/yellow]")
-        return
-
-    # Process each YAML file
-    for yaml_file in sorted(yaml_files):
-        console.print(f"\n[bold]Evaluating {yaml_file}[/bold]\n")
-        transform_obj = models.TableMapping.from_file(yaml_file)
-
-        # Get confidence score
-        table_mapping_eval: models.TableMappingEval = get_table_mapping_eval(
-            transform_obj.field_mappings,
-        )
-
-        # Print analysis
-        transform_obj.attach_evaluation(table_mapping_eval)
-        transform_obj.print_as_rich_table()
-
-        if do_source_annotations:
-            transform_obj.to_file()
 
 
 @main.command()
@@ -272,7 +245,7 @@ def generate(
             transform_name=target_table.name,
         )
         if transform_file.exists():
-            transform_def = models.TableMapping.from_file(transform_file)
+            transform_def = models.TransformDefinition.from_file(transform_file)
             if transform_def.get_mapped_fields():  # Skip if at least some fields are mapped
                 include_table = False
                 console.print(
