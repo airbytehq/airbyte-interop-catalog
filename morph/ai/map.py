@@ -9,7 +9,6 @@ from morph import constants, models, resources
 from morph.ai import functions as ai_fn
 from morph.utils import dbt_source_files, text_utils
 from morph.utils.logic import if_none
-from morph.utils.retries import with_retry
 from morph.utils.transform_scaffold import generate_empty_mapping_file
 
 console = Console()
@@ -52,31 +51,12 @@ def change_mapping_source_table(
     new_transform_file_content.to_file(transform_file)
 
 
-@with_retry(max_retries=3)
-def infer_best_match_source_stream_name_short_list(
-    target_schema: models.SourceTableSummary,
-    source_tables: list[models.SourceTableSummary],
-) -> list[models.SourceTableMappingSuggestion]:
-    """Get the name of the best match source table based on the source and target table summaries.
-
-    Args:
-        target_schema: The target schema to map to
-        source_tables: A list of source tables to choose from
-
-    Returns:
-        A list of SourceTableMappingSuggestion objects.
-    """
-    # This function will be implemented by Marvin AI
-    pass
-
-
-@with_retry(max_retries=3)
 def infer_best_match_source_stream_name(
     target_schema: models.SourceTableSummary,
     source_tables: list[models.SourceTableSummary],
     *,
     auto_confirm: bool | None = None,
-) -> models.SourceTableMappingTopTwoSuggestions:
+) -> models.SourceTableMatchingSuggestion:
     """Get the name of the best match source table based on the source and target table summaries.
 
     Args:
@@ -115,8 +95,6 @@ def infer_best_match_source_stream_name(
         )
         # console.input("Press 'Enter' to continue...")
         console.line()
-        console.print("...", style="white")
-        console.line()
         source_tables_without_columns = [
             models.SourceTableSummary(
                 name=s.name,
@@ -125,14 +103,20 @@ def infer_best_match_source_stream_name(
             )
             for s in source_tables
         ]
-        short_list: models.SourceTableMatchingSuggestionShortList = (
+        short_list: models.SourceTableMatchingSuggestion = (
             ai_fn.infer_best_match_source_stream_name_short_list(
                 target_schema=target_schema,
                 source_tables=source_tables_without_columns,
             )
         )
-        short_list_names = [s.suggested_source_table_name for s in short_list.suggestions]
-        if len(short_list.suggestions) > MAX_SOURCE_TABLE_PER_MAPPING_INFERENCE:
+        if short_list.perfect_match:
+            console.print(
+                f"[green]Exact '{target_schema.name}' match found: '{short_list.perfect_match}'[/green]",
+            )
+            return short_list
+
+        short_list_names = short_list.other_match_suggestions
+        if len(short_list_names) > MAX_SOURCE_TABLE_PER_MAPPING_INFERENCE:
             console.print(
                 f"Too many suggestions were returned ({len(short_list_names)}): {short_list_names}",
                 f"\nWe will only consider the top 5: {short_list_names[:MAX_SOURCE_TABLE_PER_MAPPING_INFERENCE]}",
@@ -152,8 +136,6 @@ def infer_best_match_source_stream_name(
 
         source_tables = [s for s in source_tables if s.name in short_list_names]
 
-    # console.input("Press 'Enter' to continue...")
-    console.line()
     return ai_fn.select_best_match_source_schema(target_schema, source_tables)
 
 
@@ -294,20 +276,24 @@ def infer_table_mappings(  # noqa: PLR0912 (too many branches)
             )
         )
 
-        suggested_source_table: models.SourceTableMappingTopTwoSuggestions | None = (
+        matching_suggestion: models.SourceTableMatchingSuggestion = (
             infer_best_match_source_stream_name(
                 target_schema=target_table_schema,
                 source_tables=source_tables,
             )
         )
 
-        console.print("The best match found was:")
-        console.print(suggested_source_table.best_match_suggestion.as_rich_table())
-        source_table = suggested_source_table.best_match_suggestion.suggested_source_table_name
+        if matching_suggestion.perfect_match:
+            suggested_source_table = matching_suggestion.perfect_match
+            console.print(f"The best match found was: {matching_suggestion.perfect_match}")
 
-        if suggested_source_table.next_best_match_suggestion:
-            console.print("The next best match was:")
-            console.print(suggested_source_table.next_best_match_suggestion.as_rich_table())
+        else:
+            console.print(matching_suggestion)
+            suggested_source_table = matching_suggestion.other_match_suggestions[0]
+
+            if matching_suggestion.other_match_suggestions:
+                console.print("The next best match was:")
+                console.print(matching_suggestion.other_match_suggestions[0])
 
         # Ask user to confirm mapping
         confirm_mapping = "Y"
@@ -315,11 +301,11 @@ def infer_table_mappings(  # noqa: PLR0912 (too many branches)
             if current_mapping_source_stream_name == "MISSING":
                 summary_text = (
                     f"The table `{target_table_schema.name}` is currently not mapped. "
-                    f"\nDo you want to apply the proposed mapping to use `{source_table}`? "
+                    f"\nDo you want to apply the proposed mapping to use `{suggested_source_table}`? "
                 )
-            elif current_mapping_source_stream_name == source_table:
+            elif current_mapping_source_stream_name == suggested_source_table:
                 summary_text = (
-                    f"The table `{target_table_schema.name}` is already mapped to the best match source table `{source_table}`. "
+                    f"The table `{target_table_schema.name}` is already mapped to the best match source table `{suggested_source_table}`. "
                     f"\n[yellow]Do you want to rebuild the mappings? "
                     "\nAll existing mappings will be reset and a new set of mappings will be generated.[/yellow]\n"
                 )
@@ -352,10 +338,7 @@ def infer_table_mappings(  # noqa: PLR0912 (too many branches)
             )
             return
 
-        if suggested_source_table is not None:
-            source_table = suggested_source_table.best_match_suggestion.suggested_source_table_name
-
-    if source_table is None:
+    if suggested_source_table is None:
         return
 
     console.print("Mapping confirmed.", style="green")
@@ -378,7 +361,7 @@ def infer_table_mappings(  # noqa: PLR0912 (too many branches)
         source_name=source_name,
         project_name=project_name,
         transform_name=transform_name,
-        new_source_table=source_table,
+        new_source_table=suggested_source_table,
     )
     populate_missing_mappings(
         source_name=source_name,

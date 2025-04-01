@@ -62,7 +62,7 @@ transforms:
         expression: ads.landing_page_url
         description: Landing page URL.
       open_url:
-        expression: ads.deeplink
+        expression: MISSING
         description:
           The specific location where you want your audience to go if they
           have your app installed.
@@ -76,121 +76,119 @@ transforms:
         expression: ads.profile_image_url
         description: Avatar URL.
       status:
-        expression: ads.secondary_status
+        expression: MISSING
         description: Ad status.
       video_id:
         expression: ads.video_id
         description: The video ID.
 annotations:
-  approved: true
-  missing_fields: []
+  approved: false
+  missing_fields:
+    - open_url
+    - status
   evaluation:
     source_stream_name: ads
     target_table_name: ad_history
-    name_match_score: 0.8
-    score: 0.85
+    name_match_score: 0.6
+    score: 0.5
     explanation:
-      The field mappings have a high level of consistency and match well
-      with the expected expressions. However, a few mappings could potentially be
-      misunderstood if not monitored closely.
+      Mapping confidence evaluation completed with consideration for missing
+      expressions and name matching. The average mapping score reflects both matched
+      and unmatched fields.
     field_mapping_evals:
       - name: ad_id
         expression: ads.ad_id
-        score: 1.0
-        explanation: Perfect match as the name and expression align precisely.
+        score: 0.8
+        explanation: Expression matches expected format and name matches.
       - name: updated_at
         expression: ads._airbyte_extracted_at
-        score: 0.9
-        explanation: High confidence with a standard field name used for timestamp.
+        score: 0.7
+        explanation: Expression matches expected field for sync time.
       - name: adgroup_id
         expression: ads.adgroup_id
-        score: 0.95
-        explanation: Clear alignment between the field name and the provided expression.
+        score: 0.8
+        explanation: Expression matches expected format and name matches.
       - name: advertiser_id
         expression: ads.advertiser_id
-        score: 0.95
-        explanation: Field naming directly corresponds to the expression.
+        score: 0.8
+        explanation: Expression matches expected format and name matches.
       - name: campaign_id
         expression: ads.campaign_id
-        score: 1.0
-        explanation: Precise match between the field name and its expression.
+        score: 0.8
+        explanation: Expression matches expected format and name matches.
       - name: ad_name
         expression: ads.ad_name
-        score: 0.85
-        explanation:
-          Potential for confusion with other 'name' fields, but contextually
-          appropriate.
+        score: 0.8
+        explanation: Expression matches expected format and name matches.
       - name: ad_text
         expression: ads.ad_text
-        score: 0.85
-        explanation: Specific to ads and unlikely to be confused with other fields.
+        score: 0.8
+        explanation: Expression matches expected format and name matches.
       - name: app_name
         expression: ads.app_name
         score: 0.8
-        explanation:
-          Could potentially be confused with 'ad_name' but serves a distinct
-          purpose.
+        explanation: Expression matches expected format and name matches.
       - name: call_to_action
         expression: ads.call_to_action
-        score: 0.8
-        explanation: Field is specific but could potentially be confused without context.
+        score: 0.7
+        explanation: Expression and name are reasonably matched.
       - name: click_tracking_url
         expression: ads.click_tracking_url
-        score: 0.9
-        explanation: Name and expression suggest a direct correlation without ambiguity.
+        score: 0.8
+        explanation: Expression matches expected format and name matches.
       - name: create_time
         expression: ads.create_time
-        score: 0.9
-        explanation: Standard timestamp field name with high match confidence.
+        score: 0.8
+        explanation: Expression matches expected format and name matches.
       - name: display_name
         expression: ads.display_name
-        score: 0.75
-        explanation: Potential confusion with 'ad_name' though distinct in description.
+        score: 0.7
+        explanation: Expression and name are reasonably matched.
       - name: image_ids
         expression: ads.image_ids
-        score: 0.95
-        explanation: Highly specific to the context of ads.
+        score: 0.8
+        explanation: Expression matches expected format and name matches.
       - name: impression_tracking_url
         expression: ads.impression_tracking_url
-        score: 0.9
-        explanation: High confidence due to specific use case.
+        score: 0.8
+        explanation: Expression matches expected format and name matches.
       - name: is_aco
         expression: ads.is_aco
-        score: 0.85
-        explanation: Clear indication of ad status with some scope for confusion.
+        score: 0.8
+        explanation: Expression matches expected format and name matches.
       - name: is_creative_authorized
         expression: ads.creative_authorized
-        score: 0.85
-        explanation: Highly descriptive despite potential variations in interpretation.
+        score: 0.8
+        explanation: Expression matches expected format and name matches.
       - name: is_new_structure
         expression: ads.is_new_structure
         score: 0.8
-        explanation: Some ambiguity without documentation but matches description.
+        explanation: Expression matches expected format and name matches.
       - name: landing_page_url
         expression: ads.landing_page_url
-        score: 0.95
-        explanation: Highly descriptive and confident mapping.
-      - name: open_url
-        expression: ads.deeplink
         score: 0.8
-        explanation: Potential ambiguity but specific to the task.
+        explanation: Expression matches expected format and name matches.
+      - name: open_url
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is missing, unable to evaluate mapping.
       - name: opt_status
         expression: ads.operation_status
         score: 0.8
-        explanation: May have varying interpretations but clear in this context.
+        explanation: Expression matches expected format and name matches.
       - name: playable_url
         expression: ads.playable_url
-        score: 0.9
-        explanation: Clear indication of unique purpose.
+        score: 0.8
+        explanation: Expression matches expected format and name matches.
       - name: profile_image
         expression: ads.profile_image_url
         score: 0.8
-        explanation: Potentially confused with other image types but distinct in use.
+        explanation: Expression matches expected format and name matches.
       - name: status
-        expression: ads.secondary_status
-        score: 0.8
-        explanation: General term, could have multiple interpretations.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is missing, unable to evaluate mapping.
       - name: video_id
         expression: ads.video_id
-        score: 0.85
-        explanation: Specific enough to warrant high confidence.
+        score: 0.8
+        explanation: Expression matches expected format and name matches.

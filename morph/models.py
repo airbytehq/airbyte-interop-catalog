@@ -761,27 +761,18 @@ class SourceTableMappingSuggestion(BaseModel):
         return table
 
 
-class SourceTableMatchingSuggestionShortList(BaseModel):
+class SourceTableMatchingSuggestion(BaseModel):
     """A short list of source table mapping suggestions."""
 
-    exact_match: SourceTableMappingSuggestion | None = None
+    perfect_match: str | None = None
+    """An exact match for the source stream name, if available."""
 
-    suggestions: list[SourceTableMappingSuggestion]
-    """The suggestions for the source table mapping.
+    other_match_suggestions: list[str]
+    """Other suggestions for the source stream name.
 
-    The list should be sorted by confidence score, with the highest confidence score first.
+    The list should be sorted with the highest confidence matches first.
     No more than 5 suggestions and no fewer than 3 should be provided.
     """
 
-
-class SourceTableMappingTopTwoSuggestions(BaseModel):
-    """A suggestion for a source table mapping.
-
-    Optionally, the next-best match for the source table can also be provided.
-    """
-
-    best_match_suggestion: SourceTableMappingSuggestion
-    """The best match for the source table."""
-
-    next_best_match_suggestion: SourceTableMappingSuggestion | None = None
-    """The next-best match for the source table."""
+    explanation: str
+    """A detailed explanation of the suggestions."""

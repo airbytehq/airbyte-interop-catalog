@@ -68,18 +68,18 @@ def evaluate_mapping_confidence(
 def select_best_match_source_schema(
     target_schema: models.DbtSourceTable,
     source_schemas: list[models.DbtSourceTable],
-) -> models.SourceTableMappingTopTwoSuggestions:
+) -> models.SourceTableMatchingSuggestion:
     """Select the name of the source stream that is most similar to the target table schema.
 
-    You should consider the name of the source stream, the name of the target table, and the
-    degree of overlap in the column definitions of the source and target.
+    You should consider the name of the source stream and the name of the target table. As a tie
+    breaker, you can evaluate the degree of overlap in the column definitions of the source and target.
 
     Args:
         target_schema: The target schema to map to
         source_schemas: A list of source schemas to choose from
 
     Returns:
-        A SourceTableMappingTopTwoSuggestions object.
+        A string representing the name of the best match source stream.
     """
     # This function will be implemented by Marvin AI
     ...
@@ -118,7 +118,7 @@ def generate_mappings(
 def infer_best_match_source_stream_name_short_list(
     target_schema: models.SourceTableSummary,
     source_tables: list[models.SourceTableSummary],
-) -> models.SourceTableMatchingSuggestionShortList:
+) -> models.SourceTableMatchingSuggestion:
     """Get the name of the top 3-5 source tables based on the source and target table summaries.
 
     You are trying to find the source tables which are most similar to the target table in content,

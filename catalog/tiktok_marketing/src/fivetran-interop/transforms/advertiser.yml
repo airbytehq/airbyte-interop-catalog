@@ -56,7 +56,7 @@ transforms:
         expression: advertisers.name
         description: Advertiser name
       phone_number:
-        expression: MISSING
+        expression: advertisers.cellphone_number
         description:
           "Contact mobile number, desensitised data. IMPORTANT: This field
           will not be populated for connectors utilizing the Tiktok Ads v1.3 API version,
@@ -94,117 +94,115 @@ transforms:
 annotations:
   approved: true
   missing_fields:
-    - phone_number
     - telephone
   evaluation:
     source_stream_name: advertisers
     target_table_name: advertiser
-    name_match_score: 0.9
-    score: 0.95
+    name_match_score: 0.85
+    score: 0.75
     explanation:
-      Most mappings are accurate and fields like `_fivetran_synced` are
-      correctly captured. Minor issues with MISSING expressions for `phone_number`
-      and `telephone`. Including highly accurate mappings such as `id`, `balance`,
-      `email`, etc. Confidence slightly less than perfect due to some fields with
-      MISSING expressions.
+      The table mapping evaluation is based on the confidence scores of
+      individual field mappings. Most fields have clear matches with high descriptiveness
+      and matching names. Considerations include potential conflicts with deprecated
+      or renamed fields and missing values.
     field_mapping_evals:
       - name: id
         expression: advertisers.advertiser_id
         score: 1.0
-        explanation: Perfect mapping with a unique identifier.
+        explanation: Perfect match with descriptive clarity and name alignment.
       - name: address
         expression: advertisers.address
-        score: 1.0
-        explanation: Accurate mapping as it clearly describes an address.
+        score: 0.9
+        explanation: Direct match with a high degree of confidence.
       - name: balance
         expression: advertisers.balance
-        score: 1.0
-        explanation: Balance field is clearly well-mapped.
+        score: 0.9
+        explanation: Direct match with a high degree of confidence.
       - name: cellphone_number
         expression: advertisers.cellphone_number
         score: 1.0
-        explanation: Matches the new API column accurately.
+        explanation: Perfect match with updated naming convention.
       - name: company
         expression: advertisers.company
         score: 1.0
-        explanation: Company name mapping is straightforward and accurate.
+        explanation: Perfect match with descriptive clarity and name alignment.
       - name: contacter
         expression: advertisers.contacter
         score: 1.0
-        explanation: Contact person name is perfectly mapped.
+        explanation: Perfect match with descriptive clarity and name alignment.
       - name: country
         expression: advertisers.country
         score: 1.0
-        explanation: Country is clearly defined in the mapping.
+        explanation: Perfect match with descriptive clarity and name alignment.
       - name: create_time
         expression: advertisers.create_time
         score: 1.0
-        explanation: Creation time mapping is accurate.
+        explanation: Perfect match with descriptive clarity and name alignment.
       - name: currency
         expression: advertisers.currency
         score: 1.0
-        explanation: Currency type is unambiguously mapped.
+        explanation: Perfect match with descriptive clarity and name alignment.
       - name: description
         expression: advertisers.description
-        score: 1.0
-        explanation: Description field aligns correctly with promotional content.
+        score: 0.9
+        explanation: Direct match with acceptable description alignment.
       - name: email
         expression: advertisers.email
         score: 1.0
-        explanation: Email mapping is accurate with desensitised data.
+        explanation: Perfect match with updated naming convention.
       - name: industry
         expression: advertisers.industry
-        score: 1.0
-        explanation: Industry categories are correctly identified.
+        score: 0.8
+        explanation: Good match; minimal room for interpretation.
       - name: language
         expression: advertisers.language
         score: 1.0
-        explanation: Language mapping is precise.
+        explanation: Perfect match with descriptive clarity and name alignment.
       - name: license_no
         expression: advertisers.license_no
         score: 1.0
-        explanation: License number is specifically targeted.
+        explanation: Perfect match with descriptive clarity and name alignment.
       - name: license_url
         expression: advertisers.license_url
         score: 1.0
-        explanation: License URL correctness confirmed.
+        explanation: Perfect match, noting the temporary nature of the link.
       - name: name
         expression: advertisers.name
         score: 1.0
-        explanation: Name mapping entirely accurate.
+        explanation: Perfect match with descriptive clarity and name alignment.
       - name: phone_number
-        expression: MISSING
+        expression: advertisers.cellphone_number
         score: 0.0
-        explanation: Missing mapping due to API update.
+        explanation: Renamed column creating a mismatch; refer to `cellphone_number`.
       - name: promotion_area
         expression: advertisers.promotion_area
-        score: 1.0
-        explanation: Promotion area perfectly mapped.
+        score: 0.9
+        explanation: High confidence match with descriptive clarity.
       - name: reason
         expression: advertisers.rejection_reason
-        score: 1.0
-        explanation: Rejection reason is well-mapped.
+        score: 0.95
+        explanation: Reason for rejection aligns clearly with description.
       - name: role
         expression: advertisers.role
         score: 1.0
-        explanation: Role mapping is clear and accurate.
+        explanation: Perfect match with descriptive clarity and name alignment.
       - name: status
         expression: advertisers.status
         score: 1.0
-        explanation: Status is properly identified in mapping.
+        explanation: Perfect match with descriptive clarity and name alignment.
       - name: telephone
         expression: MISSING
         score: 0.0
-        explanation: Missing mapping due to API update.
+        explanation: Column is not populated due to a rename; refer to `telephone_number`.
       - name: telephone_number
         expression: advertisers.telephone_number
         score: 1.0
-        explanation: Correct usage of the updated column name.
+        explanation: Perfect match with updated naming convention.
       - name: timezone
         expression: advertisers.timezone
         score: 1.0
-        explanation: Timezone mappings include understandable GMT offsets.
+        explanation: Perfect match with descriptive clarity and name alignment.
       - name: _fivetran_synced
         expression: advertisers._airbyte_extracted_at
         score: 1.0
-        explanation: Correct mapping for `_fivetran_synced` as `_airbyte_extracted_at`.
+        explanation: Perfect match to `_airbyte_extracted_at`, as per guidelines.

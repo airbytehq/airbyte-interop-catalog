@@ -300,10 +300,12 @@ def generate(
             )
             continue
 
+        console.print("\n" + ("-" * 80) + "\n")
         console.print(
             f"Generating missing mappings for '{target_table}'...",
-            style="bold white on blue",
+            style="bold blue",
         )
+        console.line()
         map.infer_table_mappings(
             source_name=source_name,
             project_name=project_name,

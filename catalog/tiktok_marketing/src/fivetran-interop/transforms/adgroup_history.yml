@@ -8,7 +8,7 @@ transforms:
         expression: ad_groups.adgroup_id
         description: Ad group ID
       updated_at:
-        expression: ad_groups.modify_time
+        expression: MISSING
         description: Time the record was updated.
       advertiser_id:
         expression: ad_groups.advertiser_id
@@ -31,25 +31,25 @@ transforms:
           "Age groups you want to target. This is the newest version of
           the field `age`, which was renamed after the Tiktok Ads v1.3 API release.\n"
       android_osv:
-        expression: ad_groups.min_android_version
+        expression: MISSING
         description: Minimum Android version.
       app_download_url:
-        expression: ad_groups.app_download_url
+        expression: MISSING
         description: App download link
       app_id:
-        expression: ad_groups.app_id
+        expression: MISSING
         description: The Application id of the promoted app
       app_name:
         expression: MISSING
         description: App name.
       app_type:
-        expression: ad_groups.app_type
+        expression: MISSING
         description: App type.
       audience:
         expression: MISSING
         description: A list of audience IDs.
       audience_type:
-        expression: ad_groups.audience_type
+        expression: MISSING
         description: Audience Type
       bid:
         expression: MISSING
@@ -58,23 +58,23 @@ transforms:
         expression: MISSING
         description: Bidding Strategy
       billing_event:
-        expression: ad_groups.billing_event
+        expression: MISSING
         description: Bid method.
       budget:
-        expression: ad_groups.budget
+        expression: MISSING
         description:
           Ad budget. Returns 0.0 when Campaign Budget Optimization (budget_optimize_switch)
           is on.
       budget_mode:
-        expression: ad_groups.budget_mode
+        expression: MISSING
         description:
           Budget mode. This field will be ignored when Campaign Budget
           Optimization (budget_optimize_switch) is enabled.
       carriers:
-        expression: ad_groups.carriers
+        expression: MISSING
         description: Carriers that you want to target.
       category:
-        expression: ad_groups.category_id
+        expression: MISSING
         description: Ad group category.
       click_tracking_url:
         expression: MISSING
@@ -92,7 +92,7 @@ transforms:
           \  Allowed values; SIX_SECONDS (video playback 6s), TWO_SECONDS (video playback
           2s)\n"
       creative_material_mode:
-        expression: ad_groups.creative_material_mode
+        expression: MISSING
         description: Creative delivery mode.
       dayparting:
         expression: MISSING
@@ -116,7 +116,7 @@ transforms:
         expression: MISSING
         description: Display name of ad group.
       enable_inventory_filter:
-        expression: ad_groups.inventory_filter_enabled
+        expression: MISSING
         description: Inventory filtering (Unsafe videos will not be displayed).
       excluded_audience:
         expression: MISSING
@@ -135,56 +135,56 @@ transforms:
           WEBSITE, UNSET. If website is chosen, you need to specify the url via landing_page_url
           field.\n"
       frequency:
-        expression: ad_groups.frequency
+        expression: MISSING
         description:
           "frequency, together with frequency_schedule, controls how often
           people see your ad (only available for REACH ads).  For example, frequency
           = 2 frequency_schedule = 3 means \"show ads no more than twice every 3 day\"\
           .\n"
       frequency_schedule:
-        expression: ad_groups.frequency_schedule
+        expression: MISSING
         description:
           frequency, together with frequency, controls how often people
           see your ad (only available for REACH ads).
       gender:
-        expression: ad_groups.gender
+        expression: MISSING
         description: Gender that you want to target.
       impression_tracking_url:
         expression: MISSING
         description: Display monitoring URL.
       interest_category_v2:
-        expression: ad_groups.interest_category_ids
+        expression: MISSING
         description:
           Interest classification. If the interest is specified, users
           that do not meet interest target will be excluded during delivery.
       ios_osv:
-        expression: ad_groups.min_ios_version
+        expression: MISSING
         description: Minimum iOS version.
       is_comment_disable:
-        expression: ad_groups.comment_disabled
+        expression: MISSING
         description: Whether to allow comments on your ads on TikTok, Vigo, Helo.
       is_hfss:
-        expression: ad_groups.is_hfss
+        expression: MISSING
         description:
           Whether the promoted content is HFSS foods (foods that are high
           in fat, salt, or sugar).
       is_new_structure:
-        expression: ad_groups.is_new_structure
+        expression: MISSING
         description: Whether the campaign is a new structure.
       keywords:
-        expression: ad_groups.keywords
+        expression: MISSING
         description: Keywords used.
       landing_page_url:
         expression: MISSING
         description: Landing page URL.
       languages:
-        expression: ad_groups.languages
+        expression: MISSING
         description: Codes of the languages that you want to target.
       location:
-        expression: ad_groups.location_ids
+        expression: MISSING
         description: IDs of the locations that you want to target.
       open_url:
-        expression: ad_groups.promotion_website_type
+        expression: MISSING
         description:
           The specific location where you want your audience to go if they
           have your app installed.
@@ -192,16 +192,16 @@ transforms:
         expression: MISSING
         description: The open URL type.
       operation_system:
-        expression: ad_groups.operating_systems
+        expression: MISSING
         description: Device operating systems that you want to target.
       opt_status:
-        expression: ad_groups.operation_status
+        expression: MISSING
         description: Operation status.
       optimize_goal:
-        expression: ad_groups.optimization_goal
+        expression: MISSING
         description: Optimization goal.
       pacing:
-        expression: ad_groups.pacing
+        expression: MISSING
         description:
           "You can choose between PACING_MODE_SMOOTH and PACING_MODE_FAST.
           For PACING_MODE_SMOOTH, the budget is allocated evenly within the scheduled
@@ -214,7 +214,7 @@ transforms:
         expression: MISSING
         description: Pangle app block list ID.
       pixel_id:
-        expression: ad_groups.pixel_id
+        expression: MISSING
         description: Pixel ID. Only application for landing pages.
       placement:
         expression: MISSING
@@ -226,13 +226,13 @@ transforms:
         expression: MISSING
         description: Avatar URL.
       schedule_end_time:
-        expression: ad_groups.schedule_end_time
+        expression: MISSING
         description: Ad delivery end time (UTC+0). Format should be YYYY-MM-DD HH:MM:SS
       schedule_start_time:
-        expression: ad_groups.schedule_start_time
+        expression: MISSING
         description: Ad delivery start time (UTC+0). Format should be YYYY-MM-DD HH:MM:SS
       schedule_type:
-        expression: ad_groups.schedule_type
+        expression: MISSING
         description:
           The schedule type, which can be either SCHEDULE_START_END or
           SCHEDULE_FROM_NOW.
@@ -246,10 +246,10 @@ transforms:
         expression: MISSING
         description: Ad group status
       video_actions:
-        expression: ad_groups.video_actions
+        expression: MISSING
         description: Number of video actions.
       video_download:
-        expression: ad_groups.video_download_disabled
+        expression: MISSING
         description:
           Whether users can download your video ads on TikTok(cannot be
           updated once created).
@@ -259,374 +259,351 @@ annotations:
     - action_categories
     - action_days
     - age_groups
+    - android_osv
+    - app_download_url
+    - app_id
     - app_name
+    - app_type
     - audience
+    - audience_type
     - bid
     - bid_type
+    - billing_event
+    - budget
+    - budget_mode
+    - carriers
+    - category
     - click_tracking_url
     - connection_type
     - conversion_bid
     - cpv_video_duration
+    - creative_material_mode
     - dayparting
     - deep_bid_type
     - deep_cpabid
     - deep_external_action
     - display_name
+    - enable_inventory_filter
     - excluded_audience
     - external_action
     - fallback_type
+    - frequency
+    - frequency_schedule
+    - gender
     - impression_tracking_url
+    - interest_category_v2
+    - ios_osv
+    - is_comment_disable
+    - is_hfss
+    - is_new_structure
+    - keywords
     - landing_page_url
+    - languages
+    - location
+    - open_url
     - open_url_type
+    - operation_system
+    - opt_status
+    - optimize_goal
+    - pacing
     - package
     - pangle_block_app_list_id
+    - pixel_id
     - placement
     - profile_image
+    - schedule_end_time
+    - schedule_start_time
+    - schedule_type
     - skip_learning_phase
     - statistic_type
     - status
+    - updated_at
+    - video_actions
+    - video_download
   evaluation:
     source_stream_name: ad_groups
     target_table_name: adgroup_history
-    name_match_score: 0.35
-    score: 0.35
+    name_match_score: 0.6
+    score: 0.1
     explanation:
-      The confidence score is evaluated based on the presence of expressions
-      for each field mapping. Fields with expressions are evaluated and those with
-      'MISSING' are given a zero score. The average confidence score reflects this
-      mixture of complete and missing expressions.
+      Evaluation of field mappings resulted in a low overall score due
+      to many 'MISSING' expressions, indicating a lack of confidence in the mappings.
+      The name match score is moderate, reflecting some alignment in naming but not
+      enough to increase confidence significantly.
     field_mapping_evals:
       - name: adgroup_id
         expression: ad_groups.adgroup_id
         score: 1.0
-        explanation:
-          The expression 'ad_groups.adgroup_id' matches perfectly with
-          'adgroup_id'.
+        explanation: Perfect match with expression 'ad_groups.adgroup_id'.
       - name: updated_at
-        expression: ad_groups.modify_time
-        score: 0.7
-        explanation:
-          The expression 'ad_groups.modify_time' likely corresponds to
-          'updated_at' but refers slightly differently.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: advertiser_id
         expression: ad_groups.advertiser_id
         score: 1.0
-        explanation:
-          The expression 'ad_groups.advertiser_id' matches perfectly with
-          'advertiser_id'.
+        explanation: Perfect match with expression 'ad_groups.advertiser_id'.
       - name: campaign_id
         expression: ad_groups.campaign_id
         score: 1.0
-        explanation:
-          The expression 'ad_groups.campaign_id' matches perfectly with
-          'campaign_id'.
+        explanation: Perfect match with expression 'ad_groups.campaign_id'.
       - name: action_categories
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: action_days
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: adgroup_name
         expression: ad_groups.adgroup_name
         score: 1.0
-        explanation:
-          The expression 'ad_groups.adgroup_name' matches perfectly with
-          'adgroup_name'.
+        explanation: Perfect match with expression 'ad_groups.adgroup_name'.
       - name: age_groups
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: android_osv
-        expression: ad_groups.min_android_version
-        score: 1.0
-        explanation:
-          The expression 'ad_groups.min_android_version' matches perfectly
-          with 'android_osv'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: app_download_url
-        expression: ad_groups.app_download_url
-        score: 1.0
-        explanation:
-          The expression 'ad_groups.app_download_url' matches perfectly
-          with 'app_download_url'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: app_id
-        expression: ad_groups.app_id
-        score: 1.0
-        explanation: The expression 'ad_groups.app_id' matches perfectly with 'app_id'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: app_name
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: app_type
-        expression: ad_groups.app_type
-        score: 1.0
-        explanation: The expression 'ad_groups.app_type' matches perfectly with 'app_type'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: audience
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: audience_type
-        expression: ad_groups.audience_type
-        score: 1.0
-        explanation:
-          The expression 'ad_groups.audience_type' matches perfectly with
-          'audience_type'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: bid
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: bid_type
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: billing_event
-        expression: ad_groups.billing_event
-        score: 1.0
-        explanation:
-          The expression 'ad_groups.billing_event' matches perfectly with
-          'billing_event'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: budget
-        expression: ad_groups.budget
-        score: 1.0
-        explanation: The expression 'ad_groups.budget' matches perfectly with 'budget'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: budget_mode
-        expression: ad_groups.budget_mode
-        score: 1.0
-        explanation:
-          The expression 'ad_groups.budget_mode' matches perfectly with
-          'budget_mode'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: carriers
-        expression: ad_groups.carriers
-        score: 1.0
-        explanation: The expression 'ad_groups.carriers' matches perfectly with 'carriers'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: category
-        expression: ad_groups.category_id
-        score: 1.0
-        explanation:
-          The expression 'ad_groups.category_id' matches perfectly with
-          'category'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: click_tracking_url
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: connection_type
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: conversion_bid
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: cpv_video_duration
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: creative_material_mode
-        expression: ad_groups.creative_material_mode
-        score: 1.0
-        explanation:
-          The expression 'ad_groups.creative_material_mode' matches perfectly
-          with 'creative_material_mode'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: dayparting
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: deep_bid_type
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: deep_cpabid
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: deep_external_action
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: display_name
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: enable_inventory_filter
-        expression: ad_groups.inventory_filter_enabled
-        score: 1.0
-        explanation:
-          The expression 'ad_groups.inventory_filter_enabled' matches perfectly
-          with 'enable_inventory_filter'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: excluded_audience
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: external_action
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: fallback_type
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: frequency
-        expression: ad_groups.frequency
-        score: 1.0
-        explanation: The expression 'ad_groups.frequency' matches perfectly with 'frequency'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: frequency_schedule
-        expression: ad_groups.frequency_schedule
-        score: 1.0
-        explanation:
-          The expression 'ad_groups.frequency_schedule' matches perfectly
-          with 'frequency_schedule'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: gender
-        expression: ad_groups.gender
-        score: 1.0
-        explanation: The expression 'ad_groups.gender' matches perfectly with 'gender'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: impression_tracking_url
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: interest_category_v2
-        expression: ad_groups.interest_category_ids
-        score: 1.0
-        explanation:
-          The expression 'ad_groups.interest_category_ids' matches perfectly
-          with 'interest_category_v2'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: ios_osv
-        expression: ad_groups.min_ios_version
-        score: 1.0
-        explanation:
-          The expression 'ad_groups.min_ios_version' matches perfectly
-          with 'ios_osv'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: is_comment_disable
-        expression: ad_groups.comment_disabled
-        score: 1.0
-        explanation:
-          The expression 'ad_groups.comment_disabled' matches perfectly
-          with 'is_comment_disable'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: is_hfss
-        expression: ad_groups.is_hfss
-        score: 1.0
-        explanation: The expression 'ad_groups.is_hfss' matches perfectly with 'is_hfss'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: is_new_structure
-        expression: ad_groups.is_new_structure
-        score: 1.0
-        explanation:
-          The expression 'ad_groups.is_new_structure' matches perfectly
-          with 'is_new_structure'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: keywords
-        expression: ad_groups.keywords
-        score: 1.0
-        explanation: The expression 'ad_groups.keywords' matches perfectly with 'keywords'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: landing_page_url
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: languages
-        expression: ad_groups.languages
-        score: 1.0
-        explanation: The expression 'ad_groups.languages' matches perfectly with 'languages'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: location
-        expression: ad_groups.location_ids
-        score: 1.0
-        explanation:
-          The expression 'ad_groups.location_ids' matches perfectly with
-          'location'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: open_url
-        expression: ad_groups.promotion_website_type
-        score: 1.0
-        explanation:
-          The expression 'ad_groups.promotion_website_type' matches perfectly
-          with 'open_url'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: open_url_type
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: operation_system
-        expression: ad_groups.operating_systems
-        score: 1.0
-        explanation:
-          The expression 'ad_groups.operating_systems' matches perfectly
-          with 'operation_system'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: opt_status
-        expression: ad_groups.operation_status
-        score: 1.0
-        explanation:
-          The expression 'ad_groups.operation_status' matches perfectly
-          with 'opt_status'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: optimize_goal
-        expression: ad_groups.optimization_goal
-        score: 1.0
-        explanation:
-          The expression 'ad_groups.optimization_goal' matches perfectly
-          with 'optimize_goal'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: pacing
-        expression: ad_groups.pacing
-        score: 1.0
-        explanation: The expression 'ad_groups.pacing' matches perfectly with 'pacing'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: package
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: pangle_block_app_list_id
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: pixel_id
-        expression: ad_groups.pixel_id
-        score: 1.0
-        explanation: The expression 'ad_groups.pixel_id' matches perfectly with 'pixel_id'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: placement
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: placement_type
         expression: ad_groups.placement_type
         score: 1.0
-        explanation:
-          The expression 'ad_groups.placement_type' matches perfectly with
-          'placement_type'.
+        explanation: Perfect match with expression 'ad_groups.placement_type'.
       - name: profile_image
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: schedule_end_time
-        expression: ad_groups.schedule_end_time
-        score: 1.0
-        explanation:
-          The expression 'ad_groups.schedule_end_time' matches perfectly
-          with 'schedule_end_time'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: schedule_start_time
-        expression: ad_groups.schedule_start_time
-        score: 1.0
-        explanation:
-          The expression 'ad_groups.schedule_start_time' matches perfectly
-          with 'schedule_start_time'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: schedule_type
-        expression: ad_groups.schedule_type
-        score: 1.0
-        explanation:
-          The expression 'ad_groups.schedule_type' matches perfectly with
-          'schedule_type'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: skip_learning_phase
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: statistic_type
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: status
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', indicating no mapping.
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: video_actions
-        expression: ad_groups.video_actions
-        score: 1.0
-        explanation:
-          The expression 'ad_groups.video_actions' matches perfectly with
-          'video_actions'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.
       - name: video_download
-        expression: ad_groups.video_download_disabled
-        score: 1.0
-        explanation:
-          The expression 'ad_groups.video_download_disabled' matches perfectly
-          with 'video_download'.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No information to evaluate.

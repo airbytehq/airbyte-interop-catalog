@@ -5,18 +5,18 @@ transforms:
       - ads_reports_hourly: tiktok_marketing.ads_reports_hourly
     fields:
       ad_id:
-        expression: ads_reports_hourly.ad_id
+        expression: ads_reports_hourly.dimensions.ad_id
         description: Ad id
       stat_time_hour:
-        expression: ads_reports_hourly.stat_time_hour
+        expression: ads_reports_hourly.dimensions.stat_time_hour
         description: Hour of activity
       cost_per_conversion:
-        expression: ads_reports_hourly.metrics.cost_per_conversion
+        expression: MISSING
         description:
           "The average amount of money you've spent on a conversion.  (The
           total count is calculated based on the time each ad impression occurred.)\n"
       real_time_conversion:
-        expression: ads_reports_hourly.metrics.real_time_conversion
+        expression: MISSING
         description:
           Number of times your ad resulted in the optimization event you
           selected.
@@ -29,7 +29,7 @@ transforms:
           The number of times your video starts to play. Replays will not
           be counted.
       conversion_rate:
-        expression: ads_reports_hourly.metrics.conversion_rate
+        expression: MISSING
         description:
           "The percentage of results you received out of all the clicks
           of your ads.   (The total count is calculated based on the time each ad
@@ -40,7 +40,7 @@ transforms:
           The number of times your video was played at 75% of its length.
           Replays will not be counted.
       result:
-        expression: ads_reports_hourly.metrics.result
+        expression: MISSING
         description:
           "The number of times your ad achieved an outcome, based on the
           optimization goal  you selected. As one campaign may have a number of different
@@ -61,14 +61,14 @@ transforms:
           The number of comments your video creative received within 1
           day of a user seeing a paid ad.
       real_time_cost_per_result:
-        expression: ads_reports_hourly.metrics.real_time_cost_per_result
+        expression: MISSING
         description:
           "As a campaign may have different optimization goals, the total
           number of result   is not supported in campaign section now, please go to
           the ad group section to view the cost per Result. (The total count is based
           on when the conversion actually happened.)\n"
       conversion:
-        expression: ads_reports_hourly.metrics.conversion
+        expression: MISSING
         description:
           "The number of times your ad achieved an outcome, based on the
           secondary goal you selected.  As one campaign may have a number of different
@@ -76,7 +76,7 @@ transforms:
           go to ad groups or ads to view. (The total count is calculated based on
           the time each ad impression occurred.)\n"
       real_time_result:
-        expression: ads_reports_hourly.metrics.real_time_result
+        expression: MISSING
         description:
           "The number of times your ad achieved an outcome, based on the
           optimization goal you selected.  As a campaign may have different optimization
@@ -94,19 +94,19 @@ transforms:
           The number of shares your video creative received within 1 day
           of a user seeing a paid ad.
       real_time_conversion_rate:
-        expression: ads_reports_hourly.metrics.real_time_conversion_rate
+        expression: MISSING
         description:
           The percentage of results you received out of all the clicks
           of your ads. (The total count is based on when the conversion actually happened.)
       cost_per_secondary_goal_result:
-        expression: ads_reports_hourly.metrics.cost_per_secondary_goal_result
+        expression: MISSING
         description:
           "The average cost for each secondary goal result from your adverts.
           As one campaign may have a number of different secondary goals,  this statistic
           is not supported for campaigns. Please go to ad groups or ads to view. (The
           total count is calculated based on the time each ad impression occurred.)\n"
       secondary_goal_result_rate:
-        expression: ads_reports_hourly.metrics.secondary_goal_result_rate
+        expression: MISSING
         description:
           "The percentage of secondary goal results you achieved out of
           all of the installs of your adverts. As one campaign may have a number \
@@ -117,7 +117,7 @@ transforms:
         expression: ads_reports_hourly.metrics.clicks
         description: The number of clicks on your ads.
       cost_per_1000_reached:
-        expression: ads_reports_hourly.metrics.cost_per_1000_reached
+        expression: MISSING
         description:
           The average cost to reach 1,000 unique users. This metric is
           estimated.
@@ -127,12 +127,12 @@ transforms:
           The number of times your video was played at 25% of its length.
           Replays will not be counted.
       reach:
-        expression: ads_reports_hourly.metrics.reach
+        expression: MISSING
         description:
           The number of unique users who saw your ads at least once. This
           metric is estimated.
       real_time_cost_per_conversion:
-        expression: ads_reports_hourly.metrics.real_time_cost_per_conversion
+        expression: MISSING
         description:
           The average amount of money you've spent on a conversion. (The
           total count is based on when the conversion actually happened.)
@@ -181,7 +181,7 @@ transforms:
           The number of times your video played for at least 6 seconds,
           or completely played. Replays will not be counted.
       secondary_goal_result:
-        expression: ads_reports_hourly.metrics.secondary_goal_result
+        expression: MISSING
         description:
           "The number of times your ad achieved an outcome, based on the
           secondary goal you selected. As one campaign may have a number  of different
@@ -202,7 +202,7 @@ transforms:
           The average time your video was played per person, including
           any time spent replaying the video. This metric is estimated.
       real_time_result_rate:
-        expression: ads_reports_hourly.metrics.real_time_result_rate
+        expression: MISSING
         description:
           As a campaign may have different optimization goals, the total
           number of result is not supported in campaign section now ,Please go to
@@ -222,7 +222,7 @@ transforms:
         expression: ads_reports_hourly._airbyte_extracted_at
         description: Timestamp of when Fivetran synced a record.
       total_purchase_value:
-        expression: ads_reports_hourly.metrics.total_purchase_value
+        expression: MISSING
         description:
           The total value of purchase events that occurred in your app
           that were recorded by your measurement partner.
@@ -232,190 +232,209 @@ transforms:
           The monetary worth or potential value assigned to a lead generated
           through ads.
 annotations:
-  approved: true
+  approved: false
   missing_fields:
+    - conversion
+    - conversion_rate
+    - cost_per_1000_reached
+    - cost_per_conversion
+    - cost_per_secondary_goal_result
     - cpm
+    - reach
+    - real_time_conversion
+    - real_time_conversion_rate
+    - real_time_cost_per_conversion
+    - real_time_cost_per_result
+    - real_time_result
+    - real_time_result_rate
+    - result
+    - secondary_goal_result
+    - secondary_goal_result_rate
+    - total_purchase_value
     - total_sales_lead_value
   evaluation:
     source_stream_name: ads_reports_hourly
     target_table_name: ad_report_hourly
-    name_match_score: 0.8
-    score: 0.79
+    name_match_score: 0.54
+    score: 0.54
     explanation:
-      The table mappings are mostly accurate, with minor discrepancies,
-      particularly with fields marked as 'MISSING'. Fields with specific mappings
-      are well-matched to their descriptions and expressions, leading to a relatively
-      high overall confidence score with a few exceptions.
+      The table mapping evaluation scores are calculated based on the availability
+      and match of expressions. Several fields have missing expressions ('MISSING'),
+      which reduces the confidence score. Mapping expressions that are clearly defined
+      contribute positively to the score. Fields with precise mappings achieve higher
+      scores, while those with ambiguous or 'MISSING' expressions have lower confidence
+      scores. The primary field '_fivetran_synced' is correctly mapped to '_airbyte_extracted_at',
+      as per instructions, ensuring high confidence for this specific mapping.
     field_mapping_evals:
       - name: ad_id
-        expression: ads_reports_hourly.ad_id
-        score: 1.0
-        explanation: Mapping is perfect.
+        expression: ads_reports_hourly.dimensions.ad_id
+        score: 0.7
+        explanation: Expression matches perfectly with source field.
       - name: stat_time_hour
-        expression: ads_reports_hourly.stat_time_hour
-        score: 1.0
-        explanation: Mapping is perfect.
+        expression: ads_reports_hourly.dimensions.stat_time_hour
+        score: 0.7
+        explanation: Expression matches perfectly with source field.
       - name: cost_per_conversion
-        expression: ads_reports_hourly.metrics.cost_per_conversion
-        score: 1.0
-        explanation: Mapping is perfect.
+        expression: MISSING
+        score: 0.0
+        explanation: Field is marked as 'MISSING', indicating no available expression.
       - name: real_time_conversion
-        expression: ads_reports_hourly.metrics.real_time_conversion
-        score: 1.0
-        explanation: Mapping is perfect.
+        expression: MISSING
+        score: 0.0
+        explanation: Field is marked as 'MISSING', indicating no available expression.
       - name: cpc
         expression: ads_reports_hourly.metrics.cpc
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.7
+        explanation: Expression matches perfectly with source field.
       - name: video_play_actions
         expression: ads_reports_hourly.metrics.video_play_actions
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.7
+        explanation: Expression matches perfectly with source field.
       - name: conversion_rate
-        expression: ads_reports_hourly.metrics.conversion_rate
-        score: 1.0
-        explanation: Mapping is perfect.
+        expression: MISSING
+        score: 0.0
+        explanation: Field is marked as 'MISSING', indicating no available expression.
       - name: video_views_p_75
         expression: ads_reports_hourly.metrics.video_views_p75
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.7
+        explanation: Expression matches perfectly with source field.
       - name: result
-        expression: ads_reports_hourly.metrics.result
-        score: 1.0
-        explanation: Mapping is perfect.
+        expression: MISSING
+        score: 0.0
+        explanation: Field is marked as 'MISSING', indicating no available expression.
       - name: video_views_p_50
         expression: ads_reports_hourly.metrics.video_views_p50
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.7
+        explanation: Expression matches perfectly with source field.
       - name: impressions
         expression: ads_reports_hourly.metrics.impressions
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.7
+        explanation: Expression matches perfectly with source field.
       - name: comments
         expression: ads_reports_hourly.metrics.comments
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.7
+        explanation: Expression matches perfectly with source field.
       - name: real_time_cost_per_result
-        expression: ads_reports_hourly.metrics.real_time_cost_per_result
-        score: 1.0
-        explanation: Mapping is perfect.
+        expression: MISSING
+        score: 0.0
+        explanation: Field is marked as 'MISSING', indicating no available expression.
       - name: conversion
-        expression: ads_reports_hourly.metrics.conversion
-        score: 1.0
-        explanation: Mapping is perfect.
+        expression: MISSING
+        score: 0.0
+        explanation: Field is marked as 'MISSING', indicating no available expression.
       - name: real_time_result
-        expression: ads_reports_hourly.metrics.real_time_result
-        score: 1.0
-        explanation: Mapping is perfect.
+        expression: MISSING
+        score: 0.0
+        explanation: Field is marked as 'MISSING', indicating no available expression.
       - name: video_view_p_100
         expression: ads_reports_hourly.metrics.video_views_p100
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.7
+        explanation: Expression matches perfectly with source field.
       - name: shares
         expression: ads_reports_hourly.metrics.shares
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.7
+        explanation: Expression matches perfectly with source field.
       - name: real_time_conversion_rate
-        expression: ads_reports_hourly.metrics.real_time_conversion_rate
-        score: 1.0
-        explanation: Mapping is perfect.
+        expression: MISSING
+        score: 0.0
+        explanation: Field is marked as 'MISSING', indicating no available expression.
       - name: cost_per_secondary_goal_result
-        expression: ads_reports_hourly.metrics.cost_per_secondary_goal_result
-        score: 1.0
-        explanation: Mapping is perfect.
+        expression: MISSING
+        score: 0.0
+        explanation: Field is marked as 'MISSING', indicating no available expression.
       - name: secondary_goal_result_rate
-        expression: ads_reports_hourly.metrics.secondary_goal_result_rate
-        score: 1.0
-        explanation: Mapping is perfect.
+        expression: MISSING
+        score: 0.0
+        explanation: Field is marked as 'MISSING', indicating no available expression.
       - name: clicks
         expression: ads_reports_hourly.metrics.clicks
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.7
+        explanation: Expression matches perfectly with source field.
       - name: cost_per_1000_reached
-        expression: ads_reports_hourly.metrics.cost_per_1000_reached
-        score: 1.0
-        explanation: Mapping is perfect.
+        expression: MISSING
+        score: 0.0
+        explanation: Field is marked as 'MISSING', indicating no available expression.
       - name: video_views_p_25
         expression: ads_reports_hourly.metrics.video_views_p25
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.7
+        explanation: Expression matches perfectly with source field.
       - name: reach
-        expression: ads_reports_hourly.metrics.reach
-        score: 1.0
-        explanation: Mapping is perfect.
+        expression: MISSING
+        score: 0.0
+        explanation: Field is marked as 'MISSING', indicating no available expression.
       - name: real_time_cost_per_conversion
-        expression: ads_reports_hourly.metrics.real_time_cost_per_conversion
-        score: 1.0
-        explanation: Mapping is perfect.
+        expression: MISSING
+        score: 0.0
+        explanation: Field is marked as 'MISSING', indicating no available expression.
       - name: profile_visits_rate
         expression: ads_reports_hourly.metrics.profile_visits_rate
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.7
+        explanation: Expression matches perfectly with source field.
       - name: average_video_play
         expression: ads_reports_hourly.metrics.average_video_play
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.7
+        explanation: Expression matches perfectly with source field.
       - name: profile_visits
         expression: ads_reports_hourly.metrics.profile_visits
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.7
+        explanation: Expression matches perfectly with source field.
       - name: cpm
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING.
+        explanation: Field is marked as 'MISSING', indicating no available expression.
       - name: ctr
         expression: ads_reports_hourly.metrics.ctr
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.7
+        explanation: Expression matches perfectly with source field.
       - name: video_watched_2_s
         expression: ads_reports_hourly.metrics.video_watched_2s
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.7
+        explanation: Expression matches perfectly with source field.
       - name: follows
         expression: ads_reports_hourly.metrics.follows
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.7
+        explanation: Expression matches perfectly with source field.
       - name: result_rate
         expression: ads_reports_hourly.metrics.result_rate
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.7
+        explanation: Expression matches perfectly with source field.
       - name: video_watched_6_s
         expression: ads_reports_hourly.metrics.video_watched_6s
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.7
+        explanation: Expression matches perfectly with source field.
       - name: secondary_goal_result
-        expression: ads_reports_hourly.metrics.secondary_goal_result
-        score: 1.0
-        explanation: Mapping is perfect.
+        expression: MISSING
+        score: 0.0
+        explanation: Field is marked as 'MISSING', indicating no available expression.
       - name: cost_per_result
         expression: ads_reports_hourly.metrics.cost_per_result
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.7
+        explanation: Expression matches perfectly with source field.
       - name: average_video_play_per_user
         expression: ads_reports_hourly.metrics.average_video_play_per_user
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.7
+        explanation: Expression matches perfectly with source field.
       - name: real_time_result_rate
-        expression: ads_reports_hourly.metrics.real_time_result_rate
-        score: 1.0
-        explanation: Mapping is perfect.
+        expression: MISSING
+        score: 0.0
+        explanation: Field is marked as 'MISSING', indicating no available expression.
       - name: spend
         expression: ads_reports_hourly.metrics.spend
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.7
+        explanation: Expression matches perfectly with source field.
       - name: likes
         expression: ads_reports_hourly.metrics.likes
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.7
+        explanation: Expression matches perfectly with source field.
       - name: _fivetran_synced
         expression: ads_reports_hourly._airbyte_extracted_at
-        score: 1.0
-        explanation: _fivetran_synced is mapped to _airbyte_extracted_at as required.
+        score: 0.7
+        explanation: Expression matches perfectly with source field (_airbyte_extracted_at).
       - name: total_purchase_value
-        expression: ads_reports_hourly.metrics.total_purchase_value
-        score: 1.0
-        explanation: Mapping is perfect.
+        expression: MISSING
+        score: 0.0
+        explanation: Field is marked as 'MISSING', indicating no available expression.
       - name: total_sales_lead_value
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING.
+        explanation: Field is marked as 'MISSING', indicating no available expression.
