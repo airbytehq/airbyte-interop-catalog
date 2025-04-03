@@ -631,7 +631,11 @@ class TableMapping(BaseModel):
         overall_confidence = f"Overall Confidence Score: {markdown_formatted_confidence(self._attached_evaluation.score)}"
 
         # Explanation section
-        explanation = create_markdown_section("Explanation", self._attached_evaluation.explanation, level=3)
+        explanation = create_markdown_section(
+            "Explanation",
+            self._attached_evaluation.explanation,
+            level=3,
+        )
 
         # Field-by-field analysis section
         headers = ["Field", "Expression", "Description", "Confidence", "Evaluation"]
@@ -641,13 +645,15 @@ class TableMapping(BaseModel):
             field_ref: FieldMapping = next(
                 f for f in self.field_mappings if f.name == field_eval.name
             )
-            rows.append([
-                field_eval.name,
-                str(field_ref.expression),
-                field_ref.description or "",
-                markdown_formatted_confidence(field_eval.score),
-                field_eval.explanation,
-            ])
+            rows.append(
+                [
+                    field_eval.name,
+                    str(field_ref.expression),
+                    field_ref.description or "",
+                    markdown_formatted_confidence(field_eval.score),
+                    field_eval.explanation,
+                ],
+            )
 
         field_analysis = create_markdown_section(
             "Field-by-Field Analysis",
@@ -656,7 +662,11 @@ class TableMapping(BaseModel):
         )
 
         # Combine all sections
-        return create_markdown_section(title, overall_confidence + "\n\n" + explanation + field_analysis, level=2)
+        return create_markdown_section(
+            title,
+            overall_confidence + "\n\n" + explanation + field_analysis,
+            level=2,
+        )
 
     def print_as_rich_table(self) -> None:
         """Print a complete mapping confidence analysis.
@@ -778,7 +788,7 @@ class SourceTableMappingSuggestion(BaseModel):
         rows = [
             ["Suggested Source Table", self.suggested_source_table_name],
             ["Confidence Score", markdown_formatted_confidence(self.confidence_score)],
-            ["Explanation", self.explanation]
+            ["Explanation", self.explanation],
         ]
 
         table = create_markdown_table(headers, rows)
