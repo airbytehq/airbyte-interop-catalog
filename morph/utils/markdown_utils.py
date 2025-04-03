@@ -1,7 +1,6 @@
 """Utility functions for markdown formatting."""
 
-CONFIDENCE_HIGH = 0.65
-CONFIDENCE_LOW = 0.35
+from morph.utils.rich_utils import CONFIDENCE_HIGH, CONFIDENCE_LOW
 
 
 def markdown_formatted_confidence(score: float) -> str:
@@ -14,12 +13,12 @@ def markdown_formatted_confidence(score: float) -> str:
         A markdown formatted string representing the confidence score
     """
     if score > CONFIDENCE_HIGH:
-        return f"**{score:.2f}**"  # Bold for high confidence
+        return f"🟢 {score:.2f}"  # Bold for high confidence
 
     if score < CONFIDENCE_LOW:
-        return f"*{score:.2f}*"  # Italic for low confidence
+        return f"❌ {score:.2f}"  # Red for low confidence
 
-    return f"{score:.2f}"  # Normal for medium confidence
+    return f"⚠️ {score:.2f}"  # Normal for medium confidence
 
 
 def create_markdown_table(headers: list[str], rows: list[list[str]]) -> str:

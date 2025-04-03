@@ -519,7 +519,7 @@ class TableMapping(BaseModel):
         if self._attached_evaluation:
             output_dict["annotations"] = {}
             if (
-                self._attached_evaluation.score >= constants.MIN_APPROVAL_SCORE
+                self._attached_evaluation.table_match_score >= constants.MIN_APPROVAL_SCORE
                 and len(self.get_missing_field_mappings()) <= constants.MAX_MISSING_FIELDS
             ):
                 output_dict["annotations"]["approved"] = True
@@ -563,8 +563,8 @@ class TableMapping(BaseModel):
         return {
             "source_stream_name": self.source_stream_name,
             "target_table_name": self.target_table_name,
-            "name_match_score": self._attached_evaluation.name_match_score,
-            "score": self._attached_evaluation.score,
+            "table_match_score": self._attached_evaluation.table_match_score,
+            "completion_score": self._attached_evaluation.completion_score,
             "explanation": self._attached_evaluation.explanation,
             "field_mapping_evals": [
                 _to_dict(field_eval) for field_eval in self._attached_evaluation.field_mapping_evals
@@ -628,7 +628,8 @@ class TableMapping(BaseModel):
         title = f"Table Mapping Eval: '{self.source_stream_name}->{self.target_table_name}'"
 
         # Overall confidence section
-        overall_confidence = f"Overall Confidence Score: {markdown_formatted_confidence(self._attached_evaluation.score)}"
+        table_match_confidence = f"Table Match Confidence Score: {markdown_formatted_confidence(self._attached_evaluation.table_match_score)}"
+        table_completion_score = f"Table Completion Score: {markdown_formatted_confidence(self._attached_evaluation.completion_score)}"
 
         # Explanation section
         explanation = create_markdown_section(
@@ -664,7 +665,12 @@ class TableMapping(BaseModel):
         # Combine all sections
         return create_markdown_section(
             title,
-            overall_confidence + "\n\n" + explanation + field_analysis,
+            table_match_confidence
+            + "\n\n"
+            + table_completion_score
+            + "\n\n"
+            + explanation
+            + field_analysis,
             level=2,
         )
 
@@ -719,11 +725,11 @@ class TableMappingSuggestion(BaseModel):
 class TableMappingEval(BaseModel):
     """Represents the confidence score and explanation for a table mapping."""
 
-    score: float
-    """The overall confidence score (0.00 to 1.00)."""
-
-    name_match_score: float
+    table_match_score: float
     """The confidence score for the name match between the source and target tables."""
+
+    completion_score: float
+    """The overall confidence score (0.00 to 1.00)."""
 
     explanation: str
     """A detailed explanation of the overall score."""
