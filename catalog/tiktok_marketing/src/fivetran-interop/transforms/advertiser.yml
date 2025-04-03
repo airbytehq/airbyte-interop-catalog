@@ -99,112 +99,111 @@ annotations:
   evaluation:
     source_stream_name: advertisers
     target_table_name: advertiser
-    name_match_score: 0.9
-    score: 0.95
+    table_match_score: 0.85
+    completion_score: 0.9
     explanation:
-      Most mappings are accurate and fields like `_fivetran_synced` are
-      correctly captured. Minor issues with MISSING expressions for `phone_number`
-      and `telephone`. Including highly accurate mappings such as `id`, `balance`,
-      `email`, etc. Confidence slightly less than perfect due to some fields with
-      MISSING expressions.
+      The table match between the source and target schema is strong due
+      to shared API origins and significant overlap in field mapping. However, a few
+      fields are missing or uncertain mappings, slightly reducing the overall completion
+      score.
     field_mapping_evals:
       - name: id
         expression: advertisers.advertiser_id
         score: 1.0
-        explanation: Perfect mapping with a unique identifier.
+        explanation: Perfect match with 'advertisers.advertiser_id'.
       - name: address
         expression: advertisers.address
         score: 1.0
-        explanation: Accurate mapping as it clearly describes an address.
+        explanation: Perfect match with 'advertisers.address'.
       - name: balance
         expression: advertisers.balance
         score: 1.0
-        explanation: Balance field is clearly well-mapped.
+        explanation: Perfect match with 'advertisers.balance'.
       - name: cellphone_number
         expression: advertisers.cellphone_number
         score: 1.0
-        explanation: Matches the new API column accurately.
+        explanation: Direct mapping to the most current field version.
       - name: company
         expression: advertisers.company
         score: 1.0
-        explanation: Company name mapping is straightforward and accurate.
+        explanation: Perfect match with 'advertisers.company'.
       - name: contacter
         expression: advertisers.contacter
         score: 1.0
-        explanation: Contact person name is perfectly mapped.
+        explanation: Perfect match with 'advertisers.contacter'.
       - name: country
         expression: advertisers.country
         score: 1.0
-        explanation: Country is clearly defined in the mapping.
+        explanation: Perfect match with 'advertisers.country'.
       - name: create_time
         expression: advertisers.create_time
         score: 1.0
-        explanation: Creation time mapping is accurate.
+        explanation: Perfect match with 'advertisers.create_time'.
       - name: currency
         expression: advertisers.currency
         score: 1.0
-        explanation: Currency type is unambiguously mapped.
+        explanation: Perfect match with 'advertisers.currency'.
       - name: description
         expression: advertisers.description
         score: 1.0
-        explanation: Description field aligns correctly with promotional content.
+        explanation: Perfect match with 'advertisers.description'.
       - name: email
         expression: advertisers.email
         score: 1.0
-        explanation: Email mapping is accurate with desensitised data.
+        explanation: Perfect match with 'advertisers.email'.
       - name: industry
         expression: advertisers.industry
         score: 1.0
-        explanation: Industry categories are correctly identified.
+        explanation: Perfect match with 'advertisers.industry'.
       - name: language
         expression: advertisers.language
         score: 1.0
-        explanation: Language mapping is precise.
+        explanation: Perfect match with 'advertisers.language'.
       - name: license_no
         expression: advertisers.license_no
         score: 1.0
-        explanation: License number is specifically targeted.
+        explanation: Perfect match with 'advertisers.license_no'.
       - name: license_url
         expression: advertisers.license_url
         score: 1.0
-        explanation: License URL correctness confirmed.
+        explanation: Perfect match with 'advertisers.license_url'.
       - name: name
         expression: advertisers.name
         score: 1.0
-        explanation: Name mapping entirely accurate.
+        explanation: Perfect match with 'advertisers.name'.
       - name: phone_number
         expression: MISSING
         score: 0.0
-        explanation: Missing mapping due to API update.
+        explanation: No good match found.
       - name: promotion_area
         expression: advertisers.promotion_area
         score: 1.0
-        explanation: Promotion area perfectly mapped.
+        explanation: Perfect match with 'advertisers.promotion_area'.
       - name: reason
         expression: advertisers.rejection_reason
         score: 1.0
-        explanation: Rejection reason is well-mapped.
+        explanation: Perfect match with 'advertisers.rejection_reason'.
       - name: role
         expression: advertisers.role
         score: 1.0
-        explanation: Role mapping is clear and accurate.
+        explanation: Perfect match with 'advertisers.role'.
       - name: status
         expression: advertisers.status
         score: 1.0
-        explanation: Status is properly identified in mapping.
+        explanation: Perfect match with 'advertisers.status'.
       - name: telephone
         expression: MISSING
         score: 0.0
-        explanation: Missing mapping due to API update.
+        explanation: No good match found.
       - name: telephone_number
         expression: advertisers.telephone_number
         score: 1.0
-        explanation: Correct usage of the updated column name.
+        explanation: Direct mapping to the most current field version.
       - name: timezone
         expression: advertisers.timezone
         score: 1.0
-        explanation: Timezone mappings include understandable GMT offsets.
+        explanation: Perfect match with 'advertisers.timezone'.
       - name: _fivetran_synced
         expression: advertisers._airbyte_extracted_at
         score: 1.0
-        explanation: Correct mapping for `_fivetran_synced` as `_airbyte_extracted_at`.
+        explanation: Standard mapping from '_airbyte_extracted_at'.

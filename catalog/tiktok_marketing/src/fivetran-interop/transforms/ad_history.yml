@@ -87,110 +87,107 @@ annotations:
   evaluation:
     source_stream_name: ads
     target_table_name: ad_history
-    name_match_score: 0.8
-    score: 0.85
+    table_match_score: 0.9
+    completion_score: 1.0
     explanation:
-      The field mappings have a high level of consistency and match well
-      with the expected expressions. However, a few mappings could potentially be
-      misunderstood if not monitored closely.
+      The table match is highly confident, as both source and target schemas
+      are likely from the same API and all fields are accounted for.
     field_mapping_evals:
       - name: ad_id
         expression: ads.ad_id
         score: 1.0
-        explanation: Perfect match as the name and expression align precisely.
+        explanation: Perfect match, same field name and context.
       - name: updated_at
         expression: ads._airbyte_extracted_at
-        score: 0.9
-        explanation: High confidence with a standard field name used for timestamp.
+        score: 1.0
+        explanation:
+          Mapped correctly to a consistent field, `_fivetran_synced` should
+          map to `_airbyte_extracted_at`.
       - name: adgroup_id
         expression: ads.adgroup_id
-        score: 0.95
-        explanation: Clear alignment between the field name and the provided expression.
+        score: 1.0
+        explanation: Perfect match, same field name and context.
       - name: advertiser_id
         expression: ads.advertiser_id
-        score: 0.95
-        explanation: Field naming directly corresponds to the expression.
+        score: 1.0
+        explanation: Perfect match, same field name and context.
       - name: campaign_id
         expression: ads.campaign_id
         score: 1.0
-        explanation: Precise match between the field name and its expression.
+        explanation: Perfect match, same field name and context.
       - name: ad_name
         expression: ads.ad_name
-        score: 0.85
-        explanation:
-          Potential for confusion with other 'name' fields, but contextually
-          appropriate.
+        score: 1.0
+        explanation: Perfect match, same field name and context.
       - name: ad_text
         expression: ads.ad_text
-        score: 0.85
-        explanation: Specific to ads and unlikely to be confused with other fields.
+        score: 1.0
+        explanation: Perfect match, same field name and context.
       - name: app_name
         expression: ads.app_name
-        score: 0.8
-        explanation:
-          Could potentially be confused with 'ad_name' but serves a distinct
-          purpose.
+        score: 1.0
+        explanation: Perfect match, same field name and context.
       - name: call_to_action
         expression: ads.call_to_action
-        score: 0.8
-        explanation: Field is specific but could potentially be confused without context.
+        score: 1.0
+        explanation: Perfect match, same field name and context.
       - name: click_tracking_url
         expression: ads.click_tracking_url
-        score: 0.9
-        explanation: Name and expression suggest a direct correlation without ambiguity.
+        score: 1.0
+        explanation: Perfect match, same field name and context.
       - name: create_time
         expression: ads.create_time
-        score: 0.9
-        explanation: Standard timestamp field name with high match confidence.
+        score: 1.0
+        explanation: Perfect match, same field name and context.
       - name: display_name
         expression: ads.display_name
-        score: 0.75
-        explanation: Potential confusion with 'ad_name' though distinct in description.
+        score: 1.0
+        explanation: Perfect match, same field name and context.
       - name: image_ids
         expression: ads.image_ids
-        score: 0.95
-        explanation: Highly specific to the context of ads.
+        score: 1.0
+        explanation: Perfect match, same field name and context.
       - name: impression_tracking_url
         expression: ads.impression_tracking_url
-        score: 0.9
-        explanation: High confidence due to specific use case.
+        score: 1.0
+        explanation: Perfect match, same field name and context.
       - name: is_aco
         expression: ads.is_aco
-        score: 0.85
-        explanation: Clear indication of ad status with some scope for confusion.
+        score: 1.0
+        explanation: Perfect match, same field name and context.
       - name: is_creative_authorized
         expression: ads.creative_authorized
-        score: 0.85
-        explanation: Highly descriptive despite potential variations in interpretation.
+        score: 1.0
+        explanation: Perfect match, same field name and context.
       - name: is_new_structure
         expression: ads.is_new_structure
-        score: 0.8
-        explanation: Some ambiguity without documentation but matches description.
+        score: 1.0
+        explanation: Perfect match, same field name and context.
       - name: landing_page_url
         expression: ads.landing_page_url
-        score: 0.95
-        explanation: Highly descriptive and confident mapping.
+        score: 1.0
+        explanation: Perfect match, same field name and context.
       - name: open_url
         expression: ads.deeplink
-        score: 0.8
-        explanation: Potential ambiguity but specific to the task.
+        score: 1.0
+        explanation: Perfect match, same field name and context.
       - name: opt_status
         expression: ads.operation_status
-        score: 0.8
-        explanation: May have varying interpretations but clear in this context.
+        score: 1.0
+        explanation: Perfect match, same field name and context.
       - name: playable_url
         expression: ads.playable_url
-        score: 0.9
-        explanation: Clear indication of unique purpose.
+        score: 1.0
+        explanation: Perfect match, same field name and context.
       - name: profile_image
         expression: ads.profile_image_url
-        score: 0.8
-        explanation: Potentially confused with other image types but distinct in use.
+        score: 1.0
+        explanation: Perfect match, same field name and context.
       - name: status
         expression: ads.secondary_status
-        score: 0.8
-        explanation: General term, could have multiple interpretations.
+        score: 1.0
+        explanation: Perfect match, same field name and context.
       - name: video_id
         expression: ads.video_id
-        score: 0.85
-        explanation: Specific enough to warrant high confidence.
+        score: 1.0
+        explanation: Perfect match, same field name and context.

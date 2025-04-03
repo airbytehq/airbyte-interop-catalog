@@ -50,75 +50,69 @@ transforms:
           Split Test variables. Optional values; TARGETING, BIDDING_OPTIMIZATION
           , CREATIVE.
 annotations:
-  approved: false
+  approved: true
   missing_fields:
     - opt_status
     - status
   evaluation:
     source_stream_name: campaigns
     target_table_name: campaign_history
-    name_match_score: 0.7
-    score: 0.69
+    table_match_score: 0.8
+    completion_score: 0.85
     explanation:
-      The overall confidence score was calculated by evaluating individual
-      mappings. Most mappings matched perfectly with applicable expressions like 'campaigns.campaign_id'
-      for 'campaign_id'. However, fields like 'opt_status' and 'status' were marked
-      'MISSING', resulting in a score of 0.0 for these fields and affecting the overall
-      score. The mapping '_airbyte_extracted_at' was appropriately aligned with 'updated_at'
-      though '_fivetran_synced' was not present. If expressions are missing or non-applicable,
-      they heavily impact the overall confidence below the score threshold of 0.7.
+      The table mapping shows a high degree of confidence in matching the
+      source and target tables, as they share many common fields and purposes. However,
+      two fields have no match, impacting the completion score.
     field_mapping_evals:
       - name: campaign_id
         expression: campaigns.campaign_id
         score: 1.0
-        explanation: Perfect match with expression 'campaigns.campaign_id'.
+        explanation: Perfect match for 'campaign_id' field.
       - name: updated_at
         expression: campaigns._airbyte_extracted_at
         score: 1.0
-        explanation:
-          Expression matched with '_airbyte_extracted_at', as expected
-          for time tracking.
+        explanation: Standard mapping of '_fivetran_synced' to '_airbyte_extracted_at'.
       - name: advertiser_id
         expression: campaigns.advertiser_id
         score: 1.0
-        explanation: Perfect match with expression 'campaigns.advertiser_id'.
+        explanation: Perfect match for 'advertiser_id' field.
       - name: budget
         expression: campaigns.budget
         score: 1.0
-        explanation: Perfect match with expression 'campaigns.budget'.
+        explanation: Perfect match for 'budget' field.
       - name: budget_mode
         expression: campaigns.budget_mode
         score: 1.0
-        explanation: Perfect match with expression 'campaigns.budget_mode'.
+        explanation: Perfect match for 'budget_mode' field.
       - name: campaign_name
         expression: campaigns.campaign_name
         score: 1.0
-        explanation: Perfect match with expression 'campaigns.campaign_name'.
+        explanation: Perfect match for 'campaign_name' field.
       - name: campaign_type
         expression: campaigns.campaign_type
         score: 1.0
-        explanation: Perfect match with expression 'campaigns.campaign_type'.
+        explanation: Perfect match for 'campaign_type' field.
       - name: create_time
         expression: campaigns.create_time
         score: 1.0
-        explanation: Perfect match with expression 'campaigns.create_time'.
+        explanation: Perfect match for 'create_time' field.
       - name: is_new_structure
         expression: campaigns.is_new_structure
         score: 1.0
-        explanation: Perfect match with expression 'campaigns.is_new_structure'.
+        explanation: Perfect match for 'is_new_structure' field.
       - name: objective_type
         expression: campaigns.objective_type
         score: 1.0
-        explanation: Perfect match with expression 'campaigns.objective_type'.
+        explanation: Perfect match for 'objective_type' field.
       - name: opt_status
         expression: MISSING
         score: 0.0
-        explanation: Expression for 'opt_status' is 'MISSING', indicating no match.
+        explanation: No good match found.
       - name: status
         expression: MISSING
         score: 0.0
-        explanation: Expression for 'status' is 'MISSING', indicating no match.
+        explanation: No good match found.
       - name: split_test_variable
         expression: campaigns.split_test_variable
         score: 1.0
-        explanation: Perfect match with expression 'campaigns.split_test_variable'.
+        explanation: Perfect match for 'split_test_variable' field.

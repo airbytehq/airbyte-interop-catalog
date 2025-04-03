@@ -265,186 +265,184 @@ annotations:
   evaluation:
     source_stream_name: ad_groups_reports_hourly
     target_table_name: adgroup_report_hourly
-    name_match_score: 0.5
-    score: 0.4
+    table_match_score: 0.8
+    completion_score: 0.5
     explanation:
-      The evaluation considered 42 field mappings. Fields with expression
-      marked as 'MISSING' received a confidence score of 0.0. Some fields were successfully
-      matched to their source expressions, providing a higher confidence score for
-      those mappings, specifically when source expressions were not marked as 'MISSING'.
-      The overall confidence score reflects a mix of good matches (around 1.0) and
-      missing mappings (0.0). Name match score is moderately low because several fields
-      were marked as 'MISSING.', impacting the overall table mapping confidence.
+      The table match score is relatively high because the source and target
+      tables share similar fields, indicating that they describe the same subject
+      matter, though not all fields are perfectly mapped. The completion score is
+      lower due to several missing field mappings, indicating incomplete population
+      of field mappings.
     field_mapping_evals:
       - name: adgroup_id
         expression: ad_groups_reports_hourly.metrics.adgroup_id
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.metrics.adgroup_id'.
+        explanation: Perfect match for ad group id.
       - name: stat_time_hour
         expression: ad_groups_reports_hourly.dimensions.stat_time_hour
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.dimensions.stat_time_hour'.
+        explanation: Perfect match for hour of activity.
       - name: cost_per_conversion
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: real_time_conversion
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: cpc
         expression: ad_groups_reports_hourly.metrics.cpc
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.metrics.cpc'.
+        explanation: Perfect match for cost per click.
       - name: video_play_actions
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: conversion_rate
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: video_views_p_75
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: result
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: video_views_p_50
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: impressions
         expression: ad_groups_reports_hourly.metrics.impressions
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.metrics.impressions'.
+        explanation: Perfect match for number of times ads were shown.
       - name: comments
         expression: ad_groups_reports_hourly.metrics.comments
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.metrics.comments'.
+        explanation: Perfect match for comments received.
       - name: real_time_cost_per_result
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: conversion
         expression: ad_groups_reports_hourly.metrics.conversion
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.metrics.conversion'.
+        explanation: Perfect match for the number of times an ad achieved an outcome.
       - name: real_time_result
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: video_view_p_100
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: shares
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: real_time_conversion_rate
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: cost_per_secondary_goal_result
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: secondary_goal_result_rate
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: clicks
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: cost_per_1000_reached
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: video_views_p_25
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: reach
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: real_time_cost_per_conversion
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: profile_visits_rate
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: average_video_play
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: profile_visits
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: cpm
         expression: ad_groups_reports_hourly.metrics.cpm
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.metrics.cpm'.
+        explanation: Perfect match for cost per 1000 impressions.
       - name: ctr
         expression: ad_groups_reports_hourly.metrics.ctr
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.metrics.ctr'.
+        explanation: Perfect match for click-through rate.
       - name: video_watched_2_s
         expression: ad_groups_reports_hourly.metrics.video_watched_2s
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.metrics.video_watched_2s'.
+        explanation: Perfect match for video played for at least 2 seconds.
       - name: follows
         expression: ad_groups_reports_hourly.metrics.follows
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.metrics.follows'.
+        explanation: Perfect match for new followers.
       - name: result_rate
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: video_watched_6_s
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: secondary_goal_result
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: cost_per_result
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: average_video_play_per_user
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: real_time_result_rate
         expression: MISSING
         score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        explanation: No good match found.
       - name: spend
         expression: ad_groups_reports_hourly.metrics.spend
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.metrics.spend'.
+        explanation: Perfect match for total spend.
       - name: likes
         expression: ad_groups_reports_hourly.metrics.likes
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.metrics.likes'.
+        explanation: Perfect match for likes received.
       - name: _fivetran_synced
         expression: ad_groups_reports_hourly._airbyte_extracted_at
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly._airbyte_extracted_at'.
+        explanation: Perfect standard match for sync timestamp.
       - name: total_purchase_value
         expression: ad_groups_reports_hourly.metrics.total_purchase_value
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.metrics.total_purchase_value'.
+        explanation: Perfect match for total purchase value.
       - name: total_sales_lead_value
         expression: ad_groups_reports_hourly.metrics.total_sales_lead_value
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.metrics.total_sales_lead_value'.
+        explanation: Perfect match for total sales lead value.
