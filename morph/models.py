@@ -8,12 +8,16 @@ from typing import Any
 
 from pydantic import BaseModel
 from rich.console import Console
-from rich.table import Table
+from rich.markdown import Markdown
 from typing_extensions import Self
 
 from morph import constants, resources
 from morph.utils import text_utils
-from morph.utils.rich_utils import rich_formatted_confidence
+from morph.utils.markdown_utils import (
+    create_markdown_section,
+    create_markdown_table,
+    markdown_formatted_confidence,
+)
 from morph.utils.text_utils import normalize_field_name
 
 console = Console()
@@ -611,48 +615,60 @@ class TableMapping(BaseModel):
 
         return [f for f in self.field_mappings if str(f.expression) != "MISSING"]
 
+    def as_markdown(self) -> str:
+        """Generate a markdown table for the mapping confidence analysis.
+
+        Returns:
+            A markdown formatted string containing the analysis
+        """
+        if not self._attached_evaluation:
+            raise ValueError("No evaluation attached to the table mapping")
+
+        # Create header section
+        title = f"Table Mapping Eval: '{self.source_stream_name}->{self.target_table_name}'"
+
+        # Overall confidence section
+        overall_confidence = f"Overall Confidence Score: {markdown_formatted_confidence(self._attached_evaluation.score)}"
+
+        # Explanation section
+        explanation = create_markdown_section("Explanation", self._attached_evaluation.explanation, level=3)
+
+        # Field-by-field analysis section
+        headers = ["Field", "Expression", "Description", "Confidence", "Evaluation"]
+        rows: list[list[str]] = []
+
+        for field_eval in self._attached_evaluation.field_mapping_evals:
+            field_ref: FieldMapping = next(
+                f for f in self.field_mappings if f.name == field_eval.name
+            )
+            rows.append([
+                field_eval.name,
+                str(field_ref.expression),
+                field_ref.description or "",
+                markdown_formatted_confidence(field_eval.score),
+                field_eval.explanation,
+            ])
+
+        field_analysis = create_markdown_section(
+            "Field-by-Field Analysis",
+            create_markdown_table(headers, rows),
+            level=3,
+        )
+
+        # Combine all sections
+        return create_markdown_section(title, overall_confidence + "\n\n" + explanation + field_analysis, level=2)
+
     def print_as_rich_table(self) -> None:
         """Print a complete mapping confidence analysis.
+
+        This method is maintained for backward compatibility but now uses markdown.
 
         Args:
             confidence: The confidence evaluation results
             fields: List of field mappings
             title: Optional title for the analysis table
         """
-        if not self._attached_evaluation:
-            raise ValueError("No evaluation attached to the table mapping")
-
-        # Create results table
-        table = Table(
-            title=f"Table Mapping Eval: '{self.source_stream_name}->{self.target_table_name}'",
-        )
-        table.add_column("Field", style="cyan", overflow="fold")
-        table.add_column("Expression", style="yellow", overflow="fold")
-        table.add_column("Description", overflow="fold")
-        table.add_column("Confidence", justify="right")
-        table.add_column("Evaluation", style="italic", overflow="fold")
-        # Print results
-        console.print(
-            f"\nOverall Confidence Score: {rich_formatted_confidence(self._attached_evaluation.score)}",
-        )
-        console.print("\nExplanation:")
-        console.print(f"\n{self._attached_evaluation.explanation}", style="italic")
-        console.print("\nField-by-Field Analysis:")
-
-        # Print each field evaluation
-        for field_eval in self._attached_evaluation.field_mapping_evals:
-            field_ref: FieldMapping = next(
-                f for f in self.field_mappings if f.name == field_eval.name
-            )
-            table.add_row(
-                field_eval.name,
-                str(field_ref.expression),
-                field_ref.description or "",
-                rich_formatted_confidence(field_eval.score),
-                field_eval.explanation,
-            )
-
-        console.print(table)
+        console.print(Markdown(self.as_markdown()))
 
 
 class FieldMappingEval(BaseModel):
@@ -749,16 +765,34 @@ class SourceTableMappingSuggestion(BaseModel):
     explanation: str
     """A detailed explanation of the confidence score."""
 
-    def as_rich_table(self) -> Table:
-        """Return a rich representation of the object as a Rich Table."""
-        table = Table(
-            title=f"Table Matching Suggestion for '{self.target_table_name}'",
-            show_header=False,
-        )
-        table.add_row("Suggested Source Table", self.suggested_source_table_name)
-        table.add_row("Confidence Score", rich_formatted_confidence(self.confidence_score))
-        table.add_row("Explanation", self.explanation)
-        return table
+    def as_markdown_table(self) -> str:
+        """Return a markdown representation of the object.
+
+        Returns:
+            A markdown formatted string
+        """
+        title = f"Table Matching Suggestion for '{self.target_table_name}'"
+
+        # Create a simple two-column table
+        headers = ["Property", "Value"]
+        rows = [
+            ["Suggested Source Table", self.suggested_source_table_name],
+            ["Confidence Score", markdown_formatted_confidence(self.confidence_score)],
+            ["Explanation", self.explanation]
+        ]
+
+        table = create_markdown_table(headers, rows)
+        return create_markdown_section(title, table, level=3)
+
+    def as_rich_table(self) -> str:
+        """Return a markdown representation of the object.
+
+        This method is maintained for backward compatibility but now returns a markdown string.
+
+        Returns:
+            A markdown formatted string
+        """
+        return self.as_markdown_table()
 
 
 class SourceTableMappingSuggestionShortList(BaseModel):
