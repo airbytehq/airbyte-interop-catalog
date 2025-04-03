@@ -57,61 +57,62 @@ annotations:
     source_stream_name: campaigns
     target_table_name: campaign_history
     name_match_score: 0.9
-    score: 0.83
+    score: 0.85
     explanation:
-      All fields are well matched except for 'status', which has a 'MISSING'
-      expression. This lowers the overall score. Remaining fields exhibit strong matching
-      criteria.
+      The overall mapping confidence score is high due to close matches
+      between field names and their expressions. However, 'status' field has an expression
+      of 'MISSING', reducing the score. One column, _fivetran_synced, is recommended
+      to map to _airbyte_extracted_at but is not present in the mappings list.
     field_mapping_evals:
       - name: campaign_id
         expression: campaigns.campaign_id
         score: 1.0
-        explanation: Field matches perfectly with source.
+        explanation: Direct match with campaigns.campaign_id.
       - name: updated_at
         expression: campaigns.modify_time
         score: 1.0
-        explanation: Field matches perfectly with source.
+        explanation: Direct match with campaigns.modify_time.
       - name: advertiser_id
         expression: campaigns.advertiser_id
         score: 1.0
-        explanation: Field matches perfectly with source.
+        explanation: Direct match with campaigns.advertiser_id.
       - name: budget
         expression: campaigns.budget
         score: 1.0
-        explanation: Field matches perfectly with source.
+        explanation: Direct match with campaigns.budget.
       - name: budget_mode
         expression: campaigns.budget_mode
         score: 1.0
-        explanation: Field matches perfectly with source.
+        explanation: Direct match with campaigns.budget_mode.
       - name: campaign_name
         expression: campaigns.campaign_name
         score: 1.0
-        explanation: Field matches perfectly with source.
+        explanation: Direct match with campaigns.campaign_name.
       - name: campaign_type
         expression: campaigns.campaign_type
         score: 1.0
-        explanation: Field matches perfectly with source.
+        explanation: Direct match with campaigns.campaign_type.
       - name: create_time
         expression: campaigns.create_time
         score: 1.0
-        explanation: Field matches perfectly with source.
+        explanation: Direct match with campaigns.create_time.
       - name: is_new_structure
         expression: campaigns.is_new_structure
         score: 1.0
-        explanation: Field matches perfectly with source.
+        explanation: Direct match with campaigns.is_new_structure.
       - name: objective_type
         expression: campaigns.objective_type
         score: 1.0
-        explanation: Field matches perfectly with source.
+        explanation: Direct match with campaigns.objective_type.
       - name: opt_status
         expression: campaigns.operation_status
         score: 1.0
-        explanation: Field matches perfectly with source.
+        explanation: Direct match with campaigns.operation_status.
       - name: status
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING' which results in no confidence.
+        explanation: Expression is MISSING.
       - name: split_test_variable
         expression: campaigns.split_test_variable
         score: 1.0
-        explanation: Field matches perfectly with source.
+        explanation: Direct match with campaigns.split_test_variable.

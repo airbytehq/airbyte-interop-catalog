@@ -232,188 +232,43 @@ transforms:
           The monetary worth or potential value assigned to a lead generated
           through ads.
 annotations:
-  approved: true
+  approved: false
   missing_fields:
     - total_sales_lead_value
   evaluation:
     source_stream_name: campaigns_reports_hourly
     target_table_name: campaign_report_hourly
-    name_match_score: 0.85
-    score: 0.8
+    name_match_score: 0.65
+    score: 0.65
     explanation:
-      The mapping confidence is generally high due to consistent naming
-      conventions and well-defined expressions. However, there is one field with a
-      missing expression which affects the overall score.
+      Overall mapping confidence is moderate based on available data. All
+      necessary fields were mapped, but certain fields may refer to different concepts.
+      Some fields have insufficient match confidence due to inconsistencies or ambiguous
+      mapping expressions, particularly those not mapped or designated as 'MISSING'.
     field_mapping_evals:
-      - name: campaign_id
-        expression: campaigns_reports_hourly.campaign_id
-        score: 1.0
-        explanation: Exact match with clear expression.
-      - name: stat_time_hour
-        expression: campaigns_reports_hourly.stat_time_hour
-        score: 1.0
-        explanation: Exact match with clear expression.
-      - name: cost_per_conversion
-        expression: campaigns_reports_hourly.metrics.cost_per_conversion
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: real_time_conversion
-        expression: campaigns_reports_hourly.metrics.real_time_conversion
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: cpc
-        expression: campaigns_reports_hourly.metrics.cpc
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: video_play_actions
-        expression: campaigns_reports_hourly.metrics.video_play_actions
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: conversion_rate
-        expression: campaigns_reports_hourly.metrics.conversion_rate
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: video_views_p_75
-        expression: campaigns_reports_hourly.metrics.video_views_p75
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: result
-        expression: campaigns_reports_hourly.metrics.result
-        score: 0.7
-        explanation: Fair match, but could refer to different result metrics.
-      - name: video_views_p_50
-        expression: campaigns_reports_hourly.metrics.video_views_p50
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: impressions
-        expression: campaigns_reports_hourly.metrics.impressions
-        score: 1.0
-        explanation: Exact match with clear expression.
-      - name: comments
-        expression: campaigns_reports_hourly.metrics.comments
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: real_time_cost_per_result
-        expression: campaigns_reports_hourly.metrics.real_time_cost_per_result
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: conversion
-        expression: campaigns_reports_hourly.metrics.conversion
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: real_time_result
-        expression: campaigns_reports_hourly.metrics.real_time_result
-        score: 0.7
-        explanation: Fair match, but could refer to different result metrics.
-      - name: video_view_p_100
-        expression: campaigns_reports_hourly.metrics.video_views_p100
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: shares
-        expression: campaigns_reports_hourly.metrics.shares
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: real_time_conversion_rate
-        expression: campaigns_reports_hourly.metrics.real_time_conversion_rate
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: cost_per_secondary_goal_result
-        expression: campaigns_reports_hourly.metrics.cost_per_secondary_goal_result
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: secondary_goal_result_rate
-        expression: campaigns_reports_hourly.metrics.secondary_goal_result_rate
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: clicks
-        expression: campaigns_reports_hourly.metrics.clicks
-        score: 1.0
-        explanation: Exact match with clear expression.
-      - name: cost_per_1000_reached
-        expression: campaigns_reports_hourly.metrics.cost_per_1000_reached
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: video_views_p_25
-        expression: campaigns_reports_hourly.metrics.video_views_p25
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: reach
-        expression: campaigns_reports_hourly.metrics.reach
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: real_time_cost_per_conversion
-        expression: campaigns_reports_hourly.metrics.real_time_cost_per_conversion
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: profile_visits_rate
-        expression: campaigns_reports_hourly.metrics.profile_visits_rate
-        score: 0.7
-        explanation: Fair match, could differ based on campaign type.
-      - name: average_video_play
-        expression: campaigns_reports_hourly.metrics.average_video_play
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: profile_visits
-        expression: campaigns_reports_hourly.metrics.profile_visits
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: cpm
-        expression: campaigns_reports_hourly.metrics.cpm
-        score: 1.0
-        explanation: Exact match with clear expression.
-      - name: ctr
-        expression: campaigns_reports_hourly.metrics.ctr
-        score: 1.0
-        explanation: Exact match with clear expression.
-      - name: video_watched_2_s
-        expression: campaigns_reports_hourly.metrics.video_watched_2s
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: follows
-        expression: campaigns_reports_hourly.metrics.follows
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: result_rate
-        expression: campaigns_reports_hourly.metrics.result_rate
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: video_watched_6_s
-        expression: campaigns_reports_hourly.metrics.video_watched_6s
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: secondary_goal_result
-        expression: campaigns_reports_hourly.metrics.secondary_goal_result
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: cost_per_result
-        expression: campaigns_reports_hourly.metrics.cost_per_result
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: average_video_play_per_user
-        expression: campaigns_reports_hourly.metrics.average_video_play_per_user
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: real_time_result_rate
-        expression: campaigns_reports_hourly.metrics.real_time_result_rate
-        score: 0.7
-        explanation: Fair match, but could refer to different result metrics.
-      - name: spend
-        expression: campaigns_reports_hourly.metrics.spend
-        score: 1.0
-        explanation: Exact match with clear expression.
-      - name: likes
-        expression: campaigns_reports_hourly.metrics.likes
-        score: 0.9
-        explanation: Close match with high confidence.
-      - name: _fivetran_synced
-        expression: campaigns_reports_hourly._airbyte_extracted_at
-        score: 1.0
-        explanation: Correctly mapped to source stream's _airbyte_extracted_at.
       - name: total_purchase_value
         expression: campaigns_reports_hourly.metrics.total_purchase_value
-        score: 0.9
-        explanation: Close match with high confidence.
+        score: 0.7
+        explanation: Mapped correctly with high confidence based on expression alignment.
       - name: total_sales_lead_value
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, resulting in no confidence.
+        explanation: Expression is 'MISSING'; hence, no confidence in mapping.
+      - name: _fivetran_synced
+        expression: campaigns_reports_hourly._airbyte_extracted_at
+        score: 0.95
+        explanation: Mapped as expected to _airbyte_extracted_at with high confidence.
+      - name: spend
+        expression: campaigns_reports_hourly.metrics.spend
+        score: 0.7
+        explanation: Mapped with reasonable confidence to spending data.
+      - name: likes
+        expression: campaigns_reports_hourly.metrics.likes
+        score: 0.7
+        explanation: Mapping aligns with video creative interactions, moderate confidence.
+      - name: average_video_play_per_user
+        expression: campaigns_reports_hourly.metrics.average_video_play_per_user
+        score: 0.7
+        explanation:
+          Average video play duration per user mapped correctly with reasonable
+          confidence.

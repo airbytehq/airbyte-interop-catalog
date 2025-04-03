@@ -9,7 +9,7 @@ campaigns AS (
 
 SELECT
     campaigns.campaign_id AS campaign_id,
-    campaigns._airbyte_extracted_at AS updated_at,
+    campaigns.modify_time AS updated_at,
     campaigns.advertiser_id AS advertiser_id,
     campaigns.budget AS budget,
     campaigns.budget_mode AS budget_mode,
@@ -18,7 +18,7 @@ SELECT
     campaigns.create_time AS create_time,
     campaigns.is_new_structure AS is_new_structure,
     campaigns.objective_type AS objective_type,
-    NULL AS opt_status,
+    campaigns.operation_status AS opt_status,
     NULL AS status,
     campaigns.split_test_variable AS split_test_variable
 FROM campaigns

@@ -33,7 +33,7 @@ SELECT
     campaigns_reports_hourly.metrics.video_views_p25 AS video_views_p_25,
     campaigns_reports_hourly.metrics.reach AS reach,
     campaigns_reports_hourly.metrics.real_time_cost_per_conversion AS real_time_cost_per_conversion,
-    NULL AS profile_visits_rate,
+    campaigns_reports_hourly.metrics.profile_visits_rate AS profile_visits_rate,
     campaigns_reports_hourly.metrics.average_video_play AS average_video_play,
     campaigns_reports_hourly.metrics.profile_visits AS profile_visits,
     campaigns_reports_hourly.metrics.cpm AS cpm,

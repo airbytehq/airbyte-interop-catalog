@@ -255,186 +255,188 @@ annotations:
   evaluation:
     source_stream_name: ads_reports_hourly
     target_table_name: ad_report_hourly
-    name_match_score: 0.54
-    score: 0.54
+    name_match_score: 0.5
+    score: 0.53
     explanation:
-      The table mapping evaluation scores are calculated based on the availability
-      and match of expressions. Several fields have missing expressions ('MISSING'),
-      which reduces the confidence score. Mapping expressions that are clearly defined
-      contribute positively to the score. Fields with precise mappings achieve higher
-      scores, while those with ambiguous or 'MISSING' expressions have lower confidence
-      scores. The primary field '_fivetran_synced' is correctly mapped to '_airbyte_extracted_at',
-      as per instructions, ensuring high confidence for this specific mapping.
+      Overall confidence score is calculated based on the presence and
+      accuracy of field mappings. Fields with expression 'MISSING' were given a score
+      of 0.0. Only mappings with accurate names and existing expressions contributed
+      positively to the score. Mapping '_fivetran_synced' shows perfect confidence,
+      aligning '_airbyte_extracted_at' with highest confidence.
     field_mapping_evals:
       - name: ad_id
         expression: ads_reports_hourly.dimensions.ad_id
         score: 0.7
-        explanation: Expression matches perfectly with source field.
+        explanation:
+          Mapping is based on an accurate match between the field name
+          and description.
       - name: stat_time_hour
         expression: ads_reports_hourly.dimensions.stat_time_hour
         score: 0.7
-        explanation: Expression matches perfectly with source field.
+        explanation:
+          Field name corresponds well with an existing column in the source
+          data.
       - name: cost_per_conversion
         expression: MISSING
         score: 0.0
-        explanation: Field is marked as 'MISSING', indicating no available expression.
+        explanation: Expression is missing hence no confidence.
       - name: real_time_conversion
         expression: MISSING
         score: 0.0
-        explanation: Field is marked as 'MISSING', indicating no available expression.
+        explanation: Expression is missing hence no confidence.
       - name: cpc
         expression: ads_reports_hourly.metrics.cpc
         score: 0.7
-        explanation: Expression matches perfectly with source field.
+        explanation: Mapping name matches accurately with a complete expression.
       - name: video_play_actions
         expression: ads_reports_hourly.metrics.video_play_actions
         score: 0.7
-        explanation: Expression matches perfectly with source field.
+        explanation: Expression exists and correlates correctly with the field name.
       - name: conversion_rate
         expression: MISSING
         score: 0.0
-        explanation: Field is marked as 'MISSING', indicating no available expression.
+        explanation: Expression is missing hence no confidence.
       - name: video_views_p_75
         expression: ads_reports_hourly.metrics.video_views_p75
         score: 0.7
-        explanation: Expression matches perfectly with source field.
+        explanation: Accurate mapping based on expression and description.
       - name: result
         expression: MISSING
         score: 0.0
-        explanation: Field is marked as 'MISSING', indicating no available expression.
+        explanation: Expression is missing hence no confidence.
       - name: video_views_p_50
         expression: ads_reports_hourly.metrics.video_views_p50
         score: 0.7
-        explanation: Expression matches perfectly with source field.
+        explanation: Well-mapped with existing field in source data.
       - name: impressions
         expression: ads_reports_hourly.metrics.impressions
         score: 0.7
-        explanation: Expression matches perfectly with source field.
+        explanation: Field matches perfectly with the source data expression.
       - name: comments
         expression: ads_reports_hourly.metrics.comments
         score: 0.7
-        explanation: Expression matches perfectly with source field.
+        explanation: Full description alignment leading to high confidence.
       - name: real_time_cost_per_result
         expression: MISSING
         score: 0.0
-        explanation: Field is marked as 'MISSING', indicating no available expression.
+        explanation: Expression is missing hence no confidence.
       - name: conversion
         expression: MISSING
         score: 0.0
-        explanation: Field is marked as 'MISSING', indicating no available expression.
+        explanation: Expression is missing hence no confidence.
       - name: real_time_result
         expression: MISSING
         score: 0.0
-        explanation: Field is marked as 'MISSING', indicating no available expression.
+        explanation: Expression is missing hence no confidence.
       - name: video_view_p_100
         expression: ads_reports_hourly.metrics.video_views_p100
         score: 0.7
-        explanation: Expression matches perfectly with source field.
+        explanation: Field and expression match perfectly.
       - name: shares
         expression: ads_reports_hourly.metrics.shares
         score: 0.7
-        explanation: Expression matches perfectly with source field.
+        explanation: Field aligns well with available expression.
       - name: real_time_conversion_rate
         expression: MISSING
         score: 0.0
-        explanation: Field is marked as 'MISSING', indicating no available expression.
+        explanation: Expression is missing hence no confidence.
       - name: cost_per_secondary_goal_result
         expression: MISSING
         score: 0.0
-        explanation: Field is marked as 'MISSING', indicating no available expression.
+        explanation: Expression is missing hence no confidence.
       - name: secondary_goal_result_rate
         expression: MISSING
         score: 0.0
-        explanation: Field is marked as 'MISSING', indicating no available expression.
+        explanation: Expression is missing hence no confidence.
       - name: clicks
         expression: ads_reports_hourly.metrics.clicks
         score: 0.7
-        explanation: Expression matches perfectly with source field.
+        explanation: Good mapping confidence with full expression.
       - name: cost_per_1000_reached
         expression: MISSING
         score: 0.0
-        explanation: Field is marked as 'MISSING', indicating no available expression.
+        explanation: Expression missing, leading to no confidence.
       - name: video_views_p_25
         expression: ads_reports_hourly.metrics.video_views_p25
         score: 0.7
-        explanation: Expression matches perfectly with source field.
+        explanation: Complete and accurate field and expression match.
       - name: reach
         expression: MISSING
         score: 0.0
-        explanation: Field is marked as 'MISSING', indicating no available expression.
+        explanation: Expression is missing hence no confidence.
       - name: real_time_cost_per_conversion
         expression: MISSING
         score: 0.0
-        explanation: Field is marked as 'MISSING', indicating no available expression.
+        explanation: Expression is missing, no confidence.
       - name: profile_visits_rate
         expression: ads_reports_hourly.metrics.profile_visits_rate
         score: 0.7
-        explanation: Expression matches perfectly with source field.
+        explanation: Accurate match with existing source field.
       - name: average_video_play
         expression: ads_reports_hourly.metrics.average_video_play
         score: 0.7
-        explanation: Expression matches perfectly with source field.
+        explanation: Good match based on complete expression.
       - name: profile_visits
         expression: ads_reports_hourly.metrics.profile_visits
         score: 0.7
-        explanation: Expression matches perfectly with source field.
+        explanation: Perfect match between field and available data.
       - name: cpm
         expression: MISSING
         score: 0.0
-        explanation: Field is marked as 'MISSING', indicating no available expression.
+        explanation: Expression is missing hence no confidence.
       - name: ctr
         expression: ads_reports_hourly.metrics.ctr
         score: 0.7
-        explanation: Expression matches perfectly with source field.
+        explanation: Matches well with expression and context.
       - name: video_watched_2_s
         expression: ads_reports_hourly.metrics.video_watched_2s
         score: 0.7
-        explanation: Expression matches perfectly with source field.
+        explanation: Matches well with the existing expression.
       - name: follows
         expression: ads_reports_hourly.metrics.follows
         score: 0.7
-        explanation: Expression matches perfectly with source field.
+        explanation: Field aligns well with source data expression.
       - name: result_rate
         expression: ads_reports_hourly.metrics.result_rate
         score: 0.7
-        explanation: Expression matches perfectly with source field.
+        explanation: Perfect match with existing field and data descriptions.
       - name: video_watched_6_s
         expression: ads_reports_hourly.metrics.video_watched_6s
         score: 0.7
-        explanation: Expression matches perfectly with source field.
+        explanation: Expression is complete and contextually accurate.
       - name: secondary_goal_result
         expression: MISSING
         score: 0.0
-        explanation: Field is marked as 'MISSING', indicating no available expression.
+        explanation: No expression available, hence no confidence.
       - name: cost_per_result
         expression: ads_reports_hourly.metrics.cost_per_result
         score: 0.7
-        explanation: Expression matches perfectly with source field.
+        explanation: Expressed data matches field perfectly.
       - name: average_video_play_per_user
         expression: ads_reports_hourly.metrics.average_video_play_per_user
         score: 0.7
-        explanation: Expression matches perfectly with source field.
+        explanation: Matches with good confidence to source field.
       - name: real_time_result_rate
         expression: MISSING
         score: 0.0
-        explanation: Field is marked as 'MISSING', indicating no available expression.
+        explanation: Expression is missing, hence no confidence.
       - name: spend
         expression: ads_reports_hourly.metrics.spend
         score: 0.7
-        explanation: Expression matches perfectly with source field.
+        explanation: Field matches exactly with the available expression.
       - name: likes
         expression: ads_reports_hourly.metrics.likes
         score: 0.7
-        explanation: Expression matches perfectly with source field.
+        explanation: High confidence due to existing mapped expression.
       - name: _fivetran_synced
         expression: ads_reports_hourly._airbyte_extracted_at
-        score: 0.7
-        explanation: Expression matches perfectly with source field (_airbyte_extracted_at).
+        score: 1.0
+        explanation: Mapped perfectly to '_airbyte_extracted_at'.
       - name: total_purchase_value
         expression: MISSING
         score: 0.0
-        explanation: Field is marked as 'MISSING', indicating no available expression.
+        explanation: Expression is missing, hence no confidence.
       - name: total_sales_lead_value
         expression: MISSING
         score: 0.0
-        explanation: Field is marked as 'MISSING', indicating no available expression.
+        explanation: No expression available, resulting in no confidence.

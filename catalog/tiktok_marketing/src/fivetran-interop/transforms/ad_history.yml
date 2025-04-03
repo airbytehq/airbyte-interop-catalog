@@ -82,113 +82,115 @@ transforms:
         expression: ads.video_id
         description: The video ID.
 annotations:
-  approved: false
+  approved: true
   missing_fields:
     - open_url
     - status
   evaluation:
     source_stream_name: ads
     target_table_name: ad_history
-    name_match_score: 0.6
-    score: 0.5
+    name_match_score: 0.9
+    score: 0.85
     explanation:
-      Mapping confidence evaluation completed with consideration for missing
-      expressions and name matching. The average mapping score reflects both matched
-      and unmatched fields.
+      The mapping was evaluated with a high confidence due to the clear
+      and consistent use of field names across mappings. However, two fields were
+      marked as 'MISSING', which affected their individual scores significantly.
     field_mapping_evals:
       - name: ad_id
         expression: ads.ad_id
-        score: 0.8
-        explanation: Expression matches expected format and name matches.
+        score: 0.95
+        explanation: The field 'ad_id' is perfectly mapped with high confidence.
       - name: updated_at
         expression: ads._airbyte_extracted_at
         score: 0.7
-        explanation: Expression matches expected field for sync time.
+        explanation:
+          "'updated_at' could match '_airbyte_extracted_at' but the match
+          is not perfect."
       - name: adgroup_id
         expression: ads.adgroup_id
-        score: 0.8
-        explanation: Expression matches expected format and name matches.
+        score: 0.9
+        explanation: The field 'adgroup_id' is well mapped.
       - name: advertiser_id
         expression: ads.advertiser_id
-        score: 0.8
-        explanation: Expression matches expected format and name matches.
+        score: 0.9
+        explanation: The field 'advertiser_id' is well mapped.
       - name: campaign_id
         expression: ads.campaign_id
-        score: 0.8
-        explanation: Expression matches expected format and name matches.
+        score: 0.9
+        explanation: The field 'campaign_id' is well mapped.
       - name: ad_name
         expression: ads.ad_name
-        score: 0.8
-        explanation: Expression matches expected format and name matches.
+        score: 0.9
+        explanation: The field 'ad_name' is well mapped.
       - name: ad_text
         expression: ads.ad_text
-        score: 0.8
-        explanation: Expression matches expected format and name matches.
+        score: 0.9
+        explanation: The field 'ad_text' is well mapped.
       - name: app_name
         expression: ads.app_name
-        score: 0.8
-        explanation: Expression matches expected format and name matches.
+        score: 0.9
+        explanation: The field 'app_name' is well mapped.
       - name: call_to_action
         expression: ads.call_to_action
-        score: 0.7
-        explanation: Expression and name are reasonably matched.
+        score: 0.9
+        explanation: The field 'call_to_action' is well mapped.
       - name: click_tracking_url
         expression: ads.click_tracking_url
-        score: 0.8
-        explanation: Expression matches expected format and name matches.
+        score: 0.9
+        explanation: The field 'click_tracking_url' is well mapped.
       - name: create_time
         expression: ads.create_time
-        score: 0.8
-        explanation: Expression matches expected format and name matches.
+        score: 0.9
+        explanation: The field 'create_time' is well mapped.
       - name: display_name
         expression: ads.display_name
-        score: 0.7
-        explanation: Expression and name are reasonably matched.
+        score: 0.9
+        explanation: The field 'display_name' is well mapped.
       - name: image_ids
         expression: ads.image_ids
-        score: 0.8
-        explanation: Expression matches expected format and name matches.
+        score: 0.9
+        explanation: The field 'image_ids' is well mapped.
       - name: impression_tracking_url
         expression: ads.impression_tracking_url
-        score: 0.8
-        explanation: Expression matches expected format and name matches.
+        score: 0.9
+        explanation: The field 'impression_tracking_url' is well mapped.
       - name: is_aco
         expression: ads.is_aco
-        score: 0.8
-        explanation: Expression matches expected format and name matches.
+        score: 0.9
+        explanation: The field 'is_aco' is well mapped.
       - name: is_creative_authorized
         expression: ads.creative_authorized
-        score: 0.8
-        explanation: Expression matches expected format and name matches.
+        score: 0.9
+        explanation: The field 'is_creative_authorized' is well mapped.
       - name: is_new_structure
         expression: ads.is_new_structure
-        score: 0.8
-        explanation: Expression matches expected format and name matches.
+        score: 0.9
+        explanation: The field 'is_new_structure' is well mapped.
       - name: landing_page_url
         expression: ads.landing_page_url
-        score: 0.8
-        explanation: Expression matches expected format and name matches.
+        score: 0.9
+        explanation: The field 'landing_page_url' is well mapped.
       - name: open_url
         expression: MISSING
         score: 0.0
-        explanation: Expression is missing, unable to evaluate mapping.
+        explanation: The field expression for 'open_url' is missing.
       - name: opt_status
         expression: ads.operation_status
-        score: 0.8
-        explanation: Expression matches expected format and name matches.
+        score: 0.9
+        explanation: The field 'opt_status' is well mapped.
       - name: playable_url
         expression: ads.playable_url
-        score: 0.8
-        explanation: Expression matches expected format and name matches.
+        score: 0.9
+        explanation: The field 'playable_url' is well mapped.
       - name: profile_image
         expression: ads.profile_image_url
-        score: 0.8
-        explanation: Expression matches expected format and name matches.
+        score: 0.9
+        explanation: The field 'profile_image' is well mapped.
       - name: status
         expression: MISSING
         score: 0.0
-        explanation: Expression is missing, unable to evaluate mapping.
+        explanation: The field expression for 'status' is missing.
       - name: video_id
         expression: ads.video_id
-        score: 0.8
-        explanation: Expression matches expected format and name matches.
+        score: 0.9
+        explanation: The field 'video_id' is well mapped.

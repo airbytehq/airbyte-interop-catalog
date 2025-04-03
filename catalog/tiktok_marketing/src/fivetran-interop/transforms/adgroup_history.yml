@@ -323,287 +323,295 @@ annotations:
   evaluation:
     source_stream_name: ad_groups
     target_table_name: adgroup_history
-    name_match_score: 0.6
-    score: 0.1
+    name_match_score: 0.15
+    score: 0.15
     explanation:
-      Evaluation of field mappings resulted in a low overall score due
-      to many 'MISSING' expressions, indicating a lack of confidence in the mappings.
-      The name match score is moderate, reflecting some alignment in naming but not
-      enough to increase confidence significantly.
+      Out of 66 fields, only a few have non-MISSING expressions, resulting
+      in a low overall confidence score.
     field_mapping_evals:
       - name: adgroup_id
         expression: ad_groups.adgroup_id
-        score: 1.0
-        explanation: Perfect match with expression 'ad_groups.adgroup_id'.
+        score: 0.9
+        explanation:
+          adgroup_id is mapped to ad_groups.adgroup_id which is a likely
+          match based on name and context.
       - name: updated_at
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: advertiser_id
         expression: ad_groups.advertiser_id
-        score: 1.0
-        explanation: Perfect match with expression 'ad_groups.advertiser_id'.
+        score: 0.9
+        explanation:
+          advertiser_id is mapped to ad_groups.advertiser_id which is a
+          likely match based on name and context.
       - name: campaign_id
         expression: ad_groups.campaign_id
-        score: 1.0
-        explanation: Perfect match with expression 'ad_groups.campaign_id'.
+        score: 0.9
+        explanation:
+          campaign_id is mapped to ad_groups.campaign_id which is a likely
+          match based on name and context.
       - name: action_categories
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: action_days
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: adgroup_name
         expression: ad_groups.adgroup_name
-        score: 1.0
-        explanation: Perfect match with expression 'ad_groups.adgroup_name'.
+        score: 0.9
+        explanation:
+          adgroup_name is mapped to ad_groups.adgroup_name which is a likely
+          match based on name and context.
       - name: age_groups
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: android_osv
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: app_download_url
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: app_id
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: app_name
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: app_type
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: audience
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: audience_type
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: bid
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: bid_type
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: billing_event
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: budget
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: budget_mode
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: carriers
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: category
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: click_tracking_url
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: connection_type
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: conversion_bid
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: cpv_video_duration
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: creative_material_mode
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: dayparting
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: deep_bid_type
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: deep_cpabid
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: deep_external_action
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: display_name
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: enable_inventory_filter
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: excluded_audience
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: external_action
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: fallback_type
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: frequency
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: frequency_schedule
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: gender
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: impression_tracking_url
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: interest_category_v2
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: ios_osv
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: is_comment_disable
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: is_hfss
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: is_new_structure
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: keywords
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: landing_page_url
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: languages
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: location
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: open_url
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: open_url_type
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: operation_system
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: opt_status
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: optimize_goal
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: pacing
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: package
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: pangle_block_app_list_id
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: pixel_id
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: placement
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: placement_type
         expression: ad_groups.placement_type
-        score: 1.0
-        explanation: Perfect match with expression 'ad_groups.placement_type'.
+        score: 0.9
+        explanation:
+          placement_type is mapped to ad_groups.placement_type which is
+          a likely match based on name and context.
       - name: profile_image
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: schedule_end_time
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: schedule_start_time
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: schedule_type
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: skip_learning_phase
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: statistic_type
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: status
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: video_actions
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.
       - name: video_download
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'. No information to evaluate.
+        explanation: The expression is MISSING, so the confidence score is 0.0.

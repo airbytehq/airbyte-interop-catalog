@@ -26,10 +26,10 @@ SELECT
     ads.creative_authorized AS is_creative_authorized,
     ads.is_new_structure AS is_new_structure,
     ads.landing_page_url AS landing_page_url,
-    ads.deeplink AS open_url,
+    NULL AS open_url,
     ads.operation_status AS opt_status,
     ads.playable_url AS playable_url,
     ads.profile_image_url AS profile_image,
-    ads.secondary_status AS status,
+    NULL AS status,
     ads.video_id AS video_id
 FROM ads

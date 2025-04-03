@@ -24,7 +24,7 @@ SELECT
     advertisers.license_no AS license_no,
     advertisers.license_url AS license_url,
     advertisers.name AS name,
-    NULL AS phone_number,
+    advertisers.cellphone_number AS phone_number,
     advertisers.promotion_area AS promotion_area,
     advertisers.rejection_reason AS reason,
     advertisers.role AS role,
