@@ -131,7 +131,7 @@ def test_find_unused_source_streams():
 #         validate_field_mappings("transform_id", source_aliases, fields)
 
 
-# def test_generate_lock_file():
+# def test_update_lock_file():
 #     # Create test directory structure
 #     with tempfile.TemporaryDirectory() as tmpdir:
 #         # Create config file
@@ -220,7 +220,7 @@ def test_find_unused_source_streams():
 
 #         # Call function
 #         lock_file = Path(tmpdir) / "morph-lock.toml"
-#         generate_lock_file_for_project(
+#         update_lock_file_for_project(
 #             source_name="test",
 #             project_name="test",
 #             mapping_dir=mapping_dir,

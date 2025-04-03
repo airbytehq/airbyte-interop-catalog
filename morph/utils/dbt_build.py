@@ -20,7 +20,7 @@ from morph.utils.mapping_to_dbt_models import generate_dbt_package
 console = Console()
 
 
-def generate_dbt_project(
+def build_dbt_project(
     source_name: str,
     project_name: str,
     *,

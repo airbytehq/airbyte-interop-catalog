@@ -142,7 +142,7 @@ def validate_field_mappings(
                     )
 
 
-def generate_lock_file_for_project(
+def update_lock_file_for_project(
     source_name: str,
     project_name: str,
 ) -> None:
@@ -301,7 +301,7 @@ def generate_lock_file_for_project(
     console.print(f"Generated lock file for {source_name}", style="green")
 
 
-def generate_lock_file(
+def update_lock_file(
     source_name: str,
     project_name: str,
 ) -> None:
@@ -332,7 +332,7 @@ def generate_lock_file(
 
     # Generate lock file
     try:
-        generate_lock_file_for_project(
+        update_lock_file_for_project(
             source_name=source_name,
             project_name=project_name,
         )

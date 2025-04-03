@@ -273,7 +273,7 @@ FROM {% for source in sources %}{{ source.alias }}{% if not loop.last %}, {% end
     )
 
 
-def generate_dbt_project_yml(
+def build_dbt_project_yml(
     catalog_name: str,
     models: list[str],
 ) -> str:
