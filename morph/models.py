@@ -482,7 +482,7 @@ class TableMapping(BaseModel):
                 ),
             )
 
-        return cls(
+        table_mapping = cls(
             source_name=source_name,
             project_name=project_name,
             transform_name=transform_name,
@@ -490,6 +490,32 @@ class TableMapping(BaseModel):
             target_table_name=target_table_name,
             field_mappings=fields,
         )
+
+        # Load attached evaluation if present
+        if "annotations" in file_data and "evaluation" in file_data["annotations"]:
+            eval_data = file_data["annotations"]["evaluation"]
+
+            # Create field mapping evaluations
+            field_mapping_evals = []
+            for field_eval_data in eval_data.get("field_mapping_evals", []):
+                field_mapping_evals.append(
+                    FieldMappingEval(
+                        name=field_eval_data["name"],
+                        score=field_eval_data["score"],
+                        explanation=field_eval_data["explanation"],
+                    )
+                )
+
+            # Create and attach the evaluation
+            evaluation = TableMappingEval(
+                table_match_score=eval_data["table_match_score"],
+                completion_score=eval_data["completion_score"],
+                explanation=eval_data["explanation"],
+                field_mapping_evals=field_mapping_evals,
+            )
+            table_mapping.attach_evaluation(evaluation)
+
+        return table_mapping
 
     def to_file(self, transform_file: Path | None = None) -> None:
         """Write the TableMapping to a transform file."""
