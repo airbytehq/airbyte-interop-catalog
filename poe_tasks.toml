@@ -25,3 +25,5 @@ pre-commit = { cmd = "pre-commit run --all-files", help = "Run pre-commit hooks"
 morph-eval = { cmd = "uv run morph eval", help = "Evaluate mapping files in a project" }
 morph-build = { cmd = "uv run morph build", help = "Build mapping files in a project" }
 morph-lock = { cmd = "uv run morph lock", help = "Lock mapping files in a project" }
+
+morph-build-all = { shell = "uv run morph build hubspot --no-creds && uv run morph build tiktok_marketing --no-creds && uv run morph build facebook_marketing --no-creds && uv run morph build shopify --no-creds", help = "Build all project files in all projects" }
