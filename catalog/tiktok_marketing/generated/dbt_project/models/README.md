@@ -5,7 +5,7 @@ This directory contains automatically generated dbt models based on mapping file
 ### Mapping: Airbyte `ad_groups_reports_hourly` to Fivetran `adgroup_report_hourly`
 
 
-- Table Match Confidence Score: 🟢 _1.00__
+- Table Match Confidence Score: 🟢 _1.00_
 - Table Completion Score: 🟢 _1.00_
 - Summary Self-Evaluation: _Successfully mapped all fields with a high confidence score, indicating perfect mapping between the source and target schema._
 
@@ -58,7 +58,7 @@ This directory contains automatically generated dbt models based on mapping file
 ### Mapping: Airbyte `campaigns` to Fivetran `campaign_history`
 
 
-- Table Match Confidence Score: 🟢 _0.85__
+- Table Match Confidence Score: 🟢 _0.85_
 - Table Completion Score: 🟢 _0.77_
 - Summary Self-Evaluation: _The source table 'campaigns' matches the target schema closely with most fields appropriately mapped, resulting in a high table match score. However, missing fields 'opt_status' and 'status' reflect in a slightly lower completion score._
 
@@ -81,7 +81,7 @@ This directory contains automatically generated dbt models based on mapping file
 ### Mapping: Airbyte `advertisers` to Fivetran `advertiser`
 
 
-- Table Match Confidence Score: 🟢 _0.85__
+- Table Match Confidence Score: 🟢 _0.85_
 - Table Completion Score: 🟢 _0.90_
 - Summary Self-Evaluation: _The table has strong similarities in representing advertiser information across both source and target schemas. However, there is some discrepancy in field mapping completion due primarily to missing field expressions, though key fields like '_fivetran_synced' show complete and direct mapping._
 
@@ -116,7 +116,7 @@ This directory contains automatically generated dbt models based on mapping file
 ### Mapping: Airbyte `campaigns_reports_hourly` to Fivetran `campaign_report_hourly`
 
 
-- Table Match Confidence Score: 🟢 _0.95__
+- Table Match Confidence Score: 🟢 _0.95_
 - Table Completion Score: 🟢 _0.97_
 - Summary Self-Evaluation: _The table and field mappings are highly accurate. The mapping configuration includes a variety of field mappings that closely align with their expressions, with few MISSING mappings indicating minor gaps in completion. Generally, mappings such as '_fivetran_synced' to '_airbyte_extracted_at' are perfectly matched, resulting in a high table match score. Other fields are accurately associated with the correct expressions, suggesting they describe the same subject matter from a shared source. This results in a high completion score due to the absence of non-mappable fields, apart from minor misses like 'total_sales_lead_value' and 'profile_visits_rate'._
 
@@ -169,7 +169,7 @@ This directory contains automatically generated dbt models based on mapping file
 ### Mapping: Airbyte `ads` to Fivetran `ad_history`
 
 
-- Table Match Confidence Score: 🟢 _0.85__
+- Table Match Confidence Score: 🟢 _0.85_
 - Table Completion Score: 🟢 _0.95_
 - Summary Self-Evaluation: _The table mapping reflects a high degree of confidence given that the field mappings align well with expectations for a typical ad schema. However, some fields could not perfectly be matched or verified due to lack of comprehensive context._
 
@@ -203,7 +203,7 @@ This directory contains automatically generated dbt models based on mapping file
 ### Mapping: Airbyte `ads_reports_hourly` to Fivetran `ad_report_hourly`
 
 
-- Table Match Confidence Score: 🟢 _0.85__
+- Table Match Confidence Score: 🟢 _0.85_
 - Table Completion Score: 🟢 _0.80_
 - Summary Self-Evaluation: _The table mapping is highly confident with most fields accurately mapped to their equivalents in the target schema. However, a few fields have missing mappings which slightly lowers the completion score._
 
@@ -260,7 +260,7 @@ These models are in the workshop directory and are not yet approved.
 ### Mapping: Airbyte `ad_groups` to Fivetran `adgroup_history`
 
 
-- Table Match Confidence Score: 🟢 _0.90__
+- Table Match Confidence Score: 🟢 _0.90_
 - Table Completion Score: ⚠️ _0.60_
 - Summary Self-Evaluation: _The table match score is high due to strong alignment between the source and target schemas from similar APIs. However, completion is limited by several 'MISSING' fields that indicate fields present in target schema do not have corresponding entries in the source schema._
 

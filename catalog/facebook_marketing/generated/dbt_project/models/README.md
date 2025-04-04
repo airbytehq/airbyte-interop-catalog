@@ -5,7 +5,7 @@ This directory contains automatically generated dbt models based on mapping file
 ### Mapping: Airbyte `campaigns` to Fivetran `campaign_history`
 
 
-- Table Match Confidence Score: 🟢 _1.00__
+- Table Match Confidence Score: 🟢 _1.00_
 - Table Completion Score: 🟢 _1.00_
 - Summary Self-Evaluation: _All provided field mappings closely correspond to the source fields for the campaigns table, thus the highest confidence scores apply for the overall table and field mappings._
 
@@ -27,7 +27,7 @@ This directory contains automatically generated dbt models based on mapping file
 ### Mapping: Airbyte `ads_insights` to Fivetran `basic_ad`
 
 
-- Table Match Confidence Score: 🟢 _0.90__
+- Table Match Confidence Score: 🟢 _0.90_
 - Table Completion Score: 🟢 _0.95_
 - Summary Self-Evaluation: _The mapping is very comprehensive and the fields provided closely match the target schema. Most fields have a clear counterpart in the target schema, providing high confidence scores._
 
@@ -48,7 +48,7 @@ This directory contains automatically generated dbt models based on mapping file
 ### Mapping: Airbyte `ad_sets` to Fivetran `ad_set_history`
 
 
-- Table Match Confidence Score: 🟢 _0.85__
+- Table Match Confidence Score: 🟢 _0.85_
 - Table Completion Score: 🟢 _0.75_
 - Summary Self-Evaluation: _The table mapping evaluation indicates a moderate to high confidence in the table subject matching, primarily based on shared semantics derived from similar schemas in the source and target tables, both of which are generated from equivalent API endpoints. However, there are significant disparities in the field mappings, particularly with undefined fields marked as 'MISSING', which affects the completion score._
 
@@ -71,7 +71,7 @@ This directory contains automatically generated dbt models based on mapping file
 ### Mapping: Airbyte `ad_account` to Fivetran `account_history`
 
 
-- Table Match Confidence Score: 🟢 _0.85__
+- Table Match Confidence Score: 🟢 _0.85_
 - Table Completion Score: 🟢 _0.90_
 - Summary Self-Evaluation: _The table mapping is strong with most fields mapped accurately from source to target. Standard mappings and casing differences align correctly. No significant mismatches found that would lower confidence._
 
@@ -89,7 +89,7 @@ This directory contains automatically generated dbt models based on mapping file
 ### Mapping: Airbyte `ads` to Fivetran `ad_history`
 
 
-- Table Match Confidence Score: 🟢 _0.80__
+- Table Match Confidence Score: 🟢 _0.80_
 - Table Completion Score: 🟢 _0.90_
 - Summary Self-Evaluation: _The table mapping is highly confident; all fields except 'conversion_domain' are well-matched. Matches from source to target are clear and relevant._
 
@@ -112,7 +112,7 @@ These models are in the workshop directory and are not yet approved.
 ### Mapping: Airbyte `ad_creatives` to Fivetran `creative_history`
 
 
-- Table Match Confidence Score: 🟢 _0.95__
+- Table Match Confidence Score: 🟢 _0.95_
 - Table Completion Score: 🟢 _0.82_
 - Summary Self-Evaluation: _The table mappings are from similar source and target schemas with consistent subject matter. However, some fields were missing a good match. The table has a high match score due to strong alignment in identifiers and account fields, but completion is not perfect due to missing fields._
 
@@ -140,7 +140,7 @@ These models are in the workshop directory and are not yet approved.
 ### Mapping: Airbyte `ads_insights` to Fivetran `basic_ad_actions`
 
 
-- Table Match Confidence Score: ⚠️ _0.65__
+- Table Match Confidence Score: ⚠️ _0.65_
 - Table Completion Score: ❌ _0.40_
 - Summary Self-Evaluation: _The table mapping shows a moderate match given the context of the fields provided. Some fields have been mapped with confidence, but there are significant number of fields missing a valid match, impacting the overall completion._
 
@@ -161,7 +161,7 @@ These models are in the workshop directory and are not yet approved.
 ### Mapping: Airbyte `ads_insights` to Fivetran `basic_ad_action_values`
 
 
-- Table Match Confidence Score: ❌ _0.00__
+- Table Match Confidence Score: ❌ _0.00_
 - Table Completion Score: ❌ _0.25_
 - Summary Self-Evaluation: _The table match score is 0.0 as the fields do not suggest a coherent table matching due to missing and unclear mappings. The completion score is 0.25 because only 2 out of 8 fields are precisely mapped or have clear logic, primarily due to 2 'MISSING' expressions indicating a failure to map necessary fields._
 
