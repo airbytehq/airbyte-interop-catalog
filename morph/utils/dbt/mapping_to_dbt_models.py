@@ -310,12 +310,6 @@ models:
   airbyte_{{ catalog_name }}:
     +materialized: view
 
-    # Approved models
-    {% for model in models %}
-    {{ model }}:
-      +materialized: table
-    {% endfor %}
-
     # Workshop models (not yet approved)
     workshop:
       +enabled: false  # Workshop models disabled by default
@@ -443,6 +437,7 @@ def generate_dbt_package(
     workshop_models: list[str] = []
     for mapping_file in mapping_files:
         mapping = load_mapping_file(mapping_file)
+        annotations = mapping.get("annotations", {})
 
         # Process each transform in the mapping
         for transform in mapping.get("transforms", []):
@@ -451,7 +446,7 @@ def generate_dbt_package(
                 continue
 
             # Track approved vs workshop models
-            is_approved = transform.get("annotations", {}).get("approved", False)
+            is_approved = annotations.get("approved", False)
             if is_approved:
                 generated_models.append(transform_id)
             else:
@@ -497,6 +492,7 @@ def generate_dbt_package(
     # Generate SQL for each model
     for mapping_file in mapping_files:
         mapping = load_mapping_file(mapping_file)
+        annotations = mapping.get("annotations", {})
 
         # Process each transform in the mapping
         for transform in mapping.get("transforms", []):
@@ -508,7 +504,7 @@ def generate_dbt_package(
             model_sql = generate_model_sql(mapping, transform_id, config)
 
             # Determine if transform is approved
-            is_approved = transform.get("annotations", {}).get("approved", False)
+            is_approved = annotations.get("approved", False)
 
             # Place unapproved models in workshop subdirectory
             if not is_approved:
