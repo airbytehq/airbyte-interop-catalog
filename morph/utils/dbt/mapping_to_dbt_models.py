@@ -277,14 +277,22 @@ FROM {% for source in sources %}{{ source.alias }}{% if not loop.last %}, {% end
 def build_dbt_project_yml(
     catalog_name: str,
     models: list[str],
+    workshop_models: list[str],
 ) -> str:
-    """Generate dbt_project.yml content."""
+    """Generate dbt_project.yml content.
+
+    Args:
+        catalog_name: Name of the catalog
+        models: List of approved model names
+        workshop_models: List of unapproved model names in workshop/
+    """
+    # TODO: This should probably be managed by the copier template.
     project_template = """
-name: 'airbyte_{{ catalog_name }}'
-version: '1.0.0'
+name: "airbyte_{{ catalog_name }}"
+version: "1.0.0"
 config-version: 2
 
-profile: 'default'
+profile: "default"
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]
@@ -301,14 +309,21 @@ clean-targets:
 models:
   airbyte_{{ catalog_name }}:
     +materialized: view
+
+    # Approved models
     {% for model in models %}
     {{ model }}:
       +materialized: table
     {% endfor %}
 
+    # Workshop models (not yet approved)
+    workshop:
+      +enabled: false  # Workshop models disabled by default
+
 vars:
-  airbyte_{{ catalog_name }}_schema: "{{ catalog_name }}"
   airbyte_{{ catalog_name }}_database: "{{ catalog_name }}"
+  airbyte_{{ catalog_name }}_schema: "{{ catalog_name }}_raw"
+
 """
     env = Environment(autoescape=False)
     template = env.from_string(project_template)
@@ -316,6 +331,7 @@ vars:
     return template.render(
         catalog_name=catalog_name,
         models=models,
+        workshop_models=workshop_models,
     )
 
 
@@ -422,9 +438,9 @@ def generate_dbt_package(
     mapping_path = Path(mapping_dir_path)
     for yaml_file in list(mapping_path.glob("**/*.yml")) + list(mapping_path.glob("**/*.yaml")):
         mapping_files.append(str(yaml_file))
-
     # Generate models for each mapping file
     generated_models: list[str] = []
+    workshop_models: list[str] = []
     for mapping_file in mapping_files:
         mapping = load_mapping_file(mapping_file)
 
@@ -434,17 +450,22 @@ def generate_dbt_package(
             if not transform_id:
                 continue
 
-            # Add to list of generated models
-            generated_models.append(transform_id)
+            # Track approved vs workshop models
+            is_approved = transform.get("annotations", {}).get("approved", False)
+            if is_approved:
+                generated_models.append(transform_id)
+            else:
+                workshop_models.append(transform_id)
 
     # Use copier to generate the dbt project scaffolding
     template_dir = Path() / "templates" / "dbt_project_template"
 
-    # Prepare data for the template
-    template_data = {
-        "catalog_name": source_name,
-        "models": generated_models,
-    }
+    # Generate dbt_project.yml content
+    project_yml_content = build_dbt_project_yml(
+        catalog_name=source_name,
+        models=generated_models,
+        workshop_models=workshop_models,
+    )
 
     if not template_dir.is_dir():
         raise FileNotFoundError(f"Template directory {template_dir} does not exist.")
@@ -453,12 +474,25 @@ def generate_dbt_package(
     run_copy(
         src_path=str(template_dir),
         dst_path=str(output_path),
-        data=template_data,
+        data={"catalog_name": source_name},  # Only pass required template data
     )
 
+    # Write the generated dbt_project.yml
+    dbt_project_path = output_path / "dbt_project" / "dbt_project.yml"
+    dbt_project_path.write_text(project_yml_content)
     # Now generate the SQL models
     models_dir = output_path / "dbt_project" / "models"
     models_dir.mkdir(parents=True, exist_ok=True)
+
+    # Clean up existing files
+    for file in models_dir.glob("*.sql"):
+        file.unlink()
+
+    workshop_dir = models_dir / "workshop"
+    if workshop_dir.exists():
+        for file in workshop_dir.glob("*.sql"):
+            file.unlink()
+    workshop_dir.mkdir(exist_ok=True)
 
     # Generate SQL for each model
     for mapping_file in mapping_files:
@@ -473,8 +507,16 @@ def generate_dbt_package(
             # Generate SQL model
             model_sql = generate_model_sql(mapping, transform_id, config)
 
-            # Write model to file
-            model_path = models_dir / f"{transform_id}.sql"
+            # Determine if transform is approved
+            is_approved = transform.get("annotations", {}).get("approved", False)
+
+            # Place unapproved models in workshop subdirectory
+            if not is_approved:
+                workshop_dir = models_dir / "workshop"
+                model_path = workshop_dir / f"{transform_id}.sql"
+            else:
+                model_path = models_dir / f"{transform_id}.sql"
+
             model_path.write_text(model_sql)
 
     # Generate README.md with documentation
