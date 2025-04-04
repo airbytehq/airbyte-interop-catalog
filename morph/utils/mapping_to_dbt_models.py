@@ -19,6 +19,7 @@ from morph.constants import (
     VALID_TRAVERSAL_BY_DIALECT,
 )
 from morph.utils import text_utils
+from morph.utils.markdown_utils import create_markdown_section, create_markdown_table
 
 
 def load_mapping_file(mapping_file_path: str) -> dict[str, Any]:
@@ -199,7 +200,7 @@ def _extract_fields(
     sql_dialect = config.get("sql_dialect", DEFAULT_SQL_DIALECT)
     subcolumn_traversal = config.get("subcolumn_traversal", "default")
 
-    fields = []
+    fields: list[dict[str, str]] = []
     for field_name, field_config in transform.get("fields", {}).items():
         expression = field_config.get("expression")
 
@@ -318,6 +319,73 @@ vars:
     )
 
 
+def build_readme(mapping_files: list[str], models_dir: Path) -> None:
+    """Generate README.md with documentation from table mappings.
+
+    Args:
+        mapping_files: List of mapping file paths
+        models_dir: Directory where the README.md should be written
+    """
+    sections: list[str] = []
+
+    # Add header
+    sections.append("# Generated dbt Models\n")
+    sections.append("This directory contains automatically generated dbt models based on mapping files.\n")
+
+    # Process each mapping file
+    for mapping_file in mapping_files:
+        mapping = load_mapping_file(mapping_file)
+
+        # Process each transform
+        for transform in mapping.get("transforms", []):
+            transform_id = transform.get("name")
+            if not transform_id:
+                continue
+
+            # Add section for this transform
+            sections.append(create_markdown_section(
+                title=transform_id,
+                content="",
+                level=2
+            ))
+
+            # Add source information
+            sources = _extract_sources(transform)
+            if sources:
+                sections.append("\n### Source Tables\n")
+                headers = ["Alias", "Schema", "Table"]
+                rows = [
+                    [
+                        source["alias"],
+                        source.get("schema", "default"),
+                        source["table"]
+                    ]
+                    for source in sources
+                ]
+                sections.append(create_markdown_table(headers, rows))
+
+            # Add fields table
+            fields = _extract_fields(transform)
+            if fields:
+                sections.append("\n### Fields\n")
+                headers = ["Name", "Expression", "Description"]
+                rows = [
+                    [
+                        field["name"],
+                        str(field["expression"]),
+                        field["description"] or "",
+                    ]
+                    for field in fields
+                ]
+                sections.append(create_markdown_table(headers, rows))
+
+            sections.append("\n")
+
+    # Write README.md
+    readme_path = models_dir / "README.md"
+    readme_path.write_text("\n".join(sections))
+
+
 def generate_dbt_package(
     source_name: str,
     *,
@@ -346,13 +414,13 @@ def generate_dbt_package(
         config = text_utils.load_yaml_file(config_path)
 
     # Find all mapping files
-    mapping_files = []
+    mapping_files: list[str] = []
     mapping_path = Path(mapping_dir_path)
     for yaml_file in list(mapping_path.glob("**/*.yml")) + list(mapping_path.glob("**/*.yaml")):
         mapping_files.append(str(yaml_file))
 
     # Generate models for each mapping file
-    generated_models = []
+    generated_models: list[str] = []
     for mapping_file in mapping_files:
         mapping = load_mapping_file(mapping_file)
 
@@ -401,3 +469,6 @@ def generate_dbt_package(
             # Write model to file
             model_path = models_dir / f"{transform_id}.sql"
             model_path.write_text(model_sql)
+
+    # Generate README.md with documentation
+    build_readme(mapping_files, models_dir)
