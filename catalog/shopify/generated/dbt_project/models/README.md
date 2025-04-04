@@ -2,18 +2,12 @@
 
 This directory contains automatically generated dbt models based on mapping files.
 
-### Mapping from Airbyte `discount_codes` to Fivetran `order_discount_code`
+### Mapping: Airbyte `discount_codes` to Fivetran `order_discount_code`
+
 
 - Table Match Confidence Score: 🟢 0.80
-
 - Table Completion Score: ⚠️ 0.60
-
-#### Evaluation
-
-The table mapping is of moderate quality with certain fields perfectly mapped, some fields with potential mappings, and others missing entirely. A score of 0.8 reflects that the table structure is very likely describing the same subject matter, but not entirely complete due to missing field mappings.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table mapping is of moderate quality with certain fields perfectly mapped, some fields with potential mappings, and others missing entirely. A score of 0.8 reflects that the table structure is very likely describing the same subject matter, but not entirely complete due to missing field mappings._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -24,19 +18,12 @@ The table mapping is of moderate quality with certain fields perfectly mapped, s
 | `type` | The type of discount - `fixed_amount`, `percentage`, or `shipping`. | `discount_codes.discount_type` | 🟢 0.70 | Mapping `type` to `discount_codes.discount_type` appears valid given context of discount type enumeration. |
 | `index` | Pairs with `order_id` to provide unique identifier for order discount code. | `MISSING` | ❌ 0.00 | No good match found. |
 
+### Mapping: Airbyte `discount_codes` to Fivetran `discount_code`
 
-### Mapping from Airbyte `discount_codes` to Fivetran `discount_code`
 
 - Table Match Confidence Score: 🟢 0.90
-
 - Table Completion Score: 🟢 0.86
-
-#### Evaluation
-
-The table fields are generally well-aligned with their purposes clearly defined. The source fields such as 'code', 'created_at', 'id', 'price_rule_id', 'updated_at', and 'usage_count' align with expectations for discount codes in the context provided. '_fivetran_synced' is correctly mapped to a source stream's '_airbyte_extracted_at', providing a reliable match for synchronization tracking. There are no fields marked as 'MISSING', indicating an attempt has been made to map all relevant fields in the source schema to the target schema, resulting in a high score.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table fields are generally well-aligned with their purposes clearly defined. The source fields such as 'code', 'created_at', 'id', 'price_rule_id', 'updated_at', and 'usage_count' align with expectations for discount codes in the context provided. '_fivetran_synced' is correctly mapped to a source stream's '_airbyte_extracted_at', providing a reliable match for synchronization tracking. There are no fields marked as 'MISSING', indicating an attempt has been made to map all relevant fields in the source schema to the target schema, resulting in a high score._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -48,19 +35,12 @@ The table fields are generally well-aligned with their purposes clearly defined.
 | `updated_at` | The date and time (ISO 8601 format) when the discount code was updated. | `discount_codes.updated_at` | 🟢 0.90 | Successfully maps update timestamps, common in schemas where record modifications are tracked. |
 | `usage_count` | The number of times that the discount code has been redeemed. | `discount_codes.usage_count` | 🟢 0.80 | Reflects typical semantic usage tracking, indicating satisfactory mapping despite potential source differences. |
 
+### Mapping: Airbyte `customers` to Fivetran `customer`
 
-### Mapping from Airbyte `customers` to Fivetran `customer`
 
 - Table Match Confidence Score: 🟢 0.80
-
 - Table Completion Score: 🟢 0.90
-
-#### Evaluation
-
-The table match score is high due to the high similarity in subject matter between the source and target schemas, both concerned with customer information. While the completion score is even higher since most of the fields have precise mappings in the target schema.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table match score is high due to the high similarity in subject matter between the source and target schemas, both concerned with customer information. While the completion score is even higher since most of the fields have precise mappings in the target schema._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -88,19 +68,12 @@ The table match score is high due to the high similarity in subject matter betwe
 | `note` | A note about the customer. | `customers.note` | ⚠️ 0.60 | Marginal mapping match with 'customers.note'. |
 | `currency` | The three-letter code (ISO 4217 format) for the currency that the customer used when they paid for their last order. Defaults to the shop currency. Returns the shop currency for test orders. | `customers.currency` | 🟢 0.80 | Matches well with 'customers.currency'. |
 
+### Mapping: Airbyte `order_refunds` to Fivetran `order_adjustment`
 
-### Mapping from Airbyte `order_refunds` to Fivetran `order_adjustment`
 
 - Table Match Confidence Score: 🟢 0.85
-
 - Table Completion Score: 🟢 0.80
-
-#### Evaluation
-
-The table mapping has a high confidence level as most fields are well-matched with minor discrepancies. 'MISSING' fields are well addressed and the usual high-confidence mappings are adhered to.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table mapping has a high confidence level as most fields are well-matched with minor discrepancies. 'MISSING' fields are well addressed and the usual high-confidence mappings are adhered to._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -115,19 +88,12 @@ The table mapping has a high confidence level as most fields are well-matched wi
 | `tax_amount_set` | Tax amount set towards the order adjustment in shop and presentment currencies. | `order_refunds.total_duties_set.presentment_money` | 🟢 0.70 | The mapping of 'tax_amount_set' to 'order_refunds.total_duties_set.presentment_money' is moderate due to nested structure. |
 | `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `order_refunds._airbyte_extracted_at` | 🟢 1.00 | Standard mapping to '_airbyte_extracted_at'. |
 
+### Mapping: Airbyte `metafield_shops` to Fivetran `metafield`
 
-### Mapping from Airbyte `metafield_shops` to Fivetran `metafield`
 
 - Table Match Confidence Score: 🟢 0.85
-
 - Table Completion Score: 🟢 0.90
-
-#### Evaluation
-
-The table mapping matches closely with the expected schema based on the field names and their descriptions. Most fields have a direct match and the mappings are generally appropriate, with a few exceptions where 'MISSING' is used due to lack of good matches.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table mapping matches closely with the expected schema based on the field names and their descriptions. Most fields have a direct match and the mappings are generally appropriate, with a few exceptions where 'MISSING' is used due to lack of good matches._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -144,19 +110,12 @@ The table mapping matches closely with the expected schema based on the field na
 | `value` | The data to store in the metafield. The value is always stored as a string, regardless of the metafield's type. | `metafield_shops.value` | 🟢 0.90 | Typically used for storing string data, fits with equivalent field. |
 | `value_type` | DEPRECATED as of [June 2022](https://fivetran.com/docs/applications/shopify/changelog#june2022). Use `type` instead. | `metafield_shops.value_type` | ❌ 0.00 | No good match found; field is deprecated. |
 
+### Mapping: Airbyte `locations` to Fivetran `location`
 
-### Mapping from Airbyte `locations` to Fivetran `location`
 
 - Table Match Confidence Score: 🟢 0.85
-
 - Table Completion Score: 🟢 0.95
-
-#### Evaluation
-
-The table mapping evaluation resulted in a high confidence score due to a close match between source and target schemas. The presence of exact mappings and the ability to identify synonymous fields contribute to the quality and coverage of the mapping.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table mapping evaluation resulted in a high confidence score due to a close match between source and target schemas. The presence of exact mappings and the ability to identify synonymous fields contribute to the quality and coverage of the mapping._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -181,19 +140,12 @@ The table mapping evaluation resulted in a high confidence score due to a close 
 | `updated_at` | The date and time (ISO 8601 format) when the location was last updated. | `locations.updated_at` | 🟢 1.00 | Field 'updated_at' perfectly concurs with temporal data standards. |
 | `zip` | The zip or postal code. | `locations.zip` | 🟢 1.00 | The 'zip' field forms an exact match with source schema definition. |
 
+### Mapping: Airbyte `tender_transactions` to Fivetran `tender_transaction`
 
-### Mapping from Airbyte `tender_transactions` to Fivetran `tender_transaction`
 
 - Table Match Confidence Score: 🟢 1.00
-
 - Table Completion Score: 🟢 1.00
-
-#### Evaluation
-
-All fields mapped successfully with high confidence according to provided rules and context. Mapping hypothetical fields between schemas across transformations without loss of meaning.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _All fields mapped successfully with high confidence according to provided rules and context. Mapping hypothetical fields between schemas across transformations without loss of meaning._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -208,19 +160,12 @@ All fields mapped successfully with high confidence according to provided rules 
 | `test` | Whether the tender transaction is a test transaction. | `tender_transactions.test` | 🟢 1.00 | Direct match in field names and context (indicates if transaction is a test). |
 | `user_id` | The ID of the user logged into the Shopify POS device that processed the tender transaction, if applicable. | `tender_transactions.user_id` | 🟢 1.00 | Direct match in field names and context (user ID processing the transaction). |
 
+### Mapping: Airbyte `abandoned_checkouts` to Fivetran `abandoned_checkout`
 
-### Mapping from Airbyte `abandoned_checkouts` to Fivetran `abandoned_checkout`
 
 - Table Match Confidence Score: 🟢 1.00
-
 - Table Completion Score: 🟢 0.90
-
-#### Evaluation
-
-The table mappings are evaluated to be of high confidence as they describe the same subject matter in both source and target implementations.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table mappings are evaluated to be of high confidence as they describe the same subject matter in both source and target implementations._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -228,19 +173,12 @@ The table mappings are evaluated to be of high confidence as they describe the s
 | `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `abandoned_checkouts._airbyte_extracted_at` | 🟢 1.00 | _fivetran_synced is correctly mapped to _airbyte_extracted_at. |
 | `total_duties` | The total duties of the checkout in presentment currency. | `MISSING` | ❌ 0.00 | No good match found. |
 
+### Mapping: Airbyte `shop` to Fivetran `shop`
 
-### Mapping from Airbyte `shop` to Fivetran `shop`
 
 - Table Match Confidence Score: 🟢 0.80
-
 - Table Completion Score: 🟢 0.95
-
-#### Evaluation
-
-The table mapping evaluated to a high confidence score due to matching fields and descriptions aligning well with expected domains. A few fields could not be directly matched and are marked as 'MISSING'.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table mapping evaluated to a high confidence score due to matching fields and descriptions aligning well with expected domains. A few fields could not be directly matched and are marked as 'MISSING'._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -300,19 +238,12 @@ The table mapping evaluated to a high confidence score due to matching fields an
 | `weight_unit` | The default unit of weight measurement for the shop. | `shop.weight_unit` | 🟢 1.00 | Exact match with 'shop.weight_unit'. |
 | `zip` | The shop's zip or postal code. | `shop.zip` | 🟢 1.00 | Exact match with 'shop.zip'. |
 
+### Mapping: Airbyte `orders` to Fivetran `order_tag`
 
-### Mapping from Airbyte `orders` to Fivetran `order_tag`
 
 - Table Match Confidence Score: 🟢 0.80
-
 - Table Completion Score: ⚠️ 0.50
-
-#### Evaluation
-
-The table match score is relatively high because the `_fivetran_synced` was successfully mapped to `_airbyte_extracted_at`, a standard mapping. However, two of the field mappings have expressions set to 'MISSING', resulting in a lower completion score.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table match score is relatively high because the `_fivetran_synced` was successfully mapped to `_airbyte_extracted_at`, a standard mapping. However, two of the field mappings have expressions set to 'MISSING', resulting in a lower completion score._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -321,19 +252,12 @@ The table match score is relatively high because the `_fivetran_synced` was succ
 | `order_id` | ID of the order being tagged. | `orders.id` | 🟢 0.70 | order_id is mapped to orders.id with a reasonable level of confidence. |
 | `value` | Value of the tag. | `MISSING` | ❌ 0.00 | Expression is 'MISSING'. No good match found. |
 
+### Mapping: Airbyte `inventory_levels` to Fivetran `inventory_level`
 
-### Mapping from Airbyte `inventory_levels` to Fivetran `inventory_level`
 
 - Table Match Confidence Score: 🟢 0.85
-
 - Table Completion Score: 🟢 0.90
-
-#### Evaluation
-
-The table has a strong correspondence between source and target, given shared fields and expressions. The completion score is high due to the presence of mappings for nearly all fields, though some fields are marked as deprecation or missing information.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table has a strong correspondence between source and target, given shared fields and expressions. The completion score is high due to the presence of mappings for nearly all fields, though some fields are marked as deprecation or missing information._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -347,19 +271,12 @@ The table has a strong correspondence between source and target, given shared fi
 | `created_at` | The date and time when the inventory level was created. | `inventory_levels.created_at` | 🟢 1.00 | Creation timestamp matches directly. |
 | `deactivation_alert` | Provides an alert message when the inventory item is deactivated at the location. | `inventory_levels.deactivation_alert` | 🟢 0.70 | Alert message likely corresponds, though there is some uncertainty. |
 
+### Mapping: Airbyte `fulfillments` to Fivetran `fulfillment`
 
-### Mapping from Airbyte `fulfillments` to Fivetran `fulfillment`
 
 - Table Match Confidence Score: 🟢 0.90
-
 - Table Completion Score: 🟢 0.85
-
-#### Evaluation
-
-The table mapping shows a high level of confidence as most fields have clear matches between the source and target. The mapping from `_fivetran_synced` to `_airbyte_extracted_at` achieves a perfect score of 1.00 as a standard mapping agreement. Other fields, such as `created_at`, `id`, `status`, and `tracking_number`, have clear semantic consistency, scoring above 0.85. Some fields like `shipment_status` and `service` could have slightly lower scores due to potential ambiguity, but still fall within the 0.70-0.85 range as they seem contextually accurate. `MISSING` mappings are assigned a score of 0.00 and explained with 'No good match found.'
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table mapping shows a high level of confidence as most fields have clear matches between the source and target. The mapping from `_fivetran_synced` to `_airbyte_extracted_at` achieves a perfect score of 1.00 as a standard mapping agreement. Other fields, such as `created_at`, `id`, `status`, and `tracking_number`, have clear semantic consistency, scoring above 0.85. Some fields like `shipment_status` and `service` could have slightly lower scores due to potential ambiguity, but still fall within the 0.70-0.85 range as they seem contextually accurate. `MISSING` mappings are assigned a score of 0.00 and explained with 'No good match found.'_
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -379,19 +296,12 @@ The table mapping shows a high level of confidence as most fields have clear mat
 | `tracking_urls` | The URLs of tracking pages for the fulfillment. | `fulfillments.tracking_urls` | 🟢 0.90 | URLs for tracking correspond distinctly with the fulfillment tracking. |
 | `updated_at` | The date and time (ISO 8601 format) when the fulfillment was last modified. | `fulfillments.updated_at` | 🟢 0.90 | Matches the timestamp for last modification accurately. |
 
+### Mapping: Airbyte `price_rules` to Fivetran `price_rule`
 
-### Mapping from Airbyte `price_rules` to Fivetran `price_rule`
 
 - Table Match Confidence Score: 🟢 0.90
-
 - Table Completion Score: 🟢 0.95
-
-#### Evaluation
-
-The table mapping has a high confidence score because the source and target tables are derived from similar APIs with most fields properly mapped. All fields have either been mapped or identified as MISSING with a 0.00 confidence score.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table mapping has a high confidence score because the source and target tables are derived from similar APIs with most fields properly mapped. All fields have either been mapped or identified as MISSING with a 0.00 confidence score._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -418,19 +328,12 @@ The table mapping has a high confidence score because the source and target tabl
 | `value` | The value of the price rule. If if the value of `target_type` is `shipping_line`, then only -100 is accepted. The value must be negative. | `price_rules.value` | 🟢 0.70 | Requires considering negative values unique to context but maps well. |
 | `value_type` | The value type of the price rule. Valid values include `fixed_amount` (applies a discount of value as a unit of the store's currency. For example, if value is -30 and the store's currency is USD, then $30 USD is deducted when the discount is applied) and `percentage` (applies a percentage discount of value. For example, if value is -30, then 30% will be deducted when the discount is applied). If `target_type` is `shipping_line`, then only `percentage` is accepted.  | `price_rules.value_type` | 🟢 0.85 | Valid values for 'value_type' show strong mapping consistency. |
 
+### Mapping: Airbyte `order_refunds` to Fivetran `refund`
 
-### Mapping from Airbyte `order_refunds` to Fivetran `refund`
 
 - Table Match Confidence Score: 🟢 0.80
-
 - Table Completion Score: 🟢 0.90
-
-#### Evaluation
-
-The table mapping shows high confidence since source and target tables are assumed to be derived from the same API, indicating they describe the same subject matter. The completion score is high as well, given all fields of significance in source are well mapped, except for the expected standard and one missing field.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table mapping shows high confidence since source and target tables are assumed to be derived from the same API, indicating they describe the same subject matter. The completion score is high as well, given all fields of significance in source are well mapped, except for the expected standard and one missing field._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -444,19 +347,12 @@ The table mapping shows high confidence since source and target tables are assum
 | `total_duties_set` | Record representing total duties set for the refund. | `order_refunds.total_duties_set` | 🟢 1.00 | Exact match found for the total duties set record. |
 | `order_id` | Reference to the order which the refund is associated. | `order_refunds.order_id` | 🟢 1.00 | Exact match found for the order id reference. |
 
+### Mapping: Airbyte `collects` to Fivetran `collection_product`
 
-### Mapping from Airbyte `collects` to Fivetran `collection_product`
 
 - Table Match Confidence Score: 🟢 0.70
-
 - Table Completion Score: 🟢 0.80
-
-#### Evaluation
-
-The table mapping was evaluated with a high table match score as the subject matter aligns closely between source and target, hence a match score of 0.70. The completion score is 0.80, indicating some fields have good mapping and coverage from source to target with a slight room for improvement.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table mapping was evaluated with a high table match score as the subject matter aligns closely between source and target, hence a match score of 0.70. The completion score is 0.80, indicating some fields have good mapping and coverage from source to target with a slight room for improvement._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -464,19 +360,12 @@ The table mapping was evaluated with a high table match score as the subject mat
 | `collection_id` | ID referencing the `collection` the product belongs to. | `collects.collection_id` | 🟢 0.70 | ID referencing the `collection` has a relevant mapping. Given score reflects strong, but not perfect match due to potential contextual differences. |
 | `product_id` | ID referencing the `product`. | `collects.product_id` | 🟢 0.70 | ID referencing the `product` aligns closely in purpose but may differ slightly in context in some implementations, hence the score. |
 
+### Mapping: Airbyte `products` to Fivetran `product`
 
-### Mapping from Airbyte `products` to Fivetran `product`
 
 - Table Match Confidence Score: 🟢 0.80
-
 - Table Completion Score: 🟢 0.90
-
-#### Evaluation
-
-The mapping configuration aligns well with the expected target schema. High confidence mappings like '_fivetran_synced' to 'products._airbyte_extracted_at' contribute positively. Missing mappings like '_fivetran_deleted' are penalized. Field mappings suggest a strong match with exceptions handled appropriately.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The mapping configuration aligns well with the expected target schema. High confidence mappings like '_fivetran_synced' to 'products._airbyte_extracted_at' contribute positively. Missing mappings like '_fivetran_deleted' are penalized. Field mappings suggest a strong match with exceptions handled appropriately._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -493,23 +382,16 @@ The mapping configuration aligns well with the expected target schema. High conf
 | `vendor` | The name of the product's vendor. | `products.vendor` | 🟢 0.90 | 'products.vendor' is a precise match for 'vendor'. |
 | `status` | The status of the product. Valid values: - active: The product is ready to sell and is available to customers on the online store, sales channels, and apps. By default, existing products are set to active. - archived: The product is no longer being sold and isn't available to customers on sales channels and apps. - draft: The product isn't ready to sell and is unavailable to customers on sales channels and apps. By default, duplicated and unarchived products are set to draft.  | `products.status` | 🟢 0.80 | 'products.status' aligns well with 'status', acknowledging the valid status values. |
 
-
 ## Workshop Models
 
 These models are in the workshop directory and are not yet approved.
 
-### Mapping from Airbyte `custom_collections` to Fivetran `collection`
+### Mapping: Airbyte `custom_collections` to Fivetran `collection`
+
 
 - Table Match Confidence Score: 🟢 0.80
-
 - Table Completion Score: 🟢 0.82
-
-#### Evaluation
-
-The table match confidence is high due to the similarity in subject matter, but not all fields could be mapped, especially with some fields missing appropriate matches. The completion score reflects the proportion of fields that have meaningful mappings.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table match confidence is high due to the similarity in subject matter, but not all fields could be mapped, especially with some fields missing appropriate matches. The completion score reflects the proportion of fields that have meaningful mappings._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -525,19 +407,12 @@ The table match confidence is high due to the similarity in subject matter, but 
 | `title` | The name of the collection | `custom_collections.title` | 🟢 0.70 | Good match found with 'custom_collections.title'. |
 | `updated_at` | The date and time (ISO 8601 format) when the collection was last modified. | `custom_collections.updated_at` | 🟢 0.70 | Good match found with 'custom_collections.updated_at'. |
 
+### Mapping: Airbyte `inventory_items` to Fivetran `inventory_item`
 
-### Mapping from Airbyte `inventory_items` to Fivetran `inventory_item`
 
 - Table Match Confidence Score: 🟢 0.70
-
 - Table Completion Score: ⚠️ 0.52
-
-#### Evaluation
-
-The table mappings have some missing fields and questionable matches. The '_fivetran_deleted' and several others are marked as 'MISSING'. Also, there are only a few fields that match perfectly, like '_fivetran_synced'.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table mappings have some missing fields and questionable matches. The '_fivetran_deleted' and several others are marked as 'MISSING'. Also, there are only a few fields that match perfectly, like '_fivetran_synced'._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -563,19 +438,12 @@ The table mappings have some missing fields and questionable matches. The '_five
 | `unit_cost_amount` | Decimal money amount of the unit cost associated with the inventory item. | `MISSING` | ❌ 0.00 | No good match found. |
 | `unit_cost_currency_code` | Currency of the unit cost associated with the inventory item. | `inventory_items.currency_code` | 🟢 0.90 | Currency code match is likely correct. |
 
+### Mapping: Airbyte `metafield_orders` to Fivetran `order_url_tag`
 
-### Mapping from Airbyte `metafield_orders` to Fivetran `order_url_tag`
 
 - Table Match Confidence Score: ⚠️ 0.50
-
 - Table Completion Score: 🟢 0.75
-
-#### Evaluation
-
-The table match score is 0.5 due to partial similarity between the source and target schemas. The completion score is 0.75 as most fields are mapped, but some are missing or poorly matched.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table match score is 0.5 due to partial similarity between the source and target schemas. The completion score is 0.75 as most fields are mapped, but some are missing or poorly matched._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -584,19 +452,12 @@ The table match score is 0.5 due to partial similarity between the source and ta
 | `order_id` | ID of the order url being tagged. | `MISSING` | ❌ 0.00 | Expression is 'MISSING', no good match found. |
 | `value` | Value of the tag. | `metafield_orders.value` | ⚠️ 0.60 | Fields 'value' in source and 'value' in target mapped with a lower confidence due to minimal contextual match. |
 
+### Mapping: Airbyte `discount_codes` to Fivetran `abandoned_checkout_discount_code`
 
-### Mapping from Airbyte `discount_codes` to Fivetran `abandoned_checkout_discount_code`
 
 - Table Match Confidence Score: 🟢 0.70
-
 - Table Completion Score: ❌ 0.44
-
-#### Evaluation
-
-The table mapping confidence score is moderate due to partial matches and the presence of several 'MISSING' expressions indicating incomplete mappings. Despite a few high-confidence mappings, the overall completion is low due to multiple unmapped fields.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table mapping confidence score is moderate due to partial matches and the presence of several 'MISSING' expressions indicating incomplete mappings. Despite a few high-confidence mappings, the overall completion is low due to multiple unmapped fields._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -610,19 +471,12 @@ The table mapping confidence score is moderate due to partial matches and the pr
 | `type` | The type of discount. Valid values - percentage, shipping, fixed_amount. (default - fixed_amount) | `discount_codes.discount_type` | 🟢 0.70 | discount_codes.discount_type mapped to type due to likely contextual match for discount types. |
 | `updated_at` | When the checkout's discount was last updated | `discount_codes.updated_at` | 🟢 0.70 | discount_codes.updated_at mapped to updated_at with moderate confidence. |
 
+### Mapping: Airbyte `products` to Fivetran `product_tag`
 
-### Mapping from Airbyte `products` to Fivetran `product_tag`
 
 - Table Match Confidence Score: 🟢 1.00
-
 - Table Completion Score: ❌ 0.25
-
-#### Evaluation
-
-The mapping configuration exhibits a perfect table match with successful standard field mapping for '_fivetran_synced', but lacks completion with most fields having 'MISSING' expressions.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The mapping configuration exhibits a perfect table match with successful standard field mapping for '_fivetran_synced', but lacks completion with most fields having 'MISSING' expressions._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -631,19 +485,12 @@ The mapping configuration exhibits a perfect table match with successful standar
 | `product_id` | ID of the product being tagged. | `MISSING` | ❌ 0.00 | No good match found. |
 | `value` | Value of the tag. | `MISSING` | ❌ 0.00 | No good match found. |
 
+### Mapping: Airbyte `customers` to Fivetran `customer_tag`
 
-### Mapping from Airbyte `customers` to Fivetran `customer_tag`
 
 - Table Match Confidence Score: ⚠️ 0.60
-
 - Table Completion Score: ⚠️ 0.50
-
-#### Evaluation
-
-The mapping includes standard and missing field expressions. Standard mappings like '_fivetran_synced' were given a high score, while missing fields were penalized.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The mapping includes standard and missing field expressions. Standard mappings like '_fivetran_synced' were given a high score, while missing fields were penalized._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -652,19 +499,12 @@ The mapping includes standard and missing field expressions. Standard mappings l
 | `customer_id` | ID of the customer being tagged. | `customers.default_address.customer_id` | 🟢 0.70 | Mapped to 'customers.default_address.customer_id'. Considered a likely match with some uncertainty. |
 | `value` | Value of the tag. | `MISSING` | ❌ 0.00 | Expression is 'MISSING'. No good match found. |
 
+### Mapping: Airbyte `product_variants` to Fivetran `product_variant`
 
-### Mapping from Airbyte `product_variants` to Fivetran `product_variant`
 
 - Table Match Confidence Score: 🟢 0.80
-
 - Table Completion Score: ⚠️ 0.60
-
-#### Evaluation
-
-The table mapping is mostly consistent with the target schema, but there are several fields marked as 'MISSING' due to lack of good matches or differences in field representation. The overall table match score is high due to shared subject matter and relevant fields, but the completion score is lower reflecting these gaps.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table mapping is mostly consistent with the target schema, but there are several fields marked as 'MISSING' due to lack of good matches or differences in field representation. The overall table match score is high due to shared subject matter and relevant fields, but the completion score is lower reflecting these gaps._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -702,19 +542,12 @@ The table mapping is mostly consistent with the target schema, but there are sev
 | `sellable_online_quantity` | The total sellable quantity of the variant for online channels. | `MISSING` | ❌ 0.00 | No good match found. |
 | `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `product_variants._airbyte_extracted_at` | 🟢 1.00 | The mapping of '_fivetran_synced' to '_airbyte_extracted_at' is perfect and standard for all tables. |
 
+### Mapping: Airbyte `fulfillments` to Fivetran `fulfillment_event`
 
-### Mapping from Airbyte `fulfillments` to Fivetran `fulfillment_event`
 
 - Table Match Confidence Score: 🟢 0.85
-
 - Table Completion Score: ❌ 0.30
-
-#### Evaluation
-
-The table match score is high because most of the fields seem to relate to fulfillment events, matching the expected domain. However, many fields have 'MISSING' expressions, leading to a lower completion score.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table match score is high because most of the fields seem to relate to fulfillment events, matching the expected domain. However, many fields have 'MISSING' expressions, leading to a lower completion score._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -738,19 +571,12 @@ The table match score is high because most of the fields seem to relate to fulfi
 | `updated_at` | The date and time (ISO 8601 format) when the fulfillment event was updated. | `fulfillments.updated_at` | 🟢 0.70 | 'updated_at' maps well to 'fulfillments.updated_at'. |
 | `zip` | The zip code of the location where the fulfillment event occurred. | `fulfillments.origin_address.zip` | 🟢 0.70 | The 'zip' field maps correctly to 'fulfillments.origin_address.zip'. |
 
+### Mapping: Airbyte `order_refunds` to Fivetran `order_shipping_tax_line`
 
-### Mapping from Airbyte `order_refunds` to Fivetran `order_shipping_tax_line`
 
 - Table Match Confidence Score: ⚠️ 0.60
-
 - Table Completion Score: ❌ 0.14
-
-#### Evaluation
-
-The field mapping includes one perfect match (`_fivetran_synced` to `_airbyte_extracted_at`), which always receives a score of 1.00. All other fields are marked as 'MISSING', indicating no good matches found, which lowers the completion score significantly.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The field mapping includes one perfect match (`_fivetran_synced` to `_airbyte_extracted_at`), which always receives a score of 1.00. All other fields are marked as 'MISSING', indicating no good matches found, which lowers the completion score significantly._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -762,19 +588,12 @@ The field mapping includes one perfect match (`_fivetran_synced` to `_airbyte_ex
 | `rate` | The proportion of the line item price that the tax represents as a decimal. | `MISSING` | ❌ 0.00 | No good match found. |
 | `title` | The name of the tax. | `MISSING` | ❌ 0.00 | No good match found. |
 
+### Mapping: Airbyte `product_images` to Fivetran `product_image`
 
-### Mapping from Airbyte `product_images` to Fivetran `product_image`
 
 - Table Match Confidence Score: 🟢 0.85
-
 - Table Completion Score: 🟢 0.75
-
-#### Evaluation
-
-The table mapping is based on shared API endpoints, suggesting a strong match. However, not all fields in the target schema are present in the source.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table mapping is based on shared API endpoints, suggesting a strong match. However, not all fields in the target schema are present in the source._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -794,19 +613,12 @@ The table mapping is based on shared API endpoints, suggesting a strong match. H
 | `status` | The status of the product image, indicating its availability or processing state. | `MISSING` | ❌ 0.00 | No good match found. |
 | `url` | The URL of the product image. | `product_images.shop_url` | 🟢 0.70 | Likely match considering its use as image URL. |
 
+### Mapping: Airbyte `orders` to Fivetran `order_line`
 
-### Mapping from Airbyte `orders` to Fivetran `order_line`
 
 - Table Match Confidence Score: ⚠️ 0.50
-
 - Table Completion Score: ❌ 0.10
-
-#### Evaluation
-
-The table match is neutral due to generic field matching, with many fields having 'MISSING' values indicating no correspondence in the source data.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table match is neutral due to generic field matching, with many fields having 'MISSING' values indicating no correspondence in the source data._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -838,19 +650,12 @@ The table match is neutral due to generic field matching, with many fields havin
 | `variant_inventory_management` | The fulfillment service that tracks the number of items in stock for the product variant. | `MISSING` | ❌ 0.00 | No good match found. |
 | `properties` | Line item properties. | `MISSING` | ❌ 0.00 | No good match found. |
 
+### Mapping: Airbyte `inventory_levels` to Fivetran `inventory_quantity`
 
-### Mapping from Airbyte `inventory_levels` to Fivetran `inventory_quantity`
 
 - Table Match Confidence Score: ⚠️ 0.65
-
 - Table Completion Score: 🟢 0.86
-
-#### Evaluation
-
-The table match score reflects a fairly good match between the source and target table schemas, as they share related fields and concepts. However, it's not perfect due to field variations and expressions not directly matching for all fields. The completion score is high as most fields have corresponding expressions in the source schema, with '_fivetran_synced' correctly mapped to '_airbyte_extracted_at'.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table match score reflects a fairly good match between the source and target table schemas, as they share related fields and concepts. However, it's not perfect due to field variations and expressions not directly matching for all fields. The completion score is high as most fields have corresponding expressions in the source schema, with '_fivetran_synced' correctly mapped to '_airbyte_extracted_at'._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -862,19 +667,12 @@ The table match score reflects a fairly good match between the source and target
 | `updated_at` | The timestamp of the last update to the inventory record. | `inventory_levels.updated_at` | 🟢 0.95 | The field 'updated_at' is confidently mapped to 'inventory_levels.updated_at', reflecting the same timestamp for updates. |
 | `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `inventory_levels._airbyte_extracted_at` | 🟢 1.00 | Standard mapping with 100% confidence as '_fivetran_synced' always maps to '_airbyte_extracted_at'. |
 
+### Mapping: Airbyte `order_refunds` to Fivetran `order_line_refund`
 
-### Mapping from Airbyte `order_refunds` to Fivetran `order_line_refund`
 
 - Table Match Confidence Score: 🟢 0.70
-
 - Table Completion Score: ❌ 0.36
-
-#### Evaluation
-
-The table matching is strong because both systems likely describe the same subject matter. However, many fields have missing expressions, resulting in a low completion score.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table matching is strong because both systems likely describe the same subject matter. However, many fields have missing expressions, resulting in a low completion score._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -890,19 +688,12 @@ The table matching is strong because both systems likely describe the same subje
 | `subtotal_set` | The subtotal of the refund line item in shop and presentment currencies. | `MISSING` | ❌ 0.00 | No good match found. |
 | `total_tax_set` | The total tax of the line item in shop and presentment currencies. | `MISSING` | ❌ 0.00 | No good match found. |
 
+### Mapping: Airbyte `transactions` to Fivetran `transaction`
 
-### Mapping from Airbyte `transactions` to Fivetran `transaction`
 
 - Table Match Confidence Score: 🟢 0.85
-
 - Table Completion Score: 🟢 0.72
-
-#### Evaluation
-
-The table match score is high due to strong similarity in table subject matter. The completion score reflects some missing mappings, lowering overall confidence.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table match score is high due to strong similarity in table subject matter. The completion score reflects some missing mappings, lowering overall confidence._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -939,19 +730,12 @@ The table match score is high due to strong similarity in table subject matter. 
 | `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `transactions._airbyte_extracted_at` | 🟢 1.00 | Standard mapping for synchronization fields. |
 | `authorization_expires_at` | The date and time (ISO 8601 format) when the Shopify Payments authorization expires. | `MISSING` | ❌ 0.00 | No good match found. |
 
+### Mapping: Airbyte `abandoned_checkouts` to Fivetran `abandoned_checkout_shipping_line`
 
-### Mapping from Airbyte `abandoned_checkouts` to Fivetran `abandoned_checkout_shipping_line`
 
 - Table Match Confidence Score: ⚠️ 0.50
-
 - Table Completion Score: ❌ 0.05
-
-#### Evaluation
-
-Only one field mapping is accurate with perfect confidence, the rest have 'MISSING' as expressions, indicating no matches found.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _Only one field mapping is accurate with perfect confidence, the rest have 'MISSING' as expressions, indicating no matches found._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -974,19 +758,12 @@ Only one field mapping is accurate with perfect confidence, the rest have 'MISSI
 | `source` | The channel where the checkout originated. Example value - shopify. | `MISSING` | ❌ 0.00 | No good match found. |
 | `title` | The title of the shipping method. Example value - International Shipping. | `MISSING` | ❌ 0.00 | No good match found. |
 
+### Mapping: Airbyte `transactions` to Fivetran `tax_line`
 
-### Mapping from Airbyte `transactions` to Fivetran `tax_line`
 
 - Table Match Confidence Score: 🟢 0.70
-
 - Table Completion Score: ⚠️ 0.57
-
-#### Evaluation
-
-The table mapping quality is relatively high, given that most field names have corresponding expressions from similar schemas. However, several fields are marked as 'MISSING,' indicating incomplete field mappings and reducing the completion score. The standard mapping of '_fivetran_synced' to '_airbyte_extracted_at' boosts confidence significantly. The lack of a logical or exact match for 'index', 'order_line_id', and 'rate' fields decreases the completion score as they are marked 'MISSING'.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table mapping quality is relatively high, given that most field names have corresponding expressions from similar schemas. However, several fields are marked as 'MISSING,' indicating incomplete field mappings and reducing the completion score. The standard mapping of '_fivetran_synced' to '_airbyte_extracted_at' boosts confidence significantly. The lack of a logical or exact match for 'index', 'order_line_id', and 'rate' fields decreases the completion score as they are marked 'MISSING'._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -998,19 +775,12 @@ The table mapping quality is relatively high, given that most field names have c
 | `rate` | The proportion of the line item price that the tax represents as a decimal. | `MISSING` | ❌ 0.00 | No good match found. |
 | `title` | The name of the tax. | `transactions.source_name` | 🟢 0.70 | 'transactions.source_name' is presumed to align with 'title' based on context, dealing with tax-related naming. |
 
+### Mapping: Airbyte `orders` to Fivetran `order`
 
-### Mapping from Airbyte `orders` to Fivetran `order`
 
 - Table Match Confidence Score: 🟢 0.95
-
 - Table Completion Score: 🟢 0.85
-
-#### Evaluation
-
-The table mapping is evaluated to have a high table match score due to the comprehensive outline of field mappings that are appropriately correlated with reasonable confidence to the target schema. However, there are fields with 'MISSING' expressions which moderately reduce the completion score as they indicate where the source schema lacks equivalent or meaningful matches.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table mapping is evaluated to have a high table match score due to the comprehensive outline of field mappings that are appropriately correlated with reasonable confidence to the target schema. However, there are fields with 'MISSING' expressions which moderately reduce the completion score as they indicate where the source schema lacks equivalent or meaningful matches._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -1020,19 +790,12 @@ The table mapping is evaluated to have a high table match score due to the compr
 | `confirmed` | Whether inventory has been reserved for the order. | `MISSING` | ❌ 0.00 | No good match found. |
 | `presentment_currency` | The presentment currency that was used to display prices to the customer. | `MISSING` | ❌ 0.00 | No good match found. |
 
+### Mapping: Airbyte `fulfillments` to Fivetran `order_shipping_line`
 
-### Mapping from Airbyte `fulfillments` to Fivetran `order_shipping_line`
 
 - Table Match Confidence Score: 🟢 0.70
-
 - Table Completion Score: ❌ 0.21
-
-#### Evaluation
-
-The table mapping has a partial match with high confidence for standardized fields like '_fivetran_synced'. Several fields are missing a good match, affecting the completion score significantly. The high-confidence mapping of '_fivetran_synced' to '_airbyte_extracted_at' contributes positively to the table match score.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table mapping has a partial match with high confidence for standardized fields like '_fivetran_synced'. Several fields are missing a good match, affecting the completion score significantly. The high-confidence mapping of '_fivetran_synced' to '_airbyte_extracted_at' contributes positively to the table match score._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -1051,20 +814,12 @@ The table mapping has a partial match with high confidence for standardized fiel
 | `source` | Returns the rate source for the shipping line. | `MISSING` | ❌ 0.00 | No good match found. |
 | `title` | Returns the title of the shipping line. | `fulfillments.name` | 🟢 0.70 | Matched 'title' with partial confidence as the title of the shipping line. |
 
+### Mapping: Airbyte `orders` to Fivetran `order_note_attribute`
 
-### Mapping from Airbyte `orders` to Fivetran `order_note_attribute`
 
 - Table Match Confidence Score: ⚠️ 0.65
-
 - Table Completion Score: 🟢 0.75
-
-#### Evaluation
-
-The table mapping reflects a moderate confidence level due to missing mappings.
-Field-level mappings include both perfect and missing entries.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table mapping reflects a moderate confidence level due to missing mappings. Field-level mappings include both perfect and missing entries._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -1072,4 +827,3 @@ Field-level mappings include both perfect and missing entries.
 | `name` | Name of the attribute. | `orders.name` | 🟢 0.70 | Mapping 'name' to 'orders.name' is plausible with moderate confidence. |
 | `order_id` | ID referencing the order the note attribute belongs to. | `orders.id` | 🟢 0.70 | Mapping 'order_id' to 'orders.id' is plausible with moderate confidence. |
 | `value` | Value of the attribute. | `MISSING` | ❌ 0.00 | No good match found. |
-

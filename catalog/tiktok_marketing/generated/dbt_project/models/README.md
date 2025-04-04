@@ -2,18 +2,12 @@
 
 This directory contains automatically generated dbt models based on mapping files.
 
-### Mapping from Airbyte `ad_groups_reports_hourly` to Fivetran `adgroup_report_hourly`
+### Mapping: Airbyte `ad_groups_reports_hourly` to Fivetran `adgroup_report_hourly`
+
 
 - Table Match Confidence Score: 🟢 1.00
-
 - Table Completion Score: 🟢 1.00
-
-#### Evaluation
-
-Successfully mapped all fields with a high confidence score, indicating perfect mapping between the source and target schema.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _Successfully mapped all fields with a high confidence score, indicating perfect mapping between the source and target schema._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -61,19 +55,12 @@ Successfully mapped all fields with a high confidence score, indicating perfect 
 | `total_purchase_value` | The total value of purchase events that occurred in your app that were recorded by your measurement partner. | `ad_groups_reports_hourly.metrics.total_purchase_value` | 🟢 1.00 | Exact match found for 'total_purchase_value'. |
 | `total_sales_lead_value` | The monetary worth or potential value assigned to a lead generated through ads. | `MISSING` | ❌ 0.00 | No good match found. |
 
+### Mapping: Airbyte `campaigns` to Fivetran `campaign_history`
 
-### Mapping from Airbyte `campaigns` to Fivetran `campaign_history`
 
 - Table Match Confidence Score: 🟢 0.85
-
 - Table Completion Score: 🟢 0.77
-
-#### Evaluation
-
-The source table 'campaigns' matches the target schema closely with most fields appropriately mapped, resulting in a high table match score. However, missing fields 'opt_status' and 'status' reflect in a slightly lower completion score.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The source table 'campaigns' matches the target schema closely with most fields appropriately mapped, resulting in a high table match score. However, missing fields 'opt_status' and 'status' reflect in a slightly lower completion score._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -91,19 +78,12 @@ The source table 'campaigns' matches the target schema closely with most fields 
 | `status` | Campaign status | `MISSING` | ❌ 0.00 | No good match found. |
 | `split_test_variable` | Split Test variables. Optional values; TARGETING, BIDDING_OPTIMIZATION , CREATIVE. | `campaigns.split_test_variable` | 🟢 0.70 | The source field 'campaigns.split_test_variable' is likely a match for 'split_test_variable' but with some uncertainty. |
 
+### Mapping: Airbyte `advertisers` to Fivetran `advertiser`
 
-### Mapping from Airbyte `advertisers` to Fivetran `advertiser`
 
 - Table Match Confidence Score: 🟢 0.85
-
 - Table Completion Score: 🟢 0.90
-
-#### Evaluation
-
-The table has strong similarities in representing advertiser information across both source and target schemas. However, there is some discrepancy in field mapping completion due primarily to missing field expressions, though key fields like '_fivetran_synced' show complete and direct mapping.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table has strong similarities in representing advertiser information across both source and target schemas. However, there is some discrepancy in field mapping completion due primarily to missing field expressions, though key fields like '_fivetran_synced' show complete and direct mapping._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -133,19 +113,12 @@ The table has strong similarities in representing advertiser information across 
 | `timezone` | Ad account time zone including GMT offset | `advertisers.timezone` | 🟢 0.95 | The field 'timezone' is mapped accurately to 'advertisers.timezone'. |
 | `_fivetran_synced` | Timestamp of when Fivetran synced a record. | `advertisers._airbyte_extracted_at` | 🟢 1.00 | The field '_fivetran_synced' is correctly mapped to 'advertisers._airbyte_extracted_at'. |
 
+### Mapping: Airbyte `campaigns_reports_hourly` to Fivetran `campaign_report_hourly`
 
-### Mapping from Airbyte `campaigns_reports_hourly` to Fivetran `campaign_report_hourly`
 
 - Table Match Confidence Score: 🟢 0.95
-
 - Table Completion Score: 🟢 0.97
-
-#### Evaluation
-
-The table and field mappings are highly accurate. The mapping configuration includes a variety of field mappings that closely align with their expressions, with few MISSING mappings indicating minor gaps in completion. Generally, mappings such as '_fivetran_synced' to '_airbyte_extracted_at' are perfectly matched, resulting in a high table match score. Other fields are accurately associated with the correct expressions, suggesting they describe the same subject matter from a shared source. This results in a high completion score due to the absence of non-mappable fields, apart from minor misses like 'total_sales_lead_value' and 'profile_visits_rate'.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table and field mappings are highly accurate. The mapping configuration includes a variety of field mappings that closely align with their expressions, with few MISSING mappings indicating minor gaps in completion. Generally, mappings such as '_fivetran_synced' to '_airbyte_extracted_at' are perfectly matched, resulting in a high table match score. Other fields are accurately associated with the correct expressions, suggesting they describe the same subject matter from a shared source. This results in a high completion score due to the absence of non-mappable fields, apart from minor misses like 'total_sales_lead_value' and 'profile_visits_rate'._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -193,19 +166,12 @@ The table and field mappings are highly accurate. The mapping configuration incl
 | `total_purchase_value` | The total value of purchase events that occurred in your app that were recorded by your measurement partner. | `campaigns_reports_hourly.metrics.total_purchase_value` | 🟢 1.00 | Exact match to field 'total_purchase_value' in source. |
 | `total_sales_lead_value` | The monetary worth or potential value assigned to a lead generated through ads. | `MISSING` | ❌ 0.00 | No good match found. |
 
+### Mapping: Airbyte `ads` to Fivetran `ad_history`
 
-### Mapping from Airbyte `ads` to Fivetran `ad_history`
 
 - Table Match Confidence Score: 🟢 0.85
-
 - Table Completion Score: 🟢 0.95
-
-#### Evaluation
-
-The table mapping reflects a high degree of confidence given that the field mappings align well with expectations for a typical ad schema. However, some fields could not perfectly be matched or verified due to lack of comprehensive context.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table mapping reflects a high degree of confidence given that the field mappings align well with expectations for a typical ad schema. However, some fields could not perfectly be matched or verified due to lack of comprehensive context._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -234,19 +200,12 @@ The table mapping reflects a high degree of confidence given that the field mapp
 | `status` | Ad status. | `ads.secondary_status` | 🟢 0.90 | Expected mapping from 'ads.secondary_status', but some schema variance may exist. |
 | `video_id` | The video ID. | `ads.video_id` | 🟢 1.00 | Direct mapping from 'ads.video_id' finely matches expectations. |
 
+### Mapping: Airbyte `ads_reports_hourly` to Fivetran `ad_report_hourly`
 
-### Mapping from Airbyte `ads_reports_hourly` to Fivetran `ad_report_hourly`
 
 - Table Match Confidence Score: 🟢 0.85
-
 - Table Completion Score: 🟢 0.80
-
-#### Evaluation
-
-The table mapping is highly confident with most fields accurately mapped to their equivalents in the target schema. However, a few fields have missing mappings which slightly lowers the completion score.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table mapping is highly confident with most fields accurately mapped to their equivalents in the target schema. However, a few fields have missing mappings which slightly lowers the completion score._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -294,23 +253,16 @@ The table mapping is highly confident with most fields accurately mapped to thei
 | `total_purchase_value` | The total value of purchase events that occurred in your app that were recorded by your measurement partner. | `ads_reports_hourly.metrics.total_purchase_value` | 🟢 0.95 | Strong match for 'total_purchase_value' field. |
 | `total_sales_lead_value` | The monetary worth or potential value assigned to a lead generated through ads. | `MISSING` | ❌ 0.00 | No good match found. |
 
-
 ## Workshop Models
 
 These models are in the workshop directory and are not yet approved.
 
-### Mapping from Airbyte `ad_groups` to Fivetran `adgroup_history`
+### Mapping: Airbyte `ad_groups` to Fivetran `adgroup_history`
+
 
 - Table Match Confidence Score: 🟢 0.90
-
 - Table Completion Score: ⚠️ 0.60
-
-#### Evaluation
-
-The table match score is high due to strong alignment between the source and target schemas from similar APIs. However, completion is limited by several 'MISSING' fields that indicate fields present in target schema do not have corresponding entries in the source schema.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table match score is high due to strong alignment between the source and target schemas from similar APIs. However, completion is limited by several 'MISSING' fields that indicate fields present in target schema do not have corresponding entries in the source schema._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -383,4 +335,3 @@ The table match score is high due to strong alignment between the source and tar
 | `status` | Ad group status | `MISSING` | ❌ 0.00 | No good match found. |
 | `video_actions` | Number of video actions. | `ad_groups.video_actions` | 🟢 1.00 | Perfect match based on field name and context. |
 | `video_download` | Whether users can download your video ads on TikTok(cannot be updated once created). | `ad_groups.video_download_disabled` | 🟢 1.00 | Perfect match based on field name and context. |
-

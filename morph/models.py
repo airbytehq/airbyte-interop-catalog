@@ -657,23 +657,19 @@ class TableMapping(BaseModel):
 
         # Create header section
         sections.append(
-            f"### Mapping from Airbyte `{self.source_stream_name}` "
+            f"### Mapping: Airbyte `{self.source_stream_name}` "
             f"to Fivetran `{self.target_table_name}`",
         )
 
         # Overall confidence section
-        sections.extend(
-            [
-                f"- Table Match Confidence Score: {markdown_formatted_confidence(self._attached_evaluation.table_match_score)}",
-                f"- Table Completion Score: {markdown_formatted_confidence(self._attached_evaluation.completion_score)}",
-            ],
-        )
-
-        # Explanation section
-        explanation = create_markdown_section(
-            "Evaluation",
-            self._attached_evaluation.explanation,
-            level=4,
+        sections.append(
+            "\n- Table Match Confidence Score: "
+            + markdown_formatted_confidence(self._attached_evaluation.table_match_score)
+            + "\n- Table Completion Score: "
+            + markdown_formatted_confidence(self._attached_evaluation.completion_score)
+            + "\n- Summary Self-Evaluation: _"
+            + self._attached_evaluation.explanation.replace("\n", " ").strip()
+            + "_",
         )
 
         # Field-by-field analysis section
@@ -694,14 +690,7 @@ class TableMapping(BaseModel):
                 ],
             )
 
-        field_analysis = create_markdown_section(
-            "Field Mapping Logic",
-            create_markdown_table(headers, rows),
-            level=4,
-        )
-        sections.extend([explanation, field_analysis])
-
-        # Combine all sections
+        sections.append(create_markdown_table(headers, rows))
         return "\n\n".join(sections)
 
     def print_as_rich_table(self) -> None:

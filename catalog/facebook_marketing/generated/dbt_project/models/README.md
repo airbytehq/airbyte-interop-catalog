@@ -2,18 +2,12 @@
 
 This directory contains automatically generated dbt models based on mapping files.
 
-### Mapping from Airbyte `campaigns` to Fivetran `campaign_history`
+### Mapping: Airbyte `campaigns` to Fivetran `campaign_history`
+
 
 - Table Match Confidence Score: 🟢 1.00
-
 - Table Completion Score: 🟢 1.00
-
-#### Evaluation
-
-All provided field mappings closely correspond to the source fields for the campaigns table, thus the highest confidence scores apply for the overall table and field mappings.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _All provided field mappings closely correspond to the source fields for the campaigns table, thus the highest confidence scores apply for the overall table and field mappings._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -30,19 +24,12 @@ All provided field mappings closely correspond to the source fields for the camp
 | `lifetime_budget` | Lifetime budget of the campaign. | `campaigns.lifetime_budget` | 🟢 1.00 | Direct match with the field 'campaigns.lifetime_budget'. |
 | `status` | Status values are - 'ACTIVE', 'PAUSED', 'DELETED', 'ARCHIVED'. | `campaigns.status` | 🟢 1.00 | Direct match with the field 'campaigns.status'. The status values are assumed to directly correspond. |
 
+### Mapping: Airbyte `ads_insights` to Fivetran `basic_ad`
 
-### Mapping from Airbyte `ads_insights` to Fivetran `basic_ad`
 
 - Table Match Confidence Score: 🟢 0.90
-
 - Table Completion Score: 🟢 0.95
-
-#### Evaluation
-
-The mapping is very comprehensive and the fields provided closely match the target schema. Most fields have a clear counterpart in the target schema, providing high confidence scores.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The mapping is very comprehensive and the fields provided closely match the target schema. Most fields have a clear counterpart in the target schema, providing high confidence scores._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -58,19 +45,12 @@ The mapping is very comprehensive and the fields provided closely match the targ
 | `frequency` | The average number of times each person saw your ad; it is calculated as impressions divided by reach. | `ads_insights.frequency` | 🟢 1.00 | Exact match found for frequency. |
 | `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `ads_insights._airbyte_extracted_at` | 🟢 1.00 | Mapped to _airbyte_extracted_at as per standard procedure. |
 
+### Mapping: Airbyte `ad_sets` to Fivetran `ad_set_history`
 
-### Mapping from Airbyte `ad_sets` to Fivetran `ad_set_history`
 
 - Table Match Confidence Score: 🟢 0.85
-
 - Table Completion Score: 🟢 0.75
-
-#### Evaluation
-
-The table mapping evaluation indicates a moderate to high confidence in the table subject matching, primarily based on shared semantics derived from similar schemas in the source and target tables, both of which are generated from equivalent API endpoints. However, there are significant disparities in the field mappings, particularly with undefined fields marked as 'MISSING', which affects the completion score.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table mapping evaluation indicates a moderate to high confidence in the table subject matching, primarily based on shared semantics derived from similar schemas in the source and target tables, both of which are generated from equivalent API endpoints. However, there are significant disparities in the field mappings, particularly with undefined fields marked as 'MISSING', which affects the completion score._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -88,19 +68,12 @@ The table mapping evaluation indicates a moderate to high confidence in the tabl
 | `status` | Status values are - 'ACTIVE', 'PAUSED', 'DELETED', 'ARCHIVED'. | `ad_sets.effective_status` | 🟢 0.95 | The 'status' field shows high confidence due to consistent enumerated value definitions. |
 | `optimization_goal` | The optimization goal this ad set is using. Possible values defined [here](https://developers.facebook.com/docs/marketing-api/reference/ad-campaign/#fields). | `MISSING` | ❌ 0.00 | No good match found. |
 
+### Mapping: Airbyte `ad_account` to Fivetran `account_history`
 
-### Mapping from Airbyte `ad_account` to Fivetran `account_history`
 
 - Table Match Confidence Score: 🟢 0.85
-
 - Table Completion Score: 🟢 0.90
-
-#### Evaluation
-
-The table mapping is strong with most fields mapped accurately from source to target. Standard mappings and casing differences align correctly. No significant mismatches found that would lower confidence.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table mapping is strong with most fields mapped accurately from source to target. Standard mappings and casing differences align correctly. No significant mismatches found that would lower confidence._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -113,19 +86,12 @@ The table mapping is strong with most fields mapped accurately from source to ta
 | `currency` | Currency associated with account. | `ad_account.currency` | 🟢 0.90 | The field 'ad_account.currency' maps confidently to 'currency'. |
 | `timezone_name` | Timezone associated with account. | `ad_account.timezone_name` | 🟢 0.90 | The source field 'ad_account.timezone_name' matches well with 'timezone_name'. |
 
+### Mapping: Airbyte `ads` to Fivetran `ad_history`
 
-### Mapping from Airbyte `ads` to Fivetran `ad_history`
 
 - Table Match Confidence Score: 🟢 0.80
-
 - Table Completion Score: 🟢 0.90
-
-#### Evaluation
-
-The table mapping is highly confident; all fields except 'conversion_domain' are well-matched. Matches from source to target are clear and relevant.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table mapping is highly confident; all fields except 'conversion_domain' are well-matched. Matches from source to target are clear and relevant._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -139,23 +105,16 @@ The table mapping is highly confident; all fields except 'conversion_domain' are
 | `updated_time` | {{ doc('updated_time') }} | `ads.updated_time` | 🟢 1.00 | Exact match for 'updated_time' field. |
 | `conversion_domain` | The domain you've configured the ad to convert to. | `MISSING` | ❌ 0.00 | No good match found. |
 
-
 ## Workshop Models
 
 These models are in the workshop directory and are not yet approved.
 
-### Mapping from Airbyte `ad_creatives` to Fivetran `creative_history`
+### Mapping: Airbyte `ad_creatives` to Fivetran `creative_history`
+
 
 - Table Match Confidence Score: 🟢 0.95
-
 - Table Completion Score: 🟢 0.82
-
-#### Evaluation
-
-The table mappings are from similar source and target schemas with consistent subject matter. However, some fields were missing a good match. The table has a high match score due to strong alignment in identifiers and account fields, but completion is not perfect due to missing fields.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table mappings are from similar source and target schemas with consistent subject matter. However, some fields were missing a good match. The table has a high match score due to strong alignment in identifiers and account fields, but completion is not perfect due to missing fields._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -178,19 +137,12 @@ The table mappings are from similar source and target schemas with consistent su
 | `template_app_link_spec_android` | Link of the template app for android | `ad_creatives.object_story_spec.template_data.app_link_spec.android` | ⚠️ 0.50 | Possible match but not certain. |
 | `template_app_link_spec_iphone` | Link of the template app for iphone | `ad_creatives.object_story_spec.template_data.app_link_spec.iphone` | ⚠️ 0.50 | Possible match but not certain. |
 
+### Mapping: Airbyte `ads_insights` to Fivetran `basic_ad_actions`
 
-### Mapping from Airbyte `ads_insights` to Fivetran `basic_ad_actions`
 
 - Table Match Confidence Score: ⚠️ 0.65
-
 - Table Completion Score: ❌ 0.40
-
-#### Evaluation
-
-The table mapping shows a moderate match given the context of the fields provided. Some fields have been mapped with confidence, but there are significant number of fields missing a valid match, impacting the overall completion.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table mapping shows a moderate match given the context of the fields provided. Some fields have been mapped with confidence, but there are significant number of fields missing a valid match, impacting the overall completion._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -206,19 +158,12 @@ The table mapping shows a moderate match given the context of the fields provide
 | `inline` | Conversion metric value using the attribution window that occurs on the ad itself. Not included in downstream models by default, but can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics` var. | `MISSING` | ❌ 0.00 | No good match found. |
 | `value` | Conversion metric value using the default attribution window. | `MISSING` | ❌ 0.00 | No good match found. |
 
+### Mapping: Airbyte `ads_insights` to Fivetran `basic_ad_action_values`
 
-### Mapping from Airbyte `ads_insights` to Fivetran `basic_ad_action_values`
 
 - Table Match Confidence Score: ❌ 0.00
-
 - Table Completion Score: ❌ 0.25
-
-#### Evaluation
-
-The table match score is 0.0 as the fields do not suggest a coherent table matching due to missing and unclear mappings. The completion score is 0.25 because only 2 out of 8 fields are precisely mapped or have clear logic, primarily due to 2 'MISSING' expressions indicating a failure to map necessary fields.
-
-
-#### Field Mapping Logic
+- Summary Self-Evaluation: _The table match score is 0.0 as the fields do not suggest a coherent table matching due to missing and unclear mappings. The completion score is 0.25 because only 2 out of 8 fields are precisely mapped or have clear logic, primarily due to 2 'MISSING' expressions indicating a failure to map necessary fields._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -230,4 +175,3 @@ The table match score is 0.0 as the fields do not suggest a coherent table match
 | `date` | The date of the reported performance. | `ads_insights.date_start` | ⚠️ 0.60 | The 'date' maps well to 'ads_insights.date_start', showing date logic but slightly unclear due to name plurality variance. |
 | `index` | Index reflecting the `action_type` tracked for this ad on this day. Column of not much consequence. | `ads_insights.conversion_rate_ranking` | ⚠️ 0.55 | The mapping to 'ads_insights.conversion_rate_ranking' is a possible vague match in concept but lacks better contextual linking. |
 | `value` | Monetary value associated with the convesion action using the default attribution window. | `ads_insights.conversion_values` | 🟢 0.70 | Expression 'ads_insights.conversion_values' aligns with conversion metric insights provided by Facebook, showing fairly high mapping confidence. |
-
