@@ -37,7 +37,8 @@ annotations:
     target_table_name: contact_property_history
     table_match_score: 0.6
     completion_score: 0.42857142857142855
-    explanation: The mapping involves 7 fields, out of which 4 had direct matches.
+    explanation:
+      The mapping involves 7 fields, out of which 4 had direct matches.
       However, 3 fields are marked as 'MISSING', significantly reducing the completion
       score.
     field_mapping_evals:
@@ -64,10 +65,12 @@ annotations:
       - name: timestamp
         expression: contacts_property_history.timestamp
         score: 0.7
-        explanation: Reasonable confidence that 'contacts_property_history.timestamp'
+        explanation:
+          Reasonable confidence that 'contacts_property_history.timestamp'
           is the correct mapping.
       - name: value
         expression: contacts_property_history.value
         score: 0.7
-        explanation: Reasonable confidence that 'contacts_property_history.value'
+        explanation:
+          Reasonable confidence that 'contacts_property_history.value'
           is the correct mapping.

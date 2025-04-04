@@ -12,28 +12,32 @@ transforms:
         description: The ID of the engagement.
       property_hs_createdate:
         expression: engagements_tasks.properties_hs_createdate
-        description: "This field marks the task's time of creation and determines
+        description:
+          "This field marks the task's time of creation and determines
           where the task sits on the record timeline. You can use either a Unix timestamp
           in milliseconds or UTC format. \nPLEASE NOTE: This field will only be populated
           for connectors utilizing the HubSpot v3 API version. For the pre HubSpot
           v3 versions, this value may be found within the parent `engagement` table.\n"
       timestamp:
         expression: engagements_tasks.properties_hs_timestamp
-        description: "This field marks the task's time of occurrence and determines
+        description:
+          "This field marks the task's time of occurrence and determines
           where the task sits on the record timeline. You can use either a Unix timestamp
           in milliseconds or UTC format. \nPLEASE NOTE: This field will only be populated
           for connectors utilizing the HubSpot v3 API version. For the pre HubSpot
           v3 versions, this value may be found within the parent `engagement` table.\n"
       property_hubspot_owner_id:
         expression: engagements_tasks.properties_hubspot_owner_id
-        description: "The ID of the owner associated with the task. This field determines
+        description:
+          "The ID of the owner associated with the task. This field determines
           the user listed as the task creator on the record timeline.\nPLEASE NOTE:
           This field will only be populated for connectors utilizing the HubSpot v3
           API version. For the pre HubSpot v3 versions, this value may be found within
           the parent `engagement` table.\n"
       property_hubspot_team_id:
         expression: engagements_tasks.properties_hubspot_team_id
-        description: "The ID of the team associated with the task. This field determines
+        description:
+          "The ID of the team associated with the task. This field determines
           the team listed as the task creator on the record timeline.\nPLEASE NOTE:
           This field will only be populated for connectors utilizing the HubSpot v3
           API version.\n"
@@ -46,13 +50,15 @@ annotations:
     target_table_name: engagement_task
     table_match_score: 0.7
     completion_score: 0.83
-    explanation: The table mapping uses similar source and target models with high
+    explanation:
+      The table mapping uses similar source and target models with high
       confidence. However, one field expression is missing, reducing the overall completion.
     field_mapping_evals:
       - name: _fivetran_synced
         expression: engagements_tasks._airbyte_extracted_at
         score: 1.0
-        explanation: Standard mapping for '_fivetran_synced' to '_airbyte_extracted_at'
+        explanation:
+          Standard mapping for '_fivetran_synced' to '_airbyte_extracted_at'
           with perfect confidence.
       - name: engagement_id
         expression: MISSING
@@ -61,7 +67,8 @@ annotations:
       - name: property_hs_createdate
         expression: engagements_tasks.properties_hs_createdate
         score: 0.7
-        explanation: Mapping is likely correct based on similar meaning of creation
+        explanation:
+          Mapping is likely correct based on similar meaning of creation
           date fields.
       - name: timestamp
         expression: engagements_tasks.properties_hs_timestamp
@@ -70,10 +77,12 @@ annotations:
       - name: property_hubspot_owner_id
         expression: engagements_tasks.properties_hubspot_owner_id
         score: 0.7
-        explanation: Mapping likely correct for owner linkage based on API versioning
+        explanation:
+          Mapping likely correct for owner linkage based on API versioning
           details.
       - name: property_hubspot_team_id
         expression: engagements_tasks.properties_hubspot_team_id
         score: 0.7
-        explanation: Mapping likely correct for team linkage given API versioning
+        explanation:
+          Mapping likely correct for team linkage given API versioning
           restrictions.

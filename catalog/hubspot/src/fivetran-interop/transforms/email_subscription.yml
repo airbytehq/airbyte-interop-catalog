@@ -30,7 +30,8 @@ annotations:
     target_table_name: email_subscription
     table_match_score: 0.7
     completion_score: 1.0
-    explanation: Table mapping between the source and target is a strong match due
+    explanation:
+      Table mapping between the source and target is a strong match due
       to alignment of fields and standardized mappings. Completion score is perfect
       as all required fields are mapped.
     field_mapping_evals:
@@ -41,25 +42,30 @@ annotations:
       - name: active
         expression: email_subscriptions.active
         score: 0.7
-        explanation: Mapped to a field with a closely matching name and plausible
+        explanation:
+          Mapped to a field with a closely matching name and plausible
           function.
       - name: description
         expression: email_subscriptions.description
         score: 0.7
-        explanation: Mapped to a field with a closely matching name and plausible
+        explanation:
+          Mapped to a field with a closely matching name and plausible
           function.
       - name: id
         expression: email_subscriptions.id
         score: 0.7
-        explanation: Mapped to a field with a closely matching name and plausible
+        explanation:
+          Mapped to a field with a closely matching name and plausible
           function.
       - name: name
         expression: email_subscriptions.name
         score: 0.7
-        explanation: Mapped to a field with a closely matching name and plausible
+        explanation:
+          Mapped to a field with a closely matching name and plausible
           function.
       - name: portal_id
         expression: email_subscriptions.portalId
         score: 0.7
-        explanation: Mapped to a field with a closely matching name and plausible
+        explanation:
+          Mapped to a field with a closely matching name and plausible
           function.

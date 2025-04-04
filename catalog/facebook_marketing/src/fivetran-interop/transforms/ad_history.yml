@@ -38,46 +38,44 @@ annotations:
   evaluation:
     source_stream_name: ads
     target_table_name: ad_history
-    table_match_score: 0.95
-    completion_score: 0.89
-    explanation: The table match score is high due to the strong alignment of most
-      fields between the source and target schemas, indicating they describe similar
-      subjects. The completion score is slightly lower due to the presence of a 'MISSING'
-      field mapping, which indicates that not all fields have a direct match.
+    table_match_score: 0.8
+    completion_score: 0.9
+    explanation:
+      The table mapping is highly confident; all fields except 'conversion_domain'
+      are well-matched. Matches from source to target are clear and relevant.
     field_mapping_evals:
       - name: id
         expression: ads.id
         score: 1.0
-        explanation: Direct mapping with a perfect match.
+        explanation: Exact match for 'id' field.
       - name: account_id
         expression: ads.account_id
         score: 1.0
-        explanation: Direct mapping with a perfect match.
+        explanation: Exact match for 'account_id' field.
       - name: ad_set_id
         expression: ads.adset_id
         score: 1.0
-        explanation: Direct mapping with a perfect match.
+        explanation: Exact match for 'ad_set_id' field.
       - name: campaign_id
         expression: ads.campaign_id
         score: 1.0
-        explanation: Direct mapping with a perfect match.
+        explanation: Exact match for 'campaign_id' field.
       - name: creative_id
         expression: ads.creative.creative_id
         score: 1.0
-        explanation: Direct mapping with a perfect match.
+        explanation: Exact match for 'creative_id' field.
       - name: name
         expression: ads.name
         score: 1.0
-        explanation: Direct mapping with a perfect match.
+        explanation: Exact match for 'name' field.
       - name: _fivetran_synced
         expression: ads._airbyte_extracted_at
         score: 1.0
-        explanation: Standard mapping to '_airbyte_extracted_at', score is always
-          1.00.
+        explanation: Standard mapping of '_fivetran_synced' to '_airbyte_extracted_at'.
       - name: updated_time
         expression: ads.updated_time
         score: 1.0
-        explanation: Direct mapping with a perfect match.
+        explanation: Exact match for 'updated_time' field.
       - name: conversion_domain
         expression: MISSING
         score: 0.0

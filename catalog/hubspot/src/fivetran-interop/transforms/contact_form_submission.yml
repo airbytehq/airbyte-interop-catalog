@@ -27,7 +27,8 @@ transforms:
         description: A Unix timestamp in milliseconds of the time the submission occurred.
       title:
         expression: contacts_form_submissions.page_title
-        description: The title of the page that the form was submitted on. This will
+        description:
+          The title of the page that the form was submitted on. This will
           default to the name of the form if no title is provided.
 annotations:
   approved: true
@@ -38,7 +39,8 @@ annotations:
     target_table_name: contact_form_submission
     table_match_score: 0.8
     completion_score: 0.875
-    explanation: The table match confidence is high due to the presence of common
+    explanation:
+      The table match confidence is high due to the presence of common
       fields in the source and target tables, such as conversion_id and form_id, which
       are indicative of form submissions. However, the completion is partly reduced
       as a result of a 'MISSING' field and some other mapped fields having a close
@@ -47,7 +49,8 @@ annotations:
       - name: _fivetran_synced
         expression: contacts_form_submissions._airbyte_extracted_at
         score: 1.0
-        explanation: The field '_fivetran_synced' is correctly mapped to '_airbyte_extracted_at'
+        explanation:
+          The field '_fivetran_synced' is correctly mapped to '_airbyte_extracted_at'
           as per standard mapping rules.
       - name: contact_id
         expression: MISSING
@@ -56,17 +59,20 @@ annotations:
       - name: conversion_id
         expression: contacts_form_submissions.conversion_id
         score: 0.7
-        explanation: Close confidence since 'conversion_id' appears to match correctly
+        explanation:
+          Close confidence since 'conversion_id' appears to match correctly
           with the source.
       - name: form_id
         expression: contacts_form_submissions.form_id
         score: 0.7
-        explanation: Reasonable confidence as 'form_id' corresponds within the submission
+        explanation:
+          Reasonable confidence as 'form_id' corresponds within the submission
           context.
       - name: page_url
         expression: contacts_form_submissions.canonical_url
         score: 0.7
-        explanation: Matches with 'canonical_url' reasonably well for a form submission
+        explanation:
+          Matches with 'canonical_url' reasonably well for a form submission
           context.
       - name: portal_id
         expression: contacts_form_submissions.portal_id
@@ -75,7 +81,8 @@ annotations:
       - name: timestamp
         expression: contacts_form_submissions.timestamp
         score: 0.7
-        explanation: Field 'timestamp' appears to match the context of form submission
+        explanation:
+          Field 'timestamp' appears to match the context of form submission
           times.
       - name: title
         expression: contacts_form_submissions.page_title

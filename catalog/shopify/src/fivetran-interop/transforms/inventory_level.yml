@@ -9,7 +9,8 @@ transforms:
         description: "{{ doc('_fivetran_synced') }}"
       available:
         expression: inventory_levels.available
-        description: (DEPRECATED 2025-01-06) The available quantity of an inventory
+        description:
+          (DEPRECATED 2025-01-06) The available quantity of an inventory
           item at the inventory level's associated location. Returns null if the inventory
           item is not tracked.
       inventory_item_id:
@@ -20,21 +21,24 @@ transforms:
         description: The ID of the location that the inventory level belongs to.
       updated_at:
         expression: inventory_levels.updated_at
-        description: The date and time (ISO 8601 format) when the inventory level
+        description:
+          The date and time (ISO 8601 format) when the inventory level
           was last modified.
       id:
         expression: inventory_levels.id
         description: A globally unique identifier for the inventory level.
       can_deactivate:
         expression: inventory_levels.can_deactivate
-        description: Indicates whether the inventory item can be deactivated at the
+        description:
+          Indicates whether the inventory item can be deactivated at the
           location.
       created_at:
         expression: inventory_levels.created_at
         description: The date and time when the inventory level was created.
       deactivation_alert:
         expression: inventory_levels.deactivation_alert
-        description: Provides an alert message when the inventory item is deactivated
+        description:
+          Provides an alert message when the inventory item is deactivated
           at the location.
 annotations:
   approved: true
@@ -44,7 +48,8 @@ annotations:
     target_table_name: inventory_level
     table_match_score: 0.85
     completion_score: 0.9
-    explanation: The table has a strong correspondence between source and target,
+    explanation:
+      The table has a strong correspondence between source and target,
       given shared fields and expressions. The completion score is high due to the
       presence of mappings for nearly all fields, though some fields are marked as
       deprecation or missing information.
@@ -52,12 +57,14 @@ annotations:
       - name: _fivetran_synced
         expression: inventory_levels._airbyte_extracted_at
         score: 1.0
-        explanation: Standard mapping for all tables between _fivetran_synced and
+        explanation:
+          Standard mapping for all tables between _fivetran_synced and
           _airbyte_extracted_at.
       - name: available
         expression: inventory_levels.available
         score: 0.5
-        explanation: The field is deprecated and may not have a direct corresponding
+        explanation:
+          The field is deprecated and may not have a direct corresponding
           field in the target.
       - name: inventory_item_id
         expression: inventory_levels.inventory_item_id

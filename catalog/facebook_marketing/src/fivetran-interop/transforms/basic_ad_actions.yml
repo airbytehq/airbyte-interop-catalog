@@ -6,19 +6,22 @@ transforms:
     fields:
       _1_d_view:
         expression: MISSING
-        description: Conversion metric value using an attribution window of "1 day
+        description:
+          Conversion metric value using an attribution window of "1 day
           after viewing the ad". Not included in downstream models by default, but
           can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics`
           var.
       _7_d_click:
         expression: MISSING
-        description: Conversion metric value using an attribution window of "7 days
+        description:
+          Conversion metric value using an attribution window of "7 days
           after clicking the ad". Not included in downstream models by default, but
           can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics`
           var.
       _28_d_click:
         expression: MISSING
-        description: Conversion metric value using an attribution window of "28 days
+        description:
+          Conversion metric value using an attribution window of "28 days
           after clicking the ad". Deprecated by Facebook due to digital privacy initiatives.
           Not included in downstream models by default, but can be added using the
           `facebook_ads__basic_ad_actions_passthrough_metrics` var.
@@ -30,7 +33,8 @@ transforms:
         description: "{{ doc('_fivetran_synced') }}"
       action_type:
         expression: ads_insights.actions
-        description: "The kind of actions taken on your ad, Page, app or event after
+        description:
+          "The kind of actions taken on your ad, Page, app or event after
           your ad was served to someone, even if they didn't click on it. Action types
           include Page likes, app installs, conversions, event responses and more.
           Actions prepended by app_custom_event come from mobile app events and actions
@@ -43,11 +47,13 @@ transforms:
         description: The date of the reported performance.
       index:
         expression: MISSING
-        description: Index reflecting the `action_type` tracked for this ad on this
+        description:
+          Index reflecting the `action_type` tracked for this ad on this
           day. Column of not much consequence.
       inline:
         expression: MISSING
-        description: Conversion metric value using the attribution window that occurs
+        description:
+          Conversion metric value using the attribution window that occurs
           on the ad itself. Not included in downstream models by default, but can
           be added using the `facebook_ads__basic_ad_actions_passthrough_metrics`
           var.
@@ -68,11 +74,11 @@ annotations:
     source_stream_name: ads_insights
     target_table_name: basic_ad_actions
     table_match_score: 0.65
-    completion_score: 0.36363636363636365
-    explanation: The table match score reflects a moderate confidence that the source
-      and target tables describe the same subject matter, particularly due to a standard
-      mapping found for _fivetran_synced. Several fields are marked 'MISSING' due
-      to lack of matches, lowering the completion score.
+    completion_score: 0.4
+    explanation:
+      The table mapping shows a moderate match given the context of the
+      fields provided. Some fields have been mapped with confidence, but there are
+      significant number of fields missing a valid match, impacting the overall completion.
     field_mapping_evals:
       - name: _1_d_view
         expression: MISSING
@@ -93,22 +99,25 @@ annotations:
       - name: _fivetran_synced
         expression: ads_insights._airbyte_extracted_at
         score: 1.0
-        explanation: Standard mapping for _fivetran_synced to _airbyte_extracted_at.
+        explanation: _fivetran_synced is correctly mapped to ads_insights._airbyte_extracted_at.
       - name: action_type
         expression: ads_insights.actions
         score: 0.7
-        explanation: Mapped to ads_insights.actions, reflecting a likely but not certain
-          match based on contextual semantics.
+        explanation:
+          action_type is mapped to ads_insights.actions based on contextual
+          similarity.
       - name: ad_id
         expression: ads_insights.ad_id
-        score: 0.6
-        explanation: Mapped to ads_insights.ad_id, indicating a probable mapping based
-          on naming consistency.
+        score: 0.7
+        explanation:
+          ad_id is mapped to ads_insights.ad_id based on direct name and
+          purpose matching.
       - name: date
         expression: ads_insights.date_start
-        score: 0.6
-        explanation: Mapped to ads_insights.date_start, signifying a probable mapping
-          based on naming consistency.
+        score: 0.7
+        explanation:
+          date is matched to ads_insights.date_start. This matches the
+          purpose of recording performance date.
       - name: index
         expression: MISSING
         score: 0.0

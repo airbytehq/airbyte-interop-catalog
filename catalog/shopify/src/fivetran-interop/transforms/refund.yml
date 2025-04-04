@@ -39,7 +39,8 @@ annotations:
     target_table_name: refund
     table_match_score: 0.8
     completion_score: 0.9
-    explanation: The table mapping shows high confidence since source and target tables
+    explanation:
+      The table mapping shows high confidence since source and target tables
       are assumed to be derived from the same API, indicating they describe the same
       subject matter. The completion score is high as well, given all fields of significance
       in source are well mapped, except for the expected standard and one missing

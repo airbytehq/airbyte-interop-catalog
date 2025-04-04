@@ -12,7 +12,8 @@ transforms:
         description: The amount that's deducted from the order total.
       code:
         expression: discount_codes.code
-        description: This property returns the discount code that was entered at checkout.
+        description:
+          This property returns the discount code that was entered at checkout.
           Otherwise this property returns the title of the discount that was applied.
       order_id:
         expression: MISSING
@@ -22,7 +23,8 @@ transforms:
         description: The type of discount - `fixed_amount`, `percentage`, or `shipping`.
       index:
         expression: MISSING
-        description: Pairs with `order_id` to provide unique identifier for order
+        description:
+          Pairs with `order_id` to provide unique identifier for order
           discount code.
 annotations:
   approved: true
@@ -34,7 +36,8 @@ annotations:
     target_table_name: order_discount_code
     table_match_score: 0.8
     completion_score: 0.6
-    explanation: The table mapping is of moderate quality with certain fields perfectly
+    explanation:
+      The table mapping is of moderate quality with certain fields perfectly
       mapped, some fields with potential mappings, and others missing entirely. A
       score of 0.8 reflects that the table structure is very likely describing the
       same subject matter, but not entirely complete due to missing field mappings.
@@ -42,17 +45,20 @@ annotations:
       - name: _fivetran_synced
         expression: discount_codes._airbyte_extracted_at
         score: 1.0
-        explanation: 'Standard mapping: `_fivetran_synced` to `_airbyte_extracted_at`,
-          always scores 1.00.'
+        explanation:
+          "Standard mapping: `_fivetran_synced` to `_airbyte_extracted_at`,
+          always scores 1.00."
       - name: amount
         expression: discount_codes.total_sales.amount
         score: 0.7
-        explanation: Mapping `amount` to `discount_codes.total_sales.amount` is potentially
+        explanation:
+          Mapping `amount` to `discount_codes.total_sales.amount` is potentially
           correct given context, but exact match not certain.
       - name: code
         expression: discount_codes.code
         score: 0.7
-        explanation: Mapping `code` to `discount_codes.code` is likely correct based
+        explanation:
+          Mapping `code` to `discount_codes.code` is likely correct based
           on contextual description of discount application.
       - name: order_id
         expression: MISSING
@@ -61,7 +67,8 @@ annotations:
       - name: type
         expression: discount_codes.discount_type
         score: 0.7
-        explanation: Mapping `type` to `discount_codes.discount_type` appears valid
+        explanation:
+          Mapping `type` to `discount_codes.discount_type` appears valid
           given context of discount type enumeration.
       - name: index
         expression: MISSING

@@ -33,7 +33,8 @@ transforms:
         description: The name of the form.
       notify_recipients:
         expression: forms.configuration.notifyRecipients
-        description: "A comma-separated list of user IDs that should receive submission
+        description:
+          "A comma-separated list of user IDs that should receive submission
           notifications.\nEmail addresses will be returned for individuals who aren't
           users.\n"
       portal_id:
@@ -41,7 +42,8 @@ transforms:
         description: '{{ doc("portal_id") }}'
       redirect:
         expression: forms.configuration.postSubmitAction.value
-        description: The URL that the visitor will be redirected to after filling
+        description:
+          The URL that the visitor will be redirected to after filling
           out the form.
       submit_text:
         expression: forms.displayOptions.submitButtonText
@@ -62,7 +64,8 @@ annotations:
     target_table_name: form
     table_match_score: 0.9
     completion_score: 0.69
-    explanation: The table mapping score is high because the tables share many common
+    explanation:
+      The table mapping score is high because the tables share many common
       fields, indicating they likely describe similar subjects. However, the completion
       score is lower due to several fields mapped as 'MISSING'.
     field_mapping_evals:
@@ -93,7 +96,8 @@ annotations:
       - name: lead_nurturing_campaign_id
         expression: forms.properties.hs_marketing_campaign_guid
         score: 0.6
-        explanation: Mapping to a marketing campaign GUID is a possible but uncertain
+        explanation:
+          Mapping to a marketing campaign GUID is a possible but uncertain
           match.
       - name: method
         expression: MISSING
@@ -106,7 +110,8 @@ annotations:
       - name: notify_recipients
         expression: forms.configuration.notifyRecipients
         score: 0.8
-        explanation: Correctly identifies a list of user IDs for notifications within
+        explanation:
+          Correctly identifies a list of user IDs for notifications within
           the forms.
       - name: portal_id
         expression: MISSING

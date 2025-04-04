@@ -15,28 +15,32 @@ transforms:
         description: Boolean to mark rows that were deleted in the source database.
       property_hs_createdate:
         expression: engagements_calls.properties.hs_createdate
-        description: "This field marks the call's time of creation and determines
+        description:
+          "This field marks the call's time of creation and determines
           where the call sits on the record timeline. You can use either a Unix timestamp
           in milliseconds or UTC format. \nPLEASE NOTE: This field will only be populated
           for connectors utilizing the HubSpot v3 API version. For the pre HubSpot
           v3 versions, this value may be found within the parent `engagement` table.\n"
       timestamp:
         expression: MISSING
-        description: "This field marks the call's time of occurrence and determines
+        description:
+          "This field marks the call's time of occurrence and determines
           where the call sits on the record timeline. You can use either a Unix timestamp
           in milliseconds or UTC format. \nPLEASE NOTE: This field will only be populated
           for connectors utilizing the HubSpot v3 API version. For the pre HubSpot
           v3 versions, this value may be found within the parent `engagement` table.\n"
       property_hubspot_owner_id:
         expression: engagements_calls.properties.hubspot_owner_id
-        description: "The ID of the owner associated with the call. This field determines
+        description:
+          "The ID of the owner associated with the call. This field determines
           the user listed as the call creator on the record timeline.\nPLEASE NOTE:
           This field will only be populated for connectors utilizing the HubSpot v3
           API version. For the pre HubSpot v3 versions, this value may be found within
           the parent `engagement` table.\n"
       property_hubspot_team_id:
         expression: engagements_calls.properties.hubspot_team_id
-        description: "The ID of the team associated with the call. This field determines
+        description:
+          "The ID of the team associated with the call. This field determines
           the team listed as the call creator on the record timeline.\nPLEASE NOTE:
           This field will only be populated for connectors utilizing the HubSpot v3
           API version.\n"
@@ -51,7 +55,8 @@ annotations:
     target_table_name: engagement_call
     table_match_score: 0.8
     completion_score: 0.42857142857142855
-    explanation: The table match score is relatively high due to the commonality in
+    explanation:
+      The table match score is relatively high due to the commonality in
       the API usage and consistent field naming conventions between source and target
       schemas. However, the completion score is low due to missing expressions in
       key fields, which significantly impacts the ability to map data comprehensively.
@@ -59,7 +64,8 @@ annotations:
       - name: _fivetran_synced
         expression: engagements_calls._airbyte_extracted_at
         score: 1.0
-        explanation: _fivetran_synced is mapped to a source stream's _airbyte_extracted_at
+        explanation:
+          _fivetran_synced is mapped to a source stream's _airbyte_extracted_at
           column, which is a standard mapping.
       - name: engagement_id
         expression: MISSING
@@ -80,10 +86,12 @@ annotations:
       - name: property_hubspot_owner_id
         expression: engagements_calls.properties.hubspot_owner_id
         score: 0.7
-        explanation: This field has a moderate confidence match based on the HubSpot
+        explanation:
+          This field has a moderate confidence match based on the HubSpot
           API version context.
       - name: property_hubspot_team_id
         expression: engagements_calls.properties.hubspot_team_id
         score: 0.7
-        explanation: This field has a moderate confidence match based on the HubSpot
+        explanation:
+          This field has a moderate confidence match based on the HubSpot
           API version context.

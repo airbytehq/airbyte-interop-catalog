@@ -6,7 +6,8 @@ transforms:
     fields:
       _7_d_click:
         expression: ads_insights.attribution_setting
-        description: Conversion metric value using an attribution window of "7 days
+        description:
+          Conversion metric value using an attribution window of "7 days
           after clicking the ad". Not included in downstream models by default, but
           can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics`
           var.
@@ -18,7 +19,8 @@ transforms:
         description: "{{ doc('_fivetran_synced') }}"
       action_type:
         expression: ads_insights.actions
-        description: "The kind of actions taken on your ad, Page, app or event after
+        description:
+          "The kind of actions taken on your ad, Page, app or event after
           your ad was served to someone, even if they didn't click on it. Action types
           include Page likes, app installs, conversions, event responses and more.
           Actions prepended by app_custom_event come from mobile app events and actions
@@ -31,11 +33,13 @@ transforms:
         description: The date of the reported performance.
       index:
         expression: ads_insights.conversion_rate_ranking
-        description: Index reflecting the `action_type` tracked for this ad on this
+        description:
+          Index reflecting the `action_type` tracked for this ad on this
           day. Column of not much consequence.
       value:
         expression: ads_insights.conversion_values
-        description: Monetary value associated with the convesion action using the
+        description:
+          Monetary value associated with the convesion action using the
           default attribution window.
 annotations:
   approved: false
@@ -47,7 +51,8 @@ annotations:
     target_table_name: basic_ad_action_values
     table_match_score: 0.0
     completion_score: 0.25
-    explanation: The table match score is 0.0 as the fields do not suggest a coherent
+    explanation:
+      The table match score is 0.0 as the fields do not suggest a coherent
       table matching due to missing and unclear mappings. The completion score is
       0.25 because only 2 out of 8 fields are precisely mapped or have clear logic,
       primarily due to 2 'MISSING' expressions indicating a failure to map necessary
@@ -56,7 +61,8 @@ annotations:
       - name: _7_d_click
         expression: ads_insights.attribution_setting
         score: 0.55
-        explanation: The field '_7_d_click' is not directly mapped in a clear manner
+        explanation:
+          The field '_7_d_click' is not directly mapped in a clear manner
           to the source and is somewhat inferred. Given name usage could broadly match
           Facebook ad insights overlap but lacks clear matching.
       - name: _fivetran_id
@@ -70,7 +76,8 @@ annotations:
       - name: action_type
         expression: ads_insights.actions
         score: 0.65
-        explanation: The expression 'ads_insights.actions' commonly refers to ad actions
+        explanation:
+          The expression 'ads_insights.actions' commonly refers to ad actions
           but could encompass broad category types with possible good fit due to description
           match.
       - name: ad_id
@@ -80,15 +87,18 @@ annotations:
       - name: date
         expression: ads_insights.date_start
         score: 0.6
-        explanation: The 'date' maps well to 'ads_insights.date_start', showing date
+        explanation:
+          The 'date' maps well to 'ads_insights.date_start', showing date
           logic but slightly unclear due to name plurality variance.
       - name: index
         expression: ads_insights.conversion_rate_ranking
         score: 0.55
-        explanation: The mapping to 'ads_insights.conversion_rate_ranking' is a possible
+        explanation:
+          The mapping to 'ads_insights.conversion_rate_ranking' is a possible
           vague match in concept but lacks better contextual linking.
       - name: value
         expression: ads_insights.conversion_values
         score: 0.7
-        explanation: Expression 'ads_insights.conversion_values' aligns with conversion
+        explanation:
+          Expression 'ads_insights.conversion_values' aligns with conversion
           metric insights provided by Facebook, showing fairly high mapping confidence.

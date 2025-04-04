@@ -2,1299 +2,1097 @@
 
 This directory contains automatically generated dbt models based on mapping files.
 
-## collection
+### Mapping from Airbyte `discount_codes` to Fivetran `order_discount_code`
 
+- Table Match Confidence Score: 🟢 0.80
 
+- Table Completion Score: ⚠️ 0.60
 
+### Explanation
 
-### Source Tables
+The table mapping is of moderate quality with certain fields perfectly mapped, some fields with potential mappings, and others missing entirely. A score of 0.8 reflects that the table structure is very likely describing the same subject matter, but not entirely complete due to missing field mappings.
 
-| Alias | Schema | Table |
-| --- | --- | --- |
-| custom_collections | shopify | custom_collections |
 
+### Field-by-Field Analysis
 
-### Fields
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `discount_codes._airbyte_extracted_at` | 🟢 1.00 | Standard mapping: `_fivetran_synced` to `_airbyte_extracted_at`, always scores 1.00. |
+| `amount` | The amount that's deducted from the order total. | `discount_codes.total_sales.amount` | 🟢 0.70 | Mapping `amount` to `discount_codes.total_sales.amount` is potentially correct given context, but exact match not certain. |
+| `code` | This property returns the discount code that was entered at checkout. Otherwise this property returns the title of the discount that was applied. | `discount_codes.code` | 🟢 0.70 | Mapping `code` to `discount_codes.code` is likely correct based on contextual description of discount application. |
+| `order_id` | Associated order ID. | `MISSING` | ❌ 0.00 | No good match found. |
+| `type` | The type of discount - `fixed_amount`, `percentage`, or `shipping`. | `discount_codes.discount_type` | 🟢 0.70 | Mapping `type` to `discount_codes.discount_type` appears valid given context of discount type enumeration. |
+| `index` | Pairs with `order_id` to provide unique identifier for order discount code. | `MISSING` | ❌ 0.00 | No good match found. |
 
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_deleted | MISSING | {{ doc('_fivetran_deleted') }} |
-| _fivetran_synced | custom_collections._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| disjunctive | MISSING | Boolean representing whether the `rules` or disjuctive (logical `OR`) or not. True = disjuctive, false = conjunctive (logical `AND`). |
-| handle | custom_collections.handle | A unique, human-readable string for the collection automatically generated from its title. This is used in themes by the Liquid templating language to refer to the collection. |
-| id | custom_collections.id | The ID for the collection. |
-| published_at | custom_collections.published_at | The time and date (ISO 8601 format) when the collection was made visible. Returns null for a hidden collection. |
-| published_scope | custom_collections.published_scope | Whether the collection is published to the Point of Sale channel. Valid values `web` (the collection is published to the Online Store channel but not published to the Point of Sale channel) and `global` (the collection is published to both the Online Store channel and the Point of Sale channel).
- |
-| rules | MISSING | An array of rules that define what products go into the smart collection. Each rule (`column` -- `relation` --> `condition`) has these properties: - `column`: the property of a product being used to populate the smart collection. Ex: 'tag', 'type', 'vendor', 'variant_price', etc. - `relation`: The comparitive relationship between the column choice, and the condition ('equals', 'contains', 'greater_than', etc.) - condition: Select products for a smart collection using a condition. Values are either strings or numbers, depending on the relation value. See the [Shopify docs](https://shopify.dev/api/admin-rest/2022-10/resources/smartcollection#resource-object) for more.
- |
-| sort_order | custom_collections.sort_order | The order of the products in the collection. Valid values inclide - `alpha-asc`: The products are sorted alphabetically from A to Z. - `alpha-des`: The products are sorted alphabetically from Z to A. - `best-selling`: The products are sorted by number of sales. - `created`: The products are sorted by the date they were created, from oldest to newest. - `created-desc`: The products are sorted by the date they were created, from newest to oldest. - `manual`: The products are manually sorted by the shop owner. - `price-asc`: The products are sorted by price from lowest to highest. - `price-desc`: The products are sorted by price from highest to lowest.
- |
-| title | custom_collections.title | The name of the collection |
-| updated_at | custom_collections.updated_at | The date and time (ISO 8601 format) when the collection was last modified. |
 
+### Mapping from Airbyte `discount_codes` to Fivetran `discount_code`
 
+- Table Match Confidence Score: 🟢 0.90
 
-## order_discount_code
+- Table Completion Score: 🟢 0.86
 
+### Explanation
 
+The table fields are generally well-aligned with their purposes clearly defined. The source fields such as 'code', 'created_at', 'id', 'price_rule_id', 'updated_at', and 'usage_count' align with expectations for discount codes in the context provided. '_fivetran_synced' is correctly mapped to a source stream's '_airbyte_extracted_at', providing a reliable match for synchronization tracking. There are no fields marked as 'MISSING', indicating an attempt has been made to map all relevant fields in the source schema to the target schema, resulting in a high score.
 
 
-### Source Tables
+### Field-by-Field Analysis
 
-| Alias | Schema | Table |
-| --- | --- | --- |
-| discount_codes | shopify | discount_codes |
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `discount_codes._airbyte_extracted_at` | 🟢 1.00 | Standard mapping to '_airbyte_extracted_at'. |
+| `code` | The case-insensitive discount code that customers use at checkout. Shopify recommends this map onto the associated `price_rule.title`. | `discount_codes.code` | 🟢 0.80 | Matches the source and target purpose of representing the discount code as used at checkout. |
+| `created_at` | The date and time (ISO 8601 format) when the discount code was created. | `discount_codes.created_at` | 🟢 0.90 | Correctly maps to the source's created timestamp for the discount code, aligning with typical data schema expectations. |
+| `id` | The ID for the discount code. | `discount_codes.id` | 🟢 0.90 | Maps source's discount code ID, sufficient match given familiarity with common identification fields. |
+| `price_rule_id` | The ID for the price rule that this discount code belongs to. | `discount_codes.price_rule_id` | 🟢 0.80 | Adequate match since it represents an ID for associated rules, a typical relational mapping. |
+| `updated_at` | The date and time (ISO 8601 format) when the discount code was updated. | `discount_codes.updated_at` | 🟢 0.90 | Successfully maps update timestamps, common in schemas where record modifications are tracked. |
+| `usage_count` | The number of times that the discount code has been redeemed. | `discount_codes.usage_count` | 🟢 0.80 | Reflects typical semantic usage tracking, indicating satisfactory mapping despite potential source differences. |
 
 
-### Fields
+### Mapping from Airbyte `customers` to Fivetran `customer`
 
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_synced | discount_codes._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| amount | discount_codes.total_sales.amount | The amount that's deducted from the order total. |
-| code | discount_codes.code | This property returns the discount code that was entered at checkout. Otherwise this property returns the title of the discount that was applied. |
-| order_id | MISSING | Associated order ID. |
-| type | discount_codes.discount_type | The type of discount - `fixed_amount`, `percentage`, or `shipping`. |
-| index | MISSING | Pairs with `order_id` to provide unique identifier for order discount code. |
+- Table Match Confidence Score: 🟢 0.80
 
+- Table Completion Score: 🟢 0.90
 
+### Explanation
 
-## inventory_item
+The table match score is high due to the high similarity in subject matter between the source and target schemas, both concerned with customer information. While the completion score is even higher since most of the fields have precise mappings in the target schema.
 
 
+### Field-by-Field Analysis
 
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `customers._airbyte_extracted_at` | 🟢 1.00 | Standard mapping for '_fivetran_synced' to '_airbyte_extracted_at'. |
+| `accepts_marketing` | Whether the customer has consented to receive marketing material via email. Deprecated and will be coalesced with `email_marketing_consent_state`. | `customers.accepts_marketing` | ❌ 0.00 | No good match found. |
+| `created_at` | The date and time when the customer was created. | `customers.created_at` | 🟢 0.80 | 'created_at' has a direct equivalent in the target schema. |
+| `default_address_id` | The default address for the customer. | `customers.default_address.id` | 🟢 0.80 | 'default_address_id' matches structurally to 'customers.default_address.id'. |
+| `email` | The unique email address of the customer. Attempting to assign the same email address to multiple customers returns an error. | `customers.email` | 🟢 0.90 | 'email' is uniquely tied to 'customers.email' in a mapping. |
+| `first_name` | The customer's first name. | `customers.first_name` | 🟢 0.90 | 'first_name' has equivalent mapping to 'customers.first_name'. |
+| `id` | A unique identifier for the customer. | `customers.id` | 🟢 1.00 | Exact match found with 'customers.id'. |
+| `last_name` | The customer's last name. | `customers.last_name` | 🟢 0.90 | 'last_name' found similar corresponding field 'customers.last_name'. |
+| `orders_count` | The number of orders associated with this customer. | `customers.orders_count` | 🟢 0.85 | 'orders_count' accurately reflects 'customers.orders_count'. |
+| `phone` | The unique phone number (E.164 format) for this customer. Attempting to assign the same phone number to multiple customers returns an error. | `customers.phone` | 🟢 0.90 | Direct mapping with 'customers.phone'. |
+| `state` | The state of the customer's account with a shop. | `customers.state` | 🟢 0.70 | Ambiguity exists, but current context favors this mapping to 'customers.state'. |
+| `tax_exempt` | Whether the customer is exempt from paying taxes on their order. If true, then taxes won't be applied to an order at checkout. If false, then taxes will be applied at checkout. | `customers.tax_exempt` | 🟢 0.85 | Good match with 'customers.tax_exempt'. Similar domain. |
+| `total_spent` | The total amount of money that the customer has spent across their order history. | `customers.total_spent` | 🟢 0.90 | Correlates well with 'customers.total_spent'. |
+| `updated_at` | The date and time when the customer information was last updated. | `customers.updated_at` | 🟢 0.85 | Good mapping correspondence to 'customers.updated_at'. |
+| `verified_email` | Whether the customer has verified their email address. | `customers.verified_email` | 🟢 0.85 | 'verified_email' matches well with 'customers.verified_email'. |
+| `email_marketing_consent_state` | The current email marketing state for the customer. New version of `accepts_marketing` field. | `customers.email_marketing_consent.state` | 🟢 0.70 | Some similarity with 'customers.email_marketing_consent.state'. |
+| `email_marketing_consent_opt_in_level` | The marketing subscription opt-in level, as described in the M3AAWG Sender Best Common Practices, that the customer gave when they consented to receive marketing material by email. New version of `marketing_opt_in_level` field. | `customers.email_marketing_consent.opt_in_level` | 🟢 0.70 | Some similarity with 'customers.email_marketing_consent.opt_in_level'. |
+| `email_marketing_consent_consent_updated_at` | The date and time when the customer consented to receive marketing material by email. If no date is provided, then the date and time when the consent information was sent is used. New version of `accepts_marketing_updated_at` field. | `customers.email_marketing_consent.consent_updated_at` | 🟢 0.70 | Some similarity with 'customers.email_marketing_consent.consent_updated_at'. |
+| `accepts_marketing_updated_at` | Deprecated. The package will coalesce with `email_marketing_consent_consent_updated_at`. | `customers.accepts_marketing_updated_at` | ❌ 0.00 | No good match found. |
+| `marketing_opt_in_level` | Deprecated. The package will coalesce with `email_marketing_consent_opt_in_level`. | `customers.marketing_opt_in_level` | ❌ 0.00 | No good match found. |
+| `_fivetran_deleted` | {{ doc('_fivetran_deleted') }} | `MISSING` | ❌ 0.00 | No good match found. |
+| `note` | A note about the customer. | `customers.note` | ⚠️ 0.60 | Marginal mapping match with 'customers.note'. |
+| `currency` | The three-letter code (ISO 4217 format) for the currency that the customer used when they paid for their last order. Defaults to the shop currency. Returns the shop currency for test orders. | `customers.currency` | 🟢 0.80 | Matches well with 'customers.currency'. |
 
-### Source Tables
 
-| Alias | Schema | Table |
-| --- | --- | --- |
-| inventory_items | shopify | inventory_items |
+### Mapping from Airbyte `order_refunds` to Fivetran `order_adjustment`
 
+- Table Match Confidence Score: 🟢 0.85
 
-### Fields
+- Table Completion Score: 🟢 0.80
 
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_deleted | MISSING | {{ doc('_fivetran_deleted') }} |
-| _fivetran_synced | inventory_items._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| country_code_of_origin | inventory_items.country_code_of_origin | The country code (ISO 3166-1 alpha-2) of where the item came from. |
-| created_at | inventory_items.created_at | The date and time (ISO 8601 format) when the inventory item was created. |
-| id | inventory_items.id | The ID of the inventory item. |
-| province_code_of_origin | inventory_items.province_code_of_origin | The province code (ISO 3166-2 alpha-2) of where the item came from. The province code is only used if the shipping provider for the inventory item is Canada Post. |
-| requires_shipping | inventory_items.requires_shipping | Boolean representing whether a customer needs to provide a shipping address when placing an order containing the inventory item. |
-| sku | inventory_items.sku | The unique SKU (stock keeping unit) of the inventory item. |
-| tracked | inventory_items.tracked | Boolean representing whether inventory levels are tracked for the item. If true, then the inventory quantity changes are tracked by Shopify. |
-| updated_at | inventory_items.updated_at | The date and time (ISO 8601 format) when the inventory item was last modified. |
-| duplicate_sku_count | inventory_items.duplicate_sku_count | The number of inventory items that share the same SKU with this item. |
-| harmonized_system_code | inventory_items.harmonized_system_code | The harmonized system code of the item. |
-| inventory_history_url | MISSING | The URL that points to the inventory history for the item. |
-| legacy_resource_id | MISSING | The ID of the corresponding resource in the REST Admin API. |
-| measurement_id | MISSING | The unique identifier for the inventory item's measurement. |
-| measurement_weight_value | MISSING | The weight value of the inventory item's measurement. |
-| measurement_weight_unit | MISSING | The unit of measurement for the inventory item's weight. |
-| tracked_editable_locked | MISSING | Indicates whether the 'tracked' field for the inventory item is locked from editing. |
-| tracked_editable_reason | MISSING | Provides the reason why the 'tracked' field for the inventory item is locked from editing. |
-| unit_cost_amount | MISSING | Decimal money amount of the unit cost associated with the inventory item. |
-| unit_cost_currency_code | inventory_items.currency_code | Currency of the unit cost associated with the inventory item. |
+### Explanation
 
+The table mapping has a high confidence level as most fields are well-matched with minor discrepancies. 'MISSING' fields are well addressed and the usual high-confidence mappings are adhered to.
 
 
-## discount_code
+### Field-by-Field Analysis
 
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `id` | The unique numeric identifier for the order adjustment. | `order_refunds.id` | 🟢 0.90 | The mapping of 'id' to 'order_refunds.id' is strong due to similar naming and meaning. |
+| `order_id` | Reference to the order which the adjustment is associated. | `order_refunds.order_id` | 🟢 0.90 | The mapping of 'order_id' to 'order_refunds.order_id' is strong due to direct correspondence in naming and meaning. |
+| `refund_id` | Reference to the refund which the adjustment is associated. | `order_refunds.return.id` | 🟢 0.70 | The mapping of 'refund_id' to 'order_refunds.return.id' is moderate due to nested structure. |
+| `amount` | Amount of the adjustment. | `order_refunds.total_duties_set.shop_money.amount` | 🟢 0.80 | The mapping of 'amount' to 'order_refunds.total_duties_set.shop_money.amount' is good due to relevant scope of the field despite nested structure. |
+| `tax_amount` | Tax amount applied to the order adjustment in shop currency. | `order_refunds.total_duties_set.presentment_money.amount` | 🟢 0.80 | The mapping of 'tax_amount' to 'order_refunds.total_duties_set.presentment_money.amount' is good due to relevant context despite nested structure. |
+| `kind` | The kind of order adjustment (eg. refund, restock, etc.). | `MISSING` | ❌ 0.00 | No good match found. |
+| `reason` | The reason for the order adjustment. | `order_refunds.note` | 🟢 0.75 | The mapping of 'reason' to 'order_refunds.note' is reasonable due to relevant meaning. |
+| `amount_set` | Amount set towards the order adjustment in shop and presentment currencies. | `order_refunds.total_duties_set` | 🟢 0.70 | The mapping of 'amount_set' to 'order_refunds.total_duties_set' is moderate due to nested structure. |
+| `tax_amount_set` | Tax amount set towards the order adjustment in shop and presentment currencies. | `order_refunds.total_duties_set.presentment_money` | 🟢 0.70 | The mapping of 'tax_amount_set' to 'order_refunds.total_duties_set.presentment_money' is moderate due to nested structure. |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `order_refunds._airbyte_extracted_at` | 🟢 1.00 | Standard mapping to '_airbyte_extracted_at'. |
 
 
+### Mapping from Airbyte `metafield_shops` to Fivetran `metafield`
 
-### Source Tables
+- Table Match Confidence Score: 🟢 0.85
 
-| Alias | Schema | Table |
-| --- | --- | --- |
-| discount_codes | shopify | discount_codes |
+- Table Completion Score: 🟢 0.90
 
+### Explanation
 
-### Fields
+The table mapping matches closely with the expected schema based on the field names and their descriptions. Most fields have a direct match and the mappings are generally appropriate, with a few exceptions where 'MISSING' is used due to lack of good matches.
 
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_synced | discount_codes._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| code | discount_codes.code | The case-insensitive discount code that customers use at checkout. Shopify recommends this map onto the associated `price_rule.title`. |
-| created_at | discount_codes.created_at | The date and time (ISO 8601 format) when the discount code was created. |
-| id | discount_codes.id | The ID for the discount code. |
-| price_rule_id | discount_codes.price_rule_id | The ID for the price rule that this discount code belongs to. |
-| updated_at | discount_codes.updated_at | The date and time (ISO 8601 format) when the discount code was updated. |
-| usage_count | discount_codes.usage_count | The number of times that the discount code has been redeemed. |
 
+### Field-by-Field Analysis
 
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `metafield_shops._airbyte_extracted_at` | 🟢 1.00 | Standard mapping to source stream's '_airbyte_extracted_at' column. |
+| `created_at` | The date and time (ISO 8601 format) when the metafield was created. | `metafield_shops.created_at` | 🟢 0.95 | High confidence mapping based on field name and purpose of capturing creation date. |
+| `description` | A description of the information that the metafield contains. | `metafield_shops.description` | 🟢 0.90 | Field matches closely based on description and typical usage. |
+| `id` | The unique ID of the metafield. | `metafield_shops.id` | 🟢 1.00 | Direct match with unique identifier field. |
+| `key` | The key of the metafield. Keys can be up to 64 characters long and can contain alphanumeric characters, hyphens, underscores, and periods. | `metafield_shops.key` | 🟢 0.85 | Field mapping based on key attributes; fits well with typical schema. |
+| `namespace` | A container for a group of metafields. Grouping metafields within a namespace prevents your metafields from conflicting with other metafields with the same key name. Must have between 3-255 characters. | `metafield_shops.namespace` | 🟢 0.80 | Closely aligns with expected schema for group containers. |
+| `owner_id` | The unique ID of the resource that the metafield is attached to. | `metafield_shops.owner_id` | 🟢 0.90 | High confidence mapping for field indicating owner relation. |
+| `owner_resource` | The type of resource (table) that the metafield is attached to. | `metafield_shops.owner_resource` | 🟢 0.70 | Resource-type field matches well, although contextual evidence is moderate. |
+| `type` | The type of data that the metafield stores in the `value` field. Refer to the [list](https://shopify.dev/apps/metafields/types) of supported types. Use this instead of `value_type`. | `metafield_shops.type` | 🟢 0.75 | Mapping is appropriate with regard to data type description. |
+| `updated_at` | The date and time (ISO 8601 format) when the metafield was last updated. | `metafield_shops.updated_at` | 🟢 0.95 | High confidence mapping for a timestamp of last update. |
+| `value` | The data to store in the metafield. The value is always stored as a string, regardless of the metafield's type. | `metafield_shops.value` | 🟢 0.90 | Typically used for storing string data, fits with equivalent field. |
+| `value_type` | DEPRECATED as of [June 2022](https://fivetran.com/docs/applications/shopify/changelog#june2022). Use `type` instead. | `metafield_shops.value_type` | ❌ 0.00 | No good match found; field is deprecated. |
 
-## order_url_tag
 
+### Mapping from Airbyte `locations` to Fivetran `location`
 
+- Table Match Confidence Score: 🟢 0.85
 
+- Table Completion Score: 🟢 0.95
 
-### Source Tables
+### Explanation
 
-| Alias | Schema | Table |
-| --- | --- | --- |
-| metafield_orders | shopify | metafield_orders |
+The table mapping evaluation resulted in a high confidence score due to a close match between source and target schemas. The presence of exact mappings and the ability to identify synonymous fields contribute to the quality and coverage of the mapping.
 
 
-### Fields
+### Field-by-Field Analysis
 
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_synced | metafield_orders._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| key | metafield_orders.key | Key of the tag pair. |
-| order_id | MISSING | ID of the order url being tagged. |
-| value | metafield_orders.value | Value of the tag. |
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_deleted` | {{ doc('_fivetran_deleted') }} | `locations._airbyte_extracted_at` | ❌ 0.00 | No good match found. |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `locations._airbyte_extracted_at` | 🟢 1.00 | Standard mapping for all tables. |
+| `active` | Boolean representing whether the location is active. If true, then the location can be used to sell products, stock inventory, and fulfill orders.
+ | `locations.active` | 🟢 1.00 | The field 'active' has a clear one-to-one mapping, as it directly maps from the source to the target fields with no ambiguity. |
+| `address_1` | The location's street address. | `locations.address1` | 🟢 1.00 | The field 'address_1' is directly mapped to the source, indicating a high degree of confidence in the mapping. |
+| `address_2` | The optional second line of the location's street address. | `locations.address2` | 🟢 1.00 | 'address_2' maps directly from the source, matching the field intent and data type. |
+| `city` | The city the location is in. | `locations.city` | 🟢 1.00 | The 'city' field maps directly from the source to target schemas accurately. |
+| `country` | The country the location is in (two-letter code). | `locations.country` | 🟢 1.00 | The field 'country' is an exact match between source and target. |
+| `country_code` | The two-letter code (ISO 3166-1 alpha-2 format) corresponding to country the location is in. | `locations.country_code` | 🟢 1.00 | The 'country_code' field has a perfect mapping from source to target respecting the ISO standard. |
+| `country_name` | Full name of the location's country. | `locations.country_name` | 🟢 1.00 | Direct mapping from source 'country_name' to target. |
+| `created_at` | The date and time (ISO 8601 format) when the location was created. | `locations.created_at` | 🟢 1.00 | The 'created_at' field exists in both schemas and matches perfectly with ISO 8601 format indication. |
+| `id` | The ID of the location. | `locations.id` | 🟢 1.00 | The 'id' is an exact match and critical field forming the primary key. |
+| `legacy` | Boolean representing whether this is a fulfillment service location. If true, then the location is a fulfillment service location.  If false, then the location was created by the merchant and isn't tied to a fulfillment service.
+ | `locations.legacy` | 🟢 1.00 | The 'legacy' field maps accurately maintaining boolean context. |
+| `localized_country_name` | The localized name of the location's country. | `locations.localized_country_name` | 🟢 1.00 | Direct and accurate mapping for localized country name. |
+| `localized_province_name` | The localized name of the location's region. Typically a province, state, or district. | `locations.localized_province_name` | 🟢 1.00 | Perfect match for localized province name. |
+| `name` | The name of the location. | `locations.name` | 🟢 1.00 | 'Different schemas have identical field denoted by 'name', implying a perfect mapping. |
+| `phone` | The phone number of the location. This value can contain special characters, such as - or +. | `locations.phone` | 🟢 1.00 | Accurate mapping keeping respect to phone field attribute consistency. |
+| `province` | The province, state, or district of the location. | `locations.province` | 🟢 1.00 | 'Province' is a direct match with no distinction. |
+| `province_code` | The province, state, or district code (ISO 3166-2 alpha-2 format) of the location. | `locations.province_code` | 🟢 1.00 | Perfect match for province code with ISO format consideration. |
+| `updated_at` | The date and time (ISO 8601 format) when the location was last updated. | `locations.updated_at` | 🟢 1.00 | Field 'updated_at' perfectly concurs with temporal data standards. |
+| `zip` | The zip or postal code. | `locations.zip` | 🟢 1.00 | The 'zip' field forms an exact match with source schema definition. |
 
+
+### Mapping from Airbyte `tender_transactions` to Fivetran `tender_transaction`
+
+- Table Match Confidence Score: 🟢 1.00
+
+- Table Completion Score: 🟢 1.00
+
+### Explanation
+
+All fields mapped successfully with high confidence according to provided rules and context. Mapping hypothetical fields between schemas across transformations without loss of meaning.
+
+
+### Field-by-Field Analysis
+
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `tender_transactions._airbyte_extracted_at` | 🟢 1.00 | Mapped to _airbyte_extracted_at as a standard mapping. |
+| `amount` | The amount of the tender transaction in the shop's currency. | `tender_transactions.amount` | 🟢 1.00 | Direct match in field names and context (transaction amount). |
+| `currency` | The three-letter code (ISO 4217 format) for the currency used for the tender transaction. | `tender_transactions.currency` | 🟢 1.00 | Direct match in field names and context (ISO currency code). |
+| `id` | The ID of the transaction. | `tender_transactions.id` | 🟢 1.00 | Direct match in field names and context (transaction ID). |
+| `order_id` | The ID of the order that the tender transaction belongs to. | `tender_transactions.order_id` | 🟢 1.00 | Direct match in field names and context (order ID). |
+| `payment_method` | Information about the payment method used for this transaction. Valid values include: - credit_card - cash - android_pay - apple_pay - google_pay - samsung_pay - shopify_pay - amazon - klarna - paypal - unknown - other
+ | `tender_transactions.payment_method` | 🟢 1.00 | Direct match in field names and context (types of payment methods). |
+| `processed_at` | The date and time (ISO 8601 format) when the tender transaction was processed. | `tender_transactions.processed_at` | 🟢 1.00 | Direct match in field names and context (date of transaction processing). |
+| `remote_reference` | The remote (gateway) reference associated with the tender. | `tender_transactions.remote_reference` | 🟢 1.00 | Direct match in field names and context (reference associated with tender). |
+| `test` | Whether the tender transaction is a test transaction. | `tender_transactions.test` | 🟢 1.00 | Direct match in field names and context (indicates if transaction is a test). |
+| `user_id` | The ID of the user logged into the Shopify POS device that processed the tender transaction, if applicable. | `tender_transactions.user_id` | 🟢 1.00 | Direct match in field names and context (user ID processing the transaction). |
+
+
+### Mapping from Airbyte `abandoned_checkouts` to Fivetran `abandoned_checkout`
+
+- Table Match Confidence Score: 🟢 1.00
+
+- Table Completion Score: 🟢 0.90
 
+### Explanation
+
+The table mappings are evaluated to be of high confidence as they describe the same subject matter in both source and target implementations.
+
+
+### Field-by-Field Analysis
+
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_deleted` | {{ doc('_fivetran_deleted') }} | `MISSING` | ❌ 0.00 | No good match found. |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `abandoned_checkouts._airbyte_extracted_at` | 🟢 1.00 | _fivetran_synced is correctly mapped to _airbyte_extracted_at. |
+| `total_duties` | The total duties of the checkout in presentment currency. | `MISSING` | ❌ 0.00 | No good match found. |
 
-## abandoned_checkout_discount_code
 
+### Mapping from Airbyte `shop` to Fivetran `shop`
 
+- Table Match Confidence Score: 🟢 0.80
 
+- Table Completion Score: 🟢 0.95
 
-### Source Tables
+### Explanation
 
-| Alias | Schema | Table |
-| --- | --- | --- |
-| discount_codes | shopify | discount_codes |
+The table mapping evaluated to a high confidence score due to matching fields and descriptions aligning well with expected domains. A few fields could not be directly matched and are marked as 'MISSING'.
 
 
-### Fields
+### Field-by-Field Analysis
 
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_synced | discount_codes._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| amount | MISSING | The amount of the discount in presentment currency. |
-| checkout_id | MISSING | ID of the checkout. |
-| code | discount_codes.code | The discount code. |
-| created_at | discount_codes.created_at | When the checkout discount application was created. |
-| discount_id | MISSING | ID of the discount. Deprecated, use `code` instead. |
-| index | MISSING | Index (from 1) representing the application of the discount to the checkout. Use the latest (highest index) |
-| type | discount_codes.discount_type | The type of discount. Valid values - percentage, shipping, fixed_amount. (default - fixed_amount) |
-| updated_at | discount_codes.updated_at | When the checkout's discount was last updated |
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_deleted` | {{ doc('_fivetran_deleted') }} | `MISSING` | ❌ 0.00 | No good match found. |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `shop._airbyte_extracted_at` | 🟢 1.00 | Standard mapping to _airbyte_extracted_at. |
+| `address_1` | The shop's street address. | `shop.address1` | 🟢 1.00 | Exact match with 'shop.address1'. |
+| `address_2` | The optional second line of the shop's street address. | `shop.address2` | 🟢 1.00 | Exact match with 'shop.address2'. |
+| `checkout_api_supported` | Boolean representing whether the shop is capable of accepting payments directly through the Checkout API. | `shop.checkout_api_supported` | 🟢 0.95 | High confidence match. |
+| `city` | The shop's city. | `shop.city` | 🟢 1.00 | Exact match with 'shop.city'. |
+| `cookie_consent_level` | The cookie consent level defined on the shop's online store. | `shop.cookie_consent_level` | 🟢 1.00 | Exact match with 'shop.cookie_consent_level'. |
+| `country` | The shop's country. In most cases, this value matches the country_code. | `shop.country` | 🟢 1.00 | Exact match with 'shop.country'. |
+| `country_code` | The two-letter country code corresponding to the shop's country. | `shop.country_code` | 🟢 1.00 | Exact match with 'shop.country_code'. |
+| `country_name` | The shop's normalized country name. | `shop.country_name` | 🟢 1.00 | Exact match with 'shop.country_name'. |
+| `county_taxes` | Boolean representing whether the shop is applying taxes on a per-county basis. Only applicable to shops based in the US. Either `true` or `null` (not false, according to Shopify API docs). | `shop.county_taxes` | 🟢 0.90 | High confidence match with explanation from Shopify API. |
+| `created_at` | The date and time (ISO 8601) when the shop was created. | `shop.created_at` | 🟢 1.00 | Exact match with 'shop.created_at'. |
+| `currency` | The three-letter code (ISO 4217 format) for the shop's default currency. | `shop.currency` | 🟢 1.00 | Exact match with 'shop.currency'. |
+| `customer_email` | The contact email used for communication between the shop owner and the customer. | `shop.customer_email` | 🟢 1.00 | Exact match with 'shop.customer_email'. |
+| `domain` | The shop's domain. | `shop.domain` | 🟢 1.00 | Exact match with 'shop.domain'. |
+| `eligible_for_card_reader_giveaway` | Boolean representing whether the shop is eligible to receive a free credit card reader from Shopify. | `shop.eligible_for_card_reader_giveaway` | 🟢 0.95 | High confidence match. |
+| `eligible_for_payments` | Boolean representing whether the shop is eligible to use Shopify Payments. | `shop.eligible_for_payments` | 🟢 0.95 | High confidence match. |
+| `email` | The contact email used for communication between Shopify and the shop owner. | `shop.email` | 🟢 1.00 | Exact match with 'shop.email'. |
+| `enabled_presentment_currencies` | An array of of enabled currencies (ISO 4217 format) that the shop accepts. Merchants can enable currencies from their Shopify Payments settings in the Shopify Admin. | `shop.enabled_presentment_currencies` | 🟢 1.00 | Exact match with 'shop.enabled_presentment_currencies'. |
+| `force_ssl` | DEPRECATED. | `shop.force_ssl` | ❌ 0.00 | No good match found. |
+| `google_apps_domain` | The GSuite URL for the store, if applicable. | `shop.google_apps_domain` | 🟢 1.00 | Exact match with 'shop.google_apps_domain'. |
+| `google_apps_login_enabled` | Boolean representing whether the GSuite login is enabled. Shops with this feature will be able to log in through the GSuite login page. Valid values are `true` and `null`. | `shop.google_apps_login_enabled` | 🟢 0.95 | High confidence match. |
+| `has_discounts` | Boolean representing whether any active discounts exist for the shop. | `shop.has_discounts` | 🟢 0.95 | High confidence match. |
+| `has_gift_cards` | Boolean representing whether any active gift cards exist for the shop. | `shop.has_gift_cards` | 🟢 0.95 | High confidence match. |
+| `has_storefront` | Boolean representing whether this shop has an online store. | `shop.has_storefront` | 🟢 0.95 | High confidence match. |
+| `iana_timezone` | The name of the timezone assigned by the [IANA](https://www.iana.org/time-zones). | `shop.iana_timezone` | 🟢 1.00 | Exact match with 'shop.iana_timezone'. |
+| `id` | The ID for the shop. A 64-bit unsigned integer. | `shop.id` | 🟢 1.00 | Exact match with 'shop.id'. |
+| `latitude` | The latitude of the shop's location. | `shop.latitude` | 🟢 1.00 | Exact match with 'shop.latitude'. |
+| `longitude` | The longitude of the shop's location. | `shop.longitude` | 🟢 1.00 | Exact match with 'shop.longitude'. |
+| `money_format` | A string representing the way currency is formatted when the currency isn't specified. | `shop.money_format` | 🟢 1.00 | Exact match with 'shop.money_format'. |
+| `money_in_emails_format` | A string representing the way currency is formatted in email notifications when the currency isn't specified. | `shop.money_in_emails_format` | 🟢 1.00 | Exact match with 'shop.money_in_emails_format'. |
+| `money_with_currency_format` | A string representing the way currency is formatted when the currency is specified. | `shop.money_with_currency_format` | 🟢 1.00 | Exact match with 'shop.money_with_currency_format'. |
+| `money_with_currency_in_emails_format` | A string representing the way currency is formatted in email notifications when the currency is specified. | `shop.money_with_currency_in_emails_format` | 🟢 1.00 | Exact match with 'shop.money_with_currency_in_emails_format'. |
+| `multi_location_enabled` | DEPRECATED and hard-coded to `true`. | `shop.multi_location_enabled` | 🟢 1.00 | Exact match with 'shop.multi_location_enabled'. |
+| `myshopify_domain` | The shop's .myshopify.com domain. | `shop.myshopify_domain` | 🟢 1.00 | Exact match with 'shop.myshopify_domain'. |
+| `name` | The name of the shop. | `shop.name` | 🟢 1.00 | Exact match with 'shop.name'. |
+| `password_enabled` | Boolean representing whether the password protection page is enabled on the shop's online store. | `shop.password_enabled` | 🟢 1.00 | Exact match with 'shop.password_enabled'. |
+| `phone` | The contact phone number for the shop. | `shop.phone` | 🟢 1.00 | Exact match with 'shop.phone'. |
+| `plan_display_name` | The display name of the Shopify plan the shop is on. | `shop.plan_display_name` | 🟢 1.00 | Exact match with 'shop.plan_display_name'. |
+| `plan_name` | The name of the Shopify plan the shop is on. | `shop.plan_name` | 🟢 1.00 | Exact match with 'shop.plan_name'. |
+| `pre_launch_enabled` | Boolen representing whether the pre-launch page is enabled on the shop's online store. | `shop.pre_launch_enabled` | 🟢 1.00 | Exact match with 'shop.pre_launch_enabled'. |
+| `primary_locale` | The shop's primary locale, as configured in the language settings of the shop's theme. | `shop.primary_locale` | 🟢 1.00 | Exact match with 'shop.primary_locale'. |
+| `primary_location_id` | DEPRECATED. Formerly used for the ID of the shipping origin location. | `shop.primary_location_id` | ❌ 0.00 | No good match found. |
+| `province` | The shop's normalized province or state name. | `shop.province` | 🟢 1.00 | Exact match with 'shop.province'. |
+| `province_code` | The two- or three-letter code for the shop's province or state. | `shop.province_code` | 🟢 1.00 | Exact match with 'shop.province_code'. |
+| `requires_extra_payments_agreement` | Boolean representing whether the shop requires an extra Shopify Payments agreement. | `shop.requires_extra_payments_agreement` | 🟢 0.95 | High confidence match. |
+| `setup_required` | Boolean representing whether the shop has any outstanding setup steps. | `shop.setup_required` | 🟢 0.95 | High confidence match. |
+| `shop_owner` | The username of the shop owner. | `shop.shop_owner` | 🟢 1.00 | Exact match with 'shop.shop_owner'. |
+| `source` | The handle of the partner account that referred the merchant to Shopify, if applicable. | `shop.source` | 🟢 1.00 | Exact match with 'shop.source'. |
+| `tax_shipping` | Boolean representing whether taxes are charged for shipping. Valid values are true or false. | `shop.tax_shipping` | 🟢 0.95 | High confidence match. |
+| `taxes_included` | Boolean representing whether applicable taxes are included in product prices. Valid values are true or null. | `shop.taxes_included` | 🟢 0.95 | High confidence match. |
+| `timezone` | The name of the timezone the shop is in. | `shop.timezone` | 🟢 1.00 | Exact match with 'shop.timezone'. |
+| `updated_at` | The date and time (ISO 8601) when the shop was last updated. | `shop.updated_at` | 🟢 1.00 | Exact match with 'shop.updated_at'. |
+| `weight_unit` | The default unit of weight measurement for the shop. | `shop.weight_unit` | 🟢 1.00 | Exact match with 'shop.weight_unit'. |
+| `zip` | The shop's zip or postal code. | `shop.zip` | 🟢 1.00 | Exact match with 'shop.zip'. |
 
 
+### Mapping from Airbyte `orders` to Fivetran `order_tag`
 
-## product_tag
+- Table Match Confidence Score: 🟢 0.80
 
+- Table Completion Score: ⚠️ 0.50
 
+### Explanation
 
+The table match score is relatively high because the `_fivetran_synced` was successfully mapped to `_airbyte_extracted_at`, a standard mapping. However, two of the field mappings have expressions set to 'MISSING', resulting in a lower completion score.
 
-### Source Tables
 
-| Alias | Schema | Table |
-| --- | --- | --- |
-| products | shopify | products |
+### Field-by-Field Analysis
 
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `orders._airbyte_extracted_at` | 🟢 1.00 | _fivetran_synced is always mapped to _airbyte_extracted_at with a perfect score of 1.00 as it is a standard mapping. |
+| `index` | Index (starting from 1) represnting when the tag was placed on the order. | `MISSING` | ❌ 0.00 | Expression is 'MISSING'. No good match found. |
+| `order_id` | ID of the order being tagged. | `orders.id` | 🟢 0.70 | order_id is mapped to orders.id with a reasonable level of confidence. |
+| `value` | Value of the tag. | `MISSING` | ❌ 0.00 | Expression is 'MISSING'. No good match found. |
 
-### Fields
 
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_synced | products._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| index | MISSING | Index (starting from 1) represnting when the tag was placed on the product. |
-| product_id | MISSING | ID of the product being tagged. |
-| value | MISSING | Value of the tag. |
+### Mapping from Airbyte `inventory_levels` to Fivetran `inventory_level`
 
-
-
-## customer
-
-
-
-
-### Source Tables
-
-| Alias | Schema | Table |
-| --- | --- | --- |
-| customers | shopify | customers |
-
-
-### Fields
-
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_synced | customers._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| accepts_marketing | customers.accepts_marketing | Whether the customer has consented to receive marketing material via email. Deprecated and will be coalesced with `email_marketing_consent_state`. |
-| created_at | customers.created_at | The date and time when the customer was created. |
-| default_address_id | customers.default_address.id | The default address for the customer. |
-| email | customers.email | The unique email address of the customer. Attempting to assign the same email address to multiple customers returns an error. |
-| first_name | customers.first_name | The customer's first name. |
-| id | customers.id | A unique identifier for the customer. |
-| last_name | customers.last_name | The customer's last name. |
-| orders_count | customers.orders_count | The number of orders associated with this customer. |
-| phone | customers.phone | The unique phone number (E.164 format) for this customer. Attempting to assign the same phone number to multiple customers returns an error. |
-| state | customers.state | The state of the customer's account with a shop. |
-| tax_exempt | customers.tax_exempt | Whether the customer is exempt from paying taxes on their order. If true, then taxes won't be applied to an order at checkout. If false, then taxes will be applied at checkout. |
-| total_spent | customers.total_spent | The total amount of money that the customer has spent across their order history. |
-| updated_at | customers.updated_at | The date and time when the customer information was last updated. |
-| verified_email | customers.verified_email | Whether the customer has verified their email address. |
-| email_marketing_consent_state | customers.email_marketing_consent.state | The current email marketing state for the customer. New version of `accepts_marketing` field. |
-| email_marketing_consent_opt_in_level | customers.email_marketing_consent.opt_in_level | The marketing subscription opt-in level, as described in the M3AAWG Sender Best Common Practices, that the customer gave when they consented to receive marketing material by email. New version of `marketing_opt_in_level` field. |
-| email_marketing_consent_consent_updated_at | customers.email_marketing_consent.consent_updated_at | The date and time when the customer consented to receive marketing material by email. If no date is provided, then the date and time when the consent information was sent is used. New version of `accepts_marketing_updated_at` field. |
-| accepts_marketing_updated_at | customers.accepts_marketing_updated_at | Deprecated. The package will coalesce with `email_marketing_consent_consent_updated_at`. |
-| marketing_opt_in_level | customers.marketing_opt_in_level | Deprecated. The package will coalesce with `email_marketing_consent_opt_in_level`. |
-| _fivetran_deleted | MISSING | {{ doc('_fivetran_deleted') }} |
-| note | customers.note | A note about the customer. |
-| currency | customers.currency | The three-letter code (ISO 4217 format) for the currency that the customer used when they paid for their last order. Defaults to the shop currency. Returns the shop currency for test orders. |
-
-
-
-## order_adjustment
-
-
-
-
-### Source Tables
-
-| Alias | Schema | Table |
-| --- | --- | --- |
-| order_refunds | shopify | order_refunds |
-
-
-### Fields
-
-| Name | Expression | Description |
-| --- | --- | --- |
-| id | order_refunds.id | The unique numeric identifier for the order adjustment. |
-| order_id | order_refunds.order_id | Reference to the order which the adjustment is associated. |
-| refund_id | order_refunds.return.id | Reference to the refund which the adjustment is associated. |
-| amount | order_refunds.total_duties_set.shop_money.amount | Amount of the adjustment. |
-| tax_amount | order_refunds.total_duties_set.presentment_money.amount | Tax amount applied to the order adjustment in shop currency. |
-| kind | MISSING | The kind of order adjustment (eg. refund, restock, etc.). |
-| reason | order_refunds.note | The reason for the order adjustment. |
-| amount_set | order_refunds.total_duties_set | Amount set towards the order adjustment in shop and presentment currencies. |
-| tax_amount_set | order_refunds.total_duties_set.presentment_money | Tax amount set towards the order adjustment in shop and presentment currencies. |
-| _fivetran_synced | order_refunds._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-
-
-
-## metafield
-
-
-
-
-### Source Tables
-
-| Alias | Schema | Table |
-| --- | --- | --- |
-| metafield_shops | shopify | metafield_shops |
-
-
-### Fields
-
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_synced | metafield_shops._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| created_at | metafield_shops.created_at | The date and time (ISO 8601 format) when the metafield was created. |
-| description | metafield_shops.description | A description of the information that the metafield contains. |
-| id | metafield_shops.id | The unique ID of the metafield. |
-| key | metafield_shops.key | The key of the metafield. Keys can be up to 64 characters long and can contain alphanumeric characters, hyphens, underscores, and periods. |
-| namespace | metafield_shops.namespace | A container for a group of metafields. Grouping metafields within a namespace prevents your metafields from conflicting with other metafields with the same key name. Must have between 3-255 characters. |
-| owner_id | metafield_shops.owner_id | The unique ID of the resource that the metafield is attached to. |
-| owner_resource | metafield_shops.owner_resource | The type of resource (table) that the metafield is attached to. |
-| type | metafield_shops.type | The type of data that the metafield stores in the `value` field. Refer to the [list](https://shopify.dev/apps/metafields/types) of supported types. Use this instead of `value_type`. |
-| updated_at | metafield_shops.updated_at | The date and time (ISO 8601 format) when the metafield was last updated. |
-| value | metafield_shops.value | The data to store in the metafield. The value is always stored as a string, regardless of the metafield's type. |
-| value_type | metafield_shops.value_type | DEPRECATED as of [June 2022](https://fivetran.com/docs/applications/shopify/changelog#june2022). Use `type` instead. |
-
-
-
-## customer_tag
-
-
-
-
-### Source Tables
-
-| Alias | Schema | Table |
-| --- | --- | --- |
-| customers | shopify | customers |
-
-
-### Fields
-
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_synced | customers._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| index | MISSING | Index (starting from 1) represnting when the tag was placed on the customer. |
-| customer_id | customers.default_address.customer_id | ID of the customer being tagged. |
-| value | MISSING | Value of the tag. |
-
-
-
-## location
-
-
-
-
-### Source Tables
-
-| Alias | Schema | Table |
-| --- | --- | --- |
-| locations | shopify | locations |
-
-
-### Fields
-
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_deleted | locations._airbyte_extracted_at | {{ doc('_fivetran_deleted') }} |
-| _fivetran_synced | locations._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| active | locations.active | Boolean representing whether the location is active. If true, then the location can be used to sell products, stock inventory, and fulfill orders.
- |
-| address_1 | locations.address1 | The location's street address. |
-| address_2 | locations.address2 | The optional second line of the location's street address. |
-| city | locations.city | The city the location is in. |
-| country | locations.country | The country the location is in (two-letter code). |
-| country_code | locations.country_code | The two-letter code (ISO 3166-1 alpha-2 format) corresponding to country the location is in. |
-| country_name | locations.country_name | Full name of the location's country. |
-| created_at | locations.created_at | The date and time (ISO 8601 format) when the location was created. |
-| id | locations.id | The ID of the location. |
-| legacy | locations.legacy | Boolean representing whether this is a fulfillment service location. If true, then the location is a fulfillment service location.  If false, then the location was created by the merchant and isn't tied to a fulfillment service.
- |
-| localized_country_name | locations.localized_country_name | The localized name of the location's country. |
-| localized_province_name | locations.localized_province_name | The localized name of the location's region. Typically a province, state, or district. |
-| name | locations.name | The name of the location. |
-| phone | locations.phone | The phone number of the location. This value can contain special characters, such as - or +. |
-| province | locations.province | The province, state, or district of the location. |
-| province_code | locations.province_code | The province, state, or district code (ISO 3166-2 alpha-2 format) of the location. |
-| updated_at | locations.updated_at | The date and time (ISO 8601 format) when the location was last updated. |
-| zip | locations.zip | The zip or postal code. |
-
-
-
-## product_variant
-
-
-
-
-### Source Tables
-
-| Alias | Schema | Table |
-| --- | --- | --- |
-| product_variants | shopify | product_variants |
-
-
-### Fields
-
-| Name | Expression | Description |
-| --- | --- | --- |
-| barcode | product_variants.barcode | The barcode, UPC, or ISBN number for the product. |
-| compare_at_price | product_variants.compare_at_price | The original price of the item before an adjustment or a sale in shop currency. |
-| created_at | product_variants.created_at | The date and time (ISO 8601 format) when the product variant was created. |
-| fulfillment_service | MISSING | (DEPRECATED 2025-01-06) The fulfillment service associated with the product variant. |
-| grams | product_variants.grams | (DEPRECATED 2025-01-06) The weight of the product variant in grams. |
-| id | product_variants.id | The unique numeric identifier for the product variant. |
-| image_id | product_variants.image_id | The unique numeric identifier for a product's image. The image must be associated to the same product as the variant. |
-| inventory_item_id | product_variants.inventory_item_id | The unique identifier for the inventory item, which is used in the Inventory API to query for inventory information. |
-| inventory_management | MISSING | (DEPRECATED 2025-01-06) The fulfillment service that tracks the number of items in stock for the product variant. |
-| inventory_policy | product_variants.inventory_policy | Whether customers are allowed to place an order for the product variant when it's out of stock. |
-| inventory_quantity | product_variants.inventory_quantity | An aggregate of inventory across all locations. To adjust inventory at a specific location, use the InventoryLevel resource. |
-| old_inventory_quantity | product_variants.old_inventory_quantity | (DEPRECATED 2025-01-06) Use the InventoryLevel resource instead. |
-| option_1 | product_variants.option1 | (DEPRECATED 2025-01-06) The custom properties that a shop owner uses to define product variants. You can define three options for a product variant: option1, option2, option3.
- |
-| option_2 | product_variants.option2 | (DEPRECATED 2025-01-06) The custom properties that a shop owner uses to define product variants. You can define three options for a product variant: option1, option2, option3.
- |
-| option_3 | product_variants.option3 | (DEPRECATED 2025-01-06) The custom properties that a shop owner uses to define product variants. You can define three options for a product variant: option1, option2, option3.
- |
-| position | product_variants.position | The order of the product variant in the list of product variants. The first position in the list is 1. The position of variants is indicated by the order in which they are listed. |
-| price | product_variants.price | The price of the product variant in shop currency. |
-| product_id | product_variants.product_id | The unique numeric identifier for the product. |
-| requires_shipping | product_variants.requires_shipping | (DEPRECATED 2025-01-06) Use the `requires_shipping` property on the InventoryItem resource instead. |
-| sku | product_variants.sku | A unique identifier for the product variant in the shop. Required in order to connect to a FulfillmentService. |
-| taxable | product_variants.taxable | Whether a tax is charged when the product variant is sold. |
-| tax_code | product_variants.tax_code | This parameter applies only to the stores that have the Avalara AvaTax app installed. Specifies the Avalara tax code for the product variant. |
-| title | product_variants.title | The title of the product variant. The title field is a concatenation of the option1, option2, and option3 fields. You can only update title indirectly using the option fields. |
-| updated_at | product_variants.updated_at | The date and time when the product variant was last modified. Gets returned in ISO 8601 format. |
-| weight | product_variants.weight | (DEPRECATED 2025-01-06) The weight of the product variant in the unit system specified with weight_unit. |
-| weight_unit | product_variants.weight_unit | (DEPRECATED 2025-01-06) The unit of measurement that applies to the product variant's weight. If you don't specify a value for weight_unit, then the shop's default unit of measurement is applied. Valid values: g, kg, oz, and lb.
- |
-| available_for_sale | product_variants.available_for_sale | Indicates whether the product variant is available for sale. |
-| display_name | product_variants.display_name | The display name of the variant, based on the product's title and variant's title. |
-| legacy_resource_id | MISSING | The ID of the corresponding resource in the REST Admin API. |
-| metafield | MISSING | A custom field, including its namespace and key, that's associated with a Shopify resource for the purposes of adding and storing additional information. |
-| requires_components | MISSING | Indicates whether a product variant requires components. |
-| sellable_online_quantity | MISSING | The total sellable quantity of the variant for online channels. |
-| _fivetran_synced | product_variants._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-
-
-
-## fulfillment_event
-
-
-
-
-### Source Tables
-
-| Alias | Schema | Table |
-| --- | --- | --- |
-| fulfillments | shopify | fulfillments |
-
-
-### Fields
-
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_deleted | MISSING | {{ doc('_fivetran_deleted') }} |
-| _fivetran_synced | fulfillments._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| address_1 | MISSING | The street address where the fulfillment event occurred. |
-| city | fulfillments.origin_address.city | The city where the fulfillment event occurred. |
-| country | fulfillments.origin_address.country_code | The country where the fulfillment event occurred. |
-| created_at | fulfillments.created_at | The date and time (ISO 8601 format) when the fulfillment event was created. |
-| estimated_delivery_at | MISSING | The estimated delivery date based on the fulfillment's tracking number, as long as it's provided by one of the following carriers: USPS, FedEx, UPS, or Canada Post (Canada only).  Value is `null` if no tracking number is available or if the tracking number is from an unsupported carrier. This property is available only when carrier calculated rates are in use.
- |
-| fulfillment_id | fulfillments.id | An ID for the fulfillment that's associated with the fulfillment event. |
-| happened_at | MISSING | The date and time (ISO 8601 format) when the fulfillment event occurred. |
-| id | fulfillments.id | An ID for the fulfillment event. |
-| latitude | MISSING | A geographic coordinate specifying the latitude of the fulfillment event. |
-| longitude | MISSING | A geographic coordinate specifying the longitude of the fulfillment event. |
-| message | MISSING | An arbitrary message describing the status. Can be provided by a shipping carrier. |
-| order_id | fulfillments.order_id | The ID of the order that's associated with the fulfillment event. |
-| province | fulfillments.origin_address.province_code | The province where the fulfillment event occurred. |
-| shop_id | MISSING | An ID for the shop that's associated with the fulfillment event. |
-| status | fulfillments.shipment_status | The status of the fulfillment event. Valid values: - label_printed: A label for the shipment was purchased and printed. - label_purchased: A label for the shipment was purchased, but not printed. - attempted_delivery: Delivery of the shipment was attempted, but unable to be completed. - ready_for_pickup: The shipment is ready for pickup at a shipping depot. - picked_up: The fulfillment was successfully picked up. - confirmed: The carrier is aware of the shipment, but hasn't received it yet. - in_transit: The shipment is being transported between shipping facilities on the way to its destination. - out_for_delivery: The shipment is being delivered to its final destination. - delivered: The shipment was successfully delivered. - failure: Something went wrong when pulling tracking information for the shipment, such as the tracking number was invalid or the shipment was canceled.
- |
-| updated_at | fulfillments.updated_at | The date and time (ISO 8601 format) when the fulfillment event was updated. |
-| zip | fulfillments.origin_address.zip | The zip code of the location where the fulfillment event occurred. |
-
-
-
-## order_shipping_tax_line
-
-
-
-
-### Source Tables
-
-| Alias | Schema | Table |
-| --- | --- | --- |
-| order_refunds | shopify | order_refunds |
-
-
-### Fields
-
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_synced | order_refunds._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| index | MISSING | Index (from 1) representing the order of shipping lines per order. |
-| order_shipping_line_id | MISSING | ID of the order shipping line this recod is associated with. |
-| price | MISSING | The amount of tax, in shop currency, after discounts and before returns. |
-| price_set | MISSING | The amount of tax, in shop and presentment currencies, after discounts and before returns (JSON). |
-| rate | MISSING | The proportion of the line item price that the tax represents as a decimal. |
-| title | MISSING | The name of the tax. |
-
-
-
-## tender_transaction
-
-
-
-
-### Source Tables
-
-| Alias | Schema | Table |
-| --- | --- | --- |
-| tender_transactions | shopify | tender_transactions |
-
-
-### Fields
-
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_synced | tender_transactions._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| amount | tender_transactions.amount | The amount of the tender transaction in the shop's currency. |
-| currency | tender_transactions.currency | The three-letter code (ISO 4217 format) for the currency used for the tender transaction. |
-| id | tender_transactions.id | The ID of the transaction. |
-| order_id | tender_transactions.order_id | The ID of the order that the tender transaction belongs to. |
-| payment_method | tender_transactions.payment_method | Information about the payment method used for this transaction. Valid values include: - credit_card - cash - android_pay - apple_pay - google_pay - samsung_pay - shopify_pay - amazon - klarna - paypal - unknown - other
- |
-| processed_at | tender_transactions.processed_at | The date and time (ISO 8601 format) when the tender transaction was processed. |
-| remote_reference | tender_transactions.remote_reference | The remote (gateway) reference associated with the tender. |
-| test | tender_transactions.test | Whether the tender transaction is a test transaction. |
-| user_id | tender_transactions.user_id | The ID of the user logged into the Shopify POS device that processed the tender transaction, if applicable. |
-
-
-
-## abandoned_checkout
-
-
-
-
-### Source Tables
-
-| Alias | Schema | Table |
-| --- | --- | --- |
-| abandoned_checkouts | shopify | abandoned_checkouts |
-
-
-### Fields
-
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_deleted | MISSING | {{ doc('_fivetran_deleted') }} |
-| _fivetran_synced | abandoned_checkouts._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| abandoned_checkout_url | abandoned_checkouts.abandoned_checkout_url | The recovery URL that's sent to a customer so they can recover their checkout. |
-| billing_address_address_1 | abandoned_checkouts.billing_address.address1 | The street address of the billing address. |
-| billing_address_address_2 | abandoned_checkouts.billing_address.address2 | An optional additional field for the street address of the billing address. |
-| billing_address_city | abandoned_checkouts.billing_address.city | The city of the billing address. |
-| billing_address_company | abandoned_checkouts.billing_address.company | The company of the person associated with the billing address. |
-| billing_address_country | abandoned_checkouts.billing_address.country | The name of the country of the billing address. |
-| billing_address_country_code | abandoned_checkouts.billing_address.country_code | The two-letter code (ISO 3166-1 alpha-2 format) for the country of the billing address. |
-| billing_address_first_name | abandoned_checkouts.billing_address.first_name | The first name of the person associated with the payment method. |
-| billing_address_last_name | abandoned_checkouts.billing_address.last_name | The last name of the person associated with the payment method. |
-| billing_address_latitude | abandoned_checkouts.billing_address.latitude | The latitude of the billing address. |
-| billing_address_longitude | abandoned_checkouts.billing_address.longitude | The longitude of the billing address. |
-| billing_address_name | abandoned_checkouts.billing_address.name | The full name of the person associated with the payment method. |
-| billing_address_phone | abandoned_checkouts.billing_address.phone | The phone number at the billing address. |
-| billing_address_province | abandoned_checkouts.billing_address.province | The name of the state or province of the billing address. |
-| billing_address_province_code | abandoned_checkouts.billing_address.province_code | The two-letter abbreviation of the state or province of the billing address. |
-| billing_address_zip | abandoned_checkouts.billing_address.zip | The zip or postal code of the billing address. |
-| buyer_accepts_marketing | abandoned_checkouts.buyer_accepts_marketing | Whether the customer would like to receive email updates from the shop. This is set by the 'I want to receive occasional emails about new products, promotions and other news' checkbox during checkout. |
-| cart_token | abandoned_checkouts.cart_token | The ID for the cart that's attached to the checkout. |
-| closed_at | abandoned_checkouts.closed_at | The date and time (ISO 8601 format) when the checkout was closed. If the checkout was not closed, then this value is null. |
-| created_at | abandoned_checkouts.created_at | The date and time (ISO 8601 format) when the checkout was created. |
-| currency | abandoned_checkouts.currency | The three-letter code (ISO 4217 format) of the shop's default currency at the time of checkout. For the currency that the customer used at checkout, see `presentment_currency`. |
-| customer_id | abandoned_checkouts.customer.default_address.customer_id | ID of the customer with the abandoned checkout. |
-| customer_locale | abandoned_checkouts.customer_locale | The two or three-letter language code, optionally followed by a region modifier. Example values - en, en-CA. |
-| device_id | abandoned_checkouts.device_id | The ID of the Shopify POS device that created the checkout. |
-| email | abandoned_checkouts.email | The customer's email address. |
-| gateway | abandoned_checkouts.gateway | The payment gateway used by the checkout. |
-| id | abandoned_checkouts.id | The ID for the checkout. |
-| landing_site_base_url | abandoned_checkouts.landing_site | The URL for the page where the customer entered the shop. |
-| location_id | abandoned_checkouts.location_id | The ID of the physical location where the checkout was processed. |
-| name | abandoned_checkouts.name | Checkout order number. |
-| note | abandoned_checkouts.note | The text of an optional note that a shop owner can attach to the order. |
-| phone | abandoned_checkouts.phone | The customer's phone number for receiving SMS notifications. |
-| presentment_currency | abandoned_checkouts.presentment_currency | The three-letter code (ISO 4217 format) of the currency that the customer used at checkout. For the shop's default currency, see `currency`. |
-| referring_site | abandoned_checkouts.referring_site | The website that referred the customer to the shop. |
-| shipping_address_address_1 | abandoned_checkouts.shipping_address.address1 | The street address of the shipping address. |
-| shipping_address_address_2 | abandoned_checkouts.shipping_address.address2 | An optional additional field for the street address of the shipping address. |
-| shipping_address_city | abandoned_checkouts.shipping_address.city | The city of the shipping address. |
-| shipping_address_company | abandoned_checkouts.shipping_address.company | The company of the person associated with the shipping address. |
-| shipping_address_country | abandoned_checkouts.shipping_address.country | The name of the country of the shipping address. |
-| shipping_address_country_code | abandoned_checkouts.shipping_address.country_code | The two-letter code (ISO 3166-1 alpha-2 format) for the country of the shipping address. |
-| shipping_address_first_name | abandoned_checkouts.shipping_address.first_name | The first name of the person associated with the shipping address. |
-| shipping_address_last_name | abandoned_checkouts.shipping_address.last_name | The last name of the person associated with the shipping address. |
-| shipping_address_latitude | abandoned_checkouts.shipping_address.latitude | The latitude of the shipping address. |
-| shipping_address_longitude | abandoned_checkouts.shipping_address.longitude | The longitude of the shipping address. |
-| shipping_address_name | abandoned_checkouts.shipping_address.name | The full name of the person associated with the shipping address. |
-| shipping_address_phone | abandoned_checkouts.shipping_address.phone | The phone number at the shipping address. |
-| shipping_address_province | abandoned_checkouts.shipping_address.province | The name of the state or province of the shipping address. |
-| shipping_address_province_code | abandoned_checkouts.shipping_address.province_code | The two-letter abbreviation of the state or province of the shipping address. |
-| shipping_address_zip | abandoned_checkouts.shipping_address.zip | The zip or postal code of the shipping address. |
-| source_name | abandoned_checkouts.source_name | Where the checkout originated. Valid values include `web`, `pos`, `iphone`, `android`. |
-| subtotal_price | abandoned_checkouts.subtotal_price | The price of the checkout in _presentment_ (customer) currency before shipping and taxes. |
-| taxes_included | abandoned_checkouts.taxes_included | Boolean representing whether taxes are included in the price. |
-| token | abandoned_checkouts.token | A unique ID for a checkout. |
-| total_discounts | abandoned_checkouts.total_discounts | The total amount of discounts to be applied in presentment currency. |
-| total_duties | MISSING | The total duties of the checkout in presentment currency. |
-| total_line_items_price | abandoned_checkouts.total_line_items_price | The sum of the prices of all line items in the checkout in _presentment_ (customer) currency. |
-| total_price | abandoned_checkouts.total_price | The sum of line item prices, all discounts, shipping costs, and taxes for the checkout in _presentment_ (customer) currency. |
-| total_tax | abandoned_checkouts.total_tax | The sum of all the taxes applied to the checkout in _presentment_ (customer) currency. |
-| total_weight | abandoned_checkouts.total_weight | The sum of all the weights in grams of the line items in the checkout. |
-| updated_at | abandoned_checkouts.updated_at | The date and time (ISO 8601 format) when the checkout was last modified. |
-| user_id | abandoned_checkouts.user_id | The ID of the user who created the checkout. |
-
-
-
-## product_image
-
-
-
-
-### Source Tables
-
-| Alias | Schema | Table |
-| --- | --- | --- |
-| product_images | shopify | product_images |
-
-
-### Fields
-
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_deleted | MISSING | {{ doc('_fivetran_deleted') }} |
-| _fivetran_synced | product_images._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| created_at | product_images.created_at | (DEPRECATED 2025-01-06) The date and time when the product image was created. The API returns this value in ISO 8601 format. |
-| height | product_images.height | Height dimension of the image which is determined on upload. |
-| id | product_images.id | Unique numeric identifier of the product image. |
-| position | product_images.position | (DEPRECATED 2025-01-06) The order of the product image in the list. The first product image is at position 1 and is the "main" image for the product. |
-| product_id | product_images.product_id | The id of the product associated with the image. |
-| src | product_images.src | (DEPRECATED 2025-01-06) Specifies the location of the product image. This parameter supports URL filters that you can use to retrieve modified copies of the image. |
-| updated_at | product_images.updated_at | (DEPRECATED 2025-01-06) The date and time when the product image was last modified. The API returns this value in ISO 8601 format. |
-| variant_ids | product_images.variant_ids | (DEPRECATED 2025-01-06) An array of variant ids associated with the image. |
-| width | product_images.width | Width dimension of the image which is determined on upload. |
-| alt_text | product_images.alt | A word or phrase to share the nature or contents of an image. |
-| media_id | MISSING | The unique identifier for the media associated with the product image. |
-| status | MISSING | The status of the product image, indicating its availability or processing state. |
-| url | product_images.shop_url | The URL of the product image. |
-
-
-
-## order_line
-
-
-
-
-### Source Tables
-
-| Alias | Schema | Table |
-| --- | --- | --- |
-| orders | shopify | orders |
-
-
-### Fields
-
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_synced | orders._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| fulfillable_quantity | MISSING | The amount available to fulfill, calculated as follows: quantity - max(refunded_quantity, fulfilled_quantity) - pending_fulfilled_quantity - open_fulfilled_quantity |
-| fulfillment_status | orders.fulfillment_status | How far along an order is in terms line items fulfilled. |
-| gift_card | MISSING | Whether the item is a gift card. If true, then the item is not taxed or considered for shipping charges. |
-| grams | MISSING | The weight of the item in grams. |
-| id | orders.id | The ID of the line item. |
-| name | orders.name | The name of the product variant. |
-| order_id | MISSING | The ID of the related order. |
-| price | MISSING | The price of the item before discounts have been applied in the shop currency. |
-| product_id | MISSING | The ID of the product that the line item belongs to. Can be null if the original product associated with the order is deleted at a later date. |
-| quantity | MISSING | The number of items that were purchased. |
-| requires_shipping | MISSING | Whether the item requires shipping. |
-| sku | MISSING | The item's SKU (stock keeping unit). |
-| taxable | MISSING | Whether the item was taxable. |
-| title | MISSING | The title of the product. |
-| total_discount | MISSING | The total amount of the discount allocated to the line item in the shop currency. |
-| variant_id | MISSING | The ID of the product variant. |
-| vendor | MISSING | The name of the item's supplier. |
-| index | MISSING | Index of the order line. |
-| pre_tax_price | MISSING | The pre tax price of the line item in shop currency. |
-| pre_tax_price_set | MISSING | The pre tax price of the line item in shop currency and presentment currency. |
-| price_set | MISSING | The price of the line item in shop and presentment currencies. |
-| tax_code | MISSING | Tax code applied to the line item. As multiple taxes can apply to a line item, we recommend referring to `stg_shopify__tax_line`. |
-| total_discount_set | MISSING | The total amount allocated to the line item in the presentment currency. |
-| variant_title | MISSING | The title of the product variant. |
-| variant_inventory_management | MISSING | The fulfillment service that tracks the number of items in stock for the product variant. |
-| properties | MISSING | Line item properties. |
-
-
-
-## shop
-
-
-
-
-### Source Tables
-
-| Alias | Schema | Table |
-| --- | --- | --- |
-| shop | shopify | shop |
-
-
-### Fields
-
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_deleted | MISSING | {{ doc('_fivetran_deleted') }} |
-| _fivetran_synced | shop._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| address_1 | shop.address1 | The shop's street address. |
-| address_2 | shop.address2 | The optional second line of the shop's street address. |
-| checkout_api_supported | shop.checkout_api_supported | Boolean representing whether the shop is capable of accepting payments directly through the Checkout API. |
-| city | shop.city | The shop's city. |
-| cookie_consent_level | shop.cookie_consent_level | The cookie consent level defined on the shop's online store. |
-| country | shop.country | The shop's country. In most cases, this value matches the country_code. |
-| country_code | shop.country_code | The two-letter country code corresponding to the shop's country. |
-| country_name | shop.country_name | The shop's normalized country name. |
-| county_taxes | shop.county_taxes | Boolean representing whether the shop is applying taxes on a per-county basis. Only applicable to shops based in the US. Either `true` or `null` (not false, according to Shopify API docs). |
-| created_at | shop.created_at | The date and time (ISO 8601) when the shop was created. |
-| currency | shop.currency | The three-letter code (ISO 4217 format) for the shop's default currency. |
-| customer_email | shop.customer_email | The contact email used for communication between the shop owner and the customer. |
-| domain | shop.domain | The shop's domain. |
-| eligible_for_card_reader_giveaway | shop.eligible_for_card_reader_giveaway | Boolean representing whether the shop is eligible to receive a free credit card reader from Shopify. |
-| eligible_for_payments | shop.eligible_for_payments | Boolean representing whether the shop is eligible to use Shopify Payments. |
-| email | shop.email | The contact email used for communication between Shopify and the shop owner. |
-| enabled_presentment_currencies | shop.enabled_presentment_currencies | An array of of enabled currencies (ISO 4217 format) that the shop accepts. Merchants can enable currencies from their Shopify Payments settings in the Shopify Admin. |
-| force_ssl | shop.force_ssl | DEPRECATED. |
-| google_apps_domain | shop.google_apps_domain | The GSuite URL for the store, if applicable. |
-| google_apps_login_enabled | shop.google_apps_login_enabled | Boolean representing whether the GSuite login is enabled. Shops with this feature will be able to log in through the GSuite login page. Valid values are `true` and `null`. |
-| has_discounts | shop.has_discounts | Boolean representing whether any active discounts exist for the shop. |
-| has_gift_cards | shop.has_gift_cards | Boolean representing whether any active gift cards exist for the shop. |
-| has_storefront | shop.has_storefront | Boolean representing whether this shop has an online store. |
-| iana_timezone | shop.iana_timezone | The name of the timezone assigned by the [IANA](https://www.iana.org/time-zones). |
-| id | shop.id | The ID for the shop. A 64-bit unsigned integer. |
-| latitude | shop.latitude | The latitude of the shop's location. |
-| longitude | shop.longitude | The longitude of the shop's location. |
-| money_format | shop.money_format | A string representing the way currency is formatted when the currency isn't specified. |
-| money_in_emails_format | shop.money_in_emails_format | A string representing the way currency is formatted in email notifications when the currency isn't specified. |
-| money_with_currency_format | shop.money_with_currency_format | A string representing the way currency is formatted when the currency is specified. |
-| money_with_currency_in_emails_format | shop.money_with_currency_in_emails_format | A string representing the way currency is formatted in email notifications when the currency is specified. |
-| multi_location_enabled | shop.multi_location_enabled | DEPRECATED and hard-coded to `true`. |
-| myshopify_domain | shop.myshopify_domain | The shop's .myshopify.com domain. |
-| name | shop.name | The name of the shop. |
-| password_enabled | shop.password_enabled | Boolean representing whether the password protection page is enabled on the shop's online store. |
-| phone | shop.phone | The contact phone number for the shop. |
-| plan_display_name | shop.plan_display_name | The display name of the Shopify plan the shop is on. |
-| plan_name | shop.plan_name | The name of the Shopify plan the shop is on. |
-| pre_launch_enabled | shop.pre_launch_enabled | Boolen representing whether the pre-launch page is enabled on the shop's online store. |
-| primary_locale | shop.primary_locale | The shop's primary locale, as configured in the language settings of the shop's theme. |
-| primary_location_id | shop.primary_location_id | DEPRECATED. Formerly used for the ID of the shipping origin location. |
-| province | shop.province | The shop's normalized province or state name. |
-| province_code | shop.province_code | The two- or three-letter code for the shop's province or state. |
-| requires_extra_payments_agreement | shop.requires_extra_payments_agreement | Boolean representing whether the shop requires an extra Shopify Payments agreement. |
-| setup_required | shop.setup_required | Boolean representing whether the shop has any outstanding setup steps. |
-| shop_owner | shop.shop_owner | The username of the shop owner. |
-| source | shop.source | The handle of the partner account that referred the merchant to Shopify, if applicable. |
-| tax_shipping | shop.tax_shipping | Boolean representing whether taxes are charged for shipping. Valid values are true or false. |
-| taxes_included | shop.taxes_included | Boolean representing whether applicable taxes are included in product prices. Valid values are true or null. |
-| timezone | shop.timezone | The name of the timezone the shop is in. |
-| updated_at | shop.updated_at | The date and time (ISO 8601) when the shop was last updated. |
-| weight_unit | shop.weight_unit | The default unit of weight measurement for the shop. |
-| zip | shop.zip | The shop's zip or postal code. |
-
-
-
-## inventory_quantity
-
-
-
-
-### Source Tables
-
-| Alias | Schema | Table |
-| --- | --- | --- |
-| inventory_levels | shopify | inventory_levels |
-
-
-### Fields
-
-| Name | Expression | Description |
-| --- | --- | --- |
-| id | inventory_levels.id | The unique identifier for the record. |
-| inventory_item_id | inventory_levels.inventory_item_id | The ID of the inventory item associated with this record. |
-| inventory_level_id | inventory_levels.location_id | The ID of the inventory level where this item is stored. |
-| name | inventory_levels.locations_count | The name of the inventory state associated with the record. [Link to list of expected values](https://shopify.dev/docs/apps/build/orders-fulfillment/inventory-management-apps#inventory-states). |
-| quantity | inventory_levels.available | The available quantity of the inventory item. |
-| updated_at | inventory_levels.updated_at | The timestamp of the last update to the inventory record. |
-| _fivetran_synced | inventory_levels._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-
-
-
-## order_tag
-
-
-
-
-### Source Tables
-
-| Alias | Schema | Table |
-| --- | --- | --- |
-| orders | shopify | orders |
-
-
-### Fields
-
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_synced | orders._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| index | MISSING | Index (starting from 1) represnting when the tag was placed on the order. |
-| order_id | orders.id | ID of the order being tagged. |
-| value | MISSING | Value of the tag. |
-
-
-
-## inventory_level
-
-
-
-
-### Source Tables
-
-| Alias | Schema | Table |
-| --- | --- | --- |
-| inventory_levels | shopify | inventory_levels |
-
-
-### Fields
-
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_synced | inventory_levels._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| available | inventory_levels.available | (DEPRECATED 2025-01-06) The available quantity of an inventory item at the inventory level's associated location. Returns null if the inventory item is not tracked. |
-| inventory_item_id | inventory_levels.inventory_item_id | The ID of the inventory item associated with the inventory level. |
-| location_id | inventory_levels.location_id | The ID of the location that the inventory level belongs to. |
-| updated_at | inventory_levels.updated_at | The date and time (ISO 8601 format) when the inventory level was last modified. |
-| id | inventory_levels.id | A globally unique identifier for the inventory level. |
-| can_deactivate | inventory_levels.can_deactivate | Indicates whether the inventory item can be deactivated at the location. |
-| created_at | inventory_levels.created_at | The date and time when the inventory level was created. |
-| deactivation_alert | inventory_levels.deactivation_alert | Provides an alert message when the inventory item is deactivated at the location. |
-
-
-
-## fulfillment
-
-
-
-
-### Source Tables
-
-| Alias | Schema | Table |
-| --- | --- | --- |
-| fulfillments | shopify | fulfillments |
-
-
-### Fields
-
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_synced | fulfillments._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| created_at | fulfillments.created_at | The date and time when the fulfillment was created. The API returns this value in ISO 8601 format. |
-| id | fulfillments.id | The ID for the fulfillment. |
-| location_id | fulfillments.location_id | The unique identifier of the location that the fulfillment was processed at. |
-| name | fulfillments.name | The uniquely identifying fulfillment name, consisting of two parts separated by a .. The first part represents the order name and the second part represents the fulfillment number.  The fulfillment number automatically increments depending on how many fulfillments are in an order (e.g. #1001.1, #1001.2).
- |
-| order_id | fulfillments.order_id | The unique numeric identifier for the order. |
-| receipt_authorization | fulfillments.receipt.authorization | The authorization code from the receipt. |
-| service | fulfillments.service | The fulfillment service associated with the fulfillment. |
-| shipment_status | fulfillments.shipment_status | The current shipment status of the fulfillment. Valid values include: - label_printed: A label for the shipment was purchased and printed. - label_purchased: A label for the shipment was purchased, but not printed. - attempted_delivery: Delivery of the shipment was attempted, but unable to be completed. - ready_for_pickup: The shipment is ready for pickup at a shipping depot. - confirmed: The carrier is aware of the shipment, but hasn't received it yet. - in_transit: The shipment is being transported between shipping facilities on the way to its destination. - out_for_delivery: The shipment is being delivered to its final destination. - delivered: The shipment was succesfully delivered. - failure: Something went wrong when pulling tracking information for the shipment, such as the tracking number was invalid or the shipment was canceled.
- |
-| status | fulfillments.status | The status of the fulfillment. Valid values include: - pending: Shopify has created the fulfillment and is waiting for the third-party fulfillment service to transition it to 'open' or 'success'. - open: The fulfillment has been acknowledged by the service and is in processing. - success: The fulfillment was successful. - cancelled: The fulfillment was cancelled. - error: There was an error with the fulfillment request. - failure: The fulfillment request failed.
- |
-| tracking_company | fulfillments.tracking_company | The name of the tracking company. |
-| tracking_number | fulfillments.tracking_number | Primary tracking number for the order. |
-| tracking_numbers | fulfillments.tracking_numbers | A list of tracking numbers, provided by the shipping company. |
-| tracking_urls | fulfillments.tracking_urls | The URLs of tracking pages for the fulfillment. |
-| updated_at | fulfillments.updated_at | The date and time (ISO 8601 format) when the fulfillment was last modified. |
-
-
-
-## order_line_refund
-
-
-
-
-### Source Tables
-
-| Alias | Schema | Table |
-| --- | --- | --- |
-| order_refunds | shopify | order_refunds |
-
-
-### Fields
-
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_synced | order_refunds._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| id | order_refunds.id | The unique identifier of the line item in the refund. |
-| location_id | MISSING | TThe unique identifier of the location where the items will be restockedBD |
-| order_line_id | MISSING | The ID of the related line item in the order. |
-| quantity | MISSING | The quantity of the associated line item that was returned. |
-| refund_id | MISSING | The ID of the related refund. |
-| restock_type | order_refunds.restock | How this refund line item affects inventory levels. |
-| subtotal | MISSING | Subtotal amount of the order line refund in shop currency. |
-| total_tax | MISSING | The total tax applied to the refund in shop currency. |
-| subtotal_set | MISSING | The subtotal of the refund line item in shop and presentment currencies. |
-| total_tax_set | MISSING | The total tax of the line item in shop and presentment currencies. |
-
-
-
-## price_rule
-
-
-
-
-### Source Tables
-
-| Alias | Schema | Table |
-| --- | --- | --- |
-| price_rules | shopify | price_rules |
-
-
-### Fields
-
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_synced | price_rules._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| allocation_limit | price_rules.allocation_limit | The number of times the discount can be allocated on the cart - if eligible. For example a Buy 1 hat Get 1 hat for free discount can be applied 3 times on a cart having more than 6 hats,  where maximum of 3 hats get discounted - if the allocation_limit is 3. Empty (null) allocation_limit means unlimited number of allocations.
- |
-| allocation_method | price_rules.allocation_method | The allocation method of the price rule. Valid values include `each` (the discount is applied to each of the entitled items. For example, for a price rule that takes $15 off, each entitled line item in a checkout will be discounted by $15) and `across` (the calculated discount amount will be applied across the entitled items. For example, for a price rule that takes $15 off, the discount will be applied across all the entitled items).
- |
-| created_at | price_rules.created_at | The date and time (ISO 8601 format) when the price rule was created. |
-| customer_selection | price_rules.customer_selection | The customer selection for the price rule. Valid values include `all` (the price rule is valid for all customers) and `prerequisite`  (the customer must either belong to one of the customer segments specified by customer_segment_prerequisite_ids, or be one of the customers specified by prerequisite_customer_ids).
- |
-| ends_at | price_rules.ends_at | The date and time (ISO 8601 format) when the price rule ends. Must be after starts_at. |
-| id | price_rules.id | The ID for the price rule. |
-| once_per_customer | price_rules.once_per_customer | Boolean representing whether the generated discount code will be valid only for a single use per customer. This is tracked using customer ID. |
-| prerequisite_quantity_range | price_rules.prerequisite_quantity_range | If `customer_selection` is `prerequisite`, the minimum number of items for the price rule to be applicable. The quantity of an entitled cart item must be greater than or equal to this value. |
-| prerequisite_shipping_price_range | price_rules.prerequisite_shipping_price_range | If `customer_selection` is `prerequisite`, the maximum shipping price for the price rule to be applicable. The shipping price must be less than or equal to this value |
-| prerequisite_subtotal_range | price_rules.prerequisite_subtotal_range | If `customer_selection` is `prerequisite`, the minimum subtotal for the price rule to be applicable. The subtotal of the entitled cart items must be greater than or equal to this value for the discount to apply. |
-| prerequisite_to_entitlement_purchase_prerequisite_amount | price_rules.prerequisite_to_entitlement_purchase.prerequisite_amount | If `customer_selection` is `prerequisite`, the prerequisite purchase for a Buy X Get Y discount. The minimum purchase amount required to be entitled to the discount. |
-| quantity_ratio_entitled_quantity | price_rules.prerequisite_to_entitlement_quantity_ratio.entitled_quantity | If `customer_selection` is `prerequisite`, in a Buy/Get ratio for a Buy X Get Y discount, this is the offered 'get' quantity. |
-| quantity_ratio_prerequisite_quantity | price_rules.prerequisite_to_entitlement_quantity_ratio.prerequisite_quantity | If `customer_selection` is `prerequisite`, in a Buy/Get ratio for a Buy X Get Y discount, this defines the necessary 'buy' quantity. |
-| starts_at | price_rules.starts_at | The date and time (ISO 8601 format) when the price rule starts. |
-| target_selection | price_rules.target_selection | The target selection method of the price rule. Valid values include `all` (the price rule applies the discount to all line items in the checkout) and  `entitled` (the price rule applies the discount to selected entitlements only).
- |
-| target_type | price_rules.target_type | The target type that the price rule applies to. Valid values include `line_item` (the price rule applies to the cart's line items) and `shipping_line` (the price rule applies to the cart's shipping lines). |
-| title | price_rules.title | The title of the price rule. This is used by the Shopify admin search to retrieve discounts. It is also displayed on the Discounts page of the Shopify admin for bulk discounts.  Shopify recommends that this map onto the associated `discount_code.code`.
- |
-| updated_at | price_rules.updated_at | The date and time (ISO 8601 format) when the price rule was updated. |
-| usage_limit | price_rules.usage_limit | The maximum number of times the price rule can be used, per discount code. |
-| value | price_rules.value | The value of the price rule. If if the value of `target_type` is `shipping_line`, then only -100 is accepted. The value must be negative. |
-| value_type | price_rules.value_type | The value type of the price rule. Valid values include `fixed_amount` (applies a discount of value as a unit of the store's currency. For example, if value is -30 and the store's currency is USD, then $30 USD is deducted when the discount is applied) and `percentage` (applies a percentage discount of value. For example, if value is -30, then 30% will be deducted when the discount is applied).
+- Table Match Confidence Score: 🟢 0.85
+
+- Table Completion Score: 🟢 0.90
+
+### Explanation
+
+The table has a strong correspondence between source and target, given shared fields and expressions. The completion score is high due to the presence of mappings for nearly all fields, though some fields are marked as deprecation or missing information.
+
+
+### Field-by-Field Analysis
+
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `inventory_levels._airbyte_extracted_at` | 🟢 1.00 | Standard mapping for all tables between _fivetran_synced and _airbyte_extracted_at. |
+| `available` | (DEPRECATED 2025-01-06) The available quantity of an inventory item at the inventory level's associated location. Returns null if the inventory item is not tracked. | `inventory_levels.available` | ⚠️ 0.50 | The field is deprecated and may not have a direct corresponding field in the target. |
+| `inventory_item_id` | The ID of the inventory item associated with the inventory level. | `inventory_levels.inventory_item_id` | 🟢 1.00 | The ID of the inventory item has a clear corresponding mapping. |
+| `location_id` | The ID of the location that the inventory level belongs to. | `inventory_levels.location_id` | 🟢 1.00 | The ID for the location maps directly with high confidence. |
+| `updated_at` | The date and time (ISO 8601 format) when the inventory level was last modified. | `inventory_levels.updated_at` | 🟢 1.00 | The date and time modified has a direct correspondence. |
+| `id` | A globally unique identifier for the inventory level. | `inventory_levels.id` | 🟢 1.00 | Unique identifier has a direct map in the target schema. |
+| `can_deactivate` | Indicates whether the inventory item can be deactivated at the location. | `inventory_levels.can_deactivate` | 🟢 0.70 | Possible match based on functionality, but not entirely certain. |
+| `created_at` | The date and time when the inventory level was created. | `inventory_levels.created_at` | 🟢 1.00 | Creation timestamp matches directly. |
+| `deactivation_alert` | Provides an alert message when the inventory item is deactivated at the location. | `inventory_levels.deactivation_alert` | 🟢 0.70 | Alert message likely corresponds, though there is some uncertainty. |
+
+
+### Mapping from Airbyte `fulfillments` to Fivetran `fulfillment`
+
+- Table Match Confidence Score: 🟢 0.90
+
+- Table Completion Score: 🟢 0.85
+
+### Explanation
+
+The table mapping shows a high level of confidence as most fields have clear matches between the source and target. The mapping from `_fivetran_synced` to `_airbyte_extracted_at` achieves a perfect score of 1.00 as a standard mapping agreement. Other fields, such as `created_at`, `id`, `status`, and `tracking_number`, have clear semantic consistency, scoring above 0.85. Some fields like `shipment_status` and `service` could have slightly lower scores due to potential ambiguity, but still fall within the 0.70-0.85 range as they seem contextually accurate. `MISSING` mappings are assigned a score of 0.00 and explained with 'No good match found.'
+
+
+### Field-by-Field Analysis
+
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `fulfillments._airbyte_extracted_at` | 🟢 1.00 | Standard mapping of `_fivetran_synced` to `_airbyte_extracted_at`. |
+| `created_at` | The date and time when the fulfillment was created. The API returns this value in ISO 8601 format. | `fulfillments.created_at` | 🟢 0.90 | High confidence as the field directly corresponds to creation timestamp. |
+| `id` | The ID for the fulfillment. | `fulfillments.id` | 🟢 0.95 | Direct match for fulfillment ID. |
+| `location_id` | The unique identifier of the location that the fulfillment was processed at. | `fulfillments.location_id` | 🟢 0.85 | Clear mapping to location identifier, maintaining contextual integrity. |
+| `name` | The uniquely identifying fulfillment name, consisting of two parts separated by a .. The first part represents the order name and the second part represents the fulfillment number.  The fulfillment number automatically increments depending on how many fulfillments are in an order (e.g. #1001.1, #1001.2).
+ | `fulfillments.name` | 🟢 0.80 | The naming structure seems intact with the order name and fulfillment number combined. |
+| `order_id` | The unique numeric identifier for the order. | `fulfillments.order_id` | 🟢 0.90 | Direct correspondence of order identifier. |
+| `receipt_authorization` | The authorization code from the receipt. | `fulfillments.receipt.authorization` | 🟢 0.70 | Potential match for receipt authorization, context considered. |
+| `service` | The fulfillment service associated with the fulfillment. | `fulfillments.service` | 🟢 0.75 | Probable match for fulfillment service within the context. |
+| `shipment_status` | The current shipment status of the fulfillment. Valid values include: - label_printed: A label for the shipment was purchased and printed. - label_purchased: A label for the shipment was purchased, but not printed. - attempted_delivery: Delivery of the shipment was attempted, but unable to be completed. - ready_for_pickup: The shipment is ready for pickup at a shipping depot. - confirmed: The carrier is aware of the shipment, but hasn't received it yet. - in_transit: The shipment is being transported between shipping facilities on the way to its destination. - out_for_delivery: The shipment is being delivered to its final destination. - delivered: The shipment was succesfully delivered. - failure: Something went wrong when pulling tracking information for the shipment, such as the tracking number was invalid or the shipment was canceled.
+ | `fulfillments.shipment_status` | 🟢 0.80 | Likely match based on available values for tracking shipment progress. |
+| `status` | The status of the fulfillment. Valid values include: - pending: Shopify has created the fulfillment and is waiting for the third-party fulfillment service to transition it to 'open' or 'success'. - open: The fulfillment has been acknowledged by the service and is in processing. - success: The fulfillment was successful. - cancelled: The fulfillment was cancelled. - error: There was an error with the fulfillment request. - failure: The fulfillment request failed.
+ | `fulfillments.status` | 🟢 0.85 | Clear contextual match for fulfillment status. |
+| `tracking_company` | The name of the tracking company. | `fulfillments.tracking_company` | 🟢 0.90 | The field correlates well with the shipping company's tracking. |
+| `tracking_number` | Primary tracking number for the order. | `fulfillments.tracking_number` | 🟢 0.90 | Primary tracking number has a straightforward match. |
+| `tracking_numbers` | A list of tracking numbers, provided by the shipping company. | `fulfillments.tracking_numbers` | 🟢 0.90 | Tracking numbers list maps accurately to shipping records. |
+| `tracking_urls` | The URLs of tracking pages for the fulfillment. | `fulfillments.tracking_urls` | 🟢 0.90 | URLs for tracking correspond distinctly with the fulfillment tracking. |
+| `updated_at` | The date and time (ISO 8601 format) when the fulfillment was last modified. | `fulfillments.updated_at` | 🟢 0.90 | Matches the timestamp for last modification accurately. |
+
+
+### Mapping from Airbyte `price_rules` to Fivetran `price_rule`
+
+- Table Match Confidence Score: 🟢 0.90
+
+- Table Completion Score: 🟢 0.95
+
+### Explanation
+
+The table mapping has a high confidence score because the source and target tables are derived from similar APIs with most fields properly mapped. All fields have either been mapped or identified as MISSING with a 0.00 confidence score.
+
+
+### Field-by-Field Analysis
+
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `price_rules._airbyte_extracted_at` | 🟢 1.00 | Standard mapping from '_fivetran_synced' to '_airbyte_extracted_at', always receives a score of 1.00. |
+| `allocation_limit` | The number of times the discount can be allocated on the cart - if eligible. For example a Buy 1 hat Get 1 hat for free discount can be applied 3 times on a cart having more than 6 hats,  where maximum of 3 hats get discounted - if the allocation_limit is 3. Empty (null) allocation_limit means unlimited number of allocations.
+ | `price_rules.allocation_limit` | 🟢 0.90 | The field 'allocation_limit' is directly mapped and closely matches the source structure, with a high confidence level. |
+| `allocation_method` | The allocation method of the price rule. Valid values include `each` (the discount is applied to each of the entitled items. For example, for a price rule that takes $15 off, each entitled line item in a checkout will be discounted by $15) and `across` (the calculated discount amount will be applied across the entitled items. For example, for a price rule that takes $15 off, the discount will be applied across all the entitled items).
+ | `price_rules.allocation_method` | 🟢 0.90 | The 'allocation_method' is directly mapped and closely matches the context of the source data. |
+| `created_at` | The date and time (ISO 8601 format) when the price rule was created. | `price_rules.created_at` | 🟢 0.80 | The field 'created_at' has a direct mapping but the date format must be confirmed. |
+| `customer_selection` | The customer selection for the price rule. Valid values include `all` (the price rule is valid for all customers) and `prerequisite`  (the customer must either belong to one of the customer segments specified by customer_segment_prerequisite_ids, or be one of the customers specified by prerequisite_customer_ids).
+ | `price_rules.customer_selection` | 🟢 0.85 | 'customer_selection' shows a strong contextual match with predefined valid values. |
+| `ends_at` | The date and time (ISO 8601 format) when the price rule ends. Must be after starts_at. | `price_rules.ends_at` | 🟢 0.80 | The field 'ends_at' closely matches the source, consider checking the date format. |
+| `id` | The ID for the price rule. | `price_rules.id` | 🟢 0.95 | Id fields generally have a high confidence due to unique identity matching. |
+| `once_per_customer` | Boolean representing whether the generated discount code will be valid only for a single use per customer. This is tracked using customer ID. | `price_rules.once_per_customer` | 🟢 0.90 | Boolean values generally have a straightforward mapping, resulting in a high score. |
+| `prerequisite_quantity_range` | If `customer_selection` is `prerequisite`, the minimum number of items for the price rule to be applicable. The quantity of an entitled cart item must be greater than or equal to this value. | `price_rules.prerequisite_quantity_range` | 🟢 0.85 | This field matches with regard to the prerequisite quantity contextual information. |
+| `prerequisite_shipping_price_range` | If `customer_selection` is `prerequisite`, the maximum shipping price for the price rule to be applicable. The shipping price must be less than or equal to this value | `price_rules.prerequisite_shipping_price_range` | 🟢 0.85 | Closely mapped based on prerequisites. |
+| `prerequisite_subtotal_range` | If `customer_selection` is `prerequisite`, the minimum subtotal for the price rule to be applicable. The subtotal of the entitled cart items must be greater than or equal to this value for the discount to apply. | `price_rules.prerequisite_subtotal_range` | 🟢 0.85 | Contextual matching with subtotal range for prerequisites. |
+| `prerequisite_to_entitlement_purchase_prerequisite_amount` | If `customer_selection` is `prerequisite`, the prerequisite purchase for a Buy X Get Y discount. The minimum purchase amount required to be entitled to the discount. | `price_rules.prerequisite_to_entitlement_purchase.prerequisite_amount` | 🟢 0.75 | The field matches but contains a nested prerequisite structure to evaluate. |
+| `quantity_ratio_entitled_quantity` | If `customer_selection` is `prerequisite`, in a Buy/Get ratio for a Buy X Get Y discount, this is the offered 'get' quantity. | `price_rules.prerequisite_to_entitlement_quantity_ratio.entitled_quantity` | 🟢 0.80 | Matching within a nested structure with 'entitled_quantity' context. |
+| `quantity_ratio_prerequisite_quantity` | If `customer_selection` is `prerequisite`, in a Buy/Get ratio for a Buy X Get Y discount, this defines the necessary 'buy' quantity. | `price_rules.prerequisite_to_entitlement_quantity_ratio.prerequisite_quantity` | 🟢 0.80 | Similar nested match with 'prerequisite_quantity' context. |
+| `starts_at` | The date and time (ISO 8601 format) when the price rule starts. | `price_rules.starts_at` | 🟢 0.80 | Close match observed, confirm date and time are represented correctly. |
+| `target_selection` | The target selection method of the price rule. Valid values include `all` (the price rule applies the discount to all line items in the checkout) and  `entitled` (the price rule applies the discount to selected entitlements only).
+ | `price_rules.target_selection` | 🟢 0.85 | High contextual relevance from given target selection options. |
+| `target_type` | The target type that the price rule applies to. Valid values include `line_item` (the price rule applies to the cart's line items) and `shipping_line` (the price rule applies to the cart's shipping lines). | `price_rules.target_type` | 🟢 0.85 | Matches well with the target type and its discretized values. |
+| `title` | The title of the price rule. This is used by the Shopify admin search to retrieve discounts. It is also displayed on the Discounts page of the Shopify admin for bulk discounts.  Shopify recommends that this map onto the associated `discount_code.code`.
+ | `price_rules.title` | 🟢 0.90 | Titles of price rules likely match directly across systems. |
+| `updated_at` | The date and time (ISO 8601 format) when the price rule was updated. | `price_rules.updated_at` | 🟢 0.80 | Ensure date formatting consistency for the updated_at field. |
+| `usage_limit` | The maximum number of times the price rule can be used, per discount code. | `price_rules.usage_limit` | 🟢 0.90 | Represents a confidently mapped numerical field with usage limitations. |
+| `value` | The value of the price rule. If if the value of `target_type` is `shipping_line`, then only -100 is accepted. The value must be negative. | `price_rules.value` | 🟢 0.70 | Requires considering negative values unique to context but maps well. |
+| `value_type` | The value type of the price rule. Valid values include `fixed_amount` (applies a discount of value as a unit of the store's currency. For example, if value is -30 and the store's currency is USD, then $30 USD is deducted when the discount is applied) and `percentage` (applies a percentage discount of value. For example, if value is -30, then 30% will be deducted when the discount is applied).
 If `target_type` is `shipping_line`, then only `percentage` is accepted.
- |
+ | `price_rules.value_type` | 🟢 0.85 | Valid values for 'value_type' show strong mapping consistency. |
 
 
+### Mapping from Airbyte `order_refunds` to Fivetran `refund`
 
-## transaction
+- Table Match Confidence Score: 🟢 0.80
 
+- Table Completion Score: 🟢 0.90
 
+### Explanation
 
+The table mapping shows high confidence since source and target tables are assumed to be derived from the same API, indicating they describe the same subject matter. The completion score is high as well, given all fields of significance in source are well mapped, except for the expected standard and one missing field.
 
-### Source Tables
 
-| Alias | Schema | Table |
-| --- | --- | --- |
-| transactions | shopify | transactions |
+### Field-by-Field Analysis
 
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `id` | The unique numeric identifier for the refund. | `order_refunds.id` | 🟢 1.00 | Exact match found for the unique numeric identifier. |
+| `created_at` | Timestamp of the date when the refund was created. | `order_refunds.created_at` | 🟢 1.00 | Exact match found for the creation timestamp. |
+| `processed_at` | Timestamp of the date when the refund was processed. | `order_refunds.processed_at` | 🟢 1.00 | Exact match found for the processing timestamp. |
+| `note` | User generated note attached to the refund. | `order_refunds.note` | 🟢 1.00 | Exact match found for the user-generated note. |
+| `restock` | Boolean indicating if the refund is a result of a restock. | `order_refunds.restock` | 🟢 1.00 | Exact match found for the restock boolean. |
+| `user_id` | Reference to the user id which generated the refund. | `order_refunds.user_id` | 🟢 1.00 | Exact match found for the user id reference. |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `order_refunds._airbyte_extracted_at` | 🟢 1.00 | Standard mapping from '_fivetran_synced' to '_airbyte_extracted_at'. |
+| `total_duties_set` | Record representing total duties set for the refund. | `order_refunds.total_duties_set` | 🟢 1.00 | Exact match found for the total duties set record. |
+| `order_id` | Reference to the order which the refund is associated. | `order_refunds.order_id` | 🟢 1.00 | Exact match found for the order id reference. |
 
-### Fields
 
-| Name | Expression | Description |
-| --- | --- | --- |
-| id | transactions.id | The ID for the transaction. |
-| order_id | transactions.order_id | The ID for the order that the transaction is associated with. |
-| refund_id | MISSING | The ID associated with a refund in the refund table. |
-| amount | transactions.amount | The amount of money included in the transaction. |
-| authorization | transactions.authorization | The authorization code associated with the transaction. |
-| created_at | transactions.created_at | The date and time when the transaction was created. |
-| processed_at | transactions.processed_at | The date and time when a transaction was processed. |
-| device_id | transactions.device_id | The ID for the device. |
-| gateway | transactions.gateway | The name of the gateway the transaction was issued through. |
-| source_name | transactions.source_name | The origin of the transaction. |
-| message | transactions.message | A string generated by the payment provider with additional information about why the transaction succeeded or failed. |
-| currency | transactions.currency | The three-letter code (ISO 4217 format) for the currency used for the payment. |
-| location_id | transactions.location_id | The ID of the physical location where the transaction was processed. |
-| parent_id | transactions.parent_id | The ID of an associated transaction. |
-| payment_avs_result_code | transactions.payment_details.avs_result_code | The response code from the address verification system. |
-| payment_credit_card_bin | transactions.payment_details.credit_card_bin | The issuer identification number (IIN), formerly known as bank identification number (BIN) of the customer's credit card. |
-| payment_cvv_result_code | transactions.payment_details.cvv_result_code | The response code from the credit card company indicating whether the customer entered the card security code, or card verification value, correctly. |
-| payment_credit_card_number | transactions.payment_details.credit_card_number | The customer's credit card number, with most of the leading digits redacted. |
-| payment_credit_card_company | transactions.payment_details.credit_card_company | The name of the company that issued the customer's credit card. |
-| kind | transactions.kind | The transaction's type. |
-| receipt | transactions.receipt | A transaction receipt attached to the transaction by the gateway. |
-| currency_exchange_id | MISSING | The ID of the adjustment. |
-| currency_exchange_adjustment | MISSING | The difference between the amounts on the associated transaction and the parent transaction. |
-| currency_exchange_original_amount | MISSING | The amount of the parent transaction in the shop currency. |
-| currency_exchange_final_amount | MISSING | The amount of the associated transaction in the shop currency. |
-| currency_exchange_currency | MISSING | The shop currency. |
-| error_code | transactions.error_code | A standardized error code, independent of the payment provider. |
-| status | transactions.status | The status of the transaction. |
-| test | transactions.test | Whether the transaction is a test transaction. |
-| user_id | transactions.user_id | The ID for the user who was logged into the Shopify POS device when the order was processed, if applicable. |
-| _fivetran_synced | transactions._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| authorization_expires_at | MISSING | The date and time (ISO 8601 format) when the Shopify Payments authorization expires. |
+### Mapping from Airbyte `collects` to Fivetran `collection_product`
 
+- Table Match Confidence Score: 🟢 0.70
 
+- Table Completion Score: 🟢 0.80
 
-## refund
+### Explanation
 
+The table mapping was evaluated with a high table match score as the subject matter aligns closely between source and target, hence a match score of 0.70. The completion score is 0.80, indicating some fields have good mapping and coverage from source to target with a slight room for improvement.
 
 
+### Field-by-Field Analysis
 
-### Source Tables
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `collects._airbyte_extracted_at` | 🟢 1.00 | Standard mapping to the source stream's _airbyte_extracted_at column. |
+| `collection_id` | ID referencing the `collection` the product belongs to. | `collects.collection_id` | 🟢 0.70 | ID referencing the `collection` has a relevant mapping. Given score reflects strong, but not perfect match due to potential contextual differences. |
+| `product_id` | ID referencing the `product`. | `collects.product_id` | 🟢 0.70 | ID referencing the `product` aligns closely in purpose but may differ slightly in context in some implementations, hence the score. |
 
-| Alias | Schema | Table |
-| --- | --- | --- |
-| order_refunds | shopify | order_refunds |
 
+### Mapping from Airbyte `products` to Fivetran `product`
 
-### Fields
+- Table Match Confidence Score: 🟢 0.80
 
-| Name | Expression | Description |
-| --- | --- | --- |
-| id | order_refunds.id | The unique numeric identifier for the refund. |
-| created_at | order_refunds.created_at | Timestamp of the date when the refund was created. |
-| processed_at | order_refunds.processed_at | Timestamp of the date when the refund was processed. |
-| note | order_refunds.note | User generated note attached to the refund. |
-| restock | order_refunds.restock | Boolean indicating if the refund is a result of a restock. |
-| user_id | order_refunds.user_id | Reference to the user id which generated the refund. |
-| _fivetran_synced | order_refunds._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| total_duties_set | order_refunds.total_duties_set | Record representing total duties set for the refund. |
-| order_id | order_refunds.order_id | Reference to the order which the refund is associated. |
+- Table Completion Score: 🟢 0.90
 
+### Explanation
 
+The mapping configuration aligns well with the expected target schema. High confidence mappings like '_fivetran_synced' to 'products._airbyte_extracted_at' contribute positively. Missing mappings like '_fivetran_deleted' are penalized. Field mappings suggest a strong match with exceptions handled appropriately.
 
-## abandoned_checkout_shipping_line
 
+### Field-by-Field Analysis
 
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_deleted` | Whether the record has been deleted in the source system. | `MISSING` | ❌ 0.00 | No good match found. |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `products._airbyte_extracted_at` | 🟢 1.00 | Mapped to 'products._airbyte_extracted_at' as a standard mapping. |
+| `created_at` | The date and time when the product was created. | `products.created_at` | 🟢 0.80 | 'products.created_at' is a good match for 'created_at'. |
+| `handle` | A unique human-friendly string for the product. Automatically generated from the product's title. | `products.handle` | 🟢 0.80 | 'products.handle' maps well to 'handle'. |
+| `id` | An unsigned 64-bit integer that's used as a unique identifier for the product. Each id is unique across the Shopify system. No two products will have the same id, even if they're from different shops. | `products.id` | 🟢 0.90 | 'products.id' is a strong match for 'id', capturing unique identifier role. |
+| `product_type` | A categorization for the product used for filtering and searching products. | `products.product_type` | 🟢 0.70 | 'products.product_type' is likely a match for 'product_type', but categorization can vary. |
+| `published_at` | The date and time (ISO 8601 format) when the product was published. Can be set to null to unpublish the product from the Online Store channel. | `products.published_at` | 🟢 0.70 | 'products.published_at' matches 'published_at', considering time format similarity. |
+| `published_scope` | Whether the product is published to the Point of Sale channel. | `products.published_scope` | 🟢 0.80 | 'products.published_scope' is aligned with 'published_scope', matching distribution scope. |
+| `title` | The name of the product. | `products.title` | 🟢 0.90 | 'products.title' accurately reflects 'title'. |
+| `updated_at` | The date and time when the product was last modified. | `products.updated_at` | 🟢 0.80 | 'products.updated_at' corresponds well to 'updated_at'. |
+| `vendor` | The name of the product's vendor. | `products.vendor` | 🟢 0.90 | 'products.vendor' is a precise match for 'vendor'. |
+| `status` | The status of the product. Valid values: - active: The product is ready to sell and is available to customers on the online store, sales channels, and apps. By default, existing products are set to active. - archived: The product is no longer being sold and isn't available to customers on sales channels and apps. - draft: The product isn't ready to sell and is unavailable to customers on sales channels and apps. By default, duplicated and unarchived products are set to draft.
+ | `products.status` | 🟢 0.80 | 'products.status' aligns well with 'status', acknowledging the valid status values. |
 
 
-### Source Tables
+## Workshop Models
 
-| Alias | Schema | Table |
-| --- | --- | --- |
-| abandoned_checkouts | shopify | abandoned_checkouts |
+These models are in the workshop directory and are not yet approved.
 
+### Mapping from Airbyte `custom_collections` to Fivetran `collection`
 
-### Fields
+- Table Match Confidence Score: 🟢 0.80
 
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_synced | abandoned_checkouts._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| carrier_identifier | MISSING | A reference to the carrier service that provided the rate. Present when the rate was computed by a third-party carrier service. |
-| checkout_id | MISSING | ID of the checkout that was abandoned. |
-| code | MISSING | A reference to the shipping method. |
-| delivery_category | MISSING | The general classification of the delivery method. |
-| delivery_expectation_range | MISSING | Expected delivery date range. |
-| delivery_expectation_range_max | MISSING | Latest expected delivery date. |
-| delivery_expectation_range_min | MISSING | Earliest possible expected delivery date. |
-| delivery_expectation_type | MISSING | Type of expected delivery. |
-| discounted_price | MISSING | The pre-tax shipping price with discounts applied in _presentment_ (customer) currency. |
-| id | MISSING | Unique ID of the abandoned checkout shipping line. |
-| index | MISSING | Index of the line amongst shipping lines for this checkout. |
-| original_shop_price | MISSING | The pre-tax shipping price without any discounts applied in _presentment_ (customer) currency. |
-| phone | MISSING | The phone number at the shipping address. |
-| price | MISSING | The price of the shipping method in presentment currency. |
-| requested_fulfillment_service_id | MISSING | The fulfillment service requested for the shipping method. Present if the shipping method requires processing by a third party fulfillment service. |
-| source | MISSING | The channel where the checkout originated. Example value - shopify. |
-| title | MISSING | The title of the shipping method. Example value - International Shipping. |
+- Table Completion Score: 🟢 0.82
 
+### Explanation
 
+The table match confidence is high due to the similarity in subject matter, but not all fields could be mapped, especially with some fields missing appropriate matches. The completion score reflects the proportion of fields that have meaningful mappings.
 
-## collection_product
 
+### Field-by-Field Analysis
 
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_deleted` | {{ doc('_fivetran_deleted') }} | `MISSING` | ❌ 0.00 | No good match found. |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `custom_collections._airbyte_extracted_at` | 🟢 1.00 | Standard mapping to '_airbyte_extracted_at'. |
+| `disjunctive` | Boolean representing whether the `rules` or disjuctive (logical `OR`) or not. True = disjuctive, false = conjunctive (logical `AND`). | `MISSING` | ❌ 0.00 | No good match found. |
+| `handle` | A unique, human-readable string for the collection automatically generated from its title. This is used in themes by the Liquid templating language to refer to the collection. | `custom_collections.handle` | 🟢 0.70 | Good match found with 'custom_collections.handle'. |
+| `id` | The ID for the collection. | `custom_collections.id` | 🟢 0.70 | Good match found with 'custom_collections.id'. |
+| `published_at` | The time and date (ISO 8601 format) when the collection was made visible. Returns null for a hidden collection. | `custom_collections.published_at` | 🟢 0.70 | Good match found with 'custom_collections.published_at'. |
+| `published_scope` | Whether the collection is published to the Point of Sale channel. Valid values `web` (the collection is published to the Online Store channel but not published to the Point of Sale channel) and `global` (the collection is published to both the Online Store channel and the Point of Sale channel).
+ | `custom_collections.published_scope` | 🟢 0.70 | Good match found with 'custom_collections.published_scope'. |
+| `rules` | An array of rules that define what products go into the smart collection. Each rule (`column` -- `relation` --> `condition`) has these properties: - `column`: the property of a product being used to populate the smart collection. Ex: 'tag', 'type', 'vendor', 'variant_price', etc. - `relation`: The comparitive relationship between the column choice, and the condition ('equals', 'contains', 'greater_than', etc.) - condition: Select products for a smart collection using a condition. Values are either strings or numbers, depending on the relation value. See the [Shopify docs](https://shopify.dev/api/admin-rest/2022-10/resources/smartcollection#resource-object) for more.
+ | `MISSING` | ❌ 0.00 | No good match found. |
+| `sort_order` | The order of the products in the collection. Valid values inclide - `alpha-asc`: The products are sorted alphabetically from A to Z. - `alpha-des`: The products are sorted alphabetically from Z to A. - `best-selling`: The products are sorted by number of sales. - `created`: The products are sorted by the date they were created, from oldest to newest. - `created-desc`: The products are sorted by the date they were created, from newest to oldest. - `manual`: The products are manually sorted by the shop owner. - `price-asc`: The products are sorted by price from lowest to highest. - `price-desc`: The products are sorted by price from highest to lowest.
+ | `custom_collections.sort_order` | 🟢 0.70 | Good match found with 'custom_collections.sort_order'. |
+| `title` | The name of the collection | `custom_collections.title` | 🟢 0.70 | Good match found with 'custom_collections.title'. |
+| `updated_at` | The date and time (ISO 8601 format) when the collection was last modified. | `custom_collections.updated_at` | 🟢 0.70 | Good match found with 'custom_collections.updated_at'. |
 
 
-### Source Tables
+### Mapping from Airbyte `inventory_items` to Fivetran `inventory_item`
 
-| Alias | Schema | Table |
-| --- | --- | --- |
-| collects | shopify | collects |
+- Table Match Confidence Score: 🟢 0.70
 
+- Table Completion Score: ⚠️ 0.52
 
-### Fields
+### Explanation
 
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_synced | collects._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| collection_id | collects.collection_id | ID referencing the `collection` the product belongs to. |
-| product_id | collects.product_id | ID referencing the `product`. |
+The table mappings have some missing fields and questionable matches. The '_fivetran_deleted' and several others are marked as 'MISSING'. Also, there are only a few fields that match perfectly, like '_fivetran_synced'.
 
 
+### Field-by-Field Analysis
 
-## tax_line
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_deleted` | {{ doc('_fivetran_deleted') }} | `MISSING` | ❌ 0.00 | No good match found. |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `inventory_items._airbyte_extracted_at` | 🟢 1.00 | Mapped to the source stream's '_airbyte_extracted_at' column as a standard mapping. |
+| `country_code_of_origin` | The country code (ISO 3166-1 alpha-2) of where the item came from. | `inventory_items.country_code_of_origin` | 🟢 0.90 | Likely a precise match due to standard naming. |
+| `created_at` | The date and time (ISO 8601 format) when the inventory item was created. | `inventory_items.created_at` | 🟢 1.00 | ISO 8601 date-time creation is a good match. |
+| `id` | The ID of the inventory item. | `inventory_items.id` | 🟢 1.00 | Unique inventory item identifier is a strong match. |
+| `province_code_of_origin` | The province code (ISO 3166-2 alpha-2) of where the item came from. The province code is only used if the shipping provider for the inventory item is Canada Post. | `inventory_items.province_code_of_origin` | 🟢 0.70 | Possible match if considering Canada Post shipping references. |
+| `requires_shipping` | Boolean representing whether a customer needs to provide a shipping address when placing an order containing the inventory item. | `inventory_items.requires_shipping` | 🟢 1.00 | Boolean values match perfectly with descriptions. |
+| `sku` | The unique SKU (stock keeping unit) of the inventory item. | `inventory_items.sku` | 🟢 1.00 | Unique SKU matches well with the inventory mapping. |
+| `tracked` | Boolean representing whether inventory levels are tracked for the item. If true, then the inventory quantity changes are tracked by Shopify. | `inventory_items.tracked` | 🟢 1.00 | Boolean tracking indicator is a perfect match. |
+| `updated_at` | The date and time (ISO 8601 format) when the inventory item was last modified. | `inventory_items.updated_at` | 🟢 1.00 | ISO 8601 date-time modification field matches precisely. |
+| `duplicate_sku_count` | The number of inventory items that share the same SKU with this item. | `inventory_items.duplicate_sku_count` | 🟢 1.00 | Clear match for counting duplicates of SKUs. |
+| `harmonized_system_code` | The harmonized system code of the item. | `inventory_items.harmonized_system_code` | 🟢 0.90 | Likely code match based on naming and usage. |
+| `inventory_history_url` | The URL that points to the inventory history for the item. | `MISSING` | ❌ 0.00 | No good match found. |
+| `legacy_resource_id` | The ID of the corresponding resource in the REST Admin API. | `MISSING` | ❌ 0.00 | No good match found. |
+| `measurement_id` | The unique identifier for the inventory item's measurement. | `MISSING` | ❌ 0.00 | No good match found. |
+| `measurement_weight_value` | The weight value of the inventory item's measurement. | `MISSING` | ❌ 0.00 | No good match found. |
+| `measurement_weight_unit` | The unit of measurement for the inventory item's weight. | `MISSING` | ❌ 0.00 | No good match found. |
+| `tracked_editable_locked` | Indicates whether the 'tracked' field for the inventory item is locked from editing. | `MISSING` | ❌ 0.00 | No good match found. |
+| `tracked_editable_reason` | Provides the reason why the 'tracked' field for the inventory item is locked from editing. | `MISSING` | ❌ 0.00 | No good match found. |
+| `unit_cost_amount` | Decimal money amount of the unit cost associated with the inventory item. | `MISSING` | ❌ 0.00 | No good match found. |
+| `unit_cost_currency_code` | Currency of the unit cost associated with the inventory item. | `inventory_items.currency_code` | 🟢 0.90 | Currency code match is likely correct. |
 
 
+### Mapping from Airbyte `metafield_orders` to Fivetran `order_url_tag`
 
+- Table Match Confidence Score: ⚠️ 0.50
 
-### Source Tables
+- Table Completion Score: 🟢 0.75
 
-| Alias | Schema | Table |
-| --- | --- | --- |
-| transactions | shopify | transactions |
+### Explanation
 
+The table match score is 0.5 due to partial similarity between the source and target schemas. The completion score is 0.75 as most fields are mapped, but some are missing or poorly matched.
 
-### Fields
 
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_synced | transactions._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| index | MISSING | The index of the tax line. |
-| order_line_id | MISSING | The order line that this tax line is associated with. |
-| price | transactions.amount | The amount of tax, in shop currency, after discounts and before returns. |
-| price_set | transactions.total_unsettled_set | The amount of tax, in shop and presentment currencies, after discounts and before returns. |
-| rate | MISSING | The proportion of the line item price that the tax represents as a decimal. |
-| title | transactions.source_name | The name of the tax. |
+### Field-by-Field Analysis
 
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `metafield_orders._airbyte_extracted_at` | 🟢 1.00 | Standard mapping of '_fivetran_synced' to '_airbyte_extracted_at', always scores 1.0. |
+| `key` | Key of the tag pair. | `metafield_orders.key` | 🟢 0.70 | Fields 'key' in source and 'key' in target are likely referring to the same entity, mapped with a score of 0.7. |
+| `order_id` | ID of the order url being tagged. | `MISSING` | ❌ 0.00 | Expression is 'MISSING', no good match found. |
+| `value` | Value of the tag. | `metafield_orders.value` | ⚠️ 0.60 | Fields 'value' in source and 'value' in target mapped with a lower confidence due to minimal contextual match. |
 
 
-## product
+### Mapping from Airbyte `discount_codes` to Fivetran `abandoned_checkout_discount_code`
 
+- Table Match Confidence Score: 🟢 0.70
 
+- Table Completion Score: ❌ 0.44
 
+### Explanation
 
-### Source Tables
+The table mapping confidence score is moderate due to partial matches and the presence of several 'MISSING' expressions indicating incomplete mappings. Despite a few high-confidence mappings, the overall completion is low due to multiple unmapped fields.
 
-| Alias | Schema | Table |
-| --- | --- | --- |
-| products | shopify | products |
-
-
-### Fields
-
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_deleted | MISSING | Whether the record has been deleted in the source system. |
-| _fivetran_synced | products._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| created_at | products.created_at | The date and time when the product was created. |
-| handle | products.handle | A unique human-friendly string for the product. Automatically generated from the product's title. |
-| id | products.id | An unsigned 64-bit integer that's used as a unique identifier for the product. Each id is unique across the Shopify system. No two products will have the same id, even if they're from different shops. |
-| product_type | products.product_type | A categorization for the product used for filtering and searching products. |
-| published_at | products.published_at | The date and time (ISO 8601 format) when the product was published. Can be set to null to unpublish the product from the Online Store channel. |
-| published_scope | products.published_scope | Whether the product is published to the Point of Sale channel. |
-| title | products.title | The name of the product. |
-| updated_at | products.updated_at | The date and time when the product was last modified. |
-| vendor | products.vendor | The name of the product's vendor. |
-| status | products.status | The status of the product. Valid values: - active: The product is ready to sell and is available to customers on the online store, sales channels, and apps. By default, existing products are set to active. - archived: The product is no longer being sold and isn't available to customers on sales channels and apps. - draft: The product isn't ready to sell and is unavailable to customers on sales channels and apps. By default, duplicated and unarchived products are set to draft.
- |
-
-
-
-## order
-
-
-
-
-### Source Tables
-
-| Alias | Schema | Table |
-| --- | --- | --- |
-| orders | shopify | orders |
-
-
-### Fields
 
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_synced | orders._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| app_id | orders.app_id | The ID of the app that created the order. |
-| billing_address_address_1 | orders.billing_address.address1 | The street address of the billing address. |
-| billing_address_address_2 | orders.billing_address.address2 | An optional additional field for the street address of the billing address. |
-| billing_address_city | orders.billing_address.city | The city, town, or village of the billing address. |
-| billing_address_company | orders.billing_address.company | The company of the person associated with the billing address. |
-| billing_address_country | orders.billing_address.country | The name of the country of the billing address. |
-| billing_address_country_code | orders.billing_address.country_code | The two-letter code (ISO 3166-1 format) for the country of the billing address. |
-| billing_address_first_name | orders.billing_address.first_name | The first name of the person associated with the payment method. |
-| billing_address_last_name | orders.billing_address.last_name | The last name of the person associated with the payment method. |
-| billing_address_latitude | orders.billing_address.latitude | The latitude of the billing address. |
-| billing_address_longitude | orders.billing_address.longitude | The longitude of the billing address. |
-| billing_address_name | orders.billing_address.name | The full name of the person associated with the payment method. |
-| billing_address_phone | orders.billing_address.phone | The phone number at the billing address. |
-| billing_address_province | orders.billing_address.province | The name of the region (province, state, prefecture, …) of the billing address. |
-| billing_address_province_code | orders.billing_address.province_code | The two-letter abbreviation of the region of the billing address. |
-| billing_address_zip | orders.billing_address.zip | The postal code (zip, postcode, Eircode, …) of the billing address. |
-| browser_ip | orders.browser_ip | The IP address of the browser used by the customer when they placed the order. |
-| buyer_accepts_marketing | orders.buyer_accepts_marketing | Whether the customer consented to receive email updates from the shop. |
-| cancel_reason | orders.cancel_reason | The reason why the order was canceled. |
-| cancelled_at | orders.cancelled_at | The date and time when the order was canceled. |
-| cart_token | orders.cart_token | The ID of the cart that's associated with the order. |
-| closed_at | orders.closed_at | The date and time when the order was closed (archived). |
-| created_at | orders.created_at | The autogenerated date and time when the order was created in Shopify. |
-| currency | orders.currency | The three-letter code for the shop currency. |
-| customer_id | MISSING | The ID of the order's customer. |
-| email | orders.email | The customer's email address. |
-| financial_status | orders.financial_status | The status of payments associated with the order. Can only be set when the order is created |
-| fulfillment_status | orders.fulfillment_status | The order's status in terms of fulfilled line items. |
-| id | orders.id | The ID of the order, used for API purposes. This is different from the order_number property, which is the ID used by the shop owner and customer. |
-| landing_site_base_url | orders.landing_site | The URL for the page where the buyer landed when they entered the shop. |
-| location_id | orders.location_id | The ID of the physical location where the order was processed. |
-| name | orders.name | The order name, generated by combining the order_number property with the order prefix and suffix that are set in the merchant's general settings. |
-| note | orders.note | An optional note that a shop owner can attach to the order. |
-| number | orders.number | The order's position in the shop's count of orders. Numbers are sequential and start at 1. |
-| order_number | orders.order_number | The order 's position in the shop's count of orders starting at 1001. Order numbers are sequential and start at 1001. |
-| processed_at | orders.processed_at | The date and time when an order was processed. This value is the date that appears on your orders and that's used in the analytic reports. |
-| referring_site | orders.referring_site | The website where the customer clicked a link to the shop. |
-| shipping_address_address_1 | orders.shipping_address.address1 | The street address of the shipping address. |
-| shipping_address_address_2 | orders.shipping_address.address2 | An optional additional field for the street address of the shipping address. |
-| shipping_address_city | orders.shipping_address.city | The city, town, or village of the shipping address. |
-| shipping_address_company | orders.shipping_address.company | The company of the person associated with the shipping address. |
-| shipping_address_country | orders.shipping_address.country | The name of the country of the shipping address. |
-| shipping_address_country_code | orders.shipping_address.country_code | The two-letter code (ISO 3166-1 format) for the country of the shipping address. |
-| shipping_address_first_name | orders.shipping_address.first_name | The first name of the person associated with the shipping address. |
-| shipping_address_last_name | orders.shipping_address.last_name | The last name of the person associated with the shipping address. |
-| shipping_address_latitude | orders.shipping_address.latitude | The latitude of the shipping address. |
-| shipping_address_longitude | orders.shipping_address.longitude | The longitude of the shipping address. |
-| shipping_address_name | orders.shipping_address.name | The full name of the person associated with the payment method. |
-| shipping_address_phone | orders.shipping_address.phone | The phone number at the shipping address. |
-| shipping_address_province | orders.shipping_address.province | The name of the region (province, state, prefecture, …) of the shipping address. |
-| shipping_address_province_code | orders.shipping_address.province_code | The two-letter abbreviation of the region of the shipping address. |
-| shipping_address_zip | orders.shipping_address.zip | The postal code (zip, postcode, Eircode, …) of the shipping address. |
-| source_name | orders.source_name | Where the order originated. Can be set only during order creation, and is not writeable afterwards. |
-| subtotal_price | orders.subtotal_price | The price of the order in the shop currency after discounts but before shipping, taxes, and tips in the shop currency. |
-| taxes_included | orders.taxes_included | Whether taxes are included in the order subtotal. |
-| test | orders.test | Whether this is a test order. |
-| token | orders.token | A unique token for the order. |
-| total_discounts | orders.total_discounts | The total discounts applied to the price of the order in the shop currency. |
-| total_line_items_price | orders.total_line_items_price | The sum of all line item prices in the shop currency. |
-| total_price | orders.total_price | The sum of all line item prices, discounts, shipping, taxes, and tips in the shop currency. Must be positive. |
-| total_tax | orders.total_tax | The sum of all the taxes applied to the order in th shop currency. Must be positive. |
-| total_weight | orders.total_weight | The sum of all line item weights in grams. |
-| updated_at | orders.updated_at | The date and time (ISO 8601 format) when the order was last modified. |
-| user_id | orders.user_id | The ID of the user logged into Shopify POS who processed the order, if applicable. |
-| checkout_token | orders.checkout_token | A unique value when referencing the checkout that's associated with the order. |
-| confirmed | MISSING | Whether inventory has been reserved for the order. |
-| customer_locale | orders.customer_locale | A two-letter or three-letter language code, optionally followed by a region modifier. |
-| checkout_id | orders.checkout_id | ID of the order's checkout. |
-| order_status_url | orders.order_status_url | The URL pointing to the order status web page, if applicable. |
-| _fivetran_deleted | MISSING | {{ doc('_fivetran_deleted') }} |
-| total_tip_received | orders.total_tip_received | The sum of all the tips in the order in the shop currency. |
-| device_id | orders.device_id | The ID for the device. |
-| presentment_currency | MISSING | The presentment currency that was used to display prices to the customer. |
-| total_shipping_price_set | orders.total_shipping_price_set | The total shipping price of the order, excluding discounts and returns, in shop and presentment currencies. If taxes_included is set to true, then total_shipping_price_set includes taxes. |
-| client_details_user_agent | orders.client_details.user_agent | Details of the browsing client, including software and operating versions. |
-| total_tax_set | orders.total_tax_set | The total tax applied to the order in shop and presentment currencies. |
-| total_discounts_set | orders.total_discounts_set | The total discounts applied to the price of the order in shop and presentment currencies. |
-| total_line_items_price_set | orders.total_line_items_price_set | The total of all line item prices in shop and presentment currencies. |
-| total_price_set | orders.total_price_set | The total price of the order in shop and presentment currencies. |
-| is_confirmed | orders.confirmed | Whether the order is confirmed. |
-| source_identifier | orders.source_identifier | The ID of the order placed on the originating platform. This value doesn't correspond to the Shopify ID that's generated from a completed draft. |
+### Field-by-Field Analysis
 
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `discount_codes._airbyte_extracted_at` | 🟢 1.00 | _fivetran_synced is always mapped to _airbyte_extracted_at with a score of 1.00 as a standard mapping. |
+| `amount` | The amount of the discount in presentment currency. | `MISSING` | ❌ 0.00 | No good match found. |
+| `checkout_id` | ID of the checkout. | `MISSING` | ❌ 0.00 | No good match found. |
+| `code` | The discount code. | `discount_codes.code` | 🟢 0.70 | discount_codes.code is likely a strong contextual match to 'code'. |
+| `created_at` | When the checkout discount application was created. | `discount_codes.created_at` | 🟢 0.70 | discount_codes.created_at mapped to created_at with moderate confidence. |
+| `discount_id` | ID of the discount. Deprecated, use `code` instead. | `MISSING` | ❌ 0.00 | No good match found. |
+| `index` | Index (from 1) representing the application of the discount to the checkout. Use the latest (highest index) | `MISSING` | ❌ 0.00 | No good match found. |
+| `type` | The type of discount. Valid values - percentage, shipping, fixed_amount. (default - fixed_amount) | `discount_codes.discount_type` | 🟢 0.70 | discount_codes.discount_type mapped to type due to likely contextual match for discount types. |
+| `updated_at` | When the checkout's discount was last updated | `discount_codes.updated_at` | 🟢 0.70 | discount_codes.updated_at mapped to updated_at with moderate confidence. |
 
 
-## order_shipping_line
+### Mapping from Airbyte `products` to Fivetran `product_tag`
 
+- Table Match Confidence Score: 🟢 1.00
 
+- Table Completion Score: ❌ 0.25
 
+### Explanation
 
-### Source Tables
+The mapping configuration exhibits a perfect table match with successful standard field mapping for '_fivetran_synced', but lacks completion with most fields having 'MISSING' expressions.
 
-| Alias | Schema | Table |
-| --- | --- | --- |
-| fulfillments | shopify | fulfillments |
 
+### Field-by-Field Analysis
 
-### Fields
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `products._airbyte_extracted_at` | 🟢 1.00 | Standard mapping of '_fivetran_synced' to '_airbyte_extracted_at'. |
+| `index` | Index (starting from 1) represnting when the tag was placed on the product. | `MISSING` | ❌ 0.00 | No good match found. |
+| `product_id` | ID of the product being tagged. | `MISSING` | ❌ 0.00 | No good match found. |
+| `value` | Value of the tag. | `MISSING` | ❌ 0.00 | No good match found. |
 
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_synced | fulfillments._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| carrier_identifier | MISSING | A reference to the carrier service that provided the rate. Present when the rate was computed by a third-party carrier service. |
-| code | MISSING | A reference to the shipping method. |
-| delivery_category | MISSING | The general classification of the delivery method. |
-| discounted_price | MISSING | The pre-tax shipping price with discounts applied in the shop currency. |
-| discounted_price_set | MISSING | The pre-tax shipping price with discounts applied (JSON) in presentment and shop currencies. |
-| id | fulfillments.id | A globally-unique identifier. |
-| order_id | fulfillments.order_id | ID of the associated order. |
-| phone | MISSING | The phone number at the shipping address. |
-| price | MISSING | Returns the price of the shipping line in shop currency. |
-| price_set | MISSING | Returns the price of the shipping line (JSON) in presentment and shop currencies. |
-| requested_fulfillment_service_id | MISSING | The fulfillment service requested for the shipping method. Present if the shipping method requires processing by a third party fulfillment service. |
-| source | MISSING | Returns the rate source for the shipping line. |
-| title | fulfillments.name | Returns the title of the shipping line. |
 
+### Mapping from Airbyte `customers` to Fivetran `customer_tag`
 
+- Table Match Confidence Score: ⚠️ 0.60
 
-## order_note_attribute
+- Table Completion Score: ⚠️ 0.50
 
+### Explanation
 
+The mapping includes standard and missing field expressions. Standard mappings like '_fivetran_synced' were given a high score, while missing fields were penalized.
 
 
-### Source Tables
+### Field-by-Field Analysis
 
-| Alias | Schema | Table |
-| --- | --- | --- |
-| orders | shopify | orders |
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `customers._airbyte_extracted_at` | 🟢 1.00 | Mapped to a source stream's '_airbyte_extracted_at' as per standard. |
+| `index` | Index (starting from 1) represnting when the tag was placed on the customer. | `MISSING` | ❌ 0.00 | Expression is 'MISSING'. No good match found. |
+| `customer_id` | ID of the customer being tagged. | `customers.default_address.customer_id` | 🟢 0.70 | Mapped to 'customers.default_address.customer_id'. Considered a likely match with some uncertainty. |
+| `value` | Value of the tag. | `MISSING` | ❌ 0.00 | Expression is 'MISSING'. No good match found. |
 
 
-### Fields
+### Mapping from Airbyte `product_variants` to Fivetran `product_variant`
 
-| Name | Expression | Description |
-| --- | --- | --- |
-| _fivetran_synced | orders._airbyte_extracted_at | {{ doc('_fivetran_synced') }} |
-| name | orders.name | Name of the attribute. |
-| order_id | orders.id | ID referencing the order the note attribute belongs to. |
-| value | MISSING | Value of the attribute. |
+- Table Match Confidence Score: 🟢 0.80
 
+- Table Completion Score: ⚠️ 0.60
+
+### Explanation
+
+The table mapping is mostly consistent with the target schema, but there are several fields marked as 'MISSING' due to lack of good matches or differences in field representation. The overall table match score is high due to shared subject matter and relevant fields, but the completion score is lower reflecting these gaps.
+
+
+### Field-by-Field Analysis
+
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `barcode` | The barcode, UPC, or ISBN number for the product. | `product_variants.barcode` | 🟢 0.90 | The mapping of 'barcode' is strong as it directly corresponds to 'product_variants.barcode'. |
+| `compare_at_price` | The original price of the item before an adjustment or a sale in shop currency. | `product_variants.compare_at_price` | 🟢 0.90 | The mapping of 'compare_at_price' is strong as it directly corresponds to 'product_variants.compare_at_price'. |
+| `created_at` | The date and time (ISO 8601 format) when the product variant was created. | `product_variants.created_at` | 🟢 0.90 | The mapping of 'created_at' is strong as it directly corresponds to 'product_variants.created_at'. |
+| `fulfillment_service` | (DEPRECATED 2025-01-06) The fulfillment service associated with the product variant. | `MISSING` | ❌ 0.00 | No good match found. |
+| `grams` | (DEPRECATED 2025-01-06) The weight of the product variant in grams. | `product_variants.grams` | 🟢 0.90 | The mapping of 'grams' is strong as it directly corresponds to 'product_variants.grams'. |
+| `id` | The unique numeric identifier for the product variant. | `product_variants.id` | 🟢 0.90 | The mapping of 'id' is strong as it directly corresponds to 'product_variants.id'. |
+| `image_id` | The unique numeric identifier for a product's image. The image must be associated to the same product as the variant. | `product_variants.image_id` | 🟢 0.90 | The mapping of 'image_id' is strong as it directly corresponds to 'product_variants.image_id'. |
+| `inventory_item_id` | The unique identifier for the inventory item, which is used in the Inventory API to query for inventory information. | `product_variants.inventory_item_id` | 🟢 0.90 | The mapping of 'inventory_item_id' is strong as it directly corresponds to 'product_variants.inventory_item_id'. |
+| `inventory_management` | (DEPRECATED 2025-01-06) The fulfillment service that tracks the number of items in stock for the product variant. | `MISSING` | ❌ 0.00 | No good match found. |
+| `inventory_policy` | Whether customers are allowed to place an order for the product variant when it's out of stock. | `product_variants.inventory_policy` | 🟢 0.90 | The mapping of 'inventory_policy' is strong as it directly corresponds to 'product_variants.inventory_policy'. |
+| `inventory_quantity` | An aggregate of inventory across all locations. To adjust inventory at a specific location, use the InventoryLevel resource. | `product_variants.inventory_quantity` | 🟢 0.90 | The mapping of 'inventory_quantity' is strong as it directly corresponds to 'product_variants.inventory_quantity'. |
+| `old_inventory_quantity` | (DEPRECATED 2025-01-06) Use the InventoryLevel resource instead. | `product_variants.old_inventory_quantity` | 🟢 0.90 | The mapping of 'old_inventory_quantity' is strong as it directly corresponds to 'product_variants.old_inventory_quantity'. |
+| `option_1` | (DEPRECATED 2025-01-06) The custom properties that a shop owner uses to define product variants. You can define three options for a product variant: option1, option2, option3.
+ | `product_variants.option1` | 🟢 0.90 | The mapping of 'option_1' is strong as it directly corresponds to 'product_variants.option1'. |
+| `option_2` | (DEPRECATED 2025-01-06) The custom properties that a shop owner uses to define product variants. You can define three options for a product variant: option1, option2, option3.
+ | `product_variants.option2` | 🟢 0.90 | The mapping of 'option_2' is strong as it directly corresponds to 'product_variants.option2'. |
+| `option_3` | (DEPRECATED 2025-01-06) The custom properties that a shop owner uses to define product variants. You can define three options for a product variant: option1, option2, option3.
+ | `product_variants.option3` | 🟢 0.90 | The mapping of 'option_3' is strong as it directly corresponds to 'product_variants.option3'. |
+| `position` | The order of the product variant in the list of product variants. The first position in the list is 1. The position of variants is indicated by the order in which they are listed. | `product_variants.position` | 🟢 0.90 | The mapping of 'position' is strong as it directly corresponds to 'product_variants.position'. |
+| `price` | The price of the product variant in shop currency. | `product_variants.price` | 🟢 0.90 | The mapping of 'price' is strong as it directly corresponds to 'product_variants.price'. |
+| `product_id` | The unique numeric identifier for the product. | `product_variants.product_id` | 🟢 0.90 | The mapping of 'product_id' is strong as it directly corresponds to 'product_variants.product_id'. |
+| `requires_shipping` | (DEPRECATED 2025-01-06) Use the `requires_shipping` property on the InventoryItem resource instead. | `product_variants.requires_shipping` | ❌ 0.00 | No good match found. |
+| `sku` | A unique identifier for the product variant in the shop. Required in order to connect to a FulfillmentService. | `product_variants.sku` | 🟢 0.90 | The mapping of 'sku' is strong as it directly corresponds to 'product_variants.sku'. |
+| `taxable` | Whether a tax is charged when the product variant is sold. | `product_variants.taxable` | 🟢 0.90 | The mapping of 'taxable' is strong as it directly corresponds to 'product_variants.taxable'. |
+| `tax_code` | This parameter applies only to the stores that have the Avalara AvaTax app installed. Specifies the Avalara tax code for the product variant. | `product_variants.tax_code` | 🟢 0.90 | The mapping of 'tax_code' is strong as it directly corresponds to 'product_variants.tax_code'. |
+| `title` | The title of the product variant. The title field is a concatenation of the option1, option2, and option3 fields. You can only update title indirectly using the option fields. | `product_variants.title` | 🟢 0.90 | The mapping of 'title' is strong as it directly corresponds to 'product_variants.title'. |
+| `updated_at` | The date and time when the product variant was last modified. Gets returned in ISO 8601 format. | `product_variants.updated_at` | 🟢 0.90 | The mapping of 'updated_at' is strong as it directly corresponds to 'product_variants.updated_at'. |
+| `weight` | (DEPRECATED 2025-01-06) The weight of the product variant in the unit system specified with weight_unit. | `product_variants.weight` | 🟢 0.90 | The mapping of 'weight' is strong as it directly corresponds to 'product_variants.weight'. |
+| `weight_unit` | (DEPRECATED 2025-01-06) The unit of measurement that applies to the product variant's weight. If you don't specify a value for weight_unit, then the shop's default unit of measurement is applied. Valid values: g, kg, oz, and lb.
+ | `product_variants.weight_unit` | 🟢 0.90 | The mapping of 'weight_unit' is strong as it directly corresponds to 'product_variants.weight_unit'. |
+| `available_for_sale` | Indicates whether the product variant is available for sale. | `product_variants.available_for_sale` | 🟢 0.90 | The mapping of 'available_for_sale' is strong as it directly corresponds to 'product_variants.available_for_sale'. |
+| `display_name` | The display name of the variant, based on the product's title and variant's title. | `product_variants.display_name` | 🟢 0.90 | The mapping of 'display_name' is strong as it directly corresponds to 'product_variants.display_name'. |
+| `legacy_resource_id` | The ID of the corresponding resource in the REST Admin API. | `MISSING` | ❌ 0.00 | No good match found. |
+| `metafield` | A custom field, including its namespace and key, that's associated with a Shopify resource for the purposes of adding and storing additional information. | `MISSING` | ❌ 0.00 | No good match found. |
+| `requires_components` | Indicates whether a product variant requires components. | `MISSING` | ❌ 0.00 | No good match found. |
+| `sellable_online_quantity` | The total sellable quantity of the variant for online channels. | `MISSING` | ❌ 0.00 | No good match found. |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `product_variants._airbyte_extracted_at` | 🟢 1.00 | The mapping of '_fivetran_synced' to '_airbyte_extracted_at' is perfect and standard for all tables. |
+
+
+### Mapping from Airbyte `fulfillments` to Fivetran `fulfillment_event`
+
+- Table Match Confidence Score: 🟢 0.85
+
+- Table Completion Score: ❌ 0.30
+
+### Explanation
+
+The table match score is high because most of the fields seem to relate to fulfillment events, matching the expected domain. However, many fields have 'MISSING' expressions, leading to a lower completion score.
+
+
+### Field-by-Field Analysis
+
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_deleted` | {{ doc('_fivetran_deleted') }} | `MISSING` | ❌ 0.00 | No good match found. |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `fulfillments._airbyte_extracted_at` | 🟢 1.00 | '_fivetran_synced' maps to '_airbyte_extracted_at' with full confidence. |
+| `address_1` | The street address where the fulfillment event occurred. | `MISSING` | ❌ 0.00 | No good match found. |
+| `city` | The city where the fulfillment event occurred. | `fulfillments.origin_address.city` | 🟢 0.70 | 'city' maps well to 'fulfillments.origin_address.city'. |
+| `country` | The country where the fulfillment event occurred. | `fulfillments.origin_address.country_code` | 🟢 0.70 | 'country' maps well to 'fulfillments.origin_address.country_code'. |
+| `created_at` | The date and time (ISO 8601 format) when the fulfillment event was created. | `fulfillments.created_at` | 🟢 0.70 | 'created_at' maps well to 'fulfillments.created_at'. |
+| `estimated_delivery_at` | The estimated delivery date based on the fulfillment's tracking number, as long as it's provided by one of the following carriers: USPS, FedEx, UPS, or Canada Post (Canada only).  Value is `null` if no tracking number is available or if the tracking number is from an unsupported carrier. This property is available only when carrier calculated rates are in use.
+ | `MISSING` | ❌ 0.00 | No good match found. |
+| `fulfillment_id` | An ID for the fulfillment that's associated with the fulfillment event. | `fulfillments.id` | 🟢 0.70 | 'fulfillment_id' maps well to 'fulfillments.id'. |
+| `happened_at` | The date and time (ISO 8601 format) when the fulfillment event occurred. | `MISSING` | ❌ 0.00 | No good match found. |
+| `id` | An ID for the fulfillment event. | `fulfillments.id` | 🟢 0.70 | 'id' maps well to 'fulfillments.id'. |
+| `latitude` | A geographic coordinate specifying the latitude of the fulfillment event. | `MISSING` | ❌ 0.00 | No good match found. |
+| `longitude` | A geographic coordinate specifying the longitude of the fulfillment event. | `MISSING` | ❌ 0.00 | No good match found. |
+| `message` | An arbitrary message describing the status. Can be provided by a shipping carrier. | `MISSING` | ❌ 0.00 | No good match found. |
+| `order_id` | The ID of the order that's associated with the fulfillment event. | `fulfillments.order_id` | 🟢 0.70 | 'order_id' maps well to 'fulfillments.order_id'. |
+| `province` | The province where the fulfillment event occurred. | `fulfillments.origin_address.province_code` | 🟢 0.70 | 'province' maps well to 'fulfillments.origin_address.province_code'. |
+| `shop_id` | An ID for the shop that's associated with the fulfillment event. | `MISSING` | ❌ 0.00 | No good match found. |
+| `status` | The status of the fulfillment event. Valid values: - label_printed: A label for the shipment was purchased and printed. - label_purchased: A label for the shipment was purchased, but not printed. - attempted_delivery: Delivery of the shipment was attempted, but unable to be completed. - ready_for_pickup: The shipment is ready for pickup at a shipping depot. - picked_up: The fulfillment was successfully picked up. - confirmed: The carrier is aware of the shipment, but hasn't received it yet. - in_transit: The shipment is being transported between shipping facilities on the way to its destination. - out_for_delivery: The shipment is being delivered to its final destination. - delivered: The shipment was successfully delivered. - failure: Something went wrong when pulling tracking information for the shipment, such as the tracking number was invalid or the shipment was canceled.
+ | `fulfillments.shipment_status` | 🟢 0.70 | 'status' maps well to 'fulfillments.shipment_status'. |
+| `updated_at` | The date and time (ISO 8601 format) when the fulfillment event was updated. | `fulfillments.updated_at` | 🟢 0.70 | 'updated_at' maps well to 'fulfillments.updated_at'. |
+| `zip` | The zip code of the location where the fulfillment event occurred. | `fulfillments.origin_address.zip` | 🟢 0.70 | The 'zip' field maps correctly to 'fulfillments.origin_address.zip'. |
+
+
+### Mapping from Airbyte `order_refunds` to Fivetran `order_shipping_tax_line`
+
+- Table Match Confidence Score: ⚠️ 0.60
+
+- Table Completion Score: ❌ 0.14
+
+### Explanation
+
+The field mapping includes one perfect match (`_fivetran_synced` to `_airbyte_extracted_at`), which always receives a score of 1.00. All other fields are marked as 'MISSING', indicating no good matches found, which lowers the completion score significantly.
+
+
+### Field-by-Field Analysis
+
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `order_refunds._airbyte_extracted_at` | 🟢 1.00 | Field `_fivetran_synced` is correctly mapped to `_airbyte_extracted_at`, which is a known perfect match. |
+| `index` | Index (from 1) representing the order of shipping lines per order. | `MISSING` | ❌ 0.00 | No good match found. |
+| `order_shipping_line_id` | ID of the order shipping line this recod is associated with. | `MISSING` | ❌ 0.00 | No good match found. |
+| `price` | The amount of tax, in shop currency, after discounts and before returns. | `MISSING` | ❌ 0.00 | No good match found. |
+| `price_set` | The amount of tax, in shop and presentment currencies, after discounts and before returns (JSON). | `MISSING` | ❌ 0.00 | No good match found. |
+| `rate` | The proportion of the line item price that the tax represents as a decimal. | `MISSING` | ❌ 0.00 | No good match found. |
+| `title` | The name of the tax. | `MISSING` | ❌ 0.00 | No good match found. |
+
+
+### Mapping from Airbyte `product_images` to Fivetran `product_image`
+
+- Table Match Confidence Score: 🟢 0.85
+
+- Table Completion Score: 🟢 0.75
+
+### Explanation
+
+The table mapping is based on shared API endpoints, suggesting a strong match. However, not all fields in the target schema are present in the source.
+
+
+### Field-by-Field Analysis
+
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_deleted` | {{ doc('_fivetran_deleted') }} | `MISSING` | ❌ 0.00 | No good match found. |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `product_images._airbyte_extracted_at` | 🟢 1.00 | Standard mapping from '_fivetran_synced' to '_airbyte_extracted_at'. |
+| `created_at` | (DEPRECATED 2025-01-06) The date and time when the product image was created. The API returns this value in ISO 8601 format. | `product_images.created_at` | ⚠️ 0.60 | The mapping is likely correct given the typical structure of the source and target schemas. |
+| `height` | Height dimension of the image which is determined on upload. | `product_images.height` | 🟢 0.70 | Height dimension is usually a directly mapped field. |
+| `id` | Unique numeric identifier of the product image. | `product_images.id` | 🟢 0.70 | Unique identifiers are often directly mapped. |
+| `position` | (DEPRECATED 2025-01-06) The order of the product image in the list. The first product image is at position 1 and is the "main" image for the product. | `product_images.position` | ⚠️ 0.60 | Reasonable match for a potentially deprecated field. |
+| `product_id` | The id of the product associated with the image. | `product_images.product_id` | 🟢 0.70 | This field commonly matches as a primary key reference. |
+| `src` | (DEPRECATED 2025-01-06) Specifies the location of the product image. This parameter supports URL filters that you can use to retrieve modified copies of the image. | `product_images.src` | ⚠️ 0.60 | Likely match for image source, albeit deprecated. |
+| `updated_at` | (DEPRECATED 2025-01-06) The date and time when the product image was last modified. The API returns this value in ISO 8601 format. | `product_images.updated_at` | ⚠️ 0.60 | Common match for modification timestamps, despite deprecation notice. |
+| `variant_ids` | (DEPRECATED 2025-01-06) An array of variant ids associated with the image. | `product_images.variant_ids` | ⚠️ 0.60 | Potentially correct for matching variant associations. |
+| `width` | Width dimension of the image which is determined on upload. | `product_images.width` | 🟢 0.70 | Width dimension is usually a directly mapped field. |
+| `alt_text` | A word or phrase to share the nature or contents of an image. | `product_images.alt` | 🟢 0.70 | Alt text fields often directly correspond. |
+| `media_id` | The unique identifier for the media associated with the product image. | `MISSING` | ❌ 0.00 | No good match found. |
+| `status` | The status of the product image, indicating its availability or processing state. | `MISSING` | ❌ 0.00 | No good match found. |
+| `url` | The URL of the product image. | `product_images.shop_url` | 🟢 0.70 | Likely match considering its use as image URL. |
+
+
+### Mapping from Airbyte `orders` to Fivetran `order_line`
+
+- Table Match Confidence Score: ⚠️ 0.50
+
+- Table Completion Score: ❌ 0.10
+
+### Explanation
+
+The table match is neutral due to generic field matching, with many fields having 'MISSING' values indicating no correspondence in the source data.
+
+
+### Field-by-Field Analysis
+
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `orders._airbyte_extracted_at` | 🟢 1.00 | Mapped to a standard column '_airbyte_extracted_at'. |
+| `fulfillable_quantity` | The amount available to fulfill, calculated as follows: quantity - max(refunded_quantity, fulfilled_quantity) - pending_fulfilled_quantity - open_fulfilled_quantity | `MISSING` | ❌ 0.00 | No good match found. |
+| `fulfillment_status` | How far along an order is in terms line items fulfilled. | `orders.fulfillment_status` | 🟢 0.70 | Mapped to 'orders.fulfillment_status' which likely represents the same concept. |
+| `gift_card` | Whether the item is a gift card. If true, then the item is not taxed or considered for shipping charges. | `MISSING` | ❌ 0.00 | No good match found. |
+| `grams` | The weight of the item in grams. | `MISSING` | ❌ 0.00 | No good match found. |
+| `id` | The ID of the line item. | `orders.id` | 🟢 0.70 | Mapped to 'orders.id', assumes similar identity role. |
+| `name` | The name of the product variant. | `orders.name` | 🟢 0.70 | Mapped to 'orders.name' likely representing the same concept. |
+| `order_id` | The ID of the related order. | `MISSING` | ❌ 0.00 | No good match found. |
+| `price` | The price of the item before discounts have been applied in the shop currency. | `MISSING` | ❌ 0.00 | No good match found. |
+| `product_id` | The ID of the product that the line item belongs to. Can be null if the original product associated with the order is deleted at a later date. | `MISSING` | ❌ 0.00 | No good match found. |
+| `quantity` | The number of items that were purchased. | `MISSING` | ❌ 0.00 | No good match found. |
+| `requires_shipping` | Whether the item requires shipping. | `MISSING` | ❌ 0.00 | No good match found. |
+| `sku` | The item's SKU (stock keeping unit). | `MISSING` | ❌ 0.00 | No good match found. |
+| `taxable` | Whether the item was taxable. | `MISSING` | ❌ 0.00 | No good match found. |
+| `title` | The title of the product. | `MISSING` | ❌ 0.00 | No good match found. |
+| `total_discount` | The total amount of the discount allocated to the line item in the shop currency. | `MISSING` | ❌ 0.00 | No good match found. |
+| `variant_id` | The ID of the product variant. | `MISSING` | ❌ 0.00 | No good match found. |
+| `vendor` | The name of the item's supplier. | `MISSING` | ❌ 0.00 | No good match found. |
+| `index` | Index of the order line. | `MISSING` | ❌ 0.00 | No good match found. |
+| `pre_tax_price` | The pre tax price of the line item in shop currency. | `MISSING` | ❌ 0.00 | No good match found. |
+| `pre_tax_price_set` | The pre tax price of the line item in shop currency and presentment currency. | `MISSING` | ❌ 0.00 | No good match found. |
+| `price_set` | The price of the line item in shop and presentment currencies. | `MISSING` | ❌ 0.00 | No good match found. |
+| `tax_code` | Tax code applied to the line item. As multiple taxes can apply to a line item, we recommend referring to `stg_shopify__tax_line`. | `MISSING` | ❌ 0.00 | No good match found. |
+| `total_discount_set` | The total amount allocated to the line item in the presentment currency. | `MISSING` | ❌ 0.00 | No good match found. |
+| `variant_title` | The title of the product variant. | `MISSING` | ❌ 0.00 | No good match found. |
+| `variant_inventory_management` | The fulfillment service that tracks the number of items in stock for the product variant. | `MISSING` | ❌ 0.00 | No good match found. |
+| `properties` | Line item properties. | `MISSING` | ❌ 0.00 | No good match found. |
+
+
+### Mapping from Airbyte `inventory_levels` to Fivetran `inventory_quantity`
+
+- Table Match Confidence Score: ⚠️ 0.65
+
+- Table Completion Score: 🟢 0.86
+
+### Explanation
+
+The table match score reflects a fairly good match between the source and target table schemas, as they share related fields and concepts. However, it's not perfect due to field variations and expressions not directly matching for all fields. The completion score is high as most fields have corresponding expressions in the source schema, with '_fivetran_synced' correctly mapped to '_airbyte_extracted_at'.
+
+
+### Field-by-Field Analysis
+
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `id` | The unique identifier for the record. | `inventory_levels.id` | 🟢 0.85 | The field 'id' from the target is matched with 'inventory_levels.id' from the source, which has a fairly high confidence as they both represent unique identifiers. |
+| `inventory_item_id` | The ID of the inventory item associated with this record. | `inventory_levels.inventory_item_id` | 🟢 0.80 | The field 'inventory_item_id' is matched with 'inventory_levels.inventory_item_id', which likely represents the same concept. |
+| `inventory_level_id` | The ID of the inventory level where this item is stored. | `inventory_levels.location_id` | 🟢 0.75 | The field 'inventory_level_id' is matched with 'inventory_levels.location_id'. Although they seem to relate to location, the exact match is less clear, warranting caution. |
+| `name` | The name of the inventory state associated with the record. [Link to list of expected values](https://shopify.dev/docs/apps/build/orders-fulfillment/inventory-management-apps#inventory-states). | `inventory_levels.locations_count` | ⚠️ 0.50 | The field 'name' is mapped to 'inventory_levels.locations_count'. This is a weaker match since 'name' typically denotes a text descriptor rather than a count. |
+| `quantity` | The available quantity of the inventory item. | `inventory_levels.available` | 🟢 0.90 | The field 'quantity' is well matched with 'inventory_levels.available', both referring to the available quantity of an inventory item. |
+| `updated_at` | The timestamp of the last update to the inventory record. | `inventory_levels.updated_at` | 🟢 0.95 | The field 'updated_at' is confidently mapped to 'inventory_levels.updated_at', reflecting the same timestamp for updates. |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `inventory_levels._airbyte_extracted_at` | 🟢 1.00 | Standard mapping with 100% confidence as '_fivetran_synced' always maps to '_airbyte_extracted_at'. |
+
+
+### Mapping from Airbyte `order_refunds` to Fivetran `order_line_refund`
+
+- Table Match Confidence Score: 🟢 0.70
+
+- Table Completion Score: ❌ 0.36
+
+### Explanation
+
+The table matching is strong because both systems likely describe the same subject matter. However, many fields have missing expressions, resulting in a low completion score.
+
+
+### Field-by-Field Analysis
+
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `order_refunds._airbyte_extracted_at` | 🟢 1.00 | Standard mapping for all tables from '_fivetran_synced' to '_airbyte_extracted_at'. |
+| `id` | The unique identifier of the line item in the refund. | `order_refunds.id` | 🟢 0.70 | Good match found for unique identifier of the line item in refund. |
+| `location_id` | TThe unique identifier of the location where the items will be restockedBD | `MISSING` | ❌ 0.00 | No good match found. |
+| `order_line_id` | The ID of the related line item in the order. | `MISSING` | ❌ 0.00 | No good match found. |
+| `quantity` | The quantity of the associated line item that was returned. | `MISSING` | ❌ 0.00 | No good match found. |
+| `refund_id` | The ID of the related refund. | `MISSING` | ❌ 0.00 | No good match found. |
+| `restock_type` | How this refund line item affects inventory levels. | `order_refunds.restock` | 🟢 0.70 | Matched to 'order_refunds.restock', indicative of inventory level impact. |
+| `subtotal` | Subtotal amount of the order line refund in shop currency. | `MISSING` | ❌ 0.00 | No good match found. |
+| `total_tax` | The total tax applied to the refund in shop currency. | `MISSING` | ❌ 0.00 | No good match found. |
+| `subtotal_set` | The subtotal of the refund line item in shop and presentment currencies. | `MISSING` | ❌ 0.00 | No good match found. |
+| `total_tax_set` | The total tax of the line item in shop and presentment currencies. | `MISSING` | ❌ 0.00 | No good match found. |
+
+
+### Mapping from Airbyte `transactions` to Fivetran `transaction`
+
+- Table Match Confidence Score: 🟢 0.85
+
+- Table Completion Score: 🟢 0.72
+
+### Explanation
+
+The table match score is high due to strong similarity in table subject matter. The completion score reflects some missing mappings, lowering overall confidence.
+
+
+### Field-by-Field Analysis
+
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `id` | The ID for the transaction. | `transactions.id` | 🟢 1.00 | Exact match with source field. |
+| `order_id` | The ID for the order that the transaction is associated with. | `transactions.order_id` | 🟢 1.00 | Exact match with source field. |
+| `refund_id` | The ID associated with a refund in the refund table. | `MISSING` | ❌ 0.00 | No good match found. |
+| `amount` | The amount of money included in the transaction. | `transactions.amount` | 🟢 1.00 | Exact match with source field. |
+| `authorization` | The authorization code associated with the transaction. | `transactions.authorization` | 🟢 1.00 | Exact match with source field. |
+| `created_at` | The date and time when the transaction was created. | `transactions.created_at` | 🟢 1.00 | Exact match with source field. |
+| `processed_at` | The date and time when a transaction was processed. | `transactions.processed_at` | 🟢 1.00 | Exact match with source field. |
+| `device_id` | The ID for the device. | `transactions.device_id` | 🟢 1.00 | Exact match with source field. |
+| `gateway` | The name of the gateway the transaction was issued through. | `transactions.gateway` | 🟢 1.00 | Exact match with source field. |
+| `source_name` | The origin of the transaction. | `transactions.source_name` | 🟢 1.00 | Exact match with source field. |
+| `message` | A string generated by the payment provider with additional information about why the transaction succeeded or failed. | `transactions.message` | 🟢 1.00 | Exact match with source field. |
+| `currency` | The three-letter code (ISO 4217 format) for the currency used for the payment. | `transactions.currency` | 🟢 1.00 | Exact match with source field. |
+| `location_id` | The ID of the physical location where the transaction was processed. | `transactions.location_id` | 🟢 1.00 | Exact match with source field. |
+| `parent_id` | The ID of an associated transaction. | `transactions.parent_id` | 🟢 1.00 | Exact match with source field. |
+| `payment_avs_result_code` | The response code from the address verification system. | `transactions.payment_details.avs_result_code` | 🟢 1.00 | Exact match with source field. |
+| `payment_credit_card_bin` | The issuer identification number (IIN), formerly known as bank identification number (BIN) of the customer's credit card. | `transactions.payment_details.credit_card_bin` | 🟢 1.00 | Exact match with source field. |
+| `payment_cvv_result_code` | The response code from the credit card company indicating whether the customer entered the card security code, or card verification value, correctly. | `transactions.payment_details.cvv_result_code` | 🟢 1.00 | Exact match with source field. |
+| `payment_credit_card_number` | The customer's credit card number, with most of the leading digits redacted. | `transactions.payment_details.credit_card_number` | 🟢 1.00 | Exact match with source field. |
+| `payment_credit_card_company` | The name of the company that issued the customer's credit card. | `transactions.payment_details.credit_card_company` | 🟢 1.00 | Exact match with source field. |
+| `kind` | The transaction's type. | `transactions.kind` | 🟢 1.00 | Exact match with source field. |
+| `receipt` | A transaction receipt attached to the transaction by the gateway. | `transactions.receipt` | 🟢 1.00 | Exact match with source field. |
+| `currency_exchange_id` | The ID of the adjustment. | `MISSING` | ❌ 0.00 | No good match found. |
+| `currency_exchange_adjustment` | The difference between the amounts on the associated transaction and the parent transaction. | `MISSING` | ❌ 0.00 | No good match found. |
+| `currency_exchange_original_amount` | The amount of the parent transaction in the shop currency. | `MISSING` | ❌ 0.00 | No good match found. |
+| `currency_exchange_final_amount` | The amount of the associated transaction in the shop currency. | `MISSING` | ❌ 0.00 | No good match found. |
+| `currency_exchange_currency` | The shop currency. | `MISSING` | ❌ 0.00 | No good match found. |
+| `error_code` | A standardized error code, independent of the payment provider. | `transactions.error_code` | 🟢 1.00 | Exact match with source field. |
+| `status` | The status of the transaction. | `transactions.status` | 🟢 1.00 | Exact match with source field. |
+| `test` | Whether the transaction is a test transaction. | `transactions.test` | 🟢 1.00 | Exact match with source field. |
+| `user_id` | The ID for the user who was logged into the Shopify POS device when the order was processed, if applicable. | `transactions.user_id` | 🟢 1.00 | Exact match with source field. |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `transactions._airbyte_extracted_at` | 🟢 1.00 | Standard mapping for synchronization fields. |
+| `authorization_expires_at` | The date and time (ISO 8601 format) when the Shopify Payments authorization expires. | `MISSING` | ❌ 0.00 | No good match found. |
+
+
+### Mapping from Airbyte `abandoned_checkouts` to Fivetran `abandoned_checkout_shipping_line`
+
+- Table Match Confidence Score: ⚠️ 0.50
+
+- Table Completion Score: ❌ 0.05
+
+### Explanation
+
+Only one field mapping is accurate with perfect confidence, the rest have 'MISSING' as expressions, indicating no matches found.
+
+
+### Field-by-Field Analysis
+
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `abandoned_checkouts._airbyte_extracted_at` | 🟢 1.00 | Standard mapping from _fivetran_synced to _airbyte_extracted_at. |
+| `carrier_identifier` | A reference to the carrier service that provided the rate. Present when the rate was computed by a third-party carrier service. | `MISSING` | ❌ 0.00 | No good match found. |
+| `checkout_id` | ID of the checkout that was abandoned. | `MISSING` | ❌ 0.00 | No good match found. |
+| `code` | A reference to the shipping method. | `MISSING` | ❌ 0.00 | No good match found. |
+| `delivery_category` | The general classification of the delivery method. | `MISSING` | ❌ 0.00 | No good match found. |
+| `delivery_expectation_range` | Expected delivery date range. | `MISSING` | ❌ 0.00 | No good match found. |
+| `delivery_expectation_range_max` | Latest expected delivery date. | `MISSING` | ❌ 0.00 | No good match found. |
+| `delivery_expectation_range_min` | Earliest possible expected delivery date. | `MISSING` | ❌ 0.00 | No good match found. |
+| `delivery_expectation_type` | Type of expected delivery. | `MISSING` | ❌ 0.00 | No good match found. |
+| `discounted_price` | The pre-tax shipping price with discounts applied in _presentment_ (customer) currency. | `MISSING` | ❌ 0.00 | No good match found. |
+| `id` | Unique ID of the abandoned checkout shipping line. | `MISSING` | ❌ 0.00 | No good match found. |
+| `index` | Index of the line amongst shipping lines for this checkout. | `MISSING` | ❌ 0.00 | No good match found. |
+| `original_shop_price` | The pre-tax shipping price without any discounts applied in _presentment_ (customer) currency. | `MISSING` | ❌ 0.00 | No good match found. |
+| `phone` | The phone number at the shipping address. | `MISSING` | ❌ 0.00 | No good match found. |
+| `price` | The price of the shipping method in presentment currency. | `MISSING` | ❌ 0.00 | No good match found. |
+| `requested_fulfillment_service_id` | The fulfillment service requested for the shipping method. Present if the shipping method requires processing by a third party fulfillment service. | `MISSING` | ❌ 0.00 | No good match found. |
+| `source` | The channel where the checkout originated. Example value - shopify. | `MISSING` | ❌ 0.00 | No good match found. |
+| `title` | The title of the shipping method. Example value - International Shipping. | `MISSING` | ❌ 0.00 | No good match found. |
+
+
+### Mapping from Airbyte `transactions` to Fivetran `tax_line`
+
+- Table Match Confidence Score: 🟢 0.70
+
+- Table Completion Score: ⚠️ 0.57
+
+### Explanation
+
+The table mapping quality is relatively high, given that most field names have corresponding expressions from similar schemas. However, several fields are marked as 'MISSING,' indicating incomplete field mappings and reducing the completion score. The standard mapping of '_fivetran_synced' to '_airbyte_extracted_at' boosts confidence significantly. The lack of a logical or exact match for 'index', 'order_line_id', and 'rate' fields decreases the completion score as they are marked 'MISSING'.
+
+
+### Field-by-Field Analysis
+
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `transactions._airbyte_extracted_at` | 🟢 1.00 | Standard mapping to '_airbyte_extracted_at' with perfect confidence. |
+| `index` | The index of the tax line. | `MISSING` | ❌ 0.00 | No good match found. |
+| `order_line_id` | The order line that this tax line is associated with. | `MISSING` | ❌ 0.00 | No good match found. |
+| `price` | The amount of tax, in shop currency, after discounts and before returns. | `transactions.amount` | 🟢 0.70 | 'transactions.amount' correlates well with 'price', assuming it represents a monetary value which matches the description. |
+| `price_set` | The amount of tax, in shop and presentment currencies, after discounts and before returns. | `transactions.total_unsettled_set` | 🟢 0.70 | 'transactions.total_unsettled_set' aligns with 'price_set', inferring a comparable financial value matching the requirements. |
+| `rate` | The proportion of the line item price that the tax represents as a decimal. | `MISSING` | ❌ 0.00 | No good match found. |
+| `title` | The name of the tax. | `transactions.source_name` | 🟢 0.70 | 'transactions.source_name' is presumed to align with 'title' based on context, dealing with tax-related naming. |
+
+
+### Mapping from Airbyte `orders` to Fivetran `order`
+
+- Table Match Confidence Score: 🟢 0.95
+
+- Table Completion Score: 🟢 0.85
+
+### Explanation
+
+The table mapping is evaluated to have a high table match score due to the comprehensive outline of field mappings that are appropriately correlated with reasonable confidence to the target schema. However, there are fields with 'MISSING' expressions which moderately reduce the completion score as they indicate where the source schema lacks equivalent or meaningful matches.
+
+
+### Field-by-Field Analysis
+
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `orders._airbyte_extracted_at` | 🟢 1.00 | The '_fivetran_synced' is mapped to the source stream's '_airbyte_extracted_at' column, which is a standard mapping and always gets a score of 1.00. |
+| `app_id` | The ID of the app that created the order. | `orders.app_id` | 🟢 0.70 | The 'app_id' field is mapped directly to 'orders.app_id', which is correct given the context provided. |
+| `customer_id` | The ID of the order's customer. | `MISSING` | ❌ 0.00 | No good match found. |
+| `confirmed` | Whether inventory has been reserved for the order. | `MISSING` | ❌ 0.00 | No good match found. |
+| `presentment_currency` | The presentment currency that was used to display prices to the customer. | `MISSING` | ❌ 0.00 | No good match found. |
+
+
+### Mapping from Airbyte `fulfillments` to Fivetran `order_shipping_line`
+
+- Table Match Confidence Score: 🟢 0.70
+
+- Table Completion Score: ❌ 0.21
+
+### Explanation
+
+The table mapping has a partial match with high confidence for standardized fields like '_fivetran_synced'. Several fields are missing a good match, affecting the completion score significantly. The high-confidence mapping of '_fivetran_synced' to '_airbyte_extracted_at' contributes positively to the table match score.
+
+
+### Field-by-Field Analysis
+
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `fulfillments._airbyte_extracted_at` | 🟢 1.00 | Standard mapping of '_fivetran_synced' to '_airbyte_extracted_at' with high confidence. |
+| `carrier_identifier` | A reference to the carrier service that provided the rate. Present when the rate was computed by a third-party carrier service. | `MISSING` | ❌ 0.00 | No good match found. |
+| `code` | A reference to the shipping method. | `MISSING` | ❌ 0.00 | No good match found. |
+| `delivery_category` | The general classification of the delivery method. | `MISSING` | ❌ 0.00 | No good match found. |
+| `discounted_price` | The pre-tax shipping price with discounts applied in the shop currency. | `MISSING` | ❌ 0.00 | No good match found. |
+| `discounted_price_set` | The pre-tax shipping price with discounts applied (JSON) in presentment and shop currencies. | `MISSING` | ❌ 0.00 | No good match found. |
+| `id` | A globally-unique identifier. | `fulfillments.id` | 🟢 0.70 | Matched 'id' with partial confidence as global unique identifier. |
+| `order_id` | ID of the associated order. | `fulfillments.order_id` | 🟢 0.70 | Matched 'order_id' with partial confidence to fulfillment order ID. |
+| `phone` | The phone number at the shipping address. | `MISSING` | ❌ 0.00 | No good match found. |
+| `price` | Returns the price of the shipping line in shop currency. | `MISSING` | ❌ 0.00 | No good match found. |
+| `price_set` | Returns the price of the shipping line (JSON) in presentment and shop currencies. | `MISSING` | ❌ 0.00 | No good match found. |
+| `requested_fulfillment_service_id` | The fulfillment service requested for the shipping method. Present if the shipping method requires processing by a third party fulfillment service. | `MISSING` | ❌ 0.00 | No good match found. |
+| `source` | Returns the rate source for the shipping line. | `MISSING` | ❌ 0.00 | No good match found. |
+| `title` | Returns the title of the shipping line. | `fulfillments.name` | 🟢 0.70 | Matched 'title' with partial confidence as the title of the shipping line. |
+
+
+### Mapping from Airbyte `orders` to Fivetran `order_note_attribute`
+
+- Table Match Confidence Score: ⚠️ 0.65
+
+- Table Completion Score: 🟢 0.75
+
+### Explanation
+
+The table mapping reflects a moderate confidence level due to missing mappings.
+Field-level mappings include both perfect and missing entries.
+
+
+### Field-by-Field Analysis
+
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `orders._airbyte_extracted_at` | 🟢 1.00 | Standard mapping of '_fivetran_synced' to '_airbyte_extracted_at'. |
+| `name` | Name of the attribute. | `orders.name` | 🟢 0.70 | Mapping 'name' to 'orders.name' is plausible with moderate confidence. |
+| `order_id` | ID referencing the order the note attribute belongs to. | `orders.id` | 🟢 0.70 | Mapping 'order_id' to 'orders.id' is plausible with moderate confidence. |
+| `value` | Value of the attribute. | `MISSING` | ❌ 0.00 | No good match found. |
 

@@ -9,18 +9,21 @@ transforms:
         description: "{{ doc('_fivetran_synced') }}"
       created_at:
         expression: fulfillments.created_at
-        description: The date and time when the fulfillment was created. The API returns
+        description:
+          The date and time when the fulfillment was created. The API returns
           this value in ISO 8601 format.
       id:
         expression: fulfillments.id
         description: The ID for the fulfillment.
       location_id:
         expression: fulfillments.location_id
-        description: The unique identifier of the location that the fulfillment was
+        description:
+          The unique identifier of the location that the fulfillment was
           processed at.
       name:
         expression: fulfillments.name
-        description: "The uniquely identifying fulfillment name, consisting of two
+        description:
+          "The uniquely identifying fulfillment name, consisting of two
           parts separated by a .. The first part represents the order name and the
           second part represents the fulfillment number.  The fulfillment number automatically
           increments depending on how many fulfillments are in an order (e.g. #1001.1,
@@ -36,7 +39,8 @@ transforms:
         description: The fulfillment service associated with the fulfillment.
       shipment_status:
         expression: fulfillments.shipment_status
-        description: "The current shipment status of the fulfillment. Valid values
+        description:
+          "The current shipment status of the fulfillment. Valid values
           include: - label_printed: A label for the shipment was purchased and printed.
           - label_purchased: A label for the shipment was purchased, but not printed.
           - attempted_delivery: Delivery of the shipment was attempted, but unable
@@ -50,7 +54,8 @@ transforms:
           was invalid or the shipment was canceled.\n"
       status:
         expression: fulfillments.status
-        description: "The status of the fulfillment. Valid values include: - pending:
+        description:
+          "The status of the fulfillment. Valid values include: - pending:
           Shopify has created the fulfillment and is waiting for the third-party fulfillment
           service to transition it to 'open' or 'success'. - open: The fulfillment
           has been acknowledged by the service and is in processing. - success: The
@@ -71,7 +76,8 @@ transforms:
         description: The URLs of tracking pages for the fulfillment.
       updated_at:
         expression: fulfillments.updated_at
-        description: The date and time (ISO 8601 format) when the fulfillment was
+        description:
+          The date and time (ISO 8601 format) when the fulfillment was
           last modified.
 annotations:
   approved: true
@@ -81,7 +87,8 @@ annotations:
     target_table_name: fulfillment
     table_match_score: 0.9
     completion_score: 0.85
-    explanation: The table mapping shows a high level of confidence as most fields
+    explanation:
+      The table mapping shows a high level of confidence as most fields
       have clear matches between the source and target. The mapping from `_fivetran_synced`
       to `_airbyte_extracted_at` achieves a perfect score of 1.00 as a standard mapping
       agreement. Other fields, such as `created_at`, `id`, `status`, and `tracking_number`,
@@ -97,7 +104,8 @@ annotations:
       - name: created_at
         expression: fulfillments.created_at
         score: 0.9
-        explanation: High confidence as the field directly corresponds to creation
+        explanation:
+          High confidence as the field directly corresponds to creation
           timestamp.
       - name: id
         expression: fulfillments.id
@@ -106,12 +114,14 @@ annotations:
       - name: location_id
         expression: fulfillments.location_id
         score: 0.85
-        explanation: Clear mapping to location identifier, maintaining contextual
+        explanation:
+          Clear mapping to location identifier, maintaining contextual
           integrity.
       - name: name
         expression: fulfillments.name
         score: 0.8
-        explanation: The naming structure seems intact with the order name and fulfillment
+        explanation:
+          The naming structure seems intact with the order name and fulfillment
           number combined.
       - name: order_id
         expression: fulfillments.order_id
@@ -128,7 +138,8 @@ annotations:
       - name: shipment_status
         expression: fulfillments.shipment_status
         score: 0.8
-        explanation: Likely match based on available values for tracking shipment
+        explanation:
+          Likely match based on available values for tracking shipment
           progress.
       - name: status
         expression: fulfillments.status
@@ -149,7 +160,8 @@ annotations:
       - name: tracking_urls
         expression: fulfillments.tracking_urls
         score: 0.9
-        explanation: URLs for tracking correspond distinctly with the fulfillment
+        explanation:
+          URLs for tracking correspond distinctly with the fulfillment
           tracking.
       - name: updated_at
         expression: fulfillments.updated_at

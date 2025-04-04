@@ -15,15 +15,18 @@ transforms:
         description: ID of the order shipping line this recod is associated with.
       price:
         expression: MISSING
-        description: The amount of tax, in shop currency, after discounts and before
+        description:
+          The amount of tax, in shop currency, after discounts and before
           returns.
       price_set:
         expression: MISSING
-        description: The amount of tax, in shop and presentment currencies, after
+        description:
+          The amount of tax, in shop and presentment currencies, after
           discounts and before returns (JSON).
       rate:
         expression: MISSING
-        description: The proportion of the line item price that the tax represents
+        description:
+          The proportion of the line item price that the tax represents
           as a decimal.
       title:
         expression: MISSING
@@ -42,7 +45,8 @@ annotations:
     target_table_name: order_shipping_tax_line
     table_match_score: 0.6
     completion_score: 0.14285714285714285
-    explanation: The field mapping includes one perfect match (`_fivetran_synced`
+    explanation:
+      The field mapping includes one perfect match (`_fivetran_synced`
       to `_airbyte_extracted_at`), which always receives a score of 1.00. All other
       fields are marked as 'MISSING', indicating no good matches found, which lowers
       the completion score significantly.
@@ -50,7 +54,8 @@ annotations:
       - name: _fivetran_synced
         expression: order_refunds._airbyte_extracted_at
         score: 1.0
-        explanation: Field `_fivetran_synced` is correctly mapped to `_airbyte_extracted_at`,
+        explanation:
+          Field `_fivetran_synced` is correctly mapped to `_airbyte_extracted_at`,
           which is a known perfect match.
       - name: index
         expression: MISSING

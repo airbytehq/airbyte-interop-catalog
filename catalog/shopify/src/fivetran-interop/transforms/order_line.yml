@@ -9,15 +9,17 @@ transforms:
         description: "{{ doc('_fivetran_synced') }}"
       fulfillable_quantity:
         expression: MISSING
-        description: 'The amount available to fulfill, calculated as follows: quantity
+        description:
+          "The amount available to fulfill, calculated as follows: quantity
           - max(refunded_quantity, fulfilled_quantity) - pending_fulfilled_quantity
-          - open_fulfilled_quantity'
+          - open_fulfilled_quantity"
       fulfillment_status:
         expression: orders.fulfillment_status
         description: How far along an order is in terms line items fulfilled.
       gift_card:
         expression: MISSING
-        description: Whether the item is a gift card. If true, then the item is not
+        description:
+          Whether the item is a gift card. If true, then the item is not
           taxed or considered for shipping charges.
       grams:
         expression: MISSING
@@ -33,11 +35,13 @@ transforms:
         description: The ID of the related order.
       price:
         expression: MISSING
-        description: The price of the item before discounts have been applied in the
+        description:
+          The price of the item before discounts have been applied in the
           shop currency.
       product_id:
         expression: MISSING
-        description: The ID of the product that the line item belongs to. Can be null
+        description:
+          The ID of the product that the line item belongs to. Can be null
           if the original product associated with the order is deleted at a later
           date.
       quantity:
@@ -57,7 +61,8 @@ transforms:
         description: The title of the product.
       total_discount:
         expression: MISSING
-        description: The total amount of the discount allocated to the line item in
+        description:
+          The total amount of the discount allocated to the line item in
           the shop currency.
       variant_id:
         expression: MISSING
@@ -73,25 +78,29 @@ transforms:
         description: The pre tax price of the line item in shop currency.
       pre_tax_price_set:
         expression: MISSING
-        description: The pre tax price of the line item in shop currency and presentment
+        description:
+          The pre tax price of the line item in shop currency and presentment
           currency.
       price_set:
         expression: MISSING
         description: The price of the line item in shop and presentment currencies.
       tax_code:
         expression: MISSING
-        description: Tax code applied to the line item. As multiple taxes can apply
+        description:
+          Tax code applied to the line item. As multiple taxes can apply
           to a line item, we recommend referring to `stg_shopify__tax_line`.
       total_discount_set:
         expression: MISSING
-        description: The total amount allocated to the line item in the presentment
+        description:
+          The total amount allocated to the line item in the presentment
           currency.
       variant_title:
         expression: MISSING
         description: The title of the product variant.
       variant_inventory_management:
         expression: MISSING
-        description: The fulfillment service that tracks the number of items in stock
+        description:
+          The fulfillment service that tracks the number of items in stock
           for the product variant.
       properties:
         expression: MISSING
@@ -127,7 +136,8 @@ annotations:
     target_table_name: order_line
     table_match_score: 0.5
     completion_score: 0.1
-    explanation: The table match is neutral due to generic field matching, with many
+    explanation:
+      The table match is neutral due to generic field matching, with many
       fields having 'MISSING' values indicating no correspondence in the source data.
     field_mapping_evals:
       - name: _fivetran_synced
@@ -141,7 +151,8 @@ annotations:
       - name: fulfillment_status
         expression: orders.fulfillment_status
         score: 0.7
-        explanation: Mapped to 'orders.fulfillment_status' which likely represents
+        explanation:
+          Mapped to 'orders.fulfillment_status' which likely represents
           the same concept.
       - name: gift_card
         expression: MISSING

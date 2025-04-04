@@ -21,37 +21,44 @@ transforms:
         description: The country where the fulfillment event occurred.
       created_at:
         expression: fulfillments.created_at
-        description: The date and time (ISO 8601 format) when the fulfillment event
+        description:
+          The date and time (ISO 8601 format) when the fulfillment event
           was created.
       estimated_delivery_at:
         expression: MISSING
-        description: "The estimated delivery date based on the fulfillment's tracking
+        description:
+          "The estimated delivery date based on the fulfillment's tracking
           number, as long as it's provided by one of the following carriers: USPS,
           FedEx, UPS, or Canada Post (Canada only).  Value is `null` if no tracking
           number is available or if the tracking number is from an unsupported carrier.
           This property is available only when carrier calculated rates are in use.\n"
       fulfillment_id:
         expression: fulfillments.id
-        description: An ID for the fulfillment that's associated with the fulfillment
+        description:
+          An ID for the fulfillment that's associated with the fulfillment
           event.
       happened_at:
         expression: MISSING
-        description: The date and time (ISO 8601 format) when the fulfillment event
+        description:
+          The date and time (ISO 8601 format) when the fulfillment event
           occurred.
       id:
         expression: fulfillments.id
         description: An ID for the fulfillment event.
       latitude:
         expression: MISSING
-        description: A geographic coordinate specifying the latitude of the fulfillment
+        description:
+          A geographic coordinate specifying the latitude of the fulfillment
           event.
       longitude:
         expression: MISSING
-        description: A geographic coordinate specifying the longitude of the fulfillment
+        description:
+          A geographic coordinate specifying the longitude of the fulfillment
           event.
       message:
         expression: MISSING
-        description: An arbitrary message describing the status. Can be provided by
+        description:
+          An arbitrary message describing the status. Can be provided by
           a shipping carrier.
       order_id:
         expression: fulfillments.order_id
@@ -64,7 +71,8 @@ transforms:
         description: An ID for the shop that's associated with the fulfillment event.
       status:
         expression: fulfillments.shipment_status
-        description: "The status of the fulfillment event. Valid values: - label_printed:
+        description:
+          "The status of the fulfillment event. Valid values: - label_printed:
           A label for the shipment was purchased and printed. - label_purchased: A
           label for the shipment was purchased, but not printed. - attempted_delivery:
           Delivery of the shipment was attempted, but unable to be completed. - ready_for_pickup:
@@ -78,7 +86,8 @@ transforms:
           was invalid or the shipment was canceled.\n"
       updated_at:
         expression: fulfillments.updated_at
-        description: The date and time (ISO 8601 format) when the fulfillment event
+        description:
+          The date and time (ISO 8601 format) when the fulfillment event
           was updated.
       zip:
         expression: fulfillments.origin_address.zip
@@ -99,7 +108,8 @@ annotations:
     target_table_name: fulfillment_event
     table_match_score: 0.85
     completion_score: 0.3
-    explanation: The table match score is high because most of the fields seem to
+    explanation:
+      The table match score is high because most of the fields seem to
       relate to fulfillment events, matching the expected domain. However, many fields
       have 'MISSING' expressions, leading to a lower completion score.
     field_mapping_evals:
@@ -110,7 +120,8 @@ annotations:
       - name: _fivetran_synced
         expression: fulfillments._airbyte_extracted_at
         score: 1.0
-        explanation: "'_fivetran_synced' maps to '_airbyte_extracted_at' with full
+        explanation:
+          "'_fivetran_synced' maps to '_airbyte_extracted_at' with full
           confidence."
       - name: address_1
         expression: MISSING

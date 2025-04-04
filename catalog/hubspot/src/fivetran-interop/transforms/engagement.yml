@@ -9,12 +9,14 @@ transforms:
         description: '{{ doc("_fivetran_synced") }}'
       active:
         expression: engagements.active
-        description: "Whether the engagement is currently being shown in the UI.\n
+        description:
+          "Whether the engagement is currently being shown in the UI.\n
           PLEASE NOTE: This field will not be populated for connectors utilizing the
           HubSpot v3 API version. This field will be deprecated in a future release.\n"
       created_at:
         expression: engagements.createdAt
-        description: "A timestamp representing when the engagement was created.\n
+        description:
+          "A timestamp representing when the engagement was created.\n
           PLEASE NOTE: This field will not be populated for connectors utilizing the
           HubSpot v3 API version. This field will be deprecated in a future release.\n"
       id:
@@ -22,7 +24,8 @@ transforms:
         description: The ID of the engagement.
       owner_id:
         expression: engagements.ownerId
-        description: "The ID of the engagement's owner.\nPLEASE NOTE: This field will
+        description:
+          "The ID of the engagement's owner.\nPLEASE NOTE: This field will
           not be populated for connectors utilizing the HubSpot v3 API version. This
           field will be deprecated in a future release.\n"
       portal_id:
@@ -30,7 +33,8 @@ transforms:
         description: '{{ doc("portal_id") }}'
       timestamp:
         expression: engagements.timestamp
-        description: "A timestamp in representing the time that the engagement should
+        description:
+          "A timestamp in representing the time that the engagement should
           appear in the timeline.\nPLEASE NOTE: This field will not be populated for
           connectors utilizing the HubSpot v3 API version. This field will be deprecated
           in a future release.\n"
@@ -45,7 +49,8 @@ annotations:
     target_table_name: engagement
     table_match_score: 0.85
     completion_score: 0.75
-    explanation: The table mapping shows high match quality with a strong correspondence
+    explanation:
+      The table mapping shows high match quality with a strong correspondence
       between most fields. However, some fields from the source schema could not be
       mapped to the target schema.
     field_mapping_evals:
@@ -80,5 +85,6 @@ annotations:
       - name: type
         expression: engagements.type
         score: 0.7
-        explanation: Mapped to 'engagements.type', high confidence due to distinct
+        explanation:
+          Mapped to 'engagements.type', high confidence due to distinct
           field type categories.

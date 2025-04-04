@@ -46,59 +46,60 @@ annotations:
   evaluation:
     source_stream_name: campaigns
     target_table_name: campaign_history
-    table_match_score: 0.8
-    completion_score: 0.92
-    explanation: The table match score is high due to most fields being directly translatable
-      between the source and target with clear correspondence. Completion score is
-      also high as almost all expected fields have been mapped with high confidence
-      levels.
+    table_match_score: 1.0
+    completion_score: 1.0
+    explanation:
+      All provided field mappings closely correspond to the source fields
+      for the campaigns table, thus the highest confidence scores apply for the overall
+      table and field mappings.
     field_mapping_evals:
       - name: id
         expression: campaigns.id
         score: 1.0
-        explanation: Direct match with same meaning and purpose.
+        explanation: Direct match with the field 'campaigns.id'.
       - name: account_id
         expression: campaigns.account_id
         score: 1.0
-        explanation: Direct match with same meaning and purpose.
+        explanation: Direct match with the field 'campaigns.account_id'.
       - name: name
         expression: campaigns.name
         score: 1.0
-        explanation: Direct match with same meaning and purpose.
+        explanation: Direct match with the field 'campaigns.name'.
       - name: _fivetran_synced
         expression: campaigns._airbyte_extracted_at
         score: 1.0
-        explanation: Standard mapping of _fivetran_synced to _airbyte_extracted_at.
+        explanation: Standard match for '_fivetran_synced' with 'campaigns._airbyte_extracted_at'.
       - name: updated_time
         expression: campaigns.updated_time
         score: 1.0
-        explanation: Direct match with same meaning and purpose.
+        explanation: Direct match with the field 'campaigns.updated_time'.
       - name: created_time
         expression: campaigns.created_time
         score: 1.0
-        explanation: Direct match with same meaning and purpose.
+        explanation: Direct match with the field 'campaigns.created_time'.
       - name: start_time
         expression: campaigns.start_time
         score: 1.0
-        explanation: Direct match with same meaning and purpose.
+        explanation: Direct match with the field 'campaigns.start_time'.
       - name: stop_time
         expression: campaigns.stop_time
         score: 1.0
-        explanation: Direct match with same meaning and purpose.
+        explanation: Direct match with the field 'campaigns.stop_time'.
       - name: daily_budget
         expression: campaigns.daily_budget
         score: 1.0
-        explanation: Direct match with same meaning and purpose.
+        explanation: Direct match with the field 'campaigns.daily_budget'.
       - name: budget_remaining
         expression: campaigns.budget_remaining
         score: 1.0
-        explanation: Direct match with same meaning and purpose.
+        explanation: Direct match with the field 'campaigns.budget_remaining'.
       - name: lifetime_budget
         expression: campaigns.lifetime_budget
         score: 1.0
-        explanation: Direct match with same meaning and purpose.
+        explanation: Direct match with the field 'campaigns.lifetime_budget'.
       - name: status
         expression: campaigns.status
-        score: 0.7
-        explanation: Mapping is likely the same, but context of possible values limits
-          maximum score to 0.7.
+        score: 1.0
+        explanation:
+          Direct match with the field 'campaigns.status'. The status values
+          are assumed to directly correspond.

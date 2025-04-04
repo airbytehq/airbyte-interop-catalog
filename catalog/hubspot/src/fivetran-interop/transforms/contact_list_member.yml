@@ -29,7 +29,8 @@ annotations:
     target_table_name: contact_list_member
     table_match_score: 0.7
     completion_score: 0.6
-    explanation: The table mappings suggest a moderate confidence that the source
+    explanation:
+      The table mappings suggest a moderate confidence that the source
       and target tables describe similar subjects. The completion score indicates
       that some fields are well-mapped, but others are missing mappings.
     field_mapping_evals:

@@ -11,7 +11,7 @@ from typing import Any
 from copier import run_copy
 from jinja2 import Environment
 
-from morph import resources
+from morph import models, resources
 from morph.constants import (
     DEFAULT_PROJECT_NAME,
     DEFAULT_SQL_DIALECT,
@@ -19,7 +19,6 @@ from morph.constants import (
     VALID_TRAVERSAL_BY_DIALECT,
 )
 from morph.utils import text_utils
-from morph.utils.markdown_utils import create_markdown_section, create_markdown_table
 
 
 def load_mapping_file(mapping_file_path: str) -> dict[str, Any]:
@@ -329,7 +328,10 @@ vars:
     )
 
 
-def build_readme(mapping_files: list[str], models_dir: Path) -> None:
+def build_readme(
+    source_name: str,
+    project_name: str,
+) -> None:
     """Generate README.md with documentation from table mappings.
 
     Args:
@@ -337,70 +339,41 @@ def build_readme(mapping_files: list[str], models_dir: Path) -> None:
         models_dir: Directory where the README.md should be written
     """
     sections: list[str] = []
-
     # Add header
     sections.append("# Generated dbt Models\n")
     sections.append(
         "This directory contains automatically generated dbt models based on mapping files.\n",
     )
+    workshop_sections = [
+        "## Workshop Models\n",
+        "These models are in the workshop directory and are not yet approved.\n",
+    ]
+    for mapping_file in resources.get_transforms_files(source_name, project_name):
+        transform = models.TableMapping.from_file(mapping_file)
+        transform_dict = load_mapping_file(mapping_file)
+        annotations = transform_dict.get("annotations", {})
+        is_approved = annotations.get("approved", False)
 
-    # Process each mapping file
-    for mapping_file in mapping_files:
-        mapping = load_mapping_file(mapping_file)
+        if is_approved:
+            sections.append(transform.as_markdown())
+        else:
+            # Put these at the end of the README
+            workshop_sections.append(transform.as_markdown())
 
-        # Process each transform
-        for transform in mapping.get("transforms", []):
-            transform_id = transform.get("name")
-            if not transform_id:
-                continue
-
-            # Add section for this transform
-            sections.append(
-                create_markdown_section(
-                    title=transform_id,
-                    content="",
-                    level=2,
-                ),
-            )
-
-            # Add source information
-            sources = _extract_sources(transform)
-            if sources:
-                sections.append("\n### Source Tables\n")
-                headers = ["Alias", "Schema", "Table"]
-                rows = [
-                    [
-                        source["alias"],
-                        source.get("schema", "default"),
-                        source["table"],
-                    ]
-                    for source in sources
-                ]
-                sections.append(create_markdown_table(headers, rows))
-
-            # Add fields table
-            fields = _extract_fields(transform)
-            if fields:
-                sections.append("\n### Fields\n")
-                headers = ["Name", "Expression", "Description"]
-                rows = [
-                    [
-                        field["name"],
-                        str(field["expression"]),
-                        field["description"] or "",
-                    ]
-                    for field in fields
-                ]
-                sections.append(create_markdown_table(headers, rows))
-
-            sections.append("\n")
+    sections.extend(workshop_sections)
 
     # Write README.md
-    readme_path = models_dir / "README.md"
+    readme_path = (
+        resources.get_generated_dbt_project_models_dir(
+            source_name=source_name,
+            project_name=project_name,
+        )
+        / "README.md"
+    )
     readme_path.write_text("\n".join(sections))
 
 
-def generate_dbt_package(
+def generate_dbt_package(  # noqa: PLR0912, PLR0915
     source_name: str,
     *,
     project_name: str = DEFAULT_PROJECT_NAME,
@@ -470,6 +443,7 @@ def generate_dbt_package(
         src_path=str(template_dir),
         dst_path=str(output_path),
         data={"catalog_name": source_name},  # Only pass required template data
+        overwrite=True,
     )
 
     # Write the generated dbt_project.yml
@@ -516,4 +490,8 @@ def generate_dbt_package(
             model_path.write_text(model_sql)
 
     # Generate README.md with documentation
-    build_readme(mapping_files, models_dir)
+    build_readme(
+        source_name=source_name,
+        project_name=project_name,
+    )
+    print("Generated README.md.")

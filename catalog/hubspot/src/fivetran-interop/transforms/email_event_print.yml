@@ -30,7 +30,8 @@ annotations:
     target_table_name: email_event_print
     table_match_score: 0.75
     completion_score: 0.8
-    explanation: The table mapping suggests a strong correlation with email events,
+    explanation:
+      The table mapping suggests a strong correlation with email events,
       commonly found in both source and target schemas. Most fields have been appropriately
       matched to their equivalents.
     field_mapping_evals:
@@ -41,25 +42,30 @@ annotations:
       - name: browser
         expression: email_events.browser
         score: 0.7
-        explanation: "'browser' matched directly from 'email_events.browser', which
+        explanation:
+          "'browser' matched directly from 'email_events.browser', which
           is likely a direct mapping of user browsing data."
       - name: id
         expression: email_events.id
         score: 0.65
-        explanation: "'id' matched to 'email_events.id', typically an identifier field
+        explanation:
+          "'id' matched to 'email_events.id', typically an identifier field
           directly shared between schemas."
       - name: ip_address
         expression: email_events.ipAddress
         score: 0.7
-        explanation: Direct match of 'ip_address' to 'email_events.ipAddress', common
+        explanation:
+          Direct match of 'ip_address' to 'email_events.ipAddress', common
           mapping for IP recording.
       - name: location
         expression: email_events.location
         score: 0.7
-        explanation: Matched 'location' to 'email_events.location', generally indicating
+        explanation:
+          Matched 'location' to 'email_events.location', generally indicating
           the same concept.
       - name: user_agent
         expression: email_events.userAgent
         score: 0.65
-        explanation: Directly mapped 'user_agent' to 'email_events.userAgent', reflecting
+        explanation:
+          Directly mapped 'user_agent' to 'email_events.userAgent', reflecting
           similar user metadata tracking.

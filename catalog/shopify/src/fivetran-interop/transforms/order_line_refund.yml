@@ -12,7 +12,8 @@ transforms:
         description: The unique identifier of the line item in the refund.
       location_id:
         expression: MISSING
-        description: TThe unique identifier of the location where the items will be
+        description:
+          TThe unique identifier of the location where the items will be
           restockedBD
       order_line_id:
         expression: MISSING
@@ -34,7 +35,8 @@ transforms:
         description: The total tax applied to the refund in shop currency.
       subtotal_set:
         expression: MISSING
-        description: The subtotal of the refund line item in shop and presentment
+        description:
+          The subtotal of the refund line item in shop and presentment
           currencies.
       total_tax_set:
         expression: MISSING
@@ -55,7 +57,8 @@ annotations:
     target_table_name: order_line_refund
     table_match_score: 0.7
     completion_score: 0.36
-    explanation: The table matching is strong because both systems likely describe
+    explanation:
+      The table matching is strong because both systems likely describe
       the same subject matter. However, many fields have missing expressions, resulting
       in a low completion score.
     field_mapping_evals:
@@ -86,7 +89,8 @@ annotations:
       - name: restock_type
         expression: order_refunds.restock
         score: 0.7
-        explanation: Matched to 'order_refunds.restock', indicative of inventory level
+        explanation:
+          Matched to 'order_refunds.restock', indicative of inventory level
           impact.
       - name: subtotal
         expression: MISSING

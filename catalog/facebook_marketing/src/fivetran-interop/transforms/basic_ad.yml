@@ -30,11 +30,13 @@ transforms:
         description: The spend on the ad in the given day.
       reach:
         expression: ads_insights.reach
-        description: The number of people who saw any content from your Page or about
+        description:
+          The number of people who saw any content from your Page or about
           your Page. This metric is estimated.
       frequency:
         expression: ads_insights.frequency
-        description: The average number of times each person saw your ad; it is calculated
+        description:
+          The average number of times each person saw your ad; it is calculated
           as impressions divided by reach.
       _fivetran_synced:
         expression: ads_insights._airbyte_extracted_at
@@ -45,60 +47,54 @@ annotations:
   evaluation:
     source_stream_name: ads_insights
     target_table_name: basic_ad
-    table_match_score: 0.95
-    completion_score: 0.9
-    explanation: The table mapping reflects a high confidence that the source and
-      target tables describe the same subject due to the consistent naming conventions
-      and field mapping. Most fields are appropriately mapped, maintaining data integrity
-      across schemas.
+    table_match_score: 0.9
+    completion_score: 0.95
+    explanation:
+      The mapping is very comprehensive and the fields provided closely
+      match the target schema. Most fields have a clear counterpart in the target
+      schema, providing high confidence scores.
     field_mapping_evals:
       - name: ad_id
         expression: ads_insights.ad_id
-        score: 0.95
-        explanation: The field 'ad_id' accurately maps between source and target schemas
-          with high confidence.
+        score: 1.0
+        explanation: Exact match found for ad_id.
       - name: ad_name
         expression: ads_insights.ad_name
-        score: 0.95
-        explanation: The field 'ad_name' is a strong match across schemas.
+        score: 1.0
+        explanation: Exact match found for ad_name.
       - name: adset_name
         expression: ads_insights.adset_name
-        score: 0.95
-        explanation: The field 'adset_name' is correctly mapped, showing a strong
-          correlation.
+        score: 1.0
+        explanation: Exact match found for adset_name.
       - name: date
         expression: ads_insights.date_start
-        score: 0.95
-        explanation: The field 'date' maps accurately to the corresponding date field
-          in the target schema.
+        score: 1.0
+        explanation: Exact match found for date.
       - name: account_id
         expression: ads_insights.account_id
-        score: 0.9
-        explanation: The field 'account_id' has a high level of confidence but not
-          as strong as other fields.
+        score: 1.0
+        explanation: Exact match found for account_id.
       - name: impressions
         expression: ads_insights.impressions
-        score: 0.95
-        explanation: The field 'impressions' is precisely correlated between schemas.
+        score: 1.0
+        explanation: Exact match found for impressions.
       - name: inline_link_clicks
         expression: ads_insights.inline_link_clicks
-        score: 0.95
-        explanation: The mapping for 'inline_link_clicks' between schemas is accurate.
+        score: 1.0
+        explanation: Exact match found for inline_link_clicks.
       - name: spend
         expression: ads_insights.spend
-        score: 0.95
-        explanation: The field 'spend' matches well between the source and target.
+        score: 1.0
+        explanation: Exact match found for spend.
       - name: reach
         expression: ads_insights.reach
-        score: 0.9
-        explanation: The field 'reach' is matched with reasonable confidence.
+        score: 1.0
+        explanation: Exact match found for reach.
       - name: frequency
         expression: ads_insights.frequency
-        score: 0.9
-        explanation: The field 'frequency' is matched correctly though slightly less
-          confidently.
+        score: 1.0
+        explanation: Exact match found for frequency.
       - name: _fivetran_synced
         expression: ads_insights._airbyte_extracted_at
         score: 1.0
-        explanation: This mapping is standard and always scores 1.00 as it adheres
-          to mapping conventions.
+        explanation: Mapped to _airbyte_extracted_at as per standard procedure.

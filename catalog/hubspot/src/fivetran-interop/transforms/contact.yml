@@ -39,7 +39,8 @@ transforms:
         description: The contact's annual company revenue.
       property_hs_calculated_merged_vids:
         expression: contacts.properties_hs_calculated_merged_vids
-        description: "List of mappings representing contact IDs that have been merged
+        description:
+          "List of mappings representing contact IDs that have been merged
           into the contact at hand. Format: <merged_contact_id>:<merged_at_in_epoch_time>;<second_merged_contact_id>:<merged_at_in_epoch_time>
           This field has replaced the `CONTACT_MERGE_AUDIT` table, which was deprecated
           by the Hubspot v3 CRM API.\n"
@@ -52,7 +53,8 @@ annotations:
     target_table_name: contact
     table_match_score: 0.85
     completion_score: 0.91
-    explanation: The mapping is generally strong, showing a high level of confidence
+    explanation:
+      The mapping is generally strong, showing a high level of confidence
       that the target schema fields align with the source fields. The completion is
       high, indicating most source fields have corresponding target fields.
     field_mapping_evals:
@@ -71,7 +73,8 @@ annotations:
       - name: property_email_1
         expression: contacts.properties_email
         score: 0.7
-        explanation: Partial match with some uncertainty due to potential overlapping
+        explanation:
+          Partial match with some uncertainty due to potential overlapping
           with similar fields.
       - name: property_company
         expression: contacts.properties_company
@@ -88,7 +91,8 @@ annotations:
       - name: property_email
         expression: contacts.properties_email
         score: 0.7
-        explanation: Partial match with some uncertainty due to potential duplicate
+        explanation:
+          Partial match with some uncertainty due to potential duplicate
           mappings.
       - name: property_createdate
         expression: contacts.properties_createdate
@@ -105,5 +109,6 @@ annotations:
       - name: property_hs_calculated_merged_vids
         expression: contacts.properties_hs_calculated_merged_vids
         score: 0.65
-        explanation: Field partially matched with high confidence for underlying meaning,
+        explanation:
+          Field partially matched with high confidence for underlying meaning,
           but lacking precise mapping.

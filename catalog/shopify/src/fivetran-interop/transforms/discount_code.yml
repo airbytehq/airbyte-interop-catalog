@@ -9,11 +9,13 @@ transforms:
         description: "{{ doc('_fivetran_synced') }}"
       code:
         expression: discount_codes.code
-        description: The case-insensitive discount code that customers use at checkout.
+        description:
+          The case-insensitive discount code that customers use at checkout.
           Shopify recommends this map onto the associated `price_rule.title`.
       created_at:
         expression: discount_codes.created_at
-        description: The date and time (ISO 8601 format) when the discount code was
+        description:
+          The date and time (ISO 8601 format) when the discount code was
           created.
       id:
         expression: discount_codes.id
@@ -23,7 +25,8 @@ transforms:
         description: The ID for the price rule that this discount code belongs to.
       updated_at:
         expression: discount_codes.updated_at
-        description: The date and time (ISO 8601 format) when the discount code was
+        description:
+          The date and time (ISO 8601 format) when the discount code was
           updated.
       usage_count:
         expression: discount_codes.usage_count
@@ -36,7 +39,8 @@ annotations:
     target_table_name: discount_code
     table_match_score: 0.9
     completion_score: 0.8571428571428571
-    explanation: The table fields are generally well-aligned with their purposes clearly
+    explanation:
+      The table fields are generally well-aligned with their purposes clearly
       defined. The source fields such as 'code', 'created_at', 'id', 'price_rule_id',
       'updated_at', and 'usage_count' align with expectations for discount codes in
       the context provided. '_fivetran_synced' is correctly mapped to a source stream's
@@ -52,30 +56,36 @@ annotations:
       - name: code
         expression: discount_codes.code
         score: 0.8
-        explanation: Matches the source and target purpose of representing the discount
+        explanation:
+          Matches the source and target purpose of representing the discount
           code as used at checkout.
       - name: created_at
         expression: discount_codes.created_at
         score: 0.9
-        explanation: Correctly maps to the source's created timestamp for the discount
+        explanation:
+          Correctly maps to the source's created timestamp for the discount
           code, aligning with typical data schema expectations.
       - name: id
         expression: discount_codes.id
         score: 0.9
-        explanation: Maps source's discount code ID, sufficient match given familiarity
+        explanation:
+          Maps source's discount code ID, sufficient match given familiarity
           with common identification fields.
       - name: price_rule_id
         expression: discount_codes.price_rule_id
         score: 0.8
-        explanation: Adequate match since it represents an ID for associated rules,
+        explanation:
+          Adequate match since it represents an ID for associated rules,
           a typical relational mapping.
       - name: updated_at
         expression: discount_codes.updated_at
         score: 0.9
-        explanation: Successfully maps update timestamps, common in schemas where
+        explanation:
+          Successfully maps update timestamps, common in schemas where
           record modifications are tracked.
       - name: usage_count
         expression: discount_codes.usage_count
         score: 0.8
-        explanation: Reflects typical semantic usage tracking, indicating satisfactory
+        explanation:
+          Reflects typical semantic usage tracking, indicating satisfactory
           mapping despite potential source differences.

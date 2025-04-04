@@ -15,11 +15,13 @@ transforms:
         description: Whether the stage is currently in use.
       display_order:
         expression: deal_pipelines.displayOrder
-        description: Used to determine the order in which the pipelines appear when
+        description:
+          Used to determine the order in which the pipelines appear when
           viewed in HubSpot.
       label:
         expression: deal_pipelines.label
-        description: The human-readable label for the pipeline. The label is used
+        description:
+          The human-readable label for the pipeline. The label is used
           when showing the pipeline in HubSpot.
       pipeline_id:
         expression: deal_pipelines.pipelineId
@@ -39,7 +41,8 @@ annotations:
     target_table_name: deal_pipeline
     table_match_score: 1.0
     completion_score: 0.875
-    explanation: All fields were matched with high confidence, except for _fivetran_deleted
+    explanation:
+      All fields were matched with high confidence, except for _fivetran_deleted
       which was missing a corresponding match.
     field_mapping_evals:
       - name: _fivetran_deleted

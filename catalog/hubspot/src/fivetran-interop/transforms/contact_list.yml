@@ -30,59 +30,70 @@ transforms:
         description: The ID that corresponds to the type of object stored by the list.
       processing_status:
         expression: MISSING
-        description: Indicates the current status of the list's processing, such as
+        description:
+          Indicates the current status of the list's processing, such as
           'COMPLETE', 'PROCESSING', 'DONE', or 'FAILED'.
       processing_type:
         expression: MISSING
-        description: Specifies the type of processing applied to the list, for example,
+        description:
+          Specifies the type of processing applied to the list, for example,
           'STATIC' for static lists or 'DYNAMIC' for dynamic lists.
       list_version:
         expression: MISSING
-        description: Represents the version number of the list, incrementing with
+        description:
+          Represents the version number of the list, incrementing with
           each modification.
       filters_updated_at:
         expression: MISSING
         description: The timestamp indicating when the list's filters were last updated.
       metadata_error:
         expression: contact_lists.metaData_error
-        description: "Any errors that happened the last time the list was processed.\n
+        description:
+          "Any errors that happened the last time the list was processed.\n
           NOTE: This field is deprecated and will not be populated for connectors
           utilizing the HubSpot v3 API. This field will be removed in a future release.\n"
       metadata_last_processing_state_change_at:
         expression: contact_lists.metaData_lastProcessingStateChangeAt
-        description: "A timestamp of the last time that the processing state changed.\n
+        description:
+          "A timestamp of the last time that the processing state changed.\n
           NOTE: This field is deprecated and will not be populated for connectors
           utilizing the HubSpot v3 API. This field will be removed in a future release.\n"
       metadata_last_size_change_at:
         expression: contact_lists.metaData_lastSizeChangeAt
-        description: "A timestamp of the last time that the size of the list changed.\n
+        description:
+          "A timestamp of the last time that the size of the list changed.\n
           NOTE: This field is deprecated and will not be populated for connectors
           utilizing the HubSpot v3 API. This field will be removed in a future release.\n"
       metadata_processing:
         expression: contact_lists.metaData_processing
-        description: "One of DONE, REFRESHING, INITIALIZING, or PROCESSING. DONE indicates
+        description:
+          "One of DONE, REFRESHING, INITIALIZING, or PROCESSING. DONE indicates
           the list has finished processing, any other value indicates that list membership
           is being evaluated.\nNOTE: This field is deprecated and will not be populated
           for connectors utilizing the HubSpot v3 API. This field will be removed
           in a future release.\n"
       metadata_size:
         expression: contact_lists.metaData_size
-        description: "The approximate number of contacts in the list.\nNOTE: This
+        description:
+          "The approximate number of contacts in the list.\nNOTE: This
           field is deprecated and will not be populated for connectors utilizing the
           HubSpot v3 API. This field will be removed in a future release.\n"
       portal_id:
         expression: contact_lists.portalId
-        description: "'{{ doc(\"portal_id\") }}'\nNOTE: This field is deprecated and
+        description:
+          "'{{ doc(\"portal_id\") }}'\nNOTE: This field is deprecated and
           will not be populated for connectors utilizing the HubSpot v3 API. This
           field will be removed in a future release.\n"
       deleteable:
         expression: contact_lists.deleteable
-        description: "If this is false, this is a system list and cannot be deleted.\n
+        description:
+          "If this is false, this is a system list and cannot be deleted.\n
           NOTE: This field is deprecated and will not be populated for connectors
           utilizing the HubSpot v3 API. This field will be removed in a future release.\n"
       dynamic:
         expression: contact_lists.dynamic
-        description: "Whether the contact list is dynamic.\nNOTE: This field is deprecated
+        description:
+          "Whether the contact list is dynamic.\nNOTE: This field is deprecated
           and will not be populated for connectors utilizing the HubSpot v3 API. This
           field will be removed in a future release.\n"
 annotations:
@@ -99,7 +110,8 @@ annotations:
     target_table_name: contact_list
     table_match_score: 0.7
     completion_score: 0.6
-    explanation: The table match is relatively strong due to shared data origin (API),
+    explanation:
+      The table match is relatively strong due to shared data origin (API),
       but not all fields are present in the source.
     field_mapping_evals:
       - name: _fivetran_deleted
@@ -153,32 +165,32 @@ annotations:
       - name: metadata_error
         expression: contact_lists.metaData_error
         score: 0.7
-        explanation: 'Deprecation notice: field may not be populated in future.'
+        explanation: "Deprecation notice: field may not be populated in future."
       - name: metadata_last_processing_state_change_at
         expression: contact_lists.metaData_lastProcessingStateChangeAt
         score: 0.7
-        explanation: 'Deprecation notice: field may not be populated in future.'
+        explanation: "Deprecation notice: field may not be populated in future."
       - name: metadata_last_size_change_at
         expression: contact_lists.metaData_lastSizeChangeAt
         score: 0.7
-        explanation: 'Deprecation notice: field may not be populated in future.'
+        explanation: "Deprecation notice: field may not be populated in future."
       - name: metadata_processing
         expression: contact_lists.metaData_processing
         score: 0.7
-        explanation: 'Deprecation notice: field may not be populated in future.'
+        explanation: "Deprecation notice: field may not be populated in future."
       - name: metadata_size
         expression: contact_lists.metaData_size
         score: 0.7
-        explanation: 'Deprecation notice: field may not be populated in future.'
+        explanation: "Deprecation notice: field may not be populated in future."
       - name: portal_id
         expression: contact_lists.portalId
         score: 0.7
-        explanation: 'Deprecation notice: field may not be populated in future.'
+        explanation: "Deprecation notice: field may not be populated in future."
       - name: deleteable
         expression: contact_lists.deleteable
         score: 0.7
-        explanation: 'Deprecation notice: field may not be populated in future.'
+        explanation: "Deprecation notice: field may not be populated in future."
       - name: dynamic
         expression: contact_lists.dynamic
         score: 0.7
-        explanation: 'Deprecation notice: field may not be populated in future.'
+        explanation: "Deprecation notice: field may not be populated in future."

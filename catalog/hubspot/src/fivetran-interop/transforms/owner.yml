@@ -41,7 +41,8 @@ annotations:
     target_table_name: owner
     table_match_score: 0.9
     completion_score: 0.7
-    explanation: The mappings are largely appropriate for the given context with `_fivetran_synced`
+    explanation:
+      The mappings are largely appropriate for the given context with `_fivetran_synced`
       mapping perfectly, but there are unknown fields marked as 'MISSING'.
     field_mapping_evals:
       - name: _fivetran_synced
@@ -55,22 +56,26 @@ annotations:
       - name: email
         expression: owners.email
         score: 0.9
-        explanation: High confidence match with 'owners.email' based on field name
+        explanation:
+          High confidence match with 'owners.email' based on field name
           and context.
       - name: first_name
         expression: owners.firstName
         score: 0.9
-        explanation: High confidence match with 'owners.firstName' due to similar
+        explanation:
+          High confidence match with 'owners.firstName' due to similar
           naming and context.
       - name: last_name
         expression: owners.lastName
         score: 0.9
-        explanation: High confidence match with 'owners.lastName' based on context
+        explanation:
+          High confidence match with 'owners.lastName' based on context
           similarity.
       - name: owner_id
         expression: owners.userId
         score: 0.9
-        explanation: High confidence that 'owner_id' and 'owners.userId' refer to
+        explanation:
+          High confidence that 'owner_id' and 'owners.userId' refer to
           the same entity.
       - name: portal_id
         expression: MISSING

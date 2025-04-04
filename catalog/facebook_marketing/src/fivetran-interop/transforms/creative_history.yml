@@ -24,7 +24,8 @@ transforms:
         description: Name of this ad creative as seen in the ad account's library.
       url_tags:
         expression: ad_creatives.url_tags
-        description: A set of query string parameters which will replace or be appended
+        description:
+          A set of query string parameters which will replace or be appended
           to urls clicked from page post ads, message of the post, and canvas app
           install creatives only.
       _fivetran_synced:
@@ -69,11 +70,13 @@ annotations:
   evaluation:
     source_stream_name: ad_creatives
     target_table_name: creative_history
-    table_match_score: 1.0
-    completion_score: 0.8823529411764706
-    explanation: All field mappings were evaluated. Some fields have 'MISSING' mappings,
-      affecting the overall completion score. The table match score is perfect because
-      it maps perfectly related fields.
+    table_match_score: 0.95
+    completion_score: 0.82
+    explanation:
+      The table mappings are from similar source and target schemas with
+      consistent subject matter. However, some fields were missing a good match. The
+      table has a high match score due to strong alignment in identifiers and account
+      fields, but completion is not perfect due to missing fields.
     field_mapping_evals:
       - name: _fivetran_id
         expression: MISSING
@@ -89,61 +92,61 @@ annotations:
         explanation: No good match found.
       - name: id
         expression: ad_creatives.id
-        score: 1.0
-        explanation: Exact match with 'ad_creatives.id'.
+        score: 0.8
+        explanation: Mapping is specific and contextually appropriate.
       - name: account_id
         expression: ad_creatives.account_id
-        score: 1.0
-        explanation: Exact match with 'ad_creatives.account_id'.
+        score: 0.8
+        explanation: Mapping is specific and contextually appropriate.
       - name: name
         expression: ad_creatives.name
-        score: 1.0
-        explanation: Exact match with 'ad_creatives.name'.
+        score: 0.8
+        explanation: Mapping is specific and contextually appropriate.
       - name: url_tags
         expression: ad_creatives.url_tags
-        score: 1.0
-        explanation: Exact match with 'ad_creatives.url_tags'.
+        score: 0.8
+        explanation: Mapping is specific and contextually appropriate.
       - name: _fivetran_synced
         expression: ad_creatives._airbyte_extracted_at
         score: 1.0
-        explanation: Standard mapping for '_fivetran_synced' to '_airbyte_extracted_at'.
+        explanation: Standard mapping for synchronization fields.
       - name: asset_feed_spec_link_urls
         expression: ad_creatives.asset_feed_spec.link_urls
-        score: 1.0
-        explanation: Exact match with 'ad_creatives.asset_feed_spec.link_urls'.
+        score: 0.5
+        explanation: Possible match but not certain.
       - name: object_story_link_data_child_attachments
         expression: ad_creatives.object_story_spec.link_data.child_attachments
-        score: 1.0
-        explanation: Exact match with 'ad_creatives.object_story_spec.link_data.child_attachments'.
+        score: 0.5
+        explanation: Possible match but not certain.
       - name: object_story_link_data_caption
         expression: ad_creatives.object_story_spec.link_data.caption
-        score: 1.0
-        explanation: Exact match with 'ad_creatives.object_story_spec.link_data.caption'.
+        score: 0.5
+        explanation: Possible match but not certain.
       - name: object_story_link_data_description
         expression: ad_creatives.object_story_spec.link_data.description
-        score: 1.0
-        explanation: Exact match with 'ad_creatives.object_story_spec.link_data.description'.
+        score: 0.5
+        explanation: Possible match but not certain.
       - name: object_story_link_data_link
         expression: ad_creatives.object_story_spec.link_data.link
-        score: 1.0
-        explanation: Exact match with 'ad_creatives.object_story_spec.link_data.link'.
+        score: 0.5
+        explanation: Possible match but not certain.
       - name: object_story_link_data_message
         expression: ad_creatives.object_story_spec.link_data.message
-        score: 1.0
-        explanation: Exact match with 'ad_creatives.object_story_spec.link_data.message'.
+        score: 0.5
+        explanation: Possible match but not certain.
       - name: template_app_link_spec_ios
         expression: ad_creatives.object_story_spec.template_data.app_link_spec.ios
-        score: 1.0
-        explanation: Exact match with 'ad_creatives.object_story_spec.template_data.app_link_spec.ios'.
+        score: 0.5
+        explanation: Possible match but not certain.
       - name: template_app_link_spec_ipad
         expression: ad_creatives.object_story_spec.template_data.app_link_spec.ipad
-        score: 1.0
-        explanation: Exact match with 'ad_creatives.object_story_spec.template_data.app_link_spec.ipad'.
+        score: 0.5
+        explanation: Possible match but not certain.
       - name: template_app_link_spec_android
         expression: ad_creatives.object_story_spec.template_data.app_link_spec.android
-        score: 1.0
-        explanation: Exact match with 'ad_creatives.object_story_spec.template_data.app_link_spec.android'.
+        score: 0.5
+        explanation: Possible match but not certain.
       - name: template_app_link_spec_iphone
         expression: ad_creatives.object_story_spec.template_data.app_link_spec.iphone
-        score: 1.0
-        explanation: Exact match with 'ad_creatives.object_story_spec.template_data.app_link_spec.iphone'.
+        score: 0.5
+        explanation: Possible match but not certain.

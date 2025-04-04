@@ -15,15 +15,18 @@ transforms:
         description: The order line that this tax line is associated with.
       price:
         expression: transactions.amount
-        description: The amount of tax, in shop currency, after discounts and before
+        description:
+          The amount of tax, in shop currency, after discounts and before
           returns.
       price_set:
         expression: transactions.total_unsettled_set
-        description: The amount of tax, in shop and presentment currencies, after
+        description:
+          The amount of tax, in shop and presentment currencies, after
           discounts and before returns.
       rate:
         expression: MISSING
-        description: The proportion of the line item price that the tax represents
+        description:
+          The proportion of the line item price that the tax represents
           as a decimal.
       title:
         expression: transactions.source_name
@@ -39,7 +42,8 @@ annotations:
     target_table_name: tax_line
     table_match_score: 0.7
     completion_score: 0.5714285714285714
-    explanation: The table mapping quality is relatively high, given that most field
+    explanation:
+      The table mapping quality is relatively high, given that most field
       names have corresponding expressions from similar schemas. However, several
       fields are marked as 'MISSING,' indicating incomplete field mappings and reducing
       the completion score. The standard mapping of '_fivetran_synced' to '_airbyte_extracted_at'
@@ -62,12 +66,14 @@ annotations:
       - name: price
         expression: transactions.amount
         score: 0.7
-        explanation: "'transactions.amount' correlates well with 'price', assuming
+        explanation:
+          "'transactions.amount' correlates well with 'price', assuming
           it represents a monetary value which matches the description."
       - name: price_set
         expression: transactions.total_unsettled_set
         score: 0.7
-        explanation: "'transactions.total_unsettled_set' aligns with 'price_set',
+        explanation:
+          "'transactions.total_unsettled_set' aligns with 'price_set',
           inferring a comparable financial value matching the requirements."
       - name: rate
         expression: MISSING
@@ -76,5 +82,6 @@ annotations:
       - name: title
         expression: transactions.source_name
         score: 0.7
-        explanation: "'transactions.source_name' is presumed to align with 'title'
+        explanation:
+          "'transactions.source_name' is presumed to align with 'title'
           based on context, dealing with tax-related naming."

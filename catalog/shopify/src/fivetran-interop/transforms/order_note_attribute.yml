@@ -25,7 +25,8 @@ annotations:
     target_table_name: order_note_attribute
     table_match_score: 0.65
     completion_score: 0.75
-    explanation: "The table mapping reflects a moderate confidence level due to missing
+    explanation:
+      "The table mapping reflects a moderate confidence level due to missing
       mappings.\nField-level mappings include both perfect and missing entries."
     field_mapping_evals:
       - name: _fivetran_synced
@@ -39,7 +40,8 @@ annotations:
       - name: order_id
         expression: orders.id
         score: 0.7
-        explanation: Mapping 'order_id' to 'orders.id' is plausible with moderate
+        explanation:
+          Mapping 'order_id' to 'orders.id' is plausible with moderate
           confidence.
       - name: value
         expression: MISSING

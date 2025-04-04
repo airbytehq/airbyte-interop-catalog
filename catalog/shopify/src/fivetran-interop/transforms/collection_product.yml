@@ -21,7 +21,8 @@ annotations:
     target_table_name: collection_product
     table_match_score: 0.7
     completion_score: 0.8
-    explanation: The table mapping was evaluated with a high table match score as
+    explanation:
+      The table mapping was evaluated with a high table match score as
       the subject matter aligns closely between source and target, hence a match score
       of 0.70. The completion score is 0.80, indicating some fields have good mapping
       and coverage from source to target with a slight room for improvement.
@@ -29,16 +30,19 @@ annotations:
       - name: _fivetran_synced
         expression: collects._airbyte_extracted_at
         score: 1.0
-        explanation: Standard mapping to the source stream's _airbyte_extracted_at
+        explanation:
+          Standard mapping to the source stream's _airbyte_extracted_at
           column.
       - name: collection_id
         expression: collects.collection_id
         score: 0.7
-        explanation: ID referencing the `collection` has a relevant mapping. Given
+        explanation:
+          ID referencing the `collection` has a relevant mapping. Given
           score reflects strong, but not perfect match due to potential contextual
           differences.
       - name: product_id
         expression: collects.product_id
         score: 0.7
-        explanation: ID referencing the `product` aligns closely in purpose but may
+        explanation:
+          ID referencing the `product` aligns closely in purpose but may
           differ slightly in context in some implementations, hence the score.

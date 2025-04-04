@@ -9,7 +9,8 @@ transforms:
         description: "{{ doc('_fivetran_synced') }}"
       index:
         expression: MISSING
-        description: Index (starting from 1) represnting when the tag was placed on
+        description:
+          Index (starting from 1) represnting when the tag was placed on
           the order.
       order_id:
         expression: orders.id
@@ -27,7 +28,8 @@ annotations:
     target_table_name: order_tag
     table_match_score: 0.8
     completion_score: 0.5
-    explanation: The table match score is relatively high because the `_fivetran_synced`
+    explanation:
+      The table match score is relatively high because the `_fivetran_synced`
       was successfully mapped to `_airbyte_extracted_at`, a standard mapping. However,
       two of the field mappings have expressions set to 'MISSING', resulting in a
       lower completion score.
@@ -35,7 +37,8 @@ annotations:
       - name: _fivetran_synced
         expression: orders._airbyte_extracted_at
         score: 1.0
-        explanation: _fivetran_synced is always mapped to _airbyte_extracted_at with
+        explanation:
+          _fivetran_synced is always mapped to _airbyte_extracted_at with
           a perfect score of 1.00 as it is a standard mapping.
       - name: index
         expression: MISSING

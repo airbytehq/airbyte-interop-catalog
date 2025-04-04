@@ -651,25 +651,33 @@ class TableMapping(BaseModel):
         Returns:
             A markdown formatted string containing the analysis
         """
+        sections: list[str] = []
         if not self._attached_evaluation:
             raise ValueError("No evaluation attached to the table mapping")
 
         # Create header section
-        title = f"Table Mapping Eval: '{self.source_stream_name}->{self.target_table_name}'"
+        sections.append(
+            f"### Mapping from Airbyte `{self.source_stream_name}` "
+            f"to Fivetran `{self.target_table_name}`",
+        )
 
         # Overall confidence section
-        table_match_confidence = f"Table Match Confidence Score: {markdown_formatted_confidence(self._attached_evaluation.table_match_score)}"
-        table_completion_score = f"Table Completion Score: {markdown_formatted_confidence(self._attached_evaluation.completion_score)}"
+        sections.extend(
+            [
+                f"- Table Match Confidence Score: {markdown_formatted_confidence(self._attached_evaluation.table_match_score)}",
+                f"- Table Completion Score: {markdown_formatted_confidence(self._attached_evaluation.completion_score)}",
+            ],
+        )
 
         # Explanation section
         explanation = create_markdown_section(
-            "Explanation",
+            "Evaluation",
             self._attached_evaluation.explanation,
             level=3,
         )
 
         # Field-by-field analysis section
-        headers = ["Field", "Expression", "Description", "Confidence", "Evaluation"]
+        headers = ["Field", "Description", "Expression", "Confidence", "Evaluation"]
         rows: list[list[str]] = []
 
         for field_eval in self._attached_evaluation.field_mapping_evals:
@@ -678,31 +686,23 @@ class TableMapping(BaseModel):
             )
             rows.append(
                 [
-                    field_eval.name,
-                    str(field_ref.expression),
+                    f"`{field_eval.name}`",
                     field_ref.description or "",
+                    f"`{field_ref.expression!s}`",
                     markdown_formatted_confidence(field_eval.score),
                     field_eval.explanation,
                 ],
             )
 
         field_analysis = create_markdown_section(
-            "Field-by-Field Analysis",
+            "Field Mapping Logic",
             create_markdown_table(headers, rows),
             level=3,
         )
+        sections.extend([explanation, field_analysis])
 
         # Combine all sections
-        return create_markdown_section(
-            title,
-            table_match_confidence
-            + "\n\n"
-            + table_completion_score
-            + "\n\n"
-            + explanation
-            + field_analysis,
-            level=2,
-        )
+        return "\n\n".join(sections)
 
     def print_as_rich_table(self) -> None:
         """Print a complete mapping confidence analysis.

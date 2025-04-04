@@ -9,7 +9,8 @@ transforms:
         description: "{{ doc('_fivetran_synced') }}"
       index:
         expression: MISSING
-        description: Index (starting from 1) represnting when the tag was placed on
+        description:
+          Index (starting from 1) represnting when the tag was placed on
           the customer.
       customer_id:
         expression: customers.default_address.customer_id
@@ -27,7 +28,8 @@ annotations:
     target_table_name: customer_tag
     table_match_score: 0.6
     completion_score: 0.5
-    explanation: The mapping includes standard and missing field expressions. Standard
+    explanation:
+      The mapping includes standard and missing field expressions. Standard
       mappings like '_fivetran_synced' were given a high score, while missing fields
       were penalized.
     field_mapping_evals:
@@ -42,7 +44,8 @@ annotations:
       - name: customer_id
         expression: customers.default_address.customer_id
         score: 0.7
-        explanation: Mapped to 'customers.default_address.customer_id'. Considered
+        explanation:
+          Mapped to 'customers.default_address.customer_id'. Considered
           a likely match with some uncertainty.
       - name: value
         expression: MISSING

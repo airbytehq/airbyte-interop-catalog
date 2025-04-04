@@ -12,7 +12,8 @@ transforms:
         description: "{{ doc('_fivetran_synced') }}"
       active:
         expression: locations.active
-        description: "Boolean representing whether the location is active. If true,
+        description:
+          "Boolean representing whether the location is active. If true,
           then the location can be used to sell products, stock inventory, and fulfill
           orders.\n"
       address_1:
@@ -29,7 +30,8 @@ transforms:
         description: The country the location is in (two-letter code).
       country_code:
         expression: locations.country_code
-        description: The two-letter code (ISO 3166-1 alpha-2 format) corresponding
+        description:
+          The two-letter code (ISO 3166-1 alpha-2 format) corresponding
           to country the location is in.
       country_name:
         expression: locations.country_name
@@ -42,7 +44,8 @@ transforms:
         description: The ID of the location.
       legacy:
         expression: locations.legacy
-        description: "Boolean representing whether this is a fulfillment service location.
+        description:
+          "Boolean representing whether this is a fulfillment service location.
           If true, then the location is a fulfillment service location.  If false,
           then the location was created by the merchant and isn't tied to a fulfillment
           service.\n"
@@ -51,25 +54,29 @@ transforms:
         description: The localized name of the location's country.
       localized_province_name:
         expression: locations.localized_province_name
-        description: The localized name of the location's region. Typically a province,
+        description:
+          The localized name of the location's region. Typically a province,
           state, or district.
       name:
         expression: locations.name
         description: The name of the location.
       phone:
         expression: locations.phone
-        description: The phone number of the location. This value can contain special
+        description:
+          The phone number of the location. This value can contain special
           characters, such as - or +.
       province:
         expression: locations.province
         description: The province, state, or district of the location.
       province_code:
         expression: locations.province_code
-        description: The province, state, or district code (ISO 3166-2 alpha-2 format)
+        description:
+          The province, state, or district code (ISO 3166-2 alpha-2 format)
           of the location.
       updated_at:
         expression: locations.updated_at
-        description: The date and time (ISO 8601 format) when the location was last
+        description:
+          The date and time (ISO 8601 format) when the location was last
           updated.
       zip:
         expression: locations.zip
@@ -82,7 +89,8 @@ annotations:
     target_table_name: location
     table_match_score: 0.85
     completion_score: 0.95
-    explanation: The table mapping evaluation resulted in a high confidence score
+    explanation:
+      The table mapping evaluation resulted in a high confidence score
       due to a close match between source and target schemas. The presence of exact
       mappings and the ability to identify synonymous fields contribute to the quality
       and coverage of the mapping.
@@ -98,22 +106,26 @@ annotations:
       - name: active
         expression: locations.active
         score: 1.0
-        explanation: The field 'active' has a clear one-to-one mapping, as it directly
+        explanation:
+          The field 'active' has a clear one-to-one mapping, as it directly
           maps from the source to the target fields with no ambiguity.
       - name: address_1
         expression: locations.address1
         score: 1.0
-        explanation: The field 'address_1' is directly mapped to the source, indicating
+        explanation:
+          The field 'address_1' is directly mapped to the source, indicating
           a high degree of confidence in the mapping.
       - name: address_2
         expression: locations.address2
         score: 1.0
-        explanation: "'address_2' maps directly from the source, matching the field
+        explanation:
+          "'address_2' maps directly from the source, matching the field
           intent and data type."
       - name: city
         expression: locations.city
         score: 1.0
-        explanation: The 'city' field maps directly from the source to target schemas
+        explanation:
+          The 'city' field maps directly from the source to target schemas
           accurately.
       - name: country
         expression: locations.country
@@ -122,7 +134,8 @@ annotations:
       - name: country_code
         expression: locations.country_code
         score: 1.0
-        explanation: The 'country_code' field has a perfect mapping from source to
+        explanation:
+          The 'country_code' field has a perfect mapping from source to
           target respecting the ISO standard.
       - name: country_name
         expression: locations.country_name
@@ -131,12 +144,14 @@ annotations:
       - name: created_at
         expression: locations.created_at
         score: 1.0
-        explanation: The 'created_at' field exists in both schemas and matches perfectly
+        explanation:
+          The 'created_at' field exists in both schemas and matches perfectly
           with ISO 8601 format indication.
       - name: id
         expression: locations.id
         score: 1.0
-        explanation: The 'id' is an exact match and critical field forming the primary
+        explanation:
+          The 'id' is an exact match and critical field forming the primary
           key.
       - name: legacy
         expression: locations.legacy
@@ -153,7 +168,8 @@ annotations:
       - name: name
         expression: locations.name
         score: 1.0
-        explanation: "'Different schemas have identical field denoted by 'name', implying
+        explanation:
+          "'Different schemas have identical field denoted by 'name', implying
           a perfect mapping."
       - name: phone
         expression: locations.phone

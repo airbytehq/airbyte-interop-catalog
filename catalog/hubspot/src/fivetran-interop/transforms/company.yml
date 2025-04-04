@@ -56,7 +56,8 @@ annotations:
     target_table_name: company
     table_match_score: 0.7
     completion_score: 0.86
-    explanation: Table match confidence is reasonably high, considering the target
+    explanation:
+      Table match confidence is reasonably high, considering the target
       schema's table fields are closely matched with source fields.
     field_mapping_evals:
       - name: _fivetran_synced

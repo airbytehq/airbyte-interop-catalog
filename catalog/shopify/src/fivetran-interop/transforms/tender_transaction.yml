@@ -12,7 +12,8 @@ transforms:
         description: The amount of the tender transaction in the shop's currency.
       currency:
         expression: tender_transactions.currency
-        description: The three-letter code (ISO 4217 format) for the currency used
+        description:
+          The three-letter code (ISO 4217 format) for the currency used
           for the tender transaction.
       id:
         expression: tender_transactions.id
@@ -22,12 +23,14 @@ transforms:
         description: The ID of the order that the tender transaction belongs to.
       payment_method:
         expression: tender_transactions.payment_method
-        description: "Information about the payment method used for this transaction.
+        description:
+          "Information about the payment method used for this transaction.
           Valid values include: - credit_card - cash - android_pay - apple_pay - google_pay
           - samsung_pay - shopify_pay - amazon - klarna - paypal - unknown - other\n"
       processed_at:
         expression: tender_transactions.processed_at
-        description: The date and time (ISO 8601 format) when the tender transaction
+        description:
+          The date and time (ISO 8601 format) when the tender transaction
           was processed.
       remote_reference:
         expression: tender_transactions.remote_reference
@@ -37,7 +40,8 @@ transforms:
         description: Whether the tender transaction is a test transaction.
       user_id:
         expression: tender_transactions.user_id
-        description: The ID of the user logged into the Shopify POS device that processed
+        description:
+          The ID of the user logged into the Shopify POS device that processed
           the tender transaction, if applicable.
 annotations:
   approved: true
@@ -47,7 +51,8 @@ annotations:
     target_table_name: tender_transaction
     table_match_score: 1.0
     completion_score: 1.0
-    explanation: All fields mapped successfully with high confidence according to
+    explanation:
+      All fields mapped successfully with high confidence according to
       provided rules and context. Mapping hypothetical fields between schemas across
       transformations without loss of meaning.
     field_mapping_evals:
@@ -78,20 +83,24 @@ annotations:
       - name: processed_at
         expression: tender_transactions.processed_at
         score: 1.0
-        explanation: Direct match in field names and context (date of transaction
+        explanation:
+          Direct match in field names and context (date of transaction
           processing).
       - name: remote_reference
         expression: tender_transactions.remote_reference
         score: 1.0
-        explanation: Direct match in field names and context (reference associated
+        explanation:
+          Direct match in field names and context (reference associated
           with tender).
       - name: test
         expression: tender_transactions.test
         score: 1.0
-        explanation: Direct match in field names and context (indicates if transaction
+        explanation:
+          Direct match in field names and context (indicates if transaction
           is a test).
       - name: user_id
         expression: tender_transactions.user_id
         score: 1.0
-        explanation: Direct match in field names and context (user ID processing the
+        explanation:
+          Direct match in field names and context (user ID processing the
           transaction).

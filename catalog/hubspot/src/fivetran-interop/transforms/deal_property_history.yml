@@ -34,7 +34,8 @@ annotations:
     target_table_name: deal_property_history
     table_match_score: 0.72
     completion_score: 0.857
-    explanation: The table match score is relatively high, indicating a good match
+    explanation:
+      The table match score is relatively high, indicating a good match
       between source and target tables based on similar schema elements. However,
       one field has an expression marked as 'MISSING', lowering the completion score
       due to incomplete mapping.
@@ -46,7 +47,8 @@ annotations:
       - name: deal_id
         expression: deals_property_history.dealId
         score: 0.7
-        explanation: dealId from deals_property_history is likely to match deal_id
+        explanation:
+          dealId from deals_property_history is likely to match deal_id
           based on naming and context.
       - name: name
         expression: MISSING
@@ -55,20 +57,24 @@ annotations:
       - name: source
         expression: deals_property_history.sourceType
         score: 0.7
-        explanation: sourceType from deals_property_history matches source based on
+        explanation:
+          sourceType from deals_property_history matches source based on
           name and typical usage.
       - name: source_id
         expression: deals_property_history.sourceId
         score: 0.7
-        explanation: sourceId from deals_property_history matches source_id based
+        explanation:
+          sourceId from deals_property_history matches source_id based
           on naming similarities.
       - name: timestamp
         expression: deals_property_history.timestamp
         score: 0.7
-        explanation: timestamp from deals_property_history matches timestamp based
+        explanation:
+          timestamp from deals_property_history matches timestamp based
           on naming conventions.
       - name: value
         expression: deals_property_history.value
         score: 0.7
-        explanation: value from deals_property_history matches value, typical mapping
+        explanation:
+          value from deals_property_history matches value, typical mapping
           based on name.

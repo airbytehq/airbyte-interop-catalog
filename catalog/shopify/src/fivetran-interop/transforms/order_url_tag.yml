@@ -25,19 +25,22 @@ annotations:
     target_table_name: order_url_tag
     table_match_score: 0.5
     completion_score: 0.75
-    explanation: The table match score is 0.5 due to partial similarity between the
+    explanation:
+      The table match score is 0.5 due to partial similarity between the
       source and target schemas. The completion score is 0.75 as most fields are mapped,
       but some are missing or poorly matched.
     field_mapping_evals:
       - name: _fivetran_synced
         expression: metafield_orders._airbyte_extracted_at
         score: 1.0
-        explanation: Standard mapping of '_fivetran_synced' to '_airbyte_extracted_at',
+        explanation:
+          Standard mapping of '_fivetran_synced' to '_airbyte_extracted_at',
           always scores 1.0.
       - name: key
         expression: metafield_orders.key
         score: 0.7
-        explanation: Fields 'key' in source and 'key' in target are likely referring
+        explanation:
+          Fields 'key' in source and 'key' in target are likely referring
           to the same entity, mapped with a score of 0.7.
       - name: order_id
         expression: MISSING
@@ -46,5 +49,6 @@ annotations:
       - name: value
         expression: metafield_orders.value
         score: 0.6
-        explanation: Fields 'value' in source and 'value' in target mapped with a
+        explanation:
+          Fields 'value' in source and 'value' in target mapped with a
           lower confidence due to minimal contextual match.

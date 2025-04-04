@@ -36,7 +36,8 @@ transforms:
         description: The day the deal is expected to close, or was closed.
       property_createdate:
         expression: deals.properties.createdate
-        description: The date the deal was created. This property is set automatically
+        description:
+          The date the deal was created. This property is set automatically
           by HubSpot.
 annotations:
   approved: false
@@ -49,7 +50,8 @@ annotations:
     target_table_name: deal
     table_match_score: 0.75
     completion_score: 0.7
-    explanation: The table mapping reflects a generally good match between source
+    explanation:
+      The table mapping reflects a generally good match between source
       and target tables, as most fields are correctly mapped. However, there are a
       few fields that could not be matched and are marked as 'MISSING', which affects
       completion.

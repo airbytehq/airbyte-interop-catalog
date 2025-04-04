@@ -27,11 +27,13 @@ transforms:
         description: The reason for the order adjustment.
       amount_set:
         expression: order_refunds.total_duties_set
-        description: Amount set towards the order adjustment in shop and presentment
+        description:
+          Amount set towards the order adjustment in shop and presentment
           currencies.
       tax_amount_set:
         expression: order_refunds.total_duties_set.presentment_money
-        description: Tax amount set towards the order adjustment in shop and presentment
+        description:
+          Tax amount set towards the order adjustment in shop and presentment
           currencies.
       _fivetran_synced:
         expression: order_refunds._airbyte_extracted_at
@@ -45,34 +47,40 @@ annotations:
     target_table_name: order_adjustment
     table_match_score: 0.85
     completion_score: 0.8
-    explanation: The table mapping has a high confidence level as most fields are
+    explanation:
+      The table mapping has a high confidence level as most fields are
       well-matched with minor discrepancies. 'MISSING' fields are well addressed and
       the usual high-confidence mappings are adhered to.
     field_mapping_evals:
       - name: id
         expression: order_refunds.id
         score: 0.9
-        explanation: The mapping of 'id' to 'order_refunds.id' is strong due to similar
+        explanation:
+          The mapping of 'id' to 'order_refunds.id' is strong due to similar
           naming and meaning.
       - name: order_id
         expression: order_refunds.order_id
         score: 0.9
-        explanation: The mapping of 'order_id' to 'order_refunds.order_id' is strong
+        explanation:
+          The mapping of 'order_id' to 'order_refunds.order_id' is strong
           due to direct correspondence in naming and meaning.
       - name: refund_id
         expression: order_refunds.return.id
         score: 0.7
-        explanation: The mapping of 'refund_id' to 'order_refunds.return.id' is moderate
+        explanation:
+          The mapping of 'refund_id' to 'order_refunds.return.id' is moderate
           due to nested structure.
       - name: amount
         expression: order_refunds.total_duties_set.shop_money.amount
         score: 0.8
-        explanation: The mapping of 'amount' to 'order_refunds.total_duties_set.shop_money.amount'
+        explanation:
+          The mapping of 'amount' to 'order_refunds.total_duties_set.shop_money.amount'
           is good due to relevant scope of the field despite nested structure.
       - name: tax_amount
         expression: order_refunds.total_duties_set.presentment_money.amount
         score: 0.8
-        explanation: The mapping of 'tax_amount' to 'order_refunds.total_duties_set.presentment_money.amount'
+        explanation:
+          The mapping of 'tax_amount' to 'order_refunds.total_duties_set.presentment_money.amount'
           is good due to relevant context despite nested structure.
       - name: kind
         expression: MISSING
@@ -81,17 +89,20 @@ annotations:
       - name: reason
         expression: order_refunds.note
         score: 0.75
-        explanation: The mapping of 'reason' to 'order_refunds.note' is reasonable
+        explanation:
+          The mapping of 'reason' to 'order_refunds.note' is reasonable
           due to relevant meaning.
       - name: amount_set
         expression: order_refunds.total_duties_set
         score: 0.7
-        explanation: The mapping of 'amount_set' to 'order_refunds.total_duties_set'
+        explanation:
+          The mapping of 'amount_set' to 'order_refunds.total_duties_set'
           is moderate due to nested structure.
       - name: tax_amount_set
         expression: order_refunds.total_duties_set.presentment_money
         score: 0.7
-        explanation: The mapping of 'tax_amount_set' to 'order_refunds.total_duties_set.presentment_money'
+        explanation:
+          The mapping of 'tax_amount_set' to 'order_refunds.total_duties_set.presentment_money'
           is moderate due to nested structure.
       - name: _fivetran_synced
         expression: order_refunds._airbyte_extracted_at

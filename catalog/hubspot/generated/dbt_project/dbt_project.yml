@@ -21,66 +21,6 @@ models:
   airbyte_hubspot:
     +materialized: view
 
-    # Approved models
-    
-    email_event:
-      +materialized: table
-    
-    deal_pipeline:
-      +materialized: table
-    
-    email_event_print:
-      +materialized: table
-    
-    engagement_email:
-      +materialized: table
-    
-    engagement_note:
-      +materialized: table
-    
-    email_event_delivered:
-      +materialized: table
-    
-    company:
-      +materialized: table
-    
-    contact_list_member:
-      +materialized: table
-    
-    engagement_meeting:
-      +materialized: table
-    
-    engagement_task:
-      +materialized: table
-    
-    ticket:
-      +materialized: table
-    
-    email_subscription:
-      +materialized: table
-    
-    contact:
-      +materialized: table
-    
-    contact_merge_audit:
-      +materialized: table
-    
-    owner:
-      +materialized: table
-    
-    contact_form_submission:
-      +materialized: table
-    
-    deal_property_history:
-      +materialized: table
-    
-    engagement:
-      +materialized: table
-    
-    company_property_history:
-      +materialized: table
-    
-
     # Workshop models (not yet approved)
     workshop:
       +enabled: false  # Workshop models disabled by default

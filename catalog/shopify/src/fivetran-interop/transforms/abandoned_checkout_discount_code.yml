@@ -24,11 +24,13 @@ transforms:
         description: ID of the discount. Deprecated, use `code` instead.
       index:
         expression: MISSING
-        description: Index (from 1) representing the application of the discount to
+        description:
+          Index (from 1) representing the application of the discount to
           the checkout. Use the latest (highest index)
       type:
         expression: discount_codes.discount_type
-        description: The type of discount. Valid values - percentage, shipping, fixed_amount.
+        description:
+          The type of discount. Valid values - percentage, shipping, fixed_amount.
           (default - fixed_amount)
       updated_at:
         expression: discount_codes.updated_at
@@ -45,7 +47,8 @@ annotations:
     target_table_name: abandoned_checkout_discount_code
     table_match_score: 0.7
     completion_score: 0.4444
-    explanation: The table mapping confidence score is moderate due to partial matches
+    explanation:
+      The table mapping confidence score is moderate due to partial matches
       and the presence of several 'MISSING' expressions indicating incomplete mappings.
       Despite a few high-confidence mappings, the overall completion is low due to
       multiple unmapped fields.
@@ -53,7 +56,8 @@ annotations:
       - name: _fivetran_synced
         expression: discount_codes._airbyte_extracted_at
         score: 1.0
-        explanation: _fivetran_synced is always mapped to _airbyte_extracted_at with
+        explanation:
+          _fivetran_synced is always mapped to _airbyte_extracted_at with
           a score of 1.00 as a standard mapping.
       - name: amount
         expression: MISSING
@@ -70,7 +74,8 @@ annotations:
       - name: created_at
         expression: discount_codes.created_at
         score: 0.7
-        explanation: discount_codes.created_at mapped to created_at with moderate
+        explanation:
+          discount_codes.created_at mapped to created_at with moderate
           confidence.
       - name: discount_id
         expression: MISSING
@@ -83,10 +88,12 @@ annotations:
       - name: type
         expression: discount_codes.discount_type
         score: 0.7
-        explanation: discount_codes.discount_type mapped to type due to likely contextual
+        explanation:
+          discount_codes.discount_type mapped to type due to likely contextual
           match for discount types.
       - name: updated_at
         expression: discount_codes.updated_at
         score: 0.7
-        explanation: discount_codes.updated_at mapped to updated_at with moderate
+        explanation:
+          discount_codes.updated_at mapped to updated_at with moderate
           confidence.

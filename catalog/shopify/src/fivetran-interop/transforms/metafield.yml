@@ -18,36 +18,43 @@ transforms:
         description: The unique ID of the metafield.
       key:
         expression: metafield_shops.key
-        description: The key of the metafield. Keys can be up to 64 characters long
+        description:
+          The key of the metafield. Keys can be up to 64 characters long
           and can contain alphanumeric characters, hyphens, underscores, and periods.
       namespace:
         expression: metafield_shops.namespace
-        description: A container for a group of metafields. Grouping metafields within
+        description:
+          A container for a group of metafields. Grouping metafields within
           a namespace prevents your metafields from conflicting with other metafields
           with the same key name. Must have between 3-255 characters.
       owner_id:
         expression: metafield_shops.owner_id
-        description: The unique ID of the resource that the metafield is attached
+        description:
+          The unique ID of the resource that the metafield is attached
           to.
       owner_resource:
         expression: metafield_shops.owner_resource
         description: The type of resource (table) that the metafield is attached to.
       type:
         expression: metafield_shops.type
-        description: The type of data that the metafield stores in the `value` field.
+        description:
+          The type of data that the metafield stores in the `value` field.
           Refer to the [list](https://shopify.dev/apps/metafields/types) of supported
           types. Use this instead of `value_type`.
       updated_at:
         expression: metafield_shops.updated_at
-        description: The date and time (ISO 8601 format) when the metafield was last
+        description:
+          The date and time (ISO 8601 format) when the metafield was last
           updated.
       value:
         expression: metafield_shops.value
-        description: The data to store in the metafield. The value is always stored
+        description:
+          The data to store in the metafield. The value is always stored
           as a string, regardless of the metafield's type.
       value_type:
         expression: metafield_shops.value_type
-        description: DEPRECATED as of [June 2022](https://fivetran.com/docs/applications/shopify/changelog#june2022).
+        description:
+          DEPRECATED as of [June 2022](https://fivetran.com/docs/applications/shopify/changelog#june2022).
           Use `type` instead.
 annotations:
   approved: true
@@ -57,7 +64,8 @@ annotations:
     target_table_name: metafield
     table_match_score: 0.85
     completion_score: 0.9
-    explanation: The table mapping matches closely with the expected schema based
+    explanation:
+      The table mapping matches closely with the expected schema based
       on the field names and their descriptions. Most fields have a direct match and
       the mappings are generally appropriate, with a few exceptions where 'MISSING'
       is used due to lack of good matches.
@@ -69,7 +77,8 @@ annotations:
       - name: created_at
         expression: metafield_shops.created_at
         score: 0.95
-        explanation: High confidence mapping based on field name and purpose of capturing
+        explanation:
+          High confidence mapping based on field name and purpose of capturing
           creation date.
       - name: description
         expression: metafield_shops.description
@@ -82,7 +91,8 @@ annotations:
       - name: key
         expression: metafield_shops.key
         score: 0.85
-        explanation: Field mapping based on key attributes; fits well with typical
+        explanation:
+          Field mapping based on key attributes; fits well with typical
           schema.
       - name: namespace
         expression: metafield_shops.namespace
@@ -95,7 +105,8 @@ annotations:
       - name: owner_resource
         expression: metafield_shops.owner_resource
         score: 0.7
-        explanation: Resource-type field matches well, although contextual evidence
+        explanation:
+          Resource-type field matches well, although contextual evidence
           is moderate.
       - name: type
         expression: metafield_shops.type
@@ -108,7 +119,8 @@ annotations:
       - name: value
         expression: metafield_shops.value
         score: 0.9
-        explanation: Typically used for storing string data, fits with equivalent
+        explanation:
+          Typically used for storing string data, fits with equivalent
           field.
       - name: value_type
         expression: metafield_shops.value_type

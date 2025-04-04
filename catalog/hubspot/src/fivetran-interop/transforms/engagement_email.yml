@@ -12,28 +12,32 @@ transforms:
         description: The ID of the engagement.
       property_hs_createdate:
         expression: engagements_emails.properties.hs_createdate
-        description: "This field marks the email's time of creation and determines
+        description:
+          "This field marks the email's time of creation and determines
           where the email sits on the record timeline. You can use either a Unix timestamp
           in milliseconds or UTC format. \nPLEASE NOTE: This field will only be populated
           for connectors utilizing the HubSpot v3 API version. For the pre HubSpot
           v3 versions, this value may be found within the parent `engagement` table.\n"
       timestamp:
         expression: engagements_emails.properties_hs_timestamp
-        description: "This field marks the email's time of occurrence and determines
+        description:
+          "This field marks the email's time of occurrence and determines
           where the email sits on the record timeline. You can use either a Unix timestamp
           in milliseconds or UTC format. \nPLEASE NOTE: This field will only be populated
           for connectors utilizing the HubSpot v3 API version. For the pre HubSpot
           v3 versions, this value may be found within the parent `engagement` table.\n"
       property_hubspot_owner_id:
         expression: engagements_emails.properties.hubspot_owner_id
-        description: "The ID of the owner associated with the email. This field determines
+        description:
+          "The ID of the owner associated with the email. This field determines
           the user listed as the email creator on the record timeline.\nPLEASE NOTE:
           This field will only be populated for connectors utilizing the HubSpot v3
           API version. For the pre HubSpot v3 versions, this value may be found within
           the parent `engagement` table.\n"
       property_hubspot_team_id:
         expression: engagements_emails.properties.hubspot_team_id
-        description: "The ID of the team associated with the email. This field determines
+        description:
+          "The ID of the team associated with the email. This field determines
           the team listed as the email creator on the record timeline.\nPLEASE NOTE:
           This field will only be populated for connectors utilizing the HubSpot v3
           API version.\n"
@@ -45,7 +49,8 @@ annotations:
     target_table_name: engagement_email
     table_match_score: 0.8
     completion_score: 0.7
-    explanation: The table mapping is evaluated with a relatively high confidence
+    explanation:
+      The table mapping is evaluated with a relatively high confidence
       due to the presence of standard mappings like `_fivetran_synced` to `_airbyte_extracted_at`
       and typical fields seen in similar schemas. However, there are fields that exhibit
       uncertainty, lowering the completion score.
@@ -57,12 +62,14 @@ annotations:
       - name: engagement_id
         expression: engagements_emails.id
         score: 0.8
-        explanation: Direct mapping with high confidence, common field name indicating
+        explanation:
+          Direct mapping with high confidence, common field name indicating
           unique identifier.
       - name: property_hs_createdate
         expression: engagements_emails.properties.hs_createdate
         score: 0.65
-        explanation: Field corresponds to a timestamp, but specific conditions in
+        explanation:
+          Field corresponds to a timestamp, but specific conditions in
           the description suggest slight differences in data presence.
       - name: timestamp
         expression: engagements_emails.properties_hs_timestamp
@@ -71,10 +78,12 @@ annotations:
       - name: property_hubspot_owner_id
         expression: engagements_emails.properties.hubspot_owner_id
         score: 0.7
-        explanation: Likely mapping for owner ID, but conditional existence in description
+        explanation:
+          Likely mapping for owner ID, but conditional existence in description
           affects confidence.
       - name: property_hubspot_team_id
         expression: engagements_emails.properties.hubspot_team_id
         score: 0.7
-        explanation: Likely mapping for team ID, but conditional existence in description
+        explanation:
+          Likely mapping for team ID, but conditional existence in description
           affects confidence.

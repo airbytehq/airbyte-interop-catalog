@@ -9,7 +9,8 @@ transforms:
         description: "{{ doc('_fivetran_synced') }}"
       carrier_identifier:
         expression: MISSING
-        description: A reference to the carrier service that provided the rate. Present
+        description:
+          A reference to the carrier service that provided the rate. Present
           when the rate was computed by a third-party carrier service.
       code:
         expression: MISSING
@@ -19,11 +20,13 @@ transforms:
         description: The general classification of the delivery method.
       discounted_price:
         expression: MISSING
-        description: The pre-tax shipping price with discounts applied in the shop
+        description:
+          The pre-tax shipping price with discounts applied in the shop
           currency.
       discounted_price_set:
         expression: MISSING
-        description: The pre-tax shipping price with discounts applied (JSON) in presentment
+        description:
+          The pre-tax shipping price with discounts applied (JSON) in presentment
           and shop currencies.
       id:
         expression: fulfillments.id
@@ -39,11 +42,13 @@ transforms:
         description: Returns the price of the shipping line in shop currency.
       price_set:
         expression: MISSING
-        description: Returns the price of the shipping line (JSON) in presentment
+        description:
+          Returns the price of the shipping line (JSON) in presentment
           and shop currencies.
       requested_fulfillment_service_id:
         expression: MISSING
-        description: The fulfillment service requested for the shipping method. Present
+        description:
+          The fulfillment service requested for the shipping method. Present
           if the shipping method requires processing by a third party fulfillment
           service.
       source:
@@ -70,7 +75,8 @@ annotations:
     target_table_name: order_shipping_line
     table_match_score: 0.7
     completion_score: 0.21428571428571427
-    explanation: The table mapping has a partial match with high confidence for standardized
+    explanation:
+      The table mapping has a partial match with high confidence for standardized
       fields like '_fivetran_synced'. Several fields are missing a good match, affecting
       the completion score significantly. The high-confidence mapping of '_fivetran_synced'
       to '_airbyte_extracted_at' contributes positively to the table match score.
@@ -78,7 +84,8 @@ annotations:
       - name: _fivetran_synced
         expression: fulfillments._airbyte_extracted_at
         score: 1.0
-        explanation: Standard mapping of '_fivetran_synced' to '_airbyte_extracted_at'
+        explanation:
+          Standard mapping of '_fivetran_synced' to '_airbyte_extracted_at'
           with high confidence.
       - name: carrier_identifier
         expression: MISSING
@@ -107,7 +114,8 @@ annotations:
       - name: order_id
         expression: fulfillments.order_id
         score: 0.7
-        explanation: Matched 'order_id' with partial confidence to fulfillment order
+        explanation:
+          Matched 'order_id' with partial confidence to fulfillment order
           ID.
       - name: phone
         expression: MISSING
@@ -132,5 +140,6 @@ annotations:
       - name: title
         expression: fulfillments.name
         score: 0.7
-        explanation: Matched 'title' with partial confidence as the title of the shipping
+        explanation:
+          Matched 'title' with partial confidence as the title of the shipping
           line.

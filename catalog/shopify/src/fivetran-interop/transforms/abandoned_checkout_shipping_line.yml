@@ -9,7 +9,8 @@ transforms:
         description: "{{ doc('_fivetran_synced') }}"
       carrier_identifier:
         expression: MISSING
-        description: A reference to the carrier service that provided the rate. Present
+        description:
+          A reference to the carrier service that provided the rate. Present
           when the rate was computed by a third-party carrier service.
       checkout_id:
         expression: MISSING
@@ -34,7 +35,8 @@ transforms:
         description: Type of expected delivery.
       discounted_price:
         expression: MISSING
-        description: The pre-tax shipping price with discounts applied in _presentment_
+        description:
+          The pre-tax shipping price with discounts applied in _presentment_
           (customer) currency.
       id:
         expression: MISSING
@@ -44,7 +46,8 @@ transforms:
         description: Index of the line amongst shipping lines for this checkout.
       original_shop_price:
         expression: MISSING
-        description: The pre-tax shipping price without any discounts applied in _presentment_
+        description:
+          The pre-tax shipping price without any discounts applied in _presentment_
           (customer) currency.
       phone:
         expression: MISSING
@@ -54,7 +57,8 @@ transforms:
         description: The price of the shipping method in presentment currency.
       requested_fulfillment_service_id:
         expression: MISSING
-        description: The fulfillment service requested for the shipping method. Present
+        description:
+          The fulfillment service requested for the shipping method. Present
           if the shipping method requires processing by a third party fulfillment
           service.
       source:
@@ -62,7 +66,8 @@ transforms:
         description: The channel where the checkout originated. Example value - shopify.
       title:
         expression: MISSING
-        description: The title of the shipping method. Example value - International
+        description:
+          The title of the shipping method. Example value - International
           Shipping.
 annotations:
   approved: false
@@ -89,7 +94,8 @@ annotations:
     target_table_name: abandoned_checkout_shipping_line
     table_match_score: 0.5
     completion_score: 0.05
-    explanation: Only one field mapping is accurate with perfect confidence, the rest
+    explanation:
+      Only one field mapping is accurate with perfect confidence, the rest
       have 'MISSING' as expressions, indicating no matches found.
     field_mapping_evals:
       - name: _fivetran_synced

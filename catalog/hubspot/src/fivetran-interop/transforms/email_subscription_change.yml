@@ -12,7 +12,8 @@ transforms:
         description: The ID of the event that caused the subscription change.
       change:
         expression: MISSING
-        description: The change which occurred. This enumeration is specific to the
+        description:
+          The change which occurred. This enumeration is specific to the
           'changeType'; see below for the possible values.
       change_type:
         expression: MISSING
@@ -31,7 +32,8 @@ transforms:
         description: The source of the subscription change.
       timestamp:
         expression: subscription_changes.timestamp
-        description: The timestamp when this change occurred. If 'causedByEvent' is
+        description:
+          The timestamp when this change occurred. If 'causedByEvent' is
           present, this will be absent.
 annotations:
   approved: false
@@ -46,7 +48,8 @@ annotations:
     target_table_name: email_subscription_change
     table_match_score: 0.65
     completion_score: 0.25
-    explanation: The table match score indicates a moderate level of confidence that
+    explanation:
+      The table match score indicates a moderate level of confidence that
       the source and target tables describe similar subject matter. The completion
       score is low due to multiple 'MISSING' expressions for field mappings, which
       suggests incomplete mappings.
@@ -54,7 +57,8 @@ annotations:
       - name: _fivetran_synced
         expression: subscription_changes._airbyte_extracted_at
         score: 1.0
-        explanation: "Standard mapping rule applied: '_fivetran_synced' is always
+        explanation:
+          "Standard mapping rule applied: '_fivetran_synced' is always
           mapped to '_airbyte_extracted_at'. No penalty or reward."
       - name: caused_by_event_id
         expression: MISSING

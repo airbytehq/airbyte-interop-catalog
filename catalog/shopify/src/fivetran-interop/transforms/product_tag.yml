@@ -9,7 +9,8 @@ transforms:
         description: "{{ doc('_fivetran_synced') }}"
       index:
         expression: MISSING
-        description: Index (starting from 1) represnting when the tag was placed on
+        description:
+          Index (starting from 1) represnting when the tag was placed on
           the product.
       product_id:
         expression: MISSING
@@ -28,7 +29,8 @@ annotations:
     target_table_name: product_tag
     table_match_score: 1.0
     completion_score: 0.25
-    explanation: The mapping configuration exhibits a perfect table match with successful
+    explanation:
+      The mapping configuration exhibits a perfect table match with successful
       standard field mapping for '_fivetran_synced', but lacks completion with most
       fields having 'MISSING' expressions.
     field_mapping_evals:

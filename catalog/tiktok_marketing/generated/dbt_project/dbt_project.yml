@@ -21,27 +21,6 @@ models:
   airbyte_tiktok_marketing:
     +materialized: view
 
-    # Approved models
-    
-    adgroup_report_hourly:
-      +materialized: table
-    
-    campaign_history:
-      +materialized: table
-    
-    advertiser:
-      +materialized: table
-    
-    campaign_report_hourly:
-      +materialized: table
-    
-    ad_history:
-      +materialized: table
-    
-    ad_report_hourly:
-      +materialized: table
-    
-
     # Workshop models (not yet approved)
     workshop:
       +enabled: false  # Workshop models disabled by default
