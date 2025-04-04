@@ -686,7 +686,7 @@ class TableMapping(BaseModel):
                     field_ref.description or "",
                     f"`{field_ref.expression!s}`",
                     markdown_formatted_confidence(field_eval.score),
-                    f"_{field_eval.explanation}_",
+                    f"*{field_eval.explanation}*",
                 ],
             )
 
