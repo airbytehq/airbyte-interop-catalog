@@ -665,7 +665,7 @@ class TableMapping(BaseModel):
         sections.append(
             "\n- Table Match Confidence Score: "
             + markdown_formatted_confidence(self._attached_evaluation.table_match_score)
-            + "\n- Table Completion Score: "
+            + "_\n- Table Completion Score: "
             + markdown_formatted_confidence(self._attached_evaluation.completion_score)
             + "\n- Summary Self-Evaluation: _"
             + self._attached_evaluation.explanation.replace("\n", " ").strip()
@@ -686,7 +686,7 @@ class TableMapping(BaseModel):
                     field_ref.description or "",
                     f"`{field_ref.expression!s}`",
                     markdown_formatted_confidence(field_eval.score),
-                    field_eval.explanation,
+                    f"_{field_eval.explanation}_",
                 ],
             )
 
