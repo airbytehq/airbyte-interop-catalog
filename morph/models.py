@@ -673,7 +673,7 @@ class TableMapping(BaseModel):
         explanation = create_markdown_section(
             "Evaluation",
             self._attached_evaluation.explanation,
-            level=3,
+            level=4,
         )
 
         # Field-by-field analysis section
@@ -697,7 +697,7 @@ class TableMapping(BaseModel):
         field_analysis = create_markdown_section(
             "Field Mapping Logic",
             create_markdown_table(headers, rows),
-            level=3,
+            level=4,
         )
         sections.extend([explanation, field_analysis])
 

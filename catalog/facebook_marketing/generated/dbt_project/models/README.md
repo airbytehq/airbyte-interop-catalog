@@ -8,12 +8,12 @@ This directory contains automatically generated dbt models based on mapping file
 
 - Table Completion Score: 🟢 1.00
 
-### Explanation
+#### Evaluation
 
 All provided field mappings closely correspond to the source fields for the campaigns table, thus the highest confidence scores apply for the overall table and field mappings.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -37,12 +37,12 @@ All provided field mappings closely correspond to the source fields for the camp
 
 - Table Completion Score: 🟢 0.95
 
-### Explanation
+#### Evaluation
 
 The mapping is very comprehensive and the fields provided closely match the target schema. Most fields have a clear counterpart in the target schema, providing high confidence scores.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -65,12 +65,12 @@ The mapping is very comprehensive and the fields provided closely match the targ
 
 - Table Completion Score: 🟢 0.75
 
-### Explanation
+#### Evaluation
 
 The table mapping evaluation indicates a moderate to high confidence in the table subject matching, primarily based on shared semantics derived from similar schemas in the source and target tables, both of which are generated from equivalent API endpoints. However, there are significant disparities in the field mappings, particularly with undefined fields marked as 'MISSING', which affects the completion score.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -89,44 +89,18 @@ The table mapping evaluation indicates a moderate to high confidence in the tabl
 | `optimization_goal` | The optimization goal this ad set is using. Possible values defined [here](https://developers.facebook.com/docs/marketing-api/reference/ad-campaign/#fields). | `MISSING` | ❌ 0.00 | No good match found. |
 
 
-### Mapping from Airbyte `ads_insights` to Fivetran `basic_ad_action_values`
-
-- Table Match Confidence Score: 🟢 0.70
-
-- Table Completion Score: ⚠️ 0.57
-
-### Explanation
-
-The table mapping shows moderate confidence that the source and target tables are the same. However, with multiple fields marked 'MISSING', the completion score is affected negatively.
-
-
-### Field-by-Field Analysis
-
-| Field | Description | Expression | Confidence | Evaluation |
-| --- | --- | --- | --- | --- |
-| `_7_d_click` | Conversion metric value using an attribution window of "7 days after clicking the ad". Not included in downstream models by default, but can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics` var. | `ads_insights.attribution_setting` | ⚠️ 0.60 | Mapping is moderately confident based on conversion metric description similarity. |
-| `_fivetran_id` | Defunct field. | `MISSING` | ❌ 0.00 | No good match found. |
-| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `ads_insights._airbyte_extracted_at` | 🟢 1.00 | Standard mapping for '_fivetran_synced' to '_airbyte_extracted_at'. |
-| `action_type` | The kind of actions taken on your ad, Page, app or event after your ad was served to someone, even if they didn't click on it. Action types include Page likes, app installs, conversions, event responses and more. Actions prepended by app_custom_event come from mobile app events and actions prepended by offsite_conversion come from the Facebook Pixel.
- | `ads_insights.actions` | ⚠️ 0.60 | Moderately confident based on similar description of actions taken on ads. |
-| `ad_id` | The ID of the ad the report relates to. | `MISSING` | ❌ 0.00 | No good match found. |
-| `date` | The date of the reported performance. | `ads_insights.date_start` | 🟢 0.70 | Confident match on date as a common field for performance reports. |
-| `index` | Index reflecting the `action_type` tracked for this ad on this day. Column of not much consequence. | `ads_insights.conversion_rate_ranking` | ⚠️ 0.50 | Low confidence due to insufficient context about 'conversion_rate_ranking'. |
-| `value` | Monetary value associated with the convesion action using the default attribution window. | `ads_insights.conversion_values` | ⚠️ 0.65 | Moderately confident based on conversion value description. |
-
-
 ### Mapping from Airbyte `ad_account` to Fivetran `account_history`
 
 - Table Match Confidence Score: 🟢 0.85
 
 - Table Completion Score: 🟢 0.90
 
-### Explanation
+#### Evaluation
 
 The table mapping is strong with most fields mapped accurately from source to target. Standard mappings and casing differences align correctly. No significant mismatches found that would lower confidence.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -146,12 +120,12 @@ The table mapping is strong with most fields mapped accurately from source to ta
 
 - Table Completion Score: 🟢 0.90
 
-### Explanation
+#### Evaluation
 
 The table mapping is highly confident; all fields except 'conversion_domain' are well-matched. Matches from source to target are clear and relevant.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -176,12 +150,12 @@ These models are in the workshop directory and are not yet approved.
 
 - Table Completion Score: 🟢 0.82
 
-### Explanation
+#### Evaluation
 
 The table mappings are from similar source and target schemas with consistent subject matter. However, some fields were missing a good match. The table has a high match score due to strong alignment in identifiers and account fields, but completion is not perfect due to missing fields.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -211,12 +185,12 @@ The table mappings are from similar source and target schemas with consistent su
 
 - Table Completion Score: ❌ 0.40
 
-### Explanation
+#### Evaluation
 
 The table mapping shows a moderate match given the context of the fields provided. Some fields have been mapped with confidence, but there are significant number of fields missing a valid match, impacting the overall completion.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -225,11 +199,35 @@ The table mapping shows a moderate match given the context of the fields provide
 | `_28_d_click` | Conversion metric value using an attribution window of "28 days after clicking the ad". Deprecated by Facebook due to digital privacy initiatives. Not included in downstream models by default, but can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics` var. | `MISSING` | ❌ 0.00 | No good match found. |
 | `_fivetran_id` | Defunct field. | `MISSING` | ❌ 0.00 | No good match found. |
 | `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `ads_insights._airbyte_extracted_at` | 🟢 1.00 | _fivetran_synced is correctly mapped to ads_insights._airbyte_extracted_at. |
-| `action_type` | The kind of actions taken on your ad, Page, app or event after your ad was served to someone, even if they didn't click on it. Action types include Page likes, app installs, conversions, event responses and more. Actions prepended by app_custom_event come from mobile app events and actions prepended by offsite_conversion come from the Facebook Pixel.
- | `ads_insights.actions` | 🟢 0.70 | action_type is mapped to ads_insights.actions based on contextual similarity. |
+| `action_type` | The kind of actions taken on your ad, Page, app or event after your ad was served to someone, even if they didn't click on it. Action types include Page likes, app installs, conversions, event responses and more. Actions prepended by app_custom_event come from mobile app events and actions prepended by offsite_conversion come from the Facebook Pixel.  | `ads_insights.actions` | 🟢 0.70 | action_type is mapped to ads_insights.actions based on contextual similarity. |
 | `ad_id` | The ID of the ad the report relates to. | `ads_insights.ad_id` | 🟢 0.70 | ad_id is mapped to ads_insights.ad_id based on direct name and purpose matching. |
 | `date` | The date of the reported performance. | `ads_insights.date_start` | 🟢 0.70 | date is matched to ads_insights.date_start. This matches the purpose of recording performance date. |
 | `index` | Index reflecting the `action_type` tracked for this ad on this day. Column of not much consequence. | `MISSING` | ❌ 0.00 | No good match found. |
 | `inline` | Conversion metric value using the attribution window that occurs on the ad itself. Not included in downstream models by default, but can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics` var. | `MISSING` | ❌ 0.00 | No good match found. |
 | `value` | Conversion metric value using the default attribution window. | `MISSING` | ❌ 0.00 | No good match found. |
+
+
+### Mapping from Airbyte `ads_insights` to Fivetran `basic_ad_action_values`
+
+- Table Match Confidence Score: ❌ 0.00
+
+- Table Completion Score: ❌ 0.25
+
+#### Evaluation
+
+The table match score is 0.0 as the fields do not suggest a coherent table matching due to missing and unclear mappings. The completion score is 0.25 because only 2 out of 8 fields are precisely mapped or have clear logic, primarily due to 2 'MISSING' expressions indicating a failure to map necessary fields.
+
+
+#### Field Mapping Logic
+
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `_7_d_click` | Conversion metric value using an attribution window of "7 days after clicking the ad". Not included in downstream models by default, but can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics` var. | `ads_insights.attribution_setting` | ⚠️ 0.55 | The field '_7_d_click' is not directly mapped in a clear manner to the source and is somewhat inferred. Given name usage could broadly match Facebook ad insights overlap but lacks clear matching. |
+| `_fivetran_id` | Defunct field. | `MISSING` | ❌ 0.00 | Expression is 'MISSING'. No good match found. |
+| `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `ads_insights._airbyte_extracted_at` | 🟢 1.00 | Standard mapping to `_airbyte_extracted_at`. Always scores 1.00. |
+| `action_type` | The kind of actions taken on your ad, Page, app or event after your ad was served to someone, even if they didn't click on it. Action types include Page likes, app installs, conversions, event responses and more. Actions prepended by app_custom_event come from mobile app events and actions prepended by offsite_conversion come from the Facebook Pixel.  | `ads_insights.actions` | ⚠️ 0.65 | The expression 'ads_insights.actions' commonly refers to ad actions but could encompass broad category types with possible good fit due to description match. |
+| `ad_id` | The ID of the ad the report relates to. | `MISSING` | ❌ 0.00 | Expression is 'MISSING'. No good match found. |
+| `date` | The date of the reported performance. | `ads_insights.date_start` | ⚠️ 0.60 | The 'date' maps well to 'ads_insights.date_start', showing date logic but slightly unclear due to name plurality variance. |
+| `index` | Index reflecting the `action_type` tracked for this ad on this day. Column of not much consequence. | `ads_insights.conversion_rate_ranking` | ⚠️ 0.55 | The mapping to 'ads_insights.conversion_rate_ranking' is a possible vague match in concept but lacks better contextual linking. |
+| `value` | Monetary value associated with the convesion action using the default attribution window. | `ads_insights.conversion_values` | 🟢 0.70 | Expression 'ads_insights.conversion_values' aligns with conversion metric insights provided by Facebook, showing fairly high mapping confidence. |
 

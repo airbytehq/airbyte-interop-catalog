@@ -45,7 +45,11 @@ def create_markdown_table(headers: list[str], rows: list[list[str]]) -> str:
         # Ensure row has same number of columns as headers
         while len(row) < len(headers):
             row.append("")
-        table += "| " + " | ".join(row) + " |\n"
+        table += (
+            "| "
+            + " | ".join([str(cell).replace("\n", " ").replace("|", "\\|") for cell in row])
+            + " |\n"
+        )
 
     return table
 

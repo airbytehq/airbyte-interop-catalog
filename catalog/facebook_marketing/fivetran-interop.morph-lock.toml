@@ -38,7 +38,7 @@ unmapped_target_tables = []
 
 [mappings.account_history]
 source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/account_history.yml"
-source_file_hash = "cfc67afc935f870c203a3f9ad16e390b3e28f28883422d20a06b376642909b6e"
+source_file_hash = "73db0237856f9670fcf19981e8a69e0809d65dabc95f8e6c000175eb4ddbdc97"
 unmapped_target_fields = []
 omitted_target_fields = []
 erroneous_source_table_columns = []
@@ -126,7 +126,7 @@ ad_account = [
 
 [mappings.ad_history]
 source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/ad_history.yml"
-source_file_hash = "ed06f2de4a64eea1d8ec81b7a04dadfb4f34b204c7434afef930eb1670a26972"
+source_file_hash = "6506b8b3f056d617258f3de10b57f571160cb71784cf6434ebf0c1e4cb2e2865"
 unmapped_target_fields = [
     "conversion_domain",
 ]
@@ -253,7 +253,7 @@ ads = [
 
 [mappings.ad_set_history]
 source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/ad_set_history.yml"
-source_file_hash = "d1d6d6ced9f871113ce391b878728b031bf6e0be8562c87a32a94219e3bcbc72"
+source_file_hash = "92a83cd84f63c8467f0d13977e0cb60eda0834ddf1edc75c1768191bc64796c4"
 unmapped_target_fields = [
     "optimization_goal",
 ]
@@ -391,7 +391,7 @@ ad_sets = [
 
 [mappings.basic_ad]
 source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/basic_ad.yml"
-source_file_hash = "2ee2b663860b8b2f0405d1aed060261961ca372d2cbcd9666b69308cb01ca162"
+source_file_hash = "bf581326004832124ba6aec9ae3cd75c2a7deb6602b2f7f40d576f9fbf47ba2e"
 unmapped_target_fields = []
 omitted_target_fields = []
 erroneous_source_table_columns = []
@@ -509,7 +509,7 @@ ads_insights = [
 
 [mappings.basic_ad_action_values]
 source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/basic_ad_action_values.yml"
-source_file_hash = "acc59626244abb6b88d2e3422a12a9cf65a78532d2d22ce0fd2de904ae6bd671"
+source_file_hash = "f71d76484a55990c2685ae86d605d5f2245c5d149a4cf46535b8e005625380fd"
 unmapped_target_fields = [
     "_fivetran_id",
     "ad_id",
@@ -630,7 +630,7 @@ ads_insights = [
 
 [mappings.basic_ad_actions]
 source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/basic_ad_actions.yml"
-source_file_hash = "ba9234a1c1214beca2ee0ee163b093b868ea61c86cdfb555e1c6cfba8333acef"
+source_file_hash = "bbaf263b6078f9a4bc5871b6c8eabedcd9b30d98e16cbdb16949bdfef628a0f0"
 unmapped_target_fields = [
     "_1_d_view",
     "_28_d_click",
@@ -756,7 +756,7 @@ ads_insights = [
 
 [mappings.campaign_history]
 source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/campaign_history.yml"
-source_file_hash = "94eb17e3202fb7fb9dafc284d4f093f801281772ccd30aa3d876dd8d0e2d4610"
+source_file_hash = "e4d55de2f75df565725617c18c72467d283287d02ee0a42f6c40d20aa1c20447"
 unmapped_target_fields = []
 omitted_target_fields = []
 erroneous_source_table_columns = []
@@ -797,7 +797,7 @@ campaigns = [
 
 [mappings.creative_history]
 source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/creative_history.yml"
-source_file_hash = "9683c0752a5ba9339bda295dfdd3e47fd6fa2c45ec4ff302aabcc52de1019dcf"
+source_file_hash = "1e939fd732b44a04ef3121e7858bda2185c702c305eff11b1b555d01e50bbc1c"
 unmapped_target_fields = [
     "_fivetran_id",
     "page_link",

@@ -8,12 +8,12 @@ This directory contains automatically generated dbt models based on mapping file
 
 - Table Completion Score: ⚠️ 0.60
 
-### Explanation
+#### Evaluation
 
 The table mapping is of moderate quality with certain fields perfectly mapped, some fields with potential mappings, and others missing entirely. A score of 0.8 reflects that the table structure is very likely describing the same subject matter, but not entirely complete due to missing field mappings.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -31,12 +31,12 @@ The table mapping is of moderate quality with certain fields perfectly mapped, s
 
 - Table Completion Score: 🟢 0.86
 
-### Explanation
+#### Evaluation
 
 The table fields are generally well-aligned with their purposes clearly defined. The source fields such as 'code', 'created_at', 'id', 'price_rule_id', 'updated_at', and 'usage_count' align with expectations for discount codes in the context provided. '_fivetran_synced' is correctly mapped to a source stream's '_airbyte_extracted_at', providing a reliable match for synchronization tracking. There are no fields marked as 'MISSING', indicating an attempt has been made to map all relevant fields in the source schema to the target schema, resulting in a high score.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -55,12 +55,12 @@ The table fields are generally well-aligned with their purposes clearly defined.
 
 - Table Completion Score: 🟢 0.90
 
-### Explanation
+#### Evaluation
 
 The table match score is high due to the high similarity in subject matter between the source and target schemas, both concerned with customer information. While the completion score is even higher since most of the fields have precise mappings in the target schema.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -95,12 +95,12 @@ The table match score is high due to the high similarity in subject matter betwe
 
 - Table Completion Score: 🟢 0.80
 
-### Explanation
+#### Evaluation
 
 The table mapping has a high confidence level as most fields are well-matched with minor discrepancies. 'MISSING' fields are well addressed and the usual high-confidence mappings are adhered to.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -122,12 +122,12 @@ The table mapping has a high confidence level as most fields are well-matched wi
 
 - Table Completion Score: 🟢 0.90
 
-### Explanation
+#### Evaluation
 
 The table mapping matches closely with the expected schema based on the field names and their descriptions. Most fields have a direct match and the mappings are generally appropriate, with a few exceptions where 'MISSING' is used due to lack of good matches.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -151,19 +151,18 @@ The table mapping matches closely with the expected schema based on the field na
 
 - Table Completion Score: 🟢 0.95
 
-### Explanation
+#### Evaluation
 
 The table mapping evaluation resulted in a high confidence score due to a close match between source and target schemas. The presence of exact mappings and the ability to identify synonymous fields contribute to the quality and coverage of the mapping.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
 | `_fivetran_deleted` | {{ doc('_fivetran_deleted') }} | `locations._airbyte_extracted_at` | ❌ 0.00 | No good match found. |
 | `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `locations._airbyte_extracted_at` | 🟢 1.00 | Standard mapping for all tables. |
-| `active` | Boolean representing whether the location is active. If true, then the location can be used to sell products, stock inventory, and fulfill orders.
- | `locations.active` | 🟢 1.00 | The field 'active' has a clear one-to-one mapping, as it directly maps from the source to the target fields with no ambiguity. |
+| `active` | Boolean representing whether the location is active. If true, then the location can be used to sell products, stock inventory, and fulfill orders.  | `locations.active` | 🟢 1.00 | The field 'active' has a clear one-to-one mapping, as it directly maps from the source to the target fields with no ambiguity. |
 | `address_1` | The location's street address. | `locations.address1` | 🟢 1.00 | The field 'address_1' is directly mapped to the source, indicating a high degree of confidence in the mapping. |
 | `address_2` | The optional second line of the location's street address. | `locations.address2` | 🟢 1.00 | 'address_2' maps directly from the source, matching the field intent and data type. |
 | `city` | The city the location is in. | `locations.city` | 🟢 1.00 | The 'city' field maps directly from the source to target schemas accurately. |
@@ -172,8 +171,7 @@ The table mapping evaluation resulted in a high confidence score due to a close 
 | `country_name` | Full name of the location's country. | `locations.country_name` | 🟢 1.00 | Direct mapping from source 'country_name' to target. |
 | `created_at` | The date and time (ISO 8601 format) when the location was created. | `locations.created_at` | 🟢 1.00 | The 'created_at' field exists in both schemas and matches perfectly with ISO 8601 format indication. |
 | `id` | The ID of the location. | `locations.id` | 🟢 1.00 | The 'id' is an exact match and critical field forming the primary key. |
-| `legacy` | Boolean representing whether this is a fulfillment service location. If true, then the location is a fulfillment service location.  If false, then the location was created by the merchant and isn't tied to a fulfillment service.
- | `locations.legacy` | 🟢 1.00 | The 'legacy' field maps accurately maintaining boolean context. |
+| `legacy` | Boolean representing whether this is a fulfillment service location. If true, then the location is a fulfillment service location.  If false, then the location was created by the merchant and isn't tied to a fulfillment service.  | `locations.legacy` | 🟢 1.00 | The 'legacy' field maps accurately maintaining boolean context. |
 | `localized_country_name` | The localized name of the location's country. | `locations.localized_country_name` | 🟢 1.00 | Direct and accurate mapping for localized country name. |
 | `localized_province_name` | The localized name of the location's region. Typically a province, state, or district. | `locations.localized_province_name` | 🟢 1.00 | Perfect match for localized province name. |
 | `name` | The name of the location. | `locations.name` | 🟢 1.00 | 'Different schemas have identical field denoted by 'name', implying a perfect mapping. |
@@ -190,12 +188,12 @@ The table mapping evaluation resulted in a high confidence score due to a close 
 
 - Table Completion Score: 🟢 1.00
 
-### Explanation
+#### Evaluation
 
 All fields mapped successfully with high confidence according to provided rules and context. Mapping hypothetical fields between schemas across transformations without loss of meaning.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -204,8 +202,7 @@ All fields mapped successfully with high confidence according to provided rules 
 | `currency` | The three-letter code (ISO 4217 format) for the currency used for the tender transaction. | `tender_transactions.currency` | 🟢 1.00 | Direct match in field names and context (ISO currency code). |
 | `id` | The ID of the transaction. | `tender_transactions.id` | 🟢 1.00 | Direct match in field names and context (transaction ID). |
 | `order_id` | The ID of the order that the tender transaction belongs to. | `tender_transactions.order_id` | 🟢 1.00 | Direct match in field names and context (order ID). |
-| `payment_method` | Information about the payment method used for this transaction. Valid values include: - credit_card - cash - android_pay - apple_pay - google_pay - samsung_pay - shopify_pay - amazon - klarna - paypal - unknown - other
- | `tender_transactions.payment_method` | 🟢 1.00 | Direct match in field names and context (types of payment methods). |
+| `payment_method` | Information about the payment method used for this transaction. Valid values include: - credit_card - cash - android_pay - apple_pay - google_pay - samsung_pay - shopify_pay - amazon - klarna - paypal - unknown - other  | `tender_transactions.payment_method` | 🟢 1.00 | Direct match in field names and context (types of payment methods). |
 | `processed_at` | The date and time (ISO 8601 format) when the tender transaction was processed. | `tender_transactions.processed_at` | 🟢 1.00 | Direct match in field names and context (date of transaction processing). |
 | `remote_reference` | The remote (gateway) reference associated with the tender. | `tender_transactions.remote_reference` | 🟢 1.00 | Direct match in field names and context (reference associated with tender). |
 | `test` | Whether the tender transaction is a test transaction. | `tender_transactions.test` | 🟢 1.00 | Direct match in field names and context (indicates if transaction is a test). |
@@ -218,12 +215,12 @@ All fields mapped successfully with high confidence according to provided rules 
 
 - Table Completion Score: 🟢 0.90
 
-### Explanation
+#### Evaluation
 
 The table mappings are evaluated to be of high confidence as they describe the same subject matter in both source and target implementations.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -238,12 +235,12 @@ The table mappings are evaluated to be of high confidence as they describe the s
 
 - Table Completion Score: 🟢 0.95
 
-### Explanation
+#### Evaluation
 
 The table mapping evaluated to a high confidence score due to matching fields and descriptions aligning well with expected domains. A few fields could not be directly matched and are marked as 'MISSING'.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -310,12 +307,12 @@ The table mapping evaluated to a high confidence score due to matching fields an
 
 - Table Completion Score: ⚠️ 0.50
 
-### Explanation
+#### Evaluation
 
 The table match score is relatively high because the `_fivetran_synced` was successfully mapped to `_airbyte_extracted_at`, a standard mapping. However, two of the field mappings have expressions set to 'MISSING', resulting in a lower completion score.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -331,12 +328,12 @@ The table match score is relatively high because the `_fivetran_synced` was succ
 
 - Table Completion Score: 🟢 0.90
 
-### Explanation
+#### Evaluation
 
 The table has a strong correspondence between source and target, given shared fields and expressions. The completion score is high due to the presence of mappings for nearly all fields, though some fields are marked as deprecation or missing information.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -357,12 +354,12 @@ The table has a strong correspondence between source and target, given shared fi
 
 - Table Completion Score: 🟢 0.85
 
-### Explanation
+#### Evaluation
 
 The table mapping shows a high level of confidence as most fields have clear matches between the source and target. The mapping from `_fivetran_synced` to `_airbyte_extracted_at` achieves a perfect score of 1.00 as a standard mapping agreement. Other fields, such as `created_at`, `id`, `status`, and `tracking_number`, have clear semantic consistency, scoring above 0.85. Some fields like `shipment_status` and `service` could have slightly lower scores due to potential ambiguity, but still fall within the 0.70-0.85 range as they seem contextually accurate. `MISSING` mappings are assigned a score of 0.00 and explained with 'No good match found.'
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -370,15 +367,12 @@ The table mapping shows a high level of confidence as most fields have clear mat
 | `created_at` | The date and time when the fulfillment was created. The API returns this value in ISO 8601 format. | `fulfillments.created_at` | 🟢 0.90 | High confidence as the field directly corresponds to creation timestamp. |
 | `id` | The ID for the fulfillment. | `fulfillments.id` | 🟢 0.95 | Direct match for fulfillment ID. |
 | `location_id` | The unique identifier of the location that the fulfillment was processed at. | `fulfillments.location_id` | 🟢 0.85 | Clear mapping to location identifier, maintaining contextual integrity. |
-| `name` | The uniquely identifying fulfillment name, consisting of two parts separated by a .. The first part represents the order name and the second part represents the fulfillment number.  The fulfillment number automatically increments depending on how many fulfillments are in an order (e.g. #1001.1, #1001.2).
- | `fulfillments.name` | 🟢 0.80 | The naming structure seems intact with the order name and fulfillment number combined. |
+| `name` | The uniquely identifying fulfillment name, consisting of two parts separated by a .. The first part represents the order name and the second part represents the fulfillment number.  The fulfillment number automatically increments depending on how many fulfillments are in an order (e.g. #1001.1, #1001.2).  | `fulfillments.name` | 🟢 0.80 | The naming structure seems intact with the order name and fulfillment number combined. |
 | `order_id` | The unique numeric identifier for the order. | `fulfillments.order_id` | 🟢 0.90 | Direct correspondence of order identifier. |
 | `receipt_authorization` | The authorization code from the receipt. | `fulfillments.receipt.authorization` | 🟢 0.70 | Potential match for receipt authorization, context considered. |
 | `service` | The fulfillment service associated with the fulfillment. | `fulfillments.service` | 🟢 0.75 | Probable match for fulfillment service within the context. |
-| `shipment_status` | The current shipment status of the fulfillment. Valid values include: - label_printed: A label for the shipment was purchased and printed. - label_purchased: A label for the shipment was purchased, but not printed. - attempted_delivery: Delivery of the shipment was attempted, but unable to be completed. - ready_for_pickup: The shipment is ready for pickup at a shipping depot. - confirmed: The carrier is aware of the shipment, but hasn't received it yet. - in_transit: The shipment is being transported between shipping facilities on the way to its destination. - out_for_delivery: The shipment is being delivered to its final destination. - delivered: The shipment was succesfully delivered. - failure: Something went wrong when pulling tracking information for the shipment, such as the tracking number was invalid or the shipment was canceled.
- | `fulfillments.shipment_status` | 🟢 0.80 | Likely match based on available values for tracking shipment progress. |
-| `status` | The status of the fulfillment. Valid values include: - pending: Shopify has created the fulfillment and is waiting for the third-party fulfillment service to transition it to 'open' or 'success'. - open: The fulfillment has been acknowledged by the service and is in processing. - success: The fulfillment was successful. - cancelled: The fulfillment was cancelled. - error: There was an error with the fulfillment request. - failure: The fulfillment request failed.
- | `fulfillments.status` | 🟢 0.85 | Clear contextual match for fulfillment status. |
+| `shipment_status` | The current shipment status of the fulfillment. Valid values include: - label_printed: A label for the shipment was purchased and printed. - label_purchased: A label for the shipment was purchased, but not printed. - attempted_delivery: Delivery of the shipment was attempted, but unable to be completed. - ready_for_pickup: The shipment is ready for pickup at a shipping depot. - confirmed: The carrier is aware of the shipment, but hasn't received it yet. - in_transit: The shipment is being transported between shipping facilities on the way to its destination. - out_for_delivery: The shipment is being delivered to its final destination. - delivered: The shipment was succesfully delivered. - failure: Something went wrong when pulling tracking information for the shipment, such as the tracking number was invalid or the shipment was canceled.  | `fulfillments.shipment_status` | 🟢 0.80 | Likely match based on available values for tracking shipment progress. |
+| `status` | The status of the fulfillment. Valid values include: - pending: Shopify has created the fulfillment and is waiting for the third-party fulfillment service to transition it to 'open' or 'success'. - open: The fulfillment has been acknowledged by the service and is in processing. - success: The fulfillment was successful. - cancelled: The fulfillment was cancelled. - error: There was an error with the fulfillment request. - failure: The fulfillment request failed.  | `fulfillments.status` | 🟢 0.85 | Clear contextual match for fulfillment status. |
 | `tracking_company` | The name of the tracking company. | `fulfillments.tracking_company` | 🟢 0.90 | The field correlates well with the shipping company's tracking. |
 | `tracking_number` | Primary tracking number for the order. | `fulfillments.tracking_number` | 🟢 0.90 | Primary tracking number has a straightforward match. |
 | `tracking_numbers` | A list of tracking numbers, provided by the shipping company. | `fulfillments.tracking_numbers` | 🟢 0.90 | Tracking numbers list maps accurately to shipping records. |
@@ -392,23 +386,20 @@ The table mapping shows a high level of confidence as most fields have clear mat
 
 - Table Completion Score: 🟢 0.95
 
-### Explanation
+#### Evaluation
 
 The table mapping has a high confidence score because the source and target tables are derived from similar APIs with most fields properly mapped. All fields have either been mapped or identified as MISSING with a 0.00 confidence score.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
 | `_fivetran_synced` | {{ doc('_fivetran_synced') }} | `price_rules._airbyte_extracted_at` | 🟢 1.00 | Standard mapping from '_fivetran_synced' to '_airbyte_extracted_at', always receives a score of 1.00. |
-| `allocation_limit` | The number of times the discount can be allocated on the cart - if eligible. For example a Buy 1 hat Get 1 hat for free discount can be applied 3 times on a cart having more than 6 hats,  where maximum of 3 hats get discounted - if the allocation_limit is 3. Empty (null) allocation_limit means unlimited number of allocations.
- | `price_rules.allocation_limit` | 🟢 0.90 | The field 'allocation_limit' is directly mapped and closely matches the source structure, with a high confidence level. |
-| `allocation_method` | The allocation method of the price rule. Valid values include `each` (the discount is applied to each of the entitled items. For example, for a price rule that takes $15 off, each entitled line item in a checkout will be discounted by $15) and `across` (the calculated discount amount will be applied across the entitled items. For example, for a price rule that takes $15 off, the discount will be applied across all the entitled items).
- | `price_rules.allocation_method` | 🟢 0.90 | The 'allocation_method' is directly mapped and closely matches the context of the source data. |
+| `allocation_limit` | The number of times the discount can be allocated on the cart - if eligible. For example a Buy 1 hat Get 1 hat for free discount can be applied 3 times on a cart having more than 6 hats,  where maximum of 3 hats get discounted - if the allocation_limit is 3. Empty (null) allocation_limit means unlimited number of allocations.  | `price_rules.allocation_limit` | 🟢 0.90 | The field 'allocation_limit' is directly mapped and closely matches the source structure, with a high confidence level. |
+| `allocation_method` | The allocation method of the price rule. Valid values include `each` (the discount is applied to each of the entitled items. For example, for a price rule that takes $15 off, each entitled line item in a checkout will be discounted by $15) and `across` (the calculated discount amount will be applied across the entitled items. For example, for a price rule that takes $15 off, the discount will be applied across all the entitled items).  | `price_rules.allocation_method` | 🟢 0.90 | The 'allocation_method' is directly mapped and closely matches the context of the source data. |
 | `created_at` | The date and time (ISO 8601 format) when the price rule was created. | `price_rules.created_at` | 🟢 0.80 | The field 'created_at' has a direct mapping but the date format must be confirmed. |
-| `customer_selection` | The customer selection for the price rule. Valid values include `all` (the price rule is valid for all customers) and `prerequisite`  (the customer must either belong to one of the customer segments specified by customer_segment_prerequisite_ids, or be one of the customers specified by prerequisite_customer_ids).
- | `price_rules.customer_selection` | 🟢 0.85 | 'customer_selection' shows a strong contextual match with predefined valid values. |
+| `customer_selection` | The customer selection for the price rule. Valid values include `all` (the price rule is valid for all customers) and `prerequisite`  (the customer must either belong to one of the customer segments specified by customer_segment_prerequisite_ids, or be one of the customers specified by prerequisite_customer_ids).  | `price_rules.customer_selection` | 🟢 0.85 | 'customer_selection' shows a strong contextual match with predefined valid values. |
 | `ends_at` | The date and time (ISO 8601 format) when the price rule ends. Must be after starts_at. | `price_rules.ends_at` | 🟢 0.80 | The field 'ends_at' closely matches the source, consider checking the date format. |
 | `id` | The ID for the price rule. | `price_rules.id` | 🟢 0.95 | Id fields generally have a high confidence due to unique identity matching. |
 | `once_per_customer` | Boolean representing whether the generated discount code will be valid only for a single use per customer. This is tracked using customer ID. | `price_rules.once_per_customer` | 🟢 0.90 | Boolean values generally have a straightforward mapping, resulting in a high score. |
@@ -419,17 +410,13 @@ The table mapping has a high confidence score because the source and target tabl
 | `quantity_ratio_entitled_quantity` | If `customer_selection` is `prerequisite`, in a Buy/Get ratio for a Buy X Get Y discount, this is the offered 'get' quantity. | `price_rules.prerequisite_to_entitlement_quantity_ratio.entitled_quantity` | 🟢 0.80 | Matching within a nested structure with 'entitled_quantity' context. |
 | `quantity_ratio_prerequisite_quantity` | If `customer_selection` is `prerequisite`, in a Buy/Get ratio for a Buy X Get Y discount, this defines the necessary 'buy' quantity. | `price_rules.prerequisite_to_entitlement_quantity_ratio.prerequisite_quantity` | 🟢 0.80 | Similar nested match with 'prerequisite_quantity' context. |
 | `starts_at` | The date and time (ISO 8601 format) when the price rule starts. | `price_rules.starts_at` | 🟢 0.80 | Close match observed, confirm date and time are represented correctly. |
-| `target_selection` | The target selection method of the price rule. Valid values include `all` (the price rule applies the discount to all line items in the checkout) and  `entitled` (the price rule applies the discount to selected entitlements only).
- | `price_rules.target_selection` | 🟢 0.85 | High contextual relevance from given target selection options. |
+| `target_selection` | The target selection method of the price rule. Valid values include `all` (the price rule applies the discount to all line items in the checkout) and  `entitled` (the price rule applies the discount to selected entitlements only).  | `price_rules.target_selection` | 🟢 0.85 | High contextual relevance from given target selection options. |
 | `target_type` | The target type that the price rule applies to. Valid values include `line_item` (the price rule applies to the cart's line items) and `shipping_line` (the price rule applies to the cart's shipping lines). | `price_rules.target_type` | 🟢 0.85 | Matches well with the target type and its discretized values. |
-| `title` | The title of the price rule. This is used by the Shopify admin search to retrieve discounts. It is also displayed on the Discounts page of the Shopify admin for bulk discounts.  Shopify recommends that this map onto the associated `discount_code.code`.
- | `price_rules.title` | 🟢 0.90 | Titles of price rules likely match directly across systems. |
+| `title` | The title of the price rule. This is used by the Shopify admin search to retrieve discounts. It is also displayed on the Discounts page of the Shopify admin for bulk discounts.  Shopify recommends that this map onto the associated `discount_code.code`.  | `price_rules.title` | 🟢 0.90 | Titles of price rules likely match directly across systems. |
 | `updated_at` | The date and time (ISO 8601 format) when the price rule was updated. | `price_rules.updated_at` | 🟢 0.80 | Ensure date formatting consistency for the updated_at field. |
 | `usage_limit` | The maximum number of times the price rule can be used, per discount code. | `price_rules.usage_limit` | 🟢 0.90 | Represents a confidently mapped numerical field with usage limitations. |
 | `value` | The value of the price rule. If if the value of `target_type` is `shipping_line`, then only -100 is accepted. The value must be negative. | `price_rules.value` | 🟢 0.70 | Requires considering negative values unique to context but maps well. |
-| `value_type` | The value type of the price rule. Valid values include `fixed_amount` (applies a discount of value as a unit of the store's currency. For example, if value is -30 and the store's currency is USD, then $30 USD is deducted when the discount is applied) and `percentage` (applies a percentage discount of value. For example, if value is -30, then 30% will be deducted when the discount is applied).
-If `target_type` is `shipping_line`, then only `percentage` is accepted.
- | `price_rules.value_type` | 🟢 0.85 | Valid values for 'value_type' show strong mapping consistency. |
+| `value_type` | The value type of the price rule. Valid values include `fixed_amount` (applies a discount of value as a unit of the store's currency. For example, if value is -30 and the store's currency is USD, then $30 USD is deducted when the discount is applied) and `percentage` (applies a percentage discount of value. For example, if value is -30, then 30% will be deducted when the discount is applied). If `target_type` is `shipping_line`, then only `percentage` is accepted.  | `price_rules.value_type` | 🟢 0.85 | Valid values for 'value_type' show strong mapping consistency. |
 
 
 ### Mapping from Airbyte `order_refunds` to Fivetran `refund`
@@ -438,12 +425,12 @@ If `target_type` is `shipping_line`, then only `percentage` is accepted.
 
 - Table Completion Score: 🟢 0.90
 
-### Explanation
+#### Evaluation
 
 The table mapping shows high confidence since source and target tables are assumed to be derived from the same API, indicating they describe the same subject matter. The completion score is high as well, given all fields of significance in source are well mapped, except for the expected standard and one missing field.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -464,12 +451,12 @@ The table mapping shows high confidence since source and target tables are assum
 
 - Table Completion Score: 🟢 0.80
 
-### Explanation
+#### Evaluation
 
 The table mapping was evaluated with a high table match score as the subject matter aligns closely between source and target, hence a match score of 0.70. The completion score is 0.80, indicating some fields have good mapping and coverage from source to target with a slight room for improvement.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -484,12 +471,12 @@ The table mapping was evaluated with a high table match score as the subject mat
 
 - Table Completion Score: 🟢 0.90
 
-### Explanation
+#### Evaluation
 
 The mapping configuration aligns well with the expected target schema. High confidence mappings like '_fivetran_synced' to 'products._airbyte_extracted_at' contribute positively. Missing mappings like '_fivetran_deleted' are penalized. Field mappings suggest a strong match with exceptions handled appropriately.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -504,8 +491,7 @@ The mapping configuration aligns well with the expected target schema. High conf
 | `title` | The name of the product. | `products.title` | 🟢 0.90 | 'products.title' accurately reflects 'title'. |
 | `updated_at` | The date and time when the product was last modified. | `products.updated_at` | 🟢 0.80 | 'products.updated_at' corresponds well to 'updated_at'. |
 | `vendor` | The name of the product's vendor. | `products.vendor` | 🟢 0.90 | 'products.vendor' is a precise match for 'vendor'. |
-| `status` | The status of the product. Valid values: - active: The product is ready to sell and is available to customers on the online store, sales channels, and apps. By default, existing products are set to active. - archived: The product is no longer being sold and isn't available to customers on sales channels and apps. - draft: The product isn't ready to sell and is unavailable to customers on sales channels and apps. By default, duplicated and unarchived products are set to draft.
- | `products.status` | 🟢 0.80 | 'products.status' aligns well with 'status', acknowledging the valid status values. |
+| `status` | The status of the product. Valid values: - active: The product is ready to sell and is available to customers on the online store, sales channels, and apps. By default, existing products are set to active. - archived: The product is no longer being sold and isn't available to customers on sales channels and apps. - draft: The product isn't ready to sell and is unavailable to customers on sales channels and apps. By default, duplicated and unarchived products are set to draft.  | `products.status` | 🟢 0.80 | 'products.status' aligns well with 'status', acknowledging the valid status values. |
 
 
 ## Workshop Models
@@ -518,12 +504,12 @@ These models are in the workshop directory and are not yet approved.
 
 - Table Completion Score: 🟢 0.82
 
-### Explanation
+#### Evaluation
 
 The table match confidence is high due to the similarity in subject matter, but not all fields could be mapped, especially with some fields missing appropriate matches. The completion score reflects the proportion of fields that have meaningful mappings.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -533,12 +519,9 @@ The table match confidence is high due to the similarity in subject matter, but 
 | `handle` | A unique, human-readable string for the collection automatically generated from its title. This is used in themes by the Liquid templating language to refer to the collection. | `custom_collections.handle` | 🟢 0.70 | Good match found with 'custom_collections.handle'. |
 | `id` | The ID for the collection. | `custom_collections.id` | 🟢 0.70 | Good match found with 'custom_collections.id'. |
 | `published_at` | The time and date (ISO 8601 format) when the collection was made visible. Returns null for a hidden collection. | `custom_collections.published_at` | 🟢 0.70 | Good match found with 'custom_collections.published_at'. |
-| `published_scope` | Whether the collection is published to the Point of Sale channel. Valid values `web` (the collection is published to the Online Store channel but not published to the Point of Sale channel) and `global` (the collection is published to both the Online Store channel and the Point of Sale channel).
- | `custom_collections.published_scope` | 🟢 0.70 | Good match found with 'custom_collections.published_scope'. |
-| `rules` | An array of rules that define what products go into the smart collection. Each rule (`column` -- `relation` --> `condition`) has these properties: - `column`: the property of a product being used to populate the smart collection. Ex: 'tag', 'type', 'vendor', 'variant_price', etc. - `relation`: The comparitive relationship between the column choice, and the condition ('equals', 'contains', 'greater_than', etc.) - condition: Select products for a smart collection using a condition. Values are either strings or numbers, depending on the relation value. See the [Shopify docs](https://shopify.dev/api/admin-rest/2022-10/resources/smartcollection#resource-object) for more.
- | `MISSING` | ❌ 0.00 | No good match found. |
-| `sort_order` | The order of the products in the collection. Valid values inclide - `alpha-asc`: The products are sorted alphabetically from A to Z. - `alpha-des`: The products are sorted alphabetically from Z to A. - `best-selling`: The products are sorted by number of sales. - `created`: The products are sorted by the date they were created, from oldest to newest. - `created-desc`: The products are sorted by the date they were created, from newest to oldest. - `manual`: The products are manually sorted by the shop owner. - `price-asc`: The products are sorted by price from lowest to highest. - `price-desc`: The products are sorted by price from highest to lowest.
- | `custom_collections.sort_order` | 🟢 0.70 | Good match found with 'custom_collections.sort_order'. |
+| `published_scope` | Whether the collection is published to the Point of Sale channel. Valid values `web` (the collection is published to the Online Store channel but not published to the Point of Sale channel) and `global` (the collection is published to both the Online Store channel and the Point of Sale channel).  | `custom_collections.published_scope` | 🟢 0.70 | Good match found with 'custom_collections.published_scope'. |
+| `rules` | An array of rules that define what products go into the smart collection. Each rule (`column` -- `relation` --> `condition`) has these properties: - `column`: the property of a product being used to populate the smart collection. Ex: 'tag', 'type', 'vendor', 'variant_price', etc. - `relation`: The comparitive relationship between the column choice, and the condition ('equals', 'contains', 'greater_than', etc.) - condition: Select products for a smart collection using a condition. Values are either strings or numbers, depending on the relation value. See the [Shopify docs](https://shopify.dev/api/admin-rest/2022-10/resources/smartcollection#resource-object) for more.  | `MISSING` | ❌ 0.00 | No good match found. |
+| `sort_order` | The order of the products in the collection. Valid values inclide - `alpha-asc`: The products are sorted alphabetically from A to Z. - `alpha-des`: The products are sorted alphabetically from Z to A. - `best-selling`: The products are sorted by number of sales. - `created`: The products are sorted by the date they were created, from oldest to newest. - `created-desc`: The products are sorted by the date they were created, from newest to oldest. - `manual`: The products are manually sorted by the shop owner. - `price-asc`: The products are sorted by price from lowest to highest. - `price-desc`: The products are sorted by price from highest to lowest.  | `custom_collections.sort_order` | 🟢 0.70 | Good match found with 'custom_collections.sort_order'. |
 | `title` | The name of the collection | `custom_collections.title` | 🟢 0.70 | Good match found with 'custom_collections.title'. |
 | `updated_at` | The date and time (ISO 8601 format) when the collection was last modified. | `custom_collections.updated_at` | 🟢 0.70 | Good match found with 'custom_collections.updated_at'. |
 
@@ -549,12 +532,12 @@ The table match confidence is high due to the similarity in subject matter, but 
 
 - Table Completion Score: ⚠️ 0.52
 
-### Explanation
+#### Evaluation
 
 The table mappings have some missing fields and questionable matches. The '_fivetran_deleted' and several others are marked as 'MISSING'. Also, there are only a few fields that match perfectly, like '_fivetran_synced'.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -587,12 +570,12 @@ The table mappings have some missing fields and questionable matches. The '_five
 
 - Table Completion Score: 🟢 0.75
 
-### Explanation
+#### Evaluation
 
 The table match score is 0.5 due to partial similarity between the source and target schemas. The completion score is 0.75 as most fields are mapped, but some are missing or poorly matched.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -608,12 +591,12 @@ The table match score is 0.5 due to partial similarity between the source and ta
 
 - Table Completion Score: ❌ 0.44
 
-### Explanation
+#### Evaluation
 
 The table mapping confidence score is moderate due to partial matches and the presence of several 'MISSING' expressions indicating incomplete mappings. Despite a few high-confidence mappings, the overall completion is low due to multiple unmapped fields.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -634,12 +617,12 @@ The table mapping confidence score is moderate due to partial matches and the pr
 
 - Table Completion Score: ❌ 0.25
 
-### Explanation
+#### Evaluation
 
 The mapping configuration exhibits a perfect table match with successful standard field mapping for '_fivetran_synced', but lacks completion with most fields having 'MISSING' expressions.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -655,12 +638,12 @@ The mapping configuration exhibits a perfect table match with successful standar
 
 - Table Completion Score: ⚠️ 0.50
 
-### Explanation
+#### Evaluation
 
 The mapping includes standard and missing field expressions. Standard mappings like '_fivetran_synced' were given a high score, while missing fields were penalized.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -676,12 +659,12 @@ The mapping includes standard and missing field expressions. Standard mappings l
 
 - Table Completion Score: ⚠️ 0.60
 
-### Explanation
+#### Evaluation
 
 The table mapping is mostly consistent with the target schema, but there are several fields marked as 'MISSING' due to lack of good matches or differences in field representation. The overall table match score is high due to shared subject matter and relevant fields, but the completion score is lower reflecting these gaps.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -697,12 +680,9 @@ The table mapping is mostly consistent with the target schema, but there are sev
 | `inventory_policy` | Whether customers are allowed to place an order for the product variant when it's out of stock. | `product_variants.inventory_policy` | 🟢 0.90 | The mapping of 'inventory_policy' is strong as it directly corresponds to 'product_variants.inventory_policy'. |
 | `inventory_quantity` | An aggregate of inventory across all locations. To adjust inventory at a specific location, use the InventoryLevel resource. | `product_variants.inventory_quantity` | 🟢 0.90 | The mapping of 'inventory_quantity' is strong as it directly corresponds to 'product_variants.inventory_quantity'. |
 | `old_inventory_quantity` | (DEPRECATED 2025-01-06) Use the InventoryLevel resource instead. | `product_variants.old_inventory_quantity` | 🟢 0.90 | The mapping of 'old_inventory_quantity' is strong as it directly corresponds to 'product_variants.old_inventory_quantity'. |
-| `option_1` | (DEPRECATED 2025-01-06) The custom properties that a shop owner uses to define product variants. You can define three options for a product variant: option1, option2, option3.
- | `product_variants.option1` | 🟢 0.90 | The mapping of 'option_1' is strong as it directly corresponds to 'product_variants.option1'. |
-| `option_2` | (DEPRECATED 2025-01-06) The custom properties that a shop owner uses to define product variants. You can define three options for a product variant: option1, option2, option3.
- | `product_variants.option2` | 🟢 0.90 | The mapping of 'option_2' is strong as it directly corresponds to 'product_variants.option2'. |
-| `option_3` | (DEPRECATED 2025-01-06) The custom properties that a shop owner uses to define product variants. You can define three options for a product variant: option1, option2, option3.
- | `product_variants.option3` | 🟢 0.90 | The mapping of 'option_3' is strong as it directly corresponds to 'product_variants.option3'. |
+| `option_1` | (DEPRECATED 2025-01-06) The custom properties that a shop owner uses to define product variants. You can define three options for a product variant: option1, option2, option3.  | `product_variants.option1` | 🟢 0.90 | The mapping of 'option_1' is strong as it directly corresponds to 'product_variants.option1'. |
+| `option_2` | (DEPRECATED 2025-01-06) The custom properties that a shop owner uses to define product variants. You can define three options for a product variant: option1, option2, option3.  | `product_variants.option2` | 🟢 0.90 | The mapping of 'option_2' is strong as it directly corresponds to 'product_variants.option2'. |
+| `option_3` | (DEPRECATED 2025-01-06) The custom properties that a shop owner uses to define product variants. You can define three options for a product variant: option1, option2, option3.  | `product_variants.option3` | 🟢 0.90 | The mapping of 'option_3' is strong as it directly corresponds to 'product_variants.option3'. |
 | `position` | The order of the product variant in the list of product variants. The first position in the list is 1. The position of variants is indicated by the order in which they are listed. | `product_variants.position` | 🟢 0.90 | The mapping of 'position' is strong as it directly corresponds to 'product_variants.position'. |
 | `price` | The price of the product variant in shop currency. | `product_variants.price` | 🟢 0.90 | The mapping of 'price' is strong as it directly corresponds to 'product_variants.price'. |
 | `product_id` | The unique numeric identifier for the product. | `product_variants.product_id` | 🟢 0.90 | The mapping of 'product_id' is strong as it directly corresponds to 'product_variants.product_id'. |
@@ -713,8 +693,7 @@ The table mapping is mostly consistent with the target schema, but there are sev
 | `title` | The title of the product variant. The title field is a concatenation of the option1, option2, and option3 fields. You can only update title indirectly using the option fields. | `product_variants.title` | 🟢 0.90 | The mapping of 'title' is strong as it directly corresponds to 'product_variants.title'. |
 | `updated_at` | The date and time when the product variant was last modified. Gets returned in ISO 8601 format. | `product_variants.updated_at` | 🟢 0.90 | The mapping of 'updated_at' is strong as it directly corresponds to 'product_variants.updated_at'. |
 | `weight` | (DEPRECATED 2025-01-06) The weight of the product variant in the unit system specified with weight_unit. | `product_variants.weight` | 🟢 0.90 | The mapping of 'weight' is strong as it directly corresponds to 'product_variants.weight'. |
-| `weight_unit` | (DEPRECATED 2025-01-06) The unit of measurement that applies to the product variant's weight. If you don't specify a value for weight_unit, then the shop's default unit of measurement is applied. Valid values: g, kg, oz, and lb.
- | `product_variants.weight_unit` | 🟢 0.90 | The mapping of 'weight_unit' is strong as it directly corresponds to 'product_variants.weight_unit'. |
+| `weight_unit` | (DEPRECATED 2025-01-06) The unit of measurement that applies to the product variant's weight. If you don't specify a value for weight_unit, then the shop's default unit of measurement is applied. Valid values: g, kg, oz, and lb.  | `product_variants.weight_unit` | 🟢 0.90 | The mapping of 'weight_unit' is strong as it directly corresponds to 'product_variants.weight_unit'. |
 | `available_for_sale` | Indicates whether the product variant is available for sale. | `product_variants.available_for_sale` | 🟢 0.90 | The mapping of 'available_for_sale' is strong as it directly corresponds to 'product_variants.available_for_sale'. |
 | `display_name` | The display name of the variant, based on the product's title and variant's title. | `product_variants.display_name` | 🟢 0.90 | The mapping of 'display_name' is strong as it directly corresponds to 'product_variants.display_name'. |
 | `legacy_resource_id` | The ID of the corresponding resource in the REST Admin API. | `MISSING` | ❌ 0.00 | No good match found. |
@@ -730,12 +709,12 @@ The table mapping is mostly consistent with the target schema, but there are sev
 
 - Table Completion Score: ❌ 0.30
 
-### Explanation
+#### Evaluation
 
 The table match score is high because most of the fields seem to relate to fulfillment events, matching the expected domain. However, many fields have 'MISSING' expressions, leading to a lower completion score.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -745,8 +724,7 @@ The table match score is high because most of the fields seem to relate to fulfi
 | `city` | The city where the fulfillment event occurred. | `fulfillments.origin_address.city` | 🟢 0.70 | 'city' maps well to 'fulfillments.origin_address.city'. |
 | `country` | The country where the fulfillment event occurred. | `fulfillments.origin_address.country_code` | 🟢 0.70 | 'country' maps well to 'fulfillments.origin_address.country_code'. |
 | `created_at` | The date and time (ISO 8601 format) when the fulfillment event was created. | `fulfillments.created_at` | 🟢 0.70 | 'created_at' maps well to 'fulfillments.created_at'. |
-| `estimated_delivery_at` | The estimated delivery date based on the fulfillment's tracking number, as long as it's provided by one of the following carriers: USPS, FedEx, UPS, or Canada Post (Canada only).  Value is `null` if no tracking number is available or if the tracking number is from an unsupported carrier. This property is available only when carrier calculated rates are in use.
- | `MISSING` | ❌ 0.00 | No good match found. |
+| `estimated_delivery_at` | The estimated delivery date based on the fulfillment's tracking number, as long as it's provided by one of the following carriers: USPS, FedEx, UPS, or Canada Post (Canada only).  Value is `null` if no tracking number is available or if the tracking number is from an unsupported carrier. This property is available only when carrier calculated rates are in use.  | `MISSING` | ❌ 0.00 | No good match found. |
 | `fulfillment_id` | An ID for the fulfillment that's associated with the fulfillment event. | `fulfillments.id` | 🟢 0.70 | 'fulfillment_id' maps well to 'fulfillments.id'. |
 | `happened_at` | The date and time (ISO 8601 format) when the fulfillment event occurred. | `MISSING` | ❌ 0.00 | No good match found. |
 | `id` | An ID for the fulfillment event. | `fulfillments.id` | 🟢 0.70 | 'id' maps well to 'fulfillments.id'. |
@@ -756,8 +734,7 @@ The table match score is high because most of the fields seem to relate to fulfi
 | `order_id` | The ID of the order that's associated with the fulfillment event. | `fulfillments.order_id` | 🟢 0.70 | 'order_id' maps well to 'fulfillments.order_id'. |
 | `province` | The province where the fulfillment event occurred. | `fulfillments.origin_address.province_code` | 🟢 0.70 | 'province' maps well to 'fulfillments.origin_address.province_code'. |
 | `shop_id` | An ID for the shop that's associated with the fulfillment event. | `MISSING` | ❌ 0.00 | No good match found. |
-| `status` | The status of the fulfillment event. Valid values: - label_printed: A label for the shipment was purchased and printed. - label_purchased: A label for the shipment was purchased, but not printed. - attempted_delivery: Delivery of the shipment was attempted, but unable to be completed. - ready_for_pickup: The shipment is ready for pickup at a shipping depot. - picked_up: The fulfillment was successfully picked up. - confirmed: The carrier is aware of the shipment, but hasn't received it yet. - in_transit: The shipment is being transported between shipping facilities on the way to its destination. - out_for_delivery: The shipment is being delivered to its final destination. - delivered: The shipment was successfully delivered. - failure: Something went wrong when pulling tracking information for the shipment, such as the tracking number was invalid or the shipment was canceled.
- | `fulfillments.shipment_status` | 🟢 0.70 | 'status' maps well to 'fulfillments.shipment_status'. |
+| `status` | The status of the fulfillment event. Valid values: - label_printed: A label for the shipment was purchased and printed. - label_purchased: A label for the shipment was purchased, but not printed. - attempted_delivery: Delivery of the shipment was attempted, but unable to be completed. - ready_for_pickup: The shipment is ready for pickup at a shipping depot. - picked_up: The fulfillment was successfully picked up. - confirmed: The carrier is aware of the shipment, but hasn't received it yet. - in_transit: The shipment is being transported between shipping facilities on the way to its destination. - out_for_delivery: The shipment is being delivered to its final destination. - delivered: The shipment was successfully delivered. - failure: Something went wrong when pulling tracking information for the shipment, such as the tracking number was invalid or the shipment was canceled.  | `fulfillments.shipment_status` | 🟢 0.70 | 'status' maps well to 'fulfillments.shipment_status'. |
 | `updated_at` | The date and time (ISO 8601 format) when the fulfillment event was updated. | `fulfillments.updated_at` | 🟢 0.70 | 'updated_at' maps well to 'fulfillments.updated_at'. |
 | `zip` | The zip code of the location where the fulfillment event occurred. | `fulfillments.origin_address.zip` | 🟢 0.70 | The 'zip' field maps correctly to 'fulfillments.origin_address.zip'. |
 
@@ -768,12 +745,12 @@ The table match score is high because most of the fields seem to relate to fulfi
 
 - Table Completion Score: ❌ 0.14
 
-### Explanation
+#### Evaluation
 
 The field mapping includes one perfect match (`_fivetran_synced` to `_airbyte_extracted_at`), which always receives a score of 1.00. All other fields are marked as 'MISSING', indicating no good matches found, which lowers the completion score significantly.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -792,12 +769,12 @@ The field mapping includes one perfect match (`_fivetran_synced` to `_airbyte_ex
 
 - Table Completion Score: 🟢 0.75
 
-### Explanation
+#### Evaluation
 
 The table mapping is based on shared API endpoints, suggesting a strong match. However, not all fields in the target schema are present in the source.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -824,12 +801,12 @@ The table mapping is based on shared API endpoints, suggesting a strong match. H
 
 - Table Completion Score: ❌ 0.10
 
-### Explanation
+#### Evaluation
 
 The table match is neutral due to generic field matching, with many fields having 'MISSING' values indicating no correspondence in the source data.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -868,12 +845,12 @@ The table match is neutral due to generic field matching, with many fields havin
 
 - Table Completion Score: 🟢 0.86
 
-### Explanation
+#### Evaluation
 
 The table match score reflects a fairly good match between the source and target table schemas, as they share related fields and concepts. However, it's not perfect due to field variations and expressions not directly matching for all fields. The completion score is high as most fields have corresponding expressions in the source schema, with '_fivetran_synced' correctly mapped to '_airbyte_extracted_at'.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -892,12 +869,12 @@ The table match score reflects a fairly good match between the source and target
 
 - Table Completion Score: ❌ 0.36
 
-### Explanation
+#### Evaluation
 
 The table matching is strong because both systems likely describe the same subject matter. However, many fields have missing expressions, resulting in a low completion score.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -920,12 +897,12 @@ The table matching is strong because both systems likely describe the same subje
 
 - Table Completion Score: 🟢 0.72
 
-### Explanation
+#### Evaluation
 
 The table match score is high due to strong similarity in table subject matter. The completion score reflects some missing mappings, lowering overall confidence.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -969,12 +946,12 @@ The table match score is high due to strong similarity in table subject matter. 
 
 - Table Completion Score: ❌ 0.05
 
-### Explanation
+#### Evaluation
 
 Only one field mapping is accurate with perfect confidence, the rest have 'MISSING' as expressions, indicating no matches found.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -1004,12 +981,12 @@ Only one field mapping is accurate with perfect confidence, the rest have 'MISSI
 
 - Table Completion Score: ⚠️ 0.57
 
-### Explanation
+#### Evaluation
 
 The table mapping quality is relatively high, given that most field names have corresponding expressions from similar schemas. However, several fields are marked as 'MISSING,' indicating incomplete field mappings and reducing the completion score. The standard mapping of '_fivetran_synced' to '_airbyte_extracted_at' boosts confidence significantly. The lack of a logical or exact match for 'index', 'order_line_id', and 'rate' fields decreases the completion score as they are marked 'MISSING'.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -1028,12 +1005,12 @@ The table mapping quality is relatively high, given that most field names have c
 
 - Table Completion Score: 🟢 0.85
 
-### Explanation
+#### Evaluation
 
 The table mapping is evaluated to have a high table match score due to the comprehensive outline of field mappings that are appropriately correlated with reasonable confidence to the target schema. However, there are fields with 'MISSING' expressions which moderately reduce the completion score as they indicate where the source schema lacks equivalent or meaningful matches.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -1050,12 +1027,12 @@ The table mapping is evaluated to have a high table match score due to the compr
 
 - Table Completion Score: ❌ 0.21
 
-### Explanation
+#### Evaluation
 
 The table mapping has a partial match with high confidence for standardized fields like '_fivetran_synced'. Several fields are missing a good match, affecting the completion score significantly. The high-confidence mapping of '_fivetran_synced' to '_airbyte_extracted_at' contributes positively to the table match score.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -1081,13 +1058,13 @@ The table mapping has a partial match with high confidence for standardized fiel
 
 - Table Completion Score: 🟢 0.75
 
-### Explanation
+#### Evaluation
 
 The table mapping reflects a moderate confidence level due to missing mappings.
 Field-level mappings include both perfect and missing entries.
 
 
-### Field-by-Field Analysis
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |

@@ -8,12 +8,12 @@ This directory contains automatically generated dbt models based on mapping file
 
 - Table Completion Score: 🟢 0.95
 
-### Evaluation
+#### Evaluation
 
 The table match score is high because the field mappings consistently relate similar data across both schemas. The completion score is also high, reflecting that each field has been thoughtfully mapped with minimal missing data.
 
 
-### Field Mapping Logic
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -40,12 +40,12 @@ The table match score is high because the field mappings consistently relate sim
 
 - Table Completion Score: 🟢 0.88
 
-### Evaluation
+#### Evaluation
 
 All fields were matched with high confidence, except for _fivetran_deleted which was missing a corresponding match.
 
 
-### Field Mapping Logic
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -65,12 +65,12 @@ All fields were matched with high confidence, except for _fivetran_deleted which
 
 - Table Completion Score: 🟢 0.80
 
-### Evaluation
+#### Evaluation
 
 The table mapping suggests a strong correlation with email events, commonly found in both source and target schemas. Most fields have been appropriately matched to their equivalents.
 
 
-### Field Mapping Logic
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -88,29 +88,21 @@ The table mapping suggests a strong correlation with email events, commonly foun
 
 - Table Completion Score: 🟢 0.70
 
-### Evaluation
+#### Evaluation
 
 The table mapping is evaluated with a relatively high confidence due to the presence of standard mappings like `_fivetran_synced` to `_airbyte_extracted_at` and typical fields seen in similar schemas. However, there are fields that exhibit uncertainty, lowering the completion score.
 
 
-### Field Mapping Logic
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
 | `_fivetran_synced` | {{ doc("_fivetran_synced") }} | `engagements_emails._airbyte_extracted_at` | 🟢 1.00 | Standard mapping of `_fivetran_synced` to `_airbyte_extracted_at`. |
 | `engagement_id` | The ID of the engagement. | `engagements_emails.id` | 🟢 0.80 | Direct mapping with high confidence, common field name indicating unique identifier. |
-| `property_hs_createdate` | This field marks the email's time of creation and determines where the email sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
-PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
- | `engagements_emails.properties.hs_createdate` | ⚠️ 0.65 | Field corresponds to a timestamp, but specific conditions in the description suggest slight differences in data presence. |
-| `timestamp` | This field marks the email's time of occurrence and determines where the email sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
-PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
- | `engagements_emails.properties_hs_timestamp` | ⚠️ 0.65 | Another timestamp field, similar explanation as property_hs_createdate. |
-| `property_hubspot_owner_id` | The ID of the owner associated with the email. This field determines the user listed as the email creator on the record timeline.
-PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
- | `engagements_emails.properties.hubspot_owner_id` | 🟢 0.70 | Likely mapping for owner ID, but conditional existence in description affects confidence. |
-| `property_hubspot_team_id` | The ID of the team associated with the email. This field determines the team listed as the email creator on the record timeline.
-PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version.
- | `engagements_emails.properties.hubspot_team_id` | 🟢 0.70 | Likely mapping for team ID, but conditional existence in description affects confidence. |
+| `property_hs_createdate` | This field marks the email's time of creation and determines where the email sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format.  PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.  | `engagements_emails.properties.hs_createdate` | ⚠️ 0.65 | Field corresponds to a timestamp, but specific conditions in the description suggest slight differences in data presence. |
+| `timestamp` | This field marks the email's time of occurrence and determines where the email sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format.  PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.  | `engagements_emails.properties_hs_timestamp` | ⚠️ 0.65 | Another timestamp field, similar explanation as property_hs_createdate. |
+| `property_hubspot_owner_id` | The ID of the owner associated with the email. This field determines the user listed as the email creator on the record timeline. PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.  | `engagements_emails.properties.hubspot_owner_id` | 🟢 0.70 | Likely mapping for owner ID, but conditional existence in description affects confidence. |
+| `property_hubspot_team_id` | The ID of the team associated with the email. This field determines the team listed as the email creator on the record timeline. PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version.  | `engagements_emails.properties.hubspot_team_id` | 🟢 0.70 | Likely mapping for team ID, but conditional existence in description affects confidence. |
 
 
 ### Mapping from Airbyte `engagements_notes` to Fivetran `engagement_note`
@@ -119,30 +111,22 @@ PLEASE NOTE: This field will only be populated for connectors utilizing the HubS
 
 - Table Completion Score: ⚠️ 0.57
 
-### Evaluation
+#### Evaluation
 
 The table mapping reflects the same conceptual entity between the source and target. However, one of the field mappings is missing, impacting the completion score. The table map aligns well with data source structures typically shared via similar APIs, thereby achieving a high table match score.
 
 
-### Field Mapping Logic
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
 | `_fivetran_synced` | {{ doc("_fivetran_synced") }} | `engagements_notes._airbyte_extracted_at` | 🟢 1.00 | This is a standard mapping for all tables and is always mapped to '_airbyte_extracted_at'. |
 | `body` | The body of the note. The body has a limit of 65536 characters. | `engagements_notes.properties.hs_note_body` | 🟢 0.80 | The field 'body' maps well to 'hs_note_body' indicating a similar content purpose, thus achieving a high confidence score. |
 | `engagement_id` | The ID of the engagement. | `MISSING` | ❌ 0.00 | No good match found. |
-| `property_hs_createdate` | This field marks the note's time of creation and determines where the note sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
-PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
- | `engagements_notes.properties.hs_createdate` | 🟢 0.70 | This field marks the note's time of creation; mapped to 'hs_createdate' reflecting likely indiscernible temporal data. Meeting specified criteria. |
-| `timestamp` | This field marks the note's time of occurrence and determines where the note sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
-PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
- | `engagements_notes.properties.hs_timestamp` | 🟢 0.70 | This field marks the note's time of occurrence; mapped to 'hs_timestamp', aligns contextually similar to creation date. |
-| `property_hubspot_owner_id` | The ID of the owner associated with the note. This field determines the user listed as the note creator on the record timeline.
-PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
- | `engagements_notes.properties.hubspot_owner_id` | 🟢 0.70 | Reflects ownership of the note, aligning contextually with 'hubspot_owner_id', maintaining entity tracking consistency. |
-| `property_hubspot_team_id` | The ID of the team associated with the note. This field determines the team listed as the note creator on the record timeline.
-PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version.
- | `engagements_notes.properties.hubspot_team_id` | 🟢 0.70 | Reflects team ownership of the note, aligning consistently with 'hubspot_team_id', reinforcing entity clarity. |
+| `property_hs_createdate` | This field marks the note's time of creation and determines where the note sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format.  PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.  | `engagements_notes.properties.hs_createdate` | 🟢 0.70 | This field marks the note's time of creation; mapped to 'hs_createdate' reflecting likely indiscernible temporal data. Meeting specified criteria. |
+| `timestamp` | This field marks the note's time of occurrence and determines where the note sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format.  PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.  | `engagements_notes.properties.hs_timestamp` | 🟢 0.70 | This field marks the note's time of occurrence; mapped to 'hs_timestamp', aligns contextually similar to creation date. |
+| `property_hubspot_owner_id` | The ID of the owner associated with the note. This field determines the user listed as the note creator on the record timeline. PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.  | `engagements_notes.properties.hubspot_owner_id` | 🟢 0.70 | Reflects ownership of the note, aligning contextually with 'hubspot_owner_id', maintaining entity tracking consistency. |
+| `property_hubspot_team_id` | The ID of the team associated with the note. This field determines the team listed as the note creator on the record timeline. PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version.  | `engagements_notes.properties.hubspot_team_id` | 🟢 0.70 | Reflects team ownership of the note, aligning consistently with 'hubspot_team_id', reinforcing entity clarity. |
 
 
 ### Mapping from Airbyte `email_events` to Fivetran `email_event_delivered`
@@ -151,12 +135,12 @@ PLEASE NOTE: This field will only be populated for connectors utilizing the HubS
 
 - Table Completion Score: 🟢 0.90
 
-### Evaluation
+#### Evaluation
 
 The table mappings are likely to be very similar due to shared API origins. However, the completion score reflects the slight differences in implementations.
 
 
-### Field Mapping Logic
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -172,12 +156,12 @@ The table mappings are likely to be very similar due to shared API origins. Howe
 
 - Table Completion Score: 🟢 0.86
 
-### Evaluation
+#### Evaluation
 
 Table match confidence is reasonably high, considering the target schema's table fields are closely matched with source fields.
 
 
-### Field Mapping Logic
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -203,12 +187,12 @@ Table match confidence is reasonably high, considering the target schema's table
 
 - Table Completion Score: ⚠️ 0.60
 
-### Evaluation
+#### Evaluation
 
 The table mappings suggest a moderate confidence that the source and target tables describe similar subjects. The completion score indicates that some fields are well-mapped, but others are missing mappings.
 
 
-### Field Mapping Logic
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -225,29 +209,21 @@ The table mappings suggest a moderate confidence that the source and target tabl
 
 - Table Completion Score: 🟢 0.67
 
-### Evaluation
+#### Evaluation
 
 The table mapping is of high quality due to the good alignment between source and target tables. However, the completion score is lower due to one missing field mapping and some field-level uncertainty.
 
 
-### Field Mapping Logic
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
 | `_fivetran_synced` | {{ doc("_fivetran_synced") }} | `engagements_meetings._airbyte_extracted_at` | 🟢 1.00 | Standard mapping for all tables. Mapped '_fivetran_synced' to source stream's '_airbyte_extracted_at' column. |
 | `engagement_id` | The ID of the engagement. | `MISSING` | ❌ 0.00 | No good match found. |
-| `property_hs_createdate` | This field marks the meeting's time of creation and determines where the meeting sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
-PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
- | `engagements_meetings.properties_hs_createdate` | 🟢 0.70 | The expression shows a direct alignment although with slight contextual uncertainties. |
-| `timestamp` | This field marks the meeting's time of occurrence and determines where the meeting sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
-PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
- | `engagements_meetings.properties_hs_timestamp` | 🟢 0.70 | The expression shows a direct alignment although with slight contextual uncertainties. |
-| `property_hubspot_owner_id` | The ID of the owner associated with the meeting. This field determines the user listed as the meeting creator on the record timeline.
- PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
- | `engagements_meetings.properties_hubspot_owner_id` | 🟢 0.70 | The expression shows a direct alignment although with slight contextual uncertainties. |
-| `property_hubspot_team_id` | The ID of the team associated with the meeting. This field determines the team listed as the meeting creator on the record timeline.
-PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version.
- | `engagements_meetings.properties_hubspot_team_id` | 🟢 0.70 | The expression shows a direct alignment although with slight contextual uncertainties. |
+| `property_hs_createdate` | This field marks the meeting's time of creation and determines where the meeting sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format.  PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.  | `engagements_meetings.properties_hs_createdate` | 🟢 0.70 | The expression shows a direct alignment although with slight contextual uncertainties. |
+| `timestamp` | This field marks the meeting's time of occurrence and determines where the meeting sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format.  PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.  | `engagements_meetings.properties_hs_timestamp` | 🟢 0.70 | The expression shows a direct alignment although with slight contextual uncertainties. |
+| `property_hubspot_owner_id` | The ID of the owner associated with the meeting. This field determines the user listed as the meeting creator on the record timeline.  PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.  | `engagements_meetings.properties_hubspot_owner_id` | 🟢 0.70 | The expression shows a direct alignment although with slight contextual uncertainties. |
+| `property_hubspot_team_id` | The ID of the team associated with the meeting. This field determines the team listed as the meeting creator on the record timeline. PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version.  | `engagements_meetings.properties_hubspot_team_id` | 🟢 0.70 | The expression shows a direct alignment although with slight contextual uncertainties. |
 
 
 ### Mapping from Airbyte `engagements_tasks` to Fivetran `engagement_task`
@@ -256,29 +232,21 @@ PLEASE NOTE: This field will only be populated for connectors utilizing the HubS
 
 - Table Completion Score: 🟢 0.83
 
-### Evaluation
+#### Evaluation
 
 The table mapping uses similar source and target models with high confidence. However, one field expression is missing, reducing the overall completion.
 
 
-### Field Mapping Logic
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
 | `_fivetran_synced` | {{ doc("_fivetran_synced") }} | `engagements_tasks._airbyte_extracted_at` | 🟢 1.00 | Standard mapping for '_fivetran_synced' to '_airbyte_extracted_at' with perfect confidence. |
 | `engagement_id` | The ID of the engagement. | `MISSING` | ❌ 0.00 | No good match found. |
-| `property_hs_createdate` | This field marks the task's time of creation and determines where the task sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
-PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
- | `engagements_tasks.properties_hs_createdate` | 🟢 0.70 | Mapping is likely correct based on similar meaning of creation date fields. |
-| `timestamp` | This field marks the task's time of occurrence and determines where the task sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
-PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
- | `engagements_tasks.properties_hs_timestamp` | 🟢 0.70 | Mapping matches timestamp meaning, considering API version context. |
-| `property_hubspot_owner_id` | The ID of the owner associated with the task. This field determines the user listed as the task creator on the record timeline.
-PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
- | `engagements_tasks.properties_hubspot_owner_id` | 🟢 0.70 | Mapping likely correct for owner linkage based on API versioning details. |
-| `property_hubspot_team_id` | The ID of the team associated with the task. This field determines the team listed as the task creator on the record timeline.
-PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version.
- | `engagements_tasks.properties_hubspot_team_id` | 🟢 0.70 | Mapping likely correct for team linkage given API versioning restrictions. |
+| `property_hs_createdate` | This field marks the task's time of creation and determines where the task sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format.  PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.  | `engagements_tasks.properties_hs_createdate` | 🟢 0.70 | Mapping is likely correct based on similar meaning of creation date fields. |
+| `timestamp` | This field marks the task's time of occurrence and determines where the task sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format.  PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.  | `engagements_tasks.properties_hs_timestamp` | 🟢 0.70 | Mapping matches timestamp meaning, considering API version context. |
+| `property_hubspot_owner_id` | The ID of the owner associated with the task. This field determines the user listed as the task creator on the record timeline. PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.  | `engagements_tasks.properties_hubspot_owner_id` | 🟢 0.70 | Mapping likely correct for owner linkage based on API versioning details. |
+| `property_hubspot_team_id` | The ID of the team associated with the task. This field determines the team listed as the task creator on the record timeline. PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version.  | `engagements_tasks.properties_hubspot_team_id` | 🟢 0.70 | Mapping likely correct for team linkage given API versioning restrictions. |
 
 
 ### Mapping from Airbyte `tickets` to Fivetran `ticket`
@@ -287,12 +255,12 @@ PLEASE NOTE: This field will only be populated for connectors utilizing the HubS
 
 - Table Completion Score: 🟢 0.93
 
-### Evaluation
+#### Evaluation
 
 The table mapping was evaluated with a high level of confidence due to significant field coverage and strong matching logic between the two systems, despite minor imperfect mappings.
 
 
-### Field Mapping Logic
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -319,12 +287,12 @@ The table mapping was evaluated with a high level of confidence due to significa
 
 - Table Completion Score: 🟢 1.00
 
-### Evaluation
+#### Evaluation
 
 Table mapping between the source and target is a strong match due to alignment of fields and standardized mappings. Completion score is perfect as all required fields are mapped.
 
 
-### Field Mapping Logic
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -342,12 +310,12 @@ Table mapping between the source and target is a strong match due to alignment o
 
 - Table Completion Score: 🟢 0.91
 
-### Evaluation
+#### Evaluation
 
 The mapping is generally strong, showing a high level of confidence that the target schema fields align with the source fields. The completion is high, indicating most source fields have corresponding target fields.
 
 
-### Field Mapping Logic
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -362,8 +330,7 @@ The mapping is generally strong, showing a high level of confidence that the tar
 | `property_createdate` | The date that the contact was created in your HubSpot account. | `contacts.properties_createdate` | 🟢 1.00 | Creation date field matches perfectly. |
 | `property_jobtitle` | The contact's job title. | `contacts.properties_jobtitle` | 🟢 1.00 | The 'job title' field is well matched. |
 | `property_annualrevenue` | The contact's annual company revenue. | `contacts.properties_annualrevenue` | 🟢 1.00 | Annual revenue field is an exact match. |
-| `property_hs_calculated_merged_vids` | List of mappings representing contact IDs that have been merged into the contact at hand. Format: <merged_contact_id>:<merged_at_in_epoch_time>;<second_merged_contact_id>:<merged_at_in_epoch_time> This field has replaced the `CONTACT_MERGE_AUDIT` table, which was deprecated by the Hubspot v3 CRM API.
- | `contacts.properties_hs_calculated_merged_vids` | ⚠️ 0.65 | Field partially matched with high confidence for underlying meaning, but lacking precise mapping. |
+| `property_hs_calculated_merged_vids` | List of mappings representing contact IDs that have been merged into the contact at hand. Format: <merged_contact_id>:<merged_at_in_epoch_time>;<second_merged_contact_id>:<merged_at_in_epoch_time> This field has replaced the `CONTACT_MERGE_AUDIT` table, which was deprecated by the Hubspot v3 CRM API.  | `contacts.properties_hs_calculated_merged_vids` | ⚠️ 0.65 | Field partially matched with high confidence for underlying meaning, but lacking precise mapping. |
 
 
 ### Mapping from Airbyte `contacts_merged_audit` to Fivetran `contact_merge_audit`
@@ -372,12 +339,12 @@ The mapping is generally strong, showing a high level of confidence that the tar
 
 - Table Completion Score: 🟢 0.90
 
-### Evaluation
+#### Evaluation
 
 The source and target tables are highly likely describing the same subject matter since the fields have meaningful mappings. However, there's a missing match affecting the completion score slightly.
 
 
-### Field Mapping Logic
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -399,12 +366,12 @@ The source and target tables are highly likely describing the same subject matte
 
 - Table Completion Score: 🟢 0.70
 
-### Evaluation
+#### Evaluation
 
 The mappings are largely appropriate for the given context with `_fivetran_synced` mapping perfectly, but there are unknown fields marked as 'MISSING'.
 
 
-### Field Mapping Logic
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -425,12 +392,12 @@ The mappings are largely appropriate for the given context with `_fivetran_synce
 
 - Table Completion Score: 🟢 0.88
 
-### Evaluation
+#### Evaluation
 
 The table match confidence is high due to the presence of common fields in the source and target tables, such as conversion_id and form_id, which are indicative of form submissions. However, the completion is partly reduced as a result of a 'MISSING' field and some other mapped fields having a close match score instead of perfect.
 
 
-### Field Mapping Logic
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -450,12 +417,12 @@ The table match confidence is high due to the presence of common fields in the s
 
 - Table Completion Score: 🟢 0.86
 
-### Evaluation
+#### Evaluation
 
 The table match score is relatively high, indicating a good match between source and target tables based on similar schema elements. However, one field has an expression marked as 'MISSING', lowering the completion score due to incomplete mapping.
 
 
-### Field Mapping Logic
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -474,30 +441,22 @@ The table match score is relatively high, indicating a good match between source
 
 - Table Completion Score: 🟢 0.75
 
-### Evaluation
+#### Evaluation
 
 The table mapping shows high match quality with a strong correspondence between most fields. However, some fields from the source schema could not be mapped to the target schema.
 
 
-### Field Mapping Logic
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
 | `_fivetran_synced` | {{ doc("_fivetran_synced") }} | `engagements._airbyte_extracted_at` | 🟢 1.00 | Standard mapping from '_fivetran_synced' to '_airbyte_extracted_at'. |
-| `active` | Whether the engagement is currently being shown in the UI.
- PLEASE NOTE: This field will not be populated for connectors utilizing the HubSpot v3 API version. This field will be deprecated in a future release.
- | `engagements.active` | ⚠️ 0.60 | Mapped to 'engagements.active' with moderate confidence. |
-| `created_at` | A timestamp representing when the engagement was created.
- PLEASE NOTE: This field will not be populated for connectors utilizing the HubSpot v3 API version. This field will be deprecated in a future release.
- | `engagements.createdAt` | ⚠️ 0.60 | Mapped to 'engagements.createdAt' with moderate confidence. |
+| `active` | Whether the engagement is currently being shown in the UI.  PLEASE NOTE: This field will not be populated for connectors utilizing the HubSpot v3 API version. This field will be deprecated in a future release.  | `engagements.active` | ⚠️ 0.60 | Mapped to 'engagements.active' with moderate confidence. |
+| `created_at` | A timestamp representing when the engagement was created.  PLEASE NOTE: This field will not be populated for connectors utilizing the HubSpot v3 API version. This field will be deprecated in a future release.  | `engagements.createdAt` | ⚠️ 0.60 | Mapped to 'engagements.createdAt' with moderate confidence. |
 | `id` | The ID of the engagement. | `engagements.id` | 🟢 0.70 | Mapped to 'engagements.id', high confidence due to clear correspondence. |
-| `owner_id` | The ID of the engagement's owner.
-PLEASE NOTE: This field will not be populated for connectors utilizing the HubSpot v3 API version. This field will be deprecated in a future release.
- | `engagements.ownerId` | ⚠️ 0.60 | Mapped to 'engagements.ownerId' with moderate confidence. |
+| `owner_id` | The ID of the engagement's owner. PLEASE NOTE: This field will not be populated for connectors utilizing the HubSpot v3 API version. This field will be deprecated in a future release.  | `engagements.ownerId` | ⚠️ 0.60 | Mapped to 'engagements.ownerId' with moderate confidence. |
 | `portal_id` | {{ doc("portal_id") }} | `engagements.portalId` | ⚠️ 0.60 | Mapped to 'engagements.portalId' with moderate confidence. |
-| `timestamp` | A timestamp in representing the time that the engagement should appear in the timeline.
-PLEASE NOTE: This field will not be populated for connectors utilizing the HubSpot v3 API version. This field will be deprecated in a future release.
- | `engagements.timestamp` | ⚠️ 0.60 | Mapped to 'engagements.timestamp' with moderate confidence. |
+| `timestamp` | A timestamp in representing the time that the engagement should appear in the timeline. PLEASE NOTE: This field will not be populated for connectors utilizing the HubSpot v3 API version. This field will be deprecated in a future release.  | `engagements.timestamp` | ⚠️ 0.60 | Mapped to 'engagements.timestamp' with moderate confidence. |
 | `type` | One of NOTE, EMAIL, TASK, MEETING, or CALL, the type of the engagement. | `engagements.type` | 🟢 0.70 | Mapped to 'engagements.type', high confidence due to distinct field type categories. |
 
 
@@ -507,12 +466,12 @@ PLEASE NOTE: This field will not be populated for connectors utilizing the HubSp
 
 - Table Completion Score: 🟢 0.85
 
-### Evaluation
+#### Evaluation
 
 The table match is strong due to the consistent naming and field availability between the source and target. All fields have been mapped with high confidence except for any potential 'MISSING' fields, which slightly lowers the completion score.
 
 
-### Field Mapping Logic
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -535,12 +494,12 @@ These models are in the workshop directory and are not yet approved.
 
 - Table Completion Score: ❌ 0.43
 
-### Evaluation
+#### Evaluation
 
 The mapping involves 7 fields, out of which 4 had direct matches. However, 3 fields are marked as 'MISSING', significantly reducing the completion score.
 
 
-### Field Mapping Logic
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -559,12 +518,12 @@ The mapping involves 7 fields, out of which 4 had direct matches. However, 3 fie
 
 - Table Completion Score: 🟢 0.69
 
-### Evaluation
+#### Evaluation
 
 The table mapping score is high because the tables share many common fields, indicating they likely describe similar subjects. However, the completion score is lower due to several fields mapped as 'MISSING'.
 
 
-### Field Mapping Logic
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -577,9 +536,7 @@ The table mapping score is high because the tables share many common fields, ind
 | `lead_nurturing_campaign_id` | TBD | `forms.properties.hs_marketing_campaign_guid` | ⚠️ 0.60 | Mapping to a marketing campaign GUID is a possible but uncertain match. |
 | `method` | This field is no longer used. | `MISSING` | ❌ 0.00 | No good match found. |
 | `name` | The name of the form. | `forms.name` | 🟢 0.90 | Mapped directly to the form's name, indicating a strong match. |
-| `notify_recipients` | A comma-separated list of user IDs that should receive submission notifications.
-Email addresses will be returned for individuals who aren't users.
- | `forms.configuration.notifyRecipients` | 🟢 0.80 | Correctly identifies a list of user IDs for notifications within the forms. |
+| `notify_recipients` | A comma-separated list of user IDs that should receive submission notifications. Email addresses will be returned for individuals who aren't users.  | `forms.configuration.notifyRecipients` | 🟢 0.80 | Correctly identifies a list of user IDs for notifications within the forms. |
 | `portal_id` | {{ doc("portal_id") }} | `MISSING` | ❌ 0.00 | No good match found. |
 | `redirect` | The URL that the visitor will be redirected to after filling out the form. | `forms.configuration.postSubmitAction.value` | 🟢 0.80 | Mapped to a post-submit URL, reflecting the described functionality. |
 | `submit_text` | The text used for the submit button. | `forms.displayOptions.submitButtonText` | 🟢 0.70 | Submit button text mapping aligns with function. |
@@ -592,12 +549,12 @@ Email addresses will be returned for individuals who aren't users.
 
 - Table Completion Score: ⚠️ 0.60
 
-### Evaluation
+#### Evaluation
 
 The table match is relatively strong due to shared data origin (API), but not all fields are present in the source.
 
 
-### Field Mapping Logic
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -613,30 +570,14 @@ The table match is relatively strong due to shared data origin (API), but not al
 | `processing_type` | Specifies the type of processing applied to the list, for example, 'STATIC' for static lists or 'DYNAMIC' for dynamic lists. | `MISSING` | ❌ 0.00 | No good match found. |
 | `list_version` | Represents the version number of the list, incrementing with each modification. | `MISSING` | ❌ 0.00 | No good match found. |
 | `filters_updated_at` | The timestamp indicating when the list's filters were last updated. | `MISSING` | ❌ 0.00 | No good match found. |
-| `metadata_error` | Any errors that happened the last time the list was processed.
- NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.
- | `contact_lists.metaData_error` | 🟢 0.70 | Deprecation notice: field may not be populated in future. |
-| `metadata_last_processing_state_change_at` | A timestamp of the last time that the processing state changed.
- NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.
- | `contact_lists.metaData_lastProcessingStateChangeAt` | 🟢 0.70 | Deprecation notice: field may not be populated in future. |
-| `metadata_last_size_change_at` | A timestamp of the last time that the size of the list changed.
- NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.
- | `contact_lists.metaData_lastSizeChangeAt` | 🟢 0.70 | Deprecation notice: field may not be populated in future. |
-| `metadata_processing` | One of DONE, REFRESHING, INITIALIZING, or PROCESSING. DONE indicates the list has finished processing, any other value indicates that list membership is being evaluated.
-NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.
- | `contact_lists.metaData_processing` | 🟢 0.70 | Deprecation notice: field may not be populated in future. |
-| `metadata_size` | The approximate number of contacts in the list.
-NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.
- | `contact_lists.metaData_size` | 🟢 0.70 | Deprecation notice: field may not be populated in future. |
-| `portal_id` | '{{ doc("portal_id") }}'
-NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.
- | `contact_lists.portalId` | 🟢 0.70 | Deprecation notice: field may not be populated in future. |
-| `deleteable` | If this is false, this is a system list and cannot be deleted.
- NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.
- | `contact_lists.deleteable` | 🟢 0.70 | Deprecation notice: field may not be populated in future. |
-| `dynamic` | Whether the contact list is dynamic.
-NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.
- | `contact_lists.dynamic` | 🟢 0.70 | Deprecation notice: field may not be populated in future. |
+| `metadata_error` | Any errors that happened the last time the list was processed.  NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.  | `contact_lists.metaData_error` | 🟢 0.70 | Deprecation notice: field may not be populated in future. |
+| `metadata_last_processing_state_change_at` | A timestamp of the last time that the processing state changed.  NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.  | `contact_lists.metaData_lastProcessingStateChangeAt` | 🟢 0.70 | Deprecation notice: field may not be populated in future. |
+| `metadata_last_size_change_at` | A timestamp of the last time that the size of the list changed.  NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.  | `contact_lists.metaData_lastSizeChangeAt` | 🟢 0.70 | Deprecation notice: field may not be populated in future. |
+| `metadata_processing` | One of DONE, REFRESHING, INITIALIZING, or PROCESSING. DONE indicates the list has finished processing, any other value indicates that list membership is being evaluated. NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.  | `contact_lists.metaData_processing` | 🟢 0.70 | Deprecation notice: field may not be populated in future. |
+| `metadata_size` | The approximate number of contacts in the list. NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.  | `contact_lists.metaData_size` | 🟢 0.70 | Deprecation notice: field may not be populated in future. |
+| `portal_id` | '{{ doc("portal_id") }}' NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.  | `contact_lists.portalId` | 🟢 0.70 | Deprecation notice: field may not be populated in future. |
+| `deleteable` | If this is false, this is a system list and cannot be deleted.  NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.  | `contact_lists.deleteable` | 🟢 0.70 | Deprecation notice: field may not be populated in future. |
+| `dynamic` | Whether the contact list is dynamic. NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.  | `contact_lists.dynamic` | 🟢 0.70 | Deprecation notice: field may not be populated in future. |
 
 
 ### Mapping from Airbyte `ticket_pipelines` to Fivetran `ticket_pipeline`
@@ -645,12 +586,12 @@ NOTE: This field is deprecated and will not be populated for connectors utilizin
 
 - Table Completion Score: ⚠️ 0.50
 
-### Evaluation
+#### Evaluation
 
 The table and field mappings include several 'MISSING' entries, indicating incomplete mapping. However, certain fields like '_fivetran_synced' have confident mappings based on standard conventions. Moreover, fields like 'display_order', 'label', 'created_at', and 'updated_at' have plausible mappings, albeit with less confidence due to lack of complete corroboration across source and target schemas.
 
 
-### Field Mapping Logic
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -671,30 +612,22 @@ The table and field mappings include several 'MISSING' entries, indicating incom
 
 - Table Completion Score: ❌ 0.43
 
-### Evaluation
+#### Evaluation
 
 The table match score is relatively high due to the commonality in the API usage and consistent field naming conventions between source and target schemas. However, the completion score is low due to missing expressions in key fields, which significantly impacts the ability to map data comprehensively.
 
 
-### Field Mapping Logic
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
 | `_fivetran_synced` | {{ doc("_fivetran_synced") }} | `engagements_calls._airbyte_extracted_at` | 🟢 1.00 | _fivetran_synced is mapped to a source stream's _airbyte_extracted_at column, which is a standard mapping. |
 | `engagement_id` | The ID of the engagement. | `MISSING` | ❌ 0.00 | No good match found. |
 | `_fivetran_deleted` | Boolean to mark rows that were deleted in the source database. | `MISSING` | ❌ 0.00 | No good match found. |
-| `property_hs_createdate` | This field marks the call's time of creation and determines where the call sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
-PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
- | `engagements_calls.properties.hs_createdate` | 🟢 0.70 | This field has a fairly direct matching in the source properties. |
-| `timestamp` | This field marks the call's time of occurrence and determines where the call sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
-PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
- | `MISSING` | ❌ 0.00 | No good match found. |
-| `property_hubspot_owner_id` | The ID of the owner associated with the call. This field determines the user listed as the call creator on the record timeline.
-PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
- | `engagements_calls.properties.hubspot_owner_id` | 🟢 0.70 | This field has a moderate confidence match based on the HubSpot API version context. |
-| `property_hubspot_team_id` | The ID of the team associated with the call. This field determines the team listed as the call creator on the record timeline.
-PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version.
- | `engagements_calls.properties.hubspot_team_id` | 🟢 0.70 | This field has a moderate confidence match based on the HubSpot API version context. |
+| `property_hs_createdate` | This field marks the call's time of creation and determines where the call sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format.  PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.  | `engagements_calls.properties.hs_createdate` | 🟢 0.70 | This field has a fairly direct matching in the source properties. |
+| `timestamp` | This field marks the call's time of occurrence and determines where the call sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format.  PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.  | `MISSING` | ❌ 0.00 | No good match found. |
+| `property_hubspot_owner_id` | The ID of the owner associated with the call. This field determines the user listed as the call creator on the record timeline. PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.  | `engagements_calls.properties.hubspot_owner_id` | 🟢 0.70 | This field has a moderate confidence match based on the HubSpot API version context. |
+| `property_hubspot_team_id` | The ID of the team associated with the call. This field determines the team listed as the call creator on the record timeline. PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version.  | `engagements_calls.properties.hubspot_team_id` | 🟢 0.70 | This field has a moderate confidence match based on the HubSpot API version context. |
 
 
 ### Mapping from Airbyte `deals` to Fivetran `deal`
@@ -703,12 +636,12 @@ PLEASE NOTE: This field will only be populated for connectors utilizing the HubS
 
 - Table Completion Score: 🟢 0.70
 
-### Evaluation
+#### Evaluation
 
 The table mapping reflects a generally good match between source and target tables, as most fields are correctly mapped. However, there are a few fields that could not be matched and are marked as 'MISSING', which affects completion.
 
 
-### Field Mapping Logic
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
@@ -731,12 +664,12 @@ The table mapping reflects a generally good match between source and target tabl
 
 - Table Completion Score: ❌ 0.25
 
-### Evaluation
+#### Evaluation
 
 The table match score indicates a moderate level of confidence that the source and target tables describe similar subject matter. The completion score is low due to multiple 'MISSING' expressions for field mappings, which suggests incomplete mappings.
 
 
-### Field Mapping Logic
+#### Field Mapping Logic
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |

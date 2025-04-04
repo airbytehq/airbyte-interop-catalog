@@ -70,7 +70,7 @@ unmapped_target_tables = [
 
 [mappings.company]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/company.yml"
-source_file_hash = "406f4152df1bfdbf1b4a356e0381cfeb04fa8df0de408848f3c77b47ae67867e"
+source_file_hash = "126f906c7de9345339ea19d7a73cbb35e214e6076e4f71504f27c865a74a59a4"
 unmapped_target_fields = [
     "portal_id",
     "property_state",
@@ -450,7 +450,7 @@ companies = [
 
 [mappings.company_property_history]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/company_property_history.yml"
-source_file_hash = "5cad447a4461a9abb43f6fed2de7f20824da35640f2b5fe10f80a6e4ae9656d0"
+source_file_hash = "4d6e6402865022c1b0e06ddb1737bf0643fd7e5f750c6c3fa7ff340c200320e9"
 unmapped_target_fields = []
 omitted_target_fields = []
 erroneous_source_table_columns = []
@@ -830,7 +830,7 @@ companies_property_history = [
 
 [mappings.contact]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/contact.yml"
-source_file_hash = "bc68bfebcbab66bfe138862da6d697e7aa30ef65bc7e654338df59d23879dd45"
+source_file_hash = "7ea71a747430e5b75e59e72bf8910204b7287226699c72cf5fde49e98876a2f4"
 unmapped_target_fields = [
     "_fivetran_deleted",
 ]
@@ -1510,7 +1510,7 @@ contacts = [
 
 [mappings.contact_form_submission]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/contact_form_submission.yml"
-source_file_hash = "1bfe431bb716aaa4e95f0965046132093a4125fc3e34bd80f704004f1667149f"
+source_file_hash = "68a1b2f5fa055ab815b358f1d596bd2aa352d7a2cae5d5c9c117baf1f95c9b5d"
 unmapped_target_fields = [
     "contact_id",
 ]
@@ -1540,7 +1540,7 @@ contacts_form_submissions = [
 
 [mappings.contact_list]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/contact_list.yml"
-source_file_hash = "f849d8fe8c0ba7c278dbe6f098a5ee94a3dfe663335c76422c52c5f0382b2e74"
+source_file_hash = "99bb680cb59657c3afabd51ec6e3b28df0e2f643e13df61c7e0e30cd7ab3ef9b"
 unmapped_target_fields = [
     "_fivetran_deleted",
     "filters_updated_at",
@@ -1595,7 +1595,7 @@ contact_lists = [
 
 [mappings.contact_list_member]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/contact_list_member.yml"
-source_file_hash = "1342b52b2e922e088bacd567f728e5f0a4b2ce267bb77e76467fcdb0c610b984"
+source_file_hash = "594a9c08e6fe27d6a26db304f359128be623d584d8d41d9be491aee380294b9c"
 unmapped_target_fields = [
     "_fivetran_deleted",
     "added_at",
@@ -1620,7 +1620,7 @@ contacts_list_memberships = [
 
 [mappings.contact_merge_audit]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/contact_merge_audit.yml"
-source_file_hash = "708bae59d0537d42f7c670d5c911808af06f32c034435999ea58bf1e537985e9"
+source_file_hash = "92add5ad8b1effc5b74d81a0bf157576545ee4c4735a0d0ab215a68499449e83"
 unmapped_target_fields = [
     "contact_id",
 ]
@@ -1678,7 +1678,7 @@ contacts_merged_audit = [
 
 [mappings.contact_property_history]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/contact_property_history.yml"
-source_file_hash = "bd116fb1a0216686684c617b4488e645e2ce1f13ef56243298341f06348ded4a"
+source_file_hash = "8a8788812d2df48799bc40cc3b08c2d9f564b32e0f8be792553a22cc5e223cd8"
 unmapped_target_fields = [
     "contact_id",
     "name",
@@ -2321,7 +2321,7 @@ contacts_property_history = [
 
 [mappings.deal]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/deal.yml"
-source_file_hash = "d1bdc4b48d733e37bbe08a3d5a1b3b66f1b93a9fe8e53c623f1d578d449b7ac0"
+source_file_hash = "2d9828d18eaa30c7fabcdd0372d49cbfb196673554b5ce83f53a601079b261fc"
 unmapped_target_fields = [
     "deal_pipeline_id",
     "is_deleted",
@@ -2755,7 +2755,7 @@ deals = [
 
 [mappings.deal_pipeline]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/deal_pipeline.yml"
-source_file_hash = "5c1e0b8a677b3742b7e660d02dd732c767375818b554afad00e423aee666ce81"
+source_file_hash = "e70b8d0b394123bc464ff193ab73afd413d9648deb1fbfc10c1c1e5d61b059cf"
 unmapped_target_fields = [
     "_fivetran_deleted",
 ]
@@ -2783,7 +2783,7 @@ deal_pipelines = [
 
 [mappings.deal_property_history]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/deal_property_history.yml"
-source_file_hash = "9a2e77b874a55bb8d9aa2b56b52ee6861d93e2dfb88eee921f338d42005a2964"
+source_file_hash = "2391eb475d6634c3f9f3a665408237db787b7088e897f24cdffc4003d1040c99"
 unmapped_target_fields = [
     "name",
 ]
@@ -3172,7 +3172,7 @@ deals_property_history = [
 
 [mappings.email_event]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/email_event.yml"
-source_file_hash = "e81df2ff42470fa48cd30b4cb219319c3e7bfeab6b843595b337253f4a9dbf60"
+source_file_hash = "0e6fd8310acbbaa6fb3e78442ef3635389ed090407e86632ac4509f93bebf614"
 unmapped_target_fields = []
 omitted_target_fields = []
 erroneous_source_table_columns = []
@@ -3246,7 +3246,7 @@ email_events = [
 
 [mappings.email_event_delivered]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/email_event_delivered.yml"
-source_file_hash = "f9ab2a60d71adf391f14dce33c8443cfbf5168d4fa5156bcfbf98112629bd347"
+source_file_hash = "6e45dd9f74fab2e1abd18f10d0406d03b0d6ecdb92c0b14d2418267e926b3860"
 unmapped_target_fields = []
 omitted_target_fields = []
 erroneous_source_table_columns = []
@@ -3323,7 +3323,7 @@ email_events = [
 
 [mappings.email_event_print]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/email_event_print.yml"
-source_file_hash = "a405eddbbb515edc9c39c05efc081b0dde91cfd6c8e7fe71ce6b68032a0dad98"
+source_file_hash = "367c4c440220b9fd8551a5d1ebfa50e100c3a3e1ee0b2fea7899c84d8fa63b16"
 unmapped_target_fields = []
 omitted_target_fields = []
 erroneous_source_table_columns = []
@@ -3400,7 +3400,7 @@ email_events = [
 
 [mappings.email_subscription]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/email_subscription.yml"
-source_file_hash = "7750fbda32bfb44b7b61acea7e83c5bd2e88207fadc4528ff11ab73b29a902f8"
+source_file_hash = "7b8a95730caaa1c4cdcf716bc97bc1f34168596fd62d814b091c34102f0e6b1e"
 unmapped_target_fields = []
 omitted_target_fields = []
 erroneous_source_table_columns = []
@@ -3427,7 +3427,7 @@ email_subscriptions = [
 
 [mappings.email_subscription_change]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/email_subscription_change.yml"
-source_file_hash = "c2554c08010bbfb35ef37121b8d14cb6ce3e67bba15b5ddc966f1dc9c07331e9"
+source_file_hash = "78e5f359aca06c681c8effb1181bf4cf4c33be9fcb70b86ac217563bd77e5350"
 unmapped_target_fields = [
     "caused_by_event_id",
     "change",
@@ -3454,7 +3454,7 @@ subscription_changes = [
 
 [mappings.engagement]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/engagement.yml"
-source_file_hash = "0eab0ce95303a43e17e8be4ff928fb5dcea6fa0353a7843dd8dd03c4d61377c3"
+source_file_hash = "972e31e1ae555d5234159c543556669cec5275fe788fff0382ccab2eaafc77c1"
 unmapped_target_fields = []
 omitted_target_fields = []
 erroneous_source_table_columns = []
@@ -3663,7 +3663,7 @@ engagements = [
 
 [mappings.engagement_call]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/engagement_call.yml"
-source_file_hash = "7d5ee2c6f8a0aab4d244bb17e30c224000bb089c057502a324f20ad8259e4021"
+source_file_hash = "c96559a5956c14dcffa320aff347934d9367038de8774d470df61d0dc018d3ee"
 unmapped_target_fields = [
     "_fivetran_deleted",
     "engagement_id",
@@ -3863,7 +3863,7 @@ engagements_calls = [
 
 [mappings.engagement_email]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/engagement_email.yml"
-source_file_hash = "7c31d47608338463aa7cc411c96d6b0fb2afc8e0438357fe4b56471593486740"
+source_file_hash = "ed92ce70ba5c2c91abb467c52e93c19f52cd769519e5d88954709fcc5fb87fe3"
 unmapped_target_fields = []
 omitted_target_fields = []
 erroneous_source_table_columns = []
@@ -4113,7 +4113,7 @@ engagements_emails = [
 
 [mappings.engagement_meeting]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/engagement_meeting.yml"
-source_file_hash = "832ad5ab06fc592e6c4f20afd79c0e376ea496d9d44dccc30bd6387af28da2f3"
+source_file_hash = "977d578e88f9d299338efc79fcfb39d68596254714d4ab8ab717653a3afad01f"
 unmapped_target_fields = [
     "engagement_id",
 ]
@@ -4301,7 +4301,7 @@ engagements_meetings = [
 
 [mappings.engagement_note]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/engagement_note.yml"
-source_file_hash = "18a9925e2b9485a44e04c3bc88def36d93dbb6f85ec29846bf582c295f88657e"
+source_file_hash = "24ad93b6778008b6e592d5419ce75bb30d42a93fcd2ee00fb20b495d76ef9ae7"
 unmapped_target_fields = [
     "engagement_id",
 ]
@@ -4419,7 +4419,7 @@ engagements_notes = [
 
 [mappings.engagement_task]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/engagement_task.yml"
-source_file_hash = "9eec13c9bf4c0e3c181e68a336614eb009f957053bfc7a6ab2f7ab77d64daf45"
+source_file_hash = "b3489a431f9772eb71fdb4f061a53852253fb176088629b232c12974b32f33f3"
 unmapped_target_fields = [
     "engagement_id",
 ]
@@ -4650,7 +4650,7 @@ engagements_tasks = [
 
 [mappings.form]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/form.yml"
-source_file_hash = "ba152207e39af713f33032d4008a0e155a9c1ea2bb4030a9b5c96dff73b2af5d"
+source_file_hash = "ba808fb364d6a3958940dbeccae48c778ab110539de1c9ebc640b6d1e3b52e79"
 unmapped_target_fields = [
     "_fivetran_deleted",
     "follow_up_id",
@@ -4811,7 +4811,7 @@ forms = [
 
 [mappings.owner]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/owner.yml"
-source_file_hash = "b11411c988fb03bf5e7016b586d4bef5bc677952e636711e44436ef059d9f14d"
+source_file_hash = "38526fa5c480673d7c32c8aa1e88257d5ee2bac8cf21330c9df74c11d4e25879"
 unmapped_target_fields = [
     "portal_id",
     "type",
@@ -4839,7 +4839,7 @@ owners = [
 
 [mappings.ticket]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/ticket.yml"
-source_file_hash = "5b349cdc9babc47d429642b91a42469235472dd0462900cc6d6eb178ce920a1f"
+source_file_hash = "ba44ac3fdfa73aa8aa4235afedd4b35e478bee077c3f7261f290fd072b24db73"
 unmapped_target_fields = [
     "portal_id",
 ]
@@ -5243,7 +5243,7 @@ tickets = [
 
 [mappings.ticket_pipeline]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/ticket_pipeline.yml"
-source_file_hash = "84d7e8d4cfb298ed6900dbad0a523b685294cb7e0452ed92b16f98caf6f5d1c7"
+source_file_hash = "5f1385101333dc9db4fe96993f93a6335bef561bff2b6b37e61c0e419af82f26"
 unmapped_target_fields = [
     "_fivetran_deleted",
     "active",
