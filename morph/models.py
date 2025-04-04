@@ -496,7 +496,7 @@ class TableMapping(BaseModel):
             eval_data = file_data["annotations"]["evaluation"]
 
             # Create field mapping evaluations
-            field_mapping_evals = []
+            field_mapping_evals: list[FieldMappingEval] = []
             for field_eval_data in eval_data.get("field_mapping_evals", []):
                 field_mapping_evals.append(
                     FieldMappingEval(
