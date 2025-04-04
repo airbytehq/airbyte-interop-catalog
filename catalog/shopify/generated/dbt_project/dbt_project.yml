@@ -1,3 +1,4 @@
+
 name: "airbyte_shopify"
 version: "1.0.0"
 config-version: 2
@@ -19,6 +20,13 @@ clean-targets:
 models:
   airbyte_shopify:
     +materialized: view
+
+    # Approved models
+    
+
+    # Workshop models (not yet approved)
+    workshop:
+      +enabled: false  # Workshop models disabled by default
 
 vars:
   airbyte_shopify_database: "shopify"
