@@ -5,7 +5,7 @@ This directory contains automatically generated dbt models based on mapping file
 ### Mapping: Airbyte `discount_codes` to Fivetran `order_discount_code`
 
 
-- Table Match Confidence Score: 🟢 _0.80__
+- Table Match Confidence Score: 🟢 _0.80_
 - Table Completion Score: ⚠️ _0.60_
 - Summary Self-Evaluation: _The table mapping is of moderate quality with certain fields perfectly mapped, some fields with potential mappings, and others missing entirely. A score of 0.8 reflects that the table structure is very likely describing the same subject matter, but not entirely complete due to missing field mappings._
 
@@ -21,7 +21,7 @@ This directory contains automatically generated dbt models based on mapping file
 ### Mapping: Airbyte `discount_codes` to Fivetran `discount_code`
 
 
-- Table Match Confidence Score: 🟢 _0.90__
+- Table Match Confidence Score: 🟢 _0.90_
 - Table Completion Score: 🟢 _0.86_
 - Summary Self-Evaluation: _The table fields are generally well-aligned with their purposes clearly defined. The source fields such as 'code', 'created_at', 'id', 'price_rule_id', 'updated_at', and 'usage_count' align with expectations for discount codes in the context provided. '_fivetran_synced' is correctly mapped to a source stream's '_airbyte_extracted_at', providing a reliable match for synchronization tracking. There are no fields marked as 'MISSING', indicating an attempt has been made to map all relevant fields in the source schema to the target schema, resulting in a high score._
 
@@ -38,7 +38,7 @@ This directory contains automatically generated dbt models based on mapping file
 ### Mapping: Airbyte `customers` to Fivetran `customer`
 
 
-- Table Match Confidence Score: 🟢 _0.80__
+- Table Match Confidence Score: 🟢 _0.80_
 - Table Completion Score: 🟢 _0.90_
 - Summary Self-Evaluation: _The table match score is high due to the high similarity in subject matter between the source and target schemas, both concerned with customer information. While the completion score is even higher since most of the fields have precise mappings in the target schema._
 
@@ -71,7 +71,7 @@ This directory contains automatically generated dbt models based on mapping file
 ### Mapping: Airbyte `order_refunds` to Fivetran `order_adjustment`
 
 
-- Table Match Confidence Score: 🟢 _0.85__
+- Table Match Confidence Score: 🟢 _0.85_
 - Table Completion Score: 🟢 _0.80_
 - Summary Self-Evaluation: _The table mapping has a high confidence level as most fields are well-matched with minor discrepancies. 'MISSING' fields are well addressed and the usual high-confidence mappings are adhered to._
 
@@ -91,7 +91,7 @@ This directory contains automatically generated dbt models based on mapping file
 ### Mapping: Airbyte `metafield_shops` to Fivetran `metafield`
 
 
-- Table Match Confidence Score: 🟢 _0.85__
+- Table Match Confidence Score: 🟢 _0.85_
 - Table Completion Score: 🟢 _0.90_
 - Summary Self-Evaluation: _The table mapping matches closely with the expected schema based on the field names and their descriptions. Most fields have a direct match and the mappings are generally appropriate, with a few exceptions where 'MISSING' is used due to lack of good matches._
 
@@ -113,7 +113,7 @@ This directory contains automatically generated dbt models based on mapping file
 ### Mapping: Airbyte `locations` to Fivetran `location`
 
 
-- Table Match Confidence Score: 🟢 _0.85__
+- Table Match Confidence Score: 🟢 _0.85_
 - Table Completion Score: 🟢 _0.95_
 - Summary Self-Evaluation: _The table mapping evaluation resulted in a high confidence score due to a close match between source and target schemas. The presence of exact mappings and the ability to identify synonymous fields contribute to the quality and coverage of the mapping._
 
@@ -143,7 +143,7 @@ This directory contains automatically generated dbt models based on mapping file
 ### Mapping: Airbyte `tender_transactions` to Fivetran `tender_transaction`
 
 
-- Table Match Confidence Score: 🟢 _1.00__
+- Table Match Confidence Score: 🟢 _1.00_
 - Table Completion Score: 🟢 _1.00_
 - Summary Self-Evaluation: _All fields mapped successfully with high confidence according to provided rules and context. Mapping hypothetical fields between schemas across transformations without loss of meaning._
 
@@ -163,7 +163,7 @@ This directory contains automatically generated dbt models based on mapping file
 ### Mapping: Airbyte `abandoned_checkouts` to Fivetran `abandoned_checkout`
 
 
-- Table Match Confidence Score: 🟢 _1.00__
+- Table Match Confidence Score: 🟢 _1.00_
 - Table Completion Score: 🟢 _0.90_
 - Summary Self-Evaluation: _The table mappings are evaluated to be of high confidence as they describe the same subject matter in both source and target implementations._
 
@@ -176,7 +176,7 @@ This directory contains automatically generated dbt models based on mapping file
 ### Mapping: Airbyte `shop` to Fivetran `shop`
 
 
-- Table Match Confidence Score: 🟢 _0.80__
+- Table Match Confidence Score: 🟢 _0.80_
 - Table Completion Score: 🟢 _0.95_
 - Summary Self-Evaluation: _The table mapping evaluated to a high confidence score due to matching fields and descriptions aligning well with expected domains. A few fields could not be directly matched and are marked as 'MISSING'._
 
@@ -241,7 +241,7 @@ This directory contains automatically generated dbt models based on mapping file
 ### Mapping: Airbyte `orders` to Fivetran `order_tag`
 
 
-- Table Match Confidence Score: 🟢 _0.80__
+- Table Match Confidence Score: 🟢 _0.80_
 - Table Completion Score: ⚠️ _0.50_
 - Summary Self-Evaluation: _The table match score is relatively high because the `_fivetran_synced` was successfully mapped to `_airbyte_extracted_at`, a standard mapping. However, two of the field mappings have expressions set to 'MISSING', resulting in a lower completion score._
 
@@ -255,7 +255,7 @@ This directory contains automatically generated dbt models based on mapping file
 ### Mapping: Airbyte `inventory_levels` to Fivetran `inventory_level`
 
 
-- Table Match Confidence Score: 🟢 _0.85__
+- Table Match Confidence Score: 🟢 _0.85_
 - Table Completion Score: 🟢 _0.90_
 - Summary Self-Evaluation: _The table has a strong correspondence between source and target, given shared fields and expressions. The completion score is high due to the presence of mappings for nearly all fields, though some fields are marked as deprecation or missing information._
 
@@ -274,7 +274,7 @@ This directory contains automatically generated dbt models based on mapping file
 ### Mapping: Airbyte `fulfillments` to Fivetran `fulfillment`
 
 
-- Table Match Confidence Score: 🟢 _0.90__
+- Table Match Confidence Score: 🟢 _0.90_
 - Table Completion Score: 🟢 _0.85_
 - Summary Self-Evaluation: _The table mapping shows a high level of confidence as most fields have clear matches between the source and target. The mapping from `_fivetran_synced` to `_airbyte_extracted_at` achieves a perfect score of 1.00 as a standard mapping agreement. Other fields, such as `created_at`, `id`, `status`, and `tracking_number`, have clear semantic consistency, scoring above 0.85. Some fields like `shipment_status` and `service` could have slightly lower scores due to potential ambiguity, but still fall within the 0.70-0.85 range as they seem contextually accurate. `MISSING` mappings are assigned a score of 0.00 and explained with 'No good match found.'_
 
@@ -299,7 +299,7 @@ This directory contains automatically generated dbt models based on mapping file
 ### Mapping: Airbyte `price_rules` to Fivetran `price_rule`
 
 
-- Table Match Confidence Score: 🟢 _0.90__
+- Table Match Confidence Score: 🟢 _0.90_
 - Table Completion Score: 🟢 _0.95_
 - Summary Self-Evaluation: _The table mapping has a high confidence score because the source and target tables are derived from similar APIs with most fields properly mapped. All fields have either been mapped or identified as MISSING with a 0.00 confidence score._
 
@@ -331,7 +331,7 @@ This directory contains automatically generated dbt models based on mapping file
 ### Mapping: Airbyte `order_refunds` to Fivetran `refund`
 
 
-- Table Match Confidence Score: 🟢 _0.80__
+- Table Match Confidence Score: 🟢 _0.80_
 - Table Completion Score: 🟢 _0.90_
 - Summary Self-Evaluation: _The table mapping shows high confidence since source and target tables are assumed to be derived from the same API, indicating they describe the same subject matter. The completion score is high as well, given all fields of significance in source are well mapped, except for the expected standard and one missing field._
 
@@ -350,7 +350,7 @@ This directory contains automatically generated dbt models based on mapping file
 ### Mapping: Airbyte `collects` to Fivetran `collection_product`
 
 
-- Table Match Confidence Score: 🟢 _0.70__
+- Table Match Confidence Score: 🟢 _0.70_
 - Table Completion Score: 🟢 _0.80_
 - Summary Self-Evaluation: _The table mapping was evaluated with a high table match score as the subject matter aligns closely between source and target, hence a match score of 0.70. The completion score is 0.80, indicating some fields have good mapping and coverage from source to target with a slight room for improvement._
 
@@ -363,7 +363,7 @@ This directory contains automatically generated dbt models based on mapping file
 ### Mapping: Airbyte `products` to Fivetran `product`
 
 
-- Table Match Confidence Score: 🟢 _0.80__
+- Table Match Confidence Score: 🟢 _0.80_
 - Table Completion Score: 🟢 _0.90_
 - Summary Self-Evaluation: _The mapping configuration aligns well with the expected target schema. High confidence mappings like '_fivetran_synced' to 'products._airbyte_extracted_at' contribute positively. Missing mappings like '_fivetran_deleted' are penalized. Field mappings suggest a strong match with exceptions handled appropriately._
 
@@ -389,7 +389,7 @@ These models are in the workshop directory and are not yet approved.
 ### Mapping: Airbyte `custom_collections` to Fivetran `collection`
 
 
-- Table Match Confidence Score: 🟢 _0.80__
+- Table Match Confidence Score: 🟢 _0.80_
 - Table Completion Score: 🟢 _0.82_
 - Summary Self-Evaluation: _The table match confidence is high due to the similarity in subject matter, but not all fields could be mapped, especially with some fields missing appropriate matches. The completion score reflects the proportion of fields that have meaningful mappings._
 
@@ -410,7 +410,7 @@ These models are in the workshop directory and are not yet approved.
 ### Mapping: Airbyte `inventory_items` to Fivetran `inventory_item`
 
 
-- Table Match Confidence Score: 🟢 _0.70__
+- Table Match Confidence Score: 🟢 _0.70_
 - Table Completion Score: ⚠️ _0.52_
 - Summary Self-Evaluation: _The table mappings have some missing fields and questionable matches. The '_fivetran_deleted' and several others are marked as 'MISSING'. Also, there are only a few fields that match perfectly, like '_fivetran_synced'._
 
@@ -441,7 +441,7 @@ These models are in the workshop directory and are not yet approved.
 ### Mapping: Airbyte `metafield_orders` to Fivetran `order_url_tag`
 
 
-- Table Match Confidence Score: ⚠️ _0.50__
+- Table Match Confidence Score: ⚠️ _0.50_
 - Table Completion Score: 🟢 _0.75_
 - Summary Self-Evaluation: _The table match score is 0.5 due to partial similarity between the source and target schemas. The completion score is 0.75 as most fields are mapped, but some are missing or poorly matched._
 
@@ -455,7 +455,7 @@ These models are in the workshop directory and are not yet approved.
 ### Mapping: Airbyte `discount_codes` to Fivetran `abandoned_checkout_discount_code`
 
 
-- Table Match Confidence Score: 🟢 _0.70__
+- Table Match Confidence Score: 🟢 _0.70_
 - Table Completion Score: ❌ _0.44_
 - Summary Self-Evaluation: _The table mapping confidence score is moderate due to partial matches and the presence of several 'MISSING' expressions indicating incomplete mappings. Despite a few high-confidence mappings, the overall completion is low due to multiple unmapped fields._
 
@@ -474,7 +474,7 @@ These models are in the workshop directory and are not yet approved.
 ### Mapping: Airbyte `products` to Fivetran `product_tag`
 
 
-- Table Match Confidence Score: 🟢 _1.00__
+- Table Match Confidence Score: 🟢 _1.00_
 - Table Completion Score: ❌ _0.25_
 - Summary Self-Evaluation: _The mapping configuration exhibits a perfect table match with successful standard field mapping for '_fivetran_synced', but lacks completion with most fields having 'MISSING' expressions._
 
@@ -488,7 +488,7 @@ These models are in the workshop directory and are not yet approved.
 ### Mapping: Airbyte `customers` to Fivetran `customer_tag`
 
 
-- Table Match Confidence Score: ⚠️ _0.60__
+- Table Match Confidence Score: ⚠️ _0.60_
 - Table Completion Score: ⚠️ _0.50_
 - Summary Self-Evaluation: _The mapping includes standard and missing field expressions. Standard mappings like '_fivetran_synced' were given a high score, while missing fields were penalized._
 
@@ -502,7 +502,7 @@ These models are in the workshop directory and are not yet approved.
 ### Mapping: Airbyte `product_variants` to Fivetran `product_variant`
 
 
-- Table Match Confidence Score: 🟢 _0.80__
+- Table Match Confidence Score: 🟢 _0.80_
 - Table Completion Score: ⚠️ _0.60_
 - Summary Self-Evaluation: _The table mapping is mostly consistent with the target schema, but there are several fields marked as 'MISSING' due to lack of good matches or differences in field representation. The overall table match score is high due to shared subject matter and relevant fields, but the completion score is lower reflecting these gaps._
 
@@ -545,7 +545,7 @@ These models are in the workshop directory and are not yet approved.
 ### Mapping: Airbyte `fulfillments` to Fivetran `fulfillment_event`
 
 
-- Table Match Confidence Score: 🟢 _0.85__
+- Table Match Confidence Score: 🟢 _0.85_
 - Table Completion Score: ❌ _0.30_
 - Summary Self-Evaluation: _The table match score is high because most of the fields seem to relate to fulfillment events, matching the expected domain. However, many fields have 'MISSING' expressions, leading to a lower completion score._
 
@@ -574,7 +574,7 @@ These models are in the workshop directory and are not yet approved.
 ### Mapping: Airbyte `order_refunds` to Fivetran `order_shipping_tax_line`
 
 
-- Table Match Confidence Score: ⚠️ _0.60__
+- Table Match Confidence Score: ⚠️ _0.60_
 - Table Completion Score: ❌ _0.14_
 - Summary Self-Evaluation: _The field mapping includes one perfect match (`_fivetran_synced` to `_airbyte_extracted_at`), which always receives a score of 1.00. All other fields are marked as 'MISSING', indicating no good matches found, which lowers the completion score significantly._
 
@@ -591,7 +591,7 @@ These models are in the workshop directory and are not yet approved.
 ### Mapping: Airbyte `product_images` to Fivetran `product_image`
 
 
-- Table Match Confidence Score: 🟢 _0.85__
+- Table Match Confidence Score: 🟢 _0.85_
 - Table Completion Score: 🟢 _0.75_
 - Summary Self-Evaluation: _The table mapping is based on shared API endpoints, suggesting a strong match. However, not all fields in the target schema are present in the source._
 
@@ -616,7 +616,7 @@ These models are in the workshop directory and are not yet approved.
 ### Mapping: Airbyte `orders` to Fivetran `order_line`
 
 
-- Table Match Confidence Score: ⚠️ _0.50__
+- Table Match Confidence Score: ⚠️ _0.50_
 - Table Completion Score: ❌ _0.10_
 - Summary Self-Evaluation: _The table match is neutral due to generic field matching, with many fields having 'MISSING' values indicating no correspondence in the source data._
 
@@ -653,7 +653,7 @@ These models are in the workshop directory and are not yet approved.
 ### Mapping: Airbyte `inventory_levels` to Fivetran `inventory_quantity`
 
 
-- Table Match Confidence Score: ⚠️ _0.65__
+- Table Match Confidence Score: ⚠️ _0.65_
 - Table Completion Score: 🟢 _0.86_
 - Summary Self-Evaluation: _The table match score reflects a fairly good match between the source and target table schemas, as they share related fields and concepts. However, it's not perfect due to field variations and expressions not directly matching for all fields. The completion score is high as most fields have corresponding expressions in the source schema, with '_fivetran_synced' correctly mapped to '_airbyte_extracted_at'._
 
@@ -670,7 +670,7 @@ These models are in the workshop directory and are not yet approved.
 ### Mapping: Airbyte `order_refunds` to Fivetran `order_line_refund`
 
 
-- Table Match Confidence Score: 🟢 _0.70__
+- Table Match Confidence Score: 🟢 _0.70_
 - Table Completion Score: ❌ _0.36_
 - Summary Self-Evaluation: _The table matching is strong because both systems likely describe the same subject matter. However, many fields have missing expressions, resulting in a low completion score._
 
@@ -691,7 +691,7 @@ These models are in the workshop directory and are not yet approved.
 ### Mapping: Airbyte `transactions` to Fivetran `transaction`
 
 
-- Table Match Confidence Score: 🟢 _0.85__
+- Table Match Confidence Score: 🟢 _0.85_
 - Table Completion Score: 🟢 _0.72_
 - Summary Self-Evaluation: _The table match score is high due to strong similarity in table subject matter. The completion score reflects some missing mappings, lowering overall confidence._
 
@@ -733,7 +733,7 @@ These models are in the workshop directory and are not yet approved.
 ### Mapping: Airbyte `abandoned_checkouts` to Fivetran `abandoned_checkout_shipping_line`
 
 
-- Table Match Confidence Score: ⚠️ _0.50__
+- Table Match Confidence Score: ⚠️ _0.50_
 - Table Completion Score: ❌ _0.05_
 - Summary Self-Evaluation: _Only one field mapping is accurate with perfect confidence, the rest have 'MISSING' as expressions, indicating no matches found._
 
@@ -761,7 +761,7 @@ These models are in the workshop directory and are not yet approved.
 ### Mapping: Airbyte `transactions` to Fivetran `tax_line`
 
 
-- Table Match Confidence Score: 🟢 _0.70__
+- Table Match Confidence Score: 🟢 _0.70_
 - Table Completion Score: ⚠️ _0.57_
 - Summary Self-Evaluation: _The table mapping quality is relatively high, given that most field names have corresponding expressions from similar schemas. However, several fields are marked as 'MISSING,' indicating incomplete field mappings and reducing the completion score. The standard mapping of '_fivetran_synced' to '_airbyte_extracted_at' boosts confidence significantly. The lack of a logical or exact match for 'index', 'order_line_id', and 'rate' fields decreases the completion score as they are marked 'MISSING'._
 
@@ -778,7 +778,7 @@ These models are in the workshop directory and are not yet approved.
 ### Mapping: Airbyte `orders` to Fivetran `order`
 
 
-- Table Match Confidence Score: 🟢 _0.95__
+- Table Match Confidence Score: 🟢 _0.95_
 - Table Completion Score: 🟢 _0.85_
 - Summary Self-Evaluation: _The table mapping is evaluated to have a high table match score due to the comprehensive outline of field mappings that are appropriately correlated with reasonable confidence to the target schema. However, there are fields with 'MISSING' expressions which moderately reduce the completion score as they indicate where the source schema lacks equivalent or meaningful matches._
 
@@ -793,7 +793,7 @@ These models are in the workshop directory and are not yet approved.
 ### Mapping: Airbyte `fulfillments` to Fivetran `order_shipping_line`
 
 
-- Table Match Confidence Score: 🟢 _0.70__
+- Table Match Confidence Score: 🟢 _0.70_
 - Table Completion Score: ❌ _0.21_
 - Summary Self-Evaluation: _The table mapping has a partial match with high confidence for standardized fields like '_fivetran_synced'. Several fields are missing a good match, affecting the completion score significantly. The high-confidence mapping of '_fivetran_synced' to '_airbyte_extracted_at' contributes positively to the table match score._
 
@@ -817,7 +817,7 @@ These models are in the workshop directory and are not yet approved.
 ### Mapping: Airbyte `orders` to Fivetran `order_note_attribute`
 
 
-- Table Match Confidence Score: ⚠️ _0.65__
+- Table Match Confidence Score: ⚠️ _0.65_
 - Table Completion Score: 🟢 _0.75_
 - Summary Self-Evaluation: _The table mapping reflects a moderate confidence level due to missing mappings. Field-level mappings include both perfect and missing entries._
 
