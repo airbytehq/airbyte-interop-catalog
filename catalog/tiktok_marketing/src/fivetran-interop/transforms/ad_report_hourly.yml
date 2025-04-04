@@ -239,183 +239,182 @@ annotations:
   evaluation:
     source_stream_name: ads_reports_hourly
     target_table_name: ad_report_hourly
-    name_match_score: 0.8
-    score: 0.79
+    table_match_score: 0.85
+    completion_score: 0.8
     explanation:
-      The table mappings are mostly accurate, with minor discrepancies,
-      particularly with fields marked as 'MISSING'. Fields with specific mappings
-      are well-matched to their descriptions and expressions, leading to a relatively
-      high overall confidence score with a few exceptions.
+      The table mapping is highly confident with most fields accurately
+      mapped to their equivalents in the target schema. However, a few fields have
+      missing mappings which slightly lowers the completion score.
     field_mapping_evals:
       - name: ad_id
         expression: ads_reports_hourly.ad_id
         score: 1.0
-        explanation: Mapping is perfect.
+        explanation: Perfect match for 'ad_id' field.
       - name: stat_time_hour
         expression: ads_reports_hourly.stat_time_hour
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'stat_time_hour' field.
       - name: cost_per_conversion
         expression: ads_reports_hourly.metrics.cost_per_conversion
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'cost_per_conversion' field.
       - name: real_time_conversion
         expression: ads_reports_hourly.metrics.real_time_conversion
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'real_time_conversion' field.
       - name: cpc
         expression: ads_reports_hourly.metrics.cpc
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'cpc' field.
       - name: video_play_actions
         expression: ads_reports_hourly.metrics.video_play_actions
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'video_play_actions' field.
       - name: conversion_rate
         expression: ads_reports_hourly.metrics.conversion_rate
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'conversion_rate' field.
       - name: video_views_p_75
         expression: ads_reports_hourly.metrics.video_views_p75
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'video_views_p_75' field.
       - name: result
         expression: ads_reports_hourly.metrics.result
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'result' field.
       - name: video_views_p_50
         expression: ads_reports_hourly.metrics.video_views_p50
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'video_views_p_50' field.
       - name: impressions
         expression: ads_reports_hourly.metrics.impressions
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'impressions' field.
       - name: comments
         expression: ads_reports_hourly.metrics.comments
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'comments' field.
       - name: real_time_cost_per_result
         expression: ads_reports_hourly.metrics.real_time_cost_per_result
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'real_time_cost_per_result' field.
       - name: conversion
         expression: ads_reports_hourly.metrics.conversion
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'conversion' field.
       - name: real_time_result
         expression: ads_reports_hourly.metrics.real_time_result
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'real_time_result' field.
       - name: video_view_p_100
         expression: ads_reports_hourly.metrics.video_views_p100
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'video_view_p_100' field.
       - name: shares
         expression: ads_reports_hourly.metrics.shares
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'shares' field.
       - name: real_time_conversion_rate
         expression: ads_reports_hourly.metrics.real_time_conversion_rate
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'real_time_conversion_rate' field.
       - name: cost_per_secondary_goal_result
         expression: ads_reports_hourly.metrics.cost_per_secondary_goal_result
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'cost_per_secondary_goal_result' field.
       - name: secondary_goal_result_rate
         expression: ads_reports_hourly.metrics.secondary_goal_result_rate
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'secondary_goal_result_rate' field.
       - name: clicks
         expression: ads_reports_hourly.metrics.clicks
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'clicks' field.
       - name: cost_per_1000_reached
         expression: ads_reports_hourly.metrics.cost_per_1000_reached
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'cost_per_1000_reached' field.
       - name: video_views_p_25
         expression: ads_reports_hourly.metrics.video_views_p25
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'video_views_p_25' field.
       - name: reach
         expression: ads_reports_hourly.metrics.reach
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'reach' field.
       - name: real_time_cost_per_conversion
         expression: ads_reports_hourly.metrics.real_time_cost_per_conversion
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'real_time_cost_per_conversion' field.
       - name: profile_visits_rate
         expression: ads_reports_hourly.metrics.profile_visits_rate
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'profile_visits_rate' field.
       - name: average_video_play
         expression: ads_reports_hourly.metrics.average_video_play
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'average_video_play' field.
       - name: profile_visits
         expression: ads_reports_hourly.metrics.profile_visits
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'profile_visits' field.
       - name: cpm
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING.
+        explanation: No good match found.
       - name: ctr
         expression: ads_reports_hourly.metrics.ctr
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'ctr' field.
       - name: video_watched_2_s
         expression: ads_reports_hourly.metrics.video_watched_2s
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'video_watched_2_s' field.
       - name: follows
         expression: ads_reports_hourly.metrics.follows
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'follows' field.
       - name: result_rate
         expression: ads_reports_hourly.metrics.result_rate
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'result_rate' field.
       - name: video_watched_6_s
         expression: ads_reports_hourly.metrics.video_watched_6s
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'video_watched_6_s' field.
       - name: secondary_goal_result
         expression: ads_reports_hourly.metrics.secondary_goal_result
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'secondary_goal_result' field.
       - name: cost_per_result
         expression: ads_reports_hourly.metrics.cost_per_result
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'cost_per_result' field.
       - name: average_video_play_per_user
         expression: ads_reports_hourly.metrics.average_video_play_per_user
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'average_video_play_per_user' field.
       - name: real_time_result_rate
         expression: ads_reports_hourly.metrics.real_time_result_rate
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'real_time_result_rate' field.
       - name: spend
         expression: ads_reports_hourly.metrics.spend
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'spend' field.
       - name: likes
         expression: ads_reports_hourly.metrics.likes
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'likes' field.
       - name: _fivetran_synced
         expression: ads_reports_hourly._airbyte_extracted_at
         score: 1.0
-        explanation: _fivetran_synced is mapped to _airbyte_extracted_at as required.
+        explanation: Standard mapping for sync timestamp field.
       - name: total_purchase_value
         expression: ads_reports_hourly.metrics.total_purchase_value
-        score: 1.0
-        explanation: Mapping is perfect.
+        score: 0.95
+        explanation: Strong match for 'total_purchase_value' field.
       - name: total_sales_lead_value
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING.
+        explanation: No good match found.

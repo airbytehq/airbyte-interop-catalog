@@ -1,7 +1,7 @@
 """Tests for the subcolumns functionality in dbt source files."""
 
 from morph.models import DbtSourceColumn, DbtSourceTable
-from morph.utils.dbt_source_files import json_schema_to_dbt_table
+from morph.utils.dbt.dbt_source_files import json_schema_to_dbt_table
 
 EXPECTED_TOP_LEVEL_SUBCOLUMNS = 3
 EXPECTED_NESTED_SUBCOLUMNS = 2

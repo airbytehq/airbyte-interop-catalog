@@ -2,42 +2,42 @@ domain: shopify.fivetran-interop
 transforms:
   - name: collection
     from:
-      - smart_collections: shopify.smart_collections
+      - custom_collections: shopify.custom_collections
     fields:
       _fivetran_deleted:
         expression: MISSING
         description: "{{ doc('_fivetran_deleted') }}"
       _fivetran_synced:
-        expression: smart_collections._airbyte_extracted_at
+        expression: custom_collections._airbyte_extracted_at
         description: "{{ doc('_fivetran_synced') }}"
       disjunctive:
-        expression: smart_collections.disjunctive
+        expression: MISSING
         description:
           Boolean representing whether the `rules` or disjuctive (logical
           `OR`) or not. True = disjuctive, false = conjunctive (logical `AND`).
       handle:
-        expression: smart_collections.handle
+        expression: custom_collections.handle
         description:
           A unique, human-readable string for the collection automatically
           generated from its title. This is used in themes by the Liquid templating
           language to refer to the collection.
       id:
-        expression: smart_collections.id
+        expression: custom_collections.id
         description: The ID for the collection.
       published_at:
-        expression: smart_collections.published_at
+        expression: custom_collections.published_at
         description:
           The time and date (ISO 8601 format) when the collection was made
           visible. Returns null for a hidden collection.
       published_scope:
-        expression: smart_collections.published_scope
+        expression: custom_collections.published_scope
         description:
           "Whether the collection is published to the Point of Sale channel.
           Valid values `web` (the collection is published to the Online Store channel
           but not published to the Point of Sale channel) and `global` (the collection
           is published to both the Online Store channel and the Point of Sale channel).\n"
       rules:
-        expression: smart_collections.rules
+        expression: MISSING
         description:
           "An array of rules that define what products go into the smart
           collection. Each rule (`column` -- `relation` --> `condition`) has these
@@ -49,7 +49,7 @@ transforms:
           strings or numbers, depending on the relation value. See the [Shopify docs](https://shopify.dev/api/admin-rest/2022-10/resources/smartcollection#resource-object)
           for more.\n"
       sort_order:
-        expression: smart_collections.sort_order
+        expression: custom_collections.sort_order
         description:
           "The order of the products in the collection. Valid values inclide
           - `alpha-asc`: The products are sorted alphabetically from A to Z. - `alpha-des`:
@@ -61,10 +61,10 @@ transforms:
           The products are sorted by price from lowest to highest. - `price-desc`:
           The products are sorted by price from highest to lowest.\n"
       title:
-        expression: smart_collections.title
+        expression: custom_collections.title
         description: The name of the collection
       updated_at:
-        expression: smart_collections.updated_at
+        expression: custom_collections.updated_at
         description:
           The date and time (ISO 8601 format) when the collection was last
           modified.
@@ -72,66 +72,60 @@ annotations:
   approved: false
   missing_fields:
     - _fivetran_deleted
+    - disjunctive
+    - rules
   evaluation:
-    source_stream_name: smart_collections
+    source_stream_name: custom_collections
     target_table_name: collection
-    name_match_score: 0.6
-    score: 0.68
+    table_match_score: 0.8
+    completion_score: 0.8181818181818182
     explanation:
-      Confidence evaluation considers 'MISSING' as 0.0, with highest confidence
-      at 1.0 for perfect mappings. '_fivetran_synced' is correctly mapped to '_airbyte_extracted_at'.
+      The table match confidence is high due to the similarity in subject
+      matter, but not all fields could be mapped, especially with some fields missing
+      appropriate matches. The completion score reflects the proportion of fields
+      that have meaningful mappings.
     field_mapping_evals:
       - name: _fivetran_deleted
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', indicating no mapping found.
+        explanation: No good match found.
       - name: _fivetran_synced
-        expression: smart_collections._airbyte_extracted_at
-        score: 0.7
-        explanation:
-          Correctly mapped to 'smart_collections._airbyte_extracted_at'
-          as expected for '_fivetran_synced' fields.
+        expression: custom_collections._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping to '_airbyte_extracted_at'.
       - name: disjunctive
-        expression: smart_collections.disjunctive
-        score: 0.6
-        explanation:
-          Likely referring to the field correctly with necessary logical
-          description.
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
       - name: handle
-        expression: smart_collections.handle
+        expression: custom_collections.handle
         score: 0.7
-        explanation:
-          Mapping seems accurate with description matching expected unique
-          string identifier.
+        explanation: Good match found with 'custom_collections.handle'.
       - name: id
-        expression: smart_collections.id
+        expression: custom_collections.id
         score: 0.7
-        explanation: ID mapping is usually straightforward and correct.
+        explanation: Good match found with 'custom_collections.id'.
       - name: published_at
-        expression: smart_collections.published_at
+        expression: custom_collections.published_at
         score: 0.7
-        explanation:
-          Field aligns with the expected published date and time in ISO
-          format.
+        explanation: Good match found with 'custom_collections.published_at'.
       - name: published_scope
-        expression: smart_collections.published_scope
+        expression: custom_collections.published_scope
         score: 0.7
-        explanation: Matches valid values for publishing channels.
+        explanation: Good match found with 'custom_collections.published_scope'.
       - name: rules
-        expression: smart_collections.rules
-        score: 0.7
-        explanation:
-          Rules description aligns with expected structure for smart collection
-          logic.
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
       - name: sort_order
-        expression: smart_collections.sort_order
+        expression: custom_collections.sort_order
         score: 0.7
-        explanation: Description matches expected sort order values.
+        explanation: Good match found with 'custom_collections.sort_order'.
       - name: title
-        expression: smart_collections.title
+        expression: custom_collections.title
         score: 0.7
-        explanation: Title mapping aligns with the name of the collection.
+        explanation: Good match found with 'custom_collections.title'.
       - name: updated_at
-        expression: smart_collections.updated_at
+        expression: custom_collections.updated_at
         score: 0.7
-        explanation: Field corresponds to expected date and time of last modification.
+        explanation: Good match found with 'custom_collections.updated_at'.

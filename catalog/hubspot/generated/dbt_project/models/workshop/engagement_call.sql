@@ -9,10 +9,10 @@ engagements_calls AS (
 
 SELECT
     engagements_calls._airbyte_extracted_at AS _fivetran_synced,
-    engagements_calls.id AS engagement_id,
-    engagements_calls.properties.hs_gdpr_deleted AS _fivetran_deleted,
+    NULL AS engagement_id,
+    NULL AS _fivetran_deleted,
     engagements_calls.properties.hs_createdate AS property_hs_createdate,
-    engagements_calls.properties.hs_timestamp AS timestamp,
+    NULL AS timestamp,
     engagements_calls.properties.hubspot_owner_id AS property_hubspot_owner_id,
     engagements_calls.properties.hubspot_team_id AS property_hubspot_team_id
 FROM engagements_calls

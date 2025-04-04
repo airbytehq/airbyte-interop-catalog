@@ -2,10 +2,10 @@ domain: shopify.fivetran-interop
 transforms:
   - name: order_shipping_tax_line
     from:
-      - orders: shopify.orders
+      - order_refunds: shopify.order_refunds
     fields:
       _fivetran_synced:
-        expression: orders._airbyte_extracted_at
+        expression: order_refunds._airbyte_extracted_at
         description: "{{ doc('_fivetran_synced') }}"
       index:
         expression: MISSING
@@ -14,12 +14,12 @@ transforms:
         expression: MISSING
         description: ID of the order shipping line this recod is associated with.
       price:
-        expression: orders.current_total_tax
+        expression: MISSING
         description:
           The amount of tax, in shop currency, after discounts and before
           returns.
       price_set:
-        expression: orders.subtotal_price_set
+        expression: MISSING
         description:
           The amount of tax, in shop and presentment currencies, after
           discounts and before returns (JSON).
@@ -29,49 +29,55 @@ transforms:
           The proportion of the line item price that the tax represents
           as a decimal.
       title:
-        expression: orders.name
+        expression: MISSING
         description: The name of the tax.
 annotations:
   approved: false
   missing_fields:
     - index
     - order_shipping_line_id
+    - price
+    - price_set
     - rate
+    - title
   evaluation:
-    source_stream_name: orders
+    source_stream_name: order_refunds
     target_table_name: order_shipping_tax_line
-    name_match_score: 0.5714285714285715
-    score: 0.4333333333333333
+    table_match_score: 0.6
+    completion_score: 0.14285714285714285
     explanation:
-      The overall mapping confidence is average due to the presence of
-      multiple fields with MISSING expressions. While '_fivetran_synced' is perfectly
-      mapped, other fields could not be matched reliably.
+      The field mapping includes one perfect match (`_fivetran_synced`
+      to `_airbyte_extracted_at`), which always receives a score of 1.00. All other
+      fields are marked as 'MISSING', indicating no good matches found, which lowers
+      the completion score significantly.
     field_mapping_evals:
       - name: _fivetran_synced
-        expression: orders._airbyte_extracted_at
+        expression: order_refunds._airbyte_extracted_at
         score: 1.0
-        explanation: Perfect mapping to '_airbyte_extracted_at' column.
+        explanation:
+          Field `_fivetran_synced` is correctly mapped to `_airbyte_extracted_at`,
+          which is a known perfect match.
       - name: index
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, indicating no mapping.
+        explanation: No good match found.
       - name: order_shipping_line_id
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, indicating no mapping.
+        explanation: No good match found.
       - name: price
-        expression: orders.current_total_tax
-        score: 0.7
-        explanation: Mapping likely but not perfect, potential match with 'current_total_tax'.
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
       - name: price_set
-        expression: orders.subtotal_price_set
-        score: 0.6
-        explanation: Potential match with 'subtotal_price_set', but not confident.
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
       - name: rate
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, indicating no mapping.
+        explanation: No good match found.
       - name: title
-        expression: orders.name
-        score: 0.7
-        explanation: Good match with 'name', representing similar concepts.
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

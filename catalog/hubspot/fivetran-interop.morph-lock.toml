@@ -4,7 +4,7 @@ project_name = "fivetran-interop"
 requirements_file = "catalog/hubspot/requirements/fivetran-interop/src_dbt_requirements.yml"
 requirements_file_hash = "5b432bf8082036e0a36457e3b5ce7e6450a2492634d212a22718ad50510352a9"
 airbyte_source_file = "catalog/hubspot/generated/src_airbyte_hubspot.yml"
-airbyte_source_file_hash = "d308fe0c7fb419a7fe662ce47b86bbe172b032a66058132186c64ca9275de463"
+airbyte_source_file_hash = "417bb4dc20c37ae012897c23e9a6cce7ec17ce7f6a8dba370343affa647a4121"
 
 [coverage]
 unused_source_streams = [
@@ -70,11 +70,13 @@ unmapped_target_tables = [
 
 [mappings.company]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/company.yml"
-source_file_hash = "0dc225cc6f306daa6406213d46cac1a6ce3ebce6189fc305e26497d9835da7c1"
+source_file_hash = "406f4152df1bfdbf1b4a356e0381cfeb04fa8df0de408848f3c77b47ae67867e"
 unmapped_target_fields = [
     "portal_id",
+    "property_state",
 ]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.company.mapped_target_fields]
 _fivetran_synced = "companies._airbyte_extracted_at"
@@ -87,7 +89,6 @@ property_industry = "companies.properties.industry"
 property_address = "companies.properties.address"
 property_address_2 = "companies.properties.address2"
 property_city = "companies.properties.city"
-property_state = "companies.properties.state"
 property_country = "companies.properties.country"
 property_annualrevenue = "companies.properties.annualrevenue"
 
@@ -255,6 +256,7 @@ companies = [
     "properties.recent_conversion_event_name_timestamp_latest_value_66c820bf",
     "properties.recent_deal_amount",
     "properties.recent_deal_close_date",
+    "properties.state",
     "properties.timezone",
     "properties.total_money_raised",
     "properties.total_revenue",
@@ -448,9 +450,10 @@ companies = [
 
 [mappings.company_property_history]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/company_property_history.yml"
-source_file_hash = "479ff5270108e30abe9390960e860f04d34989a378fde693caee552f5815a515"
+source_file_hash = "5cad447a4461a9abb43f6fed2de7f20824da35640f2b5fe10f80a6e4ae9656d0"
 unmapped_target_fields = []
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.company_property_history.mapped_target_fields]
 _fivetran_synced = "companies_property_history._airbyte_extracted_at"
@@ -827,24 +830,25 @@ companies_property_history = [
 
 [mappings.contact]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/contact.yml"
-source_file_hash = "808d3262783d7ef5b530092420c1e1899c56ca23c75690980b502bca95a9d1bf"
+source_file_hash = "bc68bfebcbab66bfe138862da6d697e7aa30ef65bc7e654338df59d23879dd45"
 unmapped_target_fields = [
     "_fivetran_deleted",
 ]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.contact.mapped_target_fields]
 _fivetran_synced = "contacts._airbyte_extracted_at"
 id = "contacts.id"
-property_email_1 = "contacts.properties.email"
-property_company = "contacts.properties.company"
-property_firstname = "contacts.properties.firstname"
-property_lastname = "contacts.properties.lastname"
-property_email = "contacts.properties.email"
-property_createdate = "contacts.properties.createdate"
-property_jobtitle = "contacts.properties.jobtitle"
-property_annualrevenue = "contacts.properties.annualrevenue"
-property_hs_calculated_merged_vids = "contacts.properties.hs_calculated_merged_vids"
+property_email_1 = "contacts.properties_email"
+property_company = "contacts.properties_company"
+property_firstname = "contacts.properties_firstname"
+property_lastname = "contacts.properties_lastname"
+property_email = "contacts.properties_email"
+property_createdate = "contacts.properties_createdate"
+property_jobtitle = "contacts.properties_jobtitle"
+property_annualrevenue = "contacts.properties_annualrevenue"
+property_hs_calculated_merged_vids = "contacts.properties_hs_calculated_merged_vids"
 
 [mappings.contact.unused_source_fields]
 contacts = [
@@ -854,16 +858,20 @@ contacts = [
     "companies",
     "createdAt",
     "properties.address",
+    "properties.annualrevenue",
     "properties.associatedcompanyid",
     "properties.associatedcompanylastupdated",
     "properties.city",
     "properties.closedate",
+    "properties.company",
     "properties.company_size",
     "properties.country",
+    "properties.createdate",
     "properties.currentlyinworkflow",
     "properties.date_of_birth",
     "properties.days_to_close",
     "properties.degree",
+    "properties.email",
     "properties.engagements_last_meeting_booked",
     "properties.engagements_last_meeting_booked_campaign",
     "properties.engagements_last_meeting_booked_medium",
@@ -873,6 +881,7 @@ contacts = [
     "properties.first_conversion_date",
     "properties.first_conversion_event_name",
     "properties.first_deal_created_date",
+    "properties.firstname",
     "properties.gender",
     "properties.graduation_date",
     "properties.hs_additional_emails",
@@ -902,6 +911,7 @@ contacts = [
     "properties.hs_avatar_filemanager_key",
     "properties.hs_buying_role",
     "properties.hs_calculated_form_submissions",
+    "properties.hs_calculated_merged_vids",
     "properties.hs_calculated_mobile_number",
     "properties.hs_calculated_phone_number",
     "properties.hs_calculated_phone_number_area_code",
@@ -1138,7 +1148,9 @@ contacts = [
     "properties.ip_state_code",
     "properties.ip_zipcode",
     "properties.job_function",
+    "properties.jobtitle",
     "properties.lastmodifieddate",
+    "properties.lastname",
     "properties.lifecyclestage",
     "properties.marital_status",
     "properties.message",
@@ -1174,20 +1186,16 @@ contacts = [
     "properties.work_email",
     "properties.zip",
     "properties_address",
-    "properties_annualrevenue",
     "properties_associatedcompanyid",
     "properties_associatedcompanylastupdated",
     "properties_city",
     "properties_closedate",
-    "properties_company",
     "properties_company_size",
     "properties_country",
-    "properties_createdate",
     "properties_currentlyinworkflow",
     "properties_date_of_birth",
     "properties_days_to_close",
     "properties_degree",
-    "properties_email",
     "properties_engagements_last_meeting_booked",
     "properties_engagements_last_meeting_booked_campaign",
     "properties_engagements_last_meeting_booked_medium",
@@ -1197,7 +1205,6 @@ contacts = [
     "properties_first_conversion_date",
     "properties_first_conversion_event_name",
     "properties_first_deal_created_date",
-    "properties_firstname",
     "properties_gender",
     "properties_graduation_date",
     "properties_hs_additional_emails",
@@ -1227,7 +1234,6 @@ contacts = [
     "properties_hs_avatar_filemanager_key",
     "properties_hs_buying_role",
     "properties_hs_calculated_form_submissions",
-    "properties_hs_calculated_merged_vids",
     "properties_hs_calculated_mobile_number",
     "properties_hs_calculated_phone_number",
     "properties_hs_calculated_phone_number_area_code",
@@ -1464,9 +1470,7 @@ contacts = [
     "properties_ip_state_code",
     "properties_ip_zipcode",
     "properties_job_function",
-    "properties_jobtitle",
     "properties_lastmodifieddate",
-    "properties_lastname",
     "properties_lifecyclestage",
     "properties_marital_status",
     "properties_message",
@@ -1506,39 +1510,47 @@ contacts = [
 
 [mappings.contact_form_submission]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/contact_form_submission.yml"
-source_file_hash = "caaab2433f3915582f87c9c3f1d26bb07693fc1589ec0fbe827d7a2217e10461"
-unmapped_target_fields = []
+source_file_hash = "1bfe431bb716aaa4e95f0965046132093a4125fc3e34bd80f704004f1667149f"
+unmapped_target_fields = [
+    "contact_id",
+]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.contact_form_submission.mapped_target_fields]
 _fivetran_synced = "contacts_form_submissions._airbyte_extracted_at"
-contact_id = "contacts_form_submissions.canonical-vid"
-conversion_id = "contacts_form_submissions.conversion-id"
-form_id = "contacts_form_submissions.form-id"
-page_url = "contacts_form_submissions.page-url"
-portal_id = "contacts_form_submissions.portal-id"
+conversion_id = "contacts_form_submissions.conversion_id"
+form_id = "contacts_form_submissions.form_id"
+page_url = "contacts_form_submissions.canonical_url"
+portal_id = "contacts_form_submissions.portal_id"
 timestamp = "contacts_form_submissions.timestamp"
-title = "contacts_form_submissions.title"
+title = "contacts_form_submissions.page_title"
 
 [mappings.contact_form_submission.unused_source_fields]
 contacts_form_submissions = [
     "_airbyte_meta",
     "_airbyte_raw_id",
-    "canonical-url",
-    "contact-associated-by",
-    "form-type",
-    "meta-data",
-    "page-title",
+    "canonical_vid",
+    "contact_associated_by",
+    "form_type",
+    "meta_data",
+    "page_url",
+    "title",
 ]
 
 [mappings.contact_list]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/contact_list.yml"
-source_file_hash = "115f5ddab8c4f269661fb74416d30ed3a6b43010da8114e04e492d17ce0ed768"
+source_file_hash = "f849d8fe8c0ba7c278dbe6f098a5ee94a3dfe663335c76422c52c5f0382b2e74"
 unmapped_target_fields = [
     "_fivetran_deleted",
+    "filters_updated_at",
     "list_version",
+    "object_type_id",
+    "processing_status",
+    "processing_type",
 ]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.contact_list.mapped_target_fields]
 _fivetran_synced = "contact_lists._airbyte_extracted_at"
@@ -1547,13 +1559,9 @@ id = "contact_lists.listId"
 name = "contact_lists.name"
 updated_at = "contact_lists.updatedAt"
 created_by_id = "contact_lists.authorId"
-object_type_id = "contact_lists.listType"
-processing_status = "contact_lists.metaData.processing"
-processing_type = "contact_lists.listType"
-filters_updated_at = "contact_lists.filters"
-metadata_error = "contact_lists.metaData.error"
-metadata_last_processing_state_change_at = "contact_lists.metaData.lastProcessingStateChangeAt"
-metadata_last_size_change_at = "contact_lists.metaData.lastSizeChangeAt"
+metadata_error = "contact_lists.metaData_error"
+metadata_last_processing_state_change_at = "contact_lists.metaData_lastProcessingStateChangeAt"
+metadata_last_size_change_at = "contact_lists.metaData_lastSizeChangeAt"
 metadata_processing = "contact_lists.metaData_processing"
 metadata_size = "contact_lists.metaData_size"
 portal_id = "contact_lists.portalId"
@@ -1565,16 +1573,19 @@ contact_lists = [
     "_airbyte_meta",
     "_airbyte_raw_id",
     "archived",
+    "filters",
     "ilsFilterBranch",
     "internal",
     "internalListId",
     "limitExempt",
+    "listType",
+    "metaData.error",
+    "metaData.lastProcessingStateChangeAt",
+    "metaData.lastSizeChangeAt",
     "metaData.listReferencesCount",
     "metaData.parentFolderId",
+    "metaData.processing",
     "metaData.size",
-    "metaData_error",
-    "metaData_lastProcessingStateChangeAt",
-    "metaData_lastSizeChangeAt",
     "metaData_listReferencesCount",
     "metaData_parentFolderId",
     "parentId",
@@ -1584,46 +1595,48 @@ contact_lists = [
 
 [mappings.contact_list_member]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/contact_list_member.yml"
-source_file_hash = "37149b55331e3ceeb4cede578f58c57a7d2304a582ec4838a26ec800fa1f5899"
+source_file_hash = "1342b52b2e922e088bacd567f728e5f0a4b2ce267bb77e76467fcdb0c610b984"
 unmapped_target_fields = [
     "_fivetran_deleted",
     "added_at",
 ]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.contact_list_member.mapped_target_fields]
 _fivetran_synced = "contacts_list_memberships._airbyte_extracted_at"
 contact_id = "contacts_list_memberships.vid"
-contact_list_id = "contacts_list_memberships.static-list-id"
+contact_list_id = "contacts_list_memberships.static_list_id"
 
 [mappings.contact_list_member.unused_source_fields]
 contacts_list_memberships = [
     "_airbyte_meta",
     "_airbyte_raw_id",
-    "canonical-vid",
-    "internal-list-id",
-    "is-member",
+    "canonical_vid",
+    "internal_list_id",
+    "is_member",
     "timestamp",
 ]
 
 [mappings.contact_merge_audit]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/contact_merge_audit.yml"
-source_file_hash = "4178107e1568a45a325b8b5214822bb9c550d4428926145de49252dda23f3cf0"
+source_file_hash = "708bae59d0537d42f7c670d5c911808af06f32c034435999ea58bf1e537985e9"
 unmapped_target_fields = [
     "contact_id",
 ]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.contact_merge_audit.mapped_target_fields]
 _fivetran_synced = "contacts_merged_audit._airbyte_extracted_at"
-canonical_vid = "contacts_merged_audit.canonical-vid"
-entity_id = "contacts_merged_audit.entity-id"
-first_name = "contacts_merged_audit.first-name"
-last_name = "contacts_merged_audit.last-name"
-num_properties_moved = "contacts_merged_audit.num-properties-moved"
+canonical_vid = "contacts_merged_audit.canonical_vid"
+entity_id = "contacts_merged_audit.entity_id"
+first_name = "contacts_merged_audit.first_name"
+last_name = "contacts_merged_audit.last_name"
+num_properties_moved = "contacts_merged_audit.num_properties_moved"
 timestamp = "contacts_merged_audit.timestamp"
-user_id = "contacts_merged_audit.user-id"
-vid_to_merge = "contacts_merged_audit.vid-to-merge"
+user_id = "contacts_merged_audit.user_id"
+vid_to_merge = "contacts_merged_audit.vid_to_merge"
 
 [mappings.contact_merge_audit.unused_source_fields]
 contacts_merged_audit = [
@@ -1639,12 +1652,12 @@ contacts_merged_audit = [
     "merged_from_email.updated-by-user-id",
     "merged_from_email.value",
     "merged_from_email_selected",
-    "merged_from_email_source-id",
-    "merged_from_email_source-label",
-    "merged_from_email_source-type",
-    "merged_from_email_source-vids",
+    "merged_from_email_source_id",
+    "merged_from_email_source_label",
+    "merged_from_email_source_type",
+    "merged_from_email_source_vids",
     "merged_from_email_timestamp",
-    "merged_from_email_updated-by-user-id",
+    "merged_from_email_updated_by_user_id",
     "merged_from_email_value",
     "merged_to_email",
     "merged_to_email.selected",
@@ -1655,26 +1668,28 @@ contacts_merged_audit = [
     "merged_to_email.updated-by-user-id",
     "merged_to_email.value",
     "merged_to_email_selected",
-    "merged_to_email_source-id",
-    "merged_to_email_source-label",
-    "merged_to_email_source-type",
+    "merged_to_email_source_id",
+    "merged_to_email_source_label",
+    "merged_to_email_source_type",
     "merged_to_email_timestamp",
-    "merged_to_email_updated-by-user-id",
+    "merged_to_email_updated_by_user_id",
     "merged_to_email_value",
 ]
 
 [mappings.contact_property_history]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/contact_property_history.yml"
-source_file_hash = "28248f0883bfc35f2af1be5f7bf0dfa82353d201dd8575f323cc50d0ade35493"
-unmapped_target_fields = []
+source_file_hash = "bd116fb1a0216686684c617b4488e645e2ce1f13ef56243298341f06348ded4a"
+unmapped_target_fields = [
+    "contact_id",
+    "name",
+    "source",
+    "source_id",
+]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.contact_property_history.mapped_target_fields]
 _fivetran_synced = "contacts_property_history._airbyte_extracted_at"
-contact_id = "contacts_property_history.hs_object_id"
-name = "contacts_property_history.source-label"
-source = "contacts_property_history.source"
-source_id = "contacts_property_history.source-id"
 timestamp = "contacts_property_history.timestamp"
 value = "contacts_property_history.value"
 
@@ -1682,9 +1697,9 @@ value = "contacts_property_history.value"
 contacts_property_history = [
     "_airbyte_meta",
     "_airbyte_raw_id",
-    "canonical-vid",
-    "is-contact",
-    "portal-id",
+    "canonical_vid",
+    "is_contact",
+    "portal_id",
     "properties",
     "properties.address",
     "properties.annualrevenue",
@@ -2296,26 +2311,29 @@ contacts_property_history = [
     "properties_zip",
     "property",
     "selected",
-    "source-type",
-    "source-vids",
-    "updated-by-user-id",
+    "source_id",
+    "source_label",
+    "source_type",
+    "source_vids",
+    "updated_by_user_id",
     "vid",
 ]
 
 [mappings.deal]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/deal.yml"
-source_file_hash = "9af140903f77c3a02d97c7206246f1b3aee8f4619b0c4f25c63435bfae5dd192"
+source_file_hash = "d1bdc4b48d733e37bbe08a3d5a1b3b66f1b93a9fe8e53c623f1d578d449b7ac0"
 unmapped_target_fields = [
+    "deal_pipeline_id",
+    "is_deleted",
     "portal_id",
 ]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.deal.mapped_target_fields]
-deal_id = "deals.id"
-is_deleted = "deals.archived"
-deal_pipeline_id = "deals.pipeline"
+deal_id = "deals.properties.hs_object_id"
 deal_pipeline_stage_id = "deals.properties.dealstage"
-owner_id = "deals.properties.hs_all_owner_ids"
+owner_id = "deals.properties_hubspot_owner_id"
 property_dealname = "deals.properties.dealname"
 property_description = "deals.properties.description"
 property_amount = "deals.properties.amount"
@@ -2327,9 +2345,11 @@ deals = [
     "_airbyte_extracted_at",
     "_airbyte_meta",
     "_airbyte_raw_id",
+    "archived",
     "companies",
     "contacts",
     "createdAt",
+    "id",
     "line_items",
     "properties.amount_in_home_currency",
     "properties.closed_lost_reason",
@@ -2344,6 +2364,7 @@ deals = [
     "properties.hs_all_accessible_team_ids",
     "properties.hs_all_collaborator_owner_ids",
     "properties.hs_all_deal_split_owner_ids",
+    "properties.hs_all_owner_ids",
     "properties.hs_all_team_ids",
     "properties.hs_analytics_latest_source",
     "properties.hs_analytics_latest_source_company",
@@ -2433,7 +2454,6 @@ deals = [
     "properties.hs_num_associated_deal_splits",
     "properties.hs_num_of_associated_line_items",
     "properties.hs_num_target_accounts",
-    "properties.hs_object_id",
     "properties.hs_object_source",
     "properties.hs_object_source_detail_1",
     "properties.hs_object_source_detail_2",
@@ -2722,7 +2742,6 @@ deals = [
     "properties_hs_v2_time_in_current_stage",
     "properties_hs_was_imported",
     "properties_hubspot_owner_assigneddate",
-    "properties_hubspot_owner_id",
     "properties_hubspot_team_id",
     "properties_notes_last_contacted",
     "properties_notes_last_updated",
@@ -2736,11 +2755,12 @@ deals = [
 
 [mappings.deal_pipeline]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/deal_pipeline.yml"
-source_file_hash = "5abf7e4a3db4b71099728139b43f3201d295259862413a67f8c966ca793927f1"
+source_file_hash = "5c1e0b8a677b3742b7e660d02dd732c767375818b554afad00e423aee666ce81"
 unmapped_target_fields = [
     "_fivetran_deleted",
 ]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.deal_pipeline.mapped_target_fields]
 _fivetran_synced = "deal_pipelines._airbyte_extracted_at"
@@ -2763,16 +2783,18 @@ deal_pipelines = [
 
 [mappings.deal_property_history]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/deal_property_history.yml"
-source_file_hash = "ee7c23fd66a079394dc081488e23a010e86a6e0c1e8767eea69ae2bcab694fd7"
-unmapped_target_fields = []
+source_file_hash = "9a2e77b874a55bb8d9aa2b56b52ee6861d93e2dfb88eee921f338d42005a2964"
+unmapped_target_fields = [
+    "name",
+]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.deal_property_history.mapped_target_fields]
 _fivetran_synced = "deals_property_history._airbyte_extracted_at"
 deal_id = "deals_property_history.dealId"
-name = "deals_property_history.properties.dealname"
-source = "deals_property_history.properties.hs_object_source"
-source_id = "deals_property_history.properties.hs_object_source_id"
+source = "deals_property_history.sourceType"
+source_id = "deals_property_history.sourceId"
 timestamp = "deals_property_history.timestamp"
 value = "deals_property_history.value"
 
@@ -2781,6 +2803,7 @@ deals_property_history = [
     "_airbyte_meta",
     "_airbyte_raw_id",
     "archived",
+    "properties",
     "properties.amount",
     "properties.amount_in_home_currency",
     "properties.closed_lost_reason",
@@ -2788,6 +2811,7 @@ deals_property_history = [
     "properties.closedate",
     "properties.createdate",
     "properties.days_to_close",
+    "properties.dealname",
     "properties.dealstage",
     "properties.dealtype",
     "properties.description",
@@ -2875,9 +2899,11 @@ deals_property_history = [
     "properties.hs_num_of_associated_line_items",
     "properties.hs_num_target_accounts",
     "properties.hs_object_id",
+    "properties.hs_object_source",
     "properties.hs_object_source_detail_1",
     "properties.hs_object_source_detail_2",
     "properties.hs_object_source_detail_3",
+    "properties.hs_object_source_id",
     "properties.hs_object_source_label",
     "properties.hs_object_source_user_id",
     "properties.hs_open_deal_create_date",
@@ -3141,16 +3167,15 @@ deals_property_history = [
     "properties_num_notes",
     "properties_pipeline",
     "property",
-    "sourceId",
-    "sourceType",
     "updatedByUserId",
 ]
 
 [mappings.email_event]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/email_event.yml"
-source_file_hash = "b77fbc9f629b55a208e8d553d18636334ef69ebb09223f232419809a4bff230c"
+source_file_hash = "e81df2ff42470fa48cd30b4cb219319c3e7bfeab6b843595b337253f4a9dbf60"
 unmapped_target_fields = []
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.email_event.mapped_target_fields]
 _fivetran_synced = "email_events._airbyte_extracted_at"
@@ -3221,9 +3246,10 @@ email_events = [
 
 [mappings.email_event_delivered]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/email_event_delivered.yml"
-source_file_hash = "0f76f9790884df390fda76d7269c13d62d09f4d769f8fde8249c667d3dc41997"
+source_file_hash = "f9ab2a60d71adf391f14dce33c8443cfbf5168d4fa5156bcfbf98112629bd347"
 unmapped_target_fields = []
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.email_event_delivered.mapped_target_fields]
 _fivetran_synced = "email_events._airbyte_extracted_at"
@@ -3297,9 +3323,10 @@ email_events = [
 
 [mappings.email_event_print]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/email_event_print.yml"
-source_file_hash = "49263dd24044d726793832c35946497a166762b8694850aef91bbd1ed8c6b40b"
+source_file_hash = "a405eddbbb515edc9c39c05efc081b0dde91cfd6c8e7fe71ce6b68032a0dad98"
 unmapped_target_fields = []
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.email_event_print.mapped_target_fields]
 _fivetran_synced = "email_events._airbyte_extracted_at"
@@ -3373,9 +3400,10 @@ email_events = [
 
 [mappings.email_subscription]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/email_subscription.yml"
-source_file_hash = "f3369540c21b1a026e51a06cd7bcc25f7a82f36f163f68b636b26953a54e9730"
+source_file_hash = "7750fbda32bfb44b7b61acea7e83c5bd2e88207fadc4528ff11ab73b29a902f8"
 unmapped_target_fields = []
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.email_subscription.mapped_target_fields]
 _fivetran_synced = "email_subscriptions._airbyte_extracted_at"
@@ -3399,18 +3427,19 @@ email_subscriptions = [
 
 [mappings.email_subscription_change]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/email_subscription_change.yml"
-source_file_hash = "095c986fd8f7451142bba94f389e0813bd14581589a602e115c50737d44c0a07"
+source_file_hash = "c2554c08010bbfb35ef37121b8d14cb6ce3e67bba15b5ddc966f1dc9c07331e9"
 unmapped_target_fields = [
     "caused_by_event_id",
+    "change",
     "change_type",
     "email_subscription_id",
     "source",
 ]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.email_subscription_change.mapped_target_fields]
 _fivetran_synced = "subscription_changes._airbyte_extracted_at"
-change = "subscription_changes.changes"
 portal_id = "subscription_changes.portalId"
 recipient = "subscription_changes.recipient"
 timestamp = "subscription_changes.timestamp"
@@ -3419,14 +3448,16 @@ timestamp = "subscription_changes.timestamp"
 subscription_changes = [
     "_airbyte_meta",
     "_airbyte_raw_id",
+    "changes",
     "normalizedEmailId",
 ]
 
 [mappings.engagement]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/engagement.yml"
-source_file_hash = "c1e5ae11a73f5a37d47b801ab163e37daafdf0823c78f072c27de0f39a53f144"
+source_file_hash = "0eab0ce95303a43e17e8be4ff928fb5dcea6fa0353a7843dd8dd03c4d61377c3"
 unmapped_target_fields = []
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.engagement.mapped_target_fields]
 _fivetran_synced = "engagements._airbyte_extracted_at"
@@ -3632,16 +3663,18 @@ engagements = [
 
 [mappings.engagement_call]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/engagement_call.yml"
-source_file_hash = "e211e4a01f16f8732817c20c6b4b4c59982725ce044d2b002903cdf3c121b28c"
-unmapped_target_fields = []
+source_file_hash = "7d5ee2c6f8a0aab4d244bb17e30c224000bb089c057502a324f20ad8259e4021"
+unmapped_target_fields = [
+    "_fivetran_deleted",
+    "engagement_id",
+    "timestamp",
+]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.engagement_call.mapped_target_fields]
 _fivetran_synced = "engagements_calls._airbyte_extracted_at"
-engagement_id = "engagements_calls."
-_fivetran_deleted = "engagements_calls."
 property_hs_createdate = "engagements_calls.properties.hs_createdate"
-timestamp = "engagements_calls.properties.hs_timestamp"
 property_hubspot_owner_id = "engagements_calls.properties.hubspot_owner_id"
 property_hubspot_team_id = "engagements_calls.properties.hubspot_team_id"
 
@@ -3727,6 +3760,7 @@ engagements_calls = [
     "properties.hs_read_only",
     "properties.hs_shared_team_ids",
     "properties.hs_shared_user_ids",
+    "properties.hs_timestamp",
     "properties.hs_unique_creation_key",
     "properties.hs_unique_id",
     "properties.hs_unknown_visitor_conversation",
@@ -3829,15 +3863,16 @@ engagements_calls = [
 
 [mappings.engagement_email]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/engagement_email.yml"
-source_file_hash = "987291ba32fcc6ee2b8c5bb046f74afab8878bf41014b041ad2b94a5538b7a00"
+source_file_hash = "7c31d47608338463aa7cc411c96d6b0fb2afc8e0438357fe4b56471593486740"
 unmapped_target_fields = []
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.engagement_email.mapped_target_fields]
 _fivetran_synced = "engagements_emails._airbyte_extracted_at"
 engagement_id = "engagements_emails.id"
 property_hs_createdate = "engagements_emails.properties.hs_createdate"
-timestamp = "engagements_emails.properties.hs_timestamp"
+timestamp = "engagements_emails.properties_hs_timestamp"
 property_hubspot_owner_id = "engagements_emails.properties.hubspot_owner_id"
 property_hubspot_team_id = "engagements_emails.properties.hubspot_team_id"
 
@@ -3951,6 +3986,7 @@ engagements_emails = [
     "properties.hs_shared_team_ids",
     "properties.hs_shared_user_ids",
     "properties.hs_ticket_create_date",
+    "properties.hs_timestamp",
     "properties.hs_unique_creation_key",
     "properties.hs_unique_id",
     "properties.hs_updated_by_user_id",
@@ -4061,7 +4097,6 @@ engagements_emails = [
     "properties_hs_shared_team_ids",
     "properties_hs_shared_user_ids",
     "properties_hs_ticket_create_date",
-    "properties_hs_timestamp",
     "properties_hs_unique_creation_key",
     "properties_hs_unique_id",
     "properties_hs_updated_by_user_id",
@@ -4078,17 +4113,19 @@ engagements_emails = [
 
 [mappings.engagement_meeting]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/engagement_meeting.yml"
-source_file_hash = "22c783a5a75053c8c834ae9eb55a1bbcbf0a76d0ab3ff5e8d3703ce011537da3"
-unmapped_target_fields = []
+source_file_hash = "832ad5ab06fc592e6c4f20afd79c0e376ea496d9d44dccc30bd6387af28da2f3"
+unmapped_target_fields = [
+    "engagement_id",
+]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.engagement_meeting.mapped_target_fields]
 _fivetran_synced = "engagements_meetings._airbyte_extracted_at"
-engagement_id = "engagements_meetings.id"
-property_hs_createdate = "engagements_meetings.properties.hs_createdate"
-timestamp = "engagements_meetings.properties.hs_timestamp"
-property_hubspot_owner_id = "engagements_meetings.properties.hubspot_owner_id"
-property_hubspot_team_id = "engagements_meetings.properties.hubspot_team_id"
+property_hs_createdate = "engagements_meetings.properties_hs_createdate"
+timestamp = "engagements_meetings.properties_hs_timestamp"
+property_hubspot_owner_id = "engagements_meetings.properties_hubspot_owner_id"
+property_hubspot_team_id = "engagements_meetings.properties_hubspot_team_id"
 
 [mappings.engagement_meeting.unused_source_fields]
 engagements_meetings = [
@@ -4099,6 +4136,7 @@ engagements_meetings = [
     "contacts",
     "createdAt",
     "deals",
+    "id",
     "properties.hs_activity_type",
     "properties.hs_all_accessible_team_ids",
     "properties.hs_all_assigned_business_unit_ids",
@@ -4116,6 +4154,7 @@ engagements_meetings = [
     "properties.hs_created_by",
     "properties.hs_created_by_scheduling_page",
     "properties.hs_created_by_user_id",
+    "properties.hs_createdate",
     "properties.hs_engagement_source",
     "properties.hs_engagement_source_id",
     "properties.hs_follow_up_action",
@@ -4166,6 +4205,7 @@ engagements_meetings = [
     "properties.hs_shared_team_ids",
     "properties.hs_shared_user_ids",
     "properties.hs_time_to_book_meeting_from_first_contact",
+    "properties.hs_timestamp",
     "properties.hs_timezone",
     "properties.hs_unique_creation_key",
     "properties.hs_unique_id",
@@ -4176,6 +4216,8 @@ engagements_meetings = [
     "properties.hs_video_conference_url",
     "properties.hs_was_imported",
     "properties.hubspot_owner_assigneddate",
+    "properties.hubspot_owner_id",
+    "properties.hubspot_team_id",
     "properties_hs_activity_type",
     "properties_hs_all_accessible_team_ids",
     "properties_hs_all_assigned_business_unit_ids",
@@ -4193,7 +4235,6 @@ engagements_meetings = [
     "properties_hs_created_by",
     "properties_hs_created_by_scheduling_page",
     "properties_hs_created_by_user_id",
-    "properties_hs_createdate",
     "properties_hs_engagement_source",
     "properties_hs_engagement_source_id",
     "properties_hs_follow_up_action",
@@ -4244,7 +4285,6 @@ engagements_meetings = [
     "properties_hs_shared_team_ids",
     "properties_hs_shared_user_ids",
     "properties_hs_time_to_book_meeting_from_first_contact",
-    "properties_hs_timestamp",
     "properties_hs_timezone",
     "properties_hs_unique_creation_key",
     "properties_hs_unique_id",
@@ -4255,22 +4295,22 @@ engagements_meetings = [
     "properties_hs_video_conference_url",
     "properties_hs_was_imported",
     "properties_hubspot_owner_assigneddate",
-    "properties_hubspot_owner_id",
-    "properties_hubspot_team_id",
     "tickets",
     "updatedAt",
 ]
 
 [mappings.engagement_note]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/engagement_note.yml"
-source_file_hash = "e58d118f85b5f778b25c7038b2a3cac7c7699f19de59ebd437a3f66c9e4d5077"
-unmapped_target_fields = []
+source_file_hash = "18a9925e2b9485a44e04c3bc88def36d93dbb6f85ec29846bf582c295f88657e"
+unmapped_target_fields = [
+    "engagement_id",
+]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.engagement_note.mapped_target_fields]
 _fivetran_synced = "engagements_notes._airbyte_extracted_at"
 body = "engagements_notes.properties.hs_note_body"
-engagement_id = "engagements_notes.id"
 property_hs_createdate = "engagements_notes.properties.hs_createdate"
 timestamp = "engagements_notes.properties.hs_timestamp"
 property_hubspot_owner_id = "engagements_notes.properties.hubspot_owner_id"
@@ -4285,6 +4325,7 @@ engagements_notes = [
     "contacts",
     "createdAt",
     "deals",
+    "id",
     "properties.hs_all_accessible_team_ids",
     "properties.hs_all_assigned_business_unit_ids",
     "properties.hs_all_owner_ids",
@@ -4378,15 +4419,17 @@ engagements_notes = [
 
 [mappings.engagement_task]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/engagement_task.yml"
-source_file_hash = "fd13a868b9280622099432f34c1c1a1fa6d9488dbc003046b56d658bf90d9e5d"
-unmapped_target_fields = []
+source_file_hash = "9eec13c9bf4c0e3c181e68a336614eb009f957053bfc7a6ab2f7ab77d64daf45"
+unmapped_target_fields = [
+    "engagement_id",
+]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.engagement_task.mapped_target_fields]
 _fivetran_synced = "engagements_tasks._airbyte_extracted_at"
-engagement_id = "engagements_tasks.id"
-property_hs_createdate = "engagements_tasks.properties.hs_createdate"
-timestamp = "engagements_tasks.properties.hs_timestamp"
+property_hs_createdate = "engagements_tasks.properties_hs_createdate"
+timestamp = "engagements_tasks.properties_hs_timestamp"
 property_hubspot_owner_id = "engagements_tasks.properties_hubspot_owner_id"
 property_hubspot_team_id = "engagements_tasks.properties_hubspot_team_id"
 
@@ -4399,6 +4442,7 @@ engagements_tasks = [
     "contacts",
     "createdAt",
     "deals",
+    "id",
     "properties.hs_all_accessible_team_ids",
     "properties.hs_all_assigned_business_unit_ids",
     "properties.hs_all_owner_ids",
@@ -4413,6 +4457,7 @@ engagements_tasks = [
     "properties.hs_calendar_event_id",
     "properties.hs_created_by",
     "properties.hs_created_by_user_id",
+    "properties.hs_createdate",
     "properties.hs_date_entered_60b5c368_04c4_4d32_9b4a_457e159f49b7_13292096",
     "properties.hs_date_entered_61bafb31_e7fa_46ed_aaa9_1322438d6e67_1866552342",
     "properties.hs_date_entered_af0e6a5c_2ea3_4c72_b69f_7c6cb3fdb591_1652950531",
@@ -4487,6 +4532,7 @@ engagements_tasks = [
     "properties.hs_time_in_af0e6a5c_2ea3_4c72_b69f_7c6cb3fdb591_1652950531",
     "properties.hs_time_in_dd5826e4_c976_4654_a527_b59ada542e52_2144133616",
     "properties.hs_time_in_fc8148fb_3a2d_4b59_834e_69b7859347cb_1813133675",
+    "properties.hs_timestamp",
     "properties.hs_unique_creation_key",
     "properties.hs_unique_id",
     "properties.hs_updated_by_user_id",
@@ -4511,7 +4557,6 @@ engagements_tasks = [
     "properties_hs_calendar_event_id",
     "properties_hs_created_by",
     "properties_hs_created_by_user_id",
-    "properties_hs_createdate",
     "properties_hs_date_entered_60b5c368_04c4_4d32_9b4a_457e159f49b7_13292096",
     "properties_hs_date_entered_61bafb31_e7fa_46ed_aaa9_1322438d6e67_1866552342",
     "properties_hs_date_entered_af0e6a5c_2ea3_4c72_b69f_7c6cb3fdb591_1652950531",
@@ -4591,7 +4636,6 @@ engagements_tasks = [
     "properties_hs_time_in_af0e6a5c_2ea3_4c72_b69f_7c6cb3fdb591_1652950531",
     "properties_hs_time_in_dd5826e4_c976_4654_a527_b59ada542e52_2144133616",
     "properties_hs_time_in_fc8148fb_3a2d_4b59_834e_69b7859347cb_1813133675",
-    "properties_hs_timestamp",
     "properties_hs_unique_creation_key",
     "properties_hs_unique_id",
     "properties_hs_updated_by_user_id",
@@ -4606,26 +4650,27 @@ engagements_tasks = [
 
 [mappings.form]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/form.yml"
-source_file_hash = "b138b7df5c251b74e3546345e13d1d011369d4632f097c3fb75acab27935e125"
+source_file_hash = "ba152207e39af713f33032d4008a0e155a9c1ea2bb4030a9b5c96dff73b2af5d"
 unmapped_target_fields = [
     "_fivetran_deleted",
     "follow_up_id",
     "guid",
-    "lead_nurturing_campaign_id",
     "method",
-    "redirect",
+    "portal_id",
 ]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.form.mapped_target_fields]
 _fivetran_synced = "forms._airbyte_extracted_at"
-created_at = "forms.properties.hs_createdate"
+created_at = "forms.createdAt"
 css_class = "forms.displayOptions.cssClass"
+lead_nurturing_campaign_id = "forms.properties.hs_marketing_campaign_guid"
 name = "forms.name"
 notify_recipients = "forms.configuration.notifyRecipients"
-portal_id = "forms.id"
+redirect = "forms.configuration.postSubmitAction.value"
 submit_text = "forms.displayOptions.submitButtonText"
-updated_at = "forms.properties.hs_lastmodifieddate"
+updated_at = "forms.updatedAt"
 
 [mappings.form.unused_source_fields]
 forms = [
@@ -4640,12 +4685,9 @@ forms = [
     "configuration.language",
     "configuration.lifecycleStages",
     "configuration.notifyContactOwner",
-    "configuration.postSubmitAction",
     "configuration.postSubmitAction.type",
-    "configuration.postSubmitAction.value",
     "configuration.prePopulateKnownValues",
     "configuration.recaptchaEnabled",
-    "createdAt",
     "deletedAt",
     "displayOptions.renderRawHtml",
     "displayOptions.style",
@@ -4664,6 +4706,7 @@ forms = [
     "displayOptions.theme",
     "fieldGroups",
     "formType",
+    "id",
     "legalConsentOptions",
     "properties.hs_all_accessible_team_ids",
     "properties.hs_all_assigned_business_unit_ids",
@@ -4672,6 +4715,7 @@ forms = [
     "properties.hs_cloneable",
     "properties.hs_created_at",
     "properties.hs_created_by_user_id",
+    "properties.hs_createdate",
     "properties.hs_deletable",
     "properties.hs_editable",
     "properties.hs_embed_version",
@@ -4685,7 +4729,7 @@ forms = [
     "properties.hs_form_submissions_per_pop_up_cta_view",
     "properties.hs_form_type",
     "properties.hs_form_views",
-    "properties.hs_marketing_campaign_guid",
+    "properties.hs_lastmodifieddate",
     "properties.hs_merged_object_ids",
     "properties.hs_name",
     "properties.hs_object_id",
@@ -4763,17 +4807,17 @@ forms = [
     "properties_hubspot_owner_assigneddate",
     "properties_hubspot_owner_id",
     "properties_hubspot_team_id",
-    "updatedAt",
 ]
 
 [mappings.owner]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/owner.yml"
-source_file_hash = "ef29b6c9d7ee7c9c9d49aec3e37c7d66944ecd13676fc52408ee5afa337cc20d"
+source_file_hash = "b11411c988fb03bf5e7016b586d4bef5bc677952e636711e44436ef059d9f14d"
 unmapped_target_fields = [
     "portal_id",
     "type",
 ]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.owner.mapped_target_fields]
 _fivetran_synced = "owners._airbyte_extracted_at"
@@ -4781,7 +4825,7 @@ created_at = "owners.createdAt"
 email = "owners.email"
 first_name = "owners.firstName"
 last_name = "owners.lastName"
-owner_id = "owners.id"
+owner_id = "owners.userId"
 updated_at = "owners.updatedAt"
 
 [mappings.owner.unused_source_fields]
@@ -4789,17 +4833,18 @@ owners = [
     "_airbyte_meta",
     "_airbyte_raw_id",
     "archived",
+    "id",
     "teams",
-    "userId",
 ]
 
 [mappings.ticket]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/ticket.yml"
-source_file_hash = "ab0ae38779e587d75fddf5b3e771440ca02eb48b4f890abc8102d69f472aa84a"
+source_file_hash = "5b349cdc9babc47d429642b91a42469235472dd0462900cc6d6eb178ce920a1f"
 unmapped_target_fields = [
     "portal_id",
 ]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.ticket.mapped_target_fields]
 _fivetran_synced = "tickets._airbyte_extracted_at"
@@ -4807,13 +4852,13 @@ id = "tickets.id"
 is_deleted = "tickets.archived"
 _fivetran_deleted = "tickets.archived"
 property_closed_date = "tickets.properties.closed_date"
-property_createdate = "tickets.properties.createdate"
-property_first_agent_reply_date = "tickets.properties.first_agent_reply_date"
+property_createdate = "tickets.properties_createdate"
+property_first_agent_reply_date = "tickets.properties_first_agent_reply_date"
 property_hs_pipeline = "tickets.properties.hs_pipeline"
 property_hs_pipeline_stage = "tickets.properties.hs_pipeline_stage"
 property_hs_ticket_priority = "tickets.properties.hs_ticket_priority"
 property_hs_ticket_category = "tickets.properties.hs_ticket_category"
-property_hubspot_owner_id = "tickets.properties.hubspot_owner_id"
+property_hubspot_owner_id = "tickets.properties_hubspot_owner_id"
 property_subject = "tickets.properties.subject"
 property_content = "tickets.properties.content"
 
@@ -4826,6 +4871,8 @@ tickets = [
     "createdAt",
     "deals",
     "properties.created_by",
+    "properties.createdate",
+    "properties.first_agent_reply_date",
     "properties.hs_all_accessible_team_ids",
     "properties.hs_all_associated_contact_companies",
     "properties.hs_all_associated_contact_emails",
@@ -4987,6 +5034,7 @@ tickets = [
     "properties.hs_v2_latest_time_in_4",
     "properties.hs_was_imported",
     "properties.hubspot_owner_assigneddate",
+    "properties.hubspot_owner_id",
     "properties.hubspot_team_id",
     "properties.last_engagement_date",
     "properties.last_reply_date",
@@ -5007,8 +5055,6 @@ tickets = [
     "properties_closed_date",
     "properties_content",
     "properties_created_by",
-    "properties_createdate",
-    "properties_first_agent_reply_date",
     "properties_hs_all_accessible_team_ids",
     "properties_hs_all_associated_contact_companies",
     "properties_hs_all_associated_contact_emails",
@@ -5174,7 +5220,6 @@ tickets = [
     "properties_hs_v2_latest_time_in_4",
     "properties_hs_was_imported",
     "properties_hubspot_owner_assigneddate",
-    "properties_hubspot_owner_id",
     "properties_hubspot_team_id",
     "properties_last_engagement_date",
     "properties_last_reply_date",
@@ -5198,18 +5243,19 @@ tickets = [
 
 [mappings.ticket_pipeline]
 source_file = "catalog/hubspot/src/fivetran-interop/transforms/ticket_pipeline.yml"
-source_file_hash = "3ec2ffcc895d2a930766c323c29297eb1e62dc8c61d05d134fc9eaf7f285bf09"
+source_file_hash = "84d7e8d4cfb298ed6900dbad0a523b685294cb7e0452ed92b16f98caf6f5d1c7"
 unmapped_target_fields = [
     "_fivetran_deleted",
     "active",
-    "display_order",
     "object_type_id",
     "pipeline_id",
 ]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.ticket_pipeline.mapped_target_fields]
 _fivetran_synced = "ticket_pipelines._airbyte_extracted_at"
+display_order = "ticket_pipelines.displayOrder"
 label = "ticket_pipelines.label"
 created_at = "ticket_pipelines.createdAt"
 updated_at = "ticket_pipelines.updatedAt"
@@ -5219,7 +5265,6 @@ ticket_pipelines = [
     "_airbyte_meta",
     "_airbyte_raw_id",
     "archived",
-    "displayOrder",
     "id",
     "stages",
 ]

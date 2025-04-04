@@ -5,7 +5,7 @@ transforms:
       - abandoned_checkouts: shopify.abandoned_checkouts
     fields:
       _fivetran_deleted:
-        expression: abandoned_checkouts._airbyte_raw_id
+        expression: MISSING
         description: "{{ doc('_fivetran_deleted') }}"
       _fivetran_synced:
         expression: abandoned_checkouts._airbyte_extracted_at
@@ -90,7 +90,7 @@ transforms:
           currency at the time of checkout. For the currency that the customer used
           at checkout, see `presentment_currency`.
       customer_id:
-        expression: MISSING
+        expression: abandoned_checkouts.customer.default_address.customer_id
         description: ID of the customer with the abandoned checkout.
       customer_locale:
         expression: abandoned_checkouts.customer_locale
@@ -238,279 +238,26 @@ transforms:
 annotations:
   approved: true
   missing_fields:
-    - customer_id
+    - _fivetran_deleted
     - total_duties
   evaluation:
     source_stream_name: abandoned_checkouts
     target_table_name: abandoned_checkout
-    name_match_score: 0.8
-    score: 0.8
+    table_match_score: 1.0
+    completion_score: 0.9
     explanation:
-      The overall confidence score reflects the accuracy of the field mappings
-      based on the provided expressions. Most fields have clear and logical mappings
-      to their source columns, and the expressions match the expected data types and
-      structures. However, there are some fields with MISSING mappings, which reduce
-      the overall score.
+      The table mappings are evaluated to be of high confidence as they
+      describe the same subject matter in both source and target implementations.
     field_mapping_evals:
       - name: _fivetran_deleted
-        expression: abandoned_checkouts._airbyte_raw_id
-        score: 0.7
-        explanation:
-          The expression matches a deleted record identifier, which is
-          a common mapping.
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
       - name: _fivetran_synced
         expression: abandoned_checkouts._airbyte_extracted_at
         score: 1.0
         explanation: _fivetran_synced is correctly mapped to _airbyte_extracted_at.
-      - name: abandoned_checkout_url
-        expression: abandoned_checkouts.abandoned_checkout_url
-        score: 0.9
-        explanation: The expression matches the description for the checkout URL.
-      - name: billing_address_address_1
-        expression: abandoned_checkouts.billing_address.address1
-        score: 0.9
-        explanation: Street address is mapped properly.
-      - name: billing_address_address_2
-        expression: abandoned_checkouts.billing_address.address2
-        score: 0.9
-        explanation: Street address optional field is mapped properly.
-      - name: billing_address_city
-        expression: abandoned_checkouts.billing_address.city
-        score: 0.9
-        explanation: City is mapped properly.
-      - name: billing_address_company
-        expression: abandoned_checkouts.billing_address.company
-        score: 0.9
-        explanation: Company field is mapped accurately.
-      - name: billing_address_country
-        expression: abandoned_checkouts.billing_address.country
-        score: 0.8
-        explanation: Country name is mapped accurately but less precise than a code.
-      - name: billing_address_country_code
-        expression: abandoned_checkouts.billing_address.country_code
-        score: 0.9
-        explanation: Country code matches ISO 3166-1 alpha-2 format.
-      - name: billing_address_first_name
-        expression: abandoned_checkouts.billing_address.first_name
-        score: 0.9
-        explanation: First name for billing is mapped correctly.
-      - name: billing_address_last_name
-        expression: abandoned_checkouts.billing_address.last_name
-        score: 0.9
-        explanation: Last name for billing is mapped correctly.
-      - name: billing_address_latitude
-        expression: abandoned_checkouts.billing_address.latitude
-        score: 0.9
-        explanation: Latitude for billing is mapped correctly.
-      - name: billing_address_longitude
-        expression: abandoned_checkouts.billing_address.longitude
-        score: 0.9
-        explanation: Longitude for billing is mapped correctly.
-      - name: billing_address_name
-        expression: abandoned_checkouts.billing_address.name
-        score: 0.9
-        explanation: Full name for billing is mapped correctly.
-      - name: billing_address_phone
-        expression: abandoned_checkouts.billing_address.phone
-        score: 0.9
-        explanation: Phone number for billing is mapped correctly.
-      - name: billing_address_province
-        expression: abandoned_checkouts.billing_address.province
-        score: 0.9
-        explanation: Province for billing is mapped correctly.
-      - name: billing_address_province_code
-        expression: abandoned_checkouts.billing_address.province_code
-        score: 0.9
-        explanation: Province code for billing is mapped correctly.
-      - name: billing_address_zip
-        expression: abandoned_checkouts.billing_address.zip
-        score: 0.9
-        explanation: Zip for billing is mapped correctly.
-      - name: buyer_accepts_marketing
-        expression: abandoned_checkouts.buyer_accepts_marketing
-        score: 0.7
-        explanation:
-          The mapping description matches, but it's a boolean field so
-          some uncertainty is present.
-      - name: cart_token
-        expression: abandoned_checkouts.cart_token
-        score: 0.8
-        explanation: Cart token matches expected ID mapping.
-      - name: closed_at
-        expression: abandoned_checkouts.closed_at
-        score: 0.8
-        explanation: Closed timestamp is mapped correctly but may be NULL.
-      - name: created_at
-        expression: abandoned_checkouts.created_at
-        score: 0.9
-        explanation: Created timestamp is mapped correctly.
-      - name: currency
-        expression: abandoned_checkouts.currency
-        score: 0.9
-        explanation: Currency field complies with expected ISO format.
-      - name: customer_id
-        expression: MISSING
-        score: 0.0
-        explanation: Mapping not found (MISSING).
-      - name: customer_locale
-        expression: abandoned_checkouts.customer_locale
-        score: 0.8
-        explanation: Locale format is correct, allowing two to three letters.
-      - name: device_id
-        expression: abandoned_checkouts.device_id
-        score: 0.8
-        explanation: Device ID is mapped appropriately.
-      - name: email
-        expression: abandoned_checkouts.email
-        score: 0.8
-        explanation: Email is a simple and high-confidence mapping.
-      - name: gateway
-        expression: abandoned_checkouts.gateway
-        score: 0.8
-        explanation: Payment gateway is mapped correctly.
-      - name: id
-        expression: abandoned_checkouts.id
-        score: 0.9
-        explanation: ID field for checkout is mapped correctly.
-      - name: landing_site_base_url
-        expression: abandoned_checkouts.landing_site
-        score: 0.8
-        explanation: Landing site URL is mapped correctly, but complex structure.
-      - name: location_id
-        expression: abandoned_checkouts.location_id
-        score: 0.8
-        explanation: Location ID is correctly found and mapped.
-      - name: name
-        expression: abandoned_checkouts.name
-        score: 0.7
-        explanation:
-          Checkout order number matches naming but could have multiple
-          interpretations.
-      - name: note
-        expression: abandoned_checkouts.note
-        score: 0.8
-        explanation: Notes map correctly.
-      - name: phone
-        expression: abandoned_checkouts.phone
-        score: 0.8
-        explanation: Customer's phone number is mapped as expected.
-      - name: presentment_currency
-        expression: abandoned_checkouts.presentment_currency
-        score: 0.9
-        explanation: Currency used during checkout matches ISO standards.
-      - name: referring_site
-        expression: abandoned_checkouts.referring_site
-        score: 0.8
-        explanation: Referring site maps to URL format correctly.
-      - name: shipping_address_address_1
-        expression: abandoned_checkouts.shipping_address.address1
-        score: 0.9
-        explanation: Shipping address 1 is mapped correctly.
-      - name: shipping_address_address_2
-        expression: abandoned_checkouts.shipping_address.address2
-        score: 0.9
-        explanation: Optional shipping address field maps correctly.
-      - name: shipping_address_city
-        expression: abandoned_checkouts.shipping_address.city
-        score: 0.9
-        explanation: City of shipping address maps correctly.
-      - name: shipping_address_company
-        expression: abandoned_checkouts.shipping_address.company
-        score: 0.9
-        explanation: Company field of shipping address maps correctly.
-      - name: shipping_address_country
-        expression: abandoned_checkouts.shipping_address.country
-        score: 0.8
-        explanation: Country mapping for shipping is less precise than a code.
-      - name: shipping_address_country_code
-        expression: abandoned_checkouts.shipping_address.country_code
-        score: 0.9
-        explanation: Country code for shipping matches ISO format.
-      - name: shipping_address_first_name
-        expression: abandoned_checkouts.shipping_address.first_name
-        score: 0.9
-        explanation: First name for shipping address maps correctly.
-      - name: shipping_address_last_name
-        expression: abandoned_checkouts.shipping_address.last_name
-        score: 0.9
-        explanation: Last name for shipping address maps correctly.
-      - name: shipping_address_latitude
-        expression: abandoned_checkouts.shipping_address.latitude
-        score: 0.9
-        explanation: Latitude for shipping is mapped correctly.
-      - name: shipping_address_longitude
-        expression: abandoned_checkouts.shipping_address.longitude
-        score: 0.9
-        explanation: Longitude for shipping is mapped correctly.
-      - name: shipping_address_name
-        expression: abandoned_checkouts.shipping_address.name
-        score: 0.9
-        explanation: Full name for shipping is mapped correctly.
-      - name: shipping_address_phone
-        expression: abandoned_checkouts.shipping_address.phone
-        score: 0.9
-        explanation: Phone number for shipping is mapped correctly.
-      - name: shipping_address_province
-        expression: abandoned_checkouts.shipping_address.province
-        score: 0.9
-        explanation: Province for shipping is mapped correctly.
-      - name: shipping_address_province_code
-        expression: abandoned_checkouts.shipping_address.province_code
-        score: 0.9
-        explanation: Province code for shipping is mapped correctly.
-      - name: shipping_address_zip
-        expression: abandoned_checkouts.shipping_address.zip
-        score: 0.9
-        explanation: Zip for shipping is mapped correctly.
-      - name: source_name
-        expression: abandoned_checkouts.source_name
-        score: 0.8
-        explanation:
-          Source name mapping is straightforward and has a fixed set of
-          values.
-      - name: subtotal_price
-        expression: abandoned_checkouts.subtotal_price
-        score: 0.8
-        explanation: Price fields mapped correctly, with a conversion hedge.
-      - name: taxes_included
-        expression: abandoned_checkouts.taxes_included
-        score: 0.8
-        explanation:
-          Boolean field like taxes included may appear uncertain but maps
-          correctly.
-      - name: token
-        expression: abandoned_checkouts.token
-        score: 0.8
-        explanation: Token ID is mapped as expected and is unique.
-      - name: total_discounts
-        expression: abandoned_checkouts.total_discounts
-        score: 0.8
-        explanation: Discounts mapped confidently into currency format.
       - name: total_duties
         expression: MISSING
         score: 0.0
-        explanation: Mapping not found (MISSING).
-      - name: total_line_items_price
-        expression: abandoned_checkouts.total_line_items_price
-        score: 0.8
-        explanation: Line item prices map into the currency format correctly.
-      - name: total_price
-        expression: abandoned_checkouts.total_price
-        score: 0.8
-        explanation: Total price combines other mappings effectively.
-      - name: total_tax
-        expression: abandoned_checkouts.total_tax
-        score: 0.8
-        explanation: Tax mappings are straightforward and correct.
-      - name: total_weight
-        expression: abandoned_checkouts.total_weight
-        score: 0.8
-        explanation: Weight mappings fit expected format for grams.
-      - name: updated_at
-        expression: abandoned_checkouts.updated_at
-        score: 0.8
-        explanation: Updated timestamp follows correct mappings.
-      - name: user_id
-        expression: abandoned_checkouts.user_id
-        score: 0.8
-        explanation: User ID mapping is consistent and correct.
+        explanation: No good match found.

@@ -2,7 +2,7 @@
 
 import pytest
 
-from morph.utils.mapping_to_dbt_models import _format_json_path
+from morph.utils.dbt.mapping_to_dbt_models import _format_json_path
 
 
 def test_format_json_path_no_dots():

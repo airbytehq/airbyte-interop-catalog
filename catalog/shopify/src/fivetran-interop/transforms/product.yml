@@ -63,82 +63,69 @@ annotations:
   evaluation:
     source_stream_name: products
     target_table_name: product
-    name_match_score: 0.8
-    score: 0.72
+    table_match_score: 0.8
+    completion_score: 0.9
     explanation:
-      The overall table mapping evaluation considers the individual field
-      mapping scores and the adherence to expected mapping patterns. Fields without
-      valid expressions, like 'MISSING', receive a score of 0.0, negatively impacting
-      the overall score. The table scores well due to accurate mappings for critical
-      fields.
+      The mapping configuration aligns well with the expected target schema.
+      High confidence mappings like '_fivetran_synced' to 'products._airbyte_extracted_at'
+      contribute positively. Missing mappings like '_fivetran_deleted' are penalized.
+      Field mappings suggest a strong match with exceptions handled appropriately.
     field_mapping_evals:
       - name: _fivetran_deleted
         expression: MISSING
         score: 0.0
-        explanation:
-          Expression is 'MISSING', indicating the mapping is missing or
-          uncertain.
+        explanation: No good match found.
       - name: _fivetran_synced
         expression: products._airbyte_extracted_at
-        score: 0.7
-        explanation:
-          Mapped correctly to '_airbyte_extracted_at', as expected for
-          fivetran synchronization fields.
+        score: 1.0
+        explanation: Mapped to 'products._airbyte_extracted_at' as a standard mapping.
       - name: created_at
         expression: products.created_at
-        score: 1.0
-        explanation:
-          Perfect mapping, 'products.created_at' matches perfectly with
-          'created_at' description.
+        score: 0.8
+        explanation: "'products.created_at' is a good match for 'created_at'."
       - name: handle
         expression: products.handle
-        score: 1.0
-        explanation:
-          Perfect mapping, 'products.handle' is well-matched with 'handle'
-          description.
+        score: 0.8
+        explanation: "'products.handle' maps well to 'handle'."
       - name: id
         expression: products.id
-        score: 1.0
-        explanation: Perfect mapping, 'products.id' is well-matched with 'id' description.
+        score: 0.9
+        explanation:
+          "'products.id' is a strong match for 'id', capturing unique identifier
+          role."
       - name: product_type
         expression: products.product_type
-        score: 1.0
+        score: 0.7
         explanation:
-          Perfect mapping, 'products.product_type' is well-matched with
-          'product_type' description.
+          "'products.product_type' is likely a match for 'product_type',
+          but categorization can vary."
       - name: published_at
         expression: products.published_at
-        score: 1.0
+        score: 0.7
         explanation:
-          Perfect mapping, 'products.published_at' is well-matched with
-          'published_at' description.
+          "'products.published_at' matches 'published_at', considering
+          time format similarity."
       - name: published_scope
         expression: products.published_scope
-        score: 1.0
+        score: 0.8
         explanation:
-          Perfect mapping, 'products.published_scope' is well-matched with
-          'published_scope' description.
+          "'products.published_scope' is aligned with 'published_scope',
+          matching distribution scope."
       - name: title
         expression: products.title
-        score: 1.0
-        explanation:
-          Perfect mapping, 'products.title' is well-matched with 'title'
-          description.
+        score: 0.9
+        explanation: "'products.title' accurately reflects 'title'."
       - name: updated_at
         expression: products.updated_at
-        score: 1.0
-        explanation:
-          Perfect mapping, 'products.updated_at' is well-matched with 'updated_at'
-          description.
+        score: 0.8
+        explanation: "'products.updated_at' corresponds well to 'updated_at'."
       - name: vendor
         expression: products.vendor
-        score: 1.0
-        explanation:
-          Perfect mapping, 'products.vendor' is well-matched with 'vendor'
-          description.
+        score: 0.9
+        explanation: "'products.vendor' is a precise match for 'vendor'."
       - name: status
         expression: products.status
-        score: 1.0
+        score: 0.8
         explanation:
-          Perfect mapping, 'products.status' is well-matched with 'status'
-          description.
+          "'products.status' aligns well with 'status', acknowledging the
+          valid status values."

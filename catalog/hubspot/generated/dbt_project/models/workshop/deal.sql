@@ -8,12 +8,12 @@ deals AS (
 
 
 SELECT
-    deals.id AS deal_id,
-    deals.archived AS is_deleted,
+    deals.properties.hs_object_id AS deal_id,
+    NULL AS is_deleted,
     NULL AS portal_id,
-    deals.properties.pipeline AS deal_pipeline_id,
+    NULL AS deal_pipeline_id,
     deals.properties.dealstage AS deal_pipeline_stage_id,
-    deals.properties.hs_all_owner_ids AS owner_id,
+    deals.properties_hubspot_owner_id AS owner_id,
     deals.properties.dealname AS property_dealname,
     deals.properties.description AS property_description,
     deals.properties.amount AS property_amount,

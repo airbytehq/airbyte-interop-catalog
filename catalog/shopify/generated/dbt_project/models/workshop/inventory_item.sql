@@ -28,5 +28,5 @@ SELECT
     NULL AS tracked_editable_locked,
     NULL AS tracked_editable_reason,
     NULL AS unit_cost_amount,
-    NULL AS unit_cost_currency_code
+    inventory_items.currency_code AS unit_cost_currency_code
 FROM inventory_items

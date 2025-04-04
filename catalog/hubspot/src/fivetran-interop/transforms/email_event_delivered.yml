@@ -17,41 +17,38 @@ transforms:
         expression: email_events.smtpId
         description: An ID attached to the message by HubSpot.
 annotations:
-  approved: false
+  approved: true
   missing_fields: []
   evaluation:
     source_stream_name: email_events
     target_table_name: email_event_delivered
-    name_match_score: 0.8
-    score: 0.675
+    table_match_score: 0.9
+    completion_score: 0.9
     explanation:
-      The mappings have been evaluated, considering the provided fields
-      and rules. The '_fivetran_synced' mapping is considered a perfect match as per
-      the instructions, while other fields like 'id', 'response', and 'smtp_id' have
-      matches that are valid but fall short of perfect certainty, resulting in a lower
-      score.
+      The table mappings are likely to be very similar due to shared API
+      origins. However, the completion score reflects the slight differences in implementations.
     field_mapping_evals:
       - name: _fivetran_synced
         expression: email_events._airbyte_extracted_at
         score: 1.0
         explanation:
-          The field '_fivetran_synced' is perfectly mapped to the '_airbyte_extracted_at'
-          column as expected.
+          Standard mapping to _airbyte_extracted_at, which is always a
+          perfect match.
       - name: id
         expression: email_events.id
-        score: 0.65
+        score: 0.8
         explanation:
-          The 'id' field mapping to 'email_events.id' is plausible but
-          not certain enough for a higher score.
+          The ID field is likely to be similar, but due to potential differing
+          usages across systems, a score of 0.8 is appropriate.
       - name: response
         expression: email_events.response
         score: 0.7
         explanation:
-          The 'response' field mapping has a reasonable match with 'email_events.response',
-          but could refer to different entities in varied contexts.
+          The response field is matched based on the content expected;
+          however, different systems might use different levels of detail or format.
       - name: smtp_id
         expression: email_events.smtpId
-        score: 0.65
+        score: 0.75
         explanation:
-          The 'smtp_id' matches with 'email_events.smtpId' fairly well,
-          though it isn't high enough to rule out mismatches.
+          This ID corresponds to a message-specific identifier used in
+          email systems, and matches are likely but not guaranteed to be identical.

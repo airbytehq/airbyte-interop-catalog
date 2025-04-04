@@ -17,7 +17,7 @@ transforms:
         expression: ads.campaign_id
         description: Ad campaign that contains this ad.
       creative_id:
-        expression: ads.creative
+        expression: ads.creative.creative_id
         description: The ID of the ad creative to be used by this ad.
       name:
         expression: ads.name
@@ -29,58 +29,54 @@ transforms:
         expression: ads.updated_time
         description: "{{ doc('updated_time') }}"
       conversion_domain:
-        expression: ads.source_ad_id
+        expression: MISSING
         description: The domain you've configured the ad to convert to.
 annotations:
   approved: true
-  missing_fields: []
+  missing_fields:
+    - conversion_domain
   evaluation:
     source_stream_name: ads
     target_table_name: ad_history
-    name_match_score: 0.9
-    score: 0.72
+    table_match_score: 0.8
+    completion_score: 0.9
     explanation:
-      Most fields are mapped with high confidence given their clear matches.
-      The overall score reflects the mapping accuracy, adjusting for potential mismatches
-      and ambiguous mappings.
+      The table mapping is highly confident; all fields except 'conversion_domain'
+      are well-matched. Matches from source to target are clear and relevant.
     field_mapping_evals:
       - name: id
         expression: ads.id
         score: 1.0
-        explanation: Direct match with 'ads.id' is perfect.
+        explanation: Exact match for 'id' field.
       - name: account_id
         expression: ads.account_id
         score: 1.0
-        explanation: Direct match with 'ads.account_id' is perfect.
+        explanation: Exact match for 'account_id' field.
       - name: ad_set_id
         expression: ads.adset_id
         score: 1.0
-        explanation: Direct match with 'ads.adset_id' is perfect.
+        explanation: Exact match for 'ad_set_id' field.
       - name: campaign_id
         expression: ads.campaign_id
         score: 1.0
-        explanation: Direct match with 'ads.campaign_id' is perfect.
+        explanation: Exact match for 'campaign_id' field.
       - name: creative_id
-        expression: ads.creative
-        score: 0.8
-        explanation:
-          High confidence that 'ads.creative' matches 'creative_id' but
-          needs confirmation.
+        expression: ads.creative.creative_id
+        score: 1.0
+        explanation: Exact match for 'creative_id' field.
       - name: name
         expression: ads.name
         score: 1.0
-        explanation: Direct match with 'ads.name' is perfect.
+        explanation: Exact match for 'name' field.
       - name: _fivetran_synced
         expression: ads._airbyte_extracted_at
         score: 1.0
-        explanation: Mapped '_fivetran_synced' to '_airbyte_extracted_at' as per instruction.
+        explanation: Standard mapping of '_fivetran_synced' to '_airbyte_extracted_at'.
       - name: updated_time
         expression: ads.updated_time
-        score: 0.7
-        explanation: Match is likely correct, but needs verification.
+        score: 1.0
+        explanation: Exact match for 'updated_time' field.
       - name: conversion_domain
-        expression: ads.source_ad_id
-        score: 0.3
-        explanation:
-          "'ads.source_ad_id' may not correctly represent 'conversion_domain',
-          low confidence in mapping."
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

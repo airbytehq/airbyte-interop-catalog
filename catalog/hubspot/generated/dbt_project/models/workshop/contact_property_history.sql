@@ -12,7 +12,7 @@ SELECT
     NULL AS contact_id,
     NULL AS name,
     NULL AS source,
-    contacts_property_history.source_id AS source_id,
+    NULL AS source_id,
     contacts_property_history.timestamp AS timestamp,
     contacts_property_history.value AS value
 FROM contacts_property_history

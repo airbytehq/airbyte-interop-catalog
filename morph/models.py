@@ -8,12 +8,16 @@ from typing import Any
 
 from pydantic import BaseModel
 from rich.console import Console
-from rich.table import Table
+from rich.markdown import Markdown
 from typing_extensions import Self
 
 from morph import constants, resources
 from morph.utils import text_utils
-from morph.utils.rich_utils import rich_formatted_confidence
+from morph.utils.markdown_utils import (
+    create_markdown_section,
+    create_markdown_table,
+    markdown_formatted_confidence,
+)
 from morph.utils.text_utils import normalize_field_name
 
 console = Console()
@@ -478,7 +482,7 @@ class TableMapping(BaseModel):
                 ),
             )
 
-        return cls(
+        table_mapping = cls(
             source_name=source_name,
             project_name=project_name,
             transform_name=transform_name,
@@ -486,6 +490,36 @@ class TableMapping(BaseModel):
             target_table_name=target_table_name,
             field_mappings=fields,
         )
+
+        # Load attached evaluation if present
+        if "annotations" in file_data and "evaluation" in file_data["annotations"]:
+            eval_data = file_data["annotations"]["evaluation"]
+
+            # Create field mapping evaluations
+            field_mapping_evals: list[FieldMappingEval] = []
+            for field_eval_data in eval_data.get("field_mapping_evals", []):
+                field_mapping_evals.append(
+                    FieldMappingEval(
+                        name=field_eval_data["name"],
+                        score=field_eval_data["score"],
+                        explanation=field_eval_data["explanation"],
+                    ),
+                )
+
+            # Create and attach the evaluation
+            try:
+                evaluation = TableMappingEval(
+                    table_match_score=eval_data["table_match_score"],
+                    completion_score=eval_data["completion_score"],
+                    explanation=eval_data["explanation"],
+                    field_mapping_evals=field_mapping_evals,
+                )
+                table_mapping.attach_evaluation(evaluation)
+            except KeyError as e:
+                console.print(f"Error attaching evaluation: {e!s}")
+                console.print(f"Evaluation data: {eval_data}")
+
+        return table_mapping
 
     def to_file(self, transform_file: Path | None = None) -> None:
         """Write the TableMapping to a transform file."""
@@ -515,7 +549,7 @@ class TableMapping(BaseModel):
         if self._attached_evaluation:
             output_dict["annotations"] = {}
             if (
-                self._attached_evaluation.score >= constants.MIN_APPROVAL_SCORE
+                self._attached_evaluation.table_match_score >= constants.MIN_APPROVAL_SCORE
                 and len(self.get_missing_field_mappings()) <= constants.MAX_MISSING_FIELDS
             ):
                 output_dict["annotations"]["approved"] = True
@@ -559,8 +593,8 @@ class TableMapping(BaseModel):
         return {
             "source_stream_name": self.source_stream_name,
             "target_table_name": self.target_table_name,
-            "name_match_score": self._attached_evaluation.name_match_score,
-            "score": self._attached_evaluation.score,
+            "table_match_score": self._attached_evaluation.table_match_score,
+            "completion_score": self._attached_evaluation.completion_score,
             "explanation": self._attached_evaluation.explanation,
             "field_mapping_evals": [
                 _to_dict(field_eval) for field_eval in self._attached_evaluation.field_mapping_evals
@@ -611,48 +645,76 @@ class TableMapping(BaseModel):
 
         return [f for f in self.field_mappings if str(f.expression) != "MISSING"]
 
+    def as_markdown(self) -> str:
+        """Generate a markdown table for the mapping confidence analysis.
+
+        Returns:
+            A markdown formatted string containing the analysis
+        """
+        sections: list[str] = []
+        if not self._attached_evaluation:
+            raise ValueError("No evaluation attached to the table mapping")
+
+        # Create header section
+        sections.append(
+            f"### Mapping from Airbyte `{self.source_stream_name}` "
+            f"to Fivetran `{self.target_table_name}`",
+        )
+
+        # Overall confidence section
+        sections.extend(
+            [
+                f"- Table Match Confidence Score: {markdown_formatted_confidence(self._attached_evaluation.table_match_score)}",
+                f"- Table Completion Score: {markdown_formatted_confidence(self._attached_evaluation.completion_score)}",
+            ],
+        )
+
+        # Explanation section
+        explanation = create_markdown_section(
+            "Evaluation",
+            self._attached_evaluation.explanation,
+            level=3,
+        )
+
+        # Field-by-field analysis section
+        headers = ["Field", "Description", "Expression", "Confidence", "Evaluation"]
+        rows: list[list[str]] = []
+
+        for field_eval in self._attached_evaluation.field_mapping_evals:
+            field_ref: FieldMapping = next(
+                f for f in self.field_mappings if f.name == field_eval.name
+            )
+            rows.append(
+                [
+                    f"`{field_eval.name}`",
+                    field_ref.description or "",
+                    f"`{field_ref.expression!s}`",
+                    markdown_formatted_confidence(field_eval.score),
+                    field_eval.explanation,
+                ],
+            )
+
+        field_analysis = create_markdown_section(
+            "Field Mapping Logic",
+            create_markdown_table(headers, rows),
+            level=3,
+        )
+        sections.extend([explanation, field_analysis])
+
+        # Combine all sections
+        return "\n\n".join(sections)
+
     def print_as_rich_table(self) -> None:
         """Print a complete mapping confidence analysis.
+
+        This method is maintained for backward compatibility but now uses markdown.
 
         Args:
             confidence: The confidence evaluation results
             fields: List of field mappings
             title: Optional title for the analysis table
         """
-        if not self._attached_evaluation:
-            raise ValueError("No evaluation attached to the table mapping")
-
-        # Create results table
-        table = Table(
-            title=f"Table Mapping Eval: '{self.source_stream_name}->{self.target_table_name}'",
-        )
-        table.add_column("Field", style="cyan", overflow="fold")
-        table.add_column("Expression", style="yellow", overflow="fold")
-        table.add_column("Description", overflow="fold")
-        table.add_column("Confidence", justify="right")
-        table.add_column("Evaluation", style="italic", overflow="fold")
-        # Print results
-        console.print(
-            f"\nOverall Confidence Score: {rich_formatted_confidence(self._attached_evaluation.score)}",
-        )
-        console.print("\nExplanation:")
-        console.print(f"\n{self._attached_evaluation.explanation}", style="italic")
-        console.print("\nField-by-Field Analysis:")
-
-        # Print each field evaluation
-        for field_eval in self._attached_evaluation.field_mapping_evals:
-            field_ref: FieldMapping = next(
-                f for f in self.field_mappings if f.name == field_eval.name
-            )
-            table.add_row(
-                field_eval.name,
-                str(field_ref.expression),
-                field_ref.description or "",
-                rich_formatted_confidence(field_eval.score),
-                field_eval.explanation,
-            )
-
-        console.print(table)
+        console.print(Markdown(self.as_markdown()))
 
 
 class FieldMappingEval(BaseModel):
@@ -693,11 +755,11 @@ class TableMappingSuggestion(BaseModel):
 class TableMappingEval(BaseModel):
     """Represents the confidence score and explanation for a table mapping."""
 
-    score: float
-    """The overall confidence score (0.00 to 1.00)."""
-
-    name_match_score: float
+    table_match_score: float
     """The confidence score for the name match between the source and target tables."""
+
+    completion_score: float
+    """The overall confidence score (0.00 to 1.00)."""
 
     explanation: str
     """A detailed explanation of the overall score."""
@@ -749,16 +811,34 @@ class SourceTableMappingSuggestion(BaseModel):
     explanation: str
     """A detailed explanation of the confidence score."""
 
-    def as_rich_table(self) -> Table:
-        """Return a rich representation of the object as a Rich Table."""
-        table = Table(
-            title=f"Table Matching Suggestion for '{self.target_table_name}'",
-            show_header=False,
-        )
-        table.add_row("Suggested Source Table", self.suggested_source_table_name)
-        table.add_row("Confidence Score", rich_formatted_confidence(self.confidence_score))
-        table.add_row("Explanation", self.explanation)
-        return table
+    def as_markdown_table(self) -> str:
+        """Return a markdown representation of the object.
+
+        Returns:
+            A markdown formatted string
+        """
+        title = f"Table Matching Suggestion for '{self.target_table_name}'"
+
+        # Create a simple two-column table
+        headers = ["Property", "Value"]
+        rows = [
+            ["Suggested Source Table", self.suggested_source_table_name],
+            ["Confidence Score", markdown_formatted_confidence(self.confidence_score)],
+            ["Explanation", self.explanation],
+        ]
+
+        table = create_markdown_table(headers, rows)
+        return create_markdown_section(title, table, level=3)
+
+    def as_rich_table(self) -> Markdown:
+        """Return a markdown representation of the object.
+
+        This method is maintained for backward compatibility but now returns a markdown string.
+
+        Returns:
+            A markdown formatted string
+        """
+        return Markdown(self.as_markdown_table())
 
 
 class SourceTableMappingSuggestionShortList(BaseModel):
@@ -783,3 +863,209 @@ class SourceTableMappingTopTwoSuggestions(BaseModel):
 
     next_best_match_suggestion: SourceTableMappingSuggestion | None = None
     """The next-best match for the source table."""
+
+
+class TableMappingAudit(BaseModel):
+    """Represents the audit results for a table mapping."""
+
+    _table_mapping: TableMapping
+    _source_dbt_file: DbtSourceFile
+    _target_dbt_file: DbtSourceFile
+
+    unused_source_table_columns: list[str]
+    """The source table columns that are not used in the transform."""
+
+    omitted_target_table_columns: list[str]
+    """The target table columns that are not declared in the mapping."""
+
+    missing_target_table_columns: list[str]
+    """The source table columns that are declared "MISSING" in the transform."""
+
+    erroneous_source_table_columns: list[str]
+    """Any source table columns that are referenced but do not exist in the source.
+
+    These are likely caused by hallucinations in the LLM, or else a column was removed that
+    was previously present.
+    """
+
+    def get_errors(self) -> list[tuple[str, str]]:
+        """Return a list of errors found in the audit.
+
+        Each error is represented as a tuple of (error_type, instance_details).
+        """
+        return [
+            ("Erroneous Source Column Reference", column)
+            for column in self.erroneous_source_table_columns
+        ] + [
+            ("Omitted Target Column in Mapping", column)
+            for column in self.omitted_target_table_columns
+        ]
+
+    @classmethod
+    def new(
+        cls,
+        table_mapping: TableMapping,
+        source_dbt_file: DbtSourceFile,
+        target_dbt_file: DbtSourceFile,
+    ) -> Self:
+        """Create a TableMappingAudit from a TableMapping.
+
+        Args:
+            table_mapping: The table mapping to audit
+            source_dbt_file: The source DBT file
+            target_dbt_file: The target DBT file
+
+        Returns:
+            A TableMappingAudit instance
+        """
+        source_table = source_dbt_file.get_table(table_mapping.source_stream_name)
+        target_table = target_dbt_file.get_table(table_mapping.target_table_name)
+
+        return cls(
+            unused_source_table_columns=cls._find_unused_source_columns(
+                source_table=source_table,
+                table_mapping=table_mapping,
+            ),
+            omitted_target_table_columns=cls._find_omitted_target_columns(
+                target_table=target_table,
+                table_mapping=table_mapping,
+            ),
+            missing_target_table_columns=cls._find_missing_target_columns(
+                table_mapping=table_mapping,
+            ),
+            erroneous_source_table_columns=cls._find_erroneous_source_columns(
+                source_table=source_table,
+                table_mapping=table_mapping,
+            ),
+            _target_dbt_file=target_dbt_file,
+            _source_dbt_file=source_dbt_file,
+            _table_mapping=table_mapping,
+        )
+
+    def fix_errors(self) -> TableMapping:
+        """Fix errors in the table mapping.
+
+        Change erroneous mappings to "MISSING" and return the resulting mapping.
+        """
+        source_table_alias = self._table_mapping.source_stream_name
+        for column in self.erroneous_source_table_columns:
+            for field in self._table_mapping.field_mappings:
+                if field.expression == source_table_alias + "." + column:
+                    field.expression = "MISSING"
+
+        # TODO: Declare anything missing.
+
+        # Return the updated table mapping
+        return self._table_mapping
+
+    @staticmethod
+    def _find_unused_source_columns(
+        source_table: DbtSourceTable,
+        table_mapping: TableMapping,
+    ) -> list[str]:
+        """Find source table columns that are not used in the transform.
+
+        Args:
+            source_table: The source table
+            table_mapping: The table mapping
+
+        Returns:
+            List of unused source table columns
+        """
+        # Get all source column names
+        source_column_names = {column.name for column in source_table.columns_and_subcolumns}
+
+        # Get all source column names used in the mapping
+        used_column_names: set[str] = set()
+        for field in table_mapping.field_mappings:
+            # Skip MISSING fields
+            if field.expression == "MISSING":
+                continue
+
+            # Handle expressions that reference source columns
+            expr = str(field.expression)
+            if expr.startswith(f"{table_mapping.source_stream_name}."):
+                # Extract the column name from the expression
+                column_name = expr.split(".", 1)[1]
+                used_column_names.add(column_name)
+
+        # Find unused columns
+        return sorted(source_column_names - used_column_names)
+
+    @staticmethod
+    def _find_omitted_target_columns(
+        target_table: DbtSourceTable,
+        table_mapping: TableMapping,
+    ) -> list[str]:
+        """Find target table columns that are not declared in the mapping.
+
+        Args:
+            target_table: The target table
+            table_mapping: The table mapping
+
+        Returns:
+            List of target table columns that are omitted from the mapping
+        """
+        # Get all target column names
+        target_column_names = {column.name for column in target_table.columns_and_subcolumns}
+
+        # Get all mapped field names
+        mapped_field_names = {field.name for field in table_mapping.field_mappings}
+
+        # Find omitted columns
+        return sorted(target_column_names - mapped_field_names)
+
+    @staticmethod
+    def _find_missing_target_columns(
+        table_mapping: TableMapping,
+    ) -> list[str]:
+        """Find target table columns that are declared as 'MISSING' in the transform.
+
+        Args:
+            table_mapping: The table mapping
+
+        Returns:
+            List of target table columns that are declared as 'MISSING'
+        """
+        missing_columns = []
+
+        for field in table_mapping.field_mappings:
+            if field.expression == "MISSING":
+                missing_columns.append(field.name)
+
+        return sorted(missing_columns)
+
+    @staticmethod
+    def _find_erroneous_source_columns(
+        source_table: DbtSourceTable,
+        table_mapping: TableMapping,
+    ) -> list[str]:
+        """Find source table columns that are referenced but do not exist in the source.
+
+        Args:
+            source_table: The source table
+            table_mapping: The table mapping
+
+        Returns:
+            List of erroneous source table columns
+        """
+        # Get all source column names
+        source_column_names = {column.name for column in source_table.columns_and_subcolumns}
+
+        # Find referenced source columns that don't exist
+        erroneous_columns = []
+
+        for field in table_mapping.field_mappings:
+            # Skip MISSING fields
+            if field.expression == "MISSING":
+                continue
+
+            # Handle expressions that reference source columns
+            expr = str(field.expression)
+            if expr.startswith(f"{table_mapping.source_stream_name}."):
+                # Extract the column name from the expression
+                column_name = expr.split(".", 1)[1]
+                if column_name not in source_column_names:
+                    erroneous_columns.append(column_name)
+
+        return sorted(erroneous_columns)

@@ -9,10 +9,7 @@ orders AS (
 
 SELECT
     orders._airbyte_extracted_at AS _fivetran_synced,
-    NULL AS index,
-    NULL AS order_shipping_line_id,
-    orders.current_total_tax AS price,
-    orders.subtotal_price_set AS price_set,
-    NULL AS rate,
-    orders.name AS title
+    orders.name AS name,
+    orders.id AS order_id,
+    NULL AS value
 FROM orders

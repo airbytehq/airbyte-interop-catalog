@@ -34,42 +34,54 @@ annotations:
   evaluation:
     source_stream_name: ad_account
     target_table_name: account_history
-    name_match_score: 0.9
-    score: 0.85
+    table_match_score: 0.85
+    completion_score: 0.9
     explanation:
-      The overall confidence score reflects successful mappings of most
-      fields with some confidence reduction due to possible discrepancies between
-      field purposes.
+      The table mapping is strong with most fields mapped accurately from
+      source to target. Standard mappings and casing differences align correctly.
+      No significant mismatches found that would lower confidence.
     field_mapping_evals:
       - name: id
         expression: ad_account.id
         score: 0.95
-        explanation: Strong match with ad_account.id.
+        explanation:
+          Source field 'ad_account.id' matches closely with expected target
+          field 'id'.
       - name: name
         expression: ad_account.name
-        score: 0.9
-        explanation: Good match with ad_account.name.
+        score: 0.95
+        explanation:
+          Source field 'ad_account.name' matches closely with expected
+          target field 'name'.
       - name: _fivetran_synced
         expression: ad_account._airbyte_extracted_at
         score: 1.0
-        explanation: Mapped successfully to the expected _airbyte_extracted_at field.
+        explanation: Standard mapping of '_fivetran_synced' to 'ad_account._airbyte_extracted_at'.
       - name: account_status
         expression: ad_account.account_status
-        score: 0.8
-        explanation: Reasonable match with ad_account.account_status.
+        score: 0.9
+        explanation:
+          The field 'ad_account.account_status' matches well with the target
+          expectation of 'account_status'.
       - name: business_country_code
         expression: ad_account.business_country_code
-        score: 0.85
-        explanation: Acceptable match with ad_account.business_country_code.
+        score: 0.9
+        explanation:
+          Field 'ad_account.business_country_code' has a high confidence
+          mapping to 'business_country_code'.
       - name: created_time
         expression: ad_account.created_time
         score: 0.9
-        explanation: Good match with ad_account.created_time.
+        explanation:
+          Field 'ad_account.created_time' is expected to match the target
+          'created_time' well.
       - name: currency
         expression: ad_account.currency
-        score: 0.75
-        explanation: Moderate confidence due to possible currency format differences.
+        score: 0.9
+        explanation: The field 'ad_account.currency' maps confidently to 'currency'.
       - name: timezone_name
         expression: ad_account.timezone_name
-        score: 0.7
-        explanation: Potential mismatch due to timezone naming conventions.
+        score: 0.9
+        explanation:
+          The source field 'ad_account.timezone_name' matches well with
+          'timezone_name'.

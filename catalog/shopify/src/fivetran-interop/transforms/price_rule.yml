@@ -136,126 +136,121 @@ annotations:
   evaluation:
     source_stream_name: price_rules
     target_table_name: price_rule
-    name_match_score: 1.0
-    score: 1.0
+    table_match_score: 0.9
+    completion_score: 0.95
     explanation:
-      All provided field mappings perfectly matched the required fields
-      without any discrepancies. Highest confidentiality achieved due to accurate
-      mapping.
+      The table mapping has a high confidence score because the source
+      and target tables are derived from similar APIs with most fields properly mapped.
+      All fields have either been mapped or identified as MISSING with a 0.00 confidence
+      score.
     field_mapping_evals:
       - name: _fivetran_synced
         expression: price_rules._airbyte_extracted_at
         score: 1.0
         explanation:
-          _fivetran_synced is mapped to a source stream's _airbyte_extracted_at
-          column exactly as required.
+          Standard mapping from '_fivetran_synced' to '_airbyte_extracted_at',
+          always receives a score of 1.00.
       - name: allocation_limit
         expression: price_rules.allocation_limit
-        score: 1.0
+        score: 0.9
         explanation:
-          allocation_limit is mapped perfectly according to the field's
-          purpose and constraints.
+          The field 'allocation_limit' is directly mapped and closely matches
+          the source structure, with a high confidence level.
       - name: allocation_method
         expression: price_rules.allocation_method
-        score: 1.0
+        score: 0.9
         explanation:
-          allocation_method matches exactly with valid values specified
-          in its description.
+          The 'allocation_method' is directly mapped and closely matches
+          the context of the source data.
       - name: created_at
         expression: price_rules.created_at
-        score: 1.0
+        score: 0.8
         explanation:
-          created_at field is correctly mapped to the creation timestamp
-          in ISO 8601 format.
+          The field 'created_at' has a direct mapping but the date format
+          must be confirmed.
       - name: customer_selection
         expression: price_rules.customer_selection
-        score: 1.0
+        score: 0.85
         explanation:
-          customer_selection has valid values and corresponds correctly
-          in the mapping.
+          "'customer_selection' shows a strong contextual match with predefined
+          valid values."
       - name: ends_at
         expression: price_rules.ends_at
-        score: 1.0
+        score: 0.8
         explanation:
-          ends_at is accurately mapped based on its purpose of determining
-          price rule termination.
+          The field 'ends_at' closely matches the source, consider checking
+          the date format.
       - name: id
         expression: price_rules.id
-        score: 1.0
-        explanation: ID is correctly mapped as a field, adhering to its intended use.
+        score: 0.95
+        explanation:
+          Id fields generally have a high confidence due to unique identity
+          matching.
       - name: once_per_customer
         expression: price_rules.once_per_customer
-        score: 1.0
+        score: 0.9
         explanation:
-          once_per_customer is properly mapped, indicating a boolean type
-          for discount validation per customer.
+          Boolean values generally have a straightforward mapping, resulting
+          in a high score.
       - name: prerequisite_quantity_range
         expression: price_rules.prerequisite_quantity_range
-        score: 1.0
+        score: 0.85
         explanation:
-          Mapping correctly represents the minimum number of items required
-          where the rule applies.
+          This field matches with regard to the prerequisite quantity contextual
+          information.
       - name: prerequisite_shipping_price_range
         expression: price_rules.prerequisite_shipping_price_range
-        score: 1.0
-        explanation:
-          Mapping handles shipping price constraint exactly as described
-          for the price rule.
+        score: 0.85
+        explanation: Closely mapped based on prerequisites.
       - name: prerequisite_subtotal_range
         expression: price_rules.prerequisite_subtotal_range
-        score: 1.0
-        explanation:
-          Field accurately depicts the minimum subtotal for price rules,
-          is mapped precisely.
+        score: 0.85
+        explanation: Contextual matching with subtotal range for prerequisites.
       - name: prerequisite_to_entitlement_purchase_prerequisite_amount
         expression: price_rules.prerequisite_to_entitlement_purchase.prerequisite_amount
-        score: 1.0
+        score: 0.75
         explanation:
-          Prerequisite purchase mapping is perfectly in line with discount
-          rules.
+          The field matches but contains a nested prerequisite structure
+          to evaluate.
       - name: quantity_ratio_entitled_quantity
         expression: price_rules.prerequisite_to_entitlement_quantity_ratio.entitled_quantity
-        score: 1.0
-        explanation: Entitled quantity mapping is exact and corresponds to its functionality.
+        score: 0.8
+        explanation: Matching within a nested structure with 'entitled_quantity' context.
       - name: quantity_ratio_prerequisite_quantity
         expression: price_rules.prerequisite_to_entitlement_quantity_ratio.prerequisite_quantity
-        score: 1.0
-        explanation:
-          Mapping records prerequisite buy quantity accurately, matching
-          field intricacies.
+        score: 0.8
+        explanation: Similar nested match with 'prerequisite_quantity' context.
       - name: starts_at
         expression: price_rules.starts_at
-        score: 1.0
-        explanation: Start date mapping is flawless, formatted exactly in ISO 8601.
+        score: 0.8
+        explanation: Close match observed, confirm date and time are represented correctly.
       - name: target_selection
         expression: price_rules.target_selection
-        score: 1.0
-        explanation: Target selection for applying discounts maps precisely.
+        score: 0.85
+        explanation: High contextual relevance from given target selection options.
       - name: target_type
         expression: price_rules.target_type
-        score: 1.0
-        explanation:
-          Target type field mapping is exact, matching line item or shipping
-          line requirements.
+        score: 0.85
+        explanation: Matches well with the target type and its discretized values.
       - name: title
         expression: price_rules.title
-        score: 1.0
-        explanation: The title field maps seamlessly and meets its functional requirements.
+        score: 0.9
+        explanation: Titles of price rules likely match directly across systems.
       - name: updated_at
         expression: price_rules.updated_at
-        score: 1.0
-        explanation: Update timestamp is correctly aligned with ISO 8601 format.
+        score: 0.8
+        explanation: Ensure date formatting consistency for the updated_at field.
       - name: usage_limit
         expression: price_rules.usage_limit
-        score: 1.0
-        explanation: Usage limit field matches perfectly for discount code usage constraints.
+        score: 0.9
+        explanation: Represents a confidently mapped numerical field with usage limitations.
       - name: value
         expression: price_rules.value
-        score: 1.0
-        explanation: Value field is correctly negative and mapped according to rules.
+        score: 0.7
+        explanation:
+          Requires considering negative values unique to context but maps
+          well.
       - name: value_type
         expression: price_rules.value_type
-        score: 1.0
-        explanation:
-          Value type mapping allows valid options, adhering precisely to
-          constraints.
+        score: 0.85
+        explanation: Valid values for 'value_type' show strong mapping consistency.

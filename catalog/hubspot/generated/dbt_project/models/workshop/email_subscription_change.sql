@@ -10,7 +10,7 @@ subscription_changes AS (
 SELECT
     subscription_changes._airbyte_extracted_at AS _fivetran_synced,
     NULL AS caused_by_event_id,
-    subscription_changes.changes AS change,
+    NULL AS change,
     NULL AS change_type,
     NULL AS email_subscription_id,
     subscription_changes.portalId AS portal_id,

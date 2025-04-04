@@ -12,13 +12,13 @@ SELECT
     ad_sets.account_id AS account_id,
     ad_sets.campaign_id AS campaign_id,
     ad_sets.name AS name,
-    _airbyte_extracted_at AS _fivetran_synced,
+    ad_sets._airbyte_extracted_at AS _fivetran_synced,
     ad_sets.updated_time AS updated_time,
     ad_sets.start_time AS start_time,
     ad_sets.end_time AS end_time,
     ad_sets.bid_strategy AS bid_strategy,
     ad_sets.daily_budget AS daily_budget,
     ad_sets.budget_remaining AS budget_remaining,
-    NULL AS status,
+    ad_sets.effective_status AS status,
     NULL AS optimization_goal
 FROM ad_sets

@@ -104,105 +104,105 @@ annotations:
   evaluation:
     source_stream_name: customers
     target_table_name: customer
-    name_match_score: 0.8
-    score: 0.75
+    table_match_score: 0.8
+    completion_score: 0.9
     explanation:
-      Most fields have direct mapping with highly plausible expression
-      matches. One field has a missing expression, which lowered the overall score.
+      The table match score is high due to the high similarity in subject
+      matter between the source and target schemas, both concerned with customer information.
+      While the completion score is even higher since most of the fields have precise
+      mappings in the target schema.
     field_mapping_evals:
       - name: _fivetran_synced
         expression: customers._airbyte_extracted_at
         score: 1.0
-        explanation:
-          Correctly mapped to a source stream's '_airbyte_extracted_at'
-          column.
+        explanation: Standard mapping for '_fivetran_synced' to '_airbyte_extracted_at'.
       - name: accepts_marketing
         expression: customers.accepts_marketing
-        score: 0.6
-        explanation:
-          The field seems deprecated but has a logical description and
-          expression match.
+        score: 0.0
+        explanation: No good match found.
       - name: created_at
         expression: customers.created_at
-        score: 0.9
-        explanation: Direct and highly plausible field match for creation date.
+        score: 0.8
+        explanation: "'created_at' has a direct equivalent in the target schema."
       - name: default_address_id
         expression: customers.default_address.id
         score: 0.8
-        explanation: Reasonable match for default address id.
+        explanation: "'default_address_id' matches structurally to 'customers.default_address.id'."
       - name: email
         expression: customers.email
         score: 0.9
-        explanation: Correct match as a unique identifier.
+        explanation: "'email' is uniquely tied to 'customers.email' in a mapping."
       - name: first_name
         expression: customers.first_name
         score: 0.9
-        explanation: Name fields have a direct match.
+        explanation: "'first_name' has equivalent mapping to 'customers.first_name'."
       - name: id
         expression: customers.id
-        score: 0.9
-        explanation: Direct match for unique identifier.
+        score: 1.0
+        explanation: Exact match found with 'customers.id'.
       - name: last_name
         expression: customers.last_name
         score: 0.9
-        explanation: Name fields have a direct match.
+        explanation: "'last_name' found similar corresponding field 'customers.last_name'."
       - name: orders_count
         expression: customers.orders_count
-        score: 0.8
-        explanation: Logical match with expression description.
+        score: 0.85
+        explanation: "'orders_count' accurately reflects 'customers.orders_count'."
       - name: phone
         expression: customers.phone
-        score: 0.8
-        explanation: Reasonable match for unique identifier.
+        score: 0.9
+        explanation: Direct mapping with 'customers.phone'.
       - name: state
         expression: customers.state
         score: 0.7
-        explanation: Uncertain match; could refer to different account statuses.
+        explanation:
+          Ambiguity exists, but current context favors this mapping to
+          'customers.state'.
       - name: tax_exempt
         expression: customers.tax_exempt
-        score: 0.8
-        explanation: Clear logical match for tax exemption.
+        score: 0.85
+        explanation: Good match with 'customers.tax_exempt'. Similar domain.
       - name: total_spent
         expression: customers.total_spent
         score: 0.9
-        explanation: High confidence with purchase history total amount.
+        explanation: Correlates well with 'customers.total_spent'.
       - name: updated_at
         expression: customers.updated_at
-        score: 0.9
-        explanation: Matches well with last update timestamp.
+        score: 0.85
+        explanation: Good mapping correspondence to 'customers.updated_at'.
       - name: verified_email
         expression: customers.verified_email
-        score: 0.7
-        explanation: Budget fittings for verified email status might vary.
+        score: 0.85
+        explanation: "'verified_email' matches well with 'customers.verified_email'."
       - name: email_marketing_consent_state
         expression: customers.email_marketing_consent.state
         score: 0.7
-        explanation: New version field match that may vary slightly.
+        explanation: Some similarity with 'customers.email_marketing_consent.state'.
       - name: email_marketing_consent_opt_in_level
         expression: customers.email_marketing_consent.opt_in_level
         score: 0.7
-        explanation: Logical but might differ in specifics.
+        explanation: Some similarity with 'customers.email_marketing_consent.opt_in_level'.
       - name: email_marketing_consent_consent_updated_at
         expression: customers.email_marketing_consent.consent_updated_at
         score: 0.7
-        explanation: Correct temporal context but could vary slightly.
+        explanation: Some similarity with 'customers.email_marketing_consent.consent_updated_at'.
       - name: accepts_marketing_updated_at
         expression: customers.accepts_marketing_updated_at
-        score: 0.6
-        explanation: Deprecated field with review needed.
+        score: 0.0
+        explanation: No good match found.
       - name: marketing_opt_in_level
         expression: customers.marketing_opt_in_level
-        score: 0.6
-        explanation: Deprecated field with review needed.
+        score: 0.0
+        explanation: No good match found.
       - name: _fivetran_deleted
         expression: MISSING
         score: 0.0
-        explanation: Missing expression leads to zero confidence.
+        explanation: No good match found.
       - name: note
         expression: customers.note
-        score: 0.8
-        explanation: Adequate match for a note about the customer.
+        score: 0.6
+        explanation: Marginal mapping match with 'customers.note'.
       - name: currency
         expression: customers.currency
         score: 0.8
-        explanation: Adequate description and expression match with currency code.
+        explanation: Matches well with 'customers.currency'.

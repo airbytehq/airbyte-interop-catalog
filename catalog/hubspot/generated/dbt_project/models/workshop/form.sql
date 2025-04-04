@@ -10,16 +10,16 @@ forms AS (
 SELECT
     NULL AS _fivetran_deleted,
     forms._airbyte_extracted_at AS _fivetran_synced,
-    forms.properties.hs_createdate AS created_at,
+    forms.createdAt AS created_at,
     forms.displayOptions.cssClass AS css_class,
     NULL AS follow_up_id,
     NULL AS guid,
-    NULL AS lead_nurturing_campaign_id,
+    forms.properties.hs_marketing_campaign_guid AS lead_nurturing_campaign_id,
     NULL AS method,
     forms.name AS name,
     forms.configuration.notifyRecipients AS notify_recipients,
-    forms.id AS portal_id,
-    NULL AS redirect,
+    NULL AS portal_id,
+    forms.configuration.postSubmitAction.value AS redirect,
     forms.displayOptions.submitButtonText AS submit_text,
-    forms.properties.hs_lastmodifieddate AS updated_at
+    forms.updatedAt AS updated_at
 FROM forms

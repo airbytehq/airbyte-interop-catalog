@@ -2,10 +2,10 @@ domain: shopify.fivetran-interop
 transforms:
   - name: order_tag
     from:
-      - order_risks: shopify.order_risks
+      - orders: shopify.orders
     fields:
       _fivetran_synced:
-        expression: order_risks._airbyte_extracted_at
+        expression: orders._airbyte_extracted_at
         description: "{{ doc('_fivetran_synced') }}"
       index:
         expression: MISSING
@@ -13,49 +13,42 @@ transforms:
           Index (starting from 1) represnting when the tag was placed on
           the order.
       order_id:
-        expression: order_risks.order_id
+        expression: orders.id
         description: ID of the order being tagged.
       value:
         expression: MISSING
         description: Value of the tag.
 annotations:
-  approved: false
+  approved: true
   missing_fields:
     - index
     - value
   evaluation:
-    source_stream_name: order_risks
+    source_stream_name: orders
     target_table_name: order_tag
-    name_match_score: 0.0
-    score: 0.375
+    table_match_score: 0.8
+    completion_score: 0.5
     explanation:
-      The overall confidence score is a weighted average of individual
-      field scores. '_fivetran_synced' has a strong mapping to '_airbyte_extracted_at'
-      resulting in a high score. Other mappings have 'MISSING' expressions leading
-      to zero confidence, lowering the average score significantly. The overall structure
-      is plausible but has critical gaps due to incomplete mappings.
+      The table match score is relatively high because the `_fivetran_synced`
+      was successfully mapped to `_airbyte_extracted_at`, a standard mapping. However,
+      two of the field mappings have expressions set to 'MISSING', resulting in a
+      lower completion score.
     field_mapping_evals:
       - name: _fivetran_synced
-        expression: order_risks._airbyte_extracted_at
+        expression: orders._airbyte_extracted_at
         score: 1.0
         explanation:
-          "'_fivetran_synced' is correctly mapped to '_airbyte_extracted_at',
-          following established best practices."
+          _fivetran_synced is always mapped to _airbyte_extracted_at with
+          a perfect score of 1.00 as it is a standard mapping.
       - name: index
         expression: MISSING
         score: 0.0
-        explanation:
-          Mapping for 'index' is 'MISSING', resulting in zero confidence
-          for this field.
+        explanation: Expression is 'MISSING'. No good match found.
       - name: order_id
-        expression: order_risks.order_id
-        score: 0.5
-        explanation:
-          Mapping for 'order_id' is plausible but not perfectly clear.
-          Considered average confidence.
+        expression: orders.id
+        score: 0.7
+        explanation: order_id is mapped to orders.id with a reasonable level of confidence.
       - name: value
         expression: MISSING
         score: 0.0
-        explanation:
-          Mapping for 'value' is 'MISSING', leading to zero confidence
-          for this field.
+        explanation: Expression is 'MISSING'. No good match found.

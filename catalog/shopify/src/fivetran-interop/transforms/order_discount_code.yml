@@ -27,43 +27,50 @@ transforms:
           Pairs with `order_id` to provide unique identifier for order
           discount code.
 annotations:
-  approved: false
+  approved: true
   missing_fields:
     - index
     - order_id
   evaluation:
     source_stream_name: discount_codes
     target_table_name: order_discount_code
-    name_match_score: 0.65
-    score: 0.55
+    table_match_score: 0.8
+    completion_score: 0.6
     explanation:
-      Field mapping evaluation completed. The overall confidence score
-      is based on individual mappings and their confidence levels. Perfect confidence
-      found for `_fivetran_synced`, partial confidence for `amount`, `code`, and `type`,
-      while `order_id` and `index` have MISSING expressions resulting in zero confidence.
-      High name match consistency across fields, except those with missing expressions.
+      The table mapping is of moderate quality with certain fields perfectly
+      mapped, some fields with potential mappings, and others missing entirely. A
+      score of 0.8 reflects that the table structure is very likely describing the
+      same subject matter, but not entirely complete due to missing field mappings.
     field_mapping_evals:
       - name: _fivetran_synced
         expression: discount_codes._airbyte_extracted_at
         score: 1.0
-        explanation: Mapped to _airbyte_extracted_at perfectly as per guidelines.
+        explanation:
+          "Standard mapping: `_fivetran_synced` to `_airbyte_extracted_at`,
+          always scores 1.00."
       - name: amount
         expression: discount_codes.total_sales.amount
         score: 0.7
-        explanation: Confident mapping to a specific total sales amount.
+        explanation:
+          Mapping `amount` to `discount_codes.total_sales.amount` is potentially
+          correct given context, but exact match not certain.
       - name: code
         expression: discount_codes.code
         score: 0.7
-        explanation: Code expression matches expected checkout discounts.
+        explanation:
+          Mapping `code` to `discount_codes.code` is likely correct based
+          on contextual description of discount application.
       - name: order_id
         expression: MISSING
         score: 0.0
-        explanation: Expression missing, resulting in zero confidence.
+        explanation: No good match found.
       - name: type
         expression: discount_codes.discount_type
         score: 0.7
-        explanation: Discount type expression aligns with known categorical values.
+        explanation:
+          Mapping `type` to `discount_codes.discount_type` appears valid
+          given context of discount type enumeration.
       - name: index
         expression: MISSING
         score: 0.0
-        explanation: Expression missing, resulting in zero confidence.
+        explanation: No good match found.

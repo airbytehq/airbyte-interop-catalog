@@ -2,10 +2,10 @@ domain: facebook_marketing.fivetran-interop
 transforms:
   - name: basic_ad_action_values
     from:
-      - ads_insights_action_type: facebook_marketing.ads_insights_action_type
+      - ads_insights: facebook_marketing.ads_insights
     fields:
       _7_d_click:
-        expression: MISSING
+        expression: ads_insights.attribution_setting
         description:
           Conversion metric value using an attribution window of "7 days
           after clicking the ad". Not included in downstream models by default, but
@@ -15,10 +15,10 @@ transforms:
         expression: MISSING
         description: Defunct field.
       _fivetran_synced:
-        expression: _airbyte_extracted_at
+        expression: ads_insights._airbyte_extracted_at
         description: "{{ doc('_fivetran_synced') }}"
       action_type:
-        expression: ads_insights_action_type.action_type
+        expression: ads_insights.actions
         description:
           "The kind of actions taken on your ad, Page, app or event after
           your ad was served to someone, even if they didn't click on it. Action types
@@ -26,78 +26,79 @@ transforms:
           Actions prepended by app_custom_event come from mobile app events and actions
           prepended by offsite_conversion come from the Facebook Pixel.\n"
       ad_id:
-        expression: ads_insights_action_type.ad_id
+        expression: MISSING
         description: The ID of the ad the report relates to.
       date:
-        expression: MISSING
+        expression: ads_insights.date_start
         description: The date of the reported performance.
       index:
-        expression: MISSING
+        expression: ads_insights.conversion_rate_ranking
         description:
           Index reflecting the `action_type` tracked for this ad on this
           day. Column of not much consequence.
       value:
-        expression: ads_insights_action_type.value
+        expression: ads_insights.conversion_values
         description:
           Monetary value associated with the convesion action using the
           default attribution window.
 annotations:
   approved: false
   missing_fields:
-    - _7_d_click
     - _fivetran_id
-    - date
-    - index
+    - ad_id
   evaluation:
-    source_stream_name: ads_insights_action_type
+    source_stream_name: ads_insights
     target_table_name: basic_ad_action_values
-    name_match_score: 0.5
-    score: 0.4375
+    table_match_score: 0.0
+    completion_score: 0.25
     explanation:
-      The table mapping evaluation reflects an overall moderate confidence
-      score due to several fields having 'MISSING' expressions, which were assigned
-      a 0.0 score. '_fivetran_synced' is correctly mapped to '_airbyte_extracted_at',
-      giving it a high confidence score. A moderate name match score was assigned
-      due to imperfect matches. Fields with potential name mismatches or missing expressions
-      were kept below a confidence of 0.7.
+      The table match score is 0.0 as the fields do not suggest a coherent
+      table matching due to missing and unclear mappings. The completion score is
+      0.25 because only 2 out of 8 fields are precisely mapped or have clear logic,
+      primarily due to 2 'MISSING' expressions indicating a failure to map necessary
+      fields.
     field_mapping_evals:
       - name: _7_d_click
-        expression: MISSING
-        score: 0.0
-        explanation: Expression is 'MISSING' leading to a low confidence score.
+        expression: ads_insights.attribution_setting
+        score: 0.55
+        explanation:
+          The field '_7_d_click' is not directly mapped in a clear manner
+          to the source and is somewhat inferred. Given name usage could broadly match
+          Facebook ad insights overlap but lacks clear matching.
       - name: _fivetran_id
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', indicating no confidence in mapping.
+        explanation: Expression is 'MISSING'. No good match found.
       - name: _fivetran_synced
-        expression: _airbyte_extracted_at
+        expression: ads_insights._airbyte_extracted_at
         score: 1.0
-        explanation:
-          Correctly mapped to '_airbyte_extracted_at', following given
-          instructions.
+        explanation: Standard mapping to `_airbyte_extracted_at`. Always scores 1.00.
       - name: action_type
-        expression: ads_insights_action_type.action_type
-        score: 0.6
+        expression: ads_insights.actions
+        score: 0.65
         explanation:
-          Expression matches description reasonably well, though there
-          might be slight uncertainties.
+          The expression 'ads_insights.actions' commonly refers to ad actions
+          but could encompass broad category types with possible good fit due to description
+          match.
       - name: ad_id
-        expression: ads_insights_action_type.ad_id
-        score: 0.6
-        explanation:
-          Expression matches well with description, slight name mismatch
-          might exist.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No good match found.
       - name: date
-        expression: MISSING
-        score: 0.0
-        explanation: Expression is 'MISSING' leading to a low confidence score.
-      - name: index
-        expression: MISSING
-        score: 0.0
-        explanation: Expression is 'MISSING', indicating no confidence in mapping.
-      - name: value
-        expression: ads_insights_action_type.value
+        expression: ads_insights.date_start
         score: 0.6
         explanation:
-          Expression likely aligns with description, with some uncertainties
-          involved.
+          The 'date' maps well to 'ads_insights.date_start', showing date
+          logic but slightly unclear due to name plurality variance.
+      - name: index
+        expression: ads_insights.conversion_rate_ranking
+        score: 0.55
+        explanation:
+          The mapping to 'ads_insights.conversion_rate_ranking' is a possible
+          vague match in concept but lacks better contextual linking.
+      - name: value
+        expression: ads_insights.conversion_values
+        score: 0.7
+        explanation:
+          Expression 'ads_insights.conversion_values' aligns with conversion
+          metric insights provided by Facebook, showing fairly high mapping confidence.

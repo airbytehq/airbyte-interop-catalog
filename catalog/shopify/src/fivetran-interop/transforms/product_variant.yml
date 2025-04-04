@@ -107,7 +107,7 @@ transforms:
           This parameter applies only to the stores that have the Avalara
           AvaTax app installed. Specifies the Avalara tax code for the product variant.
       title:
-        expression: MISSING
+        expression: product_variants.title
         description:
           The title of the product variant. The title field is a concatenation
           of the option1, option2, and option3 fields. You can only update title indirectly
@@ -164,160 +164,197 @@ annotations:
     - metafield
     - requires_components
     - sellable_online_quantity
-    - title
   evaluation:
     source_stream_name: product_variants
     target_table_name: product_variant
-    name_match_score: 0.8
-    score: 0.48
+    table_match_score: 0.8
+    completion_score: 0.6
     explanation:
-      The overall mapping confidence score is computed based on individual
-      field mappings. Fields with 'MISSING' expression receive 0.0 confidence. Scores
-      for matching expressions range up to 1.0 based on perceived accuracy and relevance.
+      The table mapping is mostly consistent with the target schema, but
+      there are several fields marked as 'MISSING' due to lack of good matches or
+      differences in field representation. The overall table match score is high due
+      to shared subject matter and relevant fields, but the completion score is lower
+      reflecting these gaps.
     field_mapping_evals:
       - name: barcode
         expression: product_variants.barcode
         score: 0.9
-        explanation: The expression matches a unique identifier for the product variant.
+        explanation:
+          The mapping of 'barcode' is strong as it directly corresponds
+          to 'product_variants.barcode'.
       - name: compare_at_price
         expression: product_variants.compare_at_price
         score: 0.9
         explanation:
-          The expression represents a relevant field that matches the intended
-          use.
+          The mapping of 'compare_at_price' is strong as it directly corresponds
+          to 'product_variants.compare_at_price'.
       - name: created_at
         expression: product_variants.created_at
         score: 0.9
         explanation:
-          The field correctly identifies the creation timestamp with proper
-          format.
+          The mapping of 'created_at' is strong as it directly corresponds
+          to 'product_variants.created_at'.
       - name: fulfillment_service
         expression: MISSING
         score: 0.0
-        explanation: The expression 'MISSING' denotes no matching mapping was found.
+        explanation: No good match found.
       - name: grams
         expression: product_variants.grams
-        score: 0.8
+        score: 0.9
         explanation:
-          The expression maps correctly to a product weight field, consistent
-          with the unit specified.
+          The mapping of 'grams' is strong as it directly corresponds to
+          'product_variants.grams'.
       - name: id
         expression: product_variants.id
-        score: 1.0
-        explanation: The expression matches a unique numeric identifier exactly.
+        score: 0.9
+        explanation: The mapping of 'id' is strong as it directly corresponds to 'product_variants.id'.
       - name: image_id
         expression: product_variants.image_id
-        score: 1.0
+        score: 0.9
         explanation:
-          The mapping correctly identifies the image identifier related
-          to the product.
+          The mapping of 'image_id' is strong as it directly corresponds
+          to 'product_variants.image_id'.
       - name: inventory_item_id
         expression: product_variants.inventory_item_id
-        score: 1.0
+        score: 0.9
         explanation:
-          The mapping accurately captures the inventory item ID required
-          for querying inventory.
+          The mapping of 'inventory_item_id' is strong as it directly corresponds
+          to 'product_variants.inventory_item_id'.
       - name: inventory_management
         expression: MISSING
         score: 0.0
-        explanation:
-          The expression 'MISSING' indicates no appropriate mapping was
-          found.
+        explanation: No good match found.
       - name: inventory_policy
         expression: product_variants.inventory_policy
-        score: 0.8
-        explanation: The mapping correctly signifies inventory policy conditions.
+        score: 0.9
+        explanation:
+          The mapping of 'inventory_policy' is strong as it directly corresponds
+          to 'product_variants.inventory_policy'.
       - name: inventory_quantity
         expression: product_variants.inventory_quantity
-        score: 0.8
-        explanation: The mapping accurately reflects inventory quantities across locations.
+        score: 0.9
+        explanation:
+          The mapping of 'inventory_quantity' is strong as it directly
+          corresponds to 'product_variants.inventory_quantity'.
       - name: old_inventory_quantity
         expression: product_variants.old_inventory_quantity
-        score: 0.7
+        score: 0.9
         explanation:
-          This deprecated mapping still correctly points to relevant historical
-          data.
+          The mapping of 'old_inventory_quantity' is strong as it directly
+          corresponds to 'product_variants.old_inventory_quantity'.
       - name: option_1
         expression: product_variants.option1
-        score: 0.8
-        explanation: The mapping aligns well with customizable properties for variants.
+        score: 0.9
+        explanation:
+          The mapping of 'option_1' is strong as it directly corresponds
+          to 'product_variants.option1'.
       - name: option_2
         expression: product_variants.option2
-        score: 0.8
-        explanation: The mapping aligns well with customizable properties for variants.
+        score: 0.9
+        explanation:
+          The mapping of 'option_2' is strong as it directly corresponds
+          to 'product_variants.option2'.
       - name: option_3
         expression: product_variants.option3
-        score: 0.8
-        explanation: The mapping aligns well with customizable properties for variants.
+        score: 0.9
+        explanation:
+          The mapping of 'option_3' is strong as it directly corresponds
+          to 'product_variants.option3'.
       - name: position
         expression: product_variants.position
         score: 0.9
-        explanation: The mapping correctly represents the list position.
+        explanation:
+          The mapping of 'position' is strong as it directly corresponds
+          to 'product_variants.position'.
       - name: price
         expression: product_variants.price
-        score: 1.0
-        explanation: The expression precisely matches the product variant's price.
+        score: 0.9
+        explanation:
+          The mapping of 'price' is strong as it directly corresponds to
+          'product_variants.price'.
       - name: product_id
         expression: product_variants.product_id
-        score: 1.0
-        explanation: Maps accurately to the unique product identifier.
+        score: 0.9
+        explanation:
+          The mapping of 'product_id' is strong as it directly corresponds
+          to 'product_variants.product_id'.
       - name: requires_shipping
         expression: product_variants.requires_shipping
-        score: 0.6
-        explanation: The deprecated field maps to the correct shipping requirement.
+        score: 0.0
+        explanation: No good match found.
       - name: sku
         expression: product_variants.sku
         score: 0.9
-        explanation: Represents the product variant's SKU as intended.
+        explanation:
+          The mapping of 'sku' is strong as it directly corresponds to
+          'product_variants.sku'.
       - name: taxable
         expression: product_variants.taxable
-        score: 0.7
-        explanation: Appropriate mapping for tax charge status.
+        score: 0.9
+        explanation:
+          The mapping of 'taxable' is strong as it directly corresponds
+          to 'product_variants.taxable'.
       - name: tax_code
         expression: product_variants.tax_code
-        score: 0.8
-        explanation: The mapping captures enhanced tax code referencing Avalara integration.
+        score: 0.9
+        explanation:
+          The mapping of 'tax_code' is strong as it directly corresponds
+          to 'product_variants.tax_code'.
       - name: title
-        expression: MISSING
-        score: 0.0
-        explanation: The expression 'MISSING' results in no mapping.
+        expression: product_variants.title
+        score: 0.9
+        explanation:
+          The mapping of 'title' is strong as it directly corresponds to
+          'product_variants.title'.
       - name: updated_at
         expression: product_variants.updated_at
         score: 0.9
-        explanation: Correctly captures the modification timestamp.
+        explanation:
+          The mapping of 'updated_at' is strong as it directly corresponds
+          to 'product_variants.updated_at'.
       - name: weight
         expression: product_variants.weight
-        score: 0.7
-        explanation: The mapping aligns with the deprecated weight field.
+        score: 0.9
+        explanation:
+          The mapping of 'weight' is strong as it directly corresponds
+          to 'product_variants.weight'.
       - name: weight_unit
         expression: product_variants.weight_unit
-        score: 0.8
-        explanation: Correctly addresses the unit of measurement for weight.
+        score: 0.9
+        explanation:
+          The mapping of 'weight_unit' is strong as it directly corresponds
+          to 'product_variants.weight_unit'.
       - name: available_for_sale
         expression: product_variants.available_for_sale
-        score: 0.7
-        explanation: Accurate mapping denoting availability status.
+        score: 0.9
+        explanation:
+          The mapping of 'available_for_sale' is strong as it directly
+          corresponds to 'product_variants.available_for_sale'.
       - name: display_name
         expression: product_variants.display_name
-        score: 0.8
-        explanation: Logical mapping for displaying combined product and variant titles.
+        score: 0.9
+        explanation:
+          The mapping of 'display_name' is strong as it directly corresponds
+          to 'product_variants.display_name'.
       - name: legacy_resource_id
         expression: MISSING
         score: 0.0
-        explanation: The expression 'MISSING' leads to no match.
+        explanation: No good match found.
       - name: metafield
         expression: MISSING
         score: 0.0
-        explanation: The expression 'MISSING' suggests absence of a proper mapping.
+        explanation: No good match found.
       - name: requires_components
         expression: MISSING
         score: 0.0
-        explanation: The expression 'MISSING' indicates no mapping was possible.
+        explanation: No good match found.
       - name: sellable_online_quantity
         expression: MISSING
         score: 0.0
-        explanation: The expression 'MISSING' yields no mapping capability.
+        explanation: No good match found.
       - name: _fivetran_synced
         expression: product_variants._airbyte_extracted_at
         score: 1.0
-        explanation: Correct mapping to the source stream's extraction timestamp.
+        explanation:
+          The mapping of '_fivetran_synced' to '_airbyte_extracted_at'
+          is perfect and standard for all tables.

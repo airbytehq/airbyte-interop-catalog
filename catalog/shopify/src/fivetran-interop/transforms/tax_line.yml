@@ -2,10 +2,10 @@ domain: shopify.fivetran-interop
 transforms:
   - name: tax_line
     from:
-      - orders: shopify.orders
+      - transactions: shopify.transactions
     fields:
       _fivetran_synced:
-        expression: orders._airbyte_extracted_at
+        expression: transactions._airbyte_extracted_at
         description: "{{ doc('_fivetran_synced') }}"
       index:
         expression: MISSING
@@ -14,12 +14,12 @@ transforms:
         expression: MISSING
         description: The order line that this tax line is associated with.
       price:
-        expression: MISSING
+        expression: transactions.amount
         description:
           The amount of tax, in shop currency, after discounts and before
           returns.
       price_set:
-        expression: MISSING
+        expression: transactions.total_unsettled_set
         description:
           The amount of tax, in shop and presentment currencies, after
           discounts and before returns.
@@ -29,53 +29,59 @@ transforms:
           The proportion of the line item price that the tax represents
           as a decimal.
       title:
-        expression: MISSING
+        expression: transactions.source_name
         description: The name of the tax.
 annotations:
   approved: false
   missing_fields:
     - index
     - order_line_id
-    - price
-    - price_set
     - rate
-    - title
   evaluation:
-    source_stream_name: orders
+    source_stream_name: transactions
     target_table_name: tax_line
-    name_match_score: 0.1
-    score: 0.14285714285714285
+    table_match_score: 0.7
+    completion_score: 0.5714285714285714
     explanation:
-      Only one field has a valid expression with a perfect mapping (_fivetran_synced
-      to _airbyte_extracted_at). The rest are marked as MISSING, indicating a lack
-      of confidence in the mapping. The overall score reflects the average confidence
-      across all mappings.
+      The table mapping quality is relatively high, given that most field
+      names have corresponding expressions from similar schemas. However, several
+      fields are marked as 'MISSING,' indicating incomplete field mappings and reducing
+      the completion score. The standard mapping of '_fivetran_synced' to '_airbyte_extracted_at'
+      boosts confidence significantly. The lack of a logical or exact match for 'index',
+      'order_line_id', and 'rate' fields decreases the completion score as they are
+      marked 'MISSING'.
     field_mapping_evals:
       - name: _fivetran_synced
-        expression: orders._airbyte_extracted_at
+        expression: transactions._airbyte_extracted_at
         score: 1.0
-        explanation: Perfect mapping with _airbyte_extracted_at column.
+        explanation: Standard mapping to '_airbyte_extracted_at' with perfect confidence.
       - name: index
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, indicating no valid mapping.
+        explanation: No good match found.
       - name: order_line_id
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, indicating no valid mapping.
+        explanation: No good match found.
       - name: price
-        expression: MISSING
-        score: 0.0
-        explanation: Expression is MISSING, indicating no valid mapping.
+        expression: transactions.amount
+        score: 0.7
+        explanation:
+          "'transactions.amount' correlates well with 'price', assuming
+          it represents a monetary value which matches the description."
       - name: price_set
-        expression: MISSING
-        score: 0.0
-        explanation: Expression is MISSING, indicating no valid mapping.
+        expression: transactions.total_unsettled_set
+        score: 0.7
+        explanation:
+          "'transactions.total_unsettled_set' aligns with 'price_set',
+          inferring a comparable financial value matching the requirements."
       - name: rate
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, indicating no valid mapping.
+        explanation: No good match found.
       - name: title
-        expression: MISSING
-        score: 0.0
-        explanation: Expression is MISSING, indicating no valid mapping.
+        expression: transactions.source_name
+        score: 0.7
+        explanation:
+          "'transactions.source_name' is presumed to align with 'title'
+          based on context, dealing with tax-related naming."

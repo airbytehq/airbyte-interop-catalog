@@ -8,7 +8,7 @@ transforms:
         expression: contacts_form_submissions._airbyte_extracted_at
         description: '{{ doc("_fivetran_synced") }}'
       contact_id:
-        expression: contacts_form_submissions.canonical_vid
+        expression: MISSING
         description: The ID of the related contact.
       conversion_id:
         expression: contacts_form_submissions.conversion_id
@@ -17,7 +17,7 @@ transforms:
         expression: contacts_form_submissions.form_id
         description: The GUID of the form that the submission belongs to.
       page_url:
-        expression: contacts_form_submissions.page_url
+        expression: contacts_form_submissions.canonical_url
         description: The URL that the form was submitted on, if applicable.
       portal_id:
         expression: contacts_form_submissions.portal_id
@@ -26,61 +26,65 @@ transforms:
         expression: contacts_form_submissions.timestamp
         description: A Unix timestamp in milliseconds of the time the submission occurred.
       title:
-        expression: contacts_form_submissions.title
+        expression: contacts_form_submissions.page_title
         description:
           The title of the page that the form was submitted on. This will
           default to the name of the form if no title is provided.
 annotations:
   approved: true
-  missing_fields: []
+  missing_fields:
+    - contact_id
   evaluation:
     source_stream_name: contacts_form_submissions
     target_table_name: contact_form_submission
-    name_match_score: 0.8
-    score: 0.85
+    table_match_score: 0.8
+    completion_score: 0.875
     explanation:
-      The mappings were evaluated based on the similarity of field names
-      and their respective expressions. High confidence for fields with clear matches.
+      The table match confidence is high due to the presence of common
+      fields in the source and target tables, such as conversion_id and form_id, which
+      are indicative of form submissions. However, the completion is partly reduced
+      as a result of a 'MISSING' field and some other mapped fields having a close
+      match score instead of perfect.
     field_mapping_evals:
       - name: _fivetran_synced
         expression: contacts_form_submissions._airbyte_extracted_at
         score: 1.0
         explanation:
-          Perfect match with '_airbyte_extracted_at' which is the expected
-          source column for '_fivetran_synced'.
+          The field '_fivetran_synced' is correctly mapped to '_airbyte_extracted_at'
+          as per standard mapping rules.
       - name: contact_id
-        expression: contacts_form_submissions.canonical_vid
-        score: 0.9
-        explanation:
-          High confidence as 'contact_id' in contacts_form_submissions
-          directly relates to a 'contact'.
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
       - name: conversion_id
         expression: contacts_form_submissions.conversion_id
-        score: 0.85
-        explanation:
-          Good match as 'conversion_id' is a unique identifier related
-          to the form conversion.
-      - name: form_id
-        expression: contacts_form_submissions.form_id
-        score: 0.8
-        explanation: "'form_id' matches the description of the form GUID adequately."
-      - name: page_url
-        expression: contacts_form_submissions.page_url
         score: 0.7
         explanation:
-          Although 'page_url' is suggestive of a URL, some ambiguity exists
-          as the description only refers to the submission page.
+          Close confidence since 'conversion_id' appears to match correctly
+          with the source.
+      - name: form_id
+        expression: contacts_form_submissions.form_id
+        score: 0.7
+        explanation:
+          Reasonable confidence as 'form_id' corresponds within the submission
+          context.
+      - name: page_url
+        expression: contacts_form_submissions.canonical_url
+        score: 0.7
+        explanation:
+          Matches with 'canonical_url' reasonably well for a form submission
+          context.
       - name: portal_id
         expression: contacts_form_submissions.portal_id
-        score: 0.75
-        explanation:
-          "'portal_id' matches closely but relies on documentation for
-          context."
+        score: 0.7
+        explanation: Field 'portal_id' mapped with standard naming conventions.
       - name: timestamp
         expression: contacts_form_submissions.timestamp
-        score: 0.9
-        explanation: High confidence in mapping 'timestamp' to a Unix timestamp.
+        score: 0.7
+        explanation:
+          Field 'timestamp' appears to match the context of form submission
+          times.
       - name: title
-        expression: contacts_form_submissions.title
-        score: 0.8
-        explanation: The 'title' is adequately matched to the page title or form name.
+        expression: contacts_form_submissions.page_title
+        score: 0.7
+        explanation: Field 'title' matches the common context in form submission metadata.

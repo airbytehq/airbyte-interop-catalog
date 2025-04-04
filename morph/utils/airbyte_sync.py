@@ -24,7 +24,7 @@ from morph import resources
 from morph.constants import DEFAULT_PROJECT_NAME
 from morph.utils import text_utils
 from morph.utils.airbyte_catalog import get_source, write_catalog_file
-from morph.utils.dbt_source_files import generate_dbt_sources_yml_from_airbyte_catalog
+from morph.utils.dbt.dbt_source_files import generate_dbt_sources_yml_from_airbyte_catalog
 from morph.utils.logic import if_none
 
 console = Console()

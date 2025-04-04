@@ -28,42 +28,44 @@ annotations:
   evaluation:
     source_stream_name: email_events
     target_table_name: email_event_print
-    name_match_score: 0.9
-    score: 0.85
+    table_match_score: 0.75
+    completion_score: 0.8
     explanation:
-      The table mapping evaluation yielded an overall high confidence score
-      due to precise mappings for most fields. The '_fivetran_synced' field mapped
-      perfectly to 'email_events._airbyte_extracted_at', contributing significantly
-      to the confidence score. Other fields like 'browser', 'id', and 'user_agent'
-      also showed strong matches. However, 'ip_address' and 'location' had slightly
-      lower confidence due to potential ambiguities in terminologies or context, preventing
-      a perfect score.
+      The table mapping suggests a strong correlation with email events,
+      commonly found in both source and target schemas. Most fields have been appropriately
+      matched to their equivalents.
     field_mapping_evals:
       - name: _fivetran_synced
         expression: email_events._airbyte_extracted_at
         score: 1.0
-        explanation:
-          Mapped correctly to the source stream's '_airbyte_extracted_at'
-          as expected.
+        explanation: Standard mapping from _fivetran_synced to _airbyte_extracted_at.
       - name: browser
         expression: email_events.browser
-        score: 0.9
-        explanation: Confidence is high due to the direct match with 'email_events.browser'.
+        score: 0.7
+        explanation:
+          "'browser' matched directly from 'email_events.browser', which
+          is likely a direct mapping of user browsing data."
       - name: id
         expression: email_events.id
-        score: 0.95
-        explanation: Very high confidence as 'id' directly maps to 'email_events.id'.
+        score: 0.65
+        explanation:
+          "'id' matched to 'email_events.id', typically an identifier field
+          directly shared between schemas."
       - name: ip_address
         expression: email_events.ipAddress
         score: 0.7
         explanation:
-          Some ambiguities exist with terminology, preventing a higher
-          confidence score.
+          Direct match of 'ip_address' to 'email_events.ipAddress', common
+          mapping for IP recording.
       - name: location
         expression: email_events.location
-        score: 0.6
-        explanation: The mapping is somewhat ambiguous, leading to moderate confidence.
+        score: 0.7
+        explanation:
+          Matched 'location' to 'email_events.location', generally indicating
+          the same concept.
       - name: user_agent
         expression: email_events.userAgent
-        score: 0.85
-        explanation: Mapped with strong confidence to 'email_events.userAgent'.
+        score: 0.65
+        explanation:
+          Directly mapped 'user_agent' to 'email_events.userAgent', reflecting
+          similar user metadata tracking.

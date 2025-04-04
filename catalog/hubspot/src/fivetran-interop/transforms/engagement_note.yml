@@ -11,7 +11,7 @@ transforms:
         expression: engagements_notes.properties.hs_note_body
         description: The body of the note. The body has a limit of 65536 characters.
       engagement_id:
-        expression: engagements_notes.id
+        expression: MISSING
         description: The ID of the engagement.
       property_hs_createdate:
         expression: engagements_notes.properties.hs_createdate
@@ -46,53 +46,56 @@ transforms:
           API version.\n"
 annotations:
   approved: true
-  missing_fields: []
+  missing_fields:
+    - engagement_id
   evaluation:
     source_stream_name: engagements_notes
     target_table_name: engagement_note
-    name_match_score: 0.8
-    score: 0.85
+    table_match_score: 0.85
+    completion_score: 0.5714285714285714
     explanation:
-      The mappings have high confidence due to accurate and contextually
-      appropriate correlations found between source and target fields. '_fivetran_synced'
-      correctly maps to '_airbyte_extracted_at', while other fields like 'body', 'engagement_id',
-      and timestamp fields align closely with the source fields based on context.
+      The table mapping reflects the same conceptual entity between the
+      source and target. However, one of the field mappings is missing, impacting
+      the completion score. The table map aligns well with data source structures
+      typically shared via similar APIs, thereby achieving a high table match score.
     field_mapping_evals:
       - name: _fivetran_synced
         expression: engagements_notes._airbyte_extracted_at
         score: 1.0
         explanation:
-          "'_fivetran_synced' is correctly mapped to the source stream's
-          '_airbyte_extracted_at' with perfect confidence."
+          This is a standard mapping for all tables and is always mapped
+          to '_airbyte_extracted_at'.
       - name: body
         expression: engagements_notes.properties.hs_note_body
-        score: 0.9
+        score: 0.8
         explanation:
-          The expression aligns with a detailed description, indicating
-          a high confidence mapping.
+          The field 'body' maps well to 'hs_note_body' indicating a similar
+          content purpose, thus achieving a high confidence score.
       - name: engagement_id
-        expression: engagements_notes.id
-        score: 0.85
-        explanation:
-          Id mapping corresponds well between the fields with sufficient
-          context.
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
       - name: property_hs_createdate
         expression: engagements_notes.properties.hs_createdate
-        score: 0.8
+        score: 0.7
         explanation:
-          The time-of-creation mapping holds due to matching timestamp
-          descriptions.
+          This field marks the note's time of creation; mapped to 'hs_createdate'
+          reflecting likely indiscernible temporal data. Meeting specified criteria.
       - name: timestamp
         expression: engagements_notes.properties.hs_timestamp
-        score: 0.8
+        score: 0.7
         explanation:
-          The occurrence time mapping corresponds accurately with the source
-          field's description.
+          This field marks the note's time of occurrence; mapped to 'hs_timestamp',
+          aligns contextually similar to creation date.
       - name: property_hubspot_owner_id
         expression: engagements_notes.properties.hubspot_owner_id
-        score: 0.75
-        explanation: Owner ID fields match thanks to the appropriate use of context.
+        score: 0.7
+        explanation:
+          Reflects ownership of the note, aligning contextually with 'hubspot_owner_id',
+          maintaining entity tracking consistency.
       - name: property_hubspot_team_id
         expression: engagements_notes.properties.hubspot_team_id
-        score: 0.75
-        explanation: Team ID fields are accurately related due to corresponding descriptions.
+        score: 0.7
+        explanation:
+          Reflects team ownership of the note, aligning consistently with
+          'hubspot_team_id', reinforcing entity clarity.

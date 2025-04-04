@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 from morph import resources
-from morph.utils.dbt_source_files import generate_dbt_sources_yml_from_airbyte_catalog
+from morph.utils.dbt.dbt_source_files import generate_dbt_sources_yml_from_airbyte_catalog
 
 AIRBYTE_INTERNAL_GCP_PROJECT = "dataline-integration-testing"
 USE_DOCKER_IMAGE = True

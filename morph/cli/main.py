@@ -14,8 +14,8 @@ from morph.ai.eval import get_table_mapping_eval
 from morph.constants import DEFAULT_PROJECT_NAME
 from morph.utils import text_utils
 from morph.utils.airbyte_sync import sync_source
-from morph.utils.dbt_build import generate_dbt_project
-from morph.utils.lock_file import generate_lock_file
+from morph.utils.dbt_build import build_dbt_project
+from morph.utils.lock_file import update_lock_file
 from morph.utils.logic import if_none
 from morph.utils.transform_scaffold import (
     generate_transform_scaffold,
@@ -107,9 +107,9 @@ def lock(
     SOURCE_NAME: Name of the source (e.g., 'facebook_marketing')
     PROJECT_NAME: Name of the project (e.g., 'fivetran-interop')
     """
-    # Call the existing generate_lock_file function
+    # Call the existing update_lock_file function
     console.print(f"Generating lock file for {source_name}...")
-    generate_lock_file(source_name, project_name)
+    update_lock_file(source_name, project_name)
     console.print(f"Generated lock file for {source_name}")
 
 
@@ -163,23 +163,32 @@ def build(
     # Generate lock file
     if not no_lock_file:
         console.print(f"Generating lock file for {source_name}...")
-        generate_lock_file(source_name, project_name)
+        update_lock_file(source_name, project_name)
         console.print(f"Generated lock file for {source_name}")
 
     # Generate dbt project
     if not no_dbt_project:
         console.print(f"Generating dbt project for {source_name}...")
-        generate_dbt_project(source_name, project_name)
+        build_dbt_project(source_name, project_name)
         console.print(f"Generated dbt project for {source_name}")
 
 
 @main.command()
 @click.argument("source_name")
 @click.argument("project_name", default=DEFAULT_PROJECT_NAME)
+@click.option(
+    "--no-build",
+    is_flag=True,
+    help="Skip building the dbt project after evaluation",
+    type=bool,
+    default=False,
+)
 def eval(
     source_name: str,
     project_name: str = DEFAULT_PROJECT_NAME,
+    *,
     do_source_annotations: bool = True,
+    no_build: bool = False,
 ) -> None:
     """Use AI to evaluated the quality of transform logic.
 
@@ -220,6 +229,17 @@ def eval(
         if do_source_annotations:
             transform_obj.to_file()
 
+    update_lock_file(
+        source_name=source_name,
+        project_name=project_name,
+    )
+
+    if not no_build:
+        console.print("\n" + ("-" * 80) + "\n")
+        console.print("Rebuilding dbt project...", style="bold green")
+        build_dbt_project(source_name, project_name)
+        console.print("Build step completed successfully.", style="bold green")
+
 
 @main.command()
 @click.argument("source_name")
@@ -232,12 +252,20 @@ def eval(
     type=bool,
     default=False,
 )
+@click.option(
+    "--no-build",
+    is_flag=True,
+    help="Skip building the dbt project after generation",
+    type=bool,
+    default=False,
+)
 def generate(
     source_name: str,
     project_name: str = DEFAULT_PROJECT_NAME,
     *,
     auto_confirm: bool | None = None,
     include_skipped_tables: bool = False,
+    no_build: bool = False,
 ) -> None:
     """Use AI to generate new transform code for a project."""
     requirements_dbt_source_file = resources.get_dbt_sources_requirements_path(
@@ -337,6 +365,16 @@ def generate(
             transform_name=target_table,
             auto_confirm=auto_confirm,
         )
+
+    console.print("Generation complete. Updating lock file...", style="bold green")
+    update_lock_file(source_name, project_name)
+
+    # Run the build step after generation is complete
+    if not no_build:
+        console.print("\n" + ("-" * 80) + "\n")
+        console.print("Rebuilding dbt project...", style="bold green")
+        build_dbt_project(source_name, project_name)
+        console.print("Build step completed successfully.", style="bold green")
 
 
 if __name__ == "__main__":

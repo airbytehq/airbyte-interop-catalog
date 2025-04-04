@@ -39,7 +39,7 @@ transforms:
           The pre-tax shipping price with discounts applied in _presentment_
           (customer) currency.
       id:
-        expression: abandoned_checkouts.id
+        expression: MISSING
         description: Unique ID of the abandoned checkout shipping line.
       index:
         expression: MISSING
@@ -50,7 +50,7 @@ transforms:
           The pre-tax shipping price without any discounts applied in _presentment_
           (customer) currency.
       phone:
-        expression: abandoned_checkouts.phone
+        expression: MISSING
         description: The phone number at the shipping address.
       price:
         expression: MISSING
@@ -62,7 +62,7 @@ transforms:
           if the shipping method requires processing by a third party fulfillment
           service.
       source:
-        expression: abandoned_checkouts.source
+        expression: MISSING
         description: The channel where the checkout originated. Example value - shopify.
       title:
         expression: MISSING
@@ -81,99 +81,92 @@ annotations:
     - delivery_expectation_range_min
     - delivery_expectation_type
     - discounted_price
+    - id
     - index
     - original_shop_price
+    - phone
     - price
     - requested_fulfillment_service_id
+    - source
     - title
   evaluation:
     source_stream_name: abandoned_checkouts
     target_table_name: abandoned_checkout_shipping_line
-    name_match_score: 0.7
-    score: 0.235
+    table_match_score: 0.5
+    completion_score: 0.05
     explanation:
-      Overall confidence is low due to many 'MISSING' expressions which
-      receive 0.0 confidence scores. '_fivetran_synced' was successfully mapped to
-      '_airbyte_extracted_at', providing higher confidence for this field. Only this
-      field received a high confidence score.
+      Only one field mapping is accurate with perfect confidence, the rest
+      have 'MISSING' as expressions, indicating no matches found.
     field_mapping_evals:
       - name: _fivetran_synced
         expression: abandoned_checkouts._airbyte_extracted_at
-        score: 0.9
-        explanation:
-          Successfully mapped to '_airbyte_extracted_at', which is a standard
-          mapping.
+        score: 1.0
+        explanation: Standard mapping from _fivetran_synced to _airbyte_extracted_at.
       - name: carrier_identifier
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', no confidence in mapping.
+        explanation: No good match found.
       - name: checkout_id
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', no confidence in mapping.
+        explanation: No good match found.
       - name: code
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', no confidence in mapping.
+        explanation: No good match found.
       - name: delivery_category
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', no confidence in mapping.
+        explanation: No good match found.
       - name: delivery_expectation_range
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', no confidence in mapping.
+        explanation: No good match found.
       - name: delivery_expectation_range_max
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', no confidence in mapping.
+        explanation: No good match found.
       - name: delivery_expectation_range_min
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', no confidence in mapping.
+        explanation: No good match found.
       - name: delivery_expectation_type
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', no confidence in mapping.
+        explanation: No good match found.
       - name: discounted_price
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', no confidence in mapping.
+        explanation: No good match found.
       - name: id
-        expression: abandoned_checkouts.id
-        score: 0.6
-        explanation:
-          Mapped to 'abandoned_checkouts.id', suitable mapping with some
-          confidence.
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
       - name: index
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', no confidence in mapping.
+        explanation: No good match found.
       - name: original_shop_price
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', no confidence in mapping.
+        explanation: No good match found.
       - name: phone
-        expression: abandoned_checkouts.phone
-        score: 0.6
-        explanation:
-          Mapped to 'abandoned_checkouts.phone', acceptable mapping with
-          some confidence.
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
       - name: price
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', no confidence in mapping.
+        explanation: No good match found.
       - name: requested_fulfillment_service_id
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', no confidence in mapping.
+        explanation: No good match found.
       - name: source
-        expression: abandoned_checkouts.source
-        score: 0.6
-        explanation:
-          Mapped to 'abandoned_checkouts.source', reasonable mapping with
-          moderate confidence.
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
       - name: title
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', no confidence in mapping.
+        explanation: No good match found.

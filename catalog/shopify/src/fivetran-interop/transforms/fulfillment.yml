@@ -85,91 +85,85 @@ annotations:
   evaluation:
     source_stream_name: fulfillments
     target_table_name: fulfillment
-    name_match_score: 0.95
-    score: 0.85
+    table_match_score: 0.9
+    completion_score: 0.85
     explanation:
-      The table mapping was evaluated based on the given field mappings.
-      The overall score is derived from individual field evaluations and the coherence
-      of the mapped fields. The name match score indicates the general alignment of
-      field names between the source and target, which was strong in this case.
+      The table mapping shows a high level of confidence as most fields
+      have clear matches between the source and target. The mapping from `_fivetran_synced`
+      to `_airbyte_extracted_at` achieves a perfect score of 1.00 as a standard mapping
+      agreement. Other fields, such as `created_at`, `id`, `status`, and `tracking_number`,
+      have clear semantic consistency, scoring above 0.85. Some fields like `shipment_status`
+      and `service` could have slightly lower scores due to potential ambiguity, but
+      still fall within the 0.70-0.85 range as they seem contextually accurate. `MISSING`
+      mappings are assigned a score of 0.00 and explained with 'No good match found.'
     field_mapping_evals:
       - name: _fivetran_synced
         expression: fulfillments._airbyte_extracted_at
         score: 1.0
-        explanation:
-          Successfully mapped to source stream's '_airbyte_extracted_at'
-          column, which was perfectly aligned with the expected field.
+        explanation: Standard mapping of `_fivetran_synced` to `_airbyte_extracted_at`.
       - name: created_at
         expression: fulfillments.created_at
-        score: 0.8
+        score: 0.9
         explanation:
-          The 'created_at' field mapped well to a corresponding timestamp
-          field in the source.
+          High confidence as the field directly corresponds to creation
+          timestamp.
       - name: id
         expression: fulfillments.id
-        score: 0.8
-        explanation: The 'id' matched a unique identifier column with high confidence.
+        score: 0.95
+        explanation: Direct match for fulfillment ID.
       - name: location_id
         expression: fulfillments.location_id
-        score: 0.8
+        score: 0.85
         explanation:
-          The 'location_id' field was mapped to a unique location identifier
-          with good confidence.
+          Clear mapping to location identifier, maintaining contextual
+          integrity.
       - name: name
         expression: fulfillments.name
-        score: 0.6
+        score: 0.8
         explanation:
-          The 'name' field had a reasonable match, though less certain
-          due to possible differences in naming conventions.
+          The naming structure seems intact with the order name and fulfillment
+          number combined.
       - name: order_id
         expression: fulfillments.order_id
-        score: 0.8
-        explanation:
-          The 'order_id' field was correctly mapped to a corresponding
-          unique order identifier.
+        score: 0.9
+        explanation: Direct correspondence of order identifier.
       - name: receipt_authorization
         expression: fulfillments.receipt.authorization
-        score: 0.75
-        explanation:
-          The 'receipt_authorization' was closely matched to an authorization
-          code field.
+        score: 0.7
+        explanation: Potential match for receipt authorization, context considered.
       - name: service
         expression: fulfillments.service
-        score: 0.7
-        explanation:
-          The 'service' field was moderately matched, potential slight
-          variations in service names.
+        score: 0.75
+        explanation: Probable match for fulfillment service within the context.
       - name: shipment_status
         expression: fulfillments.shipment_status
-        score: 0.65
-        explanation:
-          The 'shipment_status' was matched with consideration for multiple
-          valid states.
-      - name: status
-        expression: fulfillments.status
-        score: 0.65
-        explanation:
-          The 'status' field alignment was fairly good, with understanding
-          of status values.
-      - name: tracking_company
-        expression: fulfillments.tracking_company
-        score: 0.7
-        explanation: Matched with a carrier or company name field for tracking.
-      - name: tracking_number
-        expression: fulfillments.tracking_number
-        score: 0.7
-        explanation: Mapped to a primary tracking number with decent accuracy.
-      - name: tracking_numbers
-        expression: fulfillments.tracking_numbers
-        score: 0.65
-        explanation: Mapped to a list of tracking numbers.
-      - name: tracking_urls
-        expression: fulfillments.tracking_urls
-        score: 0.65
-        explanation: Mapped to URLs correlating to tracking information.
-      - name: updated_at
-        expression: fulfillments.updated_at
         score: 0.8
         explanation:
-          The 'updated_at' field aligned well with a timestamp of last
-          modification.
+          Likely match based on available values for tracking shipment
+          progress.
+      - name: status
+        expression: fulfillments.status
+        score: 0.85
+        explanation: Clear contextual match for fulfillment status.
+      - name: tracking_company
+        expression: fulfillments.tracking_company
+        score: 0.9
+        explanation: The field correlates well with the shipping company's tracking.
+      - name: tracking_number
+        expression: fulfillments.tracking_number
+        score: 0.9
+        explanation: Primary tracking number has a straightforward match.
+      - name: tracking_numbers
+        expression: fulfillments.tracking_numbers
+        score: 0.9
+        explanation: Tracking numbers list maps accurately to shipping records.
+      - name: tracking_urls
+        expression: fulfillments.tracking_urls
+        score: 0.9
+        explanation:
+          URLs for tracking correspond distinctly with the fulfillment
+          tracking.
+      - name: updated_at
+        expression: fulfillments.updated_at
+        score: 0.9
+        explanation: Matches the timestamp for last modification accurately.

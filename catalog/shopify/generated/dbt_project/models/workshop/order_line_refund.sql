@@ -14,7 +14,7 @@ SELECT
     NULL AS order_line_id,
     NULL AS quantity,
     NULL AS refund_id,
-    NULL AS restock_type,
+    order_refunds.restock AS restock_type,
     NULL AS subtotal,
     NULL AS total_tax,
     NULL AS subtotal_set,

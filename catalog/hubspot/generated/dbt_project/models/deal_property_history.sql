@@ -10,9 +10,9 @@ deals_property_history AS (
 SELECT
     deals_property_history._airbyte_extracted_at AS _fivetran_synced,
     deals_property_history.dealId AS deal_id,
-    deals_property_history.properties.dealname AS name,
-    deals_property_history.properties.hs_object_source AS source,
-    deals_property_history.properties.hs_object_source_id AS source_id,
+    NULL AS name,
+    deals_property_history.sourceType AS source,
+    deals_property_history.sourceId AS source_id,
     deals_property_history.timestamp AS timestamp,
     deals_property_history.value AS value
 FROM deals_property_history

@@ -2,10 +2,10 @@ domain: shopify.fivetran-interop
 transforms:
   - name: customer_tag
     from:
-      - metafield_customers: shopify.metafield_customers
+      - customers: shopify.customers
     fields:
       _fivetran_synced:
-        expression: metafield_customers._airbyte_extracted_at
+        expression: customers._airbyte_extracted_at
         description: "{{ doc('_fivetran_synced') }}"
       index:
         expression: MISSING
@@ -13,48 +13,41 @@ transforms:
           Index (starting from 1) represnting when the tag was placed on
           the customer.
       customer_id:
-        expression: metafield_customers.owner_id
+        expression: customers.default_address.customer_id
         description: ID of the customer being tagged.
       value:
-        expression: metafield_customers.value
+        expression: MISSING
         description: Value of the tag.
 annotations:
   approved: false
   missing_fields:
     - index
+    - value
   evaluation:
-    source_stream_name: metafield_customers
+    source_stream_name: customers
     target_table_name: customer_tag
-    name_match_score: 0.6
-    score: 0.625
+    table_match_score: 0.6
+    completion_score: 0.5
     explanation:
-      Overall confidence score is calculated based on the individual field
-      mappings' scores. The column '_fivetran_synced' is perfectly mapped with a score
-      of 1.0, while 'index' is missing a valid expression, resulting in a score of
-      0.0. The other fields have reasonable expressions resulting in a lower confidence
-      score.
+      The mapping includes standard and missing field expressions. Standard
+      mappings like '_fivetran_synced' were given a high score, while missing fields
+      were penalized.
     field_mapping_evals:
       - name: _fivetran_synced
-        expression: metafield_customers._airbyte_extracted_at
+        expression: customers._airbyte_extracted_at
         score: 1.0
-        explanation:
-          The field '_fivetran_synced' is mapped to '_airbyte_extracted_at',
-          which is considered a perfect mapping.
+        explanation: Mapped to a source stream's '_airbyte_extracted_at' as per standard.
       - name: index
         expression: MISSING
         score: 0.0
-        explanation:
-          The 'index' field has a missing expression, resulting in a confidence
-          score of 0.0.
+        explanation: Expression is 'MISSING'. No good match found.
       - name: customer_id
-        expression: metafield_customers.owner_id
+        expression: customers.default_address.customer_id
         score: 0.7
         explanation:
-          The 'customer_id' field expression 'metafield_customers.owner_id'
-          seems appropriate, but we are cautious and not exceeding 0.7.
+          Mapped to 'customers.default_address.customer_id'. Considered
+          a likely match with some uncertainty.
       - name: value
-        expression: metafield_customers.value
-        score: 0.7
-        explanation:
-          The 'value' field expression 'metafield_customers.value' seems
-          appropriate, but we are cautious and not exceeding 0.7.
+        expression: MISSING
+        score: 0.0
+        explanation: Expression is 'MISSING'. No good match found.

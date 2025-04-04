@@ -14,10 +14,10 @@ transforms:
         expression: MISSING
         description: The street address where the fulfillment event occurred.
       city:
-        expression: MISSING
+        expression: fulfillments.origin_address.city
         description: The city where the fulfillment event occurred.
       country:
-        expression: MISSING
+        expression: fulfillments.origin_address.country_code
         description: The country where the fulfillment event occurred.
       created_at:
         expression: fulfillments.created_at
@@ -33,7 +33,7 @@ transforms:
           number is available or if the tracking number is from an unsupported carrier.
           This property is available only when carrier calculated rates are in use.\n"
       fulfillment_id:
-        expression: MISSING
+        expression: fulfillments.id
         description:
           An ID for the fulfillment that's associated with the fulfillment
           event.
@@ -43,7 +43,7 @@ transforms:
           The date and time (ISO 8601 format) when the fulfillment event
           occurred.
       id:
-        expression: MISSING
+        expression: fulfillments.id
         description: An ID for the fulfillment event.
       latitude:
         expression: MISSING
@@ -64,13 +64,13 @@ transforms:
         expression: fulfillments.order_id
         description: The ID of the order that's associated with the fulfillment event.
       province:
-        expression: MISSING
+        expression: fulfillments.origin_address.province_code
         description: The province where the fulfillment event occurred.
       shop_id:
         expression: MISSING
         description: An ID for the shop that's associated with the fulfillment event.
       status:
-        expression: MISSING
+        expression: fulfillments.shipment_status
         description:
           "The status of the fulfillment event. Valid values: - label_printed:
           A label for the shipment was purchased and printed. - label_purchased: A
@@ -90,112 +90,104 @@ transforms:
           The date and time (ISO 8601 format) when the fulfillment event
           was updated.
       zip:
-        expression: MISSING
+        expression: fulfillments.origin_address.zip
         description: The zip code of the location where the fulfillment event occurred.
 annotations:
   approved: false
   missing_fields:
     - _fivetran_deleted
     - address_1
-    - city
-    - country
     - estimated_delivery_at
-    - fulfillment_id
     - happened_at
-    - id
     - latitude
     - longitude
     - message
-    - province
     - shop_id
-    - status
-    - zip
   evaluation:
     source_stream_name: fulfillments
     target_table_name: fulfillment_event
-    name_match_score: 0.2
-    score: 0.25
+    table_match_score: 0.85
+    completion_score: 0.3
     explanation:
-      The overall confidence score is calculated based on the presence
-      of valid expressions for the field mappings. Fields marked as 'MISSING' have
-      a confidence of 0.0 and greatly affect the overall score. The '_fivetran_synced'
-      field is correctly mapped to '_airbyte_extracted_at', providing a high confidence
-      for that field. However, most fields have missing expressions, lowering the
-      overall score.
+      The table match score is high because most of the fields seem to
+      relate to fulfillment events, matching the expected domain. However, many fields
+      have 'MISSING' expressions, leading to a lower completion score.
     field_mapping_evals:
       - name: _fivetran_deleted
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'.
+        explanation: No good match found.
       - name: _fivetran_synced
         expression: fulfillments._airbyte_extracted_at
         score: 1.0
-        explanation: Mapped to source stream's '_airbyte_extracted_at'.
+        explanation:
+          "'_fivetran_synced' maps to '_airbyte_extracted_at' with full
+          confidence."
       - name: address_1
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'.
+        explanation: No good match found.
       - name: city
-        expression: MISSING
-        score: 0.0
-        explanation: Expression is 'MISSING'.
+        expression: fulfillments.origin_address.city
+        score: 0.7
+        explanation: "'city' maps well to 'fulfillments.origin_address.city'."
       - name: country
-        expression: MISSING
-        score: 0.0
-        explanation: Expression is 'MISSING'.
+        expression: fulfillments.origin_address.country_code
+        score: 0.7
+        explanation: "'country' maps well to 'fulfillments.origin_address.country_code'."
       - name: created_at
         expression: fulfillments.created_at
         score: 0.7
-        explanation: Expression 'fulfillments.created_at' is a good match.
+        explanation: "'created_at' maps well to 'fulfillments.created_at'."
       - name: estimated_delivery_at
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'.
+        explanation: No good match found.
       - name: fulfillment_id
-        expression: MISSING
-        score: 0.0
-        explanation: Expression is 'MISSING'.
+        expression: fulfillments.id
+        score: 0.7
+        explanation: "'fulfillment_id' maps well to 'fulfillments.id'."
       - name: happened_at
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'.
+        explanation: No good match found.
       - name: id
-        expression: MISSING
-        score: 0.0
-        explanation: Expression is 'MISSING'.
+        expression: fulfillments.id
+        score: 0.7
+        explanation: "'id' maps well to 'fulfillments.id'."
       - name: latitude
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'.
+        explanation: No good match found.
       - name: longitude
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'.
+        explanation: No good match found.
       - name: message
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'.
+        explanation: No good match found.
       - name: order_id
         expression: fulfillments.order_id
         score: 0.7
-        explanation: Expression 'fulfillments.order_id' is a good match.
+        explanation: "'order_id' maps well to 'fulfillments.order_id'."
       - name: province
-        expression: MISSING
-        score: 0.0
-        explanation: Expression is 'MISSING'.
+        expression: fulfillments.origin_address.province_code
+        score: 0.7
+        explanation: "'province' maps well to 'fulfillments.origin_address.province_code'."
       - name: shop_id
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING'.
+        explanation: No good match found.
       - name: status
-        expression: MISSING
-        score: 0.0
-        explanation: Expression is 'MISSING'.
+        expression: fulfillments.shipment_status
+        score: 0.7
+        explanation: "'status' maps well to 'fulfillments.shipment_status'."
       - name: updated_at
         expression: fulfillments.updated_at
         score: 0.7
-        explanation: Expression 'fulfillments.updated_at' is a good match.
+        explanation: "'updated_at' maps well to 'fulfillments.updated_at'."
       - name: zip
-        expression: MISSING
-        score: 0.0
-        explanation: Expression is 'MISSING'.
+        expression: fulfillments.origin_address.zip
+        score: 0.7
+        explanation: The 'zip' field maps correctly to 'fulfillments.origin_address.zip'.

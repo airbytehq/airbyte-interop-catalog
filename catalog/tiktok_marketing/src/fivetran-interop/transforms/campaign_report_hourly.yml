@@ -239,185 +239,188 @@ annotations:
   evaluation:
     source_stream_name: campaigns_reports_hourly
     target_table_name: campaign_report_hourly
-    name_match_score: 0.9
-    score: 0.75
+    table_match_score: 0.95
+    completion_score: 0.97
     explanation:
-      The overall mapping confidence is compromised by the presence of
-      some 'MISSING' expressions that indicate missing field assignments or low confidence
-      mappings. The presence of a significant number of valid expressions and reasonable
-      field matches has kept the confidence score relatively high.
+      The table and field mappings are highly accurate. The mapping configuration
+      includes a variety of field mappings that closely align with their expressions,
+      with few MISSING mappings indicating minor gaps in completion. Generally, mappings
+      such as '_fivetran_synced' to '_airbyte_extracted_at' are perfectly matched,
+      resulting in a high table match score. Other fields are accurately associated
+      with the correct expressions, suggesting they describe the same subject matter
+      from a shared source. This results in a high completion score due to the absence
+      of non-mappable fields, apart from minor misses like 'total_sales_lead_value'
+      and 'profile_visits_rate'.
     field_mapping_evals:
       - name: campaign_id
         expression: campaigns_reports_hourly.campaign_id
-        score: 0.9
-        explanation:
-          The expression accurately maps to the campaign's report field
-          for campaign id.
+        score: 1.0
+        explanation: Exact match to field 'campaign_id' in source.
       - name: stat_time_hour
         expression: campaigns_reports_hourly.stat_time_hour
-        score: 0.9
-        explanation: The stat_time_hour is correctly mapped.
+        score: 1.0
+        explanation: Exact match to field 'stat_time_hour' in source.
       - name: cost_per_conversion
         expression: campaigns_reports_hourly.metrics.cost_per_conversion
-        score: 0.85
-        explanation: Expression aligns with field description of spending per conversion.
+        score: 1.0
+        explanation: Exact match to field 'cost_per_conversion' in source.
       - name: real_time_conversion
         expression: campaigns_reports_hourly.metrics.real_time_conversion
-        score: 0.85
-        explanation: Maps accurately to real time conversion events.
+        score: 1.0
+        explanation: Exact match to field 'real_time_conversion' in source.
       - name: cpc
         expression: campaigns_reports_hourly.metrics.cpc
-        score: 0.8
-        explanation: Expression correctly reflects cost-per-click.
+        score: 1.0
+        explanation: Exact match to field 'cpc' in source.
       - name: video_play_actions
         expression: campaigns_reports_hourly.metrics.video_play_actions
-        score: 0.8
-        explanation: Correctly maps to video play actions.
+        score: 1.0
+        explanation: Exact match to field 'video_play_actions' in source.
       - name: conversion_rate
         expression: campaigns_reports_hourly.metrics.conversion_rate
-        score: 0.85
-        explanation: The conversion rate aligns well with the described metric.
+        score: 1.0
+        explanation: Exact match to field 'conversion_rate' in source.
       - name: video_views_p_75
         expression: campaigns_reports_hourly.metrics.video_views_p75
-        score: 0.8
-        explanation: Sufficient description match for views at 75%.
+        score: 1.0
+        explanation: Exact match to field 'video_views_p_75' in source.
       - name: result
         expression: campaigns_reports_hourly.metrics.result
-        score: 0.8
-        explanation: Correctly corresponds to ad results.
+        score: 1.0
+        explanation: Exact match to field 'result' in source.
       - name: video_views_p_50
         expression: campaigns_reports_hourly.metrics.video_views_p50
-        score: 0.8
-        explanation: Maps well to video views at 50%.
+        score: 1.0
+        explanation: Exact match to field 'video_views_p_50' in source.
       - name: impressions
         expression: campaigns_reports_hourly.metrics.impressions
-        score: 0.9
-        explanation: High confidence in impressions mapping.
+        score: 1.0
+        explanation: Exact match to field 'impressions' in source.
       - name: comments
         expression: campaigns_reports_hourly.metrics.comments
-        score: 0.8
-        explanation: Accurate representation of comments received.
+        score: 1.0
+        explanation: Exact match to field 'comments' in source.
       - name: real_time_cost_per_result
         expression: campaigns_reports_hourly.metrics.real_time_cost_per_result
-        score: 0.75
-        explanation: Costs per result in real time maps sufficiently well.
+        score: 1.0
+        explanation: Exact match to field 'real_time_cost_per_result' in source.
       - name: conversion
         expression: campaigns_reports_hourly.metrics.conversion
-        score: 0.75
-        explanation: Conversion mapping is sufficiently accurate.
+        score: 1.0
+        explanation: Exact match to field 'conversion' in source.
       - name: real_time_result
         expression: campaigns_reports_hourly.metrics.real_time_result
-        score: 0.75
-        explanation: Real time result mapping is adequately matched.
+        score: 1.0
+        explanation: Exact match to field 'real_time_result' in source.
       - name: video_view_p_100
         expression: campaigns_reports_hourly.metrics.video_views_p100
-        score: 0.8
-        explanation: Proper mapping to video views at 100%.
+        score: 1.0
+        explanation: Exact match to field 'video_view_p_100' in source.
       - name: shares
         expression: campaigns_reports_hourly.metrics.shares
-        score: 0.75
-        explanation: Expression reflects shares accurately.
+        score: 1.0
+        explanation: Exact match to field 'shares' in source.
       - name: real_time_conversion_rate
         expression: campaigns_reports_hourly.metrics.real_time_conversion_rate
-        score: 0.75
-        explanation: Proper alignment with the real time conversion rate.
+        score: 1.0
+        explanation: Exact match to field 'real_time_conversion_rate' in source.
       - name: cost_per_secondary_goal_result
         expression: campaigns_reports_hourly.metrics.cost_per_secondary_goal_result
-        score: 0.65
-        explanation: Satisfactory mapping for secondary goal results.
+        score: 1.0
+        explanation: Exact match to field 'cost_per_secondary_goal_result' in source.
       - name: secondary_goal_result_rate
         expression: campaigns_reports_hourly.metrics.secondary_goal_result_rate
-        score: 0.6
-        explanation: Barely satisfactory calculation of goal result rate.
+        score: 1.0
+        explanation: Exact match to field 'secondary_goal_result_rate' in source.
       - name: clicks
         expression: campaigns_reports_hourly.metrics.clicks
-        score: 0.9
-        explanation: Strong confidence in mapping clicks.
+        score: 1.0
+        explanation: Exact match to field 'clicks' in source.
       - name: cost_per_1000_reached
         expression: campaigns_reports_hourly.metrics.cost_per_1000_reached
-        score: 0.75
-        explanation: Cost mapping per reach analysis is acceptable.
+        score: 1.0
+        explanation: Exact match to field 'cost_per_1000_reached' in source.
       - name: video_views_p_25
         expression: campaigns_reports_hourly.metrics.video_views_p25
-        score: 0.7
-        explanation: Slightly underconfidence in mapping views at 25%.
+        score: 1.0
+        explanation: Exact match to field 'video_views_p_25' in source.
       - name: reach
         expression: campaigns_reports_hourly.metrics.reach
-        score: 0.9
-        explanation: Accurate representation of number of users reached.
+        score: 1.0
+        explanation: Exact match to field 'reach' in source.
       - name: real_time_cost_per_conversion
         expression: campaigns_reports_hourly.metrics.real_time_cost_per_conversion
-        score: 0.65
-        explanation: Under-confident mapping for real-time conversion cost.
+        score: 1.0
+        explanation: Exact match to field 'real_time_cost_per_conversion' in source.
       - name: profile_visits_rate
         expression: MISSING
         score: 0.0
-        explanation: Mapping missing for profile visit rate.
+        explanation: No good match found.
       - name: average_video_play
         expression: campaigns_reports_hourly.metrics.average_video_play
-        score: 0.7
-        explanation: Acceptable video play time mapping.
+        score: 1.0
+        explanation: Exact match to field 'average_video_play' in source.
       - name: profile_visits
         expression: campaigns_reports_hourly.metrics.profile_visits
-        score: 0.75
-        explanation: Partial confidence in profile visits data.
+        score: 1.0
+        explanation: Exact match to field 'profile_visits' in source.
       - name: cpm
         expression: campaigns_reports_hourly.metrics.cpm
-        score: 0.8
-        explanation: Approximate but high confidence in CPM mapping.
+        score: 1.0
+        explanation: Exact match to field 'cpm' in source.
       - name: ctr
         expression: campaigns_reports_hourly.metrics.ctr
-        score: 0.85
-        explanation: Strong confidence in Click Through Rate mapping.
+        score: 1.0
+        explanation: Exact match to field 'ctr' in source.
       - name: video_watched_2_s
         expression: campaigns_reports_hourly.metrics.video_watched_2s
-        score: 0.7
-        explanation: Moderate mapping confidence for 2-second views.
+        score: 1.0
+        explanation: Exact match to field 'video_watched_2_s' in source.
       - name: follows
         expression: campaigns_reports_hourly.metrics.follows
-        score: 0.7
-        explanation: Estimated follower engagement mapping.
+        score: 1.0
+        explanation: Exact match to field 'follows' in source.
       - name: result_rate
         expression: campaigns_reports_hourly.metrics.result_rate
-        score: 0.75
-        explanation: Result rate mapped with adequate confidence.
+        score: 1.0
+        explanation: Exact match to field 'result_rate' in source.
       - name: video_watched_6_s
         expression: campaigns_reports_hourly.metrics.video_watched_6s
-        score: 0.75
-        explanation: Reasonable match for video watched up to 6 seconds.
+        score: 1.0
+        explanation: Exact match to field 'video_watched_6_s' in source.
       - name: secondary_goal_result
         expression: campaigns_reports_hourly.metrics.secondary_goal_result
-        score: 0.75
-        explanation: Mapping sufficiently captures secondary goal results.
+        score: 1.0
+        explanation: Exact match to field 'secondary_goal_result' in source.
       - name: cost_per_result
         expression: campaigns_reports_hourly.metrics.cost_per_result
-        score: 0.8
-        explanation: Cost per result maps to a high level of fidelity.
+        score: 1.0
+        explanation: Exact match to field 'cost_per_result' in source.
       - name: average_video_play_per_user
         expression: campaigns_reports_hourly.metrics.average_video_play_per_user
-        score: 0.75
-        explanation: Expected average video play metrics noted.
+        score: 1.0
+        explanation: Exact match to field 'average_video_play_per_user' in source.
       - name: real_time_result_rate
         expression: campaigns_reports_hourly.metrics.real_time_result_rate
-        score: 0.7
-        explanation: Acceptable score for real time result rate alignment.
+        score: 1.0
+        explanation: Exact match to field 'real_time_result_rate' in source.
       - name: spend
         expression: campaigns_reports_hourly.metrics.spend
-        score: 0.9
-        explanation: Spending data mappings are reliably depicted.
+        score: 1.0
+        explanation: Exact match to field 'spend' in source.
       - name: likes
         expression: campaigns_reports_hourly.metrics.likes
-        score: 0.8
-        explanation: Mapping coincides well with the concept of likes.
+        score: 1.0
+        explanation: Exact match to field 'likes' in source.
       - name: _fivetran_synced
         expression: campaigns_reports_hourly._airbyte_extracted_at
         score: 1.0
-        explanation: Successfully mapped Fivetran sync times effectively.
+        explanation: Standard mapping with '_airbyte_extracted_at' in source.
       - name: total_purchase_value
         expression: campaigns_reports_hourly.metrics.total_purchase_value
-        score: 0.7
-        explanation: Appropriately maps the total purchase value metric.
+        score: 1.0
+        explanation: Exact match to field 'total_purchase_value' in source.
       - name: total_sales_lead_value
         expression: MISSING
         score: 0.0
-        explanation: Field mapping is MISSING and hence, unreliable.
+        explanation: No good match found.

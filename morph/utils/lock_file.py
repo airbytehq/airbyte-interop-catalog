@@ -12,87 +12,13 @@ import tomli_w as toml_writer
 from rich.console import Console
 
 from morph import models, resources
-from morph.models import DbtSourceFile, FieldMapping
-from morph.utils import text_utils
+from morph.models import DbtSourceFile, FieldMapping, TableMappingAudit
 from morph.utils.airbyte_catalog import write_catalog_file
 from morph.utils.airbyte_sync import sync_source
 from morph.utils.file_utils import compute_file_hash
 from morph.utils.transform_scaffold import download_target_schema
 
 console = Console()
-
-
-def find_unused_source_streams(
-    config_streams: list[str],
-    mapping_files: list[dict[str, Any]],
-) -> list[str]:
-    """Find source streams that are not used in any mapping file.
-
-    Args:
-        config_streams: List of source streams from config.yml
-        mapping_files: List of loaded mapping files
-
-    Returns:
-        List of unused source streams
-    """
-    used_streams: set[str] = set()
-
-    # Extract all stream names from "from" sections
-    for mapping in mapping_files:
-        for transform in mapping.get("transforms", []):
-            from_data = transform.get("from", {})
-
-            # Handle both list and dict formats for 'from' field
-            if isinstance(from_data, list):
-                for source_item in from_data:
-                    used_streams.update(source_item.keys())
-            else:
-                used_streams.update(from_data.keys())
-
-    # Find unused streams
-    return sorted(set(config_streams) - used_streams)
-
-
-def find_omitted_target_fields(
-    transform_id: str,
-    target_schema: dict[str, Any],
-    fields: list[FieldMapping],
-) -> list[str]:
-    """Find target table fields that are not mapped in a transform.
-
-    Args:
-        transform_id: ID of the transform
-        target_schema: Target schema dictionary
-        fields: Dictionary of fields in the transform
-
-    Returns:
-        List of target fields that are omitted from the mapping
-    """
-    # Find table schema in target schema
-    table_schema = None
-    for source in target_schema.get("sources", []):
-        for table in source.get("tables", []):
-            if table.get("name") == transform_id:
-                table_schema = table
-                break
-        if table_schema:
-            break
-
-    if not table_schema:
-        return []
-
-    # Get all field names from the target schema
-    target_fields: set[str] = set()
-    for column in table_schema.get("columns", []):
-        field_name = column.get("name")
-        if field_name:
-            target_fields.add(field_name)
-
-    # Get all mapped field names
-    mapped_fields: set[str] = {f.name for f in fields}
-
-    # Find omitted fields
-    return sorted(target_fields - mapped_fields)
 
 
 def validate_field_mappings(
@@ -142,7 +68,7 @@ def validate_field_mappings(
                     )
 
 
-def generate_lock_file_for_project(
+def update_lock_file_for_project(
     source_name: str,
     project_name: str,
 ) -> None:
@@ -213,6 +139,12 @@ def generate_lock_file_for_project(
             dbt_source_table: models.DbtSourceTable = dbt_source_file.get_source_table(
                 transform.source_stream_name,
             )
+            # Create a TableMappingAudit instance
+            audit: TableMappingAudit = TableMappingAudit.new(
+                table_mapping=transform,
+                source_dbt_file=dbt_source_file,
+                target_dbt_file=dbt_requirements_source_file,
+            )
 
             # Extract source aliases from "from" section
             # For now, we assume only one source table per transform
@@ -232,16 +164,9 @@ def generate_lock_file_for_project(
                     f.name: f.expression for f in transform_obj.get_mapped_fields()
                 },
                 "unmapped_target_fields": transform_obj.get_missing_field_mappings(),
-                "omitted_target_fields": find_omitted_target_fields(
-                    transform_id=transform_id,
-                    target_schema=text_utils.load_yaml_file(
-                        resources.get_dbt_sources_requirements_path(
-                            source_name=source_name,
-                            project_name=project_name,
-                        ),
-                    ),
-                    fields=transform.field_mappings,
-                ),
+                # Create a target DbtSourceFile from the requirements file
+                "omitted_target_fields": audit.omitted_target_table_columns,
+                "erroneous_source_table_columns": audit.erroneous_source_table_columns,
             }
             for source_alias in source_aliases:
                 dbt_source_table = dbt_source_file.get_source_table(source_alias)
@@ -301,7 +226,7 @@ def generate_lock_file_for_project(
     console.print(f"Generated lock file for {source_name}", style="green")
 
 
-def generate_lock_file(
+def update_lock_file(
     source_name: str,
     project_name: str,
 ) -> None:
@@ -332,7 +257,7 @@ def generate_lock_file(
 
     # Generate lock file
     try:
-        generate_lock_file_for_project(
+        update_lock_file_for_project(
             source_name=source_name,
             project_name=project_name,
         )

@@ -37,52 +37,48 @@ annotations:
   evaluation:
     source_stream_name: order_refunds
     target_table_name: refund
-    name_match_score: 0.9
-    score: 0.85
+    table_match_score: 0.8
+    completion_score: 0.9
     explanation:
-      The table mapping evaluation demonstrates generally high confidence,
-      with key fields showing strong alignment between source and target. Minor discrepancies
-      exist but are not significant.
+      The table mapping shows high confidence since source and target tables
+      are assumed to be derived from the same API, indicating they describe the same
+      subject matter. The completion score is high as well, given all fields of significance
+      in source are well mapped, except for the expected standard and one missing
+      field.
     field_mapping_evals:
       - name: id
         expression: order_refunds.id
         score: 1.0
-        explanation: Field 'id' perfectly matches the source field 'order_refunds.id'.
+        explanation: Exact match found for the unique numeric identifier.
       - name: created_at
         expression: order_refunds.created_at
         score: 1.0
-        explanation: Field 'created_at' perfectly matches the source field 'order_refunds.created_at'.
+        explanation: Exact match found for the creation timestamp.
       - name: processed_at
         expression: order_refunds.processed_at
         score: 1.0
-        explanation: Field 'processed_at' perfectly matches the source field 'order_refunds.processed_at'.
+        explanation: Exact match found for the processing timestamp.
       - name: note
         expression: order_refunds.note
         score: 1.0
-        explanation: Field 'note' perfectly matches the source field 'order_refunds.note'.
+        explanation: Exact match found for the user-generated note.
       - name: restock
         expression: order_refunds.restock
-        score: 0.7
-        explanation:
-          Field 'restock' moderately matches the source field 'order_refunds.restock',
-          likely representing a boolean field.
+        score: 1.0
+        explanation: Exact match found for the restock boolean.
       - name: user_id
         expression: order_refunds.user_id
         score: 1.0
-        explanation: Field 'user_id' perfectly matches the source field 'order_refunds.user_id'.
+        explanation: Exact match found for the user id reference.
       - name: _fivetran_synced
         expression: order_refunds._airbyte_extracted_at
         score: 1.0
-        explanation:
-          Mapped '_fivetran_synced' to '_airbyte_extracted_at' as instructed,
-          ensuring synchronization accuracy.
+        explanation: Standard mapping from '_fivetran_synced' to '_airbyte_extracted_at'.
       - name: total_duties_set
         expression: order_refunds.total_duties_set
-        score: 0.6
-        explanation:
-          Field 'total_duties_set' has a low-confidence match, requiring
-          further verification of reference integrity.
+        score: 1.0
+        explanation: Exact match found for the total duties set record.
       - name: order_id
         expression: order_refunds.order_id
         score: 1.0
-        explanation: Field 'order_id' perfectly matches the source field 'order_refunds.order_id'.
+        explanation: Exact match found for the order id reference.

@@ -4,8 +4,10 @@
 version: 2
 sources:
   - name: facebook_marketing
-    schema: "{{ var('airbyte_facebook_marketing_schema', 'facebook_marketing_raw') }}"
-    database: "{{ var('airbyte_facebook_marketing_database', 'facebook_marketing') }}"
+    schema: "{{ var('airbyte_facebook_marketing_schema', default='facebook_marketing_raw')
+      }}"
+    database: "{{ var('airbyte_facebook_marketing_database', default='facebook_marketing')
+      }}"
     tables:
       - name: activities
         columns:

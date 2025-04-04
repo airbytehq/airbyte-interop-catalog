@@ -2,57 +2,57 @@ domain: shopify.fivetran-interop
 transforms:
   - name: metafield
     from:
-      - metafield_articles: shopify.metafield_articles
+      - metafield_shops: shopify.metafield_shops
     fields:
       _fivetran_synced:
-        expression: metafield_articles._airbyte_extracted_at
+        expression: metafield_shops._airbyte_extracted_at
         description: "{{ doc('_fivetran_synced') }}"
       created_at:
-        expression: metafield_articles.created_at
+        expression: metafield_shops.created_at
         description: The date and time (ISO 8601 format) when the metafield was created.
       description:
-        expression: metafield_articles.description
+        expression: metafield_shops.description
         description: A description of the information that the metafield contains.
       id:
-        expression: metafield_articles.id
+        expression: metafield_shops.id
         description: The unique ID of the metafield.
       key:
-        expression: metafield_articles.key
+        expression: metafield_shops.key
         description:
           The key of the metafield. Keys can be up to 64 characters long
           and can contain alphanumeric characters, hyphens, underscores, and periods.
       namespace:
-        expression: metafield_articles.namespace
+        expression: metafield_shops.namespace
         description:
           A container for a group of metafields. Grouping metafields within
           a namespace prevents your metafields from conflicting with other metafields
           with the same key name. Must have between 3-255 characters.
       owner_id:
-        expression: metafield_articles.owner_id
+        expression: metafield_shops.owner_id
         description:
           The unique ID of the resource that the metafield is attached
           to.
       owner_resource:
-        expression: metafield_articles.owner_resource
+        expression: metafield_shops.owner_resource
         description: The type of resource (table) that the metafield is attached to.
       type:
-        expression: metafield_articles.type
+        expression: metafield_shops.type
         description:
           The type of data that the metafield stores in the `value` field.
           Refer to the [list](https://shopify.dev/apps/metafields/types) of supported
           types. Use this instead of `value_type`.
       updated_at:
-        expression: metafield_articles.updated_at
+        expression: metafield_shops.updated_at
         description:
           The date and time (ISO 8601 format) when the metafield was last
           updated.
       value:
-        expression: metafield_articles.value
+        expression: metafield_shops.value
         description:
           The data to store in the metafield. The value is always stored
           as a string, regardless of the metafield's type.
       value_type:
-        expression: metafield_articles.value_type
+        expression: metafield_shops.value_type
         description:
           DEPRECATED as of [June 2022](https://fivetran.com/docs/applications/shopify/changelog#june2022).
           Use `type` instead.
@@ -60,61 +60,69 @@ annotations:
   approved: true
   missing_fields: []
   evaluation:
-    source_stream_name: metafield_articles
+    source_stream_name: metafield_shops
     target_table_name: metafield
-    name_match_score: 1.0
-    score: 0.9
+    table_match_score: 0.85
+    completion_score: 0.9
     explanation:
-      All fields in the mappings are perfectly matched to the expected
-      expressions, with '_fivetran_synced' receiving a perfect match to '_airbyte_extracted_at'
-      as advised. Other core fields are directly matched to their respective expressions
-      in metafield_articles.
+      The table mapping matches closely with the expected schema based
+      on the field names and their descriptions. Most fields have a direct match and
+      the mappings are generally appropriate, with a few exceptions where 'MISSING'
+      is used due to lack of good matches.
     field_mapping_evals:
       - name: _fivetran_synced
-        expression: metafield_articles._airbyte_extracted_at
+        expression: metafield_shops._airbyte_extracted_at
         score: 1.0
-        explanation: Mapped to '_airbyte_extracted_at' as advised, perfect match.
+        explanation: Standard mapping to source stream's '_airbyte_extracted_at' column.
       - name: created_at
-        expression: metafield_articles.created_at
-        score: 1.0
-        explanation: Matches the expression for the creation time.
+        expression: metafield_shops.created_at
+        score: 0.95
+        explanation:
+          High confidence mapping based on field name and purpose of capturing
+          creation date.
       - name: description
-        expression: metafield_articles.description
-        score: 1.0
-        explanation: Matches the expression for the description content.
+        expression: metafield_shops.description
+        score: 0.9
+        explanation: Field matches closely based on description and typical usage.
       - name: id
-        expression: metafield_articles.id
+        expression: metafield_shops.id
         score: 1.0
-        explanation: Unique ID mapping is exact.
+        explanation: Direct match with unique identifier field.
       - name: key
-        expression: metafield_articles.key
-        score: 1.0
-        explanation: Key mapping matches without discrepancies.
+        expression: metafield_shops.key
+        score: 0.85
+        explanation:
+          Field mapping based on key attributes; fits well with typical
+          schema.
       - name: namespace
-        expression: metafield_articles.namespace
-        score: 1.0
-        explanation: Namespace is correctly mapped.
+        expression: metafield_shops.namespace
+        score: 0.8
+        explanation: Closely aligns with expected schema for group containers.
       - name: owner_id
-        expression: metafield_articles.owner_id
-        score: 1.0
-        explanation: Mapping for owner ID is accurate.
+        expression: metafield_shops.owner_id
+        score: 0.9
+        explanation: High confidence mapping for field indicating owner relation.
       - name: owner_resource
-        expression: metafield_articles.owner_resource
-        score: 1.0
-        explanation: Resource type mapping is exact.
+        expression: metafield_shops.owner_resource
+        score: 0.7
+        explanation:
+          Resource-type field matches well, although contextual evidence
+          is moderate.
       - name: type
-        expression: metafield_articles.type
-        score: 1.0
-        explanation: Correct type mapping based on metafield value.
+        expression: metafield_shops.type
+        score: 0.75
+        explanation: Mapping is appropriate with regard to data type description.
       - name: updated_at
-        expression: metafield_articles.updated_at
-        score: 1.0
-        explanation: Updated at timestamp is correctly matched.
+        expression: metafield_shops.updated_at
+        score: 0.95
+        explanation: High confidence mapping for a timestamp of last update.
       - name: value
-        expression: metafield_articles.value
-        score: 1.0
-        explanation: Value is stored correctly as per expression.
+        expression: metafield_shops.value
+        score: 0.9
+        explanation:
+          Typically used for storing string data, fits with equivalent
+          field.
       - name: value_type
-        expression: metafield_articles.value_type
+        expression: metafield_shops.value_type
         score: 0.0
-        explanation: DEPRECATED; no current mapping needed or appropriate.
+        explanation: No good match found; field is deprecated.

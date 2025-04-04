@@ -1,7 +1,7 @@
 """Utility functions for rich."""
 
 CONFIDENCE_HIGH = 0.65
-CONFIDENCE_LOW = 0.35
+CONFIDENCE_LOW = 0.50
 
 
 def rich_formatted_confidence(score: float) -> str:

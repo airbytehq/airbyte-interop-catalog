@@ -12,15 +12,15 @@ from pathlib import Path
 from rich.console import Console
 
 from morph import resources
-from morph.utils.dbt_source_files import (
+from morph.utils.dbt.dbt_source_files import (
     generate_dbt_sources_yml_from_airbyte_catalog,
 )
-from morph.utils.mapping_to_dbt_models import generate_dbt_package
+from morph.utils.dbt.mapping_to_dbt_models import generate_dbt_package
 
 console = Console()
 
 
-def generate_dbt_project(
+def build_dbt_project(
     source_name: str,
     project_name: str,
     *,

@@ -17,7 +17,7 @@ transforms:
         expression: ad_sets.name
         description: The name of the ad set.
       _fivetran_synced:
-        expression: _airbyte_extracted_at
+        expression: ad_sets._airbyte_extracted_at
         description: "{{ doc('_fivetran_synced') }}"
       updated_time:
         expression: ad_sets.updated_time
@@ -40,7 +40,7 @@ transforms:
         expression: ad_sets.budget_remaining
         description: Remaining budget of ad set.
       status:
-        expression: MISSING
+        expression: ad_sets.effective_status
         description: Status values are - 'ACTIVE', 'PAUSED', 'DELETED', 'ARCHIVED'.
       optimization_goal:
         expression: MISSING
@@ -48,78 +48,95 @@ transforms:
           The optimization goal this ad set is using. Possible values defined
           [here](https://developers.facebook.com/docs/marketing-api/reference/ad-campaign/#fields).
 annotations:
-  approved: false
+  approved: true
   missing_fields:
     - optimization_goal
-    - status
   evaluation:
     source_stream_name: ad_sets
     target_table_name: ad_set_history
-    name_match_score: 0.6
-    score: 0.55
+    table_match_score: 0.85
+    completion_score: 0.75
     explanation:
-      The mappings have an overall satisfactory confidence level. However,
-      there are issues with the fields 'status' and 'optimization_goal', as their
-      expressions are marked 'MISSING', indicating a confidence score of 0.0 for these
-      fields. The other mappings have acceptable expression matches, particularly
-      '_fivetran_synced' mapped to '_airbyte_extracted_at', which is strongly advised.
-      The overall confidence score is reduced due to the missing fields.
+      The table mapping evaluation indicates a moderate to high confidence
+      in the table subject matching, primarily based on shared semantics derived from
+      similar schemas in the source and target tables, both of which are generated
+      from equivalent API endpoints. However, there are significant disparities in
+      the field mappings, particularly with undefined fields marked as 'MISSING',
+      which affects the completion score.
     field_mapping_evals:
       - name: id
         expression: ad_sets.id
-        score: 1.0
-        explanation: The expression 'ad_sets.id' perfectly matches the description.
+        score: 0.95
+        explanation:
+          The 'id' field has a clear and direct match between source and
+          target.
       - name: account_id
         expression: ad_sets.account_id
-        score: 1.0
-        explanation: The expression 'ad_sets.account_id' perfectly matches the description.
+        score: 0.95
+        explanation:
+          The 'account_id' field is well matched, sharing common semantics
+          between the source and target implementations.
       - name: campaign_id
         expression: ad_sets.campaign_id
-        score: 1.0
-        explanation: The expression 'ad_sets.campaign_id' perfectly matches the description.
+        score: 0.95
+        explanation:
+          The 'campaign_id' field links directly to the same concept in
+          both source and target schemas.
       - name: name
         expression: ad_sets.name
-        score: 1.0
-        explanation: The expression 'ad_sets.name' perfectly matches the description.
+        score: 0.95
+        explanation:
+          The 'name' field matches perfectly, consistent across the source
+          and target mappings.
       - name: _fivetran_synced
-        expression: _airbyte_extracted_at
+        expression: ad_sets._airbyte_extracted_at
         score: 1.0
         explanation:
-          _fivetran_synced is mapped to the correct '_airbyte_extracted_at'
-          column.
+          Standard mapping of '_fivetran_synced' to '_airbyte_extracted_at',
+          which is always given a score of 1.00.
       - name: updated_time
         expression: ad_sets.updated_time
-        score: 0.8
-        explanation: The expression 'ad_sets.updated_time' mostly matches the description.
+        score: 0.95
+        explanation:
+          The 'updated_time' field shows a strong match, representing the
+          same data in the source and target.
       - name: start_time
         expression: ad_sets.start_time
-        score: 1.0
-        explanation: The expression 'ad_sets.start_time' perfectly matches the description.
+        score: 0.95
+        explanation:
+          The 'start_time' field is matched accurately, denoting identical
+          timestamps.
       - name: end_time
         expression: ad_sets.end_time
-        score: 1.0
-        explanation: The expression 'ad_sets.end_time' perfectly matches the description.
+        score: 0.95
+        explanation:
+          The 'end_time' field mapping is confident, referring to the same
+          entity in both schemas.
       - name: bid_strategy
         expression: ad_sets.bid_strategy
-        score: 1.0
+        score: 0.95
         explanation:
-          The expression 'ad_sets.bid_strategy' correctly lists the bid
-          strategy values.
+          The 'bid_strategy' field matches well, reflecting identical bid
+          configurations.
       - name: daily_budget
         expression: ad_sets.daily_budget
-        score: 1.0
-        explanation: The expression 'ad_sets.daily_budget' perfectly matches the description.
+        score: 0.95
+        explanation:
+          The 'daily_budget' field is well matched with aligned semantics
+          in both implementations.
       - name: budget_remaining
         expression: ad_sets.budget_remaining
-        score: 1.0
+        score: 0.95
         explanation:
-          The expression 'ad_sets.budget_remaining' perfectly matches the
-          description.
+          The 'budget_remaining' field corresponds well to the remaining
+          budget information in both schemas.
       - name: status
-        expression: MISSING
-        score: 0.0
-        explanation: The expression is 'MISSING', cannot determine the correct mapping.
+        expression: ad_sets.effective_status
+        score: 0.95
+        explanation:
+          The 'status' field shows high confidence due to consistent enumerated
+          value definitions.
       - name: optimization_goal
         expression: MISSING
         score: 0.0
-        explanation: The expression is 'MISSING', unable to evaluate confidence.
+        explanation: No good match found.

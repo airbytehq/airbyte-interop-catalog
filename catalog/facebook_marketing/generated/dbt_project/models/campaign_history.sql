@@ -11,7 +11,7 @@ SELECT
     campaigns.id AS id,
     campaigns.account_id AS account_id,
     campaigns.name AS name,
-    _airbyte_extracted_at AS _fivetran_synced,
+    campaigns._airbyte_extracted_at AS _fivetran_synced,
     campaigns.updated_time AS updated_time,
     campaigns.created_time AS created_time,
     campaigns.start_time AS start_time,

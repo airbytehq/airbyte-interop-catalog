@@ -11,7 +11,7 @@ transforms:
         expression: forms._airbyte_extracted_at
         description: '{{ doc("_fivetran_synced") }}'
       created_at:
-        expression: forms.properties.hs_createdate
+        expression: forms.createdAt
         description: A timestamp for when the form was created.
       css_class:
         expression: forms.displayOptions.cssClass
@@ -23,7 +23,7 @@ transforms:
         expression: MISSING
         description: The internal ID of the form.
       lead_nurturing_campaign_id:
-        expression: MISSING
+        expression: forms.properties.hs_marketing_campaign_guid
         description: TBD
       method:
         expression: MISSING
@@ -38,10 +38,10 @@ transforms:
           notifications.\nEmail addresses will be returned for individuals who aren't
           users.\n"
       portal_id:
-        expression: forms.id
+        expression: MISSING
         description: '{{ doc("portal_id") }}'
       redirect:
-        expression: MISSING
+        expression: forms.configuration.postSubmitAction.value
         description:
           The URL that the visitor will be redirected to after filling
           out the form.
@@ -49,7 +49,7 @@ transforms:
         expression: forms.displayOptions.submitButtonText
         description: The text used for the submit button.
       updated_at:
-        expression: forms.properties.hs_lastmodifieddate
+        expression: forms.updatedAt
         description: A timestamp for when the form was last updated.
 annotations:
   approved: false
@@ -57,72 +57,75 @@ annotations:
     - _fivetran_deleted
     - follow_up_id
     - guid
-    - lead_nurturing_campaign_id
     - method
-    - redirect
+    - portal_id
   evaluation:
     source_stream_name: forms
     target_table_name: form
-    name_match_score: 0.0
-    score: 0.42857142857142855
+    table_match_score: 0.9
+    completion_score: 0.69
     explanation:
-      The overall confidence is based on the presence of valid mappings.
-      MISSING expressions reduce the confidence score. The `_fivetran_synced` mapping
-      receives a high confidence score due to its specific requirement alignment.
+      The table mapping score is high because the tables share many common
+      fields, indicating they likely describe similar subjects. However, the completion
+      score is lower due to several fields mapped as 'MISSING'.
     field_mapping_evals:
       - name: _fivetran_deleted
         expression: MISSING
         score: 0.0
-        explanation: Field expression is MISSING, indicating no valid mapping found.
+        explanation: No good match found.
       - name: _fivetran_synced
         expression: forms._airbyte_extracted_at
-        score: 0.7
-        explanation: Mapped correctly to the _airbyte_extracted_at column.
+        score: 1.0
+        explanation: Consistently maps to '_airbyte_extracted_at'.
       - name: created_at
-        expression: forms.properties.hs_createdate
-        score: 0.6
-        explanation: Valid timestamp mapping detected.
+        expression: forms.createdAt
+        score: 0.8
+        explanation: Mapped to a corresponding timestamp for creation within forms.
       - name: css_class
         expression: forms.displayOptions.cssClass
-        score: 0.6
-        explanation: Correct mapping for CSS class designation.
+        score: 0.7
+        explanation: Assigned CSS classes are mapped to a similarly structured path.
       - name: follow_up_id
         expression: MISSING
         score: 0.0
-        explanation: Field expression is MISSING, indicating no valid mapping found.
+        explanation: No good match found.
       - name: guid
         expression: MISSING
         score: 0.0
-        explanation: Field expression is MISSING, indicating no valid mapping found.
+        explanation: No good match found.
       - name: lead_nurturing_campaign_id
-        expression: MISSING
-        score: 0.0
-        explanation: Field expression is MISSING, indicating no valid mapping found.
+        expression: forms.properties.hs_marketing_campaign_guid
+        score: 0.6
+        explanation:
+          Mapping to a marketing campaign GUID is a possible but uncertain
+          match.
       - name: method
         expression: MISSING
         score: 0.0
-        explanation: Field expression is MISSING, indicating no valid mapping found.
+        explanation: No good match found.
       - name: name
         expression: forms.name
-        score: 0.7
-        explanation: Good mapping for form name detected.
+        score: 0.9
+        explanation: Mapped directly to the form's name, indicating a strong match.
       - name: notify_recipients
         expression: forms.configuration.notifyRecipients
-        score: 0.6
-        explanation: Valid mapping for notification recipients list.
+        score: 0.8
+        explanation:
+          Correctly identifies a list of user IDs for notifications within
+          the forms.
       - name: portal_id
-        expression: forms.id
-        score: 0.6
-        explanation: Correct portal identifier mapping detected.
-      - name: redirect
         expression: MISSING
         score: 0.0
-        explanation: Field expression is MISSING, indicating no valid mapping found.
+        explanation: No good match found.
+      - name: redirect
+        expression: forms.configuration.postSubmitAction.value
+        score: 0.8
+        explanation: Mapped to a post-submit URL, reflecting the described functionality.
       - name: submit_text
         expression: forms.displayOptions.submitButtonText
-        score: 0.6
-        explanation: Correctly mapped to submit button text.
+        score: 0.7
+        explanation: Submit button text mapping aligns with function.
       - name: updated_at
-        expression: forms.properties.hs_lastmodifieddate
-        score: 0.6
-        explanation: Valid mapping for last modified timestamp.
+        expression: forms.updatedAt
+        score: 0.8
+        explanation: Mapped to a corresponding timestamp for updates within forms.

@@ -28,47 +28,44 @@ annotations:
   evaluation:
     source_stream_name: email_subscriptions
     target_table_name: email_subscription
-    name_match_score: 0.75
-    score: 0.8
+    table_match_score: 0.7
+    completion_score: 1.0
     explanation:
-      Confidence scores are determined based on how closely the field mappings
-      match expected patterns and known fields. The mapping for '_fivetran_synced'
-      has a high score as it perfectly maps to the expected '_airbyte_extracted_at'.
-      Other fields like 'active', 'description', and 'id' are straightforward and
-      receive high confidence. The 'name' and 'portal_id' fields also match well,
-      but slightly less precisely.
+      Table mapping between the source and target is a strong match due
+      to alignment of fields and standardized mappings. Completion score is perfect
+      as all required fields are mapped.
     field_mapping_evals:
       - name: _fivetran_synced
         expression: email_subscriptions._airbyte_extracted_at
         score: 1.0
-        explanation:
-          Perfect mapping to '_airbyte_extracted_at', as expected for sync
-          timing fields.
+        explanation: Standard mapping to '_airbyte_extracted_at' with full confidence.
       - name: active
         expression: email_subscriptions.active
-        score: 0.9
+        score: 0.7
         explanation:
-          Direct mapping to a field indicating active status, which is
-          common in subscriptions.
+          Mapped to a field with a closely matching name and plausible
+          function.
       - name: description
         expression: email_subscriptions.description
-        score: 0.9
+        score: 0.7
         explanation:
-          Description field matches well with the expected field in the
-          source.
+          Mapped to a field with a closely matching name and plausible
+          function.
       - name: id
         expression: email_subscriptions.id
-        score: 0.9
+        score: 0.7
         explanation:
-          ID fields are typically direct mappings when they exist in source
-          tables.
+          Mapped to a field with a closely matching name and plausible
+          function.
       - name: name
         expression: email_subscriptions.name
         score: 0.7
-        explanation: The 'name' field matches, but names can occasionally vary significantly.
+        explanation:
+          Mapped to a field with a closely matching name and plausible
+          function.
       - name: portal_id
         expression: email_subscriptions.portalId
-        score: 0.6
+        score: 0.7
         explanation:
-          Mapped to 'portalId', which may vary in naming conventions. Slightly
-          lower confidence.
+          Mapped to a field with a closely matching name and plausible
+          function.

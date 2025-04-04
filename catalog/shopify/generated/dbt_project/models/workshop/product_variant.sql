@@ -30,7 +30,7 @@ SELECT
     product_variants.sku AS sku,
     product_variants.taxable AS taxable,
     product_variants.tax_code AS tax_code,
-    NULL AS title,
+    product_variants.title AS title,
     product_variants.updated_at AS updated_at,
     product_variants.weight AS weight,
     product_variants.weight_unit AS weight_unit,

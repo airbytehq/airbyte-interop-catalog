@@ -8,10 +8,10 @@ transforms:
         expression: engagements_calls._airbyte_extracted_at
         description: '{{ doc("_fivetran_synced") }}'
       engagement_id:
-        expression: engagements_calls.id
+        expression: MISSING
         description: The ID of the engagement.
       _fivetran_deleted:
-        expression: engagements_calls.properties.hs_gdpr_deleted
+        expression: MISSING
         description: Boolean to mark rows that were deleted in the source database.
       property_hs_createdate:
         expression: engagements_calls.properties.hs_createdate
@@ -22,7 +22,7 @@ transforms:
           for connectors utilizing the HubSpot v3 API version. For the pre HubSpot
           v3 versions, this value may be found within the parent `engagement` table.\n"
       timestamp:
-        expression: engagements_calls.properties.hs_timestamp
+        expression: MISSING
         description:
           "This field marks the call's time of occurrence and determines
           where the call sits on the record timeline. You can use either a Unix timestamp
@@ -45,52 +45,53 @@ transforms:
           This field will only be populated for connectors utilizing the HubSpot v3
           API version.\n"
 annotations:
-  approved: true
-  missing_fields: []
+  approved: false
+  missing_fields:
+    - _fivetran_deleted
+    - engagement_id
+    - timestamp
   evaluation:
     source_stream_name: engagements_calls
     target_table_name: engagement_call
-    name_match_score: 0.8
-    score: 0.75
+    table_match_score: 0.8
+    completion_score: 0.42857142857142855
     explanation:
-      The overall confidence score is based on the high quality of the
-      mappings. The essential field `_fivetran_synced` is accurately matched to the
-      source's `_airbyte_extracted_at`. Other fields have appropriate corresponding
-      expressions and descriptions that show clear relation to their intended use.
+      The table match score is relatively high due to the commonality in
+      the API usage and consistent field naming conventions between source and target
+      schemas. However, the completion score is low due to missing expressions in
+      key fields, which significantly impacts the ability to map data comprehensively.
     field_mapping_evals:
       - name: _fivetran_synced
         expression: engagements_calls._airbyte_extracted_at
         score: 1.0
         explanation:
-          The mapping for `_fivetran_synced` to `engagements_calls._airbyte_extracted_at`
-          is perfect and as expected.
+          _fivetran_synced is mapped to a source stream's _airbyte_extracted_at
+          column, which is a standard mapping.
       - name: engagement_id
-        expression: engagements_calls.id
-        score: 0.9
-        explanation: The expression matches the engagement ID perfectly.
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
       - name: _fivetran_deleted
-        expression: engagements_calls.properties.hs_gdpr_deleted
-        score: 0.85
-        explanation: Boolean fields are mapped correctly and serve the correct function.
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
       - name: property_hs_createdate
         expression: engagements_calls.properties.hs_createdate
         score: 0.7
-        explanation:
-          The mapping for the call's time of creation is accurate but has
-          dependencies on API versioning which could introduce inconsistency.
+        explanation: This field has a fairly direct matching in the source properties.
       - name: timestamp
-        expression: engagements_calls.properties.hs_timestamp
-        score: 0.7
-        explanation:
-          Similar to `property_hs_createdate`, the timestamp mapping accuracy
-          is affected by its dependency on API versions.
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
       - name: property_hubspot_owner_id
         expression: engagements_calls.properties.hubspot_owner_id
         score: 0.7
-        explanation: The owner ID is mapped correctly but conditional on API usage.
+        explanation:
+          This field has a moderate confidence match based on the HubSpot
+          API version context.
       - name: property_hubspot_team_id
         expression: engagements_calls.properties.hubspot_team_id
         score: 0.7
         explanation:
-          The team ID mapping is also dependent on the API version being
-          used.
+          This field has a moderate confidence match based on the HubSpot
+          API version context.

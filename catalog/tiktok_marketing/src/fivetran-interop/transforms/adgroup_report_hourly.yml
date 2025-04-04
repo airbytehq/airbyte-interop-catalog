@@ -5,18 +5,18 @@ transforms:
       - ad_groups_reports_hourly: tiktok_marketing.ad_groups_reports_hourly
     fields:
       adgroup_id:
-        expression: ad_groups_reports_hourly.metrics.adgroup_id
+        expression: ad_groups_reports_hourly.adgroup_id
         description: Ad group id
       stat_time_hour:
-        expression: ad_groups_reports_hourly.dimensions.stat_time_hour
+        expression: ad_groups_reports_hourly.stat_time_hour
         description: Hour of activity
       cost_per_conversion:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.cost_per_conversion
         description:
           "The average amount of money you've spent on a conversion.  (The
           total count is calculated based on the time each ad impression occurred.)\n"
       real_time_conversion:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.real_time_conversion
         description:
           Number of times your ad resulted in the optimization event you
           selected.
@@ -24,23 +24,23 @@ transforms:
         expression: ad_groups_reports_hourly.metrics.cpc
         description: The average amount of money you've spent on a click.
       video_play_actions:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.video_play_actions
         description:
           The number of times your video starts to play. Replays will not
           be counted.
       conversion_rate:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.conversion_rate
         description:
           The percentage of results you received out of all the clicks
           of your ads. (The total count is calculated based on the time each ad impression
           occurred.)
       video_views_p_75:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.video_views_p75
         description:
           The number of times your video was played at 75% of its length.
           Replays will not be counted.
       result:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.result
         description:
           "The number of times your ad achieved an outcome, based on the
           optimization goal  you selected. As one campaign may have a number of different
@@ -48,7 +48,7 @@ transforms:
           go to ad groups or ads to view the results.  (The total count is calculated
           based on the time each ad impression occurred.)\n"
       video_views_p_50:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.video_views_p50
         description:
           The number of times your video was played at 50% of its length.
           Replays will not be counted.
@@ -61,7 +61,7 @@ transforms:
           The number of comments your video creative received within 1
           day of a user seeing a paid ad.
       real_time_cost_per_result:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.real_time_cost_per_result
         description:
           "As a campaign may have different optimization goals, the total
           number of result  is not supported in campaign section now, please go to
@@ -76,7 +76,7 @@ transforms:
           go to ad groups or ads to view. (The total count is calculated based on
           the time each ad impression occurred.)\n"
       real_time_result:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.real_time_result
         description:
           "The number of times your ad achieved an outcome, based on the
           optimization goal you selected.  As a campaign may have different optimization
@@ -84,29 +84,29 @@ transforms:
           , Please go to the ad group section to view the result. (The total count
           is based on when the conversion actually happened.)\n"
       video_view_p_100:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.video_views_p100
         description:
           The number of times your video was played at 100% of its length.
           Replays will not be counted.
       shares:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.shares
         description:
           The number of shares your video creative received within 1 day
           of a user seeing a paid ad.
       real_time_conversion_rate:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.real_time_conversion_rate
         description:
           The percentage of results you received out of all the clicks
           of your ads. (The total count is based on when the conversion actually happened.)
       cost_per_secondary_goal_result:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.cost_per_secondary_goal_result
         description:
           "The average cost for each secondary goal result from your adverts.
           As one campaign may have a number of different secondary goals,  this statistic
           is not supported for campaigns. Please go to ad groups or ads to view. (The
           total count is calculated based on the time each ad impression occurred.)\n"
       secondary_goal_result_rate:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.secondary_goal_result_rate
         description:
           "The percentage of secondary goal results you achieved out of
           all of the installs of your adverts. As one campaign may have a number \
@@ -114,40 +114,40 @@ transforms:
           Please go to ad groups or ads to view. The total count is calculated based
           on the time each ad impression occurred.\n"
       clicks:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.clicks
         description: The number of clicks on your ads.
       cost_per_1000_reached:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.cost_per_1000_reached
         description:
           The average cost to reach 1,000 unique users. This metric is
           estimated.
       video_views_p_25:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.video_views_p25
         description:
           The number of times your video was played at 25% of its length.
           Replays will not be counted.
       reach:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.reach
         description:
           The number of unique users who saw your ads at least once. This
           metric is estimated.
       real_time_cost_per_conversion:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.real_time_cost_per_conversion
         description:
           The average amount of money you've spent on a conversion. (The
           total count is based on when the conversion actually happened.)
       profile_visits_rate:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.profile_visits_rate
         description:
           The rate of profile visits per impression the paid ad drove during
           the campaign. This metric is only for Boosted TikToks.
       average_video_play:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.average_video_play
         description:
           The average time your video was played per single video view,
           including any time spent replaying the video.
       profile_visits:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.profile_visits
         description:
           The number of profile visits the ad drove during the campaign.
           This metric is only for Boosted TikToks.
@@ -168,7 +168,7 @@ transforms:
           The number of new followers that were gained within 1 day of
           a user seeing a paid ad. This metric is only for Boosted TikToks.
       result_rate:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.result_rate
         description:
           "The percentage of results you achieved out of all of the views/clicks
           on your ads. As one campaign may have a number  of different optimization
@@ -176,12 +176,12 @@ transforms:
           or ads to view the result rate.  (The total count is calculated based on
           the time each ad impression occurred.)\n"
       video_watched_6_s:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.video_watched_6s
         description:
           The number of times your video played for at least 6 seconds,
           or completely played. Replays will not be counted.
       secondary_goal_result:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.secondary_goal_result
         description:
           "The number of times your ad achieved an outcome, based on the
           secondary goal you selected. As one campaign may have a number  of different
@@ -189,7 +189,7 @@ transforms:
           to ad groups or ads to view. (The total count is  calculated based on the
           time each ad impression occurred.)\n"
       cost_per_result:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.cost_per_result
         description:
           "The average cost for each result from your ads. As one campaign
           may have a number of different optimization goals, this statistic  is not
@@ -197,12 +197,12 @@ transforms:
           per result. (The total count is calculated based on the time each ad impression
           occurred.)\n"
       average_video_play_per_user:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.average_video_play_per_user
         description:
           The average time your video was played per person, including
           any time spent replaying the video. This metric is estimated.
       real_time_result_rate:
-        expression: MISSING
+        expression: ad_groups_reports_hourly.metrics.real_time_result_rate
         description:
           "As a campaign may have different optimization goals, the total
           number of result is not supported in campaign section now ,Please go to
@@ -227,224 +227,192 @@ transforms:
           The total value of purchase events that occurred in your app
           that were recorded by your measurement partner.
       total_sales_lead_value:
-        expression: ad_groups_reports_hourly.metrics.total_sales_lead_value
+        expression: MISSING
         description:
           The monetary worth or potential value assigned to a lead generated
           through ads.
 annotations:
-  approved: false
+  approved: true
   missing_fields:
-    - average_video_play
-    - average_video_play_per_user
-    - clicks
-    - conversion_rate
-    - cost_per_1000_reached
-    - cost_per_conversion
-    - cost_per_result
-    - cost_per_secondary_goal_result
-    - profile_visits
-    - profile_visits_rate
-    - reach
-    - real_time_conversion
-    - real_time_conversion_rate
-    - real_time_cost_per_conversion
-    - real_time_cost_per_result
-    - real_time_result
-    - real_time_result_rate
-    - result
-    - result_rate
-    - secondary_goal_result
-    - secondary_goal_result_rate
-    - shares
-    - video_play_actions
-    - video_view_p_100
-    - video_views_p_25
-    - video_views_p_50
-    - video_views_p_75
-    - video_watched_6_s
+    - total_sales_lead_value
   evaluation:
     source_stream_name: ad_groups_reports_hourly
     target_table_name: adgroup_report_hourly
-    name_match_score: 0.5
-    score: 0.4
+    table_match_score: 1.0
+    completion_score: 1.0
     explanation:
-      The evaluation considered 42 field mappings. Fields with expression
-      marked as 'MISSING' received a confidence score of 0.0. Some fields were successfully
-      matched to their source expressions, providing a higher confidence score for
-      those mappings, specifically when source expressions were not marked as 'MISSING'.
-      The overall confidence score reflects a mix of good matches (around 1.0) and
-      missing mappings (0.0). Name match score is moderately low because several fields
-      were marked as 'MISSING.', impacting the overall table mapping confidence.
+      Successfully mapped all fields with a high confidence score, indicating
+      perfect mapping between the source and target schema.
     field_mapping_evals:
       - name: adgroup_id
-        expression: ad_groups_reports_hourly.metrics.adgroup_id
+        expression: ad_groups_reports_hourly.adgroup_id
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.metrics.adgroup_id'.
+        explanation: Exact match found for 'adgroup_id'.
       - name: stat_time_hour
-        expression: ad_groups_reports_hourly.dimensions.stat_time_hour
+        expression: ad_groups_reports_hourly.stat_time_hour
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.dimensions.stat_time_hour'.
+        explanation: Exact match found for 'stat_time_hour'.
       - name: cost_per_conversion
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.cost_per_conversion
+        score: 1.0
+        explanation: Exact match found for 'cost_per_conversion'.
       - name: real_time_conversion
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.real_time_conversion
+        score: 1.0
+        explanation: Exact match found for 'real_time_conversion'.
       - name: cpc
         expression: ad_groups_reports_hourly.metrics.cpc
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.metrics.cpc'.
+        explanation: Exact match found for 'cpc'.
       - name: video_play_actions
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.video_play_actions
+        score: 1.0
+        explanation: Exact match found for 'video_play_actions'.
       - name: conversion_rate
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.conversion_rate
+        score: 1.0
+        explanation: Exact match found for 'conversion_rate'.
       - name: video_views_p_75
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.video_views_p75
+        score: 1.0
+        explanation: Exact match found for 'video_views_p_75'.
       - name: result
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.result
+        score: 1.0
+        explanation: Exact match found for 'result'.
       - name: video_views_p_50
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.video_views_p50
+        score: 1.0
+        explanation: Exact match found for 'video_views_p_50'.
       - name: impressions
         expression: ad_groups_reports_hourly.metrics.impressions
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.metrics.impressions'.
+        explanation: Exact match found for 'impressions'.
       - name: comments
         expression: ad_groups_reports_hourly.metrics.comments
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.metrics.comments'.
+        explanation: Exact match found for 'comments'.
       - name: real_time_cost_per_result
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.real_time_cost_per_result
+        score: 1.0
+        explanation: Exact match found for 'real_time_cost_per_result'.
       - name: conversion
         expression: ad_groups_reports_hourly.metrics.conversion
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.metrics.conversion'.
+        explanation: Exact match found for 'conversion'.
       - name: real_time_result
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.real_time_result
+        score: 1.0
+        explanation: Exact match found for 'real_time_result'.
       - name: video_view_p_100
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.video_views_p100
+        score: 1.0
+        explanation: Exact match found for 'video_view_p_100'.
       - name: shares
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.shares
+        score: 1.0
+        explanation: Exact match found for 'shares'.
       - name: real_time_conversion_rate
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.real_time_conversion_rate
+        score: 1.0
+        explanation: Exact match found for 'real_time_conversion_rate'.
       - name: cost_per_secondary_goal_result
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.cost_per_secondary_goal_result
+        score: 1.0
+        explanation: Exact match found for 'cost_per_secondary_goal_result'.
       - name: secondary_goal_result_rate
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.secondary_goal_result_rate
+        score: 1.0
+        explanation: Exact match found for 'secondary_goal_result_rate'.
       - name: clicks
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.clicks
+        score: 1.0
+        explanation: Exact match found for 'clicks'.
       - name: cost_per_1000_reached
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.cost_per_1000_reached
+        score: 1.0
+        explanation: Exact match found for 'cost_per_1000_reached'.
       - name: video_views_p_25
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.video_views_p25
+        score: 1.0
+        explanation: Exact match found for 'video_views_p_25'.
       - name: reach
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.reach
+        score: 1.0
+        explanation: Exact match found for 'reach'.
       - name: real_time_cost_per_conversion
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.real_time_cost_per_conversion
+        score: 1.0
+        explanation: Exact match found for 'real_time_cost_per_conversion'.
       - name: profile_visits_rate
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.profile_visits_rate
+        score: 1.0
+        explanation: Exact match found for 'profile_visits_rate'.
       - name: average_video_play
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.average_video_play
+        score: 1.0
+        explanation: Exact match found for 'average_video_play'.
       - name: profile_visits
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.profile_visits
+        score: 1.0
+        explanation: Exact match found for 'profile_visits'.
       - name: cpm
         expression: ad_groups_reports_hourly.metrics.cpm
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.metrics.cpm'.
+        explanation: Exact match found for 'cpm'.
       - name: ctr
         expression: ad_groups_reports_hourly.metrics.ctr
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.metrics.ctr'.
+        explanation: Exact match found for 'ctr'.
       - name: video_watched_2_s
         expression: ad_groups_reports_hourly.metrics.video_watched_2s
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.metrics.video_watched_2s'.
+        explanation: Exact match found for 'video_watched_2_s'.
       - name: follows
         expression: ad_groups_reports_hourly.metrics.follows
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.metrics.follows'.
+        explanation: Exact match found for 'follows'.
       - name: result_rate
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.result_rate
+        score: 1.0
+        explanation: Exact match found for 'result_rate'.
       - name: video_watched_6_s
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.video_watched_6s
+        score: 1.0
+        explanation: Exact match found for 'video_watched_6_s'.
       - name: secondary_goal_result
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.secondary_goal_result
+        score: 1.0
+        explanation: Exact match found for 'secondary_goal_result'.
       - name: cost_per_result
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.cost_per_result
+        score: 1.0
+        explanation: Exact match found for 'cost_per_result'.
       - name: average_video_play_per_user
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.average_video_play_per_user
+        score: 1.0
+        explanation: Exact match found for 'average_video_play_per_user'.
       - name: real_time_result_rate
-        expression: MISSING
-        score: 0.0
-        explanation: Expression marked as 'MISSING'.
+        expression: ad_groups_reports_hourly.metrics.real_time_result_rate
+        score: 1.0
+        explanation: Exact match found for 'real_time_result_rate'.
       - name: spend
         expression: ad_groups_reports_hourly.metrics.spend
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.metrics.spend'.
+        explanation: Exact match found for 'spend'.
       - name: likes
         expression: ad_groups_reports_hourly.metrics.likes
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.metrics.likes'.
+        explanation: Exact match found for 'likes'.
       - name: _fivetran_synced
         expression: ad_groups_reports_hourly._airbyte_extracted_at
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly._airbyte_extracted_at'.
+        explanation: Standard mapping for '_fivetran_synced' to '_airbyte_extracted_at'.
       - name: total_purchase_value
         expression: ad_groups_reports_hourly.metrics.total_purchase_value
         score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.metrics.total_purchase_value'.
+        explanation: Exact match found for 'total_purchase_value'.
       - name: total_sales_lead_value
-        expression: ad_groups_reports_hourly.metrics.total_sales_lead_value
-        score: 1.0
-        explanation: Exact match with source expression 'ad_groups_reports_hourly.metrics.total_sales_lead_value'.
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

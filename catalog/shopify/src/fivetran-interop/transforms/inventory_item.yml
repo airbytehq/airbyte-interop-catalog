@@ -86,7 +86,7 @@ transforms:
           Decimal money amount of the unit cost associated with the inventory
           item.
       unit_cost_currency_code:
-        expression: MISSING
+        expression: inventory_items.currency_code
         description: Currency of the unit cost associated with the inventory item.
 annotations:
   approved: false
@@ -100,108 +100,99 @@ annotations:
     - tracked_editable_locked
     - tracked_editable_reason
     - unit_cost_amount
-    - unit_cost_currency_code
   evaluation:
     source_stream_name: inventory_items
     target_table_name: inventory_item
-    name_match_score: 0.55
-    score: 0.35
+    table_match_score: 0.7
+    completion_score: 0.5238
     explanation:
-      The average confidence score reflects a mix of high confidence in
-      some correctly mapped fields and very low (0.0) scores for fields missing expression
-      data. The '_fivetran_synced' field has a perfect match with '_airbyte_extracted_at'.
+      The table mappings have some missing fields and questionable matches.
+      The '_fivetran_deleted' and several others are marked as 'MISSING'. Also, there
+      are only a few fields that match perfectly, like '_fivetran_synced'.
     field_mapping_evals:
       - name: _fivetran_deleted
         expression: MISSING
         score: 0.0
-        explanation: Missing expression to match the field.
+        explanation: No good match found.
       - name: _fivetran_synced
         expression: inventory_items._airbyte_extracted_at
         score: 1.0
         explanation:
-          Correctly mapped to '_airbyte_extracted_at' which is a standard
-          practice.
+          Mapped to the source stream's '_airbyte_extracted_at' column
+          as a standard mapping.
       - name: country_code_of_origin
         expression: inventory_items.country_code_of_origin
-        score: 0.7
-        explanation: The field expression and name closely match expected patterns.
+        score: 0.9
+        explanation: Likely a precise match due to standard naming.
       - name: created_at
         expression: inventory_items.created_at
-        score: 0.7
-        explanation:
-          The field expression and name closely match expected patterns
-          for creation timestamps.
+        score: 1.0
+        explanation: ISO 8601 date-time creation is a good match.
       - name: id
         expression: inventory_items.id
-        score: 0.7
-        explanation:
-          The field expression and name closely match expected patterns
-          for identifiers.
+        score: 1.0
+        explanation: Unique inventory item identifier is a strong match.
       - name: province_code_of_origin
         expression: inventory_items.province_code_of_origin
-        score: 0.6
-        explanation: The field expression and name somewhat match the expected patterns.
+        score: 0.7
+        explanation: Possible match if considering Canada Post shipping references.
       - name: requires_shipping
         expression: inventory_items.requires_shipping
-        score: 0.7
-        explanation: Correctly represents a boolean field related to shipping.
+        score: 1.0
+        explanation: Boolean values match perfectly with descriptions.
       - name: sku
         expression: inventory_items.sku
-        score: 0.7
-        explanation: Field expression and name are correctly mapped for SKU identification.
+        score: 1.0
+        explanation: Unique SKU matches well with the inventory mapping.
       - name: tracked
         expression: inventory_items.tracked
-        score: 0.7
-        explanation: Represents boolean tracking status effectively.
+        score: 1.0
+        explanation: Boolean tracking indicator is a perfect match.
       - name: updated_at
         expression: inventory_items.updated_at
-        score: 0.7
-        explanation: Matches the expected pattern for update timestamps.
+        score: 1.0
+        explanation: ISO 8601 date-time modification field matches precisely.
       - name: duplicate_sku_count
         expression: inventory_items.duplicate_sku_count
-        score: 0.7
-        explanation:
-          Field expression and name match the expected pattern for counting
-          duplicates.
+        score: 1.0
+        explanation: Clear match for counting duplicates of SKUs.
       - name: harmonized_system_code
         expression: inventory_items.harmonized_system_code
-        score: 0.7
-        explanation:
-          The expression and name are well matched to expected patterns
-          for system codes.
+        score: 0.9
+        explanation: Likely code match based on naming and usage.
       - name: inventory_history_url
         expression: MISSING
         score: 0.0
-        explanation: Missing expression to match the field.
+        explanation: No good match found.
       - name: legacy_resource_id
         expression: MISSING
         score: 0.0
-        explanation: Missing expression to match the field.
+        explanation: No good match found.
       - name: measurement_id
         expression: MISSING
         score: 0.0
-        explanation: Missing expression to match the field.
+        explanation: No good match found.
       - name: measurement_weight_value
         expression: MISSING
         score: 0.0
-        explanation: Missing expression to match the field.
+        explanation: No good match found.
       - name: measurement_weight_unit
         expression: MISSING
         score: 0.0
-        explanation: Missing expression to match the field.
+        explanation: No good match found.
       - name: tracked_editable_locked
         expression: MISSING
         score: 0.0
-        explanation: Missing expression to match the field.
+        explanation: No good match found.
       - name: tracked_editable_reason
         expression: MISSING
         score: 0.0
-        explanation: Missing expression to match the field.
+        explanation: No good match found.
       - name: unit_cost_amount
         expression: MISSING
         score: 0.0
-        explanation: Missing expression to match the field.
+        explanation: No good match found.
       - name: unit_cost_currency_code
-        expression: MISSING
-        score: 0.0
-        explanation: Missing expression to match the field.
+        expression: inventory_items.currency_code
+        score: 0.9
+        explanation: Currency code match is likely correct.

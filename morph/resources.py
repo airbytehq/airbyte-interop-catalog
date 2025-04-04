@@ -115,6 +115,15 @@ def get_transforms_dir(
     return get_src_dir(source_name, project_name) / "transforms"
 
 
+def get_transforms_files(
+    source_name: str,
+    project_name: str = DEFAULT_PROJECT_NAME,
+) -> list[Path]:
+    """Get the path to the transform files."""
+    transforms_dir = get_transforms_dir(source_name, project_name)
+    return list(transforms_dir.glob("*.yml"))
+
+
 def get_transform_file(
     source_name: str,
     *,
