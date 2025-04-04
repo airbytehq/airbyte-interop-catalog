@@ -8,7 +8,7 @@ abandoned_checkouts AS (
 
 
 SELECT
-    abandoned_checkouts._airbyte_raw_id AS _fivetran_deleted,
+    NULL AS _fivetran_deleted,
     abandoned_checkouts._airbyte_extracted_at AS _fivetran_synced,
     abandoned_checkouts.abandoned_checkout_url AS abandoned_checkout_url,
     abandoned_checkouts.billing_address.address1 AS billing_address_address_1,
@@ -31,7 +31,7 @@ SELECT
     abandoned_checkouts.closed_at AS closed_at,
     abandoned_checkouts.created_at AS created_at,
     abandoned_checkouts.currency AS currency,
-    NULL AS customer_id,
+    abandoned_checkouts.customer.default_address.customer_id AS customer_id,
     abandoned_checkouts.customer_locale AS customer_locale,
     abandoned_checkouts.device_id AS device_id,
     abandoned_checkouts.email AS email,

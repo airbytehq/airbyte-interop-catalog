@@ -8,7 +8,7 @@ import pytest
 from click.testing import CliRunner
 
 from morph.cli import main
-from morph.utils.dbt_source_files import (
+from morph.utils.dbt.dbt_source_files import (
     generate_dbt_sources_yml_from_schema_files,
     json_schema_to_dbt_column,
 )

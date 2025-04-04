@@ -5,36 +5,32 @@ transforms:
       - ads_insights: facebook_marketing.ads_insights
     fields:
       _1_d_view:
-        expression: ads_insights.actions
-        description:
-          Conversion metric value using an attribution window of "1 day
+        expression: MISSING
+        description: Conversion metric value using an attribution window of "1 day
           after viewing the ad". Not included in downstream models by default, but
           can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics`
           var.
       _7_d_click:
-        expression: ads_insights.ad_click_actions
-        description:
-          Conversion metric value using an attribution window of "7 days
+        expression: MISSING
+        description: Conversion metric value using an attribution window of "7 days
           after clicking the ad". Not included in downstream models by default, but
           can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics`
           var.
       _28_d_click:
-        expression: ads_insights.action_values
-        description:
-          Conversion metric value using an attribution window of "28 days
+        expression: MISSING
+        description: Conversion metric value using an attribution window of "28 days
           after clicking the ad". Deprecated by Facebook due to digital privacy initiatives.
           Not included in downstream models by default, but can be added using the
           `facebook_ads__basic_ad_actions_passthrough_metrics` var.
       _fivetran_id:
-        expression: ads_insights._airbyte_raw_id
+        expression: MISSING
         description: Defunct field.
       _fivetran_synced:
         expression: ads_insights._airbyte_extracted_at
         description: "{{ doc('_fivetran_synced') }}"
       action_type:
-        expression: ads_insights.action_values
-        description:
-          "The kind of actions taken on your ad, Page, app or event after
+        expression: ads_insights.actions
+        description: "The kind of actions taken on your ad, Page, app or event after
           your ad was served to someone, even if they didn't click on it. Action types
           include Page likes, app installs, conversions, event responses and more.
           Actions prepended by app_custom_event come from mobile app events and actions
@@ -46,81 +42,82 @@ transforms:
         expression: ads_insights.date_start
         description: The date of the reported performance.
       index:
-        expression: ads_insights.auction_max_competitor_bid
-        description:
-          Index reflecting the `action_type` tracked for this ad on this
+        expression: MISSING
+        description: Index reflecting the `action_type` tracked for this ad on this
           day. Column of not much consequence.
       inline:
-        expression: ads_insights.inline_link_clicks
-        description:
-          Conversion metric value using the attribution window that occurs
+        expression: MISSING
+        description: Conversion metric value using the attribution window that occurs
           on the ad itself. Not included in downstream models by default, but can
           be added using the `facebook_ads__basic_ad_actions_passthrough_metrics`
           var.
       value:
-        expression: ads_insights.conversion_values
+        expression: MISSING
         description: Conversion metric value using the default attribution window.
 annotations:
   approved: false
-  missing_fields: []
+  missing_fields:
+    - _1_d_view
+    - _28_d_click
+    - _7_d_click
+    - _fivetran_id
+    - index
+    - inline
+    - value
   evaluation:
     source_stream_name: ads_insights
     target_table_name: basic_ad_actions
-    name_match_score: 0.7
-    score: 0.65
-    explanation: Evaluation of field mapping confidence for Facebook Ads data fields.
+    table_match_score: 0.65
+    completion_score: 0.36363636363636365
+    explanation: The table match score reflects a moderate confidence that the source
+      and target tables describe the same subject matter, particularly due to a standard
+      mapping found for _fivetran_synced. Several fields are marked 'MISSING' due
+      to lack of matches, lowering the completion score.
     field_mapping_evals:
       - name: _1_d_view
-        expression: ads_insights.actions
-        score: 0.6
-        explanation:
-          The name and expression match well, pointing to conversion metrics
-          with a specific attribution window.
-      - name: _7_d_click
-        expression: ads_insights.ad_click_actions
-        score: 0.6
-        explanation:
-          The name and expression suggest a conversion metric based on
-          an appropriate attribution window.
-      - name: _28_d_click
-        expression: ads_insights.action_values
-        score: 0.4
-        explanation:
-          This field is deprecated and less relevant due to digital privacy
-          initiatives.
-      - name: _fivetran_id
-        expression: ads_insights._airbyte_raw_id
+        expression: MISSING
         score: 0.0
-        explanation: Defunct field with no corresponding mapping.
+        explanation: No good match found.
+      - name: _7_d_click
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _28_d_click
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _fivetran_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
       - name: _fivetran_synced
         expression: ads_insights._airbyte_extracted_at
-        score: 0.7
-        explanation:
-          Mapped to source stream's `_airbyte_extracted_at` column, matching
-          the requirement.
+        score: 1.0
+        explanation: Standard mapping for _fivetran_synced to _airbyte_extracted_at.
       - name: action_type
-        expression: ads_insights.action_values
+        expression: ads_insights.actions
         score: 0.7
-        explanation:
-          Well-matching expression for a diverse set of action types related
-          to ads.
+        explanation: Mapped to ads_insights.actions, reflecting a likely but not certain
+          match based on contextual semantics.
       - name: ad_id
         expression: ads_insights.ad_id
-        score: 0.7
-        explanation: Direct match for ad identification across the dataset.
+        score: 0.6
+        explanation: Mapped to ads_insights.ad_id, indicating a probable mapping based
+          on naming consistency.
       - name: date
         expression: ads_insights.date_start
-        score: 0.7
-        explanation: Accurate and important match for tracking performance by date.
-      - name: index
-        expression: ads_insights.auction_max_competitor_bid
-        score: 0.3
-        explanation: Not much consequence as described, resulting in low confidence.
-      - name: inline
-        expression: ads_insights.inline_link_clicks
         score: 0.6
-        explanation: Matches conversion metric with specific attribution criteria.
+        explanation: Mapped to ads_insights.date_start, signifying a probable mapping
+          based on naming consistency.
+      - name: index
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: inline
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
       - name: value
-        expression: ads_insights.conversion_values
-        score: 0.5
-        explanation: General conversion metric value, but less specific than others.
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

@@ -12,8 +12,7 @@ transforms:
         description: The amount of the tender transaction in the shop's currency.
       currency:
         expression: tender_transactions.currency
-        description:
-          The three-letter code (ISO 4217 format) for the currency used
+        description: The three-letter code (ISO 4217 format) for the currency used
           for the tender transaction.
       id:
         expression: tender_transactions.id
@@ -23,14 +22,12 @@ transforms:
         description: The ID of the order that the tender transaction belongs to.
       payment_method:
         expression: tender_transactions.payment_method
-        description:
-          "Information about the payment method used for this transaction.
+        description: "Information about the payment method used for this transaction.
           Valid values include: - credit_card - cash - android_pay - apple_pay - google_pay
           - samsung_pay - shopify_pay - amazon - klarna - paypal - unknown - other\n"
       processed_at:
         expression: tender_transactions.processed_at
-        description:
-          The date and time (ISO 8601 format) when the tender transaction
+        description: The date and time (ISO 8601 format) when the tender transaction
           was processed.
       remote_reference:
         expression: tender_transactions.remote_reference
@@ -40,8 +37,7 @@ transforms:
         description: Whether the tender transaction is a test transaction.
       user_id:
         expression: tender_transactions.user_id
-        description:
-          The ID of the user logged into the Shopify POS device that processed
+        description: The ID of the user logged into the Shopify POS device that processed
           the tender transaction, if applicable.
 annotations:
   approved: true
@@ -49,52 +45,53 @@ annotations:
   evaluation:
     source_stream_name: tender_transactions
     target_table_name: tender_transaction
-    name_match_score: 0.9
-    score: 0.85
-    explanation:
-      The field mappings have been evaluated with high confidence. Most
-      fields are directly matched with their counterparts, resulting in a strong alignment,
-      especially for '_fivetran_synced'.
+    table_match_score: 1.0
+    completion_score: 1.0
+    explanation: All fields mapped successfully with high confidence according to
+      provided rules and context. Mapping hypothetical fields between schemas across
+      transformations without loss of meaning.
     field_mapping_evals:
       - name: _fivetran_synced
         expression: tender_transactions._airbyte_extracted_at
         score: 1.0
-        explanation: Confident mapping of '_fivetran_synced' to '_airbyte_extracted_at'.
+        explanation: Mapped to _airbyte_extracted_at as a standard mapping.
       - name: amount
         expression: tender_transactions.amount
-        score: 0.9
-        explanation: The expression matches the expected content for 'amount' field.
+        score: 1.0
+        explanation: Direct match in field names and context (transaction amount).
       - name: currency
         expression: tender_transactions.currency
-        score: 0.9
-        explanation: Currency code matches ISO standards with 'currency' field.
+        score: 1.0
+        explanation: Direct match in field names and context (ISO currency code).
       - name: id
         expression: tender_transactions.id
-        score: 0.95
-        explanation: High confidence in mapping 'id' to 'id'.
+        score: 1.0
+        explanation: Direct match in field names and context (transaction ID).
       - name: order_id
         expression: tender_transactions.order_id
-        score: 0.9
-        explanation: Good match between 'order_id' expressions.
+        score: 1.0
+        explanation: Direct match in field names and context (order ID).
       - name: payment_method
         expression: tender_transactions.payment_method
-        score: 0.85
-        explanation: Mapping aligns well with valid payment methods.
+        score: 1.0
+        explanation: Direct match in field names and context (types of payment methods).
       - name: processed_at
         expression: tender_transactions.processed_at
-        score: 0.9
-        explanation: Correct use of 'processed_at' in timestamp format.
+        score: 1.0
+        explanation: Direct match in field names and context (date of transaction
+          processing).
       - name: remote_reference
         expression: tender_transactions.remote_reference
-        score: 0.9
-        explanation: High confidence mapping for 'remote_reference' field.
+        score: 1.0
+        explanation: Direct match in field names and context (reference associated
+          with tender).
       - name: test
         expression: tender_transactions.test
-        score: 0.88
-        explanation: Appropriate mapping for 'test' indicator of transactions.
+        score: 1.0
+        explanation: Direct match in field names and context (indicates if transaction
+          is a test).
       - name: user_id
         expression: tender_transactions.user_id
-        score: 0.9
-        explanation:
-          Mapping 'user_id' appears to correctly match user identification
-          field.
+        score: 1.0
+        explanation: Direct match in field names and context (user ID processing the
+          transaction).

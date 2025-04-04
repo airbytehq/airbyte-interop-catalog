@@ -4,7 +4,7 @@ project_name = "fivetran-interop"
 requirements_file = "catalog/facebook_marketing/requirements/fivetran-interop/src_dbt_requirements.yml"
 requirements_file_hash = "063605bbc7f806dd4d69ca40db1bf87e3031484feebd1e9e5bc52c905b52bba7"
 airbyte_source_file = "catalog/facebook_marketing/generated/src_airbyte_facebook_marketing.yml"
-airbyte_source_file_hash = "4601fc46a0390483cd76f46b5838b612ce51e71574ea258f117c5d78baf1ecb1"
+airbyte_source_file_hash = "e7e6a97e7f6b56cce8acf296410c4e2e2b2d722c543d008f95732ade9bf1187c"
 
 [coverage]
 unused_source_streams = [
@@ -13,6 +13,7 @@ unused_source_streams = [
     "ads_insights_action_conversion_device",
     "ads_insights_action_product_id",
     "ads_insights_action_reaction",
+    "ads_insights_action_type",
     "ads_insights_action_video_sound",
     "ads_insights_action_video_type",
     "ads_insights_age_and_gender",
@@ -37,9 +38,10 @@ unmapped_target_tables = []
 
 [mappings.account_history]
 source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/account_history.yml"
-source_file_hash = "554d26ec9d2c503167a82c3317d6add807e591bd10849c3059051f8f80a55207"
+source_file_hash = "8ef4491fed85547e5b871da5f63d8dc7fbcc689c5348ff05236f27f70b729cc1"
 unmapped_target_fields = []
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.account_history.mapped_target_fields]
 id = "ad_account.id"
@@ -59,6 +61,8 @@ ad_account = [
     "age",
     "amount_spent",
     "balance",
+    "business.id",
+    "business.name",
     "business_city",
     "business_name",
     "business_state",
@@ -71,10 +75,19 @@ ad_account = [
     "end_advertiser",
     "end_advertiser_name",
     "extended_credit_invoice_group",
+    "extended_credit_invoice_group.auto_enroll",
+    "extended_credit_invoice_group.customer_po_number",
+    "extended_credit_invoice_group.email",
+    "extended_credit_invoice_group.emails",
+    "extended_credit_invoice_group.id",
+    "extended_credit_invoice_group.name",
     "failed_delivery_checks",
     "fb_entity",
     "funding_source",
     "funding_source_details",
+    "funding_source_details.display_string",
+    "funding_source_details.id",
+    "funding_source_details.type",
     "has_migrated_permissions",
     "io_number",
     "is_attribution_spec_system_default",
@@ -92,6 +105,12 @@ ad_account = [
     "owner",
     "partner",
     "rf_spec",
+    "rf_spec.countries",
+    "rf_spec.global_io_max_campaign_duration",
+    "rf_spec.max_campaign_duration",
+    "rf_spec.max_days_to_finish",
+    "rf_spec.min_campaign_duration",
+    "rf_spec.min_reach_limits",
     "spend_cap",
     "tax_id",
     "tax_id_status",
@@ -99,26 +118,30 @@ ad_account = [
     "timezone_id",
     "timezone_offset_hours_utc",
     "tos_accepted",
+    "tos_accepted.web_custom_audience_tos",
     "user_tasks",
     "user_tos_accepted",
+    "user_tos_accepted.web_custom_audience_tos",
 ]
 
 [mappings.ad_history]
 source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/ad_history.yml"
-source_file_hash = "f56ad019b6df6f7c8b9f216e58b4a8036e7e7859c50a5143051758cb4225eadc"
-unmapped_target_fields = []
+source_file_hash = "28aa191f57b08b757c4e73f0d47079a36072c0118e3ccd7e713ac5798af5da7e"
+unmapped_target_fields = [
+    "conversion_domain",
+]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.ad_history.mapped_target_fields]
 id = "ads.id"
 account_id = "ads.account_id"
 ad_set_id = "ads.adset_id"
 campaign_id = "ads.campaign_id"
-creative_id = "ads.creative"
+creative_id = "ads.creative.creative_id"
 name = "ads.name"
 _fivetran_synced = "ads._airbyte_extracted_at"
 updated_time = "ads.updated_time"
-conversion_domain = "ads.source_ad_id"
 
 [mappings.ad_history.unused_source_fields]
 ads = [
@@ -127,79 +150,267 @@ ads = [
     "adlabels",
     "bid_amount",
     "bid_info",
+    "bid_info.ACTIONS",
+    "bid_info.CLICKS",
+    "bid_info.IMPRESSIONS",
+    "bid_info.REACH",
+    "bid_info.SOCIAL",
     "bid_type",
     "conversion_specs",
     "created_time",
+    "creative.id",
     "effective_status",
     "last_updated_by_app_id",
     "recommendations",
+    "source_ad_id",
     "status",
     "targeting",
+    "targeting.age_max",
+    "targeting.age_min",
+    "targeting.app_install_state",
+    "targeting.audience_network_positions",
+    "targeting.behaviors",
+    "targeting.brand_safety_content_filter_levels",
+    "targeting.connections",
+    "targeting.custom_audiences",
+    "targeting.device_platforms",
+    "targeting.education_statuses",
+    "targeting.excluded_connections",
+    "targeting.excluded_custom_audiences",
+    "targeting.excluded_geo_locations",
+    "targeting.excluded_geo_locations.cities",
+    "targeting.excluded_geo_locations.countries",
+    "targeting.excluded_geo_locations.country_groups",
+    "targeting.excluded_geo_locations.custom_locations",
+    "targeting.excluded_geo_locations.geo-markets",
+    "targeting.excluded_geo_locations.location_types",
+    "targeting.excluded_geo_locations.regions",
+    "targeting.excluded_geo_locations.zips",
+    "targeting.excluded_publisher_categories",
+    "targeting.excluded_user_device",
+    "targeting.exclusions",
+    "targeting.exclusions.behaviors",
+    "targeting.exclusions.connections",
+    "targeting.exclusions.custom_audiences",
+    "targeting.exclusions.education_majors",
+    "targeting.exclusions.excluded_connections",
+    "targeting.exclusions.excluded_custom_audiences",
+    "targeting.exclusions.family_statuses",
+    "targeting.exclusions.friends_of_connections",
+    "targeting.exclusions.generation",
+    "targeting.exclusions.home_ownership",
+    "targeting.exclusions.home_type",
+    "targeting.exclusions.household_composition",
+    "targeting.exclusions.income",
+    "targeting.exclusions.industries",
+    "targeting.exclusions.interests",
+    "targeting.exclusions.life_events",
+    "targeting.exclusions.moms",
+    "targeting.exclusions.net_worth",
+    "targeting.exclusions.politics",
+    "targeting.exclusions.relationship_statuses",
+    "targeting.exclusions.user_adclusters",
+    "targeting.exclusions.work_employers",
+    "targeting.exclusions.work_positions",
+    "targeting.facebook_positions",
+    "targeting.family_statuses",
+    "targeting.flexible_spec",
+    "targeting.friends_of_connections",
+    "targeting.genders",
+    "targeting.generation",
+    "targeting.geo_locations",
+    "targeting.geo_locations.cities",
+    "targeting.geo_locations.countries",
+    "targeting.geo_locations.country_groups",
+    "targeting.geo_locations.custom_locations",
+    "targeting.geo_locations.geo-markets",
+    "targeting.geo_locations.location_types",
+    "targeting.geo_locations.regions",
+    "targeting.geo_locations.zips",
+    "targeting.home_ownership",
+    "targeting.home_type",
+    "targeting.income",
+    "targeting.industries",
+    "targeting.instagram_positions",
+    "targeting.interested_in",
+    "targeting.interests",
+    "targeting.locales",
+    "targeting.messenger_positions",
+    "targeting.moms",
+    "targeting.net_worth",
+    "targeting.office_type",
+    "targeting.politics",
+    "targeting.publisher_platforms",
+    "targeting.relationship_statuses",
+    "targeting.targeting_optimization",
+    "targeting.targeting_relaxation_types",
+    "targeting.user_adclusters",
+    "targeting.user_device",
+    "targeting.user_os",
+    "targeting.work_positions",
     "tracking_specs",
 ]
 
 [mappings.ad_set_history]
 source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/ad_set_history.yml"
-source_file_hash = "2e00f30f0a557ce9bd1fb4d9bfc18d54fc456a3aead8a01e73aaeaa57b420803"
+source_file_hash = "1eeeab08d42c6342c39246152bdcbdd9fcce78cf2e5dd7cde0bf084df82bd987"
 unmapped_target_fields = [
     "optimization_goal",
-    "status",
 ]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.ad_set_history.mapped_target_fields]
 id = "ad_sets.id"
 account_id = "ad_sets.account_id"
 campaign_id = "ad_sets.campaign_id"
 name = "ad_sets.name"
-_fivetran_synced = "_airbyte_extracted_at"
+_fivetran_synced = "ad_sets._airbyte_extracted_at"
 updated_time = "ad_sets.updated_time"
 start_time = "ad_sets.start_time"
 end_time = "ad_sets.end_time"
 bid_strategy = "ad_sets.bid_strategy"
 daily_budget = "ad_sets.daily_budget"
 budget_remaining = "ad_sets.budget_remaining"
+status = "ad_sets.effective_status"
 
 [mappings.ad_set_history.unused_source_fields]
 ad_sets = [
-    "_airbyte_extracted_at",
     "_airbyte_meta",
     "_airbyte_raw_id",
     "adlabels",
     "bid_amount",
     "bid_constraints",
+    "bid_constraints.roas_average_floor",
     "bid_info",
+    "bid_info.ACTIONS",
+    "bid_info.CLICKS",
+    "bid_info.IMPRESSIONS",
+    "bid_info.REACH",
     "created_time",
-    "effective_status",
     "learning_stage_info",
+    "learning_stage_info.attribution_windows",
+    "learning_stage_info.conversions",
+    "learning_stage_info.last_sig_edit_ts",
+    "learning_stage_info.status",
     "lifetime_budget",
     "promoted_object",
+    "promoted_object.application_id",
+    "promoted_object.custom_event_type",
+    "promoted_object.object_store_url",
+    "promoted_object.offer_id",
+    "promoted_object.page_id",
+    "promoted_object.pixel_id",
+    "promoted_object.pixel_rule",
+    "promoted_object.product_set_id",
     "targeting",
+    "targeting.age_max",
+    "targeting.age_min",
+    "targeting.app_install_state",
+    "targeting.audience_network_positions",
+    "targeting.behaviors",
+    "targeting.brand_safety_content_filter_levels",
+    "targeting.connections",
+    "targeting.custom_audiences",
+    "targeting.device_platforms",
+    "targeting.education_statuses",
+    "targeting.excluded_connections",
+    "targeting.excluded_custom_audiences",
+    "targeting.excluded_geo_locations",
+    "targeting.excluded_geo_locations.cities",
+    "targeting.excluded_geo_locations.countries",
+    "targeting.excluded_geo_locations.country_groups",
+    "targeting.excluded_geo_locations.custom_locations",
+    "targeting.excluded_geo_locations.geo-markets",
+    "targeting.excluded_geo_locations.location_types",
+    "targeting.excluded_geo_locations.regions",
+    "targeting.excluded_geo_locations.zips",
+    "targeting.excluded_publisher_categories",
+    "targeting.excluded_user_device",
+    "targeting.exclusions",
+    "targeting.exclusions.behaviors",
+    "targeting.exclusions.connections",
+    "targeting.exclusions.custom_audiences",
+    "targeting.exclusions.education_majors",
+    "targeting.exclusions.excluded_connections",
+    "targeting.exclusions.excluded_custom_audiences",
+    "targeting.exclusions.family_statuses",
+    "targeting.exclusions.friends_of_connections",
+    "targeting.exclusions.generation",
+    "targeting.exclusions.home_ownership",
+    "targeting.exclusions.home_type",
+    "targeting.exclusions.household_composition",
+    "targeting.exclusions.income",
+    "targeting.exclusions.industries",
+    "targeting.exclusions.interests",
+    "targeting.exclusions.life_events",
+    "targeting.exclusions.moms",
+    "targeting.exclusions.net_worth",
+    "targeting.exclusions.politics",
+    "targeting.exclusions.relationship_statuses",
+    "targeting.exclusions.user_adclusters",
+    "targeting.exclusions.work_employers",
+    "targeting.exclusions.work_positions",
+    "targeting.facebook_positions",
+    "targeting.family_statuses",
+    "targeting.flexible_spec",
+    "targeting.friends_of_connections",
+    "targeting.genders",
+    "targeting.generation",
+    "targeting.geo_locations",
+    "targeting.geo_locations.cities",
+    "targeting.geo_locations.countries",
+    "targeting.geo_locations.country_groups",
+    "targeting.geo_locations.custom_locations",
+    "targeting.geo_locations.geo-markets",
+    "targeting.geo_locations.location_types",
+    "targeting.geo_locations.regions",
+    "targeting.geo_locations.zips",
+    "targeting.home_ownership",
+    "targeting.home_type",
+    "targeting.income",
+    "targeting.industries",
+    "targeting.instagram_positions",
+    "targeting.interested_in",
+    "targeting.interests",
+    "targeting.locales",
+    "targeting.messenger_positions",
+    "targeting.moms",
+    "targeting.net_worth",
+    "targeting.office_type",
+    "targeting.politics",
+    "targeting.publisher_platforms",
+    "targeting.relationship_statuses",
+    "targeting.targeting_optimization",
+    "targeting.targeting_relaxation_types",
+    "targeting.user_adclusters",
+    "targeting.user_device",
+    "targeting.user_os",
+    "targeting.work_positions",
 ]
 
 [mappings.basic_ad]
 source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/basic_ad.yml"
-source_file_hash = "72049684647ef1ff2f4a05d9587a8947cf1f9133af47b42a1ba0eb90d231cb27"
-unmapped_target_fields = [
-    "adset_name",
-    "date",
-    "inline_link_clicks",
-]
+source_file_hash = "0429fd1577c219e79eabd11389757a2ddcd911dab3bb938ccfa1962d9e68954a"
+unmapped_target_fields = []
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.basic_ad.mapped_target_fields]
 ad_id = "ads_insights.ad_id"
 ad_name = "ads_insights.ad_name"
+adset_name = "ads_insights.adset_name"
+date = "ads_insights.date_start"
 account_id = "ads_insights.account_id"
 impressions = "ads_insights.impressions"
+inline_link_clicks = "ads_insights.inline_link_clicks"
 spend = "ads_insights.spend"
 reach = "ads_insights.reach"
 frequency = "ads_insights.frequency"
-_fivetran_synced = "_airbyte_extracted_at"
+_fivetran_synced = "ads_insights._airbyte_extracted_at"
 
 [mappings.basic_ad.unused_source_fields]
 ads_insights = [
-    "_airbyte_extracted_at",
     "_airbyte_meta",
     "_airbyte_raw_id",
     "account_currency",
@@ -209,7 +420,6 @@ ads_insights = [
     "ad_click_actions",
     "ad_impression_actions",
     "adset_id",
-    "adset_name",
     "attribution_setting",
     "auction_bid",
     "auction_competitiveness",
@@ -249,14 +459,12 @@ ads_insights = [
     "cpp",
     "created_time",
     "ctr",
-    "date_start",
     "date_stop",
     "engagement_rate_ranking",
     "estimated_ad_recallers",
     "full_view_impressions",
     "full_view_reach",
     "inline_link_click_ctr",
-    "inline_link_clicks",
     "inline_post_engagement",
     "instant_experience_clicks_to_open",
     "instant_experience_clicks_to_start",
@@ -301,37 +509,36 @@ ads_insights = [
 
 [mappings.basic_ad_action_values]
 source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/basic_ad_action_values.yml"
-source_file_hash = "7bc7a7a4ebf886a74fd0760f3feb718e38ad73c4b6fb2906f683b5d9c581fe53"
+source_file_hash = "4ab7036ee6f5a7126447a11ae8e69daea969492288c97d6b4bc2d5ff5ed35129"
 unmapped_target_fields = [
-    "_7_d_click",
     "_fivetran_id",
-    "date",
-    "index",
+    "ad_id",
 ]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.basic_ad_action_values.mapped_target_fields]
-_fivetran_synced = "_airbyte_extracted_at"
-action_type = "ads_insights_action_type.action_type"
-ad_id = "ads_insights_action_type.ad_id"
-value = "ads_insights_action_type.value"
+_7_d_click = "ads_insights.attribution_setting"
+_fivetran_synced = "ads_insights._airbyte_extracted_at"
+action_type = "ads_insights.actions"
+date = "ads_insights.date_start"
+index = "ads_insights.conversion_rate_ranking"
+value = "ads_insights.conversion_values"
 
 [mappings.basic_ad_action_values.unused_source_fields]
-ads_insights_action_type = [
-    "_airbyte_extracted_at",
+ads_insights = [
     "_airbyte_meta",
     "_airbyte_raw_id",
     "account_currency",
     "account_id",
     "account_name",
     "action_values",
-    "actions",
     "ad_click_actions",
+    "ad_id",
     "ad_impression_actions",
     "ad_name",
     "adset_id",
     "adset_name",
-    "attribution_setting",
     "auction_bid",
     "auction_competitiveness",
     "auction_max_competitor_bid",
@@ -346,8 +553,6 @@ ads_insights_action_type = [
     "catalog_segment_value_omni_purchase_roas",
     "catalog_segment_value_website_purchase_roas",
     "clicks",
-    "conversion_rate_ranking",
-    "conversion_values",
     "conversions",
     "converted_product_quantity",
     "converted_product_value",
@@ -370,7 +575,6 @@ ads_insights_action_type = [
     "cpp",
     "created_time",
     "ctr",
-    "date_start",
     "date_stop",
     "engagement_rate_ranking",
     "estimated_ad_recallers",
@@ -426,29 +630,34 @@ ads_insights_action_type = [
 
 [mappings.basic_ad_actions]
 source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/basic_ad_actions.yml"
-source_file_hash = "fb641da297466392968c06a1cbf797ac740a2ecf07239cc127e9bd2b1209f3c0"
-unmapped_target_fields = []
+source_file_hash = "ff5245556b7ee5d646931a30d1e4fa795c0330a3a0392b81daf0811b11cb475f"
+unmapped_target_fields = [
+    "_1_d_view",
+    "_28_d_click",
+    "_7_d_click",
+    "_fivetran_id",
+    "index",
+    "inline",
+    "value",
+]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.basic_ad_actions.mapped_target_fields]
-_1_d_view = "ads_insights.actions"
-_7_d_click = "ads_insights.ad_click_actions"
-_28_d_click = "ads_insights.action_values"
-_fivetran_id = "ads_insights._airbyte_raw_id"
 _fivetran_synced = "ads_insights._airbyte_extracted_at"
-action_type = "ads_insights.action_values"
+action_type = "ads_insights.actions"
 ad_id = "ads_insights.ad_id"
 date = "ads_insights.date_start"
-index = "ads_insights.auction_max_competitor_bid"
-inline = "ads_insights.inline_link_clicks"
-value = "ads_insights.conversion_values"
 
 [mappings.basic_ad_actions.unused_source_fields]
 ads_insights = [
     "_airbyte_meta",
+    "_airbyte_raw_id",
     "account_currency",
     "account_id",
     "account_name",
+    "action_values",
+    "ad_click_actions",
     "ad_impression_actions",
     "ad_name",
     "adset_id",
@@ -456,6 +665,7 @@ ads_insights = [
     "attribution_setting",
     "auction_bid",
     "auction_competitiveness",
+    "auction_max_competitor_bid",
     "buying_type",
     "campaign_id",
     "campaign_name",
@@ -468,6 +678,7 @@ ads_insights = [
     "catalog_segment_value_website_purchase_roas",
     "clicks",
     "conversion_rate_ranking",
+    "conversion_values",
     "conversions",
     "converted_product_quantity",
     "converted_product_value",
@@ -498,6 +709,7 @@ ads_insights = [
     "full_view_reach",
     "impressions",
     "inline_link_click_ctr",
+    "inline_link_clicks",
     "inline_post_engagement",
     "instant_experience_clicks_to_open",
     "instant_experience_clicks_to_start",
@@ -544,15 +756,16 @@ ads_insights = [
 
 [mappings.campaign_history]
 source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/campaign_history.yml"
-source_file_hash = "32ac4c76fbf27a37f854eb283f6172bafbbcc99a1bf6746f98c1e1bafcdfb0ac"
+source_file_hash = "9869b2566aa3192678324b5545f2a922eb3ed1d34d35a94cd4ed0eabc0e35e1a"
 unmapped_target_fields = []
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.campaign_history.mapped_target_fields]
 id = "campaigns.id"
 account_id = "campaigns.account_id"
 name = "campaigns.name"
-_fivetran_synced = "_airbyte_extracted_at"
+_fivetran_synced = "campaigns._airbyte_extracted_at"
 updated_time = "campaigns.updated_time"
 created_time = "campaigns.created_time"
 start_time = "campaigns.start_time"
@@ -564,7 +777,6 @@ status = "campaigns.status"
 
 [mappings.campaign_history.unused_source_fields]
 campaigns = [
-    "_airbyte_extracted_at",
     "_airbyte_meta",
     "_airbyte_raw_id",
     "adlabels",
@@ -585,30 +797,31 @@ campaigns = [
 
 [mappings.creative_history]
 source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/creative_history.yml"
-source_file_hash = "3db4e1714b06f7354360fbf9e6ff2f11cad06e36d3fa172873367e2368105422"
+source_file_hash = "7183cd91fbf3ee54ac43acb211387df1818a9cbeb2a18f2c554183591a03c1eb"
 unmapped_target_fields = [
     "_fivetran_id",
-    "asset_feed_spec_link_urls",
-    "object_story_link_data_caption",
-    "object_story_link_data_child_attachments",
-    "object_story_link_data_description",
-    "object_story_link_data_link",
-    "object_story_link_data_message",
-    "template_app_link_spec_android",
-    "template_app_link_spec_ios",
-    "template_app_link_spec_ipad",
-    "template_app_link_spec_iphone",
+    "page_link",
+    "template_page_link",
 ]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.creative_history.mapped_target_fields]
-page_link = "ad_creatives.link_url"
-template_page_link = "ad_creatives.template_url"
 id = "ad_creatives.id"
 account_id = "ad_creatives.account_id"
 name = "ad_creatives.name"
 url_tags = "ad_creatives.url_tags"
 _fivetran_synced = "ad_creatives._airbyte_extracted_at"
+asset_feed_spec_link_urls = "ad_creatives.asset_feed_spec.link_urls"
+object_story_link_data_child_attachments = "ad_creatives.object_story_spec.link_data.child_attachments"
+object_story_link_data_caption = "ad_creatives.object_story_spec.link_data.caption"
+object_story_link_data_description = "ad_creatives.object_story_spec.link_data.description"
+object_story_link_data_link = "ad_creatives.object_story_spec.link_data.link"
+object_story_link_data_message = "ad_creatives.object_story_spec.link_data.message"
+template_app_link_spec_ios = "ad_creatives.object_story_spec.template_data.app_link_spec.ios"
+template_app_link_spec_ipad = "ad_creatives.object_story_spec.template_data.app_link_spec.ipad"
+template_app_link_spec_android = "ad_creatives.object_story_spec.template_data.app_link_spec.android"
+template_app_link_spec_iphone = "ad_creatives.object_story_spec.template_data.app_link_spec.iphone"
 
 [mappings.creative_history.unused_source_fields]
 ad_creatives = [
@@ -617,27 +830,283 @@ ad_creatives = [
     "actor_id",
     "adlabels",
     "applink_treatment",
-    "asset_feed_spec",
+    "asset_feed_spec.ad_formats",
+    "asset_feed_spec.additional_data",
+    "asset_feed_spec.additional_data.brand_page_id",
+    "asset_feed_spec.additional_data.is_click_to_message",
+    "asset_feed_spec.additional_data.multi_share_end_card",
+    "asset_feed_spec.asset_customization_rules",
+    "asset_feed_spec.autotranslate",
+    "asset_feed_spec.bodies",
+    "asset_feed_spec.call_to_action_types",
+    "asset_feed_spec.call_to_actions",
+    "asset_feed_spec.captions",
+    "asset_feed_spec.descriptions",
+    "asset_feed_spec.groups",
+    "asset_feed_spec.images",
+    "asset_feed_spec.optimization_type",
+    "asset_feed_spec.reasons_to_shop",
+    "asset_feed_spec.shops_bundle",
+    "asset_feed_spec.titles",
+    "asset_feed_spec.videos",
     "body",
     "call_to_action_type",
     "effective_instagram_story_id",
     "effective_object_story_id",
     "image_crops",
+    "image_crops.100x100",
+    "image_crops.100x72",
+    "image_crops.191x100",
+    "image_crops.400x150",
+    "image_crops.400x500",
+    "image_crops.600x360",
+    "image_crops.90x160",
     "image_hash",
     "image_url",
     "instagram_actor_id",
     "instagram_permalink_url",
     "instagram_story_id",
     "link_og_id",
+    "link_url",
     "object_id",
     "object_story_id",
-    "object_story_spec",
+    "object_story_spec.instagram_actor_id",
+    "object_story_spec.link_data.additional_image_index",
+    "object_story_spec.link_data.app_link_spec",
+    "object_story_spec.link_data.app_link_spec.android",
+    "object_story_spec.link_data.app_link_spec.ios",
+    "object_story_spec.link_data.app_link_spec.ipad",
+    "object_story_spec.link_data.app_link_spec.iphone",
+    "object_story_spec.link_data.attachment_style",
+    "object_story_spec.link_data.branded_content_sponsor_page_id",
+    "object_story_spec.link_data.branded_content_sponsor_relationship",
+    "object_story_spec.link_data.call_to_action",
+    "object_story_spec.link_data.call_to_action.type",
+    "object_story_spec.link_data.call_to_action.value",
+    "object_story_spec.link_data.call_to_action.value.app_destination",
+    "object_story_spec.link_data.call_to_action.value.app_link",
+    "object_story_spec.link_data.call_to_action.value.application",
+    "object_story_spec.link_data.call_to_action.value.event_id",
+    "object_story_spec.link_data.call_to_action.value.lead_gen_form_id",
+    "object_story_spec.link_data.call_to_action.value.link",
+    "object_story_spec.link_data.call_to_action.value.link_caption",
+    "object_story_spec.link_data.call_to_action.value.link_format",
+    "object_story_spec.link_data.call_to_action.value.page",
+    "object_story_spec.link_data.call_to_action.value.product_link",
+    "object_story_spec.link_data.event_id",
+    "object_story_spec.link_data.force_single_link",
+    "object_story_spec.link_data.image_crops",
+    "object_story_spec.link_data.image_crops.100x100",
+    "object_story_spec.link_data.image_crops.100x72",
+    "object_story_spec.link_data.image_crops.191x100",
+    "object_story_spec.link_data.image_crops.400x150",
+    "object_story_spec.link_data.image_crops.400x500",
+    "object_story_spec.link_data.image_crops.600x360",
+    "object_story_spec.link_data.image_crops.90x160",
+    "object_story_spec.link_data.image_hash",
+    "object_story_spec.link_data.multi_share_end_card",
+    "object_story_spec.link_data.multi_share_optimized",
+    "object_story_spec.link_data.name",
+    "object_story_spec.link_data.offer_id",
+    "object_story_spec.link_data.page_welcome_message",
+    "object_story_spec.link_data.picture",
+    "object_story_spec.link_data.retailer_item_ids",
+    "object_story_spec.link_data.show_multiple_images",
+    "object_story_spec.link_data.use_flexible_image_aspect_ratio",
+    "object_story_spec.page_id",
+    "object_story_spec.photo_data",
+    "object_story_spec.photo_data.branded_content_sponsor_page_id",
+    "object_story_spec.photo_data.branded_content_sponsor_relationship",
+    "object_story_spec.photo_data.caption",
+    "object_story_spec.photo_data.image_hash",
+    "object_story_spec.photo_data.page_welcome_message",
+    "object_story_spec.photo_data.url",
+    "object_story_spec.template_data.additional_image_index",
+    "object_story_spec.template_data.attachment_style",
+    "object_story_spec.template_data.branded_content_sponsor_page_id",
+    "object_story_spec.template_data.branded_content_sponsor_relationship",
+    "object_story_spec.template_data.call_to_action",
+    "object_story_spec.template_data.call_to_action.type",
+    "object_story_spec.template_data.call_to_action.value",
+    "object_story_spec.template_data.call_to_action.value.app_destination",
+    "object_story_spec.template_data.call_to_action.value.app_link",
+    "object_story_spec.template_data.call_to_action.value.application",
+    "object_story_spec.template_data.call_to_action.value.event_id",
+    "object_story_spec.template_data.call_to_action.value.lead_gen_form_id",
+    "object_story_spec.template_data.call_to_action.value.link",
+    "object_story_spec.template_data.call_to_action.value.link_caption",
+    "object_story_spec.template_data.call_to_action.value.link_format",
+    "object_story_spec.template_data.call_to_action.value.page",
+    "object_story_spec.template_data.call_to_action.value.product_link",
+    "object_story_spec.template_data.caption",
+    "object_story_spec.template_data.child_attachments",
+    "object_story_spec.template_data.description",
+    "object_story_spec.template_data.event_id",
+    "object_story_spec.template_data.force_single_link",
+    "object_story_spec.template_data.format_option",
+    "object_story_spec.template_data.image_crops",
+    "object_story_spec.template_data.image_crops.100x100",
+    "object_story_spec.template_data.image_crops.100x72",
+    "object_story_spec.template_data.image_crops.191x100",
+    "object_story_spec.template_data.image_crops.400x150",
+    "object_story_spec.template_data.image_crops.400x500",
+    "object_story_spec.template_data.image_crops.600x360",
+    "object_story_spec.template_data.image_crops.90x160",
+    "object_story_spec.template_data.image_hash",
+    "object_story_spec.template_data.link",
+    "object_story_spec.template_data.message",
+    "object_story_spec.template_data.multi_share_end_card",
+    "object_story_spec.template_data.multi_share_optimized",
+    "object_story_spec.template_data.name",
+    "object_story_spec.template_data.offer_id",
+    "object_story_spec.template_data.page_welcome_message",
+    "object_story_spec.template_data.picture",
+    "object_story_spec.template_data.retailer_item_ids",
+    "object_story_spec.template_data.show_multiple_images",
+    "object_story_spec.text_data",
+    "object_story_spec.text_data.message",
+    "object_story_spec.video_data",
+    "object_story_spec.video_data.additional_image_index",
+    "object_story_spec.video_data.branded_content_sponsor_page_id",
+    "object_story_spec.video_data.branded_content_sponsor_relationship",
+    "object_story_spec.video_data.call_to_action",
+    "object_story_spec.video_data.call_to_action.type",
+    "object_story_spec.video_data.call_to_action.value",
+    "object_story_spec.video_data.call_to_action.value.app_destination",
+    "object_story_spec.video_data.call_to_action.value.app_link",
+    "object_story_spec.video_data.call_to_action.value.application",
+    "object_story_spec.video_data.call_to_action.value.event_id",
+    "object_story_spec.video_data.call_to_action.value.lead_gen_form_id",
+    "object_story_spec.video_data.call_to_action.value.link",
+    "object_story_spec.video_data.call_to_action.value.link_caption",
+    "object_story_spec.video_data.call_to_action.value.link_format",
+    "object_story_spec.video_data.call_to_action.value.page",
+    "object_story_spec.video_data.call_to_action.value.product_link",
+    "object_story_spec.video_data.image_hash",
+    "object_story_spec.video_data.image_url",
+    "object_story_spec.video_data.link_description",
+    "object_story_spec.video_data.message",
+    "object_story_spec.video_data.offer_id",
+    "object_story_spec.video_data.page_welcome_message",
+    "object_story_spec.video_data.retailer_item_ids",
+    "object_story_spec.video_data.targeting",
+    "object_story_spec.video_data.targeting.age_max",
+    "object_story_spec.video_data.targeting.age_min",
+    "object_story_spec.video_data.targeting.app_install_state",
+    "object_story_spec.video_data.targeting.audience_network_positions",
+    "object_story_spec.video_data.targeting.behaviors",
+    "object_story_spec.video_data.targeting.brand_safety_content_filter_levels",
+    "object_story_spec.video_data.targeting.connections",
+    "object_story_spec.video_data.targeting.custom_audiences",
+    "object_story_spec.video_data.targeting.device_platforms",
+    "object_story_spec.video_data.targeting.education_statuses",
+    "object_story_spec.video_data.targeting.excluded_connections",
+    "object_story_spec.video_data.targeting.excluded_custom_audiences",
+    "object_story_spec.video_data.targeting.excluded_geo_locations",
+    "object_story_spec.video_data.targeting.excluded_geo_locations.cities",
+    "object_story_spec.video_data.targeting.excluded_geo_locations.countries",
+    "object_story_spec.video_data.targeting.excluded_geo_locations.country_groups",
+    "object_story_spec.video_data.targeting.excluded_geo_locations.custom_locations",
+    "object_story_spec.video_data.targeting.excluded_geo_locations.geo-markets",
+    "object_story_spec.video_data.targeting.excluded_geo_locations.location_types",
+    "object_story_spec.video_data.targeting.excluded_geo_locations.regions",
+    "object_story_spec.video_data.targeting.excluded_geo_locations.zips",
+    "object_story_spec.video_data.targeting.excluded_publisher_categories",
+    "object_story_spec.video_data.targeting.excluded_user_device",
+    "object_story_spec.video_data.targeting.exclusions",
+    "object_story_spec.video_data.targeting.exclusions.behaviors",
+    "object_story_spec.video_data.targeting.exclusions.connections",
+    "object_story_spec.video_data.targeting.exclusions.custom_audiences",
+    "object_story_spec.video_data.targeting.exclusions.education_majors",
+    "object_story_spec.video_data.targeting.exclusions.excluded_connections",
+    "object_story_spec.video_data.targeting.exclusions.excluded_custom_audiences",
+    "object_story_spec.video_data.targeting.exclusions.family_statuses",
+    "object_story_spec.video_data.targeting.exclusions.friends_of_connections",
+    "object_story_spec.video_data.targeting.exclusions.generation",
+    "object_story_spec.video_data.targeting.exclusions.home_ownership",
+    "object_story_spec.video_data.targeting.exclusions.home_type",
+    "object_story_spec.video_data.targeting.exclusions.household_composition",
+    "object_story_spec.video_data.targeting.exclusions.income",
+    "object_story_spec.video_data.targeting.exclusions.industries",
+    "object_story_spec.video_data.targeting.exclusions.interests",
+    "object_story_spec.video_data.targeting.exclusions.life_events",
+    "object_story_spec.video_data.targeting.exclusions.moms",
+    "object_story_spec.video_data.targeting.exclusions.net_worth",
+    "object_story_spec.video_data.targeting.exclusions.politics",
+    "object_story_spec.video_data.targeting.exclusions.relationship_statuses",
+    "object_story_spec.video_data.targeting.exclusions.user_adclusters",
+    "object_story_spec.video_data.targeting.exclusions.work_employers",
+    "object_story_spec.video_data.targeting.exclusions.work_positions",
+    "object_story_spec.video_data.targeting.facebook_positions",
+    "object_story_spec.video_data.targeting.family_statuses",
+    "object_story_spec.video_data.targeting.flexible_spec",
+    "object_story_spec.video_data.targeting.friends_of_connections",
+    "object_story_spec.video_data.targeting.genders",
+    "object_story_spec.video_data.targeting.generation",
+    "object_story_spec.video_data.targeting.geo_locations",
+    "object_story_spec.video_data.targeting.geo_locations.cities",
+    "object_story_spec.video_data.targeting.geo_locations.countries",
+    "object_story_spec.video_data.targeting.geo_locations.country_groups",
+    "object_story_spec.video_data.targeting.geo_locations.custom_locations",
+    "object_story_spec.video_data.targeting.geo_locations.geo-markets",
+    "object_story_spec.video_data.targeting.geo_locations.location_types",
+    "object_story_spec.video_data.targeting.geo_locations.regions",
+    "object_story_spec.video_data.targeting.geo_locations.zips",
+    "object_story_spec.video_data.targeting.home_ownership",
+    "object_story_spec.video_data.targeting.home_type",
+    "object_story_spec.video_data.targeting.income",
+    "object_story_spec.video_data.targeting.industries",
+    "object_story_spec.video_data.targeting.instagram_positions",
+    "object_story_spec.video_data.targeting.interested_in",
+    "object_story_spec.video_data.targeting.interests",
+    "object_story_spec.video_data.targeting.locales",
+    "object_story_spec.video_data.targeting.messenger_positions",
+    "object_story_spec.video_data.targeting.moms",
+    "object_story_spec.video_data.targeting.net_worth",
+    "object_story_spec.video_data.targeting.office_type",
+    "object_story_spec.video_data.targeting.politics",
+    "object_story_spec.video_data.targeting.publisher_platforms",
+    "object_story_spec.video_data.targeting.relationship_statuses",
+    "object_story_spec.video_data.targeting.targeting_optimization",
+    "object_story_spec.video_data.targeting.targeting_relaxation_types",
+    "object_story_spec.video_data.targeting.user_adclusters",
+    "object_story_spec.video_data.targeting.user_device",
+    "object_story_spec.video_data.targeting.user_os",
+    "object_story_spec.video_data.targeting.work_positions",
+    "object_story_spec.video_data.title",
+    "object_story_spec.video_data.video_id",
     "object_type",
     "object_url",
     "product_set_id",
     "source_instagram_media_id",
     "status",
+    "template_url",
     "template_url_spec",
+    "template_url_spec.android",
+    "template_url_spec.android.app_name",
+    "template_url_spec.android.package",
+    "template_url_spec.android.url",
+    "template_url_spec.config",
+    "template_url_spec.config.app_id",
+    "template_url_spec.ios",
+    "template_url_spec.ios.app_name",
+    "template_url_spec.ios.app_store_id",
+    "template_url_spec.ios.url",
+    "template_url_spec.ipad",
+    "template_url_spec.ipad.app_name",
+    "template_url_spec.ipad.app_store_id",
+    "template_url_spec.ipad.url",
+    "template_url_spec.iphone",
+    "template_url_spec.iphone.app_name",
+    "template_url_spec.iphone.app_store_id",
+    "template_url_spec.iphone.url",
+    "template_url_spec.web",
+    "template_url_spec.web.should_fallback",
+    "template_url_spec.web.url",
+    "template_url_spec.windows_phone",
+    "template_url_spec.windows_phone.app_id",
+    "template_url_spec.windows_phone.app_name",
+    "template_url_spec.windows_phone.url",
     "thumbnail_data_url",
     "thumbnail_url",
     "title",

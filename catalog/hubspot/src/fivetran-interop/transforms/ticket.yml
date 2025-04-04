@@ -23,10 +23,10 @@ transforms:
         expression: tickets.properties.closed_date
         description: The date the ticket was closed.
       property_createdate:
-        expression: tickets.properties.createdate
+        expression: tickets.properties_createdate
         description: The date the ticket was created.
       property_first_agent_reply_date:
-        expression: tickets.properties.first_agent_reply_date
+        expression: tickets.properties_first_agent_reply_date
         description: the date for the first agent reply on the ticket.
       property_hs_pipeline:
         expression: tickets.properties.hs_pipeline
@@ -41,7 +41,7 @@ transforms:
         expression: tickets.properties.hs_ticket_category
         description: The category of the ticket.
       property_hubspot_owner_id:
-        expression: tickets.properties.hubspot_owner_id
+        expression: tickets.properties_hubspot_owner_id
         description: The ID of the deal's owner.
       property_subject:
         expression: tickets.properties.subject
@@ -50,80 +50,89 @@ transforms:
         expression: tickets.properties.content
         description: Text in body of the ticket.
 annotations:
-  approved: false
+  approved: true
   missing_fields:
     - portal_id
   evaluation:
     source_stream_name: tickets
     target_table_name: ticket
-    name_match_score: 0.7
-    score: 0.55
-    explanation:
-      Overall confidence score calculated based on individual field mapping
-      evaluations. The presence of a MISSING expression significantly reduces confidence,
-      and care is taken to ensure named fields correspond correctly.
+    table_match_score: 0.7
+    completion_score: 0.93
+    explanation: The table mapping was evaluated with a high level of confidence due
+      to significant field coverage and strong matching logic between the two systems,
+      despite minor imperfect mappings.
     field_mapping_evals:
       - name: _fivetran_synced
         expression: tickets._airbyte_extracted_at
         score: 1.0
-        explanation: Mapped to source stream's '_airbyte_extracted_at', which is correct.
+        explanation: Standard mapping directly from the source's `_airbyte_extracted_at`
+          column.
       - name: id
         expression: tickets.id
-        score: 0.7
-        explanation: Direct mapping is likely correct, but has potential ambiguity.
+        score: 0.8
+        explanation: Direct match with `tickets.id`, indicating strong correspondence
+          between source and target hierarchy.
       - name: is_deleted
         expression: tickets.archived
         score: 0.7
-        explanation:
-          Could mean the same as 'archived', but context likely suggests
-          correct mapping.
+        explanation: Mapped to `tickets.archived`, which likely indicates a similar
+          field purpose.
       - name: _fivetran_deleted
         expression: tickets.archived
         score: 0.7
-        explanation:
-          Could mean the same as 'archived', but context likely suggests
-          correct mapping.
+        explanation: Also mapped to `tickets.archived`, showing another potential
+          logical mapping.
       - name: portal_id
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, indicating no valid mapping.
+        explanation: No good match found.
       - name: property_closed_date
         expression: tickets.properties.closed_date
-        score: 0.7
-        explanation: Likely a correct mapping based on name and context matching.
+        score: 0.9
+        explanation: Mapped to `tickets.properties.closed_date`, indicating direct
+          mapping with proper context.
       - name: property_createdate
-        expression: tickets.properties.createdate
-        score: 0.7
-        explanation: Likely a correct mapping based on name and context matching.
+        expression: tickets.properties_createdate
+        score: 0.9
+        explanation: Mapped to `tickets.properties_createdate` with apparent logical
+          equivalence and context correctness.
       - name: property_first_agent_reply_date
-        expression: tickets.properties.first_agent_reply_date
-        score: 0.7
-        explanation: Likely a correct mapping based on name and context matching.
+        expression: tickets.properties_first_agent_reply_date
+        score: 0.9
+        explanation: Mapped to `tickets.properties_first_agent_reply_date`, indicating
+          a clear logical match.
       - name: property_hs_pipeline
         expression: tickets.properties.hs_pipeline
-        score: 0.7
-        explanation: Likely a correct mapping based on name and context matching.
+        score: 0.9
+        explanation: Mapped to `tickets.properties.hs_pipeline`, a logical match confirming
+          field integrity.
       - name: property_hs_pipeline_stage
         expression: tickets.properties.hs_pipeline_stage
-        score: 0.7
-        explanation: Likely a correct mapping based on name and context matching.
+        score: 0.9
+        explanation: Corresponds directly to `tickets.properties.hs_pipeline_stage`,
+          with strong contextual alignment.
       - name: property_hs_ticket_priority
         expression: tickets.properties.hs_ticket_priority
-        score: 0.7
-        explanation: Likely a correct mapping based on name and context matching.
+        score: 0.9
+        explanation: Aligned with `tickets.properties.hs_ticket_priority`, serving
+          an identical purpose.
       - name: property_hs_ticket_category
         expression: tickets.properties.hs_ticket_category
-        score: 0.7
-        explanation: Likely a correct mapping based on name and context matching.
+        score: 0.9
+        explanation: Mapped identically to `tickets.properties.hs_ticket_category`
+          with contextual accuracy.
       - name: property_hubspot_owner_id
-        expression: tickets.properties.hubspot_owner_id
-        score: 0.7
-        explanation: Likely a correct mapping based on name and context matching.
+        expression: tickets.properties_hubspot_owner_id
+        score: 0.9
+        explanation: Mapped to `tickets.properties_hubspot_owner_id`, reflecting identical
+          field usage.
       - name: property_subject
         expression: tickets.properties.subject
-        score: 0.7
-        explanation: Likely a correct mapping based on name and context matching.
+        score: 0.9
+        explanation: Mapped to `tickets.properties.subject`, demonstrating a strong
+          match.
       - name: property_content
         expression: tickets.properties.content
-        score: 0.7
-        explanation: Likely a correct mapping based on name and context matching.
+        score: 0.9
+        explanation: Mapped correctly to `tickets.properties.content`, supporting
+          the mapping's validity.

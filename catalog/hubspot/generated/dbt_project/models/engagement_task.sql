@@ -9,9 +9,9 @@ engagements_tasks AS (
 
 SELECT
     engagements_tasks._airbyte_extracted_at AS _fivetran_synced,
-    engagements_tasks.id AS engagement_id,
-    engagements_tasks.properties.hs_createdate AS property_hs_createdate,
-    engagements_tasks.properties.hs_timestamp AS timestamp,
+    NULL AS engagement_id,
+    engagements_tasks.properties_hs_createdate AS property_hs_createdate,
+    engagements_tasks.properties_hs_timestamp AS timestamp,
     engagements_tasks.properties_hubspot_owner_id AS property_hubspot_owner_id,
     engagements_tasks.properties_hubspot_team_id AS property_hubspot_team_id
 FROM engagements_tasks

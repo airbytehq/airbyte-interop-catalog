@@ -9,11 +9,11 @@ contacts_form_submissions AS (
 
 SELECT
     contacts_form_submissions._airbyte_extracted_at AS _fivetran_synced,
-    contacts_form_submissions.canonical_vid AS contact_id,
+    NULL AS contact_id,
     contacts_form_submissions.conversion_id AS conversion_id,
     contacts_form_submissions.form_id AS form_id,
-    contacts_form_submissions.page_url AS page_url,
+    contacts_form_submissions.canonical_url AS page_url,
     contacts_form_submissions.portal_id AS portal_id,
     contacts_form_submissions.timestamp AS timestamp,
-    contacts_form_submissions.title AS title
+    contacts_form_submissions.page_title AS title
 FROM contacts_form_submissions

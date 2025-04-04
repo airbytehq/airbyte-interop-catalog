@@ -15,13 +15,11 @@ transforms:
         description: Whether the stage is currently in use.
       display_order:
         expression: deal_pipelines.displayOrder
-        description:
-          Used to determine the order in which the pipelines appear when
+        description: Used to determine the order in which the pipelines appear when
           viewed in HubSpot.
       label:
         expression: deal_pipelines.label
-        description:
-          The human-readable label for the pipeline. The label is used
+        description: The human-readable label for the pipeline. The label is used
           when showing the pipeline in HubSpot.
       pipeline_id:
         expression: deal_pipelines.pipelineId
@@ -33,47 +31,46 @@ transforms:
         expression: deal_pipelines.updatedAt
         description: A timestamp representing when the record was updated.
 annotations:
-  approved: false
+  approved: true
   missing_fields:
     - _fivetran_deleted
   evaluation:
     source_stream_name: deal_pipelines
     target_table_name: deal_pipeline
-    name_match_score: 0.8
-    score: 0.6125
-    explanation:
-      Overall confidence score is calculated based on individual field
-      mappings.
+    table_match_score: 1.0
+    completion_score: 0.875
+    explanation: All fields were matched with high confidence, except for _fivetran_deleted
+      which was missing a corresponding match.
     field_mapping_evals:
       - name: _fivetran_deleted
         expression: MISSING
         score: 0.0
-        explanation: Mapping uses 'MISSING'. No confidence in this mapping.
+        explanation: No good match found.
       - name: _fivetran_synced
         expression: deal_pipelines._airbyte_extracted_at
         score: 1.0
-        explanation: Correctly mapped to '_airbyte_extracted_at' column.
+        explanation: _fivetran_synced is always mapped to _airbyte_extracted_at.
       - name: active
         expression: deal_pipelines.active
-        score: 0.7
-        explanation: Likely accurate mapping based on name and context.
+        score: 1.0
+        explanation: Active state has a direct mapping match in target schema.
       - name: display_order
         expression: deal_pipelines.displayOrder
-        score: 0.7
-        explanation: Likely accurate mapping based on typical usage.
+        score: 1.0
+        explanation: Display order is mapped correctly to the target field.
       - name: label
         expression: deal_pipelines.label
-        score: 0.7
-        explanation: Likely accurate mapping based on name and context.
+        score: 1.0
+        explanation: Label field matches correctly to target schema.
       - name: pipeline_id
         expression: deal_pipelines.pipelineId
-        score: 0.7
-        explanation: Likely accurate mapping based on name and context.
+        score: 1.0
+        explanation: Pipeline ID field is correctly matched.
       - name: created_at
         expression: deal_pipelines.createdAt
-        score: 0.7
-        explanation: Likely accurate mapping based on typical usage.
+        score: 1.0
+        explanation: Created at timestamp field is well mapped.
       - name: updated_at
         expression: deal_pipelines.updatedAt
-        score: 0.7
-        explanation: Likely accurate mapping based on typical usage.
+        score: 1.0
+        explanation: Updated at timestamp field is correctly matched.

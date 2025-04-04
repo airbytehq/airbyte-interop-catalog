@@ -8,15 +8,15 @@ ads_insights AS (
 
 
 SELECT
-    ads_insights.actions AS _1_d_view,
-    ads_insights.ad_click_actions AS _7_d_click,
-    ads_insights.action_values AS _28_d_click,
-    ads_insights._airbyte_raw_id AS _fivetran_id,
+    NULL AS _1_d_view,
+    NULL AS _7_d_click,
+    NULL AS _28_d_click,
+    NULL AS _fivetran_id,
     ads_insights._airbyte_extracted_at AS _fivetran_synced,
-    ads_insights.action_values AS action_type,
+    ads_insights.actions AS action_type,
     ads_insights.ad_id AS ad_id,
     ads_insights.date_start AS date,
-    ads_insights.auction_max_competitor_bid AS index,
-    ads_insights.inline_link_clicks AS inline,
-    ads_insights.conversion_values AS value
+    NULL AS index,
+    NULL AS inline,
+    NULL AS value
 FROM ads_insights

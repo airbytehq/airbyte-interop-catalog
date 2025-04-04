@@ -14,13 +14,12 @@ transforms:
         expression: inventory_levels.location_id
         description: The ID of the inventory level where this item is stored.
       name:
-        expression: inventory_levels.deactivation_alert
-        description:
-          The name of the inventory state associated with the record. [Link
-          to list of expected
+        expression: inventory_levels.locations_count
+        description: The name of the inventory state associated with the record. [Link
+          to list of expected 
           values](https://shopify.dev/docs/apps/build/orders-fulfillment/inventory-management-apps#inventory-states).
       quantity:
-        expression: inventory_levels.quantities
+        expression: inventory_levels.available
         description: The available quantity of the inventory item.
       updated_at:
         expression: inventory_levels.updated_at
@@ -34,53 +33,50 @@ annotations:
   evaluation:
     source_stream_name: inventory_levels
     target_table_name: inventory_quantity
-    name_match_score: 0.65
-    score: 0.63
-    explanation:
-      The overall confidence score is computed based on the matching of
-      field names and their corresponding expressions. The mappings have a mix of
-      good and partial matches.
+    table_match_score: 0.65
+    completion_score: 0.86
+    explanation: The table match score reflects a fairly good match between the source
+      and target table schemas, as they share related fields and concepts. However,
+      it's not perfect due to field variations and expressions not directly matching
+      for all fields. The completion score is high as most fields have corresponding
+      expressions in the source schema, with '_fivetran_synced' correctly mapped to
+      '_airbyte_extracted_at'.
     field_mapping_evals:
       - name: id
         expression: inventory_levels.id
-        score: 0.9
-        explanation:
-          The field 'id' matches the expression 'inventory_levels.id' very
-          well because the names and context indicate a direct correlation.
+        score: 0.85
+        explanation: The field 'id' from the target is matched with 'inventory_levels.id'
+          from the source, which has a fairly high confidence as they both represent
+          unique identifiers.
       - name: inventory_item_id
         expression: inventory_levels.inventory_item_id
-        score: 0.85
-        explanation:
-          The field 'inventory_item_id' has a good match with 'inventory_levels.inventory_item_id'
-          in terms of name and meaning.
+        score: 0.8
+        explanation: The field 'inventory_item_id' is matched with 'inventory_levels.inventory_item_id',
+          which likely represents the same concept.
       - name: inventory_level_id
         expression: inventory_levels.location_id
-        score: 0.7
-        explanation:
-          The field 'inventory_level_id' matches 'inventory_levels.location_id',
-          but the differing terms 'level' and 'location' imply a possible mismatch.
+        score: 0.75
+        explanation: The field 'inventory_level_id' is matched with 'inventory_levels.location_id'.
+          Although they seem to relate to location, the exact match is less clear,
+          warranting caution.
       - name: name
-        expression: inventory_levels.deactivation_alert
+        expression: inventory_levels.locations_count
         score: 0.5
-        explanation:
-          The field 'name' associates with 'inventory_levels.deactivation_alert',
-          which might represent a related inventory state, but the naming does not
-          match directly.
+        explanation: The field 'name' is mapped to 'inventory_levels.locations_count'.
+          This is a weaker match since 'name' typically denotes a text descriptor
+          rather than a count.
       - name: quantity
-        expression: inventory_levels.quantities
-        score: 0.4
-        explanation:
-          The field 'quantity' does not exactly match 'inventory_levels.quantities'
-          as expected due to term pluralization and possible value mismatch.
+        expression: inventory_levels.available
+        score: 0.9
+        explanation: The field 'quantity' is well matched with 'inventory_levels.available',
+          both referring to the available quantity of an inventory item.
       - name: updated_at
         expression: inventory_levels.updated_at
         score: 0.95
-        explanation:
-          The field 'updated_at' precisely matches 'inventory_levels.updated_at',
-          indicating a near-perfect correlation of both time-related context and naming.
+        explanation: The field 'updated_at' is confidently mapped to 'inventory_levels.updated_at',
+          reflecting the same timestamp for updates.
       - name: _fivetran_synced
         expression: inventory_levels._airbyte_extracted_at
         score: 1.0
-        explanation:
-          The field '_fivetran_synced' is properly matched to 'inventory_levels._airbyte_extracted_at',
-          which is the expected mapping.
+        explanation: Standard mapping with 100% confidence as '_fivetran_synced' always
+          maps to '_airbyte_extracted_at'.

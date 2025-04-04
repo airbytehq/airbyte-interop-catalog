@@ -19,7 +19,7 @@ SELECT
     companies.properties.address AS property_address,
     companies.properties.address2 AS property_address_2,
     companies.properties.city AS property_city,
-    companies.properties.state AS property_state,
+    NULL AS property_state,
     companies.properties.country AS property_country,
     companies.properties.annualrevenue AS property_annualrevenue
 FROM companies

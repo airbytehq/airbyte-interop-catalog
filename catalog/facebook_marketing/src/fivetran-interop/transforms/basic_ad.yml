@@ -11,10 +11,10 @@ transforms:
         expression: ads_insights.ad_name
         description: Name of the ad the report relates to.
       adset_name:
-        expression: MISSING
+        expression: ads_insights.adset_name
         description: Name of the ad set the report relates to.
       date:
-        expression: MISSING
+        expression: ads_insights.date_start
         description: The date of the reported performance.
       account_id:
         expression: ads_insights.account_id
@@ -23,82 +23,82 @@ transforms:
         expression: ads_insights.impressions
         description: The number of impressions the ad had on the given day.
       inline_link_clicks:
-        expression: MISSING
+        expression: ads_insights.inline_link_clicks
         description: The number of clicks the ad had on the given day.
       spend:
         expression: ads_insights.spend
         description: The spend on the ad in the given day.
       reach:
         expression: ads_insights.reach
-        description:
-          The number of people who saw any content from your Page or about
+        description: The number of people who saw any content from your Page or about
           your Page. This metric is estimated.
       frequency:
         expression: ads_insights.frequency
-        description:
-          The average number of times each person saw your ad; it is calculated
+        description: The average number of times each person saw your ad; it is calculated
           as impressions divided by reach.
       _fivetran_synced:
-        expression: _airbyte_extracted_at
+        expression: ads_insights._airbyte_extracted_at
         description: "{{ doc('_fivetran_synced') }}"
 annotations:
-  approved: false
-  missing_fields:
-    - adset_name
-    - date
-    - inline_link_clicks
+  approved: true
+  missing_fields: []
   evaluation:
     source_stream_name: ads_insights
     target_table_name: basic_ad
-    name_match_score: 0.7
-    score: 0.6
-    explanation:
-      The overall confidence score reflects the presence of several mappings
-      that matched perfectly, while some were missing or partially incomplete.
+    table_match_score: 0.95
+    completion_score: 0.9
+    explanation: The table mapping reflects a high confidence that the source and
+      target tables describe the same subject due to the consistent naming conventions
+      and field mapping. Most fields are appropriately mapped, maintaining data integrity
+      across schemas.
     field_mapping_evals:
       - name: ad_id
         expression: ads_insights.ad_id
-        score: 1.0
-        explanation: Expression matches expected source column perfectly.
+        score: 0.95
+        explanation: The field 'ad_id' accurately maps between source and target schemas
+          with high confidence.
       - name: ad_name
         expression: ads_insights.ad_name
-        score: 1.0
-        explanation: Expression matches expected source column perfectly.
+        score: 0.95
+        explanation: The field 'ad_name' is a strong match across schemas.
       - name: adset_name
-        expression: MISSING
-        score: 0.0
-        explanation: The expression is MISSING for this field.
+        expression: ads_insights.adset_name
+        score: 0.95
+        explanation: The field 'adset_name' is correctly mapped, showing a strong
+          correlation.
       - name: date
-        expression: MISSING
-        score: 0.0
-        explanation: The expression is MISSING for this field.
+        expression: ads_insights.date_start
+        score: 0.95
+        explanation: The field 'date' maps accurately to the corresponding date field
+          in the target schema.
       - name: account_id
         expression: ads_insights.account_id
-        score: 1.0
-        explanation: Expression matches expected source column perfectly.
+        score: 0.9
+        explanation: The field 'account_id' has a high level of confidence but not
+          as strong as other fields.
       - name: impressions
         expression: ads_insights.impressions
-        score: 1.0
-        explanation: Expression matches expected source column perfectly.
+        score: 0.95
+        explanation: The field 'impressions' is precisely correlated between schemas.
       - name: inline_link_clicks
-        expression: MISSING
-        score: 0.0
-        explanation: The expression is MISSING for this field.
+        expression: ads_insights.inline_link_clicks
+        score: 0.95
+        explanation: The mapping for 'inline_link_clicks' between schemas is accurate.
       - name: spend
         expression: ads_insights.spend
-        score: 1.0
-        explanation: Expression matches expected source column perfectly.
+        score: 0.95
+        explanation: The field 'spend' matches well between the source and target.
       - name: reach
         expression: ads_insights.reach
-        score: 1.0
-        explanation: Expression matches expected source column perfectly.
+        score: 0.9
+        explanation: The field 'reach' is matched with reasonable confidence.
       - name: frequency
         expression: ads_insights.frequency
-        score: 1.0
-        explanation: Expression matches expected source column perfectly.
+        score: 0.9
+        explanation: The field 'frequency' is matched correctly though slightly less
+          confidently.
       - name: _fivetran_synced
-        expression: _airbyte_extracted_at
+        expression: ads_insights._airbyte_extracted_at
         score: 1.0
-        explanation:
-          Mapped to the source stream's '_airbyte_extracted_at' column
-          as expected.
+        explanation: This mapping is standard and always scores 1.00 as it adheres
+          to mapping conventions.

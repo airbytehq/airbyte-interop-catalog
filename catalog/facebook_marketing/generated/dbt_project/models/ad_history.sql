@@ -12,9 +12,9 @@ SELECT
     ads.account_id AS account_id,
     ads.adset_id AS ad_set_id,
     ads.campaign_id AS campaign_id,
-    ads.creative AS creative_id,
+    ads.creative.creative_id AS creative_id,
     ads.name AS name,
     ads._airbyte_extracted_at AS _fivetran_synced,
     ads.updated_time AS updated_time,
-    ads.source_ad_id AS conversion_domain
+    NULL AS conversion_domain
 FROM ads

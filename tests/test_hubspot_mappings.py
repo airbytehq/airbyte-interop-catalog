@@ -22,7 +22,7 @@ from morph.utils import text_utils
 def test_mapping(source_table, target_table, mapping_file):
     """Test that the mapping covers all required fields."""
     # Paths to the relevant files
-    base_dir = Path(__file__).parent.parent
+    base_dir = Path()
     mapping_path = (
         base_dir
         / "catalog"

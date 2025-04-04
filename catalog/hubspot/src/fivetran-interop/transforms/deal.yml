@@ -5,22 +5,22 @@ transforms:
       - deals: hubspot.deals
     fields:
       deal_id:
-        expression: deals.id
+        expression: deals.properties.hs_object_id
         description: The ID of the deal.
       is_deleted:
-        expression: deals.archived
+        expression: MISSING
         description: Whether the record was deleted.
       portal_id:
         expression: MISSING
         description: '{{ doc("portal_id") }}'
       deal_pipeline_id:
-        expression: deals.properties.pipeline
+        expression: MISSING
         description: The ID of the deal's pipeline.
       deal_pipeline_stage_id:
         expression: deals.properties.dealstage
         description: The ID of the deal's pipeline stage.
       owner_id:
-        expression: deals.properties.hs_all_owner_ids
+        expression: deals.properties_hubspot_owner_id
         description: The ID of the deal's owner.
       property_dealname:
         expression: deals.properties.dealname
@@ -36,82 +36,65 @@ transforms:
         description: The day the deal is expected to close, or was closed.
       property_createdate:
         expression: deals.properties.createdate
-        description:
-          The date the deal was created. This property is set automatically
+        description: The date the deal was created. This property is set automatically
           by HubSpot.
 annotations:
-  approved: true
+  approved: false
   missing_fields:
+    - deal_pipeline_id
+    - is_deleted
     - portal_id
   evaluation:
     source_stream_name: deals
     target_table_name: deal
-    name_match_score: 0.85
-    score: 0.727
-    explanation:
-      The overall confidence score is 0.727, indicating a generally good
-      match with some areas of uncertainty. The field 'portal_id' has a missing expression,
-      lowering the overall confidence. Most fields have a strong match to their expressions,
-      but a few mappings are predicted to refer to potentially different concepts,
-      capping the score at 0.7 for those fields.
+    table_match_score: 0.75
+    completion_score: 0.7
+    explanation: The table mapping reflects a generally good match between source
+      and target tables, as most fields are correctly mapped. However, there are a
+      few fields that could not be matched and are marked as 'MISSING', which affects
+      completion.
     field_mapping_evals:
       - name: deal_id
-        expression: deals.id
-        score: 1.0
-        explanation: Perfect match with 'deals.id', clear and distinct relationship.
+        expression: deals.properties.hs_object_id
+        score: 0.9
+        explanation: Matched field 'deal_id' confidently.
       - name: is_deleted
-        expression: deals.archived
-        score: 1.0
-        explanation: Perfect match with 'deals.archived', clear and distinct relationship.
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
       - name: portal_id
         expression: MISSING
         score: 0.0
-        explanation: Missing expression, confidence is null.
+        explanation: No good match found.
       - name: deal_pipeline_id
-        expression: deals.properties.pipeline
-        score: 0.7
-        explanation:
-          Good match but might refer to different pipeline stages, capping
-          at 0.7.
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
       - name: deal_pipeline_stage_id
         expression: deals.properties.dealstage
-        score: 0.7
-        explanation:
-          Good match but might refer to different pipeline stages, capping
-          at 0.7.
+        score: 0.85
+        explanation: Matched field 'deal_pipeline_stage_id' confidently.
       - name: owner_id
-        expression: deals.properties.hs_all_owner_ids
-        score: 0.7
-        explanation:
-          Good match but might refer to different owner specifications,
-          capping at 0.7.
+        expression: deals.properties_hubspot_owner_id
+        score: 0.85
+        explanation: Matched field 'owner_id' confidently.
       - name: property_dealname
         expression: deals.properties.dealname
-        score: 1.0
-        explanation:
-          Perfect match with 'deals.properties.dealname', clear and distinct
-          relationship.
+        score: 0.9
+        explanation: Matched field 'property_dealname' confidently.
       - name: property_description
         expression: deals.properties.description
-        score: 1.0
-        explanation:
-          Perfect match with 'deals.properties.description', clear and
-          distinct relationship.
+        score: 0.9
+        explanation: Matched field 'property_description' confidently.
       - name: property_amount
         expression: deals.properties.amount
-        score: 1.0
-        explanation:
-          Perfect match with 'deals.properties.amount', clear and distinct
-          relationship.
+        score: 0.9
+        explanation: Matched field 'property_amount' confidently.
       - name: property_closedate
         expression: deals.properties.closedate
-        score: 1.0
-        explanation:
-          Perfect match with 'deals.properties.closedate', clear and distinct
-          relationship.
+        score: 0.9
+        explanation: Matched field 'property_closedate' confidently.
       - name: property_createdate
         expression: deals.properties.createdate
-        score: 1.0
-        explanation:
-          Perfect match with 'deals.properties.createdate', clear and distinct
-          relationship.
+        score: 0.9
+        explanation: Matched field 'property_createdate' confidently.

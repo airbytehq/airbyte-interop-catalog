@@ -13,7 +13,7 @@ SELECT
     owners.email AS email,
     owners.firstName AS first_name,
     owners.lastName AS last_name,
-    owners.id AS owner_id,
+    owners.userId AS owner_id,
     NULL AS portal_id,
     NULL AS type,
     owners.updatedAt AS updated_at

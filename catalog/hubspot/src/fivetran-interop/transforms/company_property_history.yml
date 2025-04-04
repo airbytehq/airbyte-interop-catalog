@@ -31,49 +31,38 @@ annotations:
   evaluation:
     source_stream_name: companies_property_history
     target_table_name: company_property_history
-    name_match_score: 0.9
-    score: 0.85
-    explanation:
-      Overall confidence score evaluated by checking name matches and field
-      mappings. All mappings aligned well with expected expressions.
+    table_match_score: 0.8
+    completion_score: 0.85
+    explanation: The table match is strong due to the consistent naming and field
+      availability between the source and target. All fields have been mapped with
+      high confidence except for any potential 'MISSING' fields, which slightly lowers
+      the completion score.
     field_mapping_evals:
       - name: _fivetran_synced
         expression: companies_property_history._airbyte_extracted_at
         score: 1.0
-        explanation: "`_fivetran_synced` mapped perfectly to `_airbyte_extracted_at`."
+        explanation: Standard mapping of '_fivetran_synced' to '_airbyte_extracted_at'.
       - name: company_id
         expression: companies_property_history.companyId
-        score: 0.9
-        explanation:
-          "`company_id` correctly matches to `companyId` based on naming
-          and context."
+        score: 0.95
+        explanation: High confidence mapping based on consistent naming and usage.
       - name: name
         expression: companies_property_history.properties.name
-        score: 0.8
-        explanation:
-          "`name` maps to `properties.name`. Matching is good; fields seem
-          aligned by purpose."
+        score: 0.7
+        explanation: Reasonable match based on naming convention and context.
       - name: source
         expression: companies_property_history.sourceType
         score: 0.7
-        explanation:
-          "`source` maps to `sourceType`. Potential alignment, but possible
-          variance in meaning."
+        explanation: Reasonable match based on naming convention and context.
       - name: source_id
         expression: companies_property_history.sourceId
-        score: 0.9
-        explanation:
-          "`source_id` clearly matches `sourceId`. Strong naming and contextual
-          match."
+        score: 0.7
+        explanation: Reasonable match based on naming convention and context.
       - name: timestamp
         expression: companies_property_history.timestamp
-        score: 0.85
-        explanation:
-          "`timestamp` correctly maps to `timestamp`. Consistent naming
-          across fields."
+        score: 0.95
+        explanation: High confidence due to common timestamp usage across schemas.
       - name: value
         expression: companies_property_history.value
         score: 0.85
-        explanation:
-          "`value` successfully maps to `value`. Consistent naming indicates
-          likely correct match."
+        explanation: Strong match supported by consistent usage across data sources.

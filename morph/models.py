@@ -503,17 +503,21 @@ class TableMapping(BaseModel):
                         name=field_eval_data["name"],
                         score=field_eval_data["score"],
                         explanation=field_eval_data["explanation"],
-                    )
+                    ),
                 )
 
             # Create and attach the evaluation
-            evaluation = TableMappingEval(
-                table_match_score=eval_data["table_match_score"],
-                completion_score=eval_data["completion_score"],
-                explanation=eval_data["explanation"],
-                field_mapping_evals=field_mapping_evals,
-            )
-            table_mapping.attach_evaluation(evaluation)
+            try:
+                evaluation = TableMappingEval(
+                    table_match_score=eval_data["table_match_score"],
+                    completion_score=eval_data["completion_score"],
+                    explanation=eval_data["explanation"],
+                    field_mapping_evals=field_mapping_evals,
+                )
+                table_mapping.attach_evaluation(evaluation)
+            except KeyError as e:
+                console.print(f"Error attaching evaluation: {e!s}")
+                console.print(f"Evaluation data: {eval_data}")
 
         return table_mapping
 

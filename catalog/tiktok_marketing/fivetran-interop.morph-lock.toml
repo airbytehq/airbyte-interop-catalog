@@ -46,7 +46,7 @@ unmapped_target_tables = []
 
 [mappings.ad_history]
 source_file = "catalog/tiktok_marketing/src/fivetran-interop/transforms/ad_history.yml"
-source_file_hash = "a54e7ebb4ec5cfc2ee47742ffc007126312570c6533b2ad77052068db2098e77"
+source_file_hash = "8fdff1f886e2129fceeeda2f0d58e156a5eced66cc1ecd9cc185172525ccc8d2"
 unmapped_target_fields = []
 omitted_target_fields = []
 erroneous_source_table_columns = []
@@ -260,7 +260,7 @@ ads_reports_hourly = [
 
 [mappings.adgroup_history]
 source_file = "catalog/tiktok_marketing/src/fivetran-interop/transforms/adgroup_history.yml"
-source_file_hash = "08a2eeea5310a1fadf0b3c962f81c6f6ce1b4d9fa4b5ed95ad021b5e55b854fa"
+source_file_hash = "00fcc1ee6dc865e10e34d1b2940aafe125929a9cedc257a143777e737eaf5499"
 unmapped_target_fields = [
     "action_categories",
     "action_days",
@@ -417,7 +417,7 @@ ad_groups = [
 
 [mappings.adgroup_report_hourly]
 source_file = "catalog/tiktok_marketing/src/fivetran-interop/transforms/adgroup_report_hourly.yml"
-source_file_hash = "2c2efd8940833625de60bf4a97443f76ef4dd74fb5cafd09b8176b0d43c6849b"
+source_file_hash = "8fdedce2e9fc9e9d8af491e7121ccb9944717ba5ac8ca456487c3719e9ca7e0f"
 unmapped_target_fields = [
     "total_sales_lead_value",
 ]
@@ -529,7 +529,7 @@ ad_groups_reports_hourly = [
 
 [mappings.advertiser]
 source_file = "catalog/tiktok_marketing/src/fivetran-interop/transforms/advertiser.yml"
-source_file_hash = "a5ab6bae1c33f9714edb1821e692d48329bd2f321aa861717bef36c21935ffc3"
+source_file_hash = "1428f7d9a76bba5540236e876f9b87e820271cc421d15b697fcbcda92ac64e0a"
 unmapped_target_fields = [
     "phone_number",
     "telephone",
@@ -577,7 +577,7 @@ advertisers = [
 
 [mappings.campaign_history]
 source_file = "catalog/tiktok_marketing/src/fivetran-interop/transforms/campaign_history.yml"
-source_file_hash = "e7cdca530fd5133f518810be813305538102ea874b203c2dfc96d90f8fc120a4"
+source_file_hash = "83acf6ac18adeab9a8a2ef4238ba1d1f9c3fe8afbd98a645f3e91d64087bef29"
 unmapped_target_fields = [
     "opt_status",
     "status",
@@ -618,7 +618,7 @@ campaigns = [
 
 [mappings.campaign_report_hourly]
 source_file = "catalog/tiktok_marketing/src/fivetran-interop/transforms/campaign_report_hourly.yml"
-source_file_hash = "4961e4f97c90e604c096f3dbe473e45df4d3179d43e41089884d90299e639da0"
+source_file_hash = "5ebeb16058072bdcfcd2b20689c1d0dae10013107f1cf7d435715ab3f3ba52aa"
 unmapped_target_fields = [
     "profile_visits_rate",
     "total_sales_lead_value",

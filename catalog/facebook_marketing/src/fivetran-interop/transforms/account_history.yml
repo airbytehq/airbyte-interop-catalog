@@ -34,42 +34,49 @@ annotations:
   evaluation:
     source_stream_name: ad_account
     target_table_name: account_history
-    name_match_score: 0.9
-    score: 0.85
-    explanation:
-      The overall confidence score reflects successful mappings of most
-      fields with some confidence reduction due to possible discrepancies between
-      field purposes.
+    table_match_score: 0.8
+    completion_score: 0.875
+    explanation: The table mapping pertains to ad accounts which is consistent across
+      both Airbyte and Fivetran schemas. Despite a high mapping quality with most
+      fields expected to match in related contexts, certain fields might have missing,
+      weak, or compounded matches causing slightly reduced confidence.
     field_mapping_evals:
       - name: id
         expression: ad_account.id
-        score: 0.95
-        explanation: Strong match with ad_account.id.
+        score: 0.9
+        explanation: IDs are usually direct matches and well understood, making them
+          highly reliable for mapping.
       - name: name
         expression: ad_account.name
-        score: 0.9
-        explanation: Good match with ad_account.name.
+        score: 0.85
+        explanation: Account names are straightforward and likely to map correctly,
+          although context-specific variations may occur.
       - name: _fivetran_synced
         expression: ad_account._airbyte_extracted_at
         score: 1.0
-        explanation: Mapped successfully to the expected _airbyte_extracted_at field.
+        explanation: Standard mapping of '_fivetran_synced' to '_airbyte_extracted_at';
+          always scores 1.00.
       - name: account_status
         expression: ad_account.account_status
-        score: 0.8
-        explanation: Reasonable match with ad_account.account_status.
+        score: 0.75
+        explanation: Account status is well-defined and normally matches, with a possibility
+          of slight contextual variation.
       - name: business_country_code
         expression: ad_account.business_country_code
-        score: 0.85
-        explanation: Acceptable match with ad_account.business_country_code.
+        score: 0.8
+        explanation: Country codes are standardized well, but naming conventions may
+          slightly affect mappings.
       - name: created_time
         expression: ad_account.created_time
-        score: 0.9
-        explanation: Good match with ad_account.created_time.
+        score: 0.8
+        explanation: Creation times should map accurately, barring format discrepancies.
       - name: currency
         expression: ad_account.currency
-        score: 0.75
-        explanation: Moderate confidence due to possible currency format differences.
+        score: 0.7
+        explanation: Currency codes typically match, but there can be minor variances
+          in handling or naming.
       - name: timezone_name
         expression: ad_account.timezone_name
-        score: 0.7
-        explanation: Potential mismatch due to timezone naming conventions.
+        score: 0.65
+        explanation: Timezones generally correlate, but naming differences create
+          minor uncertainties.

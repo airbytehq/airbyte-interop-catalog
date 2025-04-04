@@ -9,21 +9,21 @@ ad_creatives AS (
 
 SELECT
     NULL AS _fivetran_id,
-    ad_creatives.link_url AS page_link,
-    ad_creatives.template_url AS template_page_link,
+    NULL AS page_link,
+    NULL AS template_page_link,
     ad_creatives.id AS id,
     ad_creatives.account_id AS account_id,
     ad_creatives.name AS name,
     ad_creatives.url_tags AS url_tags,
     ad_creatives._airbyte_extracted_at AS _fivetran_synced,
-    NULL AS asset_feed_spec_link_urls,
-    NULL AS object_story_link_data_child_attachments,
-    NULL AS object_story_link_data_caption,
-    NULL AS object_story_link_data_description,
-    NULL AS object_story_link_data_link,
-    NULL AS object_story_link_data_message,
-    NULL AS template_app_link_spec_ios,
-    NULL AS template_app_link_spec_ipad,
-    NULL AS template_app_link_spec_android,
-    NULL AS template_app_link_spec_iphone
+    ad_creatives.asset_feed_spec.link_urls AS asset_feed_spec_link_urls,
+    ad_creatives.object_story_spec.link_data.child_attachments AS object_story_link_data_child_attachments,
+    ad_creatives.object_story_spec.link_data.caption AS object_story_link_data_caption,
+    ad_creatives.object_story_spec.link_data.description AS object_story_link_data_description,
+    ad_creatives.object_story_spec.link_data.link AS object_story_link_data_link,
+    ad_creatives.object_story_spec.link_data.message AS object_story_link_data_message,
+    ad_creatives.object_story_spec.template_data.app_link_spec.ios AS template_app_link_spec_ios,
+    ad_creatives.object_story_spec.template_data.app_link_spec.ipad AS template_app_link_spec_ipad,
+    ad_creatives.object_story_spec.template_data.app_link_spec.android AS template_app_link_spec_android,
+    ad_creatives.object_story_spec.template_data.app_link_spec.iphone AS template_app_link_spec_iphone
 FROM ad_creatives

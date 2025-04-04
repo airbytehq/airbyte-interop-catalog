@@ -176,10 +176,19 @@ def build(
 @main.command()
 @click.argument("source_name")
 @click.argument("project_name", default=DEFAULT_PROJECT_NAME)
+@click.option(
+    "--no-build",
+    is_flag=True,
+    help="Skip building the dbt project after evaluation",
+    type=bool,
+    default=False,
+)
 def eval(
     source_name: str,
     project_name: str = DEFAULT_PROJECT_NAME,
+    *,
     do_source_annotations: bool = True,
+    no_build: bool = False,
 ) -> None:
     """Use AI to evaluated the quality of transform logic.
 
@@ -219,6 +228,17 @@ def eval(
 
         if do_source_annotations:
             transform_obj.to_file()
+
+    update_lock_file(
+        source_name=source_name,
+        project_name=project_name,
+    )
+
+    if not no_build:
+        console.print("\n" + ("-" * 80) + "\n")
+        console.print("Rebuilding dbt project...", style="bold green")
+        build_dbt_project(source_name, project_name)
+        console.print("Build step completed successfully.", style="bold green")
 
 
 @main.command()

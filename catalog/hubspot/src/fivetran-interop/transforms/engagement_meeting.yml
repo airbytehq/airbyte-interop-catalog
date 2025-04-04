@@ -8,82 +8,76 @@ transforms:
         expression: engagements_meetings._airbyte_extracted_at
         description: '{{ doc("_fivetran_synced") }}'
       engagement_id:
-        expression: engagements_meetings.id
+        expression: MISSING
         description: The ID of the engagement.
       property_hs_createdate:
-        expression: engagements_meetings.properties.hs_createdate
-        description:
-          "This field marks the meeting's time of creation and determines
+        expression: engagements_meetings.properties_hs_createdate
+        description: "This field marks the meeting's time of creation and determines
           where the meeting sits on the record timeline. You can use either a Unix
           timestamp in milliseconds or UTC format. \nPLEASE NOTE: This field will
           only be populated for connectors utilizing the HubSpot v3 API version. For
           the pre HubSpot v3 versions, this value may be found within the parent `engagement`
           table.\n"
       timestamp:
-        expression: engagements_meetings.properties.hs_timestamp
-        description:
-          "This field marks the meeting's time of occurrence and determines
+        expression: engagements_meetings.properties_hs_timestamp
+        description: "This field marks the meeting's time of occurrence and determines
           where the meeting sits on the record timeline. You can use either a Unix
           timestamp in milliseconds or UTC format. \nPLEASE NOTE: This field will
           only be populated for connectors utilizing the HubSpot v3 API version. For
           the pre HubSpot v3 versions, this value may be found within the parent `engagement`
           table.\n"
       property_hubspot_owner_id:
-        expression: engagements_meetings.properties.hubspot_owner_id
-        description:
-          "The ID of the owner associated with the meeting. This field
+        expression: engagements_meetings.properties_hubspot_owner_id
+        description: "The ID of the owner associated with the meeting. This field
           determines the user listed as the meeting creator on the record timeline.\n
           PLEASE NOTE: This field will only be populated for connectors utilizing
           the HubSpot v3 API version. For the pre HubSpot v3 versions, this value
           may be found within the parent `engagement` table.\n"
       property_hubspot_team_id:
-        expression: engagements_meetings.properties.hubspot_team_id
-        description:
-          "The ID of the team associated with the meeting. This field determines
+        expression: engagements_meetings.properties_hubspot_team_id
+        description: "The ID of the team associated with the meeting. This field determines
           the team listed as the meeting creator on the record timeline.\nPLEASE NOTE:
           This field will only be populated for connectors utilizing the HubSpot v3
           API version.\n"
 annotations:
   approved: true
-  missing_fields: []
+  missing_fields:
+    - engagement_id
   evaluation:
     source_stream_name: engagements_meetings
     target_table_name: engagement_meeting
-    name_match_score: 0.9
-    score: 0.8
-    explanation:
-      Overall confident mapping with logical expressions and patterns.
-      Mappings align with known entities and expected pattern matches.
+    table_match_score: 0.8
+    completion_score: 0.6666666666666666
+    explanation: The table mapping is of high quality due to the good alignment between
+      source and target tables. However, the completion score is lower due to one
+      missing field mapping and some field-level uncertainty.
     field_mapping_evals:
       - name: _fivetran_synced
         expression: engagements_meetings._airbyte_extracted_at
         score: 1.0
-        explanation:
-          Mapping aligns perfectly with source stream's _airbyte_extracted_at
-          column.
+        explanation: Standard mapping for all tables. Mapped '_fivetran_synced' to
+          source stream's '_airbyte_extracted_at' column.
       - name: engagement_id
-        expression: engagements_meetings.id
-        score: 0.9
-        explanation: Expression matches expected entity for engagement ID.
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
       - name: property_hs_createdate
-        expression: engagements_meetings.properties.hs_createdate
-        score: 0.8
-        explanation:
-          Expression seems appropriate for marking meeting's creation time.
-          Matches documented needs.
+        expression: engagements_meetings.properties_hs_createdate
+        score: 0.7
+        explanation: The expression shows a direct alignment although with slight
+          contextual uncertainties.
       - name: timestamp
-        expression: engagements_meetings.properties.hs_timestamp
-        score: 0.8
-        explanation:
-          Expression is aligned with expected format for meeting occurrence
-          time. Matches timeline expectations.
+        expression: engagements_meetings.properties_hs_timestamp
+        score: 0.7
+        explanation: The expression shows a direct alignment although with slight
+          contextual uncertainties.
       - name: property_hubspot_owner_id
-        expression: engagements_meetings.properties.hubspot_owner_id
+        expression: engagements_meetings.properties_hubspot_owner_id
         score: 0.7
-        explanation:
-          Mapping is likely correct based on context, although complex
-          API version dependencies.
+        explanation: The expression shows a direct alignment although with slight
+          contextual uncertainties.
       - name: property_hubspot_team_id
-        expression: engagements_meetings.properties.hubspot_team_id
+        expression: engagements_meetings.properties_hubspot_team_id
         score: 0.7
-        explanation: Mapping is reasonable, but API versioning limits full confidence.
+        explanation: The expression shows a direct alignment although with slight
+          contextual uncertainties.

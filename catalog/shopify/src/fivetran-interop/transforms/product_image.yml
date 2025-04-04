@@ -12,8 +12,7 @@ transforms:
         description: "{{ doc('_fivetran_synced') }}"
       created_at:
         expression: product_images.created_at
-        description:
-          (DEPRECATED 2025-01-06) The date and time when the product image
+        description: (DEPRECATED 2025-01-06) The date and time when the product image
           was created. The API returns this value in ISO 8601 format.
       height:
         expression: product_images.height
@@ -23,8 +22,7 @@ transforms:
         description: Unique numeric identifier of the product image.
       position:
         expression: product_images.position
-        description:
-          (DEPRECATED 2025-01-06) The order of the product image in the
+        description: (DEPRECATED 2025-01-06) The order of the product image in the
           list. The first product image is at position 1 and is the "main" image for
           the product.
       product_id:
@@ -32,19 +30,16 @@ transforms:
         description: The id of the product associated with the image.
       src:
         expression: product_images.src
-        description:
-          (DEPRECATED 2025-01-06) Specifies the location of the product
+        description: (DEPRECATED 2025-01-06) Specifies the location of the product
           image. This parameter supports URL filters that you can use to retrieve
           modified copies of the image.
       updated_at:
         expression: product_images.updated_at
-        description:
-          (DEPRECATED 2025-01-06) The date and time when the product image
+        description: (DEPRECATED 2025-01-06) The date and time when the product image
           was last modified. The API returns this value in ISO 8601 format.
       variant_ids:
         expression: product_images.variant_ids
-        description:
-          (DEPRECATED 2025-01-06) An array of variant ids associated with
+        description: (DEPRECATED 2025-01-06) An array of variant ids associated with
           the image.
       width:
         expression: product_images.width
@@ -54,13 +49,11 @@ transforms:
         description: A word or phrase to share the nature or contents of an image.
       media_id:
         expression: MISSING
-        description:
-          The unique identifier for the media associated with the product
+        description: The unique identifier for the media associated with the product
           image.
       status:
         expression: MISSING
-        description:
-          The status of the product image, indicating its availability
+        description: The status of the product image, indicating its availability
           or processing state.
       url:
         expression: product_images.shop_url
@@ -74,76 +67,71 @@ annotations:
   evaluation:
     source_stream_name: product_images
     target_table_name: product_image
-    name_match_score: 0.7
-    score: 0.64
-    explanation:
-      Most fields mapped successfully with high confidence, but there are
-      some mappings with missing expressions and deprecated fields lowering overall
-      confidence.
+    table_match_score: 0.85
+    completion_score: 0.75
+    explanation: The table mapping is based on shared API endpoints, suggesting a
+      strong match. However, not all fields in the target schema are present in the
+      source.
     field_mapping_evals:
       - name: _fivetran_deleted
         expression: MISSING
         score: 0.0
-        explanation:
-          The expression is 'MISSING', leading to a confidence score of
-          0.0.
+        explanation: No good match found.
       - name: _fivetran_synced
         expression: product_images._airbyte_extracted_at
         score: 1.0
-        explanation: Mapped to '_airbyte_extracted_at', which is the standard mapping.
+        explanation: Standard mapping from '_fivetran_synced' to '_airbyte_extracted_at'.
       - name: created_at
         expression: product_images.created_at
-        score: 0.7
-        explanation: Mapped correctly but is deprecated, slightly lowering confidence.
+        score: 0.6
+        explanation: The mapping is likely correct given the typical structure of
+          the source and target schemas.
       - name: height
         expression: product_images.height
         score: 0.7
-        explanation: Height dimension mappings are clear and precise.
+        explanation: Height dimension is usually a directly mapped field.
       - name: id
         expression: product_images.id
         score: 0.7
-        explanation: Field maps directly with unique identifier, high confidence.
+        explanation: Unique identifiers are often directly mapped.
       - name: position
         expression: product_images.position
-        score: 0.7
-        explanation: Mapped correctly but deprecated, confidence reduced slightly.
+        score: 0.6
+        explanation: Reasonable match for a potentially deprecated field.
       - name: product_id
         expression: product_images.product_id
         score: 0.7
-        explanation: Mapped appropriately to product ID.
+        explanation: This field commonly matches as a primary key reference.
       - name: src
         expression: product_images.src
-        score: 0.7
-        explanation: Mapped correctly but deprecated, confidence reduced slightly.
+        score: 0.6
+        explanation: Likely match for image source, albeit deprecated.
       - name: updated_at
         expression: product_images.updated_at
-        score: 0.7
-        explanation: Mapped correctly but deprecated, confidence reduced slightly.
+        score: 0.6
+        explanation: Common match for modification timestamps, despite deprecation
+          notice.
       - name: variant_ids
         expression: product_images.variant_ids
-        score: 0.7
-        explanation: Mapped correctly but deprecated, confidence reduced slightly.
+        score: 0.6
+        explanation: Potentially correct for matching variant associations.
       - name: width
         expression: product_images.width
         score: 0.7
-        explanation: Width dimension mappings are clear and precise.
+        explanation: Width dimension is usually a directly mapped field.
       - name: alt_text
         expression: product_images.alt
         score: 0.7
-        explanation: Alt text is specific and appropriate.
+        explanation: Alt text fields often directly correspond.
       - name: media_id
         expression: MISSING
         score: 0.0
-        explanation:
-          The expression is 'MISSING', leading to a confidence score of
-          0.0.
+        explanation: No good match found.
       - name: status
         expression: MISSING
         score: 0.0
-        explanation:
-          The expression is 'MISSING', leading to a confidence score of
-          0.0.
+        explanation: No good match found.
       - name: url
         expression: product_images.shop_url
         score: 0.7
-        explanation: Mapped correctly and specifically to the shop URL.
+        explanation: Likely match considering its use as image URL.

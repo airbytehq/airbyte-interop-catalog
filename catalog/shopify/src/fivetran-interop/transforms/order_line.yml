@@ -2,46 +2,42 @@ domain: shopify.fivetran-interop
 transforms:
   - name: order_line
     from:
-      - order_refunds: shopify.order_refunds
+      - orders: shopify.orders
     fields:
       _fivetran_synced:
-        expression: order_refunds._airbyte_extracted_at
+        expression: orders._airbyte_extracted_at
         description: "{{ doc('_fivetran_synced') }}"
       fulfillable_quantity:
         expression: MISSING
-        description:
-          "The amount available to fulfill, calculated as follows: quantity
+        description: 'The amount available to fulfill, calculated as follows: quantity
           - max(refunded_quantity, fulfilled_quantity) - pending_fulfilled_quantity
-          - open_fulfilled_quantity"
+          - open_fulfilled_quantity'
       fulfillment_status:
-        expression: MISSING
+        expression: orders.fulfillment_status
         description: How far along an order is in terms line items fulfilled.
       gift_card:
         expression: MISSING
-        description:
-          Whether the item is a gift card. If true, then the item is not
+        description: Whether the item is a gift card. If true, then the item is not
           taxed or considered for shipping charges.
       grams:
         expression: MISSING
         description: The weight of the item in grams.
       id:
-        expression: order_refunds.id
+        expression: orders.id
         description: The ID of the line item.
       name:
-        expression: MISSING
+        expression: orders.name
         description: The name of the product variant.
       order_id:
-        expression: order_refunds.order_id
+        expression: MISSING
         description: The ID of the related order.
       price:
         expression: MISSING
-        description:
-          The price of the item before discounts have been applied in the
+        description: The price of the item before discounts have been applied in the
           shop currency.
       product_id:
         expression: MISSING
-        description:
-          The ID of the product that the line item belongs to. Can be null
+        description: The ID of the product that the line item belongs to. Can be null
           if the original product associated with the order is deleted at a later
           date.
       quantity:
@@ -61,8 +57,7 @@ transforms:
         description: The title of the product.
       total_discount:
         expression: MISSING
-        description:
-          The total amount of the discount allocated to the line item in
+        description: The total amount of the discount allocated to the line item in
           the shop currency.
       variant_id:
         expression: MISSING
@@ -78,29 +73,25 @@ transforms:
         description: The pre tax price of the line item in shop currency.
       pre_tax_price_set:
         expression: MISSING
-        description:
-          The pre tax price of the line item in shop currency and presentment
+        description: The pre tax price of the line item in shop currency and presentment
           currency.
       price_set:
         expression: MISSING
         description: The price of the line item in shop and presentment currencies.
       tax_code:
         expression: MISSING
-        description:
-          Tax code applied to the line item. As multiple taxes can apply
+        description: Tax code applied to the line item. As multiple taxes can apply
           to a line item, we recommend referring to `stg_shopify__tax_line`.
       total_discount_set:
         expression: MISSING
-        description:
-          The total amount allocated to the line item in the presentment
+        description: The total amount allocated to the line item in the presentment
           currency.
       variant_title:
         expression: MISSING
         description: The title of the product variant.
       variant_inventory_management:
         expression: MISSING
-        description:
-          The fulfillment service that tracks the number of items in stock
+        description: The fulfillment service that tracks the number of items in stock
           for the product variant.
       properties:
         expression: MISSING
@@ -109,11 +100,10 @@ annotations:
   approved: false
   missing_fields:
     - fulfillable_quantity
-    - fulfillment_status
     - gift_card
     - grams
     - index
-    - name
+    - order_id
     - pre_tax_price
     - pre_tax_price_set
     - price
@@ -133,121 +123,119 @@ annotations:
     - variant_title
     - vendor
   evaluation:
-    source_stream_name: order_refunds
+    source_stream_name: orders
     target_table_name: order_line
-    name_match_score: 0.1
-    score: 0.03333333333333333
-    explanation:
-      Only one mapping out of thirty has a high confidence score since
-      it perfectly matched `_fivetran_synced`. The rest were missing their expressions.
+    table_match_score: 0.5
+    completion_score: 0.1
+    explanation: The table match is neutral due to generic field matching, with many
+      fields having 'MISSING' values indicating no correspondence in the source data.
     field_mapping_evals:
       - name: _fivetran_synced
-        expression: order_refunds._airbyte_extracted_at
+        expression: orders._airbyte_extracted_at
         score: 1.0
-        explanation:
-          Mapped to `order_refunds._airbyte_extracted_at`, which is the
-          correct source for `_fivetran_synced`.
+        explanation: Mapped to a standard column '_airbyte_extracted_at'.
       - name: fulfillable_quantity
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, resulting in a confidence score of 0.0.
+        explanation: No good match found.
       - name: fulfillment_status
-        expression: MISSING
-        score: 0.0
-        explanation: Expression is MISSING, resulting in a confidence score of 0.0.
+        expression: orders.fulfillment_status
+        score: 0.7
+        explanation: Mapped to 'orders.fulfillment_status' which likely represents
+          the same concept.
       - name: gift_card
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, resulting in a confidence score of 0.0.
+        explanation: No good match found.
       - name: grams
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, resulting in a confidence score of 0.0.
+        explanation: No good match found.
       - name: id
-        expression: order_refunds.id
-        score: 0.0
-        explanation: Great expression but not mapped.
+        expression: orders.id
+        score: 0.7
+        explanation: Mapped to 'orders.id', assumes similar identity role.
       - name: name
+        expression: orders.name
+        score: 0.7
+        explanation: Mapped to 'orders.name' likely representing the same concept.
+      - name: order_id
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, resulting in a confidence score of 0.0.
-      - name: order_id
-        expression: order_refunds.order_id
-        score: 0.0
-        explanation: Great expression but not mapped.
+        explanation: No good match found.
       - name: price
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, resulting in a confidence score of 0.0.
+        explanation: No good match found.
       - name: product_id
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, resulting in a confidence score of 0.0.
+        explanation: No good match found.
       - name: quantity
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, resulting in a confidence score of 0.0.
+        explanation: No good match found.
       - name: requires_shipping
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, resulting in a confidence score of 0.0.
+        explanation: No good match found.
       - name: sku
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, resulting in a confidence score of 0.0.
+        explanation: No good match found.
       - name: taxable
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, resulting in a confidence score of 0.0.
+        explanation: No good match found.
       - name: title
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, resulting in a confidence score of 0.0.
+        explanation: No good match found.
       - name: total_discount
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, resulting in a confidence score of 0.0.
+        explanation: No good match found.
       - name: variant_id
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, resulting in a confidence score of 0.0.
+        explanation: No good match found.
       - name: vendor
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, resulting in a confidence score of 0.0.
+        explanation: No good match found.
       - name: index
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, resulting in a confidence score of 0.0.
+        explanation: No good match found.
       - name: pre_tax_price
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, resulting in a confidence score of 0.0.
+        explanation: No good match found.
       - name: pre_tax_price_set
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, resulting in a confidence score of 0.0.
+        explanation: No good match found.
       - name: price_set
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, resulting in a confidence score of 0.0.
+        explanation: No good match found.
       - name: tax_code
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, resulting in a confidence score of 0.0.
+        explanation: No good match found.
       - name: total_discount_set
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, resulting in a confidence score of 0.0.
+        explanation: No good match found.
       - name: variant_title
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, resulting in a confidence score of 0.0.
+        explanation: No good match found.
       - name: variant_inventory_management
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, resulting in a confidence score of 0.0.
+        explanation: No good match found.
       - name: properties
         expression: MISSING
         score: 0.0
-        explanation: Expression is MISSING, resulting in a confidence score of 0.0.
+        explanation: No good match found.

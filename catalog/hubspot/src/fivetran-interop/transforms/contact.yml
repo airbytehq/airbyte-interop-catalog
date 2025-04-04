@@ -14,33 +14,32 @@ transforms:
         expression: contacts.id
         description: The ID of the contact.
       property_email_1:
-        expression: contacts.properties.email
+        expression: contacts.properties_email
         description: The email address of the contact.
       property_company:
-        expression: contacts.properties.company
+        expression: contacts.properties_company
         description: The name of the contact's company.
       property_firstname:
-        expression: contacts.properties.firstname
+        expression: contacts.properties_firstname
         description: The contact's first name.
       property_lastname:
-        expression: contacts.properties.lastname
+        expression: contacts.properties_lastname
         description: The contact's last name.
       property_email:
-        expression: contacts.properties.email
+        expression: contacts.properties_email
         description: The contact's email.
       property_createdate:
-        expression: contacts.properties.createdate
+        expression: contacts.properties_createdate
         description: The date that the contact was created in your HubSpot account.
       property_jobtitle:
-        expression: contacts.properties.jobtitle
+        expression: contacts.properties_jobtitle
         description: The contact's job title.
       property_annualrevenue:
-        expression: contacts.properties.annualrevenue
+        expression: contacts.properties_annualrevenue
         description: The contact's annual company revenue.
       property_hs_calculated_merged_vids:
-        expression: contacts.properties.hs_calculated_merged_vids
-        description:
-          "List of mappings representing contact IDs that have been merged
+        expression: contacts.properties_hs_calculated_merged_vids
+        description: "List of mappings representing contact IDs that have been merged
           into the contact at hand. Format: <merged_contact_id>:<merged_at_in_epoch_time>;<second_merged_contact_id>:<merged_at_in_epoch_time>
           This field has replaced the `CONTACT_MERGE_AUDIT` table, which was deprecated
           by the Hubspot v3 CRM API.\n"
@@ -51,77 +50,60 @@ annotations:
   evaluation:
     source_stream_name: contacts
     target_table_name: contact
-    name_match_score: 0.9
-    score: 0.752
-    explanation:
-      Most fields have been successfully mapped with high confidence. '_fivetran_synced'
-      was mapped to the correct '_airbyte_extracted_at' column. '_fivetran_deleted'
-      field is missing, significantly affecting the overall score. The mapping expressions
-      closely align with the expected fields, suggesting overall high mapping accuracy.
+    table_match_score: 0.85
+    completion_score: 0.91
+    explanation: The mapping is generally strong, showing a high level of confidence
+      that the target schema fields align with the source fields. The completion is
+      high, indicating most source fields have corresponding target fields.
     field_mapping_evals:
       - name: _fivetran_deleted
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', which indicates no mapping found.
+        explanation: No good match found.
       - name: _fivetran_synced
         expression: contacts._airbyte_extracted_at
         score: 1.0
-        explanation: Mapped as recommended to '_airbyte_extracted_at' column.
+        explanation: _fivetran_synced perfectly maps to contacts._airbyte_extracted_at.
       - name: id
         expression: contacts.id
         score: 1.0
-        explanation: Mapped directly to 'contacts.id' which is a perfect match.
+        explanation: The 'id' field perfectly matches the target schema.
       - name: property_email_1
-        expression: contacts.properties.email
+        expression: contacts.properties_email
         score: 0.7
-        explanation:
-          Mapped to 'contacts.properties.email', a likely match but not
-          unique due to another email field.
+        explanation: Partial match with some uncertainty due to potential overlapping
+          with similar fields.
       - name: property_company
-        expression: contacts.properties.company
+        expression: contacts.properties_company
         score: 1.0
-        explanation:
-          Mapped directly to 'contacts.properties.company', indicating
-          a perfect match.
+        explanation: The 'company' field is clearly matched.
       - name: property_firstname
-        expression: contacts.properties.firstname
+        expression: contacts.properties_firstname
         score: 1.0
-        explanation:
-          Mapped directly to 'contacts.properties.firstname', indicating
-          a perfect match.
+        explanation: The 'first name' field is correctly aligned.
       - name: property_lastname
-        expression: contacts.properties.lastname
+        expression: contacts.properties_lastname
         score: 1.0
-        explanation:
-          Mapped directly to 'contacts.properties.lastname', indicating
-          a perfect match.
+        explanation: The 'last name' field is correctly aligned.
       - name: property_email
-        expression: contacts.properties.email
+        expression: contacts.properties_email
         score: 0.7
-        explanation:
-          Mapped to 'contacts.properties.email', a likely match but redundant
-          due to another email field mapping.
+        explanation: Partial match with some uncertainty due to potential duplicate
+          mappings.
       - name: property_createdate
-        expression: contacts.properties.createdate
+        expression: contacts.properties_createdate
         score: 1.0
-        explanation:
-          Mapped directly to 'contacts.properties.createdate', indicating
-          a perfect match.
+        explanation: Creation date field matches perfectly.
       - name: property_jobtitle
-        expression: contacts.properties.jobtitle
+        expression: contacts.properties_jobtitle
         score: 1.0
-        explanation:
-          Mapped directly to 'contacts.properties.jobtitle', indicating
-          a perfect match.
+        explanation: The 'job title' field is well matched.
       - name: property_annualrevenue
-        expression: contacts.properties.annualrevenue
+        expression: contacts.properties_annualrevenue
         score: 1.0
-        explanation:
-          Mapped directly to 'contacts.properties.annualrevenue', indicating
-          a perfect match.
+        explanation: Annual revenue field is an exact match.
       - name: property_hs_calculated_merged_vids
-        expression: contacts.properties.hs_calculated_merged_vids
-        score: 0.9
-        explanation:
-          Mapped to 'contacts.properties.hs_calculated_merged_vids', close
-          to perfect match but with potential for slight discrepancies.
+        expression: contacts.properties_hs_calculated_merged_vids
+        score: 0.65
+        explanation: Field partially matched with high confidence for underlying meaning,
+          but lacking precise mapping.

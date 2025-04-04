@@ -10,6 +10,6 @@ metafield_orders AS (
 SELECT
     metafield_orders._airbyte_extracted_at AS _fivetran_synced,
     metafield_orders.key AS key,
-    metafield_orders.id AS order_id,
+    NULL AS order_id,
     metafield_orders.value AS value
 FROM metafield_orders

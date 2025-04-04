@@ -11,7 +11,7 @@ SELECT
     NULL AS _fivetran_deleted,
     ticket_pipelines._airbyte_extracted_at AS _fivetran_synced,
     NULL AS active,
-    NULL AS display_order,
+    ticket_pipelines.displayOrder AS display_order,
     ticket_pipelines.label AS label,
     NULL AS object_type_id,
     NULL AS pipeline_id,

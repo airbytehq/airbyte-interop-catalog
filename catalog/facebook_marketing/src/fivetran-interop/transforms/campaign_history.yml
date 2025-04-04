@@ -14,7 +14,7 @@ transforms:
         expression: campaigns.name
         description: The name of the campaign.
       _fivetran_synced:
-        expression: _airbyte_extracted_at
+        expression: campaigns._airbyte_extracted_at
         description: "{{ doc('_fivetran_synced') }}"
       updated_time:
         expression: campaigns.updated_time
@@ -46,67 +46,59 @@ annotations:
   evaluation:
     source_stream_name: campaigns
     target_table_name: campaign_history
-    name_match_score: 0.95
-    score: 0.85
-    explanation:
-      The overall mapping confidence is high due to strong matches between
-      the field names and descriptions with the target schema.
+    table_match_score: 0.8
+    completion_score: 0.92
+    explanation: The table match score is high due to most fields being directly translatable
+      between the source and target with clear correspondence. Completion score is
+      also high as almost all expected fields have been mapped with high confidence
+      levels.
     field_mapping_evals:
       - name: id
         expression: campaigns.id
         score: 1.0
-        explanation: The field 'id' has a perfect mapping with 'campaigns.id'.
+        explanation: Direct match with same meaning and purpose.
       - name: account_id
         expression: campaigns.account_id
         score: 1.0
-        explanation: The field 'account_id' is perfectly mapped to 'campaigns.account_id'.
+        explanation: Direct match with same meaning and purpose.
       - name: name
         expression: campaigns.name
         score: 1.0
-        explanation: Field 'name' is perfectly mapped to 'campaigns.name'.
+        explanation: Direct match with same meaning and purpose.
       - name: _fivetran_synced
-        expression: _airbyte_extracted_at
+        expression: campaigns._airbyte_extracted_at
         score: 1.0
-        explanation: The field '_fivetran_synced' is accurately mapped to '_airbyte_extracted_at'.
+        explanation: Standard mapping of _fivetran_synced to _airbyte_extracted_at.
       - name: updated_time
         expression: campaigns.updated_time
-        score: 0.65
-        explanation:
-          The mapping between 'updated_time' and 'campaigns.updated_time'
-          is fairly strong based on the description.
+        score: 1.0
+        explanation: Direct match with same meaning and purpose.
       - name: created_time
         expression: campaigns.created_time
-        score: 0.9
-        explanation:
-          The field 'created_time' is well-matched with 'campaigns.created_time',
-          aligning closely with the description.
+        score: 1.0
+        explanation: Direct match with same meaning and purpose.
       - name: start_time
         expression: campaigns.start_time
-        score: 0.9
-        explanation:
-          The field 'start_time' matches well with 'campaigns.start_time'
-          based on the description.
+        score: 1.0
+        explanation: Direct match with same meaning and purpose.
       - name: stop_time
         expression: campaigns.stop_time
-        score: 0.9
-        explanation:
-          The field 'stop_time' is well-matched with 'campaigns.stop_time',
-          reflecting the intended meanings closely.
+        score: 1.0
+        explanation: Direct match with same meaning and purpose.
       - name: daily_budget
         expression: campaigns.daily_budget
-        score: 0.9
-        explanation: There is a strong correlation between 'daily_budget' and 'campaigns.daily_budget'.
+        score: 1.0
+        explanation: Direct match with same meaning and purpose.
       - name: budget_remaining
         expression: campaigns.budget_remaining
-        score: 0.9
-        explanation: Field 'budget_remaining' is well aligned with 'campaigns.budget_remaining'.
+        score: 1.0
+        explanation: Direct match with same meaning and purpose.
       - name: lifetime_budget
         expression: campaigns.lifetime_budget
-        score: 0.9
-        explanation: The field 'lifetime_budget' maps strongly with 'campaigns.lifetime_budget'.
+        score: 1.0
+        explanation: Direct match with same meaning and purpose.
       - name: status
         expression: campaigns.status
-        score: 0.9
-        explanation:
-          There is a good match between 'status' and 'campaigns.status'
-          based on description involving status values.
+        score: 0.7
+        explanation: Mapping is likely the same, but context of possible values limits
+          maximum score to 0.7.

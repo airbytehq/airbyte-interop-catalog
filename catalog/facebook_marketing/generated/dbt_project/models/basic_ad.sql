@@ -10,13 +10,13 @@ ads_insights AS (
 SELECT
     ads_insights.ad_id AS ad_id,
     ads_insights.ad_name AS ad_name,
-    NULL AS adset_name,
-    NULL AS date,
+    ads_insights.adset_name AS adset_name,
+    ads_insights.date_start AS date,
     ads_insights.account_id AS account_id,
     ads_insights.impressions AS impressions,
-    NULL AS inline_link_clicks,
+    ads_insights.inline_link_clicks AS inline_link_clicks,
     ads_insights.spend AS spend,
     ads_insights.reach AS reach,
     ads_insights.frequency AS frequency,
-    _airbyte_extracted_at AS _fivetran_synced
+    ads_insights._airbyte_extracted_at AS _fivetran_synced
 FROM ads_insights

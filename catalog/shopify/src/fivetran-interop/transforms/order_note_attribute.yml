@@ -2,55 +2,46 @@ domain: shopify.fivetran-interop
 transforms:
   - name: order_note_attribute
     from:
-      - order_risks: shopify.order_risks
+      - orders: shopify.orders
     fields:
       _fivetran_synced:
-        expression: order_risks._airbyte_extracted_at
+        expression: orders._airbyte_extracted_at
         description: "{{ doc('_fivetran_synced') }}"
       name:
-        expression: order_risks.source
+        expression: orders.name
         description: Name of the attribute.
       order_id:
-        expression: order_risks.order_id
+        expression: orders.id
         description: ID referencing the order the note attribute belongs to.
       value:
-        expression: order_risks.score
+        expression: MISSING
         description: Value of the attribute.
 annotations:
-  approved: true
-  missing_fields: []
+  approved: false
+  missing_fields:
+    - value
   evaluation:
-    source_stream_name: order_risks
+    source_stream_name: orders
     target_table_name: order_note_attribute
-    name_match_score: 0.8
-    score: 0.85
-    explanation:
-      The mappings have been evaluated with a relatively high confidence.
-      The mapping for '_fivetran_synced' to 'order_risks._airbyte_extracted_at' was
-      perfect, scoring 1. The mapping of 'order_id' and 'value' are semantically correct
-      and distinct, but there could be ambiguity in real-world usage, thus scoring
-      0.7. 'name' has a higher confidence due to specificity in attributes, scoring
-      0.7 as well.
+    table_match_score: 0.65
+    completion_score: 0.75
+    explanation: "The table mapping reflects a moderate confidence level due to missing
+      mappings.\nField-level mappings include both perfect and missing entries."
     field_mapping_evals:
       - name: _fivetran_synced
-        expression: order_risks._airbyte_extracted_at
+        expression: orders._airbyte_extracted_at
         score: 1.0
-        explanation: Perfect match with '_airbyte_extracted_at' as instructed.
+        explanation: Standard mapping of '_fivetran_synced' to '_airbyte_extracted_at'.
       - name: name
-        expression: order_risks.source
+        expression: orders.name
         score: 0.7
-        explanation:
-          Potential for correct matching against 'source', but possible
-          semantic ambiguity.
+        explanation: Mapping 'name' to 'orders.name' is plausible with moderate confidence.
       - name: order_id
-        expression: order_risks.order_id
+        expression: orders.id
         score: 0.7
-        explanation:
-          Mapping is likely correct for 'order_id'; distinct identifier,
-          but needs confirmation.
+        explanation: Mapping 'order_id' to 'orders.id' is plausible with moderate
+          confidence.
       - name: value
-        expression: order_risks.score
-        score: 0.7
-        explanation:
-          "'score' is a reasonable match for 'value', but there could be
-          context differences."
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

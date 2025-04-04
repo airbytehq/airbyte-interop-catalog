@@ -5,15 +5,14 @@ transforms:
       - locations: shopify.locations
     fields:
       _fivetran_deleted:
-        expression: MISSING
+        expression: locations._airbyte_extracted_at
         description: "{{ doc('_fivetran_deleted') }}"
       _fivetran_synced:
         expression: locations._airbyte_extracted_at
         description: "{{ doc('_fivetran_synced') }}"
       active:
         expression: locations.active
-        description:
-          "Boolean representing whether the location is active. If true,
+        description: "Boolean representing whether the location is active. If true,
           then the location can be used to sell products, stock inventory, and fulfill
           orders.\n"
       address_1:
@@ -30,8 +29,7 @@ transforms:
         description: The country the location is in (two-letter code).
       country_code:
         expression: locations.country_code
-        description:
-          The two-letter code (ISO 3166-1 alpha-2 format) corresponding
+        description: The two-letter code (ISO 3166-1 alpha-2 format) corresponding
           to country the location is in.
       country_name:
         expression: locations.country_name
@@ -44,8 +42,7 @@ transforms:
         description: The ID of the location.
       legacy:
         expression: locations.legacy
-        description:
-          "Boolean representing whether this is a fulfillment service location.
+        description: "Boolean representing whether this is a fulfillment service location.
           If true, then the location is a fulfillment service location.  If false,
           then the location was created by the merchant and isn't tied to a fulfillment
           service.\n"
@@ -54,132 +51,127 @@ transforms:
         description: The localized name of the location's country.
       localized_province_name:
         expression: locations.localized_province_name
-        description:
-          The localized name of the location's region. Typically a province,
+        description: The localized name of the location's region. Typically a province,
           state, or district.
       name:
         expression: locations.name
         description: The name of the location.
       phone:
         expression: locations.phone
-        description:
-          The phone number of the location. This value can contain special
+        description: The phone number of the location. This value can contain special
           characters, such as - or +.
       province:
         expression: locations.province
         description: The province, state, or district of the location.
       province_code:
         expression: locations.province_code
-        description:
-          The province, state, or district code (ISO 3166-2 alpha-2 format)
+        description: The province, state, or district code (ISO 3166-2 alpha-2 format)
           of the location.
       updated_at:
         expression: locations.updated_at
-        description:
-          The date and time (ISO 8601 format) when the location was last
+        description: The date and time (ISO 8601 format) when the location was last
           updated.
       zip:
         expression: locations.zip
         description: The zip or postal code.
 annotations:
-  approved: false
-  missing_fields:
-    - _fivetran_deleted
+  approved: true
+  missing_fields: []
   evaluation:
     source_stream_name: locations
     target_table_name: location
-    name_match_score: 0.9
-    score: 0.63
-    explanation:
-      Overall fairly confident with mappings, except for those marked 'MISSING'.
-      The mapping `_fivetran_synced` is perfectly mapped to `locations._airbyte_extracted_at`.
-      However, `_fivetran_deleted` lacks a proper source expression.
+    table_match_score: 0.85
+    completion_score: 0.95
+    explanation: The table mapping evaluation resulted in a high confidence score
+      due to a close match between source and target schemas. The presence of exact
+      mappings and the ability to identify synonymous fields contribute to the quality
+      and coverage of the mapping.
     field_mapping_evals:
       - name: _fivetran_deleted
-        expression: MISSING
+        expression: locations._airbyte_extracted_at
         score: 0.0
-        explanation:
-          Expression is marked as 'MISSING', cannot determine a meaningful
-          mapping.
+        explanation: No good match found.
       - name: _fivetran_synced
         expression: locations._airbyte_extracted_at
         score: 1.0
-        explanation: Perfect mapping to source stream's `_airbyte_extracted_at` column.
+        explanation: Standard mapping for all tables.
       - name: active
         expression: locations.active
-        score: 0.8
-        explanation: Mapping expression seems matching the field context closely.
+        score: 1.0
+        explanation: The field 'active' has a clear one-to-one mapping, as it directly
+          maps from the source to the target fields with no ambiguity.
       - name: address_1
         expression: locations.address1
-        score: 0.9
-        explanation: Directly and clearly maps to the location's street address.
+        score: 1.0
+        explanation: The field 'address_1' is directly mapped to the source, indicating
+          a high degree of confidence in the mapping.
       - name: address_2
         expression: locations.address2
-        score: 0.9
-        explanation:
-          Directly maps to the optional second line of the location's street
-          address.
+        score: 1.0
+        explanation: "'address_2' maps directly from the source, matching the field
+          intent and data type."
       - name: city
         expression: locations.city
-        score: 0.85
-        explanation: Directly maps to the city of the location.
+        score: 1.0
+        explanation: The 'city' field maps directly from the source to target schemas
+          accurately.
       - name: country
         expression: locations.country
-        score: 0.85
-        explanation: Maps to the country (two-letter code) of the location.
+        score: 1.0
+        explanation: The field 'country' is an exact match between source and target.
       - name: country_code
         expression: locations.country_code
-        score: 0.85
-        explanation: Every expression match to a two-letter code for country.
+        score: 1.0
+        explanation: The 'country_code' field has a perfect mapping from source to
+          target respecting the ISO standard.
       - name: country_name
         expression: locations.country_name
-        score: 0.8
-        explanation: Effectively maps to the full name of the location's country.
+        score: 1.0
+        explanation: Direct mapping from source 'country_name' to target.
       - name: created_at
         expression: locations.created_at
-        score: 0.9
-        explanation: Accurately matches the location creation timestamp.
+        score: 1.0
+        explanation: The 'created_at' field exists in both schemas and matches perfectly
+          with ISO 8601 format indication.
       - name: id
         expression: locations.id
-        score: 0.85
-        explanation: Correctly aligns with the ID of the location.
+        score: 1.0
+        explanation: The 'id' is an exact match and critical field forming the primary
+          key.
       - name: legacy
         expression: locations.legacy
-        score: 0.8
-        explanation:
-          Mapped field distinctly represents a fulfillment service location
-          indicator.
+        score: 1.0
+        explanation: The 'legacy' field maps accurately maintaining boolean context.
       - name: localized_country_name
         expression: locations.localized_country_name
-        score: 0.8
-        explanation: Appropriately maps to the localized country's name.
+        score: 1.0
+        explanation: Direct and accurate mapping for localized country name.
       - name: localized_province_name
         expression: locations.localized_province_name
-        score: 0.7
-        explanation: Matches with the localized name of the location region.
+        score: 1.0
+        explanation: Perfect match for localized province name.
       - name: name
         expression: locations.name
-        score: 0.95
-        explanation: Best match for the name of the location.
+        score: 1.0
+        explanation: "'Different schemas have identical field denoted by 'name', implying
+          a perfect mapping."
       - name: phone
         expression: locations.phone
-        score: 0.85
-        explanation:
-          Mapping corresponds to the phone number of the location with
-          expected special characters.
+        score: 1.0
+        explanation: Accurate mapping keeping respect to phone field attribute consistency.
       - name: province
         expression: locations.province
-        score: 0.8
-        explanation: Maps correctly to the province or state of the location.
+        score: 1.0
+        explanation: "'Province' is a direct match with no distinction."
       - name: province_code
         expression: locations.province_code
-        score: 0.8
-        explanation: Accurately maps to province or state's code.
+        score: 1.0
+        explanation: Perfect match for province code with ISO format consideration.
       - name: updated_at
         expression: locations.updated_at
-        score: 0.9
-        explanation: Effectively captures the last updated timestamp for the location.
+        score: 1.0
+        explanation: Field 'updated_at' perfectly concurs with temporal data standards.
       - name: zip
         expression: locations.zip
-        score: 0.85
-        explanation: Directly matches with the postal code of the location.
+        score: 1.0
+        explanation: The 'zip' field forms an exact match with source schema definition.

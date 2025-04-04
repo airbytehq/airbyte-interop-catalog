@@ -9,13 +9,11 @@ transforms:
         description: "{{ doc('_fivetran_synced') }}"
       code:
         expression: discount_codes.code
-        description:
-          The case-insensitive discount code that customers use at checkout.
+        description: The case-insensitive discount code that customers use at checkout.
           Shopify recommends this map onto the associated `price_rule.title`.
       created_at:
         expression: discount_codes.created_at
-        description:
-          The date and time (ISO 8601 format) when the discount code was
+        description: The date and time (ISO 8601 format) when the discount code was
           created.
       id:
         expression: discount_codes.id
@@ -25,8 +23,7 @@ transforms:
         description: The ID for the price rule that this discount code belongs to.
       updated_at:
         expression: discount_codes.updated_at
-        description:
-          The date and time (ISO 8601 format) when the discount code was
+        description: The date and time (ISO 8601 format) when the discount code was
           updated.
       usage_count:
         expression: discount_codes.usage_count
@@ -37,43 +34,48 @@ annotations:
   evaluation:
     source_stream_name: discount_codes
     target_table_name: discount_code
-    name_match_score: 0.9
-    score: 0.86
-    explanation:
-      The table mapping shows a high confidence level based on the provided
-      mappings. All fields have appropriate expressions with high confidence scores.
-      The name match score is based on the consistency of naming conventions across
-      the mappings.
+    table_match_score: 0.9
+    completion_score: 0.8571428571428571
+    explanation: The table fields are generally well-aligned with their purposes clearly
+      defined. The source fields such as 'code', 'created_at', 'id', 'price_rule_id',
+      'updated_at', and 'usage_count' align with expectations for discount codes in
+      the context provided. '_fivetran_synced' is correctly mapped to a source stream's
+      '_airbyte_extracted_at', providing a reliable match for synchronization tracking.
+      There are no fields marked as 'MISSING', indicating an attempt has been made
+      to map all relevant fields in the source schema to the target schema, resulting
+      in a high score.
     field_mapping_evals:
       - name: _fivetran_synced
         expression: discount_codes._airbyte_extracted_at
         score: 1.0
-        explanation: Perfect match with source stream's '_airbyte_extracted_at' column.
+        explanation: Standard mapping to '_airbyte_extracted_at'.
       - name: code
         expression: discount_codes.code
-        score: 0.9
-        explanation:
-          Expression correctly matches the intended functionality of the
-          discount code.
+        score: 0.8
+        explanation: Matches the source and target purpose of representing the discount
+          code as used at checkout.
       - name: created_at
         expression: discount_codes.created_at
         score: 0.9
-        explanation: Field captures correct timestamp as per the description.
+        explanation: Correctly maps to the source's created timestamp for the discount
+          code, aligning with typical data schema expectations.
       - name: id
         expression: discount_codes.id
         score: 0.9
-        explanation: Field properly identifies the unique ID for the discount code.
+        explanation: Maps source's discount code ID, sufficient match given familiarity
+          with common identification fields.
       - name: price_rule_id
         expression: discount_codes.price_rule_id
         score: 0.8
-        explanation: Expression correctly associates discount code with a price rule.
+        explanation: Adequate match since it represents an ID for associated rules,
+          a typical relational mapping.
       - name: updated_at
         expression: discount_codes.updated_at
-        score: 0.8
-        explanation: Field correctly captures timestamp for code updates.
+        score: 0.9
+        explanation: Successfully maps update timestamps, common in schemas where
+          record modifications are tracked.
       - name: usage_count
         expression: discount_codes.usage_count
         score: 0.8
-        explanation:
-          Expression accurately reflects the redemption frequency of the
-          discount code.
+        explanation: Reflects typical semantic usage tracking, indicating satisfactory
+          mapping despite potential source differences.

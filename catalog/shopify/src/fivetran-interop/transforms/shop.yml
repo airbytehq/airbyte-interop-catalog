@@ -18,8 +18,7 @@ transforms:
         description: The optional second line of the shop's street address.
       checkout_api_supported:
         expression: shop.checkout_api_supported
-        description:
-          Boolean representing whether the shop is capable of accepting
+        description: Boolean representing whether the shop is capable of accepting
           payments directly through the Checkout API.
       city:
         expression: shop.city
@@ -38,8 +37,7 @@ transforms:
         description: The shop's normalized country name.
       county_taxes:
         expression: shop.county_taxes
-        description:
-          Boolean representing whether the shop is applying taxes on a
+        description: Boolean representing whether the shop is applying taxes on a
           per-county basis. Only applicable to shops based in the US. Either `true`
           or `null` (not false, according to Shopify API docs).
       created_at:
@@ -47,36 +45,30 @@ transforms:
         description: The date and time (ISO 8601) when the shop was created.
       currency:
         expression: shop.currency
-        description:
-          The three-letter code (ISO 4217 format) for the shop's default
+        description: The three-letter code (ISO 4217 format) for the shop's default
           currency.
       customer_email:
         expression: shop.customer_email
-        description:
-          The contact email used for communication between the shop owner
+        description: The contact email used for communication between the shop owner
           and the customer.
       domain:
         expression: shop.domain
         description: The shop's domain.
       eligible_for_card_reader_giveaway:
         expression: shop.eligible_for_card_reader_giveaway
-        description:
-          Boolean representing whether the shop is eligible to receive
+        description: Boolean representing whether the shop is eligible to receive
           a free credit card reader from Shopify.
       eligible_for_payments:
         expression: shop.eligible_for_payments
-        description:
-          Boolean representing whether the shop is eligible to use Shopify
+        description: Boolean representing whether the shop is eligible to use Shopify
           Payments.
       email:
         expression: shop.email
-        description:
-          The contact email used for communication between Shopify and
+        description: The contact email used for communication between Shopify and
           the shop owner.
       enabled_presentment_currencies:
         expression: shop.enabled_presentment_currencies
-        description:
-          An array of of enabled currencies (ISO 4217 format) that the
+        description: An array of of enabled currencies (ISO 4217 format) that the
           shop accepts. Merchants can enable currencies from their Shopify Payments
           settings in the Shopify Admin.
       force_ssl:
@@ -87,19 +79,16 @@ transforms:
         description: The GSuite URL for the store, if applicable.
       google_apps_login_enabled:
         expression: shop.google_apps_login_enabled
-        description:
-          Boolean representing whether the GSuite login is enabled. Shops
+        description: Boolean representing whether the GSuite login is enabled. Shops
           with this feature will be able to log in through the GSuite login page.
           Valid values are `true` and `null`.
       has_discounts:
         expression: shop.has_discounts
-        description:
-          Boolean representing whether any active discounts exist for the
+        description: Boolean representing whether any active discounts exist for the
           shop.
       has_gift_cards:
         expression: shop.has_gift_cards
-        description:
-          Boolean representing whether any active gift cards exist for
+        description: Boolean representing whether any active gift cards exist for
           the shop.
       has_storefront:
         expression: shop.has_storefront
@@ -118,23 +107,19 @@ transforms:
         description: The longitude of the shop's location.
       money_format:
         expression: shop.money_format
-        description:
-          A string representing the way currency is formatted when the
+        description: A string representing the way currency is formatted when the
           currency isn't specified.
       money_in_emails_format:
         expression: shop.money_in_emails_format
-        description:
-          A string representing the way currency is formatted in email
+        description: A string representing the way currency is formatted in email
           notifications when the currency isn't specified.
       money_with_currency_format:
         expression: shop.money_with_currency_format
-        description:
-          A string representing the way currency is formatted when the
+        description: A string representing the way currency is formatted when the
           currency is specified.
       money_with_currency_in_emails_format:
         expression: shop.money_with_currency_in_emails_format
-        description:
-          A string representing the way currency is formatted in email
+        description: A string representing the way currency is formatted in email
           notifications when the currency is specified.
       multi_location_enabled:
         expression: shop.multi_location_enabled
@@ -147,8 +132,7 @@ transforms:
         description: The name of the shop.
       password_enabled:
         expression: shop.password_enabled
-        description:
-          Boolean representing whether the password protection page is
+        description: Boolean representing whether the password protection page is
           enabled on the shop's online store.
       phone:
         expression: shop.phone
@@ -161,13 +145,11 @@ transforms:
         description: The name of the Shopify plan the shop is on.
       pre_launch_enabled:
         expression: shop.pre_launch_enabled
-        description:
-          Boolen representing whether the pre-launch page is enabled on
+        description: Boolen representing whether the pre-launch page is enabled on
           the shop's online store.
       primary_locale:
         expression: shop.primary_locale
-        description:
-          The shop's primary locale, as configured in the language settings
+        description: The shop's primary locale, as configured in the language settings
           of the shop's theme.
       primary_location_id:
         expression: shop.primary_location_id
@@ -180,31 +162,26 @@ transforms:
         description: The two- or three-letter code for the shop's province or state.
       requires_extra_payments_agreement:
         expression: shop.requires_extra_payments_agreement
-        description:
-          Boolean representing whether the shop requires an extra Shopify
+        description: Boolean representing whether the shop requires an extra Shopify
           Payments agreement.
       setup_required:
         expression: shop.setup_required
-        description:
-          Boolean representing whether the shop has any outstanding setup
+        description: Boolean representing whether the shop has any outstanding setup
           steps.
       shop_owner:
         expression: shop.shop_owner
         description: The username of the shop owner.
       source:
         expression: shop.source
-        description:
-          The handle of the partner account that referred the merchant
+        description: The handle of the partner account that referred the merchant
           to Shopify, if applicable.
       tax_shipping:
         expression: shop.tax_shipping
-        description:
-          Boolean representing whether taxes are charged for shipping.
+        description: Boolean representing whether taxes are charged for shipping.
           Valid values are true or false.
       taxes_included:
         expression: shop.taxes_included
-        description:
-          Boolean representing whether applicable taxes are included in
+        description: Boolean representing whether applicable taxes are included in
           product prices. Valid values are true or null.
       timezone:
         expression: shop.timezone
@@ -225,237 +202,229 @@ annotations:
   evaluation:
     source_stream_name: shop
     target_table_name: shop
-    name_match_score: 0.9
-    score: 0.87
-    explanation:
-      Overall confidence score of 0.87 is based on the evaluation of individual
-      field mappings. High name match score of 0.9 indicates good alignment of names
-      between source and target fields. Field Mapping Evals indicate how well each
-      specific field was mapped.
+    table_match_score: 0.8
+    completion_score: 0.95
+    explanation: The table mapping evaluated to a high confidence score due to matching
+      fields and descriptions aligning well with expected domains. A few fields could
+      not be directly matched and are marked as 'MISSING'.
     field_mapping_evals:
       - name: _fivetran_deleted
         expression: MISSING
         score: 0.0
-        explanation: Missing expression leads to a confidence score of 0.0.
+        explanation: No good match found.
       - name: _fivetran_synced
         expression: shop._airbyte_extracted_at
         score: 1.0
-        explanation:
-          Mapped to '_airbyte_extracted_at', expected mapping with a perfect
-          score.
+        explanation: Standard mapping to _airbyte_extracted_at.
       - name: address_1
         expression: shop.address1
-        score: 0.9
-        explanation:
-          The field name 'address_1' and expression 'shop.address1' are
-          well-aligned.
+        score: 1.0
+        explanation: Exact match with 'shop.address1'.
       - name: address_2
         expression: shop.address2
-        score: 0.9
-        explanation:
-          The field name 'address_2' and expression 'shop.address2' are
-          well-aligned.
+        score: 1.0
+        explanation: Exact match with 'shop.address2'.
       - name: checkout_api_supported
         expression: shop.checkout_api_supported
         score: 0.95
-        explanation: The boolean nature and description match well with the field.
+        explanation: High confidence match.
       - name: city
         expression: shop.city
-        score: 0.95
-        explanation: Name 'city' matches well with expression 'shop.city'.
+        score: 1.0
+        explanation: Exact match with 'shop.city'.
       - name: cookie_consent_level
         expression: shop.cookie_consent_level
-        score: 0.9
-        explanation: Well-defined field and expression, aligned with its description.
+        score: 1.0
+        explanation: Exact match with 'shop.cookie_consent_level'.
       - name: country
         expression: shop.country
-        score: 0.95
-        explanation: High confidence on 'country' with corresponding expression.
+        score: 1.0
+        explanation: Exact match with 'shop.country'.
       - name: country_code
         expression: shop.country_code
-        score: 0.95
-        explanation: High confidence in matching 'country_code' to its expression.
+        score: 1.0
+        explanation: Exact match with 'shop.country_code'.
       - name: country_name
         expression: shop.country_name
-        score: 0.9
-        explanation: Good alignment between country name and expression.
+        score: 1.0
+        explanation: Exact match with 'shop.country_name'.
       - name: county_taxes
         expression: shop.county_taxes
         score: 0.9
-        explanation: Boolean representation matches the field's description well.
+        explanation: High confidence match with explanation from Shopify API.
       - name: created_at
         expression: shop.created_at
-        score: 0.95
-        explanation: "'created_at' field aligned with expression with high confidence."
+        score: 1.0
+        explanation: Exact match with 'shop.created_at'.
       - name: currency
         expression: shop.currency
-        score: 0.9
-        explanation: ISO code alignment supports high confidence score.
+        score: 1.0
+        explanation: Exact match with 'shop.currency'.
       - name: customer_email
         expression: shop.customer_email
-        score: 0.9
-        explanation: Field name and expression match strongly.
+        score: 1.0
+        explanation: Exact match with 'shop.customer_email'.
       - name: domain
         expression: shop.domain
-        score: 0.95
-        explanation: High confidence due to direct name match.
+        score: 1.0
+        explanation: Exact match with 'shop.domain'.
       - name: eligible_for_card_reader_giveaway
         expression: shop.eligible_for_card_reader_giveaway
-        score: 0.9
-        explanation: Field aligned as expected, matching high confidence requirements.
+        score: 0.95
+        explanation: High confidence match.
       - name: eligible_for_payments
         expression: shop.eligible_for_payments
-        score: 0.9
-        explanation: Matches well with description, high confidence.
+        score: 0.95
+        explanation: High confidence match.
       - name: email
         expression: shop.email
-        score: 0.95
-        explanation: Contact email aligns perfectly with field name.
+        score: 1.0
+        explanation: Exact match with 'shop.email'.
       - name: enabled_presentment_currencies
         expression: shop.enabled_presentment_currencies
-        score: 0.9
-        explanation: Array handling expected in field mapping.
+        score: 1.0
+        explanation: Exact match with 'shop.enabled_presentment_currencies'.
       - name: force_ssl
         expression: shop.force_ssl
         score: 0.0
-        explanation: Deprecated field leads to a score of 0.0.
+        explanation: No good match found.
       - name: google_apps_domain
         expression: shop.google_apps_domain
-        score: 0.9
-        explanation: Matches expected usage of domain.
+        score: 1.0
+        explanation: Exact match with 'shop.google_apps_domain'.
       - name: google_apps_login_enabled
         expression: shop.google_apps_login_enabled
-        score: 0.9
-        explanation: Correct boolean mapping ensures high confidence.
+        score: 0.95
+        explanation: High confidence match.
       - name: has_discounts
         expression: shop.has_discounts
-        score: 0.9
-        explanation: Boolean nature aligns with field mapping.
+        score: 0.95
+        explanation: High confidence match.
       - name: has_gift_cards
         expression: shop.has_gift_cards
-        score: 0.9
-        explanation: Boolean representation matches well.
+        score: 0.95
+        explanation: High confidence match.
       - name: has_storefront
         expression: shop.has_storefront
         score: 0.95
-        explanation: Field name and expression directly align.
+        explanation: High confidence match.
       - name: iana_timezone
         expression: shop.iana_timezone
-        score: 0.95
-        explanation: IANA timezone name is properly matched.
+        score: 1.0
+        explanation: Exact match with 'shop.iana_timezone'.
       - name: id
         expression: shop.id
-        score: 0.95
-        explanation: Good match for shop identifier field.
+        score: 1.0
+        explanation: Exact match with 'shop.id'.
       - name: latitude
         expression: shop.latitude
-        score: 0.9
-        explanation: Numeric match ensures confidence.
+        score: 1.0
+        explanation: Exact match with 'shop.latitude'.
       - name: longitude
         expression: shop.longitude
-        score: 0.9
-        explanation: Numeric match ensures confidence.
+        score: 1.0
+        explanation: Exact match with 'shop.longitude'.
       - name: money_format
         expression: shop.money_format
-        score: 0.9
-        explanation: Currency format aligns with description.
+        score: 1.0
+        explanation: Exact match with 'shop.money_format'.
       - name: money_in_emails_format
         expression: shop.money_in_emails_format
-        score: 0.9
-        explanation: Currency formatting aligns well.
+        score: 1.0
+        explanation: Exact match with 'shop.money_in_emails_format'.
       - name: money_with_currency_format
         expression: shop.money_with_currency_format
-        score: 0.9
-        explanation: Strong alignment due to proper formatting.
+        score: 1.0
+        explanation: Exact match with 'shop.money_with_currency_format'.
       - name: money_with_currency_in_emails_format
         expression: shop.money_with_currency_in_emails_format
-        score: 0.9
-        explanation: Matching and formatting increase confidence.
+        score: 1.0
+        explanation: Exact match with 'shop.money_with_currency_in_emails_format'.
       - name: multi_location_enabled
         expression: shop.multi_location_enabled
-        score: 0.0
-        explanation: Deprecated and unchangeable.
+        score: 1.0
+        explanation: Exact match with 'shop.multi_location_enabled'.
       - name: myshopify_domain
         expression: shop.myshopify_domain
-        score: 0.95
-        explanation: Direct match with shop's domain.
+        score: 1.0
+        explanation: Exact match with 'shop.myshopify_domain'.
       - name: name
         expression: shop.name
-        score: 0.9
-        explanation: Matches direct naming scheme of the shop.
+        score: 1.0
+        explanation: Exact match with 'shop.name'.
       - name: password_enabled
         expression: shop.password_enabled
-        score: 0.9
-        explanation: Boolean representation and field match description.
+        score: 1.0
+        explanation: Exact match with 'shop.password_enabled'.
       - name: phone
         expression: shop.phone
-        score: 0.9
-        explanation: Contact number aligns well.
+        score: 1.0
+        explanation: Exact match with 'shop.phone'.
       - name: plan_display_name
         expression: shop.plan_display_name
-        score: 0.9
-        explanation: Naming convention match.
+        score: 1.0
+        explanation: Exact match with 'shop.plan_display_name'.
       - name: plan_name
         expression: shop.plan_name
-        score: 0.9
-        explanation: Field and expression alignment strong.
+        score: 1.0
+        explanation: Exact match with 'shop.plan_name'.
       - name: pre_launch_enabled
         expression: shop.pre_launch_enabled
-        score: 0.9
-        explanation: Boolean field matches description purpose.
+        score: 1.0
+        explanation: Exact match with 'shop.pre_launch_enabled'.
       - name: primary_locale
         expression: shop.primary_locale
-        score: 0.9
-        explanation: Locale matches with high confidence.
+        score: 1.0
+        explanation: Exact match with 'shop.primary_locale'.
       - name: primary_location_id
         expression: shop.primary_location_id
         score: 0.0
-        explanation: Deprecated field reduces confidence.
+        explanation: No good match found.
       - name: province
         expression: shop.province
-        score: 0.9
-        explanation: State name matches field expectation.
+        score: 1.0
+        explanation: Exact match with 'shop.province'.
       - name: province_code
         expression: shop.province_code
-        score: 0.9
-        explanation: Code matches expected two-letter representation.
+        score: 1.0
+        explanation: Exact match with 'shop.province_code'.
       - name: requires_extra_payments_agreement
         expression: shop.requires_extra_payments_agreement
-        score: 0.9
-        explanation: Field description and boolean match.
+        score: 0.95
+        explanation: High confidence match.
       - name: setup_required
         expression: shop.setup_required
-        score: 0.9
-        explanation: Boolean field matches set-up requirements.
+        score: 0.95
+        explanation: High confidence match.
       - name: shop_owner
         expression: shop.shop_owner
-        score: 0.95
-        explanation: Owner name properly matched to field.
+        score: 1.0
+        explanation: Exact match with 'shop.shop_owner'.
       - name: source
         expression: shop.source
-        score: 0.9
-        explanation: Referral source matches documentation.
+        score: 1.0
+        explanation: Exact match with 'shop.source'.
       - name: tax_shipping
         expression: shop.tax_shipping
-        score: 0.9
-        explanation: Boolean representation matches expectation.
+        score: 0.95
+        explanation: High confidence match.
       - name: taxes_included
         expression: shop.taxes_included
-        score: 0.9
-        explanation: Boolean matches field purpose.
+        score: 0.95
+        explanation: High confidence match.
       - name: timezone
         expression: shop.timezone
-        score: 0.95
-        explanation: Timezone name precisely matched.
+        score: 1.0
+        explanation: Exact match with 'shop.timezone'.
       - name: updated_at
         expression: shop.updated_at
-        score: 0.95
-        explanation: Aligned with update time field representation.
+        score: 1.0
+        explanation: Exact match with 'shop.updated_at'.
       - name: weight_unit
         expression: shop.weight_unit
-        score: 0.9
-        explanation: Matches expected unit of measurement.
+        score: 1.0
+        explanation: Exact match with 'shop.weight_unit'.
       - name: zip
         expression: shop.zip
-        score: 0.95
-        explanation: Postal code aligned with expression.
+        score: 1.0
+        explanation: Exact match with 'shop.zip'.

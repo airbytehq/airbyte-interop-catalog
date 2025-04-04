@@ -11,13 +11,13 @@ transforms:
         expression: deals_property_history.dealId
         description: The ID of the related deal record.
       name:
-        expression: deals_property_history.properties.dealname
+        expression: MISSING
         description: '{{ doc("history_name") }}'
       source:
-        expression: deals_property_history.properties.hs_object_source
+        expression: deals_property_history.sourceType
         description: '{{ doc("history_source") }}'
       source_id:
-        expression: deals_property_history.properties.hs_object_source_id
+        expression: deals_property_history.sourceId
         description: '{{ doc("history_source_id") }}'
       timestamp:
         expression: deals_property_history.timestamp
@@ -27,56 +27,48 @@ transforms:
         description: '{{ doc("history_value") }}'
 annotations:
   approved: true
-  missing_fields: []
+  missing_fields:
+    - name
   evaluation:
     source_stream_name: deals_property_history
     target_table_name: deal_property_history
-    name_match_score: 0.88
-    score: 0.85
-    explanation:
-      The mapping configuration was found to be generally accurate, with
-      most fields having a clear and correct match. Some fields like '_fivetran_synced'
-      had a perfect, pre-defined mapping match. Other fields had an adequate match
-      based on their names and context. No fields were deemed confusingly mismatched.
-      Adjustments to certain field expressions are suggested for improved confidence.
+    table_match_score: 0.72
+    completion_score: 0.857
+    explanation: The table match score is relatively high, indicating a good match
+      between source and target tables based on similar schema elements. However,
+      one field has an expression marked as 'MISSING', lowering the completion score
+      due to incomplete mapping.
     field_mapping_evals:
       - name: _fivetran_synced
         expression: deals_property_history._airbyte_extracted_at
         score: 1.0
-        explanation:
-          The '_fivetran_synced' was correctly mapped to '_airbyte_extracted_at'
-          as per predefined rules.
+        explanation: Standard mapping for _fivetran_synced to _airbyte_extracted_at.
       - name: deal_id
         expression: deals_property_history.dealId
-        score: 0.95
-        explanation:
-          The 'deal_id' field had a strong match based on its name and
-          context.
-      - name: name
-        expression: deals_property_history.properties.dealname
-        score: 0.65
-        explanation:
-          The 'name' field has a reasonable match, but ambiguity about
-          potential context differences slightly lowered the score.
-      - name: source
-        expression: deals_property_history.properties.hs_object_source
         score: 0.7
-        explanation:
-          The 'source' field matches well but could be interpreted differently
-          in distinct contexts.
+        explanation: dealId from deals_property_history is likely to match deal_id
+          based on naming and context.
+      - name: name
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: source
+        expression: deals_property_history.sourceType
+        score: 0.7
+        explanation: sourceType from deals_property_history matches source based on
+          name and typical usage.
       - name: source_id
-        expression: deals_property_history.properties.hs_object_source_id
-        score: 0.9
-        explanation: The 'source_id' matches strongly with the respective column identification.
+        expression: deals_property_history.sourceId
+        score: 0.7
+        explanation: sourceId from deals_property_history matches source_id based
+          on naming similarities.
       - name: timestamp
         expression: deals_property_history.timestamp
-        score: 0.85
-        explanation:
-          The 'timestamp' has a high confidence score as it appropriately
-          matches time-based data.
+        score: 0.7
+        explanation: timestamp from deals_property_history matches timestamp based
+          on naming conventions.
       - name: value
         expression: deals_property_history.value
-        score: 0.8
-        explanation:
-          The 'value' has a good match but the complexity of possible interpretations
-          reduced the certainty slightly.
+        score: 0.7
+        explanation: value from deals_property_history matches value, typical mapping
+          based on name.

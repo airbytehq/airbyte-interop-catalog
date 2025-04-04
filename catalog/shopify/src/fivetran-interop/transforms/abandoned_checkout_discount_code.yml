@@ -24,13 +24,11 @@ transforms:
         description: ID of the discount. Deprecated, use `code` instead.
       index:
         expression: MISSING
-        description:
-          Index (from 1) representing the application of the discount to
+        description: Index (from 1) representing the application of the discount to
           the checkout. Use the latest (highest index)
       type:
         expression: discount_codes.discount_type
-        description:
-          The type of discount. Valid values - percentage, shipping, fixed_amount.
+        description: The type of discount. Valid values - percentage, shipping, fixed_amount.
           (default - fixed_amount)
       updated_at:
         expression: discount_codes.updated_at
@@ -45,53 +43,50 @@ annotations:
   evaluation:
     source_stream_name: discount_codes
     target_table_name: abandoned_checkout_discount_code
-    name_match_score: 0.5
-    score: 0.36
-    explanation:
-      The overall confidence score is calculated based on the presence
-      of valid expressions for the mappings. Fields with 'MISSING' expressions contribute
-      0.0 to the confidence. \nThe field '_fivetran_synced' is mapped as expected
-      with a known pattern, contributing positively to the confidence. Several fields
-      could not be mapped correctly, reducing the overall confidence score. \nThe
-      name match score reflects a moderate match between the field names and their
-      expressions, where some fields like '_fivetran_synced', 'code', 'created_at',
-      'type', and 'updated_at' are mapped well, but others are missing critical information.
+    table_match_score: 0.7
+    completion_score: 0.4444
+    explanation: The table mapping confidence score is moderate due to partial matches
+      and the presence of several 'MISSING' expressions indicating incomplete mappings.
+      Despite a few high-confidence mappings, the overall completion is low due to
+      multiple unmapped fields.
     field_mapping_evals:
       - name: _fivetran_synced
         expression: discount_codes._airbyte_extracted_at
-        score: 0.8
-        explanation: Mapped to '_airbyte_extracted_at' as expected with high confidence.
+        score: 1.0
+        explanation: _fivetran_synced is always mapped to _airbyte_extracted_at with
+          a score of 1.00 as a standard mapping.
       - name: amount
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', yielding zero confidence score.
+        explanation: No good match found.
       - name: checkout_id
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', yielding zero confidence score.
+        explanation: No good match found.
       - name: code
         expression: discount_codes.code
         score: 0.7
-        explanation: Mapped to 'discount_codes.code' with acceptable confidence.
+        explanation: discount_codes.code is likely a strong contextual match to 'code'.
       - name: created_at
         expression: discount_codes.created_at
         score: 0.7
-        explanation: Mapped to 'discount_codes.created_at' with acceptable confidence.
+        explanation: discount_codes.created_at mapped to created_at with moderate
+          confidence.
       - name: discount_id
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', yielding zero confidence score.
+        explanation: No good match found.
       - name: index
         expression: MISSING
         score: 0.0
-        explanation: Expression is 'MISSING', yielding zero confidence score.
+        explanation: No good match found.
       - name: type
         expression: discount_codes.discount_type
-        score: 0.65
-        explanation:
-          Mapped to 'discount_codes.discount_type' with slight concerns
-          over exact match but within acceptable range.
+        score: 0.7
+        explanation: discount_codes.discount_type mapped to type due to likely contextual
+          match for discount types.
       - name: updated_at
         expression: discount_codes.updated_at
         score: 0.7
-        explanation: Mapped to 'discount_codes.updated_at' with acceptable confidence.
+        explanation: discount_codes.updated_at mapped to updated_at with moderate
+          confidence.

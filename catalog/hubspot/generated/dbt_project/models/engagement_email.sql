@@ -11,7 +11,7 @@ SELECT
     engagements_emails._airbyte_extracted_at AS _fivetran_synced,
     engagements_emails.id AS engagement_id,
     engagements_emails.properties.hs_createdate AS property_hs_createdate,
-    engagements_emails.properties.hs_timestamp AS timestamp,
+    engagements_emails.properties_hs_timestamp AS timestamp,
     engagements_emails.properties.hubspot_owner_id AS property_hubspot_owner_id,
     engagements_emails.properties.hubspot_team_id AS property_hubspot_team_id
 FROM engagements_emails

@@ -10,7 +10,7 @@ engagements_notes AS (
 SELECT
     engagements_notes._airbyte_extracted_at AS _fivetran_synced,
     engagements_notes.properties.hs_note_body AS body,
-    engagements_notes.id AS engagement_id,
+    NULL AS engagement_id,
     engagements_notes.properties.hs_createdate AS property_hs_createdate,
     engagements_notes.properties.hs_timestamp AS timestamp,
     engagements_notes.properties.hubspot_owner_id AS property_hubspot_owner_id,

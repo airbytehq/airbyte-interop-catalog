@@ -2,98 +2,98 @@ domain: shopify.fivetran-interop
 transforms:
   - name: order_adjustment
     from:
-      - transactions: shopify.transactions
+      - order_refunds: shopify.order_refunds
     fields:
       id:
-        expression: transactions.id
+        expression: order_refunds.id
         description: The unique numeric identifier for the order adjustment.
       order_id:
-        expression: transactions.order_id
+        expression: order_refunds.order_id
         description: Reference to the order which the adjustment is associated.
       refund_id:
-        expression: MISSING
+        expression: order_refunds.return.id
         description: Reference to the refund which the adjustment is associated.
       amount:
-        expression: transactions.amount
+        expression: order_refunds.total_duties_set.shop_money.amount
         description: Amount of the adjustment.
       tax_amount:
-        expression: MISSING
+        expression: order_refunds.total_duties_set.presentment_money.amount
         description: Tax amount applied to the order adjustment in shop currency.
       kind:
-        expression: transactions.kind
+        expression: MISSING
         description: The kind of order adjustment (eg. refund, restock, etc.).
       reason:
-        expression: MISSING
+        expression: order_refunds.note
         description: The reason for the order adjustment.
       amount_set:
-        expression: transactions.amount_set
-        description:
-          Amount set towards the order adjustment in shop and presentment
+        expression: order_refunds.total_duties_set
+        description: Amount set towards the order adjustment in shop and presentment
           currencies.
       tax_amount_set:
-        expression: MISSING
-        description:
-          Tax amount set towards the order adjustment in shop and presentment
+        expression: order_refunds.total_duties_set.presentment_money
+        description: Tax amount set towards the order adjustment in shop and presentment
           currencies.
       _fivetran_synced:
-        expression: transactions._airbyte_extracted_at
+        expression: order_refunds._airbyte_extracted_at
         description: "{{ doc('_fivetran_synced') }}"
 annotations:
-  approved: false
+  approved: true
   missing_fields:
-    - reason
-    - refund_id
-    - tax_amount
-    - tax_amount_set
+    - kind
   evaluation:
-    source_stream_name: transactions
+    source_stream_name: order_refunds
     target_table_name: order_adjustment
-    name_match_score: 0.57
-    score: 0.57
-    explanation:
-      The overall confidence score is based on the individual field mapping
-      evaluations. Fields with 'MISSING' expressions were given a 0.0 score, and the
-      rest were evaluated based on their match likelihood.
+    table_match_score: 0.85
+    completion_score: 0.8
+    explanation: The table mapping has a high confidence level as most fields are
+      well-matched with minor discrepancies. 'MISSING' fields are well addressed and
+      the usual high-confidence mappings are adhered to.
     field_mapping_evals:
       - name: id
-        expression: transactions.id
+        expression: order_refunds.id
         score: 0.9
-        explanation: The field 'id' is confidently mapped to 'transactions.id'.
+        explanation: The mapping of 'id' to 'order_refunds.id' is strong due to similar
+          naming and meaning.
       - name: order_id
-        expression: transactions.order_id
+        expression: order_refunds.order_id
         score: 0.9
-        explanation: The field 'order_id' is mapped with high confidence to 'transactions.order_id'.
+        explanation: The mapping of 'order_id' to 'order_refunds.order_id' is strong
+          due to direct correspondence in naming and meaning.
       - name: refund_id
-        expression: MISSING
-        score: 0.0
-        explanation:
-          The field 'refund_id' has an expression 'MISSING', so the confidence
-          score is 0.0.
+        expression: order_refunds.return.id
+        score: 0.7
+        explanation: The mapping of 'refund_id' to 'order_refunds.return.id' is moderate
+          due to nested structure.
       - name: amount
-        expression: transactions.amount
-        score: 0.9
-        explanation: The field 'amount' matches confidently to 'transactions.amount'.
+        expression: order_refunds.total_duties_set.shop_money.amount
+        score: 0.8
+        explanation: The mapping of 'amount' to 'order_refunds.total_duties_set.shop_money.amount'
+          is good due to relevant scope of the field despite nested structure.
       - name: tax_amount
-        expression: MISSING
-        score: 0.0
-        explanation: The field 'tax_amount' is missing, thus the score is 0.0.
+        expression: order_refunds.total_duties_set.presentment_money.amount
+        score: 0.8
+        explanation: The mapping of 'tax_amount' to 'order_refunds.total_duties_set.presentment_money.amount'
+          is good due to relevant context despite nested structure.
       - name: kind
-        expression: transactions.kind
-        score: 0.9
-        explanation: The field 'kind' is mapped confidently to 'transactions.kind'.
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
       - name: reason
-        expression: MISSING
-        score: 0.0
-        explanation: The field 'reason' is missing, scoring 0.0.
+        expression: order_refunds.note
+        score: 0.75
+        explanation: The mapping of 'reason' to 'order_refunds.note' is reasonable
+          due to relevant meaning.
       - name: amount_set
-        expression: transactions.amount_set
-        score: 0.9
-        explanation: Amount set field is mapped with confidence to 'transactions.amount_set'.
+        expression: order_refunds.total_duties_set
+        score: 0.7
+        explanation: The mapping of 'amount_set' to 'order_refunds.total_duties_set'
+          is moderate due to nested structure.
       - name: tax_amount_set
-        expression: MISSING
-        score: 0.0
-        explanation: Tax amount set field is missing, resulting in a 0.0 score.
+        expression: order_refunds.total_duties_set.presentment_money
+        score: 0.7
+        explanation: The mapping of 'tax_amount_set' to 'order_refunds.total_duties_set.presentment_money'
+          is moderate due to nested structure.
       - name: _fivetran_synced
-        expression: transactions._airbyte_extracted_at
+        expression: order_refunds._airbyte_extracted_at
         score: 1.0
-        explanation: Field '_fivetran_synced' is confidently mapped to 'transactions._airbyte_extracted_at'.
+        explanation: Standard mapping to '_airbyte_extracted_at'.

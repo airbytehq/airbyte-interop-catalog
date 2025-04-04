@@ -330,7 +330,9 @@ def build_readme(mapping_files: list[str], models_dir: Path) -> None:
 
     # Add header
     sections.append("# Generated dbt Models\n")
-    sections.append("This directory contains automatically generated dbt models based on mapping files.\n")
+    sections.append(
+        "This directory contains automatically generated dbt models based on mapping files.\n",
+    )
 
     # Process each mapping file
     for mapping_file in mapping_files:
@@ -343,11 +345,13 @@ def build_readme(mapping_files: list[str], models_dir: Path) -> None:
                 continue
 
             # Add section for this transform
-            sections.append(create_markdown_section(
-                title=transform_id,
-                content="",
-                level=2
-            ))
+            sections.append(
+                create_markdown_section(
+                    title=transform_id,
+                    content="",
+                    level=2,
+                ),
+            )
 
             # Add source information
             sources = _extract_sources(transform)
@@ -358,7 +362,7 @@ def build_readme(mapping_files: list[str], models_dir: Path) -> None:
                     [
                         source["alias"],
                         source.get("schema", "default"),
-                        source["table"]
+                        source["table"],
                     ]
                     for source in sources
                 ]
@@ -390,8 +394,8 @@ def generate_dbt_package(
     source_name: str,
     *,
     project_name: str = DEFAULT_PROJECT_NAME,
-    output_dir: str | None = None,
-    mapping_dir: str | None = None,
+    output_dir: Path | None = None,
+    mapping_dir: Path | None = None,
 ) -> None:
     """Generate a dbt package from mapping files.
 
@@ -434,13 +438,16 @@ def generate_dbt_package(
             generated_models.append(transform_id)
 
     # Use copier to generate the dbt project scaffolding
-    template_dir = Path(__file__).parent.parent.parent / "templates" / "dbt_project_template"
+    template_dir = Path() / "templates" / "dbt_project_template"
 
     # Prepare data for the template
     template_data = {
         "catalog_name": source_name,
         "models": generated_models,
     }
+
+    if not template_dir.is_dir():
+        raise FileNotFoundError(f"Template directory {template_dir} does not exist.")
 
     # Run copier to generate the project scaffolding
     run_copy(

@@ -8,7 +8,7 @@ locations AS (
 
 
 SELECT
-    NULL AS _fivetran_deleted,
+    locations._airbyte_extracted_at AS _fivetran_deleted,
     locations._airbyte_extracted_at AS _fivetran_synced,
     locations.active AS active,
     locations.address1 AS address_1,

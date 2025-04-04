@@ -7,7 +7,8 @@ from rich.prompt import Prompt
 
 from morph import constants, models, resources
 from morph.ai import functions as ai_fn
-from morph.utils import dbt_source_files, text_utils
+from morph.utils import text_utils
+from morph.utils.dbt import dbt_source_files
 from morph.utils.logic import if_none
 from morph.utils.retries import with_retry
 from morph.utils.transform_scaffold import generate_empty_mapping_file

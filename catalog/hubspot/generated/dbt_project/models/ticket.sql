@@ -14,13 +14,13 @@ SELECT
     tickets.archived AS _fivetran_deleted,
     NULL AS portal_id,
     tickets.properties.closed_date AS property_closed_date,
-    tickets.properties.createdate AS property_createdate,
-    tickets.properties.first_agent_reply_date AS property_first_agent_reply_date,
+    tickets.properties_createdate AS property_createdate,
+    tickets.properties_first_agent_reply_date AS property_first_agent_reply_date,
     tickets.properties.hs_pipeline AS property_hs_pipeline,
     tickets.properties.hs_pipeline_stage AS property_hs_pipeline_stage,
     tickets.properties.hs_ticket_priority AS property_hs_ticket_priority,
     tickets.properties.hs_ticket_category AS property_hs_ticket_category,
-    tickets.properties.hubspot_owner_id AS property_hubspot_owner_id,
+    tickets.properties_hubspot_owner_id AS property_hubspot_owner_id,
     tickets.properties.subject AS property_subject,
     tickets.properties.content AS property_content
 FROM tickets

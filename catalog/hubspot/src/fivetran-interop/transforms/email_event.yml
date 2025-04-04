@@ -15,8 +15,7 @@ transforms:
         description: The timestamp of the event that caused this event.
       caused_by_id:
         expression: email_events.causedBy.id
-        description:
-          The event ID which uniquely identifies the event which directly
+        description: The event ID which uniquely identifies the event which directly
           caused this event. If not applicable, this property is omitted.
       created:
         expression: email_events.created
@@ -26,8 +25,7 @@ transforms:
         description: The ID of the related email campaign.
       filtered_event:
         expression: email_events.filteredEvent
-        description:
-          A boolean representing whether the event has been filtered out
+        description: A boolean representing whether the event has been filtered out
           of reporting based on customer reports settings or not.
       id:
         expression: email_events.id
@@ -37,8 +35,7 @@ transforms:
         description: The timestamp of the event that made the current event obsolete.
       obsoleted_by_id:
         expression: email_events.obsoletedBy.id
-        description:
-          The event ID which uniquely identifies the follow-on event which
+        description: The event ID which uniquely identifies the follow-on event which
           makes this current event obsolete. If not applicable, this property is omitted.
       portal_id:
         expression: email_events.portalId
@@ -51,8 +48,7 @@ transforms:
         description: The timestamp of the SENT event related to this event.
       sent_by_id:
         expression: email_events.sentBy.id
-        description:
-          The event ID which uniquely identifies the email message's SENT
+        description: The event ID which uniquely identifies the email message's SENT
           event. If not applicable, this property is omitted.
       type:
         expression: email_events.type
@@ -63,79 +59,81 @@ annotations:
   evaluation:
     source_stream_name: email_events
     target_table_name: email_event
-    name_match_score: 0.85
-    score: 0.8
-    explanation:
-      The overall mapping confidence is determined by evaluating the familiarity
-      of field expressions and their relevant descriptions. A key match was found
-      for '_fivetran_synced', which was accurately mapped, contributing positively
-      to the score. Certain mappings could have ambiguities (e.g., 'caused_by_created'
-      vs. 'created'), lowering the scores for individual fields. Name match score
-      reflects the general naming consistency between field names and their expressions.
+    table_match_score: 0.9
+    completion_score: 0.95
+    explanation: The table match score is high because the field mappings consistently
+      relate similar data across both schemas. The completion score is also high,
+      reflecting that each field has been thoughtfully mapped with minimal missing
+      data.
     field_mapping_evals:
       - name: _fivetran_synced
         expression: email_events._airbyte_extracted_at
         score: 1.0
-        explanation: Perfect mapping to '_airbyte_extracted_at' as instructed.
+        explanation: Standard mapping of _fivetran_synced to _airbyte_extracted_at.
       - name: app_id
         expression: email_events.appId
-        score: 0.8
-        explanation: Expression matches typical patterns for application identifier.
+        score: 0.9
+        explanation: app_id maps directly to email_events.appId with high confidence
+          due to exact naming and expected context.
       - name: caused_by_created
         expression: email_events.causedBy.created
-        score: 0.6
-        explanation:
-          Matches the event 'created' pattern but could be ambiguous with
-          other timestamp fields.
+        score: 0.9
+        explanation: Field matches email_events.causedBy.created based on context
+          and similar naming structure.
       - name: caused_by_id
         expression: email_events.causedBy.id
-        score: 0.6
-        explanation:
-          Event ID mapping can be unique but might conflict with other
-          ID mappings.
+        score: 0.85
+        explanation: Mapping to email_events.causedBy.id, given the context of event
+          causality and ID purpose.
       - name: created
         expression: email_events.created
-        score: 0.7
-        explanation:
-          Matches a general 'created' timestamp. Slight ambiguity with
-          other timestamps.
+        score: 0.9
+        explanation: Created timestamp exactly matches email_events.created field.
       - name: email_campaign_id
         expression: email_events.emailCampaignId
-        score: 0.8
-        explanation: Strong match with campaign-specific identifier.
+        score: 0.9
+        explanation: Direct match to email_events.emailCampaignId, likely identical
+          due to naming and purpose.
       - name: filtered_event
         expression: email_events.filteredEvent
-        score: 0.85
-        explanation: Boolean representation accurately captured.
+        score: 0.8
+        explanation: Somewhat clear mapping to email_events.filteredEvent, representing
+          the same filter logic.
       - name: id
         expression: email_events.id
-        score: 0.75
-        explanation: ID fields usually clearly mappable, though generic.
+        score: 0.9
+        explanation: Matching event IDs with email_events.id is direct and accurate.
       - name: obsoleted_by_created
         expression: email_events.obsoletedBy.created
-        score: 0.55
-        explanation: Somewhat matches with other 'created' timestamps.
+        score: 0.8
+        explanation: Logically aligns with email_events.obsoletedBy.created; naming
+          suggests a correct match.
       - name: obsoleted_by_id
         expression: email_events.obsoletedBy.id
-        score: 0.55
-        explanation: Similar challenges as 'caused_by_id'; could be ambiguous.
+        score: 0.8
+        explanation: Seems to correctly match with email_events.obsoletedBy.id as
+          per the purpose of the field.
       - name: portal_id
         expression: email_events.portalId
-        score: 0.8
-        explanation: Portal ID shows a clear mapping consistency.
+        score: 0.85
+        explanation: Likely matches as portal_id is a common field shared across systems,
+          direct naming helps.
       - name: recipient
         expression: email_events.recipient
         score: 0.9
-        explanation: Precise mapping for an email address.
+        explanation: Email recipient logically and directly relates to email_events.recipient.
       - name: sent_by_created
         expression: email_events.sentBy.created
-        score: 0.65
-        explanation: Matches a 'created' pattern but unclear based on event context.
+        score: 0.85
+        explanation: Sensible mapping with email_events.sentBy.created based on timestamp
+          semantics.
       - name: sent_by_id
         expression: email_events.sentBy.id
-        score: 0.65
-        explanation: Specific to SENT events, but general ID issues arise.
+        score: 0.85
+        explanation: SentBy ID maps well to email_events.sentBy.id given similar roles
+          in event tracking.
       - name: type
         expression: email_events.type
         score: 0.9
-        explanation: Clear mapping for an event type field.
+        explanation: Event type accurately maps to email_events.type, supported by
+          consistent terminology.

@@ -18,12 +18,12 @@ SELECT
     NULL AS delivery_expectation_range_min,
     NULL AS delivery_expectation_type,
     NULL AS discounted_price,
-    abandoned_checkouts.id AS id,
+    NULL AS id,
     NULL AS index,
     NULL AS original_shop_price,
-    abandoned_checkouts.phone AS phone,
+    NULL AS phone,
     NULL AS price,
     NULL AS requested_fulfillment_service_id,
-    abandoned_checkouts.source AS source,
+    NULL AS source,
     NULL AS title
 FROM abandoned_checkouts

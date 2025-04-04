@@ -9,16 +9,14 @@ transforms:
         description: "{{ doc('_fivetran_synced') }}"
       allocation_limit:
         expression: price_rules.allocation_limit
-        description:
-          "The number of times the discount can be allocated on the cart
+        description: "The number of times the discount can be allocated on the cart
           - if eligible. For example a Buy 1 hat Get 1 hat for free discount can be
           applied 3 times on a cart having more than 6 hats,  where maximum of 3 hats
           get discounted - if the allocation_limit is 3. Empty (null) allocation_limit
           means unlimited number of allocations.\n"
       allocation_method:
         expression: price_rules.allocation_method
-        description:
-          "The allocation method of the price rule. Valid values include
+        description: "The allocation method of the price rule. Valid values include
           `each` (the discount is applied to each of the entitled items. For example,
           for a price rule that takes $15 off, each entitled line item in a checkout
           will be discounted by $15) and `across` (the calculated discount amount
@@ -30,80 +28,68 @@ transforms:
         description: The date and time (ISO 8601 format) when the price rule was created.
       customer_selection:
         expression: price_rules.customer_selection
-        description:
-          "The customer selection for the price rule. Valid values include
+        description: "The customer selection for the price rule. Valid values include
           `all` (the price rule is valid for all customers) and `prerequisite`  (the
           customer must either belong to one of the customer segments specified by
           customer_segment_prerequisite_ids, or be one of the customers specified
           by prerequisite_customer_ids).\n"
       ends_at:
         expression: price_rules.ends_at
-        description:
-          The date and time (ISO 8601 format) when the price rule ends.
+        description: The date and time (ISO 8601 format) when the price rule ends.
           Must be after starts_at.
       id:
         expression: price_rules.id
         description: The ID for the price rule.
       once_per_customer:
         expression: price_rules.once_per_customer
-        description:
-          Boolean representing whether the generated discount code will
+        description: Boolean representing whether the generated discount code will
           be valid only for a single use per customer. This is tracked using customer
           ID.
       prerequisite_quantity_range:
         expression: price_rules.prerequisite_quantity_range
-        description:
-          If `customer_selection` is `prerequisite`, the minimum number
+        description: If `customer_selection` is `prerequisite`, the minimum number
           of items for the price rule to be applicable. The quantity of an entitled
           cart item must be greater than or equal to this value.
       prerequisite_shipping_price_range:
         expression: price_rules.prerequisite_shipping_price_range
-        description:
-          If `customer_selection` is `prerequisite`, the maximum shipping
+        description: If `customer_selection` is `prerequisite`, the maximum shipping
           price for the price rule to be applicable. The shipping price must be less
           than or equal to this value
       prerequisite_subtotal_range:
         expression: price_rules.prerequisite_subtotal_range
-        description:
-          If `customer_selection` is `prerequisite`, the minimum subtotal
+        description: If `customer_selection` is `prerequisite`, the minimum subtotal
           for the price rule to be applicable. The subtotal of the entitled cart items
           must be greater than or equal to this value for the discount to apply.
       prerequisite_to_entitlement_purchase_prerequisite_amount:
         expression: price_rules.prerequisite_to_entitlement_purchase.prerequisite_amount
-        description:
-          If `customer_selection` is `prerequisite`, the prerequisite purchase
+        description: If `customer_selection` is `prerequisite`, the prerequisite purchase
           for a Buy X Get Y discount. The minimum purchase amount required to be entitled
           to the discount.
       quantity_ratio_entitled_quantity:
         expression: price_rules.prerequisite_to_entitlement_quantity_ratio.entitled_quantity
-        description:
-          If `customer_selection` is `prerequisite`, in a Buy/Get ratio
+        description: If `customer_selection` is `prerequisite`, in a Buy/Get ratio
           for a Buy X Get Y discount, this is the offered 'get' quantity.
       quantity_ratio_prerequisite_quantity:
         expression: price_rules.prerequisite_to_entitlement_quantity_ratio.prerequisite_quantity
-        description:
-          If `customer_selection` is `prerequisite`, in a Buy/Get ratio
+        description: If `customer_selection` is `prerequisite`, in a Buy/Get ratio
           for a Buy X Get Y discount, this defines the necessary 'buy' quantity.
       starts_at:
         expression: price_rules.starts_at
         description: The date and time (ISO 8601 format) when the price rule starts.
       target_selection:
         expression: price_rules.target_selection
-        description:
-          "The target selection method of the price rule. Valid values
+        description: "The target selection method of the price rule. Valid values
           include `all` (the price rule applies the discount to all line items in
           the checkout) and  `entitled` (the price rule applies the discount to selected
           entitlements only).\n"
       target_type:
         expression: price_rules.target_type
-        description:
-          The target type that the price rule applies to. Valid values
+        description: The target type that the price rule applies to. Valid values
           include `line_item` (the price rule applies to the cart's line items) and
           `shipping_line` (the price rule applies to the cart's shipping lines).
       title:
         expression: price_rules.title
-        description:
-          "The title of the price rule. This is used by the Shopify admin
+        description: "The title of the price rule. This is used by the Shopify admin
           search to retrieve discounts. It is also displayed on the Discounts page
           of the Shopify admin for bulk discounts.  Shopify recommends that this map
           onto the associated `discount_code.code`.\n"
@@ -112,18 +98,15 @@ transforms:
         description: The date and time (ISO 8601 format) when the price rule was updated.
       usage_limit:
         expression: price_rules.usage_limit
-        description:
-          The maximum number of times the price rule can be used, per discount
+        description: The maximum number of times the price rule can be used, per discount
           code.
       value:
         expression: price_rules.value
-        description:
-          The value of the price rule. If if the value of `target_type`
+        description: The value of the price rule. If if the value of `target_type`
           is `shipping_line`, then only -100 is accepted. The value must be negative.
       value_type:
         expression: price_rules.value_type
-        description:
-          "The value type of the price rule. Valid values include `fixed_amount`
+        description: "The value type of the price rule. Valid values include `fixed_amount`
           (applies a discount of value as a unit of the store's currency. For example,
           if value is -30 and the store's currency is USD, then $30 USD is deducted
           when the discount is applied) and `percentage` (applies a percentage discount
@@ -136,126 +119,109 @@ annotations:
   evaluation:
     source_stream_name: price_rules
     target_table_name: price_rule
-    name_match_score: 1.0
-    score: 1.0
-    explanation:
-      All provided field mappings perfectly matched the required fields
-      without any discrepancies. Highest confidentiality achieved due to accurate
-      mapping.
+    table_match_score: 0.9
+    completion_score: 0.95
+    explanation: The table mapping has a high confidence score because the source
+      and target tables are derived from similar APIs with most fields properly mapped.
+      All fields have either been mapped or identified as MISSING with a 0.00 confidence
+      score.
     field_mapping_evals:
       - name: _fivetran_synced
         expression: price_rules._airbyte_extracted_at
         score: 1.0
-        explanation:
-          _fivetran_synced is mapped to a source stream's _airbyte_extracted_at
-          column exactly as required.
+        explanation: Standard mapping from '_fivetran_synced' to '_airbyte_extracted_at',
+          always receives a score of 1.00.
       - name: allocation_limit
         expression: price_rules.allocation_limit
-        score: 1.0
-        explanation:
-          allocation_limit is mapped perfectly according to the field's
-          purpose and constraints.
+        score: 0.9
+        explanation: The field 'allocation_limit' is directly mapped and closely matches
+          the source structure, with a high confidence level.
       - name: allocation_method
         expression: price_rules.allocation_method
-        score: 1.0
-        explanation:
-          allocation_method matches exactly with valid values specified
-          in its description.
+        score: 0.9
+        explanation: The 'allocation_method' is directly mapped and closely matches
+          the context of the source data.
       - name: created_at
         expression: price_rules.created_at
-        score: 1.0
-        explanation:
-          created_at field is correctly mapped to the creation timestamp
-          in ISO 8601 format.
+        score: 0.8
+        explanation: The field 'created_at' has a direct mapping but the date format
+          must be confirmed.
       - name: customer_selection
         expression: price_rules.customer_selection
-        score: 1.0
-        explanation:
-          customer_selection has valid values and corresponds correctly
-          in the mapping.
+        score: 0.85
+        explanation: "'customer_selection' shows a strong contextual match with predefined
+          valid values."
       - name: ends_at
         expression: price_rules.ends_at
-        score: 1.0
-        explanation:
-          ends_at is accurately mapped based on its purpose of determining
-          price rule termination.
+        score: 0.8
+        explanation: The field 'ends_at' closely matches the source, consider checking
+          the date format.
       - name: id
         expression: price_rules.id
-        score: 1.0
-        explanation: ID is correctly mapped as a field, adhering to its intended use.
+        score: 0.95
+        explanation: Id fields generally have a high confidence due to unique identity
+          matching.
       - name: once_per_customer
         expression: price_rules.once_per_customer
-        score: 1.0
-        explanation:
-          once_per_customer is properly mapped, indicating a boolean type
-          for discount validation per customer.
+        score: 0.9
+        explanation: Boolean values generally have a straightforward mapping, resulting
+          in a high score.
       - name: prerequisite_quantity_range
         expression: price_rules.prerequisite_quantity_range
-        score: 1.0
-        explanation:
-          Mapping correctly represents the minimum number of items required
-          where the rule applies.
+        score: 0.85
+        explanation: This field matches with regard to the prerequisite quantity contextual
+          information.
       - name: prerequisite_shipping_price_range
         expression: price_rules.prerequisite_shipping_price_range
-        score: 1.0
-        explanation:
-          Mapping handles shipping price constraint exactly as described
-          for the price rule.
+        score: 0.85
+        explanation: Closely mapped based on prerequisites.
       - name: prerequisite_subtotal_range
         expression: price_rules.prerequisite_subtotal_range
-        score: 1.0
-        explanation:
-          Field accurately depicts the minimum subtotal for price rules,
-          is mapped precisely.
+        score: 0.85
+        explanation: Contextual matching with subtotal range for prerequisites.
       - name: prerequisite_to_entitlement_purchase_prerequisite_amount
         expression: price_rules.prerequisite_to_entitlement_purchase.prerequisite_amount
-        score: 1.0
-        explanation:
-          Prerequisite purchase mapping is perfectly in line with discount
-          rules.
+        score: 0.75
+        explanation: The field matches but contains a nested prerequisite structure
+          to evaluate.
       - name: quantity_ratio_entitled_quantity
         expression: price_rules.prerequisite_to_entitlement_quantity_ratio.entitled_quantity
-        score: 1.0
-        explanation: Entitled quantity mapping is exact and corresponds to its functionality.
+        score: 0.8
+        explanation: Matching within a nested structure with 'entitled_quantity' context.
       - name: quantity_ratio_prerequisite_quantity
         expression: price_rules.prerequisite_to_entitlement_quantity_ratio.prerequisite_quantity
-        score: 1.0
-        explanation:
-          Mapping records prerequisite buy quantity accurately, matching
-          field intricacies.
+        score: 0.8
+        explanation: Similar nested match with 'prerequisite_quantity' context.
       - name: starts_at
         expression: price_rules.starts_at
-        score: 1.0
-        explanation: Start date mapping is flawless, formatted exactly in ISO 8601.
+        score: 0.8
+        explanation: Close match observed, confirm date and time are represented correctly.
       - name: target_selection
         expression: price_rules.target_selection
-        score: 1.0
-        explanation: Target selection for applying discounts maps precisely.
+        score: 0.85
+        explanation: High contextual relevance from given target selection options.
       - name: target_type
         expression: price_rules.target_type
-        score: 1.0
-        explanation:
-          Target type field mapping is exact, matching line item or shipping
-          line requirements.
+        score: 0.85
+        explanation: Matches well with the target type and its discretized values.
       - name: title
         expression: price_rules.title
-        score: 1.0
-        explanation: The title field maps seamlessly and meets its functional requirements.
+        score: 0.9
+        explanation: Titles of price rules likely match directly across systems.
       - name: updated_at
         expression: price_rules.updated_at
-        score: 1.0
-        explanation: Update timestamp is correctly aligned with ISO 8601 format.
+        score: 0.8
+        explanation: Ensure date formatting consistency for the updated_at field.
       - name: usage_limit
         expression: price_rules.usage_limit
-        score: 1.0
-        explanation: Usage limit field matches perfectly for discount code usage constraints.
+        score: 0.9
+        explanation: Represents a confidently mapped numerical field with usage limitations.
       - name: value
         expression: price_rules.value
-        score: 1.0
-        explanation: Value field is correctly negative and mapped according to rules.
+        score: 0.7
+        explanation: Requires considering negative values unique to context but maps
+          well.
       - name: value_type
         expression: price_rules.value_type
-        score: 1.0
-        explanation:
-          Value type mapping allows valid options, adhering precisely to
-          constraints.
+        score: 0.85
+        explanation: Valid values for 'value_type' show strong mapping consistency.

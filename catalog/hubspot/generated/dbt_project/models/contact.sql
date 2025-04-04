@@ -11,13 +11,13 @@ SELECT
     NULL AS _fivetran_deleted,
     contacts._airbyte_extracted_at AS _fivetran_synced,
     contacts.id AS id,
-    contacts.properties.email AS property_email_1,
-    contacts.properties.company AS property_company,
-    contacts.properties.firstname AS property_firstname,
-    contacts.properties.lastname AS property_lastname,
-    contacts.properties.email AS property_email,
-    contacts.properties.createdate AS property_createdate,
-    contacts.properties.jobtitle AS property_jobtitle,
-    contacts.properties.annualrevenue AS property_annualrevenue,
-    contacts.properties.hs_calculated_merged_vids AS property_hs_calculated_merged_vids
+    contacts.properties_email AS property_email_1,
+    contacts.properties_company AS property_company,
+    contacts.properties_firstname AS property_firstname,
+    contacts.properties_lastname AS property_lastname,
+    contacts.properties_email AS property_email,
+    contacts.properties_createdate AS property_createdate,
+    contacts.properties_jobtitle AS property_jobtitle,
+    contacts.properties_annualrevenue AS property_annualrevenue,
+    contacts.properties_hs_calculated_merged_vids AS property_hs_calculated_merged_vids
 FROM contacts

@@ -11,8 +11,8 @@ SELECT
     inventory_levels.id AS id,
     inventory_levels.inventory_item_id AS inventory_item_id,
     inventory_levels.location_id AS inventory_level_id,
-    inventory_levels.deactivation_alert AS name,
-    inventory_levels.quantities AS quantity,
+    inventory_levels.locations_count AS name,
+    inventory_levels.available AS quantity,
     inventory_levels.updated_at AS updated_at,
     inventory_levels._airbyte_extracted_at AS _fivetran_synced
 FROM inventory_levels
