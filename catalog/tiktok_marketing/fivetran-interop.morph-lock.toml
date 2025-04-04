@@ -46,9 +46,10 @@ unmapped_target_tables = []
 
 [mappings.ad_history]
 source_file = "catalog/tiktok_marketing/src/fivetran-interop/transforms/ad_history.yml"
-source_file_hash = "e66e4e7582c230e7c9a3c291b5cb5d3603a2a1ded2038239d7f3aa2770b03775"
+source_file_hash = "a54e7ebb4ec5cfc2ee47742ffc007126312570c6533b2ad77052068db2098e77"
 unmapped_target_fields = []
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.ad_history.mapped_target_fields]
 ad_id = "ads.ad_id"
@@ -146,12 +147,13 @@ ads = [
 
 [mappings.ad_report_hourly]
 source_file = "catalog/tiktok_marketing/src/fivetran-interop/transforms/ad_report_hourly.yml"
-source_file_hash = "a09d5dbec5df1e57f42e8178e950b2b2bc11a5355938b87c7707b66e8c22c43e"
+source_file_hash = "68964b8648d04ea64b645137385d132dad5c4847799b2be8b2008a41fc93254d"
 unmapped_target_fields = [
     "cpm",
     "total_sales_lead_value",
 ]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.ad_report_hourly.mapped_target_fields]
 ad_id = "ads_reports_hourly.ad_id"
@@ -258,7 +260,7 @@ ads_reports_hourly = [
 
 [mappings.adgroup_history]
 source_file = "catalog/tiktok_marketing/src/fivetran-interop/transforms/adgroup_history.yml"
-source_file_hash = "22dfd7f3323e573db3913a45dd0652f4b2b2b49445fad6c0d00410f9d1371684"
+source_file_hash = "08a2eeea5310a1fadf0b3c962f81c6f6ce1b4d9fa4b5ed95ad021b5e55b854fa"
 unmapped_target_fields = [
     "action_categories",
     "action_days",
@@ -291,6 +293,7 @@ unmapped_target_fields = [
     "status",
 ]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.adgroup_history.mapped_target_fields]
 adgroup_id = "ad_groups.adgroup_id"
@@ -414,90 +417,85 @@ ad_groups = [
 
 [mappings.adgroup_report_hourly]
 source_file = "catalog/tiktok_marketing/src/fivetran-interop/transforms/adgroup_report_hourly.yml"
-source_file_hash = "18fc0ebf68bdbc95ad982e193326bf8262d21e31a248ccef514b48318469b4cd"
+source_file_hash = "2c2efd8940833625de60bf4a97443f76ef4dd74fb5cafd09b8176b0d43c6849b"
 unmapped_target_fields = [
-    "average_video_play",
-    "average_video_play_per_user",
-    "clicks",
-    "conversion_rate",
-    "cost_per_1000_reached",
-    "cost_per_conversion",
-    "cost_per_result",
-    "cost_per_secondary_goal_result",
-    "profile_visits",
-    "profile_visits_rate",
-    "reach",
-    "real_time_conversion",
-    "real_time_conversion_rate",
-    "real_time_cost_per_conversion",
-    "real_time_cost_per_result",
-    "real_time_result",
-    "real_time_result_rate",
-    "result",
-    "result_rate",
-    "secondary_goal_result",
-    "secondary_goal_result_rate",
-    "shares",
-    "video_play_actions",
-    "video_view_p_100",
-    "video_views_p_25",
-    "video_views_p_50",
-    "video_views_p_75",
-    "video_watched_6_s",
+    "total_sales_lead_value",
 ]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.adgroup_report_hourly.mapped_target_fields]
-adgroup_id = "ad_groups_reports_hourly.metrics.adgroup_id"
-stat_time_hour = "ad_groups_reports_hourly.dimensions.stat_time_hour"
+adgroup_id = "ad_groups_reports_hourly.adgroup_id"
+stat_time_hour = "ad_groups_reports_hourly.stat_time_hour"
+cost_per_conversion = "ad_groups_reports_hourly.metrics.cost_per_conversion"
+real_time_conversion = "ad_groups_reports_hourly.metrics.real_time_conversion"
 cpc = "ad_groups_reports_hourly.metrics.cpc"
+video_play_actions = "ad_groups_reports_hourly.metrics.video_play_actions"
+conversion_rate = "ad_groups_reports_hourly.metrics.conversion_rate"
+video_views_p_75 = "ad_groups_reports_hourly.metrics.video_views_p75"
+result = "ad_groups_reports_hourly.metrics.result"
+video_views_p_50 = "ad_groups_reports_hourly.metrics.video_views_p50"
 impressions = "ad_groups_reports_hourly.metrics.impressions"
 comments = "ad_groups_reports_hourly.metrics.comments"
+real_time_cost_per_result = "ad_groups_reports_hourly.metrics.real_time_cost_per_result"
 conversion = "ad_groups_reports_hourly.metrics.conversion"
+real_time_result = "ad_groups_reports_hourly.metrics.real_time_result"
+video_view_p_100 = "ad_groups_reports_hourly.metrics.video_views_p100"
+shares = "ad_groups_reports_hourly.metrics.shares"
+real_time_conversion_rate = "ad_groups_reports_hourly.metrics.real_time_conversion_rate"
+cost_per_secondary_goal_result = "ad_groups_reports_hourly.metrics.cost_per_secondary_goal_result"
+secondary_goal_result_rate = "ad_groups_reports_hourly.metrics.secondary_goal_result_rate"
+clicks = "ad_groups_reports_hourly.metrics.clicks"
+cost_per_1000_reached = "ad_groups_reports_hourly.metrics.cost_per_1000_reached"
+video_views_p_25 = "ad_groups_reports_hourly.metrics.video_views_p25"
+reach = "ad_groups_reports_hourly.metrics.reach"
+real_time_cost_per_conversion = "ad_groups_reports_hourly.metrics.real_time_cost_per_conversion"
+profile_visits_rate = "ad_groups_reports_hourly.metrics.profile_visits_rate"
+average_video_play = "ad_groups_reports_hourly.metrics.average_video_play"
+profile_visits = "ad_groups_reports_hourly.metrics.profile_visits"
 cpm = "ad_groups_reports_hourly.metrics.cpm"
 ctr = "ad_groups_reports_hourly.metrics.ctr"
 video_watched_2_s = "ad_groups_reports_hourly.metrics.video_watched_2s"
 follows = "ad_groups_reports_hourly.metrics.follows"
+result_rate = "ad_groups_reports_hourly.metrics.result_rate"
+video_watched_6_s = "ad_groups_reports_hourly.metrics.video_watched_6s"
+secondary_goal_result = "ad_groups_reports_hourly.metrics.secondary_goal_result"
+cost_per_result = "ad_groups_reports_hourly.metrics.cost_per_result"
+average_video_play_per_user = "ad_groups_reports_hourly.metrics.average_video_play_per_user"
+real_time_result_rate = "ad_groups_reports_hourly.metrics.real_time_result_rate"
 spend = "ad_groups_reports_hourly.metrics.spend"
 likes = "ad_groups_reports_hourly.metrics.likes"
 _fivetran_synced = "ad_groups_reports_hourly._airbyte_extracted_at"
 total_purchase_value = "ad_groups_reports_hourly.metrics.total_purchase_value"
-total_sales_lead_value = "ad_groups_reports_hourly.metrics.total_sales_lead_value"
 
 [mappings.adgroup_report_hourly.unused_source_fields]
 ad_groups_reports_hourly = [
     "_airbyte_meta",
     "_airbyte_raw_id",
     "ad_id",
-    "adgroup_id",
     "advertiser_id",
     "campaign_id",
+    "dimensions",
     "dimensions.ad_id",
     "dimensions.adgroup_id",
     "dimensions.advertiser_id",
     "dimensions.campaign_id",
     "dimensions.stat_time_day",
+    "dimensions.stat_time_hour",
     "metrics.ad_name",
     "metrics.ad_text",
+    "metrics.adgroup_id",
     "metrics.adgroup_name",
     "metrics.app_install",
-    "metrics.average_video_play",
-    "metrics.average_video_play_per_user",
     "metrics.campaign_id",
     "metrics.campaign_name",
     "metrics.cash_spend",
-    "metrics.clicks",
     "metrics.clicks_on_music_disc",
     "metrics.complete_payment",
-    "metrics.conversion_rate",
-    "metrics.cost_per_1000_reached",
     "metrics.cost_per_app_install",
-    "metrics.cost_per_conversion",
     "metrics.cost_per_purchase",
     "metrics.cost_per_registration",
-    "metrics.cost_per_result",
     "metrics.cost_per_sales_lead",
-    "metrics.cost_per_secondary_goal_result",
     "metrics.cost_per_total_app_event_add_to_cart",
     "metrics.cost_per_total_sales_lead",
     "metrics.cta_conversion",
@@ -507,29 +505,15 @@ ad_groups_reports_hourly = [
     "metrics.mobile_app_id",
     "metrics.onsite_shopping",
     "metrics.placement_type",
-    "metrics.profile_visits",
-    "metrics.profile_visits_rate",
     "metrics.promotion_type",
     "metrics.purchase",
     "metrics.purchase_rate",
-    "metrics.reach",
     "metrics.real_time_app_install",
     "metrics.real_time_app_install_cost",
-    "metrics.real_time_conversion",
-    "metrics.real_time_conversion_rate",
-    "metrics.real_time_cost_per_conversion",
-    "metrics.real_time_cost_per_result",
-    "metrics.real_time_result",
-    "metrics.real_time_result_rate",
     "metrics.registration",
     "metrics.registration_rate",
-    "metrics.result",
-    "metrics.result_rate",
     "metrics.sales_lead",
     "metrics.sales_lead_rate",
-    "metrics.secondary_goal_result",
-    "metrics.secondary_goal_result_rate",
-    "metrics.shares",
     "metrics.total_app_event_add_to_cart",
     "metrics.total_complete_payment_rate",
     "metrics.total_onsite_shopping_value",
@@ -537,27 +521,21 @@ ad_groups_reports_hourly = [
     "metrics.tt_app_id",
     "metrics.tt_app_name",
     "metrics.value_per_complete_payment",
-    "metrics.video_play_actions",
-    "metrics.video_views_p100",
-    "metrics.video_views_p25",
-    "metrics.video_views_p50",
-    "metrics.video_views_p75",
-    "metrics.video_watched_6s",
     "metrics.voucher_spend",
     "metrics.vta_conversion",
     "metrics.vta_purchase",
     "stat_time_day",
-    "stat_time_hour",
 ]
 
 [mappings.advertiser]
 source_file = "catalog/tiktok_marketing/src/fivetran-interop/transforms/advertiser.yml"
-source_file_hash = "4db7d968fbbfee597a4bc82d0665ef9c0ee153c732e81835cb0e51467dbddd79"
+source_file_hash = "a5ab6bae1c33f9714edb1821e692d48329bd2f321aa861717bef36c21935ffc3"
 unmapped_target_fields = [
     "phone_number",
     "telephone",
 ]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.advertiser.mapped_target_fields]
 id = "advertisers.advertiser_id"
@@ -599,12 +577,13 @@ advertisers = [
 
 [mappings.campaign_history]
 source_file = "catalog/tiktok_marketing/src/fivetran-interop/transforms/campaign_history.yml"
-source_file_hash = "e116ede9baf2945c63080f716c6cab6e1abbdc81487802eeb44cdf6bb27b1f5b"
+source_file_hash = "e7cdca530fd5133f518810be813305538102ea874b203c2dfc96d90f8fc120a4"
 unmapped_target_fields = [
     "opt_status",
     "status",
 ]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.campaign_history.mapped_target_fields]
 campaign_id = "campaigns.campaign_id"
@@ -639,12 +618,13 @@ campaigns = [
 
 [mappings.campaign_report_hourly]
 source_file = "catalog/tiktok_marketing/src/fivetran-interop/transforms/campaign_report_hourly.yml"
-source_file_hash = "979b8b4b09fb6d0173aff63c88a617c257e8d6b7e69f16a02afc0919117f6dda"
+source_file_hash = "4961e4f97c90e604c096f3dbe473e45df4d3179d43e41089884d90299e639da0"
 unmapped_target_fields = [
     "profile_visits_rate",
     "total_sales_lead_value",
 ]
 omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.campaign_report_hourly.mapped_target_fields]
 campaign_id = "campaigns_reports_hourly.campaign_id"

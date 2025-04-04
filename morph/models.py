@@ -800,7 +800,7 @@ class SourceTableMappingSuggestion(BaseModel):
         table = create_markdown_table(headers, rows)
         return create_markdown_section(title, table, level=3)
 
-    def as_rich_table(self) -> str:
+    def as_rich_table(self) -> Markdown:
         """Return a markdown representation of the object.
 
         This method is maintained for backward compatibility but now returns a markdown string.
@@ -808,7 +808,7 @@ class SourceTableMappingSuggestion(BaseModel):
         Returns:
             A markdown formatted string
         """
-        return self.as_markdown_table()
+        return Markdown(self.as_markdown_table())
 
 
 class SourceTableMappingSuggestionShortList(BaseModel):
@@ -833,3 +833,209 @@ class SourceTableMappingTopTwoSuggestions(BaseModel):
 
     next_best_match_suggestion: SourceTableMappingSuggestion | None = None
     """The next-best match for the source table."""
+
+
+class TableMappingAudit(BaseModel):
+    """Represents the audit results for a table mapping."""
+
+    _table_mapping: TableMapping
+    _source_dbt_file: DbtSourceFile
+    _target_dbt_file: DbtSourceFile
+
+    unused_source_table_columns: list[str]
+    """The source table columns that are not used in the transform."""
+
+    omitted_target_table_columns: list[str]
+    """The target table columns that are not declared in the mapping."""
+
+    missing_target_table_columns: list[str]
+    """The source table columns that are declared "MISSING" in the transform."""
+
+    erroneous_source_table_columns: list[str]
+    """Any source table columns that are referenced but do not exist in the source.
+
+    These are likely caused by hallucinations in the LLM, or else a column was removed that
+    was previously present.
+    """
+
+    def get_errors(self) -> list[tuple[str, str]]:
+        """Return a list of errors found in the audit.
+
+        Each error is represented as a tuple of (error_type, instance_details).
+        """
+        return [
+            ("Erroneous Source Column Reference", column)
+            for column in self.erroneous_source_table_columns
+        ] + [
+            ("Omitted Target Column in Mapping", column)
+            for column in self.omitted_target_table_columns
+        ]
+
+    @classmethod
+    def new(
+        cls,
+        table_mapping: TableMapping,
+        source_dbt_file: DbtSourceFile,
+        target_dbt_file: DbtSourceFile,
+    ) -> Self:
+        """Create a TableMappingAudit from a TableMapping.
+
+        Args:
+            table_mapping: The table mapping to audit
+            source_dbt_file: The source DBT file
+            target_dbt_file: The target DBT file
+
+        Returns:
+            A TableMappingAudit instance
+        """
+        source_table = source_dbt_file.get_table(table_mapping.source_stream_name)
+        target_table = target_dbt_file.get_table(table_mapping.target_table_name)
+
+        return cls(
+            unused_source_table_columns=cls._find_unused_source_columns(
+                source_table=source_table,
+                table_mapping=table_mapping,
+            ),
+            omitted_target_table_columns=cls._find_omitted_target_columns(
+                target_table=target_table,
+                table_mapping=table_mapping,
+            ),
+            missing_target_table_columns=cls._find_missing_target_columns(
+                table_mapping=table_mapping,
+            ),
+            erroneous_source_table_columns=cls._find_erroneous_source_columns(
+                source_table=source_table,
+                table_mapping=table_mapping,
+            ),
+            _target_dbt_file=target_dbt_file,
+            _source_dbt_file=source_dbt_file,
+            _table_mapping=table_mapping,
+        )
+
+    def fix_errors(self) -> TableMapping:
+        """Fix errors in the table mapping.
+
+        Change erroneous mappings to "MISSING" and return the resulting mapping.
+        """
+        source_table_alias = self._table_mapping.source_stream_name
+        for column in self.erroneous_source_table_columns:
+            for field in self._table_mapping.field_mappings:
+                if field.expression == source_table_alias + "." + column:
+                    field.expression = "MISSING"
+
+        # TODO: Declare anything missing.
+
+        # Return the updated table mapping
+        return self._table_mapping
+
+    @staticmethod
+    def _find_unused_source_columns(
+        source_table: DbtSourceTable,
+        table_mapping: TableMapping,
+    ) -> list[str]:
+        """Find source table columns that are not used in the transform.
+
+        Args:
+            source_table: The source table
+            table_mapping: The table mapping
+
+        Returns:
+            List of unused source table columns
+        """
+        # Get all source column names
+        source_column_names = {column.name for column in source_table.columns_and_subcolumns}
+
+        # Get all source column names used in the mapping
+        used_column_names: set[str] = set()
+        for field in table_mapping.field_mappings:
+            # Skip MISSING fields
+            if field.expression == "MISSING":
+                continue
+
+            # Handle expressions that reference source columns
+            expr = str(field.expression)
+            if expr.startswith(f"{table_mapping.source_stream_name}."):
+                # Extract the column name from the expression
+                column_name = expr.split(".", 1)[1]
+                used_column_names.add(column_name)
+
+        # Find unused columns
+        return sorted(source_column_names - used_column_names)
+
+    @staticmethod
+    def _find_omitted_target_columns(
+        target_table: DbtSourceTable,
+        table_mapping: TableMapping,
+    ) -> list[str]:
+        """Find target table columns that are not declared in the mapping.
+
+        Args:
+            target_table: The target table
+            table_mapping: The table mapping
+
+        Returns:
+            List of target table columns that are omitted from the mapping
+        """
+        # Get all target column names
+        target_column_names = {column.name for column in target_table.columns_and_subcolumns}
+
+        # Get all mapped field names
+        mapped_field_names = {field.name for field in table_mapping.field_mappings}
+
+        # Find omitted columns
+        return sorted(target_column_names - mapped_field_names)
+
+    @staticmethod
+    def _find_missing_target_columns(
+        table_mapping: TableMapping,
+    ) -> list[str]:
+        """Find target table columns that are declared as 'MISSING' in the transform.
+
+        Args:
+            table_mapping: The table mapping
+
+        Returns:
+            List of target table columns that are declared as 'MISSING'
+        """
+        missing_columns = []
+
+        for field in table_mapping.field_mappings:
+            if field.expression == "MISSING":
+                missing_columns.append(field.name)
+
+        return sorted(missing_columns)
+
+    @staticmethod
+    def _find_erroneous_source_columns(
+        source_table: DbtSourceTable,
+        table_mapping: TableMapping,
+    ) -> list[str]:
+        """Find source table columns that are referenced but do not exist in the source.
+
+        Args:
+            source_table: The source table
+            table_mapping: The table mapping
+
+        Returns:
+            List of erroneous source table columns
+        """
+        # Get all source column names
+        source_column_names = {column.name for column in source_table.columns_and_subcolumns}
+
+        # Find referenced source columns that don't exist
+        erroneous_columns = []
+
+        for field in table_mapping.field_mappings:
+            # Skip MISSING fields
+            if field.expression == "MISSING":
+                continue
+
+            # Handle expressions that reference source columns
+            expr = str(field.expression)
+            if expr.startswith(f"{table_mapping.source_stream_name}."):
+                # Extract the column name from the expression
+                column_name = expr.split(".", 1)[1]
+                if column_name not in source_column_names:
+                    erroneous_columns.append(column_name)
+
+        return sorted(erroneous_columns)
