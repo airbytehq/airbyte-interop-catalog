@@ -9,7 +9,7 @@ from morph.models import (
     DbtSourceFile,
     DbtSourceTable,
     FieldMapping,
-    TableMapping,
+    TransformFile,
     TableMappingAudit,
 )
 
@@ -98,9 +98,9 @@ class TestTableMappingAudit:
         )
 
     @pytest.fixture
-    def table_mapping(self) -> TableMapping:
+    def table_mapping(self) -> TransformFile:
         """Create a table mapping fixture."""
-        return TableMapping(
+        return TransformFile(
             source_name="test_source",
             project_name="test_project",
             transform_name="target_table",
@@ -141,7 +141,7 @@ class TestTableMappingAudit:
     def test_find_unused_source_columns(
         self,
         source_table: DbtSourceTable,
-        table_mapping: TableMapping,
+        table_mapping: TransformFile,
     ):
         """Test _find_unused_source_columns method."""
         unused_columns = TableMappingAudit._find_unused_source_columns(
@@ -161,7 +161,7 @@ class TestTableMappingAudit:
     def test_find_omitted_target_columns(
         self,
         target_table: DbtSourceTable,
-        table_mapping: TableMapping,
+        table_mapping: TransformFile,
     ):
         """Test _find_omitted_target_columns method."""
         omitted_columns = TableMappingAudit._find_omitted_target_columns(
@@ -172,7 +172,7 @@ class TestTableMappingAudit:
         # The 'country' column from target_table is not declared in the mapping
         assert omitted_columns == ["country"]
 
-    def test_find_missing_target_columns(self, table_mapping: TableMapping):
+    def test_find_missing_target_columns(self, table_mapping: TransformFile):
         """Test _find_missing_target_columns method."""
         missing_columns = TableMappingAudit._find_missing_target_columns(
             table_mapping=table_mapping,
@@ -184,7 +184,7 @@ class TestTableMappingAudit:
     def test_find_erroneous_source_columns(
         self,
         source_table: DbtSourceTable,
-        table_mapping: TableMapping,
+        table_mapping: TransformFile,
     ):
         """Test _find_erroneous_source_columns method."""
         erroneous_columns = TableMappingAudit._find_erroneous_source_columns(
@@ -200,7 +200,7 @@ class TestTableMappingAudit:
         self,
         source_dbt_file: DbtSourceFile,
         target_dbt_file: DbtSourceFile,
-        table_mapping: TableMapping,
+        table_mapping: TransformFile,
     ):
         """Test new method."""
         audit = TableMappingAudit.new(

@@ -294,7 +294,7 @@ def build_readme(
         "These models are in the workshop directory and are not yet approved.\n",
     ]
     for mapping_file in resources.get_transforms_files(source_name, project_name):
-        transform = models.TableMapping.from_file(mapping_file)
+        transform = models.TransformFile.from_file(mapping_file)
         transform_dict = load_mapping_file(mapping_file)
         annotations = transform_dict.get("annotations", {})
         is_approved = annotations.get("approved", False)
