@@ -20,6 +20,10 @@ models:
   airbyte_{{ catalog_name }}:
     +materialized: view
 
+    # Workshop models (not yet approved)
+    workshop:
+      +enabled: false  # Workshop models are disabled by default
+
 vars:
   airbyte_{{ catalog_name }}_database: "{{ catalog_name }}"
   airbyte_{{ catalog_name }}_schema: "{{ catalog_name }}_raw"
