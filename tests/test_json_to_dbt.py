@@ -9,7 +9,6 @@ from click.testing import CliRunner
 
 from morph.cli import main
 from morph.utils.dbt.dbt_source_files import (
-    generate_dbt_sources_yml_from_schema_files,
     json_schema_to_dbt_column,
 )
 
@@ -78,41 +77,6 @@ def test_cli_json_to_dbt_command() -> None:
 
         # Clean up
         output_path.unlink()
-
-
-def test_generate_dbt_sources_yml() -> None:
-    """Test generation of dbt sources YAML from JSON schema files."""
-    with tempfile.TemporaryDirectory() as tmpdir:
-        # Create a test schema file
-        schema_path = Path(tmpdir) / "test_table.json"
-        schema_content = {
-            "type": "object",
-            "properties": {
-                "id": {"type": "integer"},
-                "name": {"type": "string"},
-            },
-        }
-        with schema_path.open("w") as f:
-            json.dump(schema_content, f)
-
-        # Generate sources.yml content
-        result = generate_dbt_sources_yml_from_schema_files(
-            source_name="test_source",
-            database="test_db",
-            schema="test_schema",
-            schema_files=[str(schema_path)],
-        )
-
-        # Verify the structure
-        assert "version" in result
-        assert "sources" in result
-        assert len(result["sources"]) == 1
-        source = result["sources"][0]
-        assert source["name"] == "test_source"
-        assert source["database"] == "test_db"
-        assert source["schema"] == "test_schema"
-        assert len(source["tables"]) == 1
-        assert source["tables"][0]["name"] == "test_table"
 
 
 def test_airbyte_catalog_with_additional_columns() -> None:

@@ -7,7 +7,6 @@ from __future__ import annotations
 
 import shutil
 import subprocess
-from pathlib import Path
 
 from rich.console import Console
 
@@ -49,7 +48,7 @@ def build_dbt_project(
     if not catalog_dir.exists():
         raise ValueError(f"Error: {catalog_dir} does not exist")
 
-    if not Path(catalog_file).exists():
+    if not catalog_file.exists():
         raise ValueError(f"Error: {catalog_file} does not exist")
 
     dbt_project_dir = resources.get_generated_dbt_project_dir(

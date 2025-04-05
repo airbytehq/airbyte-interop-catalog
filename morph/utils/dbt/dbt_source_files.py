@@ -102,25 +102,6 @@ def process_schema_file(schema_file: str) -> tuple[str, dict[str, Any]]:
     return table_name, table
 
 
-def generate_dbt_sources_yml_from_schema_files(
-    schema_files: list[str],
-    source_name: str,
-    database: str | None = None,
-    schema: str | None = None,
-) -> dict[str, Any]:
-    """Generate a dbt sources.yml structure from JSON schema files."""
-    tables = []
-
-    for schema_file in schema_files:
-        try:
-            _, table = process_schema_file(schema_file)
-            tables.append(table)
-        except Exception as e:
-            print(f"Error processing {schema_file}: {e}")
-
-    return create_dbt_source(tables, source_name, database, schema)
-
-
 def generate_dbt_sources_yml_from_airbyte_catalog(
     source_name: str,
     *,
