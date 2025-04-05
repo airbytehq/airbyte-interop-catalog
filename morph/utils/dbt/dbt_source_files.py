@@ -10,108 +10,34 @@ Example:
     python dbt_source_files.py catalog.json --catalog --source-name my_source --output models/sources.yml
 """
 
-import json
 from pathlib import Path
-from typing import Any
 
 from rich.console import Console
 
 from morph import resources
 from morph.constants import DEFAULT_PROJECT_NAME, HEADER_COMMENT
-from morph.models import DbtSourceColumn, DbtSourceFile, DbtSourceTable
+from morph.models import DbtSourceFile
 from morph.utils import text_utils
 
 console = Console()
 
 
-def json_schema_to_dbt_column(
-    property_name: str,
-    property_schema: dict[str, Any],
-) -> dict[str, Any]:
-    """Convert a JSON schema property to a dbt column definition.
-
-    This function is maintained for backward compatibility.
-    New code should use DbtSourceColumn.from_json_schema() instead.
-    """
-
-    dbt_column = DbtSourceColumn.from_json_schema(property_name, property_schema)
-    result = dbt_column.model_dump(exclude={"subcolumns": True})
-
-    if result.get("original_name") is None:
-        result.pop("original_name", None)
-
-    return result
-
-
-def json_schema_to_dbt_table(schema_name: str, schema_data: dict[str, Any]) -> dict[str, Any]:
-    """Convert a JSON schema to a dbt table definition."""
-
-    table = {"name": schema_name}
-
-    # Add description if available
-    if "description" in schema_data:
-        table["description"] = schema_data["description"]
-
-    # Extract columns from properties
-    if "properties" in schema_data:
-        columns = []
-        for prop_name, prop_schema in schema_data["properties"].items():
-            dbt_column = DbtSourceColumn.from_json_schema(prop_name, prop_schema)
-            columns.append(dbt_column)
-
-        if columns:
-            dbt_table = DbtSourceTable(
-                name=schema_name,
-                description=table.get("description"),
-                columns=columns,
-            )
-            return dbt_table.to_dict()
-
-    return table
-
-
-def create_dbt_source(
-    tables: list[dict[str, Any]],
-    source_name: str,
-    database: str | None = None,
-    schema: str | None = None,
-) -> dict[str, Any]:
-    """Create a dbt source definition with tables."""
-    # Sort tables alphabetically by name
-    sorted_tables = sorted(tables, key=lambda x: x.get("name", ""))
-
-    source = {"name": source_name, "tables": sorted_tables}
-
-    if database:
-        source["database"] = database
-
-    if schema:
-        source["schema"] = schema
-
-    return {"version": 2, "sources": [source]}
-
-
-def process_schema_file(schema_file: str) -> tuple[str, dict[str, Any]]:
-    """Process a single schema file and return table name and table definition."""
-    schema_path = Path(schema_file)
-    schema_data = json.loads(schema_path.read_text())
-
-    # Use filename without extension as table name
-    table_name = schema_path.stem
-    table = json_schema_to_dbt_table(table_name, schema_data)
-    return table_name, table
-
-
-def generate_dbt_sources_yml_from_airbyte_catalog(
+def update_generated_dbt_sources_yml_from_airbyte_catalog(
     source_name: str,
     *,
     project_name: str = DEFAULT_PROJECT_NAME,
     catalog_file: Path | None = None,
     output_file: Path | None = None,
 ) -> None:
-    """Generate a dbt sources.yml structure from an Airbyte catalog file."""
+    """Generate a dbt sources.yml structure from an Airbyte catalog file.
+
+    Save it to disk in the default location, or in a custom location if specified.
+    """
     if not catalog_file:
-        catalog_file = resources.get_generated_catalog_path(source_name, project_name)
+        catalog_file = resources.get_generated_catalog_path(
+            source_name=source_name,
+            project_name=project_name,
+        )
 
     # Validate input path exists
     if not catalog_file.exists():
@@ -134,43 +60,3 @@ def generate_dbt_sources_yml_from_airbyte_catalog(
     # Write to file
     output_path.write_text(f"{HEADER_COMMENT}\n{text_utils.dump_yaml_str(dbt_file.to_dict())}")
     console.print(f"Generated sources.yml at {output_path}")
-
-
-def parse_airbyte_catalog_to_dbt_sources_format(
-    catalog_file: str | Path,
-    source_name: str,
-    database: str | None = None,
-    schema: str | None = None,
-) -> dict[str, Any]:
-    """Generate a dbt sources.yml structure from an Airbyte catalog file.
-
-    This function is maintained for backward compatibility.
-    New code should use DbtSourceFile.from_airbyte_catalog_json() instead.
-    """
-    try:
-        dbt_file = DbtSourceFile.from_airbyte_catalog_json(
-            catalog_file=catalog_file,
-            source_name=source_name,
-        )
-
-        source_dict = dbt_file.to_dict()
-
-        if (database or schema) and source_dict.get("sources"):
-            if database:
-                source_dict["sources"][0]["database"] = database
-            if schema:
-                source_dict["sources"][0]["schema"] = schema
-
-        return source_dict
-    except Exception as e:
-        print(f"Error processing Airbyte catalog {catalog_file}: {e}")
-        return create_dbt_source([], source_name, database, schema)
-
-
-def get_dbt_sources_requirements(
-    source_name: str,
-    project_name: str = DEFAULT_PROJECT_NAME,
-) -> dict[str, Any]:
-    """Get the parsed dbt sources.yml requirements file content."""
-    catalog_file = resources.get_generated_catalog_path(source_name, project_name)
-    return parse_airbyte_catalog_to_dbt_sources_format(catalog_file, source_name)

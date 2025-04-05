@@ -5,19 +5,21 @@ Utilities for generating Airbyte catalog files.
 from __future__ import annotations
 
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import Any
+
+import airbyte as ab
+from airbyte.secrets import GoogleGSMSecretManager
 
 from morph import resources
-from morph.utils.dbt.dbt_source_files import generate_dbt_sources_yml_from_airbyte_catalog
+from morph.utils.dbt.dbt_source_files import update_generated_dbt_sources_yml_from_airbyte_catalog
 
 AIRBYTE_INTERNAL_GCP_PROJECT = "dataline-integration-testing"
 USE_DOCKER_IMAGE = True
 
-if TYPE_CHECKING:
-    import airbyte as ab
 
-
-def get_connector_id(source_name: str) -> str:
+def get_connector_id(
+    source_name: str,
+) -> str:
     """Get the connector ID for an Airbyte source.
 
     Args:
@@ -32,7 +34,10 @@ def get_connector_id(source_name: str) -> str:
     return f"source-{source_name.replace('_', '-')}"
 
 
-def get_config(source_name: str, secret_name: str | None = None) -> dict:
+def get_config(
+    source_name: str,
+    secret_name: str | None = None,
+) -> dict[str, Any]:
     """Get the config for an Airbyte source.
 
     Args:
@@ -42,8 +47,6 @@ def get_config(source_name: str, secret_name: str | None = None) -> dict:
     Returns:
         The source configuration as a dictionary
     """
-    import airbyte as ab
-    from airbyte.secrets import GoogleGSMSecretManager
 
     connector_name = get_connector_id(source_name)
     secret_manager = GoogleGSMSecretManager(
@@ -51,15 +54,27 @@ def get_config(source_name: str, secret_name: str | None = None) -> dict:
         credentials_json=ab.get_secret("GCP_GSM_CREDENTIALS"),
     )
     if secret_name:
-        return secret_manager.get_secret(secret_name).parse_json()
+        return secret_manager.get_secret(
+            secret_name=secret_name,
+        ).parse_json()
 
-    secret = next(iter(secret_manager.fetch_connector_secrets(connector_name)), None)
+    secret = next(
+        iter(
+            secret_manager.fetch_connector_secrets(
+                connector_name,
+            ),
+        ),
+        None,
+    )
     if secret is None:
         raise ValueError(f"No secrets found for {connector_name}")
     return secret.parse_json()
 
 
-def get_source(source_name: str, streams: list[str] | str = "*") -> ab.Source:
+def get_source(
+    source_name: str,
+    streams: list[str] | str = "*",
+) -> ab.Source:
     """Get an Airbyte source instance.
 
     Args:
@@ -69,7 +84,6 @@ def get_source(source_name: str, streams: list[str] | str = "*") -> ab.Source:
     Returns:
         An Airbyte source instance
     """
-    import airbyte as ab
 
     # Hubspot's CDK ref is not properly pinned in its pyproject.toml (needs airbyte-cdk==2.4.0)
     # AND it needs the old version of pendulum so it isn't compatible with Python 3.12
@@ -87,6 +101,8 @@ def write_catalog_file(
 ) -> Path:
     """Write the Airbyte catalog to a file.
 
+    The default file path will be used unless a custom location is specified.
+
     Args:
         source_name: Name of the source
         output_file_path: Path to the output file
@@ -103,7 +119,7 @@ def write_catalog_file(
     output_file_path.parent.mkdir(parents=True, exist_ok=True)
     output_file_path.write_text(catalog.model_dump_json(indent=2))
 
-    generate_dbt_sources_yml_from_airbyte_catalog(
+    update_generated_dbt_sources_yml_from_airbyte_catalog(
         source_name=source_name,
     )
 

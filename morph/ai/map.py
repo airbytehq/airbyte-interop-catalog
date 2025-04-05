@@ -258,7 +258,7 @@ def infer_table_mappings(  # noqa: PLR0912 (too many branches)
         project_name=project_name,
     )
     if not dbt_source_file_path.exists():
-        dbt_source_files.generate_dbt_sources_yml_from_airbyte_catalog(
+        dbt_source_files.update_generated_dbt_sources_yml_from_airbyte_catalog(
             source_name=source_name,
             project_name=project_name,
         )

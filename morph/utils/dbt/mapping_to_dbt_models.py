@@ -318,7 +318,7 @@ def build_readme(
     readme_path.write_text("\n".join(sections))
 
 
-def generate_dbt_package(  # noqa: PLR0912, PLR0915
+def generate_dbt_package(  # noqa: PLR0912
     source_name: str,
     *,
     project_name: str = DEFAULT_PROJECT_NAME,

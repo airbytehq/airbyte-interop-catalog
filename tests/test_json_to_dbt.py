@@ -8,30 +8,6 @@ import pytest
 from click.testing import CliRunner
 
 from morph.cli import main
-from morph.utils.dbt.dbt_source_files import (
-    json_schema_to_dbt_column,
-)
-
-
-def test_json_schema_to_dbt_column() -> None:
-    """Test conversion of JSON schema properties to dbt column definitions."""
-    # Test string type
-    string_schema = {"type": "string", "description": "A text column"}
-    result = json_schema_to_dbt_column("text_col", string_schema)
-    assert result == {
-        "name": "text_col",
-        "description": "A text column",
-        "data_type": "varchar",
-    }
-
-    # Test integer type
-    integer_schema = {"type": "integer"}
-    result = json_schema_to_dbt_column("int_col", integer_schema)
-    assert result == {
-        "name": "int_col",
-        "data_type": "integer",
-        "description": None,
-    }
 
 
 @pytest.mark.skip(
