@@ -13,12 +13,12 @@ def markdown_formatted_confidence(score: float) -> str:
         A markdown formatted string representing the confidence score
     """
     if score > CONFIDENCE_HIGH:
-        return f"🟢 {score:.2f}"  # Bold for high confidence
+        return f"🟢 _{score:.2f}_"  # Bold for high confidence
 
     if score < CONFIDENCE_LOW:
-        return f"❌ {score:.2f}"  # Red for low confidence
+        return f"❌ _{score:.2f}_"  # Red for low confidence
 
-    return f"⚠️ {score:.2f}"  # Normal for medium confidence
+    return f"⚠️ _{score:.2f}_"  # Normal for medium confidence
 
 
 def create_markdown_table(headers: list[str], rows: list[list[str]]) -> str:
@@ -45,7 +45,11 @@ def create_markdown_table(headers: list[str], rows: list[list[str]]) -> str:
         # Ensure row has same number of columns as headers
         while len(row) < len(headers):
             row.append("")
-        table += "| " + " | ".join(row) + " |\n"
+        table += (
+            "| "
+            + " | ".join([str(cell).replace("\n", " ").replace("|", "\\|") for cell in row])
+            + " |\n"
+        )
 
     return table
 
