@@ -68,7 +68,7 @@ def infer_best_match_source_stream_name_short_list(
         A list of SourceTableMappingSuggestion objects.
     """
     # This function will be implemented by Marvin AI
-    pass
+    ...
 
 
 @with_retry(max_retries=3)
@@ -128,8 +128,8 @@ def infer_best_match_source_stream_name(
         ]
         short_list: models.SourceTableMappingSuggestionShortList = (
             ai_fn.infer_best_match_source_stream_name_short_list(
-                target_schema=target_schema,
-                source_tables=source_tables_without_columns,
+                target_table_description=target_schema,
+                available_source_tables=source_tables_without_columns,
             )
         )
         short_list_names = [s.suggested_source_table_name for s in short_list.suggestions]
@@ -155,7 +155,10 @@ def infer_best_match_source_stream_name(
 
     # console.input("Press 'Enter' to continue...")
     console.line()
-    return ai_fn.select_best_match_source_schema(target_schema, source_tables)
+    return ai_fn.select_best_match_source_schema(
+        target_table_schema=target_schema,
+        source_table_schemas=source_tables,
+    )
 
 
 def populate_missing_mappings(
@@ -182,7 +185,6 @@ def populate_missing_mappings(
     )
     source_schema: models.SourceTableSummary = next(
         (table for table in source_table_info if table.name == transform_parsed.source_stream_name),
-        None,
     )
     if source_schema is None:
         raise ValueError(f"Source schema not found for {transform_parsed.source_stream_name}")

@@ -117,8 +117,8 @@ def evaluate_mapping_confidence(
     ),
 )  # pyright: ignore [reportUntypedFunctionDecorator]
 def select_best_match_source_schema(
-    target_schema: models.DbtSourceTable,
-    source_schemas: list[models.DbtSourceTable],
+    target_table_schema: models.SourceTableSummary,
+    source_table_schemas: list[models.SourceTableSummary],
 ) -> models.SourceTableMappingTopTwoSuggestions:
     """Select the name of the source stream that is most similar to the target table schema.
 
@@ -126,8 +126,8 @@ def select_best_match_source_schema(
     degree of overlap in the column definitions of the source and target.
 
     Args:
-        target_schema: The target schema to map to
-        source_schemas: A list of source schemas to choose from
+        target_table_schema: The target schema to map to
+        source_table_schemas: A list of source schemas to choose from
 
     Returns:
         A SourceTableMappingTopTwoSuggestions object.
@@ -183,8 +183,8 @@ def generate_mappings(
     ),
 )  # pyright: ignore [reportUntypedFunctionDecorator]
 def infer_best_match_source_stream_name_short_list(
-    target_schema: models.SourceTableSummary,
-    source_tables: list[models.SourceTableSummary],
+    target_table_description: models.SourceTableSummary,
+    available_source_tables: list[models.SourceTableSummary],
 ) -> models.SourceTableMappingSuggestionShortList:
     """Get the name of the top 3-5 source tables based on the source and target table summaries.
 
