@@ -414,7 +414,7 @@ class FieldMappingSuggestion(BaseModel):
     """The confidence score for the next-best source field, or None if the field cannot be mapped."""
 
 
-class TableMapping(BaseModel):
+class TransformFile(BaseModel):
     """Represents a table mapping with its properties."""
 
     source_name: str
@@ -452,7 +452,7 @@ class TableMapping(BaseModel):
 
     @classmethod
     def from_file(cls, transform_file: Path) -> Self:
-        """Create a TableMapping from a transform file."""
+        """Create a TransformFile from a transform file."""
         file_data = text_utils.load_yaml_file(transform_file)
         source_name = file_data.get("domain", ".").split(".")[0]
         project_name = file_data.get("domain", ".").split(".")[1]
@@ -522,7 +522,7 @@ class TableMapping(BaseModel):
         return table_mapping
 
     def to_file(self, transform_file: Path | None = None) -> None:
-        """Write the TableMapping to a transform file."""
+        """Write the TransformFile to a transform file."""
         transform_file = transform_file or resources.get_transform_file(
             source_name=self.source_name,
             project_name=self.project_name,
@@ -857,7 +857,7 @@ class SourceTableMappingTopTwoSuggestions(BaseModel):
 class TableMappingAudit(BaseModel):
     """Represents the audit results for a table mapping."""
 
-    _table_mapping: TableMapping
+    _table_mapping: TransformFile
     _source_dbt_file: DbtSourceFile
     _target_dbt_file: DbtSourceFile
 
@@ -893,11 +893,11 @@ class TableMappingAudit(BaseModel):
     @classmethod
     def new(
         cls,
-        table_mapping: TableMapping,
+        table_mapping: TransformFile,
         source_dbt_file: DbtSourceFile,
         target_dbt_file: DbtSourceFile,
     ) -> Self:
-        """Create a TableMappingAudit from a TableMapping.
+        """Create a TableMappingAudit from a TransformFile.
 
         Args:
             table_mapping: The table mapping to audit
@@ -931,7 +931,7 @@ class TableMappingAudit(BaseModel):
             _table_mapping=table_mapping,
         )
 
-    def fix_errors(self) -> TableMapping:
+    def fix_errors(self) -> TransformFile:
         """Fix errors in the table mapping.
 
         Change erroneous mappings to "MISSING" and return the resulting mapping.
@@ -950,7 +950,7 @@ class TableMappingAudit(BaseModel):
     @staticmethod
     def _find_unused_source_columns(
         source_table: DbtSourceTable,
-        table_mapping: TableMapping,
+        table_mapping: TransformFile,
     ) -> list[str]:
         """Find source table columns that are not used in the transform.
 
@@ -984,7 +984,7 @@ class TableMappingAudit(BaseModel):
     @staticmethod
     def _find_omitted_target_columns(
         target_table: DbtSourceTable,
-        table_mapping: TableMapping,
+        table_mapping: TransformFile,
     ) -> list[str]:
         """Find target table columns that are not declared in the mapping.
 
@@ -1006,7 +1006,7 @@ class TableMappingAudit(BaseModel):
 
     @staticmethod
     def _find_missing_target_columns(
-        table_mapping: TableMapping,
+        table_mapping: TransformFile,
     ) -> list[str]:
         """Find target table columns that are declared as 'MISSING' in the transform.
 
@@ -1027,7 +1027,7 @@ class TableMappingAudit(BaseModel):
     @staticmethod
     def _find_erroneous_source_columns(
         source_table: DbtSourceTable,
-        table_mapping: TableMapping,
+        table_mapping: TransformFile,
     ) -> list[str]:
         """Find source table columns that are referenced but do not exist in the source.
 

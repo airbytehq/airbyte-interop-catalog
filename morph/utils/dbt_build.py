@@ -7,13 +7,12 @@ from __future__ import annotations
 
 import shutil
 import subprocess
-from pathlib import Path
 
 from rich.console import Console
 
 from morph import resources
 from morph.utils.dbt.dbt_source_files import (
-    generate_dbt_sources_yml_from_airbyte_catalog,
+    update_generated_dbt_sources_yml_from_airbyte_catalog,
 )
 from morph.utils.dbt.mapping_to_dbt_models import generate_dbt_package
 
@@ -49,7 +48,7 @@ def build_dbt_project(
     if not catalog_dir.exists():
         raise ValueError(f"Error: {catalog_dir} does not exist")
 
-    if not Path(catalog_file).exists():
+    if not catalog_file.exists():
         raise ValueError(f"Error: {catalog_file} does not exist")
 
     dbt_project_dir = resources.get_generated_dbt_project_dir(
@@ -72,7 +71,7 @@ def build_dbt_project(
         if not generated_sources_path.exists():
             # Only generate sources.yml if it doesn't exist.
             # Otherwise, we'll copy the existing sources.yml into the generated directory.
-            generate_dbt_sources_yml_from_airbyte_catalog(
+            update_generated_dbt_sources_yml_from_airbyte_catalog(
                 source_name=source_name,
                 project_name=project_name,
                 catalog_file=catalog_file,

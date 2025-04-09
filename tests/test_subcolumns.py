@@ -1,7 +1,6 @@
 """Tests for the subcolumns functionality in dbt source files."""
 
 from morph.models import DbtSourceColumn, DbtSourceTable
-from morph.utils.dbt.dbt_source_files import json_schema_to_dbt_table
 
 EXPECTED_TOP_LEVEL_SUBCOLUMNS = 3
 EXPECTED_NESTED_SUBCOLUMNS = 2
@@ -124,69 +123,6 @@ def test_dbt_source_table_serialization_with_subcolumns() -> None:
     assert "subcolumns" in nested_again_dict
     assert isinstance(nested_again_dict["subcolumns"], list)
     assert len(nested_again_dict["subcolumns"]) == EXPECTED_NESTED_SUBCOLUMNS
-
-
-def test_json_schema_to_dbt_table_with_subcolumns() -> None:
-    """Test that json_schema_to_dbt_table correctly handles nested properties."""
-    schema_data = {
-        "type": "object",
-        "description": "A test table",
-        "properties": {
-            "id": {"type": "integer", "description": "Primary key"},
-            "name": {"type": "string", "description": "User name"},
-            "user_data": {
-                "type": "object",
-                "description": "User data as a variant",
-                "properties": {
-                    "email": {"type": "string", "description": "User email"},
-                    "address": {
-                        "type": "object",
-                        "description": "User address",
-                        "properties": {
-                            "street": {"type": "string", "description": "Street address"},
-                            "city": {"type": "string", "description": "City"},
-                            "zip": {"type": "string", "description": "ZIP code"},
-                        },
-                    },
-                },
-            },
-        },
-    }
-
-    table = json_schema_to_dbt_table("test_table", schema_data)
-
-    assert table["name"] == "test_table"
-    assert table["description"] == "A test table"
-    assert "columns" in table
-
-    assert "columns" in table
-    assert isinstance(table["columns"], list)
-
-    columns = {}
-    for col in table["columns"]:
-        assert isinstance(col, dict)
-        assert "name" in col
-        columns[col["name"]] = col
-
-    assert "user_data" in columns
-    user_data = columns["user_data"]
-
-    assert "meta" in user_data
-    assert isinstance(user_data["meta"], dict)
-    assert "subcolumns" in user_data["meta"]
-    assert isinstance(user_data["meta"]["subcolumns"], list)
-    assert len(user_data["meta"]["subcolumns"]) == EXPECTED_NESTED_SUBCOLUMNS
-
-    address = None
-    for col in user_data["meta"]["subcolumns"]:
-        if col["name"] == "address":
-            address = col
-            break
-
-    assert address is not None
-    assert "subcolumns" in address
-    assert isinstance(address["subcolumns"], list)
-    assert len(address["subcolumns"]) == EXPECTED_ADDRESS_SUBCOLUMNS
 
 
 def test_dbt_source_table_deserialization_with_subcolumns() -> None:

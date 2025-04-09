@@ -273,61 +273,6 @@ FROM {% for source in sources %}{{ source.alias }}{% if not loop.last %}, {% end
     )
 
 
-def build_dbt_project_yml(
-    catalog_name: str,
-    models: list[str],
-    workshop_models: list[str],
-) -> str:
-    """Generate dbt_project.yml content.
-
-    Args:
-        catalog_name: Name of the catalog
-        models: List of approved model names
-        workshop_models: List of unapproved model names in workshop/
-    """
-    # TODO: This should probably be managed by the copier template.
-    project_template = """
-name: "airbyte_{{ catalog_name }}"
-version: "1.0.0"
-config-version: 2
-
-profile: "default"
-
-model-paths: ["models"]
-analysis-paths: ["analyses"]
-test-paths: ["tests"]
-seed-paths: ["seeds"]
-macro-paths: ["macros"]
-snapshot-paths: ["snapshots"]
-
-target-path: "target"
-clean-targets:
-  - "target"
-  - "dbt_packages"
-
-models:
-  airbyte_{{ catalog_name }}:
-    +materialized: view
-
-    # Workshop models (not yet approved)
-    workshop:
-      +enabled: false  # Workshop models disabled by default
-
-vars:
-  airbyte_{{ catalog_name }}_database: "{{ catalog_name }}"
-  airbyte_{{ catalog_name }}_schema: "{{ catalog_name }}_raw"
-
-"""
-    env = Environment(autoescape=False)
-    template = env.from_string(project_template)
-
-    return template.render(
-        catalog_name=catalog_name,
-        models=models,
-        workshop_models=workshop_models,
-    )
-
-
 def build_readme(
     source_name: str,
     project_name: str,
@@ -349,7 +294,7 @@ def build_readme(
         "These models are in the workshop directory and are not yet approved.\n",
     ]
     for mapping_file in resources.get_transforms_files(source_name, project_name):
-        transform = models.TableMapping.from_file(mapping_file)
+        transform = models.TransformFile.from_file(mapping_file)
         transform_dict = load_mapping_file(mapping_file)
         annotations = transform_dict.get("annotations", {})
         is_approved = annotations.get("approved", False)
@@ -373,7 +318,7 @@ def build_readme(
     readme_path.write_text("\n".join(sections))
 
 
-def generate_dbt_package(  # noqa: PLR0912, PLR0915
+def generate_dbt_package(  # noqa: PLR0912
     source_name: str,
     *,
     project_name: str = DEFAULT_PROJECT_NAME,
@@ -428,13 +373,6 @@ def generate_dbt_package(  # noqa: PLR0912, PLR0915
     # Use copier to generate the dbt project scaffolding
     template_dir = Path() / "templates" / "dbt_project_template"
 
-    # Generate dbt_project.yml content
-    project_yml_content = build_dbt_project_yml(
-        catalog_name=source_name,
-        models=generated_models,
-        workshop_models=workshop_models,
-    )
-
     if not template_dir.is_dir():
         raise FileNotFoundError(f"Template directory {template_dir} does not exist.")
 
@@ -446,9 +384,6 @@ def generate_dbt_package(  # noqa: PLR0912, PLR0915
         overwrite=True,
     )
 
-    # Write the generated dbt_project.yml
-    dbt_project_path = output_path / "dbt_project" / "dbt_project.yml"
-    dbt_project_path.write_text(project_yml_content)
     # Now generate the SQL models
     models_dir = output_path / "dbt_project" / "models"
     models_dir.mkdir(parents=True, exist_ok=True)

@@ -33,9 +33,9 @@ def change_mapping_source_table(
         project_name=project_name,
         transform_name=transform_name,
     )
-    transform_parsed = models.TableMapping.from_file(transform_file)
+    transform_parsed = models.TransformFile.from_file(transform_file)
     transform_parsed.source_stream_name = new_source_table
-    new_transform_file_content = models.TableMapping(
+    new_transform_file_content = models.TransformFile(
         source_name=source_name,
         project_name=project_name,
         transform_name=transform_name,
@@ -68,7 +68,7 @@ def infer_best_match_source_stream_name_short_list(
         A list of SourceTableMappingSuggestion objects.
     """
     # This function will be implemented by Marvin AI
-    pass
+    ...
 
 
 @with_retry(max_retries=3)
@@ -128,8 +128,8 @@ def infer_best_match_source_stream_name(
         ]
         short_list: models.SourceTableMappingSuggestionShortList = (
             ai_fn.infer_best_match_source_stream_name_short_list(
-                target_schema=target_schema,
-                source_tables=source_tables_without_columns,
+                target_table_description=target_schema,
+                available_source_tables=source_tables_without_columns,
             )
         )
         short_list_names = [s.suggested_source_table_name for s in short_list.suggestions]
@@ -155,7 +155,10 @@ def infer_best_match_source_stream_name(
 
     # console.input("Press 'Enter' to continue...")
     console.line()
-    return ai_fn.select_best_match_source_schema(target_schema, source_tables)
+    return ai_fn.select_best_match_source_schema(
+        target_table_schema=target_schema,
+        source_table_schemas=source_tables,
+    )
 
 
 def populate_missing_mappings(
@@ -171,7 +174,7 @@ def populate_missing_mappings(
         project_name=project_name,
         transform_name=transform_name,
     )
-    transform_parsed = models.TableMapping.from_file(transform_file)
+    transform_parsed = models.TransformFile.from_file(transform_file)
     fields_to_populate = []
 
     source_table_info = models.SourceTableSummary.from_dbt_source_file(
@@ -182,7 +185,6 @@ def populate_missing_mappings(
     )
     source_schema: models.SourceTableSummary = next(
         (table for table in source_table_info if table.name == transform_parsed.source_stream_name),
-        None,
     )
     if source_schema is None:
         raise ValueError(f"Source schema not found for {transform_parsed.source_stream_name}")
@@ -248,7 +250,7 @@ def infer_table_mappings(  # noqa: PLR0912 (too many branches)
     if not yaml_file.exists():
         current_mapping_source_stream_name = constants.MISSING
     else:
-        current_mapping_source_stream_name = models.TableMapping.from_file(
+        current_mapping_source_stream_name = models.TransformFile.from_file(
             yaml_file,
         ).source_stream_name
 
@@ -258,7 +260,7 @@ def infer_table_mappings(  # noqa: PLR0912 (too many branches)
         project_name=project_name,
     )
     if not dbt_source_file_path.exists():
-        dbt_source_files.generate_dbt_sources_yml_from_airbyte_catalog(
+        dbt_source_files.update_generated_dbt_sources_yml_from_airbyte_catalog(
             source_name=source_name,
             project_name=project_name,
         )

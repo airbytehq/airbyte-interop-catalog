@@ -215,7 +215,7 @@ def eval(
     # Process each YAML file
     for yaml_file in sorted(yaml_files):
         console.print(f"\n[bold]Evaluating {yaml_file}[/bold]\n")
-        transform_obj = models.TableMapping.from_file(yaml_file)
+        transform_obj = models.TransformFile.from_file(yaml_file)
 
         # Get confidence score
         table_mapping_eval: models.TableMappingEval = get_table_mapping_eval(
@@ -300,7 +300,7 @@ def generate(
             transform_name=target_table.name,
         )
         if transform_file.exists():
-            transform_def = models.TableMapping.from_file(transform_file)
+            transform_def = models.TransformFile.from_file(transform_file)
             if transform_def.get_mapped_fields():  # Skip if at least some fields are mapped
                 include_table = False
                 console.print(
