@@ -1,0 +1,114 @@
+Table "account_history" {
+    "id" varchar
+    "name" varchar
+    "_fivetran_synced" varchar
+    "account_status" varchar
+    "business_country_code" varchar
+    "created_time" varchar
+    "currency" varchar
+    "timezone_name" varchar
+}
+
+Table "ad_history" {
+    "id" varchar
+    "account_id" varchar
+    "ad_set_id" varchar
+    "campaign_id" varchar
+    "creative_id" varchar
+    "name" varchar
+    "_fivetran_synced" varchar
+    "updated_time" varchar
+    "conversion_domain" varchar
+}
+
+Table "ad_set_history" {
+    "id" varchar
+    "account_id" varchar
+    "campaign_id" varchar
+    "name" varchar
+    "_fivetran_synced" varchar
+    "updated_time" varchar
+    "start_time" varchar
+    "end_time" varchar
+    "bid_strategy" varchar
+    "daily_budget" varchar
+    "budget_remaining" varchar
+    "status" varchar
+    "optimization_goal" varchar
+}
+
+Table "basic_ad" {
+    "ad_id" varchar
+    "ad_name" varchar
+    "adset_name" varchar
+    "date" varchar
+    "account_id" varchar
+    "impressions" varchar
+    "inline_link_clicks" varchar
+    "spend" varchar
+    "reach" varchar
+    "frequency" varchar
+    "_fivetran_synced" varchar
+}
+
+Table "basic_ad_actions" {
+    "_1_d_view" varchar
+    "_7_d_click" varchar
+    "_28_d_click" varchar
+    "_fivetran_id" varchar
+    "_fivetran_synced" varchar
+    "action_type" varchar
+    "ad_id" varchar
+    "date" varchar
+    "index" varchar
+    "inline" varchar
+    "value" varchar
+}
+
+Table "basic_ad_action_values" {
+    "_7_d_click" varchar
+    "_fivetran_id" varchar
+    "_fivetran_synced" varchar
+    "action_type" varchar
+    "ad_id" varchar
+    "date" varchar
+    "index" varchar
+    "value" varchar
+}
+
+Table "campaign_history" {
+    "id" varchar
+    "account_id" varchar
+    "name" varchar
+    "_fivetran_synced" varchar
+    "updated_time" varchar
+    "created_time" varchar
+    "start_time" varchar
+    "stop_time" varchar
+    "daily_budget" varchar
+    "budget_remaining" varchar
+    "lifetime_budget" varchar
+    "status" varchar
+}
+
+Table "creative_history" {
+    "_fivetran_id" varchar
+    "page_link" varchar
+    "template_page_link" varchar
+    "id" varchar
+    "account_id" varchar
+    "name" varchar
+    "url_tags" varchar
+    "_fivetran_synced" varchar
+    "template_page_link" varchar
+    "asset_feed_spec_link_urls" varchar
+    "object_story_link_data_child_attachments" varchar
+    "object_story_link_data_caption" varchar
+    "object_story_link_data_description" varchar
+    "object_story_link_data_link" varchar
+    "object_story_link_data_message" varchar
+    "template_app_link_spec_ios" varchar
+    "template_app_link_spec_ipad" varchar
+    "template_app_link_spec_android" varchar
+    "template_app_link_spec_iphone" varchar
+}

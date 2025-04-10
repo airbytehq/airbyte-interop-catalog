@@ -1,0 +1,601 @@
+Table "calendar_event" {
+    "_fivetran_synced" varchar
+    "avatar_url" varchar
+    "campaign_guid" varchar
+    "category" varchar
+    "category_id" varchar
+    "content_group_id" varchar
+    "content_id" varchar
+    "created_by" varchar
+    "description" varchar
+    "event_date" varchar
+    "event_type" varchar
+    "id" varchar
+    "is_recurring" varchar
+    "name" varchar
+    "owner_id" varchar
+    "portal_id" varchar
+    "preview_key" varchar
+    "social_display_name" varchar
+    "social_username" varchar
+    "state" varchar
+    "topic_ids" varchar
+    "url" varchar
+}
+
+Table "company" {
+    "_fivetran_synced" varchar
+    "id" varchar
+    "portal_id" varchar
+    "is_deleted" varchar
+    "property_name" varchar
+    "property_description" varchar
+    "property_createdate" varchar
+    "property_industry" varchar
+    "property_address" varchar
+    "property_address_2" varchar
+    "property_city" varchar
+    "property_state" varchar
+    "property_country" varchar
+    "property_annualrevenue" varchar
+}
+
+Table "company_property_history" {
+    "_fivetran_synced" varchar
+    "company_id" varchar
+    "name" varchar
+    "source" varchar
+    "source_id" varchar
+    "timestamp" varchar
+    "value" varchar
+}
+
+Table "contact_merge_audit" {
+    "_fivetran_synced" varchar
+    "canonical_vid" varchar
+    "contact_id" varchar
+    "entity_id" varchar
+    "first_name" varchar
+    "last_name" varchar
+    "num_properties_moved" varchar
+    "timestamp" varchar
+    "user_id" varchar
+    "vid_to_merge" varchar
+}
+
+Table "contact" {
+    "_fivetran_deleted" varchar
+    "_fivetran_synced" varchar
+    "id" varchar
+    "property_email_1" varchar
+    "property_company" varchar
+    "property_firstname" varchar
+    "property_lastname" varchar
+    "property_email" varchar
+    "property_createdate" varchar
+    "property_jobtitle" varchar
+    "property_annualrevenue" varchar
+    "property_hs_calculated_merged_vids" varchar
+}
+
+Table "contact_form_submission" {
+    "_fivetran_synced" varchar
+    "contact_id" varchar
+    "conversion_id" varchar
+    "form_id" varchar
+    "page_url" varchar
+    "portal_id" varchar
+    "timestamp" varchar
+    "title" varchar
+}
+
+Table "contact_list" {
+    "_fivetran_deleted" varchar
+    "_fivetran_synced" varchar
+    "created_at" varchar
+    "id" varchar
+    "name" varchar
+    "updated_at" varchar
+    "created_by_id" varchar
+    "object_type_id" varchar
+    "processing_status" varchar
+    "processing_type" varchar
+    "list_version" varchar
+    "filters_updated_at" varchar
+    "metadata_error" varchar
+    "metadata_last_processing_state_change_at" varchar
+    "metadata_last_size_change_at" varchar
+    "metadata_processing" varchar
+    "metadata_size" varchar
+    "portal_id" varchar
+    "deleteable" varchar
+    "dynamic" varchar
+}
+
+Table "contact_list_member" {
+    "_fivetran_deleted" varchar
+    "_fivetran_synced" varchar
+    "added_at" varchar
+    "contact_id" varchar
+    "contact_list_id" varchar
+}
+
+Table "contact_property_history" {
+    "_fivetran_synced" varchar
+    "contact_id" varchar
+    "name" varchar
+    "source" varchar
+    "source_id" varchar
+    "timestamp" varchar
+    "value" varchar
+}
+
+Table "deal" {
+    "deal_id" varchar
+    "is_deleted" varchar
+    "portal_id" varchar
+    "deal_pipeline_id" varchar
+    "deal_pipeline_stage_id" varchar
+    "owner_id" varchar
+    "property_dealname" varchar
+    "property_description" varchar
+    "property_amount" varchar
+    "property_closedate" varchar
+    "property_createdate" varchar
+}
+
+Table "deal_stage" {
+    "_fivetran_active" varchar
+    "_fivetran_end" varchar
+    "_fivetran_start" varchar
+    "_fivetran_synced" varchar
+    "date_entered" varchar
+    "deal_id" varchar
+    "source" varchar
+    "source_id" varchar
+    "value" varchar
+}
+
+Table "deal_company" {
+    "_fivetran_synced" varchar
+    "company_id" varchar
+    "deal_id" varchar
+    "type_id" varchar
+    "category" varchar
+}
+
+Table "deal_contact" {
+    "_fivetran_synced" varchar
+    "contact_id" varchar
+    "deal_id" varchar
+    "type_id" varchar
+    "category" varchar
+}
+
+Table "deal_pipeline" {
+    "_fivetran_deleted" varchar
+    "_fivetran_synced" varchar
+    "active" varchar
+    "display_order" varchar
+    "label" varchar
+    "pipeline_id" varchar
+    "created_at" varchar
+    "updated_at" varchar
+}
+
+Table "deal_pipeline_stage" {
+    "_fivetran_deleted" varchar
+    "_fivetran_synced" varchar
+    "active" varchar
+    "closed_won" varchar
+    "display_order" varchar
+    "label" varchar
+    "pipeline_id" varchar
+    "probability" varchar
+    "stage_id" varchar
+    "created_at" varchar
+    "updated_at" varchar
+}
+
+Table "deal_property_history" {
+    "_fivetran_synced" varchar
+    "deal_id" varchar
+    "name" varchar
+    "source" varchar
+    "source_id" varchar
+    "timestamp" varchar
+    "value" varchar
+}
+
+Table "email_campaign" {
+    "_fivetran_synced" varchar
+    "app_id" varchar
+    "app_name" varchar
+    "content_id" varchar
+    "id" varchar
+    "name" varchar
+    "num_included" varchar
+    "num_queued" varchar
+    "sub_type" varchar
+    "subject" varchar
+    "type" varchar
+}
+
+Table "email_event" {
+    "_fivetran_synced" varchar
+    "app_id" varchar
+    "caused_by_created" varchar
+    "caused_by_id" varchar
+    "created" varchar
+    "email_campaign_id" varchar
+    "filtered_event" varchar
+    "id" varchar
+    "obsoleted_by_created" varchar
+    "obsoleted_by_id" varchar
+    "portal_id" varchar
+    "recipient" varchar
+    "sent_by_created" varchar
+    "sent_by_id" varchar
+    "type" varchar
+}
+
+Table "email_event_bounce" {
+    "_fivetran_synced" varchar
+    "category" varchar
+    "id" varchar
+    "response" varchar
+    "status" varchar
+}
+
+Table "email_event_click" {
+    "_fivetran_synced" varchar
+    "browser" varchar
+    "id" varchar
+    "ip_address" varchar
+    "location" varchar
+    "referer" varchar
+    "url" varchar
+    "user_agent" varchar
+}
+
+Table "email_event_deferred" {
+    "_fivetran_synced" varchar
+    "attempt" varchar
+    "id" varchar
+    "response" varchar
+}
+
+Table "email_event_delivered" {
+    "_fivetran_synced" varchar
+    "id" varchar
+    "response" varchar
+    "smtp_id" varchar
+}
+
+Table "email_event_dropped" {
+    "_fivetran_synced" varchar
+    "bcc" varchar
+    "cc" varchar
+    "drop_message" varchar
+    "drop_reason" varchar
+    "from" varchar
+    "id" varchar
+    "reply_to" varchar
+    "subject" varchar
+}
+
+Table "email_event_forward" {
+    "_fivetran_synced" varchar
+    "browser" varchar
+    "id" varchar
+    "ip_address" varchar
+    "location" varchar
+    "user_agent" varchar
+}
+
+Table "email_event_open" {
+    "_fivetran_synced" varchar
+    "browser" varchar
+    "duration" varchar
+    "id" varchar
+    "ip_address" varchar
+    "location" varchar
+    "user_agent" varchar
+}
+
+Table "email_event_print" {
+    "_fivetran_synced" varchar
+    "browser" varchar
+    "id" varchar
+    "ip_address" varchar
+    "location" varchar
+    "user_agent" varchar
+}
+
+Table "email_event_sent" {
+    "_fivetran_synced" varchar
+    "bcc" varchar
+    "cc" varchar
+    "from" varchar
+    "id" varchar
+    "reply_to" varchar
+    "subject" varchar
+}
+
+Table "email_event_spam_report" {
+    "_fivetran_synced" varchar
+    "id" varchar
+    "ip_address" varchar
+    "user_agent" varchar
+}
+
+Table "email_event_status_change" {
+    "_fivetran_synced" varchar
+    "bounced" varchar
+    "id" varchar
+    "portal_subscription_status" varchar
+    "requested_by" varchar
+    "source" varchar
+    "subscriptions" varchar
+}
+
+Table "email_subscription" {
+    "_fivetran_synced" varchar
+    "active" varchar
+    "description" varchar
+    "id" varchar
+    "name" varchar
+    "portal_id" varchar
+}
+
+Table "email_subscription_change" {
+    "_fivetran_synced" varchar
+    "caused_by_event_id" varchar
+    "change" varchar
+    "change_type" varchar
+    "email_subscription_id" varchar
+    "portal_id" varchar
+    "recipient" varchar
+    "source" varchar
+    "timestamp" varchar
+}
+
+Table "engagement" {
+    "_fivetran_synced" varchar
+    "active" varchar
+    "created_at" varchar
+    "id" varchar
+    "owner_id" varchar
+    "portal_id" varchar
+    "timestamp" varchar
+    "type" varchar
+}
+
+Table "engagement_call" {
+    "_fivetran_synced" varchar
+    "engagement_id" varchar
+    "_fivetran_deleted" varchar
+    "property_hs_createdate" varchar
+    "timestamp" varchar
+    "property_hubspot_owner_id" varchar
+    "property_hubspot_team_id" varchar
+}
+
+Table "engagement_company" {
+    "_fivetran_synced" varchar
+    "company_id" varchar
+    "engagement_id" varchar
+    "category" varchar
+}
+
+Table "engagement_contact" {
+    "_fivetran_synced" varchar
+    "contact_id" varchar
+    "engagement_id" varchar
+    "category" varchar
+}
+
+Table "engagement_deal" {
+    "_fivetran_synced" varchar
+    "deal_id" varchar
+    "engagement_id" varchar
+    "category" varchar
+}
+
+Table "engagement_email" {
+    "_fivetran_synced" varchar
+    "engagement_id" varchar
+    "property_hs_createdate" varchar
+    "timestamp" varchar
+    "property_hubspot_owner_id" varchar
+    "property_hubspot_team_id" varchar
+}
+
+Table "engagement_email_cc" {
+    "_fivetran_synced" varchar
+    "email" varchar
+    "engagement_id" varchar
+    "first_name" varchar
+    "last_name" varchar
+}
+
+Table "engagement_email_to" {
+    "_fivetran_synced" varchar
+    "email" varchar
+    "engagement_id" varchar
+    "first_name" varchar
+    "last_name" varchar
+}
+
+Table "engagement_meeting" {
+    "_fivetran_synced" varchar
+    "engagement_id" varchar
+    "property_hs_createdate" varchar
+    "timestamp" varchar
+    "property_hubspot_owner_id" varchar
+    "property_hubspot_team_id" varchar
+}
+
+Table "engagement_note" {
+    "_fivetran_synced" varchar
+    "body" varchar
+    "engagement_id" varchar
+    "property_hs_createdate" varchar
+    "timestamp" varchar
+    "property_hubspot_owner_id" varchar
+    "property_hubspot_team_id" varchar
+}
+
+Table "engagement_task" {
+    "_fivetran_synced" varchar
+    "engagement_id" varchar
+    "property_hs_createdate" varchar
+    "timestamp" varchar
+    "property_hubspot_owner_id" varchar
+    "property_hubspot_team_id" varchar
+}
+
+Table "form" {
+    "_fivetran_deleted" varchar
+    "_fivetran_synced" varchar
+    "created_at" varchar
+    "css_class" varchar
+    "follow_up_id" varchar
+    "guid" varchar
+    "lead_nurturing_campaign_id" varchar
+    "method" varchar
+    "name" varchar
+    "notify_recipients" varchar
+    "portal_id" varchar
+    "redirect" varchar
+    "submit_text" varchar
+    "updated_at" varchar
+}
+
+Table "owner" {
+    "_fivetran_synced" varchar
+    "created_at" varchar
+    "email" varchar
+    "first_name" varchar
+    "last_name" varchar
+    "owner_id" varchar
+    "portal_id" varchar
+    "type" varchar
+    "updated_at" varchar
+}
+
+Table "property" {
+    "_fivetran_id" varchar
+    "_fivetran_synced" varchar
+    "calculated" varchar
+    "created_at" varchar
+    "description" varchar
+    "field_type" varchar
+    "group_name" varchar
+    "hubspot_defined" varchar
+    "hubspot_object" varchar
+    "label" varchar
+    "name" varchar
+    "show_currency_symbol" varchar
+    "type" varchar
+    "updated_at" varchar
+}
+
+Table "property_option" {
+    "_fivetran_synced" varchar
+    "label" varchar
+    "property_id" varchar
+    "display_order" varchar
+    "hidden" varchar
+    "value" varchar
+}
+
+Table "ticket_company" {
+    "_fivetran_synced" varchar
+    "ticket_id" varchar
+    "company_id" varchar
+    "category" varchar
+}
+
+Table "ticket_contact" {
+    "_fivetran_synced" varchar
+    "ticket_id" varchar
+    "contact_id" varchar
+    "category" varchar
+}
+
+Table "ticket_deal" {
+    "_fivetran_synced" varchar
+    "ticket_id" varchar
+    "deal_id" varchar
+    "category" varchar
+}
+
+Table "ticket_engagement" {
+    "_fivetran_synced" varchar
+    "ticket_id" varchar
+    "engagement_id" varchar
+    "category" varchar
+}
+
+Table "ticket_pipeline_stage" {
+    "_fivetran_deleted" varchar
+    "_fivetran_synced" varchar
+    "active" varchar
+    "display_order" varchar
+    "is_closed" varchar
+    "label" varchar
+    "pipeline_id" varchar
+    "stage_id" varchar
+    "ticket_state" varchar
+    "created_at" varchar
+    "updated_at" varchar
+}
+
+Table "ticket_pipeline" {
+    "_fivetran_deleted" varchar
+    "_fivetran_synced" varchar
+    "active" varchar
+    "display_order" varchar
+    "label" varchar
+    "object_type_id" varchar
+    "pipeline_id" varchar
+    "created_at" varchar
+    "updated_at" varchar
+}
+
+Table "ticket_property_history" {
+    "_fivetran_synced" varchar
+    "source" varchar
+    "source_id" varchar
+    "timestamp_instant" varchar
+    "ticket_id" varchar
+    "name" varchar
+    "value" varchar
+    "_fivetran_start" varchar
+    "_fivetran_end" varchar
+}
+
+Table "ticket" {
+    "_fivetran_synced" varchar
+    "id" varchar
+    "is_deleted" varchar
+    "_fivetran_deleted" varchar
+    "portal_id" varchar
+    "property_closed_date" varchar
+    "property_createdate" varchar
+    "property_first_agent_reply_date" varchar
+    "property_hs_pipeline" varchar
+    "property_hs_pipeline_stage" varchar
+    "property_hs_ticket_priority" varchar
+    "property_hs_ticket_category" varchar
+    "property_hubspot_owner_id" varchar
+    "property_subject" varchar
+    "property_content" varchar
+}
+
+Table "merged_deal" {
+    "deal_id" varchar
+    "merged_deal_id" varchar
+    "_fivetran_synced" varchar
+}

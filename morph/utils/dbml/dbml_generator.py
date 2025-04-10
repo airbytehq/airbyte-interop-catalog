@@ -37,8 +37,7 @@ def generate_dbml_from_dbt_source_file(
                 Column(
                     name=column.name,
                     type=column.data_type or "varchar",
-                    description=column.description,
-                ),
+                )
             )
 
         database.add(dbml_table)
