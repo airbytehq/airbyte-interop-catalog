@@ -80,6 +80,36 @@ def get_generated_source_yml_path(
     )
 
 
+def get_erd_dir(
+    source_name: str,
+    project_name: str = DEFAULT_PROJECT_NAME,
+) -> Path:
+    """Get the path to the ERD directory for a source."""
+    _ = project_name  # Unused for now
+    return (
+        get_generated_dir_root(
+            source_name=source_name,
+        )
+        / "erd"
+    )
+
+
+def get_source_dbml_path(
+    source_name: str,
+    project_name: str = DEFAULT_PROJECT_NAME,
+) -> Path:
+    """Get the path to the source DBML file for a source."""
+    return get_erd_dir(source_name=source_name, project_name=project_name) / "source.dbml"
+
+
+def get_target_dbml_path(
+    source_name: str,
+    project_name: str = DEFAULT_PROJECT_NAME,
+) -> Path:
+    """Get the path to the target DBML file for a source."""
+    return get_erd_dir(source_name=source_name, project_name=project_name) / "target.dbml"
+
+
 def get_requirements_dir(
     source_name: str,
     project_name: str = DEFAULT_PROJECT_NAME,

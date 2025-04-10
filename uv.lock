@@ -38,7 +38,7 @@ wheels = [
 
 [[package]]
 name = "airbyte"
-version = "0.24.1"
+version = "0.24.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "airbyte-api" },
@@ -74,9 +74,9 @@ dependencies = [
     { name = "typing-extensions" },
     { name = "uuid7" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/39/49/2bf2ae1e9538042fdbbdabfd7bd0f1eeeca71a8f692bb0341054b4c06182/airbyte-0.24.1.tar.gz", hash = "sha256:ec38e2ad4153128ba27a96066dc3de4b411e50b1588646ef2f90b22f6479c5f5", size = 140972 }
+sdist = { url = "https://files.pythonhosted.org/packages/c2/85/305e18799ead2cb37c87d3d0858418ccfa397d46fc3104e9a0256b964fc0/airbyte-0.24.2.tar.gz", hash = "sha256:8cedb5fcc1478c3e32e8b06536323a72edfc7ed41b94d2d7c75f67eb34e78313", size = 141049 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/09/f9/763154f2c0b23778939a776bb7588a32412cc18938be100d9ecf9be2392a/airbyte-0.24.1-py3-none-any.whl", hash = "sha256:bed45ce3a8123632b2b83e22e62951222130571e563830452a9785f644300531", size = 184464 },
+    { url = "https://files.pythonhosted.org/packages/8f/73/4c704a45dfa462786d794f9eee353930a3baddbbcef21fa2e5e88520b582/airbyte-0.24.2-py3-none-any.whl", hash = "sha256:0f43495d372e96f3bf886c49739e9011e06f82d540df206c95cfb9a492f4d1d7", size = 184544 },
 ]
 
 [[package]]
@@ -1675,7 +1675,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "airbyte", specifier = "==0.24.1" },
+    { name = "airbyte", specifier = "==0.24.2" },
     { name = "basedpyright", marker = "extra == 'dev'", specifier = ">=1.28.2" },
     { name = "click", specifier = ">=8.0.0" },
     { name = "copier", specifier = ">=9.6.0" },
