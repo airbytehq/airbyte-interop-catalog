@@ -1,0 +1,140 @@
+domain: klaviyo.fivetran-interop
+transforms:
+  - name: person
+    from:
+      - profiles: klaviyo.profiles
+    fields:
+      id:
+        expression: profiles.id
+        description: Unique ID of the person.
+      email:
+        expression: profiles.attributes.email
+        description: The email address and the unique identifier for a profile.
+      first_name:
+        expression: profiles.attributes.first_name
+        description: Person's first name.
+      last_name:
+        expression: profiles.attributes.last_name
+        description: Person's surname.
+      address_1:
+        expression: profiles.attributes.location.address1
+        description: First line of the person's address.
+      address_2:
+        expression: profiles.attributes.location.address2
+        description: Second line of the person's address.
+      city:
+        expression: profiles.attributes.location.city
+        description: City they live in.
+      country:
+        expression: profiles.attributes.location.country
+        description: Country they live in.
+      zip:
+        expression: profiles.attributes.location.zip
+        description: Postal code where they live.
+      created:
+        expression: profiles.attributes.created
+        description: Timestamp of when the person's profile was created.
+      phone_number:
+        expression: profiles.attributes.phone_number
+        description: Associated phone number.
+      region:
+        expression: profiles.attributes.location.region
+        description: Region or state they live in.
+      timezone:
+        expression: profiles.attributes.location.timezone
+        description: Timezone they are situated in.
+      organization:
+        expression: profiles.attributes.organization
+        description: Business organization they belong to.
+      title:
+        expression: profiles.attributes.title
+        description: Title at their business or organization.
+      updated:
+        expression: profiles.attributes.updated
+        description: Timestamp of when the person profile was last updated.
+      _fivetran_synced:
+        expression: profiles._airbyte_extracted_at
+        description: Timestamp when this record was last synced.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: profiles
+    target_table_name: person
+    table_match_score: 0.85
+    completion_score: 0.95
+    explanation: The table mappings are highly confident due to the strong contextual
+      alignment between fields, except for a few low-confidence mappings or missing
+      mappings where no suitable match was found.
+    field_mapping_evals:
+      - name: id
+        expression: profiles.id
+        score: 1.0
+        explanation: Perfect match with profiles.id.
+      - name: email
+        expression: profiles.attributes.email
+        score: 1.0
+        explanation: Perfect match with profiles.attributes.email.
+      - name: first_name
+        expression: profiles.attributes.first_name
+        score: 1.0
+        explanation: Perfect match with profiles.attributes.first_name.
+      - name: last_name
+        expression: profiles.attributes.last_name
+        score: 1.0
+        explanation: Perfect match with profiles.attributes.last_name.
+      - name: address_1
+        expression: profiles.attributes.location.address1
+        score: 0.75
+        explanation: Good match with profiles.attributes.location.address1.
+      - name: address_2
+        expression: profiles.attributes.location.address2
+        score: 0.75
+        explanation: Good match with profiles.attributes.location.address2.
+      - name: city
+        expression: profiles.attributes.location.city
+        score: 0.75
+        explanation: Good match with profiles.attributes.location.city.
+      - name: country
+        expression: profiles.attributes.location.country
+        score: 0.75
+        explanation: Good match with profiles.attributes.location.country.
+      - name: zip
+        expression: profiles.attributes.location.zip
+        score: 0.6
+        explanation: Matches profiles.attributes.location.zip but with some uncertainty
+          on its usage.
+      - name: created
+        expression: profiles.attributes.created
+        score: 1.0
+        explanation: Perfect match with profiles.attributes.created.
+      - name: phone_number
+        expression: profiles.attributes.phone_number
+        score: 0.7
+        explanation: Match with profiles.attributes.phone_number with some uncertainty.
+      - name: region
+        expression: profiles.attributes.location.region
+        score: 0.5
+        explanation: Potential match with a similar regional field, but context is
+          unclear.
+      - name: timezone
+        expression: profiles.attributes.location.timezone
+        score: 0.7
+        explanation: Matches profiles.attributes.location.timezone with minor discrepancies.
+      - name: organization
+        expression: profiles.attributes.organization
+        score: 0.8
+        explanation: Likely match with profiles.attributes.organization.
+      - name: title
+        expression: profiles.attributes.title
+        score: 0.8
+        explanation: Likely match with profiles.attributes.title.
+      - name: updated
+        expression: profiles.attributes.updated
+        score: 1.0
+        explanation: Perfect match with profiles.attributes.updated.
+      - name: _fivetran_synced
+        expression: profiles._airbyte_extracted_at
+        score: 1.0
+        explanation: Direct match to profiles._airbyte_extracted_at as a standard
+          practice.

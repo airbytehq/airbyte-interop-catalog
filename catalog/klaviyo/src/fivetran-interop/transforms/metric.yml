@@ -1,0 +1,61 @@
+domain: klaviyo.fivetran-interop
+transforms:
+  - name: metric
+    from:
+      - metrics: klaviyo.metrics
+    fields:
+      id:
+        expression: metrics.id
+        description: Unique ID of the metric.
+      name:
+        expression: metrics.attributes.name
+        description: Name of the metric.
+      created:
+        expression: metrics.attributes.created
+        description: Timestamp when the metric was created.
+      updated:
+        expression: metrics.attributes.updated
+        description: Timestamp when the metric was last updated.
+      integration:
+        expression: metrics.attributes.integration
+        description: Integration associated with this metric.
+      _fivetran_synced:
+        expression: metrics._airbyte_extracted_at
+        description: Timestamp when this record was last synced.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: metrics
+    target_table_name: metric
+    table_match_score: 0.85
+    completion_score: 0.95
+    explanation: The table mapping is highly confident, as most fields align well
+      between the source and target schemas. The completion score is high because
+      almost all fields are matched, including the special handling of '_fivetran_synced'.
+    field_mapping_evals:
+      - name: id
+        expression: metrics.id
+        score: 1.0
+        explanation: Perfect match for the unique identifier of the metric.
+      - name: name
+        expression: metrics.attributes.name
+        score: 1.0
+        explanation: Name of the metric matches perfectly between source and target.
+      - name: created
+        expression: metrics.attributes.created
+        score: 1.0
+        explanation: Timestamp for creation matches perfectly.
+      - name: updated
+        expression: metrics.attributes.updated
+        score: 1.0
+        explanation: Timestamp for update matches perfectly.
+      - name: integration
+        expression: metrics.attributes.integration
+        score: 1.0
+        explanation: The associated integration is correctly mapped.
+      - name: _fivetran_synced
+        expression: metrics._airbyte_extracted_at
+        score: 1.0
+        explanation: Mapped '_fivetran_synced' to '_airbyte_extracted_at' as required
+          by standard mapping.

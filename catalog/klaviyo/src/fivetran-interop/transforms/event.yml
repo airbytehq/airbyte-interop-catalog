@@ -1,0 +1,75 @@
+domain: klaviyo.fivetran-interop
+transforms:
+  - name: event
+    from:
+      - events: klaviyo.events
+    fields:
+      id:
+        expression: events.id
+        description: Unique ID of the event.
+      type:
+        expression: events.relationships.metric.data.id
+        description: Type of event that was triggered. This is the same as the METRIC
+          name.
+      timestamp:
+        expression: events.attributes.datetime
+        description: Timestamp when the event was triggered.
+      datetime:
+        expression: events.attributes.datetime
+        description: Timestamp when the event was recorded in Klaviyo.
+      event_properties:
+        expression: events.attributes.event_properties
+        description: JSON object containing properties of the event.
+      person_id:
+        expression: events.relationships.profile.data.id
+        description: Foreign key referencing the PERSON who triggered the event.
+      _fivetran_synced:
+        expression: events._airbyte_extracted_at
+        description: Timestamp when this record was last synced.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: events
+    target_table_name: event
+    table_match_score: 0.9
+    completion_score: 1.0
+    explanation: Field mappings are evaluated with high confidence. Most of the fields
+      have clear matches, and the mapping for '_fivetran_synced' to '_airbyte_extracted_at'
+      is a standard 1.00 score.
+    field_mapping_evals:
+      - name: id
+        expression: events.id
+        score: 0.95
+        explanation: The field 'id' maps directly to 'events.id' with strong confidence.
+      - name: type
+        expression: events.relationships.metric.data.id
+        score: 0.7
+        explanation: The field 'type' maps to 'events.relationships.metric.data.id'
+          which is related to METRIC name. The mapping is somewhat confident but requires
+          contextual understanding.
+      - name: timestamp
+        expression: events.attributes.datetime
+        score: 0.85
+        explanation: The field 'timestamp' maps to 'events.attributes.datetime' indicating
+          a high confidence match.
+      - name: datetime
+        expression: events.attributes.datetime
+        score: 0.85
+        explanation: The field 'datetime' also maps to 'events.attributes.datetime'.
+          These timestamps appear to reflect different event timings but have similar
+          sources.
+      - name: event_properties
+        expression: events.attributes.event_properties
+        score: 0.8
+        explanation: The field 'event_properties' appropriately maps to 'events.attributes.event_properties'
+          with good confidence.
+      - name: person_id
+        expression: events.relationships.profile.data.id
+        score: 0.8
+        explanation: The 'person_id' maps to 'events.relationships.profile.data.id',
+          indicating a foreign key relationship and holding strong confidence in context.
+      - name: _fivetran_synced
+        expression: events._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping of '_fivetran_synced' to '_airbyte_extracted_at'.

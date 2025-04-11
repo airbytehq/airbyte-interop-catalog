@@ -1,0 +1,119 @@
+domain: klaviyo.fivetran-interop
+transforms:
+  - name: campaign
+    from:
+      - campaigns: klaviyo.campaigns
+    fields:
+      _fivetran_deleted:
+        expression: campaigns.attributes.archived
+        description: Boolean that is true if the campaign has been soft-deleted.
+      campaign_type:
+        expression: campaigns.attributes.channel
+        description: Type of campaign.
+      created:
+        expression: campaigns.attributes.created_at
+        description: Timestamp of when the campaign was created, in UTC.
+      email_template_id:
+        expression: campaigns.attributes.template_id
+        description: Foreign key referencing the ID of the email_template object that
+          will be the content of this campaign.
+      from_email:
+        expression: campaigns.attributes.from_email
+        description: The email address your email will be sent from and will be used
+          in the reply-to header.
+      from_name:
+        expression: campaigns.attributes.from_name
+        description: The name or label associated with the email address you're sending
+          from.
+      id:
+        expression: campaigns.id
+        description: Unique ID of the campaign.
+      name:
+        expression: campaigns.attributes.name
+        description: A name for this campaign. If not specified, this will default
+          to the subject of the campaign.
+      send_time:
+        expression: campaigns.attributes.send_time
+        description: Timestamp of when the campaign is scheduled to be sent in the
+          future.
+      sent_at:
+        expression: campaigns.attributes.sent_at
+        description: Timestamp of when the campaign was first sent out to users.
+      status:
+        expression: campaigns.attributes.status
+        description: Current status of the campaign. Either "draft", "scheduled",
+          "sent", or "cancelled".
+      _fivetran_synced:
+        expression: campaigns._airbyte_extracted_at
+        description: Timestamp when this record was last synced.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: campaigns
+    target_table_name: campaign
+    table_match_score: 0.85
+    completion_score: 0.75
+    explanation: The table match score suggests that the source and target tables
+      describe the same subject matter with reasonable confidence. However, not all
+      fields could be confidently mapped, resulting in a lower completion score.
+    field_mapping_evals:
+      - name: _fivetran_deleted
+        expression: campaigns.attributes.archived
+        score: 0.7
+        explanation: The expression 'campaigns.attributes.archived' seems to indicate
+          whether a campaign is deleted, similar to '_fivetran_deleted'.
+      - name: campaign_type
+        expression: campaigns.attributes.channel
+        score: 0.7
+        explanation: The expression 'campaigns.attributes.channel' likely maps well
+          to 'campaign_type', denoting the type of campaign.
+      - name: created
+        expression: campaigns.attributes.created_at
+        score: 0.7
+        explanation: The expression 'campaigns.attributes.created_at' appears to indicate
+          the creation timestamp, mapping well to 'created'.
+      - name: email_template_id
+        expression: campaigns.attributes.template_id
+        score: 0.7
+        explanation: Given it's a foreign key, 'campaigns.attributes.template_id'
+          likely maps to 'email_template_id'.
+      - name: from_email
+        expression: campaigns.attributes.from_email
+        score: 0.7
+        explanation: The email expressions map well together, as 'campaigns.attributes.from_email'
+          indicates the sender email.
+      - name: from_name
+        expression: campaigns.attributes.from_name
+        score: 0.7
+        explanation: The expression 'campaigns.attributes.from_name' maps well to
+          identify the sender name.
+      - name: id
+        expression: campaigns.id
+        score: 1.0
+        explanation: Exact match as 'campaigns.id' clearly maps to 'id'.
+      - name: name
+        expression: campaigns.attributes.name
+        score: 0.7
+        explanation: "'campaigns.attributes.name' captures the essence of 'name' for
+          a campaign."
+      - name: send_time
+        expression: campaigns.attributes.send_time
+        score: 0.7
+        explanation: The mapping to 'campaigns.attributes.send_time' indicates scheduling
+          information.
+      - name: sent_at
+        expression: campaigns.attributes.sent_at
+        score: 0.7
+        explanation: The expression 'campaigns.attributes.sent_at' indicates the time
+          sent, mapping well to 'sent_at'.
+      - name: status
+        expression: campaigns.attributes.status
+        score: 0.7
+        explanation: "'campaigns.attributes.status' for campaign state aligns well
+          with 'status'."
+      - name: _fivetran_synced
+        expression: campaigns._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping of '_fivetran_synced' to '_airbyte_extracted_at'
+          with full confidence.
