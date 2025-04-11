@@ -99,7 +99,7 @@ def get_source_dbml_path(
     project_name: str = DEFAULT_PROJECT_NAME,
 ) -> Path:
     """Get the path to the source DBML file for a source."""
-    return get_erd_dir(source_name=source_name, project_name=project_name) / "source.dbml"
+    return get_generated_source_yml_path(source_name, project_name).with_suffix(".dbml")
 
 
 def get_target_dbml_path(
@@ -107,7 +107,7 @@ def get_target_dbml_path(
     project_name: str = DEFAULT_PROJECT_NAME,
 ) -> Path:
     """Get the path to the target DBML file for a source."""
-    return get_erd_dir(source_name=source_name, project_name=project_name) / "target.dbml"
+    return get_dbt_sources_requirements_path(source_name, project_name).with_suffix(".dbml")
 
 
 def get_requirements_dir(
