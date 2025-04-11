@@ -1656,6 +1656,8 @@ dependencies = [
     { name = "copier" },
     { name = "jinja2" },
     { name = "marvin" },
+    { name = "pydbml" },
+    { name = "python-dotenv" },
     { name = "rich" },
     { name = "ruamel-yaml" },
     { name = "tomli-w" },
@@ -1685,8 +1687,10 @@ requires-dist = [
     { name = "marvin", specifier = ">=3.0.2" },
     { name = "poethepoet", marker = "extra == 'dev'", specifier = ">=0.33.1" },
     { name = "pre-commit", marker = "extra == 'dev'", specifier = ">=4.2.0" },
+    { name = "pydbml", specifier = ">=1.2.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.3.5" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=6.0.0" },
+    { name = "python-dotenv", specifier = ">=1.0.0" },
     { name = "rich", specifier = ">=10.0.0" },
     { name = "ruamel-yaml", specifier = ">=0.18.10" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.11.0" },
@@ -2383,6 +2387,18 @@ wheels = [
 ]
 
 [[package]]
+name = "pydbml"
+version = "1.2.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pyparsing" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b6/ef/c006de411f6fab6b2f728eccfba082c2ab581e2d5cbaddf16ab90ad7157e/pydbml-1.2.0.tar.gz", hash = "sha256:c4fdb602f62b42e2b28674ea45e72f3d0e88bc6d186ea3a683685c41662ece14", size = 35895 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/f3/e7/3f926cc57715d865b640015ad99c8cc0711ce9a94029df4be0746fa27ba6/pydbml-1.2.0-py3-none-any.whl", hash = "sha256:dc663786647c97bbb6ef61f7a5becd5e7bb304770bb3e2e01d3f43748d33064f", size = 46150 },
+]
+
+[[package]]
 name = "pygments"
 version = "2.19.1"
 source = { registry = "https://pypi.org/simple" }
@@ -2411,6 +2427,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/9f/26/e25b4a374b4639e0c235527bbe31c0524f26eda701d79456a7e1877f4cc5/pyopenssl-25.0.0.tar.gz", hash = "sha256:cd2cef799efa3936bb08e8ccb9433a575722b9dd986023f1cabc4ae64e9dac16", size = 179573 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/ca/d7/eb76863d2060dcbe7c7e6cccfd95ac02ea0b9acc37745a0d99ff6457aefb/pyOpenSSL-25.0.0-py3-none-any.whl", hash = "sha256:424c247065e46e76a37411b9ab1782541c23bb658bf003772c3405fbaa128e90", size = 56453 },
+]
+
+[[package]]
+name = "pyparsing"
+version = "3.2.3"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/bb/22/f1129e69d94ffff626bdb5c835506b3a5b4f3d070f17ea295e12c2c6f60f/pyparsing-3.2.3.tar.gz", hash = "sha256:b9c13f1ab8b3b542f72e28f634bad4de758ab3ce4546e4301970ad6fa77c38be", size = 1088608 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/05/e7/df2285f3d08fee213f2d041540fa4fc9ca6c2d44cf36d3a035bf2a8d2bcc/pyparsing-3.2.3-py3-none-any.whl", hash = "sha256:a749938e02d6fd0b59b356ca504a24982314bb090c383e3cf201c95ef7e2bfcf", size = 111120 },
 ]
 
 [[package]]

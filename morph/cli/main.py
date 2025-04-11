@@ -22,6 +22,13 @@ from morph.utils.transform_scaffold import (
     generate_transform_scaffold,
 )
 
+try:
+    from dotenv import load_dotenv
+
+    load_dotenv(dotenv_path=Path.cwd() / ".env")
+except ImportError:
+    pass  # python-dotenv not installed, skipping .env loading
+
 console = Console()
 
 

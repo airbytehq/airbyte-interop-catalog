@@ -29,6 +29,7 @@ dependencies = [
     "jinja2>=3.0.0",
     "marvin>=3.0.2",
     "pydbml>=1.2.0",  # Added for DBML generation
+    "python-dotenv>=1.0.0",  # For loading .env files
     "rich>=10.0.0",
     "ruamel-yaml>=0.18.10",
     "tomli-w>=1.0.0",
