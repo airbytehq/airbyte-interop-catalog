@@ -10,6 +10,7 @@ from rich.table import Table
 
 from morph import models, resources
 from morph.ai import map
+from morph.ai.checks import check_openai_api_key
 from morph.ai.eval import get_table_mapping_eval
 from morph.constants import DEFAULT_PROJECT_NAME
 from morph.utils import text_utils
@@ -195,6 +196,7 @@ def eval(
     SOURCE_NAME is the name of the source (e.g., hubspot, shopify)
     PROJECT_NAME is the name of the project (defaults to fivetran-interop)
     """
+    check_openai_api_key()
     # Construct the path to the transforms directory
     transforms_dir = resources.get_transforms_dir(
         source_name=source_name,
@@ -268,6 +270,7 @@ def generate(
     no_build: bool = False,
 ) -> None:
     """Use AI to generate new transform code for a project."""
+    check_openai_api_key()
     requirements_dbt_source_file = resources.get_dbt_sources_requirements_path(
         source_name=source_name,
         project_name=project_name,

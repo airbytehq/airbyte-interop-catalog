@@ -7,6 +7,7 @@ from rich.prompt import Prompt
 
 from morph import constants, models, resources
 from morph.ai import functions as ai_fn
+from morph.ai.checks import check_openai_api_key
 from morph.utils import text_utils
 from morph.utils.dbt import dbt_source_files
 from morph.utils.logic import if_none
@@ -169,6 +170,7 @@ def populate_missing_mappings(
     auto_confirm: bool = False,
 ) -> None:
     """Populate missing mappings for a single target table."""
+    check_openai_api_key()
     transform_file = resources.get_transform_file(
         source_name=source_name,
         project_name=project_name,
@@ -237,6 +239,7 @@ def infer_table_mappings(  # noqa: PLR0912 (too many branches)
     source_table: str | None = None,
     auto_confirm: bool | None = None,
 ) -> None:
+    check_openai_api_key()
     auto_confirm = cast(bool, if_none(auto_confirm, False))
 
     # Find the YAML file
