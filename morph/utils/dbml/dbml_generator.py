@@ -36,7 +36,7 @@ def generate_dbml_from_dbt_source_file(
         for column in source_table.columns:
             column_obj = Column(
                 name=column.name,
-                type=column.data_type or "varchar",
+                type=column.data_type,  # Leave type as None if not provided
                 note=column.description if column.description else None,
             )
 
