@@ -1,202 +1,202 @@
 Table "activities" {
-    "account_id" varchar
-    "actor_id" varchar
-    "actor_name" varchar
-    "application_id" varchar
-    "application_name" varchar
-    "date_time_in_timezone" varchar
-    "event_time" timestamp
-    "event_type" varchar
-    "extra_data" varchar
-    "object_id" varchar
-    "object_name" varchar
-    "object_type" varchar
-    "translated_event_type" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "account_id" varchar [note: 'The unique identifier for the account associated with the activity.']
+    "actor_id" varchar [note: 'The unique identifier for the actor (user/page) who performed the activity.']
+    "actor_name" varchar [note: 'The name of the actor (user/page) who performed the activity.']
+    "application_id" varchar [note: 'The unique identifier for the application involved in the activity.']
+    "application_name" varchar [note: 'The name of the application involved in the activity.']
+    "date_time_in_timezone" varchar [note: 'The date and time of the activity adjusted to the timezone.']
+    "event_time" timestamp [note: 'The exact date and time when the activity occurred.']
+    "event_type" varchar [note: 'The type of event/action performed in the activity.']
+    "extra_data" varchar [note: 'Additional data associated with the activity.']
+    "object_id" varchar [note: 'The unique identifier for the object (post/ad/etc.) related to the activity.']
+    "object_name" varchar [note: 'The name/label of the object related to the activity.']
+    "object_type" varchar [note: 'The type/category of the object related to the activity.']
+    "translated_event_type" varchar [note: 'The translated or localized version of the event type.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "ad_account" {
-    "account_id" varchar
-    "account_status" integer
-    "age" float
-    "amount_spent" varchar
-    "balance" varchar
-    "business" json
-    "business_city" varchar
-    "business_country_code" varchar
-    "business_name" varchar
-    "business_state" varchar
-    "business_street" varchar
-    "business_street2" varchar
-    "business_zip" varchar
-    "can_create_brand_lift_study" boolean
-    "capabilities" array
-    "created_time" timestamp
-    "currency" varchar
-    "disable_reason" float
-    "end_advertiser" float
-    "end_advertiser_name" varchar
-    "extended_credit_invoice_group" json
-    "failed_delivery_checks" array
-    "fb_entity" float
-    "funding_source" float
-    "funding_source_details" json
-    "has_migrated_permissions" boolean
-    "id" varchar
-    "io_number" float
-    "is_attribution_spec_system_default" boolean
-    "is_direct_deals_enabled" boolean
-    "is_in_3ds_authorization_enabled_market" boolean
-    "is_notifications_enabled" boolean
-    "is_personal" float
-    "is_prepay_account" boolean
-    "is_tax_id_required" boolean
-    "line_numbers" float
-    "media_agency" float
-    "min_campaign_group_spend_cap" float
-    "min_daily_budget" float
-    "name" varchar
-    "offsite_pixels_tos_accepted" boolean
-    "owner" float
-    "partner" float
-    "rf_spec" json
-    "spend_cap" varchar
-    "tax_id" varchar
-    "tax_id_status" float
-    "tax_id_type" varchar
-    "timezone_id" float
-    "timezone_name" varchar
-    "timezone_offset_hours_utc" float
-    "tos_accepted" json
-    "user_tasks" array
-    "user_tos_accepted" json
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "account_id" varchar [note: 'The unique identifier for the Facebook ad account.']
+    "account_status" integer [note: 'The status of the Facebook ad account.']
+    "age" float [note: 'Age associated with the ad account.']
+    "amount_spent" varchar [note: 'Total amount spent on ads by the ad account.']
+    "balance" varchar [note: 'Current balance of the ad account.']
+    "business" json [note: 'Represents information about the business associated with the ad account.']
+    "business_city" varchar [note: 'City associated with the business.']
+    "business_country_code" varchar [note: 'Country code associated with the business.']
+    "business_name" varchar [note: 'Name of the business.']
+    "business_state" varchar [note: 'State associated with the business.']
+    "business_street" varchar [note: 'Street address of the business.']
+    "business_street2" varchar [note: 'Additional street information of the business.']
+    "business_zip" varchar [note: 'ZIP code associated with the business.']
+    "can_create_brand_lift_study" boolean [note: 'Flag indicating if the ad account can create brand lift studies.']
+    "capabilities" array [note: 'Specifies the capabilities of the ad account.']
+    "created_time" timestamp [note: 'Date and time when the ad account was created.']
+    "currency" varchar [note: 'Currency used by the ad account.']
+    "disable_reason" float [note: 'Reason for disabling the ad account.']
+    "end_advertiser" float [note: 'The end advertiser associated with the ad account.']
+    "end_advertiser_name" varchar [note: 'Name of the end advertiser.']
+    "extended_credit_invoice_group" json [note: 'Contains details about the extended credit invoice group linked to the ad account.']
+    "failed_delivery_checks" array [note: 'List of failed delivery checks performed for the ad account.']
+    "fb_entity" float [note: 'Facebook entity associated with the ad account.']
+    "funding_source" float [note: 'Source of funding for the ad account.']
+    "funding_source_details" json [note: 'Provides information about the funding source linked to the ad account.']
+    "has_migrated_permissions" boolean [note: 'Flag indicating if permissions have been migrated.']
+    "id" varchar [note: 'Unique identifier for the ad account.']
+    "io_number" float [note: 'IO number associated with the ad account.']
+    "is_attribution_spec_system_default" boolean [note: 'Flag indicating if attribution specification is system default.']
+    "is_direct_deals_enabled" boolean [note: 'Flag indicating if direct deals are enabled.']
+    "is_in_3ds_authorization_enabled_market" boolean [note: 'Flag indicating if the ad account is in a 3DS authorization enabled market.']
+    "is_notifications_enabled" boolean [note: 'Flag indicating if notifications are enabled for the ad account.']
+    "is_personal" float [note: 'Flag indicating if the ad account is personal.']
+    "is_prepay_account" boolean [note: 'Flag indicating if the ad account is a prepay account.']
+    "is_tax_id_required" boolean [note: 'Flag indicating if a tax ID is required for the ad account.']
+    "line_numbers" float [note: 'Line numbers associated with the ad account.']
+    "media_agency" float [note: 'Media agency associated with the ad account.']
+    "min_campaign_group_spend_cap" float [note: 'Minimum campaign group spend cap for the ad account.']
+    "min_daily_budget" float [note: 'Minimum daily budget for the ad account.']
+    "name" varchar [note: 'Name of the ad account.']
+    "offsite_pixels_tos_accepted" boolean [note: 'Flag indicating if offsite pixels terms of service are accepted.']
+    "owner" float [note: 'Owner of the ad account.']
+    "partner" float [note: 'Partner associated with the ad account.']
+    "rf_spec" json [note: 'Specifications related to reach and frequency for the ad account.']
+    "spend_cap" varchar [note: 'Spend cap for the ad account.']
+    "tax_id" varchar [note: 'Tax ID associated with the ad account.']
+    "tax_id_status" float [note: 'Status of the tax ID associated with the ad account.']
+    "tax_id_type" varchar [note: 'Type of tax ID associated with the ad account.']
+    "timezone_id" float [note: 'Timezone ID associated with the ad account.']
+    "timezone_name" varchar [note: 'Name of the timezone associated with the ad account.']
+    "timezone_offset_hours_utc" float [note: 'Timezone offset hours in UTC for the ad account.']
+    "tos_accepted" json [note: 'Indicates whether the terms of service have been accepted for the ad account.']
+    "user_tasks" array [note: 'Tasks assigned to users associated with the ad account.']
+    "user_tos_accepted" json [note: 'Records the acceptance of terms of service by users of the ad account.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "ad_creatives" {
-    "body" varchar
-    "object_story_id" varchar
-    "image_url" varchar
-    "id" varchar
-    "account_id" varchar
-    "actor_id" varchar
-    "adlabels" array
-    "applink_treatment" varchar
-    "asset_feed_spec" json
-    "call_to_action_type" varchar
-    "effective_instagram_story_id" varchar
-    "effective_object_story_id" varchar
-    "title" varchar
-    "name" varchar
+    "body" varchar [note: 'The body text of the ad creative.']
+    "object_story_id" varchar [note: 'Story ID associated with the object.']
+    "image_url" varchar [note: 'URL of the main image used in the ad creative.']
+    "id" varchar [note: 'The unique identifier of the ad creative.']
+    "account_id" varchar [note: 'The unique identifier of the Facebook ad account associated with the ad creative.']
+    "actor_id" varchar [note: 'The unique identifier of the actor associated with the ad creative.']
+    "adlabels" array [note: 'A collection of ad labels associated with the ad creative.']
+    "applink_treatment" varchar [note: 'Specifies how the app link is treated.']
+    "asset_feed_spec" json [note: 'Specifies the asset customization rules, call to actions, and groups for the ad creative.']
+    "call_to_action_type" varchar [note: 'The type of call-to-action for the ad creative.']
+    "effective_instagram_story_id" varchar [note: 'The effective Instagram story ID associated with the ad creative.']
+    "effective_object_story_id" varchar [note: 'The effective object story ID for the ad creative.']
+    "title" varchar [note: 'Title of the ad creative.']
+    "name" varchar [note: 'Name or title of the ad creative.']
     "image_crops" json
-    "instagram_actor_id" varchar
-    "instagram_permalink_url" varchar
-    "instagram_story_id" varchar
-    "link_og_id" varchar
-    "object_id" varchar
-    "object_story_spec" json
-    "object_type" varchar
-    "object_url" varchar
-    "product_set_id" varchar
+    "instagram_actor_id" varchar [note: 'Instagram actor ID associated with the ad creative.']
+    "instagram_permalink_url" varchar [note: 'Permalink URL of the ad creative on Instagram.']
+    "instagram_story_id" varchar [note: 'ID of the story on Instagram.']
+    "link_og_id" varchar [note: 'Open Graph ID related to the link.']
+    "object_id" varchar [note: 'ID of the associated object.']
+    "object_story_spec" json [note: 'Specification for the object story associated with the ad creative.']
+    "object_type" varchar [note: 'Type of object associated with the ad creative.']
+    "object_url" varchar [note: 'URL of the associated object.']
+    "product_set_id" varchar [note: 'ID of the product set linked to the ad creative.']
     "source_instagram_media_id" varchar
-    "status" varchar
-    "template_url" varchar
-    "template_url_spec" json
-    "thumbnail_data_url" varchar
-    "thumbnail_url" varchar
-    "image_hash" varchar
-    "url_tags" varchar
-    "video_id" varchar
-    "link_url" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "status" varchar [note: 'Status of the ad creative.']
+    "template_url" varchar [note: 'URL of the template used in the ad creative.']
+    "template_url_spec" json [note: 'Specification for the template URL.']
+    "thumbnail_data_url" varchar [note: 'URL of the thumbnail data.']
+    "thumbnail_url" varchar [note: 'URL of the thumbnail image.']
+    "image_hash" varchar [note: 'Hash value representing the image used in the ad creative.']
+    "url_tags" varchar [note: 'Tags added to the URL of the ad creative.']
+    "video_id" varchar [note: 'ID of the video used in the ad creative.']
+    "link_url" varchar [note: 'URL associated with the ad creative.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "ad_sets" {
-    "name" varchar
-    "end_time" timestamp
-    "promoted_object" json
-    "id" varchar
-    "account_id" varchar
-    "updated_time" timestamp
-    "daily_budget" float
-    "budget_remaining" float
-    "effective_status" varchar
-    "campaign_id" varchar
-    "created_time" timestamp
-    "start_time" timestamp
-    "lifetime_budget" float
+    "name" varchar [note: 'The name of the ad set.']
+    "end_time" timestamp [note: 'The date and time when the ad set will end.']
+    "promoted_object" json [note: 'Information about the object being promoted in the ad set.']
+    "id" varchar [note: 'The unique ID of the ad set.']
+    "account_id" varchar [note: 'The ID of the Facebook ad account to which the ad set belongs.']
+    "updated_time" timestamp [note: 'The date and time when the ad set was last updated.']
+    "daily_budget" float [note: 'The daily budget set for the ad set.']
+    "budget_remaining" float [note: 'The remaining budget in the ad set.']
+    "effective_status" varchar [note: 'The effective status of the ad set (e.g., active, paused).']
+    "campaign_id" varchar [note: 'The ID of the campaign associated with the ad set.']
+    "created_time" timestamp [note: 'The date and time when the ad set was created.']
+    "start_time" timestamp [note: 'The date and time when the ad set will start.']
+    "lifetime_budget" float [note: 'The lifetime budget set for the ad set.']
     "targeting" json
-    "bid_info" json
-    "bid_strategy" varchar
-    "bid_amount" float
-    "bid_constraints" json
-    "adlabels" array
-    "learning_stage_info" json
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "bid_info" json [note: 'Information about bidding in the ad set.']
+    "bid_strategy" varchar [note: 'The bidding strategy used in the ad set.']
+    "bid_amount" float [note: 'The amount set for bidding in the ad set.']
+    "bid_constraints" json [note: 'Bid constraints for the ad set.']
+    "adlabels" array [note: 'Labels associated with the ad set.']
+    "learning_stage_info" json [note: 'Info about whether the ranking or delivery system is still learning for this ad set.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "ads" {
-    "bid_type" varchar
-    "account_id" varchar
-    "campaign_id" varchar
-    "adset_id" varchar
-    "adlabels" array
-    "bid_amount" integer
-    "bid_info" json
-    "status" varchar
-    "creative" json
-    "id" varchar
-    "updated_time" timestamp
-    "created_time" timestamp
-    "name" varchar
+    "bid_type" varchar [note: 'The type of bid strategy used for the ad.']
+    "account_id" varchar [note: 'The unique identifier for the Facebook ad account.']
+    "campaign_id" varchar [note: 'The unique identifier for the campaign associated with the ad.']
+    "adset_id" varchar [note: 'The unique identifier for the ad set associated with the ad.']
+    "adlabels" array [note: 'Ad labels associated with the ad']
+    "bid_amount" integer [note: 'The bid amount set for the ad.']
+    "bid_info" json [note: 'Bid information for the ad']
+    "status" varchar [note: 'The current status of the ad.']
+    "creative" json [note: 'Details of the creative used in the ad']
+    "id" varchar [note: 'The unique identifier for the ad.']
+    "updated_time" timestamp [note: 'The date and time when the ad was last updated.']
+    "created_time" timestamp [note: 'The date and time when the ad was created.']
+    "name" varchar [note: 'The name of the ad.']
     "targeting" json
-    "effective_status" varchar
-    "last_updated_by_app_id" varchar
-    "recommendations" array
-    "source_ad_id" varchar
-    "tracking_specs" array
-    "conversion_specs" array
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "effective_status" varchar [note: 'The current effectiveness status of the ad.']
+    "last_updated_by_app_id" varchar [note: 'The unique identifier for the last app that updated the ad.']
+    "recommendations" array [note: 'Recommended actions or strategies for the ad']
+    "source_ad_id" varchar [note: 'The source ad identifier, if the ad was copied from another ad.']
+    "tracking_specs" array [note: 'Specifications for tracking ad performance']
+    "conversion_specs" array [note: 'Specifications for tracking conversions']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "ads_insights" {
-    "account_currency" varchar
-    "account_id" varchar
-    "account_name" varchar
+    "account_currency" varchar [note: 'Currency used for the account']
+    "account_id" varchar [note: 'ID of the account']
+    "account_name" varchar [note: 'Name of the account']
     "action_values" array
     "actions" array
     "ad_click_actions" array
-    "ad_id" varchar
+    "ad_id" varchar [note: 'ID of the ad']
     "ad_impression_actions" array
-    "ad_name" varchar
-    "adset_id" varchar
-    "adset_name" varchar
-    "attribution_setting" varchar
-    "auction_bid" float
-    "auction_competitiveness" float
-    "auction_max_competitor_bid" float
-    "buying_type" varchar
-    "campaign_id" varchar
-    "campaign_name" varchar
-    "canvas_avg_view_percent" float
-    "canvas_avg_view_time" float
+    "ad_name" varchar [note: 'Name of the ad']
+    "adset_id" varchar [note: 'ID of the ad set']
+    "adset_name" varchar [note: 'Name of the ad set']
+    "attribution_setting" varchar [note: 'How conversions are attributed']
+    "auction_bid" float [note: 'Bid amount in the auction']
+    "auction_competitiveness" float [note: 'Competitiveness level in the auction']
+    "auction_max_competitor_bid" float [note: 'Maximum bid among the competitors in the auction']
+    "buying_type" varchar [note: 'Type of buying']
+    "campaign_id" varchar [note: 'ID of the campaign']
+    "campaign_name" varchar [note: 'Name of the campaign']
+    "canvas_avg_view_percent" float [note: 'Average percentage of the canvas viewed']
+    "canvas_avg_view_time" float [note: 'Average time spent viewing the canvas']
     "catalog_segment_actions" array
     "catalog_segment_value" array
     "catalog_segment_value_mobile_purchase_roas" array
     "catalog_segment_value_omni_purchase_roas" array
     "catalog_segment_value_website_purchase_roas" array
-    "clicks" integer
-    "conversion_rate_ranking" varchar
+    "clicks" integer [note: 'Total number of clicks']
+    "conversion_rate_ranking" varchar [note: 'Ranking based on conversion rates']
     "conversion_values" array
     "conversions" array
     "converted_product_quantity" array
@@ -206,54 +206,54 @@ Table "ads_insights" {
     "cost_per_action_type" array
     "cost_per_ad_click" array
     "cost_per_conversion" array
-    "cost_per_estimated_ad_recallers" float
-    "cost_per_inline_link_click" float
-    "cost_per_inline_post_engagement" float
+    "cost_per_estimated_ad_recallers" float [note: 'Cost per estimated ad recallers']
+    "cost_per_inline_link_click" float [note: 'Cost per inline link click']
+    "cost_per_inline_post_engagement" float [note: 'Cost per inline post engagement']
     "cost_per_outbound_click" array
     "cost_per_thruplay" array
     "cost_per_unique_action_type" array
-    "cost_per_unique_click" float
-    "cost_per_unique_inline_link_click" float
+    "cost_per_unique_click" float [note: 'Cost per unique click']
+    "cost_per_unique_inline_link_click" float [note: 'Cost per unique inline link click']
     "cost_per_unique_outbound_click" array
-    "cpc" float
-    "cpm" float
-    "cpp" float
-    "created_time" date
-    "ctr" float
-    "date_start" date
-    "date_stop" date
-    "engagement_rate_ranking" varchar
-    "estimated_ad_recallers" float
-    "frequency" float
-    "full_view_impressions" float
-    "full_view_reach" float
-    "impressions" integer
-    "inline_link_click_ctr" float
-    "inline_link_clicks" integer
-    "inline_post_engagement" integer
-    "instant_experience_clicks_to_open" float
-    "instant_experience_clicks_to_start" float
+    "cpc" float [note: 'Cost per click']
+    "cpm" float [note: 'Cost per thousand impressions']
+    "cpp" float [note: 'Cost per thousand people reached']
+    "created_time" date [note: 'Time when the data was created']
+    "ctr" float [note: 'Click-through rate']
+    "date_start" date [note: 'Start date of the data']
+    "date_stop" date [note: 'End date of the data']
+    "engagement_rate_ranking" varchar [note: 'Ranking based on engagement rate']
+    "estimated_ad_recallers" float [note: 'Estimated ad recallers']
+    "frequency" float [note: 'Average number of times each person saw the ad']
+    "full_view_impressions" float [note: 'Impressions when the ad is fully viewed']
+    "full_view_reach" float [note: 'Reach when the ad is fully viewed']
+    "impressions" integer [note: 'Total number of impressions']
+    "inline_link_click_ctr" float [note: 'Click-through rate for inline link clicks']
+    "inline_link_clicks" integer [note: 'Total number of inline link clicks']
+    "inline_post_engagement" integer [note: 'Engagement on inline posts']
+    "instant_experience_clicks_to_open" float [note: 'Clicks to open instant experience']
+    "instant_experience_clicks_to_start" float [note: 'Clicks to start instant experience']
     "instant_experience_outbound_clicks" array
     "mobile_app_purchase_roas" array
-    "objective" varchar
-    "optimization_goal" varchar
+    "objective" varchar [note: 'Marketing objective']
+    "optimization_goal" varchar [note: 'Goal for optimization']
     "outbound_clicks" array
     "outbound_clicks_ctr" array
     "purchase_roas" array
-    "qualifying_question_qualify_answer_rate" float
-    "quality_ranking" varchar
-    "reach" integer
-    "social_spend" float
-    "spend" float
+    "qualifying_question_qualify_answer_rate" float [note: 'Rate of qualifying question answer qualification']
+    "quality_ranking" varchar [note: 'Ranking based on quality']
+    "reach" integer [note: 'Number of people who saw the ad']
+    "social_spend" float [note: 'Spend in social channels']
+    "spend" float [note: 'Total amount spent']
     "unique_actions" array
-    "unique_clicks" integer
-    "unique_ctr" float
-    "unique_inline_link_click_ctr" float
-    "unique_inline_link_clicks" integer
-    "unique_link_clicks_ctr" float
+    "unique_clicks" integer [note: 'Total number of unique clicks']
+    "unique_ctr" float [note: 'Unique click-through rate']
+    "unique_inline_link_click_ctr" float [note: 'Unique click-through rate for inline link clicks']
+    "unique_inline_link_clicks" integer [note: 'Total number of unique inline link clicks']
+    "unique_link_clicks_ctr" float [note: 'Unique click-through rate for link clicks']
     "unique_outbound_clicks" array
     "unique_outbound_clicks_ctr" array
-    "updated_time" date
+    "updated_time" date [note: 'Time when the data was updated']
     "video_15_sec_watched_actions" array
     "video_30_sec_watched_actions" array
     "video_avg_time_watched_actions" array
@@ -271,40 +271,40 @@ Table "ads_insights" {
     "video_time_watched_actions" array
     "website_ctr" array
     "website_purchase_roas" array
-    "wish_bid" float
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "wish_bid" float [note: 'Bid based on the wish to achieve certain results']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "ads_insights_action_carousel_card" {
-    "account_currency" varchar
-    "account_id" varchar
-    "account_name" varchar
+    "account_currency" varchar [note: 'Currency used for the account']
+    "account_id" varchar [note: 'ID of the account']
+    "account_name" varchar [note: 'Name of the account']
     "action_values" array
     "actions" array
     "ad_click_actions" array
-    "ad_id" varchar
+    "ad_id" varchar [note: 'ID of the ad']
     "ad_impression_actions" array
-    "ad_name" varchar
-    "adset_id" varchar
-    "adset_name" varchar
-    "attribution_setting" varchar
-    "auction_bid" float
-    "auction_competitiveness" float
-    "auction_max_competitor_bid" float
-    "buying_type" varchar
-    "campaign_id" varchar
-    "campaign_name" varchar
-    "canvas_avg_view_percent" float
-    "canvas_avg_view_time" float
+    "ad_name" varchar [note: 'Name of the ad']
+    "adset_id" varchar [note: 'ID of the ad set']
+    "adset_name" varchar [note: 'Name of the ad set']
+    "attribution_setting" varchar [note: 'How conversions are attributed']
+    "auction_bid" float [note: 'Bid amount in the auction']
+    "auction_competitiveness" float [note: 'Competitiveness level in the auction']
+    "auction_max_competitor_bid" float [note: 'Maximum bid among the competitors in the auction']
+    "buying_type" varchar [note: 'Type of buying']
+    "campaign_id" varchar [note: 'ID of the campaign']
+    "campaign_name" varchar [note: 'Name of the campaign']
+    "canvas_avg_view_percent" float [note: 'Average percentage of the canvas viewed']
+    "canvas_avg_view_time" float [note: 'Average time spent viewing the canvas']
     "catalog_segment_actions" array
     "catalog_segment_value" array
     "catalog_segment_value_mobile_purchase_roas" array
     "catalog_segment_value_omni_purchase_roas" array
     "catalog_segment_value_website_purchase_roas" array
-    "clicks" integer
-    "conversion_rate_ranking" varchar
+    "clicks" integer [note: 'Total number of clicks']
+    "conversion_rate_ranking" varchar [note: 'Ranking based on conversion rates']
     "conversion_values" array
     "conversions" array
     "converted_product_quantity" array
@@ -314,54 +314,54 @@ Table "ads_insights_action_carousel_card" {
     "cost_per_action_type" array
     "cost_per_ad_click" array
     "cost_per_conversion" array
-    "cost_per_estimated_ad_recallers" float
-    "cost_per_inline_link_click" float
-    "cost_per_inline_post_engagement" float
+    "cost_per_estimated_ad_recallers" float [note: 'Cost per estimated ad recallers']
+    "cost_per_inline_link_click" float [note: 'Cost per inline link click']
+    "cost_per_inline_post_engagement" float [note: 'Cost per inline post engagement']
     "cost_per_outbound_click" array
     "cost_per_thruplay" array
     "cost_per_unique_action_type" array
-    "cost_per_unique_click" float
-    "cost_per_unique_inline_link_click" float
+    "cost_per_unique_click" float [note: 'Cost per unique click']
+    "cost_per_unique_inline_link_click" float [note: 'Cost per unique inline link click']
     "cost_per_unique_outbound_click" array
-    "cpc" float
-    "cpm" float
-    "cpp" float
-    "created_time" date
-    "ctr" float
-    "date_start" date
-    "date_stop" date
-    "engagement_rate_ranking" varchar
-    "estimated_ad_recallers" float
-    "frequency" float
-    "full_view_impressions" float
-    "full_view_reach" float
-    "impressions" integer
-    "inline_link_click_ctr" float
-    "inline_link_clicks" integer
-    "inline_post_engagement" integer
-    "instant_experience_clicks_to_open" float
-    "instant_experience_clicks_to_start" float
+    "cpc" float [note: 'Cost per click']
+    "cpm" float [note: 'Cost per thousand impressions']
+    "cpp" float [note: 'Cost per thousand people reached']
+    "created_time" date [note: 'Time when the data was created']
+    "ctr" float [note: 'Click-through rate']
+    "date_start" date [note: 'Start date of the data']
+    "date_stop" date [note: 'End date of the data']
+    "engagement_rate_ranking" varchar [note: 'Ranking based on engagement rate']
+    "estimated_ad_recallers" float [note: 'Estimated ad recallers']
+    "frequency" float [note: 'Average number of times each person saw the ad']
+    "full_view_impressions" float [note: 'Impressions when the ad is fully viewed']
+    "full_view_reach" float [note: 'Reach when the ad is fully viewed']
+    "impressions" integer [note: 'Total number of impressions']
+    "inline_link_click_ctr" float [note: 'Click-through rate for inline link clicks']
+    "inline_link_clicks" integer [note: 'Total number of inline link clicks']
+    "inline_post_engagement" integer [note: 'Engagement on inline posts']
+    "instant_experience_clicks_to_open" float [note: 'Clicks to open instant experience']
+    "instant_experience_clicks_to_start" float [note: 'Clicks to start instant experience']
     "instant_experience_outbound_clicks" array
     "mobile_app_purchase_roas" array
-    "objective" varchar
-    "optimization_goal" varchar
+    "objective" varchar [note: 'Marketing objective']
+    "optimization_goal" varchar [note: 'Goal for optimization']
     "outbound_clicks" array
     "outbound_clicks_ctr" array
     "purchase_roas" array
-    "qualifying_question_qualify_answer_rate" float
-    "quality_ranking" varchar
-    "reach" integer
-    "social_spend" float
-    "spend" float
+    "qualifying_question_qualify_answer_rate" float [note: 'Rate of qualifying question answer qualification']
+    "quality_ranking" varchar [note: 'Ranking based on quality']
+    "reach" integer [note: 'Number of people who saw the ad']
+    "social_spend" float [note: 'Spend in social channels']
+    "spend" float [note: 'Total amount spent']
     "unique_actions" array
-    "unique_clicks" integer
-    "unique_ctr" float
-    "unique_inline_link_click_ctr" float
-    "unique_inline_link_clicks" integer
-    "unique_link_clicks_ctr" float
+    "unique_clicks" integer [note: 'Total number of unique clicks']
+    "unique_ctr" float [note: 'Unique click-through rate']
+    "unique_inline_link_click_ctr" float [note: 'Unique click-through rate for inline link clicks']
+    "unique_inline_link_clicks" integer [note: 'Total number of unique inline link clicks']
+    "unique_link_clicks_ctr" float [note: 'Unique click-through rate for link clicks']
     "unique_outbound_clicks" array
     "unique_outbound_clicks_ctr" array
-    "updated_time" date
+    "updated_time" date [note: 'Time when the data was updated']
     "video_15_sec_watched_actions" array
     "video_30_sec_watched_actions" array
     "video_avg_time_watched_actions" array
@@ -379,40 +379,40 @@ Table "ads_insights_action_carousel_card" {
     "video_time_watched_actions" array
     "website_ctr" array
     "website_purchase_roas" array
-    "wish_bid" float
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "wish_bid" float [note: 'Bid based on the wish to achieve certain results']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "ads_insights_action_conversion_device" {
-    "account_currency" varchar
-    "account_id" varchar
-    "account_name" varchar
+    "account_currency" varchar [note: 'Currency used for the account']
+    "account_id" varchar [note: 'ID of the account']
+    "account_name" varchar [note: 'Name of the account']
     "action_values" array
     "actions" array
     "ad_click_actions" array
-    "ad_id" varchar
+    "ad_id" varchar [note: 'ID of the ad']
     "ad_impression_actions" array
-    "ad_name" varchar
-    "adset_id" varchar
-    "adset_name" varchar
-    "attribution_setting" varchar
-    "auction_bid" float
-    "auction_competitiveness" float
-    "auction_max_competitor_bid" float
-    "buying_type" varchar
-    "campaign_id" varchar
-    "campaign_name" varchar
-    "canvas_avg_view_percent" float
-    "canvas_avg_view_time" float
+    "ad_name" varchar [note: 'Name of the ad']
+    "adset_id" varchar [note: 'ID of the ad set']
+    "adset_name" varchar [note: 'Name of the ad set']
+    "attribution_setting" varchar [note: 'How conversions are attributed']
+    "auction_bid" float [note: 'Bid amount in the auction']
+    "auction_competitiveness" float [note: 'Competitiveness level in the auction']
+    "auction_max_competitor_bid" float [note: 'Maximum bid among the competitors in the auction']
+    "buying_type" varchar [note: 'Type of buying']
+    "campaign_id" varchar [note: 'ID of the campaign']
+    "campaign_name" varchar [note: 'Name of the campaign']
+    "canvas_avg_view_percent" float [note: 'Average percentage of the canvas viewed']
+    "canvas_avg_view_time" float [note: 'Average time spent viewing the canvas']
     "catalog_segment_actions" array
     "catalog_segment_value" array
     "catalog_segment_value_mobile_purchase_roas" array
     "catalog_segment_value_omni_purchase_roas" array
     "catalog_segment_value_website_purchase_roas" array
-    "clicks" integer
-    "conversion_rate_ranking" varchar
+    "clicks" integer [note: 'Total number of clicks']
+    "conversion_rate_ranking" varchar [note: 'Ranking based on conversion rates']
     "conversion_values" array
     "conversions" array
     "converted_product_quantity" array
@@ -422,54 +422,54 @@ Table "ads_insights_action_conversion_device" {
     "cost_per_action_type" array
     "cost_per_ad_click" array
     "cost_per_conversion" array
-    "cost_per_estimated_ad_recallers" float
-    "cost_per_inline_link_click" float
-    "cost_per_inline_post_engagement" float
+    "cost_per_estimated_ad_recallers" float [note: 'Cost per estimated ad recallers']
+    "cost_per_inline_link_click" float [note: 'Cost per inline link click']
+    "cost_per_inline_post_engagement" float [note: 'Cost per inline post engagement']
     "cost_per_outbound_click" array
     "cost_per_thruplay" array
     "cost_per_unique_action_type" array
-    "cost_per_unique_click" float
-    "cost_per_unique_inline_link_click" float
+    "cost_per_unique_click" float [note: 'Cost per unique click']
+    "cost_per_unique_inline_link_click" float [note: 'Cost per unique inline link click']
     "cost_per_unique_outbound_click" array
-    "cpc" float
-    "cpm" float
-    "cpp" float
-    "created_time" date
-    "ctr" float
-    "date_start" date
-    "date_stop" date
-    "engagement_rate_ranking" varchar
-    "estimated_ad_recallers" float
-    "frequency" float
-    "full_view_impressions" float
-    "full_view_reach" float
-    "impressions" integer
-    "inline_link_click_ctr" float
-    "inline_link_clicks" integer
-    "inline_post_engagement" integer
-    "instant_experience_clicks_to_open" float
-    "instant_experience_clicks_to_start" float
+    "cpc" float [note: 'Cost per click']
+    "cpm" float [note: 'Cost per thousand impressions']
+    "cpp" float [note: 'Cost per thousand people reached']
+    "created_time" date [note: 'Time when the data was created']
+    "ctr" float [note: 'Click-through rate']
+    "date_start" date [note: 'Start date of the data']
+    "date_stop" date [note: 'End date of the data']
+    "engagement_rate_ranking" varchar [note: 'Ranking based on engagement rate']
+    "estimated_ad_recallers" float [note: 'Estimated ad recallers']
+    "frequency" float [note: 'Average number of times each person saw the ad']
+    "full_view_impressions" float [note: 'Impressions when the ad is fully viewed']
+    "full_view_reach" float [note: 'Reach when the ad is fully viewed']
+    "impressions" integer [note: 'Total number of impressions']
+    "inline_link_click_ctr" float [note: 'Click-through rate for inline link clicks']
+    "inline_link_clicks" integer [note: 'Total number of inline link clicks']
+    "inline_post_engagement" integer [note: 'Engagement on inline posts']
+    "instant_experience_clicks_to_open" float [note: 'Clicks to open instant experience']
+    "instant_experience_clicks_to_start" float [note: 'Clicks to start instant experience']
     "instant_experience_outbound_clicks" array
     "mobile_app_purchase_roas" array
-    "objective" varchar
-    "optimization_goal" varchar
+    "objective" varchar [note: 'Marketing objective']
+    "optimization_goal" varchar [note: 'Goal for optimization']
     "outbound_clicks" array
     "outbound_clicks_ctr" array
     "purchase_roas" array
-    "qualifying_question_qualify_answer_rate" float
-    "quality_ranking" varchar
-    "reach" integer
-    "social_spend" float
-    "spend" float
+    "qualifying_question_qualify_answer_rate" float [note: 'Rate of qualifying question answer qualification']
+    "quality_ranking" varchar [note: 'Ranking based on quality']
+    "reach" integer [note: 'Number of people who saw the ad']
+    "social_spend" float [note: 'Spend in social channels']
+    "spend" float [note: 'Total amount spent']
     "unique_actions" array
-    "unique_clicks" integer
-    "unique_ctr" float
-    "unique_inline_link_click_ctr" float
-    "unique_inline_link_clicks" integer
-    "unique_link_clicks_ctr" float
+    "unique_clicks" integer [note: 'Total number of unique clicks']
+    "unique_ctr" float [note: 'Unique click-through rate']
+    "unique_inline_link_click_ctr" float [note: 'Unique click-through rate for inline link clicks']
+    "unique_inline_link_clicks" integer [note: 'Total number of unique inline link clicks']
+    "unique_link_clicks_ctr" float [note: 'Unique click-through rate for link clicks']
     "unique_outbound_clicks" array
     "unique_outbound_clicks_ctr" array
-    "updated_time" date
+    "updated_time" date [note: 'Time when the data was updated']
     "video_15_sec_watched_actions" array
     "video_30_sec_watched_actions" array
     "video_avg_time_watched_actions" array
@@ -487,41 +487,41 @@ Table "ads_insights_action_conversion_device" {
     "video_time_watched_actions" array
     "website_ctr" array
     "website_purchase_roas" array
-    "wish_bid" float
-    "device_platform" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "wish_bid" float [note: 'Bid based on the wish to achieve certain results']
+    "device_platform" varchar [note: 'The device platform (e.g., mobile, desktop) targeted by the ad.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "ads_insights_action_product_id" {
-    "account_currency" varchar
-    "account_id" varchar
-    "account_name" varchar
+    "account_currency" varchar [note: 'Currency used for the account']
+    "account_id" varchar [note: 'ID of the account']
+    "account_name" varchar [note: 'Name of the account']
     "action_values" array
     "actions" array
     "ad_click_actions" array
-    "ad_id" varchar
+    "ad_id" varchar [note: 'ID of the ad']
     "ad_impression_actions" array
-    "ad_name" varchar
-    "adset_id" varchar
-    "adset_name" varchar
-    "attribution_setting" varchar
-    "auction_bid" float
-    "auction_competitiveness" float
-    "auction_max_competitor_bid" float
-    "buying_type" varchar
-    "campaign_id" varchar
-    "campaign_name" varchar
-    "canvas_avg_view_percent" float
-    "canvas_avg_view_time" float
+    "ad_name" varchar [note: 'Name of the ad']
+    "adset_id" varchar [note: 'ID of the ad set']
+    "adset_name" varchar [note: 'Name of the ad set']
+    "attribution_setting" varchar [note: 'How conversions are attributed']
+    "auction_bid" float [note: 'Bid amount in the auction']
+    "auction_competitiveness" float [note: 'Competitiveness level in the auction']
+    "auction_max_competitor_bid" float [note: 'Maximum bid among the competitors in the auction']
+    "buying_type" varchar [note: 'Type of buying']
+    "campaign_id" varchar [note: 'ID of the campaign']
+    "campaign_name" varchar [note: 'Name of the campaign']
+    "canvas_avg_view_percent" float [note: 'Average percentage of the canvas viewed']
+    "canvas_avg_view_time" float [note: 'Average time spent viewing the canvas']
     "catalog_segment_actions" array
     "catalog_segment_value" array
     "catalog_segment_value_mobile_purchase_roas" array
     "catalog_segment_value_omni_purchase_roas" array
     "catalog_segment_value_website_purchase_roas" array
-    "clicks" integer
-    "conversion_rate_ranking" varchar
+    "clicks" integer [note: 'Total number of clicks']
+    "conversion_rate_ranking" varchar [note: 'Ranking based on conversion rates']
     "conversion_values" array
     "conversions" array
     "converted_product_quantity" array
@@ -531,54 +531,54 @@ Table "ads_insights_action_product_id" {
     "cost_per_action_type" array
     "cost_per_ad_click" array
     "cost_per_conversion" array
-    "cost_per_estimated_ad_recallers" float
-    "cost_per_inline_link_click" float
-    "cost_per_inline_post_engagement" float
+    "cost_per_estimated_ad_recallers" float [note: 'Cost per estimated ad recallers']
+    "cost_per_inline_link_click" float [note: 'Cost per inline link click']
+    "cost_per_inline_post_engagement" float [note: 'Cost per inline post engagement']
     "cost_per_outbound_click" array
     "cost_per_thruplay" array
     "cost_per_unique_action_type" array
-    "cost_per_unique_click" float
-    "cost_per_unique_inline_link_click" float
+    "cost_per_unique_click" float [note: 'Cost per unique click']
+    "cost_per_unique_inline_link_click" float [note: 'Cost per unique inline link click']
     "cost_per_unique_outbound_click" array
-    "cpc" float
-    "cpm" float
-    "cpp" float
-    "created_time" date
-    "ctr" float
-    "date_start" date
-    "date_stop" date
-    "engagement_rate_ranking" varchar
-    "estimated_ad_recallers" float
-    "frequency" float
-    "full_view_impressions" float
-    "full_view_reach" float
-    "impressions" integer
-    "inline_link_click_ctr" float
-    "inline_link_clicks" integer
-    "inline_post_engagement" integer
-    "instant_experience_clicks_to_open" float
-    "instant_experience_clicks_to_start" float
+    "cpc" float [note: 'Cost per click']
+    "cpm" float [note: 'Cost per thousand impressions']
+    "cpp" float [note: 'Cost per thousand people reached']
+    "created_time" date [note: 'Time when the data was created']
+    "ctr" float [note: 'Click-through rate']
+    "date_start" date [note: 'Start date of the data']
+    "date_stop" date [note: 'End date of the data']
+    "engagement_rate_ranking" varchar [note: 'Ranking based on engagement rate']
+    "estimated_ad_recallers" float [note: 'Estimated ad recallers']
+    "frequency" float [note: 'Average number of times each person saw the ad']
+    "full_view_impressions" float [note: 'Impressions when the ad is fully viewed']
+    "full_view_reach" float [note: 'Reach when the ad is fully viewed']
+    "impressions" integer [note: 'Total number of impressions']
+    "inline_link_click_ctr" float [note: 'Click-through rate for inline link clicks']
+    "inline_link_clicks" integer [note: 'Total number of inline link clicks']
+    "inline_post_engagement" integer [note: 'Engagement on inline posts']
+    "instant_experience_clicks_to_open" float [note: 'Clicks to open instant experience']
+    "instant_experience_clicks_to_start" float [note: 'Clicks to start instant experience']
     "instant_experience_outbound_clicks" array
     "mobile_app_purchase_roas" array
-    "objective" varchar
-    "optimization_goal" varchar
+    "objective" varchar [note: 'Marketing objective']
+    "optimization_goal" varchar [note: 'Goal for optimization']
     "outbound_clicks" array
     "outbound_clicks_ctr" array
     "purchase_roas" array
-    "qualifying_question_qualify_answer_rate" float
-    "quality_ranking" varchar
-    "reach" integer
-    "social_spend" float
-    "spend" float
+    "qualifying_question_qualify_answer_rate" float [note: 'Rate of qualifying question answer qualification']
+    "quality_ranking" varchar [note: 'Ranking based on quality']
+    "reach" integer [note: 'Number of people who saw the ad']
+    "social_spend" float [note: 'Spend in social channels']
+    "spend" float [note: 'Total amount spent']
     "unique_actions" array
-    "unique_clicks" integer
-    "unique_ctr" float
-    "unique_inline_link_click_ctr" float
-    "unique_inline_link_clicks" integer
-    "unique_link_clicks_ctr" float
+    "unique_clicks" integer [note: 'Total number of unique clicks']
+    "unique_ctr" float [note: 'Unique click-through rate']
+    "unique_inline_link_click_ctr" float [note: 'Unique click-through rate for inline link clicks']
+    "unique_inline_link_clicks" integer [note: 'Total number of unique inline link clicks']
+    "unique_link_clicks_ctr" float [note: 'Unique click-through rate for link clicks']
     "unique_outbound_clicks" array
     "unique_outbound_clicks_ctr" array
-    "updated_time" date
+    "updated_time" date [note: 'Time when the data was updated']
     "video_15_sec_watched_actions" array
     "video_30_sec_watched_actions" array
     "video_avg_time_watched_actions" array
@@ -596,41 +596,41 @@ Table "ads_insights_action_product_id" {
     "video_time_watched_actions" array
     "website_ctr" array
     "website_purchase_roas" array
-    "wish_bid" float
-    "product_id" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "wish_bid" float [note: 'Bid based on the wish to achieve certain results']
+    "product_id" varchar [note: 'The identifier of the product featured in the ad.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "ads_insights_action_reaction" {
-    "account_currency" varchar
-    "account_id" varchar
-    "account_name" varchar
+    "account_currency" varchar [note: 'Currency used for the account']
+    "account_id" varchar [note: 'ID of the account']
+    "account_name" varchar [note: 'Name of the account']
     "action_values" array
     "actions" array
     "ad_click_actions" array
-    "ad_id" varchar
+    "ad_id" varchar [note: 'ID of the ad']
     "ad_impression_actions" array
-    "ad_name" varchar
-    "adset_id" varchar
-    "adset_name" varchar
-    "attribution_setting" varchar
-    "auction_bid" float
-    "auction_competitiveness" float
-    "auction_max_competitor_bid" float
-    "buying_type" varchar
-    "campaign_id" varchar
-    "campaign_name" varchar
-    "canvas_avg_view_percent" float
-    "canvas_avg_view_time" float
+    "ad_name" varchar [note: 'Name of the ad']
+    "adset_id" varchar [note: 'ID of the ad set']
+    "adset_name" varchar [note: 'Name of the ad set']
+    "attribution_setting" varchar [note: 'How conversions are attributed']
+    "auction_bid" float [note: 'Bid amount in the auction']
+    "auction_competitiveness" float [note: 'Competitiveness level in the auction']
+    "auction_max_competitor_bid" float [note: 'Maximum bid among the competitors in the auction']
+    "buying_type" varchar [note: 'Type of buying']
+    "campaign_id" varchar [note: 'ID of the campaign']
+    "campaign_name" varchar [note: 'Name of the campaign']
+    "canvas_avg_view_percent" float [note: 'Average percentage of the canvas viewed']
+    "canvas_avg_view_time" float [note: 'Average time spent viewing the canvas']
     "catalog_segment_actions" array
     "catalog_segment_value" array
     "catalog_segment_value_mobile_purchase_roas" array
     "catalog_segment_value_omni_purchase_roas" array
     "catalog_segment_value_website_purchase_roas" array
-    "clicks" integer
-    "conversion_rate_ranking" varchar
+    "clicks" integer [note: 'Total number of clicks']
+    "conversion_rate_ranking" varchar [note: 'Ranking based on conversion rates']
     "conversion_values" array
     "conversions" array
     "converted_product_quantity" array
@@ -640,54 +640,54 @@ Table "ads_insights_action_reaction" {
     "cost_per_action_type" array
     "cost_per_ad_click" array
     "cost_per_conversion" array
-    "cost_per_estimated_ad_recallers" float
-    "cost_per_inline_link_click" float
-    "cost_per_inline_post_engagement" float
+    "cost_per_estimated_ad_recallers" float [note: 'Cost per estimated ad recallers']
+    "cost_per_inline_link_click" float [note: 'Cost per inline link click']
+    "cost_per_inline_post_engagement" float [note: 'Cost per inline post engagement']
     "cost_per_outbound_click" array
     "cost_per_thruplay" array
     "cost_per_unique_action_type" array
-    "cost_per_unique_click" float
-    "cost_per_unique_inline_link_click" float
+    "cost_per_unique_click" float [note: 'Cost per unique click']
+    "cost_per_unique_inline_link_click" float [note: 'Cost per unique inline link click']
     "cost_per_unique_outbound_click" array
-    "cpc" float
-    "cpm" float
-    "cpp" float
-    "created_time" date
-    "ctr" float
-    "date_start" date
-    "date_stop" date
-    "engagement_rate_ranking" varchar
-    "estimated_ad_recallers" float
-    "frequency" float
-    "full_view_impressions" float
-    "full_view_reach" float
-    "impressions" integer
-    "inline_link_click_ctr" float
-    "inline_link_clicks" integer
-    "inline_post_engagement" integer
-    "instant_experience_clicks_to_open" float
-    "instant_experience_clicks_to_start" float
+    "cpc" float [note: 'Cost per click']
+    "cpm" float [note: 'Cost per thousand impressions']
+    "cpp" float [note: 'Cost per thousand people reached']
+    "created_time" date [note: 'Time when the data was created']
+    "ctr" float [note: 'Click-through rate']
+    "date_start" date [note: 'Start date of the data']
+    "date_stop" date [note: 'End date of the data']
+    "engagement_rate_ranking" varchar [note: 'Ranking based on engagement rate']
+    "estimated_ad_recallers" float [note: 'Estimated ad recallers']
+    "frequency" float [note: 'Average number of times each person saw the ad']
+    "full_view_impressions" float [note: 'Impressions when the ad is fully viewed']
+    "full_view_reach" float [note: 'Reach when the ad is fully viewed']
+    "impressions" integer [note: 'Total number of impressions']
+    "inline_link_click_ctr" float [note: 'Click-through rate for inline link clicks']
+    "inline_link_clicks" integer [note: 'Total number of inline link clicks']
+    "inline_post_engagement" integer [note: 'Engagement on inline posts']
+    "instant_experience_clicks_to_open" float [note: 'Clicks to open instant experience']
+    "instant_experience_clicks_to_start" float [note: 'Clicks to start instant experience']
     "instant_experience_outbound_clicks" array
     "mobile_app_purchase_roas" array
-    "objective" varchar
-    "optimization_goal" varchar
+    "objective" varchar [note: 'Marketing objective']
+    "optimization_goal" varchar [note: 'Goal for optimization']
     "outbound_clicks" array
     "outbound_clicks_ctr" array
     "purchase_roas" array
-    "qualifying_question_qualify_answer_rate" float
-    "quality_ranking" varchar
-    "reach" integer
-    "social_spend" float
-    "spend" float
+    "qualifying_question_qualify_answer_rate" float [note: 'Rate of qualifying question answer qualification']
+    "quality_ranking" varchar [note: 'Ranking based on quality']
+    "reach" integer [note: 'Number of people who saw the ad']
+    "social_spend" float [note: 'Spend in social channels']
+    "spend" float [note: 'Total amount spent']
     "unique_actions" array
-    "unique_clicks" integer
-    "unique_ctr" float
-    "unique_inline_link_click_ctr" float
-    "unique_inline_link_clicks" integer
-    "unique_link_clicks_ctr" float
+    "unique_clicks" integer [note: 'Total number of unique clicks']
+    "unique_ctr" float [note: 'Unique click-through rate']
+    "unique_inline_link_click_ctr" float [note: 'Unique click-through rate for inline link clicks']
+    "unique_inline_link_clicks" integer [note: 'Total number of unique inline link clicks']
+    "unique_link_clicks_ctr" float [note: 'Unique click-through rate for link clicks']
     "unique_outbound_clicks" array
     "unique_outbound_clicks_ctr" array
-    "updated_time" date
+    "updated_time" date [note: 'Time when the data was updated']
     "video_15_sec_watched_actions" array
     "video_30_sec_watched_actions" array
     "video_avg_time_watched_actions" array
@@ -705,40 +705,40 @@ Table "ads_insights_action_reaction" {
     "video_time_watched_actions" array
     "website_ctr" array
     "website_purchase_roas" array
-    "wish_bid" float
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "wish_bid" float [note: 'Bid based on the wish to achieve certain results']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "ads_insights_action_type" {
-    "account_currency" varchar
-    "account_id" varchar
-    "account_name" varchar
+    "account_currency" varchar [note: 'Currency used for the account']
+    "account_id" varchar [note: 'ID of the account']
+    "account_name" varchar [note: 'Name of the account']
     "action_values" array
     "actions" array
     "ad_click_actions" array
-    "ad_id" varchar
+    "ad_id" varchar [note: 'ID of the ad']
     "ad_impression_actions" array
-    "ad_name" varchar
-    "adset_id" varchar
-    "adset_name" varchar
-    "attribution_setting" varchar
-    "auction_bid" float
-    "auction_competitiveness" float
-    "auction_max_competitor_bid" float
-    "buying_type" varchar
-    "campaign_id" varchar
-    "campaign_name" varchar
-    "canvas_avg_view_percent" float
-    "canvas_avg_view_time" float
+    "ad_name" varchar [note: 'Name of the ad']
+    "adset_id" varchar [note: 'ID of the ad set']
+    "adset_name" varchar [note: 'Name of the ad set']
+    "attribution_setting" varchar [note: 'How conversions are attributed']
+    "auction_bid" float [note: 'Bid amount in the auction']
+    "auction_competitiveness" float [note: 'Competitiveness level in the auction']
+    "auction_max_competitor_bid" float [note: 'Maximum bid among the competitors in the auction']
+    "buying_type" varchar [note: 'Type of buying']
+    "campaign_id" varchar [note: 'ID of the campaign']
+    "campaign_name" varchar [note: 'Name of the campaign']
+    "canvas_avg_view_percent" float [note: 'Average percentage of the canvas viewed']
+    "canvas_avg_view_time" float [note: 'Average time spent viewing the canvas']
     "catalog_segment_actions" array
     "catalog_segment_value" array
     "catalog_segment_value_mobile_purchase_roas" array
     "catalog_segment_value_omni_purchase_roas" array
     "catalog_segment_value_website_purchase_roas" array
-    "clicks" integer
-    "conversion_rate_ranking" varchar
+    "clicks" integer [note: 'Total number of clicks']
+    "conversion_rate_ranking" varchar [note: 'Ranking based on conversion rates']
     "conversion_values" array
     "conversions" array
     "converted_product_quantity" array
@@ -748,54 +748,54 @@ Table "ads_insights_action_type" {
     "cost_per_action_type" array
     "cost_per_ad_click" array
     "cost_per_conversion" array
-    "cost_per_estimated_ad_recallers" float
-    "cost_per_inline_link_click" float
-    "cost_per_inline_post_engagement" float
+    "cost_per_estimated_ad_recallers" float [note: 'Cost per estimated ad recallers']
+    "cost_per_inline_link_click" float [note: 'Cost per inline link click']
+    "cost_per_inline_post_engagement" float [note: 'Cost per inline post engagement']
     "cost_per_outbound_click" array
     "cost_per_thruplay" array
     "cost_per_unique_action_type" array
-    "cost_per_unique_click" float
-    "cost_per_unique_inline_link_click" float
+    "cost_per_unique_click" float [note: 'Cost per unique click']
+    "cost_per_unique_inline_link_click" float [note: 'Cost per unique inline link click']
     "cost_per_unique_outbound_click" array
-    "cpc" float
-    "cpm" float
-    "cpp" float
-    "created_time" date
-    "ctr" float
-    "date_start" date
-    "date_stop" date
-    "engagement_rate_ranking" varchar
-    "estimated_ad_recallers" float
-    "frequency" float
-    "full_view_impressions" float
-    "full_view_reach" float
-    "impressions" integer
-    "inline_link_click_ctr" float
-    "inline_link_clicks" integer
-    "inline_post_engagement" integer
-    "instant_experience_clicks_to_open" float
-    "instant_experience_clicks_to_start" float
+    "cpc" float [note: 'Cost per click']
+    "cpm" float [note: 'Cost per thousand impressions']
+    "cpp" float [note: 'Cost per thousand people reached']
+    "created_time" date [note: 'Time when the data was created']
+    "ctr" float [note: 'Click-through rate']
+    "date_start" date [note: 'Start date of the data']
+    "date_stop" date [note: 'End date of the data']
+    "engagement_rate_ranking" varchar [note: 'Ranking based on engagement rate']
+    "estimated_ad_recallers" float [note: 'Estimated ad recallers']
+    "frequency" float [note: 'Average number of times each person saw the ad']
+    "full_view_impressions" float [note: 'Impressions when the ad is fully viewed']
+    "full_view_reach" float [note: 'Reach when the ad is fully viewed']
+    "impressions" integer [note: 'Total number of impressions']
+    "inline_link_click_ctr" float [note: 'Click-through rate for inline link clicks']
+    "inline_link_clicks" integer [note: 'Total number of inline link clicks']
+    "inline_post_engagement" integer [note: 'Engagement on inline posts']
+    "instant_experience_clicks_to_open" float [note: 'Clicks to open instant experience']
+    "instant_experience_clicks_to_start" float [note: 'Clicks to start instant experience']
     "instant_experience_outbound_clicks" array
     "mobile_app_purchase_roas" array
-    "objective" varchar
-    "optimization_goal" varchar
+    "objective" varchar [note: 'Marketing objective']
+    "optimization_goal" varchar [note: 'Goal for optimization']
     "outbound_clicks" array
     "outbound_clicks_ctr" array
     "purchase_roas" array
-    "qualifying_question_qualify_answer_rate" float
-    "quality_ranking" varchar
-    "reach" integer
-    "social_spend" float
-    "spend" float
+    "qualifying_question_qualify_answer_rate" float [note: 'Rate of qualifying question answer qualification']
+    "quality_ranking" varchar [note: 'Ranking based on quality']
+    "reach" integer [note: 'Number of people who saw the ad']
+    "social_spend" float [note: 'Spend in social channels']
+    "spend" float [note: 'Total amount spent']
     "unique_actions" array
-    "unique_clicks" integer
-    "unique_ctr" float
-    "unique_inline_link_click_ctr" float
-    "unique_inline_link_clicks" integer
-    "unique_link_clicks_ctr" float
+    "unique_clicks" integer [note: 'Total number of unique clicks']
+    "unique_ctr" float [note: 'Unique click-through rate']
+    "unique_inline_link_click_ctr" float [note: 'Unique click-through rate for inline link clicks']
+    "unique_inline_link_clicks" integer [note: 'Total number of unique inline link clicks']
+    "unique_link_clicks_ctr" float [note: 'Unique click-through rate for link clicks']
     "unique_outbound_clicks" array
     "unique_outbound_clicks_ctr" array
-    "updated_time" date
+    "updated_time" date [note: 'Time when the data was updated']
     "video_15_sec_watched_actions" array
     "video_30_sec_watched_actions" array
     "video_avg_time_watched_actions" array
@@ -813,40 +813,40 @@ Table "ads_insights_action_type" {
     "video_time_watched_actions" array
     "website_ctr" array
     "website_purchase_roas" array
-    "wish_bid" float
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "wish_bid" float [note: 'Bid based on the wish to achieve certain results']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "ads_insights_action_video_sound" {
-    "account_currency" varchar
-    "account_id" varchar
-    "account_name" varchar
+    "account_currency" varchar [note: 'Currency used for the account']
+    "account_id" varchar [note: 'ID of the account']
+    "account_name" varchar [note: 'Name of the account']
     "action_values" array
     "actions" array
     "ad_click_actions" array
-    "ad_id" varchar
+    "ad_id" varchar [note: 'ID of the ad']
     "ad_impression_actions" array
-    "ad_name" varchar
-    "adset_id" varchar
-    "adset_name" varchar
-    "attribution_setting" varchar
-    "auction_bid" float
-    "auction_competitiveness" float
-    "auction_max_competitor_bid" float
-    "buying_type" varchar
-    "campaign_id" varchar
-    "campaign_name" varchar
-    "canvas_avg_view_percent" float
-    "canvas_avg_view_time" float
+    "ad_name" varchar [note: 'Name of the ad']
+    "adset_id" varchar [note: 'ID of the ad set']
+    "adset_name" varchar [note: 'Name of the ad set']
+    "attribution_setting" varchar [note: 'How conversions are attributed']
+    "auction_bid" float [note: 'Bid amount in the auction']
+    "auction_competitiveness" float [note: 'Competitiveness level in the auction']
+    "auction_max_competitor_bid" float [note: 'Maximum bid among the competitors in the auction']
+    "buying_type" varchar [note: 'Type of buying']
+    "campaign_id" varchar [note: 'ID of the campaign']
+    "campaign_name" varchar [note: 'Name of the campaign']
+    "canvas_avg_view_percent" float [note: 'Average percentage of the canvas viewed']
+    "canvas_avg_view_time" float [note: 'Average time spent viewing the canvas']
     "catalog_segment_actions" array
     "catalog_segment_value" array
     "catalog_segment_value_mobile_purchase_roas" array
     "catalog_segment_value_omni_purchase_roas" array
     "catalog_segment_value_website_purchase_roas" array
-    "clicks" integer
-    "conversion_rate_ranking" varchar
+    "clicks" integer [note: 'Total number of clicks']
+    "conversion_rate_ranking" varchar [note: 'Ranking based on conversion rates']
     "conversion_values" array
     "conversions" array
     "converted_product_quantity" array
@@ -856,54 +856,54 @@ Table "ads_insights_action_video_sound" {
     "cost_per_action_type" array
     "cost_per_ad_click" array
     "cost_per_conversion" array
-    "cost_per_estimated_ad_recallers" float
-    "cost_per_inline_link_click" float
-    "cost_per_inline_post_engagement" float
+    "cost_per_estimated_ad_recallers" float [note: 'Cost per estimated ad recallers']
+    "cost_per_inline_link_click" float [note: 'Cost per inline link click']
+    "cost_per_inline_post_engagement" float [note: 'Cost per inline post engagement']
     "cost_per_outbound_click" array
     "cost_per_thruplay" array
     "cost_per_unique_action_type" array
-    "cost_per_unique_click" float
-    "cost_per_unique_inline_link_click" float
+    "cost_per_unique_click" float [note: 'Cost per unique click']
+    "cost_per_unique_inline_link_click" float [note: 'Cost per unique inline link click']
     "cost_per_unique_outbound_click" array
-    "cpc" float
-    "cpm" float
-    "cpp" float
-    "created_time" date
-    "ctr" float
-    "date_start" date
-    "date_stop" date
-    "engagement_rate_ranking" varchar
-    "estimated_ad_recallers" float
-    "frequency" float
-    "full_view_impressions" float
-    "full_view_reach" float
-    "impressions" integer
-    "inline_link_click_ctr" float
-    "inline_link_clicks" integer
-    "inline_post_engagement" integer
-    "instant_experience_clicks_to_open" float
-    "instant_experience_clicks_to_start" float
+    "cpc" float [note: 'Cost per click']
+    "cpm" float [note: 'Cost per thousand impressions']
+    "cpp" float [note: 'Cost per thousand people reached']
+    "created_time" date [note: 'Time when the data was created']
+    "ctr" float [note: 'Click-through rate']
+    "date_start" date [note: 'Start date of the data']
+    "date_stop" date [note: 'End date of the data']
+    "engagement_rate_ranking" varchar [note: 'Ranking based on engagement rate']
+    "estimated_ad_recallers" float [note: 'Estimated ad recallers']
+    "frequency" float [note: 'Average number of times each person saw the ad']
+    "full_view_impressions" float [note: 'Impressions when the ad is fully viewed']
+    "full_view_reach" float [note: 'Reach when the ad is fully viewed']
+    "impressions" integer [note: 'Total number of impressions']
+    "inline_link_click_ctr" float [note: 'Click-through rate for inline link clicks']
+    "inline_link_clicks" integer [note: 'Total number of inline link clicks']
+    "inline_post_engagement" integer [note: 'Engagement on inline posts']
+    "instant_experience_clicks_to_open" float [note: 'Clicks to open instant experience']
+    "instant_experience_clicks_to_start" float [note: 'Clicks to start instant experience']
     "instant_experience_outbound_clicks" array
     "mobile_app_purchase_roas" array
-    "objective" varchar
-    "optimization_goal" varchar
+    "objective" varchar [note: 'Marketing objective']
+    "optimization_goal" varchar [note: 'Goal for optimization']
     "outbound_clicks" array
     "outbound_clicks_ctr" array
     "purchase_roas" array
-    "qualifying_question_qualify_answer_rate" float
-    "quality_ranking" varchar
-    "reach" integer
-    "social_spend" float
-    "spend" float
+    "qualifying_question_qualify_answer_rate" float [note: 'Rate of qualifying question answer qualification']
+    "quality_ranking" varchar [note: 'Ranking based on quality']
+    "reach" integer [note: 'Number of people who saw the ad']
+    "social_spend" float [note: 'Spend in social channels']
+    "spend" float [note: 'Total amount spent']
     "unique_actions" array
-    "unique_clicks" integer
-    "unique_ctr" float
-    "unique_inline_link_click_ctr" float
-    "unique_inline_link_clicks" integer
-    "unique_link_clicks_ctr" float
+    "unique_clicks" integer [note: 'Total number of unique clicks']
+    "unique_ctr" float [note: 'Unique click-through rate']
+    "unique_inline_link_click_ctr" float [note: 'Unique click-through rate for inline link clicks']
+    "unique_inline_link_clicks" integer [note: 'Total number of unique inline link clicks']
+    "unique_link_clicks_ctr" float [note: 'Unique click-through rate for link clicks']
     "unique_outbound_clicks" array
     "unique_outbound_clicks_ctr" array
-    "updated_time" date
+    "updated_time" date [note: 'Time when the data was updated']
     "video_15_sec_watched_actions" array
     "video_30_sec_watched_actions" array
     "video_avg_time_watched_actions" array
@@ -921,40 +921,40 @@ Table "ads_insights_action_video_sound" {
     "video_time_watched_actions" array
     "website_ctr" array
     "website_purchase_roas" array
-    "wish_bid" float
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "wish_bid" float [note: 'Bid based on the wish to achieve certain results']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "ads_insights_action_video_type" {
-    "account_currency" varchar
-    "account_id" varchar
-    "account_name" varchar
+    "account_currency" varchar [note: 'Currency used for the account']
+    "account_id" varchar [note: 'ID of the account']
+    "account_name" varchar [note: 'Name of the account']
     "action_values" array
     "actions" array
     "ad_click_actions" array
-    "ad_id" varchar
+    "ad_id" varchar [note: 'ID of the ad']
     "ad_impression_actions" array
-    "ad_name" varchar
-    "adset_id" varchar
-    "adset_name" varchar
-    "attribution_setting" varchar
-    "auction_bid" float
-    "auction_competitiveness" float
-    "auction_max_competitor_bid" float
-    "buying_type" varchar
-    "campaign_id" varchar
-    "campaign_name" varchar
-    "canvas_avg_view_percent" float
-    "canvas_avg_view_time" float
+    "ad_name" varchar [note: 'Name of the ad']
+    "adset_id" varchar [note: 'ID of the ad set']
+    "adset_name" varchar [note: 'Name of the ad set']
+    "attribution_setting" varchar [note: 'How conversions are attributed']
+    "auction_bid" float [note: 'Bid amount in the auction']
+    "auction_competitiveness" float [note: 'Competitiveness level in the auction']
+    "auction_max_competitor_bid" float [note: 'Maximum bid among the competitors in the auction']
+    "buying_type" varchar [note: 'Type of buying']
+    "campaign_id" varchar [note: 'ID of the campaign']
+    "campaign_name" varchar [note: 'Name of the campaign']
+    "canvas_avg_view_percent" float [note: 'Average percentage of the canvas viewed']
+    "canvas_avg_view_time" float [note: 'Average time spent viewing the canvas']
     "catalog_segment_actions" array
     "catalog_segment_value" array
     "catalog_segment_value_mobile_purchase_roas" array
     "catalog_segment_value_omni_purchase_roas" array
     "catalog_segment_value_website_purchase_roas" array
-    "clicks" integer
-    "conversion_rate_ranking" varchar
+    "clicks" integer [note: 'Total number of clicks']
+    "conversion_rate_ranking" varchar [note: 'Ranking based on conversion rates']
     "conversion_values" array
     "conversions" array
     "converted_product_quantity" array
@@ -964,54 +964,54 @@ Table "ads_insights_action_video_type" {
     "cost_per_action_type" array
     "cost_per_ad_click" array
     "cost_per_conversion" array
-    "cost_per_estimated_ad_recallers" float
-    "cost_per_inline_link_click" float
-    "cost_per_inline_post_engagement" float
+    "cost_per_estimated_ad_recallers" float [note: 'Cost per estimated ad recallers']
+    "cost_per_inline_link_click" float [note: 'Cost per inline link click']
+    "cost_per_inline_post_engagement" float [note: 'Cost per inline post engagement']
     "cost_per_outbound_click" array
     "cost_per_thruplay" array
     "cost_per_unique_action_type" array
-    "cost_per_unique_click" float
-    "cost_per_unique_inline_link_click" float
+    "cost_per_unique_click" float [note: 'Cost per unique click']
+    "cost_per_unique_inline_link_click" float [note: 'Cost per unique inline link click']
     "cost_per_unique_outbound_click" array
-    "cpc" float
-    "cpm" float
-    "cpp" float
-    "created_time" date
-    "ctr" float
-    "date_start" date
-    "date_stop" date
-    "engagement_rate_ranking" varchar
-    "estimated_ad_recallers" float
-    "frequency" float
-    "full_view_impressions" float
-    "full_view_reach" float
-    "impressions" integer
-    "inline_link_click_ctr" float
-    "inline_link_clicks" integer
-    "inline_post_engagement" integer
-    "instant_experience_clicks_to_open" float
-    "instant_experience_clicks_to_start" float
+    "cpc" float [note: 'Cost per click']
+    "cpm" float [note: 'Cost per thousand impressions']
+    "cpp" float [note: 'Cost per thousand people reached']
+    "created_time" date [note: 'Time when the data was created']
+    "ctr" float [note: 'Click-through rate']
+    "date_start" date [note: 'Start date of the data']
+    "date_stop" date [note: 'End date of the data']
+    "engagement_rate_ranking" varchar [note: 'Ranking based on engagement rate']
+    "estimated_ad_recallers" float [note: 'Estimated ad recallers']
+    "frequency" float [note: 'Average number of times each person saw the ad']
+    "full_view_impressions" float [note: 'Impressions when the ad is fully viewed']
+    "full_view_reach" float [note: 'Reach when the ad is fully viewed']
+    "impressions" integer [note: 'Total number of impressions']
+    "inline_link_click_ctr" float [note: 'Click-through rate for inline link clicks']
+    "inline_link_clicks" integer [note: 'Total number of inline link clicks']
+    "inline_post_engagement" integer [note: 'Engagement on inline posts']
+    "instant_experience_clicks_to_open" float [note: 'Clicks to open instant experience']
+    "instant_experience_clicks_to_start" float [note: 'Clicks to start instant experience']
     "instant_experience_outbound_clicks" array
     "mobile_app_purchase_roas" array
-    "objective" varchar
-    "optimization_goal" varchar
+    "objective" varchar [note: 'Marketing objective']
+    "optimization_goal" varchar [note: 'Goal for optimization']
     "outbound_clicks" array
     "outbound_clicks_ctr" array
     "purchase_roas" array
-    "qualifying_question_qualify_answer_rate" float
-    "quality_ranking" varchar
-    "reach" integer
-    "social_spend" float
-    "spend" float
+    "qualifying_question_qualify_answer_rate" float [note: 'Rate of qualifying question answer qualification']
+    "quality_ranking" varchar [note: 'Ranking based on quality']
+    "reach" integer [note: 'Number of people who saw the ad']
+    "social_spend" float [note: 'Spend in social channels']
+    "spend" float [note: 'Total amount spent']
     "unique_actions" array
-    "unique_clicks" integer
-    "unique_ctr" float
-    "unique_inline_link_click_ctr" float
-    "unique_inline_link_clicks" integer
-    "unique_link_clicks_ctr" float
+    "unique_clicks" integer [note: 'Total number of unique clicks']
+    "unique_ctr" float [note: 'Unique click-through rate']
+    "unique_inline_link_click_ctr" float [note: 'Unique click-through rate for inline link clicks']
+    "unique_inline_link_clicks" integer [note: 'Total number of unique inline link clicks']
+    "unique_link_clicks_ctr" float [note: 'Unique click-through rate for link clicks']
     "unique_outbound_clicks" array
     "unique_outbound_clicks_ctr" array
-    "updated_time" date
+    "updated_time" date [note: 'Time when the data was updated']
     "video_15_sec_watched_actions" array
     "video_30_sec_watched_actions" array
     "video_avg_time_watched_actions" array
@@ -1029,40 +1029,40 @@ Table "ads_insights_action_video_type" {
     "video_time_watched_actions" array
     "website_ctr" array
     "website_purchase_roas" array
-    "wish_bid" float
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "wish_bid" float [note: 'Bid based on the wish to achieve certain results']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "ads_insights_age_and_gender" {
-    "account_currency" varchar
-    "account_id" varchar
-    "account_name" varchar
+    "account_currency" varchar [note: 'Currency used for the account']
+    "account_id" varchar [note: 'ID of the account']
+    "account_name" varchar [note: 'Name of the account']
     "action_values" array
     "actions" array
     "ad_click_actions" array
-    "ad_id" varchar
+    "ad_id" varchar [note: 'ID of the ad']
     "ad_impression_actions" array
-    "ad_name" varchar
-    "adset_id" varchar
-    "adset_name" varchar
-    "attribution_setting" varchar
-    "auction_bid" float
-    "auction_competitiveness" float
-    "auction_max_competitor_bid" float
-    "buying_type" varchar
-    "campaign_id" varchar
-    "campaign_name" varchar
-    "canvas_avg_view_percent" float
-    "canvas_avg_view_time" float
+    "ad_name" varchar [note: 'Name of the ad']
+    "adset_id" varchar [note: 'ID of the ad set']
+    "adset_name" varchar [note: 'Name of the ad set']
+    "attribution_setting" varchar [note: 'How conversions are attributed']
+    "auction_bid" float [note: 'Bid amount in the auction']
+    "auction_competitiveness" float [note: 'Competitiveness level in the auction']
+    "auction_max_competitor_bid" float [note: 'Maximum bid among the competitors in the auction']
+    "buying_type" varchar [note: 'Type of buying']
+    "campaign_id" varchar [note: 'ID of the campaign']
+    "campaign_name" varchar [note: 'Name of the campaign']
+    "canvas_avg_view_percent" float [note: 'Average percentage of the canvas viewed']
+    "canvas_avg_view_time" float [note: 'Average time spent viewing the canvas']
     "catalog_segment_actions" array
     "catalog_segment_value" array
     "catalog_segment_value_mobile_purchase_roas" array
     "catalog_segment_value_omni_purchase_roas" array
     "catalog_segment_value_website_purchase_roas" array
-    "clicks" integer
-    "conversion_rate_ranking" varchar
+    "clicks" integer [note: 'Total number of clicks']
+    "conversion_rate_ranking" varchar [note: 'Ranking based on conversion rates']
     "conversion_values" array
     "conversions" array
     "converted_product_quantity" array
@@ -1072,54 +1072,54 @@ Table "ads_insights_age_and_gender" {
     "cost_per_action_type" array
     "cost_per_ad_click" array
     "cost_per_conversion" array
-    "cost_per_estimated_ad_recallers" float
-    "cost_per_inline_link_click" float
-    "cost_per_inline_post_engagement" float
+    "cost_per_estimated_ad_recallers" float [note: 'Cost per estimated ad recallers']
+    "cost_per_inline_link_click" float [note: 'Cost per inline link click']
+    "cost_per_inline_post_engagement" float [note: 'Cost per inline post engagement']
     "cost_per_outbound_click" array
     "cost_per_thruplay" array
     "cost_per_unique_action_type" array
-    "cost_per_unique_click" float
-    "cost_per_unique_inline_link_click" float
+    "cost_per_unique_click" float [note: 'Cost per unique click']
+    "cost_per_unique_inline_link_click" float [note: 'Cost per unique inline link click']
     "cost_per_unique_outbound_click" array
-    "cpc" float
-    "cpm" float
-    "cpp" float
-    "created_time" date
-    "ctr" float
-    "date_start" date
-    "date_stop" date
-    "engagement_rate_ranking" varchar
-    "estimated_ad_recallers" float
-    "frequency" float
-    "full_view_impressions" float
-    "full_view_reach" float
-    "impressions" integer
-    "inline_link_click_ctr" float
-    "inline_link_clicks" integer
-    "inline_post_engagement" integer
-    "instant_experience_clicks_to_open" float
-    "instant_experience_clicks_to_start" float
+    "cpc" float [note: 'Cost per click']
+    "cpm" float [note: 'Cost per thousand impressions']
+    "cpp" float [note: 'Cost per thousand people reached']
+    "created_time" date [note: 'Time when the data was created']
+    "ctr" float [note: 'Click-through rate']
+    "date_start" date [note: 'Start date of the data']
+    "date_stop" date [note: 'End date of the data']
+    "engagement_rate_ranking" varchar [note: 'Ranking based on engagement rate']
+    "estimated_ad_recallers" float [note: 'Estimated ad recallers']
+    "frequency" float [note: 'Average number of times each person saw the ad']
+    "full_view_impressions" float [note: 'Impressions when the ad is fully viewed']
+    "full_view_reach" float [note: 'Reach when the ad is fully viewed']
+    "impressions" integer [note: 'Total number of impressions']
+    "inline_link_click_ctr" float [note: 'Click-through rate for inline link clicks']
+    "inline_link_clicks" integer [note: 'Total number of inline link clicks']
+    "inline_post_engagement" integer [note: 'Engagement on inline posts']
+    "instant_experience_clicks_to_open" float [note: 'Clicks to open instant experience']
+    "instant_experience_clicks_to_start" float [note: 'Clicks to start instant experience']
     "instant_experience_outbound_clicks" array
     "mobile_app_purchase_roas" array
-    "objective" varchar
-    "optimization_goal" varchar
+    "objective" varchar [note: 'Marketing objective']
+    "optimization_goal" varchar [note: 'Goal for optimization']
     "outbound_clicks" array
     "outbound_clicks_ctr" array
     "purchase_roas" array
-    "qualifying_question_qualify_answer_rate" float
-    "quality_ranking" varchar
-    "reach" integer
-    "social_spend" float
-    "spend" float
+    "qualifying_question_qualify_answer_rate" float [note: 'Rate of qualifying question answer qualification']
+    "quality_ranking" varchar [note: 'Ranking based on quality']
+    "reach" integer [note: 'Number of people who saw the ad']
+    "social_spend" float [note: 'Spend in social channels']
+    "spend" float [note: 'Total amount spent']
     "unique_actions" array
-    "unique_clicks" integer
-    "unique_ctr" float
-    "unique_inline_link_click_ctr" float
-    "unique_inline_link_clicks" integer
-    "unique_link_clicks_ctr" float
+    "unique_clicks" integer [note: 'Total number of unique clicks']
+    "unique_ctr" float [note: 'Unique click-through rate']
+    "unique_inline_link_click_ctr" float [note: 'Unique click-through rate for inline link clicks']
+    "unique_inline_link_clicks" integer [note: 'Total number of unique inline link clicks']
+    "unique_link_clicks_ctr" float [note: 'Unique click-through rate for link clicks']
     "unique_outbound_clicks" array
     "unique_outbound_clicks_ctr" array
-    "updated_time" date
+    "updated_time" date [note: 'Time when the data was updated']
     "video_15_sec_watched_actions" array
     "video_30_sec_watched_actions" array
     "video_avg_time_watched_actions" array
@@ -1137,42 +1137,42 @@ Table "ads_insights_age_and_gender" {
     "video_time_watched_actions" array
     "website_ctr" array
     "website_purchase_roas" array
-    "wish_bid" float
-    "age" varchar
-    "gender" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "wish_bid" float [note: 'Bid based on the wish to achieve certain results']
+    "age" varchar [note: 'The age group targeted by the ad campaign.']
+    "gender" varchar [note: 'The gender targeted by the ad campaign.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "ads_insights_country" {
-    "account_currency" varchar
-    "account_id" varchar
-    "account_name" varchar
+    "account_currency" varchar [note: 'Currency used for the account']
+    "account_id" varchar [note: 'ID of the account']
+    "account_name" varchar [note: 'Name of the account']
     "action_values" array
     "actions" array
     "ad_click_actions" array
-    "ad_id" varchar
+    "ad_id" varchar [note: 'ID of the ad']
     "ad_impression_actions" array
-    "ad_name" varchar
-    "adset_id" varchar
-    "adset_name" varchar
-    "attribution_setting" varchar
-    "auction_bid" float
-    "auction_competitiveness" float
-    "auction_max_competitor_bid" float
-    "buying_type" varchar
-    "campaign_id" varchar
-    "campaign_name" varchar
-    "canvas_avg_view_percent" float
-    "canvas_avg_view_time" float
+    "ad_name" varchar [note: 'Name of the ad']
+    "adset_id" varchar [note: 'ID of the ad set']
+    "adset_name" varchar [note: 'Name of the ad set']
+    "attribution_setting" varchar [note: 'How conversions are attributed']
+    "auction_bid" float [note: 'Bid amount in the auction']
+    "auction_competitiveness" float [note: 'Competitiveness level in the auction']
+    "auction_max_competitor_bid" float [note: 'Maximum bid among the competitors in the auction']
+    "buying_type" varchar [note: 'Type of buying']
+    "campaign_id" varchar [note: 'ID of the campaign']
+    "campaign_name" varchar [note: 'Name of the campaign']
+    "canvas_avg_view_percent" float [note: 'Average percentage of the canvas viewed']
+    "canvas_avg_view_time" float [note: 'Average time spent viewing the canvas']
     "catalog_segment_actions" array
     "catalog_segment_value" array
     "catalog_segment_value_mobile_purchase_roas" array
     "catalog_segment_value_omni_purchase_roas" array
     "catalog_segment_value_website_purchase_roas" array
-    "clicks" integer
-    "conversion_rate_ranking" varchar
+    "clicks" integer [note: 'Total number of clicks']
+    "conversion_rate_ranking" varchar [note: 'Ranking based on conversion rates']
     "conversion_values" array
     "conversions" array
     "converted_product_quantity" array
@@ -1182,54 +1182,54 @@ Table "ads_insights_country" {
     "cost_per_action_type" array
     "cost_per_ad_click" array
     "cost_per_conversion" array
-    "cost_per_estimated_ad_recallers" float
-    "cost_per_inline_link_click" float
-    "cost_per_inline_post_engagement" float
+    "cost_per_estimated_ad_recallers" float [note: 'Cost per estimated ad recallers']
+    "cost_per_inline_link_click" float [note: 'Cost per inline link click']
+    "cost_per_inline_post_engagement" float [note: 'Cost per inline post engagement']
     "cost_per_outbound_click" array
     "cost_per_thruplay" array
     "cost_per_unique_action_type" array
-    "cost_per_unique_click" float
-    "cost_per_unique_inline_link_click" float
+    "cost_per_unique_click" float [note: 'Cost per unique click']
+    "cost_per_unique_inline_link_click" float [note: 'Cost per unique inline link click']
     "cost_per_unique_outbound_click" array
-    "cpc" float
-    "cpm" float
-    "cpp" float
-    "created_time" date
-    "ctr" float
-    "date_start" date
-    "date_stop" date
-    "engagement_rate_ranking" varchar
-    "estimated_ad_recallers" float
-    "frequency" float
-    "full_view_impressions" float
-    "full_view_reach" float
-    "impressions" integer
-    "inline_link_click_ctr" float
-    "inline_link_clicks" integer
-    "inline_post_engagement" integer
-    "instant_experience_clicks_to_open" float
-    "instant_experience_clicks_to_start" float
+    "cpc" float [note: 'Cost per click']
+    "cpm" float [note: 'Cost per thousand impressions']
+    "cpp" float [note: 'Cost per thousand people reached']
+    "created_time" date [note: 'Time when the data was created']
+    "ctr" float [note: 'Click-through rate']
+    "date_start" date [note: 'Start date of the data']
+    "date_stop" date [note: 'End date of the data']
+    "engagement_rate_ranking" varchar [note: 'Ranking based on engagement rate']
+    "estimated_ad_recallers" float [note: 'Estimated ad recallers']
+    "frequency" float [note: 'Average number of times each person saw the ad']
+    "full_view_impressions" float [note: 'Impressions when the ad is fully viewed']
+    "full_view_reach" float [note: 'Reach when the ad is fully viewed']
+    "impressions" integer [note: 'Total number of impressions']
+    "inline_link_click_ctr" float [note: 'Click-through rate for inline link clicks']
+    "inline_link_clicks" integer [note: 'Total number of inline link clicks']
+    "inline_post_engagement" integer [note: 'Engagement on inline posts']
+    "instant_experience_clicks_to_open" float [note: 'Clicks to open instant experience']
+    "instant_experience_clicks_to_start" float [note: 'Clicks to start instant experience']
     "instant_experience_outbound_clicks" array
     "mobile_app_purchase_roas" array
-    "objective" varchar
-    "optimization_goal" varchar
+    "objective" varchar [note: 'Marketing objective']
+    "optimization_goal" varchar [note: 'Goal for optimization']
     "outbound_clicks" array
     "outbound_clicks_ctr" array
     "purchase_roas" array
-    "qualifying_question_qualify_answer_rate" float
-    "quality_ranking" varchar
-    "reach" integer
-    "social_spend" float
-    "spend" float
+    "qualifying_question_qualify_answer_rate" float [note: 'Rate of qualifying question answer qualification']
+    "quality_ranking" varchar [note: 'Ranking based on quality']
+    "reach" integer [note: 'Number of people who saw the ad']
+    "social_spend" float [note: 'Spend in social channels']
+    "spend" float [note: 'Total amount spent']
     "unique_actions" array
-    "unique_clicks" integer
-    "unique_ctr" float
-    "unique_inline_link_click_ctr" float
-    "unique_inline_link_clicks" integer
-    "unique_link_clicks_ctr" float
+    "unique_clicks" integer [note: 'Total number of unique clicks']
+    "unique_ctr" float [note: 'Unique click-through rate']
+    "unique_inline_link_click_ctr" float [note: 'Unique click-through rate for inline link clicks']
+    "unique_inline_link_clicks" integer [note: 'Total number of unique inline link clicks']
+    "unique_link_clicks_ctr" float [note: 'Unique click-through rate for link clicks']
     "unique_outbound_clicks" array
     "unique_outbound_clicks_ctr" array
-    "updated_time" date
+    "updated_time" date [note: 'Time when the data was updated']
     "video_15_sec_watched_actions" array
     "video_30_sec_watched_actions" array
     "video_avg_time_watched_actions" array
@@ -1247,41 +1247,41 @@ Table "ads_insights_country" {
     "video_time_watched_actions" array
     "website_ctr" array
     "website_purchase_roas" array
-    "wish_bid" float
-    "country" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "wish_bid" float [note: 'Bid based on the wish to achieve certain results']
+    "country" varchar [note: 'The country where the ad is being displayed.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "ads_insights_delivery_device" {
-    "account_currency" varchar
-    "account_id" varchar
-    "account_name" varchar
+    "account_currency" varchar [note: 'Currency used for the account']
+    "account_id" varchar [note: 'ID of the account']
+    "account_name" varchar [note: 'Name of the account']
     "action_values" array
     "actions" array
     "ad_click_actions" array
-    "ad_id" varchar
+    "ad_id" varchar [note: 'ID of the ad']
     "ad_impression_actions" array
-    "ad_name" varchar
-    "adset_id" varchar
-    "adset_name" varchar
-    "attribution_setting" varchar
-    "auction_bid" float
-    "auction_competitiveness" float
-    "auction_max_competitor_bid" float
-    "buying_type" varchar
-    "campaign_id" varchar
-    "campaign_name" varchar
-    "canvas_avg_view_percent" float
-    "canvas_avg_view_time" float
+    "ad_name" varchar [note: 'Name of the ad']
+    "adset_id" varchar [note: 'ID of the ad set']
+    "adset_name" varchar [note: 'Name of the ad set']
+    "attribution_setting" varchar [note: 'How conversions are attributed']
+    "auction_bid" float [note: 'Bid amount in the auction']
+    "auction_competitiveness" float [note: 'Competitiveness level in the auction']
+    "auction_max_competitor_bid" float [note: 'Maximum bid among the competitors in the auction']
+    "buying_type" varchar [note: 'Type of buying']
+    "campaign_id" varchar [note: 'ID of the campaign']
+    "campaign_name" varchar [note: 'Name of the campaign']
+    "canvas_avg_view_percent" float [note: 'Average percentage of the canvas viewed']
+    "canvas_avg_view_time" float [note: 'Average time spent viewing the canvas']
     "catalog_segment_actions" array
     "catalog_segment_value" array
     "catalog_segment_value_mobile_purchase_roas" array
     "catalog_segment_value_omni_purchase_roas" array
     "catalog_segment_value_website_purchase_roas" array
-    "clicks" integer
-    "conversion_rate_ranking" varchar
+    "clicks" integer [note: 'Total number of clicks']
+    "conversion_rate_ranking" varchar [note: 'Ranking based on conversion rates']
     "conversion_values" array
     "conversions" array
     "converted_product_quantity" array
@@ -1291,54 +1291,54 @@ Table "ads_insights_delivery_device" {
     "cost_per_action_type" array
     "cost_per_ad_click" array
     "cost_per_conversion" array
-    "cost_per_estimated_ad_recallers" float
-    "cost_per_inline_link_click" float
-    "cost_per_inline_post_engagement" float
+    "cost_per_estimated_ad_recallers" float [note: 'Cost per estimated ad recallers']
+    "cost_per_inline_link_click" float [note: 'Cost per inline link click']
+    "cost_per_inline_post_engagement" float [note: 'Cost per inline post engagement']
     "cost_per_outbound_click" array
     "cost_per_thruplay" array
     "cost_per_unique_action_type" array
-    "cost_per_unique_click" float
-    "cost_per_unique_inline_link_click" float
+    "cost_per_unique_click" float [note: 'Cost per unique click']
+    "cost_per_unique_inline_link_click" float [note: 'Cost per unique inline link click']
     "cost_per_unique_outbound_click" array
-    "cpc" float
-    "cpm" float
-    "cpp" float
-    "created_time" date
-    "ctr" float
-    "date_start" date
-    "date_stop" date
-    "engagement_rate_ranking" varchar
-    "estimated_ad_recallers" float
-    "frequency" float
-    "full_view_impressions" float
-    "full_view_reach" float
-    "impressions" integer
-    "inline_link_click_ctr" float
-    "inline_link_clicks" integer
-    "inline_post_engagement" integer
-    "instant_experience_clicks_to_open" float
-    "instant_experience_clicks_to_start" float
+    "cpc" float [note: 'Cost per click']
+    "cpm" float [note: 'Cost per thousand impressions']
+    "cpp" float [note: 'Cost per thousand people reached']
+    "created_time" date [note: 'Time when the data was created']
+    "ctr" float [note: 'Click-through rate']
+    "date_start" date [note: 'Start date of the data']
+    "date_stop" date [note: 'End date of the data']
+    "engagement_rate_ranking" varchar [note: 'Ranking based on engagement rate']
+    "estimated_ad_recallers" float [note: 'Estimated ad recallers']
+    "frequency" float [note: 'Average number of times each person saw the ad']
+    "full_view_impressions" float [note: 'Impressions when the ad is fully viewed']
+    "full_view_reach" float [note: 'Reach when the ad is fully viewed']
+    "impressions" integer [note: 'Total number of impressions']
+    "inline_link_click_ctr" float [note: 'Click-through rate for inline link clicks']
+    "inline_link_clicks" integer [note: 'Total number of inline link clicks']
+    "inline_post_engagement" integer [note: 'Engagement on inline posts']
+    "instant_experience_clicks_to_open" float [note: 'Clicks to open instant experience']
+    "instant_experience_clicks_to_start" float [note: 'Clicks to start instant experience']
     "instant_experience_outbound_clicks" array
     "mobile_app_purchase_roas" array
-    "objective" varchar
-    "optimization_goal" varchar
+    "objective" varchar [note: 'Marketing objective']
+    "optimization_goal" varchar [note: 'Goal for optimization']
     "outbound_clicks" array
     "outbound_clicks_ctr" array
     "purchase_roas" array
-    "qualifying_question_qualify_answer_rate" float
-    "quality_ranking" varchar
-    "reach" integer
-    "social_spend" float
-    "spend" float
+    "qualifying_question_qualify_answer_rate" float [note: 'Rate of qualifying question answer qualification']
+    "quality_ranking" varchar [note: 'Ranking based on quality']
+    "reach" integer [note: 'Number of people who saw the ad']
+    "social_spend" float [note: 'Spend in social channels']
+    "spend" float [note: 'Total amount spent']
     "unique_actions" array
-    "unique_clicks" integer
-    "unique_ctr" float
-    "unique_inline_link_click_ctr" float
-    "unique_inline_link_clicks" integer
-    "unique_link_clicks_ctr" float
+    "unique_clicks" integer [note: 'Total number of unique clicks']
+    "unique_ctr" float [note: 'Unique click-through rate']
+    "unique_inline_link_click_ctr" float [note: 'Unique click-through rate for inline link clicks']
+    "unique_inline_link_clicks" integer [note: 'Total number of unique inline link clicks']
+    "unique_link_clicks_ctr" float [note: 'Unique click-through rate for link clicks']
     "unique_outbound_clicks" array
     "unique_outbound_clicks_ctr" array
-    "updated_time" date
+    "updated_time" date [note: 'Time when the data was updated']
     "video_15_sec_watched_actions" array
     "video_30_sec_watched_actions" array
     "video_avg_time_watched_actions" array
@@ -1356,41 +1356,41 @@ Table "ads_insights_delivery_device" {
     "video_time_watched_actions" array
     "website_ctr" array
     "website_purchase_roas" array
-    "wish_bid" float
-    "device_platform" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "wish_bid" float [note: 'Bid based on the wish to achieve certain results']
+    "device_platform" varchar [note: 'The device platform (e.g., mobile, desktop) targeted by the ad.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "ads_insights_delivery_platform" {
-    "account_currency" varchar
-    "account_id" varchar
-    "account_name" varchar
+    "account_currency" varchar [note: 'Currency used for the account']
+    "account_id" varchar [note: 'ID of the account']
+    "account_name" varchar [note: 'Name of the account']
     "action_values" array
     "actions" array
     "ad_click_actions" array
-    "ad_id" varchar
+    "ad_id" varchar [note: 'ID of the ad']
     "ad_impression_actions" array
-    "ad_name" varchar
-    "adset_id" varchar
-    "adset_name" varchar
-    "attribution_setting" varchar
-    "auction_bid" float
-    "auction_competitiveness" float
-    "auction_max_competitor_bid" float
-    "buying_type" varchar
-    "campaign_id" varchar
-    "campaign_name" varchar
-    "canvas_avg_view_percent" float
-    "canvas_avg_view_time" float
+    "ad_name" varchar [note: 'Name of the ad']
+    "adset_id" varchar [note: 'ID of the ad set']
+    "adset_name" varchar [note: 'Name of the ad set']
+    "attribution_setting" varchar [note: 'How conversions are attributed']
+    "auction_bid" float [note: 'Bid amount in the auction']
+    "auction_competitiveness" float [note: 'Competitiveness level in the auction']
+    "auction_max_competitor_bid" float [note: 'Maximum bid among the competitors in the auction']
+    "buying_type" varchar [note: 'Type of buying']
+    "campaign_id" varchar [note: 'ID of the campaign']
+    "campaign_name" varchar [note: 'Name of the campaign']
+    "canvas_avg_view_percent" float [note: 'Average percentage of the canvas viewed']
+    "canvas_avg_view_time" float [note: 'Average time spent viewing the canvas']
     "catalog_segment_actions" array
     "catalog_segment_value" array
     "catalog_segment_value_mobile_purchase_roas" array
     "catalog_segment_value_omni_purchase_roas" array
     "catalog_segment_value_website_purchase_roas" array
-    "clicks" integer
-    "conversion_rate_ranking" varchar
+    "clicks" integer [note: 'Total number of clicks']
+    "conversion_rate_ranking" varchar [note: 'Ranking based on conversion rates']
     "conversion_values" array
     "conversions" array
     "converted_product_quantity" array
@@ -1400,54 +1400,54 @@ Table "ads_insights_delivery_platform" {
     "cost_per_action_type" array
     "cost_per_ad_click" array
     "cost_per_conversion" array
-    "cost_per_estimated_ad_recallers" float
-    "cost_per_inline_link_click" float
-    "cost_per_inline_post_engagement" float
+    "cost_per_estimated_ad_recallers" float [note: 'Cost per estimated ad recallers']
+    "cost_per_inline_link_click" float [note: 'Cost per inline link click']
+    "cost_per_inline_post_engagement" float [note: 'Cost per inline post engagement']
     "cost_per_outbound_click" array
     "cost_per_thruplay" array
     "cost_per_unique_action_type" array
-    "cost_per_unique_click" float
-    "cost_per_unique_inline_link_click" float
+    "cost_per_unique_click" float [note: 'Cost per unique click']
+    "cost_per_unique_inline_link_click" float [note: 'Cost per unique inline link click']
     "cost_per_unique_outbound_click" array
-    "cpc" float
-    "cpm" float
-    "cpp" float
-    "created_time" date
-    "ctr" float
-    "date_start" date
-    "date_stop" date
-    "engagement_rate_ranking" varchar
-    "estimated_ad_recallers" float
-    "frequency" float
-    "full_view_impressions" float
-    "full_view_reach" float
-    "impressions" integer
-    "inline_link_click_ctr" float
-    "inline_link_clicks" integer
-    "inline_post_engagement" integer
-    "instant_experience_clicks_to_open" float
-    "instant_experience_clicks_to_start" float
+    "cpc" float [note: 'Cost per click']
+    "cpm" float [note: 'Cost per thousand impressions']
+    "cpp" float [note: 'Cost per thousand people reached']
+    "created_time" date [note: 'Time when the data was created']
+    "ctr" float [note: 'Click-through rate']
+    "date_start" date [note: 'Start date of the data']
+    "date_stop" date [note: 'End date of the data']
+    "engagement_rate_ranking" varchar [note: 'Ranking based on engagement rate']
+    "estimated_ad_recallers" float [note: 'Estimated ad recallers']
+    "frequency" float [note: 'Average number of times each person saw the ad']
+    "full_view_impressions" float [note: 'Impressions when the ad is fully viewed']
+    "full_view_reach" float [note: 'Reach when the ad is fully viewed']
+    "impressions" integer [note: 'Total number of impressions']
+    "inline_link_click_ctr" float [note: 'Click-through rate for inline link clicks']
+    "inline_link_clicks" integer [note: 'Total number of inline link clicks']
+    "inline_post_engagement" integer [note: 'Engagement on inline posts']
+    "instant_experience_clicks_to_open" float [note: 'Clicks to open instant experience']
+    "instant_experience_clicks_to_start" float [note: 'Clicks to start instant experience']
     "instant_experience_outbound_clicks" array
     "mobile_app_purchase_roas" array
-    "objective" varchar
-    "optimization_goal" varchar
+    "objective" varchar [note: 'Marketing objective']
+    "optimization_goal" varchar [note: 'Goal for optimization']
     "outbound_clicks" array
     "outbound_clicks_ctr" array
     "purchase_roas" array
-    "qualifying_question_qualify_answer_rate" float
-    "quality_ranking" varchar
-    "reach" integer
-    "social_spend" float
-    "spend" float
+    "qualifying_question_qualify_answer_rate" float [note: 'Rate of qualifying question answer qualification']
+    "quality_ranking" varchar [note: 'Ranking based on quality']
+    "reach" integer [note: 'Number of people who saw the ad']
+    "social_spend" float [note: 'Spend in social channels']
+    "spend" float [note: 'Total amount spent']
     "unique_actions" array
-    "unique_clicks" integer
-    "unique_ctr" float
-    "unique_inline_link_click_ctr" float
-    "unique_inline_link_clicks" integer
-    "unique_link_clicks_ctr" float
+    "unique_clicks" integer [note: 'Total number of unique clicks']
+    "unique_ctr" float [note: 'Unique click-through rate']
+    "unique_inline_link_click_ctr" float [note: 'Unique click-through rate for inline link clicks']
+    "unique_inline_link_clicks" integer [note: 'Total number of unique inline link clicks']
+    "unique_link_clicks_ctr" float [note: 'Unique click-through rate for link clicks']
     "unique_outbound_clicks" array
     "unique_outbound_clicks_ctr" array
-    "updated_time" date
+    "updated_time" date [note: 'Time when the data was updated']
     "video_15_sec_watched_actions" array
     "video_30_sec_watched_actions" array
     "video_avg_time_watched_actions" array
@@ -1465,41 +1465,41 @@ Table "ads_insights_delivery_platform" {
     "video_time_watched_actions" array
     "website_ctr" array
     "website_purchase_roas" array
-    "wish_bid" float
-    "publisher_platform" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "wish_bid" float [note: 'Bid based on the wish to achieve certain results']
+    "publisher_platform" varchar [note: 'The platform on which the ad is published (e.g., Facebook, Instagram).']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "ads_insights_delivery_platform_and_device_platform" {
-    "account_currency" varchar
-    "account_id" varchar
-    "account_name" varchar
+    "account_currency" varchar [note: 'Currency used for the account']
+    "account_id" varchar [note: 'ID of the account']
+    "account_name" varchar [note: 'Name of the account']
     "action_values" array
     "actions" array
     "ad_click_actions" array
-    "ad_id" varchar
+    "ad_id" varchar [note: 'ID of the ad']
     "ad_impression_actions" array
-    "ad_name" varchar
-    "adset_id" varchar
-    "adset_name" varchar
-    "attribution_setting" varchar
-    "auction_bid" float
-    "auction_competitiveness" float
-    "auction_max_competitor_bid" float
-    "buying_type" varchar
-    "campaign_id" varchar
-    "campaign_name" varchar
-    "canvas_avg_view_percent" float
-    "canvas_avg_view_time" float
+    "ad_name" varchar [note: 'Name of the ad']
+    "adset_id" varchar [note: 'ID of the ad set']
+    "adset_name" varchar [note: 'Name of the ad set']
+    "attribution_setting" varchar [note: 'How conversions are attributed']
+    "auction_bid" float [note: 'Bid amount in the auction']
+    "auction_competitiveness" float [note: 'Competitiveness level in the auction']
+    "auction_max_competitor_bid" float [note: 'Maximum bid among the competitors in the auction']
+    "buying_type" varchar [note: 'Type of buying']
+    "campaign_id" varchar [note: 'ID of the campaign']
+    "campaign_name" varchar [note: 'Name of the campaign']
+    "canvas_avg_view_percent" float [note: 'Average percentage of the canvas viewed']
+    "canvas_avg_view_time" float [note: 'Average time spent viewing the canvas']
     "catalog_segment_actions" array
     "catalog_segment_value" array
     "catalog_segment_value_mobile_purchase_roas" array
     "catalog_segment_value_omni_purchase_roas" array
     "catalog_segment_value_website_purchase_roas" array
-    "clicks" integer
-    "conversion_rate_ranking" varchar
+    "clicks" integer [note: 'Total number of clicks']
+    "conversion_rate_ranking" varchar [note: 'Ranking based on conversion rates']
     "conversion_values" array
     "conversions" array
     "converted_product_quantity" array
@@ -1509,54 +1509,54 @@ Table "ads_insights_delivery_platform_and_device_platform" {
     "cost_per_action_type" array
     "cost_per_ad_click" array
     "cost_per_conversion" array
-    "cost_per_estimated_ad_recallers" float
-    "cost_per_inline_link_click" float
-    "cost_per_inline_post_engagement" float
+    "cost_per_estimated_ad_recallers" float [note: 'Cost per estimated ad recallers']
+    "cost_per_inline_link_click" float [note: 'Cost per inline link click']
+    "cost_per_inline_post_engagement" float [note: 'Cost per inline post engagement']
     "cost_per_outbound_click" array
     "cost_per_thruplay" array
     "cost_per_unique_action_type" array
-    "cost_per_unique_click" float
-    "cost_per_unique_inline_link_click" float
+    "cost_per_unique_click" float [note: 'Cost per unique click']
+    "cost_per_unique_inline_link_click" float [note: 'Cost per unique inline link click']
     "cost_per_unique_outbound_click" array
-    "cpc" float
-    "cpm" float
-    "cpp" float
-    "created_time" date
-    "ctr" float
-    "date_start" date
-    "date_stop" date
-    "engagement_rate_ranking" varchar
-    "estimated_ad_recallers" float
-    "frequency" float
-    "full_view_impressions" float
-    "full_view_reach" float
-    "impressions" integer
-    "inline_link_click_ctr" float
-    "inline_link_clicks" integer
-    "inline_post_engagement" integer
-    "instant_experience_clicks_to_open" float
-    "instant_experience_clicks_to_start" float
+    "cpc" float [note: 'Cost per click']
+    "cpm" float [note: 'Cost per thousand impressions']
+    "cpp" float [note: 'Cost per thousand people reached']
+    "created_time" date [note: 'Time when the data was created']
+    "ctr" float [note: 'Click-through rate']
+    "date_start" date [note: 'Start date of the data']
+    "date_stop" date [note: 'End date of the data']
+    "engagement_rate_ranking" varchar [note: 'Ranking based on engagement rate']
+    "estimated_ad_recallers" float [note: 'Estimated ad recallers']
+    "frequency" float [note: 'Average number of times each person saw the ad']
+    "full_view_impressions" float [note: 'Impressions when the ad is fully viewed']
+    "full_view_reach" float [note: 'Reach when the ad is fully viewed']
+    "impressions" integer [note: 'Total number of impressions']
+    "inline_link_click_ctr" float [note: 'Click-through rate for inline link clicks']
+    "inline_link_clicks" integer [note: 'Total number of inline link clicks']
+    "inline_post_engagement" integer [note: 'Engagement on inline posts']
+    "instant_experience_clicks_to_open" float [note: 'Clicks to open instant experience']
+    "instant_experience_clicks_to_start" float [note: 'Clicks to start instant experience']
     "instant_experience_outbound_clicks" array
     "mobile_app_purchase_roas" array
-    "objective" varchar
-    "optimization_goal" varchar
+    "objective" varchar [note: 'Marketing objective']
+    "optimization_goal" varchar [note: 'Goal for optimization']
     "outbound_clicks" array
     "outbound_clicks_ctr" array
     "purchase_roas" array
-    "qualifying_question_qualify_answer_rate" float
-    "quality_ranking" varchar
-    "reach" integer
-    "social_spend" float
-    "spend" float
+    "qualifying_question_qualify_answer_rate" float [note: 'Rate of qualifying question answer qualification']
+    "quality_ranking" varchar [note: 'Ranking based on quality']
+    "reach" integer [note: 'Number of people who saw the ad']
+    "social_spend" float [note: 'Spend in social channels']
+    "spend" float [note: 'Total amount spent']
     "unique_actions" array
-    "unique_clicks" integer
-    "unique_ctr" float
-    "unique_inline_link_click_ctr" float
-    "unique_inline_link_clicks" integer
-    "unique_link_clicks_ctr" float
+    "unique_clicks" integer [note: 'Total number of unique clicks']
+    "unique_ctr" float [note: 'Unique click-through rate']
+    "unique_inline_link_click_ctr" float [note: 'Unique click-through rate for inline link clicks']
+    "unique_inline_link_clicks" integer [note: 'Total number of unique inline link clicks']
+    "unique_link_clicks_ctr" float [note: 'Unique click-through rate for link clicks']
     "unique_outbound_clicks" array
     "unique_outbound_clicks_ctr" array
-    "updated_time" date
+    "updated_time" date [note: 'Time when the data was updated']
     "video_15_sec_watched_actions" array
     "video_30_sec_watched_actions" array
     "video_avg_time_watched_actions" array
@@ -1574,42 +1574,42 @@ Table "ads_insights_delivery_platform_and_device_platform" {
     "video_time_watched_actions" array
     "website_ctr" array
     "website_purchase_roas" array
-    "wish_bid" float
-    "publisher_platform" varchar
-    "device_platform" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "wish_bid" float [note: 'Bid based on the wish to achieve certain results']
+    "publisher_platform" varchar [note: 'The platform on which the ad is published (e.g., Facebook, Instagram).']
+    "device_platform" varchar [note: 'The device platform (e.g., mobile, desktop) targeted by the ad.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "ads_insights_demographics_age" {
-    "account_currency" varchar
-    "account_id" varchar
-    "account_name" varchar
+    "account_currency" varchar [note: 'Currency used for the account']
+    "account_id" varchar [note: 'ID of the account']
+    "account_name" varchar [note: 'Name of the account']
     "action_values" array
     "actions" array
     "ad_click_actions" array
-    "ad_id" varchar
+    "ad_id" varchar [note: 'ID of the ad']
     "ad_impression_actions" array
-    "ad_name" varchar
-    "adset_id" varchar
-    "adset_name" varchar
-    "attribution_setting" varchar
-    "auction_bid" float
-    "auction_competitiveness" float
-    "auction_max_competitor_bid" float
-    "buying_type" varchar
-    "campaign_id" varchar
-    "campaign_name" varchar
-    "canvas_avg_view_percent" float
-    "canvas_avg_view_time" float
+    "ad_name" varchar [note: 'Name of the ad']
+    "adset_id" varchar [note: 'ID of the ad set']
+    "adset_name" varchar [note: 'Name of the ad set']
+    "attribution_setting" varchar [note: 'How conversions are attributed']
+    "auction_bid" float [note: 'Bid amount in the auction']
+    "auction_competitiveness" float [note: 'Competitiveness level in the auction']
+    "auction_max_competitor_bid" float [note: 'Maximum bid among the competitors in the auction']
+    "buying_type" varchar [note: 'Type of buying']
+    "campaign_id" varchar [note: 'ID of the campaign']
+    "campaign_name" varchar [note: 'Name of the campaign']
+    "canvas_avg_view_percent" float [note: 'Average percentage of the canvas viewed']
+    "canvas_avg_view_time" float [note: 'Average time spent viewing the canvas']
     "catalog_segment_actions" array
     "catalog_segment_value" array
     "catalog_segment_value_mobile_purchase_roas" array
     "catalog_segment_value_omni_purchase_roas" array
     "catalog_segment_value_website_purchase_roas" array
-    "clicks" integer
-    "conversion_rate_ranking" varchar
+    "clicks" integer [note: 'Total number of clicks']
+    "conversion_rate_ranking" varchar [note: 'Ranking based on conversion rates']
     "conversion_values" array
     "conversions" array
     "converted_product_quantity" array
@@ -1619,54 +1619,54 @@ Table "ads_insights_demographics_age" {
     "cost_per_action_type" array
     "cost_per_ad_click" array
     "cost_per_conversion" array
-    "cost_per_estimated_ad_recallers" float
-    "cost_per_inline_link_click" float
-    "cost_per_inline_post_engagement" float
+    "cost_per_estimated_ad_recallers" float [note: 'Cost per estimated ad recallers']
+    "cost_per_inline_link_click" float [note: 'Cost per inline link click']
+    "cost_per_inline_post_engagement" float [note: 'Cost per inline post engagement']
     "cost_per_outbound_click" array
     "cost_per_thruplay" array
     "cost_per_unique_action_type" array
-    "cost_per_unique_click" float
-    "cost_per_unique_inline_link_click" float
+    "cost_per_unique_click" float [note: 'Cost per unique click']
+    "cost_per_unique_inline_link_click" float [note: 'Cost per unique inline link click']
     "cost_per_unique_outbound_click" array
-    "cpc" float
-    "cpm" float
-    "cpp" float
-    "created_time" date
-    "ctr" float
-    "date_start" date
-    "date_stop" date
-    "engagement_rate_ranking" varchar
-    "estimated_ad_recallers" float
-    "frequency" float
-    "full_view_impressions" float
-    "full_view_reach" float
-    "impressions" integer
-    "inline_link_click_ctr" float
-    "inline_link_clicks" integer
-    "inline_post_engagement" integer
-    "instant_experience_clicks_to_open" float
-    "instant_experience_clicks_to_start" float
+    "cpc" float [note: 'Cost per click']
+    "cpm" float [note: 'Cost per thousand impressions']
+    "cpp" float [note: 'Cost per thousand people reached']
+    "created_time" date [note: 'Time when the data was created']
+    "ctr" float [note: 'Click-through rate']
+    "date_start" date [note: 'Start date of the data']
+    "date_stop" date [note: 'End date of the data']
+    "engagement_rate_ranking" varchar [note: 'Ranking based on engagement rate']
+    "estimated_ad_recallers" float [note: 'Estimated ad recallers']
+    "frequency" float [note: 'Average number of times each person saw the ad']
+    "full_view_impressions" float [note: 'Impressions when the ad is fully viewed']
+    "full_view_reach" float [note: 'Reach when the ad is fully viewed']
+    "impressions" integer [note: 'Total number of impressions']
+    "inline_link_click_ctr" float [note: 'Click-through rate for inline link clicks']
+    "inline_link_clicks" integer [note: 'Total number of inline link clicks']
+    "inline_post_engagement" integer [note: 'Engagement on inline posts']
+    "instant_experience_clicks_to_open" float [note: 'Clicks to open instant experience']
+    "instant_experience_clicks_to_start" float [note: 'Clicks to start instant experience']
     "instant_experience_outbound_clicks" array
     "mobile_app_purchase_roas" array
-    "objective" varchar
-    "optimization_goal" varchar
+    "objective" varchar [note: 'Marketing objective']
+    "optimization_goal" varchar [note: 'Goal for optimization']
     "outbound_clicks" array
     "outbound_clicks_ctr" array
     "purchase_roas" array
-    "qualifying_question_qualify_answer_rate" float
-    "quality_ranking" varchar
-    "reach" integer
-    "social_spend" float
-    "spend" float
+    "qualifying_question_qualify_answer_rate" float [note: 'Rate of qualifying question answer qualification']
+    "quality_ranking" varchar [note: 'Ranking based on quality']
+    "reach" integer [note: 'Number of people who saw the ad']
+    "social_spend" float [note: 'Spend in social channels']
+    "spend" float [note: 'Total amount spent']
     "unique_actions" array
-    "unique_clicks" integer
-    "unique_ctr" float
-    "unique_inline_link_click_ctr" float
-    "unique_inline_link_clicks" integer
-    "unique_link_clicks_ctr" float
+    "unique_clicks" integer [note: 'Total number of unique clicks']
+    "unique_ctr" float [note: 'Unique click-through rate']
+    "unique_inline_link_click_ctr" float [note: 'Unique click-through rate for inline link clicks']
+    "unique_inline_link_clicks" integer [note: 'Total number of unique inline link clicks']
+    "unique_link_clicks_ctr" float [note: 'Unique click-through rate for link clicks']
     "unique_outbound_clicks" array
     "unique_outbound_clicks_ctr" array
-    "updated_time" date
+    "updated_time" date [note: 'Time when the data was updated']
     "video_15_sec_watched_actions" array
     "video_30_sec_watched_actions" array
     "video_avg_time_watched_actions" array
@@ -1684,41 +1684,41 @@ Table "ads_insights_demographics_age" {
     "video_time_watched_actions" array
     "website_ctr" array
     "website_purchase_roas" array
-    "wish_bid" float
-    "age" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "wish_bid" float [note: 'Bid based on the wish to achieve certain results']
+    "age" varchar [note: 'The age group targeted by the ad campaign.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "ads_insights_demographics_country" {
-    "account_currency" varchar
-    "account_id" varchar
-    "account_name" varchar
+    "account_currency" varchar [note: 'Currency used for the account']
+    "account_id" varchar [note: 'ID of the account']
+    "account_name" varchar [note: 'Name of the account']
     "action_values" array
     "actions" array
     "ad_click_actions" array
-    "ad_id" varchar
+    "ad_id" varchar [note: 'ID of the ad']
     "ad_impression_actions" array
-    "ad_name" varchar
-    "adset_id" varchar
-    "adset_name" varchar
-    "attribution_setting" varchar
-    "auction_bid" float
-    "auction_competitiveness" float
-    "auction_max_competitor_bid" float
-    "buying_type" varchar
-    "campaign_id" varchar
-    "campaign_name" varchar
-    "canvas_avg_view_percent" float
-    "canvas_avg_view_time" float
+    "ad_name" varchar [note: 'Name of the ad']
+    "adset_id" varchar [note: 'ID of the ad set']
+    "adset_name" varchar [note: 'Name of the ad set']
+    "attribution_setting" varchar [note: 'How conversions are attributed']
+    "auction_bid" float [note: 'Bid amount in the auction']
+    "auction_competitiveness" float [note: 'Competitiveness level in the auction']
+    "auction_max_competitor_bid" float [note: 'Maximum bid among the competitors in the auction']
+    "buying_type" varchar [note: 'Type of buying']
+    "campaign_id" varchar [note: 'ID of the campaign']
+    "campaign_name" varchar [note: 'Name of the campaign']
+    "canvas_avg_view_percent" float [note: 'Average percentage of the canvas viewed']
+    "canvas_avg_view_time" float [note: 'Average time spent viewing the canvas']
     "catalog_segment_actions" array
     "catalog_segment_value" array
     "catalog_segment_value_mobile_purchase_roas" array
     "catalog_segment_value_omni_purchase_roas" array
     "catalog_segment_value_website_purchase_roas" array
-    "clicks" integer
-    "conversion_rate_ranking" varchar
+    "clicks" integer [note: 'Total number of clicks']
+    "conversion_rate_ranking" varchar [note: 'Ranking based on conversion rates']
     "conversion_values" array
     "conversions" array
     "converted_product_quantity" array
@@ -1728,54 +1728,54 @@ Table "ads_insights_demographics_country" {
     "cost_per_action_type" array
     "cost_per_ad_click" array
     "cost_per_conversion" array
-    "cost_per_estimated_ad_recallers" float
-    "cost_per_inline_link_click" float
-    "cost_per_inline_post_engagement" float
+    "cost_per_estimated_ad_recallers" float [note: 'Cost per estimated ad recallers']
+    "cost_per_inline_link_click" float [note: 'Cost per inline link click']
+    "cost_per_inline_post_engagement" float [note: 'Cost per inline post engagement']
     "cost_per_outbound_click" array
     "cost_per_thruplay" array
     "cost_per_unique_action_type" array
-    "cost_per_unique_click" float
-    "cost_per_unique_inline_link_click" float
+    "cost_per_unique_click" float [note: 'Cost per unique click']
+    "cost_per_unique_inline_link_click" float [note: 'Cost per unique inline link click']
     "cost_per_unique_outbound_click" array
-    "cpc" float
-    "cpm" float
-    "cpp" float
-    "created_time" date
-    "ctr" float
-    "date_start" date
-    "date_stop" date
-    "engagement_rate_ranking" varchar
-    "estimated_ad_recallers" float
-    "frequency" float
-    "full_view_impressions" float
-    "full_view_reach" float
-    "impressions" integer
-    "inline_link_click_ctr" float
-    "inline_link_clicks" integer
-    "inline_post_engagement" integer
-    "instant_experience_clicks_to_open" float
-    "instant_experience_clicks_to_start" float
+    "cpc" float [note: 'Cost per click']
+    "cpm" float [note: 'Cost per thousand impressions']
+    "cpp" float [note: 'Cost per thousand people reached']
+    "created_time" date [note: 'Time when the data was created']
+    "ctr" float [note: 'Click-through rate']
+    "date_start" date [note: 'Start date of the data']
+    "date_stop" date [note: 'End date of the data']
+    "engagement_rate_ranking" varchar [note: 'Ranking based on engagement rate']
+    "estimated_ad_recallers" float [note: 'Estimated ad recallers']
+    "frequency" float [note: 'Average number of times each person saw the ad']
+    "full_view_impressions" float [note: 'Impressions when the ad is fully viewed']
+    "full_view_reach" float [note: 'Reach when the ad is fully viewed']
+    "impressions" integer [note: 'Total number of impressions']
+    "inline_link_click_ctr" float [note: 'Click-through rate for inline link clicks']
+    "inline_link_clicks" integer [note: 'Total number of inline link clicks']
+    "inline_post_engagement" integer [note: 'Engagement on inline posts']
+    "instant_experience_clicks_to_open" float [note: 'Clicks to open instant experience']
+    "instant_experience_clicks_to_start" float [note: 'Clicks to start instant experience']
     "instant_experience_outbound_clicks" array
     "mobile_app_purchase_roas" array
-    "objective" varchar
-    "optimization_goal" varchar
+    "objective" varchar [note: 'Marketing objective']
+    "optimization_goal" varchar [note: 'Goal for optimization']
     "outbound_clicks" array
     "outbound_clicks_ctr" array
     "purchase_roas" array
-    "qualifying_question_qualify_answer_rate" float
-    "quality_ranking" varchar
-    "reach" integer
-    "social_spend" float
-    "spend" float
+    "qualifying_question_qualify_answer_rate" float [note: 'Rate of qualifying question answer qualification']
+    "quality_ranking" varchar [note: 'Ranking based on quality']
+    "reach" integer [note: 'Number of people who saw the ad']
+    "social_spend" float [note: 'Spend in social channels']
+    "spend" float [note: 'Total amount spent']
     "unique_actions" array
-    "unique_clicks" integer
-    "unique_ctr" float
-    "unique_inline_link_click_ctr" float
-    "unique_inline_link_clicks" integer
-    "unique_link_clicks_ctr" float
+    "unique_clicks" integer [note: 'Total number of unique clicks']
+    "unique_ctr" float [note: 'Unique click-through rate']
+    "unique_inline_link_click_ctr" float [note: 'Unique click-through rate for inline link clicks']
+    "unique_inline_link_clicks" integer [note: 'Total number of unique inline link clicks']
+    "unique_link_clicks_ctr" float [note: 'Unique click-through rate for link clicks']
     "unique_outbound_clicks" array
     "unique_outbound_clicks_ctr" array
-    "updated_time" date
+    "updated_time" date [note: 'Time when the data was updated']
     "video_15_sec_watched_actions" array
     "video_30_sec_watched_actions" array
     "video_avg_time_watched_actions" array
@@ -1793,41 +1793,41 @@ Table "ads_insights_demographics_country" {
     "video_time_watched_actions" array
     "website_ctr" array
     "website_purchase_roas" array
-    "wish_bid" float
-    "country" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "wish_bid" float [note: 'Bid based on the wish to achieve certain results']
+    "country" varchar [note: 'The country where the ad is being displayed.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "ads_insights_demographics_dma_region" {
-    "account_currency" varchar
-    "account_id" varchar
-    "account_name" varchar
+    "account_currency" varchar [note: 'Currency used for the account']
+    "account_id" varchar [note: 'ID of the account']
+    "account_name" varchar [note: 'Name of the account']
     "action_values" array
     "actions" array
     "ad_click_actions" array
-    "ad_id" varchar
+    "ad_id" varchar [note: 'ID of the ad']
     "ad_impression_actions" array
-    "ad_name" varchar
-    "adset_id" varchar
-    "adset_name" varchar
-    "attribution_setting" varchar
-    "auction_bid" float
-    "auction_competitiveness" float
-    "auction_max_competitor_bid" float
-    "buying_type" varchar
-    "campaign_id" varchar
-    "campaign_name" varchar
-    "canvas_avg_view_percent" float
-    "canvas_avg_view_time" float
+    "ad_name" varchar [note: 'Name of the ad']
+    "adset_id" varchar [note: 'ID of the ad set']
+    "adset_name" varchar [note: 'Name of the ad set']
+    "attribution_setting" varchar [note: 'How conversions are attributed']
+    "auction_bid" float [note: 'Bid amount in the auction']
+    "auction_competitiveness" float [note: 'Competitiveness level in the auction']
+    "auction_max_competitor_bid" float [note: 'Maximum bid among the competitors in the auction']
+    "buying_type" varchar [note: 'Type of buying']
+    "campaign_id" varchar [note: 'ID of the campaign']
+    "campaign_name" varchar [note: 'Name of the campaign']
+    "canvas_avg_view_percent" float [note: 'Average percentage of the canvas viewed']
+    "canvas_avg_view_time" float [note: 'Average time spent viewing the canvas']
     "catalog_segment_actions" array
     "catalog_segment_value" array
     "catalog_segment_value_mobile_purchase_roas" array
     "catalog_segment_value_omni_purchase_roas" array
     "catalog_segment_value_website_purchase_roas" array
-    "clicks" integer
-    "conversion_rate_ranking" varchar
+    "clicks" integer [note: 'Total number of clicks']
+    "conversion_rate_ranking" varchar [note: 'Ranking based on conversion rates']
     "conversion_values" array
     "conversions" array
     "converted_product_quantity" array
@@ -1837,54 +1837,54 @@ Table "ads_insights_demographics_dma_region" {
     "cost_per_action_type" array
     "cost_per_ad_click" array
     "cost_per_conversion" array
-    "cost_per_estimated_ad_recallers" float
-    "cost_per_inline_link_click" float
-    "cost_per_inline_post_engagement" float
+    "cost_per_estimated_ad_recallers" float [note: 'Cost per estimated ad recallers']
+    "cost_per_inline_link_click" float [note: 'Cost per inline link click']
+    "cost_per_inline_post_engagement" float [note: 'Cost per inline post engagement']
     "cost_per_outbound_click" array
     "cost_per_thruplay" array
     "cost_per_unique_action_type" array
-    "cost_per_unique_click" float
-    "cost_per_unique_inline_link_click" float
+    "cost_per_unique_click" float [note: 'Cost per unique click']
+    "cost_per_unique_inline_link_click" float [note: 'Cost per unique inline link click']
     "cost_per_unique_outbound_click" array
-    "cpc" float
-    "cpm" float
-    "cpp" float
-    "created_time" date
-    "ctr" float
-    "date_start" date
-    "date_stop" date
-    "engagement_rate_ranking" varchar
-    "estimated_ad_recallers" float
-    "frequency" float
-    "full_view_impressions" float
-    "full_view_reach" float
-    "impressions" integer
-    "inline_link_click_ctr" float
-    "inline_link_clicks" integer
-    "inline_post_engagement" integer
-    "instant_experience_clicks_to_open" float
-    "instant_experience_clicks_to_start" float
+    "cpc" float [note: 'Cost per click']
+    "cpm" float [note: 'Cost per thousand impressions']
+    "cpp" float [note: 'Cost per thousand people reached']
+    "created_time" date [note: 'Time when the data was created']
+    "ctr" float [note: 'Click-through rate']
+    "date_start" date [note: 'Start date of the data']
+    "date_stop" date [note: 'End date of the data']
+    "engagement_rate_ranking" varchar [note: 'Ranking based on engagement rate']
+    "estimated_ad_recallers" float [note: 'Estimated ad recallers']
+    "frequency" float [note: 'Average number of times each person saw the ad']
+    "full_view_impressions" float [note: 'Impressions when the ad is fully viewed']
+    "full_view_reach" float [note: 'Reach when the ad is fully viewed']
+    "impressions" integer [note: 'Total number of impressions']
+    "inline_link_click_ctr" float [note: 'Click-through rate for inline link clicks']
+    "inline_link_clicks" integer [note: 'Total number of inline link clicks']
+    "inline_post_engagement" integer [note: 'Engagement on inline posts']
+    "instant_experience_clicks_to_open" float [note: 'Clicks to open instant experience']
+    "instant_experience_clicks_to_start" float [note: 'Clicks to start instant experience']
     "instant_experience_outbound_clicks" array
     "mobile_app_purchase_roas" array
-    "objective" varchar
-    "optimization_goal" varchar
+    "objective" varchar [note: 'Marketing objective']
+    "optimization_goal" varchar [note: 'Goal for optimization']
     "outbound_clicks" array
     "outbound_clicks_ctr" array
     "purchase_roas" array
-    "qualifying_question_qualify_answer_rate" float
-    "quality_ranking" varchar
-    "reach" integer
-    "social_spend" float
-    "spend" float
+    "qualifying_question_qualify_answer_rate" float [note: 'Rate of qualifying question answer qualification']
+    "quality_ranking" varchar [note: 'Ranking based on quality']
+    "reach" integer [note: 'Number of people who saw the ad']
+    "social_spend" float [note: 'Spend in social channels']
+    "spend" float [note: 'Total amount spent']
     "unique_actions" array
-    "unique_clicks" integer
-    "unique_ctr" float
-    "unique_inline_link_click_ctr" float
-    "unique_inline_link_clicks" integer
-    "unique_link_clicks_ctr" float
+    "unique_clicks" integer [note: 'Total number of unique clicks']
+    "unique_ctr" float [note: 'Unique click-through rate']
+    "unique_inline_link_click_ctr" float [note: 'Unique click-through rate for inline link clicks']
+    "unique_inline_link_clicks" integer [note: 'Total number of unique inline link clicks']
+    "unique_link_clicks_ctr" float [note: 'Unique click-through rate for link clicks']
     "unique_outbound_clicks" array
     "unique_outbound_clicks_ctr" array
-    "updated_time" date
+    "updated_time" date [note: 'Time when the data was updated']
     "video_15_sec_watched_actions" array
     "video_30_sec_watched_actions" array
     "video_avg_time_watched_actions" array
@@ -1902,41 +1902,41 @@ Table "ads_insights_demographics_dma_region" {
     "video_time_watched_actions" array
     "website_ctr" array
     "website_purchase_roas" array
-    "wish_bid" float
-    "dma" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "wish_bid" float [note: 'Bid based on the wish to achieve certain results']
+    "dma" varchar [note: 'Designated Market Area for ad targeting in the United States.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "ads_insights_demographics_gender" {
-    "account_currency" varchar
-    "account_id" varchar
-    "account_name" varchar
+    "account_currency" varchar [note: 'Currency used for the account']
+    "account_id" varchar [note: 'ID of the account']
+    "account_name" varchar [note: 'Name of the account']
     "action_values" array
     "actions" array
     "ad_click_actions" array
-    "ad_id" varchar
+    "ad_id" varchar [note: 'ID of the ad']
     "ad_impression_actions" array
-    "ad_name" varchar
-    "adset_id" varchar
-    "adset_name" varchar
-    "attribution_setting" varchar
-    "auction_bid" float
-    "auction_competitiveness" float
-    "auction_max_competitor_bid" float
-    "buying_type" varchar
-    "campaign_id" varchar
-    "campaign_name" varchar
-    "canvas_avg_view_percent" float
-    "canvas_avg_view_time" float
+    "ad_name" varchar [note: 'Name of the ad']
+    "adset_id" varchar [note: 'ID of the ad set']
+    "adset_name" varchar [note: 'Name of the ad set']
+    "attribution_setting" varchar [note: 'How conversions are attributed']
+    "auction_bid" float [note: 'Bid amount in the auction']
+    "auction_competitiveness" float [note: 'Competitiveness level in the auction']
+    "auction_max_competitor_bid" float [note: 'Maximum bid among the competitors in the auction']
+    "buying_type" varchar [note: 'Type of buying']
+    "campaign_id" varchar [note: 'ID of the campaign']
+    "campaign_name" varchar [note: 'Name of the campaign']
+    "canvas_avg_view_percent" float [note: 'Average percentage of the canvas viewed']
+    "canvas_avg_view_time" float [note: 'Average time spent viewing the canvas']
     "catalog_segment_actions" array
     "catalog_segment_value" array
     "catalog_segment_value_mobile_purchase_roas" array
     "catalog_segment_value_omni_purchase_roas" array
     "catalog_segment_value_website_purchase_roas" array
-    "clicks" integer
-    "conversion_rate_ranking" varchar
+    "clicks" integer [note: 'Total number of clicks']
+    "conversion_rate_ranking" varchar [note: 'Ranking based on conversion rates']
     "conversion_values" array
     "conversions" array
     "converted_product_quantity" array
@@ -1946,54 +1946,54 @@ Table "ads_insights_demographics_gender" {
     "cost_per_action_type" array
     "cost_per_ad_click" array
     "cost_per_conversion" array
-    "cost_per_estimated_ad_recallers" float
-    "cost_per_inline_link_click" float
-    "cost_per_inline_post_engagement" float
+    "cost_per_estimated_ad_recallers" float [note: 'Cost per estimated ad recallers']
+    "cost_per_inline_link_click" float [note: 'Cost per inline link click']
+    "cost_per_inline_post_engagement" float [note: 'Cost per inline post engagement']
     "cost_per_outbound_click" array
     "cost_per_thruplay" array
     "cost_per_unique_action_type" array
-    "cost_per_unique_click" float
-    "cost_per_unique_inline_link_click" float
+    "cost_per_unique_click" float [note: 'Cost per unique click']
+    "cost_per_unique_inline_link_click" float [note: 'Cost per unique inline link click']
     "cost_per_unique_outbound_click" array
-    "cpc" float
-    "cpm" float
-    "cpp" float
-    "created_time" date
-    "ctr" float
-    "date_start" date
-    "date_stop" date
-    "engagement_rate_ranking" varchar
-    "estimated_ad_recallers" float
-    "frequency" float
-    "full_view_impressions" float
-    "full_view_reach" float
-    "impressions" integer
-    "inline_link_click_ctr" float
-    "inline_link_clicks" integer
-    "inline_post_engagement" integer
-    "instant_experience_clicks_to_open" float
-    "instant_experience_clicks_to_start" float
+    "cpc" float [note: 'Cost per click']
+    "cpm" float [note: 'Cost per thousand impressions']
+    "cpp" float [note: 'Cost per thousand people reached']
+    "created_time" date [note: 'Time when the data was created']
+    "ctr" float [note: 'Click-through rate']
+    "date_start" date [note: 'Start date of the data']
+    "date_stop" date [note: 'End date of the data']
+    "engagement_rate_ranking" varchar [note: 'Ranking based on engagement rate']
+    "estimated_ad_recallers" float [note: 'Estimated ad recallers']
+    "frequency" float [note: 'Average number of times each person saw the ad']
+    "full_view_impressions" float [note: 'Impressions when the ad is fully viewed']
+    "full_view_reach" float [note: 'Reach when the ad is fully viewed']
+    "impressions" integer [note: 'Total number of impressions']
+    "inline_link_click_ctr" float [note: 'Click-through rate for inline link clicks']
+    "inline_link_clicks" integer [note: 'Total number of inline link clicks']
+    "inline_post_engagement" integer [note: 'Engagement on inline posts']
+    "instant_experience_clicks_to_open" float [note: 'Clicks to open instant experience']
+    "instant_experience_clicks_to_start" float [note: 'Clicks to start instant experience']
     "instant_experience_outbound_clicks" array
     "mobile_app_purchase_roas" array
-    "objective" varchar
-    "optimization_goal" varchar
+    "objective" varchar [note: 'Marketing objective']
+    "optimization_goal" varchar [note: 'Goal for optimization']
     "outbound_clicks" array
     "outbound_clicks_ctr" array
     "purchase_roas" array
-    "qualifying_question_qualify_answer_rate" float
-    "quality_ranking" varchar
-    "reach" integer
-    "social_spend" float
-    "spend" float
+    "qualifying_question_qualify_answer_rate" float [note: 'Rate of qualifying question answer qualification']
+    "quality_ranking" varchar [note: 'Ranking based on quality']
+    "reach" integer [note: 'Number of people who saw the ad']
+    "social_spend" float [note: 'Spend in social channels']
+    "spend" float [note: 'Total amount spent']
     "unique_actions" array
-    "unique_clicks" integer
-    "unique_ctr" float
-    "unique_inline_link_click_ctr" float
-    "unique_inline_link_clicks" integer
-    "unique_link_clicks_ctr" float
+    "unique_clicks" integer [note: 'Total number of unique clicks']
+    "unique_ctr" float [note: 'Unique click-through rate']
+    "unique_inline_link_click_ctr" float [note: 'Unique click-through rate for inline link clicks']
+    "unique_inline_link_clicks" integer [note: 'Total number of unique inline link clicks']
+    "unique_link_clicks_ctr" float [note: 'Unique click-through rate for link clicks']
     "unique_outbound_clicks" array
     "unique_outbound_clicks_ctr" array
-    "updated_time" date
+    "updated_time" date [note: 'Time when the data was updated']
     "video_15_sec_watched_actions" array
     "video_30_sec_watched_actions" array
     "video_avg_time_watched_actions" array
@@ -2011,41 +2011,41 @@ Table "ads_insights_demographics_gender" {
     "video_time_watched_actions" array
     "website_ctr" array
     "website_purchase_roas" array
-    "wish_bid" float
-    "gender" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "wish_bid" float [note: 'Bid based on the wish to achieve certain results']
+    "gender" varchar [note: 'The gender targeted by the ad campaign.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "ads_insights_dma" {
-    "account_currency" varchar
-    "account_id" varchar
-    "account_name" varchar
+    "account_currency" varchar [note: 'Currency used for the account']
+    "account_id" varchar [note: 'ID of the account']
+    "account_name" varchar [note: 'Name of the account']
     "action_values" array
     "actions" array
     "ad_click_actions" array
-    "ad_id" varchar
+    "ad_id" varchar [note: 'ID of the ad']
     "ad_impression_actions" array
-    "ad_name" varchar
-    "adset_id" varchar
-    "adset_name" varchar
-    "attribution_setting" varchar
-    "auction_bid" float
-    "auction_competitiveness" float
-    "auction_max_competitor_bid" float
-    "buying_type" varchar
-    "campaign_id" varchar
-    "campaign_name" varchar
-    "canvas_avg_view_percent" float
-    "canvas_avg_view_time" float
+    "ad_name" varchar [note: 'Name of the ad']
+    "adset_id" varchar [note: 'ID of the ad set']
+    "adset_name" varchar [note: 'Name of the ad set']
+    "attribution_setting" varchar [note: 'How conversions are attributed']
+    "auction_bid" float [note: 'Bid amount in the auction']
+    "auction_competitiveness" float [note: 'Competitiveness level in the auction']
+    "auction_max_competitor_bid" float [note: 'Maximum bid among the competitors in the auction']
+    "buying_type" varchar [note: 'Type of buying']
+    "campaign_id" varchar [note: 'ID of the campaign']
+    "campaign_name" varchar [note: 'Name of the campaign']
+    "canvas_avg_view_percent" float [note: 'Average percentage of the canvas viewed']
+    "canvas_avg_view_time" float [note: 'Average time spent viewing the canvas']
     "catalog_segment_actions" array
     "catalog_segment_value" array
     "catalog_segment_value_mobile_purchase_roas" array
     "catalog_segment_value_omni_purchase_roas" array
     "catalog_segment_value_website_purchase_roas" array
-    "clicks" integer
-    "conversion_rate_ranking" varchar
+    "clicks" integer [note: 'Total number of clicks']
+    "conversion_rate_ranking" varchar [note: 'Ranking based on conversion rates']
     "conversion_values" array
     "conversions" array
     "converted_product_quantity" array
@@ -2055,54 +2055,54 @@ Table "ads_insights_dma" {
     "cost_per_action_type" array
     "cost_per_ad_click" array
     "cost_per_conversion" array
-    "cost_per_estimated_ad_recallers" float
-    "cost_per_inline_link_click" float
-    "cost_per_inline_post_engagement" float
+    "cost_per_estimated_ad_recallers" float [note: 'Cost per estimated ad recallers']
+    "cost_per_inline_link_click" float [note: 'Cost per inline link click']
+    "cost_per_inline_post_engagement" float [note: 'Cost per inline post engagement']
     "cost_per_outbound_click" array
     "cost_per_thruplay" array
     "cost_per_unique_action_type" array
-    "cost_per_unique_click" float
-    "cost_per_unique_inline_link_click" float
+    "cost_per_unique_click" float [note: 'Cost per unique click']
+    "cost_per_unique_inline_link_click" float [note: 'Cost per unique inline link click']
     "cost_per_unique_outbound_click" array
-    "cpc" float
-    "cpm" float
-    "cpp" float
-    "created_time" date
-    "ctr" float
-    "date_start" date
-    "date_stop" date
-    "engagement_rate_ranking" varchar
-    "estimated_ad_recallers" float
-    "frequency" float
-    "full_view_impressions" float
-    "full_view_reach" float
-    "impressions" integer
-    "inline_link_click_ctr" float
-    "inline_link_clicks" integer
-    "inline_post_engagement" integer
-    "instant_experience_clicks_to_open" float
-    "instant_experience_clicks_to_start" float
+    "cpc" float [note: 'Cost per click']
+    "cpm" float [note: 'Cost per thousand impressions']
+    "cpp" float [note: 'Cost per thousand people reached']
+    "created_time" date [note: 'Time when the data was created']
+    "ctr" float [note: 'Click-through rate']
+    "date_start" date [note: 'Start date of the data']
+    "date_stop" date [note: 'End date of the data']
+    "engagement_rate_ranking" varchar [note: 'Ranking based on engagement rate']
+    "estimated_ad_recallers" float [note: 'Estimated ad recallers']
+    "frequency" float [note: 'Average number of times each person saw the ad']
+    "full_view_impressions" float [note: 'Impressions when the ad is fully viewed']
+    "full_view_reach" float [note: 'Reach when the ad is fully viewed']
+    "impressions" integer [note: 'Total number of impressions']
+    "inline_link_click_ctr" float [note: 'Click-through rate for inline link clicks']
+    "inline_link_clicks" integer [note: 'Total number of inline link clicks']
+    "inline_post_engagement" integer [note: 'Engagement on inline posts']
+    "instant_experience_clicks_to_open" float [note: 'Clicks to open instant experience']
+    "instant_experience_clicks_to_start" float [note: 'Clicks to start instant experience']
     "instant_experience_outbound_clicks" array
     "mobile_app_purchase_roas" array
-    "objective" varchar
-    "optimization_goal" varchar
+    "objective" varchar [note: 'Marketing objective']
+    "optimization_goal" varchar [note: 'Goal for optimization']
     "outbound_clicks" array
     "outbound_clicks_ctr" array
     "purchase_roas" array
-    "qualifying_question_qualify_answer_rate" float
-    "quality_ranking" varchar
-    "reach" integer
-    "social_spend" float
-    "spend" float
+    "qualifying_question_qualify_answer_rate" float [note: 'Rate of qualifying question answer qualification']
+    "quality_ranking" varchar [note: 'Ranking based on quality']
+    "reach" integer [note: 'Number of people who saw the ad']
+    "social_spend" float [note: 'Spend in social channels']
+    "spend" float [note: 'Total amount spent']
     "unique_actions" array
-    "unique_clicks" integer
-    "unique_ctr" float
-    "unique_inline_link_click_ctr" float
-    "unique_inline_link_clicks" integer
-    "unique_link_clicks_ctr" float
+    "unique_clicks" integer [note: 'Total number of unique clicks']
+    "unique_ctr" float [note: 'Unique click-through rate']
+    "unique_inline_link_click_ctr" float [note: 'Unique click-through rate for inline link clicks']
+    "unique_inline_link_clicks" integer [note: 'Total number of unique inline link clicks']
+    "unique_link_clicks_ctr" float [note: 'Unique click-through rate for link clicks']
     "unique_outbound_clicks" array
     "unique_outbound_clicks_ctr" array
-    "updated_time" date
+    "updated_time" date [note: 'Time when the data was updated']
     "video_15_sec_watched_actions" array
     "video_30_sec_watched_actions" array
     "video_avg_time_watched_actions" array
@@ -2120,41 +2120,41 @@ Table "ads_insights_dma" {
     "video_time_watched_actions" array
     "website_ctr" array
     "website_purchase_roas" array
-    "wish_bid" float
-    "dma" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "wish_bid" float [note: 'Bid based on the wish to achieve certain results']
+    "dma" varchar [note: 'Designated Market Area for ad targeting in the United States.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "ads_insights_platform_and_device" {
-    "account_currency" varchar
-    "account_id" varchar
-    "account_name" varchar
+    "account_currency" varchar [note: 'Currency used for the account']
+    "account_id" varchar [note: 'ID of the account']
+    "account_name" varchar [note: 'Name of the account']
     "action_values" array
     "actions" array
     "ad_click_actions" array
-    "ad_id" varchar
+    "ad_id" varchar [note: 'ID of the ad']
     "ad_impression_actions" array
-    "ad_name" varchar
-    "adset_id" varchar
-    "adset_name" varchar
-    "attribution_setting" varchar
-    "auction_bid" float
-    "auction_competitiveness" float
-    "auction_max_competitor_bid" float
-    "buying_type" varchar
-    "campaign_id" varchar
-    "campaign_name" varchar
-    "canvas_avg_view_percent" float
-    "canvas_avg_view_time" float
+    "ad_name" varchar [note: 'Name of the ad']
+    "adset_id" varchar [note: 'ID of the ad set']
+    "adset_name" varchar [note: 'Name of the ad set']
+    "attribution_setting" varchar [note: 'How conversions are attributed']
+    "auction_bid" float [note: 'Bid amount in the auction']
+    "auction_competitiveness" float [note: 'Competitiveness level in the auction']
+    "auction_max_competitor_bid" float [note: 'Maximum bid among the competitors in the auction']
+    "buying_type" varchar [note: 'Type of buying']
+    "campaign_id" varchar [note: 'ID of the campaign']
+    "campaign_name" varchar [note: 'Name of the campaign']
+    "canvas_avg_view_percent" float [note: 'Average percentage of the canvas viewed']
+    "canvas_avg_view_time" float [note: 'Average time spent viewing the canvas']
     "catalog_segment_actions" array
     "catalog_segment_value" array
     "catalog_segment_value_mobile_purchase_roas" array
     "catalog_segment_value_omni_purchase_roas" array
     "catalog_segment_value_website_purchase_roas" array
-    "clicks" integer
-    "conversion_rate_ranking" varchar
+    "clicks" integer [note: 'Total number of clicks']
+    "conversion_rate_ranking" varchar [note: 'Ranking based on conversion rates']
     "conversion_values" array
     "conversions" array
     "converted_product_quantity" array
@@ -2164,54 +2164,54 @@ Table "ads_insights_platform_and_device" {
     "cost_per_action_type" array
     "cost_per_ad_click" array
     "cost_per_conversion" array
-    "cost_per_estimated_ad_recallers" float
-    "cost_per_inline_link_click" float
-    "cost_per_inline_post_engagement" float
+    "cost_per_estimated_ad_recallers" float [note: 'Cost per estimated ad recallers']
+    "cost_per_inline_link_click" float [note: 'Cost per inline link click']
+    "cost_per_inline_post_engagement" float [note: 'Cost per inline post engagement']
     "cost_per_outbound_click" array
     "cost_per_thruplay" array
     "cost_per_unique_action_type" array
-    "cost_per_unique_click" float
-    "cost_per_unique_inline_link_click" float
+    "cost_per_unique_click" float [note: 'Cost per unique click']
+    "cost_per_unique_inline_link_click" float [note: 'Cost per unique inline link click']
     "cost_per_unique_outbound_click" array
-    "cpc" float
-    "cpm" float
-    "cpp" float
-    "created_time" date
-    "ctr" float
-    "date_start" date
-    "date_stop" date
-    "engagement_rate_ranking" varchar
-    "estimated_ad_recallers" float
-    "frequency" float
-    "full_view_impressions" float
-    "full_view_reach" float
-    "impressions" integer
-    "inline_link_click_ctr" float
-    "inline_link_clicks" integer
-    "inline_post_engagement" integer
-    "instant_experience_clicks_to_open" float
-    "instant_experience_clicks_to_start" float
+    "cpc" float [note: 'Cost per click']
+    "cpm" float [note: 'Cost per thousand impressions']
+    "cpp" float [note: 'Cost per thousand people reached']
+    "created_time" date [note: 'Time when the data was created']
+    "ctr" float [note: 'Click-through rate']
+    "date_start" date [note: 'Start date of the data']
+    "date_stop" date [note: 'End date of the data']
+    "engagement_rate_ranking" varchar [note: 'Ranking based on engagement rate']
+    "estimated_ad_recallers" float [note: 'Estimated ad recallers']
+    "frequency" float [note: 'Average number of times each person saw the ad']
+    "full_view_impressions" float [note: 'Impressions when the ad is fully viewed']
+    "full_view_reach" float [note: 'Reach when the ad is fully viewed']
+    "impressions" integer [note: 'Total number of impressions']
+    "inline_link_click_ctr" float [note: 'Click-through rate for inline link clicks']
+    "inline_link_clicks" integer [note: 'Total number of inline link clicks']
+    "inline_post_engagement" integer [note: 'Engagement on inline posts']
+    "instant_experience_clicks_to_open" float [note: 'Clicks to open instant experience']
+    "instant_experience_clicks_to_start" float [note: 'Clicks to start instant experience']
     "instant_experience_outbound_clicks" array
     "mobile_app_purchase_roas" array
-    "objective" varchar
-    "optimization_goal" varchar
+    "objective" varchar [note: 'Marketing objective']
+    "optimization_goal" varchar [note: 'Goal for optimization']
     "outbound_clicks" array
     "outbound_clicks_ctr" array
     "purchase_roas" array
-    "qualifying_question_qualify_answer_rate" float
-    "quality_ranking" varchar
-    "reach" integer
-    "social_spend" float
-    "spend" float
+    "qualifying_question_qualify_answer_rate" float [note: 'Rate of qualifying question answer qualification']
+    "quality_ranking" varchar [note: 'Ranking based on quality']
+    "reach" integer [note: 'Number of people who saw the ad']
+    "social_spend" float [note: 'Spend in social channels']
+    "spend" float [note: 'Total amount spent']
     "unique_actions" array
-    "unique_clicks" integer
-    "unique_ctr" float
-    "unique_inline_link_click_ctr" float
-    "unique_inline_link_clicks" integer
-    "unique_link_clicks_ctr" float
+    "unique_clicks" integer [note: 'Total number of unique clicks']
+    "unique_ctr" float [note: 'Unique click-through rate']
+    "unique_inline_link_click_ctr" float [note: 'Unique click-through rate for inline link clicks']
+    "unique_inline_link_clicks" integer [note: 'Total number of unique inline link clicks']
+    "unique_link_clicks_ctr" float [note: 'Unique click-through rate for link clicks']
     "unique_outbound_clicks" array
     "unique_outbound_clicks_ctr" array
-    "updated_time" date
+    "updated_time" date [note: 'Time when the data was updated']
     "video_15_sec_watched_actions" array
     "video_30_sec_watched_actions" array
     "video_avg_time_watched_actions" array
@@ -2229,43 +2229,43 @@ Table "ads_insights_platform_and_device" {
     "video_time_watched_actions" array
     "website_ctr" array
     "website_purchase_roas" array
-    "wish_bid" float
-    "publisher_platform" varchar
-    "platform_position" varchar
-    "impression_device" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "wish_bid" float [note: 'Bid based on the wish to achieve certain results']
+    "publisher_platform" varchar [note: 'The platform on which the ad is published (e.g., Facebook, Instagram).']
+    "platform_position" varchar [note: 'The position where the ad appears on the platform (e.g., News Feed, right column).']
+    "impression_device" varchar [note: 'The device type (e.g., smartphone, tablet) that generated the ad impression.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "ads_insights_region" {
-    "account_currency" varchar
-    "account_id" varchar
-    "account_name" varchar
+    "account_currency" varchar [note: 'Currency used for the account']
+    "account_id" varchar [note: 'ID of the account']
+    "account_name" varchar [note: 'Name of the account']
     "action_values" array
     "actions" array
     "ad_click_actions" array
-    "ad_id" varchar
+    "ad_id" varchar [note: 'ID of the ad']
     "ad_impression_actions" array
-    "ad_name" varchar
-    "adset_id" varchar
-    "adset_name" varchar
-    "attribution_setting" varchar
-    "auction_bid" float
-    "auction_competitiveness" float
-    "auction_max_competitor_bid" float
-    "buying_type" varchar
-    "campaign_id" varchar
-    "campaign_name" varchar
-    "canvas_avg_view_percent" float
-    "canvas_avg_view_time" float
+    "ad_name" varchar [note: 'Name of the ad']
+    "adset_id" varchar [note: 'ID of the ad set']
+    "adset_name" varchar [note: 'Name of the ad set']
+    "attribution_setting" varchar [note: 'How conversions are attributed']
+    "auction_bid" float [note: 'Bid amount in the auction']
+    "auction_competitiveness" float [note: 'Competitiveness level in the auction']
+    "auction_max_competitor_bid" float [note: 'Maximum bid among the competitors in the auction']
+    "buying_type" varchar [note: 'Type of buying']
+    "campaign_id" varchar [note: 'ID of the campaign']
+    "campaign_name" varchar [note: 'Name of the campaign']
+    "canvas_avg_view_percent" float [note: 'Average percentage of the canvas viewed']
+    "canvas_avg_view_time" float [note: 'Average time spent viewing the canvas']
     "catalog_segment_actions" array
     "catalog_segment_value" array
     "catalog_segment_value_mobile_purchase_roas" array
     "catalog_segment_value_omni_purchase_roas" array
     "catalog_segment_value_website_purchase_roas" array
-    "clicks" integer
-    "conversion_rate_ranking" varchar
+    "clicks" integer [note: 'Total number of clicks']
+    "conversion_rate_ranking" varchar [note: 'Ranking based on conversion rates']
     "conversion_values" array
     "conversions" array
     "converted_product_quantity" array
@@ -2275,54 +2275,54 @@ Table "ads_insights_region" {
     "cost_per_action_type" array
     "cost_per_ad_click" array
     "cost_per_conversion" array
-    "cost_per_estimated_ad_recallers" float
-    "cost_per_inline_link_click" float
-    "cost_per_inline_post_engagement" float
+    "cost_per_estimated_ad_recallers" float [note: 'Cost per estimated ad recallers']
+    "cost_per_inline_link_click" float [note: 'Cost per inline link click']
+    "cost_per_inline_post_engagement" float [note: 'Cost per inline post engagement']
     "cost_per_outbound_click" array
     "cost_per_thruplay" array
     "cost_per_unique_action_type" array
-    "cost_per_unique_click" float
-    "cost_per_unique_inline_link_click" float
+    "cost_per_unique_click" float [note: 'Cost per unique click']
+    "cost_per_unique_inline_link_click" float [note: 'Cost per unique inline link click']
     "cost_per_unique_outbound_click" array
-    "cpc" float
-    "cpm" float
-    "cpp" float
-    "created_time" date
-    "ctr" float
-    "date_start" date
-    "date_stop" date
-    "engagement_rate_ranking" varchar
-    "estimated_ad_recallers" float
-    "frequency" float
-    "full_view_impressions" float
-    "full_view_reach" float
-    "impressions" integer
-    "inline_link_click_ctr" float
-    "inline_link_clicks" integer
-    "inline_post_engagement" integer
-    "instant_experience_clicks_to_open" float
-    "instant_experience_clicks_to_start" float
+    "cpc" float [note: 'Cost per click']
+    "cpm" float [note: 'Cost per thousand impressions']
+    "cpp" float [note: 'Cost per thousand people reached']
+    "created_time" date [note: 'Time when the data was created']
+    "ctr" float [note: 'Click-through rate']
+    "date_start" date [note: 'Start date of the data']
+    "date_stop" date [note: 'End date of the data']
+    "engagement_rate_ranking" varchar [note: 'Ranking based on engagement rate']
+    "estimated_ad_recallers" float [note: 'Estimated ad recallers']
+    "frequency" float [note: 'Average number of times each person saw the ad']
+    "full_view_impressions" float [note: 'Impressions when the ad is fully viewed']
+    "full_view_reach" float [note: 'Reach when the ad is fully viewed']
+    "impressions" integer [note: 'Total number of impressions']
+    "inline_link_click_ctr" float [note: 'Click-through rate for inline link clicks']
+    "inline_link_clicks" integer [note: 'Total number of inline link clicks']
+    "inline_post_engagement" integer [note: 'Engagement on inline posts']
+    "instant_experience_clicks_to_open" float [note: 'Clicks to open instant experience']
+    "instant_experience_clicks_to_start" float [note: 'Clicks to start instant experience']
     "instant_experience_outbound_clicks" array
     "mobile_app_purchase_roas" array
-    "objective" varchar
-    "optimization_goal" varchar
+    "objective" varchar [note: 'Marketing objective']
+    "optimization_goal" varchar [note: 'Goal for optimization']
     "outbound_clicks" array
     "outbound_clicks_ctr" array
     "purchase_roas" array
-    "qualifying_question_qualify_answer_rate" float
-    "quality_ranking" varchar
-    "reach" integer
-    "social_spend" float
-    "spend" float
+    "qualifying_question_qualify_answer_rate" float [note: 'Rate of qualifying question answer qualification']
+    "quality_ranking" varchar [note: 'Ranking based on quality']
+    "reach" integer [note: 'Number of people who saw the ad']
+    "social_spend" float [note: 'Spend in social channels']
+    "spend" float [note: 'Total amount spent']
     "unique_actions" array
-    "unique_clicks" integer
-    "unique_ctr" float
-    "unique_inline_link_click_ctr" float
-    "unique_inline_link_clicks" integer
-    "unique_link_clicks_ctr" float
+    "unique_clicks" integer [note: 'Total number of unique clicks']
+    "unique_ctr" float [note: 'Unique click-through rate']
+    "unique_inline_link_click_ctr" float [note: 'Unique click-through rate for inline link clicks']
+    "unique_inline_link_clicks" integer [note: 'Total number of unique inline link clicks']
+    "unique_link_clicks_ctr" float [note: 'Unique click-through rate for link clicks']
     "unique_outbound_clicks" array
     "unique_outbound_clicks_ctr" array
-    "updated_time" date
+    "updated_time" date [note: 'Time when the data was updated']
     "video_15_sec_watched_actions" array
     "video_30_sec_watched_actions" array
     "video_avg_time_watched_actions" array
@@ -2340,167 +2340,167 @@ Table "ads_insights_region" {
     "video_time_watched_actions" array
     "website_ctr" array
     "website_purchase_roas" array
-    "wish_bid" float
-    "region" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "wish_bid" float [note: 'Bid based on the wish to achieve certain results']
+    "region" varchar [note: 'The region being targeted by the ad campaign.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "campaigns" {
-    "account_id" varchar
-    "adlabels" array
-    "bid_strategy" varchar
-    "boosted_object_id" varchar
-    "budget_rebalance_flag" boolean
-    "budget_remaining" float
-    "buying_type" varchar
-    "daily_budget" float
-    "created_time" timestamp
-    "configured_status" varchar
-    "effective_status" varchar
-    "id" varchar
-    "issues_info" array
-    "lifetime_budget" float
-    "name" varchar
-    "objective" varchar
-    "smart_promotion_type" varchar
-    "source_campaign_id" float
-    "special_ad_category" varchar
-    "special_ad_category_country" array
-    "spend_cap" float
-    "start_time" timestamp
-    "status" varchar
-    "stop_time" timestamp
-    "updated_time" timestamp
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "account_id" varchar [note: 'The ID of the Facebook Ads account associated with the campaign.']
+    "adlabels" array [note: 'Labels associated with the ad campaigns.']
+    "bid_strategy" varchar [note: 'The bid strategy used for the campaign.']
+    "boosted_object_id" varchar [note: 'The ID of the boosted object associated with the campaign.']
+    "budget_rebalance_flag" boolean [note: 'A flag indicating whether the budget is set to rebalance.']
+    "budget_remaining" float [note: 'The remaining budget for the campaign.']
+    "buying_type" varchar [note: 'The type of buying for the campaign.']
+    "daily_budget" float [note: 'The daily budget set for the campaign.']
+    "created_time" timestamp [note: 'The date and time when the campaign was created.']
+    "configured_status" varchar [note: 'The configured status of the campaign.']
+    "effective_status" varchar [note: 'The effective status of the campaign.']
+    "id" varchar [note: 'The ID of the campaign.']
+    "issues_info" array [note: 'Information on any issues related to the campaigns.']
+    "lifetime_budget" float [note: 'The lifetime budget set for the campaign.']
+    "name" varchar [note: 'The name of the campaign.']
+    "objective" varchar [note: 'The objective of the campaign.']
+    "smart_promotion_type" varchar [note: 'The type of smart promotion used for the campaign.']
+    "source_campaign_id" float [note: 'The ID of the source campaign, if any.']
+    "special_ad_category" varchar [note: 'The special ad category associated with the campaign.']
+    "special_ad_category_country" array [note: 'The country associated with the special ad category.']
+    "spend_cap" float [note: 'The spend cap set for the campaign.']
+    "start_time" timestamp [note: 'The start date and time of the campaign.']
+    "status" varchar [note: 'The status of the campaign.']
+    "stop_time" timestamp [note: 'The end date and time of the campaign.']
+    "updated_time" timestamp [note: 'The date and time when the campaign was last updated.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "custom_audiences" {
-    "id" varchar
-    "account_id" varchar
-    "approximate_count_lower_bound" integer
-    "approximate_count_upper_bound" integer
-    "customer_file_source" varchar
-    "data_source" json
-    "delivery_status" json
-    "description" varchar
-    "is_value_based" boolean
-    "lookalike_audience_ids" array
-    "lookalike_spec" json
-    "name" varchar
-    "operation_status" json
-    "opt_out_link" varchar
-    "page_deletion_marked_delete_time" integer
-    "permission_for_actions" json
-    "pixel_id" varchar
-    "retention_days" integer
-    "rule" varchar
-    "rule_aggregation" varchar
-    "sharing_status" json
-    "subtype" varchar
-    "time_content_updated" integer
-    "time_created" integer
-    "time_updated" integer
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" varchar [note: 'The unique identifier for the custom audience.']
+    "account_id" varchar [note: 'The ID of the Facebook account associated with the custom audience.']
+    "approximate_count_lower_bound" integer [note: 'An estimated lower bound count of the size of the custom audience.']
+    "approximate_count_upper_bound" integer [note: 'An estimated upper bound count of the size of the custom audience.']
+    "customer_file_source" varchar [note: 'The source of the customer file used to create the custom audience.']
+    "data_source" json [note: 'Information about the source of the custom audience.']
+    "delivery_status" json [note: 'Status of the delivery related to the custom audience.']
+    "description" varchar [note: 'Description or any additional information related to the custom audience.']
+    "is_value_based" boolean [note: 'Indicates if the custom audience is value-based or not.']
+    "lookalike_audience_ids" array [note: 'IDs of lookalike audiences based on this custom audience.']
+    "lookalike_spec" json [note: 'Specifications for creating lookalike audiences.']
+    "name" varchar [note: 'The name given to the custom audience.']
+    "operation_status" json [note: 'Status of ongoing operations related to the custom audience.']
+    "opt_out_link" varchar [note: 'The link for opting out of the custom audience.']
+    "page_deletion_marked_delete_time" integer [note: 'The time when the page deletion was marked for deletion.']
+    "permission_for_actions" json [note: 'Permissions granted for actions associated with the custom audience.']
+    "pixel_id" varchar [note: 'The ID of the pixel associated with the custom audience.']
+    "retention_days" integer [note: 'The number of days data for the custom audience will be retained.']
+    "rule" varchar [note: 'The rule or condition used to define the custom audience.']
+    "rule_aggregation" varchar [note: 'The aggregation method used for rules in the custom audience.']
+    "sharing_status" json [note: 'Status of sharing permissions for the custom audience.']
+    "subtype" varchar [note: 'The subtype of the custom audience.']
+    "time_content_updated" integer [note: 'The time when the content of the custom audience was last updated.']
+    "time_created" integer [note: 'The time when the custom audience was created.']
+    "time_updated" integer [note: 'The time when the custom audience was last updated.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "custom_conversions" {
-    "id" varchar
-    "account_id" varchar
-    "business" varchar
-    "creation_time" timestamp
-    "custom_event_type" varchar
-    "data_sources" array
-    "default_conversion_value" float
-    "description" varchar
-    "event_source_type" varchar
-    "first_fired_time" timestamp
-    "is_archived" boolean
-    "is_unavailable" boolean
-    "last_fired_time" timestamp
-    "name" varchar
-    "offline_conversion_data_set" varchar
-    "retention_days" float
-    "rule" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" varchar [note: 'Unique identifier for the custom conversion.']
+    "account_id" varchar [note: 'Unique identifier for the Facebook ad account.']
+    "business" varchar [note: 'Information about the business associated with the custom conversion.']
+    "creation_time" timestamp [note: 'Date and time when the custom conversion was created.']
+    "custom_event_type" varchar [note: 'Type of custom event triggering the conversion.']
+    "data_sources" array [note: 'Data sources related to the custom conversion.']
+    "default_conversion_value" float [note: 'Default value assigned to the conversion event if no specific value is provided.']
+    "description" varchar [note: 'Brief description of the custom conversion.']
+    "event_source_type" varchar [note: 'Type of event source triggering the custom conversion.']
+    "first_fired_time" timestamp [note: 'Date and time when the custom conversion was first triggered.']
+    "is_archived" boolean [note: 'Flag indicating if the custom conversion is archived.']
+    "is_unavailable" boolean [note: 'Flag indicating if the custom conversion is unavailable.']
+    "last_fired_time" timestamp [note: 'Date and time when the custom conversion was last triggered.']
+    "name" varchar [note: 'Name of the custom conversion.']
+    "offline_conversion_data_set" varchar [note: 'If applicable, the data set for offline conversions.']
+    "retention_days" float [note: 'Number of days for which the conversion data is retained.']
+    "rule" varchar [note: 'Rules or conditions triggering the custom conversion.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "customcustom_insight_stream" {
-    "account_id" varchar
-    "account_name" varchar
-    "ad_id" varchar
-    "clicks" integer
-    "cpc" float
-    "date_start" date
-    "date_stop" date
-    "gender" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "account_id" varchar [note: 'ID of the account']
+    "account_name" varchar [note: 'Name of the account']
+    "ad_id" varchar [note: 'ID of the ad']
+    "clicks" integer [note: 'Total number of clicks']
+    "cpc" float [note: 'Cost per click']
+    "date_start" date [note: 'Start date of the data']
+    "date_stop" date [note: 'End date of the data']
+    "gender" varchar [note: 'The gender targeted by the ad campaign.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "images" {
-    "account_id" varchar
-    "id" varchar
-    "name" varchar
-    "creatives" array
-    "original_height" integer
-    "original_width" integer
-    "permalink_url" varchar
-    "status" varchar
-    "url" varchar
-    "created_time" timestamp
-    "hash" varchar
-    "url_128" varchar
-    "is_associated_creatives_in_adgroups" boolean
-    "filename" varchar
-    "updated_time" timestamp
-    "height" integer
-    "width" integer
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "account_id" varchar [note: 'The unique identifier of the Facebook advertising account associated with the image data.']
+    "id" varchar [note: 'The unique identifier of the image data.']
+    "name" varchar [note: 'The name or label assigned to the image.']
+    "creatives" array [note: 'Additional information or metadata related to the image.']
+    "original_height" integer [note: 'The original height dimension of the image in pixels.']
+    "original_width" integer [note: 'The original width dimension of the image in pixels.']
+    "permalink_url" varchar [note: 'The permanent URL where the image can be accessed or viewed.']
+    "status" varchar [note: 'The current status or state of the image data.']
+    "url" varchar [note: 'The URL pointing to the image file.']
+    "created_time" timestamp [note: 'The date and time when the image was initially created.']
+    "hash" varchar [note: 'A unique hash value generated for the image.']
+    "url_128" varchar [note: 'The URL pointing to a lower resolution (128px) version of the image file.']
+    "is_associated_creatives_in_adgroups" boolean [note: 'Indicates if the image is associated with creatives in ad groups.']
+    "filename" varchar [note: 'The name of the file containing the image data.']
+    "updated_time" timestamp [note: 'The date and time when the image data was last updated.']
+    "height" integer [note: 'The height dimension of the image in pixels.']
+    "width" integer [note: 'The width dimension of the image in pixels.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "videos" {
-    "account_id" varchar
-    "id" varchar
-    "ad_breaks" array
-    "backdated_time" timestamp
-    "backdated_time_granularity" varchar
-    "content_category" varchar
-    "content_tags" array
-    "created_time" timestamp
-    "custom_labels" array
-    "description" varchar
-    "embed_html" varchar
-    "embeddable" boolean
-    "format" array
-    "icon" varchar
-    "is_crosspost_video" boolean
-    "is_crossposting_eligible" boolean
-    "is_episode" boolean
-    "is_instagram_eligible" boolean
-    "length" float
-    "live_status" varchar
-    "permalink_url" varchar
-    "post_views" integer
-    "premiere_living_room_status" boolean
-    "published" boolean
-    "scheduled_publish_time" timestamp
-    "source" varchar
-    "title" varchar
-    "universal_video_id" varchar
-    "updated_time" timestamp
-    "views" integer
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "account_id" varchar [note: 'The ID of the Facebook account associated with the video.']
+    "id" varchar [note: 'Unique ID of the video.']
+    "ad_breaks" array [note: 'Information about ad breaks within the video.']
+    "backdated_time" timestamp [note: 'The time when the video was backdated.']
+    "backdated_time_granularity" varchar [note: 'Granularity of the backdated time.']
+    "content_category" varchar [note: 'The category of the video content.']
+    "content_tags" array [note: 'Tags associated with the video content.']
+    "created_time" timestamp [note: 'The time when the video was created.']
+    "custom_labels" array [note: 'Custom labels assigned to the video.']
+    "description" varchar [note: 'Description or caption of the video.']
+    "embed_html" varchar [note: 'HTML code for embedding the video.']
+    "embeddable" boolean [note: 'Flag indicating if the video is embeddable.']
+    "format" array [note: 'Specifies the format of the video data being fetched.']
+    "icon" varchar [note: 'Icon associated with the video.']
+    "is_crosspost_video" boolean [note: 'Flag indicating if the video is a crosspost.']
+    "is_crossposting_eligible" boolean [note: 'Flag indicating if the video is eligible for crossposting.']
+    "is_episode" boolean [note: 'Flag indicating if the video is an episode of a series.']
+    "is_instagram_eligible" boolean [note: 'Flag indicating if the video is eligible for posting on Instagram.']
+    "length" float [note: 'Duration of the video.']
+    "live_status" varchar [note: 'Status of the live video.']
+    "permalink_url" varchar [note: 'URL for accessing the video directly.']
+    "post_views" integer [note: 'Number of views on the video post.']
+    "premiere_living_room_status" boolean [note: 'Status of the video premiere in living rooms.']
+    "published" boolean [note: 'Flag indicating if the video is published.']
+    "scheduled_publish_time" timestamp [note: 'Scheduled time for publishing the video.']
+    "source" varchar [note: 'Source of the video.']
+    "title" varchar [note: 'Title or name of the video.']
+    "universal_video_id" varchar [note: 'Universal unique ID for the video.']
+    "updated_time" timestamp [note: 'The time when the video was last updated.']
+    "views" integer [note: 'Number of views on the video.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }

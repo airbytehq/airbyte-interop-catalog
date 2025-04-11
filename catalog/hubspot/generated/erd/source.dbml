@@ -1,39 +1,39 @@
 Table "campaigns" {
-    "appId" integer
-    "appName" varchar
-    "contentId" integer
-    "counters" json
-    "counters_open" integer
-    "counters_processed" integer
-    "counters_sent" integer
-    "counters_deferred" integer
-    "counters_unsubscribed" integer
-    "counters_statuschange" integer
-    "counters_bounce" integer
-    "counters_mta_dropped" integer
-    "counters_dropped" integer
-    "counters_suppressed" integer
-    "counters_click" integer
-    "counters_delivered" integer
-    "counters_forward" integer
-    "counters_print" integer
-    "counters_reply" integer
-    "counters_spamreport" integer
-    "id" integer
-    "lastProcessingFinishedAt" integer
-    "lastProcessingStateChangeAt" integer
-    "lastProcessingStartedAt" integer
-    "processingState" varchar
-    "name" varchar
-    "numIncluded" integer
-    "numQueued" integer
-    "subType" varchar
-    "subject" varchar
-    "type" varchar
-    "lastUpdatedTime" integer
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "appId" integer [note: 'The unique identifier of the application associated with the campaign data.']
+    "appName" varchar [note: 'The name of the application associated with the campaign data.']
+    "contentId" integer [note: 'The unique identifier of the content associated with the campaign.']
+    "counters" json [note: 'Object containing different counters related to the campaign\'s performance.']
+    "counters_open" integer [note: 'Alias for the open counter value.']
+    "counters_processed" integer [note: 'Alias for the processed counter value.']
+    "counters_sent" integer [note: 'Alias for the sent counter value.']
+    "counters_deferred" integer [note: 'Alias for the deferred counter value.']
+    "counters_unsubscribed" integer [note: 'Alias for the unsubscribed counter value.']
+    "counters_statuschange" integer [note: 'Alias for the status change counter value.']
+    "counters_bounce" integer [note: 'Alias for the bounce counter value.']
+    "counters_mta_dropped" integer [note: 'Alias for the MTA dropped counter value.']
+    "counters_dropped" integer [note: 'Alias for the dropped counter value.']
+    "counters_suppressed" integer [note: 'Alias for the suppressed counter value.']
+    "counters_click" integer [note: 'Alias for the click counter value.']
+    "counters_delivered" integer [note: 'Alias for the delivered counter value.']
+    "counters_forward" integer [note: 'Alias for the forward counter value.']
+    "counters_print" integer [note: 'Alias for the print counter value.']
+    "counters_reply" integer [note: 'Alias for the reply counter value.']
+    "counters_spamreport" integer [note: 'Alias for the spam report counter value.']
+    "id" integer [note: 'The unique identifier of the campaign.']
+    "lastProcessingFinishedAt" integer [note: 'Timestamp indicating when the last processing of the campaign was finished.']
+    "lastProcessingStateChangeAt" integer [note: 'Timestamp indicating the last state change time of the processing state.']
+    "lastProcessingStartedAt" integer [note: 'Timestamp indicating when the last processing of the campaign started.']
+    "processingState" varchar [note: 'Current processing state of the campaign.']
+    "name" varchar [note: 'The name of the campaign.']
+    "numIncluded" integer [note: 'Number of recipients included in the campaign.']
+    "numQueued" integer [note: 'Number of emails queued for sending.']
+    "subType" varchar [note: 'Subtype of the campaign.']
+    "subject" varchar [note: 'The subject line of the campaign.']
+    "type" varchar [note: 'Type classification of the campaign.']
+    "lastUpdatedTime" integer [note: 'Timestamp indicating when the campaign data was last updated.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "cars" {
@@ -73,9 +73,9 @@ Table "cars" {
     "properties_hubspot_owner_assigneddate" timestamp
     "properties_hubspot_owner_id" varchar
     "properties_hubspot_team_id" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "cars_web_analytics" {
@@ -128,17 +128,17 @@ Table "cars_web_analytics" {
     "objectType" varchar
     "eventType" varchar
     "occurredAt" timestamp
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "companies" {
-    "id" varchar
-    "createdAt" timestamp
-    "updatedAt" timestamp
-    "archived" boolean
-    "contacts" array
+    "id" varchar [note: 'Unique identifier for the company']
+    "createdAt" timestamp [note: 'Date and time when the company was created']
+    "updatedAt" timestamp [note: 'Date and time when the company was last updated']
+    "archived" boolean [note: 'Indicates whether the company is archived or active']
+    "contacts" array [note: 'List of contacts associated with the company']
     "properties" json
     "properties_about_us" varchar
     "properties_address" varchar
@@ -318,20 +318,20 @@ Table "companies" {
     "properties_web_technologies" varchar
     "properties_website" varchar
     "properties_zip" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "companies_property_history" {
-    "updatedByUserId" float
-    "timestamp" timestamp
-    "property" varchar
-    "companyId" varchar
-    "sourceType" varchar
-    "sourceId" varchar
-    "value" varchar
-    "archived" boolean
+    "updatedByUserId" float [note: 'The user ID of the user who initiated the property update.']
+    "timestamp" timestamp [note: 'The date and time when the property update occurred.']
+    "property" varchar [note: 'The specific property that was updated in the company record.']
+    "companyId" varchar [note: 'The unique identifier of the company to which the property history record belongs.']
+    "sourceType" varchar [note: 'The type of the source that updated the property in the company record.']
+    "sourceId" varchar [note: 'The identifier of the source that updated the property in the company record.']
+    "value" varchar [note: 'The new value of the property after the update.']
+    "archived" boolean [note: 'Flag indicating if the company property history record is archived or not.']
     "properties" json
     "properties_about_us" varchar
     "properties_address" varchar
@@ -511,9 +511,9 @@ Table "companies_property_history" {
     "properties_web_technologies" varchar
     "properties_website" varchar
     "properties_zip" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "companies_web_analytics" {
@@ -566,49 +566,49 @@ Table "companies_web_analytics" {
     "objectType" varchar
     "eventType" varchar
     "occurredAt" timestamp
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "contact_lists" {
-    "parentId" integer
-    "metaData" json
-    "metaData_processing" varchar
-    "metaData_size" integer
-    "metaData_error" varchar
-    "metaData_lastProcessingStateChangeAt" integer
-    "metaData_lastSizeChangeAt" integer
-    "metaData_listReferencesCount" integer
-    "metaData_parentFolderId" integer
-    "dynamic" boolean
-    "name" varchar
-    "filters" array
-    "ilsFilterBranch" varchar
-    "internal" boolean
-    "authorId" integer
-    "limitExempt" boolean
-    "teamIds" array
-    "portalId" integer
-    "createdAt" integer
-    "listId" integer
-    "updatedAt" integer
-    "internalListId" integer
-    "readOnly" boolean
-    "deleteable" boolean
-    "listType" varchar
-    "archived" boolean
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "parentId" integer [note: 'The ID of the parent list, if applicable.']
+    "metaData" json [note: 'Additional metadata related to the fetched contact lists']
+    "metaData_processing" varchar [note: 'Processing status related to list metadata.']
+    "metaData_size" integer [note: 'Size of the list metadata.']
+    "metaData_error" varchar [note: 'Error information related to list metadata.']
+    "metaData_lastProcessingStateChangeAt" integer [note: 'Timestamp of the last processing state change for metadata.']
+    "metaData_lastSizeChangeAt" integer [note: 'Timestamp of the last size change for metadata.']
+    "metaData_listReferencesCount" integer [note: 'References count related to list metadata.']
+    "metaData_parentFolderId" integer [note: 'Parent folder ID associated with list metadata.']
+    "dynamic" boolean [note: 'Identifies if the contact list is dynamic in nature.']
+    "name" varchar [note: 'The name or title of the contact list.']
+    "filters" array [note: 'Contains filter criteria to fetch contact lists']
+    "ilsFilterBranch" varchar [note: 'Indicates the branch of the filter applied.']
+    "internal" boolean [note: 'Specifies if the contact list is internal (not accessible to customers).']
+    "authorId" integer [note: 'The ID of the user who authored or created the contact list.']
+    "limitExempt" boolean [note: 'Specifies if any limits are exempted for the contact list.']
+    "teamIds" array [note: 'The IDs of teams that have access to the contact list.']
+    "portalId" integer [note: 'The ID of the portal to which the contact list belongs.']
+    "createdAt" integer [note: 'The timestamp when the contact list was created.']
+    "listId" integer [note: 'The unique ID of the contact list.']
+    "updatedAt" integer [note: 'The timestamp of the last update to the contact list.']
+    "internalListId" integer [note: 'The internal ID of the contact list.']
+    "readOnly" boolean [note: 'Specifies if the list is read-only or not.']
+    "deleteable" boolean [note: 'Specifies if the contact list can be deleted.']
+    "listType" varchar [note: 'Specifies the type of list, e.g., static or dynamic.']
+    "archived" boolean [note: 'Indicates if the contact list is archived or not.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "contacts" {
-    "id" varchar
-    "createdAt" timestamp
-    "updatedAt" timestamp
-    "archived" boolean
-    "companies" array
+    "id" varchar [note: 'Unique identifier for the contact.']
+    "createdAt" timestamp [note: 'Date and time when the contact was created.']
+    "updatedAt" timestamp [note: 'Date and time when the contact was last updated.']
+    "archived" boolean [note: 'Indicates if the contact is archived or not.']
+    "companies" array [note: 'List of companies associated with the contact.']
     "properties" json
     "properties_address" varchar
     "properties_annualrevenue" varchar
@@ -938,86 +938,86 @@ Table "contacts" {
     "properties_hs_time_in_other" float
     "properties_hs_time_in_salesqualifiedlead" float
     "properties_hs_time_in_subscriber" float
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "contacts_form_submissions" {
-    "canonical_vid" integer
-    "canonical_url" varchar
-    "conversion_id" varchar
-    "page_title" varchar
-    "timestamp" integer
-    "form_id" varchar
-    "portal_id" integer
-    "title" varchar
-    "page_url" varchar
-    "form_type" varchar
-    "contact_associated_by" array
-    "meta_data" array
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "canonical_vid" integer [note: 'The canonical VID associated with the submission']
+    "canonical_url" varchar [note: 'The canonical URL of the submitted form']
+    "conversion_id" varchar [note: 'The conversion ID related to the form submission']
+    "page_title" varchar [note: 'The title of the page where the form submission occurred']
+    "timestamp" integer [note: 'The timestamp of when the form submission occurred']
+    "form_id" varchar [note: 'The unique ID of the form submitted']
+    "portal_id" integer [note: 'The ID of the portal where the form submission was made']
+    "title" varchar [note: 'The title of the form submitted']
+    "page_url" varchar [note: 'The URL of the page where the form was submitted']
+    "form_type" varchar [note: 'The type of form that was submitted']
+    "contact_associated_by" array [note: 'The specific contacts associated with the submission']
+    "meta_data" array [note: 'Additional metadata associated with the submission']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "contacts_list_memberships" {
-    "canonical_vid" integer
-    "static_list_id" integer
-    "internal_list_id" integer
-    "timestamp" integer
-    "vid" integer
-    "is_member" boolean
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "canonical_vid" integer [note: 'The unique ID associated with the contact in the HubSpot CRM']
+    "static_list_id" integer [note: 'The static ID assigned to the list of contacts within the HubSpot CRM']
+    "internal_list_id" integer [note: 'The internal ID assigned to the list of contacts within the HubSpot CRM']
+    "timestamp" integer [note: 'The timestamp when the contact was added to or removed from the list']
+    "vid" integer [note: 'The ID associated with the contact in the HubSpot CRM']
+    "is_member" boolean [note: 'Flag indicating whether the contact is a member of the list or not']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "contacts_merged_audit" {
-    "canonical_vid" integer
-    "vid_to_merge" integer
-    "timestamp" integer
-    "entity_id" varchar
-    "user_id" integer
-    "num_properties_moved" integer
-    "merged_from_email" json
-    "merged_from_email_source_vids" array
-    "merged_from_email_updated_by_user_id" integer
-    "merged_from_email_source_label" varchar
-    "merged_from_email_source_type" varchar
-    "merged_from_email_value" varchar
-    "merged_from_email_source_id" varchar
-    "merged_from_email_selected" boolean
-    "merged_from_email_timestamp" integer
-    "merged_to_email" json
-    "merged_to_email_updated_by_user_id" integer
-    "merged_to_email_source_label" varchar
-    "merged_to_email_source_type" varchar
-    "merged_to_email_value" varchar
-    "merged_to_email_source_id" varchar
-    "merged_to_email_selected" boolean
-    "merged_to_email_timestamp" integer
-    "first_name" varchar
-    "last_name" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "canonical_vid" integer [note: 'The unique identifier for the merged contact in HubSpot\'s CRM.']
+    "vid_to_merge" integer [note: 'The contact’s unique identifier to be merged.']
+    "timestamp" integer [note: 'The timestamp of when the merge operation occurred.']
+    "entity_id" varchar [note: 'The entity identifier for the merged contact.']
+    "user_id" integer [note: 'The user ID responsible for the merge operation.']
+    "num_properties_moved" integer [note: 'The number of properties moved during the merge process.']
+    "merged_from_email" json [note: 'Details of the email address from which the contact was merged from.']
+    "merged_from_email_source_vids" array [note: 'Array of unique identifiers of video sources.']
+    "merged_from_email_updated_by_user_id" integer [note: 'The user ID of the user who updated the email address from which the contact was merged from.']
+    "merged_from_email_source_label" varchar [note: 'The source label of the email address from which the contact was merged from.']
+    "merged_from_email_source_type" varchar [note: 'The source type of the email address from which the contact was merged from.']
+    "merged_from_email_value" varchar [note: 'The email address value from which the contact was merged from.']
+    "merged_from_email_source_id" varchar [note: 'The source ID of the email address from which the contact was merged from.']
+    "merged_from_email_selected" boolean [note: 'Indicates if the email address from which the contact was merged from was selected.']
+    "merged_from_email_timestamp" integer [note: 'The timestamp of the email address merge.']
+    "merged_to_email" json [note: 'Details of the email address to which the contact was merged to.']
+    "merged_to_email_updated_by_user_id" integer [note: 'The user ID of the user who updated the email address to which the contact was merged to.']
+    "merged_to_email_source_label" varchar [note: 'The source label of the email address to which the contact was merged to.']
+    "merged_to_email_source_type" varchar [note: 'The source type of the email address to which the contact was merged to.']
+    "merged_to_email_value" varchar [note: 'The email address value to which the contact was merged to.']
+    "merged_to_email_source_id" varchar [note: 'The source ID of the email address to which the contact was merged to.']
+    "merged_to_email_selected" boolean [note: 'Indicates if the email address to which the contact was merged to was selected.']
+    "merged_to_email_timestamp" integer [note: 'The timestamp of the email address merge.']
+    "first_name" varchar [note: 'The first name of the merged contact.']
+    "last_name" varchar [note: 'The last name of the merged contact.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "contacts_property_history" {
-    "value" varchar
-    "source_type" varchar
-    "source_id" varchar
-    "source_label" varchar
-    "updated_by_user_id" integer
-    "timestamp" integer
-    "selected" boolean
-    "is_contact" boolean
-    "property" varchar
-    "vid" integer
-    "canonical_vid" integer
-    "portal_id" integer
-    "source_vids" array
+    "value" varchar [note: 'The value of the property at the specified timestamp.']
+    "source_type" varchar [note: 'The type or category of the data source.']
+    "source_id" varchar [note: 'The identifier of the data source that generated this historical entry.']
+    "source_label" varchar [note: 'The label representing the source of the data.']
+    "updated_by_user_id" integer [note: 'The identifier of the user who last updated the property value.']
+    "timestamp" integer [note: 'The timestamp when the property value was last updated.']
+    "selected" boolean [note: 'Indicates whether this property is currently selected or not.']
+    "is_contact" boolean [note: 'Indicates whether the data is associated with a contact record.']
+    "property" varchar [note: 'The specific property whose history is being tracked.']
+    "vid" integer [note: 'The unique identifier for this historical data entry.']
+    "canonical_vid" integer [note: 'The unique identifier for the contact record that this historical data belongs to.']
+    "portal_id" integer [note: 'The identifier for the HubSpot portal that the data belongs to.']
+    "source_vids" array [note: 'List of unique identifiers of the sources associated with this historical data.']
     "properties" json
     "properties_address" varchar
     "properties_annualrevenue" varchar
@@ -1323,9 +1323,9 @@ Table "contacts_property_history" {
     "properties_website" varchar
     "properties_work_email" varchar
     "properties_zip" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "contacts_web_analytics" {
@@ -1378,29 +1378,29 @@ Table "contacts_web_analytics" {
     "objectType" varchar
     "eventType" varchar
     "occurredAt" timestamp
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "deal_pipelines" {
-    "label" varchar
-    "displayOrder" integer
-    "active" boolean
-    "stages" array
-    "objectType" varchar
-    "objectTypeId" varchar
-    "pipelineId" varchar
-    "createdAt" integer
-    "updatedAt" integer
-    "default" boolean
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "label" varchar [note: 'The label or name of the deal pipeline.']
+    "displayOrder" integer [note: 'The ordering of the deal pipeline for display.']
+    "active" boolean [note: 'Indicates if the deal pipeline is currently active or not.']
+    "stages" array [note: 'List of deal stages within the pipeline.']
+    "objectType" varchar [note: 'The type of object this deal pipeline is associated with.']
+    "objectTypeId" varchar [note: 'The ID of the object type this deal pipeline is associated with.']
+    "pipelineId" varchar [note: 'The unique identifier of the deal pipeline.']
+    "createdAt" integer [note: 'Timestamp for the creation date of the deal pipeline.']
+    "updatedAt" integer [note: 'Timestamp for the last update to the deal pipeline.']
+    "default" boolean [note: 'Indicates if this pipeline is the default one in the system.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "deal_splits" {
-    "id" varchar
+    "id" varchar [note: 'Unique identifier for the deal split']
     "properties" json
     "properties_hs_deal_split_amount" float
     "properties_hs_deal_split_percentage" float
@@ -1409,9 +1409,9 @@ Table "deal_splits" {
     "properties_hs_object_id" float
     "properties_hs_lastmodifieddate" timestamp
     "properties_hubspot_owner_id" varchar
-    "createdAt" timestamp
-    "updatedAt" timestamp
-    "archived" boolean
+    "createdAt" timestamp [note: 'The date and time when the deal split was created']
+    "updatedAt" timestamp [note: 'The date and time when the deal split was last updated']
+    "archived" boolean [note: 'Indicates if the deal is archived']
     "properties_hs_all_accessible_team_ids" varchar
     "properties_hs_all_assigned_business_unit_ids" varchar
     "properties_hs_all_owner_ids" varchar
@@ -1452,13 +1452,13 @@ Table "deal_splits" {
     "properties_hs_was_imported" boolean
     "properties_hubspot_owner_assigneddate" timestamp
     "properties_hubspot_team_id" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "deals" {
-    "id" varchar
+    "id" varchar [note: 'Unique identifier for the deal']
     "properties" json
     "properties_amount" float
     "properties_amount_in_home_currency" float
@@ -1477,7 +1477,7 @@ Table "deals" {
     "properties_engagements_last_meeting_booked_source" varchar
     "properties_hs_acv" float
     "properties_hs_all_accessible_team_ids" varchar
-    "properties_hs_all_assigned_business_unit_ids" varchar
+    "properties_hs_all_assigned_business_unit_ids" varchar [note: 'IDs of all assigned business units for the deal']
     "properties_hs_all_owner_ids" varchar
     "properties_hs_all_team_ids" varchar
     "properties_hs_analytics_source" varchar
@@ -1554,12 +1554,12 @@ Table "deals" {
     "properties_num_contacted_notes" float
     "properties_num_notes" float
     "properties_pipeline" varchar
-    "createdAt" timestamp
-    "updatedAt" timestamp
-    "archived" boolean
-    "companies" array
-    "contacts" array
-    "line_items" array
+    "createdAt" timestamp [note: 'The date and time when the deal was created']
+    "updatedAt" timestamp [note: 'The date and time when the deal was last updated']
+    "archived" boolean [note: 'Indicates if the deal is archived']
+    "companies" array [note: 'Information about companies associated with the deal']
+    "contacts" array [note: 'Information about contacts associated with the deal']
+    "line_items" array [note: 'Details of line items associated with the deal']
     "properties_hs_all_collaborator_owner_ids" varchar
     "properties_hs_all_deal_split_owner_ids" varchar
     "properties_hs_analytics_latest_source" varchar
@@ -1670,9 +1670,9 @@ Table "deals" {
     "properties_hs_time_in_decisionmakerboughtin" float
     "properties_hs_time_in_presentationscheduled" float
     "properties_hs_time_in_qualifiedtobuy" float
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "deals_archived" {
@@ -1775,7 +1775,7 @@ Table "deals_archived" {
     "createdAt" timestamp
     "updatedAt" timestamp
     "archived" boolean
-    "archivedAt" timestamp
+    "archivedAt" timestamp [note: 'The date and time when the deal was archived']
     "companies" array
     "contacts" array
     "line_items" array
@@ -1889,20 +1889,20 @@ Table "deals_archived" {
     "properties_hs_time_in_decisionmakerboughtin" float
     "properties_hs_time_in_presentationscheduled" float
     "properties_hs_time_in_qualifiedtobuy" float
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "deals_property_history" {
-    "updatedByUserId" float
-    "timestamp" timestamp
-    "property" varchar
-    "dealId" varchar
-    "sourceType" varchar
-    "sourceId" varchar
-    "value" varchar
-    "archived" boolean
+    "updatedByUserId" float [note: 'The unique identifier of the user who made the update']
+    "timestamp" timestamp [note: 'The date and time when the property was updated']
+    "property" varchar [note: 'The name of the property that was updated']
+    "dealId" varchar [note: 'The unique identifier of the deal associated with this property history']
+    "sourceType" varchar [note: 'The type of source that triggered this update']
+    "sourceId" varchar [note: 'The unique identifier of the source of this update']
+    "value" varchar [note: 'The new value of the property']
+    "archived" boolean [note: 'Indicates if the deal property history is archived']
     "properties" json
     "properties_amount" float
     "properties_amount_in_home_currency" float
@@ -2085,9 +2085,9 @@ Table "deals_property_history" {
     "properties_num_contacted_notes" float
     "properties_num_notes" float
     "properties_pipeline" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "deals_web_analytics" {
@@ -2140,191 +2140,191 @@ Table "deals_web_analytics" {
     "objectType" varchar
     "eventType" varchar
     "occurredAt" timestamp
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "email_events" {
-    "appId" integer
-    "appName" varchar
-    "bcc" array
-    "cc" array
-    "attempt" integer
-    "bounced" boolean
-    "browser" json
-    "category" varchar
-    "causedBy" json
-    "created" integer
-    "deviceType" varchar
-    "dropMessage" varchar
-    "dropReason" varchar
-    "duration" integer
-    "emailCampaignId" integer
-    "emailCampaignGroupId" integer
-    "filteredEvent" boolean
-    "from" varchar
-    "hmid" varchar
-    "id" varchar
-    "ipAddress" varchar
-    "linkId" integer
-    "location" json
-    "obsoletedBy" json
-    "portalId" integer
-    "portalSubscriptionStatus" varchar
-    "recipient" varchar
-    "referer" varchar
-    "replyTo" array
-    "requestedBy" varchar
-    "requestedByUserId" integer
-    "response" varchar
-    "sentBy" json
-    "smtpId" varchar
-    "source" varchar
-    "sourceId" varchar
-    "subscriptions" array
-    "status" varchar
-    "subject" varchar
-    "type" varchar
-    "url" varchar
-    "userAgent" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "appId" integer [note: 'The unique identifier of the application associated with the email event.']
+    "appName" varchar [note: 'The name of the application associated with the email event.']
+    "bcc" array [note: 'The blind carbon copy recipients of the email.']
+    "cc" array [note: 'The carbon copy recipients of the email.']
+    "attempt" integer [note: 'The number of attempts made to send the email.']
+    "bounced" boolean [note: 'Indicates if the email bounced.']
+    "browser" json [note: 'Details about the email event recipient\'s browser.']
+    "category" varchar [note: 'The category of the email event.']
+    "causedBy" json [note: 'Information about the action that caused the email event.']
+    "created" integer [note: 'The timestamp of when the email event was created.']
+    "deviceType" varchar [note: 'The type of device used by the recipient.']
+    "dropMessage" varchar [note: 'The message associated with dropped email.']
+    "dropReason" varchar [note: 'The reason for dropping the email.']
+    "duration" integer [note: 'The duration of the email event.']
+    "emailCampaignId" integer [note: 'The ID of the email campaign associated with the event.']
+    "emailCampaignGroupId" integer [note: 'The group ID of the email campaign associated with the event.']
+    "filteredEvent" boolean [note: 'Indicates if the event is filtered.']
+    "from" varchar [note: 'The sender of the email.']
+    "hmid" varchar [note: 'The HubSpot Marketing ID.']
+    "id" varchar [note: 'The unique identifier of the email event.']
+    "ipAddress" varchar [note: 'The IP address of the recipient.']
+    "linkId" integer [note: 'The ID of the link in the email.']
+    "location" json [note: 'Details about the geographical location associated with the email event.']
+    "obsoletedBy" json [note: 'Information about any email event that this event has made obsolete.']
+    "portalId" integer [note: 'The ID of the HubSpot portal.']
+    "portalSubscriptionStatus" varchar [note: 'The subscription status of the portal.']
+    "recipient" varchar [note: 'The recipient of the email.']
+    "referer" varchar [note: 'The referer URL of the email.']
+    "replyTo" array [note: 'The email address to which replies should be directed.']
+    "requestedBy" varchar [note: 'The entity that requested the email event.']
+    "requestedByUserId" integer [note: 'The ID of the user who requested the email event.']
+    "response" varchar [note: 'The response code related to the email event.']
+    "sentBy" json [note: 'Details about the entity that sent the email event.']
+    "smtpId" varchar [note: 'The SMTP ID associated with email event.']
+    "source" varchar [note: 'The source of the email event.']
+    "sourceId" varchar [note: 'The unique identifier of the email event source.']
+    "subscriptions" array [note: 'Information about the subscriptions associated with the email event.']
+    "status" varchar [note: 'The status of the email event.']
+    "subject" varchar [note: 'The subject of the email.']
+    "type" varchar [note: 'The type of email event.']
+    "url" varchar [note: 'The URL associated with the email event.']
+    "userAgent" varchar [note: 'The user agent of the recipient.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "email_subscriptions" {
-    "active" boolean
-    "portalId" integer
-    "description" varchar
-    "id" integer
-    "name" varchar
-    "order" integer
-    "businessUnitId" integer
-    "internal" boolean
-    "internalName" varchar
-    "category" varchar
-    "channel" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "active" boolean [note: 'Indicates whether the subscription is currently active or not']
+    "portalId" integer [note: 'The unique identifier for the portal associated with the subscription']
+    "description" varchar [note: 'Additional information or details about the subscription']
+    "id" integer [note: 'The unique identifier for the subscription']
+    "name" varchar [note: 'The display name of the subscription']
+    "order" integer [note: 'The order in which the subscription is displayed or processed']
+    "businessUnitId" integer [note: 'The unique identifier for the business unit associated with the subscription']
+    "internal" boolean [note: 'Indicates whether the subscription is for internal use only']
+    "internalName" varchar [note: 'The internal name for the subscription']
+    "category" varchar [note: 'The category to which the subscription belongs']
+    "channel" varchar [note: 'The communication channel through which the subscription is managed']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "engagements" {
-    "id" integer
-    "uid" varchar
-    "teamId" integer
-    "portalId" integer
-    "queueMembershipIds" array
-    "scheduledTasks" array
-    "active" boolean
-    "createdAt" integer
-    "createdBy" integer
-    "modifiedBy" integer
-    "lastUpdated" integer
-    "ownerId" integer
-    "type" varchar
-    "timestamp" integer
-    "bodyPreview" varchar
-    "bodyPreviewHtml" varchar
-    "bodyPreviewIsTruncated" boolean
-    "allAccessibleTeamIds" array
-    "activityType" varchar
-    "gdprDeleted" boolean
-    "source" varchar
-    "sourceId" varchar
-    "associations" json
-    "associations_contactIds" array
-    "associations_contentIds" array
-    "associations_companyIds" array
-    "associations_dealIds" array
-    "associations_marketingEventIds" array
-    "associations_ownerIds" array
-    "associations_quoteIds" array
-    "associations_workflowIds" array
-    "associations_ticketIds" array
-    "attachments" array
-    "metadata" json
-    "metadata_attendeeOwnerIds" array
-    "metadata_calendarEventHash" varchar
-    "metadata_createdFromLinkId" integer
-    "metadata_meetingChangeId" varchar
-    "ownerIdsBcc" array
-    "ownerIdsFrom" array
-    "ownerIdsTo" array
-    "pendingInlineImageIds" array
-    "validationSkipped" array
-    "ownerIdsCc" array
-    "metadata_guestEmails" array
-    "metadata_iCalUid" varchar
-    "metadata_includeDescriptionInReminder" boolean
-    "metadata_internalMeetingNotes" varchar
-    "metadata_location" varchar
-    "metadata_locationType" varchar
-    "metadata_meetingOutcome" varchar
-    "metadata_timezone" varchar
-    "metadata_preMeetingProspectReminders" array
-    "metadata_body" varchar
-    "metadata_from" json
-    "metadata_sender" json
-    "metadata_to" array
-    "metadata_cc" array
-    "metadata_bounceErrorDetail" json
-    "metadata_emailSendEventId" json
-    "metadata_ownerIdsBcc" array
-    "metadata_ownerIdsCc" array
-    "metadata_ownerIdsFrom" array
-    "metadata_ownerIdsTo" array
-    "metadata_pendingInlineImageIds" array
-    "metadata_validationSkipped" array
-    "metadata_bcc" array
-    "metadata_subject" varchar
-    "metadata_html" varchar
-    "metadata_text" varchar
-    "metadata_status" varchar
-    "metadata_forObjectType" varchar
-    "metadata_startTime" integer
-    "metadata_endTime" integer
-    "metadata_title" varchar
-    "metadata_toNumber" varchar
-    "metadata_fromNumber" varchar
-    "metadata_externalId" varchar
-    "metadata_durationMilliseconds" integer
-    "metadata_externalAccountId" varchar
-    "metadata_recordingUrl" varchar
-    "metadata_disposition" varchar
-    "metadata_completionDate" integer
-    "metadata_taskType" varchar
-    "metadata_reminders" array
-    "metadata_threadId" varchar
-    "metadata_messageId" varchar
-    "metadata_loggedFrom" varchar
-    "metadata_attachedVideoOpened" boolean
-    "metadata_attachedVideoWatched" boolean
-    "metadata_trackerKey" varchar
-    "metadata_sendDefaultReminder" boolean
-    "metadata_source" varchar
-    "metadata_unknownVisitorConversation" boolean
-    "metadata_facsimileSendId" varchar
-    "metadata_sentVia" varchar
-    "metadata_sequenceStepOrder" integer
-    "metadata_externalUrl" varchar
-    "metadata_postSendStatus" varchar
-    "metadata_errorMessage" varchar
-    "metadata_recipientDropReasons" varchar
-    "metadata_calleeObjectId" integer
-    "metadata_calleeObjectType" varchar
-    "metadata_mediaProcessingStatus" varchar
-    "metadata_sourceId" varchar
-    "metadata_priority" varchar
-    "metadata_isAllDay" boolean
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" integer [note: 'Unique ID of the engagement.']
+    "uid" varchar [note: 'Unique identifier of the engagement.']
+    "teamId" integer [note: 'ID of the team associated with the engagement.']
+    "portalId" integer [note: 'ID of the portal associated with the engagement.']
+    "queueMembershipIds" array [note: 'IDs of queue memberships related to the engagement.']
+    "scheduledTasks" array [note: 'Scheduled tasks related to the engagement.']
+    "active" boolean [note: 'Indicates if the engagement is currently active or not.']
+    "createdAt" integer [note: 'Timestamp indicating when the engagement was created.']
+    "createdBy" integer [note: 'ID of the user who created the engagement.']
+    "modifiedBy" integer [note: 'ID of the user who last modified the engagement.']
+    "lastUpdated" integer [note: 'Timestamp indicating when the engagement was last updated.']
+    "ownerId" integer [note: 'ID of the owner of the engagement.']
+    "type" varchar [note: 'Type of the engagement.']
+    "timestamp" integer [note: 'Timestamp related to the engagement.']
+    "bodyPreview" varchar [note: 'Preview of the body content.']
+    "bodyPreviewHtml" varchar [note: 'HTML preview of the body content.']
+    "bodyPreviewIsTruncated" boolean [note: 'Indicates if the body preview is truncated.']
+    "allAccessibleTeamIds" array [note: 'IDs of all teams with access to this engagement.']
+    "activityType" varchar [note: 'Type of activity associated with the engagement.']
+    "gdprDeleted" boolean [note: 'Indicates if the engagement is deleted due to GDPR compliance.']
+    "source" varchar [note: 'Source of the engagement data.']
+    "sourceId" varchar [note: 'ID of the source associated with the engagement.']
+    "associations" json [note: 'Associations related to the engagement.']
+    "associations_contactIds" array [note: 'List of contact IDs associated with the engagement']
+    "associations_contentIds" array [note: 'List of content IDs associated with the engagement']
+    "associations_companyIds" array [note: 'List of company IDs associated with the engagement']
+    "associations_dealIds" array [note: 'List of deal IDs associated with the engagement']
+    "associations_marketingEventIds" array [note: 'List of marketing event IDs associated with the engagement']
+    "associations_ownerIds" array [note: 'List of owner IDs associated with the engagement']
+    "associations_quoteIds" array [note: 'List of quote IDs associated with the engagement']
+    "associations_workflowIds" array [note: 'List of workflow IDs associated with the engagement']
+    "associations_ticketIds" array [note: 'List of ticket IDs associated with the engagement']
+    "attachments" array [note: 'Attachments included in the engagement.']
+    "metadata" json [note: 'Metadata related to the engagement.']
+    "metadata_attendeeOwnerIds" array [note: 'IDs of attendees\' owners in metadata.']
+    "metadata_calendarEventHash" varchar [note: 'Hash value for calendar event']
+    "metadata_createdFromLinkId" integer [note: 'ID from which engagement was created']
+    "metadata_meetingChangeId" varchar [note: 'ID of the meeting change']
+    "ownerIdsBcc" array [note: 'IDs of BCC owners.']
+    "ownerIdsFrom" array [note: 'IDs of \'from\' owners.']
+    "ownerIdsTo" array [note: 'IDs of \'to\' owners.']
+    "pendingInlineImageIds" array [note: 'IDs of pending inline image attachments.']
+    "validationSkipped" array [note: 'Validation details skipped.']
+    "ownerIdsCc" array [note: 'IDs of CC owners.']
+    "metadata_guestEmails" array [note: 'Guest attendee emails in metadata.']
+    "metadata_iCalUid" varchar [note: 'Unique ID for iCal']
+    "metadata_includeDescriptionInReminder" boolean [note: 'Flag indicating if description should be included in reminder']
+    "metadata_internalMeetingNotes" varchar [note: 'Internal meeting notes']
+    "metadata_location" varchar [note: 'Location of the engagement']
+    "metadata_locationType" varchar [note: 'Type of location for the engagement']
+    "metadata_meetingOutcome" varchar [note: 'Outcome of the meeting']
+    "metadata_timezone" varchar [note: 'Timezone of the engagement']
+    "metadata_preMeetingProspectReminders" array [note: 'Pre-meeting prospect reminders in metadata.']
+    "metadata_body" varchar [note: 'Engagement body content']
+    "metadata_from" json [note: 'Sender information in metadata.']
+    "metadata_sender" json [note: 'Sender\'s email information in metadata.']
+    "metadata_to" array [note: 'Recipient information in metadata.']
+    "metadata_cc" array [note: 'CC recipients in metadata.']
+    "metadata_bounceErrorDetail" json [note: 'Details of bounce errors, if any']
+    "metadata_emailSendEventId" json [note: 'ID of the email send event']
+    "metadata_ownerIdsBcc" array [note: 'IDs of BCC owners in metadata.']
+    "metadata_ownerIdsCc" array [note: 'IDs of CC owners in metadata.']
+    "metadata_ownerIdsFrom" array [note: 'IDs of \'from\' owners in metadata.']
+    "metadata_ownerIdsTo" array [note: 'IDs of \'to\' owners in metadata.']
+    "metadata_pendingInlineImageIds" array [note: 'IDs of pending inline image attachments in metadata.']
+    "metadata_validationSkipped" array [note: 'Validation details skipped in metadata.']
+    "metadata_bcc" array [note: 'BCC recipients in metadata.']
+    "metadata_subject" varchar [note: 'Subject of the engagement']
+    "metadata_html" varchar [note: 'HTML content of the engagement']
+    "metadata_text" varchar [note: 'Text content of the engagement']
+    "metadata_status" varchar [note: 'Status of the engagement']
+    "metadata_forObjectType" varchar [note: 'Type of object for which engagement is associated']
+    "metadata_startTime" integer [note: 'Start time of the engagement']
+    "metadata_endTime" integer [note: 'End time of the engagement']
+    "metadata_title" varchar [note: 'Title of the engagement']
+    "metadata_toNumber" varchar [note: 'Number to which engagement was sent']
+    "metadata_fromNumber" varchar [note: 'Number from which engagement was sent']
+    "metadata_externalId" varchar [note: 'External ID of the engagement']
+    "metadata_durationMilliseconds" integer [note: 'Duration of the engagement in milliseconds']
+    "metadata_externalAccountId" varchar [note: 'External account ID associated with the engagement']
+    "metadata_recordingUrl" varchar [note: 'URL of the recording related to the engagement']
+    "metadata_disposition" varchar [note: 'Engagement disposition']
+    "metadata_completionDate" integer [note: 'Date when engagement was completed']
+    "metadata_taskType" varchar [note: 'Type of engagement task']
+    "metadata_reminders" array [note: 'Reminders in metadata.']
+    "metadata_threadId" varchar [note: 'ID of the thread']
+    "metadata_messageId" varchar [note: 'ID of the message']
+    "metadata_loggedFrom" varchar [note: 'Source from which the engagement was logged']
+    "metadata_attachedVideoOpened" boolean [note: 'Flag indicating if attached videos were opened']
+    "metadata_attachedVideoWatched" boolean [note: 'Flag indicating if attached videos were watched']
+    "metadata_trackerKey" varchar [note: 'Key for tracking engagement']
+    "metadata_sendDefaultReminder" boolean [note: 'Default reminder settings for the engagement']
+    "metadata_source" varchar [note: 'Source of the engagement']
+    "metadata_unknownVisitorConversation" boolean [note: 'Conversation with unknown visitor']
+    "metadata_facsimileSendId" varchar [note: 'ID of the facsimile send']
+    "metadata_sentVia" varchar [note: 'Medium through which engagement was sent']
+    "metadata_sequenceStepOrder" integer [note: 'Order of sequence step']
+    "metadata_externalUrl" varchar [note: 'External URL related to the engagement']
+    "metadata_postSendStatus" varchar [note: 'Status of post send operation']
+    "metadata_errorMessage" varchar [note: 'Error message associated with the engagement']
+    "metadata_recipientDropReasons" varchar [note: 'Reasons for recipient drop']
+    "metadata_calleeObjectId" integer [note: 'ID of the callee object']
+    "metadata_calleeObjectType" varchar [note: 'Type of the callee object']
+    "metadata_mediaProcessingStatus" varchar [note: 'Status of media processing for the engagement']
+    "metadata_sourceId" varchar [note: 'Source ID of the engagement']
+    "metadata_priority" varchar [note: 'Priority of the engagement']
+    "metadata_isAllDay" boolean [note: 'Flag indicating if engagement is for the whole day']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "engagements_calls" {
-    "id" varchar
+    "id" varchar [note: 'Unique identifier for the call engagement.']
     "properties" json
     "properties_hs_activity_type" varchar
     "properties_hs_all_assigned_business_unit_ids" varchar
@@ -2380,13 +2380,13 @@ Table "engagements_calls" {
     "properties_hs_all_owner_ids" varchar
     "properties_hs_all_team_ids" varchar
     "properties_hs_all_accessible_team_ids" varchar
-    "createdAt" timestamp
-    "updatedAt" timestamp
-    "archived" boolean
-    "contacts" array
-    "deals" array
-    "companies" array
-    "tickets" array
+    "createdAt" timestamp [note: 'Date and time when the call engagement was created.']
+    "updatedAt" timestamp [note: 'Date and time when the call engagement was last updated.']
+    "archived" boolean [note: 'Indicates if the call engagement is archived or not.']
+    "contacts" array [note: 'Contacts associated with the call engagement.']
+    "deals" array [note: 'Deals associated with the call engagement.']
+    "companies" array [note: 'Companies associated with the call engagement.']
+    "tickets" array [note: 'Tickets associated with the call engagement.']
     "properties_hs_call_deal_stage_during_call" varchar
     "properties_hs_call_direction" varchar
     "properties_hs_call_from_number_nickname" varchar
@@ -2419,9 +2419,9 @@ Table "engagements_calls" {
     "properties_hs_shared_user_ids" varchar
     "properties_hs_voicemail_count" float
     "properties_hs_was_imported" boolean
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "engagements_calls_web_analytics" {
@@ -2474,13 +2474,13 @@ Table "engagements_calls_web_analytics" {
     "objectType" varchar
     "eventType" varchar
     "occurredAt" timestamp
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "engagements_emails" {
-    "id" varchar
+    "id" varchar [note: 'Unique identifier for the engagement email']
     "properties" json
     "properties_hs_all_assigned_business_unit_ids" varchar
     "properties_hs_at_mentioned_owner_ids" varchar
@@ -2562,13 +2562,13 @@ Table "engagements_emails" {
     "properties_hs_all_owner_ids" varchar
     "properties_hs_all_team_ids" varchar
     "properties_hs_all_accessible_team_ids" varchar
-    "createdAt" timestamp
-    "updatedAt" timestamp
-    "archived" boolean
-    "contacts" array
-    "deals" array
-    "companies" array
-    "tickets" array
+    "createdAt" timestamp [note: 'Date and time when the engagement email was created']
+    "updatedAt" timestamp [note: 'Date and time when the engagement email was last updated']
+    "archived" boolean [note: 'Indicates if the engagement email is archived or not']
+    "contacts" array [note: 'List of contacts associated with the engagement email']
+    "deals" array [note: 'List of deals associated with the engagement email']
+    "companies" array [note: 'List of companies associated with the engagement email']
+    "tickets" array [note: 'List of tickets associated with the engagement email']
     "properties_hs_app_id" float
     "properties_hs_campaign_guid" varchar
     "properties_hs_email_associated_contact_id" float
@@ -2602,9 +2602,9 @@ Table "engagements_emails" {
     "properties_hs_shared_user_ids" varchar
     "properties_hs_ticket_create_date" timestamp
     "properties_hs_was_imported" boolean
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "engagements_emails_web_analytics" {
@@ -2657,13 +2657,13 @@ Table "engagements_emails_web_analytics" {
     "objectType" varchar
     "eventType" varchar
     "occurredAt" timestamp
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "engagements_meetings" {
-    "id" varchar
+    "id" varchar [note: 'Unique identifier for the meeting engagement.']
     "properties" json
     "properties_hs_activity_type" varchar
     "properties_hs_all_assigned_business_unit_ids" varchar
@@ -2717,13 +2717,13 @@ Table "engagements_meetings" {
     "properties_hs_all_owner_ids" varchar
     "properties_hs_all_team_ids" varchar
     "properties_hs_all_accessible_team_ids" varchar
-    "createdAt" timestamp
-    "updatedAt" timestamp
-    "archived" boolean
-    "contacts" array
-    "deals" array
-    "companies" array
-    "tickets" array
+    "createdAt" timestamp [note: 'Timestamp indicating when the meeting engagement was created.']
+    "updatedAt" timestamp [note: 'Timestamp indicating when the meeting engagement was last updated.']
+    "archived" boolean [note: 'Indicates whether the meeting engagement is archived or not.']
+    "contacts" array [note: 'Information about the contacts associated with the meeting engagement.']
+    "deals" array [note: 'Information about the deals associated with the meeting engagement.']
+    "companies" array [note: 'Information about the companies associated with the meeting engagement.']
+    "tickets" array [note: 'Information about the tickets associated with the meeting engagement.']
     "properties_hs_booking_instance_id" float
     "properties_hs_campaign_guid" varchar
     "properties_hs_contact_first_outreach_date" timestamp
@@ -2753,9 +2753,9 @@ Table "engagements_meetings" {
     "properties_hs_timezone" varchar
     "properties_hs_video_conference_url" varchar
     "properties_hs_was_imported" boolean
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "engagements_meetings_web_analytics" {
@@ -2808,13 +2808,13 @@ Table "engagements_meetings_web_analytics" {
     "objectType" varchar
     "eventType" varchar
     "occurredAt" timestamp
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "engagements_notes" {
-    "id" varchar
+    "id" varchar [note: 'Unique identifier for the engagement note']
     "properties" json
     "properties_hs_all_assigned_business_unit_ids" varchar
     "properties_hs_at_mentioned_owner_ids" varchar
@@ -2849,13 +2849,13 @@ Table "engagements_notes" {
     "properties_hs_all_owner_ids" varchar
     "properties_hs_all_team_ids" varchar
     "properties_hs_all_accessible_team_ids" varchar
-    "createdAt" timestamp
-    "updatedAt" timestamp
-    "archived" boolean
-    "contacts" array
-    "deals" array
-    "companies" array
-    "tickets" array
+    "createdAt" timestamp [note: 'The date and time when the note was created']
+    "updatedAt" timestamp [note: 'Date and time when the note was last updated']
+    "archived" boolean [note: 'Indicates if the note has been archived']
+    "contacts" array [note: 'Contacts associated with the engagement note']
+    "deals" array [note: 'Deals associated with the engagement note']
+    "companies" array [note: 'Companies associated with the engagement note']
+    "tickets" array [note: 'Tickets associated with the engagement note']
     "properties_hs_hd_ticket_ids" float
     "properties_hs_note_ms_teams_payload" varchar
     "properties_hs_object_source" varchar
@@ -2869,9 +2869,9 @@ Table "engagements_notes" {
     "properties_hs_shared_team_ids" varchar
     "properties_hs_shared_user_ids" varchar
     "properties_hs_was_imported" boolean
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "engagements_notes_web_analytics" {
@@ -2924,13 +2924,13 @@ Table "engagements_notes_web_analytics" {
     "objectType" varchar
     "eventType" varchar
     "occurredAt" timestamp
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "engagements_tasks" {
-    "id" varchar
+    "id" varchar [note: 'Unique identifier for the task']
     "properties" json
     "properties_hs_all_assigned_business_unit_ids" varchar
     "properties_hs_at_mentioned_owner_ids" varchar
@@ -2950,11 +2950,11 @@ Table "engagements_tasks" {
     "properties_hs_merged_object_ids" varchar
     "properties_hs_modified_by" float
     "properties_hs_msteams_message_id" varchar
-    "properties_hs_num_associated_companies" float
-    "properties_hs_num_associated_contacts" float
-    "properties_hs_num_associated_deals" float
-    "properties_hs_num_associated_queue_objects" float
-    "properties_hs_num_associated_tickets" float
+    "properties_hs_num_associated_companies" float [note: 'Number of companies associated with the task.']
+    "properties_hs_num_associated_contacts" float [note: 'Number of contacts associated with the task.']
+    "properties_hs_num_associated_deals" float [note: 'Number of deals associated with the task.']
+    "properties_hs_num_associated_queue_objects" float [note: 'Number of queue objects associated with the task.']
+    "properties_hs_num_associated_tickets" float [note: 'Number of tickets associated with the task.']
     "properties_hs_object_id" float
     "properties_hs_product_name" varchar
     "properties_hs_queue_membership_ids" varchar
@@ -2992,13 +2992,13 @@ Table "engagements_tasks" {
     "properties_hs_all_owner_ids" varchar
     "properties_hs_all_team_ids" varchar
     "properties_hs_all_accessible_team_ids" varchar
-    "createdAt" timestamp
-    "updatedAt" timestamp
-    "archived" boolean
-    "contacts" array
-    "deals" array
-    "companies" array
-    "tickets" array
+    "createdAt" timestamp [note: 'The date and time when the task was created']
+    "updatedAt" timestamp [note: 'The date and time when the task was last updated']
+    "archived" boolean [note: 'Indicates if the task has been archived']
+    "contacts" array [note: 'List of contacts associated with the task']
+    "deals" array [note: 'List of deals associated with the task']
+    "companies" array [note: 'List of companies associated with the task']
+    "tickets" array [note: 'List of tickets associated with the task']
     "properties_hs_associated_company_labels" varchar
     "properties_hs_associated_contact_labels" varchar
     "properties_hs_date_entered_60b5c368_04c4_4d32_9b4a_457e159f49b7_13292096" timestamp
@@ -3044,9 +3044,9 @@ Table "engagements_tasks" {
     "properties_hs_time_in_dd5826e4_c976_4654_a527_b59ada542e52_2144133616" float
     "properties_hs_time_in_fc8148fb_3a2d_4b59_834e_69b7859347cb_1813133675" float
     "properties_hs_was_imported" boolean
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "engagements_tasks_web_analytics" {
@@ -3099,34 +3099,34 @@ Table "engagements_tasks_web_analytics" {
     "objectType" varchar
     "eventType" varchar
     "occurredAt" timestamp
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "form_submissions" {
-    "submittedAt" integer
-    "updatedAt" integer
-    "values" array
-    "pageUrl" varchar
-    "formId" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "submittedAt" integer [note: 'The timestamp when the form was submitted.']
+    "updatedAt" integer [note: 'The timestamp when the form submission data was last updated.']
+    "values" array [note: 'An array of form field values submitted in the form.']
+    "pageUrl" varchar [note: 'The URL of the web page where the form was submitted.']
+    "formId" varchar [note: 'The unique identifier of the form associated with the submission.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "forms" {
-    "id" varchar
-    "name" varchar
-    "formType" varchar
-    "createdAt" timestamp
-    "updatedAt" timestamp
-    "archived" boolean
-    "deletedAt" varchar
-    "fieldGroups" array
-    "configuration" json
-    "displayOptions" json
-    "legalConsentOptions" json
+    "id" varchar [note: 'Unique identifier for the form.']
+    "name" varchar [note: 'Name of the form.']
+    "formType" varchar [note: 'Type of the form.']
+    "createdAt" timestamp [note: 'Date and time when the form was created.']
+    "updatedAt" timestamp [note: 'Date and time when the form was last updated.']
+    "archived" boolean [note: 'Indicates whether the form is archived.']
+    "deletedAt" varchar [note: 'Date and time when the form was deleted.']
+    "fieldGroups" array [note: 'Groups containing fields of a form.']
+    "configuration" json [note: 'Configuration settings for the form.']
+    "displayOptions" json [note: 'Display options for the form.']
+    "legalConsentOptions" json [note: 'Legal consent options for the form.']
     "properties" json
     "properties_hs_all_accessible_team_ids" varchar
     "properties_hs_all_assigned_business_unit_ids" varchar
@@ -3178,13 +3178,13 @@ Table "forms" {
     "properties_hubspot_owner_assigneddate" timestamp
     "properties_hubspot_owner_id" varchar
     "properties_hubspot_team_id" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "goals" {
-    "id" varchar
+    "id" varchar [note: 'Unique identifier for the goal.']
     "properties" json
     "properties_hs_created_by_user_id" float
     "properties_hs_createdate" timestamp
@@ -3195,9 +3195,9 @@ Table "goals" {
     "properties_hs_kpi_value_last_calculated_at" timestamp
     "properties_hs_object_id" float
     "properties_hs_target_amount" float
-    "createdAt" timestamp
-    "updatedAt" timestamp
-    "archived" boolean
+    "createdAt" timestamp [note: 'Date and time when the goal was created.']
+    "updatedAt" timestamp [note: 'Date and time when the goal was last updated.']
+    "archived" boolean [note: 'Indicates if the goal is archived or not.']
     "properties_hs__migration_soft_delete" varchar
     "properties_hs_ad_account_asset_ids" varchar
     "properties_hs_ad_campaign_asset_ids" varchar
@@ -3295,9 +3295,9 @@ Table "goals" {
     "properties_hubspot_owner_assigneddate" timestamp
     "properties_hubspot_owner_id" varchar
     "properties_hubspot_team_id" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "goals_web_analytics" {
@@ -3350,17 +3350,17 @@ Table "goals_web_analytics" {
     "objectType" varchar
     "eventType" varchar
     "occurredAt" timestamp
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "leads" {
-    "id" varchar
-    "createdAt" timestamp
-    "updatedAt" timestamp
-    "archived" boolean
-    "contacts" array
+    "id" varchar [note: 'Unique identifier for the lead']
+    "createdAt" timestamp [note: 'Date and time when the lead was created']
+    "updatedAt" timestamp [note: 'Date and time when the lead was last updated']
+    "archived" boolean [note: 'Indicates whether the lead is archived or active']
+    "contacts" array [note: 'List of contacts associated with the lead']
     "properties" json
     "properties_hs_all_accessible_team_ids" varchar
     "properties_hs_all_assigned_business_unit_ids" varchar
@@ -3517,16 +3517,16 @@ Table "leads" {
     "properties_hubspot_owner_assigneddate" timestamp
     "properties_hubspot_owner_id" varchar
     "properties_hubspot_team_id" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "line_items" {
-    "id" varchar
-    "createdAt" timestamp
-    "updatedAt" timestamp
-    "archived" boolean
+    "id" varchar [note: 'The unique identifier for the line item.']
+    "createdAt" timestamp [note: 'The date and time when the line item was created.']
+    "updatedAt" timestamp [note: 'The date and time when the line item was last updated.']
+    "archived" boolean [note: 'Indicates whether the line item is archived or not.']
     "properties" json
     "properties_amount" float
     "properties_createdate" timestamp
@@ -3611,9 +3611,9 @@ Table "line_items" {
     "properties_tax" float
     "properties_test" date
     "properties_test_product_price" date
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "line_items_web_analytics" {
@@ -3666,9 +3666,9 @@ Table "line_items_web_analytics" {
     "objectType" varchar
     "eventType" varchar
     "occurredAt" timestamp
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "marketing_emails" {
@@ -3709,124 +3709,124 @@ Table "marketing_emails" {
     "emailNote" varchar
     "emailTemplateMode" varchar
     "emailType" varchar
-    "emailbodyPlaintext" varchar
-    "feedbackEmailCategory" varchar
-    "feedbackSurveyId" integer
-    "folderId" integer
-    "freezeDate" integer
-    "fromName" varchar
-    "htmlTitle" varchar
-    "isGraymailSuppressionEnabled" boolean
-    "isLocalTimezoneSend" boolean
-    "isPublished" boolean
-    "isRecipientFatigueSuppressionEnabled" boolean
-    "leadFlowId" integer
-    "liveDomain" varchar
+    "emailbodyPlaintext" varchar [note: 'Plain text version of the email body']
+    "feedbackEmailCategory" varchar [note: 'Category for feedback related to the email']
+    "feedbackSurveyId" integer [note: 'ID of the feedback survey linked to the email']
+    "folderId" integer [note: 'ID of the folder where the email is stored']
+    "freezeDate" integer [note: 'Date when the email content was finalized']
+    "fromName" varchar [note: 'Name of the sender displayed in the email']
+    "htmlTitle" varchar [note: 'HTML title of the email']
+    "isGraymailSuppressionEnabled" boolean [note: 'Flag indicating if graymail suppression is enabled for the email']
+    "isLocalTimezoneSend" boolean [note: 'Flag indicating if the email is sent based on the local timezone']
+    "isPublished" boolean [note: 'Flag indicating if the email is published']
+    "isRecipientFatigueSuppressionEnabled" boolean [note: 'Flag indicating if recipient fatigue suppression is enabled']
+    "leadFlowId" integer [note: 'ID of the lead flow associated with the email']
+    "liveDomain" varchar [note: 'Domain where the live version of the email is hosted']
     "mailingListsExcluded" array
     "mailingListsIncluded" array
-    "maxRssEntries" integer
-    "metaDescription" varchar
-    "name" varchar
-    "pageExpiryEnabled" boolean
-    "pageRedirected" boolean
-    "portalId" integer
-    "previewKey" varchar
-    "primaryEmailCampaignId" integer
-    "processingStatus" varchar
-    "publishDate" integer
-    "publishedById" integer
-    "publishedByName" varchar
-    "publishImmediately" boolean
-    "publishedUrl" varchar
-    "replyTo" varchar
-    "resolvedDomain" varchar
-    "rootMicId" varchar
-    "selected" integer
-    "slug" varchar
-    "smartEmailFields" json
-    "state" varchar
+    "maxRssEntries" integer [note: 'Maximum number of RSS entries to include in the email']
+    "metaDescription" varchar [note: 'Meta description of the email content']
+    "name" varchar [note: 'Name of the email']
+    "pageExpiryEnabled" boolean [note: 'Flag indicating if page expiry is enabled for the email']
+    "pageRedirected" boolean [note: 'Information about page redirection']
+    "portalId" integer [note: 'ID of the HubSpot portal associated with the email']
+    "previewKey" varchar [note: 'Key used for email preview']
+    "primaryEmailCampaignId" integer [note: 'ID of the primary email campaign associated with the email']
+    "processingStatus" varchar [note: 'Status of the email processing']
+    "publishDate" integer [note: 'Date when the email is scheduled to be published']
+    "publishedById" integer [note: 'ID of the user who published the email']
+    "publishedByName" varchar [note: 'Name of the user who published the email']
+    "publishImmediately" boolean [note: 'Flag indicating if the email should be published immediately']
+    "publishedUrl" varchar [note: 'URL where the published email can be accessed']
+    "replyTo" varchar [note: 'Email address for replies to the email']
+    "resolvedDomain" varchar [note: 'Domain resolved for the email']
+    "rootMicId" varchar [note: 'Root MIC ID associated with the email']
+    "selected" integer [note: 'Flag indicating if the email is selected']
+    "slug" varchar [note: 'Slug associated with the email']
+    "smartEmailFields" json [note: 'Fields related to smart email features']
+    "state" varchar [note: 'Current state of the email']
     "stats" json
-    "subcategory" varchar
-    "subject" varchar
-    "subscription" integer
-    "subscriptionName" varchar
-    "templatePath" varchar
-    "transactional" boolean
-    "unpublishedAt" integer
-    "updated" integer
-    "updatedById" integer
-    "url" varchar
-    "useRssHeadlineAsSubject" boolean
+    "subcategory" varchar [note: 'Subcategory to which the email belongs']
+    "subject" varchar [note: 'Subject line of the email']
+    "subscription" integer [note: 'Information about email subscription']
+    "subscriptionName" varchar [note: 'Name of the email subscription']
+    "templatePath" varchar [note: 'Path of the email template']
+    "transactional" boolean [note: 'Flag indicating if the email is transactional']
+    "unpublishedAt" integer [note: 'Timestamp when the email was unpublished']
+    "updated" integer [note: 'Timestamp of the last update to the email']
+    "updatedById" integer [note: 'ID of the user who last updated the email']
+    "url" varchar [note: 'URL associated with the email']
+    "useRssHeadlineAsSubject" boolean [note: 'Flag indicating if the RSS headline should be used as the subject']
     "vidsExcluded" array
     "vidsIncluded" array
-    "publishedByEmail" varchar
-    "sections" json
-    "author" varchar
-    "isCreatedFomSandboxSync" boolean
-    "rssEmailUrl" varchar
+    "publishedByEmail" varchar [note: 'Email address of the user who published the email']
+    "sections" json [note: 'Sections within the email']
+    "author" varchar [note: 'Author of the email']
+    "isCreatedFomSandboxSync" boolean [note: 'Flag indicating if the email was created from a sandbox sync']
+    "rssEmailUrl" varchar [note: 'URL for RSS emails']
     "teamPerms" array
-    "securityState" varchar
-    "isInstanceLayoutPage" boolean
-    "audienceAccess" varchar
-    "campaignUtm" varchar
+    "securityState" varchar [note: 'Security state of the email']
+    "isInstanceLayoutPage" boolean [note: 'Flag indicating if the email is a layout page in an instance']
+    "audienceAccess" varchar [note: 'Information about who has access to view the email']
+    "campaignUtm" varchar [note: 'UTM parameters for campaign tracking']
     "contentAccessRuleTypes" array
     "pastMabExperimentIds" array
-    "rssEmailClickThroughText" varchar
-    "rssEmailImageMaxWidth" integer
+    "rssEmailClickThroughText" varchar [note: 'Text for click-through actions in RSS emails']
+    "rssEmailImageMaxWidth" integer [note: 'Maximum width of images in RSS emails']
     "flexAreas" json
-    "emailCampaignGroupId" integer
-    "layoutSections" json
-    "blogRssSettings" varchar
-    "archivedInDashboard" boolean
-    "publishedAt" integer
-    "lastEditUpdateId" integer
-    "lastEditSessionId" integer
+    "emailCampaignGroupId" integer [note: 'Group ID associated with the email campaign']
+    "layoutSections" json [note: 'Sections within the email layout']
+    "blogRssSettings" varchar [note: 'Settings related to blog RSS integration']
+    "archivedInDashboard" boolean [note: 'Flag indicating if the email was archived in the dashboard']
+    "publishedAt" integer [note: 'Timestamp when the email was published']
+    "lastEditUpdateId" integer [note: 'Update ID of the last edit made to the email']
+    "lastEditSessionId" integer [note: 'Session ID of the last edit made to the email']
     "styleSettings" json
-    "visibleToAll" boolean
-    "language" varchar
-    "rssEmailByText" varchar
-    "rssEmailCommentText" varchar
-    "hasContentAccessRules" boolean
-    "archivedAt" integer
-    "translations" json
+    "visibleToAll" boolean [note: 'Flag indicating if the email is visible to all users']
+    "language" varchar [note: 'Language in which the email is written']
+    "rssEmailByText" varchar [note: 'Text content related to RSS emails']
+    "rssEmailCommentText" varchar [note: 'Text for comments in RSS emails']
+    "hasContentAccessRules" boolean [note: 'Indicates if the email has content access rules applied']
+    "archivedAt" integer [note: 'Timestamp when the email was archived']
+    "translations" json [note: 'Translations available for the email']
     "userPerms" array
     "contentAccessRuleIds" array
-    "rssEmailEntryTemplateEnabled" boolean
+    "rssEmailEntryTemplateEnabled" boolean [note: 'Flag indicating if the RSS email entry template is enabled']
     "mailingIlsListsExcluded" array
     "mailingIlsListsIncluded" array
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "owners" {
-    "id" varchar
-    "email" varchar
-    "firstName" varchar
-    "lastName" varchar
-    "userId" integer
-    "createdAt" timestamp
-    "updatedAt" timestamp
-    "archived" boolean
-    "teams" array
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" varchar [note: 'The unique identifier of the owner.']
+    "email" varchar [note: 'The email address of the owner.']
+    "firstName" varchar [note: 'The first name of the owner.']
+    "lastName" varchar [note: 'The last name of the owner.']
+    "userId" integer [note: 'The unique identifier of the user associated with the owner.']
+    "createdAt" timestamp [note: 'The date and time when the owner was created.']
+    "updatedAt" timestamp [note: 'The date and time when the owner was last updated.']
+    "archived" boolean [note: 'Indicates if the owner is archived or not.']
+    "teams" array [note: 'An array of teams the owner belongs to.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "owners_archived" {
-    "id" varchar
-    "email" varchar
-    "firstName" varchar
-    "lastName" varchar
-    "userId" integer
-    "createdAt" timestamp
-    "updatedAt" timestamp
-    "archived" boolean
-    "teams" array
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" varchar [note: 'The unique identifier of the owner.']
+    "email" varchar [note: 'The email address of the owner.']
+    "firstName" varchar [note: 'The first name of the owner.']
+    "lastName" varchar [note: 'The last name of the owner.']
+    "userId" integer [note: 'The user ID associated with the owner.']
+    "createdAt" timestamp [note: 'The date and time the owner was created.']
+    "updatedAt" timestamp [note: 'The date and time the owner was last updated.']
+    "archived" boolean [note: 'Indicates if the owner is archived or not.']
+    "teams" array [note: 'A list of teams the owner belongs to.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "pets" {
@@ -3866,9 +3866,9 @@ Table "pets" {
     "properties_hubspot_team_id" varchar
     "properties_pet_name" varchar
     "properties_pet_type" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "pets_web_analytics" {
@@ -3921,16 +3921,16 @@ Table "pets_web_analytics" {
     "objectType" varchar
     "eventType" varchar
     "occurredAt" timestamp
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "products" {
-    "id" varchar
-    "createdAt" timestamp
-    "updatedAt" timestamp
-    "archived" boolean
+    "id" varchar [note: 'The unique identifier of the product.']
+    "createdAt" timestamp [note: 'The datetime when the product was created.']
+    "updatedAt" timestamp [note: 'The datetime when the product was last updated.']
+    "archived" boolean [note: 'Indicates whether the product is archived or active.']
     "properties" json
     "properties_amount" float
     "properties_createdate" timestamp
@@ -3983,9 +3983,9 @@ Table "products" {
     "properties_tax" float
     "properties_test" date
     "properties_test_product_price" date
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "products_web_analytics" {
@@ -4038,43 +4038,43 @@ Table "products_web_analytics" {
     "objectType" varchar
     "eventType" varchar
     "occurredAt" timestamp
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "subscription_changes" {
-    "timestamp" integer
-    "portalId" integer
-    "recipient" varchar
-    "normalizedEmailId" varchar
-    "changes" array
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "timestamp" integer [note: 'Timestamp when the subscription change data was fetched']
+    "portalId" integer [note: 'ID of the portal related to the subscription changes']
+    "recipient" varchar [note: 'Recipient of the subscription change notification']
+    "normalizedEmailId" varchar [note: 'Normalized email identifier associated with the subscription']
+    "changes" array [note: 'List of all subscription changes']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "ticket_pipelines" {
-    "label" varchar
-    "displayOrder" integer
-    "id" varchar
-    "archived" boolean
-    "stages" array
-    "createdAt" timestamp
-    "updatedAt" timestamp
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "label" varchar [note: 'The label or name of the ticket pipeline.']
+    "displayOrder" integer [note: 'The order in which the ticket pipeline is displayed.']
+    "id" varchar [note: 'The unique identifier of the ticket pipeline.']
+    "archived" boolean [note: 'Indicates if the ticket pipeline is archived or not.']
+    "stages" array [note: 'List of stages within the ticket pipeline.']
+    "createdAt" timestamp [note: 'The date and time when the ticket pipeline was created.']
+    "updatedAt" timestamp [note: 'The date and time when the ticket pipeline was last updated.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "tickets" {
-    "id" varchar
-    "createdAt" timestamp
-    "updatedAt" timestamp
-    "archived" boolean
-    "contacts" array
-    "companies" array
-    "deals" array
+    "id" varchar [note: 'Unique identifier for the ticket']
+    "createdAt" timestamp [note: 'Date and time when the ticket was created']
+    "updatedAt" timestamp [note: 'Date and time when the ticket was last updated']
+    "archived" boolean [note: 'Indicates if the ticket is archived or not']
+    "contacts" array [note: 'Contacts associated with the ticket']
+    "companies" array [note: 'Companies associated with the ticket']
+    "deals" array [note: 'Deals associated with the ticket']
     "properties" json
     "properties_closed_date" timestamp
     "properties_content" varchar
@@ -4265,9 +4265,9 @@ Table "tickets" {
     "properties_tags" varchar
     "properties_time_to_close" float
     "properties_time_to_first_agent_reply" float
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "tickets_web_analytics" {
@@ -4320,34 +4320,34 @@ Table "tickets_web_analytics" {
     "objectType" varchar
     "eventType" varchar
     "occurredAt" timestamp
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "workflows" {
-    "name" varchar
-    "id" integer
-    "type" varchar
-    "enabled" boolean
-    "insertedAt" integer
-    "updatedAt" integer
-    "personaTagIds" array
-    "contactListIds" json
-    "contactListIds_enrolled" integer
-    "contactListIds_active" integer
-    "contactListIds_completed" integer
-    "contactListIds_succeeded" integer
-    "contactListIds_steps" array
-    "lastUpdatedByUserId" integer
-    "contactCounts" json
-    "description" varchar
-    "originalAuthorUserId" integer
-    "migrationStatus" json
-    "updateSource" json
-    "creationSource" json
-    "portalId" integer
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "name" varchar [note: 'Name of the workflow']
+    "id" integer [note: 'Unique identifier of the workflow']
+    "type" varchar [note: 'Type of the workflow']
+    "enabled" boolean [note: 'Flag indicating if the workflow is enabled']
+    "insertedAt" integer [note: 'Timestamp when the workflow was inserted']
+    "updatedAt" integer [note: 'Timestamp when the workflow was last updated']
+    "personaTagIds" array [note: 'IDs of persona tags associated with the workflow']
+    "contactListIds" json [note: 'IDs of contact lists associated with the workflow']
+    "contactListIds_enrolled" integer [note: 'ID of the contact list containing enrolled contacts']
+    "contactListIds_active" integer [note: 'ID of the contact list containing active contacts']
+    "contactListIds_completed" integer [note: 'ID of the contact list containing completed contacts']
+    "contactListIds_succeeded" integer [note: 'ID of the contact list containing succeeded contacts']
+    "contactListIds_steps" array [note: 'List of steps within the workflow']
+    "lastUpdatedByUserId" integer [note: 'ID of the user who last updated the workflow']
+    "contactCounts" json [note: 'Counts of contacts in various stages within the workflow']
+    "description" varchar [note: 'Description of the workflow']
+    "originalAuthorUserId" integer [note: 'ID of the original author of the workflow']
+    "migrationStatus" json [note: 'Status and details of workflow migration']
+    "updateSource" json [note: 'Details of the workflow update source']
+    "creationSource" json [note: 'Details of the workflow creation source']
+    "portalId" integer [note: 'ID of the portal associated with the workflow']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }

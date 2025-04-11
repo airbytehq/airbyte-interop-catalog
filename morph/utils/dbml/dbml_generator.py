@@ -33,13 +33,14 @@ def generate_dbml_from_dbt_source_file(
         dbml_table = Table(source_table.name)
 
         for column in source_table.columns:
-            dbml_table.add_column(
-                Column(
-                    name=column.name,
-                    type=column.data_type or "varchar",
-                )
+            column_obj = Column(
+                name=column.name,
+                type=column.data_type or "varchar",
+                note=column.description if column.description else None,
             )
-
+            
+            dbml_table.add_column(column_obj)
+            
         database.add(dbml_table)
 
     output_file.parent.mkdir(parents=True, exist_ok=True)

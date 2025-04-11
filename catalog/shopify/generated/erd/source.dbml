@@ -1,1158 +1,1158 @@
 Table "abandoned_checkouts" {
-    "note_attributes" array
-    "location_id" integer
-    "buyer_accepts_marketing" boolean
-    "currency" varchar
-    "completed_at" timestamp
-    "token" varchar
-    "billing_address" json
-    "email" varchar
-    "discount_codes" array
-    "customer_locale" varchar
-    "created_at" timestamp
-    "updated_at" timestamp
-    "gateway" varchar
-    "referring_site" varchar
-    "source_identifier" varchar
-    "total_weight" integer
-    "tax_lines" array
-    "total_line_items_price" float
-    "closed_at" timestamp
-    "device_id" integer
-    "phone" varchar
-    "source_name" varchar
-    "id" integer
-    "name" varchar
-    "total_tax" float
-    "subtotal_price" float
-    "line_items" array
-    "source_url" varchar
-    "shop_url" varchar
-    "total_discounts" float
-    "note" varchar
-    "presentment_currency" varchar
-    "shipping_lines" array
-    "user_id" integer
-    "source" varchar
-    "shipping_address" json
-    "abandoned_checkout_url" varchar
-    "landing_site" varchar
-    "customer" json
-    "total_price" float
-    "cart_token" varchar
-    "taxes_included" boolean
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "note_attributes" array [note: 'Additional notes or attributes associated with the checkout']
+    "location_id" integer [note: 'ID of the location']
+    "buyer_accepts_marketing" boolean [note: 'Indicates if the buyer accepts marketing']
+    "currency" varchar [note: 'Currency used for the checkout']
+    "completed_at" timestamp [note: 'Date and time when the checkout was completed']
+    "token" varchar [note: 'Token associated with the checkout']
+    "billing_address" json [note: 'Information about the billing address associated with the checkout']
+    "email" varchar [note: 'Customer\'s email']
+    "discount_codes" array [note: 'List of discount codes applied to the checkout']
+    "customer_locale" varchar [note: 'Locale of the customer']
+    "created_at" timestamp [note: 'Date and time when the checkout was created']
+    "updated_at" timestamp [note: 'Date and time of last checkout update']
+    "gateway" varchar [note: 'Payment gateway used']
+    "referring_site" varchar [note: 'Site that referred the customer']
+    "source_identifier" varchar [note: 'Identifier of the source']
+    "total_weight" integer [note: 'Total weight of all line items']
+    "tax_lines" array [note: 'List of tax lines associated with the checkout']
+    "total_line_items_price" float [note: 'Total price of all line items']
+    "closed_at" timestamp [note: 'Date and time when the checkout was closed']
+    "device_id" integer [note: 'ID of the device used for checkout']
+    "phone" varchar [note: 'Customer\'s phone number']
+    "source_name" varchar [note: 'Name of the source']
+    "id" integer [note: 'ID of the checkout']
+    "name" varchar [note: 'Name of the checkout']
+    "total_tax" float [note: 'Total tax amount']
+    "subtotal_price" float [note: 'Subtotal price of the checkout']
+    "line_items" array [note: 'List of purchased items in the checkout']
+    "source_url" varchar [note: 'URL of the source']
+    "shop_url" varchar [note: 'URL of the shop']
+    "total_discounts" float [note: 'Total discounts applied']
+    "note" varchar [note: 'Checkout note']
+    "presentment_currency" varchar [note: 'Currency used for presentation']
+    "shipping_lines" array [note: 'List of shipping methods selected for the checkout']
+    "user_id" integer [note: 'ID of the user associated with the checkout']
+    "source" varchar [note: 'Source of the checkout']
+    "shipping_address" json [note: 'Information about the shipping address for the checkout']
+    "abandoned_checkout_url" varchar [note: 'The URL to access the abandoned checkout']
+    "landing_site" varchar [note: 'URL of the landing site']
+    "customer" json [note: 'Details of the customer who initiated the checkout']
+    "total_price" float [note: 'Total price of the checkout']
+    "cart_token" varchar [note: 'Token associated with the cart']
+    "taxes_included" boolean [note: 'Indicates if taxes are included in prices']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "articles" {
-    "id" integer
-    "title" varchar
-    "created_at" timestamp
-    "body_html" varchar
-    "blog_id" integer
-    "author" varchar
-    "user_id" varchar
-    "published_at" timestamp
-    "updated_at" timestamp
-    "summary_html" varchar
-    "template_suffix" varchar
-    "handle" varchar
-    "tags" varchar
-    "admin_graphql_api_id" varchar
-    "shop_url" varchar
-    "deleted_at" timestamp
-    "deleted_message" varchar
-    "deleted_description" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" integer [note: 'The unique identifier of the article']
+    "title" varchar [note: 'The title of the article']
+    "created_at" timestamp [note: 'The date and time when the article was created']
+    "body_html" varchar [note: 'The HTML content of the article body']
+    "blog_id" integer [note: 'The unique identifier of the blog to which the article belongs']
+    "author" varchar [note: 'The name of the author of the article']
+    "user_id" varchar [note: 'The unique identifier of the user who created the article']
+    "published_at" timestamp [note: 'The date and time when the article was published']
+    "updated_at" timestamp [note: 'The date and time when the article was last updated']
+    "summary_html" varchar [note: 'A summary or excerpt of the article content in HTML format']
+    "template_suffix" varchar [note: 'The suffix of the template used for the article']
+    "handle" varchar [note: 'The unique URL path segment for the article']
+    "tags" varchar [note: 'Tags associated with the article']
+    "admin_graphql_api_id" varchar [note: 'The unique identifier of the article in the GraphQL Admin API']
+    "shop_url" varchar [note: 'The URL of the shop where the article is published']
+    "deleted_at" timestamp [note: 'The date and time when the article was deleted']
+    "deleted_message" varchar [note: 'Message related to the deletion of the article']
+    "deleted_description" varchar [note: 'Description of the reason for article deletion']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "balance_transactions" {
-    "id" integer
-    "type" varchar
-    "test" boolean
-    "payout_id" integer
-    "payout_status" varchar
-    "payoucurrencyt_status" varchar
-    "amount" float
-    "fee" float
-    "net" float
-    "source_id" integer
-    "source_type" varchar
-    "source_order_transaction_id" integer
-    "source_order_id" integer
-    "processed_at" timestamp
-    "shop_url" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" integer [note: 'The unique identifier of the balance transaction.']
+    "type" varchar [note: 'The type of transaction.']
+    "test" boolean [note: 'Flag indicating if the transaction is a test transaction.']
+    "payout_id" integer [note: 'The identifier of the associated payout.']
+    "payout_status" varchar [note: 'The status of the payout associated with this transaction.']
+    "payoucurrencyt_status" varchar [note: 'Indicates the status of the payout for the currency in which the transaction occurred.']
+    "amount" float [note: 'The amount of the transaction in the specified currency.']
+    "fee" float [note: 'The fee associated with the transaction.']
+    "net" float [note: 'The final amount received after deducting fees.']
+    "source_id" integer [note: 'The identifier of the source related to the transaction.']
+    "source_type" varchar [note: 'The type of source for the transaction.']
+    "source_order_transaction_id" integer [note: 'The transaction identifier within the order.']
+    "source_order_id" integer [note: 'The identifier of the order related to the transaction.']
+    "processed_at" timestamp [note: 'The date and time when the transaction was processed.']
+    "shop_url" varchar [note: 'The URL of the shop related to the transaction.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "blogs" {
-    "commentable" varchar
-    "created_at" timestamp
-    "feedburner" timestamp
-    "feedburner_location" integer
-    "handle" varchar
-    "id" integer
-    "tags" varchar
-    "template_suffix" varchar
-    "title" varchar
-    "updated_at" timestamp
-    "admin_graphql_api_id" varchar
-    "shop_url" varchar
-    "deleted_at" timestamp
-    "deleted_message" varchar
-    "deleted_description" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "commentable" varchar [note: 'Indicates whether comments are allowed on the blog.']
+    "created_at" timestamp [note: 'The date and time when the blog was created.']
+    "feedburner" timestamp [note: 'The Feedburner date for the blog.']
+    "feedburner_location" integer [note: 'The location information related to Feedburner.']
+    "handle" varchar [note: 'The unique handle used in the blog\'s URL.']
+    "id" integer [note: 'The unique identifier for the blog.']
+    "tags" varchar [note: 'Tags associated with the blog.']
+    "template_suffix" varchar [note: 'The template suffix used in the blog\'s layout.']
+    "title" varchar [note: 'The title of the blog.']
+    "updated_at" timestamp [note: 'The date and time when the blog was last updated.']
+    "admin_graphql_api_id" varchar [note: 'The unique identifier for the blog within the admin GraphQL API.']
+    "shop_url" varchar [note: 'The URL of the shop associated with the blog.']
+    "deleted_at" timestamp [note: 'The date and time when the blog was deleted, if applicable.']
+    "deleted_message" varchar [note: 'A message associated with the deletion of the blog.']
+    "deleted_description" varchar [note: 'A description of the reason for deleting the blog.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "collections" {
-    "id" integer
-    "handle" varchar
-    "title" varchar
-    "updated_at" timestamp
-    "body_html" varchar
-    "published_at" timestamp
-    "sort_order" varchar
-    "template_suffix" varchar
-    "products_count" integer
-    "collection_type" varchar
-    "published_scope" varchar
-    "admin_graphql_api_id" varchar
-    "shop_url" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" integer [note: 'The unique identifier for the collection.']
+    "handle" varchar [note: 'A unique URL-friendly string that represents the collection.']
+    "title" varchar [note: 'The title or name of the collection.']
+    "updated_at" timestamp [note: 'The datetime when the collection was last updated.']
+    "body_html" varchar [note: 'The HTML content describing the collection.']
+    "published_at" timestamp [note: 'The datetime when the collection was published.']
+    "sort_order" varchar [note: 'The order in which the collection should be sorted.']
+    "template_suffix" varchar [note: 'The name of the template that is used to render the collection.']
+    "products_count" integer [note: 'The number of products within the collection.']
+    "collection_type" varchar [note: 'The type or category of the collection.']
+    "published_scope" varchar [note: 'The visibility of the collection to customers.']
+    "admin_graphql_api_id" varchar [note: 'The unique identifier for the collection in the Admin GraphQL API.']
+    "shop_url" varchar [note: 'The URL of the shop where the collection belongs.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "collects" {
-    "id" integer
-    "collection_id" integer
-    "created_at" timestamp
-    "position" integer
-    "product_id" integer
-    "sort_value" varchar
-    "shop_url" varchar
-    "updated_at" timestamp
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" integer [note: 'The unique identifier for the collect.']
+    "collection_id" integer [note: 'The unique identifier for the collection.']
+    "created_at" timestamp [note: 'The date and time when the collect was created.']
+    "position" integer [note: 'The position of the product in the collection.']
+    "product_id" integer [note: 'The unique identifier of the product.']
+    "sort_value" varchar [note: 'The value used to sort the products in the collection.']
+    "shop_url" varchar [note: 'The URL of the shop associated with the collect.']
+    "updated_at" timestamp [note: 'The date and time when the collect was last updated.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "countries" {
-    "code" varchar
-    "id" integer
-    "name" varchar
-    "provinces" array
-    "rest_of_world" boolean
-    "translated_name" varchar
-    "shop_url" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "code" varchar [note: 'ISO country code.']
+    "id" integer [note: 'Unique identifier for the country.']
+    "name" varchar [note: 'Name of the country.']
+    "provinces" array [note: 'Array of provinces or states within the country.']
+    "rest_of_world" boolean [note: 'Whether the country in a catch-all group of countries that are not individually listed or assigned to any specific zone or market.']
+    "translated_name" varchar [note: 'Translated name of the country']
+    "shop_url" varchar [note: 'URL for the shop related to this country.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "custom_collections" {
-    "handle" varchar
-    "sort_order" varchar
-    "body_html" varchar
-    "title" varchar
-    "id" integer
-    "published_scope" varchar
-    "admin_graphql_api_id" varchar
-    "updated_at" timestamp
-    "image" json
-    "published_at" timestamp
-    "template_suffix" varchar
-    "shop_url" varchar
-    "deleted_at" timestamp
-    "deleted_message" varchar
-    "deleted_description" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "handle" varchar [note: 'The unique URL-friendly string that identifies the custom collection.']
+    "sort_order" varchar [note: 'The order in which the custom collection should be displayed.']
+    "body_html" varchar [note: 'The full description of the custom collection for display purposes.']
+    "title" varchar [note: 'The title of the custom collection.']
+    "id" integer [note: 'The unique identifier of the custom collection.']
+    "published_scope" varchar [note: 'The scope where the custom collection is published (global or web).']
+    "admin_graphql_api_id" varchar [note: 'The unique identifier of the custom collection accessible via GraphQL Admin API.']
+    "updated_at" timestamp [note: 'The date and time when the custom collection was last updated.']
+    "image" json [note: 'Represents the image associated with the custom collection if available.']
+    "published_at" timestamp [note: 'The date and time when the custom collection was published.']
+    "template_suffix" varchar [note: 'The template suffix for the custom collection\'s URL.']
+    "shop_url" varchar [note: 'The URL of the shop where the custom collection belongs.']
+    "deleted_at" timestamp [note: 'The date and time when the custom collection was deleted.']
+    "deleted_message" varchar [note: 'Any additional message related to the deletion of the custom collection.']
+    "deleted_description" varchar [note: 'The description of why the custom collection was deleted.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "customer_address" {
-    "address1" varchar
-    "address2" varchar
-    "city" varchar
-    "country" varchar
-    "country_code" varchar
-    "country_name" varchar
-    "company" varchar
-    "customer_id" integer
-    "first_name" varchar
-    "id" integer
-    "last_name" varchar
-    "name" varchar
-    "phone" varchar
-    "province" varchar
-    "province_code" varchar
-    "zip" varchar
-    "default" boolean
-    "shop_url" varchar
-    "updated_at" timestamp
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "address1" varchar [note: 'The first line of the customer\'s street address.']
+    "address2" varchar [note: 'The second line of the customer\'s street address.']
+    "city" varchar [note: 'The city where the customer resides.']
+    "country" varchar [note: 'The full name of the country associated with the address.']
+    "country_code" varchar [note: 'The ISO 3166-1 alpha-2 country code of the address country.']
+    "country_name" varchar [note: 'The name of the country associated with the address.']
+    "company" varchar [note: 'The company name associated with the customer\'s address.']
+    "customer_id" integer [note: 'The unique identifier of the customer to whom the address belongs.']
+    "first_name" varchar [note: 'The first name of the customer.']
+    "id" integer [note: 'The unique identifier of the address.']
+    "last_name" varchar [note: 'The last name of the customer.']
+    "name" varchar [note: 'The full name of the customer associated with the address.']
+    "phone" varchar [note: 'The phone number associated with the address.']
+    "province" varchar [note: 'The region or state where the customer resides.']
+    "province_code" varchar [note: 'The code or abbreviation of the region or state.']
+    "zip" varchar [note: 'The postal code or ZIP code of the address.']
+    "default" boolean [note: 'Indicates whether this is the default address for the customer.']
+    "shop_url" varchar [note: 'The URL of the shop associated with the customer\'s address.']
+    "updated_at" timestamp [note: 'The date and time when the address was last updated.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "customer_journey_summary" {
-    "order_id" integer
-    "created_at" timestamp
-    "updated_at" timestamp
-    "customer_journey_summary" json
-    "admin_graphql_api_id" varchar
-    "shop_url" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "order_id" integer [note: 'The id of the order.']
+    "created_at" timestamp [note: 'The date and time when the order was created.']
+    "updated_at" timestamp [note: 'The date and time when the order was last updated.']
+    "customer_journey_summary" json [note: 'Represents a customer\'s visiting activities on a shop\'s online store.']
+    "admin_graphql_api_id" varchar [note: 'Unique identifier for the customer in the Admin GraphQL API.']
+    "shop_url" varchar [note: 'The URL of the shop associated with this customer saved search.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "customers" {
-    "last_order_name" varchar
-    "currency" varchar
-    "email" varchar
-    "multipass_identifier" varchar
-    "shop_url" varchar
-    "default_address" json
-    "email_marketing_consent" json
-    "orders_count" integer
-    "state" varchar
-    "verified_email" boolean
-    "total_spent" float
-    "last_order_id" integer
-    "first_name" varchar
-    "updated_at" timestamp
-    "note" varchar
-    "phone" varchar
-    "admin_graphql_api_id" varchar
-    "addresses" array
-    "last_name" varchar
-    "tags" varchar
-    "tax_exempt" boolean
-    "id" integer
-    "accepts_marketing" boolean
-    "accepts_marketing_updated_at" varchar
-    "created_at" timestamp
-    "sms_marketing_consent" json
-    "tax_exemptions" varchar
-    "marketing_opt_in_level" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "last_order_name" varchar [note: 'Name of the customer\'s last order.']
+    "currency" varchar [note: 'Currency associated with the customer.']
+    "email" varchar [note: 'Customer\'s email address.']
+    "multipass_identifier" varchar [note: 'Multipass identifier for the customer.']
+    "shop_url" varchar [note: 'URL of the customer\'s associated shop.']
+    "default_address" json [note: 'Customer\'s default address']
+    "email_marketing_consent" json [note: 'Indicates if the customer has consented to receive marketing emails']
+    "orders_count" integer [note: 'Total number of orders placed by the customer.']
+    "state" varchar [note: 'Current state or status of the customer.']
+    "verified_email" boolean [note: 'Indicates if the customer\'s email address has been verified.']
+    "total_spent" float [note: 'Total amount spent by the customer.']
+    "last_order_id" integer [note: 'Unique identifier for the customer\'s last order.']
+    "first_name" varchar [note: 'Customer\'s first name.']
+    "updated_at" timestamp [note: 'Timestamp when the customer data was last updated.']
+    "note" varchar [note: 'Additional notes or comments related to the customer.']
+    "phone" varchar [note: 'Customer\'s phone number.']
+    "admin_graphql_api_id" varchar [note: 'Unique identifier for the customer in the Admin GraphQL API.']
+    "addresses" array [note: 'List of addresses associated with the customer']
+    "last_name" varchar [note: 'Customer\'s last name.']
+    "tags" varchar [note: 'Tags associated with the customer for categorization.']
+    "tax_exempt" boolean [note: 'Indicates if the customer is tax exempt.']
+    "id" integer [note: 'Unique identifier for the customer.']
+    "accepts_marketing" boolean [note: 'Indicates if the customer has agreed to receive marketing materials.']
+    "accepts_marketing_updated_at" varchar [note: 'Timestamp when the marketing consent status was last updated.']
+    "created_at" timestamp [note: 'Timestamp when the customer was created.']
+    "sms_marketing_consent" json [note: 'Indicates if the customer has consented to receive marketing SMS messages']
+    "tax_exemptions" varchar [note: 'Information about tax exemptions for the customer.']
+    "marketing_opt_in_level" varchar [note: 'Level of opt-in for marketing activities.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "discount_codes" {
-    "id" integer
-    "price_rule_id" integer
-    "code" varchar
-    "usage_count" integer
-    "created_at" timestamp
-    "createdBy" json
-    "updated_at" timestamp
-    "summary" varchar
-    "discount_type" varchar
-    "typename" varchar
-    "starts_at" timestamp
-    "ends_at" timestamp
-    "status" varchar
-    "title" varchar
-    "usage_limit" integer
-    "applies_once_per_customer" boolean
-    "async_usage_count" integer
-    "codes_count" json
-    "total_sales" json
-    "admin_graphql_api_id" varchar
-    "shop_url" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" integer [note: 'The unique identifier for the discount code']
+    "price_rule_id" integer [note: 'The identifier of the price rule associated with the discount code']
+    "code" varchar [note: 'The discount code that customers can use during checkout to apply the discount']
+    "usage_count" integer [note: 'The number of times the discount code has been used by customers']
+    "created_at" timestamp [note: 'The date and time when the discount code was created']
+    "createdBy" json [note: 'The application that created the discount reedem code.']
+    "updated_at" timestamp [note: 'The date and time when the discount code was last updated']
+    "summary" varchar [note: 'A brief summary or description of the discount code']
+    "discount_type" varchar [note: 'The type of discount applied by the discount code, such as a percentage or fixed amount off']
+    "typename" varchar [note: 'The typename of the discount']
+    "starts_at" timestamp [note: 'The date and time when the discount code is activated.']
+    "ends_at" timestamp [note: 'The date and time when the discount code is deactivated.']
+    "status" varchar [note: 'The status of the Discount']
+    "title" varchar [note: 'The title of the discount.']
+    "usage_limit" integer [note: 'The maximum number of times that the discount can be used.']
+    "applies_once_per_customer" boolean [note: 'Whether the discount can be applied only once per customer.']
+    "async_usage_count" integer [note: 'The number of times that the discount has been used.']
+    "codes_count" json [note: 'The number of redeem codes for the discount.']
+    "total_sales" json [note: 'The total sales from orders where the discount was used.']
+    "admin_graphql_api_id" varchar [note: 'The unique identifier for the discount code in the Shopify Admin GraphQL API']
+    "shop_url" varchar [note: 'The URL of the shop where the discount code is applicable']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "disputes" {
-    "id" integer
-    "order_id" integer
-    "type" varchar
-    "currency" varchar
-    "amount" varchar
-    "reason" varchar
-    "network_reason_code" varchar
-    "status" varchar
-    "initiated_at" timestamp
-    "evidence_due_by" timestamp
-    "evidence_sent_on" timestamp
-    "finalized_on" timestamp
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" integer [note: 'The unique identifier of the dispute']
+    "order_id" integer [note: 'The identifier of the order associated with the dispute']
+    "type" varchar [note: 'The type of dispute (e.g., chargeback, refund request)']
+    "currency" varchar [note: 'The currency in which the dispute amount is represented']
+    "amount" varchar [note: 'The disputed amount in the currency specified']
+    "reason" varchar [note: 'The reason provided for the dispute']
+    "network_reason_code" varchar [note: 'The reason code provided by the network for the dispute']
+    "status" varchar [note: 'The current status of the dispute']
+    "initiated_at" timestamp [note: 'The date and time when the dispute was initiated']
+    "evidence_due_by" timestamp [note: 'The date by which evidence needs to be submitted for the dispute']
+    "evidence_sent_on" timestamp [note: 'The date when evidence was sent for the dispute']
+    "finalized_on" timestamp [note: 'The date when the dispute was finalized']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "draft_orders" {
-    "id" integer
-    "note" varchar
-    "email" varchar
-    "taxes_included" boolean
-    "currency" varchar
-    "invoice_sent_at" timestamp
-    "created_at" timestamp
-    "updated_at" timestamp
-    "tax_exempt" boolean
-    "completed_at" timestamp
-    "name" varchar
-    "status" varchar
-    "line_items" array
-    "shipping_address" json
-    "billing_address" json
-    "invoice_url" varchar
-    "applied_discount" json
-    "order_id" integer
-    "payment_terms" varchar
-    "po_number" varchar
-    "shipping_line" json
-    "tax_lines" array
-    "tags" varchar
-    "note_attributes" array
-    "total_price" varchar
-    "subtotal_price" varchar
-    "total_tax" varchar
-    "admin_graphql_api_id" varchar
-    "customer" json
-    "shop_url" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" integer [note: 'Unique identifier of the draft order']
+    "note" varchar [note: 'Additional notes or comments related to the draft order']
+    "email" varchar [note: 'Email address associated with the draft order']
+    "taxes_included" boolean [note: 'Indicates if taxes are included in the prices']
+    "currency" varchar [note: 'Currency used for the draft order']
+    "invoice_sent_at" timestamp [note: 'Timestamp when the invoice was sent']
+    "created_at" timestamp [note: 'Timestamp when the draft order was created']
+    "updated_at" timestamp [note: 'Timestamp when the draft order was last updated']
+    "tax_exempt" boolean [note: 'Indicates if the draft order is tax exempt']
+    "completed_at" timestamp [note: 'Timestamp when the draft order was completed']
+    "name" varchar [note: 'Name of the draft order']
+    "status" varchar [note: 'Status of the draft order']
+    "line_items" array [note: 'Items included in the draft order']
+    "shipping_address" json [note: 'The shipping address associated with the draft order']
+    "billing_address" json [note: 'The billing address associated with the draft order']
+    "invoice_url" varchar [note: 'URL for the invoice related to the draft order']
+    "applied_discount" json [note: 'Details of any discount applied to the draft order']
+    "order_id" integer [note: 'Unique identifier of the order associated with the draft order']
+    "payment_terms" varchar [note: 'Terms of payment for the draft order']
+    "po_number" varchar [note: 'Purchase order number associated with the draft order']
+    "shipping_line" json [note: 'Details of the shipping service and cost associated with the draft order']
+    "tax_lines" array [note: 'Tax information related to the draft order']
+    "tags" varchar [note: 'Tags associated with the draft order']
+    "note_attributes" array [note: 'Additional attributes or notes associated with the draft order']
+    "total_price" varchar [note: 'Total price of the draft order']
+    "subtotal_price" varchar [note: 'Subtotal price of the draft order']
+    "total_tax" varchar [note: 'Total tax amount for the draft order']
+    "admin_graphql_api_id" varchar [note: 'The unique identifier of the draft order in the Shopify Admin GraphQL API']
+    "customer" json [note: 'Details of the customer associated with the draft order']
+    "shop_url" varchar [note: 'URL of the shop related to the draft order']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "fulfillment_orders" {
-    "assigned_location_id" integer
-    "channel_id" varchar
-    "destination" json
-    "delivery_method" json
-    "fulfilled_at" timestamp
-    "fulfill_at" timestamp
-    "fulfill_by" varchar
-    "international_duties" varchar
-    "fulfillment_holds" array
-    "id" integer
-    "line_items" array
-    "order_id" integer
-    "request_status" varchar
-    "shop_id" integer
-    "status" varchar
-    "supported_actions" array
-    "merchant_requests" array
-    "assigned_location" json
-    "shop_url" varchar
-    "created_at" timestamp
-    "updated_at" timestamp
-    "admin_graphql_api_id" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "assigned_location_id" integer [note: 'The unique identifier of the assigned location']
+    "channel_id" varchar [note: 'The ID of the channel that created an order']
+    "destination" json [note: 'Details of the destination where the order is to be fulfilled']
+    "delivery_method" json [note: 'Details of the delivery method for the fulfillment order']
+    "fulfilled_at" timestamp [note: 'The date and time when the fulfillment was completed']
+    "fulfill_at" timestamp [note: 'The date and time when the fulfillment is scheduled to occur']
+    "fulfill_by" varchar [note: 'The deadline by which the fulfillment must be completed']
+    "international_duties" varchar [note: 'Details of any international duties associated with the fulfillment order']
+    "fulfillment_holds" array [note: 'Details of any holds on the fulfillment']
+    "id" integer [note: 'The unique identifier of the fulfillment order']
+    "line_items" array [note: 'Details of the line items in the fulfillment order']
+    "order_id" integer [note: 'The identifier of the order associated with the fulfillment']
+    "request_status" varchar [note: 'The status of any requests associated with the fulfillment order']
+    "shop_id" integer [note: 'The identifier of the shop that created the fulfillment order']
+    "status" varchar [note: 'The current status of the fulfillment order']
+    "supported_actions" array [note: 'Actions supported for the fulfillment order']
+    "merchant_requests" array [note: 'Details of any requests made by the merchant regarding the fulfillment order']
+    "assigned_location" json [note: 'The location to which the fulfillment order is assigned']
+    "shop_url" varchar [note: 'The URL of the shop associated with the fulfillment order']
+    "created_at" timestamp [note: 'The date and time when the fulfillment order was created']
+    "updated_at" timestamp [note: 'The date and time when the fulfillment order was last updated']
+    "admin_graphql_api_id" varchar [note: 'The unique identifier of the fulfillment order in the Admin GraphQL API']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "fulfillments" {
-    "admin_graphql_api_id" varchar
-    "created_at" timestamp
-    "id" integer
-    "location_id" integer
-    "name" varchar
-    "notify_customer" boolean
-    "order_id" integer
-    "origin_address" json
-    "receipt" json
-    "service" varchar
-    "shipment_status" varchar
-    "status" varchar
-    "tracking_company" varchar
-    "tracking_numbers" array
-    "tracking_urls" array
-    "tracking_url" varchar
-    "tracking_number" varchar
-    "updated_at" timestamp
-    "variant_inventory_management" varchar
-    "line_items" array
-    "duties" array
-    "shop_url" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "admin_graphql_api_id" varchar [note: 'The unique identifier of the resource in the Admin GraphQL API.']
+    "created_at" timestamp [note: 'The date and time when the fulfillment was created.']
+    "id" integer [note: 'The unique identifier of the fulfillment.']
+    "location_id" integer [note: 'The location identifier where the fulfillment takes place.']
+    "name" varchar [note: 'The name of the fulfillment.']
+    "notify_customer" boolean [note: 'Indicates if the customer should be notified about the fulfillment.']
+    "order_id" integer [note: 'The unique identifier of the order associated with the fulfillment.']
+    "origin_address" json [note: 'Address information for the origin of the fulfillment']
+    "receipt" json [note: 'Receipt details for the fulfillment']
+    "service" varchar [note: 'The service used for the fulfillment.']
+    "shipment_status" varchar [note: 'The status of the shipment.']
+    "status" varchar [note: 'The status of the fulfillment.']
+    "tracking_company" varchar [note: 'The company responsible for tracking the shipment.']
+    "tracking_numbers" array [note: 'Tracking numbers associated with the fulfillment']
+    "tracking_urls" array [note: 'Tracking URLs for tracking the fulfillment']
+    "tracking_url" varchar [note: 'The tracking URL of the shipment.']
+    "tracking_number" varchar [note: 'The tracking number of the shipment.']
+    "updated_at" timestamp [note: 'The date and time when the fulfillment was last updated.']
+    "variant_inventory_management" varchar [note: 'The inventory management method for the variant.']
+    "line_items" array [note: 'Information about line items included in the fulfillment']
+    "duties" array [note: 'Information about duties associated with the fulfillment']
+    "shop_url" varchar [note: 'The URL of the shop associated with the fulfillment.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "inventory_items" {
-    "id" integer
-    "admin_graphql_api_id" varchar
-    "cost" float
-    "currency_code" varchar
-    "country_code_of_origin" varchar
-    "country_harmonized_system_codes" array
-    "duplicate_sku_count" integer
-    "harmonized_system_code" varchar
-    "province_code_of_origin" varchar
-    "updated_at" timestamp
-    "created_at" timestamp
-    "sku" varchar
-    "tracked" boolean
-    "requires_shipping" boolean
-    "shop_url" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" integer [note: 'The unique identifier of the inventory item']
+    "admin_graphql_api_id" varchar [note: 'The unique identifier for the inventory item in the admin GraphQL API']
+    "cost" float [note: 'The cost of the inventory item']
+    "currency_code" varchar [note: 'Currency of the money']
+    "country_code_of_origin" varchar [note: 'The country code indicating the origin of the inventory item']
+    "country_harmonized_system_codes" array [note: 'The harmonized system codes associated with the inventory item']
+    "duplicate_sku_count" integer [note: 'The number of inventory items that share the same SKU with this item']
+    "harmonized_system_code" varchar [note: 'The harmonized system code for the inventory item']
+    "province_code_of_origin" varchar [note: 'The province code indicating the origin of the inventory item']
+    "updated_at" timestamp [note: 'The date and time when the inventory item was last updated']
+    "created_at" timestamp [note: 'The date and time when the inventory item was created']
+    "sku" varchar [note: 'The stock keeping unit (SKU) of the inventory item']
+    "tracked" boolean [note: 'Flag indicating if the inventory item is tracked']
+    "requires_shipping" boolean [note: 'Flag indicating if the inventory item requires shipping']
+    "shop_url" varchar [note: 'The URL of the shop where the inventory item belongs']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "inventory_levels" {
-    "id" varchar
-    "admin_graphql_api_id" varchar
-    "available" integer
-    "can_deactivate" boolean
-    "created_at" timestamp
-    "inventory_history_url" varchar
-    "locations_count" json
-    "deactivation_alert" varchar
-    "inventory_item_id" integer
-    "location_id" integer
-    "updated_at" timestamp
-    "shop_url" varchar
-    "quantities" array
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" varchar [note: 'The unique identifier for the inventory level.']
+    "admin_graphql_api_id" varchar [note: 'The unique identifier for the inventory levels in GraphQL format.']
+    "available" integer [note: 'The quantity of items available for sale in the inventory.']
+    "can_deactivate" boolean [note: 'Whether the inventory items associated with the inventory level can be deactivated.']
+    "created_at" timestamp [note: 'The date and time when the inventory level was created.']
+    "inventory_history_url" varchar [note: 'The URL that points to the inventory history for the item.']
+    "locations_count" json [note: 'The number of locations where this inventory item is stocked.']
+    "deactivation_alert" varchar [note: 'Describes either the impact of deactivating the inventory level, or why the inventory level can\'t be deactivated.']
+    "inventory_item_id" integer [note: 'The unique identifier for the associated inventory item.']
+    "location_id" integer [note: 'The unique identifier for the location related to the inventory level.']
+    "updated_at" timestamp [note: 'The date and time when the inventory level was last updated.']
+    "shop_url" varchar [note: 'The URL of the shop where the inventory belongs.']
+    "quantities" array [note: 'The quantities of items available for sale in the inventory.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "locations" {
-    "active" boolean
-    "address1" varchar
-    "address2" varchar
-    "admin_graphql_api_id" varchar
-    "city" varchar
-    "country" varchar
-    "country_code" varchar
-    "country_name" varchar
-    "created_at" timestamp
-    "id" integer
-    "legacy" boolean
-    "name" varchar
-    "phone" varchar
-    "province" varchar
-    "province_code" varchar
-    "updated_at" timestamp
-    "zip" varchar
-    "localized_country_name" varchar
-    "localized_province_name" varchar
-    "shop_url" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "active" boolean [note: 'Indicates if the location is currently active or not.']
+    "address1" varchar [note: 'The first line of the location\'s address.']
+    "address2" varchar [note: 'The second line of the location\'s address.']
+    "admin_graphql_api_id" varchar [note: 'The Admin GraphQL API ID of the location.']
+    "city" varchar [note: 'The city where the location is based.']
+    "country" varchar [note: 'The full name of the country where the location is located.']
+    "country_code" varchar [note: 'The ISO country code of the location.']
+    "country_name" varchar [note: 'The name of the country where the location is located.']
+    "created_at" timestamp [note: 'The date and time when the location was created.']
+    "id" integer [note: 'The unique identifier of the location.']
+    "legacy" boolean [note: 'Indicates if the location is a legacy location or not.']
+    "name" varchar [note: 'The name of the location.']
+    "phone" varchar [note: 'The phone number associated with the location.']
+    "province" varchar [note: 'The full name of the province or state where the location is located.']
+    "province_code" varchar [note: 'The ISO code of the province or state where the location is located.']
+    "updated_at" timestamp [note: 'The date and time when the location was last updated.']
+    "zip" varchar [note: 'The postal or ZIP code of the location.']
+    "localized_country_name" varchar [note: 'The localized name of the country where the location is located.']
+    "localized_province_name" varchar [note: 'The localized name of the province or state of the location.']
+    "shop_url" varchar [note: 'The URL of the shop associated with the location.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "metafield_articles" {
-    "id" integer
-    "namespace" varchar
-    "key" varchar
-    "value" varchar
-    "value_type" varchar
-    "description" varchar
-    "owner_id" integer
-    "created_at" timestamp
-    "updated_at" timestamp
-    "owner_resource" varchar
-    "type" varchar
-    "admin_graphql_api_id" varchar
-    "shop_url" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" integer [note: 'The unique identifier of the metafield']
+    "namespace" varchar [note: 'The namespace under which the metafield is defined']
+    "key" varchar [note: 'The key or identifier used to access the metafield']
+    "value" varchar [note: 'The actual value stored in the metafield']
+    "value_type" varchar [note: 'The type of value stored in the metafield (e.g., single, array)']
+    "description" varchar [note: 'The description or details of the metafield']
+    "owner_id" integer [note: 'The unique identifier of the resource that owns the metafield']
+    "created_at" timestamp [note: 'The date and time when the metafield was created']
+    "updated_at" timestamp [note: 'The date and time when the metafield was last updated']
+    "owner_resource" varchar [note: 'The type or resource that owns the metafield (e.g., Article, Product)']
+    "type" varchar [note: 'The data type of the metafield\'s value (e.g., string, integer)']
+    "admin_graphql_api_id" varchar [note: 'The unique identifier of the metafield in the GraphQL Admin API']
+    "shop_url" varchar [note: 'The URL of the shop linked to the metafield']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "metafield_blogs" {
-    "owner_id" integer
-    "admin_graphql_api_id" varchar
-    "owner_resource" varchar
-    "value_type" varchar
-    "key" varchar
-    "created_at" timestamp
-    "id" integer
-    "namespace" varchar
-    "description" varchar
-    "value" varchar
-    "updated_at" timestamp
-    "shop_url" varchar
-    "type" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "owner_id" integer [note: 'The unique identifier of the owner associated with the metafield data']
+    "admin_graphql_api_id" varchar [note: 'The unique identifier for the metafield data in the Admin GraphQL API']
+    "owner_resource" varchar [note: 'The resource type of the owner associated with the metafield data']
+    "value_type" varchar [note: 'The data type of the value stored in the metafield']
+    "key" varchar [note: 'The key associated with the metafield data']
+    "created_at" timestamp [note: 'The date and time when the metafield data was created']
+    "id" integer [note: 'The unique identifier for the metafield data']
+    "namespace" varchar [note: 'The namespace of the metafield data']
+    "description" varchar [note: 'The description of the metafield data']
+    "value" varchar [note: 'The value of the metafield data']
+    "updated_at" timestamp [note: 'The date and time when the metafield data was last updated']
+    "shop_url" varchar [note: 'The URL of the shop where the metafield data belongs']
+    "type" varchar [note: 'The type of data stored in the metafield']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "metafield_collections" {
-    "owner_id" integer
-    "admin_graphql_api_id" varchar
-    "owner_resource" varchar
-    "value_type" varchar
-    "key" varchar
-    "created_at" timestamp
-    "id" integer
-    "namespace" varchar
-    "description" varchar
-    "value" varchar
-    "updated_at" timestamp
-    "shop_url" varchar
-    "type" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "owner_id" integer [note: 'The ID of the owner associated with the metafield collection']
+    "admin_graphql_api_id" varchar [note: 'The unique identifier for the metafield collection in the Admin GraphQL API']
+    "owner_resource" varchar [note: 'The resource type of the owner associated with the metafield collection']
+    "value_type" varchar [note: 'The type of the value in the metafield collection']
+    "key" varchar [note: 'The key associated with the metafield collection']
+    "created_at" timestamp [note: 'The date and time when the metafield collection was created']
+    "id" integer [note: 'The unique identifier for the metafield collection']
+    "namespace" varchar [note: 'The namespace for the metafield collection']
+    "description" varchar [note: 'The description of the metafield collection']
+    "value" varchar [note: 'The value of the metafield collection']
+    "updated_at" timestamp [note: 'The date and time when the metafield collection was last updated']
+    "shop_url" varchar [note: 'The URL of the shop related to the metafield collection']
+    "type" varchar [note: 'The type of the metafield collection']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "metafield_customers" {
-    "id" integer
-    "namespace" varchar
-    "key" varchar
-    "value" varchar
-    "value_type" varchar
-    "description" varchar
-    "owner_id" integer
-    "created_at" timestamp
-    "updated_at" timestamp
-    "owner_resource" varchar
-    "type" varchar
-    "admin_graphql_api_id" varchar
-    "shop_url" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" integer [note: 'The unique identifier for the metafield.']
+    "namespace" varchar [note: 'The namespace in which the metafield is defined.']
+    "key" varchar [note: 'The key or title that identifies the metafield.']
+    "value" varchar [note: 'The actual value of the metafield.']
+    "value_type" varchar [note: 'The type of value stored in the metafield (e.g., string, integer, boolean).']
+    "description" varchar [note: 'The description or additional information about the metafield.']
+    "owner_id" integer [note: 'The unique identifier of the resource owner associated with the metafield.']
+    "created_at" timestamp [note: 'The date and time when the metafield was created.']
+    "updated_at" timestamp [note: 'The date and time when the metafield was last updated.']
+    "owner_resource" varchar [note: 'The resource type of the owner (e.g., Customer, Product) of the metafield.']
+    "type" varchar [note: 'The data type of the metafield value.']
+    "admin_graphql_api_id" varchar [note: 'The unique identifier for the metafield accessible via the Admin GraphQL API.']
+    "shop_url" varchar [note: 'The URL of the shop associated with the metafield.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "metafield_draft_orders" {
-    "id" integer
-    "namespace" varchar
-    "key" varchar
-    "value" varchar
-    "value_type" varchar
-    "description" varchar
-    "owner_id" integer
-    "created_at" timestamp
-    "updated_at" timestamp
-    "owner_resource" varchar
-    "type" varchar
-    "admin_graphql_api_id" varchar
-    "shop_url" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" integer [note: 'The unique identifier of the metafield draft order.']
+    "namespace" varchar [note: 'The namespace of the metafield draft order.']
+    "key" varchar [note: 'The key associated with the metafield draft order.']
+    "value" varchar [note: 'The value of the metafield draft order.']
+    "value_type" varchar [note: 'The data type of the value of the metafield draft order.']
+    "description" varchar [note: 'The textual description of the metafield draft order.']
+    "owner_id" integer [note: 'The unique identifier of the owner (e.g., shop) associated with the metafield draft order.']
+    "created_at" timestamp [note: 'The date and time when the metafield draft order was created.']
+    "updated_at" timestamp [note: 'The date and time when the metafield draft order was last updated.']
+    "owner_resource" varchar [note: 'The type of owner resource (e.g., shop) associated with the metafield draft order.']
+    "type" varchar [note: 'The type of the metafield draft order.']
+    "admin_graphql_api_id" varchar [note: 'The unique identifier of the metafield draft order within the admin GraphQL API.']
+    "shop_url" varchar [note: 'The URL of the shop to which the metafield draft order belongs.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "metafield_locations" {
-    "id" integer
-    "namespace" varchar
-    "key" varchar
-    "value" varchar
-    "value_type" varchar
-    "description" varchar
-    "owner_id" integer
-    "created_at" timestamp
-    "updated_at" timestamp
-    "owner_resource" varchar
-    "type" varchar
-    "admin_graphql_api_id" varchar
-    "shop_url" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" integer [note: 'The unique identifier for the metafield']
+    "namespace" varchar [note: 'The namespace of the metafield']
+    "key" varchar [note: 'The key or name of the metafield']
+    "value" varchar [note: 'The actual value of the metafield']
+    "value_type" varchar [note: 'The data type of the metafield value']
+    "description" varchar [note: 'The description of the metafield']
+    "owner_id" integer [note: 'The unique identifier of the resource that owns the metafield']
+    "created_at" timestamp [note: 'The date and time when the metafield was created']
+    "updated_at" timestamp [note: 'The date and time when the metafield was last updated']
+    "owner_resource" varchar [note: 'The type of resource that owns the metafield']
+    "type" varchar [note: 'The type of the metafield value']
+    "admin_graphql_api_id" varchar [note: 'The unique identifier for the metafield in the Shopify GraphQL Admin API']
+    "shop_url" varchar [note: 'The URL of the shop where the metafield is associated']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "metafield_orders" {
-    "id" integer
-    "namespace" varchar
-    "key" varchar
-    "value" varchar
-    "value_type" varchar
-    "description" varchar
-    "owner_id" integer
-    "created_at" timestamp
-    "updated_at" timestamp
-    "owner_resource" varchar
-    "type" varchar
-    "admin_graphql_api_id" varchar
-    "shop_url" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" integer [note: 'The unique identifier for the metafield record.']
+    "namespace" varchar [note: 'The area or group to which the metafield belongs.']
+    "key" varchar [note: 'The name that identifies the metafield.']
+    "value" varchar [note: 'The actual value of the metafield.']
+    "value_type" varchar [note: 'The type of data stored in the metafield value.']
+    "description" varchar [note: 'Additional information or notes about the metafield.']
+    "owner_id" integer [note: 'The unique identifier of the resource that owns the metafield.']
+    "created_at" timestamp [note: 'The date and time when the metafield was created.']
+    "updated_at" timestamp [note: 'The date and time when the metafield was last updated.']
+    "owner_resource" varchar [note: 'The type of resource that owns the metafield.']
+    "type" varchar [note: 'The data type of the metafield value.']
+    "admin_graphql_api_id" varchar [note: 'The unique identifier for the metafield in the Admin GraphQL API.']
+    "shop_url" varchar [note: 'The URL of the Shopify shop associated with the metafield.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "metafield_pages" {
-    "id" integer
-    "namespace" varchar
-    "key" varchar
-    "value" varchar
-    "value_type" varchar
-    "description" varchar
-    "owner_id" integer
-    "created_at" timestamp
-    "updated_at" timestamp
-    "owner_resource" varchar
-    "type" varchar
-    "admin_graphql_api_id" varchar
-    "shop_url" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" integer [note: 'A unique identifier for the metafield.']
+    "namespace" varchar [note: 'The namespace for the metafield, used to group related metafields together.']
+    "key" varchar [note: 'The key or name of the metafield.']
+    "value" varchar [note: 'The actual value stored in the metafield.']
+    "value_type" varchar [note: 'The data type of the value stored in the metafield (e.g., string, integer).']
+    "description" varchar [note: 'The description or purpose of the metafield.']
+    "owner_id" integer [note: 'The ID of the resource (e.g., product, order) that owns the metafield.']
+    "created_at" timestamp [note: 'The date and time when the metafield was created.']
+    "updated_at" timestamp [note: 'The date and time when the metafield was last updated.']
+    "owner_resource" varchar [note: 'The type of resource (e.g., product, order) that owns the metafield.']
+    "type" varchar [note: 'The data type of the value stored in the metafield (e.g., string, integer).']
+    "admin_graphql_api_id" varchar [note: 'A unique identifier for the metafield within Shopify\'s GraphQL Admin API.']
+    "shop_url" varchar [note: 'The URL of the shop where the metafield is associated.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "metafield_product_images" {
-    "id" integer
-    "namespace" varchar
-    "key" varchar
-    "value" varchar
-    "value_type" varchar
-    "description" varchar
-    "owner_id" integer
-    "created_at" timestamp
-    "updated_at" timestamp
-    "owner_resource" varchar
-    "type" varchar
-    "admin_graphql_api_id" varchar
-    "shop_url" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" integer [note: 'The unique ID of the metafield.']
+    "namespace" varchar [note: 'The namespace of the metafield.']
+    "key" varchar [note: 'The key that identifies the metafield.']
+    "value" varchar [note: 'The actual value stored in the metafield.']
+    "value_type" varchar [note: 'The type of the value stored in the metafield.']
+    "description" varchar [note: 'The description of the metafield.']
+    "owner_id" integer [note: 'The ID of the owner of the metafield.']
+    "created_at" timestamp [note: 'The date and time when the metafield was created.']
+    "updated_at" timestamp [note: 'The date and time when the metafield was last updated.']
+    "owner_resource" varchar [note: 'The type of resource that owns the metafield.']
+    "type" varchar [note: 'The data type of the value stored in the metafield.']
+    "admin_graphql_api_id" varchar [note: 'The admin GraphQL API ID of the metafield.']
+    "shop_url" varchar [note: 'The URL of the shop where the metafield belongs.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "metafield_product_variants" {
-    "id" integer
-    "namespace" varchar
-    "key" varchar
-    "value" varchar
-    "value_type" varchar
-    "description" varchar
-    "owner_id" integer
-    "created_at" timestamp
-    "updated_at" timestamp
-    "owner_resource" varchar
-    "type" varchar
-    "admin_graphql_api_id" varchar
-    "shop_url" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" integer [note: 'The unique identifier for the metafield']
+    "namespace" varchar [note: 'The namespace for grouping metafields']
+    "key" varchar [note: 'The key associated with the metafield for identifying purposes']
+    "value" varchar [note: 'The actual value of the metafield']
+    "value_type" varchar [note: 'The type that the value of the metafield represents (e.g., URL, text)']
+    "description" varchar [note: 'The description of the metafield content']
+    "owner_id" integer [note: 'The unique identifier of the entity that owns the metafield']
+    "created_at" timestamp [note: 'The date and time when the metafield was created']
+    "updated_at" timestamp [note: 'The date and time when the metafield was last updated']
+    "owner_resource" varchar [note: 'The resource type that owns the metafield (e.g., product, variant)']
+    "type" varchar [note: 'The data type of the metafield value (e.g., string, integer)']
+    "admin_graphql_api_id" varchar [note: 'The unique identifier for the metafield in the GraphQL Admin API']
+    "shop_url" varchar [note: 'The URL of the shop where the metafield is associated']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "metafield_products" {
-    "id" integer
-    "namespace" varchar
-    "key" varchar
-    "value" varchar
-    "value_type" varchar
-    "description" varchar
-    "owner_id" integer
-    "created_at" timestamp
-    "updated_at" timestamp
-    "owner_resource" varchar
-    "type" varchar
-    "admin_graphql_api_id" varchar
-    "shop_url" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" integer [note: 'A unique identifier for the metafield.']
+    "namespace" varchar [note: 'The namespace for the metafield, helping to group related metafields together.']
+    "key" varchar [note: 'The key or name that identifies the metafield.']
+    "value" varchar [note: 'The actual value of the metafield based on its type.']
+    "value_type" varchar [note: 'A representation of the type of the value (for example, \'string\' or \'integer\').']
+    "description" varchar [note: 'The description of the metafield, providing additional information.']
+    "owner_id" integer [note: 'The unique identifier of the resource that owns the metafield.']
+    "created_at" timestamp [note: 'The date and time the metafield was created in ISO 8601 format.']
+    "updated_at" timestamp [note: 'The date and time the metafield was last updated in ISO 8601 format.']
+    "owner_resource" varchar [note: 'The type of resource that owns the metafield, such as \'product\' or \'collection\'.']
+    "type" varchar [note: 'The type of the metafield value, such as \'string\', \'integer\', \'json_string\', etc.']
+    "admin_graphql_api_id" varchar [note: 'A unique identifier for the metafield used in the Shopify Admin GraphQL API.']
+    "shop_url" varchar [note: 'The shop URL where the metafield is associated with.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "metafield_shops" {
-    "id" integer
-    "namespace" varchar
-    "key" varchar
-    "value" varchar
-    "value_type" varchar
-    "description" varchar
-    "owner_id" integer
-    "created_at" timestamp
-    "updated_at" timestamp
-    "owner_resource" varchar
-    "type" varchar
-    "admin_graphql_api_id" varchar
-    "shop_url" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" integer [note: 'The unique identifier for the metafield.']
+    "namespace" varchar [note: 'The namespace to which the metafield belongs.']
+    "key" varchar [note: 'The key that identifies the metafield.']
+    "value" varchar [note: 'The actual value stored in the metafield.']
+    "value_type" varchar [note: 'The data type of the value stored in the metafield.']
+    "description" varchar [note: 'The additional information about the metafield.']
+    "owner_id" integer [note: 'The unique identifier of the owner resource linked to this metafield.']
+    "created_at" timestamp [note: 'The date and time when the metafield was created.']
+    "updated_at" timestamp [note: 'The date and time when the metafield was last updated.']
+    "owner_resource" varchar [note: 'The type of resource that owns the metafield.']
+    "type" varchar [note: 'The type of data stored in the metafield.']
+    "admin_graphql_api_id" varchar [note: 'The unique identifier for the admin GraphQL API of the shop.']
+    "shop_url" varchar [note: 'The URL of the shop to which the metafield is associated.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "metafield_smart_collections" {
-    "id" integer
-    "namespace" varchar
-    "key" varchar
-    "value" varchar
-    "value_type" varchar
-    "description" varchar
-    "owner_id" integer
-    "created_at" timestamp
-    "updated_at" timestamp
-    "owner_resource" varchar
-    "type" varchar
-    "admin_graphql_api_id" varchar
-    "shop_url" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" integer [note: 'The unique identifier for the metafield.']
+    "namespace" varchar [note: 'The container for a set of metafields. Typically corresponds to a section of the store.']
+    "key" varchar [note: 'The key or name associated with the metafield.']
+    "value" varchar [note: 'The actual value of the metafield.']
+    "value_type" varchar [note: 'The type of value stored in the metafield (e.g., string, integer, json_string).']
+    "description" varchar [note: 'The detailed description of the metafield data.']
+    "owner_id" integer [note: 'The ID of the resource to which the metafield is attached.']
+    "created_at" timestamp [note: 'The date and time when the metafield was created.']
+    "updated_at" timestamp [note: 'The date and time when the metafield was last updated.']
+    "owner_resource" varchar [note: 'The resource type (e.g., Product, Collection) to which the metafield is attached.']
+    "type" varchar [note: 'The data type of the metafield value (e.g., string, integer).']
+    "admin_graphql_api_id" varchar [note: 'The unique identifier for the metafield in the GraphQL admin API.']
+    "shop_url" varchar [note: 'The URL of the shop where the metafield belongs.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "order_agreements" {
-    "id" integer
-    "created_at" timestamp
-    "updated_at" timestamp
-    "admin_graphql_api_id" varchar
-    "shop_url" varchar
-    "agreements" array
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" integer [note: 'A globally-unique Order ID']
+    "created_at" timestamp [note: 'The date and time when the order was created']
+    "updated_at" timestamp [note: 'The date and time when the order was last updated']
+    "admin_graphql_api_id" varchar [note: 'The original order id reference for the shopify api']
+    "shop_url" varchar [note: 'URL of the shop where the order was placed.']
+    "agreements" array [note: 'A list of sales agreements associated with the order.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "order_refunds" {
-    "order_id" integer
-    "restock" boolean
-    "order_adjustments" array
-    "processed_at" varchar
-    "user_id" integer
-    "note" varchar
-    "id" integer
-    "created_at" timestamp
-    "admin_graphql_api_id" varchar
-    "duties" varchar
-    "refund_line_items" array
-    "return" json
-    "transactions" array
-    "shop_url" varchar
-    "total_duties_set" json
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "order_id" integer [note: 'ID of the original order for which the refund was issued']
+    "restock" boolean [note: 'Indicates if the refund involves restocking items']
+    "order_adjustments" array [note: 'Adjustments made to the original order as part of the refund']
+    "processed_at" varchar [note: 'Date and time when the refund was processed']
+    "user_id" integer [note: 'ID of the user who initiated the refund']
+    "note" varchar [note: 'Any additional notes or comments regarding the refund']
+    "id" integer [note: 'Unique identifier for the order refund resource']
+    "created_at" timestamp [note: 'Date and time when the order refund was created']
+    "admin_graphql_api_id" varchar [note: 'ID of the Shopify API resource']
+    "duties" varchar [note: 'Information about any duties associated with the refund']
+    "refund_line_items" array [note: 'Line items included in the refund']
+    "return" json [note: 'Details of the return associated with the refund']
+    "transactions" array [note: 'Payment transactions related to the refund']
+    "shop_url" varchar [note: 'URL of the shop where the refund was processed']
+    "total_duties_set" json [note: 'Details of the total duties amount']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "order_risks" {
-    "id" integer
-    "order_id" integer
-    "checkout_id" integer
-    "source" varchar
-    "score" float
-    "recommendation" varchar
-    "display" boolean
-    "cause_cancel" boolean
-    "message" varchar
-    "merchant_message" varchar
-    "admin_graphql_api_id" varchar
-    "updated_at" timestamp
-    "assessments" array
-    "shop_url" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" integer [note: 'Unique identifier for the order risk entry.']
+    "order_id" integer [note: 'The identifier of the order to which the risk is related.']
+    "checkout_id" integer [note: 'The unique identifier of the checkout associated with the order.']
+    "source" varchar [note: 'Source of the risk notification.']
+    "score" float [note: 'Numerical score indicating the level of risk.']
+    "recommendation" varchar [note: 'Suggested action to mitigate the risk.']
+    "display" boolean [note: 'Flag to determine if the risk should be displayed to the merchant.']
+    "cause_cancel" boolean [note: 'Reason indicating why the order is at risk of cancellation.']
+    "message" varchar [note: 'Description of the risk associated with the order.']
+    "merchant_message" varchar [note: 'Message shown to the merchant regarding the risk.']
+    "admin_graphql_api_id" varchar [note: 'The original id reference for the shopify api']
+    "updated_at" timestamp [note: 'The date and time when the order and the risk was last updated']
+    "assessments" array [note: 'The risk assessments for an order.']
+    "shop_url" varchar [note: 'URL of the shop where the order was placed.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "orders" {
-    "id" integer
-    "admin_graphql_api_id" varchar
-    "app_id" integer
-    "browser_ip" varchar
-    "buyer_accepts_marketing" boolean
-    "cancel_reason" varchar
-    "cancelled_at" timestamp
-    "cart_token" varchar
-    "checkout_id" integer
-    "checkout_token" varchar
+    "id" integer [note: 'The unique identifier of the order']
+    "admin_graphql_api_id" varchar [note: 'The unique identifier of the order in the GraphQL Admin API']
+    "app_id" integer [note: 'The ID of the app that created the order']
+    "browser_ip" varchar [note: 'The IP address of the customer\'s browser']
+    "buyer_accepts_marketing" boolean [note: 'Indicates if the customer has agreed to receive marketing emails']
+    "cancel_reason" varchar [note: 'The reason provided if the order was canceled']
+    "cancelled_at" timestamp [note: 'The date and time when the order was canceled']
+    "cart_token" varchar [note: 'Token representing the cart associated with the order']
+    "checkout_id" integer [note: 'The ID of the checkout that processed the order']
+    "checkout_token" varchar [note: 'Token representing the checkout associated with the order']
     "client_details" json
-    "closed_at" timestamp
-    "company" varchar
-    "confirmed" boolean
-    "confirmation_number" varchar
-    "contact_email" varchar
-    "created_at" timestamp
-    "currency" varchar
-    "current_subtotal_price" float
+    "closed_at" timestamp [note: 'The date and time when the order was closed']
+    "company" varchar [note: 'The name of the company associated with the order']
+    "confirmed" boolean [note: 'Indicates if the order has been confirmed']
+    "confirmation_number" varchar [note: 'The unique number for confirming the order']
+    "contact_email" varchar [note: 'The email address for order-related contacts']
+    "created_at" timestamp [note: 'The date and time when the order was created']
+    "currency" varchar [note: 'The currency used for the order']
+    "current_subtotal_price" float [note: 'The current subtotal price of the order']
     "current_subtotal_price_set" json
-    "current_total_discounts" float
+    "current_total_discounts" float [note: 'The current total discounts applied to the order']
     "current_total_discounts_set" json
-    "current_total_duties_set" varchar
-    "current_total_price" float
+    "current_total_duties_set" varchar [note: 'The current total duties set for the order']
+    "current_total_price" float [note: 'The current total price of the order']
     "current_total_price_set" json
-    "current_total_tax" float
+    "current_total_tax" float [note: 'The current total tax amount for the order']
     "current_total_tax_set" json
     "current_total_additional_fees_set" json
-    "customer_locale" varchar
-    "device_id" varchar
-    "duties_included" boolean
+    "customer_locale" varchar [note: 'The locale of the customer']
+    "device_id" varchar [note: 'The ID of the device used to place the order']
+    "duties_included" boolean [note: 'Whether duties included in the subtotal price of the order.']
     "discount_applications" array
     "discount_codes" array
-    "email" varchar
-    "estimated_taxes" boolean
-    "financial_status" varchar
-    "fulfillment_status" varchar
-    "landing_site" varchar
-    "landing_site_ref" varchar
-    "location_id" integer
-    "merchant_of_record_app_id" varchar
-    "merchant_business_entity_id" varchar
-    "name" varchar
-    "note" varchar
-    "note_attributes" array
-    "number" integer
-    "order_number" integer
-    "order_status_url" varchar
-    "original_total_duties_set" varchar
+    "email" varchar [note: 'The email address of the customer']
+    "estimated_taxes" boolean [note: 'Estimated taxes for the order']
+    "financial_status" varchar [note: 'The financial status of the order']
+    "fulfillment_status" varchar [note: 'The fulfillment status of the order']
+    "landing_site" varchar [note: 'The landing site of the order']
+    "landing_site_ref" varchar [note: 'Reference for the landing site of the order']
+    "location_id" integer [note: 'The location ID associated with the order']
+    "merchant_of_record_app_id" varchar [note: 'The app ID of the merchant of record']
+    "merchant_business_entity_id" varchar [note: 'The business entity ID of the merchant of record.']
+    "name" varchar [note: 'The name of the order']
+    "note" varchar [note: 'Additional notes related to the order']
+    "note_attributes" array [note: 'Custom note attributes associated with the order']
+    "number" integer [note: 'The order number']
+    "order_number" integer [note: 'The unique number assigned to the order']
+    "order_status_url" varchar [note: 'URL to check the status of the order']
+    "original_total_duties_set" varchar [note: 'The original total duties set for the order']
     "original_total_additional_fees_set" json
     "payment_gateway_names" array
-    "payment_terms" varchar
-    "total_cash_rounding_payment_adjustment_set" json
-    "phone" varchar
-    "presentment_currency" varchar
-    "processed_at" varchar
-    "po_number" varchar
-    "reference" varchar
-    "referring_site" varchar
-    "source_identifier" varchar
-    "source_name" varchar
-    "source_url" varchar
-    "shop_url" varchar
-    "subtotal_price" float
+    "payment_terms" varchar [note: 'The terms of payment for the order']
+    "total_cash_rounding_payment_adjustment_set" json [note: 'The money set that represents the amount adjusted on the order total due to cash rounding.']
+    "phone" varchar [note: 'The phone number of the customer']
+    "presentment_currency" varchar [note: 'The currency used for presenting the order']
+    "processed_at" varchar [note: 'The date and time when the order was processed']
+    "po_number" varchar [note: 'The purchase order number']
+    "reference" varchar [note: 'Reference associated with the order']
+    "referring_site" varchar [note: 'The referring site of the order']
+    "source_identifier" varchar [note: 'Identifier for the order\'s source']
+    "source_name" varchar [note: 'Name of the order\'s source']
+    "source_url" varchar [note: 'URL of the order\'s source']
+    "shop_url" varchar [note: 'URL of the shop associated with the order']
+    "subtotal_price" float [note: 'The subtotal price of the order']
     "subtotal_price_set" json
-    "tags" varchar
-    "tax_exempt" boolean
+    "tags" varchar [note: 'Tags associated with the order']
+    "tax_exempt" boolean [note: 'Indicates if the order is tax exempt']
     "tax_lines" array
-    "taxes_included" boolean
-    "test" boolean
-    "token" varchar
-    "total_discounts" float
+    "taxes_included" boolean [note: 'Indicates if taxes are included in the prices']
+    "test" boolean [note: 'Indicates if the order is a test order']
+    "token" varchar [note: 'Token associated with the order']
+    "total_discounts" float [note: 'The total amount of discounts applied to the order']
     "total_discounts_set" json
-    "total_line_items_price" float
+    "total_line_items_price" float [note: 'The total price of all line items in the order']
     "total_line_items_price_set" json
-    "total_outstanding" float
-    "total_price" float
+    "total_outstanding" float [note: 'The total outstanding amount for the order']
+    "total_price" float [note: 'The total price of the order']
     "total_price_set" json
-    "total_price_usd" float
-    "total_shipping_price_set" json
-    "total_tax" float
-    "total_tax_set" json
-    "total_tip_received" float
-    "total_weight" integer
-    "updated_at" timestamp
-    "user_id" float
+    "total_price_usd" float [note: 'The total price of the order in USD']
+    "total_shipping_price_set" json [note: 'The details of the total shipping price for the order.']
+    "total_tax" float [note: 'The total tax amount for the order']
+    "total_tax_set" json [note: 'The details of the total tax applied to the order.']
+    "total_tip_received" float [note: 'The total tip amount received, if any']
+    "total_weight" integer [note: 'The total weight of all items in the order']
+    "updated_at" timestamp [note: 'The date and time when the order was last updated']
+    "user_id" float [note: 'The unique identifier of the user associated with the order']
     "billing_address" json
     "customer" json
     "discount_allocations" array
     "fulfillments" array
-    "line_items" array
-    "refunds" array
+    "line_items" array [note: 'Details of the products within an order']
+    "refunds" array [note: 'Information about the refunds associated with the order']
     "shipping_address" json
     "shipping_lines" array
-    "deleted_at" timestamp
-    "deleted_message" varchar
-    "deleted_description" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "deleted_at" timestamp [note: 'The date and time when the order was deleted']
+    "deleted_message" varchar [note: 'Message provided when the order was deleted']
+    "deleted_description" varchar [note: 'Description provided when the order was deleted']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "pages" {
-    "author" varchar
-    "admin_graphql_api_id" varchar
-    "body_html" varchar
-    "created_at" timestamp
-    "handle" varchar
-    "id" integer
-    "published_at" timestamp
-    "shop_id" integer
-    "template_suffix" varchar
-    "title" varchar
-    "updated_at" timestamp
-    "shop_url" varchar
-    "deleted_at" timestamp
-    "deleted_message" varchar
-    "deleted_description" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "author" varchar [note: 'The author of the page.']
+    "admin_graphql_api_id" varchar [note: 'The unique identifier for the page in the Admin GraphQL API.']
+    "body_html" varchar [note: 'The HTML content of the page.']
+    "created_at" timestamp [note: 'The timestamp when the page was created.']
+    "handle" varchar [note: 'The unique URL path segment for the page.']
+    "id" integer [note: 'The unique identifier for the page.']
+    "published_at" timestamp [note: 'The timestamp when the page was published.']
+    "shop_id" integer [note: 'The ID of the shop to which the page belongs.']
+    "template_suffix" varchar [note: 'The suffix of the liquid template used for the page.']
+    "title" varchar [note: 'The title of the page.']
+    "updated_at" timestamp [note: 'The timestamp when the page was last updated.']
+    "shop_url" varchar [note: 'The URL of the shop associated with the page.']
+    "deleted_at" timestamp [note: 'The timestamp when the page was deleted.']
+    "deleted_message" varchar [note: 'Message indicating why the page was deleted.']
+    "deleted_description" varchar [note: 'Description of the reason for deletion of the page.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "price_rules" {
-    "allocation_method" varchar
-    "admin_graphql_api_id" varchar
-    "created_at" timestamp
-    "customer_segment_prerequisite_ids" array
-    "updated_at" timestamp
-    "customer_selection" varchar
-    "ends_at" timestamp
-    "entitled_collection_ids" array
-    "entitled_country_ids" array
-    "entitled_product_ids" array
-    "entitled_variant_ids" array
-    "id" integer
-    "once_per_customer" boolean
-    "prerequisite_customer_ids" array
-    "prerequisite_quantity_range" json
-    "prerequisite_saved_search_ids" array
-    "prerequisite_shipping_price_range" json
-    "prerequisite_subtotal_range" json
-    "prerequisite_to_entitlement_purchase" json
-    "starts_at" timestamp
-    "target_selection" varchar
-    "target_type" varchar
-    "title" varchar
-    "usage_limit" integer
-    "prerequisite_product_ids" array
-    "prerequisite_variant_ids" array
-    "prerequisite_collection_ids" array
-    "value" varchar
-    "value_type" varchar
-    "prerequisite_to_entitlement_quantity_ratio" json
-    "allocation_limit" integer
-    "shop_url" varchar
-    "deleted_at" timestamp
-    "deleted_message" varchar
-    "deleted_description" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "allocation_method" varchar [note: 'The method used to allocate the discount']
+    "admin_graphql_api_id" varchar [note: 'The unique identifier for the price rule in the GraphQL Admin API']
+    "created_at" timestamp [note: 'The date and time when the price rule was created']
+    "customer_segment_prerequisite_ids" array [note: 'An array of customer segment IDs as prerequisites for the discount']
+    "updated_at" timestamp [note: 'The date and time when the price rule was last updated']
+    "customer_selection" varchar [note: 'The customer selection criteria for the discount']
+    "ends_at" timestamp [note: 'The date and time when the discount ends']
+    "entitled_collection_ids" array [note: 'An array of collection IDs entitled to the discount']
+    "entitled_country_ids" array [note: 'An array of country IDs entitled to the discount']
+    "entitled_product_ids" array [note: 'An array of product IDs entitled to the discount']
+    "entitled_variant_ids" array [note: 'An array of variant IDs entitled to the discount']
+    "id" integer [note: 'The unique identifier for the price rule']
+    "once_per_customer" boolean [note: 'Whether the discount can only be applied once per customer']
+    "prerequisite_customer_ids" array [note: 'An array of customer IDs required as prerequisites for the discount']
+    "prerequisite_quantity_range" json [note: 'The required quantity range for the discount']
+    "prerequisite_saved_search_ids" array [note: 'An array of saved search IDs that act as prerequisites for the discount']
+    "prerequisite_shipping_price_range" json [note: 'The maximum shipping price required for the discount']
+    "prerequisite_subtotal_range" json [note: 'The required subtotal range for the discount']
+    "prerequisite_to_entitlement_purchase" json [note: 'The amount required for a purchase to be entitled to the discount']
+    "starts_at" timestamp [note: 'The date and time when the discount starts']
+    "target_selection" varchar [note: 'The target selection criteria for the discount']
+    "target_type" varchar [note: 'The type of target for the discount']
+    "title" varchar [note: 'The title of the price rule']
+    "usage_limit" integer [note: 'The limit on the total number of times the discount can be used']
+    "prerequisite_product_ids" array [note: 'An array of product IDs required as prerequisites for the discount']
+    "prerequisite_variant_ids" array [note: 'An array of variant IDs required as prerequisites for the discount']
+    "prerequisite_collection_ids" array [note: 'An array of collection IDs required as prerequisites for the discount']
+    "value" varchar [note: 'The value of the discount']
+    "value_type" varchar [note: 'The type of value for the discount']
+    "prerequisite_to_entitlement_quantity_ratio" json [note: 'The quantity ratio required for entitlement to the discount']
+    "allocation_limit" integer [note: 'The maximum number of times the discount can be applied']
+    "shop_url" varchar [note: 'The URL of the shop where the price rule is applied']
+    "deleted_at" timestamp [note: 'The date and time when the price rule was deleted']
+    "deleted_message" varchar [note: 'Message displayed when the price rule is deleted']
+    "deleted_description" varchar [note: 'Description of why the price rule was deleted']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "product_images" {
-    "created_at" timestamp
-    "id" integer
-    "position" integer
-    "product_id" integer
-    "variant_ids" array
-    "src" varchar
-    "width" integer
-    "height" integer
-    "updated_at" timestamp
-    "admin_graphql_api_id" varchar
-    "alt" varchar
-    "shop_url" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "created_at" timestamp [note: 'Date and time when the image was created']
+    "id" integer [note: 'Unique identifier for the image']
+    "position" integer [note: 'Position order of the image relative to other images of the same product']
+    "product_id" integer [note: 'Unique identifier of the product associated with the image']
+    "variant_ids" array [note: 'Array of unique identifiers for the product variants associated with the image']
+    "src" varchar [note: 'URL of the image']
+    "width" integer [note: 'Width of the image in pixels']
+    "height" integer [note: 'Height of the image in pixels']
+    "updated_at" timestamp [note: 'Date and time when the image was last updated']
+    "admin_graphql_api_id" varchar [note: 'Unique identifier for the image in the Admin GraphQL API']
+    "alt" varchar [note: 'Alternative text description of the image for accessibility']
+    "shop_url" varchar [note: 'URL of the shop where the image is hosted']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "product_variants" {
-    "id" integer
-    "product_id" integer
-    "title" varchar
-    "price" float
-    "sku" varchar
-    "position" integer
-    "inventory_policy" varchar
-    "compare_at_price" varchar
-    "option1" varchar
-    "option2" varchar
-    "option3" varchar
-    "options" array
-    "created_at" timestamp
-    "updated_at" timestamp
-    "taxable" boolean
-    "barcode" varchar
-    "grams" integer
-    "image_id" integer
-    "image_src" varchar
-    "image_url" varchar
-    "weight" float
-    "weight_unit" varchar
-    "inventory_item_id" integer
-    "inventory_quantity" integer
-    "old_inventory_quantity" integer
-    "presentment_prices" array
-    "requires_shipping" boolean
-    "admin_graphql_api_id" varchar
-    "shop_url" varchar
-    "available_for_sale" boolean
-    "display_name" varchar
-    "tax_code" varchar
-    "tracked" boolean
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" integer [note: 'The unique identifier for the variant']
+    "product_id" integer [note: 'The unique identifier for the product associated with the variant']
+    "title" varchar [note: 'The title of the variant']
+    "price" float [note: 'The price of the variant']
+    "sku" varchar [note: 'The unique SKU (stock keeping unit) of the variant']
+    "position" integer [note: 'The position of the variant in the product\'s list of variants']
+    "inventory_policy" varchar [note: 'The inventory policy for the variant']
+    "compare_at_price" varchar [note: 'The original price of the variant before any discount']
+    "option1" varchar [note: 'The value for option 1 of the variant']
+    "option2" varchar [note: 'The value for option 2 of the variant']
+    "option3" varchar [note: 'The value for option 3 of the variant']
+    "options" array [note: 'List of product options applied to the variant.']
+    "created_at" timestamp [note: 'The date and time when the variant was created']
+    "updated_at" timestamp [note: 'The date and time when the variant was last updated']
+    "taxable" boolean [note: 'Indicates whether taxes are applied to the variant']
+    "barcode" varchar [note: 'The barcode associated with the variant']
+    "grams" integer [note: 'The weight of the variant in grams']
+    "image_id" integer [note: 'The unique identifier for the image associated with the variant']
+    "image_src" varchar [note: 'The location of the image as URL.']
+    "image_url" varchar [note: 'The location of the image as URL.']
+    "weight" float [note: 'The weight of the variant']
+    "weight_unit" varchar [note: 'The unit of measurement for the weight of the variant']
+    "inventory_item_id" integer [note: 'The unique identifier for the inventory item associated with the variant']
+    "inventory_quantity" integer [note: 'The current inventory quantity for the variant']
+    "old_inventory_quantity" integer [note: 'The previous inventory quantity for the variant']
+    "presentment_prices" array [note: 'The prices of the variant for presentation in different currencies']
+    "requires_shipping" boolean [note: 'Indicates whether the variant requires shipping']
+    "admin_graphql_api_id" varchar [note: 'The unique identifier for the variant used by the GraphQL Admin API']
+    "shop_url" varchar [note: 'The URL of the shop where the variant is listed']
+    "available_for_sale" boolean [note: 'Whether the product variant is available for sale.']
+    "display_name" varchar [note: 'Display name of the variant, based on product\'s title + variant\'s title.']
+    "tax_code" varchar [note: 'The tax code for the product variant.']
+    "tracked" boolean [note: 'Whether inventory levels are tracked for the item.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "products" {
-    "published_at" timestamp
-    "created_at" timestamp
-    "published_scope" varchar
-    "status" varchar
-    "vendor" varchar
-    "updated_at" timestamp
-    "body_html" varchar
-    "product_type" varchar
-    "tags" varchar
-    "options" array
-    "image" json
-    "handle" varchar
-    "images" array
-    "template_suffix" varchar
-    "title" varchar
-    "variants" array
-    "admin_graphql_api_id" varchar
-    "id" integer
-    "shop_url" varchar
-    "deleted_at" timestamp
-    "deleted_message" varchar
-    "deleted_description" varchar
-    "description" varchar
-    "description_html" varchar
-    "is_gift_card" boolean
-    "legacy_resource_id" varchar
-    "media_count" integer
-    "online_store_preview_url" varchar
-    "online_store_url" varchar
-    "total_inventory" integer
-    "total_variants" integer
-    "tracks_inventory" boolean
-    "has_only_default_variant" boolean
-    "has_out_of_stock_variants" boolean
-    "requires_sellin_plan" boolean
-    "price_range_v2" json
-    "featured_image" json
-    "seo" json
-    "featured_media" json
-    "feedback" json
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "published_at" timestamp [note: 'The date and time when the product was published.']
+    "created_at" timestamp [note: 'The date and time when the product was created.']
+    "published_scope" varchar [note: 'The scope of where the product is available for purchase.']
+    "status" varchar [note: 'The status of the product.']
+    "vendor" varchar [note: 'The vendor or manufacturer of the product.']
+    "updated_at" timestamp [note: 'The date and time when the product was last updated.']
+    "body_html" varchar [note: 'The HTML description of the product.']
+    "product_type" varchar [note: 'The type or category of the product.']
+    "tags" varchar [note: 'Tags associated with the product.']
+    "options" array [note: 'Represents different customizable options available for the product.']
+    "image" json [note: 'Represents the main product image linked to one or more variants.']
+    "handle" varchar [note: 'The human-readable URL for the product.']
+    "images" array [note: 'Represents a collection of additional images related to the product.']
+    "template_suffix" varchar [note: 'The template suffix used for the product.']
+    "title" varchar [note: 'The title of the product.']
+    "variants" array [note: 'Represents different versions or variations of the product.']
+    "admin_graphql_api_id" varchar [note: 'The unique identifier of the product in the Admin GraphQL API.']
+    "id" integer [note: 'The unique identifier of the product.']
+    "shop_url" varchar [note: 'The URL of the shop where the product is listed.']
+    "deleted_at" timestamp [note: 'The date and time when the product was deleted.']
+    "deleted_message" varchar [note: 'Message related to the deletion of the product.']
+    "deleted_description" varchar [note: 'Description of the reason for deletion.']
+    "description" varchar [note: 'The product\'s description.']
+    "description_html" varchar [note: 'The product\'s description in HTML format.']
+    "is_gift_card" boolean [note: 'Indicates whether the product is a gift card.']
+    "legacy_resource_id" varchar [note: 'The legacy resource ID of the product.']
+    "media_count" integer [note: 'The total count of media (images/videos) associated with the product.']
+    "online_store_preview_url" varchar [note: 'The URL for previewing the product on the online store.']
+    "online_store_url" varchar [note: 'The URL of the product on the online store.']
+    "total_inventory" integer [note: 'The total inventory count of the product.']
+    "total_variants" integer [note: 'The total number of variants available for the product.']
+    "tracks_inventory" boolean [note: 'Indicates whether inventory tracking is enabled for the product.']
+    "has_only_default_variant" boolean [note: 'Whether the product has only a single variant with the default option and value.']
+    "has_out_of_stock_variants" boolean [note: 'Whether the product has out of stock variants.']
+    "requires_sellin_plan" boolean [note: 'Whether the product can only be purchased with a selling plan (subscription)']
+    "price_range_v2" json [note: 'The price range of the product with prices formatted as decimals.']
+    "featured_image" json [note: 'The featured image for the product.']
+    "seo" json [note: 'SEO information of the product.']
+    "featured_media" json [note: 'The featured media for the product.']
+    "feedback" json [note: 'Information about the product that\'s provided through resource feedback.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "shop" {
-    "address1" varchar
-    "address2" varchar
-    "auto_configure_tax_inclusivity" varchar
-    "checkout_api_supported" boolean
-    "city" varchar
-    "country" varchar
-    "country_code" varchar
-    "country_name" varchar
-    "county_taxes" boolean
-    "created_at" timestamp
-    "customer_email" varchar
-    "currency" varchar
-    "domain" varchar
-    "enabled_presentment_currencies" array
-    "eligible_for_card_reader_giveaway" boolean
-    "eligible_for_payments" boolean
-    "email" varchar
-    "finances" boolean
-    "force_ssl" boolean
-    "google_apps_domain" varchar
-    "google_apps_login_enabled" boolean
-    "has_discounts" boolean
-    "has_gift_cards" boolean
-    "has_storefront" boolean
-    "iana_timezone" varchar
-    "id" integer
-    "latitude" float
-    "longitude" float
-    "marketing_sms_consent_enabled_at_checkout" boolean
-    "money_format" varchar
-    "money_in_emails_format" varchar
-    "money_with_currency_format" varchar
-    "money_with_currency_in_emails_format" varchar
-    "multi_location_enabled" boolean
-    "myshopify_domain" varchar
-    "name" varchar
-    "password_enabled" boolean
-    "phone" varchar
-    "plan_display_name" varchar
-    "pre_launch_enabled" boolean
-    "cookie_consent_level" varchar
-    "plan_name" varchar
-    "primary_locale" varchar
-    "primary_location_id" integer
-    "province" varchar
-    "province_code" varchar
-    "requires_extra_payments_agreement" boolean
-    "setup_required" boolean
-    "shop_owner" varchar
-    "source" varchar
-    "taxes_included" boolean
-    "tax_shipping" boolean
-    "timezone" varchar
-    "transactional_sms_disabled" boolean
-    "updated_at" timestamp
-    "visitor_tracking_consent_preference" varchar
-    "weight_unit" varchar
-    "zip" varchar
-    "shop_url" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "address1" varchar [note: 'The first line of the shop\'s address']
+    "address2" varchar [note: 'The second line of the shop\'s address']
+    "auto_configure_tax_inclusivity" varchar [note: 'Flag indicating if taxes are automatically configured to be inclusive']
+    "checkout_api_supported" boolean [note: 'Flag indicating if the shop supports the checkout API']
+    "city" varchar [note: 'The city where the shop is located']
+    "country" varchar [note: 'The country where the shop is located']
+    "country_code" varchar [note: 'The country code of the shop\'s location']
+    "country_name" varchar [note: 'The name of the country where the shop is located']
+    "county_taxes" boolean [note: 'Flag indicating if county taxes are applicable']
+    "created_at" timestamp [note: 'The date and time when the shop was created']
+    "customer_email" varchar [note: 'The email address of the shop\'s customer support']
+    "currency" varchar [note: 'The currency used in the shop']
+    "domain" varchar [note: 'The domain of the shop']
+    "enabled_presentment_currencies" array [note: 'The list of currencies enabled for presenting prices']
+    "eligible_for_card_reader_giveaway" boolean [note: 'Flag indicating if the shop is eligible for a card reader giveaway']
+    "eligible_for_payments" boolean [note: 'Flag indicating if the shop is eligible to receive payments']
+    "email" varchar [note: 'The email address associated with the shop']
+    "finances" boolean [note: 'Financial information related to the shop']
+    "force_ssl" boolean [note: 'Flag indicating if SSL is enforced for the shop']
+    "google_apps_domain" varchar [note: 'The Google Apps domain associated with the shop']
+    "google_apps_login_enabled" boolean [note: 'Flag indicating if Google Apps login is enabled for the shop']
+    "has_discounts" boolean [note: 'Flag indicating if the shop offers discounts']
+    "has_gift_cards" boolean [note: 'Flag indicating if the shop offers gift cards']
+    "has_storefront" boolean [note: 'Flag indicating if the shop has a visible storefront']
+    "iana_timezone" varchar [note: 'The IANA timezone of the shop']
+    "id" integer [note: 'The unique identifier of the shop']
+    "latitude" float [note: 'The latitude coordinate of the shop\'s location']
+    "longitude" float [note: 'The longitude coordinate of the shop\'s location']
+    "marketing_sms_consent_enabled_at_checkout" boolean [note: 'Flag indicating if SMS marketing consent is enabled at checkout']
+    "money_format" varchar [note: 'The format used for displaying money']
+    "money_in_emails_format" varchar [note: 'The format used for displaying money in emails']
+    "money_with_currency_format" varchar [note: 'The format used for displaying money with currency']
+    "money_with_currency_in_emails_format" varchar [note: 'The format used for displaying money with currency in emails']
+    "multi_location_enabled" boolean [note: 'Flag indicating if multi-location is enabled for the shop']
+    "myshopify_domain" varchar [note: 'The MyShopify domain of the shop']
+    "name" varchar [note: 'The name of the shop']
+    "password_enabled" boolean [note: 'Flag indicating if password login is enabled for the shop']
+    "phone" varchar [note: 'The phone number associated with the shop']
+    "plan_display_name" varchar [note: 'The display name of the plan the shop is on']
+    "pre_launch_enabled" boolean [note: 'Flag indicating if pre-launch settings are enabled']
+    "cookie_consent_level" varchar [note: 'The level of cookie consent set for the shop']
+    "plan_name" varchar [note: 'The name of the plan the shop is on']
+    "primary_locale" varchar [note: 'The primary locale set for the shop']
+    "primary_location_id" integer [note: 'The ID of the primary location of the shop']
+    "province" varchar [note: 'The province or state where the shop is located']
+    "province_code" varchar [note: 'The code representing the province or state of the shop\'s location']
+    "requires_extra_payments_agreement" boolean [note: 'Flag indicating if an extra payments agreement is required']
+    "setup_required" boolean [note: 'Flag indicating if setup is required for the shop']
+    "shop_owner" varchar [note: 'The owner of the shop']
+    "source" varchar [note: 'The source of the shop data']
+    "taxes_included" boolean [note: 'Flag indicating if taxes are included in prices']
+    "tax_shipping" boolean [note: 'Flag indicating if taxes are applicable to shipping']
+    "timezone" varchar [note: 'The timezone of the shop']
+    "transactional_sms_disabled" boolean [note: 'Flag indicating if transactional SMS is disabled']
+    "updated_at" timestamp [note: 'The date and time when the shop was last updated']
+    "visitor_tracking_consent_preference" varchar [note: 'The visitor tracking consent preference set for the shop']
+    "weight_unit" varchar [note: 'The unit used for measuring weight']
+    "zip" varchar [note: 'The ZIP or postal code of the shop\'s location']
+    "shop_url" varchar [note: 'The URL of the shop']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "smart_collections" {
-    "id" integer
-    "handle" varchar
-    "title" varchar
-    "updated_at" timestamp
-    "body_html" varchar
-    "published_at" timestamp
-    "sort_order" varchar
-    "template_suffix" varchar
-    "disjunctive" boolean
-    "rules" array
-    "published_scope" varchar
-    "admin_graphql_api_id" varchar
-    "shop_url" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" integer [note: 'The unique identifier for the smart collection']
+    "handle" varchar [note: 'The human-friendly URL for the collection']
+    "title" varchar [note: 'The title or name of the smart collection']
+    "updated_at" timestamp [note: 'The date and time when the collection was last updated']
+    "body_html" varchar [note: 'The description or details of the smart collection']
+    "published_at" timestamp [note: 'The date and time when the collection was published']
+    "sort_order" varchar [note: 'The order in which the collection is displayed']
+    "template_suffix" varchar [note: 'The suffix added to the collection template filename']
+    "disjunctive" boolean [note: 'Indicates whether the collection uses disjunctive filtering']
+    "rules" array [note: 'The filtering rules that determine which products are included in the collection']
+    "published_scope" varchar [note: 'The visibility of the collection to different sales channels']
+    "admin_graphql_api_id" varchar [note: 'The unique identifier for the collection in the GraphQL Admin API']
+    "shop_url" varchar [note: 'The URL of the shop where the smart collection belongs']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "tender_transactions" {
-    "id" integer
-    "order_id" integer
-    "amount" varchar
-    "currency" varchar
-    "user_id" integer
-    "test" boolean
-    "processed_at" timestamp
-    "remote_reference" varchar
-    "payment_details" json
-    "payment_method" varchar
-    "shop_url" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "id" integer [note: 'Unique identifier for the tender transaction.']
+    "order_id" integer [note: 'The identifier of the order associated with the transaction.']
+    "amount" varchar [note: 'The transaction amount in the specified currency.']
+    "currency" varchar [note: 'The currency in which the transaction amount is stated.']
+    "user_id" integer [note: 'Unique identifier of the user associated with the transaction.']
+    "test" boolean [note: 'Flag indicating whether the transaction was done in a testing environment.']
+    "processed_at" timestamp [note: 'The date and time when the transaction was processed.']
+    "remote_reference" varchar [note: 'Reference to an external system for the transaction.']
+    "payment_details" json [note: 'Details about the payment made for the transaction.']
+    "payment_method" varchar [note: 'The method used for payment, e.g., credit card, PayPal, etc.']
+    "shop_url" varchar [note: 'The URL of the shop where the transaction took place.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
 
 Table "transactions" {
-    "error_code" varchar
-    "device_id" integer
-    "user_id" integer
-    "parent_id" integer
-    "test" boolean
-    "kind" varchar
-    "order_id" integer
-    "amount" float
-    "amount_set" json
-    "fees" array
-    "authorization" varchar
-    "currency" varchar
-    "source_name" varchar
-    "message" varchar
-    "id" integer
-    "created_at" timestamp
-    "status" varchar
-    "total_unsettled_set" json
-    "payment_id" varchar
-    "payment_details" json
-    "processed_at" timestamp
-    "gateway" varchar
-    "admin_graphql_api_id" varchar
-    "receipt" varchar
-    "location_id" integer
-    "accountNumber" integer
-    "formattedGateway" varchar
-    "manuallyCapturable" boolean
-    "shop_url" varchar
-    "_airbyte_extracted_at" timestamp
-    "_airbyte_meta" json
-    "_airbyte_raw_id" varchar
+    "error_code" varchar [note: 'Error code associated with the transaction']
+    "device_id" integer [note: 'ID of the device used to process the transaction']
+    "user_id" integer [note: 'ID of the user associated with the transaction']
+    "parent_id" integer [note: 'ID of the parent transaction if applicable']
+    "test" boolean [note: 'Flag to indicate if the transaction is a test transaction']
+    "kind" varchar [note: 'Type of transaction']
+    "order_id" integer [note: 'ID of the order associated with the transaction']
+    "amount" float [note: 'The amount of the transaction']
+    "amount_set" json [note: 'The amount and currency of the transaction in shop']
+    "fees" array [note: 'The transaction fees charged on the order transaction. Only present for Shopify Payments transactions.']
+    "authorization" varchar [note: 'Authorization code for the transaction']
+    "currency" varchar [note: 'Currency of the transaction']
+    "source_name" varchar [note: 'Name of the source that initiated the transaction']
+    "message" varchar [note: 'Additional message or notes regarding the transaction']
+    "id" integer [note: 'Unique identifier of the transaction']
+    "created_at" timestamp [note: 'Date and time when the transaction was created']
+    "status" varchar [note: 'Status of the transaction']
+    "total_unsettled_set" json [note: 'Total unsettled amount of the transaction']
+    "payment_id" varchar [note: 'ID of the payment associated with the transaction']
+    "payment_details" json [note: 'Details of the payment transaction']
+    "processed_at" timestamp [note: 'Date and time when the transaction was processed']
+    "gateway" varchar [note: 'Payment gateway used for the transaction']
+    "admin_graphql_api_id" varchar [note: 'Unique identifier for the resource in the GraphQL Admin API']
+    "receipt" varchar [note: 'Receipt information related to the transaction']
+    "location_id" integer [note: 'ID of the location where the transaction took place']
+    "accountNumber" integer [note: 'The masked account number associated with the payment method.']
+    "formattedGateway" varchar [note: 'The human-readable payment gateway name used to process the transaction.']
+    "manuallyCapturable" boolean [note: 'Whether the transaction can be manually captured.']
+    "shop_url" varchar [note: 'URL of the shop where the transaction occurred']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
 }
