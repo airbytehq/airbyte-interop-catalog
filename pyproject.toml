@@ -28,6 +28,7 @@ dependencies = [
     "copier>=9.6.0",
     "jinja2>=3.0.0",
     "marvin>=3.0.2",
+    "pydbml>=1.2.0",  # Added for DBML generation
     "rich>=10.0.0",
     "ruamel-yaml>=0.18.10",
     "tomli-w>=1.0.0",

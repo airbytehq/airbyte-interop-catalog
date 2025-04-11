@@ -194,6 +194,33 @@ uv run morph lock [source_name] [project_name]
 
 To skip generating the lock file during project generation, use the `--no-lock-file` flag with the `build` command.
 
+## DBML and ERD Generation
+
+Morph can generate DBML (Database Markup Language) files from source and target schemas. These files can be used to visualize the database schema as Entity Relationship Diagrams (ERDs).
+
+### Generating DBML Files
+
+DBML files are automatically generated when you build a dbt project:
+
+```bash
+# Build project (includes DBML generation)
+uv run morph build source_name --project-name project_name
+```
+
+### DBML File Location
+
+By default, DBML files are generated in:
+
+- Source schema: `catalog/{source_name}/generated/erd/source.dbml`
+- Target schema: `catalog/{source_name}/generated/erd/target.dbml`
+
+### Visualizing ERDs
+
+The generated DBML files can be visualized using tools like:
+
+- [dbdiagram.io](https://dbdiagram.io/d) - Paste the DBML content
+- [dbdocs.io](https://dbdocs.io/) - For publishing documentation
+
 ## JSON Schema to dbt Sources
 
 Morph can convert JSON schema files to dbt source definitions with field name normalization:

@@ -1,0 +1,686 @@
+Table "calendar_event" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "avatar_url" varchar [note: 'URL of image associated with social media event.']
+    "campaign_guid" varchar [note: 'Value of campaign GUID associated with Task.']
+    "category" varchar [note: '''Type of event. If the event type is PUBLISHING_TASK, it is one of BLOG_POST, EMAIL, LANDING_PAGE, CUSTOM.
+    If event type is SOCIAL, it is one of twitter, facebook, linkedin, googlepluspages.
+    If event type is CONTENT, it is one of email, recurring-email, blog-post, landing-page, legacy-page, site-page.
+    ''']
+    "category_id" varchar [note: '''For event type of PUBLISHING_TASK, a numeric value corresponding to the type of task; one of 3 (BLOG_POST), 2 (EMAIL), 1 (LANDING_PAGE), 0 (CUSTOM).
+    For event type of SOCIAL, this is 0.
+    If event type is CONTENT, it is one of 2 (email, recurring-email), 3 (blog-post), 1 (landing-page), 5 (legacy-page), 4 (site-page).
+    ''']
+    "content_group_id" varchar [note: '''The ID of the content group (aka blog) that the associated Blog Post belongs to, if any.
+    Otherwise null. Only populated for single task GETs and for Blog Post Tasks.
+    ''']
+    "content_id" varchar [note: 'ID value of the COS content object associated with the event, null for social or if nothing associated.']
+    "created_by" varchar [note: 'HubSpot ID of the user that the event was created by.']
+    "description" varchar [note: 'Description of Event.']
+    "event_date" varchar [note: 'If task, When the task is set to be due, otherwise when the event is/ was scheduled for; in milliseconds since the epoch.']
+    "event_type" varchar [note: 'Type of calendar event; for tasks this is PUBLISHING_TASK, for COS Items, this is CONTENT, for social media events, this is SOCIAL']
+    "id" varchar [note: 'The unique ID of the task.']
+    "is_recurring" varchar [note: 'Whether the event is recurring.']
+    "name" varchar [note: 'Name of Event.']
+    "owner_id" varchar [note: 'TASK - HubSpot ID of the user that the task is assigned to.']
+    "portal_id" varchar [note: '{{ doc("portal_id") }}']
+    "preview_key" varchar [note: 'Preview key of content object; used for showing previews of unpublished items.']
+    "social_display_name" varchar [note: 'Social media full name associate with event.']
+    "social_username" varchar [note: 'Social media user name associated with event.']
+    "state" varchar [note: 'For type publishing task, value of TODO or DONE, for others, a value of SCHEDULED, PUBLISHED, PUBLISHED_OR_SCHEDULED.']
+    "topic_ids" varchar [note: 'The list of IDs of topics associated with the associated Blog Post, if any. Otherwise null. Only populated for single task GETs and for Blog Post Tasks.']
+    "url" varchar [note: 'Public URL of content item.']
+}
+
+Table "company" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "id" varchar [note: 'The ID of the company.']
+    "portal_id" varchar [note: '{{ doc("portal_id") }}']
+    "is_deleted" varchar [note: '{{ doc("is_deleted") }}']
+    "property_name" varchar [note: 'The name of the company.']
+    "property_description" varchar [note: 'A short statement about the company\'s mission and goals.']
+    "property_createdate" varchar [note: 'The date the company was added to your account.']
+    "property_industry" varchar [note: 'The type of business the company performs.']
+    "property_address" varchar [note: 'The street address of the company.']
+    "property_address_2" varchar [note: 'Additional address information for the company.']
+    "property_city" varchar [note: 'The city where the company is located.']
+    "property_state" varchar [note: 'The state where the company is located.']
+    "property_country" varchar [note: 'The country where the company is located.']
+    "property_annualrevenue" varchar [note: 'The actual or estimated annual revenue of the company.']
+}
+
+Table "company_property_history" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "company_id" varchar [note: 'The ID of the related company record.']
+    "name" varchar [note: '{{ doc("history_name") }}']
+    "source" varchar [note: '{{ doc("history_source") }}']
+    "source_id" varchar [note: '{{ doc("history_source_id") }}']
+    "timestamp" varchar [note: '{{ doc("history_timestamp") }}']
+    "value" varchar [note: '{{ doc("history_value") }}']
+}
+
+Table "contact_merge_audit" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "canonical_vid" varchar [note: 'The contact ID of the contact which the vid_to_merge contact was merged into.']
+    "contact_id" varchar [note: 'The ID of the contact.']
+    "entity_id" varchar [note: 'The ID of the related entity.']
+    "first_name" varchar [note: 'The contact\'s first name.']
+    "last_name" varchar [note: 'The contact\'s last name.']
+    "num_properties_moved" varchar [note: 'The number of properties which were removed from the merged contact.']
+    "timestamp" varchar [note: 'Timestamp of when the contacts were merged.']
+    "user_id" varchar [note: 'The ID of the user.']
+    "vid_to_merge" varchar [note: 'The ID of the contact which was merged.']
+}
+
+Table "contact" {
+    "_fivetran_deleted" varchar [note: '{{ doc("_fivetran_deleted") }}']
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "id" varchar [note: 'The ID of the contact.']
+    "property_email_1" varchar [note: 'The email address of the contact.']
+    "property_company" varchar [note: 'The name of the contact\'s company.']
+    "property_firstname" varchar [note: 'The contact\'s first name.']
+    "property_lastname" varchar [note: 'The contact\'s last name.']
+    "property_email" varchar [note: 'The contact\'s email.']
+    "property_createdate" varchar [note: 'The date that the contact was created in your HubSpot account.']
+    "property_jobtitle" varchar [note: 'The contact\'s job title.']
+    "property_annualrevenue" varchar [note: 'The contact\'s annual company revenue.']
+    "property_hs_calculated_merged_vids" varchar [note: '''List of mappings representing contact IDs that have been merged into the contact at hand. Format: <merged_contact_id>:<merged_at_in_epoch_time>;<second_merged_contact_id>:<merged_at_in_epoch_time> This field has replaced the `CONTACT_MERGE_AUDIT` table, which was deprecated by the Hubspot v3 CRM API.
+    ''']
+}
+
+Table "contact_form_submission" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "contact_id" varchar [note: 'The ID of the related contact.']
+    "conversion_id" varchar [note: 'A Unique ID for the specific form conversion.']
+    "form_id" varchar [note: 'The GUID of the form that the submission belongs to.']
+    "page_url" varchar [note: 'The URL that the form was submitted on, if applicable.']
+    "portal_id" varchar [note: '{{ doc("portal_id") }}']
+    "timestamp" varchar [note: 'A Unix timestamp in milliseconds of the time the submission occurred.']
+    "title" varchar [note: 'The title of the page that the form was submitted on. This will default to the name of the form if no title is provided.']
+}
+
+Table "contact_list" {
+    "_fivetran_deleted" varchar [note: '{{ doc("_fivetran_deleted") }}']
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "created_at" varchar [note: 'A timestamp of the time the list was created.']
+    "id" varchar [note: 'The ID of the contact list.']
+    "name" varchar [note: 'The name of the contact list.']
+    "updated_at" varchar [note: 'A timestamp of the time that the list was last modified.']
+    "created_by_id" varchar [note: 'The unique identifier of the user who created the contact list.']
+    "object_type_id" varchar [note: 'The ID that corresponds to the type of object stored by the list.']
+    "processing_status" varchar [note: 'Indicates the current status of the list\'s processing, such as \'COMPLETE\', \'PROCESSING\', \'DONE\', or \'FAILED\'.']
+    "processing_type" varchar [note: 'Specifies the type of processing applied to the list, for example, \'STATIC\' for static lists or \'DYNAMIC\' for dynamic lists.']
+    "list_version" varchar [note: 'Represents the version number of the list, incrementing with each modification.']
+    "filters_updated_at" varchar [note: 'The timestamp indicating when the list\'s filters were last updated.']
+    "metadata_error" varchar [note: '''Any errors that happened the last time the list was processed.
+    NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.
+    ''']
+    "metadata_last_processing_state_change_at" varchar [note: '''A timestamp of the last time that the processing state changed.
+    NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.
+    ''']
+    "metadata_last_size_change_at" varchar [note: '''A timestamp of the last time that the size of the list changed.
+    NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.
+    ''']
+    "metadata_processing" varchar [note: '''One of DONE, REFRESHING, INITIALIZING, or PROCESSING. DONE indicates the list has finished processing, any other value indicates that list membership is being evaluated.
+    NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.
+    ''']
+    "metadata_size" varchar [note: '''The approximate number of contacts in the list.
+    NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.
+    ''']
+    "portal_id" varchar [note: '''\'{{ doc("portal_id") }}\'
+    NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.
+    ''']
+    "deleteable" varchar [note: '''If this is false, this is a system list and cannot be deleted.
+    NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.
+    ''']
+    "dynamic" varchar [note: '''Whether the contact list is dynamic.
+    NOTE: This field is deprecated and will not be populated for connectors utilizing the HubSpot v3 API. This field will be removed in a future release.
+    ''']
+}
+
+Table "contact_list_member" {
+    "_fivetran_deleted" varchar [note: '{{ doc("_fivetran_deleted") }}']
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "added_at" varchar [note: 'The timestamp a contact was added to a list.']
+    "contact_id" varchar [note: 'The ID of the related contact.']
+    "contact_list_id" varchar [note: 'The ID of the related contact list.']
+}
+
+Table "contact_property_history" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "contact_id" varchar [note: 'The ID of the related contact record.']
+    "name" varchar [note: '{{ doc("history_name") }}']
+    "source" varchar [note: '{{ doc("history_source") }}']
+    "source_id" varchar [note: '{{ doc("history_source_id") }}']
+    "timestamp" varchar [note: '{{ doc("history_timestamp") }}']
+    "value" varchar [note: '{{ doc("history_value") }}']
+}
+
+Table "deal" {
+    "deal_id" varchar [note: 'The ID of the deal.']
+    "is_deleted" varchar [note: 'Whether the record was deleted.']
+    "portal_id" varchar [note: '{{ doc("portal_id") }}']
+    "deal_pipeline_id" varchar [note: 'The ID of the deal\'s pipeline.']
+    "deal_pipeline_stage_id" varchar [note: 'The ID of the deal\'s pipeline stage.']
+    "owner_id" varchar [note: 'The ID of the deal\'s owner.']
+    "property_dealname" varchar [note: 'The name you have given this deal.']
+    "property_description" varchar [note: 'A brief description of the deal.']
+    "property_amount" varchar [note: 'The total value of the deal in the deal\'s currency.']
+    "property_closedate" varchar [note: 'The day the deal is expected to close, or was closed.']
+    "property_createdate" varchar [note: 'The date the deal was created. This property is set automatically by HubSpot.']
+}
+
+Table "deal_stage" {
+    "_fivetran_active" varchar [note: 'Boolean indicating whether the deal stage is active.']
+    "_fivetran_end" varchar [note: 'The Fivetran calculated exist time of the deal stage.']
+    "_fivetran_start" varchar [note: 'The date the deal stage was entered.']
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "date_entered" varchar [note: 'The timestamp the deal stage was entered.']
+    "deal_id" varchar [note: 'Reference to the deal.']
+    "source" varchar [note: 'The relevant source of the deal stage.']
+    "source_id" varchar [note: 'Reference to the source.']
+    "value" varchar [note: 'The value of the deal stage. Typically the name of the stage.']
+}
+
+Table "deal_company" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "company_id" varchar [note: 'The ID of the company.']
+    "deal_id" varchar [note: 'The ID of the deal.']
+    "type_id" varchar [note: 'The ID of the type.']
+    "category" varchar [note: 'The association category. Either HUBSPOT_DEFINED (default label) or USER_DEFINED (custom label).']
+}
+
+Table "deal_contact" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "contact_id" varchar [note: 'The ID of the contact.']
+    "deal_id" varchar [note: 'The ID of the deal.']
+    "type_id" varchar [note: 'The ID of the type.']
+    "category" varchar [note: 'The association category. Either HUBSPOT_DEFINED (default label) or USER_DEFINED (custom label).']
+}
+
+Table "deal_pipeline" {
+    "_fivetran_deleted" varchar [note: '{{ doc("_fivetran_deleted") }}']
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "active" varchar [note: 'Whether the stage is currently in use.']
+    "display_order" varchar [note: 'Used to determine the order in which the pipelines appear when viewed in HubSpot.']
+    "label" varchar [note: 'The human-readable label for the pipeline. The label is used when showing the pipeline in HubSpot.']
+    "pipeline_id" varchar [note: 'The ID of the pipeline.']
+    "created_at" varchar [note: 'A timestamp representing when the record was created.']
+    "updated_at" varchar [note: 'A timestamp representing when the record was updated.']
+}
+
+Table "deal_pipeline_stage" {
+    "_fivetran_deleted" varchar [note: '{{ doc("_fivetran_deleted") }}']
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "active" varchar [note: 'Whether the pipeline stage is currently in use.']
+    "closed_won" varchar [note: 'Whether the stage represents a Closed Won deal.']
+    "display_order" varchar [note: 'Used to determine the order in which the stages appear when viewed in HubSpot.']
+    "label" varchar [note: 'The human-readable label for the stage. The label is used when showing the stage in HubSpot.']
+    "pipeline_id" varchar [note: 'The ID of the related pipeline.']
+    "probability" varchar [note: 'The probability that the deal will close. Used for the deal forecast.']
+    "stage_id" varchar [note: 'The ID of the pipeline stage.']
+    "created_at" varchar [note: 'A timestamp representing when the record was created.']
+    "updated_at" varchar [note: 'A timestamp representing when the record was updated.']
+}
+
+Table "deal_property_history" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "deal_id" varchar [note: 'The ID of the related deal record.']
+    "name" varchar [note: '{{ doc("history_name") }}']
+    "source" varchar [note: '{{ doc("history_source") }}']
+    "source_id" varchar [note: '{{ doc("history_source_id") }}']
+    "timestamp" varchar [note: '{{ doc("history_timestamp") }}']
+    "value" varchar [note: '{{ doc("history_value") }}']
+}
+
+Table "email_campaign" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "app_id" varchar [note: 'The app ID.']
+    "app_name" varchar [note: 'The app name.']
+    "content_id" varchar [note: 'The ID of the content.']
+    "id" varchar [note: 'The ID of the email campaign.']
+    "name" varchar [note: 'The name of the email campaign.']
+    "num_included" varchar [note: 'The number of messages included as part of the email campaign.']
+    "num_queued" varchar [note: 'The number of messages queued as part of the email campaign.']
+    "sub_type" varchar [note: 'The email campaign sub-type.']
+    "subject" varchar [note: 'The subject of the email campaign.']
+    "type" varchar [note: 'The email campaign type.']
+}
+
+Table "email_event" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "app_id" varchar [note: 'The ID of the app that sent the email.']
+    "caused_by_created" varchar [note: 'The timestamp of the event that caused this event.']
+    "caused_by_id" varchar [note: 'The event ID which uniquely identifies the event which directly caused this event. If not applicable, this property is omitted.']
+    "created" varchar [note: 'The created timestamp of the event.']
+    "email_campaign_id" varchar [note: 'The ID of the related email campaign.']
+    "filtered_event" varchar [note: 'A boolean representing whether the event has been filtered out of reporting based on customer reports settings or not.']
+    "id" varchar [note: 'The ID of the event.']
+    "obsoleted_by_created" varchar [note: 'The timestamp of the event that made the current event obsolete.']
+    "obsoleted_by_id" varchar [note: 'The event ID which uniquely identifies the follow-on event which makes this current event obsolete. If not applicable, this property is omitted.']
+    "portal_id" varchar [note: '{{ doc("portal_id") }}']
+    "recipient" varchar [note: 'The email address of the contact related to the event.']
+    "sent_by_created" varchar [note: 'The timestamp of the SENT event related to this event.']
+    "sent_by_id" varchar [note: 'The event ID which uniquely identifies the email message\'s SENT event. If not applicable, this property is omitted.']
+    "type" varchar [note: 'The type of event.']
+}
+
+Table "email_event_bounce" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "category" varchar [note: '''The best-guess of the type of bounce encountered.
+    If an appropriate category couldn\'t be determined, this property is omitted. See below for the possible values.
+    Note that this is a derived value, and may be modified at any time to improve the accuracy of classification.
+    ''']
+    "id" varchar [note: 'The ID of the event.']
+    "response" varchar [note: 'The full response from the recipient\'s email server.']
+    "status" varchar [note: 'The status code returned from the recipient\'s email server.']
+}
+
+Table "email_event_click" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "browser" varchar [note: '{{ doc("email_event_browser") }}']
+    "id" varchar [note: 'The ID of the event.']
+    "ip_address" varchar [note: '{{ doc("email_event_ip_address") }}']
+    "location" varchar [note: '{{ doc("email_event_location") }}']
+    "referer" varchar [note: 'The URL of the webpage that linked to the URL clicked. Whether this is provided, and what its value is, is determined by the recipient\'s email client.']
+    "url" varchar [note: 'The URL within the message that the recipient clicked.']
+    "user_agent" varchar [note: '{{ doc("email_event_user_agent") }}']
+}
+
+Table "email_event_deferred" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "attempt" varchar [note: 'The delivery attempt number.']
+    "id" varchar [note: 'The ID of the event.']
+    "response" varchar [note: 'The full response from the recipient\'s email server.']
+}
+
+Table "email_event_delivered" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "id" varchar [note: 'The ID of the event.']
+    "response" varchar [note: 'The full response from the recipient\'s email server.']
+    "smtp_id" varchar [note: 'An ID attached to the message by HubSpot.']
+}
+
+Table "email_event_dropped" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "bcc" varchar [note: 'The \'bcc\' field of the email message.']
+    "cc" varchar [note: 'The \'cc\' field of the email message.']
+    "drop_message" varchar [note: 'The raw message describing why the email message was dropped. This will usually provide additional details beyond \'dropReason\'.']
+    "drop_reason" varchar [note: 'The reason why the email message was dropped. See below for the possible values.']
+    "from" varchar [note: 'The \'from\' field of the email message.']
+    "id" varchar [note: 'The ID of the event.']
+    "reply_to" varchar [note: 'The \'reply-to\' field of the email message.']
+    "subject" varchar [note: 'The subject line of the email message.']
+}
+
+Table "email_event_forward" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "browser" varchar [note: '{{ doc("email_event_browser") }}']
+    "id" varchar [note: 'The ID of the event.']
+    "ip_address" varchar [note: '{{ doc("email_event_ip_address") }}']
+    "location" varchar [note: '{{ doc("email_event_location") }}']
+    "user_agent" varchar [note: '{{ doc("email_event_user_agent") }}']
+}
+
+Table "email_event_open" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "browser" varchar [note: '{{ doc("email_event_browser") }}']
+    "duration" varchar [note: 'If provided and nonzero, the approximate number of milliseconds the user had opened the email.']
+    "id" varchar [note: 'The ID of the event.']
+    "ip_address" varchar [note: '{{ doc("email_event_ip_address") }}']
+    "location" varchar [note: '{{ doc("email_event_location") }}']
+    "user_agent" varchar [note: '{{ doc("email_event_user_agent") }}']
+}
+
+Table "email_event_print" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "browser" varchar [note: '{{ doc("email_event_browser") }}']
+    "id" varchar [note: 'The ID of the event.']
+    "ip_address" varchar [note: '{{ doc("email_event_ip_address") }}']
+    "location" varchar [note: '{{ doc("email_event_location") }}']
+    "user_agent" varchar [note: '{{ doc("email_event_user_agent") }}']
+}
+
+Table "email_event_sent" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "bcc" varchar [note: 'The \'cc\' field of the email message.']
+    "cc" varchar [note: 'The \'bcc\' field of the email message.']
+    "from" varchar [note: 'The \'from\' field of the email message.']
+    "id" varchar [note: 'The ID of the event.']
+    "reply_to" varchar [note: 'The \'reply-to\' field of the email message.']
+    "subject" varchar [note: 'The subject line of the email message.']
+}
+
+Table "email_event_spam_report" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "id" varchar [note: 'The ID of the event.']
+    "ip_address" varchar [note: '{{ doc("email_event_ip_address") }}']
+    "user_agent" varchar [note: '{{ doc("email_event_user_agent") }}']
+}
+
+Table "email_event_status_change" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "bounced" varchar [note: '''A HubSpot employee explicitly initiated the status change to block messages to the recipient.
+    (Note this usage has been deprecated in favor of dropping messages with a \'dropReason\' of BLOCKED_ADDRESS.)
+    ''']
+    "id" varchar [note: 'The ID of the event.']
+    "portal_subscription_status" varchar [note: '''The recipient\'s portal subscription status.
+    Note that if this is \'UNSUBSCRIBED\', the property \'subscriptions\' is not necessarily an empty array, nor are all
+    subscriptions contained in it necessarily going to have their statuses set to \'UNSUBSCRIBED\'.)
+    ''']
+    "requested_by" varchar [note: 'The email address of the person requesting the change on behalf of the recipient. If not applicable, this property is omitted.']
+    "source" varchar [note: 'The source of the subscription change.']
+    "subscriptions" varchar [note: '''An array of JSON objects representing the status of subscriptions for the recipient.
+    Each JSON subscription object is comprised of the properties: \'id\', \'status\'.
+    ''']
+}
+
+Table "email_subscription" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "active" varchar [note: 'Whether the subscription is active.']
+    "description" varchar [note: 'The description of the subscription.']
+    "id" varchar [note: 'The ID of the email subscription.']
+    "name" varchar [note: 'The name of the email subscription.']
+    "portal_id" varchar [note: '{{ doc("portal_id") }}']
+}
+
+Table "email_subscription_change" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "caused_by_event_id" varchar [note: 'The ID of the event that caused the subscription change.']
+    "change" varchar [note: 'The change which occurred. This enumeration is specific to the \'changeType\'; see below for the possible values.']
+    "change_type" varchar [note: 'The type of change which occurred.']
+    "email_subscription_id" varchar [note: 'The ID of the related email subscription.']
+    "portal_id" varchar [note: '{{ doc("portal_id") }}']
+    "recipient" varchar [note: 'The email address of the related contact.']
+    "source" varchar [note: 'The source of the subscription change.']
+    "timestamp" varchar [note: 'The timestamp when this change occurred. If \'causedByEvent\' is present, this will be absent.']
+}
+
+Table "engagement" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "active" varchar [note: '''Whether the engagement is currently being shown in the UI.
+    PLEASE NOTE: This field will not be populated for connectors utilizing the HubSpot v3 API version. This field will be deprecated in a future release.
+    ''']
+    "created_at" varchar [note: '''A timestamp representing when the engagement was created.
+    PLEASE NOTE: This field will not be populated for connectors utilizing the HubSpot v3 API version. This field will be deprecated in a future release.
+    ''']
+    "id" varchar [note: 'The ID of the engagement.']
+    "owner_id" varchar [note: '''The ID of the engagement\'s owner.
+    PLEASE NOTE: This field will not be populated for connectors utilizing the HubSpot v3 API version. This field will be deprecated in a future release.
+    ''']
+    "portal_id" varchar [note: '{{ doc("portal_id") }}']
+    "timestamp" varchar [note: '''A timestamp in representing the time that the engagement should appear in the timeline.
+    PLEASE NOTE: This field will not be populated for connectors utilizing the HubSpot v3 API version. This field will be deprecated in a future release.
+    ''']
+    "type" varchar [note: 'One of NOTE, EMAIL, TASK, MEETING, or CALL, the type of the engagement.']
+}
+
+Table "engagement_call" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "engagement_id" varchar [note: 'The ID of the engagement.']
+    "_fivetran_deleted" varchar [note: 'Boolean to mark rows that were deleted in the source database.']
+    "property_hs_createdate" varchar [note: '''This field marks the call\'s time of creation and determines where the call sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
+    PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
+    ''']
+    "timestamp" varchar [note: '''This field marks the call\'s time of occurrence and determines where the call sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
+    PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
+    ''']
+    "property_hubspot_owner_id" varchar [note: '''The ID of the owner associated with the call. This field determines the user listed as the call creator on the record timeline.
+    PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
+    ''']
+    "property_hubspot_team_id" varchar [note: '''The ID of the team associated with the call. This field determines the team listed as the call creator on the record timeline.
+    PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version.
+    ''']
+}
+
+Table "engagement_company" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "company_id" varchar [note: 'The ID of the related company.']
+    "engagement_id" varchar [note: 'The ID of the related engagement.']
+    "category" varchar [note: 'The association category. Either HUBSPOT_DEFINED (default label) or USER_DEFINED (custom label).']
+}
+
+Table "engagement_contact" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "contact_id" varchar [note: 'The ID of the related contact.']
+    "engagement_id" varchar [note: 'The ID of the related engagement.']
+    "category" varchar [note: 'The association category. Either HUBSPOT_DEFINED (default label) or USER_DEFINED (custom label).']
+}
+
+Table "engagement_deal" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "deal_id" varchar [note: 'The ID of the related contact.']
+    "engagement_id" varchar [note: 'The ID of the related engagement.']
+    "category" varchar [note: 'The association category. Either HUBSPOT_DEFINED (default label) or USER_DEFINED (custom label).']
+}
+
+Table "engagement_email" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "engagement_id" varchar [note: 'The ID of the engagement.']
+    "property_hs_createdate" varchar [note: '''This field marks the email\'s time of creation and determines where the email sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
+    PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
+    ''']
+    "timestamp" varchar [note: '''This field marks the email\'s time of occurrence and determines where the email sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
+    PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
+    ''']
+    "property_hubspot_owner_id" varchar [note: '''The ID of the owner associated with the email. This field determines the user listed as the email creator on the record timeline.
+    PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
+    ''']
+    "property_hubspot_team_id" varchar [note: '''The ID of the team associated with the email. This field determines the team listed as the email creator on the record timeline.
+    PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version.
+    ''']
+}
+
+Table "engagement_email_cc" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "email" varchar [note: 'The email address of the recipient.']
+    "engagement_id" varchar [note: 'The ID of the related engagement.']
+    "first_name" varchar [note: 'The first name of the recipient.']
+    "last_name" varchar [note: 'The last name of the recipient.']
+}
+
+Table "engagement_email_to" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "email" varchar [note: 'The email address of the recipient.']
+    "engagement_id" varchar [note: 'The ID of the related engagement.']
+    "first_name" varchar [note: 'The first name of the recipient.']
+    "last_name" varchar [note: 'The last name of the recipient.']
+}
+
+Table "engagement_meeting" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "engagement_id" varchar [note: 'The ID of the engagement.']
+    "property_hs_createdate" varchar [note: '''This field marks the meeting\'s time of creation and determines where the meeting sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
+    PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
+    ''']
+    "timestamp" varchar [note: '''This field marks the meeting\'s time of occurrence and determines where the meeting sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
+    PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
+    ''']
+    "property_hubspot_owner_id" varchar [note: '''The ID of the owner associated with the meeting. This field determines the user listed as the meeting creator on the record timeline.
+    PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
+    ''']
+    "property_hubspot_team_id" varchar [note: '''The ID of the team associated with the meeting. This field determines the team listed as the meeting creator on the record timeline.
+    PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version.
+    ''']
+}
+
+Table "engagement_note" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "body" varchar [note: 'The body of the note. The body has a limit of 65536 characters.']
+    "engagement_id" varchar [note: 'The ID of the engagement.']
+    "property_hs_createdate" varchar [note: '''This field marks the note\'s time of creation and determines where the note sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
+    PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
+    ''']
+    "timestamp" varchar [note: '''This field marks the note\'s time of occurrence and determines where the note sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
+    PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
+    ''']
+    "property_hubspot_owner_id" varchar [note: '''The ID of the owner associated with the note. This field determines the user listed as the note creator on the record timeline.
+    PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
+    ''']
+    "property_hubspot_team_id" varchar [note: '''The ID of the team associated with the note. This field determines the team listed as the note creator on the record timeline.
+    PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version.
+    ''']
+}
+
+Table "engagement_task" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "engagement_id" varchar [note: 'The ID of the engagement.']
+    "property_hs_createdate" varchar [note: '''This field marks the task\'s time of creation and determines where the task sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
+    PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
+    ''']
+    "timestamp" varchar [note: '''This field marks the task\'s time of occurrence and determines where the task sits on the record timeline. You can use either a Unix timestamp in milliseconds or UTC format. 
+    PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
+    ''']
+    "property_hubspot_owner_id" varchar [note: '''The ID of the owner associated with the task. This field determines the user listed as the task creator on the record timeline.
+    PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version. For the pre HubSpot v3 versions, this value may be found within the parent `engagement` table.
+    ''']
+    "property_hubspot_team_id" varchar [note: '''The ID of the team associated with the task. This field determines the team listed as the task creator on the record timeline.
+    PLEASE NOTE: This field will only be populated for connectors utilizing the HubSpot v3 API version.
+    ''']
+}
+
+Table "form" {
+    "_fivetran_deleted" varchar [note: '{{ doc("_fivetran_deleted") }}']
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "created_at" varchar [note: 'A timestamp for when the form was created.']
+    "css_class" varchar [note: 'The CSS classes assigned to the form.']
+    "follow_up_id" varchar [note: 'This field is no longer used.']
+    "guid" varchar [note: 'The internal ID of the form.']
+    "lead_nurturing_campaign_id" varchar [note: 'TBD']
+    "method" varchar [note: 'This field is no longer used.']
+    "name" varchar [note: 'The name of the form.']
+    "notify_recipients" varchar [note: '''A comma-separated list of user IDs that should receive submission notifications.
+    Email addresses will be returned for individuals who aren\'t users.
+    ''']
+    "portal_id" varchar [note: '{{ doc("portal_id") }}']
+    "redirect" varchar [note: 'The URL that the visitor will be redirected to after filling out the form.']
+    "submit_text" varchar [note: 'The text used for the submit button.']
+    "updated_at" varchar [note: 'A timestamp for when the form was last updated.']
+}
+
+Table "owner" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "created_at" varchar [note: 'A timestamp for when the owner was created.']
+    "email" varchar [note: 'The email address of the owner.']
+    "first_name" varchar [note: 'The first name of the owner.']
+    "last_name" varchar [note: 'The last name of the owner.']
+    "owner_id" varchar [note: 'The ID of the owner.']
+    "portal_id" varchar [note: '{{ doc("portal_id") }}']
+    "type" varchar [note: 'The type of owner.']
+    "updated_at" varchar
+}
+
+Table "property" {
+    "_fivetran_id" varchar [note: 'Fivetran generated id. Joins to `property_id` in the `property_option` table.']
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "calculated" varchar [note: 'Indicates if the property is calculated by a HubSpot process']
+    "created_at" varchar [note: 'Timestamp representing when the property was created.']
+    "description" varchar [note: 'A description of the property.']
+    "field_type" varchar [note: 'One of textarea, text, date, file, number, select, radio, checkbox, or booleancheckbox.']
+    "group_name" varchar [note: 'The name of the property group that the property belongs to.']
+    "hubspot_defined" varchar [note: 'This will be true for default properties that are built into HubSpot.']
+    "hubspot_object" varchar [note: 'If this property is related to other objects, the object will be listed here.']
+    "label" varchar [note: 'A human readable label for the property.']
+    "name" varchar [note: 'The internal name of the property.']
+    "show_currency_symbol" varchar [note: 'If true, the property will display the currency symbol set in the portal settings.']
+    "type" varchar [note: 'One of string, number, date, datetime, or enumeration.']
+    "updated_at" varchar [note: 'Timestamp representing when the property was last updated.']
+}
+
+Table "property_option" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "label" varchar [note: 'The label of the option displayed inside the HubSpot app.']
+    "property_id" varchar [note: 'The ID of the related property.']
+    "display_order" varchar [note: 'Order of options displayed in Hubspot, starting with the lowest positive integer value. Values of -1 will cause the option to be displayed after any positive values.']
+    "hidden" varchar [note: 'Boolean if the option will be displayed in HubSpot']
+    "value" varchar [note: 'The internal value of the option.']
+}
+
+Table "ticket_company" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "ticket_id" varchar [note: 'The ID of the related ticket.']
+    "company_id" varchar [note: 'The ID of the related company.']
+    "category" varchar [note: 'The association category. Either HUBSPOT_DEFINED (default label) or USER_DEFINED (custom label).']
+}
+
+Table "ticket_contact" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "ticket_id" varchar [note: 'The ID of the related ticket.']
+    "contact_id" varchar [note: 'The ID of the related contact.']
+    "category" varchar [note: 'The association category. Either HUBSPOT_DEFINED (default label) or USER_DEFINED (custom label).']
+}
+
+Table "ticket_deal" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "ticket_id" varchar [note: 'The ID of the related ticket.']
+    "deal_id" varchar [note: 'The ID of the related deal.']
+    "category" varchar [note: 'The association category. Either HUBSPOT_DEFINED (default label) or USER_DEFINED (custom label).']
+}
+
+Table "ticket_engagement" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "ticket_id" varchar [note: 'The ID of the related ticket.']
+    "engagement_id" varchar [note: 'The ID of the related deal.']
+    "category" varchar [note: 'The association category. Either HUBSPOT_DEFINED (default label) or USER_DEFINED (custom label).']
+}
+
+Table "ticket_pipeline_stage" {
+    "_fivetran_deleted" varchar [note: '{{ doc("_fivetran_deleted") }}']
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "active" varchar [note: 'Boolean indicating whether the pipeline stage is active.']
+    "display_order" varchar [note: 'Used to determine the order in which the stages appear when viewed in HubSpot.']
+    "is_closed" varchar [note: 'Boolean indicating if the pipeline stage is closed.']
+    "label" varchar [note: 'The human-readable label for the stage. The label is used when showing the stage in HubSpot.']
+    "pipeline_id" varchar [note: 'The ID of the pipeline.']
+    "stage_id" varchar [note: 'The ID of the pipeline stage.']
+    "ticket_state" varchar [note: 'State of the ticket.']
+    "created_at" varchar [note: 'A timestamp representing when the record was created.']
+    "updated_at" varchar [note: 'A timestamp representing when the record was updated.']
+}
+
+Table "ticket_pipeline" {
+    "_fivetran_deleted" varchar [note: '{{ doc("_fivetran_deleted") }}']
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "active" varchar [note: 'Boolean indicating whether the pipeline is active.']
+    "display_order" varchar [note: 'Used to determine the order in which the stages appear when viewed in HubSpot.']
+    "label" varchar [note: 'The human-readable label for the stage. The label is used when showing the stage in HubSpot.']
+    "object_type_id" varchar [note: 'Reference to the object type.']
+    "pipeline_id" varchar [note: 'Reference to the pipeline.']
+    "created_at" varchar [note: 'A timestamp representing when the record was created.']
+    "updated_at" varchar [note: 'A timestamp representing when the record was updated.']
+}
+
+Table "ticket_property_history" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "source" varchar [note: '{{ doc("history_source") }}']
+    "source_id" varchar [note: '{{ doc("history_source_id") }}']
+    "timestamp_instant" varchar [note: '{{ doc("history_timestamp") }}']
+    "ticket_id" varchar [note: 'The ID of the related ticket record.']
+    "name" varchar [note: '{{ doc("history_name") }}']
+    "value" varchar [note: '{{ doc("history_value") }}']
+    "_fivetran_start" varchar [note: '{{ doc("_fivetran_start") }}']
+    "_fivetran_end" varchar [note: '{{ doc("_fivetran_end") }}']
+}
+
+Table "ticket" {
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+    "id" varchar [note: 'ID of the ticket.']
+    "is_deleted" varchar [note: 'Whether the record was deleted (v2 endpoint).']
+    "_fivetran_deleted" varchar [note: 'Whether the record was deleted (v3 endpoint).']
+    "portal_id" varchar [note: '{{ doc("portal_id") }}']
+    "property_closed_date" varchar [note: 'The date the ticket was closed.']
+    "property_createdate" varchar [note: 'The date the ticket was created.']
+    "property_first_agent_reply_date" varchar [note: 'the date for the first agent reply on the ticket.']
+    "property_hs_pipeline" varchar [note: 'The ID of the ticket\'s pipeline.']
+    "property_hs_pipeline_stage" varchar [note: 'The ID of the ticket\'s pipeline stage.']
+    "property_hs_ticket_priority" varchar [note: 'The priority of the ticket.']
+    "property_hs_ticket_category" varchar [note: 'The category of the ticket.']
+    "property_hubspot_owner_id" varchar [note: 'The ID of the deal\'s owner.']
+    "property_subject" varchar [note: 'Short summary of ticket.']
+    "property_content" varchar [note: 'Text in body of the ticket.']
+}
+
+Table "merged_deal" {
+    "deal_id" varchar [note: 'The ID of the deal the record has been merged INTO.']
+    "merged_deal_id" varchar [note: 'ID of deal that has been merged.']
+    "_fivetran_synced" varchar [note: '{{ doc("_fivetran_synced") }}']
+}

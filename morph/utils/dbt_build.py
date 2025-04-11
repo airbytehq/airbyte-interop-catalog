@@ -96,6 +96,11 @@ def build_dbt_project(
         # Copy sources.yml into the generated directory
         shutil.copy(generated_sources_path, new_sources_path)
 
+        from morph.utils.dbml.dbml_generator import generate_source_dbml, generate_target_dbml
+
+        generate_source_dbml(source_name=source_name, project_name=project_name)
+        generate_target_dbml(source_name=source_name, project_name=project_name)
+
         console.print(f"Generated dbt project at {dbt_project_dir}")
     except Exception as e:
         console.print(f"Error generating dbt project: {e}", style="bold red")
