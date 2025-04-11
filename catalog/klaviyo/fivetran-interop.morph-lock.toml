@@ -1,0 +1,333 @@
+[project]
+source_name = "klaviyo"
+project_name = "fivetran-interop"
+requirements_file = "catalog/klaviyo/requirements/fivetran-interop/src_dbt_requirements.yml"
+requirements_file_hash = "097e0e63ba70c1caea1ae2993a2e8deea10eab751c6b978c03ecd6f2cce22043"
+airbyte_source_file = "catalog/klaviyo/generated/src_airbyte_klaviyo.yml"
+airbyte_source_file_hash = "2b796748f238c6525536eafe671b278568155a8f7063b6f63437dfe8ccc9bc8d"
+
+[coverage]
+unused_source_streams = [
+    "campaigns_detailed",
+    "email_templates",
+    "events_detailed",
+    "global_exclusions",
+    "lists",
+    "lists_detailed",
+]
+unmapped_target_tables = []
+
+[mappings.campaign]
+source_file = "catalog/klaviyo/src/fivetran-interop/transforms/campaign.yml"
+source_file_hash = "b087416178d63a314029e97dce9fdadfa55d9122cf19dc9b284c7e29bda99322"
+unmapped_target_fields = []
+omitted_target_fields = [
+    "archived",
+    "scheduled",
+    "status_id",
+    "status_label",
+    "subject",
+    "updated",
+]
+erroneous_source_table_columns = [
+    "attributes.from_email",
+    "attributes.from_name",
+    "attributes.sent_at",
+    "attributes.template_id",
+]
+
+[mappings.campaign.mapped_target_fields]
+_fivetran_deleted = "campaigns.attributes.archived"
+campaign_type = "campaigns.attributes.channel"
+created = "campaigns.attributes.created_at"
+email_template_id = "campaigns.attributes.template_id"
+from_email = "campaigns.attributes.from_email"
+from_name = "campaigns.attributes.from_name"
+id = "campaigns.id"
+name = "campaigns.attributes.name"
+send_time = "campaigns.attributes.send_time"
+sent_at = "campaigns.attributes.sent_at"
+status = "campaigns.attributes.status"
+_fivetran_synced = "campaigns._airbyte_extracted_at"
+
+[mappings.campaign.unused_source_fields]
+campaigns = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "attributes.audiences",
+    "attributes.audiences.excluded",
+    "attributes.audiences.included",
+    "attributes.message",
+    "attributes.scheduled_at",
+    "attributes.send_options",
+    "attributes.send_options.ignore_unsubscribes",
+    "attributes.send_options.use_smart_sending",
+    "attributes.send_strategy",
+    "attributes.send_strategy.method",
+    "attributes.send_strategy.options_static",
+    "attributes.send_strategy.options_static.datetime",
+    "attributes.send_strategy.options_static.is_local",
+    "attributes.send_strategy.options_static.send_past_recipients_immediately",
+    "attributes.send_strategy.options_sto",
+    "attributes.send_strategy.options_sto.date",
+    "attributes.send_strategy.options_throttled",
+    "attributes.send_strategy.options_throttled.datetime",
+    "attributes.send_strategy.options_throttled.throttle_percentage",
+    "attributes.tracking_options",
+    "attributes.tracking_options.add_tracking_params",
+    "attributes.tracking_options.is_add_utm",
+    "attributes.tracking_options.is_tracking_clicks",
+    "attributes.tracking_options.is_tracking_opens",
+    "attributes.tracking_options.utm_params",
+    "attributes.updated_at",
+    "links",
+    "links.self",
+    "relationships",
+    "relationships.campaign-messages",
+    "relationships.campaign-messages.data",
+    "relationships.campaign-messages.links",
+    "relationships.campaign-messages.links.related",
+    "relationships.campaign-messages.links.self",
+    "relationships.tags",
+    "relationships.tags.data",
+    "relationships.tags.links",
+    "relationships.tags.links.related",
+    "relationships.tags.links.self",
+    "type",
+    "updated_at",
+]
+
+[mappings.event]
+source_file = "catalog/klaviyo/src/fivetran-interop/transforms/event.yml"
+source_file_hash = "7a6a116f08fa6de6ca55b0dbfef814894c05bb85eb0c1347c9bef237b230be4b"
+unmapped_target_fields = []
+omitted_target_fields = [
+    "_fivetran_deleted",
+    "_variation",
+    "campaign_id",
+    "flow_id",
+    "flow_message_id",
+    "metric_id",
+    "property_value",
+    "uuid",
+]
+erroneous_source_table_columns = []
+
+[mappings.event.mapped_target_fields]
+id = "events.id"
+type = "events.relationships.metric.data.id"
+timestamp = "events.attributes.datetime"
+datetime = "events.attributes.datetime"
+event_properties = "events.attributes.event_properties"
+person_id = "events.relationships.profile.data.id"
+_fivetran_synced = "events._airbyte_extracted_at"
+
+[mappings.event.unused_source_fields]
+events = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "attributes.timestamp",
+    "attributes.uuid",
+    "datetime",
+    "links",
+    "links.self",
+    "relationships.attributions",
+    "relationships.attributions.data",
+    "relationships.attributions.links",
+    "relationships.attributions.links.related",
+    "relationships.attributions.links.self",
+    "relationships.metric.data.type",
+    "relationships.metric.links",
+    "relationships.metric.links.related",
+    "relationships.metric.links.self",
+    "relationships.profile.data.type",
+    "relationships.profile.links",
+    "relationships.profile.links.related",
+    "relationships.profile.links.self",
+    "type",
+]
+
+[mappings.flow]
+source_file = "catalog/klaviyo/src/fivetran-interop/transforms/flow.yml"
+source_file_hash = "9e6a27fa30434900e5b08b18eefc073d4c6136fa9ce0cfac7f1830712dc705a2"
+unmapped_target_fields = []
+omitted_target_fields = [
+    "_fivetran_deleted",
+    "archived",
+]
+erroneous_source_table_columns = []
+
+[mappings.flow.mapped_target_fields]
+id = "flows.id"
+name = "flows.attributes.name"
+created = "flows.attributes.created"
+updated = "flows.attributes.updated"
+status = "flows.attributes.status"
+trigger_type = "flows.attributes.trigger_type"
+_fivetran_synced = "flows._airbyte_extracted_at"
+
+[mappings.flow.unused_source_fields]
+flows = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "attributes.archived",
+    "links",
+    "links.self",
+    "relationships",
+    "relationships.flow-actions",
+    "relationships.flow-actions.data",
+    "relationships.flow-actions.links",
+    "relationships.flow-actions.links.related",
+    "relationships.flow-actions.links.self",
+    "relationships.tags",
+    "relationships.tags.data",
+    "relationships.tags.links",
+    "relationships.tags.links.related",
+    "relationships.tags.links.self",
+    "type",
+    "updated",
+]
+
+[mappings.metric]
+source_file = "catalog/klaviyo/src/fivetran-interop/transforms/metric.yml"
+source_file_hash = "136460fb94430cbdb9057fc0afe83f6b9cff8849d2778d6daf52e20eaa8c88a3"
+unmapped_target_fields = []
+omitted_target_fields = [
+    "_fivetran_deleted",
+    "integration_category",
+    "integration_id",
+    "integration_name",
+]
+erroneous_source_table_columns = []
+
+[mappings.metric.mapped_target_fields]
+id = "metrics.id"
+name = "metrics.attributes.name"
+created = "metrics.attributes.created"
+updated = "metrics.attributes.updated"
+integration = "metrics.attributes.integration"
+_fivetran_synced = "metrics._airbyte_extracted_at"
+
+[mappings.metric.unused_source_fields]
+metrics = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "links",
+    "links.self",
+    "relationships",
+    "relationships.flow-triggers",
+    "relationships.flow-triggers.data",
+    "relationships.flow-triggers.data.id",
+    "relationships.flow-triggers.data.type",
+    "relationships.flow-triggers.links",
+    "relationships.flow-triggers.links.related",
+    "relationships.flow-triggers.links.self",
+    "type",
+    "updated",
+]
+
+[mappings.person]
+source_file = "catalog/klaviyo/src/fivetran-interop/transforms/person.yml"
+source_file_hash = "e2bb93feca9321ef63f33a19713649210c1219352ebaca914e5cb7e8d432e224"
+unmapped_target_fields = []
+omitted_target_fields = [
+    "_fivetran_deleted",
+    "last_event_date",
+    "latitude",
+    "longitude",
+]
+erroneous_source_table_columns = []
+
+[mappings.person.mapped_target_fields]
+id = "profiles.id"
+email = "profiles.attributes.email"
+first_name = "profiles.attributes.first_name"
+last_name = "profiles.attributes.last_name"
+address_1 = "profiles.attributes.location.address1"
+address_2 = "profiles.attributes.location.address2"
+city = "profiles.attributes.location.city"
+country = "profiles.attributes.location.country"
+zip = "profiles.attributes.location.zip"
+created = "profiles.attributes.created"
+phone_number = "profiles.attributes.phone_number"
+region = "profiles.attributes.location.region"
+timezone = "profiles.attributes.location.timezone"
+organization = "profiles.attributes.organization"
+title = "profiles.attributes.title"
+updated = "profiles.attributes.updated"
+_fivetran_synced = "profiles._airbyte_extracted_at"
+
+[mappings.person.unused_source_fields]
+profiles = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "attributes.anonymous_id",
+    "attributes.external_id",
+    "attributes.image",
+    "attributes.last_event_date",
+    "attributes.locale",
+    "attributes.location.ip",
+    "attributes.location.latitude",
+    "attributes.location.longitude",
+    "attributes.predictive_analytics",
+    "attributes.predictive_analytics.average_days_between_orders",
+    "attributes.predictive_analytics.average_order_value",
+    "attributes.predictive_analytics.churn_probability",
+    "attributes.predictive_analytics.expected_date_of_next_order",
+    "attributes.predictive_analytics.historic_clv",
+    "attributes.predictive_analytics.historic_number_of_orders",
+    "attributes.predictive_analytics.predicted_clv",
+    "attributes.predictive_analytics.predicted_number_of_orders",
+    "attributes.predictive_analytics.total_clv",
+    "attributes.properties",
+    "attributes.subscriptions",
+    "attributes.subscriptions.email",
+    "attributes.subscriptions.email.marketing",
+    "attributes.subscriptions.email.marketing.can_receive_email_marketing",
+    "attributes.subscriptions.email.marketing.consent",
+    "attributes.subscriptions.email.marketing.consent_timestamp",
+    "attributes.subscriptions.email.marketing.custom_method_detail",
+    "attributes.subscriptions.email.marketing.double_optin",
+    "attributes.subscriptions.email.marketing.last_updated",
+    "attributes.subscriptions.email.marketing.list_suppressions",
+    "attributes.subscriptions.email.marketing.method",
+    "attributes.subscriptions.email.marketing.method_detail",
+    "attributes.subscriptions.email.marketing.suppressions",
+    "attributes.subscriptions.email.marketing.timestamp",
+    "attributes.subscriptions.mobile_push",
+    "attributes.subscriptions.mobile_push.marketing",
+    "attributes.subscriptions.mobile_push.marketing.can_receive_sms_marketing",
+    "attributes.subscriptions.mobile_push.marketing.consent",
+    "attributes.subscriptions.mobile_push.marketing.consent_timestamp",
+    "attributes.subscriptions.sms",
+    "attributes.subscriptions.sms.marketing",
+    "attributes.subscriptions.sms.marketing.can_receive_sms_marketing",
+    "attributes.subscriptions.sms.marketing.consent",
+    "attributes.subscriptions.sms.marketing.consent_timestamp",
+    "attributes.subscriptions.sms.marketing.last_updated",
+    "attributes.subscriptions.sms.marketing.method",
+    "attributes.subscriptions.sms.marketing.method_detail",
+    "attributes.subscriptions.sms.marketing.timestamp",
+    "attributes.subscriptions.sms.transactional",
+    "attributes.subscriptions.sms.transactional.can_receive_sms_marketing",
+    "attributes.subscriptions.sms.transactional.consent",
+    "attributes.subscriptions.sms.transactional.consent_timestamp",
+    "attributes.subscriptions.sms.transactional.last_updated",
+    "attributes.subscriptions.sms.transactional.method",
+    "attributes.subscriptions.sms.transactional.method_detail",
+    "attributes.subscriptions.sms.transactional.timestamp",
+    "links",
+    "links.self",
+    "relationships",
+    "relationships.lists",
+    "relationships.lists.links",
+    "relationships.lists.links.related",
+    "relationships.lists.links.self",
+    "relationships.segments",
+    "relationships.segments.links",
+    "relationships.segments.links.related",
+    "relationships.segments.links.self",
+    "segments",
+    "type",
+    "updated",
+]

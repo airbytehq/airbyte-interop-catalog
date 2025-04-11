@@ -1,0 +1,13 @@
+project_id: klaviyo.fivetran-interop
+source_name: klaviyo
+# Target schema file snapshotted from: https://github.com/fivetran/dbt_klaviyo_source/blob/main/models/src_klaviyo.yml
+target_dbt_schema_url: https://raw.githubusercontent.com/fivetran/dbt_klaviyo_source/refs/heads/main/models/src_klaviyo.yml
+# SQL dialect configuration
+sql_dialect: duckdb
+subcolumn_traversal: dot_notation
+source_streams:
+  - events
+  - campaigns
+  - metrics
+  - flows
+  - profiles
