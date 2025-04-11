@@ -416,6 +416,28 @@ subcolumn_traversal: json_path
 
 This configuration will use BigQuery's JSON_EXTRACT function for nested field traversal.
 
+## Environment Variables
+
+Morph supports loading environment variables from a `.env` file in your current working directory. This is particularly useful for storing secrets like API keys that you don't want to commit to version control.
+
+### Using .env Files
+
+1. Create a `.env` file in the root of your project by copying the template:
+
+   ```bash
+   cp .env.template .env
+   ```
+
+2. Edit the `.env` file and add your environment variables:
+
+   ```
+   OPENAI_API_KEY=your-openai-api-key-here
+   ```
+
+3. Morph will automatically load these variables when you run any CLI command.
+
+4. For AI-assisted functionality (mapping generation and evaluation), the `OPENAI_API_KEY` variable is required.
+
 ## Additional Resources
 
 For more information on the available commands and options, use the `--help` flag:
