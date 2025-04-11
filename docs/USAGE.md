@@ -211,8 +211,8 @@ uv run morph build source_name --project-name project_name
 
 By default, DBML files are generated in:
 
-- Source schema: `catalog/{source_name}/generated/erd/source.dbml`
-- Target schema: `catalog/{source_name}/generated/erd/target.dbml`
+- Source schema: Adjacent to the generated source file at `catalog/{source_name}/generated/src_airbyte_{source_name}.dbml`
+- Target schema: Adjacent to the target schema file at `catalog/{source_name}/requirements/{project_name}/src_dbt_requirements.dbml`
 
 ### Visualizing ERDs
 
