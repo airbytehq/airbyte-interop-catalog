@@ -38,9 +38,9 @@ def generate_dbml_from_dbt_source_file(
                 type=column.data_type or "varchar",
                 note=column.description if column.description else None,
             )
-            
+
             dbml_table.add_column(column_obj)
-            
+
         database.add(dbml_table)
 
     output_file.parent.mkdir(parents=True, exist_ok=True)

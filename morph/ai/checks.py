@@ -1,6 +1,7 @@
 """Utility functions for checking AI service requirements."""
 
 import os
+
 from rich.console import Console
 
 console = Console()
@@ -8,7 +9,7 @@ console = Console()
 
 def check_openai_api_key():
     """Check if OpenAI API key is set in environment variables.
-    
+
     Raises:
         SystemExit: If the OpenAI API key is not set
     """
@@ -16,6 +17,6 @@ def check_openai_api_key():
         console.print(
             "[bold red]Error:[/bold red] OpenAI API key is not set. "
             "Please set the OPENAI_API_KEY environment variable to use AI functionality.\n"
-            "Example: [bold]export OPENAI_API_KEY=your-api-key[/bold]"
+            "Example: [bold]export OPENAI_API_KEY=your-api-key[/bold]",
         )
         raise SystemExit(1)
