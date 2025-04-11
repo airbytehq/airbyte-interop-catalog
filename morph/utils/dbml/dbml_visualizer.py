@@ -73,7 +73,7 @@ def render_dbml_to_svg(
         ]
         
         console.print(f"Rendering DBML file {dbml_file_path} to {output_file_path}")
-        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+        subprocess.run(cmd, capture_output=True, text=True, check=True)
         console.print(f"Successfully rendered DBML file to {output_file_path}")
     except subprocess.CalledProcessError as e:
         console.print(f"Error rendering DBML file: {e.stderr}")
