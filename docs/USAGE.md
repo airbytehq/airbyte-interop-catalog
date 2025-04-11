@@ -223,13 +223,13 @@ Morph can automatically visualize DBML files as SVG images using a Docker-based 
 
 **Automatic Visualization:**
 - SVG files are automatically generated alongside DBML files during the build process
-- Source schema: `catalog/{source_name}/generated/erd/source.svg`
-- Target schema: `catalog/{source_name}/generated/erd/target.svg`
+- Source schema: `catalog/{source_name}/generated/src_airbyte_{source_name}.svg`
+- Target schema: `catalog/{source_name}/requirements/{project_name}/src_dbt_requirements.svg`
 
 **Manual Visualization:**
 ```bash
 # Visualize specific DBML files
-uv run morph visualize-dbml catalog/hubspot/generated/erd/source.dbml
+uv run morph visualize-dbml catalog/hubspot/generated/src_airbyte_hubspot.dbml
 ```
 
 You can also use online tools to visualize DBML files:
