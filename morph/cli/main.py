@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
 import click
@@ -119,6 +120,39 @@ def lock(
     console.print(f"Generating lock file for {source_name}...")
     update_lock_file(source_name, project_name)
     console.print(f"Generated lock file for {source_name}")
+
+
+@main.command()
+@click.argument("dbml_file_path", type=click.Path(exists=True, path_type=Path))
+@click.option(
+    "--output-file-path",
+    type=click.Path(path_type=Path),
+    help="Path where the SVG file should be written",
+)
+def visualize_dbml(
+    dbml_file_path: Path,
+    output_file_path: Path | None = None,
+) -> None:
+    """Visualize a DBML file as an SVG image using Docker.
+
+    This command renders a DBML file to an SVG image using a Docker-based solution.
+    Docker must be installed and available on your system.
+
+    DBML_FILE_PATH: Path to the DBML file to visualize
+    """
+    try:
+        from morph.utils.dbml.dbml_visualizer import render_dbml_to_svg
+        
+        success = render_dbml_to_svg(
+            dbml_file_path=dbml_file_path,
+            output_file_path=output_file_path,
+        )
+        
+        if not success:
+            sys.exit(1)
+    except Exception as e:
+        console.print(f"Error visualizing DBML file: {str(e)}")
+        sys.exit(1)
 
 
 # Project Auto-Generation

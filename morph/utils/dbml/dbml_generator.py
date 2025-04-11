@@ -54,6 +54,7 @@ def generate_source_dbml(
     source_name: str,
     project_name: str = resources.DEFAULT_PROJECT_NAME,
     output_file: Path | None = None,
+    visualize: bool = True,
 ) -> None:
     """Generate a DBML file for the Airbyte source.
 
@@ -61,6 +62,7 @@ def generate_source_dbml(
         source_name: Name of the source
         project_name: Name of the project
         output_file: Optional custom output path
+        visualize: Whether to visualize the DBML file after generation
     """
     source_yml_path = resources.get_generated_source_yml_path(
         source_name=source_name,
@@ -85,12 +87,22 @@ def generate_source_dbml(
         dbt_source_file=dbt_source_file,
         output_file=output_file,
     )
+    
+    if visualize:
+        try:
+            from morph.utils.dbml.dbml_visualizer import visualize_source_dbml
+            visualize_source_dbml(source_name=source_name, project_name=project_name)
+        except ImportError:
+            console.print("DBML visualization module not available, skipping visualization")
+        except Exception as e:
+            console.print(f"Error visualizing DBML file: {str(e)}")
 
 
 def generate_target_dbml(
     source_name: str,
     project_name: str = resources.DEFAULT_PROJECT_NAME,
     output_file: Path | None = None,
+    visualize: bool = True,
 ) -> None:
     """Generate a DBML file for the target schema.
 
@@ -98,6 +110,7 @@ def generate_target_dbml(
         source_name: Name of the source
         project_name: Name of the project
         output_file: Optional custom output path
+        visualize: Whether to visualize the DBML file after generation
     """
     target_schema_path = resources.get_dbt_sources_requirements_path(
         source_name=source_name,
@@ -122,3 +135,12 @@ def generate_target_dbml(
         dbt_source_file=dbt_source_file,
         output_file=output_file,
     )
+    
+    if visualize:
+        try:
+            from morph.utils.dbml.dbml_visualizer import visualize_target_dbml
+            visualize_target_dbml(source_name=source_name, project_name=project_name)
+        except ImportError:
+            console.print("DBML visualization module not available, skipping visualization")
+        except Exception as e:
+            console.print(f"Error visualizing DBML file: {str(e)}")
