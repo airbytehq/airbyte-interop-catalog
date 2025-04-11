@@ -280,32 +280,41 @@ def build_readme(
     """Generate README.md with documentation from table mappings.
 
     Args:
-        mapping_files: List of mapping file paths
-        models_dir: Directory where the README.md should be written
+        source_name: Name of the source
+        project_name: Name of the project
     """
     sections: list[str] = []
-    # Add header
+    rejected_sections: list[str] = []
+    
     sections.append("# Generated dbt Models\n")
     sections.append(
         "This directory contains automatically generated dbt models based on mapping files.\n",
     )
-    workshop_sections = [
-        "## Workshop Models\n",
-        "These models are in the workshop directory and are not yet approved.\n",
-    ]
+    sections.append(
+        "See [Rejected Mappings](./rejected_mappings.md) for mappings that did not meet approval criteria.\n",
+    )
+    
+    rejected_sections.append("# Rejected Mappings\n")
+    rejected_sections.append(
+        "These mappings did not meet the approval criteria and are not included in the default dbt build.\n",
+    )
+    rejected_sections.append(
+        "To include these mappings in your dbt build, use the `include_rejected_mappings=True` parameter.\n",
+    )
+    rejected_sections.append(
+        "[Return to main README](./README.md)\n",
+    )
+    
     for mapping_file in resources.get_transforms_files(source_name, project_name):
         transform = models.TransformFile.from_file(mapping_file)
-        transform_dict = load_mapping_file(mapping_file)
+        transform_dict = load_mapping_file(str(mapping_file))
         annotations = transform_dict.get("annotations", {})
         is_approved = annotations.get("approved", False)
 
         if is_approved:
             sections.append(transform.as_markdown())
         else:
-            # Put these at the end of the README
-            workshop_sections.append(transform.as_markdown())
-
-    sections.extend(workshop_sections)
+            rejected_sections.append(transform.as_markdown())
 
     # Write README.md
     readme_path = (
@@ -316,6 +325,15 @@ def build_readme(
         / "README.md"
     )
     readme_path.write_text("\n".join(sections))
+    
+    rejected_path = (
+        resources.get_generated_dbt_project_models_dir(
+            source_name=source_name,
+            project_name=project_name,
+        )
+        / "rejected_mappings.md"
+    )
+    rejected_path.write_text("\n".join(rejected_sections))
 
 
 def generate_dbt_package(  # noqa: PLR0912
@@ -324,6 +342,7 @@ def generate_dbt_package(  # noqa: PLR0912
     project_name: str = DEFAULT_PROJECT_NAME,
     output_dir: Path | None = None,
     mapping_dir: Path | None = None,
+    include_rejected_mappings: bool = False,
 ) -> None:
     """Generate a dbt package from mapping files.
 
@@ -332,6 +351,9 @@ def generate_dbt_package(  # noqa: PLR0912
         project_name: Name of the project (e.g., 'fivetran-interop').
         output_dir: Path to the output directory.
         mapping_dir: Path to the mapping directory.
+        include_rejected_mappings: Whether to include rejected mappings in the dbt package.
+            When False (default), rejected mappings will be skipped.
+            When True, rejected mappings will be placed in the 'rejected' subfolder.
     """
     output_dir_path = output_dir or resources.get_generated_dir_root(source_name)
     mapping_dir_path = mapping_dir or resources.get_transforms_dir(source_name, project_name)
@@ -392,11 +414,11 @@ def generate_dbt_package(  # noqa: PLR0912
     for file in models_dir.glob("*.sql"):
         file.unlink()
 
-    workshop_dir = models_dir / "workshop"
-    if workshop_dir.exists():
-        for file in workshop_dir.glob("*.sql"):
+    rejected_dir = models_dir / "rejected"
+    if rejected_dir.exists():
+        for file in rejected_dir.glob("*.sql"):
             file.unlink()
-    workshop_dir.mkdir(exist_ok=True)
+    rejected_dir.mkdir(exist_ok=True)
 
     # Generate SQL for each model
     for mapping_file in mapping_files:
@@ -414,11 +436,13 @@ def generate_dbt_package(  # noqa: PLR0912
 
             # Determine if transform is approved
             is_approved = annotations.get("approved", False)
+            
+            if not is_approved and not include_rejected_mappings:
+                continue
 
-            # Place unapproved models in workshop subdirectory
             if not is_approved:
-                workshop_dir = models_dir / "workshop"
-                model_path = workshop_dir / f"{transform_id}.sql"
+                rejected_dir = models_dir / "rejected"
+                model_path = rejected_dir / f"{transform_id}.sql"
             else:
                 model_path = models_dir / f"{transform_id}.sql"
 
