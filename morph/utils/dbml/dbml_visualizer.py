@@ -29,7 +29,7 @@ def check_docker_availability() -> bool:
 def render_dbml_to_svg(
     dbml_file_path: Path,
     output_file_path: Optional[Path] = None,
-) -> bool:
+) -> None:
     """Render a DBML file to SVG using Docker-based dbml-renderer.
 
     Args:
@@ -37,11 +37,11 @@ def render_dbml_to_svg(
         output_file_path: Path where the SVG file should be written.
             If not provided, will use the same path as the DBML file with .svg extension.
 
-    Returns:
-        bool: True if rendering was successful, False otherwise.
-
     Raises:
         RuntimeError: If Docker is not available.
+        FileNotFoundError: If the DBML file does not exist.
+        subprocess.CalledProcessError: If the Docker command fails.
+        Exception: For any other errors during rendering.
     """
     if not check_docker_availability():
         raise RuntimeError(
@@ -49,11 +49,10 @@ def render_dbml_to_svg(
         )
 
     if not dbml_file_path.exists():
-        console.print(f"DBML file {dbml_file_path} does not exist, skipping visualization")
-        return False
+        raise FileNotFoundError(f"DBML file {dbml_file_path} does not exist")
 
     if output_file_path is None:
-        output_file_path = dbml_file_path.with_suffix(".svg")
+        output_file_path = dbml_file_path.with_name(f"{dbml_file_path.stem}.svg")
 
     output_file_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -74,56 +73,59 @@ def render_dbml_to_svg(
         ]
         
         console.print(f"Rendering DBML file {dbml_file_path} to {output_file_path}")
-        result = subprocess.run(cmd, capture_output=True, text=True, check=False)
-        
-        if result.returncode != 0:
-            console.print(f"Error rendering DBML file: {result.stderr}")
-            return False
-            
+        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
         console.print(f"Successfully rendered DBML file to {output_file_path}")
-        return True
+    except subprocess.CalledProcessError as e:
+        console.print(f"Error rendering DBML file: {e.stderr}")
+        raise
     except Exception as e:
         console.print(f"Error rendering DBML file: {str(e)}")
-        return False
+        raise
 
 
 def visualize_source_dbml(
     source_name: str,
     project_name: str = resources.DEFAULT_PROJECT_NAME,
-) -> bool:
+) -> None:
     """Visualize the source DBML file for a source.
 
     Args:
         source_name: Name of the source
         project_name: Name of the project
 
-    Returns:
-        bool: True if visualization was successful, False otherwise.
+    Raises:
+        FileNotFoundError: If the DBML file does not exist.
+        RuntimeError: If Docker is not available.
+        subprocess.CalledProcessError: If the Docker command fails.
+        Exception: For any other errors during rendering.
     """
     dbml_path = resources.get_source_dbml_path(
         source_name=source_name,
         project_name=project_name,
     )
     
-    return render_dbml_to_svg(dbml_path)
+    render_dbml_to_svg(dbml_path)
 
 
 def visualize_target_dbml(
     source_name: str,
     project_name: str = resources.DEFAULT_PROJECT_NAME,
-) -> bool:
+) -> None:
     """Visualize the target DBML file for a source.
 
     Args:
         source_name: Name of the source
         project_name: Name of the project
 
-    Returns:
-        bool: True if visualization was successful, False otherwise.
+    Raises:
+        FileNotFoundError: If the DBML file does not exist.
+        RuntimeError: If Docker is not available.
+        subprocess.CalledProcessError: If the Docker command fails.
+        Exception: For any other errors during rendering.
     """
     dbml_path = resources.get_target_dbml_path(
         source_name=source_name,
         project_name=project_name,
     )
     
-    return render_dbml_to_svg(dbml_path)
+    render_dbml_to_svg(dbml_path)

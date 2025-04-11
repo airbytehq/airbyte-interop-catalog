@@ -17,6 +17,7 @@ from morph.constants import DEFAULT_PROJECT_NAME
 from morph.utils import text_utils
 from morph.utils.airbyte_sync import sync_source
 from morph.utils.dbt_build import build_dbt_project
+from morph.utils.dbml.dbml_visualizer import render_dbml_to_svg
 from morph.utils.lock_file import update_lock_file
 from morph.utils.logic import if_none
 from morph.utils.transform_scaffold import (
@@ -141,15 +142,10 @@ def visualize_dbml(
     DBML_FILE_PATH: Path to the DBML file to visualize
     """
     try:
-        from morph.utils.dbml.dbml_visualizer import render_dbml_to_svg
-        
-        success = render_dbml_to_svg(
+        render_dbml_to_svg(
             dbml_file_path=dbml_file_path,
             output_file_path=output_file_path,
         )
-        
-        if not success:
-            sys.exit(1)
     except Exception as e:
         console.print(f"Error visualizing DBML file: {str(e)}")
         sys.exit(1)

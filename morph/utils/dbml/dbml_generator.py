@@ -13,6 +13,7 @@ from rich.console import Console
 
 from morph import resources
 from morph.models import DbtSourceFile
+from morph.utils.dbml.dbml_visualizer import visualize_source_dbml, visualize_target_dbml
 
 console = Console()
 
@@ -90,10 +91,11 @@ def generate_source_dbml(
     
     if visualize:
         try:
-            from morph.utils.dbml.dbml_visualizer import visualize_source_dbml
             visualize_source_dbml(source_name=source_name, project_name=project_name)
-        except ImportError:
-            console.print("DBML visualization module not available, skipping visualization")
+        except FileNotFoundError:
+            console.print(f"DBML file not found, skipping visualization")
+        except RuntimeError as e:
+            console.print(f"Docker not available, skipping visualization: {str(e)}")
         except Exception as e:
             console.print(f"Error visualizing DBML file: {str(e)}")
 
@@ -138,9 +140,10 @@ def generate_target_dbml(
     
     if visualize:
         try:
-            from morph.utils.dbml.dbml_visualizer import visualize_target_dbml
             visualize_target_dbml(source_name=source_name, project_name=project_name)
-        except ImportError:
-            console.print("DBML visualization module not available, skipping visualization")
+        except FileNotFoundError:
+            console.print(f"DBML file not found, skipping visualization")
+        except RuntimeError as e:
+            console.print(f"Docker not available, skipping visualization: {str(e)}")
         except Exception as e:
             console.print(f"Error visualizing DBML file: {str(e)}")
