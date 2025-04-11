@@ -5,25 +5,15 @@ This module provides functionality to render DBML files to SVG images
 using the dbml-renderer tool in a Docker container.
 """
 
-import shutil
-import subprocess
 from pathlib import Path
 from typing import Optional
 
 from rich.console import Console
 
 from morph import resources
+from morph.utils.docker_utils import check_docker_availability, run_docker_command
 
 console = Console()
-
-
-def check_docker_availability() -> bool:
-    """Check if Docker CLI is available.
-
-    Returns:
-        bool: True if Docker is available, False otherwise.
-    """
-    return shutil.which("docker") is not None
 
 
 def render_dbml_to_svg(
@@ -43,11 +33,6 @@ def render_dbml_to_svg(
         subprocess.CalledProcessError: If the Docker command fails.
         Exception: For any other errors during rendering.
     """
-    if not check_docker_availability():
-        raise RuntimeError(
-            "Docker is not available. Please install Docker to use DBML visualization."
-        )
-
     if not dbml_file_path.exists():
         raise FileNotFoundError(f"DBML file {dbml_file_path} does not exist")
 
@@ -65,19 +50,16 @@ def render_dbml_to_svg(
     rel_output_file = abs_output_path.name if abs_output_path.parent == mount_dir else abs_output_path
 
     try:
-        cmd = [
-            "docker", "run", "--rm",
-            "-v", f"{mount_dir}:/data",
-            "node:20-alpine", "sh", "-c",
-            f"npm install -g @softwaretechnik/dbml-renderer && dbml-renderer -i /data/{rel_dbml_file} -o /data/{rel_output_file}"
-        ]
-        
         console.print(f"Rendering DBML file {dbml_file_path} to {output_file_path}")
-        subprocess.run(cmd, capture_output=True, text=True, check=True)
+        
+        command = f"npm install -g @softwaretechnik/dbml-renderer && dbml-renderer -i /data/{rel_dbml_file} -o /data/{rel_output_file}"
+        run_docker_command(
+            image="node:20-alpine",
+            command=command,
+            mount_dir=mount_dir,
+        )
+        
         console.print(f"Successfully rendered DBML file to {output_file_path}")
-    except subprocess.CalledProcessError as e:
-        console.print(f"Error rendering DBML file: {e.stderr}")
-        raise
     except Exception as e:
         console.print(f"Error rendering DBML file: {str(e)}")
         raise
