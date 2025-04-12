@@ -1,0 +1,11 @@
+{
+    "recommendations": [
+        "bocovo.dbml-erd-visualizer",
+        "charliermarsh.ruff",
+        "jannchie.ruff-ignore-explainer",
+        "matt-meyers.vscode-dbml",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "redhat.vscode-yaml",
+    ]
+}

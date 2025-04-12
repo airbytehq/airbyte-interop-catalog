@@ -115,7 +115,10 @@ dmypy.json
 
 # IDE specific files
 .idea/
+# Track the recommended extensions file:
+!.vscode/extensions.json
 .vscode/
+
 *.swp
 *.swo
 
