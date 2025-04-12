@@ -2,82 +2,6 @@
 
 This directory contains automatically generated dbt models based on mapping files.
 
-### Mapping: Airbyte `ad_groups_reports_hourly` to Fivetran `adgroup_report_hourly`
-
-
-- Table Match Confidence Score: 🟢 _1.00_
-- Table Completion Score: 🟢 _1.00_
-- Summary Self-Evaluation: _Successfully mapped all fields with a high confidence score, indicating perfect mapping between the source and target schema._
-
-| Field | Description | Expression | Confidence | Evaluation |
-| --- | --- | --- | --- | --- |
-| `adgroup_id` | Ad group id | `ad_groups_reports_hourly.adgroup_id` | 🟢 _1.00_ | *Exact match found for 'adgroup_id'.* |
-| `stat_time_hour` | Hour of activity | `ad_groups_reports_hourly.stat_time_hour` | 🟢 _1.00_ | *Exact match found for 'stat_time_hour'.* |
-| `cost_per_conversion` | The average amount of money you've spent on a conversion.  (The total count is calculated based on the time each ad impression occurred.)  | `ad_groups_reports_hourly.metrics.cost_per_conversion` | 🟢 _1.00_ | *Exact match found for 'cost_per_conversion'.* |
-| `real_time_conversion` | Number of times your ad resulted in the optimization event you selected. | `ad_groups_reports_hourly.metrics.real_time_conversion` | 🟢 _1.00_ | *Exact match found for 'real_time_conversion'.* |
-| `cpc` | The average amount of money you've spent on a click. | `ad_groups_reports_hourly.metrics.cpc` | 🟢 _1.00_ | *Exact match found for 'cpc'.* |
-| `video_play_actions` | The number of times your video starts to play. Replays will not be counted. | `ad_groups_reports_hourly.metrics.video_play_actions` | 🟢 _1.00_ | *Exact match found for 'video_play_actions'.* |
-| `conversion_rate` | The percentage of results you received out of all the clicks of your ads. (The total count is calculated based on the time each ad impression occurred.) | `ad_groups_reports_hourly.metrics.conversion_rate` | 🟢 _1.00_ | *Exact match found for 'conversion_rate'.* |
-| `video_views_p_75` | The number of times your video was played at 75% of its length. Replays will not be counted. | `ad_groups_reports_hourly.metrics.video_views_p75` | 🟢 _1.00_ | *Exact match found for 'video_views_p_75'.* |
-| `result` | The number of times your ad achieved an outcome, based on the optimization goal  you selected. As one campaign may have a number of different optimization goals,  this statistic is not supported for campaigns. Please go to ad groups or ads to view the results.  (The total count is calculated based on the time each ad impression occurred.)  | `ad_groups_reports_hourly.metrics.result` | 🟢 _1.00_ | *Exact match found for 'result'.* |
-| `video_views_p_50` | The number of times your video was played at 50% of its length. Replays will not be counted. | `ad_groups_reports_hourly.metrics.video_views_p50` | 🟢 _1.00_ | *Exact match found for 'video_views_p_50'.* |
-| `impressions` | The number of times your ads were on screen. | `ad_groups_reports_hourly.metrics.impressions` | 🟢 _1.00_ | *Exact match found for 'impressions'.* |
-| `comments` | The number of comments your video creative received within 1 day of a user seeing a paid ad. | `ad_groups_reports_hourly.metrics.comments` | 🟢 _1.00_ | *Exact match found for 'comments'.* |
-| `real_time_cost_per_result` | As a campaign may have different optimization goals, the total number of result  is not supported in campaign section now, please go to the ad group section to view the cost  per Result. (The total count is based on when the conversion actually happened.)  | `ad_groups_reports_hourly.metrics.real_time_cost_per_result` | 🟢 _1.00_ | *Exact match found for 'real_time_cost_per_result'.* |
-| `conversion` | The number of times your ad achieved an outcome, based on the secondary goal you selected.  As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns.  Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)  | `ad_groups_reports_hourly.metrics.conversion` | 🟢 _1.00_ | *Exact match found for 'conversion'.* |
-| `real_time_result` | The number of times your ad achieved an outcome, based on the optimization goal you selected.  As a campaign may have different optimization goals, the total number of result is not supported in campaign section now , Please go to the ad group section to view the result. (The total count is based on when the conversion actually happened.)  | `ad_groups_reports_hourly.metrics.real_time_result` | 🟢 _1.00_ | *Exact match found for 'real_time_result'.* |
-| `video_view_p_100` | The number of times your video was played at 100% of its length. Replays will not be counted. | `ad_groups_reports_hourly.metrics.video_views_p100` | 🟢 _1.00_ | *Exact match found for 'video_view_p_100'.* |
-| `shares` | The number of shares your video creative received within 1 day of a user seeing a paid ad. | `ad_groups_reports_hourly.metrics.shares` | 🟢 _1.00_ | *Exact match found for 'shares'.* |
-| `real_time_conversion_rate` | The percentage of results you received out of all the clicks of your ads. (The total count is based on when the conversion actually happened.) | `ad_groups_reports_hourly.metrics.real_time_conversion_rate` | 🟢 _1.00_ | *Exact match found for 'real_time_conversion_rate'.* |
-| `cost_per_secondary_goal_result` | The average cost for each secondary goal result from your adverts. As one campaign may have a number of different secondary goals,  this statistic is not supported for campaigns. Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)  | `ad_groups_reports_hourly.metrics.cost_per_secondary_goal_result` | 🟢 _1.00_ | *Exact match found for 'cost_per_secondary_goal_result'.* |
-| `secondary_goal_result_rate` | The percentage of secondary goal results you achieved out of all of the installs of your adverts. As one campaign may have a number  of different secondary goals, this statistic is not supported for campaigns. Please go to ad groups or ads to view. The total count is calculated based on the time each ad impression occurred.  | `ad_groups_reports_hourly.metrics.secondary_goal_result_rate` | 🟢 _1.00_ | *Exact match found for 'secondary_goal_result_rate'.* |
-| `clicks` | The number of clicks on your ads. | `ad_groups_reports_hourly.metrics.clicks` | 🟢 _1.00_ | *Exact match found for 'clicks'.* |
-| `cost_per_1000_reached` | The average cost to reach 1,000 unique users. This metric is estimated. | `ad_groups_reports_hourly.metrics.cost_per_1000_reached` | 🟢 _1.00_ | *Exact match found for 'cost_per_1000_reached'.* |
-| `video_views_p_25` | The number of times your video was played at 25% of its length. Replays will not be counted. | `ad_groups_reports_hourly.metrics.video_views_p25` | 🟢 _1.00_ | *Exact match found for 'video_views_p_25'.* |
-| `reach` | The number of unique users who saw your ads at least once. This metric is estimated. | `ad_groups_reports_hourly.metrics.reach` | 🟢 _1.00_ | *Exact match found for 'reach'.* |
-| `real_time_cost_per_conversion` | The average amount of money you've spent on a conversion. (The total count is based on when the conversion actually happened.) | `ad_groups_reports_hourly.metrics.real_time_cost_per_conversion` | 🟢 _1.00_ | *Exact match found for 'real_time_cost_per_conversion'.* |
-| `profile_visits_rate` | The rate of profile visits per impression the paid ad drove during the campaign. This metric is only for Boosted TikToks. | `ad_groups_reports_hourly.metrics.profile_visits_rate` | 🟢 _1.00_ | *Exact match found for 'profile_visits_rate'.* |
-| `average_video_play` | The average time your video was played per single video view, including any time spent replaying the video. | `ad_groups_reports_hourly.metrics.average_video_play` | 🟢 _1.00_ | *Exact match found for 'average_video_play'.* |
-| `profile_visits` | The number of profile visits the ad drove during the campaign. This metric is only for Boosted TikToks. | `ad_groups_reports_hourly.metrics.profile_visits` | 🟢 _1.00_ | *Exact match found for 'profile_visits'.* |
-| `cpm` | The average amount of money you've spent per 1,000 impressions. | `ad_groups_reports_hourly.metrics.cpm` | 🟢 _1.00_ | *Exact match found for 'cpm'.* |
-| `ctr` | The percentage of times people saw your ad and performed a click. | `ad_groups_reports_hourly.metrics.ctr` | 🟢 _1.00_ | *Exact match found for 'ctr'.* |
-| `video_watched_2_s` | The number of times your video played for at least 2 seconds. Replays will not be counted. | `ad_groups_reports_hourly.metrics.video_watched_2s` | 🟢 _1.00_ | *Exact match found for 'video_watched_2_s'.* |
-| `follows` | The number of new followers that were gained within 1 day of a user seeing a paid ad. This metric is only for Boosted TikToks. | `ad_groups_reports_hourly.metrics.follows` | 🟢 _1.00_ | *Exact match found for 'follows'.* |
-| `result_rate` | The percentage of results you achieved out of all of the views/clicks on your ads. As one campaign may have a number  of different optimization goals, this statistic is not supported for campaigns. Please go to ad groups or ads to view the result rate.  (The total count is calculated based on the time each ad impression occurred.)  | `ad_groups_reports_hourly.metrics.result_rate` | 🟢 _1.00_ | *Exact match found for 'result_rate'.* |
-| `video_watched_6_s` | The number of times your video played for at least 6 seconds, or completely played. Replays will not be counted. | `ad_groups_reports_hourly.metrics.video_watched_6s` | 🟢 _1.00_ | *Exact match found for 'video_watched_6_s'.* |
-| `secondary_goal_result` | The number of times your ad achieved an outcome, based on the secondary goal you selected. As one campaign may have a number  of different secondary goals, this statistic is not supported for campaigns. Please go to ad groups or ads to view. (The total count is  calculated based on the time each ad impression occurred.)  | `ad_groups_reports_hourly.metrics.secondary_goal_result` | 🟢 _1.00_ | *Exact match found for 'secondary_goal_result'.* |
-| `cost_per_result` | The average cost for each result from your ads. As one campaign may have a number of different optimization goals, this statistic  is not supported for campaigns. Please go to ad groups or ads to view the cost per result. (The total count is calculated based on the time each ad impression occurred.)  | `ad_groups_reports_hourly.metrics.cost_per_result` | 🟢 _1.00_ | *Exact match found for 'cost_per_result'.* |
-| `average_video_play_per_user` | The average time your video was played per person, including any time spent replaying the video. This metric is estimated. | `ad_groups_reports_hourly.metrics.average_video_play_per_user` | 🟢 _1.00_ | *Exact match found for 'average_video_play_per_user'.* |
-| `real_time_result_rate` | As a campaign may have different optimization goals, the total number of result is not supported in campaign section now ,Please go to the ad group section to view the Result Rate.  (The total count is based on when the conversion actually happened.)  | `ad_groups_reports_hourly.metrics.real_time_result_rate` | 🟢 _1.00_ | *Exact match found for 'real_time_result_rate'.* |
-| `spend` | The estimated total amount of money you've spent on your campaign, ad group or ad during its schedule. | `ad_groups_reports_hourly.metrics.spend` | 🟢 _1.00_ | *Exact match found for 'spend'.* |
-| `likes` | The number of likes your video creative received within 1 day of a user seeing a paid ad. | `ad_groups_reports_hourly.metrics.likes` | 🟢 _1.00_ | *Exact match found for 'likes'.* |
-| `_fivetran_synced` | Timestamp of when Fivetran synced a record. | `ad_groups_reports_hourly._airbyte_extracted_at` | 🟢 _1.00_ | *Standard mapping for '_fivetran_synced' to '_airbyte_extracted_at'.* |
-| `total_purchase_value` | The total value of purchase events that occurred in your app that were recorded by your measurement partner. | `ad_groups_reports_hourly.metrics.total_purchase_value` | 🟢 _1.00_ | *Exact match found for 'total_purchase_value'.* |
-| `total_sales_lead_value` | The monetary worth or potential value assigned to a lead generated through ads. | `MISSING` | ❌ _0.00_ | *No good match found.* |
-
-### Mapping: Airbyte `campaigns` to Fivetran `campaign_history`
-
-
-- Table Match Confidence Score: 🟢 _0.85_
-- Table Completion Score: 🟢 _0.77_
-- Summary Self-Evaluation: _The source table 'campaigns' matches the target schema closely with most fields appropriately mapped, resulting in a high table match score. However, missing fields 'opt_status' and 'status' reflect in a slightly lower completion score._
-
-| Field | Description | Expression | Confidence | Evaluation |
-| --- | --- | --- | --- | --- |
-| `campaign_id` | Campaign ID | `campaigns.campaign_id` | 🟢 _0.90_ | *The source field 'campaigns.campaign_id' is a strong match for 'campaign_id'.* |
-| `updated_at` | Time the record was updated. | `campaigns._airbyte_extracted_at` | 🟢 _1.00_ | *The source field 'campaigns._airbyte_extracted_at' is a required standard mapping for '_fivetran_synced', thus always scores 1.00.* |
-| `advertiser_id` | Advertiser ID | `campaigns.advertiser_id` | 🟢 _0.90_ | *The source field 'campaigns.advertiser_id' is a strong match for 'advertiser_id'.* |
-| `budget` | Campaign budget | `campaigns.budget` | 🟢 _0.90_ | *The source field 'campaigns.budget' is a strong match for 'budget'.* |
-| `budget_mode` | Budget type | `campaigns.budget_mode` | 🟢 _0.90_ | *The source field 'campaigns.budget_mode' is a strong match for 'budget_mode'.* |
-| `campaign_name` | Campaign name | `campaigns.campaign_name` | 🟢 _0.90_ | *The source field 'campaigns.campaign_name' is a strong match for 'campaign_name'.* |
-| `campaign_type` | Campaign Type, indicates the campaign is a regular campaign or iOS 14 campaign. | `campaigns.campaign_type` | 🟢 _0.90_ | *The source field 'campaigns.campaign_type' is a strong match for 'campaign_type'.* |
-| `create_time` | Time at which the campaign was created. | `campaigns.create_time` | 🟢 _0.90_ | *The source field 'campaigns.create_time' is a strong match for 'create_time'.* |
-| `is_new_structure` | Whether the campaign is a new structure (for the same campaign, the structure of campaign, adgroups and ads are the same) | `campaigns.is_new_structure` | 🟢 _0.90_ | *The source field 'campaigns.is_new_structure' is a strong match for 'is_new_structure'.* |
-| `objective_type` | Advertising objective. | `campaigns.objective_type` | 🟢 _0.90_ | *The source field 'campaigns.objective_type' is a strong match for 'objective_type'.* |
-| `opt_status` | Operation status. | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `status` | Campaign status | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `split_test_variable` | Split Test variables. Optional values; TARGETING, BIDDING_OPTIMIZATION , CREATIVE. | `campaigns.split_test_variable` | 🟢 _0.70_ | *The source field 'campaigns.split_test_variable' is likely a match for 'split_test_variable' but with some uncertainty.* |
-
 ### Mapping: Airbyte `advertisers` to Fivetran `advertiser`
 
 
@@ -166,40 +90,6 @@ This directory contains automatically generated dbt models based on mapping file
 | `total_purchase_value` | The total value of purchase events that occurred in your app that were recorded by your measurement partner. | `campaigns_reports_hourly.metrics.total_purchase_value` | 🟢 _1.00_ | *Exact match to field 'total_purchase_value' in source.* |
 | `total_sales_lead_value` | The monetary worth or potential value assigned to a lead generated through ads. | `MISSING` | ❌ _0.00_ | *No good match found.* |
 
-### Mapping: Airbyte `ads` to Fivetran `ad_history`
-
-
-- Table Match Confidence Score: 🟢 _0.85_
-- Table Completion Score: 🟢 _0.95_
-- Summary Self-Evaluation: _The table mapping reflects a high degree of confidence given that the field mappings align well with expectations for a typical ad schema. However, some fields could not perfectly be matched or verified due to lack of comprehensive context._
-
-| Field | Description | Expression | Confidence | Evaluation |
-| --- | --- | --- | --- | --- |
-| `ad_id` | Ad ID | `ads.ad_id` | 🟢 _1.00_ | *Perfect match given the direct mapping from 'ads.ad_id'.* |
-| `updated_at` | Time the record was updated. | `ads._airbyte_extracted_at` | 🟢 _1.00_ | *Standard 1.0 score for '_fivetran_synced' mapped to '_airbyte_extracted_at'.* |
-| `adgroup_id` | Ad group ID | `ads.adgroup_id` | 🟢 _0.95_ | *'ads.adgroup_id' aligns well with expectations.* |
-| `advertiser_id` | Advertiser ID | `ads.advertiser_id` | 🟢 _0.95_ | *'ads.advertiser_id' aligns well with expectations.* |
-| `campaign_id` | Campaign ID | `ads.campaign_id` | 🟢 _0.95_ | *'ads.campaign_id' aligns well with expectations.* |
-| `ad_name` | Ad Name. | `ads.ad_name` | 🟢 _1.00_ | *Directly maps from 'ads.ad_name' with high confidence.* |
-| `ad_text` | The ad text. | `ads.ad_text` | 🟢 _1.00_ | *Directly maps from 'ads.ad_text' with high confidence.* |
-| `app_name` | The display name of app download ad. | `ads.app_name` | 🟢 _1.00_ | *Directly maps from 'ads.app_name' with high confidence.* |
-| `call_to_action` | Call to action values. | `ads.call_to_action` | 🟢 _1.00_ | *Directly maps from 'ads.call_to_action' with high confidence.* |
-| `click_tracking_url` | Click monitoring URL. | `ads.click_tracking_url` | 🟢 _1.00_ | *Directly maps from 'ads.click_tracking_url' with high confidence.* |
-| `create_time` | Time at which the ad was created. | `ads.create_time` | 🟢 _0.90_ | *Most likely correct mapping but slight uncertainty.* |
-| `display_name` | The display name of landing page or pure exposure ad. | `ads.display_name` | 🟢 _0.90_ | *Most likely correct mapping but slight uncertainty.* |
-| `image_ids` | A list of image IDs. | `ads.image_ids` | 🟢 _0.90_ | *Most likely correct mapping but slight uncertainty.* |
-| `impression_tracking_url` | Display monitoring URL. | `ads.impression_tracking_url` | 🟢 _0.85_ | *Maps to 'ads.impression_tracking_url'; expression is detailed and consistent with ad-related data.* |
-| `is_aco` | Whether the ad is an automated ad. | `ads.is_aco` | 🟢 _0.90_ | *The mapping appears consistent with ad schema.* |
-| `is_creative_authorized` | Whether you grant displaying some of your ads in our TikTok For Business Creative Center. Only valid for non-US advertisers, the default value is false.  | `ads.creative_authorized` | 🟢 _0.85_ | *Mappings align, but US-specific context introduces slight uncertainty.* |
-| `is_new_structure` | Whether the campaign is a new structure. | `ads.is_new_structure` | 🟢 _0.85_ | *Limited by schema-specific context.* |
-| `landing_page_url` | Landing page URL. | `ads.landing_page_url` | 🟢 _1.00_ | *Direct mapping from 'ads.landing_page_url' is strong.* |
-| `open_url` | The specific location where you want your audience to go if they have your app installed. | `ads.deeplink` | 🟢 _0.85_ | *Mapping exists but specifics vary, slightly lowering confidence.* |
-| `opt_status` | Operation status. | `ads.operation_status` | 🟢 _0.85_ | *Limited schema context slightly reduces confidence.* |
-| `playable_url` | Playable material url. | `ads.playable_url` | 🟢 _1.00_ | *Strong mapping based on ad schema knowledge.* |
-| `profile_image` | Avatar URL. | `ads.profile_image_url` | 🟢 _1.00_ | *Direct mapping from 'ads.profile_image_url' matches perfectly.* |
-| `status` | Ad status. | `ads.secondary_status` | 🟢 _0.90_ | *Expected mapping from 'ads.secondary_status', but some schema variance may exist.* |
-| `video_id` | The video ID. | `ads.video_id` | 🟢 _1.00_ | *Direct mapping from 'ads.video_id' finely matches expectations.* |
-
 ### Mapping: Airbyte `ads_reports_hourly` to Fivetran `ad_report_hourly`
 
 
@@ -253,85 +143,114 @@ This directory contains automatically generated dbt models based on mapping file
 | `total_purchase_value` | The total value of purchase events that occurred in your app that were recorded by your measurement partner. | `ads_reports_hourly.metrics.total_purchase_value` | 🟢 _0.95_ | *Strong match for 'total_purchase_value' field.* |
 | `total_sales_lead_value` | The monetary worth or potential value assigned to a lead generated through ads. | `MISSING` | ❌ _0.00_ | *No good match found.* |
 
-## Workshop Models
-
-These models are in the workshop directory and are not yet approved.
-
-### Mapping: Airbyte `ad_groups` to Fivetran `adgroup_history`
+### Mapping: Airbyte `ad_groups_reports_hourly` to Fivetran `adgroup_report_hourly`
 
 
-- Table Match Confidence Score: 🟢 _0.90_
-- Table Completion Score: ⚠️ _0.60_
-- Summary Self-Evaluation: _The table match score is high due to strong alignment between the source and target schemas from similar APIs. However, completion is limited by several 'MISSING' fields that indicate fields present in target schema do not have corresponding entries in the source schema._
+- Table Match Confidence Score: 🟢 _1.00_
+- Table Completion Score: 🟢 _1.00_
+- Summary Self-Evaluation: _Successfully mapped all fields with a high confidence score, indicating perfect mapping between the source and target schema._
 
 | Field | Description | Expression | Confidence | Evaluation |
 | --- | --- | --- | --- | --- |
-| `adgroup_id` | Ad group ID | `ad_groups.adgroup_id` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `updated_at` | Time the record was updated. | `ad_groups.modify_time` | 🟢 _0.70_ | *Likely the correct match based on context and typical usage, but not perfect due to possible alternate interpretations.* |
-| `advertiser_id` | Advertiser ID | `ad_groups.advertiser_id` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `campaign_id` | The Ad group's campaign ID. | `ad_groups.campaign_id` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `action_categories` | IDs of the action categories (behaviors) that you want to target. | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `action_days` | The number of days of the time period to include action from. | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `adgroup_name` | Ad group name. Character limit is 512 and cannot contain emoji. | `ad_groups.adgroup_name` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `age_groups` | Age groups you want to target. This is the newest version of the field `age`, which was renamed after the Tiktok Ads v1.3 API release.  | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `android_osv` | Minimum Android version. | `ad_groups.min_android_version` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `app_download_url` | App download link | `ad_groups.app_download_url` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `app_id` | The Application id of the promoted app | `ad_groups.app_id` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `app_name` | App name. | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `app_type` | App type. | `ad_groups.app_type` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `audience` | A list of audience IDs. | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `audience_type` | Audience Type | `ad_groups.audience_type` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `bid` | CPC, CPM bidding, oCPM learning bidding | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `bid_type` | Bidding Strategy | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `billing_event` | Bid method. | `ad_groups.billing_event` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `budget` | Ad budget. Returns 0.0 when Campaign Budget Optimization (budget_optimize_switch) is on. | `ad_groups.budget` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `budget_mode` | Budget mode. This field will be ignored when Campaign Budget Optimization (budget_optimize_switch) is enabled. | `ad_groups.budget_mode` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `carriers` | Carriers that you want to target. | `ad_groups.carriers` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `category` | Ad group category. | `ad_groups.category_id` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `click_tracking_url` | Click monitoring URL. | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `connection_type` | Device connection types that you want to target. Default; unlimited. | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `conversion_bid` | oCPM conversion bid | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `cpv_video_duration` | Video playback duration, required if optimize_goal is VIDEO_VIEW.  Allowed values; SIX_SECONDS (video playback 6s), TWO_SECONDS (video playback 2s)  | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `creative_material_mode` | Creative delivery mode. | `ad_groups.creative_material_mode` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `dayparting` | Ad delivery period, the default is always and the format is 48 * 7 character string, represented by 0 or 1. > That is, with half an hour as the minimum granularity, a day (24 hours) is divided by the minimum granularity(30 mins) from Monday to Sunday. Resulting in a 48*7 format.0 represents not to be delivered, 1 represents delivery. no transmission, full transmission 0, full transmission 1 all represent full time delivery | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `deep_bid_type` | Bidding strategy for in-app events. | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `deep_cpabid` | Deep bid | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `deep_external_action` | Deep conversion event. | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `display_name` | Display name of ad group. | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `enable_inventory_filter` | Inventory filtering (Unsafe videos will not be displayed). | `ad_groups.inventory_filter_enabled` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `excluded_audience` | A list of audience ID to be excluded. | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `external_action` | Conversion event for the ad group. It is required when the promoted object is an app with tracking urls, or when pixel_id is specified. | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `fallback_type` | Fallback Type. If the audience do not have the app installed, you can have them fall back to install the app, or to view a specific web page. Not applicable for Deferred Deeplink. Allowed values; APP_INSTALL, WEBSITE, UNSET. If website is chosen, you need to specify the url via landing_page_url field.  | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `frequency` | frequency, together with frequency_schedule, controls how often people see your ad (only available for REACH ads).  For example, frequency = 2 frequency_schedule = 3 means "show ads no more than twice every 3 day".  | `ad_groups.frequency` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `frequency_schedule` | frequency, together with frequency, controls how often people see your ad (only available for REACH ads). | `ad_groups.frequency_schedule` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `gender` | Gender that you want to target. | `ad_groups.gender` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `impression_tracking_url` | Display monitoring URL. | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `interest_category_v2` | Interest classification. If the interest is specified, users that do not meet interest target will be excluded during delivery. | `ad_groups.interest_category_ids` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `ios_osv` | Minimum iOS version. | `ad_groups.min_ios_version` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `is_comment_disable` | Whether to allow comments on your ads on TikTok, Vigo, Helo. | `ad_groups.comment_disabled` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `is_hfss` | Whether the promoted content is HFSS foods (foods that are high in fat, salt, or sugar). | `ad_groups.is_hfss` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `is_new_structure` | Whether the campaign is a new structure. | `ad_groups.is_new_structure` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `keywords` | Keywords used. | `ad_groups.keywords` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `landing_page_url` | Landing page URL. | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `languages` | Codes of the languages that you want to target. | `ad_groups.languages` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `location` | IDs of the locations that you want to target. | `ad_groups.location_ids` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `open_url` | The specific location where you want your audience to go if they have your app installed. | `ad_groups.promotion_website_type` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `open_url_type` | The open URL type. | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `operation_system` | Device operating systems that you want to target. | `ad_groups.operating_systems` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `opt_status` | Operation status. | `ad_groups.operation_status` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `optimize_goal` | Optimization goal. | `ad_groups.optimization_goal` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `pacing` | You can choose between PACING_MODE_SMOOTH and PACING_MODE_FAST. For PACING_MODE_SMOOTH, the budget is allocated evenly within the scheduled time.  PACING_MODE_FAST would consume budget and produce results as soon as possible.   | `ad_groups.pacing` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `package` | Package name. | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `pangle_block_app_list_id` | Pangle app block list ID. | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `pixel_id` | Pixel ID. Only application for landing pages. | `ad_groups.pixel_id` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `placement` | The apps where you want to deliver your ads. | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `placement_type` | Placement type. | `ad_groups.placement_type` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `profile_image` | Avatar URL. | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `schedule_end_time` | Ad delivery end time (UTC+0). Format should be YYYY-MM-DD HH:MM:SS | `ad_groups.schedule_end_time` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `schedule_start_time` | Ad delivery start time (UTC+0). Format should be YYYY-MM-DD HH:MM:SS | `ad_groups.schedule_start_time` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `schedule_type` | The schedule type, which can be either SCHEDULE_START_END or SCHEDULE_FROM_NOW. | `ad_groups.schedule_type` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `skip_learning_phase` | Whether to skip the learning stage. | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `statistic_type` | conversion bid statistic type | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `status` | Ad group status | `MISSING` | ❌ _0.00_ | *No good match found.* |
-| `video_actions` | Number of video actions. | `ad_groups.video_actions` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
-| `video_download` | Whether users can download your video ads on TikTok(cannot be updated once created). | `ad_groups.video_download_disabled` | 🟢 _1.00_ | *Perfect match based on field name and context.* |
+| `adgroup_id` | Ad group id | `ad_groups_reports_hourly.adgroup_id` | 🟢 _1.00_ | *Exact match found for 'adgroup_id'.* |
+| `stat_time_hour` | Hour of activity | `ad_groups_reports_hourly.stat_time_hour` | 🟢 _1.00_ | *Exact match found for 'stat_time_hour'.* |
+| `cost_per_conversion` | The average amount of money you've spent on a conversion.  (The total count is calculated based on the time each ad impression occurred.)  | `ad_groups_reports_hourly.metrics.cost_per_conversion` | 🟢 _1.00_ | *Exact match found for 'cost_per_conversion'.* |
+| `real_time_conversion` | Number of times your ad resulted in the optimization event you selected. | `ad_groups_reports_hourly.metrics.real_time_conversion` | 🟢 _1.00_ | *Exact match found for 'real_time_conversion'.* |
+| `cpc` | The average amount of money you've spent on a click. | `ad_groups_reports_hourly.metrics.cpc` | 🟢 _1.00_ | *Exact match found for 'cpc'.* |
+| `video_play_actions` | The number of times your video starts to play. Replays will not be counted. | `ad_groups_reports_hourly.metrics.video_play_actions` | 🟢 _1.00_ | *Exact match found for 'video_play_actions'.* |
+| `conversion_rate` | The percentage of results you received out of all the clicks of your ads. (The total count is calculated based on the time each ad impression occurred.) | `ad_groups_reports_hourly.metrics.conversion_rate` | 🟢 _1.00_ | *Exact match found for 'conversion_rate'.* |
+| `video_views_p_75` | The number of times your video was played at 75% of its length. Replays will not be counted. | `ad_groups_reports_hourly.metrics.video_views_p75` | 🟢 _1.00_ | *Exact match found for 'video_views_p_75'.* |
+| `result` | The number of times your ad achieved an outcome, based on the optimization goal  you selected. As one campaign may have a number of different optimization goals,  this statistic is not supported for campaigns. Please go to ad groups or ads to view the results.  (The total count is calculated based on the time each ad impression occurred.)  | `ad_groups_reports_hourly.metrics.result` | 🟢 _1.00_ | *Exact match found for 'result'.* |
+| `video_views_p_50` | The number of times your video was played at 50% of its length. Replays will not be counted. | `ad_groups_reports_hourly.metrics.video_views_p50` | 🟢 _1.00_ | *Exact match found for 'video_views_p_50'.* |
+| `impressions` | The number of times your ads were on screen. | `ad_groups_reports_hourly.metrics.impressions` | 🟢 _1.00_ | *Exact match found for 'impressions'.* |
+| `comments` | The number of comments your video creative received within 1 day of a user seeing a paid ad. | `ad_groups_reports_hourly.metrics.comments` | 🟢 _1.00_ | *Exact match found for 'comments'.* |
+| `real_time_cost_per_result` | As a campaign may have different optimization goals, the total number of result  is not supported in campaign section now, please go to the ad group section to view the cost  per Result. (The total count is based on when the conversion actually happened.)  | `ad_groups_reports_hourly.metrics.real_time_cost_per_result` | 🟢 _1.00_ | *Exact match found for 'real_time_cost_per_result'.* |
+| `conversion` | The number of times your ad achieved an outcome, based on the secondary goal you selected.  As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns.  Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)  | `ad_groups_reports_hourly.metrics.conversion` | 🟢 _1.00_ | *Exact match found for 'conversion'.* |
+| `real_time_result` | The number of times your ad achieved an outcome, based on the optimization goal you selected.  As a campaign may have different optimization goals, the total number of result is not supported in campaign section now , Please go to the ad group section to view the result. (The total count is based on when the conversion actually happened.)  | `ad_groups_reports_hourly.metrics.real_time_result` | 🟢 _1.00_ | *Exact match found for 'real_time_result'.* |
+| `video_view_p_100` | The number of times your video was played at 100% of its length. Replays will not be counted. | `ad_groups_reports_hourly.metrics.video_views_p100` | 🟢 _1.00_ | *Exact match found for 'video_view_p_100'.* |
+| `shares` | The number of shares your video creative received within 1 day of a user seeing a paid ad. | `ad_groups_reports_hourly.metrics.shares` | 🟢 _1.00_ | *Exact match found for 'shares'.* |
+| `real_time_conversion_rate` | The percentage of results you received out of all the clicks of your ads. (The total count is based on when the conversion actually happened.) | `ad_groups_reports_hourly.metrics.real_time_conversion_rate` | 🟢 _1.00_ | *Exact match found for 'real_time_conversion_rate'.* |
+| `cost_per_secondary_goal_result` | The average cost for each secondary goal result from your adverts. As one campaign may have a number of different secondary goals,  this statistic is not supported for campaigns. Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)  | `ad_groups_reports_hourly.metrics.cost_per_secondary_goal_result` | 🟢 _1.00_ | *Exact match found for 'cost_per_secondary_goal_result'.* |
+| `secondary_goal_result_rate` | The percentage of secondary goal results you achieved out of all of the installs of your adverts. As one campaign may have a number  of different secondary goals, this statistic is not supported for campaigns. Please go to ad groups or ads to view. The total count is calculated based on the time each ad impression occurred.  | `ad_groups_reports_hourly.metrics.secondary_goal_result_rate` | 🟢 _1.00_ | *Exact match found for 'secondary_goal_result_rate'.* |
+| `clicks` | The number of clicks on your ads. | `ad_groups_reports_hourly.metrics.clicks` | 🟢 _1.00_ | *Exact match found for 'clicks'.* |
+| `cost_per_1000_reached` | The average cost to reach 1,000 unique users. This metric is estimated. | `ad_groups_reports_hourly.metrics.cost_per_1000_reached` | 🟢 _1.00_ | *Exact match found for 'cost_per_1000_reached'.* |
+| `video_views_p_25` | The number of times your video was played at 25% of its length. Replays will not be counted. | `ad_groups_reports_hourly.metrics.video_views_p25` | 🟢 _1.00_ | *Exact match found for 'video_views_p_25'.* |
+| `reach` | The number of unique users who saw your ads at least once. This metric is estimated. | `ad_groups_reports_hourly.metrics.reach` | 🟢 _1.00_ | *Exact match found for 'reach'.* |
+| `real_time_cost_per_conversion` | The average amount of money you've spent on a conversion. (The total count is based on when the conversion actually happened.) | `ad_groups_reports_hourly.metrics.real_time_cost_per_conversion` | 🟢 _1.00_ | *Exact match found for 'real_time_cost_per_conversion'.* |
+| `profile_visits_rate` | The rate of profile visits per impression the paid ad drove during the campaign. This metric is only for Boosted TikToks. | `ad_groups_reports_hourly.metrics.profile_visits_rate` | 🟢 _1.00_ | *Exact match found for 'profile_visits_rate'.* |
+| `average_video_play` | The average time your video was played per single video view, including any time spent replaying the video. | `ad_groups_reports_hourly.metrics.average_video_play` | 🟢 _1.00_ | *Exact match found for 'average_video_play'.* |
+| `profile_visits` | The number of profile visits the ad drove during the campaign. This metric is only for Boosted TikToks. | `ad_groups_reports_hourly.metrics.profile_visits` | 🟢 _1.00_ | *Exact match found for 'profile_visits'.* |
+| `cpm` | The average amount of money you've spent per 1,000 impressions. | `ad_groups_reports_hourly.metrics.cpm` | 🟢 _1.00_ | *Exact match found for 'cpm'.* |
+| `ctr` | The percentage of times people saw your ad and performed a click. | `ad_groups_reports_hourly.metrics.ctr` | 🟢 _1.00_ | *Exact match found for 'ctr'.* |
+| `video_watched_2_s` | The number of times your video played for at least 2 seconds. Replays will not be counted. | `ad_groups_reports_hourly.metrics.video_watched_2s` | 🟢 _1.00_ | *Exact match found for 'video_watched_2_s'.* |
+| `follows` | The number of new followers that were gained within 1 day of a user seeing a paid ad. This metric is only for Boosted TikToks. | `ad_groups_reports_hourly.metrics.follows` | 🟢 _1.00_ | *Exact match found for 'follows'.* |
+| `result_rate` | The percentage of results you achieved out of all of the views/clicks on your ads. As one campaign may have a number  of different optimization goals, this statistic is not supported for campaigns. Please go to ad groups or ads to view the result rate.  (The total count is calculated based on the time each ad impression occurred.)  | `ad_groups_reports_hourly.metrics.result_rate` | 🟢 _1.00_ | *Exact match found for 'result_rate'.* |
+| `video_watched_6_s` | The number of times your video played for at least 6 seconds, or completely played. Replays will not be counted. | `ad_groups_reports_hourly.metrics.video_watched_6s` | 🟢 _1.00_ | *Exact match found for 'video_watched_6_s'.* |
+| `secondary_goal_result` | The number of times your ad achieved an outcome, based on the secondary goal you selected. As one campaign may have a number  of different secondary goals, this statistic is not supported for campaigns. Please go to ad groups or ads to view. (The total count is  calculated based on the time each ad impression occurred.)  | `ad_groups_reports_hourly.metrics.secondary_goal_result` | 🟢 _1.00_ | *Exact match found for 'secondary_goal_result'.* |
+| `cost_per_result` | The average cost for each result from your ads. As one campaign may have a number of different optimization goals, this statistic  is not supported for campaigns. Please go to ad groups or ads to view the cost per result. (The total count is calculated based on the time each ad impression occurred.)  | `ad_groups_reports_hourly.metrics.cost_per_result` | 🟢 _1.00_ | *Exact match found for 'cost_per_result'.* |
+| `average_video_play_per_user` | The average time your video was played per person, including any time spent replaying the video. This metric is estimated. | `ad_groups_reports_hourly.metrics.average_video_play_per_user` | 🟢 _1.00_ | *Exact match found for 'average_video_play_per_user'.* |
+| `real_time_result_rate` | As a campaign may have different optimization goals, the total number of result is not supported in campaign section now ,Please go to the ad group section to view the Result Rate.  (The total count is based on when the conversion actually happened.)  | `ad_groups_reports_hourly.metrics.real_time_result_rate` | 🟢 _1.00_ | *Exact match found for 'real_time_result_rate'.* |
+| `spend` | The estimated total amount of money you've spent on your campaign, ad group or ad during its schedule. | `ad_groups_reports_hourly.metrics.spend` | 🟢 _1.00_ | *Exact match found for 'spend'.* |
+| `likes` | The number of likes your video creative received within 1 day of a user seeing a paid ad. | `ad_groups_reports_hourly.metrics.likes` | 🟢 _1.00_ | *Exact match found for 'likes'.* |
+| `_fivetran_synced` | Timestamp of when Fivetran synced a record. | `ad_groups_reports_hourly._airbyte_extracted_at` | 🟢 _1.00_ | *Standard mapping for '_fivetran_synced' to '_airbyte_extracted_at'.* |
+| `total_purchase_value` | The total value of purchase events that occurred in your app that were recorded by your measurement partner. | `ad_groups_reports_hourly.metrics.total_purchase_value` | 🟢 _1.00_ | *Exact match found for 'total_purchase_value'.* |
+| `total_sales_lead_value` | The monetary worth or potential value assigned to a lead generated through ads. | `MISSING` | ❌ _0.00_ | *No good match found.* |
+
+### Mapping: Airbyte `campaigns` to Fivetran `campaign_history`
+
+
+- Table Match Confidence Score: 🟢 _0.85_
+- Table Completion Score: 🟢 _0.77_
+- Summary Self-Evaluation: _The source table 'campaigns' matches the target schema closely with most fields appropriately mapped, resulting in a high table match score. However, missing fields 'opt_status' and 'status' reflect in a slightly lower completion score._
+
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `campaign_id` | Campaign ID | `campaigns.campaign_id` | 🟢 _0.90_ | *The source field 'campaigns.campaign_id' is a strong match for 'campaign_id'.* |
+| `updated_at` | Time the record was updated. | `campaigns._airbyte_extracted_at` | 🟢 _1.00_ | *The source field 'campaigns._airbyte_extracted_at' is a required standard mapping for '_fivetran_synced', thus always scores 1.00.* |
+| `advertiser_id` | Advertiser ID | `campaigns.advertiser_id` | 🟢 _0.90_ | *The source field 'campaigns.advertiser_id' is a strong match for 'advertiser_id'.* |
+| `budget` | Campaign budget | `campaigns.budget` | 🟢 _0.90_ | *The source field 'campaigns.budget' is a strong match for 'budget'.* |
+| `budget_mode` | Budget type | `campaigns.budget_mode` | 🟢 _0.90_ | *The source field 'campaigns.budget_mode' is a strong match for 'budget_mode'.* |
+| `campaign_name` | Campaign name | `campaigns.campaign_name` | 🟢 _0.90_ | *The source field 'campaigns.campaign_name' is a strong match for 'campaign_name'.* |
+| `campaign_type` | Campaign Type, indicates the campaign is a regular campaign or iOS 14 campaign. | `campaigns.campaign_type` | 🟢 _0.90_ | *The source field 'campaigns.campaign_type' is a strong match for 'campaign_type'.* |
+| `create_time` | Time at which the campaign was created. | `campaigns.create_time` | 🟢 _0.90_ | *The source field 'campaigns.create_time' is a strong match for 'create_time'.* |
+| `is_new_structure` | Whether the campaign is a new structure (for the same campaign, the structure of campaign, adgroups and ads are the same) | `campaigns.is_new_structure` | 🟢 _0.90_ | *The source field 'campaigns.is_new_structure' is a strong match for 'is_new_structure'.* |
+| `objective_type` | Advertising objective. | `campaigns.objective_type` | 🟢 _0.90_ | *The source field 'campaigns.objective_type' is a strong match for 'objective_type'.* |
+| `opt_status` | Operation status. | `MISSING` | ❌ _0.00_ | *No good match found.* |
+| `status` | Campaign status | `MISSING` | ❌ _0.00_ | *No good match found.* |
+| `split_test_variable` | Split Test variables. Optional values; TARGETING, BIDDING_OPTIMIZATION , CREATIVE. | `campaigns.split_test_variable` | 🟢 _0.70_ | *The source field 'campaigns.split_test_variable' is likely a match for 'split_test_variable' but with some uncertainty.* |
+
+### Mapping: Airbyte `ads` to Fivetran `ad_history`
+
+
+- Table Match Confidence Score: 🟢 _0.85_
+- Table Completion Score: 🟢 _0.95_
+- Summary Self-Evaluation: _The table mapping reflects a high degree of confidence given that the field mappings align well with expectations for a typical ad schema. However, some fields could not perfectly be matched or verified due to lack of comprehensive context._
+
+| Field | Description | Expression | Confidence | Evaluation |
+| --- | --- | --- | --- | --- |
+| `ad_id` | Ad ID | `ads.ad_id` | 🟢 _1.00_ | *Perfect match given the direct mapping from 'ads.ad_id'.* |
+| `updated_at` | Time the record was updated. | `ads._airbyte_extracted_at` | 🟢 _1.00_ | *Standard 1.0 score for '_fivetran_synced' mapped to '_airbyte_extracted_at'.* |
+| `adgroup_id` | Ad group ID | `ads.adgroup_id` | 🟢 _0.95_ | *'ads.adgroup_id' aligns well with expectations.* |
+| `advertiser_id` | Advertiser ID | `ads.advertiser_id` | 🟢 _0.95_ | *'ads.advertiser_id' aligns well with expectations.* |
+| `campaign_id` | Campaign ID | `ads.campaign_id` | 🟢 _0.95_ | *'ads.campaign_id' aligns well with expectations.* |
+| `ad_name` | Ad Name. | `ads.ad_name` | 🟢 _1.00_ | *Directly maps from 'ads.ad_name' with high confidence.* |
+| `ad_text` | The ad text. | `ads.ad_text` | 🟢 _1.00_ | *Directly maps from 'ads.ad_text' with high confidence.* |
+| `app_name` | The display name of app download ad. | `ads.app_name` | 🟢 _1.00_ | *Directly maps from 'ads.app_name' with high confidence.* |
+| `call_to_action` | Call to action values. | `ads.call_to_action` | 🟢 _1.00_ | *Directly maps from 'ads.call_to_action' with high confidence.* |
+| `click_tracking_url` | Click monitoring URL. | `ads.click_tracking_url` | 🟢 _1.00_ | *Directly maps from 'ads.click_tracking_url' with high confidence.* |
+| `create_time` | Time at which the ad was created. | `ads.create_time` | 🟢 _0.90_ | *Most likely correct mapping but slight uncertainty.* |
+| `display_name` | The display name of landing page or pure exposure ad. | `ads.display_name` | 🟢 _0.90_ | *Most likely correct mapping but slight uncertainty.* |
+| `image_ids` | A list of image IDs. | `ads.image_ids` | 🟢 _0.90_ | *Most likely correct mapping but slight uncertainty.* |
+| `impression_tracking_url` | Display monitoring URL. | `ads.impression_tracking_url` | 🟢 _0.85_ | *Maps to 'ads.impression_tracking_url'; expression is detailed and consistent with ad-related data.* |
+| `is_aco` | Whether the ad is an automated ad. | `ads.is_aco` | 🟢 _0.90_ | *The mapping appears consistent with ad schema.* |
+| `is_creative_authorized` | Whether you grant displaying some of your ads in our TikTok For Business Creative Center. Only valid for non-US advertisers, the default value is false.  | `ads.creative_authorized` | 🟢 _0.85_ | *Mappings align, but US-specific context introduces slight uncertainty.* |
+| `is_new_structure` | Whether the campaign is a new structure. | `ads.is_new_structure` | 🟢 _0.85_ | *Limited by schema-specific context.* |
+| `landing_page_url` | Landing page URL. | `ads.landing_page_url` | 🟢 _1.00_ | *Direct mapping from 'ads.landing_page_url' is strong.* |
+| `open_url` | The specific location where you want your audience to go if they have your app installed. | `ads.deeplink` | 🟢 _0.85_ | *Mapping exists but specifics vary, slightly lowering confidence.* |
+| `opt_status` | Operation status. | `ads.operation_status` | 🟢 _0.85_ | *Limited schema context slightly reduces confidence.* |
+| `playable_url` | Playable material url. | `ads.playable_url` | 🟢 _1.00_ | *Strong mapping based on ad schema knowledge.* |
+| `profile_image` | Avatar URL. | `ads.profile_image_url` | 🟢 _1.00_ | *Direct mapping from 'ads.profile_image_url' matches perfectly.* |
+| `status` | Ad status. | `ads.secondary_status` | 🟢 _0.90_ | *Expected mapping from 'ads.secondary_status', but some schema variance may exist.* |
+| `video_id` | The video ID. | `ads.video_id` | 🟢 _1.00_ | *Direct mapping from 'ads.video_id' finely matches expectations.* |
+
+See [Rejected Mappings](./rejected_mappings.md) for mappings that did not meet approval criteria.
