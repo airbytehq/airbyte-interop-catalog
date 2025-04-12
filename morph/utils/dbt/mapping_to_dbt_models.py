@@ -285,13 +285,11 @@ def build_readme(
     """
     sections: list[str] = []
     rejected_sections: list[str] = []
+    has_rejected_mappings = False
     
     sections.append("# Generated dbt Models\n")
     sections.append(
         "This directory contains automatically generated dbt models based on mapping files.\n",
-    )
-    sections.append(
-        "See [Rejected Mappings](./rejected_mappings.md) for mappings that did not meet approval criteria.\n",
     )
     
     rejected_sections.append("# Rejected Mappings\n")
@@ -314,7 +312,18 @@ def build_readme(
         if is_approved:
             sections.append(transform.as_markdown())
         else:
+            has_rejected_mappings = True
             rejected_sections.append(transform.as_markdown())
+
+    if not has_rejected_mappings:
+        sections.append("\n## Rejected Mappings\n")
+        sections.append(
+            "There are no rejected mappings for this source.\n",
+        )
+    else:
+        sections.append(
+            "See [Rejected Mappings](./rejected_mappings.md) for mappings that did not meet approval criteria.\n",
+        )
 
     # Write README.md
     readme_path = (
@@ -326,14 +335,15 @@ def build_readme(
     )
     readme_path.write_text("\n".join(sections))
     
-    rejected_path = (
-        resources.get_generated_dbt_project_models_dir(
-            source_name=source_name,
-            project_name=project_name,
+    if has_rejected_mappings:
+        rejected_path = (
+            resources.get_generated_dbt_project_models_dir(
+                source_name=source_name,
+                project_name=project_name,
+            )
+            / "rejected_mappings.md"
         )
-        / "rejected_mappings.md"
-    )
-    rejected_path.write_text("\n".join(rejected_sections))
+        rejected_path.write_text("\n".join(rejected_sections))
 
 
 def generate_dbt_package(  # noqa: PLR0912, PLR0915
