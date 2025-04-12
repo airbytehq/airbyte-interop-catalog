@@ -297,9 +297,6 @@ def build_readme(
         "These mappings did not meet the approval criteria and are not included in the default dbt build.\n",
     )
     rejected_sections.append(
-        "To include these mappings in your dbt build, use the `include_rejected_mappings=True` parameter.\n",
-    )
-    rejected_sections.append(
         "[Return to main README](./README.md)\n",
     )
     
