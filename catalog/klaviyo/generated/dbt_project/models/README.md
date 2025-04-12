@@ -101,6 +101,7 @@ This directory contains automatically generated dbt models based on mapping file
 | `trigger_type` | Type of trigger that initiates this flow. | `flows.attributes.trigger_type` | 🟢 _0.80_ | *The 'trigger_type' mapping aligns well as it captures the initiation type for the flow.* |
 | `_fivetran_synced` | Timestamp when this record was last synced. | `flows._airbyte_extracted_at` | 🟢 _1.00_ | *Standard sync mapping from '_fivetran_synced' to '_airbyte_extracted_at', always scoring maximally.* |
 
-## Workshop Models
 
-These models are in the workshop directory and are not yet approved.
+## Rejected Mappings
+
+There are no rejected mappings for this source.

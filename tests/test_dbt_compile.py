@@ -64,6 +64,7 @@ def test_dbt_compile_generated_project() -> None:
             source_name="hubspot",
             output_dir=dbt_project_dir_parent,
             mapping_dir=transforms_dir,
+            include_rejected_mappings=False,
         )
 
         # Verify the project was generated

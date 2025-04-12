@@ -20,9 +20,9 @@ models:
   airbyte_{{ catalog_name }}:
     +materialized: view
 
-    # Workshop models (not yet approved)
-    workshop:
-      +enabled: false  # Workshop models are disabled by default
+    # Rejected mappings (mappings that did not meet approval criteria)
+    rejected:
+      +enabled: false  # Rejected mappings are disabled by default
 
 vars:
   airbyte_{{ catalog_name }}_database: "{{ catalog_name }}"

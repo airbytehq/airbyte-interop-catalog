@@ -1,4 +1,3 @@
-
 name: "airbyte_facebook_marketing"
 version: "1.0.0"
 config-version: 2
@@ -21,9 +20,9 @@ models:
   airbyte_facebook_marketing:
     +materialized: view
 
-    # Workshop models (not yet approved)
-    workshop:
-      +enabled: false  # Workshop models disabled by default
+    # Rejected mappings (mappings that did not meet approval criteria)
+    rejected:
+      +enabled: false  # Rejected mappings are disabled by default
 
 vars:
   airbyte_facebook_marketing_database: "facebook_marketing"

@@ -61,6 +61,7 @@ def build_dbt_project(
         generate_dbt_package(
             source_name=source_name,
             project_name=project_name,
+            include_rejected_mappings=False,
         )
 
         # Get sources.yml path from generated directory
