@@ -2,8 +2,6 @@
 
 These mappings did not meet the approval criteria and are not included in the default dbt build.
 
-To include these mappings in your dbt build, use the `include_rejected_mappings=True` parameter.
-
 [Return to main README](./README.md)
 
 ### Mapping: Airbyte `forms` to Fivetran `form`
