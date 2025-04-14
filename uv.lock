@@ -1675,6 +1675,12 @@ dev = [
     { name = "ruff" },
 ]
 
+[package.dev-dependencies]
+dev = [
+    { name = "pytest" },
+    { name = "pytest-cov" },
+]
+
 [package.metadata]
 requires-dist = [
     { name = "airbyte", specifier = "==0.24.2" },
@@ -1697,6 +1703,12 @@ requires-dist = [
     { name = "tomli-w", specifier = ">=1.0.0" },
 ]
 provides-extras = ["dev"]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "pytest", specifier = ">=8.3.5" },
+    { name = "pytest-cov", specifier = ">=6.0.0" },
+]
 
 [[package]]
 name = "msgpack"

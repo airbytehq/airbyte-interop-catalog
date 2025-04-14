@@ -54,5 +54,15 @@ Issues = "https://github.com/airbytehq/morph/issues"
 [project.scripts]
 morph = "morph.cli:main"
 
+[tool.hatch.metadata]
+# Tells Hatch to look for packages under "src"
+sources = ["src"]
+
 [tool.hatch.version]
 source = "uv-dynamic-versioning"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5",
+    "pytest-cov>=6.0.0",
+]
