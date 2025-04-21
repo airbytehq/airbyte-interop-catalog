@@ -4,7 +4,7 @@ HEADER_COMMENT = """# This file was auto-generated using the morph cli.
 # Please do not edit manually.
 """
 
-DEFAULT_PROJECT_NAME = "fivetran-interop"
+DEFAULT_PROJECT_NAME = "airbyte-interop"
 
 MISSING = "MISSING"
 

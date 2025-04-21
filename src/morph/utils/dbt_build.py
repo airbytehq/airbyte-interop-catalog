@@ -11,6 +11,7 @@ import subprocess
 from rich.console import Console
 
 from morph import resources
+from morph.utils.dbml.dbml_generator import generate_source_dbml, generate_target_dbml
 from morph.utils.dbt.dbt_source_files import (
     update_generated_dbt_sources_yml_from_airbyte_catalog,
 )
@@ -97,8 +98,6 @@ def build_dbt_project(
         # Copy sources.yml into the generated directory
         shutil.copy(generated_sources_path, new_sources_path)
 
-        from morph.utils.dbml.dbml_generator import generate_source_dbml, generate_target_dbml
-
         generate_source_dbml(source_name=source_name, project_name=project_name)
         generate_target_dbml(source_name=source_name, project_name=project_name)
 
@@ -106,7 +105,10 @@ def build_dbt_project(
     except Exception as e:
         console.print(f"Error generating dbt project: {e}", style="bold red")
 
-    if run_tests:
+    if run_tests and resources.get_transforms_files(
+        source_name=source_name,
+        project_name=project_name,
+    ):
         console.print("Running dbt tests...")
         result = subprocess.run(
             ["uv", "run", "dbt", "deps"],

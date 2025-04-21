@@ -153,7 +153,7 @@ def generate_empty_mapping_file(
         project_name=project_name,
     )
     # Find table schema in target_schema
-    table_schema: models.DbtSourceFile = models.DbtSourceFile.from_file(
+    table_schema: models.DbtSourceTable = models.DbtSourceFile.from_file(
         dbt_source_requirements_file,
     ).get_table(transform_name)
 
