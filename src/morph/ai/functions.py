@@ -148,7 +148,7 @@ def select_best_match_source_schema(
 )  # pyright: ignore [reportUntypedFunctionDecorator]
 def generate_mappings(
     fields_to_populate: list[models.FieldMapping],
-    source_schema: models.DbtSourceTable,
+    source_schema: models.DbtSourceTable | models.SourceTableSummary,
 ) -> list[models.FieldMappingSuggestion]:
     """Generate mappings for a list of fields.
 

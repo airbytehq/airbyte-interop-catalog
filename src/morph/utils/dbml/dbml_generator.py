@@ -36,7 +36,7 @@ def generate_dbml_from_dbt_source_file(
         for column in source_table.columns:
             column_obj = Column(
                 name=column.name,
-                type=column.data_type,  # Leave type as None if not provided
+                type=column.data_type or "varchar",  # type: ignore # Leave None if not provided
                 note=column.description if column.description else None,
             )
 
@@ -88,7 +88,7 @@ def generate_source_dbml(
         dbt_source_file=dbt_source_file,
         output_file=output_file,
     )
-    
+
     if visualize:
         try:
             visualize_source_dbml(source_name=source_name, project_name=project_name)
@@ -137,7 +137,7 @@ def generate_target_dbml(
         dbt_source_file=dbt_source_file,
         output_file=output_file,
     )
-    
+
     if visualize:
         try:
             visualize_target_dbml(source_name=source_name, project_name=project_name)
