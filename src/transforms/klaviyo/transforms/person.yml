@@ -1,0 +1,163 @@
+domain: klaviyo.airbyte-interop
+transforms:
+  - name: person
+    from:
+      - profiles: klaviyo.profiles
+    fields:
+      id:
+        expression: profiles.id
+        description: "Unique ID of the user if you use your own unique identifier.
+          Otherwise, Klaviyo  recommends using the email as the primary key. \n"
+      address_1:
+        expression: profiles.attributes.location.address1
+        description: First line of the person's address.
+      address_2:
+        expression: profiles.attributes.location.address2
+        description: Second line of the person's address.
+      city:
+        expression: profiles.attributes.location.city
+        description: City they live in.
+      country:
+        expression: profiles.attributes.location.country
+        description: Country they live in.
+      zip:
+        expression: profiles.attributes.location.zip
+        description: Postal code where they live.
+      created:
+        expression: profiles.attributes.created
+        description: Timestamp of when the person's profile was created.
+      email:
+        expression: profiles.attributes.email
+        description: The email address and the unique identifier for a profile.
+      first_name:
+        expression: profiles.attributes.first_name
+        description: Person's first name.
+      last_name:
+        expression: profiles.attributes.last_name
+        description: Person's surname.
+      latitude:
+        expression: profiles.attributes.location.latitude
+        description: Latitude of the person's location.
+      longitude:
+        expression: profiles.attributes.location.longitude
+        description: Longitude of the person's location.
+      organization:
+        expression: profiles.attributes.organization
+        description: Business organization they belong to.
+      phone_number:
+        expression: profiles.attributes.phone_number
+        description: Associated phone number.
+      region:
+        expression: profiles.attributes.location.region
+        description: Region or state they live in.
+      timezone:
+        expression: profiles.attributes.location.timezone
+        description: Timezone they are situated in.
+      title:
+        expression: profiles.attributes.title
+        description: Title at their business or organization.
+      updated:
+        expression: profiles.attributes.updated
+        description: Timestamp of when the person profile was last updated.
+      last_event_date:
+        expression: profiles.attributes.last_event_date
+        description: Date and time of the most recent event the triggered an update
+          to the profile, in ISO 8601 format (YYYY-MM-DDTHH:MM:SS.mmmmmm)
+      _fivetran_deleted:
+        expression: MISSING
+        description: Boolean that is true if the campaign has been soft-deleted.
+annotations:
+  approved: true
+  missing_fields:
+    - _fivetran_deleted
+  evaluation:
+    source_stream_name: profiles
+    target_table_name: person
+    table_match_score: 0.95
+    completion_score: 0.95
+    explanation: High confidence in overall table and field mapping. All field names
+      match closely to their source counterparts, with only one field (_fivetran_deleted)
+      set to MISSING. Some fields could have different meanings but based on the provided
+      context, assumptions have been made.
+    field_mapping_evals:
+      - name: id
+        expression: profiles.id
+        score: 1.0
+        explanation: Perfect match found for 'id'.
+      - name: address_1
+        expression: profiles.attributes.location.address1
+        score: 1.0
+        explanation: Perfect match found for 'address_1'.
+      - name: address_2
+        expression: profiles.attributes.location.address2
+        score: 1.0
+        explanation: Perfect match found for 'address_2'.
+      - name: city
+        expression: profiles.attributes.location.city
+        score: 1.0
+        explanation: Perfect match found for 'city'.
+      - name: country
+        expression: profiles.attributes.location.country
+        score: 1.0
+        explanation: Perfect match found for 'country'.
+      - name: zip
+        expression: profiles.attributes.location.zip
+        score: 1.0
+        explanation: Perfect match found for 'zip'.
+      - name: created
+        expression: profiles.attributes.created
+        score: 1.0
+        explanation: Perfect match found for 'created'.
+      - name: email
+        expression: profiles.attributes.email
+        score: 1.0
+        explanation: Perfect match found for 'email'.
+      - name: first_name
+        expression: profiles.attributes.first_name
+        score: 1.0
+        explanation: Perfect match found for 'first_name'.
+      - name: last_name
+        expression: profiles.attributes.last_name
+        score: 1.0
+        explanation: Perfect match found for 'last_name'.
+      - name: latitude
+        expression: profiles.attributes.location.latitude
+        score: 1.0
+        explanation: Perfect match found for 'latitude'.
+      - name: longitude
+        expression: profiles.attributes.location.longitude
+        score: 1.0
+        explanation: Perfect match found for 'longitude'.
+      - name: organization
+        expression: profiles.attributes.organization
+        score: 1.0
+        explanation: Perfect match found for 'organization'.
+      - name: phone_number
+        expression: profiles.attributes.phone_number
+        score: 1.0
+        explanation: Perfect match found for 'phone_number'.
+      - name: region
+        expression: profiles.attributes.location.region
+        score: 0.7
+        explanation: Good match found for 'region', but the term could have multiple
+          contexts.
+      - name: timezone
+        expression: profiles.attributes.location.timezone
+        score: 1.0
+        explanation: Perfect match found for 'timezone'.
+      - name: title
+        expression: profiles.attributes.title
+        score: 1.0
+        explanation: Perfect match found for 'title'.
+      - name: updated
+        expression: profiles.attributes.updated
+        score: 1.0
+        explanation: Perfect match found for 'updated'.
+      - name: last_event_date
+        expression: profiles.attributes.last_event_date
+        score: 1.0
+        explanation: Perfect match found for 'last_event_date'.
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

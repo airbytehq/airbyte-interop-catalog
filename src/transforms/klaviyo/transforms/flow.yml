@@ -1,0 +1,78 @@
+domain: klaviyo.airbyte-interop
+transforms:
+  - name: flow
+    from:
+      - flows: klaviyo.flows
+    fields:
+      created:
+        expression: flows.attributes.created
+        description: Timestamp of when the flow was first created.
+      id:
+        expression: flows.id
+        description: Unique ID of the flow.
+      name:
+        expression: flows.attributes.name
+        description: Name of the flow.
+      status:
+        expression: flows.attributes.status
+        description: Current status of the flow. Either 'manual', 'live', or 'draft'.
+          Read more 
+          [here](https://help.klaviyo.com/hc/en-us/articles/115002774932-Getting-Started-with-Flows#the-flow-action-status9).
+      updated:
+        expression: flows.attributes.updated
+        description: Timestamp of when the flow was last updated.
+      archived:
+        expression: flows.attributes.archived
+        description: Boolean of whether this record has been archived
+      trigger_type:
+        expression: flows.attributes.trigger_type
+        description: Corresponds to the object which triggered the flow.
+      _fivetran_deleted:
+        expression: MISSING
+        description: Boolean that is true if the campaign has been soft-deleted.
+annotations:
+  approved: true
+  missing_fields:
+    - _fivetran_deleted
+  evaluation:
+    source_stream_name: flows
+    target_table_name: flow
+    table_match_score: 0.85
+    completion_score: 0.88
+    explanation: The given field mappings align quite well with the target schema
+      allowing a lot of the data to be preserved. However, there is one field ('_fivetran_deleted')
+      that could not be appropriately matched causing a slightly lower completion
+      score.
+    field_mapping_evals:
+      - name: created
+        expression: flows.attributes.created
+        score: 1.0
+        explanation: Perfect match.
+      - name: id
+        expression: flows.id
+        score: 1.0
+        explanation: Perfect match.
+      - name: name
+        expression: flows.attributes.name
+        score: 1.0
+        explanation: Perfect match.
+      - name: status
+        expression: flows.attributes.status
+        score: 1.0
+        explanation: Perfect match.
+      - name: updated
+        expression: flows.attributes.updated
+        score: 1.0
+        explanation: Perfect match.
+      - name: archived
+        expression: flows.attributes.archived
+        score: 1.0
+        explanation: Perfect match.
+      - name: trigger_type
+        expression: flows.attributes.trigger_type
+        score: 1.0
+        explanation: Perfect match.
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

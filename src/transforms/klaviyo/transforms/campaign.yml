@@ -1,0 +1,165 @@
+domain: klaviyo.airbyte-interop
+transforms:
+  - name: campaign
+    from:
+      - campaigns: klaviyo.campaigns
+    fields:
+      _fivetran_deleted:
+        expression: MISSING
+        description: Boolean that is true if the campaign has been soft-deleted.
+      campaign_type:
+        expression: campaigns.type
+        description: Type of campaign.
+      created:
+        expression: campaigns.attributes.created_at
+        description: Timestamp of when the campaign was created, in UTC.
+      email_template_id:
+        expression: MISSING
+        description: "Foreign key referencing the ID of the `email_template` object
+          that will be the  content of this campaign. Note the Email Template is copied
+          when creating this campaign,  so future changes to that Email Template will
+          not alter the content of this campaign.\n"
+      from_email:
+        expression: MISSING
+        description: The email address your email will be sent from and will be used
+          in the reply-to header.
+      from_name:
+        expression: MISSING
+        description: The name or label associated with the email address you're sending
+          from.
+      id:
+        expression: campaigns.id
+        description: Unique ID of the campaign.
+      name:
+        expression: campaigns.attributes.name
+        description: A name for this campaign. If not specified, this will default
+          to the subject of the campaign.
+      send_time:
+        expression: campaigns.attributes.send_time
+        description: "Timestamp of when the campaign is scheduled to be sent in the
+          future, if  [\"smart send time\"](https://help.klaviyo.com/hc/en-us/articles/360029794371-Smart-Send-Time-in-Klaviyo#how-to-utilize-smart-send-time3)
+          is used. \n"
+      sent_at:
+        expression: campaigns.attributes.scheduled_at
+        description: Timestamp of when the campaign was first sent out to users.
+      status:
+        expression: campaigns.attributes.status
+        description: Current status of the campaign. Either "draft", "scheduled",
+          "sent", or "cancelled".
+      status_id:
+        expression: MISSING
+        description: Corresponding ID to the current status.
+      status_label:
+        expression: MISSING
+        description: The label of the status as it appears in the UI (should be the
+          same as `status`).
+      subject:
+        expression: campaigns.attributes.message
+        description: The subject line of the campaign's email.
+      updated:
+        expression: campaigns.attributes.updated_at
+        description: Timestamp of when the campaign was last updated.
+      archived:
+        expression: campaigns.attributes.archived
+        description: Boolean of whether the campaign has been archived or not
+      scheduled:
+        expression: campaigns.attributes.scheduled_at
+        description: The datetime when the campaign was scheduled for future sending
+annotations:
+  approved: false
+  missing_fields:
+    - _fivetran_deleted
+    - email_template_id
+    - from_email
+    - from_name
+    - status_id
+    - status_label
+  evaluation:
+    source_stream_name: campaigns
+    target_table_name: campaign
+    table_match_score: 1.0
+    completion_score: 0.78
+    explanation: The table matches perfectly with a score of 1.00. Completion score
+      is based on the ratio of correctly mapped fields to the total fields in the
+      table. There are 7 fields which stood unmatched with 'Missing' expression resulting
+      in the score of 0.78.
+    field_mapping_evals:
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: campaign_type
+        expression: campaigns.type
+        score: 1.0
+        explanation: Campaign type is perfectly mapped from 'campaigns.type' with
+          the score of 1.00
+      - name: created
+        expression: campaigns.attributes.created_at
+        score: 1.0
+        explanation: Created is perfectly mapped from 'campaigns.attributes.created_at'
+          with the score of 1.00
+      - name: email_template_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: from_email
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: from_name
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: id
+        expression: campaigns.id
+        score: 1.0
+        explanation: Id is perfectly mapped from 'campaigns.id' with the score of
+          1.00
+      - name: name
+        expression: campaigns.attributes.name
+        score: 1.0
+        explanation: Name is perfectly mapped from 'campaigns.attributes.name' with
+          the score of 1.00
+      - name: send_time
+        expression: campaigns.attributes.send_time
+        score: 1.0
+        explanation: Send time is perfectly mapped from 'campaigns.attributes.send_time'
+          with the score of 1.00
+      - name: sent_at
+        expression: campaigns.attributes.scheduled_at
+        score: 1.0
+        explanation: Sent at is perfectly mapped from 'campaigns.attributes.scheduled_at'
+          with the score of 1.00
+      - name: status
+        expression: campaigns.attributes.status
+        score: 1.0
+        explanation: Status is perfectly mapped from 'campaigns.attributes.status'
+          with the score of 1.00
+      - name: status_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: status_label
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: subject
+        expression: campaigns.attributes.message
+        score: 1.0
+        explanation: Subject is perfectly mapped from 'campaigns.attributes.message'
+          with the score of 1.00
+      - name: updated
+        expression: campaigns.attributes.updated_at
+        score: 1.0
+        explanation: Updated is perfectly mapped from 'campaigns.attributes.updated_at'
+          with the score of 1.00
+      - name: archived
+        expression: campaigns.attributes.archived
+        score: 1.0
+        explanation: Archived is perfectly mapped from 'campaigns.attributes.archived'
+          with the score of 1.00
+      - name: scheduled
+        expression: campaigns.attributes.scheduled_at
+        score: 1.0
+        explanation: Scheduled is perfectly mapped from 'campaigns.attributes.scheduled_at'
+          with the score of 1.00
