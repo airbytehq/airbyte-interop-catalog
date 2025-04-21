@@ -5,13 +5,13 @@ default:
       type: duckdb
       # Assume we are running from `catalog/{source-name}/dbt_project/`
       # and that repo root is 3 levels up.
-      path: ../../../../.data/{{ catalog_name }}.duckdb
+      path: ../../../../.data/{{ source_name }}.duckdb
       extensions:
         - httpfs
         - parquet
     motherduck:
       type: duckdb
-      path: "md:airbyte_{{ catalog_name }}"
+      path: "md:airbyte_{{ source_name }}"
       extensions:
         - httpfs
         - parquet

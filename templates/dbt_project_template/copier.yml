@@ -5,6 +5,11 @@ _exclude:
   - .git
 
 # Template variables
-catalog_name:
+source_name:
   type: str
   help: Name of the catalog (e.g. 'hubspot')
+
+dbt_project_dir_name:
+  type: str
+  help: Name of the dbt project directory (e.g. 'airbyte_hubspot')
+  default: "airbyte-interop-dbt-project"
