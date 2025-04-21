@@ -4,13 +4,13 @@ install = { cmd = "uv sync --all-extras", help = "Install and sync project depen
 sync = { cmd = "uv sync --all-extras", help = "Sync project dependencies. (Alias for install.)" }
 format = { cmd = "uv run ruff format .", help = "Format code with ruff" }
 lint = { cmd = "uv run ruff check .", help = "Lint code with ruff" }
-typecheck = { cmd = "uv run python -m basedpyright morph", help = "Type check code with basedpyright" }
+type-check = { cmd = "uv run basedpyright", help = "Type check code with basedpyright" }
 pytest = { cmd = "uv run pytest --cov=morph --cov-report=term-missing --cov-report=xml", help = "Run tests with coverage" }
 pytest-fast = { cmd = "uv run pytest --exitfirst tests", help = "Run tests" }
 pytest-collect = { cmd = "uv run pytest --collect-only", help = "Collect tests" }
 
 # Combined tasks
-check = { sequence = ["lint", "typecheck", "pytest"], help = "Run all checks" }
+check = { sequence = ["lint", "type-check", "pytest"], help = "Run all checks" }
 fix = { sequence = ["format", "lint --fix"], help = "Auto-fix formatting and linting issues" }
 
 # Build tasks
