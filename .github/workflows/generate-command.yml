@@ -15,6 +15,7 @@ on:
         description: "Source Name (e.g., hubspot, facebook_marketing)"
         type: string
         required: true
+
   push:
     paths:
       - '.github/workflows/generate-command.yml'
@@ -107,12 +108,11 @@ jobs:
       # Run the generate command
       - name: Run generate command
         id: generate
-        if: ${{ github.event_name == 'workflow_dispatch' }}
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           # Run morph generate with the provided source_name and default project_name
-          uv run morph generate ${{ github.event.inputs.source_name }} airbyte-interop --auto-confirm
+          uv run morph generate ${{ github.event.inputs.source_name || 'hubspot' }} --auto-confirm
 
           # Store the exit code
           GENERATE_EXIT_CODE=$?
