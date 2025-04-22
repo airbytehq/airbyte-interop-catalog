@@ -110,6 +110,7 @@ jobs:
       # Run the generate command
       - name: Run generate command
         id: generate
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         continue-on-error: true
         run: |
           # Run morph generate with the provided source_name and default project_name
@@ -132,7 +133,7 @@ jobs:
           
       # Handle git operations only if generate was successful
       - name: Process changes
-        if: ${{ env.generate_success == 'true' }}
+        if: ${{ github.event_name == 'workflow_dispatch' && env.generate_success == 'true' }}
         run: |
           # Configure git
           git config --global user.name "GitHub Actions"
@@ -158,7 +159,7 @@ jobs:
 
       # Handle PR creation if no PR was specified
       - name: Create PR if needed
-        if: ${{ github.event.inputs.pr == '' && (env.generate_changes == 'true' || env.generate_success == 'false') }}
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.pr == '' && (env.generate_changes == 'true' || env.generate_success == 'false') }}
         id: create-pr
         run: |
           # Create PR title and body based on generate success
@@ -220,18 +221,18 @@ Requested by: Aaron (\"AJ\") Steers (aj@airbyte.io)"
 
       # Success/failure messages for new PR
       - name: Success message for new PR
-        if: ${{ success() && github.event.inputs.pr == '' && env.generate_changes == 'true' }}
+        if: ${{ github.event_name == 'workflow_dispatch' && success() && github.event.inputs.pr == '' && env.generate_changes == 'true' }}
         run: |
           echo "✅ Generate command completed successfully."
           echo "PR created: ${{ steps.create-pr.outputs.pr_url }}"
 
       - name: No changes message
-        if: ${{ success() && github.event.inputs.pr == '' && env.generate_changes == 'false' && env.generate_success == 'true' }}
+        if: ${{ github.event_name == 'workflow_dispatch' && success() && github.event.inputs.pr == '' && env.generate_changes == 'false' && env.generate_success == 'true' }}
         run: |
           echo "✅ Generate command completed, but no changes were needed."
           
       - name: Error message
-        if: ${{ success() && github.event.inputs.pr == '' && env.generate_success == 'false' }}
+        if: ${{ github.event_name == 'workflow_dispatch' && success() && github.event.inputs.pr == '' && env.generate_success == 'false' }}
         run: |
           echo "⚠️ Generate command failed with exit code ${{ steps.generate.outputs.exit_code }}."
           echo "PR created with error details: ${{ steps.create-pr.outputs.pr_url }}"
