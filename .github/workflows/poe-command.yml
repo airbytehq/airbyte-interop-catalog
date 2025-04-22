@@ -12,7 +12,7 @@ on:
         type: string
         required: false
       comment-text:
-        description: "Full comment text, beginning with '/poe '."
+        description: "Full slash command, starting with '/poe'."
         type: string
         required: false
 
