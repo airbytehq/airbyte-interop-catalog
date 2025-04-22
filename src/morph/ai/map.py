@@ -183,6 +183,8 @@ def populate_missing_mappings(
             "with missing source table.",
             style="red",
         )
+        return
+
     fields_to_populate: list[models.FieldMapping] = []
 
     source_table_info = models.SourceTableSummary.from_dbt_source_file(

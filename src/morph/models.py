@@ -253,7 +253,7 @@ class DbtSourceFile(BaseModel):
         """Get a source table by name."""
         matches = [table for table in self.source_tables if table.name == table_name]
         if not matches:
-            raise ValueError(f"Table '{table_name}' not found in source file.")
+            raise ValueError(f"Source table '{table_name}' not found in source file.")
 
         return matches[0]
 
