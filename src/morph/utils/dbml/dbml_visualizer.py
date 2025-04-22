@@ -46,7 +46,9 @@ def render_dbml_to_svg(
     mount_dir = abs_dbml_path.parent
 
     rel_dbml_file = abs_dbml_path.name
-    rel_output_file = abs_output_path.name if abs_output_path.parent == mount_dir else abs_output_path
+    rel_output_file = (
+        abs_output_path.name if abs_output_path.parent == mount_dir else abs_output_path
+    )
 
     try:
         console.print(f"Rendering DBML file {dbml_file_path} to {output_file_path}")
@@ -60,7 +62,7 @@ def render_dbml_to_svg(
 
         console.print(f"Successfully rendered DBML file to {output_file_path}")
     except Exception as e:
-        console.print(f"Error rendering DBML file: {str(e)}")
+        console.print(f"Error rendering DBML file: {e!s}")
         raise
 
 

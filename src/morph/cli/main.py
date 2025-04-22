@@ -147,7 +147,7 @@ def visualize_dbml(
             output_file_path=output_file_path,
         )
     except Exception as e:
-        console.print(f"Error visualizing DBML file: {str(e)}")
+        console.print(f"Error visualizing DBML file: {e!s}")
         sys.exit(1)
 
 
