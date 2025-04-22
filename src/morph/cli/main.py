@@ -298,11 +298,19 @@ def eval(
     type=bool,
     default=False,
 )
+@click.option(
+    "--regenerate-all",
+    is_flag=True,
+    help="Regenerate all mappings, even if they are already present",
+    type=bool,
+    default=False,
+)
 def generate(
     source_name: str,
     project_name: str = DEFAULT_PROJECT_NAME,
     *,
     auto_confirm: bool | None = None,
+    regenerate_all: bool = False,
     include_skipped_tables: bool = False,
     no_build: bool = False,
 ) -> None:
@@ -339,6 +347,14 @@ def generate(
             project_name=project_name,
             transform_name=target_table.name,
         )
+        if regenerate_all:
+            console.print(
+                f"Regenerating '{target_table.name}' target table...",
+                style="green",
+            )
+            target_tables.append(target_table.name)
+            continue
+
         if transform_file.exists():
             transform_def = models.TransformFile.from_file(transform_file)
             if transform_def.get_mapped_fields():  # Skip if at least some fields are mapped
@@ -383,11 +399,15 @@ def generate(
     )
     console.print(table)
     for target_table in target_tables:
-        if not include_skipped_tables and (
-            target_table
-            in map.get_skipped_target_tables(
-                source_name,
-                project_name,
+        if (
+            not regenerate_all
+            and not include_skipped_tables
+            and (
+                target_table
+                in map.get_skipped_target_tables(
+                    source_name,
+                    project_name,
+                )
             )
         ):
             console.print(
@@ -404,6 +424,7 @@ def generate(
             project_name=project_name,
             transform_name=target_table,
             auto_confirm=auto_confirm,
+            regenerate_all=regenerate_all,
         )
 
     console.print("Generation complete. Updating lock file...", style="bold green")

@@ -238,6 +238,7 @@ def infer_table_mappings(  # noqa: PLR0912 (too many branches)
     transform_name: str,
     source_table: str | None = None,
     auto_confirm: bool | None = None,
+    regenerate_all: bool = False,
 ) -> None:
     check_openai_api_key()
     auto_confirm = cast(bool, if_none(auto_confirm, False))
@@ -275,7 +276,7 @@ def infer_table_mappings(  # noqa: PLR0912 (too many branches)
         return
 
     summary_text = ""
-    if not source_table:
+    if regenerate_all or not source_table:
         # We need the AI to suggest a source table
 
         target_table_schemas: list[models.SourceTableSummary] = (
