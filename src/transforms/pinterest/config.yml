@@ -1,0 +1,7 @@
+project_id: pinterest.fivetran-interop
+source_name: pinterest
+# Target schema file snapshotted from: https://github.com/fivetran/dbt_pinterest_source/blob/main/models/src_pinterest.yml
+target_dbt_schema_url: https://raw.githubusercontent.com/fivetran/dbt_pinterest_source/refs/heads/main/models/src_pinterest.yml
+# SQL dialect configuration
+sql_dialect: duckdb
+subcolumn_traversal: dot_notation
