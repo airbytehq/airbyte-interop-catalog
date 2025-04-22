@@ -12,91 +12,22 @@ on:
         type: string
         required: false
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
-  fix-on-demand:
+  run-poe-command:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Get PR info
-        id: pr-info
-        run: |
-          PR_JSON=$(gh api repos/${{ github.repository }}/pulls/${{ github.event.inputs.pr }})
-          echo "repo=$(echo "$PR_JSON" | jq -r .head.repo.full_name)" >> $GITHUB_OUTPUT
-          echo "branch=$(echo "$PR_JSON" | jq -r .head.ref)" >> $GITHUB_OUTPUT
-        env:
-          GH_TOKEN: ${{ github.token }}
-
-      - name: Create URL to the run output
-        id: vars
-        run: echo "run-url=https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> $GITHUB_OUTPUT
-
-      - name: Append comment with job run link
-        id: first-comment-action
-        uses: peter-evans/create-or-update-comment@v4
-        with:
-          comment-id: ${{ github.event.inputs.comment-id }}
-          issue-number: ${{ github.event.inputs.pr }}
-          body: |
-            > **Auto-Fix Job Info**
-            >
-            > This job attempts to auto-fix any linting or formatting issues. If any fixes are made,
-            > those changes will be automatically committed and pushed back to the PR.
-            >
-            > Note: This job can only be run by maintainers. On PRs from forks, this command requires
-            > that the PR author has enabled the `Allow edits from maintainers` option.
-
-            > PR auto-fix job started... [Check job output.][1]
-
-            [1]: ${{ steps.vars.outputs.run-url }}
-
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Run Poe Slash Command Processor
+        uses: aaronsteers/pre-command-processor@dev
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          repository: ${{ steps.pr-info.outputs.repo }}
-          token: ${{ github.token }}
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Setup uv
-        uses: astral-sh/setup-uv@v5
-        with:
-          python-version: "3.11"
-
-      - name: Create virtual environment
-        run: uv venv
-
-      - name: Install poethepoet
-        run: uv pip install poethepoet
-
-      - name: Install dependencies
-        run: poe install
-
-      - name: Run fix command
-        run: |
-          poe fix
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git add .
-          git diff --staged --quiet || git commit -m "Apply automatic fixes from /fix command"
-          git push
-
-      - name: Append success comment
-        uses: peter-evans/create-or-update-comment@v4
-        if: success()
-        with:
-          comment-id: ${{ steps.first-comment-action.outputs.comment-id }}
-          reactions: hooray
-          body: |
-            > ✅ Fixes applied successfully.
-
-      - name: Append failure comment
-        uses: peter-evans/create-or-update-comment@v4
-        if: failure()
-        with:
-          comment-id: ${{ steps.first-comment-action.outputs.comment-id }}
-          reactions: confused
-          body: |
-            > ❌ Fix command failed.
+          command: "fix"
+          pr: ${{ github.event.inputs.pr }}
+          comment-id: ${{ github.event.inputs.comment-id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
