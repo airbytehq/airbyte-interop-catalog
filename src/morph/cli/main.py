@@ -298,6 +298,13 @@ def eval(
     type=bool,
     default=False,
 )
+@click.option(
+    "--regenerate-all",
+    is_flag=True,
+    help="Regenerate all mappings, even if they are already present",
+    type=bool,
+    default=False,
+)
 def generate(
     source_name: str,
     project_name: str = DEFAULT_PROJECT_NAME,
