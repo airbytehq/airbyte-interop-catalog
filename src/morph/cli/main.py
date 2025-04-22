@@ -16,8 +16,8 @@ from morph.ai.eval import get_table_mapping_eval
 from morph.constants import DEFAULT_PROJECT_NAME
 from morph.utils import text_utils
 from morph.utils.airbyte_sync import sync_source
-from morph.utils.dbt_build import build_dbt_project
 from morph.utils.dbml.dbml_visualizer import render_dbml_to_svg
+from morph.utils.dbt_build import build_dbt_project
 from morph.utils.lock_file import update_lock_file
 from morph.utils.logic import if_none
 from morph.utils.transform_scaffold import (
