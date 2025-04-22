@@ -347,6 +347,14 @@ def generate(
             project_name=project_name,
             transform_name=target_table.name,
         )
+        if regenerate_all:
+            console.print(
+                f"Regenerating '{target_table.name}' target table...",
+                style="green",
+            )
+            target_tables.append(target_table.name)
+            continue
+
         if transform_file.exists():
             transform_def = models.TransformFile.from_file(transform_file)
             if transform_def.get_mapped_fields():  # Skip if at least some fields are mapped
