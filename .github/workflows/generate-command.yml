@@ -15,6 +15,9 @@ on:
         description: "Source Name (e.g., hubspot, facebook_marketing)"
         type: string
         required: true
+  push:
+    paths:
+      - '.github/workflows/generate-command.yml'
 
 jobs:
   generate-on-demand:
