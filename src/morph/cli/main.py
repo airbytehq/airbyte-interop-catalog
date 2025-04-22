@@ -303,6 +303,7 @@ def generate(
     project_name: str = DEFAULT_PROJECT_NAME,
     *,
     auto_confirm: bool | None = None,
+    regenerate_all: bool = False,
     include_skipped_tables: bool = False,
     no_build: bool = False,
 ) -> None:
@@ -383,11 +384,15 @@ def generate(
     )
     console.print(table)
     for target_table in target_tables:
-        if not include_skipped_tables and (
-            target_table
-            in map.get_skipped_target_tables(
-                source_name,
-                project_name,
+        if (
+            not regenerate_all
+            and not include_skipped_tables
+            and (
+                target_table
+                in map.get_skipped_target_tables(
+                    source_name,
+                    project_name,
+                )
             )
         ):
             console.print(
@@ -404,6 +409,7 @@ def generate(
             project_name=project_name,
             transform_name=target_table,
             auto_confirm=auto_confirm,
+            regenerate_all=regenerate_all,
         )
 
     console.print("Generation complete. Updating lock file...", style="bold green")
