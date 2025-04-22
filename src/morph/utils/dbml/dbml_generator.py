@@ -93,11 +93,11 @@ def generate_source_dbml(
         try:
             visualize_source_dbml(source_name=source_name, project_name=project_name)
         except FileNotFoundError:
-            console.print(f"DBML file not found, skipping visualization")
+            console.print("DBML file not found, skipping visualization")
         except RuntimeError as e:
-            console.print(f"Docker not available, skipping visualization: {str(e)}")
+            console.print(f"Docker not available, skipping visualization: {e!s}")
         except Exception as e:
-            console.print(f"Error visualizing DBML file: {str(e)}")
+            console.print(f"Error visualizing DBML file: {e!s}")
 
 
 def generate_target_dbml(
@@ -142,8 +142,8 @@ def generate_target_dbml(
         try:
             visualize_target_dbml(source_name=source_name, project_name=project_name)
         except FileNotFoundError:
-            console.print(f"DBML file not found, skipping visualization")
+            console.print("DBML file not found, skipping visualization")
         except RuntimeError as e:
-            console.print(f"Docker not available, skipping visualization: {str(e)}")
+            console.print(f"Docker not available, skipping visualization: {e!s}")
         except Exception as e:
-            console.print(f"Error visualizing DBML file: {str(e)}")
+            console.print(f"Error visualizing DBML file: {e!s}")

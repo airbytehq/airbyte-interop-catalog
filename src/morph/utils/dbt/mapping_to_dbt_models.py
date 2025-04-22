@@ -337,7 +337,7 @@ def build_readme(
         rejected_path.write_text("\n".join(rejected_sections))
 
 
-def generate_dbt_package(  # noqa: PLR0912, PLR0914, PLR0915
+def generate_dbt_package(  # noqa: PLR0912, PLR0915
     source_name: str,
     *,
     project_name: str = DEFAULT_PROJECT_NAME,

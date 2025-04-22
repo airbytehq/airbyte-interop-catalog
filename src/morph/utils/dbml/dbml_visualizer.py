@@ -62,7 +62,7 @@ def render_dbml_to_svg(
 
         console.print(f"Successfully rendered DBML file to {output_file_path}")
     except Exception as e:
-        console.print(f"Error rendering DBML file: {str(e)}")
+        console.print(f"Error rendering DBML file: {e!s}")
         raise
 
 

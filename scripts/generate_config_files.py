@@ -79,7 +79,7 @@ matching_repos = []
 
 while url:
     response = requests.get(url, headers=headers, params=params)
-    if response.status_code != 200:
+    if response.status_code != 200:  # noqa: PLR2004  # Magic value
         raise Exception(f"GitHub API returned status code {response.status_code}: {response.text}")
 
     repos = response.json()

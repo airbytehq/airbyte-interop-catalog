@@ -8,7 +8,6 @@ and running Docker commands.
 import shutil
 import subprocess
 from pathlib import Path
-from typing import List, Optional
 
 from rich.console import Console
 
@@ -28,7 +27,7 @@ def run_docker_command(
     image: str,
     command: str,
     mount_dir: Path,
-    environment_vars: Optional[dict[str, str]] = None,
+    environment_vars: dict[str, str] | None = None,
 ) -> None:
     """Run a command in a Docker container.
 
