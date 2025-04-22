@@ -6,7 +6,7 @@ on:
       pr:
         description: "PR Number"
         type: string
-        required: true
+        required: false
       comment-id:
         description: "Comment ID (Optional)"
         type: string
