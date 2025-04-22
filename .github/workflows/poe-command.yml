@@ -28,8 +28,9 @@ jobs:
       - name: Get Poe Command
         id: get-command
         run: |
-            poe-command=$(echo "${{ github.event.inputs.comment-text }}" | sed 's|^/||' | head -n 1) >> $GITHUB_OUTPUT
-            echo "command=${command}"
+            poe_command=$(echo "${{ github.event.inputs.comment-text }}" | sed 's|^/||' | head -n 1) >> $GITHUB_OUTPUT
+            echo "Resolved command: ${poe_command}"
+            echo "poe-command=${poe_command}" >> $GITHUB_OUTPUT
 
       - name: Run Poe Slash Command Processor
         uses: aaronsteers/poe-command-processor@main
