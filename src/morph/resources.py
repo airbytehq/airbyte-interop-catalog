@@ -123,7 +123,7 @@ def get_source_config(
     )
 
     if not config_file.is_file():
-        raise ValueError(f"Error: Config file {config_file} does not exist")
+        raise FileNotFoundError(f"Error: Config file {config_file} does not exist")
 
     config = text_utils.load_yaml_file(config_file)
 
