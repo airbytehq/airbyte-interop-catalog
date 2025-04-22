@@ -344,7 +344,7 @@ def generate_dbt_package(  # noqa: PLR0912, PLR0914, PLR0915
     output_dir: Path | None = None,
     mapping_dir: Path | None = None,
     include_rejected_mappings: bool = False,
-) -> None:
+) -> Path:
     """Generate a dbt package from mapping files.
 
     Args:
@@ -467,3 +467,5 @@ def generate_dbt_package(  # noqa: PLR0912, PLR0914, PLR0915
         project_name=project_name,
     )
     print("Generated README.md.")
+
+    return dbt_project_dir
