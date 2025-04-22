@@ -165,8 +165,7 @@ jobs:
           # Create PR title and body based on generate success
           if [ "${{ env.generate_success }}" == "false" ]; then
             TITLE="fix(morph): Fix generate command for ${{ github.event.inputs.source_name }}"
-            BODY_CONTENT=$(cat <<EOF
-# Generate command failed
+            BODY_CONTENT="# Generate command failed
 
 This PR was automatically created because the \`/generate\` command failed.
 
@@ -177,13 +176,10 @@ This PR was automatically created because the \`/generate\` command failed.
 Please check the logs for more details and fix the source configuration.
 
 Link to Devin run: https://app.devin.ai/sessions/f4d085b23ec0438fab16a8e988a1b8eb
-Requested by: Aaron ("AJ") Steers (aj@airbyte.io)
-EOF
-)
+Requested by: Aaron (\"AJ\") Steers (aj@airbyte.io)"
           else
             TITLE="feat(morph): Generate mappings for ${{ github.event.inputs.source_name }}"
-            BODY_CONTENT=$(cat <<EOF
-# Generate mappings
+            BODY_CONTENT="# Generate mappings
 
 This PR was automatically created by the \`/generate\` command.
 
@@ -191,15 +187,14 @@ This PR was automatically created by the \`/generate\` command.
 - Project: airbyte-interop
 
 Link to Devin run: https://app.devin.ai/sessions/f4d085b23ec0438fab16a8e988a1b8eb
-Requested by: Aaron ("AJ") Steers (aj@airbyte.io)
-EOF
-)
+Requested by: Aaron (\"AJ\") Steers (aj@airbyte.io)"
           fi
           
           # Create PR
+          echo "$BODY_CONTENT" > /tmp/pr_body.md
           PR_URL=$(gh pr create \
             --title "$TITLE" \
-            --body "$BODY_CONTENT" \
+            --body-file /tmp/pr_body.md \
             --repo ${{ github.repository }})
           
           echo "pr_url=$PR_URL" >> $GITHUB_OUTPUT
