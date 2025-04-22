@@ -13,7 +13,7 @@ if not VERBOSE_MODE:
 agent = marvin.Agent(
     name="morph-ai",
     description="AI agent for Morph.",
-    model="gpt-4",
+    model="gpt-4-turbo",
     verbose=VERBOSE_MODE,
 )
 

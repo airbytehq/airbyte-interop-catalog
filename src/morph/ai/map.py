@@ -183,6 +183,8 @@ def populate_missing_mappings(
             "with missing source table.",
             style="red",
         )
+        return
+
     fields_to_populate: list[models.FieldMapping] = []
 
     source_table_info = models.SourceTableSummary.from_dbt_source_file(
@@ -202,7 +204,7 @@ def populate_missing_mappings(
     except StopIteration:
         raise ValueError(
             "Could not find a source table mapping that matches the name "
-            f"{transform_parsed.source_stream_name}"
+            f"{transform_parsed.source_stream_name}",
         ) from None
     if source_schema is None:
         raise ValueError(f"Source schema not found for {transform_parsed.source_stream_name}")
