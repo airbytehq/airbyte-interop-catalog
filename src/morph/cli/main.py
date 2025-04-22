@@ -364,9 +364,17 @@ def _generate(
         source_name=source_name,
         project_name=project_name,
     )
+    source_dbt_source_file = resources.get_generated_source_yml_path(
+        source_name=source_name,
+        project_name=project_name,
+    )
+
     if not requirements_dbt_source_file.exists():
-        console.print(f"Error: {requirements_dbt_source_file} does not exist", style="bold red")
-        return
+        console.print(
+            f"Error: {requirements_dbt_source_file} does not exist",
+            style="bold red",
+        )
+        sys.exit(1)
 
     console.print(
         f"Reading target tables list from '{requirements_dbt_source_file}' dbt source file...",
@@ -374,6 +382,9 @@ def _generate(
     )
     dbt_requirements_file: models.DbtSourceFile = models.DbtSourceFile.from_file(
         requirements_dbt_source_file,
+    )
+    airbyte_dbt_source_file: models.DbtSourceFile = models.DbtSourceFile.from_file(
+        source_dbt_source_file,
     )
     config_file_content = text_utils.load_yaml_file(
         resources.get_config_file_path(
@@ -438,7 +449,7 @@ def _generate(
         "Target Tables",
     )
     table.add_row(
-        f" - '{delim.join([s.name for s in dbt_requirements_file.source_tables])}'",
+        f" - '{delim.join([s.name for s in airbyte_dbt_source_file.source_tables])}'",
         f" - '{delim.join(target_tables)}'",
     )
     console.print(table)
