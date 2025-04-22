@@ -28,7 +28,7 @@ jobs:
       - name: Get Poe Command
         id: get-command
         run: |
-            poe_command=$(echo "${{ github.event.inputs.comment-text }}" | sed 's|^/||' | head -n 1) >> $GITHUB_OUTPUT
+            poe_command=$(echo "${{ github.event.inputs.comment-text }}" | sed -n '1s/^\/poe //p' | head -n 1) >> $GITHUB_OUTPUT
             echo "Resolved command: ${poe_command}"
             echo "poe-command=${poe_command}" >> $GITHUB_OUTPUT
 
