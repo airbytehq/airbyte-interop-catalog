@@ -30,4 +30,4 @@ jobs:
           command: "fix"
           pr: ${{ github.event.inputs.pr }}
           comment-id: ${{ github.event.inputs.comment-id }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GH_PAT_MAINTENANCE_OCTAVIA }}
