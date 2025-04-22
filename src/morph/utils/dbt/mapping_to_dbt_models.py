@@ -286,12 +286,12 @@ def build_readme(
     sections: list[str] = []
     rejected_sections: list[str] = []
     has_rejected_mappings = False
-    
+
     sections.append("# Generated dbt Models\n")
     sections.append(
         "This directory contains automatically generated dbt models based on mapping files.\n",
     )
-    
+
     rejected_sections.append("# Rejected Mappings\n")
     rejected_sections.append(
         "These mappings did not meet the approval criteria and are not included in the default dbt build.\n",
@@ -299,7 +299,7 @@ def build_readme(
     rejected_sections.append(
         "[Return to main README](./README.md)\n",
     )
-    
+
     for mapping_file in resources.get_transforms_files(source_name, project_name):
         transform = models.TransformFile.from_file(mapping_file)
         transform_dict = load_mapping_file(str(mapping_file))
@@ -323,34 +323,28 @@ def build_readme(
         )
 
     # Write README.md
-    readme_path = (
-        resources.get_generated_dbt_project_models_dir(
-            source_name=source_name,
-            project_name=project_name,
-        )
-        / "README.md"
+    readme_path = resources.get_generated_approved_mappings_doc_path(
+        source_name=source_name,
+        project_name=project_name,
     )
     readme_path.write_text("\n".join(sections))
-    
+
     if has_rejected_mappings:
-        rejected_path = (
-            resources.get_generated_dbt_project_models_dir(
-                source_name=source_name,
-                project_name=project_name,
-            )
-            / "rejected_mappings.md"
+        rejected_path = resources.get_generated_rejected_mappings_doc_path(
+            source_name=source_name,
+            project_name=project_name,
         )
         rejected_path.write_text("\n".join(rejected_sections))
 
 
-def generate_dbt_package(  # noqa: PLR0912, PLR0915
+def generate_dbt_package(  # noqa: PLR0912, PLR0914, PLR0915
     source_name: str,
     *,
     project_name: str = DEFAULT_PROJECT_NAME,
     output_dir: Path | None = None,
     mapping_dir: Path | None = None,
     include_rejected_mappings: bool = False,
-) -> None:
+) -> Path:
     """Generate a dbt package from mapping files.
 
     Args:
@@ -362,13 +356,22 @@ def generate_dbt_package(  # noqa: PLR0912, PLR0915
             When False (default), rejected mappings will be skipped.
             When True, rejected mappings will be placed in the 'rejected' subfolder.
     """
-    output_dir_path = output_dir or resources.get_generated_dir_root(source_name)
-    mapping_dir_path = mapping_dir or resources.get_transforms_dir(source_name, project_name)
-    config_path = resources.get_config_file_path(source_name, project_name)
+    dbt_project_dir = output_dir or resources.get_generated_dbt_project_dir(
+        source_name=source_name,
+        project_name=project_name,
+    )
+    dbt_project_parent_dir = Path(dbt_project_dir).parent
+    mapping_dir_path = mapping_dir or resources.get_transforms_dir(
+        source_name,
+        project_name,
+    )
+    config_path = resources.get_config_file_path(
+        source_name,
+        project_name,
+    )
 
     # Create output directories
-    output_path = Path(output_dir_path)
-    output_path.mkdir(parents=True, exist_ok=True)
+    dbt_project_dir.mkdir(parents=True, exist_ok=True)
 
     config = {}
     if config_path.exists():
@@ -408,13 +411,16 @@ def generate_dbt_package(  # noqa: PLR0912, PLR0915
     # Run copier to generate the project scaffolding
     run_copy(
         src_path=str(template_dir),
-        dst_path=str(output_path),
-        data={"catalog_name": source_name},  # Only pass required template data
+        dst_path=str(dbt_project_parent_dir),
+        data={
+            "source_name": source_name,
+            "dbt_project_dir_name": f"{project_name}-dbt-project",
+        },  # Only pass required template data
         overwrite=True,
     )
 
     # Now generate the SQL models
-    models_dir = output_path / "dbt_project" / "models"
+    models_dir = dbt_project_dir / "models"
     models_dir.mkdir(parents=True, exist_ok=True)
 
     # Clean up existing files
@@ -443,7 +449,7 @@ def generate_dbt_package(  # noqa: PLR0912, PLR0915
 
             # Determine if transform is approved
             is_approved = annotations.get("approved", False)
-            
+
             if not is_approved and not include_rejected_mappings:
                 continue
 
@@ -461,3 +467,5 @@ def generate_dbt_package(  # noqa: PLR0912, PLR0915
         project_name=project_name,
     )
     print("Generated README.md.")
+
+    return dbt_project_dir

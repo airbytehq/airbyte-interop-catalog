@@ -4,13 +4,13 @@ install = { cmd = "uv sync --all-extras", help = "Install and sync project depen
 sync = { cmd = "uv sync --all-extras", help = "Sync project dependencies. (Alias for install.)" }
 format = { cmd = "uv run ruff format .", help = "Format code with ruff" }
 lint = { cmd = "uv run ruff check .", help = "Lint code with ruff" }
-typecheck = { cmd = "uv run python -m basedpyright morph", help = "Type check code with basedpyright" }
+type-check = { cmd = "uv run basedpyright", help = "Type check code with basedpyright" }
 pytest = { cmd = "uv run pytest --cov=morph --cov-report=term-missing --cov-report=xml", help = "Run tests with coverage" }
 pytest-fast = { cmd = "uv run pytest --exitfirst tests", help = "Run tests" }
 pytest-collect = { cmd = "uv run pytest --collect-only", help = "Collect tests" }
 
 # Combined tasks
-check = { sequence = ["lint", "typecheck", "pytest"], help = "Run all checks" }
+check = { sequence = ["lint", "type-check", "pytest"], help = "Run all checks" }
 fix = { sequence = ["format", "lint --fix"], help = "Auto-fix formatting and linting issues" }
 
 # Build tasks
@@ -23,8 +23,9 @@ lock = { cmd = "uv lock", help = "Lock dependencies" }
 pre-commit = { cmd = "pre-commit run --all-files", help = "Run pre-commit hooks" }
 
 # Mapping tasks
-morph-eval = { cmd = "uv run morph eval", help = "Evaluate mapping files in a project" }
 morph-build = { cmd = "uv run morph build", help = "Build mapping files in a project" }
+morph-generate = { cmd = "uv run morph generate", help = "Generate mapping files in a project" }
+morph-eval = { cmd = "uv run morph eval", help = "Evaluate mapping files in a project" }
 morph-lock = { cmd = "uv run morph lock", help = "Lock mapping files in a project" }
 
 morph-build-all = { shell = "uv run morph build hubspot --no-creds && uv run morph build tiktok_marketing --no-creds && uv run morph build facebook_marketing --no-creds && uv run morph build shopify --no-creds", help = "Build all project files in all projects" }

@@ -8,7 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-build/
+# build/  # We do want to commit catalog build artifacts (not python ones though)
 develop-eggs/
 dist/
 downloads/

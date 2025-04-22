@@ -1,0 +1,122 @@
+domain: klaviyo.airbyte-interop
+transforms:
+  - name: event
+    from:
+      - events: klaviyo.events
+    fields:
+      _variation:
+        expression: MISSING
+        description: "Unique ID of the attributed flow or campaign variation group.\
+          \  This does not map onto another table. \n"
+      campaign_id:
+        expression: MISSING
+        description: Foreign key referencing the CAMPAIGN that the event is attributed
+          to.
+      datetime:
+        expression: events.attributes.datetime
+        description: Timestamp of when the event was recorded in Klaviyo. Should be
+          the same/nominally off from `timestamp`.
+      timestamp:
+        expression: events.attributes.timestamp
+        description: Timestamp of when the event was triggered. Should be the same/nominally
+          off from `datetime`.
+      flow_id:
+        expression: MISSING
+        description: Foreign key referencing the FLOW that the event is attributed
+          to.
+      flow_message_id:
+        expression: MISSING
+        description: "Unique ID of the FLOW_MESSAGE that the event is attributed to.\
+          \  This does not map onto another table.\n"
+      id:
+        expression: events.id
+        description: Unique ID of the event.
+      metric_id:
+        expression: events.relationships.metric.data.id
+        description: Foreign key referencing the metric being captured.
+      person_id:
+        expression: events.relationships.profile.data.id
+        description: Foreign key referencing the PERSON who triggered the event.
+      type:
+        expression: events.type
+        description: Type of event that was triggered. This is the same as the METRIC
+          name.
+      uuid:
+        expression: events.attributes.uuid
+        description: Universally Unique Identifier of the event.
+      property_value:
+        expression: events.attributes.event_properties
+        description: Numeric value associated with the event (ie the dollars associated
+          with a purchase).
+      _fivetran_deleted:
+        expression: MISSING
+        description: Boolean that is true if the campaign has been soft-deleted.
+annotations:
+  approved: false
+  missing_fields:
+    - _fivetran_deleted
+    - _variation
+    - campaign_id
+    - flow_id
+    - flow_message_id
+  evaluation:
+    source_stream_name: events
+    target_table_name: event
+    table_match_score: 0.7
+    completion_score: 0.8
+    explanation: The table mapping has a high level of confidence as majority of fields
+      are well aligned. However, some fields could not be mapped and are marked as
+      missing which reduces the overall completion score.
+    field_mapping_evals:
+      - name: _variation
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: campaign_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: datetime
+        expression: events.attributes.datetime
+        score: 1.0
+        explanation: Column 'datetime' maps directly to 'events.attributes.datetime'.
+      - name: timestamp
+        expression: events.attributes.timestamp
+        score: 1.0
+        explanation: Column 'timestamp' maps directly to 'events.attributes.timestamp'.
+      - name: flow_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: flow_message_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: id
+        expression: events.id
+        score: 1.0
+        explanation: Column 'id' maps directly to 'events.id'.
+      - name: metric_id
+        expression: events.relationships.metric.data.id
+        score: 1.0
+        explanation: Column 'metric_id' maps directly to 'events.relationships.metric.data.id'.
+      - name: person_id
+        expression: events.relationships.profile.data.id
+        score: 1.0
+        explanation: Column 'person_id' maps directly to 'events.relationships.profile.data.id'.
+      - name: type
+        expression: events.type
+        score: 1.0
+        explanation: Column 'type' maps directly to 'events.type'.
+      - name: uuid
+        expression: events.attributes.uuid
+        score: 1.0
+        explanation: Column 'uuid' maps directly to 'events.attributes.uuid'.
+      - name: property_value
+        expression: events.attributes.event_properties
+        score: 1.0
+        explanation: Column 'property_value' maps directly to 'events.attributes.event_properties'.
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

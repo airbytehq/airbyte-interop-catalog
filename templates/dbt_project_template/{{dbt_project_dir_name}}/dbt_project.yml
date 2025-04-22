@@ -1,4 +1,4 @@
-name: "airbyte_{{ catalog_name }}"
+name: "airbyte_{{ source_name }}"
 version: "1.0.0"
 config-version: 2
 
@@ -17,7 +17,7 @@ clean-targets:
   - "dbt_packages"
 
 models:
-  airbyte_{{ catalog_name }}:
+  airbyte_{{ source_name }}:
     +materialized: view
 
     # Rejected mappings (mappings that did not meet approval criteria)
@@ -25,5 +25,5 @@ models:
       +enabled: false  # Rejected mappings are disabled by default
 
 vars:
-  airbyte_{{ catalog_name }}_database: "{{ catalog_name }}"
-  airbyte_{{ catalog_name }}_schema: "{{ catalog_name }}_raw"
+  airbyte_{{ source_name }}_database: "{{ source_name }}"
+  airbyte_{{ source_name }}_schema: "{{ source_name }}_raw"

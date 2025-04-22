@@ -8,11 +8,12 @@ flows AS (
 
 
 SELECT
+    flows.attributes.created AS created,
     flows.id AS id,
     flows.attributes.name AS name,
-    flows.attributes.created AS created,
-    flows.attributes.updated AS updated,
     flows.attributes.status AS status,
+    flows.attributes.updated AS updated,
+    flows.attributes.archived AS archived,
     flows.attributes.trigger_type AS trigger_type,
-    flows._airbyte_extracted_at AS _fivetran_synced
+    NULL AS _fivetran_deleted
 FROM flows

@@ -9,20 +9,23 @@ profiles AS (
 
 SELECT
     profiles.id AS id,
-    profiles.attributes.email AS email,
-    profiles.attributes.first_name AS first_name,
-    profiles.attributes.last_name AS last_name,
     profiles.attributes.location.address1 AS address_1,
     profiles.attributes.location.address2 AS address_2,
     profiles.attributes.location.city AS city,
     profiles.attributes.location.country AS country,
     profiles.attributes.location.zip AS zip,
     profiles.attributes.created AS created,
+    profiles.attributes.email AS email,
+    profiles.attributes.first_name AS first_name,
+    profiles.attributes.last_name AS last_name,
+    profiles.attributes.location.latitude AS latitude,
+    profiles.attributes.location.longitude AS longitude,
+    profiles.attributes.organization AS organization,
     profiles.attributes.phone_number AS phone_number,
     profiles.attributes.location.region AS region,
     profiles.attributes.location.timezone AS timezone,
-    profiles.attributes.organization AS organization,
     profiles.attributes.title AS title,
     profiles.attributes.updated AS updated,
-    profiles._airbyte_extracted_at AS _fivetran_synced
+    profiles.attributes.last_event_date AS last_event_date,
+    NULL AS _fivetran_deleted
 FROM profiles
