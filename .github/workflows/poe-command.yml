@@ -1,0 +1,33 @@
+name: On-Demand Fix
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: "PR Number"
+        type: string
+        required: true
+      comment-id:
+        description: "Comment ID (Optional)"
+        type: string
+        required: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  run-poe-command:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Poe Slash Command Processor
+        uses: aaronsteers/pre-command-processor@dev
+        with:
+          pr: ${{ github.event.inputs.pr }}
+          comment-id: ${{ github.event.inputs.comment-id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          command: "fix"
