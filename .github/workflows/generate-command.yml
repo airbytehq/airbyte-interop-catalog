@@ -106,10 +106,31 @@ jobs:
 
       # Run the generate command
       - name: Run generate command
+        id: generate
+        continue-on-error: true
         run: |
           # Run morph generate with the provided source_name and default project_name
           uv run morph generate ${{ github.event.inputs.source_name }} airbyte-interop --auto-confirm
           
+          # Store the exit code
+          GENERATE_EXIT_CODE=$?
+          echo "exit_code=$GENERATE_EXIT_CODE" >> $GITHUB_OUTPUT
+          
+          if [ $GENERATE_EXIT_CODE -ne 0 ]; then
+            echo "Generate command failed with exit code $GENERATE_EXIT_CODE"
+            echo "generate_success=false" >> $GITHUB_ENV
+            exit 0
+          else
+            echo "Generate command succeeded"
+            echo "generate_success=true" >> $GITHUB_ENV
+          fi
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          
+      # Handle git operations only if generate was successful
+      - name: Process changes
+        if: ${{ env.generate_success == 'true' }}
+        run: |
           # Configure git
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
@@ -131,29 +152,44 @@ jobs:
             # Push changes
             git push origin HEAD
           fi
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
       # Handle PR creation if no PR was specified
       - name: Create PR if needed
-        if: ${{ github.event.inputs.pr == '' && env.generate_changes == 'true' }}
+        if: ${{ github.event.inputs.pr == '' && (env.generate_changes == 'true' || env.generate_success == 'false') }}
         id: create-pr
         run: |
+          # Create PR title and body based on generate success
+          if [ "${{ env.generate_success }}" == "false" ]; then
+            TITLE="fix(morph): Fix generate command for ${{ github.event.inputs.source_name }}"
+            BODY_CONTENT="# Generate command failed
+
+This PR was automatically created because the \`/generate\` command failed.
+
+- Source: ${{ github.event.inputs.source_name }}
+- Project: airbyte-interop
+- Error: The generate command failed with exit code ${{ steps.generate.outputs.exit_code }}
+
+Please check the logs for more details and fix the source configuration.
+
+Link to Devin run: https://app.devin.ai/sessions/f4d085b23ec0438fab16a8e988a1b8eb
+Requested by: Aaron (\"AJ\") Steers (aj@airbyte.io)"
+          else
+            TITLE="feat(morph): Generate mappings for ${{ github.event.inputs.source_name }}"
+            BODY_CONTENT="# Generate mappings
+
+This PR was automatically created by the \`/generate\` command.
+
+- Source: ${{ github.event.inputs.source_name }}
+- Project: airbyte-interop
+
+Link to Devin run: https://app.devin.ai/sessions/f4d085b23ec0438fab16a8e988a1b8eb
+Requested by: Aaron (\"AJ\") Steers (aj@airbyte.io)"
+          fi
+          
           # Create PR
           PR_URL=$(gh pr create \
-            --title "feat(morph): Generate mappings for ${{ github.event.inputs.source_name }}" \
-            --body-file <(cat <<EOF
-          # Generate mappings
-          
-          This PR was automatically created by the \`/generate\` command.
-          
-          - Source: ${{ github.event.inputs.source_name }}
-          - Project: airbyte-interop
-          
-          Link to Devin run: https://app.devin.ai/sessions/f4d085b23ec0438fab16a8e988a1b8eb
-          Requested by: Aaron ("AJ") Steers (aj@airbyte.io)
-          EOF
-            ) \
+            --title "$TITLE" \
+            --body "$BODY_CONTENT" \
             --repo ${{ github.repository }})
           
           echo "pr_url=$PR_URL" >> $GITHUB_OUTPUT
@@ -187,6 +223,12 @@ jobs:
           echo "PR created: ${{ steps.create-pr.outputs.pr_url }}"
 
       - name: No changes message
-        if: ${{ success() && github.event.inputs.pr == '' && env.generate_changes == 'false' }}
+        if: ${{ success() && github.event.inputs.pr == '' && env.generate_changes == 'false' && env.generate_success == 'true' }}
         run: |
           echo "✅ Generate command completed, but no changes were needed."
+          
+      - name: Error message
+        if: ${{ success() && github.event.inputs.pr == '' && env.generate_success == 'false' }}
+        run: |
+          echo "⚠️ Generate command failed with exit code ${{ steps.generate.outputs.exit_code }}."
+          echo "PR created with error details: ${{ steps.create-pr.outputs.pr_url }}"
