@@ -12,7 +12,7 @@ on:
         type: string
         required: false
       comment-text:
-        description: "Full comment text (Optional)"
+        description: "Full comment text, beginning with '/poe '."
         type: string
         required: false
 
