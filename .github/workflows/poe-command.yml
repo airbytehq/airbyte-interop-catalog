@@ -22,8 +22,10 @@ permissions:
 
 jobs:
   run-poe-command:
+    env:
+      GCP_GSM_CREDENTIALS: ${{ secrets.GCP_GSM_CREDENTIALS }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
     runs-on: ubuntu-latest
-
     steps:
       - name: Get Poe Command
         id: get-command
@@ -39,6 +41,3 @@ jobs:
           pr: ${{ github.event.inputs.pr }}
           comment-id: ${{ github.event.inputs.comment-id }}
           github-token: ${{ secrets.GH_PAT_MAINTENANCE_OCTAVIA }}
-          extra-env: |
-            GCP_GSM_CREDENTIALS=${{ secrets.GCP_GSM_CREDENTIALS }}
-            OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
