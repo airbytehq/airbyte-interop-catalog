@@ -658,7 +658,7 @@ class TransformFile(BaseModel):
         # Create header section
         sections.append(
             f"### Mapping: Airbyte `{self.source_stream_name}` "
-            f"to Fivetran `{self.target_table_name}`",
+            f"to Fivetran `{self.target_table_name}`"
         )
 
         # Overall confidence section
