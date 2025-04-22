@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       pr:
-        description: "PR Number"
+        description: "PR Number. If omitted, a new PR will be created."
         type: string
         required: false
       comment-id:
