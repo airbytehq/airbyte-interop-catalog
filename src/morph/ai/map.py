@@ -204,7 +204,7 @@ def populate_missing_mappings(
     except StopIteration:
         raise ValueError(
             "Could not find a source table mapping that matches the name "
-            f"{transform_parsed.source_stream_name}"
+            f"{transform_parsed.source_stream_name}",
         ) from None
     if source_schema is None:
         raise ValueError(f"Source schema not found for {transform_parsed.source_stream_name}")

@@ -345,7 +345,7 @@ def generate(
     )
 
 
-def _generate(
+def _generate(  # noqa: PLR0915
     source_name: str,
     project_name: str = DEFAULT_PROJECT_NAME,
     *,
