@@ -1,0 +1,192 @@
+name: On-Demand Generate
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: "PR Number"
+        type: string
+        required: false
+      comment-id:
+        description: "Comment ID (Optional)"
+        type: string
+        required: false
+      source_name:
+        description: "Source Name (e.g., hubspot, facebook_marketing)"
+        type: string
+        required: true
+
+jobs:
+  generate-on-demand:
+    runs-on: ubuntu-latest
+    steps:
+      # Setup for existing PR if PR number is provided
+      - name: Get PR info
+        id: pr-info
+        if: ${{ github.event.inputs.pr != '' }}
+        run: |
+          PR_JSON=$(gh api repos/${{ github.repository }}/pulls/${{ github.event.inputs.pr }})
+          echo "repo=$(echo "$PR_JSON" | jq -r .head.repo.full_name)" >> $GITHUB_OUTPUT
+          echo "branch=$(echo "$PR_JSON" | jq -r .head.ref)" >> $GITHUB_OUTPUT
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Create URL to the run output
+        id: vars
+        run: echo "run-url=https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> $GITHUB_OUTPUT
+
+      - name: Append comment with job run link
+        id: first-comment-action
+        if: ${{ github.event.inputs.comment-id != '' }}
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          comment-id: ${{ github.event.inputs.comment-id }}
+          issue-number: ${{ github.event.inputs.pr }}
+          body: |
+            > **Generate Job Info**
+            >
+            > This job attempts to generate mappings for source '${{ github.event.inputs.source_name }}' using `morph generate` command. If any changes
+            > are made, those changes will be automatically committed and pushed back to the PR.
+            >
+            > Note: This job can only be run by maintainers. On PRs from forks, this command requires
+            > that the PR author has enabled the `Allow edits from maintainers` option.
+
+            > Generate job started... [Check job output.][1]
+
+            [1]: ${{ steps.vars.outputs.run-url }}
+
+      # Setup for new PR if no PR number is provided
+      - name: Create branch name
+        id: branch-name
+        if: ${{ github.event.inputs.pr == '' }}
+        run: |
+          TIMESTAMP=$(date +%s)
+          SOURCE_NAME="${{ github.event.inputs.source_name }}"
+          echo "branch=devin/${TIMESTAMP}-generate-${SOURCE_NAME}" >> $GITHUB_OUTPUT
+
+      # Checkout repository
+      - name: Checkout for existing PR
+        if: ${{ github.event.inputs.pr != '' }}
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.pr-info.outputs.branch }}
+          repository: ${{ steps.pr-info.outputs.repo }}
+          token: ${{ github.token }}
+
+      - name: Checkout for new PR
+        if: ${{ github.event.inputs.pr == '' }}
+        uses: actions/checkout@v4
+        with:
+          token: ${{ github.token }}
+
+      - name: Create branch for new PR
+        if: ${{ github.event.inputs.pr == '' }}
+        run: |
+          git checkout -b ${{ steps.branch-name.outputs.branch }}
+
+      # Setup Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.11"
+
+      - name: Create virtual environment
+        run: uv venv
+
+      - name: Install poethepoet
+        run: uv pip install poethepoet
+
+      - name: Install dependencies
+        run: poe install
+
+      # Run the generate command
+      - name: Run generate command
+        run: |
+          # Run morph generate with the provided source_name and default project_name
+          uv run morph generate ${{ github.event.inputs.source_name }} airbyte-interop --auto-confirm
+          
+          # Configure git
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          
+          # Add changes
+          git add .
+          
+          # Check if there are any changes
+          if git diff --staged --quiet; then
+            echo "No changes found after running generate command."
+            echo "generate_changes=false" >> $GITHUB_ENV
+          else
+            echo "Changes found after running generate command."
+            echo "generate_changes=true" >> $GITHUB_ENV
+            
+            # Commit changes
+            git commit -m "Generate mappings for ${{ github.event.inputs.source_name }} source"
+            
+            # Push changes
+            git push origin HEAD
+          fi
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      # Handle PR creation if no PR was specified
+      - name: Create PR if needed
+        if: ${{ github.event.inputs.pr == '' && env.generate_changes == 'true' }}
+        id: create-pr
+        run: |
+          # Create PR
+          PR_URL=$(gh pr create \
+            --title "feat(morph): Generate mappings for ${{ github.event.inputs.source_name }}" \
+            --body-file <(cat <<EOF
+          # Generate mappings
+          
+          This PR was automatically created by the \`/generate\` command.
+          
+          - Source: ${{ github.event.inputs.source_name }}
+          - Project: airbyte-interop
+          
+          Link to Devin run: https://app.devin.ai/sessions/f4d085b23ec0438fab16a8e988a1b8eb
+          Requested by: Aaron ("AJ") Steers (aj@airbyte.io)
+          EOF
+            ) \
+            --repo ${{ github.repository }})
+          
+          echo "pr_url=$PR_URL" >> $GITHUB_OUTPUT
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      # Success/failure comments for existing PR
+      - name: Append success comment to existing PR
+        uses: peter-evans/create-or-update-comment@v4
+        if: ${{ success() && github.event.inputs.comment-id != '' }}
+        with:
+          comment-id: ${{ steps.first-comment-action.outputs.comment-id }}
+          reactions: hooray
+          body: |
+            > ✅ Generate command completed successfully.
+
+      - name: Append failure comment to existing PR
+        uses: peter-evans/create-or-update-comment@v4
+        if: ${{ failure() && github.event.inputs.comment-id != '' }}
+        with:
+          comment-id: ${{ steps.first-comment-action.outputs.comment-id }}
+          reactions: confused
+          body: |
+            > ❌ Generate command failed.
+
+      # Success/failure messages for new PR
+      - name: Success message for new PR
+        if: ${{ success() && github.event.inputs.pr == '' && env.generate_changes == 'true' }}
+        run: |
+          echo "✅ Generate command completed successfully."
+          echo "PR created: ${{ steps.create-pr.outputs.pr_url }}"
+
+      - name: No changes message
+        if: ${{ success() && github.event.inputs.pr == '' && env.generate_changes == 'false' }}
+        run: |
+          echo "✅ Generate command completed, but no changes were needed."

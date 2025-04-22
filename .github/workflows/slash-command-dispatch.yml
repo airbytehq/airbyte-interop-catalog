@@ -22,6 +22,7 @@ jobs:
             fix
             lock
             test
+            generate
           static-args: |
             pr=${{ github.event.issue.number }}
             comment-id=${{ github.event.comment.id }}
@@ -50,6 +51,7 @@ jobs:
           - \`/fix\` - Corrects any linting or formatting issues
           - \`/lock\` - Re-locks dependencies and updates the dependency lock file
           - \`/test\` - Runs tests that require credentials (useful for community PRs)
+          - \`/generate [source_name]\` - Generates mappings for the specified source
           - \`/help\` - Shows this help message" >> $GITHUB_OUTPUT
             echo "EOF" >> $GITHUB_OUTPUT
           else
@@ -61,6 +63,7 @@ jobs:
           - \`/fix\` - Corrects any linting or formatting issues
           - \`/lock\` - Re-locks dependencies and updates the dependency lock file
           - \`/test\` - Runs tests that require credentials (useful for community PRs)
+          - \`/generate [source_name]\` - Generates mappings for the specified source
           - \`/help\` - Shows this help message" >> $GITHUB_OUTPUT
             echo "EOF" >> $GITHUB_OUTPUT
           fi
