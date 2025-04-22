@@ -43,9 +43,7 @@ def run_docker_command(
         subprocess.CalledProcessError: If the Docker command fails
     """
     if not check_docker_availability():
-        raise RuntimeError(
-            "Docker is not available. Please install Docker to use this feature."
-        )
+        raise RuntimeError("Docker is not available. Please install Docker to use this feature.")
 
     cmd = ["docker", "run", "--rm", "-v", f"{mount_dir.absolute()}:/data"]
 

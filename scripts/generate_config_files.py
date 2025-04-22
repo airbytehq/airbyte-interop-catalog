@@ -65,20 +65,15 @@ AVAILABLE_DBT_SOURCES = [
     "zendesk",
     "zuora",
 ]
-AVAILABLE_DBT_PACKAGES: list[str] = [
-    f"dbt_{source}_source"
-    for source in AVAILABLE_DBT_SOURCES
-]
+AVAILABLE_DBT_PACKAGES: list[str] = [f"dbt_{source}_source" for source in AVAILABLE_DBT_SOURCES]
 
 # GitHub API endpoint for Fivetran's repositories
 url = "https://api.github.com/orgs/fivetran/repos"
 params = {
     "per_page": 100,  # Maximum number of repositories per page
-    "type": "public"  # Only public repositories
+    "type": "public",  # Only public repositories
 }
-headers = {
-    "Accept": "application/vnd.github.v3+json"
-}
+headers = {"Accept": "application/vnd.github.v3+json"}
 
 matching_repos = []
 
@@ -94,8 +89,8 @@ while url:
             matching_repos.append(name)
 
     # Check for pagination
-    if 'next' in response.links:
-        url = response.links['next']['url']
+    if "next" in response.links:
+        url = response.links["next"]["url"]
         params = None  # Parameters are already included in the 'next' URL
     else:
         url = None
