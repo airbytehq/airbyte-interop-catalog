@@ -21,11 +21,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
       - name: Run Poe Slash Command Processor
-        uses: aaronsteers/poe-command-processor@dev
+        uses: aaronsteers/poe-command-processor@main
         with:
           command: "fix"
           pr: ${{ github.event.inputs.pr }}
