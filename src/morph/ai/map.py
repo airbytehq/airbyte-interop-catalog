@@ -177,6 +177,12 @@ def populate_missing_mappings(
         transform_name=transform_name,
     )
     transform_parsed = models.TransformFile.from_file(transform_file)
+    if transform_parsed.source_stream_name == constants.MISSING:
+        console.print(
+            f"Could not generate mappings for transform '{transform_parsed.transform_name}' "
+            "with missing source table.",
+            style="red",
+        )
     fields_to_populate: list[models.FieldMapping] = []
 
     source_table_info = models.SourceTableSummary.from_dbt_source_file(

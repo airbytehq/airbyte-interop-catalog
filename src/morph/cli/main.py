@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import shutil
 import sys
 from pathlib import Path
 
@@ -479,6 +480,35 @@ def _generate(
         console.print("Rebuilding dbt project...", style="bold green")
         build_dbt_project(source_name, project_name)
         console.print("Build step completed successfully.", style="bold green")
+
+
+@main.command()
+@click.argument("source_name")
+@click.argument("project_name", default=DEFAULT_PROJECT_NAME)
+def clear(
+    source_name: str,
+    project_name: str = DEFAULT_PROJECT_NAME,
+) -> None:
+    paths_to_delete = [
+        resources.get_build_dir(
+            source_name,
+        ),
+        resources.get_transforms_dir(
+            source_name=source_name,
+            project_name=project_name,
+        ),
+        resources.get_generated_dbt_project_dir(
+            source_name=source_name,
+            project_name=project_name,
+        ),
+        resources.get_source_home_dir(
+            source_name=source_name,
+        ),
+    ]
+    for path_to_delete in paths_to_delete:
+        if path_to_delete.is_dir():
+            console.print(f"Deleting directory: {path_to_delete}", style="bold red")
+            shutil.rmtree(path_to_delete)
 
 
 if __name__ == "__main__":

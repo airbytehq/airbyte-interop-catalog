@@ -141,12 +141,19 @@ def get_catalog_root_dir() -> Path:
     return Path("catalog")
 
 
+def get_source_home_dir(
+    source_name: str,
+) -> Path:
+    """Assume we are running from the root of the morph repo."""
+    return get_catalog_root_dir() / source_name
+
+
 def get_generated_dbt_project_dir(
     source_name: str,
     project_name: str = DEFAULT_PROJECT_NAME,
 ) -> Path:
     """Get the path to the generated dbt project.yml file."""
-    return get_catalog_root_dir() / source_name / f"{project_name}-dbt-project"
+    return get_source_home_dir(source_name) / f"{project_name}-dbt-project"
 
 
 def get_generated_dbt_project_models_dir(
@@ -170,7 +177,7 @@ def get_generated_approved_mappings_doc_path(
 ) -> Path:
     """Get the path to the generated approved mappings README file."""
     _ = project_name  # Unused for now
-    return get_catalog_root_dir() / source_name / "README.md"
+    return get_source_home_dir(source_name) / "README.md"
 
 
 def get_generated_rejected_mappings_doc_path(
@@ -179,7 +186,7 @@ def get_generated_rejected_mappings_doc_path(
 ) -> Path:
     """Get the path to the generated rejected mappings README file."""
     _ = project_name  # Unused for now
-    return get_catalog_root_dir() / source_name / "rejected-mappings.md"
+    return get_source_home_dir(source_name) / "rejected-mappings.md"
 
 
 # Generated build artifacts (not user-facing):
