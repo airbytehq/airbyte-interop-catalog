@@ -162,43 +162,19 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.pr == '' && (env.generate_changes == 'true' || env.generate_success == 'false') }}
         id: create-pr
         run: |
-          # Create PR title and body based on generate success
+          # Create PR title based on generate success
           if [ "${{ env.generate_success }}" == "false" ]; then
             TITLE="fix(morph): Fix generate command for ${{ github.event.inputs.source_name }}"
-            cat > /tmp/pr_body.md << EOF
-# Generate command failed
-
-This PR was automatically created because the \`/generate\` command failed.
-
-- Source: ${{ github.event.inputs.source_name }}
-- Project: airbyte-interop
-- Error: The generate command failed with exit code ${{ steps.generate.outputs.exit_code }}
-
-Please check the logs for more details and fix the source configuration.
-
-Link to Devin run: https://app.devin.ai/sessions/f4d085b23ec0438fab16a8e988a1b8eb
-Requested by: Aaron ("AJ") Steers (aj@airbyte.io)
-EOF
+            BODY="Generate command failed with exit code ${{ steps.generate.outputs.exit_code }}. Source: ${{ github.event.inputs.source_name }}, Project: airbyte-interop. Link to Devin run: https://app.devin.ai/sessions/f4d085b23ec0438fab16a8e988a1b8eb. Requested by: Aaron (\"AJ\") Steers (aj@airbyte.io)"
           else
             TITLE="feat(morph): Generate mappings for ${{ github.event.inputs.source_name }}"
-            cat > /tmp/pr_body.md << EOF
-# Generate mappings
-
-This PR was automatically created by the \`/generate\` command.
-
-- Source: ${{ github.event.inputs.source_name }}
-- Project: airbyte-interop
-
-Link to Devin run: https://app.devin.ai/sessions/f4d085b23ec0438fab16a8e988a1b8eb
-Requested by: Aaron ("AJ") Steers (aj@airbyte.io)
-EOF
+            BODY="Generate mappings for source: ${{ github.event.inputs.source_name }}, project: airbyte-interop. Link to Devin run: https://app.devin.ai/sessions/f4d085b23ec0438fab16a8e988a1b8eb. Requested by: Aaron (\"AJ\") Steers (aj@airbyte.io)"
           fi
           
           # Create PR
-          echo "$BODY_CONTENT" > /tmp/pr_body.md
           PR_URL=$(gh pr create \
             --title "$TITLE" \
-            --body-file /tmp/pr_body.md \
+            --body "$BODY" \
             --repo ${{ github.repository }})
           
           echo "pr_url=$PR_URL" >> $GITHUB_OUTPUT
