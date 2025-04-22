@@ -420,7 +420,7 @@ def generate_dbt_package(  # noqa: PLR0912, PLR0914, PLR0915
     )
 
     # Now generate the SQL models
-    models_dir = dbt_project_parent_dir / "models"
+    models_dir = dbt_project_dir / "models"
     models_dir.mkdir(parents=True, exist_ok=True)
 
     # Clean up existing files
