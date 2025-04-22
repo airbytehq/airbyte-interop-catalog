@@ -1,0 +1,7 @@
+project_id: amplitude.fivetran-interop
+source_name: amplitude
+# Target schema file snapshotted from: https://github.com/fivetran/dbt_amplitude_source/blob/main/models/src_amplitude.yml
+target_dbt_schema_url: https://raw.githubusercontent.com/fivetran/dbt_amplitude_source/refs/heads/main/models/src_amplitude.yml
+# SQL dialect configuration
+sql_dialect: duckdb
+subcolumn_traversal: dot_notation

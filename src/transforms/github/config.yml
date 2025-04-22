@@ -1,0 +1,7 @@
+project_id: github.fivetran-interop
+source_name: github
+# Target schema file snapshotted from: https://github.com/fivetran/dbt_github_source/blob/main/models/src_github.yml
+target_dbt_schema_url: https://raw.githubusercontent.com/fivetran/dbt_github_source/refs/heads/main/models/src_github.yml
+# SQL dialect configuration
+sql_dialect: duckdb
+subcolumn_traversal: dot_notation

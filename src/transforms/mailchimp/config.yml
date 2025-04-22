@@ -1,0 +1,7 @@
+project_id: mailchimp.fivetran-interop
+source_name: mailchimp
+# Target schema file snapshotted from: https://github.com/fivetran/dbt_mailchimp_source/blob/main/models/src_mailchimp.yml
+target_dbt_schema_url: https://raw.githubusercontent.com/fivetran/dbt_mailchimp_source/refs/heads/main/models/src_mailchimp.yml
+# SQL dialect configuration
+sql_dialect: duckdb
+subcolumn_traversal: dot_notation
