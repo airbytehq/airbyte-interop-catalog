@@ -17,8 +17,7 @@ on:
         required: true
 
   push:
-    paths:
-      - '.github/workflows/generate-command.yml'
+  # TODO: Remove this before merging
 
 jobs:
   generate-on-demand:
