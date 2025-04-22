@@ -1,4 +1,4 @@
-project_id: hubspot.fivetran-interop
+project_id: hubspot.airbyte-interop
 source_name: hubspot
 # Target schema file snapshotted from: https://github.com/fivetran/dbt_hubspot_source/blob/main/models/src_hubspot.yml
 target_dbt_schema_url: https://raw.githubusercontent.com/fivetran/dbt_hubspot_source/refs/heads/main/models/src_hubspot.yml

@@ -177,6 +177,12 @@ def populate_missing_mappings(
         transform_name=transform_name,
     )
     transform_parsed = models.TransformFile.from_file(transform_file)
+    if transform_parsed.source_stream_name == constants.MISSING:
+        console.print(
+            f"Could not generate mappings for transform '{transform_parsed.transform_name}' "
+            "with missing source table.",
+            style="red",
+        )
     fields_to_populate: list[models.FieldMapping] = []
 
     source_table_info = models.SourceTableSummary.from_dbt_source_file(
@@ -185,9 +191,19 @@ def populate_missing_mappings(
             project_name=project_name,
         ),
     )
-    source_schema: models.SourceTableSummary = next(
-        (table for table in source_table_info if table.name == transform_parsed.source_stream_name),
-    )
+    try:
+        source_schema: models.SourceTableSummary = next(
+            (
+                table
+                for table in source_table_info
+                if table.name == transform_parsed.source_stream_name
+            ),
+        )
+    except StopIteration:
+        raise ValueError(
+            "Could not find a source table mapping that matches the name "
+            f"{transform_parsed.source_stream_name}"
+        ) from None
     if source_schema is None:
         raise ValueError(f"Source schema not found for {transform_parsed.source_stream_name}")
 

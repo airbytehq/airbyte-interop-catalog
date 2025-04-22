@@ -109,7 +109,7 @@ jobs:
           GCP_GSM_CREDENTIALS: ${{ secrets.GCP_GSM_CREDENTIALS }}
         run: |
           # Run morph generate with the provided source_name and default project_name
-          uv run morph generate ${{ github.event.inputs.source_name || 'klaviyo' }} --regenerate-all --auto-confirm
+          uv run morph build ${{ github.event.inputs.source_name || 'klaviyo' }} --with-generate
 
           # Store the exit code
           GENERATE_EXIT_CODE=$?

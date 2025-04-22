@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import shutil
 import sys
 from pathlib import Path
 
@@ -160,6 +161,13 @@ def visualize_dbml(
 @click.option("--no-transforms", is_flag=True)
 @click.option("--no-dbt-project", is_flag=True)
 @click.option("--no-lock-file", is_flag=True)
+@click.option(
+    "--with-generate",
+    is_flag=True,
+    help="Generate the AI mappings after project build",
+    type=bool,
+    default=False,
+)
 def build(
     source_name: str,
     project_name: str,
@@ -169,12 +177,14 @@ def build(
     no_transforms: bool | None = None,
     no_dbt_project: bool | None = None,
     no_lock_file: bool | None = None,
+    with_generate: bool | None = None,
 ) -> None:
     """Build auto-generated source and project artifacts."""
     no_airbyte_catalog = if_none(no_airbyte_catalog, False)
     no_transforms = if_none(no_transforms, False)
     no_dbt_project = if_none(no_dbt_project, False)
     no_lock_file = if_none(no_lock_file, False)
+    with_generate = if_none(with_generate, False)
 
     # Validate input arguments
     if not source_name or not project_name:
@@ -209,6 +219,16 @@ def build(
         console.print(f"Generating dbt project for {source_name}...")
         build_dbt_project(source_name, project_name)
         console.print(f"Generated dbt project for {source_name}")
+
+    if with_generate:
+        _generate(
+            source_name=source_name,
+            project_name=project_name,
+            auto_confirm=True,
+            regenerate_all=False,
+            include_skipped_tables=False,
+            no_build=False,
+        )
 
 
 @main.command()
@@ -315,6 +335,30 @@ def generate(
     no_build: bool = False,
 ) -> None:
     """Use AI to generate new transform code for a project."""
+    _generate(
+        source_name=source_name,
+        project_name=project_name,
+        auto_confirm=auto_confirm,
+        regenerate_all=regenerate_all,
+        include_skipped_tables=include_skipped_tables,
+        no_build=no_build,
+    )
+
+
+def _generate(
+    source_name: str,
+    project_name: str = DEFAULT_PROJECT_NAME,
+    *,
+    auto_confirm: bool | None = None,
+    regenerate_all: bool = False,
+    include_skipped_tables: bool = False,
+    no_build: bool = False,
+) -> None:
+    """Implements the generate CLI execution.
+
+    This separate method exists so that other CLI commands (like 'build') can
+    wrap the same execution.
+    """
     check_openai_api_key()
     requirements_dbt_source_file = resources.get_dbt_sources_requirements_path(
         source_name=source_name,
@@ -436,6 +480,35 @@ def generate(
         console.print("Rebuilding dbt project...", style="bold green")
         build_dbt_project(source_name, project_name)
         console.print("Build step completed successfully.", style="bold green")
+
+
+@main.command()
+@click.argument("source_name")
+@click.argument("project_name", default=DEFAULT_PROJECT_NAME)
+def clear(
+    source_name: str,
+    project_name: str = DEFAULT_PROJECT_NAME,
+) -> None:
+    paths_to_delete = [
+        resources.get_build_dir(
+            source_name,
+        ),
+        resources.get_transforms_dir(
+            source_name=source_name,
+            project_name=project_name,
+        ),
+        resources.get_generated_dbt_project_dir(
+            source_name=source_name,
+            project_name=project_name,
+        ),
+        resources.get_source_home_dir(
+            source_name=source_name,
+        ),
+    ]
+    for path_to_delete in paths_to_delete:
+        if path_to_delete.is_dir():
+            console.print(f"Deleting directory: {path_to_delete}", style="bold red")
+            shutil.rmtree(path_to_delete)
 
 
 if __name__ == "__main__":
