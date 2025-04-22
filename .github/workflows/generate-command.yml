@@ -3,6 +3,10 @@ name: On-Demand Generate
 on:
   workflow_dispatch:
     inputs:
+      source_name:
+        description: "Source Name (e.g., hubspot, facebook_marketing)"
+        type: string
+        required: true
       pr:
         description: "PR Number"
         type: number
@@ -11,10 +15,10 @@ on:
         description: "Comment ID (Optional)"
         type: number
         required: false
-      source_name:
-        description: "Source Name (e.g., hubspot, facebook_marketing)"
+      comment-text:
+        description: "Full comment text (optional, unused)"
         type: string
-        required: true
+        required: false
 
 jobs:
   generate-on-demand:

@@ -11,6 +11,10 @@ on:
         description: "Comment ID (Optional)"
         type: string
         required: false
+      comment-text:
+        description: "Full comment text (optional, unused)"
+        type: string
+        required: false
 
 permissions:
   contents: write
