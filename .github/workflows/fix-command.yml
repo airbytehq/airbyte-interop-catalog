@@ -12,7 +12,7 @@ on:
         type: string
         required: false
       comment-text:
-        description: "Full comment text (optional, unused)"
+        description: "Full comment text (ignored)"
         type: string
         required: false
 

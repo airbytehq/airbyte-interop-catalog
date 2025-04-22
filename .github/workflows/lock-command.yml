@@ -11,6 +11,10 @@ on:
         description: "Comment ID (Optional)"
         type: string
         required: false
+      comment-text:
+        description: "Full comment text (ignored)"
+        type: string
+        required: false
 
 jobs:
   lock-on-demand:
