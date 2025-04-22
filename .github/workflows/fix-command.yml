@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Poe Slash Command Processor
-        uses: aaronsteers/pre-command-processor@dev
+        uses: aaronsteers/poe-command-processor@dev
         with:
           command: "fix"
           pr: ${{ github.event.inputs.pr }}
