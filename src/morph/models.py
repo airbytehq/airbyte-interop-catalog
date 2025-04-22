@@ -663,8 +663,6 @@ class TransformFile(BaseModel):
 
         # Overall confidence section
         sections.append(
-
-
             "\n- Table Match Confidence Score: "
             + markdown_formatted_confidence(self._attached_evaluation.table_match_score)
             + "\n- Table Completion Score: "
