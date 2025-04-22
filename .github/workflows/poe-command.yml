@@ -1,4 +1,4 @@
-name: On-Demand Fix
+name: On-Demand Poe Task
 
 on:
   workflow_dispatch:
@@ -25,10 +25,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Get Poe Command
+        id: get-command
+        run: |
+            poe-command=$(echo "${{ github.event.inputs.comment-text }}" | sed 's|^/||' | head -n 1) >> $GITHUB_OUTPUT
+            echo "command=${command}"
+
       - name: Run Poe Slash Command Processor
         uses: aaronsteers/poe-command-processor@main
         with:
-          command: "fix"
+          command: ${{ steps.get-command.outputs.poe-command }}
           pr: ${{ github.event.inputs.pr }}
           comment-id: ${{ github.event.inputs.comment-id }}
           github-token: ${{ secrets.GH_PAT_MAINTENANCE_OCTAVIA }}
