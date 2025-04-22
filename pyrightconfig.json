@@ -1,5 +1,5 @@
 {
-  "include": ["morph"],
+  "include": ["src/morph"],
   "exclude": ["**/__pycache__", "**/.git", "**/.venv", "**/build", "**/dist"],
   "reportMissingImports": true,
   "reportMissingTypeStubs": false,

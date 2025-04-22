@@ -60,9 +60,3 @@ sources = ["src"]
 
 [tool.hatch.version]
 source = "uv-dynamic-versioning"
-
-[dependency-groups]
-dev = [
-    "pytest>=8.3.5",
-    "pytest-cov>=6.0.0",
-]

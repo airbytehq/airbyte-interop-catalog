@@ -1,9 +1,9 @@
 [project]
 source_name = "klaviyo"
-project_name = "fivetran-interop"
-requirements_file = "catalog/klaviyo/requirements/fivetran-interop/src_dbt_requirements.yml"
+project_name = "airbyte-interop"
+requirements_file = "build/klaviyo/requirements/airbyte-interop/src_dbt_requirements.yml"
 requirements_file_hash = "097e0e63ba70c1caea1ae2993a2e8deea10eab751c6b978c03ecd6f2cce22043"
-airbyte_source_file = "catalog/klaviyo/generated/src_airbyte_klaviyo.yml"
+airbyte_source_file = "build/klaviyo/src_airbyte_raw_klaviyo.yml"
 airbyte_source_file_hash = "2b796748f238c6525536eafe671b278568155a8f7063b6f63437dfe8ccc9bc8d"
 
 [coverage]
@@ -18,47 +18,41 @@ unused_source_streams = [
 unmapped_target_tables = []
 
 [mappings.campaign]
-source_file = "catalog/klaviyo/src/fivetran-interop/transforms/campaign.yml"
-source_file_hash = "b087416178d63a314029e97dce9fdadfa55d9122cf19dc9b284c7e29bda99322"
-unmapped_target_fields = []
-omitted_target_fields = [
-    "archived",
-    "scheduled",
+source_file = "src/transforms/klaviyo/transforms/campaign.yml"
+source_file_hash = "8e63f11f6140cc222ee6e4afbc4bacd42003bc555e438769338511128f5e0df5"
+unmapped_target_fields = [
+    "_fivetran_deleted",
+    "email_template_id",
+    "from_email",
+    "from_name",
     "status_id",
     "status_label",
-    "subject",
-    "updated",
 ]
-erroneous_source_table_columns = [
-    "attributes.from_email",
-    "attributes.from_name",
-    "attributes.sent_at",
-    "attributes.template_id",
-]
+omitted_target_fields = []
+erroneous_source_table_columns = []
 
 [mappings.campaign.mapped_target_fields]
-_fivetran_deleted = "campaigns.attributes.archived"
-campaign_type = "campaigns.attributes.channel"
+campaign_type = "campaigns.type"
 created = "campaigns.attributes.created_at"
-email_template_id = "campaigns.attributes.template_id"
-from_email = "campaigns.attributes.from_email"
-from_name = "campaigns.attributes.from_name"
 id = "campaigns.id"
 name = "campaigns.attributes.name"
 send_time = "campaigns.attributes.send_time"
-sent_at = "campaigns.attributes.sent_at"
+sent_at = "campaigns.attributes.scheduled_at"
 status = "campaigns.attributes.status"
-_fivetran_synced = "campaigns._airbyte_extracted_at"
+subject = "campaigns.attributes.message"
+updated = "campaigns.attributes.updated_at"
+archived = "campaigns.attributes.archived"
+scheduled = "campaigns.attributes.scheduled_at"
 
 [mappings.campaign.unused_source_fields]
 campaigns = [
+    "_airbyte_extracted_at",
     "_airbyte_meta",
     "_airbyte_raw_id",
     "attributes.audiences",
     "attributes.audiences.excluded",
     "attributes.audiences.included",
-    "attributes.message",
-    "attributes.scheduled_at",
+    "attributes.channel",
     "attributes.send_options",
     "attributes.send_options.ignore_unsubscribes",
     "attributes.send_options.use_smart_sending",
@@ -79,7 +73,6 @@ campaigns = [
     "attributes.tracking_options.is_tracking_clicks",
     "attributes.tracking_options.is_tracking_opens",
     "attributes.tracking_options.utm_params",
-    "attributes.updated_at",
     "links",
     "links.self",
     "relationships",
@@ -93,41 +86,37 @@ campaigns = [
     "relationships.tags.links",
     "relationships.tags.links.related",
     "relationships.tags.links.self",
-    "type",
     "updated_at",
 ]
 
 [mappings.event]
-source_file = "catalog/klaviyo/src/fivetran-interop/transforms/event.yml"
-source_file_hash = "7a6a116f08fa6de6ca55b0dbfef814894c05bb85eb0c1347c9bef237b230be4b"
-unmapped_target_fields = []
-omitted_target_fields = [
+source_file = "src/transforms/klaviyo/transforms/event.yml"
+source_file_hash = "1657c19a711a38fe241be710a69b690c50919a024d4405741c82267932a0407d"
+unmapped_target_fields = [
     "_fivetran_deleted",
     "_variation",
     "campaign_id",
     "flow_id",
     "flow_message_id",
-    "metric_id",
-    "property_value",
-    "uuid",
 ]
+omitted_target_fields = []
 erroneous_source_table_columns = []
 
 [mappings.event.mapped_target_fields]
-id = "events.id"
-type = "events.relationships.metric.data.id"
-timestamp = "events.attributes.datetime"
 datetime = "events.attributes.datetime"
-event_properties = "events.attributes.event_properties"
+timestamp = "events.attributes.timestamp"
+id = "events.id"
+metric_id = "events.relationships.metric.data.id"
 person_id = "events.relationships.profile.data.id"
-_fivetran_synced = "events._airbyte_extracted_at"
+type = "events.type"
+uuid = "events.attributes.uuid"
+property_value = "events.attributes.event_properties"
 
 [mappings.event.unused_source_fields]
 events = [
+    "_airbyte_extracted_at",
     "_airbyte_meta",
     "_airbyte_raw_id",
-    "attributes.timestamp",
-    "attributes.uuid",
     "datetime",
     "links",
     "links.self",
@@ -144,33 +133,31 @@ events = [
     "relationships.profile.links",
     "relationships.profile.links.related",
     "relationships.profile.links.self",
-    "type",
 ]
 
 [mappings.flow]
-source_file = "catalog/klaviyo/src/fivetran-interop/transforms/flow.yml"
-source_file_hash = "9e6a27fa30434900e5b08b18eefc073d4c6136fa9ce0cfac7f1830712dc705a2"
-unmapped_target_fields = []
-omitted_target_fields = [
+source_file = "src/transforms/klaviyo/transforms/flow.yml"
+source_file_hash = "85947ce7dee9cc18d89d1973068ba356686408ff27aa31a31c06d67c179162ed"
+unmapped_target_fields = [
     "_fivetran_deleted",
-    "archived",
 ]
+omitted_target_fields = []
 erroneous_source_table_columns = []
 
 [mappings.flow.mapped_target_fields]
+created = "flows.attributes.created"
 id = "flows.id"
 name = "flows.attributes.name"
-created = "flows.attributes.created"
-updated = "flows.attributes.updated"
 status = "flows.attributes.status"
+updated = "flows.attributes.updated"
+archived = "flows.attributes.archived"
 trigger_type = "flows.attributes.trigger_type"
-_fivetran_synced = "flows._airbyte_extracted_at"
 
 [mappings.flow.unused_source_fields]
 flows = [
+    "_airbyte_extracted_at",
     "_airbyte_meta",
     "_airbyte_raw_id",
-    "attributes.archived",
     "links",
     "links.self",
     "relationships",
@@ -189,29 +176,30 @@ flows = [
 ]
 
 [mappings.metric]
-source_file = "catalog/klaviyo/src/fivetran-interop/transforms/metric.yml"
-source_file_hash = "136460fb94430cbdb9057fc0afe83f6b9cff8849d2778d6daf52e20eaa8c88a3"
-unmapped_target_fields = []
-omitted_target_fields = [
-    "_fivetran_deleted",
+source_file = "src/transforms/klaviyo/transforms/metric.yml"
+source_file_hash = "22091971b3ecc7e5a7e1b993aada5fd06854139d15d3f6a1551dbda70d0507f3"
+unmapped_target_fields = [
+    "created",
     "integration_category",
     "integration_id",
     "integration_name",
 ]
+omitted_target_fields = []
 erroneous_source_table_columns = []
 
 [mappings.metric.mapped_target_fields]
 id = "metrics.id"
 name = "metrics.attributes.name"
-created = "metrics.attributes.created"
-updated = "metrics.attributes.updated"
-integration = "metrics.attributes.integration"
-_fivetran_synced = "metrics._airbyte_extracted_at"
+updated = "metrics.updated"
+_fivetran_deleted = "metrics._airbyte_extracted_at"
 
 [mappings.metric.unused_source_fields]
 metrics = [
     "_airbyte_meta",
     "_airbyte_raw_id",
+    "attributes.created",
+    "attributes.integration",
+    "attributes.updated",
     "links",
     "links.self",
     "relationships",
@@ -223,52 +211,48 @@ metrics = [
     "relationships.flow-triggers.links.related",
     "relationships.flow-triggers.links.self",
     "type",
-    "updated",
 ]
 
 [mappings.person]
-source_file = "catalog/klaviyo/src/fivetran-interop/transforms/person.yml"
-source_file_hash = "e2bb93feca9321ef63f33a19713649210c1219352ebaca914e5cb7e8d432e224"
-unmapped_target_fields = []
-omitted_target_fields = [
+source_file = "src/transforms/klaviyo/transforms/person.yml"
+source_file_hash = "2c13260c44697b1a5de5d87ece49fac9e30d9ba74dce0f4d2be85cf7a1627eed"
+unmapped_target_fields = [
     "_fivetran_deleted",
-    "last_event_date",
-    "latitude",
-    "longitude",
 ]
+omitted_target_fields = []
 erroneous_source_table_columns = []
 
 [mappings.person.mapped_target_fields]
 id = "profiles.id"
-email = "profiles.attributes.email"
-first_name = "profiles.attributes.first_name"
-last_name = "profiles.attributes.last_name"
 address_1 = "profiles.attributes.location.address1"
 address_2 = "profiles.attributes.location.address2"
 city = "profiles.attributes.location.city"
 country = "profiles.attributes.location.country"
 zip = "profiles.attributes.location.zip"
 created = "profiles.attributes.created"
+email = "profiles.attributes.email"
+first_name = "profiles.attributes.first_name"
+last_name = "profiles.attributes.last_name"
+latitude = "profiles.attributes.location.latitude"
+longitude = "profiles.attributes.location.longitude"
+organization = "profiles.attributes.organization"
 phone_number = "profiles.attributes.phone_number"
 region = "profiles.attributes.location.region"
 timezone = "profiles.attributes.location.timezone"
-organization = "profiles.attributes.organization"
 title = "profiles.attributes.title"
 updated = "profiles.attributes.updated"
-_fivetran_synced = "profiles._airbyte_extracted_at"
+last_event_date = "profiles.attributes.last_event_date"
 
 [mappings.person.unused_source_fields]
 profiles = [
+    "_airbyte_extracted_at",
     "_airbyte_meta",
     "_airbyte_raw_id",
     "attributes.anonymous_id",
     "attributes.external_id",
     "attributes.image",
-    "attributes.last_event_date",
     "attributes.locale",
     "attributes.location.ip",
-    "attributes.location.latitude",
-    "attributes.location.longitude",
     "attributes.predictive_analytics",
     "attributes.predictive_analytics.average_days_between_orders",
     "attributes.predictive_analytics.average_order_value",

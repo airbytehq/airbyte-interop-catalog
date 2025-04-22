@@ -13,136 +13,51 @@ from typing import Any, overload
 from morph.constants import DEFAULT_PROJECT_NAME
 from morph.utils import text_utils
 
-
-def get_catalog_root_dir() -> Path:
-    """Assume we are running from the root of the morph repo."""
-    return Path("catalog")
+# Source code resources:
 
 
-def get_generated_dir_root(
-    source_name: str,
-) -> Path:
-    """Assume we are running from the root of the morph repo."""
-    return get_catalog_root_dir() / source_name / Path("generated")
+def get_source_code_root_dir() -> Path:
+    """Get the root directory of the source code."""
+    return Path("src")
 
 
-def get_lock_file_path(
-    source_name: str,
-    project_name: str = DEFAULT_PROJECT_NAME,
-) -> Path:
-    """Get the path to the lock file."""
-    return get_catalog_root_dir() / source_name / f"{project_name}.morph-lock.toml"
+def get_source_code_dir(source_name: str) -> Path:
+    """Get the directory of the source code for a specific source."""
+    return get_source_code_root_dir() / source_name
 
 
-def get_generated_catalog_path(
+def get_project_src_dir(
     source_name: str,
     project_name: str = DEFAULT_PROJECT_NAME,
 ) -> Path:
-    """Get the path to the generated Airbyte catalog file."""
     _ = project_name  # Unused for now
-    return (
-        get_generated_dir_root(
-            source_name=source_name,
-        )
-        / "airbyte-catalog.json"
-    )
-
-
-def get_generated_dbt_project_dir(
-    source_name: str,
-    project_name: str = DEFAULT_PROJECT_NAME,
-) -> Path:
-    """Get the path to the generated dbt project.yml file."""
-    _ = project_name  # Unused for now
-    return get_generated_dir_root(source_name=source_name) / "dbt_project"
-
-
-def get_generated_dbt_project_models_dir(
-    source_name: str,
-    project_name: str = DEFAULT_PROJECT_NAME,
-) -> Path:
-    """Get the path to the generated dbt project models directory."""
-    _ = project_name  # Unused for now
-    return get_generated_dbt_project_dir(source_name, project_name) / "models"
-
-
-def get_generated_source_yml_path(
-    source_name: str,
-    project_name: str = DEFAULT_PROJECT_NAME,
-) -> Path:
-    """Get the path to the generated dbt sources.yml file."""
-    _ = project_name  # Unused for now
-    return (
-        get_generated_dir_root(
-            source_name=source_name,
-        )
-        / f"src_airbyte_{source_name}.yml"
-    )
-
-
-def get_erd_dir(
-    source_name: str,
-    project_name: str = DEFAULT_PROJECT_NAME,
-) -> Path:
-    """Get the path to the ERD directory for a source."""
-    _ = project_name  # Unused for now
-    return (
-        get_generated_dir_root(
-            source_name=source_name,
-        )
-        / "erd"
-    )
-
-
-def get_source_dbml_path(
-    source_name: str,
-    project_name: str = DEFAULT_PROJECT_NAME,
-) -> Path:
-    """Get the path to the source DBML file for a source."""
-    return get_generated_source_yml_path(source_name, project_name).with_suffix(".dbml")
-
-
-def get_target_dbml_path(
-    source_name: str,
-    project_name: str = DEFAULT_PROJECT_NAME,
-) -> Path:
-    """Get the path to the target DBML file for a source."""
-    return get_dbt_sources_requirements_path(source_name, project_name).with_suffix(".dbml")
-
-
-def get_requirements_dir(
-    source_name: str,
-    project_name: str = DEFAULT_PROJECT_NAME,
-) -> Path:
-    return get_catalog_root_dir() / source_name / "requirements" / project_name
-
-
-def get_dbt_sources_requirements_path(
-    source_name: str,
-    project_name: str = DEFAULT_PROJECT_NAME,
-) -> Path:
-    return get_requirements_dir(source_name, project_name) / "src_dbt_requirements.yml"
-
-
-def get_src_dir(
-    source_name: str,
-    project_name: str = DEFAULT_PROJECT_NAME,
-) -> Path:
-    return get_catalog_root_dir() / source_name / "src" / project_name
+    return get_source_code_root_dir() / "transforms" / source_name
 
 
 def get_config_file_path(
     source_name: str,
     project_name: str = DEFAULT_PROJECT_NAME,
 ) -> Path:
-    return get_src_dir(source_name, project_name) / "config.yml"
+    return (
+        get_project_src_dir(
+            source_name=source_name,
+            project_name=project_name,
+        )
+        / "config.yml"
+    )
 
 
 def get_transforms_dir(
     source_name: str,
     project_name: str = DEFAULT_PROJECT_NAME,
 ) -> Path:
-    return get_src_dir(source_name, project_name) / "transforms"
+    return (
+        get_project_src_dir(
+            source_name=source_name,
+            project_name=project_name,
+        )
+        / "transforms"
+    )
 
 
 def get_transforms_files(
@@ -150,7 +65,10 @@ def get_transforms_files(
     project_name: str = DEFAULT_PROJECT_NAME,
 ) -> list[Path]:
     """Get the path to the transform files."""
-    transforms_dir = get_transforms_dir(source_name, project_name)
+    transforms_dir = get_transforms_dir(
+        source_name,
+        project_name,
+    )
     return list(transforms_dir.glob("*.yml"))
 
 
@@ -160,7 +78,13 @@ def get_transform_file(
     project_name: str = DEFAULT_PROJECT_NAME,
     transform_name: str,
 ) -> Path:
-    return get_transforms_dir(source_name, project_name) / f"{transform_name}.yml"
+    return (
+        get_transforms_dir(
+            source_name=source_name,
+            project_name=project_name,
+        )
+        / f"{transform_name}.yml"
+    )
 
 
 @overload
@@ -199,7 +123,7 @@ def get_source_config(
     )
 
     if not config_file.is_file():
-        raise ValueError(f"Error: Config file {config_file} does not exist")
+        raise FileNotFoundError(f"Error: Config file {config_file} does not exist")
 
     config = text_utils.load_yaml_file(config_file)
 
@@ -207,3 +131,179 @@ def get_source_config(
         return config
 
     return config.get(key, default)
+
+
+# User-facing resources (generated by morph):
+
+
+def get_catalog_root_dir() -> Path:
+    """Assume we are running from the root of the morph repo."""
+    return Path("catalog")
+
+
+def get_generated_dbt_project_dir(
+    source_name: str,
+    project_name: str = DEFAULT_PROJECT_NAME,
+) -> Path:
+    """Get the path to the generated dbt project.yml file."""
+    return get_catalog_root_dir() / source_name / f"{project_name}-dbt-project"
+
+
+def get_generated_dbt_project_models_dir(
+    source_name: str,
+    project_name: str = DEFAULT_PROJECT_NAME,
+) -> Path:
+    """Get the path to the generated dbt project models directory."""
+    _ = project_name  # Unused for now
+    return (
+        get_generated_dbt_project_dir(
+            source_name,
+            project_name,
+        )
+        / "models"
+    )
+
+
+def get_generated_approved_mappings_doc_path(
+    source_name: str,
+    project_name: str = DEFAULT_PROJECT_NAME,
+) -> Path:
+    """Get the path to the generated approved mappings README file."""
+    _ = project_name  # Unused for now
+    return get_catalog_root_dir() / source_name / "README.md"
+
+
+def get_generated_rejected_mappings_doc_path(
+    source_name: str,
+    project_name: str = DEFAULT_PROJECT_NAME,
+) -> Path:
+    """Get the path to the generated rejected mappings README file."""
+    _ = project_name  # Unused for now
+    return get_catalog_root_dir() / source_name / "rejected-mappings.md"
+
+
+# Generated build artifacts (not user-facing):
+
+
+def get_build_dir_root() -> Path:
+    """Get the root directory of the build artifacts."""
+    return Path("build")
+
+
+def get_build_dir(source_name: str) -> Path:
+    """Get the directory of the build artifacts for a specific source."""
+    return get_build_dir_root() / source_name
+
+
+def get_lock_file_path(
+    source_name: str,
+    project_name: str = DEFAULT_PROJECT_NAME,
+) -> Path:
+    """Get the path to the lock file."""
+    return (
+        get_build_dir(
+            source_name,
+        )
+        / f"{project_name}.morph-lock.toml"
+    )
+
+
+def get_generated_catalog_path(
+    source_name: str,
+    project_name: str = DEFAULT_PROJECT_NAME,
+) -> Path:
+    """Get the path to the generated Airbyte catalog file."""
+    _ = project_name  # Unused for now
+    return (
+        get_build_dir(
+            source_name=source_name,
+        )
+        / "airbyte-catalog.json"
+    )
+
+
+def get_generated_source_yml_path(
+    source_name: str,
+    project_name: str = DEFAULT_PROJECT_NAME,
+) -> Path:
+    """Get the path to the generated dbt sources.yml file."""
+    _ = project_name  # Unused for now
+    return (
+        get_build_dir(
+            source_name=source_name,
+        )
+        / f"src_airbyte_raw_{source_name}.yml"
+    )
+
+
+# ERD resources:
+
+
+def get_erd_dir(
+    source_name: str,
+    project_name: str = DEFAULT_PROJECT_NAME,
+) -> Path:
+    """Get the path to the ERD directory for a source."""
+    _ = project_name  # Unused for now
+    return (
+        get_build_dir(
+            source_name=source_name,
+        )
+        / "erd"
+    )
+
+
+def get_source_dbml_path(
+    source_name: str,
+    project_name: str = DEFAULT_PROJECT_NAME,
+) -> Path:
+    """Get the path to the source DBML file for a source."""
+    return (
+        get_erd_dir(
+            source_name,
+            project_name,
+        )
+        / "source-schema-erd.dbml"
+    )
+
+
+def get_target_dbml_path(
+    source_name: str,
+    project_name: str = DEFAULT_PROJECT_NAME,
+) -> Path:
+    """Get the path to the target DBML file for a source."""
+    return (
+        get_erd_dir(
+            source_name,
+            project_name,
+        )
+        / "target-schema-erd.dbml"
+    )
+
+
+# Requirements resources:
+
+def get_requirements_dir(
+    source_name: str,
+    project_name: str = DEFAULT_PROJECT_NAME,
+) -> Path:
+    return (
+        get_build_dir(
+            source_name=source_name,
+        )
+        / "requirements"
+        / project_name
+    )
+
+
+def get_dbt_sources_requirements_path(
+    source_name: str,
+    project_name: str = DEFAULT_PROJECT_NAME,
+) -> Path:
+    return (
+        get_requirements_dir(
+            source_name,
+            project_name,
+        )
+        / "src_dbt_requirements.yml"
+    )

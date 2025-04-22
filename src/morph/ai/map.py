@@ -177,7 +177,7 @@ def populate_missing_mappings(
         transform_name=transform_name,
     )
     transform_parsed = models.TransformFile.from_file(transform_file)
-    fields_to_populate = []
+    fields_to_populate: list[models.FieldMapping] = []
 
     source_table_info = models.SourceTableSummary.from_dbt_source_file(
         source_file=resources.get_generated_source_yml_path(

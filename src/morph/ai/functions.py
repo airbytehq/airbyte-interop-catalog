@@ -10,6 +10,14 @@ if not VERBOSE_MODE:
     marvin.settings.enable_default_print_handler = False
 
 
+agent = marvin.Agent(
+    name="morph-ai",
+    description="AI agent for Morph.",
+    model="gpt-4",
+    verbose=VERBOSE_MODE,
+)
+
+
 PROJECT_CONTEXT = """
 Project Context: You are fulfilling the role of a data engineer creating logic for mapping source
 data from Airbyte into a target schema that should be interoperable with a similar schema from
@@ -80,6 +88,7 @@ implementation does not serialize all of the fields that the target implementati
 
 
 @marvin.fn(
+    agent=agent,
     instructions="\n\n".join(
         [
             PROJECT_CONTEXT,
@@ -108,6 +117,7 @@ def evaluate_mapping_confidence(
 
 
 @marvin.fn(
+    agent=agent,
     instructions="\n\n".join(
         [
             PROJECT_CONTEXT,
@@ -137,6 +147,7 @@ def select_best_match_source_schema(
 
 
 @marvin.fn(
+    agent=agent,
     instructions="\n\n".join(
         [
             PROJECT_CONTEXT,
@@ -148,7 +159,7 @@ def select_best_match_source_schema(
 )  # pyright: ignore [reportUntypedFunctionDecorator]
 def generate_mappings(
     fields_to_populate: list[models.FieldMapping],
-    source_schema: models.DbtSourceTable,
+    source_schema: models.DbtSourceTable | models.SourceTableSummary,
 ) -> list[models.FieldMappingSuggestion]:
     """Generate mappings for a list of fields.
 
@@ -174,6 +185,7 @@ def generate_mappings(
 
 
 @marvin.fn(
+    agent=agent,
     instructions="\n\n".join(
         [
             PROJECT_CONTEXT,

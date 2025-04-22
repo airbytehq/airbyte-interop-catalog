@@ -1,0 +1,78 @@
+domain: klaviyo.airbyte-interop
+transforms:
+  - name: metric
+    from:
+      - metrics: klaviyo.metrics
+    fields:
+      created:
+        expression: MISSING
+        description: Timestamp of when the metric was created.
+      id:
+        expression: metrics.id
+        description: Unique ID of the metric being tracked.
+      integration_id:
+        expression: MISSING
+        description: Foreign key referencing the INTEGRATION that the metric is being
+          pulled from.
+      name:
+        expression: metrics.attributes.name
+        description: Name of the metric (same as `EVENT.type`)
+      updated:
+        expression: metrics.updated
+        description: Timestamp of when the metric was last updated.
+      integration_category:
+        expression: MISSING
+        description: Use-case category of the integrated platform.
+      integration_name:
+        expression: MISSING
+        description: Name of the integrated platform.
+      _fivetran_deleted:
+        expression: metrics._airbyte_extracted_at
+        description: Boolean that is true if the campaign has been soft-deleted.
+annotations:
+  approved: false
+  missing_fields:
+    - created
+    - integration_category
+    - integration_id
+    - integration_name
+  evaluation:
+    source_stream_name: metrics
+    target_table_name: metric
+    table_match_score: 0.7
+    completion_score: 0.375
+    explanation: Table mapping has moderate confidence but most field mappings are
+      missing.
+    field_mapping_evals:
+      - name: created
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: id
+        expression: metrics.id
+        score: 1.0
+        explanation: Perfect match with 'metrics.id'
+      - name: integration_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: name
+        expression: metrics.attributes.name
+        score: 1.0
+        explanation: Perfect match with 'metrics.attributes.name'
+      - name: updated
+        expression: metrics.updated
+        score: 1.0
+        explanation: Perfect match with 'metrics.updated'
+      - name: integration_category
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: integration_name
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _fivetran_deleted
+        expression: metrics._airbyte_extracted_at
+        score: 1.0
+        explanation: Perfect match with 'metrics._airbyte_extracted_at'
