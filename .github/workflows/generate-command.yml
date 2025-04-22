@@ -16,9 +16,6 @@ on:
         type: string
         required: true
 
-  push:
-  # TODO: Remove this before merging
-
 jobs:
   generate-on-demand:
     runs-on: ubuntu-latest
@@ -109,6 +106,7 @@ jobs:
         id: generate
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GCP_GSM_CREDENTIALS: ${{ secrets.GCP_GSM_CREDENTIALS }}
         run: |
           # Run morph generate with the provided source_name and default project_name
           uv run morph generate ${{ github.event.inputs.source_name || 'klaviyo' }} --regenerate-all --auto-confirm
