@@ -1,0 +1,71 @@
+domain: github.airbyte-interop
+transforms:
+  - name: label
+    from:
+      - issue_labels: github.issue_labels
+    fields:
+      id:
+        expression: issue_labels.id
+        description: Unique identifier of the Github label
+      _fivetran_synced:
+        expression: issue_labels._airbyte_extracted_at
+        description: Timestamp of the record being synced by Fivetran
+      color:
+        expression: issue_labels.color
+        description: The color of the label
+      description:
+        expression: issue_labels.description
+        description: The description of the label indicating the purpose
+      is_default:
+        expression: issue_labels.default
+        description: Boolean flagging if the label is default on creation
+      name:
+        expression: issue_labels.name
+        description: Name of the label
+      url:
+        expression: issue_labels.url
+        description: Url where the label was used
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: issue_labels
+    target_table_name: label
+    table_match_score: 0.95
+    completion_score: 1.0
+    explanation: High confidence in table match due to the strong alignment of field
+      names and descriptions between the source and target schemas. All fields have
+      been mapped appropriately, ensuring data integrity and meaning are preserved.
+    field_mapping_evals:
+      - name: id
+        expression: issue_labels.id
+        score: 0.9
+        explanation: Direct match with minimal transformation needed.
+      - name: _fivetran_synced
+        expression: issue_labels._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard field for syncing timestamps, direct mapping from '_airbyte_extracted_at'
+          to '_fivetran_synced'.
+      - name: color
+        expression: issue_labels.color
+        score: 1.0
+        explanation: Exact match of field names and usage context.
+      - name: description
+        expression: issue_labels.description
+        score: 0.9
+        explanation: Direct correlation between descriptions in source and target,
+          minimal semantic difference.
+      - name: is_default
+        expression: issue_labels.default
+        score: 0.9
+        explanation: Boolean fields match directly between source and target, reflecting
+          the same property.
+      - name: name
+        expression: issue_labels.name
+        score: 1.0
+        explanation: Identical field names and purposes across both schemas.
+      - name: url
+        expression: issue_labels.url
+        score: 0.8
+        explanation: High relevance and match of URLs used in both contexts, though
+          slight differences in formatting.

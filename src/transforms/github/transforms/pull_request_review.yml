@@ -1,0 +1,59 @@
+domain: github.airbyte-interop
+transforms:
+  - name: pull_request_review
+    from:
+      - reviews: github.reviews
+    fields:
+      id:
+        expression: reviews.id
+        description: System generated unique id for the pull request review.
+      pull_request_id:
+        expression: reviews.pull_request_url
+        description: Foreign key that references the pull request table.
+      submitted_at:
+        expression: reviews.submitted_at
+        description: Timestamp of when the request for review was submitted.
+      state:
+        expression: reviews.state
+        description: Whether the review was an approval, request for change, comment,
+          dismissal.
+      user_id:
+        expression: reviews.user.id
+        description: Foreign key that references the user table, representing the
+          user that reviewed the pull request.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: reviews
+    target_table_name: pull_request_review
+    table_match_score: 0.9
+    completion_score: 0.75
+    explanation: The overall table match score is high, indicating a strong alignment
+      between the source and target schemas. However, the completion score has modest
+      room for improvement due to some fields not being perfectly aligned.
+    field_mapping_evals:
+      - name: id
+        expression: reviews.id
+        score: 1.0
+        explanation: Perfect match for 'id' as it maps directly to 'reviews.id'.
+      - name: pull_request_id
+        expression: reviews.pull_request_url
+        score: 0.8
+        explanation: High mapping score, appropriately linking 'pull_request_id' to
+          'reviews.pull_request_url'.
+      - name: submitted_at
+        expression: reviews.submitted_at
+        score: 1.0
+        explanation: Direct mapping of 'submitted_at' to 'reviews.submitted_at' displays
+          excellent confidence.
+      - name: state
+        expression: reviews.state
+        score: 1.0
+        explanation: The field 'state' maps precisely to 'reviews.state', indicating
+          a perfect match with unwavering confidence.
+      - name: user_id
+        expression: reviews.user.id
+        score: 0.3
+        explanation: Low confidence due to potential semantic difference between 'user_id'
+          in target and 'reviews.user.id' in source; case of likely different entities.

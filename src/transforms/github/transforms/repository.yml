@@ -1,0 +1,52 @@
+domain: github.airbyte-interop
+transforms:
+  - name: repository
+    from:
+      - repositories: github.repositories
+    fields:
+      id:
+        expression: repositories.id
+        description: System generated unique id for the repository.
+      created_at:
+        expression: repositories.created_at
+        description: Timestamp of when the repository was created.
+      full_name:
+        expression: repositories.full_name
+        description: The name of the git repository.
+      private:
+        expression: repositories.private
+        description: Boolean field indicating whether the repository is private (true)
+          or public (false).
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: repositories
+    target_table_name: repository
+    table_match_score: 0.95
+    completion_score: 0.8
+    explanation: The mappings provided are highly reliable and follow the target schema
+      closely, ensuring a high degree of confidence that the source and target tables
+      describe the same entities accurately, though not every field could be fully
+      mapped.
+    field_mapping_evals:
+      - name: id
+        expression: repositories.id
+        score: 1.0
+        explanation: Direct mapping between 'repositories.id' to 'id', representing
+          the same unique repository identifier, ensuring high confidence.
+      - name: created_at
+        expression: repositories.created_at
+        score: 1.0
+        explanation: Direct mapping between 'repositories.created_at' to 'created_at',
+          accurately capturing the creation timestamp of the repository.
+      - name: full_name
+        expression: repositories.full_name
+        score: 1.0
+        explanation: Direct mapping between 'repositories.full_name' to 'full_name',
+          accurately reflecting the repository's full name.
+      - name: private
+        expression: repositories.private
+        score: 1.0
+        explanation: Direct mapping from 'repositories.private' to 'private', correctly
+          represents the repository's privacy status.

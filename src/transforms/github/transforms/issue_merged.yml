@@ -1,0 +1,36 @@
+domain: github.airbyte-interop
+transforms:
+  - name: issue_merged
+    from:
+      - pull_requests: github.pull_requests
+    fields:
+      issue_id:
+        expression: MISSING
+        description: Foreign key that references the issue table.  This table will
+          only reference issues that are pull requests
+      merged_at:
+        expression: pull_requests.merged_at
+        description: Timestamp of when the code merge took place
+annotations:
+  approved: false
+  missing_fields:
+    - issue_id
+  evaluation:
+    source_stream_name: pull_requests
+    target_table_name: issue_merged
+    table_match_score: 0.5
+    completion_score: 0.5
+    explanation: The mapping evaluation produced mixed results. The 'merged_at' field
+      has a good matching expression, suggesting a reasonable level of confidence
+      in its similarity to the target schema. However, the 'issue_id' field is marked
+      as 'MISSING', indicating no good match was found, significantly reducing the
+      overall confidence and completion scores.
+    field_mapping_evals:
+      - name: issue_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: merged_at
+        expression: pull_requests.merged_at
+        score: 0.7
+        explanation: Good match found with target schema field 'pull_requests.merged_at'.

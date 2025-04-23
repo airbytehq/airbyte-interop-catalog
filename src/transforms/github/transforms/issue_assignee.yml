@@ -1,0 +1,12 @@
+domain: github.airbyte-interop
+transforms:
+  - name: issue_assignee
+    from:
+      - MISSING: github.MISSING
+    fields:
+      issue_id:
+        expression: MISSING
+        description: Foreign key that references the issue table
+      user_id:
+        expression: MISSING
+        description: Foreign key that references the user table

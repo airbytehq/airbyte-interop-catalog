@@ -1,0 +1,64 @@
+domain: github.airbyte-interop
+transforms:
+  - name: team
+    from:
+      - teams: github.teams
+    fields:
+      id:
+        expression: teams.id
+        description: System generated unique id for the team.
+      description:
+        expression: teams.description
+        description: User created description of the team.
+      name:
+        expression: teams.name
+        description: User created name of the team.
+      parent_id:
+        expression: teams.parent
+        description: Reference to the parent team.
+      privacy:
+        expression: teams.privacy
+        description: Type of privacy permissions associated with the team.
+      slug:
+        expression: teams.slug
+        description: Url friendly version of the team name.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: teams
+    target_table_name: team
+    table_match_score: 0.9
+    completion_score: 0.8
+    explanation: The table mapping has high confidence as both source and target tables
+      refer to team data and correspond well in terms of context. However, complete
+      mapping coverage is not achieved as some source implementations do not serialize
+      all fields matched to the target, leading to a slightly lower completion score.
+    field_mapping_evals:
+      - name: id
+        expression: teams.id
+        score: 1.0
+        explanation: Perfect match for system generated unique ID.
+      - name: description
+        expression: teams.description
+        score: 0.95
+        explanation: Direct relationship between the source and target description
+          fields.
+      - name: name
+        expression: teams.name
+        score: 0.95
+        explanation: Direct relationship between the source and target names, indicative
+          of exact data purpose match.
+      - name: parent_id
+        expression: teams.parent
+        score: 0.9
+        explanation: Proper referral to the parent team.
+      - name: privacy
+        expression: teams.privacy
+        score: 0.85
+        explanation: Privacy permissions match contextually between source and target.
+      - name: slug
+        expression: teams.slug
+        score: 0.9
+        explanation: URL friendly names align perfectly between source team name and
+          target team slug.

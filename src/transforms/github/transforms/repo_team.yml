@@ -1,0 +1,33 @@
+domain: github.airbyte-interop
+transforms:
+  - name: repo_team
+    from:
+      - team_memberships: github.team_memberships
+    fields:
+      repository_id:
+        expression: MISSING
+        description: Reference to the respective repository for the record.
+      team_id:
+        expression: MISSING
+        description: Reference to the respective team for the record.
+annotations:
+  approved: false
+  missing_fields:
+    - repository_id
+    - team_id
+  evaluation:
+    source_stream_name: team_memberships
+    target_table_name: repo_team
+    table_match_score: 0.0
+    completion_score: 0.0
+    explanation: There are no mappings provided for necessary fields, indicating an
+      absence of matching between the source and target schemas.
+    field_mapping_evals:
+      - name: repository_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: team_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

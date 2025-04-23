@@ -1,0 +1,50 @@
+domain: github.airbyte-interop
+transforms:
+  - name: pull_request
+    from:
+      - pull_requests: github.pull_requests
+    fields:
+      id:
+        expression: pull_requests.id
+        description: System generated unique id for the pull request.
+      issue_id:
+        expression: MISSING
+        description: Foreign key that references the issue table.
+      head_repo_id:
+        expression: pull_requests.head.repo_id
+        description: Foreign key that references the repository table, referencing
+          the current branch.
+      head_user_id:
+        expression: pull_requests.head.user_id
+        description: Foreign key that references the user table, referencing who created
+          the current branch.
+annotations:
+  approved: false
+  missing_fields:
+    - issue_id
+  evaluation:
+    source_stream_name: pull_requests
+    target_table_name: pull_request
+    table_match_score: 0.65
+    completion_score: 0.5
+    explanation: The table match score reflects a moderate confidence that the source
+      and target tables describe similar subject matter, despite some missing field
+      mappings. The completion score is reduced due to incomplete data serialization
+      between the source and target.
+    field_mapping_evals:
+      - name: id
+        expression: pull_requests.id
+        score: 1.0
+        explanation: Direct match found, high confidence.
+      - name: issue_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: head_repo_id
+        expression: pull_requests.head.repo_id
+        score: 0.7
+        explanation: Likely refers to the same entity due to similar context and structure.
+      - name: head_user_id
+        expression: pull_requests.head.user_id
+        score: 0.7
+        explanation: Likely refers to the same entity due to similar context and structure.
