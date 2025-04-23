@@ -1,0 +1,1174 @@
+[project]
+source_name = "github"
+project_name = "airbyte-interop"
+requirements_file = "build/github/requirements/airbyte-interop/src_dbt_requirements.yml"
+requirements_file_hash = "12b5ad8273fe9faa23cb7e3ca46aea8f4b7512f2209ea20fa0ad847af3497f6b"
+airbyte_source_file = "build/github/src_airbyte_raw_github.yml"
+airbyte_source_file_hash = "ddb46c73e258be89b01a2761fa13d2e984e15efed1397f9f0f1a710037813020"
+
+[coverage]
+unused_source_streams = [
+    "assignees",
+    "branches",
+    "collaborators",
+    "commit_comment_reactions",
+    "commit_comments",
+    "commits",
+    "contributor_activity",
+    "deployments",
+    "events",
+    "issue_comment_reactions",
+    "issue_events",
+    "issue_milestones",
+    "issue_reactions",
+    "issue_timeline_events",
+    "organizations",
+    "project_cards",
+    "project_columns",
+    "projects",
+    "projects_v2",
+    "pull_request_comment_reactions",
+    "pull_request_commits",
+    "pull_request_stats",
+    "releases",
+    "stargazers",
+    "tags",
+    "team_members",
+    "team_memberships",
+    "workflow_jobs",
+    "workflow_runs",
+    "workflows",
+]
+unmapped_target_tables = []
+
+[mappings.issue]
+source_file = "src/transforms/github/transforms/issue.yml"
+source_file_hash = "b8a60f07d2869db8842dabbf97f56709bb7994b7a8433518faec03d23e5a67e0"
+source_stream = "issues"
+unmapped_target_fields = [
+    "closed_at",
+    "repository_id",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.issue.mapped_target_fields]
+id = "issues.id"
+body = "issues.body"
+locked = "issues.locked"
+created_at = "issues.created_at"
+milestone_id = "issues.milestone.id"
+number = "issues.number"
+pull_request = "issues.pull_request"
+state = "issues.state"
+title = "issues.title"
+updated_at = "issues.updated_at"
+user_id = "issues.user.id"
+
+[mappings.issue.unused_source_fields]
+issues = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "active_lock_reason",
+    "assignee",
+    "assignee.avatar_url",
+    "assignee.events_url",
+    "assignee.followers_url",
+    "assignee.following_url",
+    "assignee.gists_url",
+    "assignee.gravatar_id",
+    "assignee.html_url",
+    "assignee.id",
+    "assignee.login",
+    "assignee.node_id",
+    "assignee.organizations_url",
+    "assignee.received_events_url",
+    "assignee.repos_url",
+    "assignee.site_admin",
+    "assignee.starred_url",
+    "assignee.subscriptions_url",
+    "assignee.type",
+    "assignee.url",
+    "assignees",
+    "author_association",
+    "closed_at",
+    "comments",
+    "comments_url",
+    "draft",
+    "events_url",
+    "html_url",
+    "labels",
+    "labels_url",
+    "milestone",
+    "milestone.closed_at",
+    "milestone.closed_issues",
+    "milestone.created_at",
+    "milestone.creator",
+    "milestone.creator.avatar_url",
+    "milestone.creator.events_url",
+    "milestone.creator.followers_url",
+    "milestone.creator.following_url",
+    "milestone.creator.gists_url",
+    "milestone.creator.gravatar_id",
+    "milestone.creator.html_url",
+    "milestone.creator.id",
+    "milestone.creator.login",
+    "milestone.creator.node_id",
+    "milestone.creator.organizations_url",
+    "milestone.creator.received_events_url",
+    "milestone.creator.repos_url",
+    "milestone.creator.site_admin",
+    "milestone.creator.starred_url",
+    "milestone.creator.subscriptions_url",
+    "milestone.creator.type",
+    "milestone.creator.url",
+    "milestone.description",
+    "milestone.due_on",
+    "milestone.html_url",
+    "milestone.labels_url",
+    "milestone.node_id",
+    "milestone.number",
+    "milestone.open_issues",
+    "milestone.state",
+    "milestone.title",
+    "milestone.updated_at",
+    "milestone.url",
+    "node_id",
+    "performed_via_github_app",
+    "performed_via_github_app.created_at",
+    "performed_via_github_app.description",
+    "performed_via_github_app.events",
+    "performed_via_github_app.external_url",
+    "performed_via_github_app.html_url",
+    "performed_via_github_app.id",
+    "performed_via_github_app.name",
+    "performed_via_github_app.node_id",
+    "performed_via_github_app.owner",
+    "performed_via_github_app.owner.avatar_url",
+    "performed_via_github_app.owner.events_url",
+    "performed_via_github_app.owner.followers_url",
+    "performed_via_github_app.owner.following_url",
+    "performed_via_github_app.owner.gists_url",
+    "performed_via_github_app.owner.gravatar_id",
+    "performed_via_github_app.owner.html_url",
+    "performed_via_github_app.owner.id",
+    "performed_via_github_app.owner.login",
+    "performed_via_github_app.owner.node_id",
+    "performed_via_github_app.owner.organizations_url",
+    "performed_via_github_app.owner.received_events_url",
+    "performed_via_github_app.owner.repos_url",
+    "performed_via_github_app.owner.site_admin",
+    "performed_via_github_app.owner.starred_url",
+    "performed_via_github_app.owner.subscriptions_url",
+    "performed_via_github_app.owner.type",
+    "performed_via_github_app.owner.url",
+    "performed_via_github_app.permissions",
+    "performed_via_github_app.permissions.actions",
+    "performed_via_github_app.permissions.checks",
+    "performed_via_github_app.permissions.contents",
+    "performed_via_github_app.permissions.deployments",
+    "performed_via_github_app.permissions.discussions",
+    "performed_via_github_app.permissions.issues",
+    "performed_via_github_app.permissions.metadata",
+    "performed_via_github_app.permissions.pull_requests",
+    "performed_via_github_app.permissions.repository_projects",
+    "performed_via_github_app.permissions.statuses",
+    "performed_via_github_app.slug",
+    "performed_via_github_app.updated_at",
+    "pull_request.diff_url",
+    "pull_request.html_url",
+    "pull_request.merged_at",
+    "pull_request.patch_url",
+    "pull_request.url",
+    "reactions",
+    "reactions.+1",
+    "reactions.-1",
+    "reactions.confused",
+    "reactions.eyes",
+    "reactions.heart",
+    "reactions.hooray",
+    "reactions.laugh",
+    "reactions.rocket",
+    "reactions.total_count",
+    "reactions.url",
+    "repository",
+    "repository_url",
+    "state_reason",
+    "timeline_url",
+    "url",
+    "user",
+    "user.avatar_url",
+    "user.events_url",
+    "user.followers_url",
+    "user.following_url",
+    "user.gists_url",
+    "user.gravatar_id",
+    "user.html_url",
+    "user.login",
+    "user.node_id",
+    "user.organizations_url",
+    "user.received_events_url",
+    "user.repos_url",
+    "user.site_admin",
+    "user.starred_url",
+    "user.subscriptions_url",
+    "user.type",
+    "user.url",
+    "user_id",
+]
+
+[mappings.issue_assignee]
+source_file = "src/transforms/github/transforms/issue_assignee.yml"
+source_file_hash = "cd8c23c7d1126cb15b29a63bf931350e58d421a3f949514f5f2691e8097c6351"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "issue_id",
+    "user_id",
+]
+
+[mappings.issue_assignee.mapped_target_fields]
+
+[mappings.issue_assignee.unused_source_fields]
+
+[mappings.issue_assignee.omitted_target_fields]
+
+[mappings.issue_assignee.erroneous_source_table_columns]
+
+[mappings.issue_closed_history]
+source_file = "src/transforms/github/transforms/issue_closed_history.yml"
+source_file_hash = "7952335c894f0bd6a543cb53d7d6e9c6e7af7a570739445020366f1188c2df04"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "closed",
+    "issue_id",
+    "updated_at",
+]
+
+[mappings.issue_closed_history.mapped_target_fields]
+
+[mappings.issue_closed_history.unused_source_fields]
+
+[mappings.issue_closed_history.omitted_target_fields]
+
+[mappings.issue_closed_history.erroneous_source_table_columns]
+
+[mappings.issue_comment]
+source_file = "src/transforms/github/transforms/issue_comment.yml"
+source_file_hash = "caf1d123df1d8088813adc62752a1db6047cbd2848628ab19912033276463098"
+source_stream = "comments"
+unmapped_target_fields = [
+    "issue_id",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.issue_comment.mapped_target_fields]
+id = "comments.id"
+user_id = "comments.user_id"
+created_at = "comments.created_at"
+
+[mappings.issue_comment.unused_source_fields]
+comments = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "author_association",
+    "body",
+    "html_url",
+    "issue_url",
+    "node_id",
+    "performed_via_github_app",
+    "performed_via_github_app.created_at",
+    "performed_via_github_app.description",
+    "performed_via_github_app.events",
+    "performed_via_github_app.external_url",
+    "performed_via_github_app.html_url",
+    "performed_via_github_app.id",
+    "performed_via_github_app.name",
+    "performed_via_github_app.node_id",
+    "performed_via_github_app.owner",
+    "performed_via_github_app.owner.avatar_url",
+    "performed_via_github_app.owner.events_url",
+    "performed_via_github_app.owner.followers_url",
+    "performed_via_github_app.owner.following_url",
+    "performed_via_github_app.owner.gists_url",
+    "performed_via_github_app.owner.gravatar_id",
+    "performed_via_github_app.owner.html_url",
+    "performed_via_github_app.owner.id",
+    "performed_via_github_app.owner.login",
+    "performed_via_github_app.owner.node_id",
+    "performed_via_github_app.owner.organizations_url",
+    "performed_via_github_app.owner.received_events_url",
+    "performed_via_github_app.owner.repos_url",
+    "performed_via_github_app.owner.site_admin",
+    "performed_via_github_app.owner.starred_url",
+    "performed_via_github_app.owner.subscriptions_url",
+    "performed_via_github_app.owner.type",
+    "performed_via_github_app.owner.url",
+    "performed_via_github_app.permissions",
+    "performed_via_github_app.permissions.issues",
+    "performed_via_github_app.permissions.metadata",
+    "performed_via_github_app.permissions.pull_requests",
+    "performed_via_github_app.slug",
+    "performed_via_github_app.updated_at",
+    "reactions",
+    "reactions.+1",
+    "reactions.-1",
+    "reactions.confused",
+    "reactions.eyes",
+    "reactions.heart",
+    "reactions.hooray",
+    "reactions.laugh",
+    "reactions.rocket",
+    "reactions.total_count",
+    "reactions.url",
+    "repository",
+    "updated_at",
+    "url",
+    "user",
+    "user.avatar_url",
+    "user.events_url",
+    "user.followers_url",
+    "user.following_url",
+    "user.gists_url",
+    "user.gravatar_id",
+    "user.html_url",
+    "user.id",
+    "user.login",
+    "user.node_id",
+    "user.organizations_url",
+    "user.received_events_url",
+    "user.repos_url",
+    "user.site_admin",
+    "user.starred_url",
+    "user.subscriptions_url",
+    "user.type",
+    "user.url",
+]
+
+[mappings.issue_label]
+source_file = "src/transforms/github/transforms/issue_label.yml"
+source_file_hash = "524f25ef833a8e6ae62ccbd600964d6b2ffdd75490d0b24c7e2f3577eca5c7aa"
+source_stream = "issue_labels"
+unmapped_target_fields = [
+    "issue_id",
+    "label_id",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.issue_label.mapped_target_fields]
+
+[mappings.issue_label.unused_source_fields]
+issue_labels = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "color",
+    "default",
+    "description",
+    "id",
+    "name",
+    "node_id",
+    "repository",
+    "url",
+]
+
+[mappings.issue_merged]
+source_file = "src/transforms/github/transforms/issue_merged.yml"
+source_file_hash = "24e325a93f077a2bdc9e2a4ae713e253788b71e8631ca2a17b9bd4fb893609f4"
+source_stream = "pull_requests"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.issue_merged.mapped_target_fields]
+issue_id = "pull_requests.id"
+merged_at = "pull_requests.merged_at"
+
+[mappings.issue_merged.unused_source_fields]
+pull_requests = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "_links",
+    "_links.comments",
+    "_links.comments.href",
+    "_links.commits",
+    "_links.commits.href",
+    "_links.html",
+    "_links.html.href",
+    "_links.issue",
+    "_links.issue.href",
+    "_links.review_comment",
+    "_links.review_comment.href",
+    "_links.review_comments",
+    "_links.review_comments.href",
+    "_links.self",
+    "_links.self.href",
+    "_links.statuses",
+    "_links.statuses.href",
+    "active_lock_reason",
+    "assignee",
+    "assignee.avatar_url",
+    "assignee.events_url",
+    "assignee.followers_url",
+    "assignee.following_url",
+    "assignee.gists_url",
+    "assignee.gravatar_id",
+    "assignee.html_url",
+    "assignee.id",
+    "assignee.login",
+    "assignee.node_id",
+    "assignee.organizations_url",
+    "assignee.received_events_url",
+    "assignee.repos_url",
+    "assignee.site_admin",
+    "assignee.starred_url",
+    "assignee.subscriptions_url",
+    "assignee.type",
+    "assignee.url",
+    "assignees",
+    "author_association",
+    "auto_merge",
+    "auto_merge.commit_message",
+    "auto_merge.commit_title",
+    "auto_merge.enabled_by",
+    "auto_merge.enabled_by.avatar_url",
+    "auto_merge.enabled_by.events_url",
+    "auto_merge.enabled_by.followers_url",
+    "auto_merge.enabled_by.following_url",
+    "auto_merge.enabled_by.gists_url",
+    "auto_merge.enabled_by.gravatar_id",
+    "auto_merge.enabled_by.html_url",
+    "auto_merge.enabled_by.id",
+    "auto_merge.enabled_by.login",
+    "auto_merge.enabled_by.node_id",
+    "auto_merge.enabled_by.organizations_url",
+    "auto_merge.enabled_by.received_events_url",
+    "auto_merge.enabled_by.repos_url",
+    "auto_merge.enabled_by.site_admin",
+    "auto_merge.enabled_by.starred_url",
+    "auto_merge.enabled_by.subscriptions_url",
+    "auto_merge.enabled_by.type",
+    "auto_merge.enabled_by.url",
+    "auto_merge.merge_method",
+    "base",
+    "base.label",
+    "base.ref",
+    "base.repo",
+    "base.repo_id",
+    "base.sha",
+    "base.user",
+    "base.user.avatar_url",
+    "base.user.events_url",
+    "base.user.followers_url",
+    "base.user.following_url",
+    "base.user.gists_url",
+    "base.user.gravatar_id",
+    "base.user.html_url",
+    "base.user.id",
+    "base.user.login",
+    "base.user.node_id",
+    "base.user.organizations_url",
+    "base.user.received_events_url",
+    "base.user.repos_url",
+    "base.user.site_admin",
+    "base.user.starred_url",
+    "base.user.subscriptions_url",
+    "base.user.type",
+    "base.user.url",
+    "base.user_id",
+    "body",
+    "closed_at",
+    "comments_url",
+    "commits_url",
+    "created_at",
+    "diff_url",
+    "draft",
+    "head",
+    "head.label",
+    "head.ref",
+    "head.repo_id",
+    "head.sha",
+    "head.user",
+    "head.user.avatar_url",
+    "head.user.events_url",
+    "head.user.followers_url",
+    "head.user.following_url",
+    "head.user.gists_url",
+    "head.user.gravatar_id",
+    "head.user.html_url",
+    "head.user.id",
+    "head.user.login",
+    "head.user.node_id",
+    "head.user.organizations_url",
+    "head.user.received_events_url",
+    "head.user.repos_url",
+    "head.user.site_admin",
+    "head.user.starred_url",
+    "head.user.subscriptions_url",
+    "head.user.type",
+    "head.user.url",
+    "head.user_id",
+    "html_url",
+    "issue_url",
+    "labels",
+    "locked",
+    "merge_commit_sha",
+    "milestone",
+    "milestone.closed_at",
+    "milestone.closed_issues",
+    "milestone.created_at",
+    "milestone.creator",
+    "milestone.creator.avatar_url",
+    "milestone.creator.events_url",
+    "milestone.creator.followers_url",
+    "milestone.creator.following_url",
+    "milestone.creator.gists_url",
+    "milestone.creator.gravatar_id",
+    "milestone.creator.html_url",
+    "milestone.creator.id",
+    "milestone.creator.login",
+    "milestone.creator.node_id",
+    "milestone.creator.organizations_url",
+    "milestone.creator.received_events_url",
+    "milestone.creator.repos_url",
+    "milestone.creator.site_admin",
+    "milestone.creator.starred_url",
+    "milestone.creator.subscriptions_url",
+    "milestone.creator.type",
+    "milestone.creator.url",
+    "milestone.description",
+    "milestone.due_on",
+    "milestone.html_url",
+    "milestone.id",
+    "milestone.labels_url",
+    "milestone.node_id",
+    "milestone.number",
+    "milestone.open_issues",
+    "milestone.state",
+    "milestone.title",
+    "milestone.updated_at",
+    "milestone.url",
+    "node_id",
+    "number",
+    "patch_url",
+    "repository",
+    "requested_reviewers",
+    "requested_teams",
+    "review_comment_url",
+    "review_comments_url",
+    "state",
+    "statuses_url",
+    "title",
+    "updated_at",
+    "url",
+    "user",
+    "user.avatar_url",
+    "user.events_url",
+    "user.followers_url",
+    "user.following_url",
+    "user.gists_url",
+    "user.gravatar_id",
+    "user.html_url",
+    "user.id",
+    "user.login",
+    "user.node_id",
+    "user.organizations_url",
+    "user.received_events_url",
+    "user.repos_url",
+    "user.site_admin",
+    "user.starred_url",
+    "user.subscriptions_url",
+    "user.type",
+    "user.url",
+]
+
+[mappings.label]
+source_file = "src/transforms/github/transforms/label.yml"
+source_file_hash = "269dbf41966414034ddd7338e52e8aa49d2255aa53819dd4a6b4a96ba77ca13a"
+source_stream = "issue_labels"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.label.mapped_target_fields]
+id = "issue_labels.id"
+_fivetran_synced = "issue_labels._airbyte_extracted_at"
+color = "issue_labels.color"
+description = "issue_labels.description"
+is_default = "issue_labels.default"
+name = "issue_labels.name"
+url = "issue_labels.url"
+
+[mappings.label.unused_source_fields]
+issue_labels = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "node_id",
+    "repository",
+]
+
+[mappings.pull_request]
+source_file = "src/transforms/github/transforms/pull_request.yml"
+source_file_hash = "4617dd30b75708bb74e468ce07e2e716f54449966ca9ee07eda9b07abe59dca5"
+source_stream = "pull_requests"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.pull_request.mapped_target_fields]
+id = "pull_requests.id"
+issue_id = "pull_requests.issue_url"
+head_repo_id = "pull_requests.head.repo_id"
+head_user_id = "pull_requests.head.user_id"
+
+[mappings.pull_request.unused_source_fields]
+pull_requests = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "_links",
+    "_links.comments",
+    "_links.comments.href",
+    "_links.commits",
+    "_links.commits.href",
+    "_links.html",
+    "_links.html.href",
+    "_links.issue",
+    "_links.issue.href",
+    "_links.review_comment",
+    "_links.review_comment.href",
+    "_links.review_comments",
+    "_links.review_comments.href",
+    "_links.self",
+    "_links.self.href",
+    "_links.statuses",
+    "_links.statuses.href",
+    "active_lock_reason",
+    "assignee",
+    "assignee.avatar_url",
+    "assignee.events_url",
+    "assignee.followers_url",
+    "assignee.following_url",
+    "assignee.gists_url",
+    "assignee.gravatar_id",
+    "assignee.html_url",
+    "assignee.id",
+    "assignee.login",
+    "assignee.node_id",
+    "assignee.organizations_url",
+    "assignee.received_events_url",
+    "assignee.repos_url",
+    "assignee.site_admin",
+    "assignee.starred_url",
+    "assignee.subscriptions_url",
+    "assignee.type",
+    "assignee.url",
+    "assignees",
+    "author_association",
+    "auto_merge",
+    "auto_merge.commit_message",
+    "auto_merge.commit_title",
+    "auto_merge.enabled_by",
+    "auto_merge.enabled_by.avatar_url",
+    "auto_merge.enabled_by.events_url",
+    "auto_merge.enabled_by.followers_url",
+    "auto_merge.enabled_by.following_url",
+    "auto_merge.enabled_by.gists_url",
+    "auto_merge.enabled_by.gravatar_id",
+    "auto_merge.enabled_by.html_url",
+    "auto_merge.enabled_by.id",
+    "auto_merge.enabled_by.login",
+    "auto_merge.enabled_by.node_id",
+    "auto_merge.enabled_by.organizations_url",
+    "auto_merge.enabled_by.received_events_url",
+    "auto_merge.enabled_by.repos_url",
+    "auto_merge.enabled_by.site_admin",
+    "auto_merge.enabled_by.starred_url",
+    "auto_merge.enabled_by.subscriptions_url",
+    "auto_merge.enabled_by.type",
+    "auto_merge.enabled_by.url",
+    "auto_merge.merge_method",
+    "base",
+    "base.label",
+    "base.ref",
+    "base.repo",
+    "base.repo_id",
+    "base.sha",
+    "base.user",
+    "base.user.avatar_url",
+    "base.user.events_url",
+    "base.user.followers_url",
+    "base.user.following_url",
+    "base.user.gists_url",
+    "base.user.gravatar_id",
+    "base.user.html_url",
+    "base.user.id",
+    "base.user.login",
+    "base.user.node_id",
+    "base.user.organizations_url",
+    "base.user.received_events_url",
+    "base.user.repos_url",
+    "base.user.site_admin",
+    "base.user.starred_url",
+    "base.user.subscriptions_url",
+    "base.user.type",
+    "base.user.url",
+    "base.user_id",
+    "body",
+    "closed_at",
+    "comments_url",
+    "commits_url",
+    "created_at",
+    "diff_url",
+    "draft",
+    "head",
+    "head.label",
+    "head.ref",
+    "head.sha",
+    "head.user",
+    "head.user.avatar_url",
+    "head.user.events_url",
+    "head.user.followers_url",
+    "head.user.following_url",
+    "head.user.gists_url",
+    "head.user.gravatar_id",
+    "head.user.html_url",
+    "head.user.id",
+    "head.user.login",
+    "head.user.node_id",
+    "head.user.organizations_url",
+    "head.user.received_events_url",
+    "head.user.repos_url",
+    "head.user.site_admin",
+    "head.user.starred_url",
+    "head.user.subscriptions_url",
+    "head.user.type",
+    "head.user.url",
+    "html_url",
+    "labels",
+    "locked",
+    "merge_commit_sha",
+    "merged_at",
+    "milestone",
+    "milestone.closed_at",
+    "milestone.closed_issues",
+    "milestone.created_at",
+    "milestone.creator",
+    "milestone.creator.avatar_url",
+    "milestone.creator.events_url",
+    "milestone.creator.followers_url",
+    "milestone.creator.following_url",
+    "milestone.creator.gists_url",
+    "milestone.creator.gravatar_id",
+    "milestone.creator.html_url",
+    "milestone.creator.id",
+    "milestone.creator.login",
+    "milestone.creator.node_id",
+    "milestone.creator.organizations_url",
+    "milestone.creator.received_events_url",
+    "milestone.creator.repos_url",
+    "milestone.creator.site_admin",
+    "milestone.creator.starred_url",
+    "milestone.creator.subscriptions_url",
+    "milestone.creator.type",
+    "milestone.creator.url",
+    "milestone.description",
+    "milestone.due_on",
+    "milestone.html_url",
+    "milestone.id",
+    "milestone.labels_url",
+    "milestone.node_id",
+    "milestone.number",
+    "milestone.open_issues",
+    "milestone.state",
+    "milestone.title",
+    "milestone.updated_at",
+    "milestone.url",
+    "node_id",
+    "number",
+    "patch_url",
+    "repository",
+    "requested_reviewers",
+    "requested_teams",
+    "review_comment_url",
+    "review_comments_url",
+    "state",
+    "statuses_url",
+    "title",
+    "updated_at",
+    "url",
+    "user",
+    "user.avatar_url",
+    "user.events_url",
+    "user.followers_url",
+    "user.following_url",
+    "user.gists_url",
+    "user.gravatar_id",
+    "user.html_url",
+    "user.id",
+    "user.login",
+    "user.node_id",
+    "user.organizations_url",
+    "user.received_events_url",
+    "user.repos_url",
+    "user.site_admin",
+    "user.starred_url",
+    "user.subscriptions_url",
+    "user.type",
+    "user.url",
+]
+
+[mappings.pull_request_review]
+source_file = "src/transforms/github/transforms/pull_request_review.yml"
+source_file_hash = "439c79a45e740e209bcc4f218941d535864ce4f8cb9e2c359461c10f3e69a868"
+source_stream = "review_comments"
+unmapped_target_fields = [
+    "state",
+    "submitted_at",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.pull_request_review.mapped_target_fields]
+id = "review_comments.id"
+pull_request_id = "review_comments.pull_request_review_id"
+user_id = "review_comments.user.id"
+
+[mappings.pull_request_review.unused_source_fields]
+review_comments = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "_links",
+    "_links.html",
+    "_links.html.href",
+    "_links.pull_request",
+    "_links.pull_request.href",
+    "_links.self",
+    "_links.self.href",
+    "author_association",
+    "body",
+    "commit_id",
+    "created_at",
+    "diff_hunk",
+    "html_url",
+    "in_reply_to_id",
+    "line",
+    "node_id",
+    "original_commit_id",
+    "original_line",
+    "original_position",
+    "original_start_line",
+    "path",
+    "position",
+    "pull_request_url",
+    "reactions",
+    "reactions.+1",
+    "reactions.-1",
+    "reactions.confused",
+    "reactions.eyes",
+    "reactions.heart",
+    "reactions.hooray",
+    "reactions.laugh",
+    "reactions.rocket",
+    "reactions.total_count",
+    "reactions.url",
+    "repository",
+    "side",
+    "start_line",
+    "start_side",
+    "subject_type",
+    "updated_at",
+    "url",
+    "user",
+    "user.avatar_url",
+    "user.events_url",
+    "user.followers_url",
+    "user.following_url",
+    "user.gists_url",
+    "user.gravatar_id",
+    "user.html_url",
+    "user.login",
+    "user.node_id",
+    "user.organizations_url",
+    "user.received_events_url",
+    "user.repos_url",
+    "user.site_admin",
+    "user.starred_url",
+    "user.subscriptions_url",
+    "user.type",
+    "user.url",
+]
+
+[mappings.repo_team]
+source_file = "src/transforms/github/transforms/repo_team.yml"
+source_file_hash = "df465575e2a570c2017c3dd220df1345b9e35845df551d3852daf754b625bfac"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "repository_id",
+    "team_id",
+]
+
+[mappings.repo_team.mapped_target_fields]
+
+[mappings.repo_team.unused_source_fields]
+
+[mappings.repo_team.omitted_target_fields]
+
+[mappings.repo_team.erroneous_source_table_columns]
+
+[mappings.repository]
+source_file = "src/transforms/github/transforms/repository.yml"
+source_file_hash = "b099b5c02bcf16e18b9a86dfa912a88532c43f7710efbab9ee5146f33686c7f7"
+source_stream = "repositories"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.repository.mapped_target_fields]
+id = "repositories.id"
+created_at = "repositories.created_at"
+full_name = "repositories.full_name"
+private = "repositories.private"
+
+[mappings.repository.unused_source_fields]
+repositories = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "allow_forking",
+    "archive_url",
+    "archived",
+    "assignees_url",
+    "blobs_url",
+    "branches_url",
+    "clone_url",
+    "collaborators_url",
+    "comments_url",
+    "commits_url",
+    "compare_url",
+    "contents_url",
+    "contributors_url",
+    "default_branch",
+    "deployments_url",
+    "description",
+    "disabled",
+    "downloads_url",
+    "events_url",
+    "fork",
+    "forks",
+    "forks_count",
+    "forks_url",
+    "git_commits_url",
+    "git_refs_url",
+    "git_tags_url",
+    "git_url",
+    "has_discussions",
+    "has_downloads",
+    "has_issues",
+    "has_pages",
+    "has_projects",
+    "has_wiki",
+    "homepage",
+    "hooks_url",
+    "html_url",
+    "is_template",
+    "issue_comment_url",
+    "issue_events_url",
+    "issues_url",
+    "keys_url",
+    "labels_url",
+    "language",
+    "languages_url",
+    "license",
+    "license.html_url",
+    "license.key",
+    "license.name",
+    "license.node_id",
+    "license.spdx_id",
+    "license.url",
+    "merges_url",
+    "milestones_url",
+    "mirror_url",
+    "name",
+    "node_id",
+    "notifications_url",
+    "open_issues",
+    "open_issues_count",
+    "organization",
+    "owner",
+    "owner.avatar_url",
+    "owner.events_url",
+    "owner.followers_url",
+    "owner.following_url",
+    "owner.gists_url",
+    "owner.gravatar_id",
+    "owner.html_url",
+    "owner.id",
+    "owner.login",
+    "owner.node_id",
+    "owner.organizations_url",
+    "owner.received_events_url",
+    "owner.repos_url",
+    "owner.site_admin",
+    "owner.starred_url",
+    "owner.subscriptions_url",
+    "owner.type",
+    "owner.url",
+    "permissions",
+    "permissions.admin",
+    "permissions.maintain",
+    "permissions.pull",
+    "permissions.push",
+    "permissions.triage",
+    "pulls_url",
+    "pushed_at",
+    "releases_url",
+    "security_and_analysis",
+    "security_and_analysis.dependabot_security_updates",
+    "security_and_analysis.dependabot_security_updates.status",
+    "security_and_analysis.secret_scanning",
+    "security_and_analysis.secret_scanning.status",
+    "security_and_analysis.secret_scanning_push_protection",
+    "security_and_analysis.secret_scanning_push_protection.status",
+    "security_and_analysis.secret_scanning_validity_checks",
+    "security_and_analysis.secret_scanning_validity_checks.status",
+    "size",
+    "ssh_url",
+    "stargazers_count",
+    "stargazers_url",
+    "statuses_url",
+    "subscribers_url",
+    "subscription_url",
+    "svn_url",
+    "tags_url",
+    "teams_url",
+    "topics",
+    "trees_url",
+    "updated_at",
+    "url",
+    "visibility",
+    "watchers",
+    "watchers_count",
+    "web_commit_signoff_required",
+]
+
+[mappings.requested_reviewer_history]
+source_file = "src/transforms/github/transforms/requested_reviewer_history.yml"
+source_file_hash = "6dd935048fe3103145102a5bdec274deb551f52e728df73d847ec148376f2ebf"
+source_stream = "reviews"
+unmapped_target_fields = [
+    "pull_request_id",
+    "removed",
+    "requested_id",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.requested_reviewer_history.mapped_target_fields]
+created_at = "reviews.created_at"
+
+[mappings.requested_reviewer_history.unused_source_fields]
+reviews = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "_links",
+    "_links.html",
+    "_links.html.href",
+    "_links.pull_request",
+    "_links.pull_request.href",
+    "author_association",
+    "body",
+    "commit_id",
+    "html_url",
+    "id",
+    "node_id",
+    "pull_request_url",
+    "repository",
+    "state",
+    "submitted_at",
+    "updated_at",
+    "user",
+    "user.avatar_url",
+    "user.html_url",
+    "user.id",
+    "user.login",
+    "user.node_id",
+    "user.site_admin",
+    "user.type",
+]
+
+[mappings.team]
+source_file = "src/transforms/github/transforms/team.yml"
+source_file_hash = "247f2e15bdaa4169fbf06c6ee648217e9ea29f863274ad2d23eee543bce83049"
+source_stream = "teams"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.team.mapped_target_fields]
+id = "teams.id"
+description = "teams.description"
+name = "teams.name"
+parent_id = "teams.parent"
+privacy = "teams.privacy"
+slug = "teams.slug"
+
+[mappings.team.unused_source_fields]
+teams = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "html_url",
+    "members_url",
+    "node_id",
+    "notification_setting",
+    "organization",
+    "permission",
+    "repositories_url",
+    "url",
+]
+
+[mappings.user]
+source_file = "src/transforms/github/transforms/user.yml"
+source_file_hash = "b3d77c103a66cddec067220068916eac839e37c679854e4ecce617cd4954bad8"
+source_stream = "users"
+unmapped_target_fields = [
+    "company",
+    "name",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.user.mapped_target_fields]
+id = "users.id"
+login = "users.login"
+
+[mappings.user.unused_source_fields]
+users = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "avatar_url",
+    "events_url",
+    "followers_url",
+    "following_url",
+    "gists_url",
+    "gravatar_id",
+    "html_url",
+    "node_id",
+    "organization",
+    "organizations_url",
+    "received_events_url",
+    "repos_url",
+    "site_admin",
+    "starred_url",
+    "subscriptions_url",
+    "type",
+    "url",
+]

@@ -20,9 +20,9 @@ annotations:
     target_table_name: issue_label
     table_match_score: 0.0
     completion_score: 0.0
-    explanation: Given the two field mappings use an expression 'MISSING', indicating
-      that there are no applicable mappings found for both fields. This results in
-      the lowest confidence for both the table_match_score and the completion_score.
+    explanation: Both mappings have set their expression to 'MISSING', indicating
+      a complete lack of confidence. There is no evidence to suggest a reliable match
+      or mapping validity due to the absence of specified expressions.
     field_mapping_evals:
       - name: issue_id
         expression: MISSING
