@@ -357,7 +357,7 @@ def generate_dbt_package(  # noqa: PLR0912, PLR0915
 
     Args:
         source_name: Name of the source (e.g., 'hubspot').
-        project_name: Name of the project (e.g., 'fivetran-interop').
+        project_name: Name of the project (e.g., 'airbyte-interop').
         output_dir: Path to the output directory.
         mapping_dir: Path to the mapping directory.
         include_rejected_mappings: Whether to include rejected mappings in the dbt package.

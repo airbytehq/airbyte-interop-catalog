@@ -1,0 +1,75 @@
+domain: facebook_marketing.airbyte-interop
+transforms:
+  - name: account_history
+    from:
+      - ad_account: facebook_marketing.ad_account
+    fields:
+      id:
+        expression: ad_account.id
+        description: The ID of the ad account.
+      name:
+        expression: ad_account.name
+        description: Name of the account.
+      _fivetran_synced:
+        expression: ad_account._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      account_status:
+        expression: ad_account.account_status
+        description: Current status of account.
+      business_country_code:
+        expression: ad_account.business_country_code
+        description: Country code of business associated to account.
+      created_time:
+        expression: ad_account.created_time
+        description: The time account was created.
+      currency:
+        expression: ad_account.currency
+        description: Currency associated with account.
+      timezone_name:
+        expression: ad_account.timezone_name
+        description: Timezone associated with account.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: ad_account
+    target_table_name: account_history
+    table_match_score: 0.8
+    completion_score: 0.9
+    explanation: The table match is highly confident, indicating a strong correlation
+      between source and target tables. The field mappings are mostly complete with
+      only minor exceptions.
+    field_mapping_evals:
+      - name: id
+        expression: ad_account.id
+        score: 0.95
+        explanation: The field directly corresponds to the source's ad_account.id.
+      - name: name
+        expression: ad_account.name
+        score: 0.95
+        explanation: The field directly corresponds to the source's ad_account.name.
+      - name: _fivetran_synced
+        expression: ad_account._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping to the source stream's _airbyte_extracted_at.
+      - name: account_status
+        expression: ad_account.account_status
+        score: 0.9
+        explanation: Account status fields match directly.
+      - name: business_country_code
+        expression: ad_account.business_country_code
+        score: 0.9
+        explanation: Direct match for country code.
+      - name: created_time
+        expression: ad_account.created_time
+        score: 0.9
+        explanation: The field directly matches the timestamp of the account creation
+          in the source.
+      - name: currency
+        expression: ad_account.currency
+        score: 0.9
+        explanation: Direct match to the account's currency in the source.
+      - name: timezone_name
+        expression: ad_account.timezone_name
+        score: 0.9
+        explanation: Direct match to the source's timezone information.

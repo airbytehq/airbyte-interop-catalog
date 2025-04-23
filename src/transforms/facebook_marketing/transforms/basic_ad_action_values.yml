@@ -1,0 +1,90 @@
+domain: facebook_marketing.airbyte-interop
+transforms:
+  - name: basic_ad_action_values
+    from:
+      - ads_insights_action_conversion_device: facebook_marketing.ads_insights_action_conversion_device
+    fields:
+      _7_d_click:
+        expression: MISSING
+        description: Conversion metric value using an attribution window of "7 days
+          after clicking the ad". Not included in downstream models by default, but
+          can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics`
+          var.
+      _fivetran_id:
+        expression: MISSING
+        description: Defunct field.
+      _fivetran_synced:
+        expression: ads_insights_action_conversion_device._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      action_type:
+        expression: ads_insights_action_conversion_device.actions
+        description: "The kind of actions taken on your ad, Page, app or event after
+          your ad was served to someone, even if they didn't click on it. Action types
+          include Page likes, app installs, conversions, event responses and more.
+          Actions prepended by app_custom_event come from mobile app events and actions
+          prepended by offsite_conversion come from the Facebook Pixel.\n"
+      ad_id:
+        expression: ads_insights_action_conversion_device.ad_id
+        description: The ID of the ad the report relates to.
+      date:
+        expression: ads_insights_action_conversion_device.date_start
+        description: The date of the reported performance.
+      index:
+        expression: MISSING
+        description: Index reflecting the `action_type` tracked for this ad on this
+          day. Column of not much consequence.
+      value:
+        expression: ads_insights_action_conversion_device.converted_product_value
+        description: Monetary value associated with the convesion action using the
+          default attribution window.
+annotations:
+  approved: false
+  missing_fields:
+    - _7_d_click
+    - _fivetran_id
+    - index
+  evaluation:
+    source_stream_name: ads_insights_action_conversion_device
+    target_table_name: basic_ad_action_values
+    table_match_score: 0.85
+    completion_score: 0.75
+    explanation: The table matching quality is high based on the standard table structure
+      from a shared API, but the completion of field mappings is not fully achieved
+      due to multiple 'MISSING' expressions.
+    field_mapping_evals:
+      - name: _7_d_click
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _fivetran_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _fivetran_synced
+        expression: ads_insights_action_conversion_device._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping for '_fivetran_synced' to '_airbyte_extracted_at'.
+      - name: action_type
+        expression: ads_insights_action_conversion_device.actions
+        score: 0.9
+        explanation: The mapping of 'action_type' closely matches with expected actions
+          taken on ads.
+      - name: ad_id
+        expression: ads_insights_action_conversion_device.ad_id
+        score: 0.9
+        explanation: "'ad_id' maps directly to its corresponding ID field in the target,
+          ensuring a high confidence."
+      - name: date
+        expression: ads_insights_action_conversion_device.date_start
+        score: 1.0
+        explanation: Perfect mapping of 'date' to 'date_start', reflecting identical
+          data.
+      - name: index
+        expression: MISSING
+        score: 0.5
+        explanation: Low relevance of the 'index' makes this a lower confidence mapping.
+      - name: value
+        expression: ads_insights_action_conversion_device.converted_product_value
+        score: 0.8
+        explanation: The 'value' maps well to 'converted_product_value', albeit with
+          minor potential discrepancies in context.

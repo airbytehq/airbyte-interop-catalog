@@ -1,0 +1,56 @@
+domain: github.airbyte-interop
+transforms:
+  - name: pull_request_review
+    from:
+      - review_comments: github.review_comments
+    fields:
+      id:
+        expression: review_comments.id
+        description: System generated unique id for the pull request review.
+      pull_request_id:
+        expression: review_comments.pull_request_review_id
+        description: Foreign key that references the pull request table.
+      submitted_at:
+        expression: MISSING
+        description: Timestamp of when the request for review was submitted.
+      state:
+        expression: MISSING
+        description: Whether the review was an approval, request for change, comment,
+          dismissal.
+      user_id:
+        expression: review_comments.user.id
+        description: Foreign key that references the user table, representing the
+          user that reviewed the pull request.
+annotations:
+  approved: true
+  missing_fields:
+    - state
+    - submitted_at
+  evaluation:
+    source_stream_name: review_comments
+    target_table_name: pull_request_review
+    table_match_score: 0.85
+    completion_score: 0.6
+    explanation: The table match score is high reflecting good overall mapping of
+      source to target schema, but completion score is reduced due to missing fields.
+    field_mapping_evals:
+      - name: id
+        expression: review_comments.id
+        score: 1.0
+        explanation: Direct mapping exists, perfect confidence.
+      - name: pull_request_id
+        expression: review_comments.pull_request_review_id
+        score: 1.0
+        explanation: Direct mapping exists, perfect confidence.
+      - name: submitted_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: state
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: user_id
+        expression: review_comments.user.id
+        score: 1.0
+        explanation: Direct mapping exists, perfect confidence.

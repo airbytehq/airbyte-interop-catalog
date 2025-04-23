@@ -1,4 +1,4 @@
-project_id: salesforce.fivetran-interop
+project_id: salesforce.airbyte-interop
 source_name: salesforce
 # Target schema file snapshotted from: https://github.com/fivetran/dbt_salesforce_source/blob/main/models/src_salesforce.yml
 target_dbt_schema_url: https://raw.githubusercontent.com/fivetran/dbt_salesforce_source/refs/heads/main/models/src_salesforce.yml

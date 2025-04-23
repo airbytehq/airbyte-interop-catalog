@@ -1,0 +1,97 @@
+domain: facebook_marketing.airbyte-interop
+transforms:
+  - name: basic_ad
+    from:
+      - ads_insights: facebook_marketing.ads_insights
+    fields:
+      ad_id:
+        expression: ads_insights.ad_id
+        description: The ID of the ad the report relates to.
+      ad_name:
+        expression: ads_insights.ad_name
+        description: Name of the ad the report relates to.
+      adset_name:
+        expression: ads_insights.adset_name
+        description: Name of the ad set the report relates to.
+      date:
+        expression: ads_insights.date_stop
+        description: The date of the reported performance.
+      account_id:
+        expression: ads_insights.account_id
+        description: The ID of the ad account that this ad belongs to.
+      impressions:
+        expression: ads_insights.impressions
+        description: The number of impressions the ad had on the given day.
+      inline_link_clicks:
+        expression: ads_insights.inline_link_clicks
+        description: The number of clicks the ad had on the given day.
+      spend:
+        expression: ads_insights.spend
+        description: The spend on the ad in the given day.
+      reach:
+        expression: ads_insights.reach
+        description: The number of people who saw any content from your Page or about
+          your Page. This metric is estimated.
+      frequency:
+        expression: ads_insights.frequency
+        description: The average number of times each person saw your ad; it is calculated
+          as impressions divided by reach.
+      _fivetran_synced:
+        expression: ads_insights._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: ads_insights
+    target_table_name: basic_ad
+    table_match_score: 0.9
+    completion_score: 1.0
+    explanation: All mappings are highly accurate and aligned well with the required
+      schema. The source and target schemas describe the same subject matter almost
+      perfectly.
+    field_mapping_evals:
+      - name: ad_id
+        expression: ads_insights.ad_id
+        score: 1.0
+        explanation: Direct match found.
+      - name: ad_name
+        expression: ads_insights.ad_name
+        score: 1.0
+        explanation: Direct match found.
+      - name: adset_name
+        expression: ads_insights.adset_name
+        score: 1.0
+        explanation: Direct match found.
+      - name: date
+        expression: ads_insights.date_stop
+        score: 1.0
+        explanation: Direct match found for 'date_stop'.
+      - name: account_id
+        expression: ads_insights.account_id
+        score: 1.0
+        explanation: Direct match found.
+      - name: impressions
+        expression: ads_insights.impressions
+        score: 1.0
+        explanation: Direct match found.
+      - name: inline_link_clicks
+        expression: ads_insights.inline_link_clicks
+        score: 1.0
+        explanation: Direct match found.
+      - name: spend
+        expression: ads_insights.spend
+        score: 1.0
+        explanation: Direct match found.
+      - name: reach
+        expression: ads_insights.reach
+        score: 1.0
+        explanation: Direct match found.
+      - name: frequency
+        expression: ads_insights.frequency
+        score: 1.0
+        explanation: Direct match found.
+      - name: _fivetran_synced
+        expression: ads_insights._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard transformation matched directly to '_airbyte_extracted_at'.

@@ -23,10 +23,10 @@ To add a new connector to the catalog, follow these steps:
 2. Identify the canonical Fivetran source name for the connector. (E.g. `facebook_ads`).
 3. Locate the Fivetran "Source" dbt package for the connector. (E.g. `https://github.com/fivetran/dbt_facebook_ads_source`).
 4. Create a new directory `catalog/{new_connector}`, matching the canonical source name, excluding the "source-" prefix, and replacing hyphens with underscores. For example, "source-shopify" would be `catalog/shopify` and "source-facebook-marketing" would be `catalog/facebook_marketing`.
-5. Create a new file `catalog/{new_connector}/src/fivetran-interop/config.yml` file which populates the info above into the following example:
+5. Create a new file `src/transforms/{new_connector}/config.yml` file which populates the info above into the following example:
 
    ```yaml
-   project_id: {new_connector}.fivetran-interop
+   project_id: {new_connector}.airbyte-interop
    source_name: {new_connector}
    source_streams:
      # TODO: list streams to include in the source here
@@ -76,21 +76,21 @@ To add a new connector to the catalog:
    ```txt
    catalog/new_connector/
    ├── src/transforms/
-   │   └── fivetran-interop/
+   │   └── airbyte-interop/
    ├── requirements/
-   │   └── fivetran-interop/
+   │   └── airbyte-interop/
    └── examples/
    ```
 
-2. Add the target schema definition in `requirements/fivetran-interop/src_new_connector.yml`. You can download this from the Fivetran "Source" dbt package that maps to the source.
+2. Add the target schema definition in `requirements/airbyte-interop/src_new_connector.yml`. You can download this from the Fivetran "Source" dbt package that maps to the source.
 
 3. Generate the `airbyte-catalog.json` file for the source. You can see an example in the `scripts` folder.
 
 4. Extract the data into a local DuckDB database for the source. You can see an example in the `scripts` directory.
 
-5. Create mapping files in `src/transforms/fivetran-interop/` for each table to transform:
+5. Create mapping files in `src/transforms/airbyte-interop/` for each table to transform:
 
-   - Define the domain (e.g., `new_connector.fivetran-interop`)
+   - Define the domain (e.g., `new_connector.airbyte-interop`)
    - Specify source tables and their aliasing
    - Map fields from source to target schema
    - Document field descriptions and unused fields
@@ -107,7 +107,7 @@ To add a new connector to the catalog:
 
 Mapping files define how to transform source data to target schemas. Key components:
 
-- `domain`: Namespace for the transforms (e.g., `hubspot.fivetran-interop`)
+- `domain`: Namespace for the transforms (e.g., `hubspot.airbyte-interop`)
 - `transforms`: List of transformations to apply
   - `id`: Identifier for the transform (becomes the model name)
   - `display_name`: Human-readable name for the transform
@@ -127,13 +127,13 @@ When mapping fields:
 1. **Generate the raw data**
 
    ```bash
-   uv run morph create_airbyte_data hubspot fivetran-interop
+   uv run morph create_airbyte_data hubspot airbyte-interop
    ```
 
 2. **Generate the Airbyte catalog**
 
    ```bash
-   uv run morph create_airbyte_catalog hubspot fivetran-interop
+   uv run morph create_airbyte_catalog hubspot airbyte-interop
    ```
 
 3. **Generate the dbt project**
@@ -145,7 +145,7 @@ When mapping fields:
      catalog/hubspot \
      catalog/hubspot/generated/airbyte-catalog.json \
      --output-dir catalog/hubspot/generated \
-     --mapping-dir catalog/hubspot/src/transforms/fivetran-interop \
+     --mapping-dir catalog/hubspot/src/transforms/airbyte-interop \
      --source-name hubspot
    ```
 
@@ -314,7 +314,7 @@ The mapping file should be a YAML file in dbt transform format. The file should 
 Example:
 
 ```yaml
-domain: facebook_marketing.fivetran-interop
+domain: facebook_marketing.airbyte-interop
 transforms:
   - display_name: Each record in this table reflects a version of a Facebook ad.
     id: ad_history

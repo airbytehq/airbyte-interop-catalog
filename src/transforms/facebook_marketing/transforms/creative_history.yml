@@ -1,0 +1,160 @@
+domain: facebook_marketing.airbyte-interop
+transforms:
+  - name: creative_history
+    from:
+      - ad_creatives: facebook_marketing.ad_creatives
+    fields:
+      _fivetran_id:
+        expression: MISSING
+        description: Unique record identifier
+      page_link:
+        expression: MISSING
+        description: URL destination of Facebook ads.
+      template_page_link:
+        expression: MISSING
+        description: URL destination of Facebook dynamic ads.
+      id:
+        expression: ad_creatives.id
+        description: Unique ID for an ad creative.
+      account_id:
+        expression: ad_creatives.account_id
+        description: Ad account ID for the account this ad creative belongs to.
+      name:
+        expression: ad_creatives.name
+        description: Name of this ad creative as seen in the ad account's library.
+      url_tags:
+        expression: ad_creatives.url_tags
+        description: A set of query string parameters which will replace or be appended
+          to urls clicked from page post ads, message of the post, and canvas app
+          install creatives only.
+      _fivetran_synced:
+        expression: ad_creatives._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      asset_feed_spec_link_urls:
+        expression: MISSING
+        description: Link to the asset feed spec
+      object_story_link_data_child_attachments:
+        expression: MISSING
+        description: Link of the object story child attachments
+      object_story_link_data_caption:
+        expression: MISSING
+        description: Link of the object story caption
+      object_story_link_data_description:
+        expression: MISSING
+        description: Link of the object story description
+      object_story_link_data_link:
+        expression: MISSING
+        description: Link of the object story link
+      object_story_link_data_message:
+        expression: MISSING
+        description: Link of the object story message
+      template_app_link_spec_ios:
+        expression: MISSING
+        description: Link of the object story spec for ios
+      template_app_link_spec_ipad:
+        expression: MISSING
+        description: Link of the template app spec for ipad
+      template_app_link_spec_android:
+        expression: MISSING
+        description: Link of the template app for android
+      template_app_link_spec_iphone:
+        expression: MISSING
+        description: Link of the template app for iphone
+annotations:
+  approved: false
+  missing_fields:
+    - _fivetran_id
+    - asset_feed_spec_link_urls
+    - object_story_link_data_caption
+    - object_story_link_data_child_attachments
+    - object_story_link_data_description
+    - object_story_link_data_link
+    - object_story_link_data_message
+    - page_link
+    - template_app_link_spec_android
+    - template_app_link_spec_ios
+    - template_app_link_spec_ipad
+    - template_app_link_spec_iphone
+    - template_page_link
+  evaluation:
+    source_stream_name: ad_creatives
+    target_table_name: creative_history
+    table_match_score: 0.5
+    completion_score: 0.2
+    explanation: Given the numerous 'MISSING' expressions in the field mappings, the
+      table mapping demonstrates an overall low confidence. While the mapping for
+      '_fivetran_synced' is accurate, the lack of valid expressions for other crucial
+      fields significantly lowers the completion score.
+    field_mapping_evals:
+      - name: _fivetran_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: page_link
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: template_page_link
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: id
+        expression: ad_creatives.id
+        score: 1.0
+        explanation: Exact field match.
+      - name: account_id
+        expression: ad_creatives.account_id
+        score: 1.0
+        explanation: Exact field match.
+      - name: name
+        expression: ad_creatives.name
+        score: 1.0
+        explanation: Exact field match.
+      - name: url_tags
+        expression: ad_creatives.url_tags
+        score: 1.0
+        explanation: Exact field match.
+      - name: _fivetran_synced
+        expression: ad_creatives._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping for all tables.
+      - name: asset_feed_spec_link_urls
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: object_story_link_data_child_attachments
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: object_story_link_data_caption
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: object_story_link_data_description
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: object_story_link_data_link
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: object_story_link_data_message
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: template_app_link_spec_ios
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: template_app_link_spec_ipad
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: template_app_link_spec_android
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: template_app_link_spec_iphone
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

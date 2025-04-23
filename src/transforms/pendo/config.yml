@@ -1,4 +1,4 @@
-project_id: pendo.fivetran-interop
+project_id: pendo.airbyte-interop
 source_name: pendo
 # Target schema file snapshotted from: https://github.com/fivetran/dbt_pendo_source/blob/main/models/src_pendo.yml
 target_dbt_schema_url: https://raw.githubusercontent.com/fivetran/dbt_pendo_source/refs/heads/main/models/src_pendo.yml

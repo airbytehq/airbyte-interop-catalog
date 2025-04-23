@@ -1,4 +1,4 @@
-project_id: intercom.fivetran-interop
+project_id: intercom.airbyte-interop
 source_name: intercom
 # Target schema file snapshotted from: https://github.com/fivetran/dbt_intercom_source/blob/main/models/src_intercom.yml
 target_dbt_schema_url: https://raw.githubusercontent.com/fivetran/dbt_intercom_source/refs/heads/main/models/src_intercom.yml

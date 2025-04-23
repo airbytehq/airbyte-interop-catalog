@@ -1,0 +1,16 @@
+domain: github.airbyte-interop
+transforms:
+  - name: issue_closed_history
+    from:
+      - MISSING: github.MISSING
+    fields:
+      issue_id:
+        expression: MISSING
+        description: Foreign key that references the issue table
+      updated_at:
+        expression: MISSING
+        description: Timestamp of when the action took place
+      closed:
+        expression: MISSING
+        description: Boolean variable for if the issue was closed (true) or re-opened
+          (false)

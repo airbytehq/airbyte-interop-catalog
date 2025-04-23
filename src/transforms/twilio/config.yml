@@ -1,4 +1,4 @@
-project_id: twilio.fivetran-interop
+project_id: twilio.airbyte-interop
 source_name: twilio
 # Target schema file snapshotted from: https://github.com/fivetran/dbt_twilio_source/blob/main/models/src_twilio.yml
 target_dbt_schema_url: https://raw.githubusercontent.com/fivetran/dbt_twilio_source/refs/heads/main/models/src_twilio.yml

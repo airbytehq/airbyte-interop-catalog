@@ -1,0 +1,50 @@
+domain: github.airbyte-interop
+transforms:
+  - name: repository
+    from:
+      - repositories: github.repositories
+    fields:
+      id:
+        expression: repositories.id
+        description: System generated unique id for the repository.
+      created_at:
+        expression: repositories.created_at
+        description: Timestamp of when the repository was created.
+      full_name:
+        expression: repositories.full_name
+        description: The name of the git repository.
+      private:
+        expression: repositories.private
+        description: Boolean field indicating whether the repository is private (true)
+          or public (false).
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: repositories
+    target_table_name: repository
+    table_match_score: 0.9
+    completion_score: 1.0
+    explanation: The table match score is high due to a good correspondence between
+      the source and target tables, specifically in their shared fields and structure.
+      The completion score is perfect as all fields are accounted for and mapped appropriately.
+    field_mapping_evals:
+      - name: id
+        expression: repositories.id
+        score: 1.0
+        explanation: Direct match of field names and types, indicating a perfect mapping.
+      - name: created_at
+        expression: repositories.created_at
+        score: 1.0
+        explanation: Direct match of field names between the schema, along with equivalent
+          data types, signifies an accurate mapping.
+      - name: full_name
+        expression: repositories.full_name
+        score: 1.0
+        explanation: The field names and purpose align correctly between source and
+          target, ensuring an accurate mapping.
+      - name: private
+        expression: repositories.private
+        score: 1.0
+        explanation: The Boolean nature of the field is consistent across both schemas,
+          and the field names match, ensuring a fully accurate mapping.

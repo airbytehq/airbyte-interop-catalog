@@ -1,4 +1,4 @@
-project_id: iterable.fivetran-interop
+project_id: iterable.airbyte-interop
 source_name: iterable
 # Target schema file snapshotted from: https://github.com/fivetran/dbt_iterable_source/blob/main/models/src_iterable.yml
 target_dbt_schema_url: https://raw.githubusercontent.com/fivetran/dbt_iterable_source/refs/heads/main/models/src_iterable.yml

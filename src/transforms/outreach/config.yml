@@ -1,4 +1,4 @@
-project_id: outreach.fivetran-interop
+project_id: outreach.airbyte-interop
 source_name: outreach
 # Target schema file snapshotted from: https://github.com/fivetran/dbt_outreach_source/blob/main/models/src_outreach.yml
 target_dbt_schema_url: https://raw.githubusercontent.com/fivetran/dbt_outreach_source/refs/heads/main/models/src_outreach.yml

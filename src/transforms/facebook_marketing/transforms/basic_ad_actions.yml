@@ -1,0 +1,122 @@
+domain: facebook_marketing.airbyte-interop
+transforms:
+  - name: basic_ad_actions
+    from:
+      - ads_insights_action_type: facebook_marketing.ads_insights_action_type
+    fields:
+      _1_d_view:
+        expression: MISSING
+        description: Conversion metric value using an attribution window of "1 day
+          after viewing the ad". Not included in downstream models by default, but
+          can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics`
+          var.
+      _7_d_click:
+        expression: MISSING
+        description: Conversion metric value using an attribution window of "7 days
+          after clicking the ad". Not included in downstream models by default, but
+          can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics`
+          var.
+      _28_d_click:
+        expression: MISSING
+        description: Conversion metric value using an attribution window of "28 days
+          after clicking the ad". Deprecated by Facebook due to digital privacy initiatives.
+          Not included in downstream models by default, but can be added using the
+          `facebook_ads__basic_ad_actions_passthrough_metrics` var.
+      _fivetran_id:
+        expression: MISSING
+        description: Defunct field.
+      _fivetran_synced:
+        expression: ads_insights_action_type._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      action_type:
+        expression: MISSING
+        description: "The kind of actions taken on your ad, Page, app or event after
+          your ad was served to someone, even if they didn't click on it. Action types
+          include Page likes, app installs, conversions, event responses and more.
+          Actions prepended by app_custom_event come from mobile app events and actions
+          prepended by offsite_conversion come from the Facebook Pixel.\n"
+      ad_id:
+        expression: ads_insights_action_type.ad_id
+        description: The ID of the ad the report relates to.
+      date:
+        expression: ads_insights_action_type.date_start
+        description: The date of the reported performance.
+      index:
+        expression: MISSING
+        description: Index reflecting the `action_type` tracked for this ad on this
+          day. Column of not much consequence.
+      inline:
+        expression: MISSING
+        description: Conversion metric value using the attribution window that occurs
+          on the ad itself. Not included in downstream models by default, but can
+          be added using the `facebook_ads__basic_ad_actions_passthrough_metrics`
+          var.
+      value:
+        expression: MISSING
+        description: Conversion metric value using the default attribution window.
+annotations:
+  approved: false
+  missing_fields:
+    - _1_d_view
+    - _28_d_click
+    - _7_d_click
+    - _fivetran_id
+    - action_type
+    - index
+    - inline
+    - value
+  evaluation:
+    source_stream_name: ads_insights_action_type
+    target_table_name: basic_ad_actions
+    table_match_score: 0.7
+    completion_score: 0.4
+    explanation: Given the high number of MISSING expressions indicating no good matches
+      found for many of the fields, both table match and completion scores are impacted
+      negatively. The presence of one correctly matched field (_fivetran_synced) does
+      contribute positively, but overall the integration of these fields into the
+      target schema is suboptimal.
+    field_mapping_evals:
+      - name: _1_d_view
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _7_d_click
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _28_d_click
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _fivetran_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _fivetran_synced
+        expression: ads_insights_action_type._airbyte_extracted_at
+        score: 1.0
+        explanation: Correctly mapped to source stream's _airbyte_extracted_at column.
+      - name: action_type
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: ad_id
+        expression: ads_insights_action_type.ad_id
+        score: 0.0
+        explanation: No good match found.
+      - name: date
+        expression: ads_insights_action_type.date_start
+        score: 0.0
+        explanation: No good match found.
+      - name: index
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: inline
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: value
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

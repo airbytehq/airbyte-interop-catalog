@@ -1,0 +1,84 @@
+domain: facebook_marketing.airbyte-interop
+transforms:
+  - name: ad_history
+    from:
+      - ad_sets: facebook_marketing.ad_sets
+    fields:
+      id:
+        expression: ad_sets.id
+        description: The ID of this ad.
+      account_id:
+        expression: ad_sets.account_id
+        description: The ID of the ad account that this ad belongs to.
+      ad_set_id:
+        expression: MISSING
+        description: ID of the ad set that contains the ad.
+      campaign_id:
+        expression: ad_sets.campaign_id
+        description: Ad campaign that contains this ad.
+      creative_id:
+        expression: MISSING
+        description: The ID of the ad creative to be used by this ad.
+      name:
+        expression: ad_sets.name
+        description: Name of the ad.
+      _fivetran_synced:
+        expression: ad_sets._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+      updated_time:
+        expression: ad_sets.updated_time
+        description: "{{ doc('updated_time') }}"
+      conversion_domain:
+        expression: MISSING
+        description: The domain you've configured the ad to convert to.
+annotations:
+  approved: false
+  missing_fields:
+    - ad_set_id
+    - conversion_domain
+    - creative_id
+  evaluation:
+    source_stream_name: ad_sets
+    target_table_name: ad_history
+    table_match_score: 0.9
+    completion_score: 0.75
+    explanation: The table match is highly confident due to correct mappings in most
+      fields, but the completion score reflects that some critical fields are missing
+      proper mappings.
+    field_mapping_evals:
+      - name: id
+        expression: ad_sets.id
+        score: 1.0
+        explanation: Direct mapping to source field.
+      - name: account_id
+        expression: ad_sets.account_id
+        score: 1.0
+        explanation: Direct mapping to source field.
+      - name: ad_set_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: campaign_id
+        expression: ad_sets.campaign_id
+        score: 1.0
+        explanation: Direct mapping to source field.
+      - name: creative_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: name
+        expression: ad_sets.name
+        score: 1.0
+        explanation: Direct mapping to source field.
+      - name: _fivetran_synced
+        expression: ad_sets._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping for all tables to '_airbyte_extracted_at'.
+      - name: updated_time
+        expression: ad_sets.updated_time
+        score: 1.0
+        explanation: Direct mapping to source field.
+      - name: conversion_domain
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

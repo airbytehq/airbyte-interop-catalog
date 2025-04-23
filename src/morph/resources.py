@@ -4,7 +4,7 @@ This module provides utility functions for getting resource paths.
 
 Most functions take a `source_name` and optional `project_name` argument, which are used to
 construct the path to the resource. If `project_name` is not provided, it defaults to
-`fivetran-interop`.
+`airbyte-interop`.
 """
 
 from pathlib import Path

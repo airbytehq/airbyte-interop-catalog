@@ -1,4 +1,4 @@
-project_id: pardot.fivetran-interop
+project_id: pardot.airbyte-interop
 source_name: pardot
 # Target schema file snapshotted from: https://github.com/fivetran/dbt_pardot_source/blob/main/models/src_pardot.yml
 target_dbt_schema_url: https://raw.githubusercontent.com/fivetran/dbt_pardot_source/refs/heads/main/models/src_pardot.yml

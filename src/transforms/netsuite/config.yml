@@ -1,4 +1,4 @@
-project_id: netsuite.fivetran-interop
+project_id: netsuite.airbyte-interop
 source_name: netsuite
 # Target schema file snapshotted from: https://github.com/fivetran/dbt_netsuite_source/blob/main/models/src_netsuite.yml
 target_dbt_schema_url: https://raw.githubusercontent.com/fivetran/dbt_netsuite_source/refs/heads/main/models/src_netsuite.yml

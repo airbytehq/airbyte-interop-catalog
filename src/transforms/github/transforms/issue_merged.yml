@@ -1,0 +1,35 @@
+domain: github.airbyte-interop
+transforms:
+  - name: issue_merged
+    from:
+      - pull_requests: github.pull_requests
+    fields:
+      issue_id:
+        expression: pull_requests.id
+        description: Foreign key that references the issue table.  This table will
+          only reference issues that are pull requests
+      merged_at:
+        expression: pull_requests.merged_at
+        description: Timestamp of when the code merge took place
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: pull_requests
+    target_table_name: issue_merged
+    table_match_score: 0.9
+    completion_score: 0.8
+    explanation: The mappings largely align well with the target schema. Most fields
+      have clear equivalents but a few are left unmatched or imprecisely matched,
+      leading to a slightly lower completion score.
+    field_mapping_evals:
+      - name: issue_id
+        expression: pull_requests.id
+        score: 0.9
+        explanation: Field maps directly to a corresponding field in the target schema,
+          indicating a strong match and relational integrity.
+      - name: merged_at
+        expression: pull_requests.merged_at
+        score: 0.95
+        explanation: Timestamp fields align perfectly in both format and context,
+          providing very high confidence in their mapping.
