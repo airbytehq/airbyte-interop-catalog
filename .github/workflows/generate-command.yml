@@ -26,8 +26,11 @@ jobs:
     steps:
       - name: Run Poe Slash Command Processor
         uses: aaronsteers/poe-command-processor@v1.0.0
+        env:
+          GCP_GSM_CREDENTIALS: ${{ secrets.GCP_GSM_CREDENTIALS }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         with:
-          command: "morph-generate ${{ github.event.inputs.source_name }}"
+          command: "morph-build ${{ github.event.inputs.source_name }} --with-generate"
           pr: ${{ github.event.inputs.pr }}
           comment-id: ${{ github.event.inputs.comment-id }}
           github-token: ${{ secrets.GH_PAT_MAINTENANCE_OCTAVIA }}
