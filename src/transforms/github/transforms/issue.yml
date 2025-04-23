@@ -56,64 +56,68 @@ annotations:
     source_stream_name: issues
     target_table_name: issue
     table_match_score: 0.85
-    completion_score: 0.92
-    explanation: The mapping evaluations indicate a highly consistent and coherent
-      schema adaptation from source to target, reflecting a robust understanding of
-      the data relationships and a clear translation between the source and target
-      models. Most fields are well matched, representing accurate and direct correlations
-      with slight adjustments for data serialization differences and naming conventions.
+    completion_score: 0.9
+    explanation: High confidence in table matching due to alignment of key structural
+      elements and data types across fields. The majority of fields have strong and
+      meaningful mappings, only a few fields have weaker correlations which affect
+      the completion score slightly.
     field_mapping_evals:
       - name: id
         expression: issues.id
         score: 1.0
-        explanation: Direct mapping of unique identifiers.
+        explanation: Direct and clear mapping, unique identifier matched perfectly.
       - name: body
         expression: issues.body
         score: 0.95
-        explanation: Text fields match appropriately.
+        explanation: Direct mapping, textual content aligns closely with the target
+          schema requirements.
       - name: locked
         expression: issues.locked
         score: 1.0
-        explanation: Direct boolean flag mapping.
+        explanation: Direct mapping of boolean type, perfectly aligns with data expectations.
       - name: closed_at
         expression: issues.closed_at
-        score: 0.85
-        explanation: Timestamp mapping, sensitive to context of open/closed status.
+        score: 0.95
+        explanation: Timestamps directly match; slight deduction for potential format
+          differences.
       - name: created_at
         expression: issues.created_at
-        score: 0.9
-        explanation: Direct mapping of creation timestamps.
+        score: 1.0
+        explanation: Exact match for creation timestamp.
       - name: milestone_id
         expression: issues.milestone.id
-        score: 0.8
-        explanation: Proper reference to milestone data, despite slight schema differences.
+        score: 0.85
+        explanation: Direct reference to milestone is matched, slight ambiguity in
+          potential milestone structures across schemas.
       - name: number
         expression: issues.number
         score: 0.9
-        explanation: Correct issue number mapping within repositories.
+        explanation: Issue number is unique within repositories, generally aligns
+          well but slight penalty due to potential inter-repository uniqueness conflicts.
       - name: pull_request
         expression: issues.pull_request
         score: 1.0
-        explanation: Clear boolean context for issue type differentiation.
+        explanation: Boolean flag directly matches, distinguishing between pull requests
+          and issues accurately.
       - name: repository_id
         expression: issues.repository_id
         score: 1.0
-        explanation: Direct mapping of repository identifiers.
+        explanation: Perfect match of repository identifiers.
       - name: state
         expression: issues.state
-        score: 1.0
-        explanation: Direct mapping of open/close state.
+        score: 0.95
+        explanation: State values (open/closed) match closely, minimal chance for
+          misinterpretation.
       - name: title
         expression: issues.title
         score: 0.95
-        explanation: Title fields match with high confidence.
+        explanation: Direct textual match, representing the issue effectively.
       - name: updated_at
         expression: issues.updated_at
-        score: 0.85
-        explanation: Timestamps for updates mapped correctly, despite potential discrepancies
-          in update frequency.
+        score: 0.95
+        explanation: Timestamp matches with potential minor deviation in time recording.
       - name: user_id
         expression: issues.user.id
-        score: 0.75
-        explanation: User identification matched with moderate confidence, mindful
-          of mapping nuances between customer and user concepts.
+        score: 0.85
+        explanation: Direct user identifier match, slight risk due to different user
+          representation potentially across data sources.

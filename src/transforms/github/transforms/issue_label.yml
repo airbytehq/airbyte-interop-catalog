@@ -20,7 +20,9 @@ annotations:
     target_table_name: issue_label
     table_match_score: 0.0
     completion_score: 0.0
-    explanation: Both fields missing explicit mappings and no appropriate match found.
+    explanation: Given the mappings provided, both fields are set to 'MISSING' indicating
+      no good match found for any of the fields, leading to a total lack of reliable
+      field mappings and thus a complete absence of confidence in this table mapping.
     field_mapping_evals:
       - name: issue_id
         expression: MISSING

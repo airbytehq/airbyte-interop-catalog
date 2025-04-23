@@ -17,3 +17,35 @@ transforms:
         expression: MISSING
         description: Boolean field indicating whether the repository is private (true)
           or public (false).
+annotations:
+  approved: false
+  missing_fields:
+    - created_at
+    - full_name
+    - id
+    - private
+  evaluation:
+    source_stream_name: MISSING
+    target_table_name: repository
+    table_match_score: 0.0
+    completion_score: 0.0
+    explanation: All field mappings have been set to 'MISSING' indicating there is
+      no confidence in the field mappings. No good matches have been found, thus the
+      table match and completion scores are 0.
+    field_mapping_evals:
+      - name: id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: created_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: full_name
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: private
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

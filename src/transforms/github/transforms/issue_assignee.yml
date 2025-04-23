@@ -10,3 +10,24 @@ transforms:
       user_id:
         expression: MISSING
         description: Foreign key that references the user table
+annotations:
+  approved: false
+  missing_fields:
+    - issue_id
+    - user_id
+  evaluation:
+    source_stream_name: MISSING
+    target_table_name: issue_assignee
+    table_match_score: 0.0
+    completion_score: 0.0
+    explanation: No valid mappings could be established based on the provided field
+      mappings which are all marked as 'MISSING'.
+    field_mapping_evals:
+      - name: issue_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: user_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

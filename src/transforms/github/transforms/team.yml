@@ -28,32 +28,38 @@ annotations:
   evaluation:
     source_stream_name: teams
     target_table_name: team
-    table_match_score: 0.95
-    completion_score: 1.0
-    explanation: Highly confident mapping with all fields from the source accurately
-      mapped to the target.
+    table_match_score: 0.75
+    completion_score: 0.83
+    explanation: The overall table match score is relatively high, indicating a good
+      match between the source and target schema for the teams table; however, the
+      completion score is not perfect, suggesting that not all field mappings have
+      a high confidence level.
     field_mapping_evals:
       - name: id
         expression: teams.id
         score: 1.0
-        explanation: Direct and exact mapping confirmed.
+        explanation: Perfect match of the field identifier across both schemas
       - name: description
         expression: teams.description
-        score: 1.0
-        explanation: Direct and exact mapping confirmed.
+        score: 0.9
+        explanation: Fields match closely and the description data is identical, leading
+          to high confidence
       - name: name
         expression: teams.name
-        score: 1.0
-        explanation: Direct and exact mapping confirmed.
+        score: 0.9
+        explanation: The name fields align well between the schemas, showing a high
+          level of confidence
       - name: parent_id
         expression: teams.parent
-        score: 1.0
-        explanation: Exact mapping confirmed with contextual matching.
+        score: 0.6
+        explanation: The field references the same concept, but might not be perfectly
+          aligned, thus the lower score
       - name: privacy
         expression: teams.privacy
-        score: 1.0
-        explanation: Direct and exact mapping confirmed.
+        score: 0.7
+        explanation: Privacy settings fields have acknowledged similarities but differences
+          in details reduce the score
       - name: slug
         expression: teams.slug
-        score: 1.0
-        explanation: Direct and exact mapping confirmed.
+        score: 0.8
+        explanation: Closely matching URL-friendly name for the team, high confidence

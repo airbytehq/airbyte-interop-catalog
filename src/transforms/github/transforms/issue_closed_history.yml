@@ -22,10 +22,11 @@ annotations:
   evaluation:
     source_stream_name: issue_timeline_events
     target_table_name: issue_closed_history
-    table_match_score: 0.6
+    table_match_score: 0.5
     completion_score: 0.33
-    explanation: The table's general intent matches somewhat closely, but many fields
-      required for a full match are missing or incorrectly matched.
+    explanation: The mappings provided include missing expressions signifying no good
+      match found for some required fields, leading to a lower completion score. The
+      table match score is moderate, indicating a potential match but with uncertainty.
     field_mapping_evals:
       - name: issue_id
         expression: MISSING
@@ -34,7 +35,7 @@ annotations:
       - name: updated_at
         expression: issue_timeline_events.comment.updated_at
         score: 1.0
-        explanation: Exact match found.
+        explanation: Direct mapping confirmed, ensuring high confidence.
       - name: closed
         expression: MISSING
         score: 0.0

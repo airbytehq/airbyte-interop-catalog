@@ -18,3 +18,35 @@ transforms:
         expression: MISSING
         description: Boolean variable indicating if the requester was removed from
           the PR (true) or added to the PR (false).
+annotations:
+  approved: false
+  missing_fields:
+    - created_at
+    - pull_request_id
+    - removed
+    - requested_id
+  evaluation:
+    source_stream_name: MISSING
+    target_table_name: requested_reviewer_history
+    table_match_score: 0.0
+    completion_score: 0.0
+    explanation: No good matches found for any fields. All expressions are set to
+      'MISSING', indicating a lack of proper mapping information, leading to zero
+      confidence scores.
+    field_mapping_evals:
+      - name: pull_request_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: created_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: requested_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: removed
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

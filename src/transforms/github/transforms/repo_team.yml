@@ -10,3 +10,25 @@ transforms:
       team_id:
         expression: MISSING
         description: Reference to the respective team for the record.
+annotations:
+  approved: true
+  missing_fields:
+    - repository_id
+    - team_id
+  evaluation:
+    source_stream_name: MISSING
+    target_table_name: repo_team
+    table_match_score: 0.8
+    completion_score: 0.5
+    explanation: The table mapping has a relatively high match quality. However, the
+      completion of field mappings is partial since some field mappings remain undefined
+      or unestablished.
+    field_mapping_evals:
+      - name: repository_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: team_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

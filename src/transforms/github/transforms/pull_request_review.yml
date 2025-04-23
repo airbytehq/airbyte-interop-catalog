@@ -27,30 +27,34 @@ annotations:
   evaluation:
     source_stream_name: reviews
     target_table_name: pull_request_review
-    table_match_score: 0.85
-    completion_score: 0.8
-    explanation: The mappings are reasonably aligned with clear correspondence and
-      meaningful matches for the fields, ensuring a high degree of data integrity
-      and reliability between the sources.
+    table_match_score: 0.8
+    completion_score: 0.9
+    explanation: The mappings accurately reflect the intended target schema. The fields
+      'id', 'pull_request_id', 'submitted_at', and 'state' are well matched with appropriate
+      descriptions; only minor mismatches are evident, keeping confidence high. The
+      overall table configuration suits the requirements and guidelines set for data
+      integrity and transformation accuracy.
     field_mapping_evals:
       - name: id
         expression: reviews.id
-        score: 0.95
-        explanation: Direct mapping identified, high confidence.
+        score: 1.0
+        explanation: Exact match to 'reviews.id'.
       - name: pull_request_id
         expression: reviews.pull_request_url
-        score: 0.7
-        explanation: Linkage between pull_request_id and pull_request_url implies
-          a strong but not perfect relation.
+        score: 0.95
+        explanation: "'pull_request_id' maps to 'reviews.pull_request_url', which
+          is the correct reference for pull requests."
       - name: submitted_at
         expression: reviews.submitted_at
         score: 1.0
-        explanation: Exact match for timestamp fields, perfect confidence.
+        explanation: Perfect alignment with 'reviews.submitted_at' indicating accurate
+          timestamp mapping.
       - name: state
         expression: reviews.state
-        score: 0.9
-        explanation: Direct representation of review states, very high confidence.
+        score: 1.0
+        explanation: Correctly captures the review state with 'reviews.state'.
       - name: user_id
         expression: reviews.user.id
-        score: 0.85
-        explanation: Direct and meaningful mapping of user identifiers, high confidence.
+        score: 0.9
+        explanation: "'user_id' maps to 'reviews.user.id' correctly identifying the
+          user involved in the review though slight semantic risk exists."

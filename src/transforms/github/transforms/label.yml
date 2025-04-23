@@ -33,39 +33,34 @@ annotations:
     target_table_name: label
     table_match_score: 0.95
     completion_score: 1.0
-    explanation: The Table Mapping has a high confidence due to a high quality of
-      match and complete population of field mappings. All field expressions align
-      closely with the target schema copiously maintaining the integrity and purpose
-      of each field in context to the provided schemas.
+    explanation: The mapping for table 'issue_labels' from source to target is highly
+      accurate, with all fields properly accounted for.
     field_mapping_evals:
       - name: id
         expression: issue_labels.id
-        score: 0.9
-        explanation: Direct match on the 'id' label preserving unique identifier property
-          across schemas.
+        score: 1.0
+        explanation: Direct match on primary identifier fields.
       - name: _fivetran_synced
         expression: issue_labels._airbyte_extracted_at
         score: 1.0
-        explanation: Standard mapping for time synchronization fields across systems.
+        explanation: Standard mapping for synchronization fields.
       - name: color
         expression: issue_labels.color
-        score: 0.9
-        explanation: Direct match enables consistent representation of the label color.
+        score: 1.0
+        explanation: Direct match based on identical property names and purposes.
       - name: description
         expression: issue_labels.description
-        score: 0.9
-        explanation: Descriptive fields align directly and retain contextual integrity.
+        score: 1.0
+        explanation: Direct match, both serve as descriptives for the label purpose.
       - name: is_default
         expression: issue_labels.default
-        score: 0.9
-        explanation: Boolean properties 'default' match perfectly, ensuring correct
-          functionality.
+        score: 1.0
+        explanation: Exact match of default status fields.
       - name: name
         expression: issue_labels.name
-        score: 0.9
-        explanation: Name fields directly match ensuring label identification is consistent
-          across systems.
+        score: 1.0
+        explanation: Direct match with identical naming and usage.
       - name: url
         expression: issue_labels.url
-        score: 0.9
-        explanation: URL fields match directly, preserving the means of label reference.
+        score: 1.0
+        explanation: Direct URL mapping, both refer to the location of usage.

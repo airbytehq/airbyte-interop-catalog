@@ -23,17 +23,16 @@ annotations:
   evaluation:
     source_stream_name: comments
     target_table_name: issue_comment
-    table_match_score: 0.8
+    table_match_score: 0.7
     completion_score: 0.75
-    explanation: Considering the mappings provided and guidelines, a relatively high
-      confidence exists that the source and target schemas describe related data,
-      but not all fields were mapped with high confidence. Some issues, such as missing
-      mappings, reduced the overall completion rate.
+    explanation: The table match score indicates a moderate confidence in the alignment,
+      as fields generally correspond well in functionality though not perfectly. However,
+      the 'issue_id' field lacks a direct counterpart, impacting the completion score.
     field_mapping_evals:
       - name: id
         expression: comments.id
         score: 1.0
-        explanation: Direct mapping to a unique identifier, suitable and straightforward.
+        explanation: "Direct match found: 'comments.id' matches 'id' perfectly."
       - name: issue_id
         expression: MISSING
         score: 0.0
@@ -41,9 +40,10 @@ annotations:
       - name: user_id
         expression: comments.user.id
         score: 0.9
-        explanation: Mapped directly to a foreign key referencing the user table,
-          indicating a high confidence of correctness.
+        explanation: "High confidence match: 'comments.user.id' closely matches to
+          'user_id'."
       - name: created_at
         expression: comments.created_at
         score: 1.0
-        explanation: Timestamp fields are correctly mapped, ensuring data consistency.
+        explanation: "Direct match found: 'comments.created_at' matches 'created_at'
+          perfectly."

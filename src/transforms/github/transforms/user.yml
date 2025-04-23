@@ -24,22 +24,20 @@ annotations:
   evaluation:
     source_stream_name: users
     target_table_name: user
-    table_match_score: 0.75
+    table_match_score: 0.8
     completion_score: 0.5
-    explanation: The table match score is relatively high due to the consistent source
-      mapping for user-related fields, indicating that the source and target tables
-      align well in subject matter. However, the completion score is moderate because
-      some key fields like 'name' and 'company' are missing, lowering the overall
-      integrity of the data mapping.
+    explanation: The table match score is high indicating a good correlation between
+      source and target tables. However, the completion score is lower due to missing
+      field mappings.
     field_mapping_evals:
       - name: id
         expression: users.id
         score: 1.0
-        explanation: Perfect match found based on the expression 'users.id'
+        explanation: "Direct match found: 'users.id' matches 'id'."
       - name: login
         expression: users.login
         score: 1.0
-        explanation: Perfect match found based on the expression 'users.login'
+        explanation: "Direct match found: 'users.login' matches 'login'."
       - name: name
         expression: MISSING
         score: 0.0
