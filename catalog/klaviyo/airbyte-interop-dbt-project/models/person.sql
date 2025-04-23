@@ -8,7 +8,7 @@ profiles AS (
 
 
 SELECT
-    profiles.id AS id,
+    NULL AS id,
     profiles.attributes.location.address1 AS address_1,
     profiles.attributes.location.address2 AS address_2,
     profiles.attributes.location.city AS city,

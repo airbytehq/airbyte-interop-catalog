@@ -474,7 +474,7 @@ def _generate(  # noqa: PLR0915
             f"Generating missing mappings for '{target_table}'...",
             style="bold white on blue",
         )
-        map.infer_table_mappings(
+        map.generate_table_mapping(
             source_name=source_name,
             project_name=project_name,
             transform_name=target_table,
@@ -483,13 +483,19 @@ def _generate(  # noqa: PLR0915
         )
 
     console.print("Generation complete. Updating lock file...", style="bold green")
-    update_lock_file(source_name, project_name)
+    update_lock_file(
+        source_name=source_name,
+        project_name=project_name,
+    )
 
     # Run the build step after generation is complete
     if not no_build:
         console.print("\n" + ("-" * 80) + "\n")
         console.print("Rebuilding dbt project...", style="bold green")
-        build_dbt_project(source_name, project_name)
+        build_dbt_project(
+            source_name,
+            project_name,
+        )
         console.print("Build step completed successfully.", style="bold green")
 
 

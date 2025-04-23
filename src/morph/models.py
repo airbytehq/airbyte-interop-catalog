@@ -861,7 +861,7 @@ class TableMappingAudit(BaseModel):
     _source_dbt_file: DbtSourceFile
     _target_dbt_file: DbtSourceFile
 
-    unused_source_table_columns: list[str]
+    unused_source_table_columns: dict[str, list[str]]
     """The source table columns that are not used in the transform."""
 
     omitted_target_table_columns: list[str]
@@ -911,10 +911,12 @@ class TableMappingAudit(BaseModel):
         target_table = target_dbt_file.get_table(table_mapping.target_table_name)
 
         return cls(
-            unused_source_table_columns=cls._find_unused_source_columns(
-                source_table=source_table,
-                table_mapping=table_mapping,
-            ),
+            unused_source_table_columns={
+                source_table.name: cls._find_unused_source_columns(
+                    source_table=source_table,
+                    table_mapping=table_mapping,
+                ),
+            },
             omitted_target_table_columns=cls._find_omitted_target_columns(
                 target_table=target_table,
                 table_mapping=table_mapping,

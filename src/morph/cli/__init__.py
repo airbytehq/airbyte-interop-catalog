@@ -1,5 +1,5 @@
 """CLI module for morph."""
 
-from morph.cli.main import main
+from morph.cli._main import main
 
 __all__ = ["main"]

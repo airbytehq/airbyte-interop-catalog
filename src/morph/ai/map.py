@@ -10,6 +10,8 @@ from morph.ai import functions as ai_fn
 from morph.ai.checks import check_openai_api_key
 from morph.utils import text_utils
 from morph.utils.dbt import dbt_source_files
+from morph.utils.dbt.mapping_to_dbt_models import update_readme
+from morph.utils.lock_file import update_lock_file
 from morph.utils.logic import if_none
 from morph.utils.retries import with_retry
 from morph.utils.transform_scaffold import generate_empty_mapping_file
@@ -17,6 +19,7 @@ from morph.utils.transform_scaffold import generate_empty_mapping_file
 console = Console()
 
 MAX_SOURCE_TABLE_PER_MAPPING_INFERENCE = 5
+MAX_ATTEMPTS = 3
 
 
 def change_mapping_source_table(
@@ -72,7 +75,6 @@ def infer_best_match_source_stream_name_short_list(
     ...
 
 
-@with_retry(max_retries=3)
 def infer_best_match_source_stream_name(
     target_schema: models.SourceTableSummary,
     source_tables: list[models.SourceTableSummary],
@@ -154,7 +156,6 @@ def infer_best_match_source_stream_name(
 
         source_tables = [s for s in source_tables if s.name in short_list_names]
 
-    # console.input("Press 'Enter' to continue...")
     console.line()
     return ai_fn.select_best_match_source_schema(
         target_table_schema=target_schema,
@@ -162,7 +163,7 @@ def infer_best_match_source_stream_name(
     )
 
 
-def populate_missing_mappings(
+def generate_field_mappings(  # noqa: PLR0912
     source_name: str,
     project_name: str,
     transform_name: str,
@@ -214,19 +215,54 @@ def populate_missing_mappings(
         if field.expression == constants.MISSING:
             fields_to_populate.append(field)
 
-    # Generate new mappings
-    new_mapping_suggestions: list[models.FieldMappingSuggestion] = ai_fn.generate_mappings(
-        fields_to_populate=fields_to_populate,
-        source_schema=source_schema,
-    )
-    for suggested_field in new_mapping_suggestions:
-        for existing_field in transform_parsed.field_mappings:
-            if existing_field.name == suggested_field.target_field_name:
-                existing_field.expression = (
-                    constants.MISSING
-                    if suggested_field.source_field_name == constants.MISSING
-                    else f"{source_schema.name}.{suggested_field.source_field_name}"
-                )
+    attempts = 0
+    while attempts < MAX_ATTEMPTS:
+        # Generate new mappings
+        new_mapping_suggestions: list[models.FieldMappingSuggestion] = ai_fn.generate_mappings(
+            fields_to_populate=fields_to_populate,
+            source_schema=source_schema,
+        )
+        for suggested_field in new_mapping_suggestions:
+            for existing_field in transform_parsed.field_mappings:
+                if existing_field.name == suggested_field.target_field_name:
+                    existing_field.expression = (
+                        constants.MISSING
+                        if suggested_field.source_field_name == constants.MISSING
+                        else f"{source_schema.name}.{suggested_field.source_field_name}"
+                    )
+
+        audit = models.TableMappingAudit.new(
+            table_mapping=transform_parsed,
+            source_dbt_file=models.DbtSourceFile.from_file(
+                resources.get_generated_source_yml_path(
+                    source_name=source_name,
+                    project_name=project_name,
+                ),
+            ),
+            target_dbt_file=models.DbtSourceFile.from_file(
+                resources.get_dbt_sources_requirements_path(
+                    source_name=source_name,
+                    project_name=project_name,
+                ),
+            ),
+        )
+        if not audit.erroneous_source_table_columns and not audit.omitted_target_table_columns:
+            break
+
+        # Else we have a problem
+        if audit.erroneous_source_table_columns:
+            console.print(
+                f"[red]Error: The following source table columns were hallucinated: "
+                f"{audit.erroneous_source_table_columns}[/red]",
+            )
+        if audit.omitted_target_table_columns:
+            console.print(
+                f"[red]Error: The following target table columns were omitted: "
+                f"{audit.omitted_target_table_columns}[/red]",
+            )
+        if attempts <= MAX_ATTEMPTS:
+            console.print("Retrying...", style="yellow")
+            attempts += 1
 
     # Evaluate the mappings
     new_mapping_eval: models.TableMappingEval = ai_fn.evaluate_mapping_confidence(
@@ -249,7 +285,7 @@ def populate_missing_mappings(
         console.print("New mappings were not applied.", style="yellow")
 
 
-def infer_table_mappings(  # noqa: PLR0912 (too many branches)
+def generate_table_mapping(  # noqa: PLR0912, PLR0915
     source_name: str,
     project_name: str,
     *,
@@ -258,6 +294,7 @@ def infer_table_mappings(  # noqa: PLR0912 (too many branches)
     auto_confirm: bool | None = None,
     regenerate_all: bool = False,
 ) -> None:
+    """First map the source table to a target table, then call generate_field_mappings()."""
     check_openai_api_key()
     auto_confirm = cast(bool, if_none(auto_confirm, False))
 
@@ -294,7 +331,7 @@ def infer_table_mappings(  # noqa: PLR0912 (too many branches)
         return
 
     summary_text = ""
-    if regenerate_all or not source_table:
+    if regenerate_all or not source_table or source_table == constants.MISSING:
         # We need the AI to suggest a source table
 
         target_table_schemas: list[models.SourceTableSummary] = (
@@ -405,14 +442,20 @@ def infer_table_mappings(  # noqa: PLR0912 (too many branches)
         transform_name=transform_name,
         new_source_table=source_table,
     )
-    populate_missing_mappings(
+    generate_field_mappings(
         source_name=source_name,
         project_name=project_name,
         transform_name=transform_name,
         auto_confirm=auto_confirm,
     )
-    # Update lock file
-    # Update dbt project
+    update_lock_file(
+        source_name=source_name,
+        project_name=project_name,
+    )
+    update_readme(
+        source_name=source_name,
+        project_name=project_name,
+    )
 
 
 def get_skipped_target_tables(

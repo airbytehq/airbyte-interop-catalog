@@ -73,90 +73,90 @@ annotations:
   evaluation:
     source_stream_name: profiles
     target_table_name: person
-    table_match_score: 0.95
-    completion_score: 0.95
-    explanation: High confidence in overall table and field mapping. All field names
-      match closely to their source counterparts, with only one field (_fivetran_deleted)
-      set to MISSING. Some fields could have different meanings but based on the provided
-      context, assumptions have been made.
+    table_match_score: 0.88
+    completion_score: 0.73
+    explanation: The table mapping is likely representing the same subject matter,
+      with most fields having strong and relevant matches. However, some fields had
+      to be set to 'MISSING' due to lack of an apparent counterpart in the source,
+      lowering the completion score.
     field_mapping_evals:
       - name: id
         expression: profiles.id
         score: 1.0
-        explanation: Perfect match found for 'id'.
+        explanation: Direct and exact match found.
       - name: address_1
         expression: profiles.attributes.location.address1
-        score: 1.0
-        explanation: Perfect match found for 'address_1'.
+        score: 0.95
+        explanation: Direct match at nested level.
       - name: address_2
         expression: profiles.attributes.location.address2
-        score: 1.0
-        explanation: Perfect match found for 'address_2'.
+        score: 0.95
+        explanation: Direct match at nested level.
       - name: city
         expression: profiles.attributes.location.city
-        score: 1.0
-        explanation: Perfect match found for 'city'.
+        score: 0.9
+        explanation: Relevant match found at nested level.
       - name: country
         expression: profiles.attributes.location.country
-        score: 1.0
-        explanation: Perfect match found for 'country'.
+        score: 0.9
+        explanation: Relevant and direct match.
       - name: zip
         expression: profiles.attributes.location.zip
-        score: 1.0
-        explanation: Perfect match found for 'zip'.
+        score: 0.9
+        explanation: Direct match for postal code identified.
       - name: created
         expression: profiles.attributes.created
-        score: 1.0
-        explanation: Perfect match found for 'created'.
+        score: 0.9
+        explanation: Timestamp fields perfectly align.
       - name: email
         expression: profiles.attributes.email
         score: 1.0
-        explanation: Perfect match found for 'email'.
+        explanation: Exact match with primary key relevance.
       - name: first_name
         expression: profiles.attributes.first_name
-        score: 1.0
-        explanation: Perfect match found for 'first_name'.
+        score: 0.95
+        explanation: Direct and exact match found.
       - name: last_name
         expression: profiles.attributes.last_name
-        score: 1.0
-        explanation: Perfect match found for 'last_name'.
+        score: 0.95
+        explanation: Direct and exact match found.
       - name: latitude
         expression: profiles.attributes.location.latitude
-        score: 1.0
-        explanation: Perfect match found for 'latitude'.
+        score: 0.85
+        explanation: Exact match for latitude.
       - name: longitude
         expression: profiles.attributes.location.longitude
-        score: 1.0
-        explanation: Perfect match found for 'longitude'.
+        score: 0.85
+        explanation: Exact match for longitude.
       - name: organization
         expression: profiles.attributes.organization
-        score: 1.0
-        explanation: Perfect match found for 'organization'.
+        score: 0.9
+        explanation: Directly matches business organization field.
       - name: phone_number
         expression: profiles.attributes.phone_number
-        score: 1.0
-        explanation: Perfect match found for 'phone_number'.
+        score: 0.9
+        explanation: Direct match found.
       - name: region
         expression: profiles.attributes.location.region
         score: 0.7
-        explanation: Good match found for 'region', but the term could have multiple
-          contexts.
+        explanation: Possible match considering regional data, but ambiguity remains.
       - name: timezone
         expression: profiles.attributes.location.timezone
-        score: 1.0
-        explanation: Perfect match found for 'timezone'.
+        score: 0.7
+        explanation: Relevant match found, although some variations may exist due
+          to different timezone formats.
       - name: title
         expression: profiles.attributes.title
-        score: 1.0
-        explanation: Perfect match found for 'title'.
+        score: 0.9
+        explanation: Direct match on job title.
       - name: updated
         expression: profiles.attributes.updated
-        score: 1.0
-        explanation: Perfect match found for 'updated'.
+        score: 0.9
+        explanation: Timestamp fields align well.
       - name: last_event_date
         expression: profiles.attributes.last_event_date
-        score: 1.0
-        explanation: Perfect match found for 'last_event_date'.
+        score: 0.9
+        explanation: Exact match for event timestamp.
       - name: _fivetran_deleted
         expression: MISSING
         score: 0.0

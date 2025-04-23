@@ -273,7 +273,7 @@ FROM {% for source in sources %}{{ source.alias }}{% if not loop.last %}, {% end
     )
 
 
-def build_readme(
+def update_readme(
     source_name: str,
     project_name: str,
 ) -> None:
@@ -306,11 +306,13 @@ def build_readme(
         annotations = transform_dict.get("annotations", {})
         is_approved = annotations.get("approved", False)
 
+        markdown_text = transform.as_markdown()
+
         if is_approved:
-            sections.append(transform.as_markdown())
+            sections.append(markdown_text)
         else:
             has_rejected_mappings = True
-            rejected_sections.append(transform.as_markdown())
+            rejected_sections.append(markdown_text)
 
     if not has_rejected_mappings:
         sections.append("\n## Rejected Mappings\n")
@@ -329,12 +331,14 @@ def build_readme(
     )
     readme_path.write_text("\n".join(sections))
 
+    rejected_path = resources.get_generated_rejected_mappings_doc_path(
+        source_name=source_name,
+        project_name=project_name,
+    )
     if has_rejected_mappings:
-        rejected_path = resources.get_generated_rejected_mappings_doc_path(
-            source_name=source_name,
-            project_name=project_name,
-        )
         rejected_path.write_text("\n".join(rejected_sections))
+    else:
+        rejected_path.unlink(missing_ok=True)
 
 
 def generate_dbt_package(  # noqa: PLR0912, PLR0915
@@ -462,7 +466,7 @@ def generate_dbt_package(  # noqa: PLR0912, PLR0915
             model_path.write_text(model_sql)
 
     # Generate README.md with documentation
-    build_readme(
+    update_readme(
         source_name=source_name,
         project_name=project_name,
     )

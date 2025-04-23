@@ -6,8 +6,12 @@ from morph import models
 
 VERBOSE_MODE = False
 
-if not VERBOSE_MODE:
-    marvin.settings.enable_default_print_handler = False
+if VERBOSE_MODE:
+    marvin.settings.enable_default_print_handler = True
+    marvin.settings.log_level = "DEBUG"
+else:
+    marvin.settings.enable_default_print_handler = True
+    marvin.settings.log_level = "WARNING"
 
 
 agent = marvin.Agent(

@@ -5,7 +5,7 @@ default:
       type: duckdb
       # Assume we are running from `catalog/{source-name}/dbt_project/`
       # and that repo root is 3 levels up.
-      path: ../../../../.data/{{ source_name }}.duckdb
+      path: ../../../.data/{{ source_name }}.duckdb
       extensions:
         - httpfs
         - parquet

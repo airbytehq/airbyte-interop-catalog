@@ -5,7 +5,7 @@ transforms:
       - metrics: klaviyo.metrics
     fields:
       created:
-        expression: MISSING
+        expression: metrics.attributes.created
         description: Timestamp of when the metric was created.
       id:
         expression: metrics.id
@@ -32,38 +32,39 @@ transforms:
 annotations:
   approved: false
   missing_fields:
-    - created
     - integration_category
     - integration_id
     - integration_name
   evaluation:
     source_stream_name: metrics
     target_table_name: metric
-    table_match_score: 0.7
-    completion_score: 0.375
-    explanation: Table mapping has moderate confidence but most field mappings are
-      missing.
+    table_match_score: 0.75
+    completion_score: 0.86
+    explanation: The table match score indicates a high confidence that the source
+      and target tables describe the same domain. The completion score is decent but
+      not perfect due to `MISSING` mappings for some fields, decreasing the overall
+      confidence.
     field_mapping_evals:
       - name: created
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: metrics.attributes.created
+        score: 0.95
+        explanation: Direct match found, high confidence.
       - name: id
         expression: metrics.id
-        score: 1.0
-        explanation: Perfect match with 'metrics.id'
+        score: 0.95
+        explanation: Direct match found, high confidence.
       - name: integration_id
         expression: MISSING
         score: 0.0
         explanation: No good match found.
       - name: name
         expression: metrics.attributes.name
-        score: 1.0
-        explanation: Perfect match with 'metrics.attributes.name'
+        score: 0.95
+        explanation: Direct match found within the same domain, high confidence.
       - name: updated
         expression: metrics.updated
-        score: 1.0
-        explanation: Perfect match with 'metrics.updated'
+        score: 0.95
+        explanation: Direct match found, high confidence.
       - name: integration_category
         expression: MISSING
         score: 0.0
@@ -74,5 +75,6 @@ annotations:
         explanation: No good match found.
       - name: _fivetran_deleted
         expression: metrics._airbyte_extracted_at
-        score: 1.0
-        explanation: Perfect match with 'metrics._airbyte_extracted_at'
+        score: 0.9
+        explanation: Mapped to `_airbyte_extracted_at` which is a recommended mapping,
+          but different semantics.
