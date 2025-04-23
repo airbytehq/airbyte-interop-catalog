@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Run Poe Slash Command Processor
-        uses: aaronsteers/poe-command-processor@main
+        uses: aaronsteers/poe-command-processor@v1.0.0
         with:
           command: "lock"
           pr: ${{ github.event.inputs.pr }}
