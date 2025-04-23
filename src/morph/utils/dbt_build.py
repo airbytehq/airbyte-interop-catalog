@@ -134,7 +134,7 @@ def build_dbt_project(
             console.print("DBT tests completed.")
         else:
             raise RuntimeError(
-                f"Error running dbt tests: {result.stderr}.\n Command output: {result.stdout}"
+                f"Error running dbt tests: {result.stderr}.\n Command output: {result.stdout}",
             )
 
         console.print("DBT tests completed.")

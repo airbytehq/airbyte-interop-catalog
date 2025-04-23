@@ -68,7 +68,7 @@ def validate_field_mappings(
                     )
 
 
-def update_lock_file(  # noqa: PLR0914
+def update_lock_file(
     source_name: str,
     project_name: str,
 ) -> None:

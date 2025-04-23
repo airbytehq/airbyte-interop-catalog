@@ -915,7 +915,7 @@ class TableMappingAudit(BaseModel):
                 source_table.name: cls._find_unused_source_columns(
                     source_table=source_table,
                     table_mapping=table_mapping,
-                )
+                ),
             },
             omitted_target_table_columns=cls._find_omitted_target_columns(
                 target_table=target_table,
