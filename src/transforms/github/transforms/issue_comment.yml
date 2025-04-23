@@ -1,0 +1,49 @@
+domain: github.airbyte-interop
+transforms:
+  - name: issue_comment
+    from:
+      - comments: github.comments
+    fields:
+      id:
+        expression: comments.id
+        description: System generated unique id for the issue comment.
+      issue_id:
+        expression: MISSING
+        description: Foreign key that references the issue table
+      user_id:
+        expression: comments.user.id
+        description: Foreign key that references the user table
+      created_at:
+        expression: comments.created_at
+        description: Timestamp of when the issue comment was created.
+annotations:
+  approved: true
+  missing_fields:
+    - issue_id
+  evaluation:
+    source_stream_name: comments
+    target_table_name: issue_comment
+    table_match_score: 0.8
+    completion_score: 0.75
+    explanation: Considering the mappings provided and guidelines, a relatively high
+      confidence exists that the source and target schemas describe related data,
+      but not all fields were mapped with high confidence. Some issues, such as missing
+      mappings, reduced the overall completion rate.
+    field_mapping_evals:
+      - name: id
+        expression: comments.id
+        score: 1.0
+        explanation: Direct mapping to a unique identifier, suitable and straightforward.
+      - name: issue_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: user_id
+        expression: comments.user.id
+        score: 0.9
+        explanation: Mapped directly to a foreign key referencing the user table,
+          indicating a high confidence of correctness.
+      - name: created_at
+        expression: comments.created_at
+        score: 1.0
+        explanation: Timestamp fields are correctly mapped, ensuring data consistency.

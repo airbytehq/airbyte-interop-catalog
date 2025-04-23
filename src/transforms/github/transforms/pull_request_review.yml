@@ -1,0 +1,56 @@
+domain: github.airbyte-interop
+transforms:
+  - name: pull_request_review
+    from:
+      - reviews: github.reviews
+    fields:
+      id:
+        expression: reviews.id
+        description: System generated unique id for the pull request review.
+      pull_request_id:
+        expression: reviews.pull_request_url
+        description: Foreign key that references the pull request table.
+      submitted_at:
+        expression: reviews.submitted_at
+        description: Timestamp of when the request for review was submitted.
+      state:
+        expression: reviews.state
+        description: Whether the review was an approval, request for change, comment,
+          dismissal.
+      user_id:
+        expression: reviews.user.id
+        description: Foreign key that references the user table, representing the
+          user that reviewed the pull request.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: reviews
+    target_table_name: pull_request_review
+    table_match_score: 0.85
+    completion_score: 0.8
+    explanation: The mappings are reasonably aligned with clear correspondence and
+      meaningful matches for the fields, ensuring a high degree of data integrity
+      and reliability between the sources.
+    field_mapping_evals:
+      - name: id
+        expression: reviews.id
+        score: 0.95
+        explanation: Direct mapping identified, high confidence.
+      - name: pull_request_id
+        expression: reviews.pull_request_url
+        score: 0.7
+        explanation: Linkage between pull_request_id and pull_request_url implies
+          a strong but not perfect relation.
+      - name: submitted_at
+        expression: reviews.submitted_at
+        score: 1.0
+        explanation: Exact match for timestamp fields, perfect confidence.
+      - name: state
+        expression: reviews.state
+        score: 0.9
+        explanation: Direct representation of review states, very high confidence.
+      - name: user_id
+        expression: reviews.user.id
+        score: 0.85
+        explanation: Direct and meaningful mapping of user identifiers, high confidence.

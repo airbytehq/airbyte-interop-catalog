@@ -1,0 +1,12 @@
+domain: github.airbyte-interop
+transforms:
+  - name: repo_team
+    from:
+      - MISSING: github.MISSING
+    fields:
+      repository_id:
+        expression: MISSING
+        description: Reference to the respective repository for the record.
+      team_id:
+        expression: MISSING
+        description: Reference to the respective team for the record.

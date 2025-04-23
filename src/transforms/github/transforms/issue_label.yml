@@ -1,0 +1,32 @@
+domain: github.airbyte-interop
+transforms:
+  - name: issue_label
+    from:
+      - issue_labels: github.issue_labels
+    fields:
+      issue_id:
+        expression: MISSING
+        description: Foreign key that references the issue table
+      label_id:
+        expression: MISSING
+        description: Unique identifier of the used label
+annotations:
+  approved: false
+  missing_fields:
+    - issue_id
+    - label_id
+  evaluation:
+    source_stream_name: issue_labels
+    target_table_name: issue_label
+    table_match_score: 0.0
+    completion_score: 0.0
+    explanation: Both fields missing explicit mappings and no appropriate match found.
+    field_mapping_evals:
+      - name: issue_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: label_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

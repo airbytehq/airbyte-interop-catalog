@@ -1,0 +1,59 @@
+domain: github.airbyte-interop
+transforms:
+  - name: team
+    from:
+      - teams: github.teams
+    fields:
+      id:
+        expression: teams.id
+        description: System generated unique id for the team.
+      description:
+        expression: teams.description
+        description: User created description of the team.
+      name:
+        expression: teams.name
+        description: User created name of the team.
+      parent_id:
+        expression: teams.parent
+        description: Reference to the parent team.
+      privacy:
+        expression: teams.privacy
+        description: Type of privacy permissions associated with the team.
+      slug:
+        expression: teams.slug
+        description: Url friendly version of the team name.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: teams
+    target_table_name: team
+    table_match_score: 0.95
+    completion_score: 1.0
+    explanation: Highly confident mapping with all fields from the source accurately
+      mapped to the target.
+    field_mapping_evals:
+      - name: id
+        expression: teams.id
+        score: 1.0
+        explanation: Direct and exact mapping confirmed.
+      - name: description
+        expression: teams.description
+        score: 1.0
+        explanation: Direct and exact mapping confirmed.
+      - name: name
+        expression: teams.name
+        score: 1.0
+        explanation: Direct and exact mapping confirmed.
+      - name: parent_id
+        expression: teams.parent
+        score: 1.0
+        explanation: Exact mapping confirmed with contextual matching.
+      - name: privacy
+        expression: teams.privacy
+        score: 1.0
+        explanation: Direct and exact mapping confirmed.
+      - name: slug
+        expression: teams.slug
+        score: 1.0
+        explanation: Direct and exact mapping confirmed.

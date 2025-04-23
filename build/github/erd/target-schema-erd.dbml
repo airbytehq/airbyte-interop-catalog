@@ -1,0 +1,103 @@
+Table "issue_assignee" {
+    "issue_id" unknown [note: 'Foreign key that references the issue table']
+    "user_id" unknown [note: 'Foreign key that references the user table']
+}
+
+Table "label" {
+    "id" unknown [note: 'Unique identifier of the Github label']
+    "_fivetran_synced" unknown [note: 'Timestamp of the record being synced by Fivetran']
+    "color" unknown [note: 'The color of the label']
+    "description" unknown [note: 'The description of the label indicating the purpose']
+    "is_default" unknown [note: 'Boolean flagging if the label is default on creation']
+    "name" unknown [note: 'Name of the label']
+    "url" unknown [note: 'Url where the label was used']
+}
+
+Table "issue_closed_history" {
+    "issue_id" unknown [note: 'Foreign key that references the issue table']
+    "updated_at" unknown [note: 'Timestamp of when the action took place']
+    "closed" unknown [note: 'Boolean variable for if the issue was closed (true) or re-opened (false)']
+}
+
+Table "issue_label" {
+    "issue_id" unknown [note: 'Foreign key that references the issue table']
+    "label_id" unknown [note: 'Unique identifier of the used label']
+}
+
+Table "issue_comment" {
+    "id" unknown [note: 'System generated unique id for the issue comment.']
+    "issue_id" unknown [note: 'Foreign key that references the issue table']
+    "user_id" unknown [note: 'Foreign key that references the user table']
+    "created_at" unknown [note: 'Timestamp of when the issue comment was created.']
+}
+
+Table "issue_merged" {
+    "issue_id" unknown [note: 'Foreign key that references the issue table.  This table will only reference issues that are pull requests']
+    "merged_at" unknown [note: 'Timestamp of when the code merge took place']
+}
+
+Table "issue" {
+    "id" unknown [note: 'System generated unique id for the issue.  This is not the number that appears in the URL.']
+    "body" unknown [note: 'The text of the main description of the issue.']
+    "locked" unknown [note: 'Boolean indicating whether the issue is locked.']
+    "closed_at" unknown [note: 'Timestamp of when the issue was closed, NULL for issues that are open.']
+    "created_at" unknown [note: 'Timestamp of when the issue was created.']
+    "milestone_id" unknown [note: 'Foreign key that references the milestone table representing the current milestone the issue is in.']
+    "number" unknown [note: 'The issue number within a repository.  Is unique by repository, but not across repositories.']
+    "pull_request" unknown [note: 'Boolean for is the issue is a pull request (true) ot regular issue (false)']
+    "repository_id" unknown [note: 'Foreign key that references the repository table.']
+    "state" unknown [note: 'Whether the issue is open or closed.']
+    "title" unknown [note: 'Title of the issue.']
+    "updated_at" unknown [note: 'Timestamp of when the last update was made to the issue.']
+    "user_id" unknown [note: 'Foreign key that references the user table, representing the user that created the issue.']
+}
+
+Table "pull_request_review" {
+    "id" unknown [note: 'System generated unique id for the pull request review.']
+    "pull_request_id" unknown [note: 'Foreign key that references the pull request table.']
+    "submitted_at" unknown [note: 'Timestamp of when the request for review was submitted.']
+    "state" unknown [note: 'Whether the review was an approval, request for change, comment, dismissal.']
+    "user_id" unknown [note: 'Foreign key that references the user table, representing the user that reviewed the pull request.']
+}
+
+Table "pull_request" {
+    "id" unknown [note: 'System generated unique id for the pull request.']
+    "issue_id" unknown [note: 'Foreign key that references the issue table.']
+    "head_repo_id" unknown [note: 'Foreign key that references the repository table, referencing the current branch.']
+    "head_user_id" unknown [note: 'Foreign key that references the user table, referencing who created the current branch.']
+}
+
+Table "repo_team" {
+    "repository_id" unknown [note: 'Reference to the respective repository for the record.']
+    "team_id" unknown [note: 'Reference to the respective team for the record.']
+}
+
+Table "repository" {
+    "id" unknown [note: 'System generated unique id for the repository.']
+    "created_at" unknown [note: 'Timestamp of when the repository was created.']
+    "full_name" unknown [note: 'The name of the git repository.']
+    "private" unknown [note: 'Boolean field indicating whether the repository is private (true) or public (false).']
+}
+
+Table "requested_reviewer_history" {
+    "pull_request_id" unknown [note: 'Foreign key that references the pull request table.']
+    "created_at" unknown [note: 'Timestamp of when the review was submitted.']
+    "requested_id" unknown [note: 'Foreign key that references the user table, representing the user that was requested to review a PR.']
+    "removed" unknown [note: 'Boolean variable indicating if the requester was removed from the PR (true) or added to the PR (false).']
+}
+
+Table "team" {
+    "id" unknown [note: 'System generated unique id for the team.']
+    "description" unknown [note: 'User created description of the team.']
+    "name" unknown [note: 'User created name of the team.']
+    "parent_id" unknown [note: 'Reference to the parent team.']
+    "privacy" unknown [note: 'Type of privacy permissions associated with the team.']
+    "slug" unknown [note: 'Url friendly version of the team name.']
+}
+
+Table "user" {
+    "id" unknown [note: 'System generated unique id for the user.']
+    "login" unknown [note: 'The alias the user uses to login to github.']
+    "name" unknown [note: 'The name of the user']
+    "company" unknown [note: 'The  company of the user.']
+}

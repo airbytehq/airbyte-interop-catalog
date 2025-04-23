@@ -1,0 +1,41 @@
+domain: github.airbyte-interop
+transforms:
+  - name: issue_closed_history
+    from:
+      - issue_timeline_events: github.issue_timeline_events
+    fields:
+      issue_id:
+        expression: MISSING
+        description: Foreign key that references the issue table
+      updated_at:
+        expression: issue_timeline_events.comment.updated_at
+        description: Timestamp of when the action took place
+      closed:
+        expression: MISSING
+        description: Boolean variable for if the issue was closed (true) or re-opened
+          (false)
+annotations:
+  approved: false
+  missing_fields:
+    - closed
+    - issue_id
+  evaluation:
+    source_stream_name: issue_timeline_events
+    target_table_name: issue_closed_history
+    table_match_score: 0.6
+    completion_score: 0.33
+    explanation: The table's general intent matches somewhat closely, but many fields
+      required for a full match are missing or incorrectly matched.
+    field_mapping_evals:
+      - name: issue_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: updated_at
+        expression: issue_timeline_events.comment.updated_at
+        score: 1.0
+        explanation: Exact match found.
+      - name: closed
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

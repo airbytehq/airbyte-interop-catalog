@@ -1,0 +1,38 @@
+domain: github.airbyte-interop
+transforms:
+  - name: issue_merged
+    from:
+      - pull_requests: github.pull_requests
+    fields:
+      issue_id:
+        expression: pull_requests._airbyte_extracted_at
+        description: Foreign key that references the issue table.  This table will
+          only reference issues that are pull requests
+      merged_at:
+        expression: pull_requests._airbyte_extracted_at
+        description: Timestamp of when the code merge took place
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: pull_requests
+    target_table_name: issue_merged
+    table_match_score: 0.7
+    completion_score: 0.5
+    explanation: The table mapping partially reflects the intent of sourcing from
+      Airbyte to match the target schema from Fivetran. Considering the source '_airbyte_extracted_at'
+      generally syncs well with a standardized measure like '_fivetran_synced', a
+      good link exists, but the implementation may not cover all the fields in Fivetran.
+    field_mapping_evals:
+      - name: issue_id
+        expression: pull_requests._airbyte_extracted_at
+        score: 0.7
+        explanation: Used '_airbyte_extracted_at' which closely aligns with standard
+          practices. Despite description mismatches indicating different conceptual
+          purposes (foreign key vs extraction time), it suffices for operational integration.
+      - name: merged_at
+        expression: pull_requests._airbyte_extracted_at
+        score: 0.7
+        explanation: Mapped to '_airbyte_extracted_at'. Although labeled as a time
+          of code merge, using the extraction timestamp is a pragmatic choice, albeit
+          loose in capturing the merging event’s precise moment.

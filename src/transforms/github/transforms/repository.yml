@@ -1,0 +1,19 @@
+domain: github.airbyte-interop
+transforms:
+  - name: repository
+    from:
+      - MISSING: github.MISSING
+    fields:
+      id:
+        expression: MISSING
+        description: System generated unique id for the repository.
+      created_at:
+        expression: MISSING
+        description: Timestamp of when the repository was created.
+      full_name:
+        expression: MISSING
+        description: The name of the git repository.
+      private:
+        expression: MISSING
+        description: Boolean field indicating whether the repository is private (true)
+          or public (false).

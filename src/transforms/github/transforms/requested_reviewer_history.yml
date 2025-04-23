@@ -1,0 +1,20 @@
+domain: github.airbyte-interop
+transforms:
+  - name: requested_reviewer_history
+    from:
+      - MISSING: github.MISSING
+    fields:
+      pull_request_id:
+        expression: MISSING
+        description: Foreign key that references the pull request table.
+      created_at:
+        expression: MISSING
+        description: Timestamp of when the review was submitted.
+      requested_id:
+        expression: MISSING
+        description: Foreign key that references the user table, representing the
+          user that was requested to review a PR.
+      removed:
+        expression: MISSING
+        description: Boolean variable indicating if the requester was removed from
+          the PR (true) or added to the PR (false).
