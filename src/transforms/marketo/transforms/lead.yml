@@ -1,0 +1,279 @@
+domain: marketo.airbyte-interop
+transforms:
+  - name: lead
+    from:
+      - leads: marketo.leads
+    fields:
+      id:
+        expression: leads.id
+        description: Unique integer id of a lead record.
+      created_at:
+        expression: leads.createdAt
+        description: The timestamp each lead object was created at.
+      updated_at:
+        expression: leads.updatedAt
+        description: The timestamp each lead object was last updated at.
+      email:
+        expression: leads.email
+        description: The email address of the lead.
+      first_name:
+        expression: leads.firstName
+        description: The first name of the lead.
+      last_name:
+        expression: leads.lastName
+        description: The last name of the lead.
+      phone:
+        expression: leads.phone
+        description: Lead’s Phone Number.
+      main_phone:
+        expression: leads.mainPhone
+        description: Primary phone number of the lead’s company
+      mobile_phone:
+        expression: leads.mobilePhone
+        description: Lead’s mobile phone number
+      company:
+        expression: leads.company
+        description: Lead’s company name
+      inferred_company:
+        expression: leads.inferredCompany
+        description: Company name inferred by reverse IP lookup of the lead’s first
+          recorded web visit
+      address_lead:
+        expression: MISSING
+        description: Second address associated with the lead.
+      address:
+        expression: leads.address
+        description: Lead’s address.
+      city:
+        expression: leads.city
+        description: Lead’s city
+      state:
+        expression: leads.state
+        description: Lead’s state
+      state_code:
+        expression: MISSING
+        description: Alpha-2 code of the Lead’s state
+      country:
+        expression: leads.country
+        description: Lead’s country
+      country_code:
+        expression: MISSING
+        description: Alpha-2 code of the Lead’s country
+      postal_code:
+        expression: leads.postalCode
+        description: Lead’s postal code
+      billing_street:
+        expression: leads.billingStreet
+        description: Billing street address of the lead’s company
+      billing_city:
+        expression: leads.billingCity
+        description: City of the lead’s billing address
+      billing_state:
+        expression: leads.billingState
+        description: State or province of the lead’s billing address
+      billing_state_code:
+        expression: MISSING
+        description: Alpha-2 code of the state or province of the lead’s billing address
+      billing_country:
+        expression: leads.billingCountry
+        description: Country of the lead’s billing address
+      billing_country_code:
+        expression: MISSING
+        description: Alpha-2 code of the country of the lead’s billing address
+      billing_postal_code:
+        expression: leads.billingPostalCode
+        description: Postal code of the lead’s billing address
+      inferred_city:
+        expression: leads.inferredCity
+        description: Lead’s city inferred by reverse IP lookup of lead’s first recorded
+          web visit.
+      inferred_state_region:
+        expression: leads.inferredStateRegion
+        description: Lead’s state region inferred by reverse IP lookup of lead’s first
+          recorded web visit.
+      inferred_country:
+        expression: leads.inferredCountry
+        description: Country inferred by reverse IP lookup of the lead’s first recorded
+          web visit
+      inferred_postal_code:
+        expression: leads.inferredPostalCode
+        description: Lead’s postal code inferred by reverse IP lookup of lead’s first
+          recorded web visit.
+      inferred_phone_area_code:
+        expression: leads.inferredPhoneAreaCode
+        description: Lead’s phone area code inferred by reverse IP lookup of lead’s
+          first recorded web visit.
+      anonymous_ip:
+        expression: leads.anonymousIP
+        description: IP address of the lead’s first recorded web visit
+      unsubscribed:
+        expression: leads.unsubscribed
+        description: Lead’s email-unsubscribed status (boolean). Partially system
+          managed. Will prevent receipt of non-operational emails if set to true.
+      email_invalid:
+        expression: leads.emailInvalid
+        description: Email invalid status (boolean). All emails to the address will
+          be blocked if set to true. Bounces indicating that the email is invalid
+          will automatically set this field to true.
+      do_not_call:
+        expression: leads.doNotCall
+        description: Lead’s do-not-call preference (boolean)
+annotations:
+  approved: false
+  missing_fields:
+    - address_lead
+    - billing_country_code
+    - billing_state_code
+    - country_code
+    - state_code
+  evaluation:
+    source_stream_name: leads
+    target_table_name: lead
+    table_match_score: 0.75
+    completion_score: 0.92
+    explanation: The table match score reflects a relatively high confidence in matching
+      the core structures of the lead records between the source and target system,
+      as indicated by the largely consistent mapping expressions. The completion score
+      is slightly reduced due to several fields set as 'MISSING' indicating that not
+      all target fields could be populated from the source data.
+    field_mapping_evals:
+      - name: id
+        expression: leads.id
+        score: 1.0
+        explanation: Direct match of field names and purposes.
+      - name: created_at
+        expression: leads.createdAt
+        score: 1.0
+        explanation: Direct match of field names and purposes.
+      - name: updated_at
+        expression: leads.updatedAt
+        score: 1.0
+        explanation: Direct match of field names and purposes.
+      - name: email
+        expression: leads.email
+        score: 1.0
+        explanation: Direct match of field names and purposes.
+      - name: first_name
+        expression: leads.firstName
+        score: 1.0
+        explanation: Direct match of field names and purposes.
+      - name: last_name
+        expression: leads.lastName
+        score: 1.0
+        explanation: Direct match of field names and purposes.
+      - name: phone
+        expression: leads.phone
+        score: 0.9
+        explanation: Closely matches expected data.
+      - name: main_phone
+        expression: leads.mainPhone
+        score: 0.9
+        explanation: Closely matches expected data.
+      - name: mobile_phone
+        expression: leads.mobilePhone
+        score: 0.9
+        explanation: Closely matches expected data.
+      - name: company
+        expression: leads.company
+        score: 1.0
+        explanation: Direct match of field names and purposes.
+      - name: inferred_company
+        expression: leads.inferredCompany
+        score: 0.9
+        explanation: Closely matches expected data, slightly indirect mapping.
+      - name: address_lead
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: address
+        expression: leads.address
+        score: 1.0
+        explanation: Direct match of field names and purposes.
+      - name: city
+        expression: leads.city
+        score: 1.0
+        explanation: Direct match of field names and purposes.
+      - name: state
+        expression: leads.state
+        score: 1.0
+        explanation: Direct match of field names and purposes.
+      - name: state_code
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: country
+        expression: leads.country
+        score: 1.0
+        explanation: Direct match of field names and purposes.
+      - name: country_code
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: postal_code
+        expression: leads.postalCode
+        score: 1.0
+        explanation: Direct match of field names and purposes.
+      - name: billing_street
+        expression: leads.billingStreet
+        score: 1.0
+        explanation: Direct match of field names and purposes.
+      - name: billing_city
+        expression: leads.billingCity
+        score: 1.0
+        explanation: Direct match of field names and purposes.
+      - name: billing_state
+        expression: leads.billingState
+        score: 1.0
+        explanation: Direct match of field names and purposes.
+      - name: billing_state_code
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: billing_country
+        expression: leads.billingCountry
+        score: 1.0
+        explanation: Direct match of field names and purposes.
+      - name: billing_country_code
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: billing_postal_code
+        expression: leads.billingPostalCode
+        score: 1.0
+        explanation: Direct match of field names and purposes.
+      - name: inferred_city
+        expression: leads.inferredCity
+        score: 0.9
+        explanation: Closely matches expected data, slightly indirect mapping.
+      - name: inferred_state_region
+        expression: leads.inferredStateRegion
+        score: 0.9
+        explanation: Closely matches expected data, slightly indirect mapping.
+      - name: inferred_country
+        expression: leads.inferredCountry
+        score: 0.9
+        explanation: Closely matches expected data, slightly indirect mapping.
+      - name: inferred_postal_code
+        expression: leads.inferredPostalCode
+        score: 0.9
+        explanation: Closely matches expected data, slightly indirect mapping.
+      - name: inferred_phone_area_code
+        expression: leads.inferredPhoneAreaCode
+        score: 0.9
+        explanation: Closely matches expected data, slightly indirect mapping.
+      - name: anonymous_ip
+        expression: leads.anonymousIP
+        score: 0.7
+        explanation: The expression matches, but the use case might differ slightly.
+      - name: unsubscribed
+        expression: leads.unsubscribed
+        score: 1.0
+        explanation: Direct match of field names and purposes.
+      - name: email_invalid
+        expression: leads.emailInvalid
+        score: 1.0
+        explanation: Direct match of field names and purposes.
+      - name: do_not_call
+        expression: leads.doNotCall
+        score: 1.0
+        explanation: Direct match of field names and purposes.

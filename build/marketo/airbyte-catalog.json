@@ -1,0 +1,7656 @@
+{
+  "streams": [
+    {
+      "name": "activity_types",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "description": "The unique identifier of the activity type.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "name": {
+            "description": "The name of the activity type.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "description": {
+            "description": "A description of the activity type.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttribute": {
+            "description": "The primary attribute of the activity, which could be the most essential or relevant data point.",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "name": {
+                "description": "The name of the primary attribute.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "dataType": {
+                "description": "The data type of the primary attribute.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              }
+            }
+          },
+          "attributes": {
+            "description": "An array containing the activity attributes including details like type, value, timestamp, etc.",
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "description": "Properties related to a specific activity attribute.",
+              "type": [
+                "null",
+                "object"
+              ],
+              "properties": {
+                "name": {
+                  "description": "The name of the attribute.",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "dataType": {
+                  "description": "The data type of the attribute.",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh"
+      ],
+      "source_defined_cursor": null,
+      "default_cursor_field": null,
+      "source_defined_primary_key": [
+        [
+          "id"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "segmentations",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "object",
+          "null"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "createdAt": {
+            "description": "The date and time when the segmentation was created.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "description": "The date and time when the segmentation was last updated.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "id": {
+            "description": "The unique identifier for the segmentation.",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "description": {
+            "description": "A brief description of the segmentation.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "name": {
+            "description": "The name of the segmentation.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "url": {
+            "description": "The URL for accessing the segmentation data.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "description": "The current status of the segmentation.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "folder": {
+            "description": "Information about the folder where the segmentation is stored.",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "type": {
+                "description": "The type of folder.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "value": {
+                "description": "The value associated with the folder.",
+                "type": [
+                  "null",
+                  "integer"
+                ]
+              },
+              "folderName": {
+                "description": "The name of the folder.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh"
+      ],
+      "source_defined_cursor": null,
+      "default_cursor_field": null,
+      "source_defined_primary_key": [
+        [
+          "id"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "campaigns",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "description": "The unique identifier for the campaign.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "createdAt": {
+            "description": "The date and time when the campaign was created.",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "description": "The date and time when the campaign was last updated.",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "active": {
+            "description": "Indicates whether the campaign is currently active or not.",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "description": {
+            "description": "A brief description of the campaign.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "name": {
+            "description": "The name of the campaign.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "programId": {
+            "description": "The unique identifier of the program to which the campaign belongs.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "programName": {
+            "description": "The name of the program to which the campaign belongs.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "type": {
+            "description": "The type of the campaign (e.g., email, social media, event).",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "workspaceName": {
+            "description": "The name of the workspace where the campaign is stored.",
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": [
+        [
+          "id"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "lists",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "object",
+          "null"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "description": "The unique identifier of the list.",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "name": {
+            "description": "The name of the list.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "createdAt": {
+            "description": "The date and time this list was created.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "description": "The date and time this list was last updated.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "description": {
+            "description": "A brief description of the list.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "programName": {
+            "description": "The name of the program associated with this list.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "workspaceName": {
+            "description": "The name of the workspace to which this list belongs.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "workspaceId": {
+            "description": "The unique identifier of the workspace to which this list belongs.",
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": [
+        [
+          "id"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "programs",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "object",
+          "null"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "description": "The unique identifier of the program.",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "createdAt": {
+            "description": "The date and time when the program was created.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "description": "The date and time when the program was last updated.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "name": {
+            "description": "The name or title of the program.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "description": {
+            "description": "The detailed information or overview of the program.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "url": {
+            "description": "The URL associated with the program.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "type": {
+            "description": "The type or category of the program.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "channel": {
+            "description": "The marketing channel associated with the program.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "description": "The current status of the program.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "workspace": {
+            "description": "The workspace or environment where the program is located.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "headStart": {
+            "description": "The time duration for the program to start.",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "isHeadStart": {
+            "description": "Indicates if the program has a head start feature enabled.",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "folder": {
+            "description": "Details about the folder associated with the program",
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "type": {
+                "description": "The type or category of the folder.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "value": {
+                "description": "The unique value associated with the folder.",
+                "type": [
+                  "null",
+                  "integer"
+                ]
+              },
+              "folderName": {
+                "description": "The name of the folder where the program is stored.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "updatedAt"
+      ],
+      "source_defined_primary_key": [
+        [
+          "id"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "leads",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "object",
+          "null"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "company": {
+            "description": "The name of the company associated with the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "site": {
+            "description": "The website associated with the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "billingStreet": {
+            "description": "The street address for billing.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "billingCity": {
+            "description": "The city for billing address.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "billingState": {
+            "description": "The state for billing address.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "billingCountry": {
+            "description": "The country for billing address.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "billingPostalCode": {
+            "description": "The postal code for billing address.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "website": {
+            "description": "The website associated with the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "mainPhone": {
+            "description": "The main phone number of the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "annualRevenue": {
+            "description": "The annual revenue of the company associated with the lead.",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "numberOfEmployees": {
+            "description": "The number of employees in the company associated with the lead.",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "industry": {
+            "description": "The industry of the company associated with the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sicCode": {
+            "description": "The Standard Industrial Classification (SIC) code.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "mktoCompanyNotes": {
+            "description": "Notes specific to the company in Marketo.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "externalCompanyId": {
+            "description": "The external company ID associated with the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "id": {
+            "description": "The unique identifier of the lead.",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "mktoName": {
+            "description": "The name of the lead in Marketo.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "personType": {
+            "description": "The type of person, e.g., individual or corporate entity.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "mktoIsPartner": {
+            "description": "Indicates if the lead is a partner in Marketo.",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "isLead": {
+            "description": "Indicates if the record is a lead.",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "mktoIsCustomer": {
+            "description": "Indicates if the lead is a customer in Marketo.",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "isAnonymous": {
+            "description": "Indicates if the lead is anonymous.",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "salutation": {
+            "description": "The salutation or form of address for the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "firstName": {
+            "description": "The first name of the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "middleName": {
+            "description": "The middle name of the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "lastName": {
+            "description": "The last name of the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "email": {
+            "description": "The email address of the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "phone": {
+            "description": "The phone number of the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "mobilePhone": {
+            "description": "The mobile phone number of the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "fax": {
+            "description": "The fax number of the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "title": {
+            "description": "The job title of the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "contactCompany": {
+            "description": "The name of the contact person's company.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "dateOfBirth": {
+            "description": "The date of birth of the lead.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "address": {
+            "description": "The complete address of the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "city": {
+            "description": "The city of the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "state": {
+            "description": "The state of the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "country": {
+            "description": "The country of the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "postalCode": {
+            "description": "The postal code of the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "personTimeZone": {
+            "description": "The time zone of the person.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "originalSourceType": {
+            "description": "The original source type of the lead data.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "originalSourceInfo": {
+            "description": "The original source information of the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "registrationSourceType": {
+            "description": "The registration source type.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "registrationSourceInfo": {
+            "description": "The registration source information.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "originalSearchEngine": {
+            "description": "The original search engine used by the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "originalSearchPhrase": {
+            "description": "The original search phrase used by the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "originalReferrer": {
+            "description": "The original referrer of the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "emailInvalid": {
+            "description": "Indicates if the email address is invalid.",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "emailInvalidCause": {
+            "description": "The reason for email address being invalid.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "unsubscribed": {
+            "description": "Indicates if the lead is unsubscribed.",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "unsubscribedReason": {
+            "description": "The reason for lead being unsubscribed.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "doNotCall": {
+            "description": "Indicates if the lead should not be contacted.",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "mktoDoNotCallCause": {
+            "description": "The reason for the lead being in do not call list in Marketo.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "doNotCallReason": {
+            "description": "The reason for not contacting the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "marketingSuspended": {
+            "description": "Indicates if marketing is suspended for the lead.",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "marketingSuspendedCause": {
+            "description": "The reason for marketing suspension.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "blackListed": {
+            "description": "Indicates if the lead is blacklisted.",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "blackListedCause": {
+            "description": "The reason for lead being blacklisted.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "mktoPersonNotes": {
+            "description": "Notes specific to the person (lead) in Marketo.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "anonymousIP": {
+            "description": "The anonymous IP address of the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "inferredCompany": {
+            "description": "The inferred company based on lead data.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "inferredCountry": {
+            "description": "The inferred country based on lead data.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "inferredCity": {
+            "description": "The inferred city based on lead data.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "inferredStateRegion": {
+            "description": "The inferred state region based on lead data.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "inferredPostalCode": {
+            "description": "The inferred postal code based on lead data.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "inferredMetropolitanArea": {
+            "description": "The inferred metropolitan area based on lead data.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "inferredPhoneAreaCode": {
+            "description": "The inferred phone area code based on lead data.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "emailSuspended": {
+            "description": "Indicates if the email address is suspended.",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "emailSuspendedCause": {
+            "description": "The reason for email address being suspended.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "emailSuspendedAt": {
+            "description": "The date and time when the email address was suspended.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "department": {
+            "description": "The department within the company.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "createdAt": {
+            "description": "The date and time when the lead was created.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "description": "The date and time when the lead was last updated.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "cookies": {
+            "description": "Cookies associated with the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "externalSalesPersonId": {
+            "description": "The external sales person ID associated with the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "leadPerson": {
+            "description": "The lead person associated with the lead data.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "leadRole": {
+            "description": "The role of the lead within the company.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "leadSource": {
+            "description": "The source from which the lead was acquired.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "leadStatus": {
+            "description": "The status of the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "leadScore": {
+            "description": "The score assigned to the lead.",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "urgency": {
+            "description": "The urgency level associated with the lead.",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "priority": {
+            "description": "The priority level associated with the lead.",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "relativeScore": {
+            "description": "The relative score of the lead.",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "relativeUrgency": {
+            "description": "The relative urgency associated with the lead.",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "rating": {
+            "description": "The rating given to the lead.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "personPrimaryLeadInterest": {
+            "description": "The primary lead interest of the person.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "leadPartitionId": {
+            "description": "The unique identifier for partitioning leads.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "leadRevenueCycleModelId": {
+            "description": "The unique identifier of the revenue cycle model.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "leadRevenueStageId": {
+            "description": "The unique identifier of the revenue stage.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "acquisitionProgramId": {
+            "description": "The unique identifier of the program through which the lead was acquired.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "mktoAcquisitionDate": {
+            "description": "The acquisition date within Marketo.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "updatedAt"
+      ],
+      "source_defined_primary_key": [
+        [
+          "id"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_visit_webpage",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "browser": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "client_ip_address": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "device": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "platform": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "query_parameters": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "referrer_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "search_engine": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "search_query": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "token": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "user_agent": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "webpage_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_fill_out_form",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "browser": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "client_ip_address": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "device": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "form_fields": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "platform": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "query_parameters": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "referrer_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "user_agent": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "webpage_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_click_link",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "browser": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "client_ip_address": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "device": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "platform": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "query_parameters": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "referrer_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "user_agent": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "webpage_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_send_email",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "browser": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "campaign_run_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "choice_number": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "device": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "has_predictive": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "platform": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "step_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "test_variant": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "user_agent": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_email_delivered",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "browser": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "campaign_run_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "choice_number": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "device": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "has_predictive": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "platform": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "step_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "test_variant": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "user_agent": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_email_bounced",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "browser": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "campaign_run_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "category": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "choice_number": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "details": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "device": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "email": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "has_predictive": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "platform": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "step_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "subcategory": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "test_variant": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "user_agent": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_unsubscribe_email",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "browser": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "campaign_run_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "client_ip_address": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "device": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "form_fields": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "has_predictive": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "platform": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "query_parameters": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "referrer_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "test_variant": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "user_agent": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "webform_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "webpage_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_open_email",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "bot_activity_pattern": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "browser": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "campaign_run_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "choice_number": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "device": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "has_predictive": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "is_bot_activity": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "is_mobile_device": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "platform": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "step_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "test_variant": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "user_agent": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_click_email",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "bot_activity_pattern": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "browser": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "campaign_run_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "choice_number": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "device": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "is_bot_activity": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "is_mobile_device": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "is_predictive": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "link": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "link_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "platform": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "step_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "test_variant": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "user_agent": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_new_lead",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "created_date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "form_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "lead_source": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "list_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sfdc_type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source_type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "api_method_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "modifying_user": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "request_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_change_data_value",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "new_value": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "old_value": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "api_method_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "modifying_user": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "request_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_change_score",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "change_value": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "new_value": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "old_value": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_addto_list",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_removefrom_list",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_email_bounced_soft",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "browser": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "campaign_run_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "category": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "choice_number": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "details": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "device": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "email": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "has_predictive": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "platform": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "step_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "subcategory": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "test_variant": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "user_agent": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_merge_leads",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "merge_ids": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": [
+                "integer",
+                "number",
+                "string",
+                "null"
+              ]
+            }
+          },
+          "master_updated": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "mergedin_sales": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "merge_source": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "api_method_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "modifying_user": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "request_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_addto_opportunity",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "is_primary": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "role": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_removefrom_opportunity",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "is_primary": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "role": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_update_opportunity",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "attribute_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "data_value_changes": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "new_value": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "old_value": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_delete_lead",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "remove_from_crm": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "api_method_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "modifying_user": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "request_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_send_alert",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "send_to_list": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "send_to_owner": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "send_to_smart_list": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_send_sales_email",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "campaign_run_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "has_predictive": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "marketo_sales_person_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "sales_campaign_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sales_campaign_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sales_email_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sales_template_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sales_template_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sentby": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "template_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_open_sales_email",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "bot_activity_pattern": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "campaign_run_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "has_predictive": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "is_bot_activity": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "marketo_sales_person_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "sales_campaign_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sales_campaign_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sales_email_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sales_template_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sales_template_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sentby": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "template_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_click_sales_email",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "bot_activity_pattern": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "campaign_run_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "is_bot_activity": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "is_predictive": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "link": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "marketo_sales_person_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "sales_campaign_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sales_campaign_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sales_email_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sales_template_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sales_template_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sentby": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "template_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_receive_sales_email",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "receivedby": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_request_campaign",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_sales_email_bounced",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "campaign_run_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "category": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "details": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "email": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "has_predictive": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "marketo_sales_person_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "sentby": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "subcategory": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "template_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_change_lead_partition",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "old_partition_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_change_revenue_stage",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "new_stage_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "old_stage_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sla_expiration": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "new_stage": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "old_stage": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_change_revenue_stage_manually",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_change_statusin_progression",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "acquired_by": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "new_status_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "old_status_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "program_member_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "reached_success_date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "registration_code": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status_reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "success": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "webinar_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "new_status": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "old_status": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_change_segment",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "new_segment_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_call_webhook",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "error_type": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "response": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_sent_forwardto_friend_email",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "choice_number": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "lead_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "step_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_received_forwardto_friend_email",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "choice_number": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "lead_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "step_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_addto_nurture",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "track_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "track_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_change_nurture_track",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "new_track_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "previous_track_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "previous_track_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "track_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_change_nurture_cadence",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "new_nurture_cadence": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "previous_nurture_cadence": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_change_program_member_data",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "attribute_display_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "attribute_name": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "new_value": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "old_value": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_push_leadto_marketo",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "api_method_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "modifying_user": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "request_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_execute_campaign",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "qualified": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "token_context_campaign_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "used_parent_campaign_token_context": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_replyto_sales_email",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "campaign_run_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "has_predictive": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "marketo_sales_person_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "sales_campaign_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sales_campaign_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sales_email_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sales_template_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sales_template_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sentby": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "template_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_engagedwitha_dialogue",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "conversation_score": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "conversation_status": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "conversation_summary": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "conversation_transcript": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "dialogue_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "discussed_topics": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "language": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "page_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "workspace": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_interactedwith_documentin_dialogue",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "dialogue_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "dialogue_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "document_downloaded": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "document_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "document_opened": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "document_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "language": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "page_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "search_terms": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "workspace": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_scheduled_meetingin_dialogue",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "agent_email": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "agent_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "dialogue_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "dialogue_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "meeting_status": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "page_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "routing_queue_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "routing_queue_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "routing_queue_type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "scheduled_for": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_reached_dialogue_goal",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "dialogue_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "goal_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "language": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "page_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "workspace": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_respondedtoapollinwebinar",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "pollquestion": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "pollresponse": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_calltoactionclickedinwebinar",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "linkclicked": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_assetdownloadsinwebinar",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "downloadedasset": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_asksquestionsinwebinar",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "question": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "questionwasanswered": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_hasattendedevent",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "event_mode": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "livewatchtimebypercent": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "numberofansweredquestions": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "numberofassetsdownloaded": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "numberof_c_t_asclicked": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "numberofpollresponses": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "numberofunansweredquestions": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "watchdurationinminutes": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "watched_date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "webinar_title": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_engagedwithan_agentin_dialogue",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "agent_email": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "agent_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "agent_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "conversation_score": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "conversation_status": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "conversation_summary": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "conversation_transcript": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "dialogue_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "discussed_topics": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "lead_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "page_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "routing_queue_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "routing_queue_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "routing_queue_type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_engagedwitha_conversational_flow",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "conversation_score": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "conversation_status": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "conversation_summary": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "conversation_transcript": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "conversational_flow_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "discussed_topics": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "interacted_u_i_type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "language": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "page_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source_type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "workspace": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_scheduled_meetingin_conversational_flow",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "agent_email": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "agent_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "conversational_flow_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "conversational_flow_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "meeting_status": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "page_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "routing_queue_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "routing_queue_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "routing_queue_type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "scheduled_for": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_reached_conversational_flow_goal",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "conversational_flow_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "goal_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "language": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "page_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "workspace": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_interactedwith_documentin_conversational_flow",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "conversational_flow_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "conversational_flow_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "document_downloaded": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "document_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "document_opened": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "document_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "language": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "page_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "search_terms": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "workspace": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_engagedwithan_agentin_conversational_flow",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "agent_email": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "agent_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "agent_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "conversation_score": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "conversation_status": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "conversation_summary": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "conversation_transcript": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "conversational_flow_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "discussed_topics": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "lead_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "page_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "routing_queue_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "routing_queue_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "routing_queue_type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "activities_share_content",
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "marketoGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "leadId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "activityDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "campaignId": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "primaryAttributeValueId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryAttributeValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "share_message": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "social_app_type_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "social_network": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "webpage_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        }
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "activityDate"
+      ],
+      "source_defined_primary_key": [
+        [
+          "marketoGUID"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    }
+  ]
+}

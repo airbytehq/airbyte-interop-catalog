@@ -1,0 +1,76 @@
+domain: marketo.airbyte-interop
+transforms:
+  - name: email_template_history
+    from:
+      - MISSING: marketo.MISSING
+    fields:
+      created_at:
+        expression: MISSING
+        description: Timestamp the email template was created.
+      description:
+        expression: MISSING
+        description: Description of the email template.
+      folder_folder_name:
+        expression: MISSING
+        description: The name of the email template's folder.
+      folder_id:
+        expression: MISSING
+        description: The ID of the email template's folder.
+      folder_type:
+        expression: MISSING
+        description: The type of the email template's folder.
+      folder_value:
+        expression: MISSING
+        description: The value of the email template's folder.
+      from_email:
+        expression: MISSING
+        description: The 'From' address of the email.
+      from_name:
+        expression: MISSING
+        description: The 'From' name of the email.
+      id:
+        expression: MISSING
+        description: ID of the email template.
+      name:
+        expression: MISSING
+        description: Name of the email template.
+      operational:
+        expression: MISSING
+        description: Whether the email is operational. Operational emails bypass unsubscribe
+          status. Defaults to false.
+      program_id:
+        expression: MISSING
+        description: The ID of the email template's program.
+      publish_to_msi:
+        expression: MISSING
+        description: Whether the email is published to Marketo Sales Insight.
+      reply_email:
+        expression: MISSING
+        description: Reply-To address of the Email.
+      status:
+        expression: MISSING
+        description: Status filter for draft or approved versions.
+      subject:
+        expression: MISSING
+        description: Subject line of the email.
+      template:
+        expression: MISSING
+        description: ID of the parent template.
+      text_only:
+        expression: MISSING
+        description: Setting to include text-only version of email when sent.
+      updated_at:
+        expression: MISSING
+        description: Timestamp the email template was last updated.
+      url:
+        expression: MISSING
+        description: URL of the email template in the Marketo UI.
+      version:
+        expression: MISSING
+        description: The type version of the email, either '1' or '2'.
+      web_view:
+        expression: MISSING
+        description: Whether 'View as Webpage' function is enabled for the email.
+      workspace:
+        expression: MISSING
+        description: Name of the workspace.

@@ -1,0 +1,126 @@
+domain: marketo.airbyte-interop
+transforms:
+  - name: activity_click_email
+    from:
+      - activities_click_email: marketo.activities_click_email
+    fields:
+      activity_date:
+        expression: activities_click_email.activityDate
+        description: The date of the activity.
+      activity_type_id:
+        expression: activities_click_email.activityTypeId
+        description: The ID of the activity type.
+      campaign_id:
+        expression: activities_click_email.campaignId
+        description: The ID of the email's campaign.
+      campaign_run_id:
+        expression: activities_click_email.campaign_run_id
+        description: The ID of the email's campaign run.
+      choice_number:
+        expression: activities_click_email.choice_number
+        description: The choice number of the current step that triggered the activity.
+      device:
+        expression: activities_click_email.device
+        description: The device type the activity occurred on.
+      email_template_id:
+        expression: MISSING
+        description: The ID of the email's template.
+      id:
+        expression: MISSING
+        description: ID of the activity.
+      is_mobile_device:
+        expression: activities_click_email.is_mobile_device
+        description: Whether the activity occurred on a mobile device.
+      lead_id:
+        expression: activities_click_email.leadId
+        description: The ID of the lead related to the activity.
+      link:
+        expression: activities_click_email.link
+        description: The URL of the link clicked.
+      primary_attribute_value:
+        expression: activities_click_email.primaryAttributeValue
+        description: The primary attribute of the activity.
+      primary_attribute_value_id:
+        expression: activities_click_email.primaryAttributeValueId
+        description: The ID of the primary attribute of the activity.
+      step_id:
+        expression: activities_click_email.step_id
+        description: The Id of the current step in the flow.
+      user_agent:
+        expression: activities_click_email.user_agent
+        description: The Web browser user agent information obtained when the lead
+          clicked the email link.
+annotations:
+  approved: true
+  missing_fields:
+    - email_template_id
+    - id
+  evaluation:
+    source_stream_name: activities_click_email
+    target_table_name: activity_click_email
+    table_match_score: 0.8
+    completion_score: 0.7142857142857143
+    explanation: The table match is of high confidence due to the alignment of most
+      source schema fields with the target schema. The completion score reflects the
+      presence of several field mappings but not all are complete.
+    field_mapping_evals:
+      - name: activity_date
+        expression: activities_click_email.activityDate
+        score: 1.0
+        explanation: Direct and exact match with the target schema.
+      - name: activity_type_id
+        expression: activities_click_email.activityTypeId
+        score: 1.0
+        explanation: Direct and exact match with the target schema.
+      - name: campaign_id
+        expression: activities_click_email.campaignId
+        score: 1.0
+        explanation: Direct and exact match with the target schema.
+      - name: campaign_run_id
+        expression: activities_click_email.campaign_run_id
+        score: 0.8
+        explanation: Field reference is very close, and likely considered equivalent.
+      - name: choice_number
+        expression: activities_click_email.choice_number
+        score: 1.0
+        explanation: Direct and exact match with the target schema.
+      - name: device
+        expression: activities_click_email.device
+        score: 1.0
+        explanation: Direct and exact match with the target schema.
+      - name: email_template_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: is_mobile_device
+        expression: activities_click_email.is_mobile_device
+        score: 1.0
+        explanation: Direct and exact match with the target schema.
+      - name: lead_id
+        expression: activities_click_email.leadId
+        score: 1.0
+        explanation: Direct and exact match with the target schema.
+      - name: link
+        expression: activities_click_email.link
+        score: 1.0
+        explanation: Direct and exact match with the target schema.
+      - name: primary_attribute_value
+        expression: activities_click_email.primaryAttributeValue
+        score: 1.0
+        explanation: Direct and exact match with the target schema.
+      - name: primary_attribute_value_id
+        expression: activities_click_email.primaryAttributeValueId
+        score: 1.0
+        explanation: Direct and exact match with the target schema.
+      - name: step_id
+        expression: activities_click_email.step_id
+        score: 0.8
+        explanation: Field reference is very close, and likely considered equivalent.
+      - name: user_agent
+        expression: activities_click_email.user_agent
+        score: 1.0
+        explanation: Direct and exact match with the target schema.
