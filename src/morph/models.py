@@ -188,8 +188,8 @@ class DbtSourceTable(BaseModel):
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> Self:
         """Create a DbtSourceTable from a dictionary."""
-        columns = []
-        for column_data in data["columns"]:
+        columns: list[DbtSourceColumn] = []
+        for column_data in data.get("columns", []):
             column = column_data.copy()
 
             if "type" in column and column.get("data_type") is None:
@@ -210,7 +210,7 @@ class DbtSourceTable(BaseModel):
 
     def to_dict(self) -> dict[str, Any]:
         """Convert the DbtSourceTable to a dictionary."""
-        columns = []
+        columns: list[DbtSourceColumn] = []
         for column in self.columns:
             col_dict = column.model_dump(exclude_none=True, exclude_unset=True)
 
