@@ -22,44 +22,28 @@ To add a new connector to the catalog, follow these steps:
 1. Identify the canonical Airbyte source name for the connector. (E.g. `airbyte-source-facebook-marketing`).
 2. Identify the canonical Fivetran source name for the connector. (E.g. `facebook_ads`).
 3. Locate the Fivetran "Source" dbt package for the connector. (E.g. `https://github.com/fivetran/dbt_facebook_ads_source`).
-4. Create a new directory `catalog/{new_connector}`, matching the canonical source name, excluding the "source-" prefix, and replacing hyphens with underscores. For example, "source-shopify" would be `catalog/shopify` and "source-facebook-marketing" would be `catalog/facebook_marketing`.
-5. Create a new file `src/transforms/{new_connector}/config.yml` file which populates the info above into the following example:
+4. Create a new file `src/transforms/{new_connector}/config.yml`, matching the canonical source name, excluding the "source-" prefix, and replacing hyphens with underscores. For example, "source-shopify" would be `src/transforms/shopify/config.yml` and "source-facebook-marketing" would be `src/transforms/facebook_marketing/config.yml`. Populates the info above into the following example:
 
    ```yaml
    project_id: {new_connector}.airbyte-interop
    source_name: {new_connector}
-   source_streams:
-     # TODO: list streams to include in the source here
-
    # Target schema file snapshotted from: https://github.com/fivetran/dbt_{fivetran_source_name}_source/blob/main/models/src_{fivetran_source_name}.yml
    target_dbt_schema: https://raw.githubusercontent.com/fivetran/dbt_{fivetran_source_name}_source/refs/heads/main/models/src_{fivetran_source_name}.yml
    target_tables: []  # Will be added later
    ```
 
-6. Generate the project scaffold using the morph CLI:
+5. Generate the project using the morph CLI:
 
    - This will generate the Airbyte catalog, mapping files, and dbt project.
    - Optionally, you can skip certain steps by using the `--no-airbyte-catalog`, `--no-transforms`, or `--no-dbt-project` flags. (See `morph build --help` for more information.)
 
    ```bash
-   uv run morph build {source_name}
+   uv run morph build {source_name} --with-generate
    ```
 
-7. Generated Airbyte schema for the source.
+## Running GitHub Actions
 
-   - The first time you run this it will require creds in a `GCP_GSM_CREDENTIALS` env var.
-     ```bash
-     uv run morph sync {source_name} --with-data
-     ```
-   - Subsequent executions can be run without creds, using the generated catalog.
-     ```bash
-     uv run morph sync {source_name} --with-data --no-creds
-     ```
-
-8. Optionally extract the raw data. This will require creds and may take a while.
-   ```bash
-   uv run morph sync {source_name}
-   ```
+Alternatively, you can execute the "On-Demand Generate" workflow in github actions. This will create a new PR for your project.
 
 ## Generating dbt Projects from Mapping Files
 
