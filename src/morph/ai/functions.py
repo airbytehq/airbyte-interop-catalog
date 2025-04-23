@@ -10,7 +10,7 @@ if VERBOSE_MODE:
     marvin.settings.enable_default_print_handler = True
     marvin.settings.log_level = "DEBUG"
 else:
-    marvin.settings.enable_default_print_handler = True
+    marvin.settings.enable_default_print_handler = False
     marvin.settings.log_level = "WARNING"
 
 
