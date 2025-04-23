@@ -23,6 +23,7 @@ lock = { cmd = "uv lock", help = "Lock dependencies" }
 pre-commit = { cmd = "pre-commit run --all-files", help = "Run pre-commit hooks" }
 
 # Mapping tasks
+morph = { cmd = "uv run morph", help = "Run morph with the provided args" }
 morph-build = { cmd = "uv run morph build", help = "Build mapping files in a project" }
 morph-generate = { cmd = "uv run morph generate", help = "Generate mapping files in a project" }
 morph-eval = { cmd = "uv run morph eval", help = "Evaluate mapping files in a project" }

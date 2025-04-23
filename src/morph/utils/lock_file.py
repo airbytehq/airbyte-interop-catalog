@@ -246,7 +246,10 @@ def update_lock_file(
     lock_file.parent.mkdir(parents=True, exist_ok=True)
 
     # Set path for local target schema file
-    requirements_dir = f"catalog/{source_name}/requirements/{project_name}"
+    requirements_dir = resources.get_requirements_dir(
+        source_name=source_name,
+        project_name=project_name,
+    )
     Path(requirements_dir).mkdir(parents=True, exist_ok=True)
 
     download_target_schema(
