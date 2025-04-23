@@ -27,7 +27,6 @@ jobs:
           static-args: |
             pr=${{ github.event.issue.number }}
             comment-id=${{ github.event.comment.id }}
-            comment-text=${{ github.event.comment.body }}
           # Only run for users with 'write' permission on the main repository
           permission: write
 
