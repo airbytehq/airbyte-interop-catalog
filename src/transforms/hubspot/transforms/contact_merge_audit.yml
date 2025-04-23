@@ -1,0 +1,94 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: contact_merge_audit
+    from:
+      - contacts_merged_audit: hubspot.contacts_merged_audit
+    fields:
+      _fivetran_synced:
+        expression: contacts_merged_audit._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      canonical_vid:
+        expression: contacts_merged_audit.canonical_vid
+        description: The contact ID of the contact which the vid_to_merge contact
+          was merged into.
+      contact_id:
+        expression: MISSING
+        description: The ID of the contact.
+      entity_id:
+        expression: contacts_merged_audit.entity_id
+        description: The ID of the related entity.
+      first_name:
+        expression: contacts_merged_audit.first_name
+        description: The contact's first name.
+      last_name:
+        expression: contacts_merged_audit.last_name
+        description: The contact's last name.
+      num_properties_moved:
+        expression: contacts_merged_audit.num_properties_moved
+        description: The number of properties which were removed from the merged contact.
+      timestamp:
+        expression: contacts_merged_audit.timestamp
+        description: Timestamp of when the contacts were merged.
+      user_id:
+        expression: contacts_merged_audit.user_id
+        description: The ID of the user.
+      vid_to_merge:
+        expression: contacts_merged_audit.vid_to_merge
+        description: The ID of the contact which was merged.
+annotations:
+  approved: true
+  missing_fields:
+    - contact_id
+  evaluation:
+    source_stream_name: contacts_merged_audit
+    target_table_name: contact_merge_audit
+    table_match_score: 0.8
+    completion_score: 0.88
+    explanation: Given the described mappings, there is a high degree of confidence
+      that the source and target tables represent the same data, especially in terms
+      of core entity information. The mappings were standardized, with evidence of
+      completeness in critical identity and event fields. The source and target fields
+      are aligned, indicating that they cover similar subject matters effectively.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: contacts_merged_audit._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping for all tables with perfect match.
+      - name: canonical_vid
+        expression: contacts_merged_audit.canonical_vid
+        score: 1.0
+        explanation: Direct mapping of core identity fields with identical names.
+      - name: contact_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: entity_id
+        expression: contacts_merged_audit.entity_id
+        score: 0.8
+        explanation: Direct mapping with no casing penalties.
+      - name: first_name
+        expression: contacts_merged_audit.first_name
+        score: 1.0
+        explanation: Direct mapping of individual identity fields.
+      - name: last_name
+        expression: contacts_merged_audit.last_name
+        score: 1.0
+        explanation: Direct mapping of individual identity fields.
+      - name: num_properties_moved
+        expression: contacts_merged_audit.num_properties_moved
+        score: 1.0
+        explanation: Direct mapping of event-specific data with high relevance.
+      - name: timestamp
+        expression: contacts_merged_audit.timestamp
+        score: 1.0
+        explanation: Timestamp fields directly mapped, ensuring temporal consistency.
+      - name: user_id
+        expression: contacts_merged_audit.user_id
+        score: 0.6
+        explanation: Acceptable match but the potential difference in semantics (e.g.,
+          user vs customer).
+      - name: vid_to_merge
+        expression: contacts_merged_audit.vid_to_merge
+        score: 0.7
+        explanation: Fuzzy match to existing entity ID fields, close but slightly
+          ambiguous in relation context.

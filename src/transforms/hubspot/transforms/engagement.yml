@@ -1,0 +1,86 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: engagement
+    from:
+      - engagements: hubspot.engagements
+    fields:
+      _fivetran_synced:
+        expression: engagements._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      active:
+        expression: engagements.active
+        description: "Whether the engagement is currently being shown in the UI.\n
+          PLEASE NOTE: This field will not be populated for connectors utilizing the
+          HubSpot v3 API version. This field will be deprecated in a future release.\n"
+      created_at:
+        expression: engagements.createdAt
+        description: "A timestamp representing when the engagement was created.\n
+          PLEASE NOTE: This field will not be populated for connectors utilizing the
+          HubSpot v3 API version. This field will be deprecated in a future release.\n"
+      id:
+        expression: engagements.id
+        description: The ID of the engagement.
+      owner_id:
+        expression: engagements.ownerId
+        description: "The ID of the engagement's owner.\nPLEASE NOTE: This field will
+          not be populated for connectors utilizing the HubSpot v3 API version. This
+          field will be deprecated in a future release.\n"
+      portal_id:
+        expression: engagements.portalId
+        description: '{{ doc("portal_id") }}'
+      timestamp:
+        expression: engagements.timestamp
+        description: "A timestamp in representing the time that the engagement should
+          appear in the timeline.\nPLEASE NOTE: This field will not be populated for
+          connectors utilizing the HubSpot v3 API version. This field will be deprecated
+          in a future release.\n"
+      type:
+        expression: engagements.type
+        description: One of NOTE, EMAIL, TASK, MEETING, or CALL, the type of the engagement.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: engagements
+    target_table_name: engagement
+    table_match_score: 0.85
+    completion_score: 0.9
+    explanation: The overall table matching quality is high, with strong indications
+      that the source and target tables describe the same subject matter. Most fields
+      were mapped successfully with high confidence, indicating good coverage and
+      accurate mappings.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: engagements._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping always gets a score of 1.00.
+      - name: active
+        expression: engagements.active
+        score: 0.9
+        explanation: Direct mapping with high confidence.
+      - name: created_at
+        expression: engagements.createdAt
+        score: 0.7
+        explanation: Mapped with medium confidence due to potential variances in API
+          version usage.
+      - name: id
+        expression: engagements.id
+        score: 1.0
+        explanation: Direct mapping, perfect match.
+      - name: owner_id
+        expression: engagements.ownerId
+        score: 0.7
+        explanation: Mapped with medium confidence reflecting version-specific variations.
+      - name: portal_id
+        expression: engagements.portalId
+        score: 0.9
+        explanation: Mapped successfully with high confidence.
+      - name: timestamp
+        expression: engagements.timestamp
+        score: 0.7
+        explanation: Mapped with medium confidence due to potential version-specific
+          variances.
+      - name: type
+        expression: engagements.type
+        score: 0.92
+        explanation: Mapped successfully with very high confidence.

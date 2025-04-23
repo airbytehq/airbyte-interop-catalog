@@ -1,0 +1,124 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: form
+    from:
+      - forms: hubspot.forms
+    fields:
+      guid:
+        expression: MISSING
+        description: Unique identifier for the form.
+      action:
+        expression: MISSING
+        description: The form action type or endpoint triggered upon submission.
+      created_at:
+        expression: forms.properties.hs_createdate
+        description: Timestamp when the form was created.
+      css_class:
+        expression: forms.displayOptions.cssClass
+        description: CSS class applied to the form for styling purposes.
+      follow_up_id:
+        expression: MISSING
+        description: ID of the follow-up action or workflow triggered by the form.
+      form_type:
+        expression: forms.properties_hs_form_type
+        description: Category of the form, such as regular, pop-up, or embedded form.
+      lead_nurturing_campaign_id:
+        expression: MISSING
+        description: ID of the associated lead nurturing campaign, if applicable.
+      method:
+        expression: MISSING
+        description: HTTP method used for form submission (typically POST).
+      name:
+        expression: forms.properties_hs_name
+        description: Name of the form as defined in HubSpot.
+      notify_recipients:
+        expression: forms.configuration.notifyRecipients
+        description: List of email addresses that receive notifications on form submissions.
+      portal_id:
+        expression: MISSING
+        description: '{{ doc("portal_id") }}'
+      redirect:
+        expression: MISSING
+        description: URL users are redirected to after submitting the form.
+      submit_text:
+        expression: forms.displayOptions.submitButtonText
+        description: Text displayed on the form's submit button.
+      updated_at:
+        expression: forms.properties_hs_updated_at
+        description: Timestamp when the form was last updated.
+annotations:
+  approved: false
+  missing_fields:
+    - action
+    - follow_up_id
+    - guid
+    - lead_nurturing_campaign_id
+    - method
+    - portal_id
+    - redirect
+  evaluation:
+    source_stream_name: forms
+    target_table_name: form
+    table_match_score: 0.65
+    completion_score: 0.45
+    explanation: The table match score indicates a moderate correlation between the
+      source and target tables. However, the completion score is low, reflecting incomplete
+      field mappings. Overall, this configuration has potential but lacks several
+      key mappings.
+    field_mapping_evals:
+      - name: guid
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: action
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: created_at
+        expression: forms.properties.hs_createdate
+        score: 0.8
+        explanation: Direct mapping found.
+      - name: css_class
+        expression: forms.displayOptions.cssClass
+        score: 0.7
+        explanation: Direct mapping found.
+      - name: follow_up_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: form_type
+        expression: forms.properties_hs_form_type
+        score: 0.8
+        explanation: Direct mapping found.
+      - name: lead_nurturing_campaign_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: method
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: name
+        expression: forms.properties_hs_name
+        score: 0.8
+        explanation: Direct mapping found.
+      - name: notify_recipients
+        expression: forms.configuration.notifyRecipients
+        score: 0.8
+        explanation: Direct mapping found.
+      - name: portal_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: redirect
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: submit_text
+        expression: forms.displayOptions.submitButtonText
+        score: 0.8
+        explanation: Direct mapping found.
+      - name: updated_at
+        expression: forms.properties_hs_updated_at
+        score: 0.8
+        explanation: Direct mapping found.

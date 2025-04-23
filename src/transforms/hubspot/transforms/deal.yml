@@ -1,0 +1,106 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: deal
+    from:
+      - deals: hubspot.deals
+    fields:
+      deal_id:
+        expression: MISSING
+        description: The ID of the deal.
+      is_deleted:
+        expression: MISSING
+        description: Whether the record was deleted.
+      portal_id:
+        expression: MISSING
+        description: '{{ doc("portal_id") }}'
+      deal_pipeline_id:
+        expression: MISSING
+        description: The ID of the deal's pipeline.
+      deal_pipeline_stage_id:
+        expression: MISSING
+        description: The ID of the deal's pipeline stage.
+      owner_id:
+        expression: MISSING
+        description: The ID of the deal's owner.
+      property_dealname:
+        expression: MISSING
+        description: The name you have given this deal.
+      property_description:
+        expression: MISSING
+        description: A brief description of the deal.
+      property_amount:
+        expression: MISSING
+        description: The total value of the deal in the deal's currency.
+      property_closedate:
+        expression: MISSING
+        description: The day the deal is expected to close, or was closed.
+      property_createdate:
+        expression: MISSING
+        description: The date the deal was created. This property is set automatically
+          by HubSpot.
+annotations:
+  approved: false
+  missing_fields:
+    - deal_id
+    - deal_pipeline_id
+    - deal_pipeline_stage_id
+    - is_deleted
+    - owner_id
+    - portal_id
+    - property_amount
+    - property_closedate
+    - property_createdate
+    - property_dealname
+    - property_description
+  evaluation:
+    source_stream_name: deals
+    target_table_name: deal
+    table_match_score: 0.0
+    completion_score: 0.0
+    explanation: All field mappings are set to 'MISSING', indicating no confidence
+      in any of the field mappings. There are no valid mappings provided.
+    field_mapping_evals:
+      - name: deal_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: is_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: portal_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: deal_pipeline_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: deal_pipeline_stage_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: owner_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: property_dealname
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: property_description
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: property_amount
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: property_closedate
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: property_createdate
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

@@ -1,0 +1,18 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: team_user
+    from:
+      - MISSING: hubspot.MISSING
+    fields:
+      user_id:
+        expression: MISSING
+        description: Unique ID of the user associated with the team.
+      team_id:
+        expression: MISSING
+        description: Unique ID of the associated team.
+      is_secondary_user:
+        expression: MISSING
+        description: Indicates whether the team is a secondary team for the user.
+      _fivetran_synced:
+        expression: MISSING
+        description: '{{ doc("_fivetran_synced") }}'

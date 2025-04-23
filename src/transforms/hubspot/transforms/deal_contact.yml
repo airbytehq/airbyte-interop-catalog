@@ -1,0 +1,58 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: deal_contact
+    from:
+      - contacts: hubspot.contacts
+    fields:
+      _fivetran_synced:
+        expression: contacts._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      contact_id:
+        expression: contacts.id
+        description: The ID of the contact.
+      deal_id:
+        expression: MISSING
+        description: The ID of the deal.
+      type_id:
+        expression: MISSING
+        description: The ID of the type.
+      category:
+        expression: MISSING
+        description: The association category. Either HUBSPOT_DEFINED (default label)
+          or USER_DEFINED (custom label).
+annotations:
+  approved: false
+  missing_fields:
+    - category
+    - deal_id
+    - type_id
+  evaluation:
+    source_stream_name: contacts
+    target_table_name: deal_contact
+    table_match_score: 0.6
+    completion_score: 0.5
+    explanation: The table match score suggests a moderate level of confidence that
+      the source and target schemas are describing the same subject matter, but the
+      incomplete field mapping reduces the overall completion score.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: contacts._airbyte_extracted_at
+        score: 1.0
+        explanation: Exact match between '_fivetran_synced' and 'contacts._airbyte_extracted_at'.
+          Standard mapping for all tables.
+      - name: contact_id
+        expression: contacts.id
+        score: 1.0
+        explanation: Exact match, this ID mapping is critical for data integrity.
+      - name: deal_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: type_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: category
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

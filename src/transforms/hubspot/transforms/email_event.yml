@@ -1,0 +1,136 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: email_event
+    from:
+      - email_events: hubspot.email_events
+    fields:
+      _fivetran_synced:
+        expression: email_events._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      app_id:
+        expression: email_events.appId
+        description: The ID of the app that sent the email.
+      caused_by_created:
+        expression: email_events.causedBy.created
+        description: The timestamp of the event that caused this event.
+      caused_by_id:
+        expression: email_events.causedBy.id
+        description: The event ID which uniquely identifies the event which directly
+          caused this event. If not applicable, this property is omitted.
+      created:
+        expression: email_events.created
+        description: The created timestamp of the event.
+      email_campaign_id:
+        expression: email_events.emailCampaignId
+        description: The ID of the related email campaign.
+      filtered_event:
+        expression: email_events.filteredEvent
+        description: A boolean representing whether the event has been filtered out
+          of reporting based on customer reports settings or not.
+      id:
+        expression: email_events.id
+        description: The ID of the event.
+      obsoleted_by_created:
+        expression: email_events.obsoletedBy.created
+        description: The timestamp of the event that made the current event obsolete.
+      obsoleted_by_id:
+        expression: email_events.obsoletedBy.id
+        description: The event ID which uniquely identifies the follow-on event which
+          makes this current event obsolete. If not applicable, this property is omitted.
+      portal_id:
+        expression: email_events.portalId
+        description: '{{ doc("portal_id") }}'
+      recipient:
+        expression: email_events.recipient
+        description: The email address of the contact related to the event.
+      sent_by_created:
+        expression: email_events.sentBy.created
+        description: The timestamp of the SENT event related to this event.
+      sent_by_id:
+        expression: email_events.sentBy.id
+        description: The event ID which uniquely identifies the email message's SENT
+          event. If not applicable, this property is omitted.
+      type:
+        expression: email_events.type
+        description: The type of event.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: email_events
+    target_table_name: email_event
+    table_match_score: 0.9
+    completion_score: 0.8
+    explanation: The field mappings generally align well with the target schema, capturing
+      most of the critical identifiers and timestamps relevant to the email events
+      context. The sources and targets seem to be describing similar datasets, enhancing
+      confidence in the appropriateness of the mappings.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: email_events._airbyte_extracted_at
+        score: 1.0
+        explanation: Perfect match as this is a standardized mapping for all tables.
+      - name: app_id
+        expression: email_events.appId
+        score: 0.95
+        explanation: Direct mapping of simple identifier fields with clear equivalent.
+      - name: caused_by_created
+        expression: email_events.causedBy.created
+        score: 0.95
+        explanation: Timestamp fields exactly match in context and naming, suggesting
+          high reliability.
+      - name: caused_by_id
+        expression: email_events.causedBy.id
+        score: 0.95
+        explanation: ID fields are directly comparable and clear in their purpose.
+      - name: created
+        expression: email_events.created
+        score: 0.95
+        explanation: Direct match on creation timestamp, essential for event logging.
+      - name: email_campaign_id
+        expression: email_events.emailCampaignId
+        score: 0.8
+        explanation: Slightly less confidence due to potential variability in campaign
+          ID definitions across platforms, but still a strong match.
+      - name: filtered_event
+        expression: email_events.filteredEvent
+        score: 0.85
+        explanation: Boolean fields are direct and unlikely to differ in meaning,
+          though slight ambiguity about filtering criteria exists.
+      - name: id
+        expression: email_events.id
+        score: 1.0
+        explanation: Perfect match on primary identifiers.
+      - name: obsoleted_by_created
+        expression: email_events.obsoletedBy.created
+        score: 0.95
+        explanation: Timestamp matching is critical and direct here, indicating strong
+          alignment.
+      - name: obsoleted_by_id
+        expression: email_events.obsoletedBy.id
+        score: 0.8
+        explanation: While the IDs match, the concept of obsolescence might carry
+          different implications across platforms.
+      - name: portal_id
+        expression: email_events.portalId
+        score: 0.95
+        explanation: Straightforward mapping with likely identical underlying meaning.
+      - name: recipient
+        expression: email_events.recipient
+        score: 0.95
+        explanation: Direct alignment of email addresses, fundamental for event logging.
+      - name: sent_by_created
+        expression: email_events.sentBy.created
+        score: 0.95
+        explanation: Timing of sent actions is universally applicable, indicating
+          high accuracy in alignment.
+      - name: sent_by_id
+        expression: email_events.sentBy.id
+        score: 0.6
+        explanation: The mapping of 'sent' event identifiers holds, though there could
+          be subtle differences in interpretation.
+      - name: type
+        expression: email_events.type
+        score: 0.9
+        explanation: Event type fields generally have high interoperability, though
+          minor differences in event categorization could exist.

@@ -1,0 +1,87 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: engagement_call
+    from:
+      - engagements_calls: hubspot.engagements_calls
+    fields:
+      _fivetran_synced:
+        expression: engagements_calls._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      engagement_id:
+        expression: engagements_calls.id
+        description: The ID of the engagement.
+      _fivetran_deleted:
+        expression: MISSING
+        description: Boolean to mark rows that were deleted in the source database.
+      property_hs_createdate:
+        expression: engagements_calls.properties.hs_createdate
+        description: "This field marks the call's time of creation and determines
+          where the call sits on the record timeline. You can use either a Unix timestamp
+          in milliseconds or UTC format. \nPLEASE NOTE: This field will only be populated
+          for connectors utilizing the HubSpot v3 API version. For the pre HubSpot
+          v3 versions, this value may be found within the parent `engagement` table.\n"
+      timestamp:
+        expression: engagements_calls.properties.hs_timestamp
+        description: "This field marks the call's time of occurrence and determines
+          where the call sits on the record timeline. You can use either a Unix timestamp
+          in milliseconds or UTC format. \nPLEASE NOTE: This field will only be populated
+          for connectors utilizing the HubSpot v3 API version. For the pre HubSpot
+          v3 versions, this value may be found within the parent `engagement` table.\n"
+      property_hubspot_owner_id:
+        expression: engagements_calls.properties.hs_user_ids_of_all_owners
+        description: "The ID of the owner associated with the call. This field determines
+          the user listed as the call creator on the record timeline.\nPLEASE NOTE:
+          This field will only be populated for connectors utilizing the HubSpot v3
+          API version. For the pre HubSpot v3 versions, this value may be found within
+          the parent `engagement` table.\n"
+      property_hubspot_team_id:
+        expression: engagements_calls.properties.hs_team_id
+        description: "The ID of the team associated with the call. This field determines
+          the team listed as the call creator on the record timeline.\nPLEASE NOTE:
+          This field will only be populated for connectors utilizing the HubSpot v3
+          API version.\n"
+annotations:
+  approved: true
+  missing_fields:
+    - _fivetran_deleted
+  evaluation:
+    source_stream_name: engagements_calls
+    target_table_name: engagement_call
+    table_match_score: 0.85
+    completion_score: 0.9
+    explanation: The table mapping generally exhibits a strong correspondence between
+      the source and target schemas, indicated by the high table match and completion
+      scores. Most fields provided were mapped appropriately, reflecting a clear and
+      consistent relationship.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: engagements_calls._airbyte_extracted_at
+        score: 1.0
+        explanation: Direct mapping of Airbyte extraction date to Fivetran sync column.
+      - name: engagement_id
+        expression: engagements_calls.id
+        score: 0.95
+        explanation: Direct mapping based on explicit ID match.
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: property_hs_createdate
+        expression: engagements_calls.properties.hs_createdate
+        score: 0.6
+        explanation: Appropriate mapping with high relevance to connector's specific
+          API version, requires alignment on date format.
+      - name: timestamp
+        expression: engagements_calls.properties.hs_timestamp
+        score: 0.6
+        explanation: Appropriate mapping relating to event timeline, requires specific
+          API version.
+      - name: property_hubspot_owner_id
+        expression: engagements_calls.properties.hs_user_ids_of_all_owners
+        score: 0.6
+        explanation: Adequate mapping due to specific API version match, attentive
+          to id specificity.
+      - name: property_hubspot_team_id
+        expression: engagements_calls.properties.hs_team_id
+        score: 0.6
+        explanation: Adequate mapping, relevant only to specific API version.

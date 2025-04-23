@@ -1,0 +1,118 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: contact
+    from:
+      - contacts: hubspot.contacts
+    fields:
+      _fivetran_deleted:
+        expression: MISSING
+        description: '{{ doc("_fivetran_deleted") }}'
+      _fivetran_synced:
+        expression: contacts._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      id:
+        expression: contacts.id
+        description: The ID of the contact.
+      property_email_1:
+        expression: contacts.properties.email
+        description: The email address of the contact.
+      property_company:
+        expression: contacts.properties.company
+        description: The name of the contact's company.
+      property_firstname:
+        expression: contacts.properties.firstname
+        description: The contact's first name.
+      property_lastname:
+        expression: contacts.properties.lastname
+        description: The contact's last name.
+      property_email:
+        expression: contacts.properties.email
+        description: The contact's email.
+      property_createdate:
+        expression: contacts.properties.createdate
+        description: The date that the contact was created in your HubSpot account.
+      property_jobtitle:
+        expression: contacts.properties.jobtitle
+        description: The contact's job title.
+      property_annualrevenue:
+        expression: contacts.properties.annualrevenue
+        description: The contact's annual company revenue.
+      property_hs_calculated_merged_vids:
+        expression: contacts.properties.hs_calculated_merged_vids
+        description: "List of mappings representing contact IDs that have been merged
+          into the contact at hand. Format: <merged_contact_id>:<merged_at_in_epoch_time>;<second_merged_contact_id>:<merged_at_in_epoch_time>
+          This field has replaced the `CONTACT_MERGE_AUDIT` table, which was deprecated
+          by the Hubspot v3 CRM API.\n"
+annotations:
+  approved: true
+  missing_fields:
+    - _fivetran_deleted
+  evaluation:
+    source_stream_name: contacts
+    target_table_name: contact
+    table_match_score: 0.85
+    completion_score: 0.9
+    explanation: The table mapping and field mappings align well, indicating a high
+      level of interoperability between the source and target schemas. Most field
+      mappings are accurately aligned with the right source fields, especially the
+      critical timestamps and identifying fields that facilitate synchronization and
+      integrity.
+    field_mapping_evals:
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _fivetran_synced
+        expression: contacts._airbyte_extracted_at
+        score: 1.0
+        explanation: Exactly matched to source stream's '_airbyte_extracted_at' column
+          as standard mapping.
+      - name: id
+        expression: contacts.id
+        score: 1.0
+        explanation: Direct match found for 'contacts.id' with the target field 'id'.
+      - name: property_email_1
+        expression: contacts.properties.email
+        score: 0.8
+        explanation: Mapped to 'contacts.properties.email' with high confidence of
+          accuracy.
+      - name: property_company
+        expression: contacts.properties.company
+        score: 0.8
+        explanation: Mapped to 'contacts.properties.company', correctly identifying
+          the company name.
+      - name: property_firstname
+        expression: contacts.properties.firstname
+        score: 0.8
+        explanation: Accurately mapped to 'contacts.properties.firstname' representing
+          the first name.
+      - name: property_lastname
+        expression: contacts.properties.lastname
+        score: 0.8
+        explanation: Correctly mapped to 'contacts.properties.lastname' representing
+          the last name.
+      - name: property_email
+        expression: contacts.properties.email
+        score: 0.9
+        explanation: Precisely mapped to 'contacts.properties.email' representing
+          the contact's email.
+      - name: property_createdate
+        expression: contacts.properties.createdate
+        score: 0.8
+        explanation: Accurately mapped to 'contacts.properties.createdate', capturing
+          the creation date in the source schema.
+      - name: property_jobtitle
+        expression: contacts.properties.jobtitle
+        score: 0.8
+        explanation: Appropriately mapped to 'contacts.properties.jobtitle', accurately
+          representing the job title.
+      - name: property_annualrevenue
+        expression: contacts.properties.annualrevenue
+        score: 0.8
+        explanation: Mapped to 'contacts.properties.annualrevenue', appropriately
+          representing the annual revenue.
+      - name: property_hs_calculated_merged_vids
+        expression: contacts.properties.hs_calculated_merged_vids
+        score: 0.8
+        explanation: Effectively mapped to 'contacts.properties.hs_calculated_merged_vids',
+          correctly identifying merged contact IDs.

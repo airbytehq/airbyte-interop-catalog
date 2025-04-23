@@ -1,0 +1,66 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: engagement_communication
+    from:
+      - engagements: hubspot.engagements
+    fields:
+      _fivetran_synced:
+        expression: engagements._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      _fivetran_deleted:
+        expression: MISSING
+        description: '{{ doc("_fivetran_deleted") }}'
+      engagement_id:
+        expression: engagements.id
+        description: ID of the engagement associated with the communication.
+      property_hs_createdate:
+        expression: engagements.createdAt
+        description: Timestamp indicating when the communication was created.
+      property_hs_timestamp:
+        expression: engagements.timestamp
+        description: Timestamp of the communication event linked to the engagement.
+      type:
+        expression: engagements.type
+        description: Type of communication (e.g., email, call, meeting).
+annotations:
+  approved: true
+  missing_fields:
+    - _fivetran_deleted
+  evaluation:
+    source_stream_name: engagements
+    target_table_name: engagement_communication
+    table_match_score: 0.85
+    completion_score: 0.95
+    explanation: The table match score is high indicating a strong match between the
+      source and target tables, mainly derived from a consistent data lineage and
+      appropriate field mappings. The completion score is also high, reflecting a
+      comprehensive mapping coverage.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: engagements._airbyte_extracted_at
+        score: 1.0
+        explanation: Direct mapping to '_airbyte_extracted_at' which is a standard
+          for all tables.
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: engagement_id
+        expression: engagements.id
+        score: 0.8
+        explanation: Direct match found with consistency in entity representation.
+      - name: property_hs_createdate
+        expression: engagements.createdAt
+        score: 0.8
+        explanation: Direct match to the timestamp of creation, consistent with the
+          source's data treatment.
+      - name: property_hs_timestamp
+        expression: engagements.timestamp
+        score: 0.7
+        explanation: Matched to 'engagements.timestamp', though careful consideration
+          is needed due to potential overlap with other timestamp fields.
+      - name: type
+        expression: engagements.type
+        score: 0.7
+        explanation: Match is very context-specific, assigned score reflects slight
+          uncertainty in the field's equivalency across different contexts.

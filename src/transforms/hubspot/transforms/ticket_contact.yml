@@ -1,0 +1,52 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: ticket_contact
+    from:
+      - contacts: hubspot.contacts
+    fields:
+      _fivetran_synced:
+        expression: contacts._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      ticket_id:
+        expression: MISSING
+        description: The ID of the related ticket.
+      contact_id:
+        expression: contacts.id
+        description: The ID of the related contact.
+      category:
+        expression: MISSING
+        description: The association category. Either HUBSPOT_DEFINED (default label)
+          or USER_DEFINED (custom label).
+annotations:
+  approved: true
+  missing_fields:
+    - category
+    - ticket_id
+  evaluation:
+    source_stream_name: contacts
+    target_table_name: ticket_contact
+    table_match_score: 1.0
+    completion_score: 0.75
+    explanation: Based on the provided mappings and project instructions, the mappings
+      demonstrate a high confidence in terms of their relevance to each other, with
+      adequate explanations and considerations for matching fields appropriately.
+      However, some fields are marked as MISSING, lowering the overall completion
+      score.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: contacts._airbyte_extracted_at
+        score: 1.0
+        explanation: Direct 1:1 mapping with clear equivalence, as indicated by standard
+          practices.
+      - name: ticket_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: contact_id
+        expression: contacts.id
+        score: 1.0
+        explanation: Direct match with clear correlation to 'contacts.id'.
+      - name: category
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

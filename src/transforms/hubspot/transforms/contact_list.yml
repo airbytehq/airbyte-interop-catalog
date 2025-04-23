@@ -1,0 +1,190 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: contact_list
+    from:
+      - contact_lists: hubspot.contact_lists
+    fields:
+      _fivetran_deleted:
+        expression: MISSING
+        description: '{{ doc("_fivetran_deleted") }}'
+      _fivetran_synced:
+        expression: contact_lists._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      created_at:
+        expression: contact_lists.createdAt
+        description: A timestamp of the time the list was created.
+      id:
+        expression: contact_lists.listId
+        description: The ID of the contact list.
+      name:
+        expression: contact_lists.name
+        description: The name of the contact list.
+      updated_at:
+        expression: contact_lists.updatedAt
+        description: A timestamp of the time that the list was last modified.
+      created_by_id:
+        expression: contact_lists.authorId
+        description: The unique identifier of the user who created the contact list.
+      object_type_id:
+        expression: MISSING
+        description: The ID that corresponds to the type of object stored by the list.
+      processing_status:
+        expression: contact_lists.metaData.processing
+        description: Indicates the current status of the list's processing, such as
+          'COMPLETE', 'PROCESSING', 'DONE', or 'FAILED'.
+      processing_type:
+        expression: MISSING
+        description: Specifies the type of processing applied to the list, for example,
+          'STATIC' for static lists or 'DYNAMIC' for dynamic lists.
+      list_version:
+        expression: MISSING
+        description: Represents the version number of the list, incrementing with
+          each modification.
+      filters_updated_at:
+        expression: MISSING
+        description: The timestamp indicating when the list's filters were last updated.
+      metadata_error:
+        expression: contact_lists.metaData.error
+        description: "Any errors that happened the last time the list was processed.\n
+          NOTE: This field is deprecated and will not be populated for connectors
+          utilizing the HubSpot v3 API. This field will be removed in a future release.\n"
+      metadata_last_processing_state_change_at:
+        expression: contact_lists.metaData.lastProcessingStateChangeAt
+        description: "A timestamp of the last time that the processing state changed.\n
+          NOTE: This field is deprecated and will not be populated for connectors
+          utilizing the HubSpot v3 API. This field will be removed in a future release.\n"
+      metadata_last_size_change_at:
+        expression: contact_lists.metaData.lastSizeChangeAt
+        description: "A timestamp of the last time that the size of the list changed.\n
+          NOTE: This field is deprecated and will not be populated for connectors
+          utilizing the HubSpot v3 API. This field will be removed in a future release.\n"
+      metadata_processing:
+        expression: contact_lists.metaData.processing
+        description: "One of DONE, REFRESHING, INITIALIZING, or PROCESSING. DONE indicates
+          the list has finished processing, any other value indicates that list membership
+          is being evaluated.\nNOTE: This field is deprecated and will not be populated
+          for connectors utilizing the HubSpot v3 API. This field will be removed
+          in a future release.\n"
+      metadata_size:
+        expression: contact_lists.metaData.size
+        description: "The approximate number of contacts in the list.\nNOTE: This
+          field is deprecated and will not be populated for connectors utilizing the
+          HubSpot v3 API. This field will be removed in a future release.\n"
+      portal_id:
+        expression: contact_lists.portalId
+        description: "'{{ doc(\"portal_id\") }}'\nNOTE: This field is deprecated and
+          will not be populated for connectors utilizing the HubSpot v3 API. This
+          field will be removed in a future release.\n"
+      deleteable:
+        expression: contact_lists.deleteable
+        description: "If this is false, this is a system list and cannot be deleted.\n
+          NOTE: This field is deprecated and will not be populated for connectors
+          utilizing the HubSpot v3 API. This field will be removed in a future release.\n"
+      dynamic:
+        expression: contact_lists.dynamic
+        description: "Whether the contact list is dynamic.\nNOTE: This field is deprecated
+          and will not be populated for connectors utilizing the HubSpot v3 API. This
+          field will be removed in a future release.\n"
+annotations:
+  approved: false
+  missing_fields:
+    - _fivetran_deleted
+    - filters_updated_at
+    - list_version
+    - object_type_id
+    - processing_type
+  evaluation:
+    source_stream_name: contact_lists
+    target_table_name: contact_list
+    table_match_score: 0.8
+    completion_score: 0.5
+    explanation: The table match score is moderately high suggesting a good level
+      of similarity between the source and target schemas. However, the completion
+      score is lower due to several fields being marked as 'MISSING', indicating incomplete
+      field mappings.
+    field_mapping_evals:
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _fivetran_synced
+        expression: contact_lists._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping for all tables to source stream's _airbyte_extracted_at.
+      - name: created_at
+        expression: contact_lists.createdAt
+        score: 1.0
+        explanation: Direct mapping from 'contact_lists.createdAt' to 'created_at'.
+      - name: id
+        expression: contact_lists.listId
+        score: 1.0
+        explanation: Direct mapping from 'contact_lists.listId' to 'id'.
+      - name: name
+        expression: contact_lists.name
+        score: 1.0
+        explanation: Direct mapping from 'contact_lists.name' to 'name'.
+      - name: updated_at
+        expression: contact_lists.updatedAt
+        score: 1.0
+        explanation: Direct mapping from 'contact_lists.updatedAt' to 'updated_at'.
+      - name: created_by_id
+        expression: contact_lists.authorId
+        score: 0.8
+        explanation: High confidence in mapping from 'contact_lists.authorId' to 'created_by_id'
+          based on both representing user identifiers.
+      - name: object_type_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: processing_status
+        expression: contact_lists.metaData.processing
+        score: 0.8
+        explanation: High confidence mapping from 'contact_lists.metaData.processing'
+          to 'processing_status' representing the processing state of the list.
+      - name: processing_type
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: list_version
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: filters_updated_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: metadata_error
+        expression: contact_lists.metaData.error
+        score: 0.6
+        explanation: Conditional match to 'contact_lists.metaData.error'. Note, this
+          field is planned for deprecation.
+      - name: metadata_last_processing_state_change_at
+        expression: contact_lists.metaData.lastProcessingStateChangeAt
+        score: 0.6
+        explanation: Conditional match to 'contact_lists.metaData.lastProcessingStateChangeAt'.
+          Note, this field is planned for deprecation.
+      - name: metadata_last_size_change_at
+        expression: contact_lists.metaData.lastSizeChangeAt
+        score: 0.6
+        explanation: Conditional match to 'contact_lists.metaData.lastSizeChangeAt'.
+          Note, this field is planned for deprecation.
+      - name: metadata_processing
+        expression: contact_lists.metaData.processing
+        score: 0.5
+        explanation: Poor confidence due to potential differences in processing states.
+      - name: metadata_size
+        expression: contact_lists.metaData.size
+        score: 0.5
+        explanation: Poor confidence due to variance in size measurements.
+      - name: portal_id
+        expression: contact_lists.portalId
+        score: 0.0
+        explanation: No good match found.
+      - name: deleteable
+        expression: contact_lists.deleteable
+        score: 0.5
+        explanation: Poor confidence due to unclear matching criteria.
+      - name: dynamic
+        expression: contact_lists.dynamic
+        score: 0.5
+        explanation: Poor confidence due to unclear matching criteria.

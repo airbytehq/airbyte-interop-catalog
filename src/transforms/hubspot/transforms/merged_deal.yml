@@ -1,0 +1,15 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: merged_deal
+    from:
+      - MISSING: hubspot.MISSING
+    fields:
+      deal_id:
+        expression: MISSING
+        description: The ID of the deal the record has been merged INTO.
+      merged_deal_id:
+        expression: MISSING
+        description: ID of deal that has been merged.
+      _fivetran_synced:
+        expression: MISSING
+        description: '{{ doc("_fivetran_synced") }}'

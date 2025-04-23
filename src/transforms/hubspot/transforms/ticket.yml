@@ -1,0 +1,125 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: ticket
+    from:
+      - tickets: hubspot.tickets
+    fields:
+      _fivetran_synced:
+        expression: tickets._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      id:
+        expression: tickets.id
+        description: ID of the ticket.
+      is_deleted:
+        expression: MISSING
+        description: Whether the record was deleted (v2 endpoint).
+      _fivetran_deleted:
+        expression: MISSING
+        description: Whether the record was deleted (v3 endpoint).
+      portal_id:
+        expression: tickets.properties.hubspot_owner_id
+        description: '{{ doc("portal_id") }}'
+      property_closed_date:
+        expression: tickets.properties.closed_date
+        description: The date the ticket was closed.
+      property_createdate:
+        expression: tickets.properties.createdate
+        description: The date the ticket was created.
+      property_first_agent_reply_date:
+        expression: tickets.properties.first_agent_reply_date
+        description: the date for the first agent reply on the ticket.
+      property_hs_pipeline:
+        expression: tickets.properties.hs_pipeline
+        description: The ID of the ticket's pipeline.
+      property_hs_pipeline_stage:
+        expression: tickets.properties.hs_pipeline_stage
+        description: The ID of the ticket's pipeline stage.
+      property_hs_ticket_priority:
+        expression: tickets.properties.hs_ticket_priority
+        description: The priority of the ticket.
+      property_hs_ticket_category:
+        expression: tickets.properties.hs_ticket_category
+        description: The category of the ticket.
+      property_hubspot_owner_id:
+        expression: tickets.properties.hubspot_owner_id
+        description: The ID of the deal's owner.
+      property_subject:
+        expression: tickets.properties.subject
+        description: Short summary of ticket.
+      property_content:
+        expression: tickets.properties.content
+        description: Text in body of the ticket.
+annotations:
+  approved: true
+  missing_fields:
+    - _fivetran_deleted
+    - is_deleted
+  evaluation:
+    source_stream_name: tickets
+    target_table_name: ticket
+    table_match_score: 0.8
+    completion_score: 0.9
+    explanation: The table mapping has a high confidence score, indicating a strong
+      match between the source and target tables. Most fields from the source are
+      utilized effectively in the target schema.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: tickets._airbyte_extracted_at
+        score: 1.0
+        explanation: Perfect match as '_fivetran_synced' directly maps to '_airbyte_extracted_at'.
+      - name: id
+        expression: tickets.id
+        score: 1.0
+        explanation: Direct mapping of 'id' fields.
+      - name: is_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: portal_id
+        expression: tickets.properties.hubspot_owner_id
+        score: 0.9
+        explanation: Highly likely match with 'hubspot_owner_id' at schema level.
+      - name: property_closed_date
+        expression: tickets.properties.closed_date
+        score: 0.8
+        explanation: Direct match with data semantics maintained.
+      - name: property_createdate
+        expression: tickets.properties.createdate
+        score: 0.8
+        explanation: Direct mapping that retains semantics.
+      - name: property_first_agent_reply_date
+        expression: tickets.properties.first_agent_reply_date
+        score: 0.8
+        explanation: The specific usage and context results in a high confidence level.
+      - name: property_hs_pipeline
+        expression: tickets.properties.hs_pipeline
+        score: 0.8
+        explanation: Direct mapping of pipeline ID with clear semantics.
+      - name: property_hs_pipeline_stage
+        expression: tickets.properties.hs_pipeline_stage
+        score: 0.8
+        explanation: Direct and meaningful mapping of pipeline stage.
+      - name: property_hs_ticket_priority
+        expression: tickets.properties.hs_ticket_priority
+        score: 0.8
+        explanation: Priority fields have a direct match.
+      - name: property_hs_ticket_category
+        expression: tickets.properties.hs_ticket_category
+        score: 0.8
+        explanation: Category fields are directly mapped.
+      - name: property_hubspot_owner_id
+        expression: tickets.properties.hubspot_owner_id
+        score: 0.9
+        explanation: High match likelihood with the portal ID context taken into account.
+      - name: property_subject
+        expression: tickets.properties.subject
+        score: 0.8
+        explanation: Straightforward and conceptually correct mapping.
+      - name: property_content
+        expression: tickets.properties.content
+        score: 0.8
+        explanation: Text content has a directly preserved meaning in mapping.

@@ -1,0 +1,19 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: engagement_contact
+    from:
+      - MISSING: hubspot.MISSING
+    fields:
+      _fivetran_synced:
+        expression: MISSING
+        description: '{{ doc("_fivetran_synced") }}'
+      contact_id:
+        expression: MISSING
+        description: The ID of the related contact.
+      engagement_id:
+        expression: MISSING
+        description: The ID of the related engagement.
+      category:
+        expression: MISSING
+        description: The association category. Either HUBSPOT_DEFINED (default label)
+          or USER_DEFINED (custom label).

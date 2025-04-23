@@ -1,0 +1,18 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: role
+    from:
+      - MISSING: hubspot.MISSING
+    fields:
+      id:
+        expression: MISSING
+        description: Unique ID of the role.
+      name:
+        expression: MISSING
+        description: Name of the role.
+      requires_billing_write:
+        expression: MISSING
+        description: Indicates whether the role requires billing write access.
+      _fivetran_synced:
+        expression: MISSING
+        description: '{{ doc("_fivetran_synced") }}'

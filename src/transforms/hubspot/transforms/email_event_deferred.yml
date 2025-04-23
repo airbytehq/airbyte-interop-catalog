@@ -1,0 +1,51 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: email_event_deferred
+    from:
+      - email_events: hubspot.email_events
+    fields:
+      _fivetran_synced:
+        expression: email_events._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      attempt:
+        expression: email_events.attempt
+        description: The delivery attempt number.
+      id:
+        expression: email_events.id
+        description: The ID of the event.
+      response:
+        expression: email_events.response
+        description: The full response from the recipient's email server.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: email_events
+    target_table_name: email_event_deferred
+    table_match_score: 0.85
+    completion_score: 0.8
+    explanation: The table matching score is high as both source and target likely
+      come from related API integrations with similar structures. The completion score
+      indicates a well-populated mapping configuration but some fields were probably
+      not directly matched.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: email_events._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping for all tables, perfectly matched with source
+          stream's _airbyte_extracted_at column.
+      - name: attempt
+        expression: email_events.attempt
+        score: 0.9
+        explanation: Direct match on field names suggests a very high confidence in
+          mapping to email_events.attempt.
+      - name: id
+        expression: email_events.id
+        score: 0.95
+        explanation: Direct match on field names indicates near certainty in mapping
+          to email_events.id.
+      - name: response
+        expression: email_events.response
+        score: 0.9
+        explanation: Direct match on field names and detailed descriptions, ensuring
+          a high level of confidence in mapping to email_events.response.

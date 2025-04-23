@@ -1,0 +1,58 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: contact_list_member
+    from:
+      - contacts_list_memberships: hubspot.contacts_list_memberships
+    fields:
+      _fivetran_deleted:
+        expression: MISSING
+        description: '{{ doc("_fivetran_deleted") }}'
+      _fivetran_synced:
+        expression: contacts_list_memberships._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      added_at:
+        expression: MISSING
+        description: The timestamp a contact was added to a list.
+      contact_id:
+        expression: MISSING
+        description: The ID of the related contact.
+      contact_list_id:
+        expression: MISSING
+        description: The ID of the related contact list.
+annotations:
+  approved: false
+  missing_fields:
+    - _fivetran_deleted
+    - added_at
+    - contact_id
+    - contact_list_id
+  evaluation:
+    source_stream_name: contacts_list_memberships
+    target_table_name: contact_list_member
+    table_match_score: 0.8
+    completion_score: 0.6
+    explanation: The table match score is relatively high due to the likelihood that
+      the source and target tables are describing the same subject matter based on
+      API descriptions. The completion score is moderate as not all possible fields
+      are fully mapped or have high confidence mappings.
+    field_mapping_evals:
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _fivetran_synced
+        expression: contacts_list_memberships._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard field mapping for synchronization timestamp.
+      - name: added_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: contact_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: contact_list_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

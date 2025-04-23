@@ -1,0 +1,91 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: deal_stage
+    from:
+      - deals: hubspot.deals
+    fields:
+      _fivetran_active:
+        expression: MISSING
+        description: Boolean indicating whether the deal stage is active.
+      _fivetran_end:
+        expression: MISSING
+        description: The Fivetran calculated exist time of the deal stage.
+      _fivetran_start:
+        expression: MISSING
+        description: The date the deal stage was entered.
+      _fivetran_synced:
+        expression: deals._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      date_entered:
+        expression: MISSING
+        description: The timestamp the deal stage was entered.
+      deal_id:
+        expression: MISSING
+        description: Reference to the deal.
+      source:
+        expression: MISSING
+        description: The relevant source of the deal stage.
+      source_id:
+        expression: MISSING
+        description: Reference to the source.
+      value:
+        expression: MISSING
+        description: The value of the deal stage. Typically the name of the stage.
+annotations:
+  approved: false
+  missing_fields:
+    - _fivetran_active
+    - _fivetran_end
+    - _fivetran_start
+    - date_entered
+    - deal_id
+    - source
+    - source_id
+    - value
+  evaluation:
+    source_stream_name: deals
+    target_table_name: deal_stage
+    table_match_score: 0.1
+    completion_score: 0.125
+    explanation: The table matching and field completion scores are low due to lack
+      of available and matching fields. Most fields have a mapping confidence of 0.00
+      due to having their expression set to 'MISSING', which indicates no suitable
+      mapping found.
+    field_mapping_evals:
+      - name: _fivetran_active
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _fivetran_end
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _fivetran_start
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _fivetran_synced
+        expression: deals._airbyte_extracted_at
+        score: 1.0
+        explanation: Direct mapping available to source stream's '_airbyte_extracted_at'
+          column.
+      - name: date_entered
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: deal_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: source
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: source_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: value
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

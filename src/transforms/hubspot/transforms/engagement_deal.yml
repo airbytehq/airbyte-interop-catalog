@@ -1,0 +1,49 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: engagement_deal
+    from:
+      - engagements: hubspot.engagements
+    fields:
+      _fivetran_synced:
+        expression: engagements._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      deal_id:
+        expression: MISSING
+        description: The ID of the related contact.
+      engagement_id:
+        expression: engagements.id
+        description: The ID of the related engagement.
+      category:
+        expression: MISSING
+        description: The association category. Either HUBSPOT_DEFINED (default label)
+          or USER_DEFINED (custom label).
+annotations:
+  approved: true
+  missing_fields:
+    - category
+    - deal_id
+  evaluation:
+    source_stream_name: engagements
+    target_table_name: engagement_deal
+    table_match_score: 0.75
+    completion_score: 0.75
+    explanation: Moderate match and completion scores indicate that while the table
+      mappings are related, not all fields were perfectly matched.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: engagements._airbyte_extracted_at
+        score: 1.0
+        explanation: Perfectly matched based on the standard mapping guidelines.
+      - name: deal_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: engagement_id
+        expression: engagements.id
+        score: 0.7
+        explanation: A high likelihood match as the target field clearly represents
+          the same concept.
+      - name: category
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

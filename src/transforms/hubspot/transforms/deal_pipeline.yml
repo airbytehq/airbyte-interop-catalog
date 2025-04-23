@@ -1,0 +1,76 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: deal_pipeline
+    from:
+      - deal_pipelines: hubspot.deal_pipelines
+    fields:
+      _fivetran_deleted:
+        expression: MISSING
+        description: '{{ doc("_fivetran_deleted") }}'
+      _fivetran_synced:
+        expression: deal_pipelines._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      active:
+        expression: deal_pipelines.active
+        description: Whether the stage is currently in use.
+      display_order:
+        expression: deal_pipelines.displayOrder
+        description: Used to determine the order in which the pipelines appear when
+          viewed in HubSpot.
+      label:
+        expression: deal_pipelines.label
+        description: The human-readable label for the pipeline. The label is used
+          when showing the pipeline in HubSpot.
+      pipeline_id:
+        expression: deal_pipelines.pipelineId
+        description: The ID of the pipeline.
+      created_at:
+        expression: deal_pipelines.createdAt
+        description: A timestamp representing when the record was created.
+      updated_at:
+        expression: deal_pipelines.updatedAt
+        description: A timestamp representing when the record was updated.
+annotations:
+  approved: true
+  missing_fields:
+    - _fivetran_deleted
+  evaluation:
+    source_stream_name: deal_pipelines
+    target_table_name: deal_pipeline
+    table_match_score: 0.75
+    completion_score: 0.86
+    explanation: The table mapping closely aligns with expected schema mappings, with
+      a few missing fields but overall strong correlation.
+    field_mapping_evals:
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _fivetran_synced
+        expression: deal_pipelines._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping for synchronisation timestamp is properly maintained.
+      - name: active
+        expression: deal_pipelines.active
+        score: 0.9
+        explanation: Direct match with clear semantic and functional alignment.
+      - name: display_order
+        expression: deal_pipelines.displayOrder
+        score: 0.8
+        explanation: Direct correspondence with minor naming variation.
+      - name: label
+        expression: deal_pipelines.label
+        score: 0.9
+        explanation: Identical meaning and functionality verified across schemas.
+      - name: pipeline_id
+        expression: deal_pipelines.pipelineId
+        score: 0.95
+        explanation: Direct equivalence with clear identification across both systems.
+      - name: created_at
+        expression: deal_pipelines.createdAt
+        score: 0.9
+        explanation: Timestamp fields directly correspond across the mappings.
+      - name: updated_at
+        expression: deal_pipelines.updatedAt
+        score: 0.9
+        explanation: Timestamp fields directly correspond across the mappings.

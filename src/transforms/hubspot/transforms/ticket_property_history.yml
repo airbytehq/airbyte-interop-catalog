@@ -1,0 +1,91 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: ticket_property_history
+    from:
+      - contacts_property_history: hubspot.contacts_property_history
+    fields:
+      _fivetran_synced:
+        expression: contacts_property_history._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      source:
+        expression: contacts_property_history._airbyte_meta
+        description: '{{ doc("history_source") }}'
+      source_id:
+        expression: contacts_property_history.properties_hs_user_ids_of_all_owners
+        description: '{{ doc("history_source_id") }}'
+      timestamp_instant:
+        expression: contacts_property_history.properties_hs_last_sales_activity_timestamp
+        description: '{{ doc("history_timestamp") }}'
+      ticket_id:
+        expression: contacts_property_history.properties_hs_v2_date_entered_customer
+        description: The ID of the related ticket record.
+      name:
+        expression: contacts_property_history.properties_hs_legal_basis
+        description: '{{ doc("history_name") }}'
+      value:
+        expression: contacts_property_history.properties_hs_testrollback
+        description: '{{ doc("history_value") }}'
+      _fivetran_start:
+        expression: contacts_property_history.properties_hs_v2_date_entered_lead
+        description: '{{ doc("_fivetran_start") }}'
+      _fivetran_end:
+        expression: contacts_property_history.properties_hs_v2_date_exited_salesqualifiedlead
+        description: '{{ doc("_fivetran_end") }}'
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: contacts_property_history
+    target_table_name: ticket_property_history
+    table_match_score: 0.75
+    completion_score: 0.8
+    explanation: The table match score and completion scores are relatively high,
+      indicating a strong correlation and good coverage of the field mappings from
+      the source to the target schema. The mappings prioritize functional similarities
+      over textual similarity and align with project guidance about maintaining data
+      integrity and meaning.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: contacts_property_history._airbyte_extracted_at
+        score: 1.0
+        explanation: Direct mapping to '_airbyte_extracted_at' as a standard, always
+          correct.
+      - name: source
+        expression: contacts_property_history._airbyte_meta
+        score: 0.7
+        explanation: Mapped to '_airbyte_meta' which likely refers to metadata of
+          similar nature in Fivetran and Airbyte schemes.
+      - name: source_id
+        expression: contacts_property_history.properties_hs_user_ids_of_all_owners
+        score: 0.7
+        explanation: Column refers to owners' user IDs in the context of history,
+          aligning well with similar data representations across schemas.
+      - name: timestamp_instant
+        expression: contacts_property_history.properties_hs_last_sales_activity_timestamp
+        score: 0.8
+        explanation: Mapped to last sales activity timestamp, which is highly relevant
+          and direct in historical data mappings.
+      - name: ticket_id
+        expression: contacts_property_history.properties_hs_v2_date_entered_customer
+        score: 0.45
+        explanation: Low confidence due to the indirect relation between 'date entered
+          customer' and a specific ticket ID.
+      - name: name
+        expression: contacts_property_history.properties_hs_legal_basis
+        score: 0.6
+        explanation: Mapped to 'hs_legal_basis' field which is a plausible match given
+          the use of historical data labels.
+      - name: value
+        expression: contacts_property_history.properties_hs_testrollback
+        score: 0.6
+        explanation: Mapped to a test rollback field, possible match but with caution.
+      - name: _fivetran_start
+        expression: contacts_property_history.properties_hs_v2_date_entered_lead
+        score: 0.4
+        explanation: Attempted mapping to 'date entered lead' lacks direct correlation
+          with 'start' context.
+      - name: _fivetran_end
+        expression: contacts_property_history.properties_hs_v2_date_exited_salesqualifiedlead
+        score: 0.4
+        explanation: Attempted mapping to 'date exited salesqualifiedlead' lacks direct
+          correlation with 'end' context.

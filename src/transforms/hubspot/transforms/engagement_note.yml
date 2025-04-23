@@ -1,0 +1,87 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: engagement_note
+    from:
+      - engagements_notes: hubspot.engagements_notes
+    fields:
+      _fivetran_synced:
+        expression: engagements_notes._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      body:
+        expression: engagements_notes.properties.hs_note_body
+        description: The body of the note. The body has a limit of 65536 characters.
+      engagement_id:
+        expression: engagements_notes.properties.hs_engagement_source_id
+        description: The ID of the engagement.
+      property_hs_createdate:
+        expression: engagements_notes.properties.hs_createdate
+        description: "This field marks the note's time of creation and determines
+          where the note sits on the record timeline. You can use either a Unix timestamp
+          in milliseconds or UTC format. \nPLEASE NOTE: This field will only be populated
+          for connectors utilizing the HubSpot v3 API version. For the pre HubSpot
+          v3 versions, this value may be found within the parent `engagement` table.\n"
+      timestamp:
+        expression: engagements_notes.properties.hs_timestamp
+        description: "This field marks the note's time of occurrence and determines
+          where the note sits on the record timeline. You can use either a Unix timestamp
+          in milliseconds or UTC format. \nPLEASE NOTE: This field will only be populated
+          for connectors utilizing the HubSpot v3 API version. For the pre HubSpot
+          v3 versions, this value may be found within the parent `engagement` table.\n"
+      property_hubspot_owner_id:
+        expression: engagements_notes.properties.hubspot_owner_id
+        description: "The ID of the owner associated with the note. This field determines
+          the user listed as the note creator on the record timeline.\nPLEASE NOTE:
+          This field will only be populated for connectors utilizing the HubSpot v3
+          API version. For the pre HubSpot v3 versions, this value may be found within
+          the parent `engagement` table.\n"
+      property_hubspot_team_id:
+        expression: engagements_notes.properties.hubspot_team_id
+        description: "The ID of the team associated with the note. This field determines
+          the team listed as the note creator on the record timeline.\nPLEASE NOTE:
+          This field will only be populated for connectors utilizing the HubSpot v3
+          API version.\n"
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: engagements_notes
+    target_table_name: engagement_note
+    table_match_score: 0.9
+    completion_score: 0.8
+    explanation: The field mappings mostly align well with the source and target schema
+      definitions, indicating a high likelihood of representing the same data entities
+      across different implementations.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: engagements_notes._airbyte_extracted_at
+        score: 1.0
+        explanation: Perfect match as it is a standard mapping for all tables.
+      - name: body
+        expression: engagements_notes.properties.hs_note_body
+        score: 0.8
+        explanation: The mapping correctly aligns with the expected body field in
+          notes, using the detailed extraction path provided.
+      - name: engagement_id
+        expression: engagements_notes.properties.hs_engagement_source_id
+        score: 0.9
+        explanation: Direct match found for the engagement ID using the specific property
+          path.
+      - name: property_hs_createdate
+        expression: engagements_notes.properties.hs_createdate
+        score: 0.7
+        explanation: The mapping is appropriate for the creation date field, aligning
+          timestamps correctly.
+      - name: timestamp
+        expression: engagements_notes.properties.hs_timestamp
+        score: 0.7
+        explanation: Proper mapping for the timestamp, aligning event times correctly.
+      - name: property_hubspot_owner_id
+        expression: engagements_notes.properties.hubspot_owner_id
+        score: 0.7
+        explanation: Mapping for the owner ID is accurate, reflecting appropriate
+          user identification.
+      - name: property_hubspot_team_id
+        expression: engagements_notes.properties.hubspot_team_id
+        score: 0.65
+        explanation: The team ID mapping is generally correct but lacks stronger contextual
+          evidence to score higher.

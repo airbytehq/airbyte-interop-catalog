@@ -1,0 +1,60 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: email_subscription
+    from:
+      - email_subscriptions: hubspot.email_subscriptions
+    fields:
+      _fivetran_synced:
+        expression: email_subscriptions._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      active:
+        expression: email_subscriptions.active
+        description: Whether the subscription is active.
+      description:
+        expression: email_subscriptions.description
+        description: The description of the subscription.
+      id:
+        expression: email_subscriptions.id
+        description: The ID of the email subscription.
+      name:
+        expression: email_subscriptions.name
+        description: The name of the email subscription.
+      portal_id:
+        expression: email_subscriptions.portalId
+        description: '{{ doc("portal_id") }}'
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: email_subscriptions
+    target_table_name: email_subscription
+    table_match_score: 1.0
+    completion_score: 1.0
+    explanation: All fields are perfectly matched, indicating a high degree of confidence
+      in both the accuracy of the field mappings and the completeness of the table
+      mapping.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: email_subscriptions._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping for all tables.
+      - name: active
+        expression: email_subscriptions.active
+        score: 1.0
+        explanation: Direct match found, high confidence.
+      - name: description
+        expression: email_subscriptions.description
+        score: 1.0
+        explanation: Direct match found, high confidence.
+      - name: id
+        expression: email_subscriptions.id
+        score: 1.0
+        explanation: Direct match found, high confidence.
+      - name: name
+        expression: email_subscriptions.name
+        score: 1.0
+        explanation: Direct match found, high confidence.
+      - name: portal_id
+        expression: email_subscriptions.portalId
+        score: 1.0
+        explanation: Standard doc mapping applied, high confidence.

@@ -1,0 +1,51 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: ticket_deal
+    from:
+      - deals: hubspot.deals
+    fields:
+      _fivetran_synced:
+        expression: deals._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      ticket_id:
+        expression: MISSING
+        description: The ID of the related ticket.
+      deal_id:
+        expression: deals.id
+        description: The ID of the related deal.
+      category:
+        expression: MISSING
+        description: The association category. Either HUBSPOT_DEFINED (default label)
+          or USER_DEFINED (custom label).
+annotations:
+  approved: true
+  missing_fields:
+    - category
+    - ticket_id
+  evaluation:
+    source_stream_name: deals
+    target_table_name: ticket_deal
+    table_match_score: 0.8
+    completion_score: 0.75
+    explanation: The overall table match is high due to consistent subject matter
+      across the source and target tables for the specified fields. The completion
+      score is less than perfect due to missing mappings for some fields.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: deals._airbyte_extracted_at
+        score: 1.0
+        explanation: "Perfect mapping: '_fivetran_synced' directly matches '_airbyte_extracted_at'
+          as required by standard procedure."
+      - name: ticket_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: deal_id
+        expression: deals.id
+        score: 1.0
+        explanation: Direct match found between 'deal_id' and 'deals.id', representing
+          the same entity.
+      - name: category
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
