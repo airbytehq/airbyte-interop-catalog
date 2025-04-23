@@ -15,6 +15,7 @@ from morph import models, resources
 from morph.constants import (
     DEFAULT_PROJECT_NAME,
     DEFAULT_SQL_DIALECT,
+    MISSING,
     SQL_DIALECT_OPTIONS,
     VALID_TRAVERSAL_BY_DIALECT,
 )
@@ -305,6 +306,9 @@ def update_readme(
         transform_dict = load_mapping_file(str(mapping_file))
         annotations = transform_dict.get("annotations", {})
         is_approved = annotations.get("approved", False)
+
+        if transform.source_stream_name == MISSING:
+            continue
 
         markdown_text = transform.as_markdown()
 

@@ -12,6 +12,7 @@ import tomli_w as toml_writer
 from rich.console import Console
 
 from morph import models, resources
+from morph.constants import MISSING
 from morph.models import DbtSourceFile, FieldMapping, TableMappingAudit
 from morph.utils.airbyte_catalog import write_catalog_file
 from morph.utils.airbyte_sync import sync_source
@@ -136,6 +137,19 @@ def update_lock_file(
         # Process each transform (assume one per file for now)
         for transform in [transform_obj]:
             transform_id = transform.transform_name
+            if transform.source_stream_name == MISSING:
+                lock_file_mapping_data[transform_id] = {
+                    "source_file": str(transform.get_file_path()),
+                    "source_file_hash": compute_file_hash(transform.get_file_path()),
+                    "source_stream": MISSING,
+                    "mapped_target_fields": {},
+                    "unmapped_target_fields": transform_obj.get_missing_field_mappings(),
+                    "unused_source_fields": {},
+                    # Create a target DbtSourceFile from the requirements file
+                    "omitted_target_fields": {},
+                    "erroneous_source_table_columns": {},
+                }
+                continue
 
             # Create a TableMappingAudit instance
             audit: TableMappingAudit = TableMappingAudit.new(
@@ -158,6 +172,7 @@ def update_lock_file(
             lock_file_mapping_data[transform_id] = {
                 "source_file": str(transform.get_file_path()),
                 "source_file_hash": compute_file_hash(transform.get_file_path()),
+                "source_stream": transform.source_stream_name,
                 "mapped_target_fields": {
                     f.name: f.expression for f in transform_obj.get_mapped_fields()
                 },
