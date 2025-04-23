@@ -1,0 +1,123 @@
+domain: github.airbyte-interop
+transforms:
+  - name: issue
+    from:
+      - issues: github.issues
+    fields:
+      id:
+        expression: issues.id
+        description: System generated unique id for the issue.  This is not the number
+          that appears in the URL.
+      body:
+        expression: issues.body
+        description: The text of the main description of the issue.
+      locked:
+        expression: issues.locked
+        description: Boolean indicating whether the issue is locked.
+      closed_at:
+        expression: issues.closed_at
+        description: Timestamp of when the issue was closed, NULL for issues that
+          are open.
+      created_at:
+        expression: issues.created_at
+        description: Timestamp of when the issue was created.
+      milestone_id:
+        expression: issues.milestone.id
+        description: Foreign key that references the milestone table representing
+          the current milestone the issue is in.
+      number:
+        expression: issues.number
+        description: The issue number within a repository.  Is unique by repository,
+          but not across repositories.
+      pull_request:
+        expression: issues.pull_request
+        description: Boolean for is the issue is a pull request (true) ot regular
+          issue (false)
+      repository_id:
+        expression: issues.repository
+        description: Foreign key that references the repository table.
+      state:
+        expression: issues.state
+        description: Whether the issue is open or closed.
+      title:
+        expression: issues.title
+        description: Title of the issue.
+      updated_at:
+        expression: issues.updated_at
+        description: Timestamp of when the last update was made to the issue.
+      user_id:
+        expression: issues.user_id
+        description: Foreign key that references the user table, representing the
+          user that created the issue.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: issues
+    target_table_name: issue
+    table_match_score: 0.9
+    completion_score: 0.85
+    explanation: The table mapping has a high degree of confidence due to the consistent
+      and meaningful correlations between field names and data types. Nearly comprehensive
+      coverage of all fields enhances the level of certainty that the source and target
+      definitions correspond closely.
+    field_mapping_evals:
+      - name: id
+        expression: issues.id
+        score: 1.0
+        explanation: Direct and exact match of field name and data type.
+      - name: body
+        expression: issues.body
+        score: 0.9
+        explanation: Exact match with minor differences in documentation clarity,
+          matching data types.
+      - name: locked
+        expression: issues.locked
+        score: 0.9
+        explanation: Direct match, boolean data type is correctly aligned.
+      - name: closed_at
+        expression: issues.closed_at
+        score: 0.85
+        explanation: Timestamp fields align well, slight ambiguity in timestamp definition.
+      - name: created_at
+        expression: issues.created_at
+        score: 0.95
+        explanation: Exact match with clear and direct correspondence in field description.
+      - name: milestone_id
+        expression: issues.milestone.id
+        score: 0.8
+        explanation: Nesting differs slightly but the key identifier matches.
+      - name: number
+        expression: issues.number
+        score: 0.7
+        explanation: Field names match; unique context-based interpretation needed
+          given scope of repository.
+      - name: pull_request
+        expression: issues.pull_request
+        score: 0.7
+        explanation: Correct data type and relevant description but requires contextual
+          interpretation.
+      - name: repository_id
+        expression: issues.repository
+        score: 0.7
+        explanation: Correct data type, alignment on being a key identifier, slightly
+          varied descriptions.
+      - name: state
+        expression: issues.state
+        score: 0.8
+        explanation: Good match in terms of state representation, slight variations
+          in possible values.
+      - name: title
+        expression: issues.title
+        score: 0.9
+        explanation: Exact match of data type and field purpose.
+      - name: updated_at
+        expression: issues.updated_at
+        score: 0.85
+        explanation: Timestamps are perfectly aligned, minor variations in interpretation
+          of 'update'.
+      - name: user_id
+        expression: issues.user_id
+        score: 0.65
+        explanation: Correct connection via foreign key, slightly different user context
+          consideration.

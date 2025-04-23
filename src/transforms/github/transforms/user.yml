@@ -1,0 +1,52 @@
+domain: github.airbyte-interop
+transforms:
+  - name: user
+    from:
+      - users: github.users
+    fields:
+      id:
+        expression: users.id
+        description: System generated unique id for the user.
+      login:
+        expression: users.login
+        description: The alias the user uses to login to github.
+      name:
+        expression: MISSING
+        description: The name of the user
+      company:
+        expression: MISSING
+        description: The  company of the user.
+annotations:
+  approved: false
+  missing_fields:
+    - company
+    - name
+  evaluation:
+    source_stream_name: users
+    target_table_name: user
+    table_match_score: 0.55
+    completion_score: 0.5
+    explanation: Given the mappings provided, the table match score is moderately
+      confident due to some accurate mappings, but not all fields have been successfully
+      mapped, impacting the completion score. Some mappings such as 'name' and 'company'
+      have been set to 'MISSING', indicating no good matches and thus lowering the
+      overall confidence.
+    field_mapping_evals:
+      - name: id
+        expression: users.id
+        score: 1.0
+        explanation: The mapping 'users.id' is a direct and exact match to the target
+          schema.
+      - name: login
+        expression: users.login
+        score: 0.8
+        explanation: The mapping 'users.login' closely aligns with the target schema
+          expectations and usage.
+      - name: name
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: company
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

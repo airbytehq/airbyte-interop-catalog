@@ -1,0 +1,55 @@
+domain: github.airbyte-interop
+transforms:
+  - name: repository
+    from:
+      - repositories: github.repositories
+    fields:
+      id:
+        expression: repositories.id
+        description: System generated unique id for the repository.
+      created_at:
+        expression: repositories.created_at
+        description: Timestamp of when the repository was created.
+      full_name:
+        expression: repositories.full_name
+        description: The name of the git repository.
+      private:
+        expression: repositories.private
+        description: Boolean field indicating whether the repository is private (true)
+          or public (false).
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: repositories
+    target_table_name: repository
+    table_match_score: 0.8
+    completion_score: 0.9
+    explanation: The mappings provided are highly relevant, showing a strong alignment
+      between the source and target schemas. The overall confidence of the table matching
+      is high because the fields are common and essential in representing repositories.
+      The completion score reflects a nearly complete mapping between the necessary
+      fields, ensuring data integrity and meaning are preserved from the source to
+      the target schema.
+    field_mapping_evals:
+      - name: id
+        expression: repositories.id
+        score: 1.0
+        explanation: Direct match found, and the field name sufficiently matches the
+          source description indicating a unique identifier.
+      - name: created_at
+        expression: repositories.created_at
+        score: 0.95
+        explanation: Direct match found, with the expression specifically pointing
+          to the timestamp each repository was created, corresponding perfectly to
+          its description.
+      - name: full_name
+        expression: repositories.full_name
+        score: 1.0
+        explanation: Direct match found. The full_name field directly matches the
+          repository's full name, aligning exactly with its intended use.
+      - name: private
+        expression: repositories.private
+        score: 0.95
+        explanation: Direct match found, and the expression reflects the boolean nature
+          described, correctly indicating repository privacy status.

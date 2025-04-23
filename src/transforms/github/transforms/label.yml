@@ -1,0 +1,69 @@
+domain: github.airbyte-interop
+transforms:
+  - name: label
+    from:
+      - issue_labels: github.issue_labels
+    fields:
+      id:
+        expression: issue_labels.id
+        description: Unique identifier of the Github label
+      _fivetran_synced:
+        expression: issue_labels._airbyte_extracted_at
+        description: Timestamp of the record being synced by Fivetran
+      color:
+        expression: issue_labels.color
+        description: The color of the label
+      description:
+        expression: issue_labels.description
+        description: The description of the label indicating the purpose
+      is_default:
+        expression: issue_labels.default
+        description: Boolean flagging if the label is default on creation
+      name:
+        expression: issue_labels.name
+        description: Name of the label
+      url:
+        expression: issue_labels.url
+        description: Url where the label was used
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: issue_labels
+    target_table_name: label
+    table_match_score: 0.9
+    completion_score: 0.85
+    explanation: The table mapping generally indicates a high correspondence between
+      the source and target schema fields, with most fields having direct and meaningful
+      matches.
+    field_mapping_evals:
+      - name: id
+        expression: issue_labels.id
+        score: 0.9
+        explanation: Direct correspondence between 'issue_labels.id' in source and
+          target schemas.
+      - name: _fivetran_synced
+        expression: issue_labels._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping to '_airbyte_extracted_at' as per data integration
+          practices.
+      - name: color
+        expression: issue_labels.color
+        score: 0.8
+        explanation: Direct mapping of color information.
+      - name: description
+        expression: issue_labels.description
+        score: 0.7
+        explanation: Both fields describe label purposes, closely matching their meanings.
+      - name: is_default
+        expression: issue_labels.default
+        score: 0.9
+        explanation: Boolean values indicating default status aligned nearly perfectly.
+      - name: name
+        expression: issue_labels.name
+        score: 0.85
+        explanation: Label names match directly between source and target.
+      - name: url
+        expression: issue_labels.url
+        score: 0.7
+        explanation: URL matching supports similar data use across systems.

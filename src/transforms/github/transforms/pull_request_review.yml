@@ -1,0 +1,58 @@
+domain: github.airbyte-interop
+transforms:
+  - name: pull_request_review
+    from:
+      - reviews: github.reviews
+    fields:
+      id:
+        expression: reviews.id
+        description: System generated unique id for the pull request review.
+      pull_request_id:
+        expression: reviews.pull_request_url
+        description: Foreign key that references the pull request table.
+      submitted_at:
+        expression: reviews.submitted_at
+        description: Timestamp of when the request for review was submitted.
+      state:
+        expression: reviews.state
+        description: Whether the review was an approval, request for change, comment,
+          dismissal.
+      user_id:
+        expression: reviews.user.id
+        description: Foreign key that references the user table, representing the
+          user that reviewed the pull request.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: reviews
+    target_table_name: pull_request_review
+    table_match_score: 0.85
+    completion_score: 1.0
+    explanation: All fields from the source match the target fields with high confidence
+      levels. The table match score is high, reflective of a well-matched table schema
+      with appropriate contextual similarity.
+    field_mapping_evals:
+      - name: id
+        expression: reviews.id
+        score: 0.95
+        explanation: Direct match on a unique identifier field.
+      - name: pull_request_id
+        expression: reviews.pull_request_url
+        score: 0.9
+        explanation: Strong match but the expression references a URL rather than
+          a direct ID, slightly reducing confidence.
+      - name: submitted_at
+        expression: reviews.submitted_at
+        score: 1.0
+        explanation: Exact match on a timestamp field.
+      - name: state
+        expression: reviews.state
+        score: 0.85
+        explanation: Good match on review status, slightly varied by different potential
+          states.
+      - name: user_id
+        expression: reviews.user.id
+        score: 0.9
+        explanation: Strong match on a foreign key relationship, albeit different
+          nomenclature for object identifiers.

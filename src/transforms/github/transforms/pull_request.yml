@@ -1,0 +1,52 @@
+domain: github.airbyte-interop
+transforms:
+  - name: pull_request
+    from:
+      - pull_requests: github.pull_requests
+    fields:
+      id:
+        expression: pull_requests.id
+        description: System generated unique id for the pull request.
+      issue_id:
+        expression: MISSING
+        description: Foreign key that references the issue table.
+      head_repo_id:
+        expression: pull_requests.head.repo_id
+        description: Foreign key that references the repository table, referencing
+          the current branch.
+      head_user_id:
+        expression: pull_requests.head.user_id
+        description: Foreign key that references the user table, referencing who created
+          the current branch.
+annotations:
+  approved: true
+  missing_fields:
+    - issue_id
+  evaluation:
+    source_stream_name: pull_requests
+    target_table_name: pull_request
+    table_match_score: 0.8
+    completion_score: 0.75
+    explanation: The table mapping confidence is moderately high with a reasonable
+      level of completion. The individual field mappings vary in confidence. The mapping
+      for 'issue_id' is clearly problematic with no available expression, directly
+      impacting the overall completion score.
+    field_mapping_evals:
+      - name: id
+        expression: pull_requests.id
+        score: 0.95
+        explanation: Direct match of unique identifiers between source and target.
+      - name: issue_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: head_repo_id
+        expression: pull_requests.head.repo_id
+        score: 0.9
+        explanation: Direct mapping of repository IDs, indicating a very high confidence
+          in the association between the source and the target.
+      - name: head_user_id
+        expression: pull_requests.head.user_id
+        score: 0.85
+        explanation: High confidence in mapping, as both user identifiers relate directly
+          to the person who created the current branch.

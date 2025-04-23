@@ -1,0 +1,38 @@
+domain: github.airbyte-interop
+transforms:
+  - name: issue_merged
+    from:
+      - pull_requests: github.pull_requests
+    fields:
+      issue_id:
+        expression: pull_requests._airbyte_extracted_at
+        description: Foreign key that references the issue table.  This table will
+          only reference issues that are pull requests
+      merged_at:
+        expression: pull_requests._airbyte_extracted_at
+        description: Timestamp of when the code merge took place
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: pull_requests
+    target_table_name: issue_merged
+    table_match_score: 0.7
+    completion_score: 0.6
+    explanation: The mapping between source and target tables represents a reasonable
+      level of similarity and completion, though it lacks full field coverage. Both
+      tables likely refer to the same entities but have differences in available data
+      fields.
+    field_mapping_evals:
+      - name: issue_id
+        expression: pull_requests._airbyte_extracted_at
+        score: 0.7
+        explanation: Pull requests are clearly related to issues as a subset of events;
+          however, 'issue_id' using the '_airbyte_extracted_at' field is speculative
+          without exact column name matching.
+      - name: merged_at
+        expression: pull_requests._airbyte_extracted_at
+        score: 0.7
+        explanation: "'merged_at' mapped to '_airbyte_extracted_at' implies it's using
+          timestamp data; reasonable but not precise, assuming it fits the merge context
+          based on naming alone."

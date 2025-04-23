@@ -1,0 +1,68 @@
+[project]
+source_name = "github"
+project_name = "airbyte-interop"
+requirements_file = "build/github/requirements/airbyte-interop/src_dbt_requirements.yml"
+requirements_file_hash = "12b5ad8273fe9faa23cb7e3ca46aea8f4b7512f2209ea20fa0ad847af3497f6b"
+airbyte_source_file = "build/github/src_airbyte_raw_github.yml"
+airbyte_source_file_hash = "ddb46c73e258be89b01a2761fa13d2e984e15efed1397f9f0f1a710037813020"
+
+[coverage]
+unused_source_streams = [
+    "assignees",
+    "branches",
+    "collaborators",
+    "comments",
+    "commit_comment_reactions",
+    "commit_comments",
+    "commits",
+    "contributor_activity",
+    "deployments",
+    "events",
+    "issue_comment_reactions",
+    "issue_events",
+    "issue_labels",
+    "issue_milestones",
+    "issue_reactions",
+    "issue_timeline_events",
+    "issues",
+    "organizations",
+    "project_cards",
+    "project_columns",
+    "projects",
+    "projects_v2",
+    "pull_request_comment_reactions",
+    "pull_request_commits",
+    "pull_request_stats",
+    "pull_requests",
+    "releases",
+    "repositories",
+    "review_comments",
+    "reviews",
+    "stargazers",
+    "tags",
+    "team_members",
+    "team_memberships",
+    "teams",
+    "users",
+    "workflow_jobs",
+    "workflow_runs",
+    "workflows",
+]
+unmapped_target_tables = [
+    "issue",
+    "issue_assignee",
+    "issue_closed_history",
+    "issue_comment",
+    "issue_label",
+    "issue_merged",
+    "label",
+    "pull_request",
+    "pull_request_review",
+    "repo_team",
+    "repository",
+    "requested_reviewer_history",
+    "team",
+    "user",
+]
+
+[mappings]

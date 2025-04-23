@@ -1,0 +1,41 @@
+domain: github.airbyte-interop
+transforms:
+  - name: issue_closed_history
+    from:
+      - issues: github.issues
+    fields:
+      issue_id:
+        expression: issues.id
+        description: Foreign key that references the issue table
+      updated_at:
+        expression: issues.updated_at
+        description: Timestamp of when the action took place
+      closed:
+        expression: MISSING
+        description: Boolean variable for if the issue was closed (true) or re-opened
+          (false)
+annotations:
+  approved: true
+  missing_fields:
+    - closed
+  evaluation:
+    source_stream_name: issues
+    target_table_name: issue_closed_history
+    table_match_score: 0.8
+    completion_score: 0.67
+    explanation: Table confidence is relatively high as basic field mappings are correctly
+      recognized. However, not all necessary mappings are complete, leading to a moderate
+      completion score.
+    field_mapping_evals:
+      - name: issue_id
+        expression: issues.id
+        score: 1.0
+        explanation: Direct match found for 'issues.id'.
+      - name: updated_at
+        expression: issues.updated_at
+        score: 1.0
+        explanation: Direct match found for 'issues.updated_at'.
+      - name: closed
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

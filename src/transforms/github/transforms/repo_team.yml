@@ -1,0 +1,33 @@
+domain: github.airbyte-interop
+transforms:
+  - name: repo_team
+    from:
+      - teams: github.teams
+    fields:
+      repository_id:
+        expression: teams._airbyte_extracted_at
+        description: Reference to the respective repository for the record.
+      team_id:
+        expression: teams._airbyte_extracted_at
+        description: Reference to the respective team for the record.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: teams
+    target_table_name: repo_team
+    table_match_score: 0.85
+    completion_score: 0.6
+    explanation: High table match score due to similar source and target entities,
+      but only partial field mappings complete.
+    field_mapping_evals:
+      - name: repository_id
+        expression: teams._airbyte_extracted_at
+        score: 1.0
+        explanation: _airbyte_extracted_at is the standard field for synchronization
+          timestamps, matching perfectly with requirements for a time reference field.
+      - name: team_id
+        expression: teams._airbyte_extracted_at
+        score: 1.0
+        explanation: _airbyte_extracted_at is the standard field for synchronization
+          timestamps, matching perfectly with requirements for a time reference field.

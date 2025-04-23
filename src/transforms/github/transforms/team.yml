@@ -1,0 +1,67 @@
+domain: github.airbyte-interop
+transforms:
+  - name: team
+    from:
+      - teams: github.teams
+    fields:
+      id:
+        expression: teams.id
+        description: System generated unique id for the team.
+      description:
+        expression: teams.description
+        description: User created description of the team.
+      name:
+        expression: teams.name
+        description: User created name of the team.
+      parent_id:
+        expression: MISSING
+        description: Reference to the parent team.
+      privacy:
+        expression: teams.privacy
+        description: Type of privacy permissions associated with the team.
+      slug:
+        expression: teams.slug
+        description: Url friendly version of the team name.
+annotations:
+  approved: true
+  missing_fields:
+    - parent_id
+  evaluation:
+    source_stream_name: teams
+    target_table_name: team
+    table_match_score: 0.85
+    completion_score: 0.83
+    explanation: The table match score is high due to the consistency of the source
+      and target data, indicating a strong correlation in the intended subject matter.
+      The completion score is relatively high but not perfect due to one missing mapping
+      ('parent_id'). This affects the overall integrity slightly but the majority
+      of fields are well accounted for with accurate mappings.
+    field_mapping_evals:
+      - name: id
+        expression: teams.id
+        score: 1.0
+        explanation: Direct and perfect match found - 'teams.id' matches without ambiguity.
+      - name: description
+        expression: teams.description
+        score: 1.0
+        explanation: Direct and perfect match found - 'teams.description' matches
+          without ambiguity.
+      - name: name
+        expression: teams.name
+        score: 1.0
+        explanation: Direct and perfect match found - 'teams.name' matches without
+          ambiguity.
+      - name: parent_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: privacy
+        expression: teams.privacy
+        score: 1.0
+        explanation: Direct and perfect match found - 'teams.privacy' matches without
+          ambiguity.
+      - name: slug
+        expression: teams.slug
+        score: 1.0
+        explanation: Direct and perfect match found - 'teams.slug' matches without
+          ambiguity.
