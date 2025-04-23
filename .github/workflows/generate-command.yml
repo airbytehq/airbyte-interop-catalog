@@ -3,6 +3,9 @@ name: On-Demand Generate
 on:
   workflow_dispatch:
     inputs:
+      # Note: This will not work as a slash command
+      # until we add a step to parse `source_name`
+      # from `comment-text`.
       source_name:
         description: "Source Name (e.g., hubspot, facebook_marketing)"
         type: string
