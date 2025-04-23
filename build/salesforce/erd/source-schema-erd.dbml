@@ -1,0 +1,381 @@
+Table "Account" {
+    "Id" varchar
+    "IsDeleted" boolean
+    "MasterRecordId" varchar
+    "Name" varchar
+    "Type" varchar
+    "ParentId" varchar
+    "BillingStreet" varchar
+    "BillingCity" varchar
+    "BillingState" varchar
+    "BillingPostalCode" varchar
+    "BillingCountry" varchar
+    "BillingLatitude" float
+    "BillingLongitude" float
+    "BillingGeocodeAccuracy" varchar
+    "BillingAddress" json
+    "ShippingStreet" varchar
+    "ShippingCity" varchar
+    "ShippingState" varchar
+    "ShippingPostalCode" varchar
+    "ShippingCountry" varchar
+    "ShippingLatitude" float
+    "ShippingLongitude" float
+    "ShippingGeocodeAccuracy" varchar
+    "ShippingAddress" json
+    "Phone" varchar
+    "Fax" varchar
+    "AccountNumber" varchar
+    "Website" varchar
+    "PhotoUrl" varchar
+    "Sic" varchar
+    "Industry" varchar
+    "AnnualRevenue" float
+    "NumberOfEmployees" integer
+    "Ownership" varchar
+    "TickerSymbol" varchar
+    "Description" varchar
+    "Rating" varchar
+    "Site" varchar
+    "OwnerId" varchar
+    "CreatedDate" timestamp
+    "CreatedById" varchar
+    "LastModifiedDate" timestamp
+    "LastModifiedById" varchar
+    "SystemModstamp" timestamp
+    "LastActivityDate" date
+    "LastViewedDate" timestamp
+    "LastReferencedDate" timestamp
+    "Jigsaw" varchar
+    "JigsawCompanyId" varchar
+    "CleanStatus" varchar
+    "AccountSource" varchar
+    "DunsNumber" varchar
+    "Tradestyle" varchar
+    "NaicsCode" varchar
+    "NaicsDesc" varchar
+    "YearStarted" varchar
+    "SicDesc" varchar
+    "DandbCompanyId" varchar
+    "OperatingHoursId" varchar
+    "CustomerPriority__c" varchar
+    "SLA__c" varchar
+    "Active__c" varchar
+    "NumberofLocations__c" float
+    "UpsellOpportunity__c" varchar
+    "SLASerialNumber__c" varchar
+    "SLAExpirationDate__c" date
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "ActiveFeatureLicenseMetric" {
+    "Id" varchar
+    "MetricsDate" date
+    "FeatureType" varchar
+    "SystemModstamp" timestamp
+    "AssignedUserCount" integer
+    "ActiveUserCount" integer
+    "TotalLicenseCount" integer
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "ActivePermSetLicenseMetric" {
+    "Id" varchar
+    "MetricsDate" date
+    "PermissionSetLicenseId" varchar
+    "SystemModstamp" timestamp
+    "AssignedUserCount" integer
+    "ActiveUserCount" integer
+    "DeveloperName" varchar
+    "MasterLabel" varchar
+    "TotalLicenses" integer
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "ActiveProfileMetric" {
+    "Id" varchar
+    "MetricsDate" date
+    "UserLicenseId" varchar
+    "ProfileId" varchar
+    "SystemModstamp" timestamp
+    "AssignedUserCount" integer
+    "ActiveUserCount" integer
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "ActiveScratchOrg" {
+    "Id" varchar
+    "OwnerId" varchar
+    "IsDeleted" boolean
+    "Name" varchar
+    "CreatedDate" timestamp
+    "CreatedById" varchar
+    "LastModifiedDate" timestamp
+    "LastModifiedById" varchar
+    "SystemModstamp" timestamp
+    "LastViewedDate" timestamp
+    "LastReferencedDate" timestamp
+    "ScratchOrg" varchar
+    "ScratchOrgInfoId" varchar
+    "Description" varchar
+    "Features" varchar
+    "Edition" varchar
+    "SignupTrialDays" integer
+    "ExpirationDate" date
+    "SignupInstance" varchar
+    "Namespace" varchar
+    "SignupUsername" varchar
+    "SignupEmail" varchar
+    "OrgName" varchar
+    "LastLoginDate" date
+    "HasSampleData" boolean
+    "Snapshot" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "ActiveScratchOrgFeed" {
+    "Id" varchar
+    "ParentId" varchar
+    "Type" varchar
+    "CreatedById" varchar
+    "CreatedDate" timestamp
+    "IsDeleted" boolean
+    "LastModifiedDate" timestamp
+    "SystemModstamp" timestamp
+    "CommentCount" integer
+    "LikeCount" integer
+    "Title" varchar
+    "Body" varchar
+    "LinkUrl" varchar
+    "IsRichText" boolean
+    "RelatedRecordId" varchar
+    "InsertedById" varchar
+    "BestCommentId" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "ActiveScratchOrgHistory" {
+    "Id" varchar
+    "IsDeleted" boolean
+    "ActiveScratchOrgId" varchar
+    "CreatedById" varchar
+    "CreatedDate" timestamp
+    "Field" varchar
+    "DataType" varchar
+    "OldValue" varchar
+    "NewValue" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "ActiveScratchOrgShare" {
+    "Id" varchar
+    "ParentId" varchar
+    "UserOrGroupId" varchar
+    "AccessLevel" varchar
+    "RowCause" varchar
+    "LastModifiedDate" timestamp
+    "LastModifiedById" varchar
+    "IsDeleted" boolean
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "AppDefinition" {
+    "Id" varchar
+    "DurableId" varchar
+    "Label" varchar
+    "MasterLabel" varchar
+    "NamespacePrefix" varchar
+    "DeveloperName" varchar
+    "LogoUrl" varchar
+    "Description" varchar
+    "UiType" varchar
+    "NavType" varchar
+    "UtilityBar" varchar
+    "HeaderColor" varchar
+    "IsOverrideOrgTheme" boolean
+    "IsSmallFormFactorSupported" boolean
+    "IsMediumFormFactorSupported" boolean
+    "IsLargeFormFactorSupported" boolean
+    "IsNavPersonalizationDisabled" boolean
+    "IsNavAutoTempTabsDisabled" boolean
+    "IsNavTabPersistenceDisabled" boolean
+    "IsOmniPinnedViewEnabled" boolean
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "Asset" {
+    "Id" varchar
+    "ContactId" varchar
+    "AccountId" varchar
+    "ParentId" varchar
+    "RootAssetId" varchar
+    "Product2Id" varchar
+    "ProductCode" varchar
+    "IsCompetitorProduct" boolean
+    "CreatedDate" timestamp
+    "CreatedById" varchar
+    "LastModifiedDate" timestamp
+    "LastModifiedById" varchar
+    "SystemModstamp" timestamp
+    "IsDeleted" boolean
+    "Name" varchar
+    "SerialNumber" varchar
+    "InstallDate" date
+    "PurchaseDate" date
+    "UsageEndDate" date
+    "LifecycleStartDate" timestamp
+    "LifecycleEndDate" timestamp
+    "Status" varchar
+    "Price" float
+    "Quantity" float
+    "Description" varchar
+    "OwnerId" varchar
+    "AssetProvidedById" varchar
+    "AssetServicedById" varchar
+    "IsInternal" boolean
+    "AssetLevel" integer
+    "StockKeepingUnit" varchar
+    "HasLifecycleManagement" boolean
+    "CurrentMrr" float
+    "CurrentLifecycleEndDate" timestamp
+    "CurrentQuantity" float
+    "CurrentAmount" float
+    "TotalLifecycleAmount" float
+    "Street" varchar
+    "City" varchar
+    "State" varchar
+    "PostalCode" varchar
+    "Country" varchar
+    "Latitude" float
+    "Longitude" float
+    "GeocodeAccuracy" varchar
+    "Address" json
+    "LastViewedDate" timestamp
+    "LastReferencedDate" timestamp
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "Describe" {
+    "actionOverrides" array [note: 'Specifies the action overrides for the object.']
+    "activateable" boolean [note: 'Indicates if the object can be activated.']
+    "associateEntityType" varchar [note: 'Specifies the associated entity type.']
+    "associateParentEntity" varchar [note: 'Specifies the parent entity associated with the object.']
+    "childRelationships" array [note: 'Contains information about the child relationships of the object.']
+    "compactLayoutable" boolean [note: 'Indicates if the object supports compact layouts.']
+    "createable" boolean [note: 'Indicates if the object can be created.']
+    "custom" boolean [note: 'Indicates if the object is custom.']
+    "customSetting" boolean [note: 'Indicates if the object is a custom setting.']
+    "dataTranslationEnabled" boolean [note: 'Indicates if data translation is enabled for the object.']
+    "deepCloneable" boolean [note: 'Indicates if the object can be deep cloned.']
+    "defaultImplementation" varchar [note: 'Specifies the default implementation for the object.']
+    "deletable" boolean [note: 'Indicates if the object can be deleted.']
+    "deprecatedAndHidden" boolean [note: 'Indicates if the object is deprecated and hidden.']
+    "extendedBy" varchar [note: 'Lists objects extended by this object.']
+    "extendsInterfaces" varchar [note: 'Lists interfaces extended by this object.']
+    "feedEnabled" boolean [note: 'Indicates if feeds are enabled for the object.']
+    "fields" array [note: 'Contains information about the fields of the object.']
+    "implementedBy" varchar [note: 'Specifies the objects implemented by this object.']
+    "implementsInterfaces" varchar [note: 'Specifies the interfaces implemented by this object.']
+    "isInterface" boolean [note: 'Indicates if the object is an interface.']
+    "keyPrefix" varchar [note: 'Specifies the key prefix of the object.']
+    "label" varchar [note: 'The label of the object.']
+    "labelPlural" varchar [note: 'The plural label of the object.']
+    "layoutable" boolean [note: 'Indicates if the object supports layouts.']
+    "mergeable" boolean [note: 'Indicates if the object is mergeable.']
+    "mruEnabled" boolean [note: 'Indicates if most recently used (MRU) is enabled for the object.']
+    "name" varchar [note: 'The name of the object.']
+    "namedLayoutInfos" array [note: 'Contains information about named layouts.']
+    "networkScopeFieldName" varchar [note: 'Specifies the network scope field name.']
+    "queryable" boolean [note: 'Indicates if the object is queryable.']
+    "recordTypeInfos" array [note: 'Contains information about record types.']
+    "replicateable" boolean [note: 'Indicates if the object can be replicated.']
+    "retrieveable" boolean [note: 'Indicates if the object is retrieveable.']
+    "searchable" boolean [note: 'Indicates if the object is searchable.']
+    "searchLayoutable" boolean [note: 'Indicates if the object supports search layouts.']
+    "supportedScopes" array [note: 'Contains information about supported scopes.']
+    "triggerable" boolean [note: 'Indicates if the object is triggerable.']
+    "undeletable" boolean [note: 'Indicates if the object is undeletable.']
+    "updateable" boolean [note: 'Indicates if the object can be updated.']
+    "urlDetail" varchar [note: 'The URL for the detailed view of the object.']
+    "urlEdit" varchar [note: 'The URL for editing the object.']
+    "urlNew" varchar [note: 'The URL for creating a new object.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "FormulaFunctionAllowedType" {
+    "Id" varchar
+    "DurableId" varchar
+    "FunctionId" varchar
+    "Type" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "LeadHistory" {
+    "Id" varchar
+    "IsDeleted" boolean
+    "LeadId" varchar
+    "CreatedById" varchar
+    "CreatedDate" timestamp
+    "Field" varchar
+    "DataType" varchar
+    "OldValue" varchar
+    "NewValue" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "ObjectPermissions" {
+    "Id" varchar
+    "ParentId" varchar
+    "SobjectType" varchar
+    "PermissionsCreate" boolean
+    "PermissionsRead" boolean
+    "PermissionsEdit" boolean
+    "PermissionsDelete" boolean
+    "PermissionsViewAllRecords" boolean
+    "PermissionsModifyAllRecords" boolean
+    "CreatedDate" timestamp
+    "CreatedById" varchar
+    "LastModifiedDate" timestamp
+    "LastModifiedById" varchar
+    "SystemModstamp" timestamp
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "PermissionSetTabSetting" {
+    "Id" varchar
+    "ParentId" varchar
+    "Visibility" varchar
+    "Name" varchar
+    "SystemModstamp" timestamp
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
