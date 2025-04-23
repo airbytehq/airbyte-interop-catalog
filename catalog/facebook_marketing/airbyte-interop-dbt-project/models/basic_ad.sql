@@ -11,7 +11,7 @@ SELECT
     ads_insights.ad_id AS ad_id,
     ads_insights.ad_name AS ad_name,
     ads_insights.adset_name AS adset_name,
-    ads_insights.date_start AS date,
+    ads_insights.date_stop AS date,
     ads_insights.account_id AS account_id,
     ads_insights.impressions AS impressions,
     ads_insights.inline_link_clicks AS inline_link_clicks,

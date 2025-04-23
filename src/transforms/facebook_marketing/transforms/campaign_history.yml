@@ -1,4 +1,4 @@
-domain: facebook_marketing.fivetran-interop
+domain: facebook_marketing.airbyte-interop
 transforms:
   - name: campaign_history
     from:
@@ -46,60 +46,64 @@ annotations:
   evaluation:
     source_stream_name: campaigns
     target_table_name: campaign_history
-    table_match_score: 1.0
-    completion_score: 1.0
-    explanation:
-      All provided field mappings closely correspond to the source fields
-      for the campaigns table, thus the highest confidence scores apply for the overall
-      table and field mappings.
+    table_match_score: 0.9
+    completion_score: 0.8
+    explanation: The table matching has a high confidence as both source and target
+      implementations seem to describe similar campaigns data, with slight variations
+      in field serialization. Most fields are well-aligned with clear matching expressions,
+      contributing to a high table match score. The completion score is slightly lower
+      due to a few fields with no exact matches but are generally paired within acceptable
+      thresholds.
     field_mapping_evals:
       - name: id
         expression: campaigns.id
-        score: 1.0
-        explanation: Direct match with the field 'campaigns.id'.
+        score: 0.95
+        explanation: Direct mapping with identical field naming and context.
       - name: account_id
         expression: campaigns.account_id
-        score: 1.0
-        explanation: Direct match with the field 'campaigns.account_id'.
+        score: 0.9
+        explanation: Direct mapping, slight variation in naming but same contextual
+          use.
       - name: name
         expression: campaigns.name
-        score: 1.0
-        explanation: Direct match with the field 'campaigns.name'.
+        score: 0.9
+        explanation: Direct mapping with identical usage and description.
       - name: _fivetran_synced
         expression: campaigns._airbyte_extracted_at
         score: 1.0
-        explanation: Standard match for '_fivetran_synced' with 'campaigns._airbyte_extracted_at'.
+        explanation: Standard mapping for system fields, perfectly aligns with '_airbyte_extracted_at'.
       - name: updated_time
         expression: campaigns.updated_time
-        score: 1.0
-        explanation: Direct match with the field 'campaigns.updated_time'.
+        score: 0.7
+        explanation: Matches in naming and serves same purpose, but minor differences
+          might exist in how timestamps are handled between systems.
       - name: created_time
         expression: campaigns.created_time
-        score: 1.0
-        explanation: Direct match with the field 'campaigns.created_time'.
+        score: 0.9
+        explanation: Direct mapping of timestamp fields showing creation times.
       - name: start_time
         expression: campaigns.start_time
-        score: 1.0
-        explanation: Direct match with the field 'campaigns.start_time'.
+        score: 0.9
+        explanation: Direct mapping of timestamp fields for campaign start times.
       - name: stop_time
         expression: campaigns.stop_time
-        score: 1.0
-        explanation: Direct match with the field 'campaigns.stop_time'.
+        score: 0.9
+        explanation: Direct mapping of timestamp fields for campaign end times.
       - name: daily_budget
         expression: campaigns.daily_budget
-        score: 1.0
-        explanation: Direct match with the field 'campaigns.daily_budget'.
+        score: 0.9
+        explanation: Direct mapping, represents the same financial aspect of campaigns.
       - name: budget_remaining
         expression: campaigns.budget_remaining
-        score: 1.0
-        explanation: Direct match with the field 'campaigns.budget_remaining'.
+        score: 0.9
+        explanation: Direct mapping, closely related financial contexts.
       - name: lifetime_budget
         expression: campaigns.lifetime_budget
-        score: 1.0
-        explanation: Direct match with the field 'campaigns.lifetime_budget'.
+        score: 0.9
+        explanation: Direct mapping, operations on financial elements of campaigns
+          are similar.
       - name: status
         expression: campaigns.status
-        score: 1.0
-        explanation:
-          Direct match with the field 'campaigns.status'. The status values
-          are assumed to directly correspond.
+        score: 0.7
+        explanation: Direct naming and context match, slight variation in possible
+          status values but sufficiently similar for high confidence mapping.

@@ -1,19 +1,18 @@
 [project]
 source_name = "facebook_marketing"
-project_name = "fivetran-interop"
-requirements_file = "catalog/facebook_marketing/requirements/fivetran-interop/src_dbt_requirements.yml"
+project_name = "airbyte-interop"
+requirements_file = "build/facebook_marketing/requirements/airbyte-interop/src_dbt_requirements.yml"
 requirements_file_hash = "063605bbc7f806dd4d69ca40db1bf87e3031484feebd1e9e5bc52c905b52bba7"
-airbyte_source_file = "catalog/facebook_marketing/generated/src_airbyte_facebook_marketing.yml"
+airbyte_source_file = "build/facebook_marketing/src_airbyte_raw_facebook_marketing.yml"
 airbyte_source_file_hash = "70c324bf578ae977b18be5838b7525d649738c24e6e40e379d780cd35fe802de"
 
 [coverage]
 unused_source_streams = [
     "activities",
+    "ads",
     "ads_insights_action_carousel_card",
-    "ads_insights_action_conversion_device",
     "ads_insights_action_product_id",
     "ads_insights_action_reaction",
-    "ads_insights_action_type",
     "ads_insights_action_video_sound",
     "ads_insights_action_video_type",
     "ads_insights_age_and_gender",
@@ -37,8 +36,8 @@ unused_source_streams = [
 unmapped_target_tables = []
 
 [mappings.account_history]
-source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/account_history.yml"
-source_file_hash = "73db0237856f9670fcf19981e8a69e0809d65dabc95f8e6c000175eb4ddbdc97"
+source_file = "src/transforms/facebook_marketing/transforms/account_history.yml"
+source_file_hash = "85d29eb45dd322242dd58537c4549e71194b519c5f917bd2414c4500d17a7efc"
 unmapped_target_fields = []
 omitted_target_fields = []
 erroneous_source_table_columns = []
@@ -61,6 +60,7 @@ ad_account = [
     "age",
     "amount_spent",
     "balance",
+    "business",
     "business.id",
     "business.name",
     "business_city",
@@ -125,45 +125,59 @@ ad_account = [
 ]
 
 [mappings.ad_history]
-source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/ad_history.yml"
-source_file_hash = "6506b8b3f056d617258f3de10b57f571160cb71784cf6434ebf0c1e4cb2e2865"
+source_file = "src/transforms/facebook_marketing/transforms/ad_history.yml"
+source_file_hash = "d97d9b8266b2a3ea30bf8264ecc4a36b209f04a43384fc17e70a20c2d51a86f7"
 unmapped_target_fields = [
+    "ad_set_id",
     "conversion_domain",
+    "creative_id",
 ]
 omitted_target_fields = []
 erroneous_source_table_columns = []
 
 [mappings.ad_history.mapped_target_fields]
-id = "ads.id"
-account_id = "ads.account_id"
-ad_set_id = "ads.adset_id"
-campaign_id = "ads.campaign_id"
-creative_id = "ads.creative.creative_id"
-name = "ads.name"
-_fivetran_synced = "ads._airbyte_extracted_at"
-updated_time = "ads.updated_time"
+id = "ad_sets.id"
+account_id = "ad_sets.account_id"
+campaign_id = "ad_sets.campaign_id"
+name = "ad_sets.name"
+_fivetran_synced = "ad_sets._airbyte_extracted_at"
+updated_time = "ad_sets.updated_time"
 
 [mappings.ad_history.unused_source_fields]
-ads = [
+ad_sets = [
     "_airbyte_meta",
     "_airbyte_raw_id",
     "adlabels",
     "bid_amount",
+    "bid_constraints",
+    "bid_constraints.roas_average_floor",
     "bid_info",
     "bid_info.ACTIONS",
     "bid_info.CLICKS",
     "bid_info.IMPRESSIONS",
     "bid_info.REACH",
-    "bid_info.SOCIAL",
-    "bid_type",
-    "conversion_specs",
+    "bid_strategy",
+    "budget_remaining",
     "created_time",
-    "creative.id",
+    "daily_budget",
     "effective_status",
-    "last_updated_by_app_id",
-    "recommendations",
-    "source_ad_id",
-    "status",
+    "end_time",
+    "learning_stage_info",
+    "learning_stage_info.attribution_windows",
+    "learning_stage_info.conversions",
+    "learning_stage_info.last_sig_edit_ts",
+    "learning_stage_info.status",
+    "lifetime_budget",
+    "promoted_object",
+    "promoted_object.application_id",
+    "promoted_object.custom_event_type",
+    "promoted_object.object_store_url",
+    "promoted_object.offer_id",
+    "promoted_object.page_id",
+    "promoted_object.pixel_id",
+    "promoted_object.pixel_rule",
+    "promoted_object.product_set_id",
+    "start_time",
     "targeting",
     "targeting.age_max",
     "targeting.age_min",
@@ -248,12 +262,11 @@ ads = [
     "targeting.user_device",
     "targeting.user_os",
     "targeting.work_positions",
-    "tracking_specs",
 ]
 
 [mappings.ad_set_history]
-source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/ad_set_history.yml"
-source_file_hash = "92a83cd84f63c8467f0d13977e0cb60eda0834ddf1edc75c1768191bc64796c4"
+source_file = "src/transforms/facebook_marketing/transforms/ad_set_history.yml"
+source_file_hash = "15a0551fdacc8c97cb6c38c98afd20410e1b5826193ee08424d04bf85adafe79"
 unmapped_target_fields = [
     "optimization_goal",
 ]
@@ -390,8 +403,8 @@ ad_sets = [
 ]
 
 [mappings.basic_ad]
-source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/basic_ad.yml"
-source_file_hash = "bf581326004832124ba6aec9ae3cd75c2a7deb6602b2f7f40d576f9fbf47ba2e"
+source_file = "src/transforms/facebook_marketing/transforms/basic_ad.yml"
+source_file_hash = "18f0b5405fa1eaa2779a9097b6972c4cb71d061cc3f14390f0b5c2ac60f28f6a"
 unmapped_target_fields = []
 omitted_target_fields = []
 erroneous_source_table_columns = []
@@ -400,7 +413,7 @@ erroneous_source_table_columns = []
 ad_id = "ads_insights.ad_id"
 ad_name = "ads_insights.ad_name"
 adset_name = "ads_insights.adset_name"
-date = "ads_insights.date_start"
+date = "ads_insights.date_stop"
 account_id = "ads_insights.account_id"
 impressions = "ads_insights.impressions"
 inline_link_clicks = "ads_insights.inline_link_clicks"
@@ -459,7 +472,7 @@ ads_insights = [
     "cpp",
     "created_time",
     "ctr",
-    "date_stop",
+    "date_start",
     "engagement_rate_ranking",
     "estimated_ad_recallers",
     "full_view_impressions",
@@ -508,25 +521,25 @@ ads_insights = [
 ]
 
 [mappings.basic_ad_action_values]
-source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/basic_ad_action_values.yml"
-source_file_hash = "f71d76484a55990c2685ae86d605d5f2245c5d149a4cf46535b8e005625380fd"
+source_file = "src/transforms/facebook_marketing/transforms/basic_ad_action_values.yml"
+source_file_hash = "19d9f424030052600c1d66087f768e78c7b34f0bc40cc15d57539bd5d8e755ce"
 unmapped_target_fields = [
+    "_7_d_click",
     "_fivetran_id",
-    "ad_id",
+    "index",
 ]
 omitted_target_fields = []
 erroneous_source_table_columns = []
 
 [mappings.basic_ad_action_values.mapped_target_fields]
-_7_d_click = "ads_insights.attribution_setting"
-_fivetran_synced = "ads_insights._airbyte_extracted_at"
-action_type = "ads_insights.actions"
-date = "ads_insights.date_start"
-index = "ads_insights.conversion_rate_ranking"
-value = "ads_insights.conversion_values"
+_fivetran_synced = "ads_insights_action_conversion_device._airbyte_extracted_at"
+action_type = "ads_insights_action_conversion_device.actions"
+ad_id = "ads_insights_action_conversion_device.ad_id"
+date = "ads_insights_action_conversion_device.date_start"
+value = "ads_insights_action_conversion_device.converted_product_value"
 
 [mappings.basic_ad_action_values.unused_source_fields]
-ads_insights = [
+ads_insights_action_conversion_device = [
     "_airbyte_meta",
     "_airbyte_raw_id",
     "account_currency",
@@ -534,11 +547,11 @@ ads_insights = [
     "account_name",
     "action_values",
     "ad_click_actions",
-    "ad_id",
     "ad_impression_actions",
     "ad_name",
     "adset_id",
     "adset_name",
+    "attribution_setting",
     "auction_bid",
     "auction_competitiveness",
     "auction_max_competitor_bid",
@@ -553,9 +566,10 @@ ads_insights = [
     "catalog_segment_value_omni_purchase_roas",
     "catalog_segment_value_website_purchase_roas",
     "clicks",
+    "conversion_rate_ranking",
+    "conversion_values",
     "conversions",
     "converted_product_quantity",
-    "converted_product_value",
     "cost_per_15_sec_video_view",
     "cost_per_2_sec_continuous_video_view",
     "cost_per_action_type",
@@ -576,6 +590,7 @@ ads_insights = [
     "created_time",
     "ctr",
     "date_stop",
+    "device_platform",
     "engagement_rate_ranking",
     "estimated_ad_recallers",
     "frequency",
@@ -629,13 +644,14 @@ ads_insights = [
 ]
 
 [mappings.basic_ad_actions]
-source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/basic_ad_actions.yml"
-source_file_hash = "bbaf263b6078f9a4bc5871b6c8eabedcd9b30d98e16cbdb16949bdfef628a0f0"
+source_file = "src/transforms/facebook_marketing/transforms/basic_ad_actions.yml"
+source_file_hash = "9a10029b680f5237c2eae8dd794564fe4e1b2da34834d6d8702d2fda42537fb6"
 unmapped_target_fields = [
     "_1_d_view",
     "_28_d_click",
     "_7_d_click",
     "_fivetran_id",
+    "action_type",
     "index",
     "inline",
     "value",
@@ -644,19 +660,19 @@ omitted_target_fields = []
 erroneous_source_table_columns = []
 
 [mappings.basic_ad_actions.mapped_target_fields]
-_fivetran_synced = "ads_insights._airbyte_extracted_at"
-action_type = "ads_insights.actions"
-ad_id = "ads_insights.ad_id"
-date = "ads_insights.date_start"
+_fivetran_synced = "ads_insights_action_type._airbyte_extracted_at"
+ad_id = "ads_insights_action_type.ad_id"
+date = "ads_insights_action_type.date_start"
 
 [mappings.basic_ad_actions.unused_source_fields]
-ads_insights = [
+ads_insights_action_type = [
     "_airbyte_meta",
     "_airbyte_raw_id",
     "account_currency",
     "account_id",
     "account_name",
     "action_values",
+    "actions",
     "ad_click_actions",
     "ad_impression_actions",
     "ad_name",
@@ -755,8 +771,8 @@ ads_insights = [
 ]
 
 [mappings.campaign_history]
-source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/campaign_history.yml"
-source_file_hash = "e4d55de2f75df565725617c18c72467d283287d02ee0a42f6c40d20aa1c20447"
+source_file = "src/transforms/facebook_marketing/transforms/campaign_history.yml"
+source_file_hash = "8b4c407133a4f71b8834eee0cd07906d3cb270ae1ac85ef139c2b631a0884c61"
 unmapped_target_fields = []
 omitted_target_fields = []
 erroneous_source_table_columns = []
@@ -796,11 +812,21 @@ campaigns = [
 ]
 
 [mappings.creative_history]
-source_file = "catalog/facebook_marketing/src/fivetran-interop/transforms/creative_history.yml"
-source_file_hash = "1e939fd732b44a04ef3121e7858bda2185c702c305eff11b1b555d01e50bbc1c"
+source_file = "src/transforms/facebook_marketing/transforms/creative_history.yml"
+source_file_hash = "6aabd134072c037a9f08153f04252f0aab1f3af9862545db9108f1e717b02a0e"
 unmapped_target_fields = [
     "_fivetran_id",
+    "asset_feed_spec_link_urls",
+    "object_story_link_data_caption",
+    "object_story_link_data_child_attachments",
+    "object_story_link_data_description",
+    "object_story_link_data_link",
+    "object_story_link_data_message",
     "page_link",
+    "template_app_link_spec_android",
+    "template_app_link_spec_ios",
+    "template_app_link_spec_ipad",
+    "template_app_link_spec_iphone",
     "template_page_link",
 ]
 omitted_target_fields = []
@@ -812,16 +838,6 @@ account_id = "ad_creatives.account_id"
 name = "ad_creatives.name"
 url_tags = "ad_creatives.url_tags"
 _fivetran_synced = "ad_creatives._airbyte_extracted_at"
-asset_feed_spec_link_urls = "ad_creatives.asset_feed_spec.link_urls"
-object_story_link_data_child_attachments = "ad_creatives.object_story_spec.link_data.child_attachments"
-object_story_link_data_caption = "ad_creatives.object_story_spec.link_data.caption"
-object_story_link_data_description = "ad_creatives.object_story_spec.link_data.description"
-object_story_link_data_link = "ad_creatives.object_story_spec.link_data.link"
-object_story_link_data_message = "ad_creatives.object_story_spec.link_data.message"
-template_app_link_spec_ios = "ad_creatives.object_story_spec.template_data.app_link_spec.ios"
-template_app_link_spec_ipad = "ad_creatives.object_story_spec.template_data.app_link_spec.ipad"
-template_app_link_spec_android = "ad_creatives.object_story_spec.template_data.app_link_spec.android"
-template_app_link_spec_iphone = "ad_creatives.object_story_spec.template_data.app_link_spec.iphone"
 
 [mappings.creative_history.unused_source_fields]
 ad_creatives = [
@@ -830,6 +846,7 @@ ad_creatives = [
     "actor_id",
     "adlabels",
     "applink_treatment",
+    "asset_feed_spec",
     "asset_feed_spec.ad_formats",
     "asset_feed_spec.additional_data",
     "asset_feed_spec.additional_data.brand_page_id",
@@ -844,6 +861,7 @@ ad_creatives = [
     "asset_feed_spec.descriptions",
     "asset_feed_spec.groups",
     "asset_feed_spec.images",
+    "asset_feed_spec.link_urls",
     "asset_feed_spec.optimization_type",
     "asset_feed_spec.reasons_to_shop",
     "asset_feed_spec.shops_bundle",
@@ -870,7 +888,9 @@ ad_creatives = [
     "link_url",
     "object_id",
     "object_story_id",
+    "object_story_spec",
     "object_story_spec.instagram_actor_id",
+    "object_story_spec.link_data",
     "object_story_spec.link_data.additional_image_index",
     "object_story_spec.link_data.app_link_spec",
     "object_story_spec.link_data.app_link_spec.android",
@@ -893,6 +913,9 @@ ad_creatives = [
     "object_story_spec.link_data.call_to_action.value.link_format",
     "object_story_spec.link_data.call_to_action.value.page",
     "object_story_spec.link_data.call_to_action.value.product_link",
+    "object_story_spec.link_data.caption",
+    "object_story_spec.link_data.child_attachments",
+    "object_story_spec.link_data.description",
     "object_story_spec.link_data.event_id",
     "object_story_spec.link_data.force_single_link",
     "object_story_spec.link_data.image_crops",
@@ -904,6 +927,8 @@ ad_creatives = [
     "object_story_spec.link_data.image_crops.600x360",
     "object_story_spec.link_data.image_crops.90x160",
     "object_story_spec.link_data.image_hash",
+    "object_story_spec.link_data.link",
+    "object_story_spec.link_data.message",
     "object_story_spec.link_data.multi_share_end_card",
     "object_story_spec.link_data.multi_share_optimized",
     "object_story_spec.link_data.name",
@@ -921,7 +946,13 @@ ad_creatives = [
     "object_story_spec.photo_data.image_hash",
     "object_story_spec.photo_data.page_welcome_message",
     "object_story_spec.photo_data.url",
+    "object_story_spec.template_data",
     "object_story_spec.template_data.additional_image_index",
+    "object_story_spec.template_data.app_link_spec",
+    "object_story_spec.template_data.app_link_spec.android",
+    "object_story_spec.template_data.app_link_spec.ios",
+    "object_story_spec.template_data.app_link_spec.ipad",
+    "object_story_spec.template_data.app_link_spec.iphone",
     "object_story_spec.template_data.attachment_style",
     "object_story_spec.template_data.branded_content_sponsor_page_id",
     "object_story_spec.template_data.branded_content_sponsor_relationship",

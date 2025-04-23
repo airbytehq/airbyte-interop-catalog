@@ -1,27 +1,24 @@
-domain: facebook_marketing.fivetran-interop
+domain: facebook_marketing.airbyte-interop
 transforms:
   - name: basic_ad_actions
     from:
-      - ads_insights: facebook_marketing.ads_insights
+      - ads_insights_action_type: facebook_marketing.ads_insights_action_type
     fields:
       _1_d_view:
         expression: MISSING
-        description:
-          Conversion metric value using an attribution window of "1 day
+        description: Conversion metric value using an attribution window of "1 day
           after viewing the ad". Not included in downstream models by default, but
           can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics`
           var.
       _7_d_click:
         expression: MISSING
-        description:
-          Conversion metric value using an attribution window of "7 days
+        description: Conversion metric value using an attribution window of "7 days
           after clicking the ad". Not included in downstream models by default, but
           can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics`
           var.
       _28_d_click:
         expression: MISSING
-        description:
-          Conversion metric value using an attribution window of "28 days
+        description: Conversion metric value using an attribution window of "28 days
           after clicking the ad". Deprecated by Facebook due to digital privacy initiatives.
           Not included in downstream models by default, but can be added using the
           `facebook_ads__basic_ad_actions_passthrough_metrics` var.
@@ -29,31 +26,28 @@ transforms:
         expression: MISSING
         description: Defunct field.
       _fivetran_synced:
-        expression: ads_insights._airbyte_extracted_at
+        expression: ads_insights_action_type._airbyte_extracted_at
         description: "{{ doc('_fivetran_synced') }}"
       action_type:
-        expression: ads_insights.actions
-        description:
-          "The kind of actions taken on your ad, Page, app or event after
+        expression: MISSING
+        description: "The kind of actions taken on your ad, Page, app or event after
           your ad was served to someone, even if they didn't click on it. Action types
           include Page likes, app installs, conversions, event responses and more.
           Actions prepended by app_custom_event come from mobile app events and actions
           prepended by offsite_conversion come from the Facebook Pixel.\n"
       ad_id:
-        expression: ads_insights.ad_id
+        expression: ads_insights_action_type.ad_id
         description: The ID of the ad the report relates to.
       date:
-        expression: ads_insights.date_start
+        expression: ads_insights_action_type.date_start
         description: The date of the reported performance.
       index:
         expression: MISSING
-        description:
-          Index reflecting the `action_type` tracked for this ad on this
+        description: Index reflecting the `action_type` tracked for this ad on this
           day. Column of not much consequence.
       inline:
         expression: MISSING
-        description:
-          Conversion metric value using the attribution window that occurs
+        description: Conversion metric value using the attribution window that occurs
           on the ad itself. Not included in downstream models by default, but can
           be added using the `facebook_ads__basic_ad_actions_passthrough_metrics`
           var.
@@ -67,18 +61,20 @@ annotations:
     - _28_d_click
     - _7_d_click
     - _fivetran_id
+    - action_type
     - index
     - inline
     - value
   evaluation:
-    source_stream_name: ads_insights
+    source_stream_name: ads_insights_action_type
     target_table_name: basic_ad_actions
-    table_match_score: 0.65
+    table_match_score: 0.7
     completion_score: 0.4
-    explanation:
-      The table mapping shows a moderate match given the context of the
-      fields provided. Some fields have been mapped with confidence, but there are
-      significant number of fields missing a valid match, impacting the overall completion.
+    explanation: Given the high number of MISSING expressions indicating no good matches
+      found for many of the fields, both table match and completion scores are impacted
+      negatively. The presence of one correctly matched field (_fivetran_synced) does
+      contribute positively, but overall the integration of these fields into the
+      target schema is suboptimal.
     field_mapping_evals:
       - name: _1_d_view
         expression: MISSING
@@ -97,27 +93,21 @@ annotations:
         score: 0.0
         explanation: No good match found.
       - name: _fivetran_synced
-        expression: ads_insights._airbyte_extracted_at
+        expression: ads_insights_action_type._airbyte_extracted_at
         score: 1.0
-        explanation: _fivetran_synced is correctly mapped to ads_insights._airbyte_extracted_at.
+        explanation: Correctly mapped to source stream's _airbyte_extracted_at column.
       - name: action_type
-        expression: ads_insights.actions
-        score: 0.7
-        explanation:
-          action_type is mapped to ads_insights.actions based on contextual
-          similarity.
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
       - name: ad_id
-        expression: ads_insights.ad_id
-        score: 0.7
-        explanation:
-          ad_id is mapped to ads_insights.ad_id based on direct name and
-          purpose matching.
+        expression: ads_insights_action_type.ad_id
+        score: 0.0
+        explanation: No good match found.
       - name: date
-        expression: ads_insights.date_start
-        score: 0.7
-        explanation:
-          date is matched to ads_insights.date_start. This matches the
-          purpose of recording performance date.
+        expression: ads_insights_action_type.date_start
+        score: 0.0
+        explanation: No good match found.
       - name: index
         expression: MISSING
         score: 0.0

@@ -1,0 +1,116 @@
+Table "account_history" {
+    "id" unknown [note: 'The ID of the ad account.']
+    "name" unknown [note: 'Name of the account.']
+    "_fivetran_synced" unknown [note: '{{ doc(\'_fivetran_synced\') }}']
+    "account_status" unknown [note: 'Current status of account.']
+    "business_country_code" unknown [note: 'Country code of business associated to account.']
+    "created_time" unknown [note: 'The time account was created.']
+    "currency" unknown [note: 'Currency associated with account.']
+    "timezone_name" unknown [note: 'Timezone associated with account.']
+}
+
+Table "ad_history" {
+    "id" unknown [note: 'The ID of this ad.']
+    "account_id" unknown [note: 'The ID of the ad account that this ad belongs to.']
+    "ad_set_id" unknown [note: 'ID of the ad set that contains the ad.']
+    "campaign_id" unknown [note: 'Ad campaign that contains this ad.']
+    "creative_id" unknown [note: 'The ID of the ad creative to be used by this ad.']
+    "name" unknown [note: 'Name of the ad.']
+    "_fivetran_synced" unknown [note: '{{ doc(\'_fivetran_synced\') }}']
+    "updated_time" unknown [note: '{{ doc(\'updated_time\') }}']
+    "conversion_domain" unknown [note: 'The domain you\'ve configured the ad to convert to.']
+}
+
+Table "ad_set_history" {
+    "id" unknown [note: 'The ID of the ad set.']
+    "account_id" unknown [note: 'The ID of the ad account that this ad set belongs to.']
+    "campaign_id" unknown [note: 'Ad campaign that contains this ad set.']
+    "name" unknown [note: 'The name of the ad set.']
+    "_fivetran_synced" unknown [note: '{{ doc(\'_fivetran_synced\') }}']
+    "updated_time" unknown [note: '{{ doc(\'updated_time\') }}']
+    "start_time" unknown [note: 'Timestamp of designated ad set start time.']
+    "end_time" unknown [note: 'Timestamp of designated ad set end time.']
+    "bid_strategy" unknown [note: 'Bid strategy values are - \'LOWEST_COST_WITHOUT_CAP\', \'LOWEST_COST_WITH_BID_CAP\', \'COST_CAP\', \'LOWEST_COST_WITH_MIN_ROAS\'.']
+    "daily_budget" unknown [note: 'Daily budget of ad set.']
+    "budget_remaining" unknown [note: 'Remaining budget of ad set.']
+    "status" unknown [note: 'Status values are - \'ACTIVE\', \'PAUSED\', \'DELETED\', \'ARCHIVED\'.']
+    "optimization_goal" unknown [note: 'The optimization goal this ad set is using. Possible values defined [here](https://developers.facebook.com/docs/marketing-api/reference/ad-campaign/#fields).']
+}
+
+Table "basic_ad" {
+    "ad_id" unknown [note: 'The ID of the ad the report relates to.']
+    "ad_name" unknown [note: 'Name of the ad the report relates to.']
+    "adset_name" unknown [note: 'Name of the ad set the report relates to.']
+    "date" unknown [note: 'The date of the reported performance.']
+    "account_id" unknown [note: 'The ID of the ad account that this ad belongs to.']
+    "impressions" unknown [note: 'The number of impressions the ad had on the given day.']
+    "inline_link_clicks" unknown [note: 'The number of clicks the ad had on the given day.']
+    "spend" unknown [note: 'The spend on the ad in the given day.']
+    "reach" unknown [note: 'The number of people who saw any content from your Page or about your Page. This metric is estimated.']
+    "frequency" unknown [note: 'The average number of times each person saw your ad; it is calculated as impressions divided by reach.']
+    "_fivetran_synced" unknown [note: '{{ doc(\'_fivetran_synced\') }}']
+}
+
+Table "basic_ad_actions" {
+    "_1_d_view" unknown [note: 'Conversion metric value using an attribution window of "1 day after viewing the ad". Not included in downstream models by default, but can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics` var.']
+    "_7_d_click" unknown [note: 'Conversion metric value using an attribution window of "7 days after clicking the ad". Not included in downstream models by default, but can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics` var.']
+    "_28_d_click" unknown [note: 'Conversion metric value using an attribution window of "28 days after clicking the ad". Deprecated by Facebook due to digital privacy initiatives. Not included in downstream models by default, but can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics` var.']
+    "_fivetran_id" unknown [note: 'Defunct field.']
+    "_fivetran_synced" unknown [note: '{{ doc(\'_fivetran_synced\') }}']
+    "action_type" unknown [note: '''The kind of actions taken on your ad, Page, app or event after your ad was served to someone, even if they didn\'t click on it. Action types include Page likes, app installs, conversions, event responses and more. Actions prepended by app_custom_event come from mobile app events and actions prepended by offsite_conversion come from the Facebook Pixel.
+    ''']
+    "ad_id" unknown [note: 'The ID of the ad the report relates to.']
+    "date" unknown [note: 'The date of the reported performance.']
+    "index" unknown [note: 'Index reflecting the `action_type` tracked for this ad on this day. Column of not much consequence.']
+    "inline" unknown [note: 'Conversion metric value using the attribution window that occurs on the ad itself. Not included in downstream models by default, but can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics` var.']
+    "value" unknown [note: 'Conversion metric value using the default attribution window.']
+}
+
+Table "basic_ad_action_values" {
+    "_7_d_click" unknown [note: 'Conversion metric value using an attribution window of "7 days after clicking the ad". Not included in downstream models by default, but can be added using the `facebook_ads__basic_ad_actions_passthrough_metrics` var.']
+    "_fivetran_id" unknown [note: 'Defunct field.']
+    "_fivetran_synced" unknown [note: '{{ doc(\'_fivetran_synced\') }}']
+    "action_type" unknown [note: '''The kind of actions taken on your ad, Page, app or event after your ad was served to someone, even if they didn\'t click on it. Action types include Page likes, app installs, conversions, event responses and more. Actions prepended by app_custom_event come from mobile app events and actions prepended by offsite_conversion come from the Facebook Pixel.
+    ''']
+    "ad_id" unknown [note: 'The ID of the ad the report relates to.']
+    "date" unknown [note: 'The date of the reported performance.']
+    "index" unknown [note: 'Index reflecting the `action_type` tracked for this ad on this day. Column of not much consequence.']
+    "value" unknown [note: 'Monetary value associated with the convesion action using the default attribution window.']
+}
+
+Table "campaign_history" {
+    "id" unknown [note: 'The ID of the campaign.']
+    "account_id" unknown [note: 'The ID of the ad account that this campaign belongs to.']
+    "name" unknown [note: 'The name of the campaign.']
+    "_fivetran_synced" unknown [note: '{{ doc(\'_fivetran_synced\') }}']
+    "updated_time" unknown [note: '{{ doc(\'updated_time\') }}']
+    "created_time" unknown [note: 'The time the campaign was created.']
+    "start_time" unknown [note: 'Timestamp of designated campaign start time.']
+    "stop_time" unknown [note: 'Timestamp of designated campaign end time.']
+    "daily_budget" unknown [note: 'Daily budget of campaign.']
+    "budget_remaining" unknown [note: 'Remaining budget of campaign.']
+    "lifetime_budget" unknown [note: 'Lifetime budget of the campaign.']
+    "status" unknown [note: 'Status values are - \'ACTIVE\', \'PAUSED\', \'DELETED\', \'ARCHIVED\'.']
+}
+
+Table "creative_history" {
+    "_fivetran_id" unknown [note: 'Unique record identifier']
+    "page_link" unknown [note: 'URL destination of Facebook ads.']
+    "template_page_link" unknown [note: 'URL destination of Facebook dynamic ads.']
+    "id" unknown [note: 'Unique ID for an ad creative.']
+    "account_id" unknown [note: 'Ad account ID for the account this ad creative belongs to.']
+    "name" unknown [note: 'Name of this ad creative as seen in the ad account\'s library.']
+    "url_tags" unknown [note: 'A set of query string parameters which will replace or be appended to urls clicked from page post ads, message of the post, and canvas app install creatives only.']
+    "_fivetran_synced" unknown [note: '{{ doc(\'_fivetran_synced\') }}']
+    "template_page_link" unknown [note: 'URL destination of Facebook dynamic ads.']
+    "asset_feed_spec_link_urls" unknown [note: 'Link to the asset feed spec']
+    "object_story_link_data_child_attachments" unknown [note: 'Link of the object story child attachments']
+    "object_story_link_data_caption" unknown [note: 'Link of the object story caption']
+    "object_story_link_data_description" unknown [note: 'Link of the object story description']
+    "object_story_link_data_link" unknown [note: 'Link of the object story link']
+    "object_story_link_data_message" unknown [note: 'Link of the object story message']
+    "template_app_link_spec_ios" unknown [note: 'Link of the object story spec for ios']
+    "template_app_link_spec_ipad" unknown [note: 'Link of the template app spec for ipad']
+    "template_app_link_spec_android" unknown [note: 'Link of the template app for android']
+    "template_app_link_spec_iphone" unknown [note: 'Link of the template app for iphone']
+}
