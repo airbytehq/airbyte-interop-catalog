@@ -7,7 +7,6 @@ on:
 jobs:
   slashCommandDispatch:
     # Only allow slash commands on pull request (not on issues)
-    if: ${{ github.event.issue.pull_request }}
     runs-on: ubuntu-latest
     steps:
       - name: Slash Command Dispatch
