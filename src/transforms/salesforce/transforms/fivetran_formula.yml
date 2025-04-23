@@ -1,0 +1,6 @@
+domain: salesforce.airbyte-interop
+transforms:
+  - name: fivetran_formula
+    from:
+      - MISSING: salesforce.MISSING
+    fields: {}
