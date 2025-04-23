@@ -1,0 +1,66 @@
+domain: github.airbyte-interop
+transforms:
+  - name: team
+    from:
+      - teams: github.teams
+    fields:
+      id:
+        expression: teams.id
+        description: System generated unique id for the team.
+      description:
+        expression: teams.description
+        description: User created description of the team.
+      name:
+        expression: teams.name
+        description: User created name of the team.
+      parent_id:
+        expression: teams.parent
+        description: Reference to the parent team.
+      privacy:
+        expression: teams.privacy
+        description: Type of privacy permissions associated with the team.
+      slug:
+        expression: teams.slug
+        description: Url friendly version of the team name.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: teams
+    target_table_name: team
+    table_match_score: 0.8
+    completion_score: 0.7
+    explanation: The table match score is relatively high, indicating a good match
+      in the semantics of the tables. The completion score is moderate, suggesting
+      that while the mappings cover most fields, there may be a few mismatches or
+      missing fields.
+    field_mapping_evals:
+      - name: id
+        expression: teams.id
+        score: 1.0
+        explanation: Exact match found.
+      - name: description
+        expression: teams.description
+        score: 0.9
+        explanation: The expression directly matches the target field name, indicating
+          high confidence.
+      - name: name
+        expression: teams.name
+        score: 0.9
+        explanation: Direct match based on field name and description.
+      - name: parent_id
+        expression: teams.parent
+        score: 0.75
+        explanation: The match likely refers to the same concept, but additional context
+          could confirm this assumption.
+      - name: privacy
+        expression: teams.privacy
+        score: 0.8
+        explanation: Field names and descriptions suggest that this is a matching
+          concept, despite slight differences in the attribute's specific privacy
+          settings.
+      - name: slug
+        expression: teams.slug
+        score: 0.85
+        explanation: The slug is consistently used as a URL-friendly version of a
+          name, highly likely to match.

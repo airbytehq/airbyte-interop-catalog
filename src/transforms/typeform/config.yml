@@ -1,4 +1,4 @@
-project_id: typeform.fivetran-interop
+project_id: typeform.airbyte-interop
 source_name: typeform
 # Target schema file snapshotted from: https://github.com/fivetran/dbt_typeform_source/blob/main/models/src_typeform.yml
 target_dbt_schema_url: https://raw.githubusercontent.com/fivetran/dbt_typeform_source/refs/heads/main/models/src_typeform.yml

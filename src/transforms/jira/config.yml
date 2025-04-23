@@ -1,4 +1,4 @@
-project_id: jira.fivetran-interop
+project_id: jira.airbyte-interop
 source_name: jira
 # Target schema file snapshotted from: https://github.com/fivetran/dbt_jira_source/blob/main/models/src_jira.yml
 target_dbt_schema_url: https://raw.githubusercontent.com/fivetran/dbt_jira_source/refs/heads/main/models/src_jira.yml

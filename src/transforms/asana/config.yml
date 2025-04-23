@@ -1,4 +1,4 @@
-project_id: asana.fivetran-interop
+project_id: asana.airbyte-interop
 source_name: asana
 # Target schema file snapshotted from: https://github.com/fivetran/dbt_asana_source/blob/main/models/src_asana.yml
 target_dbt_schema_url: https://raw.githubusercontent.com/fivetran/dbt_asana_source/refs/heads/main/models/src_asana.yml

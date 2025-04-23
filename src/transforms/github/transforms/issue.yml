@@ -1,0 +1,120 @@
+domain: github.airbyte-interop
+transforms:
+  - name: issue
+    from:
+      - issues: github.issues
+    fields:
+      id:
+        expression: issues.id
+        description: System generated unique id for the issue.  This is not the number
+          that appears in the URL.
+      body:
+        expression: issues.body
+        description: The text of the main description of the issue.
+      locked:
+        expression: issues.locked
+        description: Boolean indicating whether the issue is locked.
+      closed_at:
+        expression: MISSING
+        description: Timestamp of when the issue was closed, NULL for issues that
+          are open.
+      created_at:
+        expression: issues.created_at
+        description: Timestamp of when the issue was created.
+      milestone_id:
+        expression: issues.milestone.id
+        description: Foreign key that references the milestone table representing
+          the current milestone the issue is in.
+      number:
+        expression: issues.number
+        description: The issue number within a repository.  Is unique by repository,
+          but not across repositories.
+      pull_request:
+        expression: issues.pull_request
+        description: Boolean for is the issue is a pull request (true) ot regular
+          issue (false)
+      repository_id:
+        expression: MISSING
+        description: Foreign key that references the repository table.
+      state:
+        expression: issues.state
+        description: Whether the issue is open or closed.
+      title:
+        expression: issues.title
+        description: Title of the issue.
+      updated_at:
+        expression: issues.updated_at
+        description: Timestamp of when the last update was made to the issue.
+      user_id:
+        expression: issues.user.id
+        description: Foreign key that references the user table, representing the
+          user that created the issue.
+annotations:
+  approved: true
+  missing_fields:
+    - closed_at
+    - repository_id
+  evaluation:
+    source_stream_name: issues
+    target_table_name: issue
+    table_match_score: 0.75
+    completion_score: 0.7
+    explanation: The mapping of source schema to target schema seems to be fairly
+      accurate and appropriate based on field evaluations considering field relevance
+      and correct detections of data types without mismatches. Two fields marked as
+      'MISSING' impacted negatively on the completion score while the overall structure
+      and relevance yielded a higher table match score.
+    field_mapping_evals:
+      - name: id
+        expression: issues.id
+        score: 1.0
+        explanation: Exact match of field name and content type.
+      - name: body
+        expression: issues.body
+        score: 1.0
+        explanation: Exact match of field name and content type.
+      - name: locked
+        expression: issues.locked
+        score: 1.0
+        explanation: Exact match of field name and content type.
+      - name: closed_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: created_at
+        expression: issues.created_at
+        score: 1.0
+        explanation: Exact match of field name and content type.
+      - name: milestone_id
+        expression: issues.milestone.id
+        score: 0.9
+        explanation: Close semantic match with minor ambiguity about specific milestones
+          referenced.
+      - name: number
+        expression: issues.number
+        score: 1.0
+        explanation: Exact match of field name and content type.
+      - name: pull_request
+        expression: issues.pull_request
+        score: 1.0
+        explanation: Exact match of field name and content type.
+      - name: repository_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: state
+        expression: issues.state
+        score: 1.0
+        explanation: Exact match of field name and content type.
+      - name: title
+        expression: issues.title
+        score: 1.0
+        explanation: Exact match of field name and content type.
+      - name: updated_at
+        expression: issues.updated_at
+        score: 1.0
+        explanation: Exact match of field name and content type.
+      - name: user_id
+        expression: issues.user.id
+        score: 1.0
+        explanation: Exact match of field name and content type.

@@ -1,4 +1,4 @@
-project_id: pinterest.fivetran-interop
+project_id: pinterest.airbyte-interop
 source_name: pinterest
 # Target schema file snapshotted from: https://github.com/fivetran/dbt_pinterest_source/blob/main/models/src_pinterest.yml
 target_dbt_schema_url: https://raw.githubusercontent.com/fivetran/dbt_pinterest_source/refs/heads/main/models/src_pinterest.yml

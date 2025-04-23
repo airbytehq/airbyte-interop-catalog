@@ -1,4 +1,4 @@
-project_id: twitter.fivetran-interop
+project_id: twitter.airbyte-interop
 source_name: twitter
 # Target schema file snapshotted from: https://github.com/fivetran/dbt_twitter_source/blob/main/models/src_twitter.yml
 target_dbt_schema_url: https://raw.githubusercontent.com/fivetran/dbt_twitter_source/refs/heads/main/models/src_twitter.yml

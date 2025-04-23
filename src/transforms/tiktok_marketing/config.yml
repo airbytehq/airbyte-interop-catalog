@@ -1,4 +1,4 @@
-project_id: tiktok-marketing.fivetran-interop
+project_id: tiktok-marketing.airbyte-interop
 source_name: tiktok-marketing
 
 # Target schema file snapshotted from: https://github.com/fivetran/dbt_tiktok_ads_source/blob/main/models/src_tiktok_ads.yml

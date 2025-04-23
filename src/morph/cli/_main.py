@@ -85,7 +85,7 @@ def sync(
     The streams to sync are specified in the config.yml file.
 
     SOURCE_NAME: Name of the source (e.g., 'hubspot')
-    PROJECT_NAME: Name of the project (e.g., 'fivetran-interop')
+    PROJECT_NAME: Name of the project (e.g., 'airbyte-interop')
     """
     console.print(
         f"Syncing '{source_name}' database...",
@@ -116,7 +116,7 @@ def lock(
     and unmapped target table fields.
 
     SOURCE_NAME: Name of the source (e.g., 'facebook_marketing')
-    PROJECT_NAME: Name of the project (e.g., 'fivetran-interop')
+    PROJECT_NAME: Name of the project (e.g., 'airbyte-interop')
     """
     # Call the existing update_lock_file function
     console.print(f"Generating lock file for {source_name}...")
@@ -251,7 +251,7 @@ def eval(
     """Use AI to evaluated the quality of transform logic.
 
     SOURCE_NAME is the name of the source (e.g., hubspot, shopify)
-    PROJECT_NAME is the name of the project (defaults to fivetran-interop)
+    PROJECT_NAME is the name of the project (defaults to airbyte-interop)
     """
     check_openai_api_key()
     # Construct the path to the transforms directory

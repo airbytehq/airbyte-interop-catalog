@@ -1,0 +1,52 @@
+domain: github.airbyte-interop
+transforms:
+  - name: requested_reviewer_history
+    from:
+      - reviews: github.reviews
+    fields:
+      pull_request_id:
+        expression: MISSING
+        description: Foreign key that references the pull request table.
+      created_at:
+        expression: reviews.created_at
+        description: Timestamp of when the review was submitted.
+      requested_id:
+        expression: MISSING
+        description: Foreign key that references the user table, representing the
+          user that was requested to review a PR.
+      removed:
+        expression: MISSING
+        description: Boolean variable indicating if the requester was removed from
+          the PR (true) or added to the PR (false).
+annotations:
+  approved: false
+  missing_fields:
+    - pull_request_id
+    - removed
+    - requested_id
+  evaluation:
+    source_stream_name: reviews
+    target_table_name: requested_reviewer_history
+    table_match_score: 0.85
+    completion_score: 0.5
+    explanation: The table match is highly confident due to the similarity of the
+      source and target schemas originating from similar source APIs, indicating they
+      likely describe the same subject matter. However, the completion score is reduced
+      due to the missing mappings for several fields which could not find a good match.
+    field_mapping_evals:
+      - name: pull_request_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: created_at
+        expression: reviews.created_at
+        score: 1.0
+        explanation: Exact field expression match.
+      - name: requested_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: removed
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

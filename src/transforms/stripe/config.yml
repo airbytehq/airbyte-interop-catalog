@@ -1,4 +1,4 @@
-project_id: stripe.fivetran-interop
+project_id: stripe.airbyte-interop
 source_name: stripe
 # Target schema file snapshotted from: https://github.com/fivetran/dbt_stripe_source/blob/main/models/src_stripe.yml
 target_dbt_schema_url: https://raw.githubusercontent.com/fivetran/dbt_stripe_source/refs/heads/main/models/src_stripe.yml

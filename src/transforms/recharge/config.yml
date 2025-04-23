@@ -1,4 +1,4 @@
-project_id: recharge.fivetran-interop
+project_id: recharge.airbyte-interop
 source_name: recharge
 # Target schema file snapshotted from: https://github.com/fivetran/dbt_recharge_source/blob/main/models/src_recharge.yml
 target_dbt_schema_url: https://raw.githubusercontent.com/fivetran/dbt_recharge_source/refs/heads/main/models/src_recharge.yml

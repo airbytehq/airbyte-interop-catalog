@@ -132,7 +132,7 @@ for source_name in matched_sources:
         config_yml.write_text(
             "\n".join(
                 [
-                    f"project_id: {source_name}.fivetran-interop",
+                    f"project_id: {source_name}.airbyte-interop",
                     f"source_name: {source_name}",
                     f"# Target schema file snapshotted from: https://github.com/fivetran/dbt_{source_name}_source/blob/main/models/src_{source_name}.yml",
                     f"target_dbt_schema_url: https://raw.githubusercontent.com/fivetran/dbt_{source_name}_source/refs/heads/main/models/src_{source_name}.yml",

@@ -23,12 +23,12 @@ The mapping process involves the following high-level steps:
 For a connector named `{connector_name}`, the key schema files are:
 
 - **Source Schema**: `catalog/{connector_name}/generated/dbt_project/models/sources.yml`
-- **Target Schema**: `catalog/{connector_name}/requirements/fivetran-interop/src_{target_name}.yml`
+- **Target Schema**: `catalog/{connector_name}/requirements/airbyte-interop/src_{target_name}.yml`
 
 For example, for the Facebook Marketing connector:
 
 - Source: `catalog/facebook_marketing/generated/dbt_project/models/sources.yml`
-- Target: `catalog/facebook_marketing/requirements/fivetran-interop/src_facebook_ads.yml`
+- Target: `catalog/facebook_marketing/requirements/airbyte-interop/src_facebook_ads.yml`
 
 ### Analyzing Schema Structures
 
@@ -79,7 +79,7 @@ For example, for the Facebook Marketing connector:
 
 ### Step 2: Update Transform Files
 
-1. Locate transform files in `catalog/{connector_name}/src/fivetran-interop/transforms/`.
+1. Locate transform files in `catalog/{connector_name}/src/airbyte-interop/transforms/`.
 
 2. Update the "from" clause in each transform file to map to the correct source stream:
 
@@ -152,7 +152,7 @@ For example, for the Facebook Marketing connector:
 ### Example 1: Account History Mapping
 
 ```yaml
-domain: facebook_marketing.fivetran-interop
+domain: facebook_marketing.airbyte-interop
 transforms:
   - display_name: Each record in this table reflects a version of a Facebook ad account.
     id: account_history
@@ -174,7 +174,7 @@ transforms:
 ### Example 2: Basic Ad Mapping
 
 ```yaml
-domain: facebook_marketing.fivetran-interop
+domain: facebook_marketing.airbyte-interop
 transforms:
   - display_name: Each record represents the daily performance of an ad in Facebook.
     id: basic_ad

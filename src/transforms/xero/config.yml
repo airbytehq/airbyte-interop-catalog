@@ -1,4 +1,4 @@
-project_id: xero.fivetran-interop
+project_id: xero.airbyte-interop
 source_name: xero
 # Target schema file snapshotted from: https://github.com/fivetran/dbt_xero_source/blob/main/models/src_xero.yml
 target_dbt_schema_url: https://raw.githubusercontent.com/fivetran/dbt_xero_source/refs/heads/main/models/src_xero.yml

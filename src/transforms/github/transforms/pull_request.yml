@@ -1,0 +1,53 @@
+domain: github.airbyte-interop
+transforms:
+  - name: pull_request
+    from:
+      - pull_requests: github.pull_requests
+    fields:
+      id:
+        expression: pull_requests.id
+        description: System generated unique id for the pull request.
+      issue_id:
+        expression: pull_requests.issue_url
+        description: Foreign key that references the issue table.
+      head_repo_id:
+        expression: pull_requests.head.repo_id
+        description: Foreign key that references the repository table, referencing
+          the current branch.
+      head_user_id:
+        expression: pull_requests.head.user_id
+        description: Foreign key that references the user table, referencing who created
+          the current branch.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: pull_requests
+    target_table_name: pull_request
+    table_match_score: 0.8
+    completion_score: 0.75
+    explanation: This table mapping shows a high level of confidence and a reasonably
+      complete representation of field mappings. The field-level evaluations indicate
+      a close correlation between the source and target schema contexts, with some
+      mappings slighty lacking perfect confidence, reflecting a cautious approach
+      in cases of ambiguity.
+    field_mapping_evals:
+      - name: id
+        expression: pull_requests.id
+        score: 1.0
+        explanation: Exact match on the field designation for a unique identifier.
+      - name: issue_id
+        expression: pull_requests.issue_url
+        score: 0.65
+        explanation: Match considered based on URL linking to issue, invoking a slight
+          risk of referencing a different context.
+      - name: head_repo_id
+        expression: pull_requests.head.repo_id
+        score: 0.7
+        explanation: This mapping is plausible with moderate certainty given the direct
+          reference to repository ID under a branch.
+      - name: head_user_id
+        expression: pull_requests.head.user_id
+        score: 0.7
+        explanation: Moderately confident matching, taking into account the direct
+          relationship to 'user_id' in a specific branch context.

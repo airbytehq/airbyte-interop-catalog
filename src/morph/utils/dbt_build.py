@@ -32,7 +32,7 @@ def build_dbt_project(
     should be in YAML format and located in the mapping directory.
 
     SOURCE_NAME: Name of the source (e.g., 'hubspot')
-    PROJECT_NAME: Name of the project (e.g., 'fivetran-interop')
+    PROJECT_NAME: Name of the project (e.g., 'airbyte-interop')
     """
     _ = project_name  # Not used currently
 
