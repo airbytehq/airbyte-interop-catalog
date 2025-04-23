@@ -1,0 +1,140 @@
+domain: marketo.airbyte-interop
+transforms:
+  - name: program
+    from:
+      - programs: marketo.programs
+    fields:
+      channel:
+        expression: programs.channel
+        description: Channel of the program.
+      created_at:
+        expression: programs.createdAt
+        description: Timestamp the program was created at.
+      description:
+        expression: programs.description
+        description: Description of the program.
+      end_date:
+        expression: MISSING
+        description: End date of the program. Applicable to event, email, and webinar
+          type programs.
+      id:
+        expression: programs.id
+        description: ID of the program.
+      name:
+        expression: programs.name
+        description: Name of the program.
+      sfdc_id:
+        expression: MISSING
+        description: SFDC id of the program if linked to an SFDC campaign.
+      sfdc_name:
+        expression: MISSING
+        description: Name of the linked SFDC campaign if applicable.
+      start_date:
+        expression: MISSING
+        description: Start date of program. Applicable to event, email and webinar
+          type programs.
+      status:
+        expression: programs.status
+        description: "Status of the program. Only valid for Email and engagement program
+          types.\nAllowed values: locked, unlocked, on, off\n"
+      type:
+        expression: programs.type
+        description: "Type of the program. Allowed values: program, event, webinar,
+          nurture\n"
+      updated_at:
+        expression: programs.updatedAt
+        description: Timestamp the program was most recently updated.
+      url:
+        expression: programs.url
+        description: URL of the program in the Marketo UI.
+      workspace:
+        expression: programs.workspace
+        description: Name of the workspace.
+      _fivetran_deleted:
+        expression: MISSING
+        description: Boolean created by Fivetran to indicate whether the record has
+          been deleted.
+annotations:
+  approved: false
+  missing_fields:
+    - _fivetran_deleted
+    - end_date
+    - sfdc_id
+    - sfdc_name
+    - start_date
+  evaluation:
+    source_stream_name: programs
+    target_table_name: program
+    table_match_score: 0.95
+    completion_score: 0.62
+    explanation: The majority of fields have a direct mapping, indicating a strong
+      match between the source and target schema for the 'Programs' table. Several
+      crucial fields like 'id', 'name', and 'description' are well-matched. However,
+      the presence of several 'MISSING' field mappings, such as 'end_date', 'sfdc_id',
+      'sfdc_name', and 'start_date' lowers the completion score as these are important
+      for complete data transformation but couldn't be appropriately mapped.
+    field_mapping_evals:
+      - name: channel
+        expression: programs.channel
+        score: 0.95
+        explanation: Direct match with the source field 'programs.channel'.
+      - name: created_at
+        expression: programs.createdAt
+        score: 0.95
+        explanation: Direct match with the source field 'programs.createdAt', high
+          confidence due to exact field name correspondence.
+      - name: description
+        expression: programs.description
+        score: 0.95
+        explanation: Direct match with the source field 'programs.description'.
+      - name: end_date
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: id
+        expression: programs.id
+        score: 0.95
+        explanation: Direct match with the source field 'programs.id'.
+      - name: name
+        expression: programs.name
+        score: 0.95
+        explanation: Direct match with the source field 'programs.name'.
+      - name: sfdc_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: sfdc_name
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: start_date
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: status
+        expression: programs.status
+        score: 0.7
+        explanation: There's a clear match with 'programs.status', but the differing
+          conditionals based on the field's value slightly reduce the confidence.
+      - name: type
+        expression: programs.type
+        score: 0.95
+        explanation: Direct match with the source field 'programs.type', high confidence
+          due to exact field name correspondence.
+      - name: updated_at
+        expression: programs.updatedAt
+        score: 0.95
+        explanation: Direct match with the source field 'programs.updatedAt'.
+      - name: url
+        expression: programs.url
+        score: 0.95
+        explanation: Direct match with the source field 'programs.url'.
+      - name: workspace
+        expression: programs.workspace
+        score: 0.95
+        explanation: Direct match; both source and target reference the same term
+          'workspace'.
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

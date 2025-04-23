@@ -1,0 +1,125 @@
+domain: marketo.airbyte-interop
+transforms:
+  - name: activity_email_bounced
+    from:
+      - activities_email_bounced: marketo.activities_email_bounced
+    fields:
+      activity_date:
+        expression: activities_email_bounced.activityDate
+        description: The timestamp the email bounced.
+      activity_type_id:
+        expression: activities_email_bounced.activityTypeId
+        description: The ID of the activity type.
+      campaign_id:
+        expression: activities_email_bounced.campaignId
+        description: The ID of the email's campaign.
+      campaign_run_id:
+        expression: activities_email_bounced.campaign_run_id
+        description: The ID of the email's campaign run.
+      category:
+        expression: activities_email_bounced.category
+        description: The category associated with bounced email.
+      choice_number:
+        expression: activities_email_bounced.choice_number
+        description: The choice number of the current step that triggered the activity.
+      details:
+        expression: activities_email_bounced.details
+        description: Details about why the email bounced.
+      email:
+        expression: activities_email_bounced.email
+        description: The email address that bounced.
+      email_template_id:
+        expression: activities_email_bounced.email
+        description: The ID of the email's template.
+      id:
+        expression: activities_email_bounced.marketoGUID
+        description: ID of the activity.
+      lead_id:
+        expression: activities_email_bounced.leadId
+        description: The ID of the lead related to the activity.
+      primary_attribute_value:
+        expression: activities_email_bounced.primaryAttributeValue
+        description: The primary attribute of the activity.
+      primary_attribute_value_id:
+        expression: activities_email_bounced.primaryAttributeValueId
+        description: The ID of the primary attribute of the activity.
+      step_id:
+        expression: activities_email_bounced.step_id
+        description: The Id of the current step in the flow.
+      subcategory:
+        expression: activities_email_bounced.subcategory
+        description: The subcategory associated with bounced email.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: activities_email_bounced
+    target_table_name: activity_email_bounced
+    table_match_score: 0.8
+    completion_score: 0.85
+    explanation: The table mapping exhibits a high level of confidence that the source
+      'activities_email_bounced' and target table describe the same subject matter.
+      Most fields have strong mappings with only minor deviations.
+    field_mapping_evals:
+      - name: activity_date
+        expression: activities_email_bounced.activityDate
+        score: 0.9
+        explanation: Direct correlation between 'activityDate' and 'activity_date'.
+      - name: activity_type_id
+        expression: activities_email_bounced.activityTypeId
+        score: 0.9
+        explanation: Direct correlation between 'activityTypeId' and 'activity_type_id'.
+      - name: campaign_id
+        expression: activities_email_bounced.campaignId
+        score: 0.9
+        explanation: Direct correlation between 'campaignId' and 'campaign_id'.
+      - name: campaign_run_id
+        expression: activities_email_bounced.campaign_run_id
+        score: 0.9
+        explanation: Direct correlation between 'campaign_run_id' and 'campaign_run_id'.
+      - name: category
+        expression: activities_email_bounced.category
+        score: 0.9
+        explanation: Direct correlation between 'category' and 'category'.
+      - name: choice_number
+        expression: activities_email_bounced.choice_number
+        score: 0.9
+        explanation: Direct correlation between 'choice_number' and 'choice_number'.
+      - name: details
+        expression: activities_email_bounced.details
+        score: 0.9
+        explanation: Direct correlation between 'details' and 'details'.
+      - name: email
+        expression: activities_email_bounced.email
+        score: 0.0
+        explanation: "Mismatch found: 'email' mapping attempts to use an EMAIL field
+          for an email template ID, which is incorrect."
+      - name: email_template_id
+        expression: activities_email_bounced.email
+        score: 0.0
+        explanation: "Mismatch found: 'email' mapping attempts to use an EMAIL field
+          for an email template ID, which is incorrect."
+      - name: id
+        expression: activities_email_bounced.marketoGUID
+        score: 0.9
+        explanation: Direct correlation between 'marketoGUID' and 'id'.
+      - name: lead_id
+        expression: activities_email_bounced.leadId
+        score: 0.9
+        explanation: Direct correlation between 'leadId' and 'lead_id'.
+      - name: primary_attribute_value
+        expression: activities_email_bounced.primaryAttributeValue
+        score: 0.9
+        explanation: Direct correlation between 'primaryAttributeValue' and 'primary_attribute_value'.
+      - name: primary_attribute_value_id
+        expression: activities_email_bounced.primaryAttributeValueId
+        score: 0.9
+        explanation: Direct correlation between 'primaryAttributeValueId' and 'primary_attribute_value_id'.
+      - name: step_id
+        expression: activities_email_bounced.step_id
+        score: 0.9
+        explanation: Direct correlation between 'step_id' and 'step_id'.
+      - name: subcategory
+        expression: activities_email_bounced.subcategory
+        score: 0.9
+        explanation: Direct correlation between 'subcategory' and 'subcategory'.

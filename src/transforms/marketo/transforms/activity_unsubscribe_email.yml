@@ -1,0 +1,138 @@
+domain: marketo.airbyte-interop
+transforms:
+  - name: activity_unsubscribe_email
+    from:
+      - activities_unsubscribe_email: marketo.activities_unsubscribe_email
+    fields:
+      activity_date:
+        expression: activities_unsubscribe_email.activityDate
+        description: The timestamp the lead unsubscribed.
+      activity_type_id:
+        expression: activities_unsubscribe_email.activityTypeId
+        description: The ID of the activity type.
+      campaign_id:
+        expression: activities_unsubscribe_email.campaignId
+        description: The ID of the email's campaign.
+      campaign_run_id:
+        expression: activities_unsubscribe_email.campaign_run_id
+        description: The ID of the email's campaign run.
+      client_ip_address:
+        expression: activities_unsubscribe_email.client_ip_address
+        description: The IP address of the client that unsubscribed.
+      email_template_id:
+        expression: MISSING
+        description: The ID of the email's template.
+      form_fields:
+        expression: activities_unsubscribe_email.form_fields
+        description: The query parameters contained within the URL.
+      id:
+        expression: activities_unsubscribe_email.marketoGUID
+        description: ID of the activity.
+      lead_id:
+        expression: activities_unsubscribe_email.leadId
+        description: The ID of the lead related to the activity.
+      primary_attribute_value:
+        expression: activities_unsubscribe_email.primaryAttributeValue
+        description: The primary attribute of the activity.
+      primary_attribute_value_id:
+        expression: activities_unsubscribe_email.primaryAttributeValueId
+        description: The ID of the primary attribute of the activity.
+      query_parameters:
+        expression: activities_unsubscribe_email.query_parameters
+        description: The query parameters contained within the URL.
+      referrer_url:
+        expression: activities_unsubscribe_email.referrer_url
+        description: The URL of the referrer used to identify where the form visit
+          originated from.
+      user_agent:
+        expression: activities_unsubscribe_email.user_agent
+        description: The web browser user agent information obtained when the lead
+          unsubscribed.
+      webform_id:
+        expression: activities_unsubscribe_email.webform_id
+        description: The ID of the unsubscribe web page.
+      webpage_id:
+        expression: activities_unsubscribe_email.webpage_id
+        description: The ID of the unsubscribe web form.
+annotations:
+  approved: true
+  missing_fields:
+    - email_template_id
+  evaluation:
+    source_stream_name: activities_unsubscribe_email
+    target_table_name: activity_unsubscribe_email
+    table_match_score: 0.8
+    completion_score: 0.9
+    explanation: The table match is strong, indicating a high likelihood that the
+      source and target tables describe the same subject matter. The completion score
+      is also high, showing that most fields are populated with reasonable mappings,
+      although some mappings like 'email_template_id' had to be marked as 'MISSING'
+      due to the lack of available data.
+    field_mapping_evals:
+      - name: activity_date
+        expression: activities_unsubscribe_email.activityDate
+        score: 0.9
+        explanation: Proper mapping with detailed reference to activity date.
+      - name: activity_type_id
+        expression: activities_unsubscribe_email.activityTypeId
+        score: 0.9
+        explanation: Accurate mapping to the ID of the activity type.
+      - name: campaign_id
+        expression: activities_unsubscribe_email.campaignId
+        score: 0.85
+        explanation: Correct mapping to the corresponding email campaign ID.
+      - name: campaign_run_id
+        expression: activities_unsubscribe_email.campaign_run_id
+        score: 0.85
+        explanation: Correct mapping of the campaign run ID, corresponding directly
+          to the source.
+      - name: client_ip_address
+        expression: activities_unsubscribe_email.client_ip_address
+        score: 0.85
+        explanation: Direct and accurate mapping of the IP address.
+      - name: email_template_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: form_fields
+        expression: activities_unsubscribe_email.form_fields
+        score: 0.8
+        explanation: Mapped correctly to form fields containing URL query parameters.
+      - name: id
+        expression: activities_unsubscribe_email.marketoGUID
+        score: 0.9
+        explanation: Accurately mapped to the Market GUID in the source.
+      - name: lead_id
+        expression: activities_unsubscribe_email.leadId
+        score: 0.9
+        explanation: Matches well to the source lead ID, appropriate mapping confirmed.
+      - name: primary_attribute_value
+        expression: activities_unsubscribe_email.primaryAttributeValue
+        score: 0.85
+        explanation: Proper mapping of the primary attribute value.
+      - name: primary_attribute_value_id
+        expression: activities_unsubscribe_email.primaryAttributeValueId
+        score: 0.85
+        explanation: Correct mapping for the primary attribute value ID.
+      - name: query_parameters
+        expression: activities_unsubscribe_email.query_parameters
+        score: 0.8
+        explanation: Correctly mapped to encapsulate all query parameters related
+          to the activity.
+      - name: referrer_url
+        expression: activities_unsubscribe_email.referrer_url
+        score: 0.8
+        explanation: Accurately accounts for the URL of the form referrer.
+      - name: user_agent
+        expression: activities_unsubscribe_email.user_agent
+        score: 0.8
+        explanation: Correctly mapped the browser user agent from the unsubscribe
+          event.
+      - name: webform_id
+        expression: activities_unsubscribe_email.webform_id
+        score: 0.85
+        explanation: Direct mapping to the specific ID of the email's webform.
+      - name: webpage_id
+        expression: activities_unsubscribe_email.webpage_id
+        score: 0.85
+        explanation: Mapped directly to the webpage ID, which is specific and appropriate.

@@ -1,0 +1,81 @@
+domain: marketo.airbyte-interop
+transforms:
+  - name: lead_describe
+    from:
+      - leads: marketo.leads
+    fields:
+      data_type:
+        expression: MISSING
+        description: Datatype of the field.
+      display_name:
+        expression: MISSING
+        description: UI display-name of the field.
+      id:
+        expression: leads.id
+        description: Unique integer id of the field.
+      length:
+        expression: MISSING
+        description: Max length of the field. Only applicable to text, string, and
+          text area.
+      restname:
+        expression: MISSING
+        description: Description of REST API usage attributes.
+      restread_only:
+        expression: MISSING
+        description: Whether the field is only available via the REST API.
+      soapname:
+        expression: MISSING
+        description: Description of SOAP API usage attributes.
+      soapread_only:
+        expression: MISSING
+        description: Whether the field is only available via the SOAP API.
+annotations:
+  approved: false
+  missing_fields:
+    - data_type
+    - display_name
+    - length
+    - restname
+    - restread_only
+    - soapname
+    - soapread_only
+  evaluation:
+    source_stream_name: leads
+    target_table_name: lead_describe
+    table_match_score: 0.1
+    completion_score: 0.3
+    explanation: Low scores due to multiple 'MISSING' expressions indicating unresolved
+      field mappings.
+    field_mapping_evals:
+      - name: data_type
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: display_name
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: id
+        expression: leads.id
+        score: 1.0
+        explanation: Direct mapping found.
+      - name: length
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: restname
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: restread_only
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: soapname
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: soapread_only
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

@@ -1,0 +1,741 @@
+[project]
+source_name = "marketo"
+project_name = "airbyte-interop"
+requirements_file = "build/marketo/requirements/airbyte-interop/src_dbt_requirements.yml"
+requirements_file_hash = "30c683a7d02d205cbbcfe161263f9f6d624c02875d0cc85ee1f419330567d9f4"
+airbyte_source_file = "build/marketo/src_airbyte_raw_marketo.yml"
+airbyte_source_file_hash = "2d64f14b251f641d444d3571630b6ed6219d56e26c868aa58fa2d0d82e33238e"
+
+[coverage]
+unused_source_streams = [
+    "activities_addto_list",
+    "activities_addto_nurture",
+    "activities_addto_opportunity",
+    "activities_asksquestionsinwebinar",
+    "activities_assetdownloadsinwebinar",
+    "activities_call_webhook",
+    "activities_calltoactionclickedinwebinar",
+    "activities_change_lead_partition",
+    "activities_change_nurture_cadence",
+    "activities_change_nurture_track",
+    "activities_change_program_member_data",
+    "activities_change_revenue_stage",
+    "activities_change_revenue_stage_manually",
+    "activities_change_score",
+    "activities_change_segment",
+    "activities_change_statusin_progression",
+    "activities_click_link",
+    "activities_click_sales_email",
+    "activities_email_bounced_soft",
+    "activities_engagedwitha_conversational_flow",
+    "activities_engagedwitha_dialogue",
+    "activities_engagedwithan_agentin_conversational_flow",
+    "activities_engagedwithan_agentin_dialogue",
+    "activities_execute_campaign",
+    "activities_fill_out_form",
+    "activities_hasattendedevent",
+    "activities_interactedwith_documentin_conversational_flow",
+    "activities_interactedwith_documentin_dialogue",
+    "activities_new_lead",
+    "activities_open_sales_email",
+    "activities_push_leadto_marketo",
+    "activities_reached_conversational_flow_goal",
+    "activities_reached_dialogue_goal",
+    "activities_receive_sales_email",
+    "activities_received_forwardto_friend_email",
+    "activities_removefrom_list",
+    "activities_removefrom_opportunity",
+    "activities_replyto_sales_email",
+    "activities_request_campaign",
+    "activities_respondedtoapollinwebinar",
+    "activities_sales_email_bounced",
+    "activities_scheduled_meetingin_conversational_flow",
+    "activities_scheduled_meetingin_dialogue",
+    "activities_send_alert",
+    "activities_send_sales_email",
+    "activities_sent_forwardto_friend_email",
+    "activities_share_content",
+    "activities_update_opportunity",
+    "activities_visit_webpage",
+    "activity_types",
+    "lists",
+    "segmentations",
+]
+unmapped_target_tables = []
+
+[mappings.activity_change_data_value]
+source_file = "src/transforms/marketo/transforms/activity_change_data_value.yml"
+source_file_hash = "30c34bb782bb2c12ef7b2ffc998546d076bc20293cecd5b94399bcaa681589a3"
+source_stream = "activities_change_data_value"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.activity_change_data_value.mapped_target_fields]
+api_method_name = "activities_change_data_value.api_method_name"
+activity_date = "activities_change_data_value.activityDate"
+activity_type_id = "activities_change_data_value.activityTypeId"
+campaign_id = "activities_change_data_value.campaignId"
+id = "activities_change_data_value.marketoGUID"
+lead_id = "activities_change_data_value.leadId"
+modifying_user = "activities_change_data_value.modifying_user"
+new_value = "activities_change_data_value.new_value"
+old_value = "activities_change_data_value.old_value"
+primary_attribute_value = "activities_change_data_value.primaryAttributeValue"
+primary_attribute_value_id = "activities_change_data_value.primaryAttributeValueId"
+reason = "activities_change_data_value.reason"
+request_id = "activities_change_data_value.request_id"
+
+[mappings.activity_change_data_value.unused_source_fields]
+activities_change_data_value = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "source",
+]
+
+[mappings.activity_click_email]
+source_file = "src/transforms/marketo/transforms/activity_click_email.yml"
+source_file_hash = "713346ce682f59671a35be55da7d228dcf36842175d8cd18d30285cb735a717d"
+source_stream = "activities_click_email"
+unmapped_target_fields = [
+    "email_template_id",
+    "id",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.activity_click_email.mapped_target_fields]
+activity_date = "activities_click_email.activityDate"
+activity_type_id = "activities_click_email.activityTypeId"
+campaign_id = "activities_click_email.campaignId"
+campaign_run_id = "activities_click_email.campaign_run_id"
+choice_number = "activities_click_email.choice_number"
+device = "activities_click_email.device"
+is_mobile_device = "activities_click_email.is_mobile_device"
+lead_id = "activities_click_email.leadId"
+link = "activities_click_email.link"
+primary_attribute_value = "activities_click_email.primaryAttributeValue"
+primary_attribute_value_id = "activities_click_email.primaryAttributeValueId"
+step_id = "activities_click_email.step_id"
+user_agent = "activities_click_email.user_agent"
+
+[mappings.activity_click_email.unused_source_fields]
+activities_click_email = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "bot_activity_pattern",
+    "browser",
+    "is_bot_activity",
+    "is_predictive",
+    "link_id",
+    "marketoGUID",
+    "platform",
+    "test_variant",
+]
+
+[mappings.activity_delete_lead]
+source_file = "src/transforms/marketo/transforms/activity_delete_lead.yml"
+source_file_hash = "1f844d3b3c6ba0fbd3d9ff464cd8c9d0fd08a9f101ee3873b2d406b0561e1bf5"
+source_stream = "activities_delete_lead"
+unmapped_target_fields = [
+    "campaign",
+    "primary_attribute_value",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.activity_delete_lead.mapped_target_fields]
+activity_date = "activities_delete_lead.activityDate"
+activity_type_id = "activities_delete_lead.activityTypeId"
+campaign_id = "activities_delete_lead.campaignId"
+id = "activities_delete_lead.marketoGUID"
+lead_id = "activities_delete_lead.leadId"
+primary_attribute_value_id = "activities_delete_lead.primaryAttributeValueId"
+
+[mappings.activity_delete_lead.unused_source_fields]
+activities_delete_lead = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "api_method_name",
+    "modifying_user",
+    "primaryAttributeValue",
+    "remove_from_crm",
+    "request_id",
+]
+
+[mappings.activity_email_bounced]
+source_file = "src/transforms/marketo/transforms/activity_email_bounced.yml"
+source_file_hash = "642f7753d1f18df22389ccc38a2d2bd159a2e588a1e74ab79e1b6ef59dedfa00"
+source_stream = "activities_email_bounced"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.activity_email_bounced.mapped_target_fields]
+activity_date = "activities_email_bounced.activityDate"
+activity_type_id = "activities_email_bounced.activityTypeId"
+campaign_id = "activities_email_bounced.campaignId"
+campaign_run_id = "activities_email_bounced.campaign_run_id"
+category = "activities_email_bounced.category"
+choice_number = "activities_email_bounced.choice_number"
+details = "activities_email_bounced.details"
+email = "activities_email_bounced.email"
+email_template_id = "activities_email_bounced.email"
+id = "activities_email_bounced.marketoGUID"
+lead_id = "activities_email_bounced.leadId"
+primary_attribute_value = "activities_email_bounced.primaryAttributeValue"
+primary_attribute_value_id = "activities_email_bounced.primaryAttributeValueId"
+step_id = "activities_email_bounced.step_id"
+subcategory = "activities_email_bounced.subcategory"
+
+[mappings.activity_email_bounced.unused_source_fields]
+activities_email_bounced = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "browser",
+    "device",
+    "has_predictive",
+    "platform",
+    "test_variant",
+    "user_agent",
+]
+
+[mappings.activity_email_delivered]
+source_file = "src/transforms/marketo/transforms/activity_email_delivered.yml"
+source_file_hash = "86ee233ef3f4003d5ce5ba90eb96aee1a9b25496501341c7c44c8360fa38b4ad"
+source_stream = "activities_email_delivered"
+unmapped_target_fields = [
+    "email_template_id",
+    "id",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.activity_email_delivered.mapped_target_fields]
+activity_date = "activities_email_delivered.activityDate"
+activity_type_id = "activities_email_delivered.activityTypeId"
+campaign_id = "activities_email_delivered.campaignId"
+campaign_run_id = "activities_email_delivered.campaign_run_id"
+choice_number = "activities_email_delivered.choice_number"
+lead_id = "activities_email_delivered.leadId"
+primary_attribute_value = "activities_email_delivered.primaryAttributeValue"
+primary_attribute_value_id = "activities_email_delivered.primaryAttributeValueId"
+step_id = "activities_email_delivered.step_id"
+
+[mappings.activity_email_delivered.unused_source_fields]
+activities_email_delivered = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "browser",
+    "device",
+    "has_predictive",
+    "marketoGUID",
+    "platform",
+    "test_variant",
+    "user_agent",
+]
+
+[mappings.activity_merge_leads]
+source_file = "src/transforms/marketo/transforms/activity_merge_leads.yml"
+source_file_hash = "2dd7cd36ef164bcf3296e11d7d0b9dcf0f05869797e784b66f3a754f8dc42191"
+source_stream = "activities_merge_leads"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.activity_merge_leads.mapped_target_fields]
+activity_date = "activities_merge_leads.activityDate"
+activity_type_id = "activities_merge_leads.activityTypeId"
+campaign_id = "activities_merge_leads.campaignId"
+id = "activities_merge_leads.marketoGUID"
+lead_id = "activities_merge_leads.leadId"
+primary_attribute_value = "activities_merge_leads.primaryAttributeValue"
+primary_attribute_value_id = "activities_merge_leads.primaryAttributeValueId"
+merge_ids = "activities_merge_leads.merge_ids"
+
+[mappings.activity_merge_leads.unused_source_fields]
+activities_merge_leads = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "api_method_name",
+    "master_updated",
+    "merge_source",
+    "mergedin_sales",
+    "modifying_user",
+    "request_id",
+]
+
+[mappings.activity_open_email]
+source_file = "src/transforms/marketo/transforms/activity_open_email.yml"
+source_file_hash = "6d7748908912bd2bc353923c02585e5f616c47f00b5633e6f6e3d3d117b47d5f"
+source_stream = "activities_open_email"
+unmapped_target_fields = [
+    "email_template_id",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.activity_open_email.mapped_target_fields]
+activity_date = "activities_open_email.activityDate"
+activity_type_id = "activities_open_email.activityTypeId"
+campaign_id = "activities_open_email.campaignId"
+campaign_run_id = "activities_open_email.campaign_run_id"
+choice_number = "activities_open_email.choice_number"
+device = "activities_open_email.device"
+id = "activities_open_email.marketoGUID"
+is_mobile_device = "activities_open_email.is_mobile_device"
+lead_id = "activities_open_email.leadId"
+platform = "activities_open_email.platform"
+primary_attribute_value = "activities_open_email.primaryAttributeValue"
+primary_attribute_value_id = "activities_open_email.primaryAttributeValueId"
+step_id = "activities_open_email.step_id"
+user_agent = "activities_open_email.user_agent"
+
+[mappings.activity_open_email.unused_source_fields]
+activities_open_email = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "bot_activity_pattern",
+    "browser",
+    "has_predictive",
+    "is_bot_activity",
+    "test_variant",
+]
+
+[mappings.activity_send_email]
+source_file = "src/transforms/marketo/transforms/activity_send_email.yml"
+source_file_hash = "eb941f4477baa752c6411c3b5552aef072f809c6580635b546825be6fd6328d2"
+source_stream = "activities_send_email"
+unmapped_target_fields = [
+    "action_result",
+    "email_template_id",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.activity_send_email.mapped_target_fields]
+activity_date = "activities_send_email.activityDate"
+activity_type_id = "activities_send_email.activityTypeId"
+campaign_id = "activities_send_email.campaignId"
+campaign_run_id = "activities_send_email.campaign_run_id"
+choice_number = "activities_send_email.choice_number"
+id = "activities_send_email.marketoGUID"
+lead_id = "activities_send_email.leadId"
+primary_attribute_value = "activities_send_email.primaryAttributeValue"
+primary_attribute_value_id = "activities_send_email.primaryAttributeValueId"
+step_id = "activities_send_email.step_id"
+
+[mappings.activity_send_email.unused_source_fields]
+activities_send_email = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "browser",
+    "device",
+    "has_predictive",
+    "platform",
+    "test_variant",
+    "user_agent",
+]
+
+[mappings.activity_unsubscribe_email]
+source_file = "src/transforms/marketo/transforms/activity_unsubscribe_email.yml"
+source_file_hash = "1b28c3dae19330002eb8aa3d899dec61443ebb7f8e86736ea7fe866c23d9b16b"
+source_stream = "activities_unsubscribe_email"
+unmapped_target_fields = [
+    "email_template_id",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.activity_unsubscribe_email.mapped_target_fields]
+activity_date = "activities_unsubscribe_email.activityDate"
+activity_type_id = "activities_unsubscribe_email.activityTypeId"
+campaign_id = "activities_unsubscribe_email.campaignId"
+campaign_run_id = "activities_unsubscribe_email.campaign_run_id"
+client_ip_address = "activities_unsubscribe_email.client_ip_address"
+form_fields = "activities_unsubscribe_email.form_fields"
+id = "activities_unsubscribe_email.marketoGUID"
+lead_id = "activities_unsubscribe_email.leadId"
+primary_attribute_value = "activities_unsubscribe_email.primaryAttributeValue"
+primary_attribute_value_id = "activities_unsubscribe_email.primaryAttributeValueId"
+query_parameters = "activities_unsubscribe_email.query_parameters"
+referrer_url = "activities_unsubscribe_email.referrer_url"
+user_agent = "activities_unsubscribe_email.user_agent"
+webform_id = "activities_unsubscribe_email.webform_id"
+webpage_id = "activities_unsubscribe_email.webpage_id"
+
+[mappings.activity_unsubscribe_email.unused_source_fields]
+activities_unsubscribe_email = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "browser",
+    "device",
+    "has_predictive",
+    "platform",
+    "test_variant",
+]
+
+[mappings.campaign]
+source_file = "src/transforms/marketo/transforms/campaign.yml"
+source_file_hash = "68a8e0f4825f1aca6709ececc889df351aa04a8bdf20685b1946db338fac3e30"
+source_stream = "campaigns"
+unmapped_target_fields = [
+    "_fivetran_deleted",
+    "computed_url",
+    "flow_id",
+    "folder_id",
+    "folder_type",
+    "id",
+    "is_communication_limit_enabled",
+    "is_requestable",
+    "is_system",
+    "max_members",
+    "qualification_rule_interval",
+    "qualification_rule_type",
+    "qualification_rule_unit",
+    "recurrence_day_of_month",
+    "recurrence_day_of_week",
+    "recurrence_end_at",
+    "recurrence_interval",
+    "recurrence_interval_type",
+    "recurrence_start_at",
+    "recurrence_week_of_month",
+    "recurrence_weekday_only",
+    "smart_list_id",
+    "status",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.campaign.mapped_target_fields]
+active = "campaigns.active"
+created_at = "campaigns.createdAt"
+description = "campaigns.description"
+name = "campaigns.name"
+program_id = "campaigns.programId"
+type = "campaigns.type"
+updated_at = "campaigns.updatedAt"
+workspace_name = "campaigns.workspaceName"
+
+[mappings.campaign.unused_source_fields]
+campaigns = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "id",
+    "programName",
+]
+
+[mappings.email_template_history]
+source_file = "src/transforms/marketo/transforms/email_template_history.yml"
+source_file_hash = "f4f5afd1cb427e9d6a2b7cf5be0bbdcbc2cc4b61b3396bb578a24a7d41c255b5"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "created_at",
+    "description",
+    "folder_folder_name",
+    "folder_id",
+    "folder_type",
+    "folder_value",
+    "from_email",
+    "from_name",
+    "id",
+    "name",
+    "operational",
+    "program_id",
+    "publish_to_msi",
+    "reply_email",
+    "status",
+    "subject",
+    "template",
+    "text_only",
+    "updated_at",
+    "url",
+    "version",
+    "web_view",
+    "workspace",
+]
+
+[mappings.email_template_history.mapped_target_fields]
+
+[mappings.email_template_history.unused_source_fields]
+
+[mappings.email_template_history.omitted_target_fields]
+
+[mappings.email_template_history.erroneous_source_table_columns]
+
+[mappings.lead]
+source_file = "src/transforms/marketo/transforms/lead.yml"
+source_file_hash = "5c29a1ae9494abf615bede43413405cf317b4b2a3217b4a63bdb12720f7732f6"
+source_stream = "leads"
+unmapped_target_fields = [
+    "address_lead",
+    "billing_country_code",
+    "billing_state_code",
+    "country_code",
+    "state_code",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.lead.mapped_target_fields]
+id = "leads.id"
+created_at = "leads.createdAt"
+updated_at = "leads.updatedAt"
+email = "leads.email"
+first_name = "leads.firstName"
+last_name = "leads.lastName"
+phone = "leads.phone"
+main_phone = "leads.mainPhone"
+mobile_phone = "leads.mobilePhone"
+company = "leads.company"
+inferred_company = "leads.inferredCompany"
+address = "leads.address"
+city = "leads.city"
+state = "leads.state"
+country = "leads.country"
+postal_code = "leads.postalCode"
+billing_street = "leads.billingStreet"
+billing_city = "leads.billingCity"
+billing_state = "leads.billingState"
+billing_country = "leads.billingCountry"
+billing_postal_code = "leads.billingPostalCode"
+inferred_city = "leads.inferredCity"
+inferred_state_region = "leads.inferredStateRegion"
+inferred_country = "leads.inferredCountry"
+inferred_postal_code = "leads.inferredPostalCode"
+inferred_phone_area_code = "leads.inferredPhoneAreaCode"
+anonymous_ip = "leads.anonymousIP"
+unsubscribed = "leads.unsubscribed"
+email_invalid = "leads.emailInvalid"
+do_not_call = "leads.doNotCall"
+
+[mappings.lead.unused_source_fields]
+leads = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "acquisitionProgramId",
+    "annualRevenue",
+    "blackListed",
+    "blackListedCause",
+    "contactCompany",
+    "cookies",
+    "dateOfBirth",
+    "department",
+    "doNotCallReason",
+    "emailInvalidCause",
+    "emailSuspended",
+    "emailSuspendedAt",
+    "emailSuspendedCause",
+    "externalCompanyId",
+    "externalSalesPersonId",
+    "fax",
+    "industry",
+    "inferredMetropolitanArea",
+    "isAnonymous",
+    "isLead",
+    "leadPartitionId",
+    "leadPerson",
+    "leadRevenueCycleModelId",
+    "leadRevenueStageId",
+    "leadRole",
+    "leadScore",
+    "leadSource",
+    "leadStatus",
+    "marketingSuspended",
+    "marketingSuspendedCause",
+    "middleName",
+    "mktoAcquisitionDate",
+    "mktoCompanyNotes",
+    "mktoDoNotCallCause",
+    "mktoIsCustomer",
+    "mktoIsPartner",
+    "mktoName",
+    "mktoPersonNotes",
+    "numberOfEmployees",
+    "originalReferrer",
+    "originalSearchEngine",
+    "originalSearchPhrase",
+    "originalSourceInfo",
+    "originalSourceType",
+    "personPrimaryLeadInterest",
+    "personTimeZone",
+    "personType",
+    "priority",
+    "rating",
+    "registrationSourceInfo",
+    "registrationSourceType",
+    "relativeScore",
+    "relativeUrgency",
+    "salutation",
+    "sicCode",
+    "site",
+    "title",
+    "unsubscribedReason",
+    "urgency",
+    "website",
+]
+
+[mappings.lead_describe]
+source_file = "src/transforms/marketo/transforms/lead_describe.yml"
+source_file_hash = "e98177ba067cf7361407ce757dc74bcc3215ee7df74edf17fb4220f4c2d9d854"
+source_stream = "leads"
+unmapped_target_fields = [
+    "data_type",
+    "display_name",
+    "length",
+    "restname",
+    "restread_only",
+    "soapname",
+    "soapread_only",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.lead_describe.mapped_target_fields]
+id = "leads.id"
+
+[mappings.lead_describe.unused_source_fields]
+leads = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "acquisitionProgramId",
+    "address",
+    "annualRevenue",
+    "anonymousIP",
+    "billingCity",
+    "billingCountry",
+    "billingPostalCode",
+    "billingState",
+    "billingStreet",
+    "blackListed",
+    "blackListedCause",
+    "city",
+    "company",
+    "contactCompany",
+    "cookies",
+    "country",
+    "createdAt",
+    "dateOfBirth",
+    "department",
+    "doNotCall",
+    "doNotCallReason",
+    "email",
+    "emailInvalid",
+    "emailInvalidCause",
+    "emailSuspended",
+    "emailSuspendedAt",
+    "emailSuspendedCause",
+    "externalCompanyId",
+    "externalSalesPersonId",
+    "fax",
+    "firstName",
+    "industry",
+    "inferredCity",
+    "inferredCompany",
+    "inferredCountry",
+    "inferredMetropolitanArea",
+    "inferredPhoneAreaCode",
+    "inferredPostalCode",
+    "inferredStateRegion",
+    "isAnonymous",
+    "isLead",
+    "lastName",
+    "leadPartitionId",
+    "leadPerson",
+    "leadRevenueCycleModelId",
+    "leadRevenueStageId",
+    "leadRole",
+    "leadScore",
+    "leadSource",
+    "leadStatus",
+    "mainPhone",
+    "marketingSuspended",
+    "marketingSuspendedCause",
+    "middleName",
+    "mktoAcquisitionDate",
+    "mktoCompanyNotes",
+    "mktoDoNotCallCause",
+    "mktoIsCustomer",
+    "mktoIsPartner",
+    "mktoName",
+    "mktoPersonNotes",
+    "mobilePhone",
+    "numberOfEmployees",
+    "originalReferrer",
+    "originalSearchEngine",
+    "originalSearchPhrase",
+    "originalSourceInfo",
+    "originalSourceType",
+    "personPrimaryLeadInterest",
+    "personTimeZone",
+    "personType",
+    "phone",
+    "postalCode",
+    "priority",
+    "rating",
+    "registrationSourceInfo",
+    "registrationSourceType",
+    "relativeScore",
+    "relativeUrgency",
+    "salutation",
+    "sicCode",
+    "site",
+    "state",
+    "title",
+    "unsubscribed",
+    "unsubscribedReason",
+    "updatedAt",
+    "urgency",
+    "website",
+]
+
+[mappings.program]
+source_file = "src/transforms/marketo/transforms/program.yml"
+source_file_hash = "c8ba2b22c8097541a4af63e2b0a6a4d3a1e6b5fe668f23bbf2f704f68171f9fd"
+source_stream = "programs"
+unmapped_target_fields = [
+    "_fivetran_deleted",
+    "end_date",
+    "sfdc_id",
+    "sfdc_name",
+    "start_date",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.program.mapped_target_fields]
+channel = "programs.channel"
+created_at = "programs.createdAt"
+description = "programs.description"
+id = "programs.id"
+name = "programs.name"
+status = "programs.status"
+type = "programs.type"
+updated_at = "programs.updatedAt"
+url = "programs.url"
+workspace = "programs.workspace"
+
+[mappings.program.unused_source_fields]
+programs = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "folder",
+    "folder.folderName",
+    "folder.type",
+    "folder.value",
+    "headStart",
+    "isHeadStart",
+]

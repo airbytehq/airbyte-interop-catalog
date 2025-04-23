@@ -1,0 +1,121 @@
+domain: marketo.airbyte-interop
+transforms:
+  - name: activity_open_email
+    from:
+      - activities_open_email: marketo.activities_open_email
+    fields:
+      activity_date:
+        expression: activities_open_email.activityDate
+        description: The timestamp the email was opened.
+      activity_type_id:
+        expression: activities_open_email.activityTypeId
+        description: The ID of the activity type.
+      campaign_id:
+        expression: activities_open_email.campaignId
+        description: The ID of the email's campaign.
+      campaign_run_id:
+        expression: activities_open_email.campaign_run_id
+        description: The ID of the email's campaign run.
+      choice_number:
+        expression: activities_open_email.choice_number
+        description: The choice number of the current step that triggered the activity.
+      device:
+        expression: activities_open_email.device
+        description: The device that was used to open the email.
+      email_template_id:
+        expression: MISSING
+        description: The ID of the email's template.
+      id:
+        expression: activities_open_email.marketoGUID
+        description: ID of the activity.
+      is_mobile_device:
+        expression: activities_open_email.is_mobile_device
+        description: Identifies whether a mobile device was used to open the email.
+      lead_id:
+        expression: activities_open_email.leadId
+        description: The ID of the lead related to the activity.
+      platform:
+        expression: activities_open_email.platform
+        description: The platform that was used to open the email.
+      primary_attribute_value:
+        expression: activities_open_email.primaryAttributeValue
+        description: The primary attribute of the activity.
+      primary_attribute_value_id:
+        expression: activities_open_email.primaryAttributeValueId
+        description: The ID of the primary attribute of the activity.
+      step_id:
+        expression: activities_open_email.step_id
+        description: The Id of the current step in the flow.
+      user_agent:
+        expression: activities_open_email.user_agent
+        description: The web browser user agent information obtained when the email
+          was opened.
+annotations:
+  approved: true
+  missing_fields:
+    - email_template_id
+  evaluation:
+    source_stream_name: activities_open_email
+    target_table_name: activity_open_email
+    table_match_score: 0.85
+    completion_score: 0.9
+    explanation: The table mapping shows a high level of confidence that the source
+      and target tables are describing the same subject matter, with almost all fields
+      properly populated.
+    field_mapping_evals:
+      - name: activity_date
+        expression: activities_open_email.activityDate
+        score: 1.0
+        explanation: Exact match found.
+      - name: activity_type_id
+        expression: activities_open_email.activityTypeId
+        score: 0.95
+        explanation: Exact match found.
+      - name: campaign_id
+        expression: activities_open_email.campaignId
+        score: 0.95
+        explanation: Exact match found.
+      - name: campaign_run_id
+        expression: activities_open_email.campaign_run_id
+        score: 0.95
+        explanation: Exact match found.
+      - name: choice_number
+        expression: activities_open_email.choice_number
+        score: 0.95
+        explanation: Exact match found.
+      - name: device
+        expression: activities_open_email.device
+        score: 0.95
+        explanation: Exact match found.
+      - name: email_template_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: id
+        expression: activities_open_email.marketoGUID
+        score: 0.95
+        explanation: Exact match found.
+      - name: is_mobile_device
+        expression: activities_open_email.is_mobile_device
+        score: 0.95
+        explanation: Exact match found.
+      - name: lead_id
+        expression: activities_open_email.leadId
+        score: 0.95
+        explanation: Exact match found.
+      - name: platform
+        expression: activities_open_email.platform
+        score: 0.95
+        explanation: Exact match found.
+      - name: primary_attribute_value
+        expression: activities_open_email.primaryAttributeValue
+        score: 0.95
+        explanation: Exact match found.
+      - name: primary_attribute_value_id
+        expression: activities_open_email.primaryAttributeValueId
+        score: 0.95
+        explanation: Exact match found.
+      - name: user_agent
+        expression: activities_open_email.user_agent
+        score: 0.95
+        explanation: Exact match found.

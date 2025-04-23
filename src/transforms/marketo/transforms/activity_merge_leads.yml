@@ -1,0 +1,75 @@
+domain: marketo.airbyte-interop
+transforms:
+  - name: activity_merge_leads
+    from:
+      - activities_merge_leads: marketo.activities_merge_leads
+    fields:
+      activity_date:
+        expression: activities_merge_leads.activityDate
+        description: The timestamp the lead was deleted.
+      activity_type_id:
+        expression: activities_merge_leads.activityTypeId
+        description: The ID of the activity type.
+      campaign_id:
+        expression: activities_merge_leads.campaignId
+        description: The ID of the campaign related to the activity, if applicable.
+      id:
+        expression: activities_merge_leads.marketoGUID
+        description: ID of the activity.
+      lead_id:
+        expression: activities_merge_leads.leadId
+        description: The ID of the lead related to the activity.
+      primary_attribute_value:
+        expression: activities_merge_leads.primaryAttributeValue
+        description: The primary attribute of the activity.
+      primary_attribute_value_id:
+        expression: activities_merge_leads.primaryAttributeValueId
+        description: The ID of the primary attribute of the activity.
+      merge_ids:
+        expression: activities_merge_leads.merge_ids
+        description: ID of the lead that the lead was merged into.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: activities_merge_leads
+    target_table_name: activity_merge_leads
+    table_match_score: 0.9
+    completion_score: 0.8
+    explanation: The table match score is high because the source and target likely
+      describe the same concept, reflecting shared upstream APIs. The completion score
+      is moderately high, although not all fields are serialized equally across implementations.
+    field_mapping_evals:
+      - name: activity_date
+        expression: activities_merge_leads.activityDate
+        score: 0.9
+        explanation: Direct match on activity dates.
+      - name: activity_type_id
+        expression: activities_merge_leads.activityTypeId
+        score: 0.9
+        explanation: Exact column match for activity type IDs.
+      - name: campaign_id
+        expression: activities_merge_leads.campaignId
+        score: 0.75
+        explanation: There's a high probability that campaign IDs match, subject to
+          further verification.
+      - name: id
+        expression: activities_merge_leads.marketoGUID
+        score: 0.9
+        explanation: ID fields tend to be consistent across similar schemas.
+      - name: lead_id
+        expression: activities_merge_leads.leadId
+        score: 0.9
+        explanation: Direct match on identification for lead.
+      - name: primary_attribute_value
+        expression: activities_merge_leads.primaryAttributeValue
+        score: 0.8
+        explanation: High confidence in matching primary attribute value.
+      - name: primary_attribute_value_id
+        expression: activities_merge_leads.primaryAttributeValueId
+        score: 0.8
+        explanation: Primary attribute IDs highly match the contextual expectations.
+      - name: merge_ids
+        expression: activities_merge_leads.merge_ids
+        score: 0.35
+        explanation: Uncertainty exists; the context of merging might differ substantially.

@@ -1,0 +1,2737 @@
+# This file was auto-generated using the morph cli.
+# Please do not edit manually.
+
+version: 2
+sources:
+  - name: marketo
+    schema: "{{ var('airbyte_marketo_schema', default='marketo_raw') }}"
+    database: "{{ var('airbyte_marketo_database', default='marketo') }}"
+    tables:
+      - name: activities_addto_list
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: source
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_addto_nurture
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: track_id
+            data_type: integer
+          - name: track_name
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_addto_opportunity
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: is_primary
+            data_type: boolean
+          - name: role
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_asksquestionsinwebinar
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: question
+            data_type: varchar
+          - name: questionwasanswered
+            data_type: boolean
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_assetdownloadsinwebinar
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: downloadedasset
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_call_webhook
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: error_type
+            data_type: integer
+          - name: response
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_calltoactionclickedinwebinar
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: linkclicked
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_change_data_value
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: new_value
+            data_type: varchar
+          - name: old_value
+            data_type: varchar
+          - name: reason
+            data_type: varchar
+          - name: source
+            data_type: varchar
+          - name: api_method_name
+            data_type: varchar
+          - name: modifying_user
+            data_type: varchar
+          - name: request_id
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_change_lead_partition
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: old_partition_id
+            data_type: integer
+          - name: reason
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_change_nurture_cadence
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: new_nurture_cadence
+            data_type: varchar
+          - name: previous_nurture_cadence
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_change_nurture_track
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: new_track_id
+            data_type: integer
+          - name: previous_track_id
+            data_type: integer
+          - name: previous_track_name
+            data_type: varchar
+          - name: track_name
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_change_program_member_data
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: attribute_display_name
+            data_type: varchar
+          - name: attribute_name
+            data_type: integer
+          - name: new_value
+            data_type: varchar
+          - name: old_value
+            data_type: varchar
+          - name: reason
+            data_type: varchar
+          - name: source
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_change_revenue_stage
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: new_stage_id
+            data_type: integer
+          - name: old_stage_id
+            data_type: integer
+          - name: reason
+            data_type: varchar
+          - name: sla_expiration
+            data_type: timestamp
+          - name: new_stage
+            data_type: varchar
+          - name: old_stage
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_change_revenue_stage_manually
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_change_score
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: change_value
+            data_type: varchar
+          - name: new_value
+            data_type: integer
+          - name: old_value
+            data_type: integer
+          - name: reason
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_change_segment
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: new_segment_id
+            data_type: integer
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_change_statusin_progression
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: acquired_by
+            data_type: boolean
+          - name: new_status_id
+            data_type: integer
+          - name: old_status_id
+            data_type: integer
+          - name: program_member_id
+            data_type: integer
+          - name: reached_success_date
+            data_type: timestamp
+          - name: reason
+            data_type: varchar
+          - name: registration_code
+            data_type: varchar
+          - name: status_reason
+            data_type: varchar
+          - name: success
+            data_type: boolean
+          - name: webinar_url
+            data_type: varchar
+          - name: new_status
+            data_type: varchar
+          - name: old_status
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_click_email
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: bot_activity_pattern
+            data_type: varchar
+          - name: browser
+            data_type: varchar
+          - name: campaign_run_id
+            data_type: integer
+          - name: choice_number
+            data_type: integer
+          - name: device
+            data_type: varchar
+          - name: is_bot_activity
+            data_type: boolean
+          - name: is_mobile_device
+            data_type: boolean
+          - name: is_predictive
+            data_type: boolean
+          - name: link
+            data_type: varchar
+          - name: link_id
+            data_type: varchar
+          - name: platform
+            data_type: varchar
+          - name: step_id
+            data_type: integer
+          - name: test_variant
+            data_type: integer
+          - name: user_agent
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_click_link
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: browser
+            data_type: varchar
+          - name: client_ip_address
+            data_type: varchar
+          - name: device
+            data_type: varchar
+          - name: platform
+            data_type: varchar
+          - name: query_parameters
+            data_type: varchar
+          - name: referrer_url
+            data_type: varchar
+          - name: user_agent
+            data_type: varchar
+          - name: webpage_id
+            data_type: integer
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_click_sales_email
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: bot_activity_pattern
+            data_type: varchar
+          - name: campaign_run_id
+            data_type: integer
+          - name: is_bot_activity
+            data_type: boolean
+          - name: is_predictive
+            data_type: boolean
+          - name: link
+            data_type: varchar
+          - name: marketo_sales_person_id
+            data_type: integer
+          - name: sales_campaign_name
+            data_type: varchar
+          - name: sales_campaign_url
+            data_type: varchar
+          - name: sales_email_url
+            data_type: varchar
+          - name: sales_template_name
+            data_type: varchar
+          - name: sales_template_url
+            data_type: varchar
+          - name: sentby
+            data_type: varchar
+          - name: source
+            data_type: varchar
+          - name: template_id
+            data_type: integer
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_delete_lead
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: remove_from_crm
+            data_type: boolean
+          - name: api_method_name
+            data_type: varchar
+          - name: modifying_user
+            data_type: varchar
+          - name: request_id
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_email_bounced
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: browser
+            data_type: varchar
+          - name: campaign_run_id
+            data_type: integer
+          - name: category
+            data_type: varchar
+          - name: choice_number
+            data_type: integer
+          - name: details
+            data_type: varchar
+          - name: device
+            data_type: varchar
+          - name: email
+            data_type: varchar
+          - name: has_predictive
+            data_type: boolean
+          - name: platform
+            data_type: varchar
+          - name: step_id
+            data_type: integer
+          - name: subcategory
+            data_type: varchar
+          - name: test_variant
+            data_type: integer
+          - name: user_agent
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_email_bounced_soft
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: browser
+            data_type: varchar
+          - name: campaign_run_id
+            data_type: integer
+          - name: category
+            data_type: varchar
+          - name: choice_number
+            data_type: integer
+          - name: details
+            data_type: varchar
+          - name: device
+            data_type: varchar
+          - name: email
+            data_type: varchar
+          - name: has_predictive
+            data_type: boolean
+          - name: platform
+            data_type: varchar
+          - name: step_id
+            data_type: integer
+          - name: subcategory
+            data_type: varchar
+          - name: test_variant
+            data_type: integer
+          - name: user_agent
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_email_delivered
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: browser
+            data_type: varchar
+          - name: campaign_run_id
+            data_type: integer
+          - name: choice_number
+            data_type: integer
+          - name: device
+            data_type: varchar
+          - name: has_predictive
+            data_type: boolean
+          - name: platform
+            data_type: varchar
+          - name: step_id
+            data_type: integer
+          - name: test_variant
+            data_type: integer
+          - name: user_agent
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_engagedwitha_conversational_flow
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: conversation_score
+            data_type: integer
+          - name: conversation_status
+            data_type: varchar
+          - name: conversation_summary
+            data_type: varchar
+          - name: conversation_transcript
+            data_type: varchar
+          - name: conversational_flow_name
+            data_type: varchar
+          - name: discussed_topics
+            data_type: varchar
+          - name: interacted_u_i_type
+            data_type: varchar
+          - name: language
+            data_type: varchar
+          - name: page_url
+            data_type: varchar
+          - name: source_name
+            data_type: varchar
+          - name: source_type
+            data_type: varchar
+          - name: workspace
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_engagedwitha_dialogue
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: conversation_score
+            data_type: integer
+          - name: conversation_status
+            data_type: varchar
+          - name: conversation_summary
+            data_type: varchar
+          - name: conversation_transcript
+            data_type: varchar
+          - name: dialogue_name
+            data_type: varchar
+          - name: discussed_topics
+            data_type: varchar
+          - name: language
+            data_type: varchar
+          - name: page_url
+            data_type: varchar
+          - name: workspace
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_engagedwithan_agentin_conversational_flow
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: agent_email
+            data_type: varchar
+          - name: agent_id
+            data_type: integer
+          - name: agent_name
+            data_type: varchar
+          - name: conversation_score
+            data_type: integer
+          - name: conversation_status
+            data_type: varchar
+          - name: conversation_summary
+            data_type: varchar
+          - name: conversation_transcript
+            data_type: varchar
+          - name: conversational_flow_name
+            data_type: varchar
+          - name: discussed_topics
+            data_type: varchar
+          - name: lead_id
+            data_type: varchar
+          - name: page_url
+            data_type: varchar
+          - name: routing_queue_id
+            data_type: integer
+          - name: routing_queue_name
+            data_type: varchar
+          - name: routing_queue_type
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_engagedwithan_agentin_dialogue
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: agent_email
+            data_type: varchar
+          - name: agent_id
+            data_type: integer
+          - name: agent_name
+            data_type: varchar
+          - name: conversation_score
+            data_type: integer
+          - name: conversation_status
+            data_type: varchar
+          - name: conversation_summary
+            data_type: varchar
+          - name: conversation_transcript
+            data_type: varchar
+          - name: dialogue_name
+            data_type: varchar
+          - name: discussed_topics
+            data_type: varchar
+          - name: lead_id
+            data_type: varchar
+          - name: page_url
+            data_type: varchar
+          - name: routing_queue_id
+            data_type: integer
+          - name: routing_queue_name
+            data_type: varchar
+          - name: routing_queue_type
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_execute_campaign
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: qualified
+            data_type: boolean
+          - name: token_context_campaign_id
+            data_type: integer
+          - name: used_parent_campaign_token_context
+            data_type: boolean
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_fill_out_form
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: browser
+            data_type: varchar
+          - name: client_ip_address
+            data_type: varchar
+          - name: device
+            data_type: varchar
+          - name: form_fields
+            data_type: varchar
+          - name: platform
+            data_type: varchar
+          - name: query_parameters
+            data_type: varchar
+          - name: referrer_url
+            data_type: varchar
+          - name: user_agent
+            data_type: varchar
+          - name: webpage_id
+            data_type: integer
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_hasattendedevent
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: event_mode
+            data_type: varchar
+          - name: livewatchtimebypercent
+            data_type: integer
+          - name: numberofansweredquestions
+            data_type: integer
+          - name: numberofassetsdownloaded
+            data_type: integer
+          - name: numberof_c_t_asclicked
+            data_type: integer
+          - name: numberofpollresponses
+            data_type: integer
+          - name: numberofunansweredquestions
+            data_type: integer
+          - name: watchdurationinminutes
+            data_type: integer
+          - name: watched_date
+            data_type: timestamp
+          - name: webinar_title
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_interactedwith_documentin_conversational_flow
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: conversational_flow_id
+            data_type: integer
+          - name: conversational_flow_name
+            data_type: varchar
+          - name: document_downloaded
+            data_type: boolean
+          - name: document_name
+            data_type: varchar
+          - name: document_opened
+            data_type: boolean
+          - name: document_url
+            data_type: varchar
+          - name: language
+            data_type: varchar
+          - name: page_url
+            data_type: varchar
+          - name: search_terms
+            data_type: varchar
+          - name: workspace
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_interactedwith_documentin_dialogue
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: dialogue_id
+            data_type: integer
+          - name: dialogue_name
+            data_type: varchar
+          - name: document_downloaded
+            data_type: boolean
+          - name: document_name
+            data_type: varchar
+          - name: document_opened
+            data_type: boolean
+          - name: document_url
+            data_type: varchar
+          - name: language
+            data_type: varchar
+          - name: page_url
+            data_type: varchar
+          - name: search_terms
+            data_type: varchar
+          - name: workspace
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_merge_leads
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: merge_ids
+            data_type: array
+          - name: master_updated
+            data_type: boolean
+          - name: mergedin_sales
+            data_type: boolean
+          - name: merge_source
+            data_type: varchar
+          - name: api_method_name
+            data_type: varchar
+          - name: modifying_user
+            data_type: varchar
+          - name: request_id
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_new_lead
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: created_date
+            data_type: date
+          - name: form_name
+            data_type: varchar
+          - name: lead_source
+            data_type: varchar
+          - name: list_name
+            data_type: varchar
+          - name: sfdc_type
+            data_type: varchar
+          - name: source_type
+            data_type: varchar
+          - name: api_method_name
+            data_type: varchar
+          - name: modifying_user
+            data_type: varchar
+          - name: request_id
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_open_email
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: bot_activity_pattern
+            data_type: varchar
+          - name: browser
+            data_type: varchar
+          - name: campaign_run_id
+            data_type: integer
+          - name: choice_number
+            data_type: integer
+          - name: device
+            data_type: varchar
+          - name: has_predictive
+            data_type: boolean
+          - name: is_bot_activity
+            data_type: boolean
+          - name: is_mobile_device
+            data_type: boolean
+          - name: platform
+            data_type: varchar
+          - name: step_id
+            data_type: integer
+          - name: test_variant
+            data_type: integer
+          - name: user_agent
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_open_sales_email
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: bot_activity_pattern
+            data_type: varchar
+          - name: campaign_run_id
+            data_type: integer
+          - name: has_predictive
+            data_type: boolean
+          - name: is_bot_activity
+            data_type: boolean
+          - name: marketo_sales_person_id
+            data_type: integer
+          - name: sales_campaign_name
+            data_type: varchar
+          - name: sales_campaign_url
+            data_type: varchar
+          - name: sales_email_url
+            data_type: varchar
+          - name: sales_template_name
+            data_type: varchar
+          - name: sales_template_url
+            data_type: varchar
+          - name: sentby
+            data_type: varchar
+          - name: source
+            data_type: varchar
+          - name: template_id
+            data_type: integer
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_push_leadto_marketo
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: reason
+            data_type: varchar
+          - name: source
+            data_type: varchar
+          - name: api_method_name
+            data_type: varchar
+          - name: modifying_user
+            data_type: varchar
+          - name: request_id
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_reached_conversational_flow_goal
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: conversational_flow_name
+            data_type: varchar
+          - name: goal_name
+            data_type: varchar
+          - name: language
+            data_type: varchar
+          - name: page_url
+            data_type: varchar
+          - name: workspace
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_reached_dialogue_goal
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: dialogue_name
+            data_type: varchar
+          - name: goal_name
+            data_type: varchar
+          - name: language
+            data_type: varchar
+          - name: page_url
+            data_type: varchar
+          - name: workspace
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_receive_sales_email
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: receivedby
+            data_type: varchar
+          - name: source
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_received_forwardto_friend_email
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: choice_number
+            data_type: integer
+          - name: lead_id
+            data_type: varchar
+          - name: step_id
+            data_type: integer
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_removefrom_list
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: source
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_removefrom_opportunity
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: is_primary
+            data_type: boolean
+          - name: role
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_replyto_sales_email
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: campaign_run_id
+            data_type: integer
+          - name: has_predictive
+            data_type: boolean
+          - name: marketo_sales_person_id
+            data_type: integer
+          - name: sales_campaign_name
+            data_type: varchar
+          - name: sales_campaign_url
+            data_type: varchar
+          - name: sales_email_url
+            data_type: varchar
+          - name: sales_template_name
+            data_type: varchar
+          - name: sales_template_url
+            data_type: varchar
+          - name: sentby
+            data_type: varchar
+          - name: source
+            data_type: varchar
+          - name: template_id
+            data_type: integer
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_request_campaign
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: source
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_respondedtoapollinwebinar
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: pollquestion
+            data_type: varchar
+          - name: pollresponse
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_sales_email_bounced
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: campaign_run_id
+            data_type: integer
+          - name: category
+            data_type: varchar
+          - name: details
+            data_type: varchar
+          - name: email
+            data_type: varchar
+          - name: has_predictive
+            data_type: boolean
+          - name: marketo_sales_person_id
+            data_type: integer
+          - name: sentby
+            data_type: varchar
+          - name: source
+            data_type: varchar
+          - name: subcategory
+            data_type: varchar
+          - name: template_id
+            data_type: integer
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_scheduled_meetingin_conversational_flow
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: agent_email
+            data_type: varchar
+          - name: agent_name
+            data_type: varchar
+          - name: conversational_flow_id
+            data_type: integer
+          - name: conversational_flow_name
+            data_type: varchar
+          - name: meeting_status
+            data_type: varchar
+          - name: page_url
+            data_type: varchar
+          - name: routing_queue_id
+            data_type: integer
+          - name: routing_queue_name
+            data_type: varchar
+          - name: routing_queue_type
+            data_type: varchar
+          - name: scheduled_for
+            data_type: timestamp
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_scheduled_meetingin_dialogue
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: agent_email
+            data_type: varchar
+          - name: agent_name
+            data_type: varchar
+          - name: dialogue_id
+            data_type: integer
+          - name: dialogue_name
+            data_type: varchar
+          - name: meeting_status
+            data_type: varchar
+          - name: page_url
+            data_type: varchar
+          - name: routing_queue_id
+            data_type: integer
+          - name: routing_queue_name
+            data_type: varchar
+          - name: routing_queue_type
+            data_type: varchar
+          - name: scheduled_for
+            data_type: timestamp
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_send_alert
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: send_to_list
+            data_type: varchar
+          - name: send_to_owner
+            data_type: varchar
+          - name: send_to_smart_list
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_send_email
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: browser
+            data_type: varchar
+          - name: campaign_run_id
+            data_type: integer
+          - name: choice_number
+            data_type: integer
+          - name: device
+            data_type: varchar
+          - name: has_predictive
+            data_type: boolean
+          - name: platform
+            data_type: varchar
+          - name: step_id
+            data_type: integer
+          - name: test_variant
+            data_type: integer
+          - name: user_agent
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_send_sales_email
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: campaign_run_id
+            data_type: integer
+          - name: has_predictive
+            data_type: boolean
+          - name: marketo_sales_person_id
+            data_type: integer
+          - name: sales_campaign_name
+            data_type: varchar
+          - name: sales_campaign_url
+            data_type: varchar
+          - name: sales_email_url
+            data_type: varchar
+          - name: sales_template_name
+            data_type: varchar
+          - name: sales_template_url
+            data_type: varchar
+          - name: sentby
+            data_type: varchar
+          - name: source
+            data_type: varchar
+          - name: template_id
+            data_type: integer
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_sent_forwardto_friend_email
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: choice_number
+            data_type: integer
+          - name: lead_id
+            data_type: varchar
+          - name: step_id
+            data_type: integer
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_share_content
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: share_message
+            data_type: varchar
+          - name: social_app_type_id
+            data_type: integer
+          - name: social_network
+            data_type: varchar
+          - name: webpage_id
+            data_type: integer
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_unsubscribe_email
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: browser
+            data_type: varchar
+          - name: campaign_run_id
+            data_type: varchar
+          - name: client_ip_address
+            data_type: varchar
+          - name: device
+            data_type: varchar
+          - name: form_fields
+            data_type: varchar
+          - name: has_predictive
+            data_type: boolean
+          - name: platform
+            data_type: varchar
+          - name: query_parameters
+            data_type: varchar
+          - name: referrer_url
+            data_type: varchar
+          - name: test_variant
+            data_type: integer
+          - name: user_agent
+            data_type: varchar
+          - name: webform_id
+            data_type: integer
+          - name: webpage_id
+            data_type: integer
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_update_opportunity
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: attribute_name
+            data_type: varchar
+          - name: data_value_changes
+            data_type: varchar
+          - name: new_value
+            data_type: varchar
+          - name: old_value
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activities_visit_webpage
+        columns:
+          - name: marketoGUID
+            data_type: varchar
+          - name: leadId
+            data_type: integer
+          - name: activityDate
+            data_type: timestamp
+          - name: activityTypeId
+            data_type: integer
+          - name: campaignId
+            data_type: integer
+          - name: primaryAttributeValueId
+            data_type: varchar
+          - name: primaryAttributeValue
+            data_type: varchar
+          - name: browser
+            data_type: varchar
+          - name: client_ip_address
+            data_type: varchar
+          - name: device
+            data_type: varchar
+          - name: platform
+            data_type: varchar
+          - name: query_parameters
+            data_type: varchar
+          - name: referrer_url
+            data_type: varchar
+          - name: search_engine
+            data_type: varchar
+          - name: search_query
+            data_type: varchar
+          - name: token
+            data_type: varchar
+          - name: user_agent
+            data_type: varchar
+          - name: webpage_url
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: activity_types
+        columns:
+          - name: id
+            description: The unique identifier of the activity type.
+            data_type: integer
+          - name: name
+            description: The name of the activity type.
+            data_type: varchar
+          - name: description
+            description: A description of the activity type.
+            data_type: varchar
+          - name: primaryAttribute
+            description: The primary attribute of the activity, which could be the
+              most essential or relevant data point.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: name
+                  description: The name of the primary attribute.
+                  data_type: varchar
+                - name: dataType
+                  description: The data type of the primary attribute.
+                  data_type: varchar
+          - name: attributes
+            description: An array containing the activity attributes including details
+              like type, value, timestamp, etc.
+            data_type: array
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: campaigns
+        columns:
+          - name: id
+            description: The unique identifier for the campaign.
+            data_type: integer
+          - name: createdAt
+            description: The date and time when the campaign was created.
+            data_type: timestamp
+          - name: updatedAt
+            description: The date and time when the campaign was last updated.
+            data_type: timestamp
+          - name: active
+            description: Indicates whether the campaign is currently active or not.
+            data_type: boolean
+          - name: description
+            description: A brief description of the campaign.
+            data_type: varchar
+          - name: name
+            description: The name of the campaign.
+            data_type: varchar
+          - name: programId
+            description: The unique identifier of the program to which the campaign
+              belongs.
+            data_type: integer
+          - name: programName
+            description: The name of the program to which the campaign belongs.
+            data_type: varchar
+          - name: type
+            description: The type of the campaign (e.g., email, social media, event).
+            data_type: varchar
+          - name: workspaceName
+            description: The name of the workspace where the campaign is stored.
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: leads
+        columns:
+          - name: company
+            description: The name of the company associated with the lead.
+            data_type: varchar
+          - name: site
+            description: The website associated with the lead.
+            data_type: varchar
+          - name: billingStreet
+            description: The street address for billing.
+            data_type: varchar
+          - name: billingCity
+            description: The city for billing address.
+            data_type: varchar
+          - name: billingState
+            description: The state for billing address.
+            data_type: varchar
+          - name: billingCountry
+            description: The country for billing address.
+            data_type: varchar
+          - name: billingPostalCode
+            description: The postal code for billing address.
+            data_type: varchar
+          - name: website
+            description: The website associated with the lead.
+            data_type: varchar
+          - name: mainPhone
+            description: The main phone number of the lead.
+            data_type: varchar
+          - name: annualRevenue
+            description: The annual revenue of the company associated with the lead.
+            data_type: float
+          - name: numberOfEmployees
+            description: The number of employees in the company associated with the
+              lead.
+            data_type: integer
+          - name: industry
+            description: The industry of the company associated with the lead.
+            data_type: varchar
+          - name: sicCode
+            description: The Standard Industrial Classification (SIC) code.
+            data_type: varchar
+          - name: mktoCompanyNotes
+            description: Notes specific to the company in Marketo.
+            data_type: varchar
+          - name: externalCompanyId
+            description: The external company ID associated with the lead.
+            data_type: varchar
+          - name: id
+            description: The unique identifier of the lead.
+            data_type: integer
+          - name: mktoName
+            description: The name of the lead in Marketo.
+            data_type: varchar
+          - name: personType
+            description: The type of person, e.g., individual or corporate entity.
+            data_type: varchar
+          - name: mktoIsPartner
+            description: Indicates if the lead is a partner in Marketo.
+            data_type: boolean
+          - name: isLead
+            description: Indicates if the record is a lead.
+            data_type: boolean
+          - name: mktoIsCustomer
+            description: Indicates if the lead is a customer in Marketo.
+            data_type: boolean
+          - name: isAnonymous
+            description: Indicates if the lead is anonymous.
+            data_type: boolean
+          - name: salutation
+            description: The salutation or form of address for the lead.
+            data_type: varchar
+          - name: firstName
+            description: The first name of the lead.
+            data_type: varchar
+          - name: middleName
+            description: The middle name of the lead.
+            data_type: varchar
+          - name: lastName
+            description: The last name of the lead.
+            data_type: varchar
+          - name: email
+            description: The email address of the lead.
+            data_type: varchar
+          - name: phone
+            description: The phone number of the lead.
+            data_type: varchar
+          - name: mobilePhone
+            description: The mobile phone number of the lead.
+            data_type: varchar
+          - name: fax
+            description: The fax number of the lead.
+            data_type: varchar
+          - name: title
+            description: The job title of the lead.
+            data_type: varchar
+          - name: contactCompany
+            description: The name of the contact person's company.
+            data_type: varchar
+          - name: dateOfBirth
+            description: The date of birth of the lead.
+            data_type: timestamp
+          - name: address
+            description: The complete address of the lead.
+            data_type: varchar
+          - name: city
+            description: The city of the lead.
+            data_type: varchar
+          - name: state
+            description: The state of the lead.
+            data_type: varchar
+          - name: country
+            description: The country of the lead.
+            data_type: varchar
+          - name: postalCode
+            description: The postal code of the lead.
+            data_type: varchar
+          - name: personTimeZone
+            description: The time zone of the person.
+            data_type: varchar
+          - name: originalSourceType
+            description: The original source type of the lead data.
+            data_type: varchar
+          - name: originalSourceInfo
+            description: The original source information of the lead.
+            data_type: varchar
+          - name: registrationSourceType
+            description: The registration source type.
+            data_type: varchar
+          - name: registrationSourceInfo
+            description: The registration source information.
+            data_type: varchar
+          - name: originalSearchEngine
+            description: The original search engine used by the lead.
+            data_type: varchar
+          - name: originalSearchPhrase
+            description: The original search phrase used by the lead.
+            data_type: varchar
+          - name: originalReferrer
+            description: The original referrer of the lead.
+            data_type: varchar
+          - name: emailInvalid
+            description: Indicates if the email address is invalid.
+            data_type: boolean
+          - name: emailInvalidCause
+            description: The reason for email address being invalid.
+            data_type: varchar
+          - name: unsubscribed
+            description: Indicates if the lead is unsubscribed.
+            data_type: boolean
+          - name: unsubscribedReason
+            description: The reason for lead being unsubscribed.
+            data_type: varchar
+          - name: doNotCall
+            description: Indicates if the lead should not be contacted.
+            data_type: boolean
+          - name: mktoDoNotCallCause
+            description: The reason for the lead being in do not call list in Marketo.
+            data_type: varchar
+          - name: doNotCallReason
+            description: The reason for not contacting the lead.
+            data_type: varchar
+          - name: marketingSuspended
+            description: Indicates if marketing is suspended for the lead.
+            data_type: boolean
+          - name: marketingSuspendedCause
+            description: The reason for marketing suspension.
+            data_type: varchar
+          - name: blackListed
+            description: Indicates if the lead is blacklisted.
+            data_type: boolean
+          - name: blackListedCause
+            description: The reason for lead being blacklisted.
+            data_type: varchar
+          - name: mktoPersonNotes
+            description: Notes specific to the person (lead) in Marketo.
+            data_type: varchar
+          - name: anonymousIP
+            description: The anonymous IP address of the lead.
+            data_type: varchar
+          - name: inferredCompany
+            description: The inferred company based on lead data.
+            data_type: varchar
+          - name: inferredCountry
+            description: The inferred country based on lead data.
+            data_type: varchar
+          - name: inferredCity
+            description: The inferred city based on lead data.
+            data_type: varchar
+          - name: inferredStateRegion
+            description: The inferred state region based on lead data.
+            data_type: varchar
+          - name: inferredPostalCode
+            description: The inferred postal code based on lead data.
+            data_type: varchar
+          - name: inferredMetropolitanArea
+            description: The inferred metropolitan area based on lead data.
+            data_type: varchar
+          - name: inferredPhoneAreaCode
+            description: The inferred phone area code based on lead data.
+            data_type: varchar
+          - name: emailSuspended
+            description: Indicates if the email address is suspended.
+            data_type: boolean
+          - name: emailSuspendedCause
+            description: The reason for email address being suspended.
+            data_type: varchar
+          - name: emailSuspendedAt
+            description: The date and time when the email address was suspended.
+            data_type: timestamp
+          - name: department
+            description: The department within the company.
+            data_type: varchar
+          - name: createdAt
+            description: The date and time when the lead was created.
+            data_type: timestamp
+          - name: updatedAt
+            description: The date and time when the lead was last updated.
+            data_type: timestamp
+          - name: cookies
+            description: Cookies associated with the lead.
+            data_type: varchar
+          - name: externalSalesPersonId
+            description: The external sales person ID associated with the lead.
+            data_type: varchar
+          - name: leadPerson
+            description: The lead person associated with the lead data.
+            data_type: varchar
+          - name: leadRole
+            description: The role of the lead within the company.
+            data_type: varchar
+          - name: leadSource
+            description: The source from which the lead was acquired.
+            data_type: varchar
+          - name: leadStatus
+            description: The status of the lead.
+            data_type: varchar
+          - name: leadScore
+            description: The score assigned to the lead.
+            data_type: integer
+          - name: urgency
+            description: The urgency level associated with the lead.
+            data_type: float
+          - name: priority
+            description: The priority level associated with the lead.
+            data_type: integer
+          - name: relativeScore
+            description: The relative score of the lead.
+            data_type: integer
+          - name: relativeUrgency
+            description: The relative urgency associated with the lead.
+            data_type: integer
+          - name: rating
+            description: The rating given to the lead.
+            data_type: varchar
+          - name: personPrimaryLeadInterest
+            description: The primary lead interest of the person.
+            data_type: varchar
+          - name: leadPartitionId
+            description: The unique identifier for partitioning leads.
+            data_type: varchar
+          - name: leadRevenueCycleModelId
+            description: The unique identifier of the revenue cycle model.
+            data_type: varchar
+          - name: leadRevenueStageId
+            description: The unique identifier of the revenue stage.
+            data_type: varchar
+          - name: acquisitionProgramId
+            description: The unique identifier of the program through which the lead
+              was acquired.
+            data_type: varchar
+          - name: mktoAcquisitionDate
+            description: The acquisition date within Marketo.
+            data_type: timestamp
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: lists
+        columns:
+          - name: id
+            description: The unique identifier of the list.
+            data_type: integer
+          - name: name
+            description: The name of the list.
+            data_type: varchar
+          - name: createdAt
+            description: The date and time this list was created.
+            data_type: timestamp
+          - name: updatedAt
+            description: The date and time this list was last updated.
+            data_type: timestamp
+          - name: description
+            description: A brief description of the list.
+            data_type: varchar
+          - name: programName
+            description: The name of the program associated with this list.
+            data_type: varchar
+          - name: workspaceName
+            description: The name of the workspace to which this list belongs.
+            data_type: varchar
+          - name: workspaceId
+            description: The unique identifier of the workspace to which this list
+              belongs.
+            data_type: integer
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: programs
+        columns:
+          - name: id
+            description: The unique identifier of the program.
+            data_type: integer
+          - name: createdAt
+            description: The date and time when the program was created.
+            data_type: timestamp
+          - name: updatedAt
+            description: The date and time when the program was last updated.
+            data_type: timestamp
+          - name: name
+            description: The name or title of the program.
+            data_type: varchar
+          - name: description
+            description: The detailed information or overview of the program.
+            data_type: varchar
+          - name: url
+            description: The URL associated with the program.
+            data_type: varchar
+          - name: type
+            description: The type or category of the program.
+            data_type: varchar
+          - name: channel
+            description: The marketing channel associated with the program.
+            data_type: varchar
+          - name: status
+            description: The current status of the program.
+            data_type: varchar
+          - name: workspace
+            description: The workspace or environment where the program is located.
+            data_type: varchar
+          - name: headStart
+            description: The time duration for the program to start.
+            data_type: boolean
+          - name: isHeadStart
+            description: Indicates if the program has a head start feature enabled.
+            data_type: boolean
+          - name: folder
+            description: Details about the folder associated with the program
+            data_type: json
+            meta:
+              subcolumns:
+                - name: type
+                  description: The type or category of the folder.
+                  data_type: varchar
+                - name: value
+                  description: The unique value associated with the folder.
+                  data_type: integer
+                - name: folderName
+                  description: The name of the folder where the program is stored.
+                  data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: segmentations
+        columns:
+          - name: createdAt
+            description: The date and time when the segmentation was created.
+            data_type: timestamp
+          - name: updatedAt
+            description: The date and time when the segmentation was last updated.
+            data_type: timestamp
+          - name: id
+            description: The unique identifier for the segmentation.
+            data_type: integer
+          - name: description
+            description: A brief description of the segmentation.
+            data_type: varchar
+          - name: name
+            description: The name of the segmentation.
+            data_type: varchar
+          - name: url
+            description: The URL for accessing the segmentation data.
+            data_type: varchar
+          - name: status
+            description: The current status of the segmentation.
+            data_type: varchar
+          - name: folder
+            description: Information about the folder where the segmentation is stored.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: type
+                  description: The type of folder.
+                  data_type: varchar
+                - name: value
+                  description: The value associated with the folder.
+                  data_type: integer
+                - name: folderName
+                  description: The name of the folder.
+                  data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar

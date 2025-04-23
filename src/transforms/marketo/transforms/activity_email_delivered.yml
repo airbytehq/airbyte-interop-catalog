@@ -1,0 +1,105 @@
+domain: marketo.airbyte-interop
+transforms:
+  - name: activity_email_delivered
+    from:
+      - activities_email_delivered: marketo.activities_email_delivered
+    fields:
+      activity_date:
+        expression: activities_email_delivered.activityDate
+        description: The timestamp the email was delivered.
+      activity_type_id:
+        expression: activities_email_delivered.activityTypeId
+        description: The ID of the activity type.
+      campaign_id:
+        expression: activities_email_delivered.campaignId
+        description: The ID of the email's campaign.
+      campaign_run_id:
+        expression: activities_email_delivered.campaign_run_id
+        description: The ID of the email's campaign run.
+      choice_number:
+        expression: activities_email_delivered.choice_number
+        description: The choice number of the current step that triggered the activity.
+      email_template_id:
+        expression: MISSING
+        description: The ID of the email's template.
+      id:
+        expression: MISSING
+        description: ID of the activity.
+      lead_id:
+        expression: activities_email_delivered.leadId
+        description: The ID of the lead related to the activity.
+      primary_attribute_value:
+        expression: activities_email_delivered.primaryAttributeValue
+        description: The primary attribute of the activity.
+      primary_attribute_value_id:
+        expression: activities_email_delivered.primaryAttributeValueId
+        description: The ID of the primary attribute of the activity.
+      step_id:
+        expression: activities_email_delivered.step_id
+        description: The Id of the current step in the flow.
+annotations:
+  approved: true
+  missing_fields:
+    - email_template_id
+    - id
+  evaluation:
+    source_stream_name: activities_email_delivered
+    target_table_name: activity_email_delivered
+    table_match_score: 0.8
+    completion_score: 0.8
+    explanation: Most fields are well mapped, but 'email_template_id' and 'id' have
+      no direct matches, lowering the completion score.
+    field_mapping_evals:
+      - name: activity_date
+        expression: activities_email_delivered.activityDate
+        score: 0.9
+        explanation: The expression directly matches the target schema's expected
+          field.
+      - name: activity_type_id
+        expression: activities_email_delivered.activityTypeId
+        score: 0.9
+        explanation: The expression directly matches the target schema's expected
+          field.
+      - name: campaign_id
+        expression: activities_email_delivered.campaignId
+        score: 0.9
+        explanation: The expression directly matches the target schema's expected
+          field.
+      - name: campaign_run_id
+        expression: activities_email_delivered.campaign_run_id
+        score: 0.9
+        explanation: The expression directly matches the target schema's expected
+          field.
+      - name: choice_number
+        expression: activities_email_delivered.choice_number
+        score: 0.9
+        explanation: The expression directly matches the target schema's expected
+          field.
+      - name: email_template_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: lead_id
+        expression: activities_email_delivered.leadId
+        score: 0.9
+        explanation: The expression directly matches the target schema's expected
+          field.
+      - name: primary_attribute_value
+        expression: activities_email_delivered.primaryAttributeValue
+        score: 0.9
+        explanation: The expression directly matches the target schema's expected
+          field.
+      - name: primary_attribute_value_id
+        expression: activities_email_delivered.primaryAttributeValueId
+        score: 0.9
+        explanation: The expression directly matches the target schema's expected
+          field.
+      - name: step_id
+        expression: activities_email_delivered.step_id
+        score: 0.9
+        explanation: The expression directly matches the target schema's expected
+          field.

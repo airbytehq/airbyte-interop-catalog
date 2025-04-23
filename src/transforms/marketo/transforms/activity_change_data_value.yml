@@ -1,0 +1,116 @@
+domain: marketo.airbyte-interop
+transforms:
+  - name: activity_change_data_value
+    from:
+      - activities_change_data_value: marketo.activities_change_data_value
+    fields:
+      api_method_name:
+        expression: activities_change_data_value.api_method_name
+        description: API method used for change, if applicable.
+      activity_date:
+        expression: activities_change_data_value.activityDate
+        description: Timestamp of the actvity.
+      activity_type_id:
+        expression: activities_change_data_value.activityTypeId
+        description: ID of the activity type.
+      campaign_id:
+        expression: activities_change_data_value.campaignId
+        description: The ID of the related campaign, if applicable.
+      id:
+        expression: activities_change_data_value.marketoGUID
+        description: ID of the activity.
+      lead_id:
+        expression: activities_change_data_value.leadId
+        description: Id of the lead associated to the activity.
+      modifying_user:
+        expression: activities_change_data_value.modifying_user
+        description: The user who instigated the change, if applicable.
+      new_value:
+        expression: activities_change_data_value.new_value
+        description: New value after the change.
+      old_value:
+        expression: activities_change_data_value.old_value
+        description: Old value before the change.
+      primary_attribute_value:
+        expression: activities_change_data_value.primaryAttributeValue
+        description: Value of the primary attribute.
+      primary_attribute_value_id:
+        expression: activities_change_data_value.primaryAttributeValueId
+        description: ID of the primary attribute field.
+      reason:
+        expression: activities_change_data_value.reason
+        description: Reason for the data change.
+      request_id:
+        expression: activities_change_data_value.request_id
+        description: ID of the request made.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: activities_change_data_value
+    target_table_name: activity_change_data_value
+    table_match_score: 0.8
+    completion_score: 0.95
+    explanation: The high table match score reflects that both the source and target
+      tables closely align in terms of describing similar aspects of activity and
+      campaign data. The completion score is not perfect due to some fields not being
+      mapped either because no good match was found or they are less relevant to the
+      core dataset.
+    field_mapping_evals:
+      - name: api_method_name
+        expression: activities_change_data_value.api_method_name
+        score: 0.7
+        explanation: The API method fields are mapped with high confidence as it directly
+          matches API related entities.
+      - name: activity_date
+        expression: activities_change_data_value.activityDate
+        score: 0.9
+        explanation: Direct match for timestamp data relating to activity logs.
+      - name: activity_type_id
+        expression: activities_change_data_value.activityTypeId
+        score: 0.9
+        explanation: Identities of activity types match directly between the systems.
+      - name: campaign_id
+        expression: activities_change_data_value.campaignId
+        score: 0.9
+        explanation: Campaign IDs mapped accurately reflecting closure in campaign
+          related data.
+      - name: id
+        expression: activities_change_data_value.marketoGUID
+        score: 0.9
+        explanation: Direct mapping of activity IDs.
+      - name: lead_id
+        expression: activities_change_data_value.leadId
+        score: 0.9
+        explanation: Lead IDs match directly showing relevance in both data structures.
+      - name: modifying_user
+        expression: activities_change_data_value.modifying_user
+        score: 0.7
+        explanation: Matches a user entity involved in changes, though the use case
+          could slightly vary.
+      - name: new_value
+        expression: activities_change_data_value.new_value
+        score: 0.85
+        explanation: Excellent match for fields capturing new states in data.
+      - name: old_value
+        expression: activities_change_data_value.old_value
+        score: 0.85
+        explanation: Similar to new_value, old value fields are mapped well.
+      - name: primary_attribute_value
+        expression: activities_change_data_value.primaryAttributeValue
+        score: 0.8
+        explanation: Attributes critical to both systems are matched well.
+      - name: primary_attribute_value_id
+        expression: activities_change_data_value.primaryAttributeValueId
+        score: 0.8
+        explanation: The primary attribute ID is crucial and matched well.
+      - name: reason
+        expression: activities_change_data_value.reason
+        score: 0.6
+        explanation: Reason for changes are relatively mapped, although the context
+          can vary slightly.
+      - name: request_id
+        expression: activities_change_data_value.request_id
+        score: 0.75
+        explanation: Request IDs relate critically in managing data requests across
+          systems.

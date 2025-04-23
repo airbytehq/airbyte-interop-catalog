@@ -1,0 +1,80 @@
+domain: marketo.airbyte-interop
+transforms:
+  - name: activity_delete_lead
+    from:
+      - activities_delete_lead: marketo.activities_delete_lead
+    fields:
+      activity_date:
+        expression: activities_delete_lead.activityDate
+        description: The timestamp the lead was deleted.
+      activity_type_id:
+        expression: activities_delete_lead.activityTypeId
+        description: The ID of the activity type.
+      campaign_id:
+        expression: activities_delete_lead.campaignId
+        description: The ID of the campaign related to the activity, if applicable.
+      campaign:
+        expression: MISSING
+        description: The name of the campaign related to the activity, if applicable.
+      id:
+        expression: activities_delete_lead.marketoGUID
+        description: ID of the activity.
+      lead_id:
+        expression: activities_delete_lead.leadId
+        description: The ID of the lead related to the activity.
+      primary_attribute_value:
+        expression: MISSING
+        description: The primary attribute of the activity.
+      primary_attribute_value_id:
+        expression: activities_delete_lead.primaryAttributeValueId
+        description: The ID of the primary attribute of the activity.
+annotations:
+  approved: true
+  missing_fields:
+    - campaign
+    - primary_attribute_value
+  evaluation:
+    source_stream_name: activities_delete_lead
+    target_table_name: activity_delete_lead
+    table_match_score: 0.8
+    completion_score: 0.57
+    explanation: The overall confidence for the table matching is relatively high
+      as most fields are mapped correctly with good confidence, but some fields are
+      still missing. Mappings for 'campaign' and 'primary_attribute_value' are marked
+      as MISSING, lowering the completion score.
+    field_mapping_evals:
+      - name: activity_date
+        expression: activities_delete_lead.activityDate
+        score: 0.9
+        explanation: Direct and clear mapping to source's activityDate field
+      - name: activity_type_id
+        expression: activities_delete_lead.activityTypeId
+        score: 0.95
+        explanation: Exact match to source naming, high confidence in mapping.
+      - name: campaign_id
+        expression: activities_delete_lead.campaignId
+        score: 0.8
+        explanation: Direct match to a relevant and clearly identified field, albeit
+          with possible multiple variations in campaign references.
+      - name: campaign
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: id
+        expression: activities_delete_lead.marketoGUID
+        score: 0.9
+        explanation: Uses marketoGUID, which matches the intended unique identifier
+          purpose of the ID field.
+      - name: lead_id
+        expression: activities_delete_lead.leadId
+        score: 0.88
+        explanation: Direct correlation to the specified lead's unique identifier.
+      - name: primary_attribute_value
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: primary_attribute_value_id
+        expression: activities_delete_lead.primaryAttributeValueId
+        score: 0.85
+        explanation: The mapping accurately ties back to a clearly relevant source
+          field.

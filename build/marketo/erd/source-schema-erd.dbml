@@ -1,0 +1,1310 @@
+Table "activities_addto_list" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "source" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_addto_nurture" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "track_id" integer
+    "track_name" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_addto_opportunity" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "is_primary" boolean
+    "role" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_asksquestionsinwebinar" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "question" varchar
+    "questionwasanswered" boolean
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_assetdownloadsinwebinar" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "downloadedasset" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_call_webhook" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "error_type" integer
+    "response" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_calltoactionclickedinwebinar" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "linkclicked" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_change_data_value" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "new_value" varchar
+    "old_value" varchar
+    "reason" varchar
+    "source" varchar
+    "api_method_name" varchar
+    "modifying_user" varchar
+    "request_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_change_lead_partition" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "old_partition_id" integer
+    "reason" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_change_nurture_cadence" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "new_nurture_cadence" varchar
+    "previous_nurture_cadence" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_change_nurture_track" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "new_track_id" integer
+    "previous_track_id" integer
+    "previous_track_name" varchar
+    "track_name" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_change_program_member_data" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "attribute_display_name" varchar
+    "attribute_name" integer
+    "new_value" varchar
+    "old_value" varchar
+    "reason" varchar
+    "source" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_change_revenue_stage" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "new_stage_id" integer
+    "old_stage_id" integer
+    "reason" varchar
+    "sla_expiration" timestamp
+    "new_stage" varchar
+    "old_stage" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_change_revenue_stage_manually" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_change_score" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "change_value" varchar
+    "new_value" integer
+    "old_value" integer
+    "reason" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_change_segment" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "new_segment_id" integer
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_change_statusin_progression" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "acquired_by" boolean
+    "new_status_id" integer
+    "old_status_id" integer
+    "program_member_id" integer
+    "reached_success_date" timestamp
+    "reason" varchar
+    "registration_code" varchar
+    "status_reason" varchar
+    "success" boolean
+    "webinar_url" varchar
+    "new_status" varchar
+    "old_status" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_click_email" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "bot_activity_pattern" varchar
+    "browser" varchar
+    "campaign_run_id" integer
+    "choice_number" integer
+    "device" varchar
+    "is_bot_activity" boolean
+    "is_mobile_device" boolean
+    "is_predictive" boolean
+    "link" varchar
+    "link_id" varchar
+    "platform" varchar
+    "step_id" integer
+    "test_variant" integer
+    "user_agent" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_click_link" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "browser" varchar
+    "client_ip_address" varchar
+    "device" varchar
+    "platform" varchar
+    "query_parameters" varchar
+    "referrer_url" varchar
+    "user_agent" varchar
+    "webpage_id" integer
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_click_sales_email" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "bot_activity_pattern" varchar
+    "campaign_run_id" integer
+    "is_bot_activity" boolean
+    "is_predictive" boolean
+    "link" varchar
+    "marketo_sales_person_id" integer
+    "sales_campaign_name" varchar
+    "sales_campaign_url" varchar
+    "sales_email_url" varchar
+    "sales_template_name" varchar
+    "sales_template_url" varchar
+    "sentby" varchar
+    "source" varchar
+    "template_id" integer
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_delete_lead" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "remove_from_crm" boolean
+    "api_method_name" varchar
+    "modifying_user" varchar
+    "request_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_email_bounced" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "browser" varchar
+    "campaign_run_id" integer
+    "category" varchar
+    "choice_number" integer
+    "details" varchar
+    "device" varchar
+    "email" varchar
+    "has_predictive" boolean
+    "platform" varchar
+    "step_id" integer
+    "subcategory" varchar
+    "test_variant" integer
+    "user_agent" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_email_bounced_soft" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "browser" varchar
+    "campaign_run_id" integer
+    "category" varchar
+    "choice_number" integer
+    "details" varchar
+    "device" varchar
+    "email" varchar
+    "has_predictive" boolean
+    "platform" varchar
+    "step_id" integer
+    "subcategory" varchar
+    "test_variant" integer
+    "user_agent" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_email_delivered" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "browser" varchar
+    "campaign_run_id" integer
+    "choice_number" integer
+    "device" varchar
+    "has_predictive" boolean
+    "platform" varchar
+    "step_id" integer
+    "test_variant" integer
+    "user_agent" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_engagedwitha_conversational_flow" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "conversation_score" integer
+    "conversation_status" varchar
+    "conversation_summary" varchar
+    "conversation_transcript" varchar
+    "conversational_flow_name" varchar
+    "discussed_topics" varchar
+    "interacted_u_i_type" varchar
+    "language" varchar
+    "page_url" varchar
+    "source_name" varchar
+    "source_type" varchar
+    "workspace" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_engagedwitha_dialogue" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "conversation_score" integer
+    "conversation_status" varchar
+    "conversation_summary" varchar
+    "conversation_transcript" varchar
+    "dialogue_name" varchar
+    "discussed_topics" varchar
+    "language" varchar
+    "page_url" varchar
+    "workspace" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_engagedwithan_agentin_conversational_flow" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "agent_email" varchar
+    "agent_id" integer
+    "agent_name" varchar
+    "conversation_score" integer
+    "conversation_status" varchar
+    "conversation_summary" varchar
+    "conversation_transcript" varchar
+    "conversational_flow_name" varchar
+    "discussed_topics" varchar
+    "lead_id" varchar
+    "page_url" varchar
+    "routing_queue_id" integer
+    "routing_queue_name" varchar
+    "routing_queue_type" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_engagedwithan_agentin_dialogue" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "agent_email" varchar
+    "agent_id" integer
+    "agent_name" varchar
+    "conversation_score" integer
+    "conversation_status" varchar
+    "conversation_summary" varchar
+    "conversation_transcript" varchar
+    "dialogue_name" varchar
+    "discussed_topics" varchar
+    "lead_id" varchar
+    "page_url" varchar
+    "routing_queue_id" integer
+    "routing_queue_name" varchar
+    "routing_queue_type" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_execute_campaign" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "qualified" boolean
+    "token_context_campaign_id" integer
+    "used_parent_campaign_token_context" boolean
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_fill_out_form" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "browser" varchar
+    "client_ip_address" varchar
+    "device" varchar
+    "form_fields" varchar
+    "platform" varchar
+    "query_parameters" varchar
+    "referrer_url" varchar
+    "user_agent" varchar
+    "webpage_id" integer
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_hasattendedevent" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "event_mode" varchar
+    "livewatchtimebypercent" integer
+    "numberofansweredquestions" integer
+    "numberofassetsdownloaded" integer
+    "numberof_c_t_asclicked" integer
+    "numberofpollresponses" integer
+    "numberofunansweredquestions" integer
+    "watchdurationinminutes" integer
+    "watched_date" timestamp
+    "webinar_title" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_interactedwith_documentin_conversational_flow" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "conversational_flow_id" integer
+    "conversational_flow_name" varchar
+    "document_downloaded" boolean
+    "document_name" varchar
+    "document_opened" boolean
+    "document_url" varchar
+    "language" varchar
+    "page_url" varchar
+    "search_terms" varchar
+    "workspace" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_interactedwith_documentin_dialogue" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "dialogue_id" integer
+    "dialogue_name" varchar
+    "document_downloaded" boolean
+    "document_name" varchar
+    "document_opened" boolean
+    "document_url" varchar
+    "language" varchar
+    "page_url" varchar
+    "search_terms" varchar
+    "workspace" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_merge_leads" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "merge_ids" array
+    "master_updated" boolean
+    "mergedin_sales" boolean
+    "merge_source" varchar
+    "api_method_name" varchar
+    "modifying_user" varchar
+    "request_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_new_lead" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "created_date" date
+    "form_name" varchar
+    "lead_source" varchar
+    "list_name" varchar
+    "sfdc_type" varchar
+    "source_type" varchar
+    "api_method_name" varchar
+    "modifying_user" varchar
+    "request_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_open_email" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "bot_activity_pattern" varchar
+    "browser" varchar
+    "campaign_run_id" integer
+    "choice_number" integer
+    "device" varchar
+    "has_predictive" boolean
+    "is_bot_activity" boolean
+    "is_mobile_device" boolean
+    "platform" varchar
+    "step_id" integer
+    "test_variant" integer
+    "user_agent" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_open_sales_email" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "bot_activity_pattern" varchar
+    "campaign_run_id" integer
+    "has_predictive" boolean
+    "is_bot_activity" boolean
+    "marketo_sales_person_id" integer
+    "sales_campaign_name" varchar
+    "sales_campaign_url" varchar
+    "sales_email_url" varchar
+    "sales_template_name" varchar
+    "sales_template_url" varchar
+    "sentby" varchar
+    "source" varchar
+    "template_id" integer
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_push_leadto_marketo" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "reason" varchar
+    "source" varchar
+    "api_method_name" varchar
+    "modifying_user" varchar
+    "request_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_reached_conversational_flow_goal" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "conversational_flow_name" varchar
+    "goal_name" varchar
+    "language" varchar
+    "page_url" varchar
+    "workspace" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_reached_dialogue_goal" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "dialogue_name" varchar
+    "goal_name" varchar
+    "language" varchar
+    "page_url" varchar
+    "workspace" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_receive_sales_email" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "receivedby" varchar
+    "source" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_received_forwardto_friend_email" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "choice_number" integer
+    "lead_id" varchar
+    "step_id" integer
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_removefrom_list" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "source" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_removefrom_opportunity" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "is_primary" boolean
+    "role" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_replyto_sales_email" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "campaign_run_id" integer
+    "has_predictive" boolean
+    "marketo_sales_person_id" integer
+    "sales_campaign_name" varchar
+    "sales_campaign_url" varchar
+    "sales_email_url" varchar
+    "sales_template_name" varchar
+    "sales_template_url" varchar
+    "sentby" varchar
+    "source" varchar
+    "template_id" integer
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_request_campaign" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "source" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_respondedtoapollinwebinar" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "pollquestion" varchar
+    "pollresponse" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_sales_email_bounced" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "campaign_run_id" integer
+    "category" varchar
+    "details" varchar
+    "email" varchar
+    "has_predictive" boolean
+    "marketo_sales_person_id" integer
+    "sentby" varchar
+    "source" varchar
+    "subcategory" varchar
+    "template_id" integer
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_scheduled_meetingin_conversational_flow" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "agent_email" varchar
+    "agent_name" varchar
+    "conversational_flow_id" integer
+    "conversational_flow_name" varchar
+    "meeting_status" varchar
+    "page_url" varchar
+    "routing_queue_id" integer
+    "routing_queue_name" varchar
+    "routing_queue_type" varchar
+    "scheduled_for" timestamp
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_scheduled_meetingin_dialogue" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "agent_email" varchar
+    "agent_name" varchar
+    "dialogue_id" integer
+    "dialogue_name" varchar
+    "meeting_status" varchar
+    "page_url" varchar
+    "routing_queue_id" integer
+    "routing_queue_name" varchar
+    "routing_queue_type" varchar
+    "scheduled_for" timestamp
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_send_alert" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "send_to_list" varchar
+    "send_to_owner" varchar
+    "send_to_smart_list" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_send_email" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "browser" varchar
+    "campaign_run_id" integer
+    "choice_number" integer
+    "device" varchar
+    "has_predictive" boolean
+    "platform" varchar
+    "step_id" integer
+    "test_variant" integer
+    "user_agent" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_send_sales_email" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "campaign_run_id" integer
+    "has_predictive" boolean
+    "marketo_sales_person_id" integer
+    "sales_campaign_name" varchar
+    "sales_campaign_url" varchar
+    "sales_email_url" varchar
+    "sales_template_name" varchar
+    "sales_template_url" varchar
+    "sentby" varchar
+    "source" varchar
+    "template_id" integer
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_sent_forwardto_friend_email" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "choice_number" integer
+    "lead_id" varchar
+    "step_id" integer
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_share_content" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "share_message" varchar
+    "social_app_type_id" integer
+    "social_network" varchar
+    "webpage_id" integer
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_unsubscribe_email" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "browser" varchar
+    "campaign_run_id" varchar
+    "client_ip_address" varchar
+    "device" varchar
+    "form_fields" varchar
+    "has_predictive" boolean
+    "platform" varchar
+    "query_parameters" varchar
+    "referrer_url" varchar
+    "test_variant" integer
+    "user_agent" varchar
+    "webform_id" integer
+    "webpage_id" integer
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_update_opportunity" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "attribute_name" varchar
+    "data_value_changes" varchar
+    "new_value" varchar
+    "old_value" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activities_visit_webpage" {
+    "marketoGUID" varchar
+    "leadId" integer
+    "activityDate" timestamp
+    "activityTypeId" integer
+    "campaignId" integer
+    "primaryAttributeValueId" varchar
+    "primaryAttributeValue" varchar
+    "browser" varchar
+    "client_ip_address" varchar
+    "device" varchar
+    "platform" varchar
+    "query_parameters" varchar
+    "referrer_url" varchar
+    "search_engine" varchar
+    "search_query" varchar
+    "token" varchar
+    "user_agent" varchar
+    "webpage_url" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "activity_types" {
+    "id" integer [note: 'The unique identifier of the activity type.']
+    "name" varchar [note: 'The name of the activity type.']
+    "description" varchar [note: 'A description of the activity type.']
+    "primaryAttribute" json [note: 'The primary attribute of the activity, which could be the most essential or relevant data point.']
+    "attributes" array [note: 'An array containing the activity attributes including details like type, value, timestamp, etc.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "campaigns" {
+    "id" integer [note: 'The unique identifier for the campaign.']
+    "createdAt" timestamp [note: 'The date and time when the campaign was created.']
+    "updatedAt" timestamp [note: 'The date and time when the campaign was last updated.']
+    "active" boolean [note: 'Indicates whether the campaign is currently active or not.']
+    "description" varchar [note: 'A brief description of the campaign.']
+    "name" varchar [note: 'The name of the campaign.']
+    "programId" integer [note: 'The unique identifier of the program to which the campaign belongs.']
+    "programName" varchar [note: 'The name of the program to which the campaign belongs.']
+    "type" varchar [note: 'The type of the campaign (e.g., email, social media, event).']
+    "workspaceName" varchar [note: 'The name of the workspace where the campaign is stored.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "leads" {
+    "company" varchar [note: 'The name of the company associated with the lead.']
+    "site" varchar [note: 'The website associated with the lead.']
+    "billingStreet" varchar [note: 'The street address for billing.']
+    "billingCity" varchar [note: 'The city for billing address.']
+    "billingState" varchar [note: 'The state for billing address.']
+    "billingCountry" varchar [note: 'The country for billing address.']
+    "billingPostalCode" varchar [note: 'The postal code for billing address.']
+    "website" varchar [note: 'The website associated with the lead.']
+    "mainPhone" varchar [note: 'The main phone number of the lead.']
+    "annualRevenue" float [note: 'The annual revenue of the company associated with the lead.']
+    "numberOfEmployees" integer [note: 'The number of employees in the company associated with the lead.']
+    "industry" varchar [note: 'The industry of the company associated with the lead.']
+    "sicCode" varchar [note: 'The Standard Industrial Classification (SIC) code.']
+    "mktoCompanyNotes" varchar [note: 'Notes specific to the company in Marketo.']
+    "externalCompanyId" varchar [note: 'The external company ID associated with the lead.']
+    "id" integer [note: 'The unique identifier of the lead.']
+    "mktoName" varchar [note: 'The name of the lead in Marketo.']
+    "personType" varchar [note: 'The type of person, e.g., individual or corporate entity.']
+    "mktoIsPartner" boolean [note: 'Indicates if the lead is a partner in Marketo.']
+    "isLead" boolean [note: 'Indicates if the record is a lead.']
+    "mktoIsCustomer" boolean [note: 'Indicates if the lead is a customer in Marketo.']
+    "isAnonymous" boolean [note: 'Indicates if the lead is anonymous.']
+    "salutation" varchar [note: 'The salutation or form of address for the lead.']
+    "firstName" varchar [note: 'The first name of the lead.']
+    "middleName" varchar [note: 'The middle name of the lead.']
+    "lastName" varchar [note: 'The last name of the lead.']
+    "email" varchar [note: 'The email address of the lead.']
+    "phone" varchar [note: 'The phone number of the lead.']
+    "mobilePhone" varchar [note: 'The mobile phone number of the lead.']
+    "fax" varchar [note: 'The fax number of the lead.']
+    "title" varchar [note: 'The job title of the lead.']
+    "contactCompany" varchar [note: 'The name of the contact person\'s company.']
+    "dateOfBirth" timestamp [note: 'The date of birth of the lead.']
+    "address" varchar [note: 'The complete address of the lead.']
+    "city" varchar [note: 'The city of the lead.']
+    "state" varchar [note: 'The state of the lead.']
+    "country" varchar [note: 'The country of the lead.']
+    "postalCode" varchar [note: 'The postal code of the lead.']
+    "personTimeZone" varchar [note: 'The time zone of the person.']
+    "originalSourceType" varchar [note: 'The original source type of the lead data.']
+    "originalSourceInfo" varchar [note: 'The original source information of the lead.']
+    "registrationSourceType" varchar [note: 'The registration source type.']
+    "registrationSourceInfo" varchar [note: 'The registration source information.']
+    "originalSearchEngine" varchar [note: 'The original search engine used by the lead.']
+    "originalSearchPhrase" varchar [note: 'The original search phrase used by the lead.']
+    "originalReferrer" varchar [note: 'The original referrer of the lead.']
+    "emailInvalid" boolean [note: 'Indicates if the email address is invalid.']
+    "emailInvalidCause" varchar [note: 'The reason for email address being invalid.']
+    "unsubscribed" boolean [note: 'Indicates if the lead is unsubscribed.']
+    "unsubscribedReason" varchar [note: 'The reason for lead being unsubscribed.']
+    "doNotCall" boolean [note: 'Indicates if the lead should not be contacted.']
+    "mktoDoNotCallCause" varchar [note: 'The reason for the lead being in do not call list in Marketo.']
+    "doNotCallReason" varchar [note: 'The reason for not contacting the lead.']
+    "marketingSuspended" boolean [note: 'Indicates if marketing is suspended for the lead.']
+    "marketingSuspendedCause" varchar [note: 'The reason for marketing suspension.']
+    "blackListed" boolean [note: 'Indicates if the lead is blacklisted.']
+    "blackListedCause" varchar [note: 'The reason for lead being blacklisted.']
+    "mktoPersonNotes" varchar [note: 'Notes specific to the person (lead) in Marketo.']
+    "anonymousIP" varchar [note: 'The anonymous IP address of the lead.']
+    "inferredCompany" varchar [note: 'The inferred company based on lead data.']
+    "inferredCountry" varchar [note: 'The inferred country based on lead data.']
+    "inferredCity" varchar [note: 'The inferred city based on lead data.']
+    "inferredStateRegion" varchar [note: 'The inferred state region based on lead data.']
+    "inferredPostalCode" varchar [note: 'The inferred postal code based on lead data.']
+    "inferredMetropolitanArea" varchar [note: 'The inferred metropolitan area based on lead data.']
+    "inferredPhoneAreaCode" varchar [note: 'The inferred phone area code based on lead data.']
+    "emailSuspended" boolean [note: 'Indicates if the email address is suspended.']
+    "emailSuspendedCause" varchar [note: 'The reason for email address being suspended.']
+    "emailSuspendedAt" timestamp [note: 'The date and time when the email address was suspended.']
+    "department" varchar [note: 'The department within the company.']
+    "createdAt" timestamp [note: 'The date and time when the lead was created.']
+    "updatedAt" timestamp [note: 'The date and time when the lead was last updated.']
+    "cookies" varchar [note: 'Cookies associated with the lead.']
+    "externalSalesPersonId" varchar [note: 'The external sales person ID associated with the lead.']
+    "leadPerson" varchar [note: 'The lead person associated with the lead data.']
+    "leadRole" varchar [note: 'The role of the lead within the company.']
+    "leadSource" varchar [note: 'The source from which the lead was acquired.']
+    "leadStatus" varchar [note: 'The status of the lead.']
+    "leadScore" integer [note: 'The score assigned to the lead.']
+    "urgency" float [note: 'The urgency level associated with the lead.']
+    "priority" integer [note: 'The priority level associated with the lead.']
+    "relativeScore" integer [note: 'The relative score of the lead.']
+    "relativeUrgency" integer [note: 'The relative urgency associated with the lead.']
+    "rating" varchar [note: 'The rating given to the lead.']
+    "personPrimaryLeadInterest" varchar [note: 'The primary lead interest of the person.']
+    "leadPartitionId" varchar [note: 'The unique identifier for partitioning leads.']
+    "leadRevenueCycleModelId" varchar [note: 'The unique identifier of the revenue cycle model.']
+    "leadRevenueStageId" varchar [note: 'The unique identifier of the revenue stage.']
+    "acquisitionProgramId" varchar [note: 'The unique identifier of the program through which the lead was acquired.']
+    "mktoAcquisitionDate" timestamp [note: 'The acquisition date within Marketo.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "lists" {
+    "id" integer [note: 'The unique identifier of the list.']
+    "name" varchar [note: 'The name of the list.']
+    "createdAt" timestamp [note: 'The date and time this list was created.']
+    "updatedAt" timestamp [note: 'The date and time this list was last updated.']
+    "description" varchar [note: 'A brief description of the list.']
+    "programName" varchar [note: 'The name of the program associated with this list.']
+    "workspaceName" varchar [note: 'The name of the workspace to which this list belongs.']
+    "workspaceId" integer [note: 'The unique identifier of the workspace to which this list belongs.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "programs" {
+    "id" integer [note: 'The unique identifier of the program.']
+    "createdAt" timestamp [note: 'The date and time when the program was created.']
+    "updatedAt" timestamp [note: 'The date and time when the program was last updated.']
+    "name" varchar [note: 'The name or title of the program.']
+    "description" varchar [note: 'The detailed information or overview of the program.']
+    "url" varchar [note: 'The URL associated with the program.']
+    "type" varchar [note: 'The type or category of the program.']
+    "channel" varchar [note: 'The marketing channel associated with the program.']
+    "status" varchar [note: 'The current status of the program.']
+    "workspace" varchar [note: 'The workspace or environment where the program is located.']
+    "headStart" boolean [note: 'The time duration for the program to start.']
+    "isHeadStart" boolean [note: 'Indicates if the program has a head start feature enabled.']
+    "folder" json [note: 'Details about the folder associated with the program']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "segmentations" {
+    "createdAt" timestamp [note: 'The date and time when the segmentation was created.']
+    "updatedAt" timestamp [note: 'The date and time when the segmentation was last updated.']
+    "id" integer [note: 'The unique identifier for the segmentation.']
+    "description" varchar [note: 'A brief description of the segmentation.']
+    "name" varchar [note: 'The name of the segmentation.']
+    "url" varchar [note: 'The URL for accessing the segmentation data.']
+    "status" varchar [note: 'The current status of the segmentation.']
+    "folder" json [note: 'Information about the folder where the segmentation is stored.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
