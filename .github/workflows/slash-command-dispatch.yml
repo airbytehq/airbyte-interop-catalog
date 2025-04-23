@@ -23,10 +23,11 @@ jobs:
             lock
             test
             generate
+            poe
           static-args: |
             pr=${{ github.event.issue.number }}
             comment-id=${{ github.event.comment.id }}
-
+            comment-text=${{ github.event.comment.body }}
           # Only run for users with 'write' permission on the main repository
           permission: write
 
@@ -37,34 +38,3 @@ jobs:
           comment-id: ${{ github.event.comment.id }}
           body: |
             > Error: ${{ steps.dispatch.outputs.error-message }}
-
-      - name: Generate help text
-        id: help
-        if: >
-          startsWith(github.event.comment.body, '/help') ||
-          (startsWith(github.event.comment.body, '/') && !steps.dispatch.outputs.dispatched)
-        run: |
-          if [[ "${{ github.event.comment.body }}" == "/help" ]]; then
-            echo "body<<EOF" >> $GITHUB_OUTPUT
-            echo "The following slash commands are available:
-
-          - \`/fix\` - Corrects any linting or formatting issues
-          - \`/lock\` - Re-locks dependencies and updates the dependency lock file
-          - \`/test\` - Runs tests that require credentials (useful for community PRs)
-          - \`/generate [source_name]\` - Generates mappings for the specified source
-          - \`/help\` - Shows this help message" >> $GITHUB_OUTPUT
-            echo "EOF" >> $GITHUB_OUTPUT
-          else
-            echo "body<<EOF" >> $GITHUB_OUTPUT
-            echo "It looks like you are trying to enter a slash command. Either the slash command is unrecognized or you don't have access to call it.
-
-          The following slash commands are available:
-
-          - \`/fix\` - Corrects any linting or formatting issues
-          - \`/lock\` - Re-locks dependencies and updates the dependency lock file
-          - \`/test\` - Runs tests that require credentials (useful for community PRs)
-          - \`/generate [source_name]\` - Generates mappings for the specified source
-          - \`/help\` - Shows this help message" >> $GITHUB_OUTPUT
-            echo "EOF" >> $GITHUB_OUTPUT
-          fi
-

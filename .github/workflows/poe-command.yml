@@ -1,0 +1,43 @@
+name: On-Demand Poe Task
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: "PR Number. If omitted, a new PR will be created."
+        type: string
+        required: false
+      comment-id:
+        description: "Comment ID (Optional)"
+        type: string
+        required: false
+      comment-text:
+        description: "Full slash command, starting with '/poe'."
+        type: string
+        required: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  run-poe-command:
+    env:
+      GCP_GSM_CREDENTIALS: ${{ secrets.GCP_GSM_CREDENTIALS }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Poe Command
+        id: get-command
+        run: |
+            poe_command=$(echo "${{ github.event.inputs.comment-text }}" | sed -n '1s/^\/poe //p' | head -n 1)
+            echo "Resolved command: ${poe_command}"
+            echo "poe-command=${poe_command}" >> $GITHUB_OUTPUT
+
+      - name: Run Poe Slash Command Processor
+        uses: aaronsteers/poe-command-processor@main
+        with:
+          command: ${{ steps.get-command.outputs.poe-command }}
+          pr: ${{ github.event.inputs.pr }}
+          comment-id: ${{ github.event.inputs.comment-id }}
+          github-token: ${{ secrets.GH_PAT_MAINTENANCE_OCTAVIA }}
