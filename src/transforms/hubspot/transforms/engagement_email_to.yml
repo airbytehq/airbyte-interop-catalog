@@ -1,0 +1,59 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: engagement_email_to
+    from:
+      - engagements_emails: hubspot.engagements_emails
+    fields:
+      _fivetran_synced:
+        expression: engagements_emails._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      email:
+        expression: MISSING
+        description: The email address of the recipient.
+      engagement_id:
+        expression: MISSING
+        description: The ID of the related engagement.
+      first_name:
+        expression: MISSING
+        description: The first name of the recipient.
+      last_name:
+        expression: MISSING
+        description: The last name of the recipient.
+annotations:
+  approved: false
+  missing_fields:
+    - email
+    - engagement_id
+    - first_name
+    - last_name
+  evaluation:
+    source_stream_name: engagements_emails
+    target_table_name: engagement_email_to
+    table_match_score: 0.6
+    completion_score: 0.2
+    explanation: The table match score is moderately high, suggesting a reasonable
+      likelihood that the source and target tables are describing similar subject
+      matter. However, the completion score is low due to many fields marked as 'MISSING',
+      indicating a lack of complete field mappings.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: engagements_emails._airbyte_extracted_at
+        score: 1.0
+        explanation: Perfect match as '_fivetran_synced' is mapped to a source stream's
+          '_airbyte_extracted_at' column as standard mapping.
+      - name: email
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: engagement_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: first_name
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: last_name
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

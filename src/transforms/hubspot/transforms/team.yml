@@ -1,0 +1,15 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: team
+    from:
+      - MISSING: hubspot.MISSING
+    fields:
+      id:
+        expression: MISSING
+        description: Unique ID of the team.
+      name:
+        expression: MISSING
+        description: Name of the team.
+      _fivetran_synced:
+        expression: MISSING
+        description: '{{ doc("_fivetran_synced") }}'

@@ -1,0 +1,70 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: email_event_sent
+    from:
+      - email_events: hubspot.email_events
+    fields:
+      _fivetran_synced:
+        expression: email_events._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      bcc:
+        expression: email_events.bcc
+        description: The 'cc' field of the email message.
+      cc:
+        expression: email_events.cc
+        description: The 'bcc' field of the email message.
+      from:
+        expression: email_events.from
+        description: The 'from' field of the email message.
+      id:
+        expression: email_events.id
+        description: The ID of the event.
+      reply_to:
+        expression: email_events.replyTo
+        description: The 'reply-to' field of the email message.
+      subject:
+        expression: email_events.subject
+        description: The subject line of the email message.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: email_events
+    target_table_name: email_event_sent
+    table_match_score: 0.9
+    completion_score: 0.85
+    explanation: Table match is high as the mappings largely correlate well with the
+      target schema requirements. Completion is mostly thorough with most required
+      fields mapped effectively.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: email_events._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping for all tables, perfectly matched as specified.
+      - name: bcc
+        expression: email_events.bcc
+        score: 0.8
+        explanation: Direct match found but with uncertainty due to semantic context,
+          so score is slightly less than perfect.
+      - name: cc
+        expression: email_events.cc
+        score: 0.8
+        explanation: Direct match found, score slightly less due to semantic context.
+      - name: from
+        expression: email_events.from
+        score: 0.9
+        explanation: Perfect semantic match with a direct correlation to the target
+          field.
+      - name: id
+        expression: email_events.id
+        score: 1.0
+        explanation: Ideal direct correlation observed, perfect score awarded.
+      - name: reply_to
+        expression: email_events.replyTo
+        score: 0.9
+        explanation: Close correlation found with the target field, almost perfect
+          semantic match.
+      - name: subject
+        expression: email_events.subject
+        score: 1.0
+        explanation: Direct match found with high confidence, perfect score awarded.

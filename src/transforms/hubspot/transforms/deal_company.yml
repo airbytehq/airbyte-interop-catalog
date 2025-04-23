@@ -1,0 +1,56 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: deal_company
+    from:
+      - deals: hubspot.deals
+    fields:
+      _fivetran_synced:
+        expression: deals._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      company_id:
+        expression: MISSING
+        description: The ID of the company.
+      deal_id:
+        expression: deals.properties.hs_object_id
+        description: The ID of the deal.
+      type_id:
+        expression: deals.properties.dealtype
+        description: The ID of the type.
+      category:
+        expression: MISSING
+        description: The association category. Either HUBSPOT_DEFINED (default label)
+          or USER_DEFINED (custom label).
+annotations:
+  approved: true
+  missing_fields:
+    - category
+    - company_id
+  evaluation:
+    source_stream_name: deals
+    target_table_name: deal_company
+    table_match_score: 0.85
+    completion_score: 0.6
+    explanation: The table match score is high indicating a good quality of table
+      matching. The completion score is moderate, reflecting partial coverage in field
+      mappings.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: deals._airbyte_extracted_at
+        score: 1.0
+        explanation: Perfect match as this is a standard mapping for all tables.
+      - name: company_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: deal_id
+        expression: deals.properties.hs_object_id
+        score: 0.7
+        explanation: Good match based on the deal identifier consistency.
+      - name: type_id
+        expression: deals.properties.dealtype
+        score: 0.7
+        explanation: Good match based on the type identifier consistency.
+      - name: category
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

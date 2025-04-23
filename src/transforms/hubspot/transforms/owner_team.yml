@@ -1,0 +1,18 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: owner_team
+    from:
+      - MISSING: hubspot.MISSING
+    fields:
+      owner_id:
+        expression: MISSING
+        description: Unique ID of the HubSpot owner (user) assigned to the team.
+      team_id:
+        expression: MISSING
+        description: Unique ID of the team to which the owner belongs.
+      is_team_primary:
+        expression: MISSING
+        description: Indicates whether the team is the owner's primary team.
+      _fivetran_synced:
+        expression: MISSING
+        description: '{{ doc("_fivetran_synced") }}'

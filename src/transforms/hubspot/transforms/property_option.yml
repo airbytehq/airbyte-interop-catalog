@@ -1,0 +1,26 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: property_option
+    from:
+      - MISSING: hubspot.MISSING
+    fields:
+      _fivetran_synced:
+        expression: MISSING
+        description: '{{ doc("_fivetran_synced") }}'
+      label:
+        expression: MISSING
+        description: The label of the option displayed inside the HubSpot app.
+      property_id:
+        expression: MISSING
+        description: The ID of the related property.
+      display_order:
+        expression: MISSING
+        description: Order of options displayed in Hubspot, starting with the lowest
+          positive integer value. Values of -1 will cause the option to be displayed
+          after any positive values.
+      hidden:
+        expression: MISSING
+        description: Boolean if the option will be displayed in HubSpot
+      value:
+        expression: MISSING
+        description: The internal value of the option.

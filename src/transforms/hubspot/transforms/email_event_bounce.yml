@@ -1,0 +1,62 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: email_event_bounce
+    from:
+      - email_events: hubspot.email_events
+    fields:
+      _fivetran_synced:
+        expression: email_events._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      category:
+        expression: email_events.category
+        description: "The best-guess of the type of bounce encountered.\nIf an appropriate
+          category couldn't be determined, this property is omitted. See below for
+          the possible values.\nNote that this is a derived value, and may be modified
+          at any time to improve the accuracy of classification.\n"
+      id:
+        expression: email_events.id
+        description: The ID of the event.
+      response:
+        expression: email_events.response
+        description: The full response from the recipient's email server.
+      status:
+        expression: email_events.status
+        description: The status code returned from the recipient's email server.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: email_events
+    target_table_name: email_event_bounce
+    table_match_score: 0.8
+    completion_score: 0.9
+    explanation: The table mapping between 'email_events' source and target schema
+      is fairly strong, reflecting the sharing of most fields relevant to the domain.
+      There is a high confidence in the overall schema alignment, but some fields
+      might not map completely, hence the slightly less than perfect completion score.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: email_events._airbyte_extracted_at
+        score: 1.0
+        explanation: Perfect match as '_fivetran_synced' is standard for all tables
+          mapping to source stream's '_airbyte_extracted_at'.
+      - name: category
+        expression: email_events.category
+        score: 0.7
+        explanation: The descriptions indicate a good semantic match, suggesting both
+          fields relate to email event categorization.
+      - name: id
+        expression: email_events.id
+        score: 1.0
+        explanation: Direct match on 'id' field in both schemas.
+      - name: response
+        expression: email_events.response
+        score: 0.7
+        explanation: While different terminologies are used, the fields both refer
+          to email server responses, justifying a fairly confident mapping.
+      - name: status
+        expression: email_events.status
+        score: 0.7
+        explanation: Mapping is based on a reasonable guess that both fields address
+          the status of emails, hence a solid confidence score but not perfect due
+          to potential variations in how statuses are represented.

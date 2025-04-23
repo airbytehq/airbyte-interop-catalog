@@ -1,0 +1,91 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: email_subscription_change
+    from:
+      - subscription_changes: hubspot.subscription_changes
+    fields:
+      _fivetran_synced:
+        expression: subscription_changes._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      caused_by_event_id:
+        expression: MISSING
+        description: The ID of the event that caused the subscription change.
+      change:
+        expression: MISSING
+        description: The change which occurred. This enumeration is specific to the
+          'changeType'; see below for the possible values.
+      change_type:
+        expression: MISSING
+        description: The type of change which occurred.
+      email_subscription_id:
+        expression: MISSING
+        description: The ID of the related email subscription.
+      portal_id:
+        expression: subscription_changes.portalId
+        description: '{{ doc("portal_id") }}'
+      recipient:
+        expression: subscription_changes.recipient
+        description: The email address of the related contact.
+      source:
+        expression: MISSING
+        description: The source of the subscription change.
+      timestamp:
+        expression: subscription_changes.timestamp
+        description: The timestamp when this change occurred. If 'causedByEvent' is
+          present, this will be absent.
+annotations:
+  approved: false
+  missing_fields:
+    - caused_by_event_id
+    - change
+    - change_type
+    - email_subscription_id
+    - source
+  evaluation:
+    source_stream_name: subscription_changes
+    target_table_name: email_subscription_change
+    table_match_score: 0.8
+    completion_score: 0.57
+    explanation: The table mapping shows moderate-to-high confidence that the source
+      and target tables are describing the same subject matter. However, several field
+      mappings are missing, which reduces the completion score significantly.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: subscription_changes._airbyte_extracted_at
+        score: 1.0
+        explanation: Direct mapping was available for '_fivetran_synced' to 'subscription_changes._airbyte_extracted_at'.
+      - name: caused_by_event_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: change
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: change_type
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: email_subscription_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: portal_id
+        expression: subscription_changes.portalId
+        score: 0.8
+        explanation: Existing mapping to 'subscription_changes.portalId' provides
+          high confidence.
+      - name: recipient
+        expression: subscription_changes.recipient
+        score: 0.8
+        explanation: Existing mapping to 'subscription_changes.recipient' provides
+          high confidence.
+      - name: source
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: timestamp
+        expression: subscription_changes.timestamp
+        score: 0.8
+        explanation: Existing mapping to 'subscription_changes.timestamp' provides
+          high confidence.

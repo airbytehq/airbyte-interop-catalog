@@ -1,0 +1,50 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: engagement_company
+    from:
+      - engagements: hubspot.engagements
+    fields:
+      _fivetran_synced:
+        expression: engagements._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      company_id:
+        expression: engagements.associations.companyIds
+        description: The ID of the related company.
+      engagement_id:
+        expression: engagements.associations.engagementIds
+        description: The ID of the related engagement.
+      category:
+        expression: MISSING
+        description: The association category. Either HUBSPOT_DEFINED (default label)
+          or USER_DEFINED (custom label).
+annotations:
+  approved: true
+  missing_fields:
+    - category
+  evaluation:
+    source_stream_name: engagements
+    target_table_name: engagement_company
+    table_match_score: 0.75
+    completion_score: 0.75
+    explanation: The table mapping is relatively accurate, as the source and target
+      tables describe the same subject matter. The completion score indicates a majority
+      of fields are mapped correctly but not all.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: engagements._airbyte_extracted_at
+        score: 1.0
+        explanation: Exact match to a source stream's column, as prescribed by standard
+          mapping practices.
+      - name: company_id
+        expression: engagements.associations.companyIds
+        score: 0.8
+        explanation: Direct mapping found, matching related company IDs in the schema.
+      - name: engagement_id
+        expression: engagements.associations.engagementIds
+        score: 0.8
+        explanation: Direct mapping found, matching related engagement IDs in the
+          schema.
+      - name: category
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

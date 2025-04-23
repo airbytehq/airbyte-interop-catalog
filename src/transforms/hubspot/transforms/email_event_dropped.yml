@@ -1,0 +1,91 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: email_event_dropped
+    from:
+      - email_events: hubspot.email_events
+    fields:
+      _fivetran_synced:
+        expression: email_events._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      bcc:
+        expression: email_events.bcc
+        description: The 'bcc' field of the email message.
+      cc:
+        expression: email_events.cc
+        description: The 'cc' field of the email message.
+      drop_message:
+        expression: email_events.dropMessage
+        description: The raw message describing why the email message was dropped.
+          This will usually provide additional details beyond 'dropReason'.
+      drop_reason:
+        expression: email_events.dropReason
+        description: The reason why the email message was dropped. See below for the
+          possible values.
+      from:
+        expression: email_events.from
+        description: The 'from' field of the email message.
+      id:
+        expression: email_events.id
+        description: The ID of the event.
+      reply_to:
+        expression: email_events.replyTo
+        description: The 'reply-to' field of the email message.
+      subject:
+        expression: email_events.subject
+        description: The subject line of the email message.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: email_events
+    target_table_name: email_event_dropped
+    table_match_score: 0.85
+    completion_score: 0.9
+    explanation: The table match score is relatively high due to consistent source
+      API contributions, ensuring a good match. The completion score is also high
+      as most of the fields are comprehensively mapped. The field mappings reflect
+      a high degree of match, with appropriate expressions mapped to source fields.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: email_events._airbyte_extracted_at
+        score: 1.0
+        explanation: The mapping for `_fivetran_synced` to `email_events._airbyte_extracted_at`
+          is perfect as it is a standard, consistent mapping across implementations.
+      - name: bcc
+        expression: email_events.bcc
+        score: 0.9
+        explanation: Direct mapping found with identical field names.
+      - name: cc
+        expression: email_events.cc
+        score: 0.9
+        explanation: Direct mapping with similar field names and clear semantic relation.
+      - name: drop_message
+        expression: email_events.dropMessage
+        score: 0.85
+        explanation: Mapped directly to `email_events.dropMessage` though with slight
+          semantic variation in the description, ensuring a very good match.
+      - name: drop_reason
+        expression: email_events.dropReason
+        score: 0.85
+        explanation: Direct mapping to `email_events.dropReason`, with clear semantic
+          relation.
+      - name: from
+        expression: email_events.from
+        score: 0.9
+        explanation: Direct and clear mapping to `email_events.from` reflects identical
+          semantic and syntactical match.
+      - name: id
+        expression: email_events.id
+        score: 0.9
+        explanation: Direct mapping to `email_events.id` with perfect semantic and
+          syntactical alignment.
+      - name: reply_to
+        expression: email_events.replyTo
+        score: 0.8
+        explanation: Direct mapping with slightly broad semantic scope which could
+          potentially include additional elements not present in corresponding mapping.
+      - name: subject
+        expression: email_events.subject
+        score: 0.9
+        explanation: Direct mapping to `email_events.subject`; clear semantic and
+          syntactical alignment.

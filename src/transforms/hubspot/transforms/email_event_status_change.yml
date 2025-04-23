@@ -1,0 +1,79 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: email_event_status_change
+    from:
+      - email_events: hubspot.email_events
+    fields:
+      _fivetran_synced:
+        expression: email_events._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      bounced:
+        expression: email_events.bounced
+        description: "A HubSpot employee explicitly initiated the status change to
+          block messages to the recipient.\n(Note this usage has been deprecated in
+          favor of dropping messages with a 'dropReason' of BLOCKED_ADDRESS.)\n"
+      id:
+        expression: email_events.id
+        description: The ID of the event.
+      portal_subscription_status:
+        expression: email_events.portalSubscriptionStatus
+        description: "The recipient's portal subscription status.\nNote that if this
+          is 'UNSUBSCRIBED', the property 'subscriptions' is not necessarily an empty
+          array, nor are all\nsubscriptions contained in it necessarily going to have
+          their statuses set to 'UNSUBSCRIBED'.)\n"
+      requested_by:
+        expression: email_events.requestedBy
+        description: The email address of the person requesting the change on behalf
+          of the recipient. If not applicable, this property is omitted.
+      source:
+        expression: email_events.source
+        description: The source of the subscription change.
+      subscriptions:
+        expression: email_events.subscriptions
+        description: "An array of JSON objects representing the status of subscriptions
+          for the recipient.\nEach JSON subscription object is comprised of the properties:
+          'id', 'status'.\n"
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: email_events
+    target_table_name: email_event_status_change
+    table_match_score: 1.0
+    completion_score: 1.0
+    explanation: All field mappings are set up correctly, align with the source and
+      target schema requirements, ensuring data integrity and appropriate transformations.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: email_events._airbyte_extracted_at
+        score: 1.0
+        explanation: Perfect match as per standardized mapping guidelines.
+      - name: bounced
+        expression: email_events.bounced
+        score: 0.85
+        explanation: High confidence score due to direct mapping and matching field
+          relevance between source and target.
+      - name: id
+        expression: email_events.id
+        score: 1.0
+        explanation: Direct mapping and data type match ensure a perfect score.
+      - name: portal_subscription_status
+        expression: email_events.portalSubscriptionStatus
+        score: 0.7
+        explanation: Good match, minor differences in definitions do not significantly
+          impact the matching quality.
+      - name: requested_by
+        expression: email_events.requestedBy
+        score: 0.9
+        explanation: High confidence due to the exact match of meaning, despite the
+          absence of the field under certain conditions.
+      - name: source
+        expression: email_events.source
+        score: 0.65
+        explanation: Moderate confidence due to slightly broader context in the source,
+          but still a functional match.
+      - name: subscriptions
+        expression: email_events.subscriptions
+        score: 0.75
+        explanation: Solid match with clear correspondence between the source and
+          target representation of subscription statuses.

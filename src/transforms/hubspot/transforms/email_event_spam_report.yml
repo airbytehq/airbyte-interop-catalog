@@ -1,0 +1,51 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: email_event_spam_report
+    from:
+      - email_events: hubspot.email_events
+    fields:
+      _fivetran_synced:
+        expression: email_events._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      id:
+        expression: email_events.id
+        description: The ID of the event.
+      ip_address:
+        expression: email_events.ipAddress
+        description: '{{ doc("email_event_ip_address") }}'
+      user_agent:
+        expression: email_events.userAgent
+        description: '{{ doc("email_event_user_agent") }}'
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: email_events
+    target_table_name: email_event_spam_report
+    table_match_score: 0.8
+    completion_score: 0.9
+    explanation: The fields are appropriately matched considering their names and
+      descriptions, as underscore conversions and casing differences are considered
+      equivalent. Fivetran-compatible fields map closely to the Airbyte schema, ensuring
+      high integrity and relevancy of the mapping.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: email_events._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping for synchronization timestamps, perfectly matched
+          between schemas.
+      - name: id
+        expression: email_events.id
+        score: 0.9
+        explanation: Direct mapping of identification fields; both pertain to identical
+          entities in their respective schema contexts.
+      - name: ip_address
+        expression: email_events.ipAddress
+        score: 0.7
+        explanation: Field names suggest the same data, but context is necessary to
+          confirm they are indeed the same across different schemas.
+      - name: user_agent
+        expression: email_events.userAgent
+        score: 0.7
+        explanation: Given the names and similar usages in tracking user environments,
+          it's likely they refer to the same data despite minor naming differences.

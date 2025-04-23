@@ -1,0 +1,104 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: ticket_pipeline_stage
+    from:
+      - ticket_pipelines: hubspot.ticket_pipelines
+    fields:
+      _fivetran_deleted:
+        expression: MISSING
+        description: '{{ doc("_fivetran_deleted") }}'
+      _fivetran_synced:
+        expression: ticket_pipelines._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      active:
+        expression: MISSING
+        description: Boolean indicating whether the pipeline stage is active.
+      display_order:
+        expression: ticket_pipelines.displayOrder
+        description: Used to determine the order in which the stages appear when viewed
+          in HubSpot.
+      is_closed:
+        expression: MISSING
+        description: Boolean indicating if the pipeline stage is closed.
+      label:
+        expression: ticket_pipelines.label
+        description: The human-readable label for the stage. The label is used when
+          showing the stage in HubSpot.
+      pipeline_id:
+        expression: ticket_pipelines.id
+        description: The ID of the pipeline.
+      stage_id:
+        expression: MISSING
+        description: The ID of the pipeline stage.
+      ticket_state:
+        expression: MISSING
+        description: State of the ticket.
+      created_at:
+        expression: ticket_pipelines.createdAt
+        description: A timestamp representing when the record was created.
+      updated_at:
+        expression: ticket_pipelines.updatedAt
+        description: A timestamp representing when the record was updated.
+annotations:
+  approved: false
+  missing_fields:
+    - _fivetran_deleted
+    - active
+    - is_closed
+    - stage_id
+    - ticket_state
+  evaluation:
+    source_stream_name: ticket_pipelines
+    target_table_name: ticket_pipeline_stage
+    table_match_score: 0.8
+    completion_score: 0.7
+    explanation: The mappings cover most of the essential field mappings with high
+      confidence due to some fields directly matching. However, some fields like 'is_closed'
+      and 'ticket_state' lack expanding data which lowers the completion score.
+    field_mapping_evals:
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _fivetran_synced
+        expression: ticket_pipelines._airbyte_extracted_at
+        score: 1.0
+        explanation: Perfect match to the schema expected value.
+      - name: active
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: display_order
+        expression: ticket_pipelines.displayOrder
+        score: 0.9
+        explanation: Direct mapping exists with proper naming conventions.
+      - name: is_closed
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: label
+        expression: ticket_pipelines.label
+        score: 0.9
+        explanation: Direct mapping exists which perfectly aligns with source API
+          field.
+      - name: pipeline_id
+        expression: ticket_pipelines.id
+        score: 0.9
+        explanation: Direct mapping identified with accurate field correlation.
+      - name: stage_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: ticket_state
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: created_at
+        expression: ticket_pipelines.createdAt
+        score: 0.9
+        explanation: Direct mapping identified with accurate time field correlation.
+      - name: updated_at
+        expression: ticket_pipelines.updatedAt
+        score: 0.9
+        explanation: Accurate mapping of time fields indicating up-to-date record
+          tracking.

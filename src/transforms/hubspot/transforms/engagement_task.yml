@@ -1,0 +1,85 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: engagement_task
+    from:
+      - engagements_tasks: hubspot.engagements_tasks
+    fields:
+      _fivetran_synced:
+        expression: engagements_tasks._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      engagement_id:
+        expression: engagements_tasks.id
+        description: The ID of the engagement.
+      property_hs_createdate:
+        expression: engagements_tasks.properties_hs_createdate
+        description: "This field marks the task's time of creation and determines
+          where the task sits on the record timeline. You can use either a Unix timestamp
+          in milliseconds or UTC format. \nPLEASE NOTE: This field will only be populated
+          for connectors utilizing the HubSpot v3 API version. For the pre HubSpot
+          v3 versions, this value may be found within the parent `engagement` table.\n"
+      timestamp:
+        expression: engagements_tasks.properties_hs_timestamp
+        description: "This field marks the task's time of occurrence and determines
+          where the task sits on the record timeline. You can use either a Unix timestamp
+          in milliseconds or UTC format. \nPLEASE NOTE: This field will only be populated
+          for connectors utilizing the HubSpot v3 API version. For the pre HubSpot
+          v3 versions, this value may be found within the parent `engagement` table.\n"
+      property_hubspot_owner_id:
+        expression: engagements_tasks.properties_hubspot_owner_id
+        description: "The ID of the owner associated with the task. This field determines
+          the user listed as the task creator on the record timeline.\nPLEASE NOTE:
+          This field will only be populated for connectors utilizing the HubSpot v3
+          API version. For the pre HubSpot v3 versions, this value may be found within
+          the parent `engagement` table.\n"
+      property_hubspot_team_id:
+        expression: engagements_tasks.properties_hubspot_team_id
+        description: "The ID of the team associated with the task. This field determines
+          the team listed as the task creator on the record timeline.\nPLEASE NOTE:
+          This field will only be populated for connectors utilizing the HubSpot v3
+          API version.\n"
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: engagements_tasks
+    target_table_name: engagement_task
+    table_match_score: 0.9
+    completion_score: 0.85
+    explanation: The table mapping between the source table 'engagements_tasks' and
+      the target schema captures most of the key fields, though it omits some optional
+      fields. The fields provided are mapped with high confidence, particularly the
+      identifications of date fields and ownership. The confidence in the table matching
+      is very high due to the correct and similar fields that are highly relevant
+      to both implementations.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: engagements_tasks._airbyte_extracted_at
+        score: 1.0
+        explanation: This mapping of '_fivetran_synced' to 'engagements_tasks._airbyte_extracted_at'
+          is a standard mapping across all tables, hence the perfect score.
+      - name: engagement_id
+        expression: engagements_tasks.id
+        score: 1.0
+        explanation: Direct mapping of 'engagement_id' aligns with the target schema
+          identifier without any discrepancies.
+      - name: property_hs_createdate
+        expression: engagements_tasks.properties_hs_createdate
+        score: 0.8
+        explanation: The field matches based on the description and relevance to creation
+          date contexts across both schema versions, though minor differences in the
+          API version are noted.
+      - name: timestamp
+        expression: engagements_tasks.properties_hs_timestamp
+        score: 0.8
+        explanation: Mapped correctly to reference the timestamp in context of the
+          task's occurrence consistent with the target schema's expectations.
+      - name: property_hubspot_owner_id
+        expression: engagements_tasks.properties_hubspot_owner_id
+        score: 0.7
+        explanation: The owner ID is mapped well but has slight potential differences
+          depending on API version changes noted in descriptions.
+      - name: property_hubspot_team_id
+        expression: engagements_tasks.properties_hubspot_team_id
+        score: 0.7
+        explanation: Team ID mapping is relevant and correct, though minor variations
+          due to API versioning are observed, which brings the score to 0.7.

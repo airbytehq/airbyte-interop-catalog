@@ -1,0 +1,49 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: ticket_company
+    from:
+      - tickets: hubspot.tickets
+    fields:
+      _fivetran_synced:
+        expression: tickets._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      ticket_id:
+        expression: tickets.properties.hs_ticket_id
+        description: The ID of the related ticket.
+      company_id:
+        expression: tickets.properties.hs_primary_company_id
+        description: The ID of the related company.
+      category:
+        expression: tickets.properties.hs_ticket_category
+        description: The association category. Either HUBSPOT_DEFINED (default label)
+          or USER_DEFINED (custom label).
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: tickets
+    target_table_name: ticket_company
+    table_match_score: 0.85
+    completion_score: 0.95
+    explanation: High match quality and nearly complete field mappings, reflecting
+      a strong confidence in the table and field correlations.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: tickets._airbyte_extracted_at
+        score: 1.0
+        explanation: Perfect scoring for a standard mapping, always maps '_fivetran_synced'
+          to '_airbyte_extracted_at'.
+      - name: ticket_id
+        expression: tickets.properties.hs_ticket_id
+        score: 0.8
+        explanation: Strong match between 'tickets.properties.hs_ticket_id' and 'ticket_id'.
+      - name: company_id
+        expression: tickets.properties.hs_primary_company_id
+        score: 0.8
+        explanation: Strong match between 'tickets.properties.hs_primary_company_id'
+          and 'company_id'.
+      - name: category
+        expression: tickets.properties.hs_ticket_category
+        score: 0.7
+        explanation: Good match for 'tickets.properties.hs_ticket_category' to 'category',
+          within the acceptable confidence range.

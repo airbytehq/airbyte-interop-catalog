@@ -1,0 +1,74 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: email_event_open
+    from:
+      - email_events: hubspot.email_events
+    fields:
+      _fivetran_synced:
+        expression: email_events._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      browser:
+        expression: email_events.browser
+        description: '{{ doc("email_event_browser") }}'
+      duration:
+        expression: email_events.duration
+        description: If provided and nonzero, the approximate number of milliseconds
+          the user had opened the email.
+      id:
+        expression: email_events.id
+        description: The ID of the event.
+      ip_address:
+        expression: email_events.ipAddress
+        description: '{{ doc("email_event_ip_address") }}'
+      location:
+        expression: email_events.location
+        description: '{{ doc("email_event_location") }}'
+      user_agent:
+        expression: email_events.userAgent
+        description: '{{ doc("email_event_user_agent") }}'
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: email_events
+    target_table_name: email_event_open
+    table_match_score: 0.9
+    completion_score: 0.9
+    explanation: High confidence in table match and completion, following the guidelines
+      for mapping source data and maintaining data integrity.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: email_events._airbyte_extracted_at
+        score: 1.0
+        explanation: Direct match as per standards requiring mapping '_fivetran_synced'
+          to 'email_events._airbyte_extracted_at'.
+      - name: browser
+        expression: email_events.browser
+        score: 0.8
+        explanation: Direct field match, mapping properly from source to target, maintaining
+          the meaning of the data.
+      - name: duration
+        expression: email_events.duration
+        score: 0.6
+        explanation: Likely the same, with behavior described clearly and matched
+          accurately.
+      - name: id
+        expression: email_events.id
+        score: 1.0
+        explanation: Perfect match for 'id' across source and target, directly matching
+          unique identifiers.
+      - name: ip_address
+        expression: email_events.ipAddress
+        score: 0.8
+        explanation: Good alignment with source, mapping 'ipAddress' directly keeping
+          the field's meaning intact.
+      - name: location
+        expression: email_events.location
+        score: 0.7
+        explanation: Good confidence in field mapping, relevant contextual match between
+          'email_events.location' and target schema.
+      - name: user_agent
+        expression: email_events.userAgent
+        score: 0.7
+        explanation: Appropriate matching of 'userAgent' to 'user_agent', with high
+          likelihood of referring to same data.

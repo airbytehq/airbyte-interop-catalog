@@ -1,0 +1,62 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: email_event_print
+    from:
+      - email_events: hubspot.email_events
+    fields:
+      _fivetran_synced:
+        expression: email_events._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      browser:
+        expression: email_events.browser
+        description: '{{ doc("email_event_browser") }}'
+      id:
+        expression: email_events.id
+        description: The ID of the event.
+      ip_address:
+        expression: email_events.ipAddress
+        description: '{{ doc("email_event_ip_address") }}'
+      location:
+        expression: email_events.location
+        description: '{{ doc("email_event_location") }}'
+      user_agent:
+        expression: email_events.userAgent
+        description: '{{ doc("email_event_user_agent") }}'
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: email_events
+    target_table_name: email_event_print
+    table_match_score: 0.75
+    completion_score: 0.8
+    explanation: The mapping generally aligns well with our schema compatibility expectations.
+      Mappings for common fields are on point, but some fields are potentially ambiguous
+      and need more context.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: email_events._airbyte_extracted_at
+        score: 1.0
+        explanation: Perfect match as per standard mapping guidelines for system fields.
+      - name: browser
+        expression: email_events.browser
+        score: 0.85
+        explanation: Direct mapping with no significant differences in meaning detected.
+      - name: id
+        expression: email_events.id
+        score: 1.0
+        explanation: Perfect match as this is a unique identifier.
+      - name: ip_address
+        expression: email_events.ipAddress
+        score: 0.9
+        explanation: Direct mapping, slight potential for variance in format.
+      - name: location
+        expression: email_events.location
+        score: 0.75
+        explanation: Likely the same, but subject to regional differences in data
+          definition.
+      - name: user_agent
+        expression: email_events.userAgent
+        score: 0.8
+        explanation: Generally the same, although exact details about data collection
+          might differ.

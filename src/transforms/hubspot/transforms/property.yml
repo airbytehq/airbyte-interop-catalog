@@ -1,0 +1,53 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: property
+    from:
+      - MISSING: hubspot.MISSING
+    fields:
+      _fivetran_id:
+        expression: MISSING
+        description: Fivetran generated id. Joins to `property_id` in the `property_option`
+          table.
+      _fivetran_synced:
+        expression: MISSING
+        description: '{{ doc("_fivetran_synced") }}'
+      calculated:
+        expression: MISSING
+        description: Indicates if the property is calculated by a HubSpot process
+      created_at:
+        expression: MISSING
+        description: Timestamp representing when the property was created.
+      description:
+        expression: MISSING
+        description: A description of the property.
+      field_type:
+        expression: MISSING
+        description: One of textarea, text, date, file, number, select, radio, checkbox,
+          or booleancheckbox.
+      group_name:
+        expression: MISSING
+        description: The name of the property group that the property belongs to.
+      hubspot_defined:
+        expression: MISSING
+        description: This will be true for default properties that are built into
+          HubSpot.
+      hubspot_object:
+        expression: MISSING
+        description: If this property is related to other objects, the object will
+          be listed here.
+      label:
+        expression: MISSING
+        description: A human readable label for the property.
+      name:
+        expression: MISSING
+        description: The internal name of the property.
+      show_currency_symbol:
+        expression: MISSING
+        description: If true, the property will display the currency symbol set in
+          the portal settings.
+      type:
+        expression: MISSING
+        description: One of string, number, date, datetime, or enumeration.
+      updated_at:
+        expression: MISSING
+        description: Timestamp representing when the property was last updated.

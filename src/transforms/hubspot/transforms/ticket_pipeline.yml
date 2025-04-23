@@ -1,0 +1,90 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: ticket_pipeline
+    from:
+      - ticket_pipelines: hubspot.ticket_pipelines
+    fields:
+      _fivetran_deleted:
+        expression: MISSING
+        description: '{{ doc("_fivetran_deleted") }}'
+      _fivetran_synced:
+        expression: ticket_pipelines._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      active:
+        expression: MISSING
+        description: Boolean indicating whether the pipeline is active.
+      display_order:
+        expression: ticket_pipelines.displayOrder
+        description: Used to determine the order in which the stages appear when viewed
+          in HubSpot.
+      label:
+        expression: ticket_pipelines.label
+        description: The human-readable label for the stage. The label is used when
+          showing the stage in HubSpot.
+      object_type_id:
+        expression: MISSING
+        description: Reference to the object type.
+      pipeline_id:
+        expression: ticket_pipelines.id
+        description: Reference to the pipeline.
+      created_at:
+        expression: ticket_pipelines.createdAt
+        description: A timestamp representing when the record was created.
+      updated_at:
+        expression: ticket_pipelines.updatedAt
+        description: A timestamp representing when the record was updated.
+annotations:
+  approved: false
+  missing_fields:
+    - _fivetran_deleted
+    - active
+    - object_type_id
+  evaluation:
+    source_stream_name: ticket_pipelines
+    target_table_name: ticket_pipeline
+    table_match_score: 0.85
+    completion_score: 0.75
+    explanation: The overall match of the fields between the source and target tables
+      shows a good alignment, except for some fields that have no direct mapping,
+      affecting the completion score.
+    field_mapping_evals:
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _fivetran_synced
+        expression: ticket_pipelines._airbyte_extracted_at
+        score: 1.0
+        explanation: Direct mapping to ticket_pipelines._airbyte_extracted_at as per
+          standard.
+      - name: active
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: display_order
+        expression: ticket_pipelines.displayOrder
+        score: 0.9
+        explanation: High confidence based on similar field usage and context in source
+          and target schemas.
+      - name: label
+        expression: ticket_pipelines.label
+        score: 0.9
+        explanation: The label directly corresponds to the similarly purposed field
+          in the target schema.
+      - name: object_type_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: pipeline_id
+        expression: ticket_pipelines.id
+        score: 0.9
+        explanation: Direct mapping found with very high confidence level.
+      - name: created_at
+        expression: ticket_pipelines.createdAt
+        score: 0.9
+        explanation: Direct mapping corresponds centrally to the source created timestamp.
+      - name: updated_at
+        expression: ticket_pipelines.updatedAt
+        score: 0.9
+        explanation: Direct mapping with high confidence of correctly representing
+          the updated timestamp.

@@ -1,0 +1,71 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: company_property_history
+    from:
+      - companies_property_history: hubspot.companies_property_history
+    fields:
+      _fivetran_synced:
+        expression: companies_property_history._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      company_id:
+        expression: companies_property_history.companyId
+        description: The ID of the related company record.
+      name:
+        expression: companies_property_history.property
+        description: '{{ doc("history_name") }}'
+      source:
+        expression: companies_property_history.sourceType
+        description: '{{ doc("history_source") }}'
+      source_id:
+        expression: companies_property_history.sourceId
+        description: '{{ doc("history_source_id") }}'
+      timestamp:
+        expression: companies_property_history.timestamp
+        description: '{{ doc("history_timestamp") }}'
+      value:
+        expression: companies_property_history.value
+        description: '{{ doc("history_value") }}'
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: companies_property_history
+    target_table_name: company_property_history
+    table_match_score: 0.85
+    completion_score: 0.9
+    explanation: High accuracy in table matching due to consistent and relevant field
+      mappings that closely align with the target schema requirements, despite not
+      populating all possible fields.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: companies_property_history._airbyte_extracted_at
+        score: 1.0
+        explanation: Perfect match according to the standard mapping procedure for
+          synchronizing timestamps.
+      - name: company_id
+        expression: companies_property_history.companyId
+        score: 0.9
+        explanation: Correct mapping of company identifiers between source and target
+          schemas.
+      - name: name
+        expression: companies_property_history.property
+        score: 0.9
+        explanation: Field descriptions are well aligned and mapped based on the content
+          relevance across both schemas.
+      - name: source
+        expression: companies_property_history.sourceType
+        score: 0.9
+        explanation: Accurate mapping based on shared context and description.
+      - name: source_id
+        expression: companies_property_history.sourceId
+        score: 0.9
+        explanation: Direct mapping between source ids provides a strong correlation.
+      - name: timestamp
+        expression: companies_property_history.timestamp
+        score: 0.9
+        explanation: Timestamp fields are universally relevant and aligned correctly.
+      - name: value
+        expression: companies_property_history.value
+        score: 0.9
+        explanation: Proper mapping of value fields, maintaining data integrity and
+          contextual relevance.

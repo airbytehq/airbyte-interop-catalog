@@ -1,0 +1,59 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: engagement_email_cc
+    from:
+      - engagements_emails: hubspot.engagements_emails
+    fields:
+      _fivetran_synced:
+        expression: engagements_emails._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      email:
+        expression: engagements_emails.properties.hs_email_from_email
+        description: The email address of the recipient.
+      engagement_id:
+        expression: engagements_emails.properties.hs_engagement_source_id
+        description: The ID of the related engagement.
+      first_name:
+        expression: engagements_emails.properties.hs_email_from_firstname
+        description: The first name of the recipient.
+      last_name:
+        expression: engagements_emails.properties.hs_email_from_lastname
+        description: The last name of the recipient.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: engagements_emails
+    target_table_name: engagement_email_cc
+    table_match_score: 0.8
+    completion_score: 0.9
+    explanation: The table mapping involves a source from Airbyte and targets a similar
+      schema used by Fivetran. The mappings are well-aligned as both the source and
+      target likely represent emails specific activities, providing a high table match
+      score. Most fields are matched appropriately, ensuring a high completion score.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: engagements_emails._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping based on consistent source-to-target requirements
+          for sync timestamps.
+      - name: email
+        expression: engagements_emails.properties.hs_email_from_email
+        score: 0.95
+        explanation: Directly matches an email address field from source to target,
+          maintaining integrity and specificity of the data.
+      - name: engagement_id
+        expression: engagements_emails.properties.hs_engagement_source_id
+        score: 0.9
+        explanation: Target field is directly related to a source column denoting
+          an engagement ID, very likely referring to the same concept.
+      - name: first_name
+        expression: engagements_emails.properties.hs_email_from_firstname
+        score: 0.85
+        explanation: Straightforward mapping of first name fields between source and
+          target schemas.
+      - name: last_name
+        expression: engagements_emails.properties.hs_email_from_lastname
+        score: 0.85
+        explanation: Straightforward mapping of last name fields between source and
+          target schemas.

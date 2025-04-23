@@ -1,0 +1,119 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: company
+    from:
+      - companies: hubspot.companies
+    fields:
+      _fivetran_synced:
+        expression: companies._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      id:
+        expression: companies.id
+        description: The ID of the company.
+      portal_id:
+        expression: companies.id
+        description: '{{ doc("portal_id") }}'
+      is_deleted:
+        expression: companies.archived
+        description: '{{ doc("is_deleted") }}'
+      property_name:
+        expression: companies.properties.name
+        description: The name of the company.
+      property_description:
+        expression: companies.properties.description
+        description: A short statement about the company's mission and goals.
+      property_createdate:
+        expression: companies.properties.createdate
+        description: The date the company was added to your account.
+      property_industry:
+        expression: companies.properties.industry
+        description: The type of business the company performs.
+      property_address:
+        expression: companies.properties.address
+        description: The street address of the company.
+      property_address_2:
+        expression: companies.properties.address2
+        description: Additional address information for the company.
+      property_city:
+        expression: companies.properties.city
+        description: The city where the company is located.
+      property_state:
+        expression: companies.properties.state
+        description: The state where the company is located.
+      property_country:
+        expression: companies.properties.country
+        description: The country where the company is located.
+      property_annualrevenue:
+        expression: companies.properties.annualrevenue
+        description: The actual or estimated annual revenue of the company.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: companies
+    target_table_name: company
+    table_match_score: 0.9
+    completion_score: 0.8
+    explanation: The source and target tables are closely aligned, indicating high
+      interoperability between schema mappings. Most mappings are strong, but some
+      fields lack exact matches.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: companies._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping is perfect.
+      - name: id
+        expression: companies.id
+        score: 1.0
+        explanation: Direct match of identifier fields in both source and target schemas.
+      - name: portal_id
+        expression: companies.id
+        score: 0.0
+        explanation: No good match found.
+      - name: is_deleted
+        expression: companies.archived
+        score: 0.8
+        explanation: Mapped to 'archived,' which implies a similar active/deleted
+          state differentiation.
+      - name: property_name
+        expression: companies.properties.name
+        score: 1.0
+        explanation: Exact match for the name of the company.
+      - name: property_description
+        expression: companies.properties.description
+        score: 1.0
+        explanation: Direct match for a description field.
+      - name: property_createdate
+        expression: companies.properties.createdate
+        score: 1.0
+        explanation: Exact match of creation dates.
+      - name: property_industry
+        expression: companies.properties.industry
+        score: 1.0
+        explanation: Direct match for industry classification.
+      - name: property_address
+        expression: companies.properties.address
+        score: 0.8
+        explanation: Mapped to 'address' with slightly different field nesting but
+          fundamentally same data.
+      - name: property_address_2
+        expression: companies.properties.address2
+        score: 0.8
+        explanation: Same as 'property_address' with slight differences in detail
+          provided.
+      - name: property_city
+        expression: companies.properties.city
+        score: 1.0
+        explanation: Direct match to city location.
+      - name: property_state
+        expression: companies.properties.state
+        score: 1.0
+        explanation: Exact match for state location.
+      - name: property_country
+        expression: companies.properties.country
+        score: 1.0
+        explanation: Countries perfectly align between source and target.
+      - name: property_annualrevenue
+        expression: companies.properties.annualrevenue
+        score: 0.7
+        explanation: Slight ambiguity in revenue reporting, but likely the same field.

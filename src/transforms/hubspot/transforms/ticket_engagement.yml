@@ -1,0 +1,56 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: ticket_engagement
+    from:
+      - engagements: hubspot.engagements
+    fields:
+      _fivetran_synced:
+        expression: engagements._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      ticket_id:
+        expression: engagements.associations_ticketIds
+        description: The ID of the related ticket.
+      engagement_id:
+        expression: engagements.id
+        description: The ID of the related deal.
+      category:
+        expression: MISSING
+        description: The association category. Either HUBSPOT_DEFINED (default label)
+          or USER_DEFINED (custom label).
+annotations:
+  approved: true
+  missing_fields:
+    - category
+  evaluation:
+    source_stream_name: engagements
+    target_table_name: ticket_engagement
+    table_match_score: 0.85
+    completion_score: 0.75
+    explanation: The table match score is relatively high because both source and
+      target tables are being generated from a similar API context, indicating a strong
+      alignment in the data's subject matter. The completion score is lower due to
+      some missing field mappings which could not be confidently matched, reflecting
+      a partial but significant overlap in fields between source and target schemas.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: engagements._airbyte_extracted_at
+        score: 1.0
+        explanation: Direct mapping to source streams '_airbyte_extracted_at' always
+          scores a 1.00 as it is considered a standard requirement for all tables.
+      - name: ticket_id
+        expression: engagements.associations_ticketIds
+        score: 0.7
+        explanation: Mapped to 'engagements.associations_ticketIds' with reasonably
+          high confidence, as it closely represents the 'ticket_id' in a typical schema,
+          but less than perfect due to potential variations in ticket ID context across
+          applications.
+      - name: engagement_id
+        expression: engagements.id
+        score: 0.7
+        explanation: Mapped to 'engagements.id' with high confidence due to direct
+          relevance and similarity in concept, though the lack of more detailed context
+          hinders a perfect score.
+      - name: category
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

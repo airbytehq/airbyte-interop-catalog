@@ -1,0 +1,102 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: email_campaign
+    from:
+      - marketing_emails: hubspot.marketing_emails
+    fields:
+      _fivetran_synced:
+        expression: marketing_emails._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      app_id:
+        expression: MISSING
+        description: The app ID.
+      app_name:
+        expression: MISSING
+        description: The app name.
+      content_id:
+        expression: MISSING
+        description: The ID of the content.
+      id:
+        expression: marketing_emails.id
+        description: The ID of the email campaign.
+      name:
+        expression: marketing_emails.name
+        description: The name of the email campaign.
+      num_included:
+        expression: MISSING
+        description: The number of messages included as part of the email campaign.
+      num_queued:
+        expression: MISSING
+        description: The number of messages queued as part of the email campaign.
+      sub_type:
+        expression: MISSING
+        description: The email campaign sub-type.
+      subject:
+        expression: marketing_emails.subject
+        description: The subject of the email campaign.
+      type:
+        expression: MISSING
+        description: The email campaign type.
+annotations:
+  approved: false
+  missing_fields:
+    - app_id
+    - app_name
+    - content_id
+    - num_included
+    - num_queued
+    - sub_type
+    - type
+  evaluation:
+    source_stream_name: marketing_emails
+    target_table_name: email_campaign
+    table_match_score: 0.65
+    completion_score: 0.4
+    explanation: The table match score is moderate suggesting some similarity between
+      source and target schemas. However, many key fields are missing accurate mappings,
+      indicating a low completion score.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: marketing_emails._airbyte_extracted_at
+        score: 1.0
+        explanation: Direct matching standard field '_fivetran_synced' to '_airbyte_extracted_at'.
+      - name: app_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: app_name
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: content_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: id
+        expression: marketing_emails.id
+        score: 1.0
+        explanation: Exact match of 'id' field in both schemas.
+      - name: name
+        expression: marketing_emails.name
+        score: 1.0
+        explanation: Exact match of 'name' field in both schemas.
+      - name: num_included
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: num_queued
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: sub_type
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: subject
+        expression: marketing_emails.subject
+        score: 1.0
+        explanation: Exact match of 'subject' field in both schemas.
+      - name: type
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

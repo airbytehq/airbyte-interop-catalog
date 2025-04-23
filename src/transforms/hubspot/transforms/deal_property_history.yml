@@ -1,0 +1,69 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: deal_property_history
+    from:
+      - deals_property_history: hubspot.deals_property_history
+    fields:
+      _fivetran_synced:
+        expression: deals_property_history._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      deal_id:
+        expression: deals_property_history.dealId
+        description: The ID of the related deal record.
+      name:
+        expression: deals_property_history.property
+        description: '{{ doc("history_name") }}'
+      source:
+        expression: deals_property_history.sourceType
+        description: '{{ doc("history_source") }}'
+      source_id:
+        expression: deals_property_history.sourceId
+        description: '{{ doc("history_source_id") }}'
+      timestamp:
+        expression: deals_property_history.timestamp
+        description: '{{ doc("history_timestamp") }}'
+      value:
+        expression: deals_property_history.value
+        description: '{{ doc("history_value") }}'
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: deals_property_history
+    target_table_name: deal_property_history
+    table_match_score: 0.8
+    completion_score: 0.7
+    explanation: Table matches and field mappings show good confidence and reasonable
+      assumptions based on the shared API source with minor unpopulated fields.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: deals_property_history._airbyte_extracted_at
+        score: 1.0
+        explanation: Direct match with source stream’s _airbyte_extracted_at column.
+      - name: deal_id
+        expression: deals_property_history.dealId
+        score: 0.9
+        explanation: Direct match found on key field.
+      - name: name
+        expression: deals_property_history.property
+        score: 0.7
+        explanation: Likely represents the same property, but less clarity due to
+          generic naming.
+      - name: source
+        expression: deals_property_history.sourceType
+        score: 0.65
+        explanation: Reasonable confidence that source fields correspond.
+      - name: source_id
+        expression: deals_property_history.sourceId
+        score: 0.65
+        explanation: Matching identifers but could be clearer if exact source field
+          type documented.
+      - name: timestamp
+        expression: deals_property_history.timestamp
+        score: 0.8
+        explanation: Timestamp fields typically match well across different systems.
+      - name: value
+        expression: deals_property_history.value
+        score: 0.6
+        explanation: Value fields are broadly similar, but specifics could use more
+          documentation.

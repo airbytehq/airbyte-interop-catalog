@@ -1,0 +1,89 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: email_event_click
+    from:
+      - email_events: hubspot.email_events
+    fields:
+      _fivetran_synced:
+        expression: email_events._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      browser:
+        expression: email_events.browser
+        description: '{{ doc("email_event_browser") }}'
+      id:
+        expression: email_events.id
+        description: The ID of the event.
+      ip_address:
+        expression: email_events.ipAddress
+        description: '{{ doc("email_event_ip_address") }}'
+      location:
+        expression: email_events.location
+        description: '{{ doc("email_event_location") }}'
+      referer:
+        expression: email_events.referer
+        description: The URL of the webpage that linked to the URL clicked. Whether
+          this is provided, and what its value is, is determined by the recipient's
+          email client.
+      url:
+        expression: email_events.url
+        description: The URL within the message that the recipient clicked.
+      user_agent:
+        expression: email_events.userAgent
+        description: '{{ doc("email_event_user_agent") }}'
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: email_events
+    target_table_name: email_event_click
+    table_match_score: 0.85
+    completion_score: 0.75
+    explanation: The table mapping has a high confidence score for matching the source
+      and target tables, reflecting the good correlation in the context of shared
+      upstream source APIs from Airbyte and Fivetran. The completion score indicates
+      a substantial but not full serialization of fields, relevant to the careful
+      mapping of each field while considering differences in terms like singular vs
+      plural and casing.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: email_events._airbyte_extracted_at
+        score: 1.0
+        explanation: This is a standard mapping, always matching Airbyte's '_airbyte_extracted_at'
+          column to Fivetran's '_fivetran_synced' field. Score is thus perfect.
+      - name: browser
+        expression: email_events.browser
+        score: 0.9
+        explanation: Direct mapping of 'email_events.browser' which correctly reflects
+          the field's meaning and format without deviation.
+      - name: id
+        expression: email_events.id
+        score: 0.9
+        explanation: Relevant direct column mapping from 'email_events.id' with clear
+          identity preservation.
+      - name: ip_address
+        expression: email_events.ipAddress
+        score: 0.9
+        explanation: Field 'email_events.ipAddress' closely matches target field 'ip_address',
+          noting the slight format difference in casing but maintaining the correct
+          meaning.
+      - name: location
+        expression: email_events.location
+        score: 0.9
+        explanation: Direct and appropriate mapping of 'email_events.location', target
+          mirroring source adequately.
+      - name: referer
+        expression: email_events.referer
+        score: 0.85
+        explanation: The field maps correctly from 'email_events.referer' to 'referer'
+          with contextual matching about links from web sources.
+      - name: url
+        expression: email_events.url
+        score: 0.6
+        explanation: Mapping of 'email_events.url' has slightly lower confidence due
+          to potential variations in URL patterns or usage but remains a justified
+          match.
+      - name: user_agent
+        expression: email_events.userAgent
+        score: 0.9
+        explanation: Field 'email_events.userAgent' is well translated to 'user_agent',
+          respecting the context and format adaptability.

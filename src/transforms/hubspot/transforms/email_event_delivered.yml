@@ -1,0 +1,50 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: email_event_delivered
+    from:
+      - email_events: hubspot.email_events
+    fields:
+      _fivetran_synced:
+        expression: email_events._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      id:
+        expression: email_events.id
+        description: The ID of the event.
+      response:
+        expression: email_events.response
+        description: The full response from the recipient's email server.
+      smtp_id:
+        expression: email_events.smtpId
+        description: An ID attached to the message by HubSpot.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: email_events
+    target_table_name: email_event_delivered
+    table_match_score: 0.7
+    completion_score: 0.75
+    explanation: Given the context of the field mappings and the table similarity,
+      the table match has a moderate to high confidence score suggesting a good correlation.
+      However, the completion score indicates that while most fields are mapped, there
+      could be improvements or some fields are missing.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: email_events._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping as per instruction, always matches to _airbyte_extracted_at.
+      - name: id
+        expression: email_events.id
+        score: 0.8
+        explanation: Direct mapping of 'id' fields suggests a very high confidence
+          due to identical meanings.
+      - name: response
+        expression: email_events.response
+        score: 0.7
+        explanation: Mapping of 'response' fields is relevant and accurate, reflecting
+          a good confidence score based on their descriptions.
+      - name: smtp_id
+        expression: email_events.smtpId
+        score: 0.6
+        explanation: Mapping of 'smtpId' to 'smtp_id', this represents a good match
+          under the provided conditions without penalizing for case sensitivity.

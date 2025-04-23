@@ -1,0 +1,100 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: owner
+    from:
+      - owners: hubspot.owners
+    fields:
+      _fivetran_synced:
+        expression: owners._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      active_user_id:
+        expression: owners.userId
+        description: ID of the active user account associated with the owner. Null
+          if owner is not an active user.
+      created_at:
+        expression: owners.createdAt
+        description: A timestamp for when the owner was created.
+      email:
+        expression: owners.email
+        description: The email address of the owner.
+      first_name:
+        expression: owners.firstName
+        description: The first name of the owner.
+      last_name:
+        expression: owners.lastName
+        description: The last name of the owner.
+      owner_id:
+        expression: owners.id
+        description: The ID of the owner.
+      portal_id:
+        expression: MISSING
+        description: '{{ doc("portal_id") }}'
+      type:
+        expression: MISSING
+        description: The type of owner.
+      updated_at:
+        expression: owners.updatedAt
+        description: Timestamp the owner was updated.
+annotations:
+  approved: true
+  missing_fields:
+    - portal_id
+    - type
+  evaluation:
+    source_stream_name: owners
+    target_table_name: owner
+    table_match_score: 0.8
+    completion_score: 0.7
+    explanation: The fields have been reasonably well mapped, with high confidence
+      for direct correlations and appropriate settings of 'MISSING' for unmatched
+      fields. The table match and completion are satisfactory, aligned with the guidelines
+      indicated for data integrity and representation across similar schemas.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: owners._airbyte_extracted_at
+        score: 1.0
+        explanation: This is a standard mapping and always matches directly and appropriately
+          with '_airbyte_extracted_at'.
+      - name: active_user_id
+        expression: owners.userId
+        score: 0.9
+        explanation: Direct correlation to 'owners.userId' considering the overlap
+          in context.
+      - name: created_at
+        expression: owners.createdAt
+        score: 0.9
+        explanation: Direct mapping to 'owners.createdAt', appropriate and with high
+          confidence due to matching data types and contexts.
+      - name: email
+        expression: owners.email
+        score: 0.9
+        explanation: Highly accurate mapping of 'owners.email' reflecting direct data
+          correspondence.
+      - name: first_name
+        expression: owners.firstName
+        score: 0.9
+        explanation: High confidence mapping due to direct correspondence of data
+          field 'owners.firstName'.
+      - name: last_name
+        expression: owners.lastName
+        score: 0.9
+        explanation: The mapping accurately reflects the direct lineage of data from
+          'owners.lastName'.
+      - name: owner_id
+        expression: owners.id
+        score: 0.9
+        explanation: Direct and appropriate mapping of 'owners.id', showing exact
+          data correlations.
+      - name: portal_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: type
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: updated_at
+        expression: owners.updatedAt
+        score: 0.9
+        explanation: Direct alignment with 'owners.updatedAt', reflecting the temporal
+          aspect of the data accurately.

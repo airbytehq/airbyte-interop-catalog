@@ -1,0 +1,27 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: users
+    from:
+      - MISSING: hubspot.MISSING
+    fields:
+      id:
+        expression: MISSING
+        description: Unique ID of the user.
+      primary_team_id:
+        expression: MISSING
+        description: ID of the user's primary team.
+      role_id:
+        expression: MISSING
+        description: ID of the role assigned to the user.
+      email:
+        expression: MISSING
+        description: Email address of the user.
+      first_name:
+        expression: MISSING
+        description: First name of the user.
+      last_name:
+        expression: MISSING
+        description: Last name of the user.
+      _fivetran_synced:
+        expression: MISSING
+        description: '{{ doc("_fivetran_synced") }}'

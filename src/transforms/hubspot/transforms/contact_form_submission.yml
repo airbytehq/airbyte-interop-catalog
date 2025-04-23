@@ -1,0 +1,85 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: contact_form_submission
+    from:
+      - contacts_form_submissions: hubspot.contacts_form_submissions
+    fields:
+      _fivetran_synced:
+        expression: contacts_form_submissions._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      contact_id:
+        expression: MISSING
+        description: The ID of the related contact.
+      conversion_id:
+        expression: contacts_form_submissions.conversion_id
+        description: A Unique ID for the specific form conversion.
+      form_id:
+        expression: contacts_form_submissions.form_id
+        description: The GUID of the form that the submission belongs to.
+      page_id:
+        expression: MISSING
+        description: The ID of the related page.
+      page_url:
+        expression: contacts_form_submissions.page_url
+        description: The URL that the form was submitted on, if applicable.
+      portal_id:
+        expression: contacts_form_submissions.portal_id
+        description: '{{ doc("portal_id") }}'
+      timestamp:
+        expression: contacts_form_submissions.timestamp
+        description: A Unix timestamp in milliseconds of the time the submission occurred.
+      title:
+        expression: contacts_form_submissions.title
+        description: The title of the page that the form was submitted on. This will
+          default to the name of the form if no title is provided.
+annotations:
+  approved: true
+  missing_fields:
+    - contact_id
+    - page_id
+  evaluation:
+    source_stream_name: contacts_form_submissions
+    target_table_name: contact_form_submission
+    table_match_score: 0.8
+    completion_score: 0.75
+    explanation: The mapping has a high table match score due to consistent definitions
+      and connection between the Fivetran and Airbyte schemas, both sourced from similar
+      APIs. The completion score is slightly lower because not all fields could be
+      confidently mapped.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: contacts_form_submissions._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping, matches perfectly to source stream's column.
+      - name: contact_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: conversion_id
+        expression: contacts_form_submissions.conversion_id
+        score: 1.0
+        explanation: Direct match available in source schema.
+      - name: form_id
+        expression: contacts_form_submissions.form_id
+        score: 1.0
+        explanation: Direct match available in source schema.
+      - name: page_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: page_url
+        expression: contacts_form_submissions.page_url
+        score: 1.0
+        explanation: Direct match available, source field matches target field description.
+      - name: portal_id
+        expression: contacts_form_submissions.portal_id
+        score: 1.0
+        explanation: Standard mapping to schema using templated doc reference.
+      - name: timestamp
+        expression: contacts_form_submissions.timestamp
+        score: 1.0
+        explanation: Exact match found in the source schema.
+      - name: title
+        expression: contacts_form_submissions.title
+        score: 1.0
+        explanation: Direct match mapping to source schema.

@@ -1,0 +1,105 @@
+domain: hubspot.airbyte-interop
+transforms:
+  - name: deal_pipeline_stage
+    from:
+      - deal_pipelines: hubspot.deal_pipelines
+    fields:
+      _fivetran_deleted:
+        expression: MISSING
+        description: '{{ doc("_fivetran_deleted") }}'
+      _fivetran_synced:
+        expression: deal_pipelines._airbyte_extracted_at
+        description: '{{ doc("_fivetran_synced") }}'
+      active:
+        expression: deal_pipelines.active
+        description: Whether the pipeline stage is currently in use.
+      closed_won:
+        expression: MISSING
+        description: Whether the stage represents a Closed Won deal.
+      display_order:
+        expression: deal_pipelines.displayOrder
+        description: Used to determine the order in which the stages appear when viewed
+          in HubSpot.
+      label:
+        expression: deal_pipelines.label
+        description: The human-readable label for the stage. The label is used when
+          showing the stage in HubSpot.
+      pipeline_id:
+        expression: deal_pipelines.pipelineId
+        description: The ID of the related pipeline.
+      probability:
+        expression: MISSING
+        description: The probability that the deal will close. Used for the deal forecast.
+      stage_id:
+        expression: MISSING
+        description: The ID of the pipeline stage.
+      created_at:
+        expression: deal_pipelines.createdAt
+        description: A timestamp representing when the record was created.
+      updated_at:
+        expression: deal_pipelines.updatedAt
+        description: A timestamp representing when the record was updated.
+annotations:
+  approved: false
+  missing_fields:
+    - _fivetran_deleted
+    - closed_won
+    - probability
+    - stage_id
+  evaluation:
+    source_stream_name: deal_pipelines
+    target_table_name: deal_pipeline_stage
+    table_match_score: 0.7
+    completion_score: 0.5
+    explanation: The overall table matching score is moderately high, indicating a
+      general alignment between source and target schemas, but the completion score
+      reveals that not all fields are mapped, indicating gaps in data transformation.
+      Some of the key fields like 'probability', 'stage_id', and '_fivetran_deleted'
+      remain unmapped as 'MISSING', significantly lowering the overall confidence
+      in the data mapping completeness.
+    field_mapping_evals:
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _fivetran_synced
+        expression: deal_pipelines._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping for all tables, perfectly matches source column
+          '_airbyte_extracted_at'.
+      - name: active
+        expression: deal_pipelines.active
+        score: 1.0
+        explanation: Exact match found in source schema.
+      - name: closed_won
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: display_order
+        expression: deal_pipelines.displayOrder
+        score: 1.0
+        explanation: Exact match found in source schema.
+      - name: label
+        expression: deal_pipelines.label
+        score: 1.0
+        explanation: Exact match found in source schema.
+      - name: pipeline_id
+        expression: deal_pipelines.pipelineId
+        score: 1.0
+        explanation: Exact match found in source schema.
+      - name: probability
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: stage_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: created_at
+        expression: deal_pipelines.createdAt
+        score: 1.0
+        explanation: Exact match found in source schema.
+      - name: updated_at
+        expression: deal_pipelines.updatedAt
+        score: 1.0
+        explanation: Exact match found in source schema.
