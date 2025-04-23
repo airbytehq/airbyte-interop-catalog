@@ -13,7 +13,7 @@ transforms:
         description: Foreign key referencing the CAMPAIGN that the event is attributed
           to.
       datetime:
-        expression: events.attributes.datetime
+        expression: events.datetime
         description: Timestamp of when the event was recorded in Klaviyo. Should be
           the same/nominally off from `timestamp`.
       timestamp:
@@ -32,10 +32,10 @@ transforms:
         expression: events.id
         description: Unique ID of the event.
       metric_id:
-        expression: events.relationships.metric.data.id
+        expression: MISSING
         description: Foreign key referencing the metric being captured.
       person_id:
-        expression: events.relationships.profile.data.id
+        expression: MISSING
         description: Foreign key referencing the PERSON who triggered the event.
       type:
         expression: events.type
@@ -45,7 +45,7 @@ transforms:
         expression: events.attributes.uuid
         description: Universally Unique Identifier of the event.
       property_value:
-        expression: events.attributes.event_properties
+        expression: MISSING
         description: Numeric value associated with the event (ie the dollars associated
           with a purchase).
       _fivetran_deleted:
@@ -59,14 +59,18 @@ annotations:
     - campaign_id
     - flow_id
     - flow_message_id
+    - metric_id
+    - person_id
+    - property_value
   evaluation:
     source_stream_name: events
     target_table_name: event
-    table_match_score: 0.7
-    completion_score: 0.8
-    explanation: The table mapping has a high level of confidence as majority of fields
-      are well aligned. However, some fields could not be mapped and are marked as
-      missing which reduces the overall completion score.
+    table_match_score: 0.75
+    completion_score: 0.35
+    explanation: Partial matches for field mappings with a considerable amount of
+      missing matches suggest a moderate table match but low completion. Fields that
+      have direct mappings show a high confidence, while several missing mappings
+      drastically lower the completion score.
     field_mapping_evals:
       - name: _variation
         expression: MISSING
@@ -77,13 +81,13 @@ annotations:
         score: 0.0
         explanation: No good match found.
       - name: datetime
-        expression: events.attributes.datetime
-        score: 1.0
-        explanation: Column 'datetime' maps directly to 'events.attributes.datetime'.
+        expression: events.datetime
+        score: 0.9
+        explanation: Direct mapping with minor discrepancies in attribute names.
       - name: timestamp
         expression: events.attributes.timestamp
-        score: 1.0
-        explanation: Column 'timestamp' maps directly to 'events.attributes.timestamp'.
+        score: 0.9
+        explanation: Direct mapping with minor discrepancies in attribute names.
       - name: flow_id
         expression: MISSING
         score: 0.0
@@ -95,27 +99,27 @@ annotations:
       - name: id
         expression: events.id
         score: 1.0
-        explanation: Column 'id' maps directly to 'events.id'.
+        explanation: Perfect mapping.
       - name: metric_id
-        expression: events.relationships.metric.data.id
-        score: 1.0
-        explanation: Column 'metric_id' maps directly to 'events.relationships.metric.data.id'.
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
       - name: person_id
-        expression: events.relationships.profile.data.id
-        score: 1.0
-        explanation: Column 'person_id' maps directly to 'events.relationships.profile.data.id'.
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
       - name: type
         expression: events.type
         score: 1.0
-        explanation: Column 'type' maps directly to 'events.type'.
+        explanation: Perfect mapping.
       - name: uuid
         expression: events.attributes.uuid
         score: 1.0
-        explanation: Column 'uuid' maps directly to 'events.attributes.uuid'.
+        explanation: Perfect mapping.
       - name: property_value
-        expression: events.attributes.event_properties
-        score: 1.0
-        explanation: Column 'property_value' maps directly to 'events.attributes.event_properties'.
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
       - name: _fivetran_deleted
         expression: MISSING
         score: 0.0

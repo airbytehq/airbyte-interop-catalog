@@ -68,7 +68,7 @@ def validate_field_mappings(
                     )
 
 
-def update_lock_file_for_project(
+def update_lock_file(  # noqa: PLR0914
     source_name: str,
     project_name: str,
 ) -> None:
@@ -77,12 +77,13 @@ def update_lock_file_for_project(
     Args:
         source_name: Name of the source
         project_name: Name of the project
-
-    Raises:
-        ValueError: If a fatal validation error is found
     """
-    # Load all mapping files
-    lock_file_mapping_data: dict[str, Any] = {}  # What we will write to the lock file
+    # Download target schema if it doesn't exist
+    download_target_schema(
+        source_name=source_name,
+        project_name=project_name,
+        if_not_exists=True,
+    )
 
     # Extract source streams and target tables from schema files instead of config
     dbt_requirements_source_file_path: Path = resources.get_dbt_sources_requirements_path(
@@ -116,10 +117,9 @@ def update_lock_file_for_project(
         dbt_source_file_path,
     )
 
-    transform_files: list[Path] = list(
-        resources.get_transforms_dir(
-            source_name=source_name,
-        ).glob("**/*.yml"),
+    transform_files: list[Path] = resources.get_transforms_files(
+        source_name=source_name,
+        project_name=project_name,
     )
     transforms: list[models.TransformFile] = [
         models.TransformFile.from_file(yaml_file) for yaml_file in transform_files
@@ -131,14 +131,12 @@ def update_lock_file_for_project(
         {t.name for t in dbt_source_file.source_tables} - set(used_source_streams),
     )
 
+    lock_file_mapping_data: dict[str, Any] = {}  # What we will write to the lock file
     for transform_obj in transforms:
         # Process each transform (assume one per file for now)
         for transform in [transform_obj]:
             transform_id = transform.transform_name
 
-            dbt_source_table: models.DbtSourceTable = dbt_source_file.get_source_table(
-                transform.source_stream_name,
-            )
             # Create a TableMappingAudit instance
             audit: TableMappingAudit = TableMappingAudit.new(
                 table_mapping=transform,
@@ -164,31 +162,11 @@ def update_lock_file_for_project(
                     f.name: f.expression for f in transform_obj.get_mapped_fields()
                 },
                 "unmapped_target_fields": transform_obj.get_missing_field_mappings(),
+                "unused_source_fields": audit.unused_source_table_columns,
                 # Create a target DbtSourceFile from the requirements file
                 "omitted_target_fields": audit.omitted_target_table_columns,
                 "erroneous_source_table_columns": audit.erroneous_source_table_columns,
             }
-            for source_alias in source_aliases:
-                dbt_source_table = dbt_source_file.get_source_table(source_alias)
-                if "unused_source_fields" not in lock_file_mapping_data[transform_id]:
-                    lock_file_mapping_data[transform_id]["unused_source_fields"] = {}
-
-                lock_file_mapping_data[transform_id]["unused_source_fields"][source_alias] = sorted(
-                    [
-                        c.name
-                        for c in dbt_source_table.columns_and_subcolumns
-                        if not any(
-                            (
-                                f"{source_alias}.{c.name}"
-                                in str(f.expression)  # Contains table.field
-                                or c.name == str(f.expression)  # Exact match on field name
-                            )
-                            for f in transform_obj.get_mapped_fields(
-                                source_alias=source_alias,
-                            )
-                        )
-                    ],
-                )
 
     # Sort mapping data by transform ID
     lock_file_mapping_data = dict(sorted(lock_file_mapping_data.items()))
@@ -217,52 +195,15 @@ def update_lock_file_for_project(
     }
 
     # Write lock file
-    # Convert lock data to TOML string and write to file
-    toml_string = toml_writer.dumps(lock_data)
-    resources.get_lock_file_path(
-        source_name=source_name,
-    ).write_bytes(toml_string.encode("utf-8"))
-
-    console.print(f"Generated lock file for {source_name}", style="green")
-
-
-def update_lock_file(
-    source_name: str,
-    project_name: str,
-) -> None:
-    """Generate a lock file for a project.
-
-    Args:
-        source_name: Name of the source
-        project_name: Name of the project
-    """
-    # Set paths
-    lock_file = resources.get_lock_file_path(
+    lock_file_path = resources.get_lock_file_path(
         source_name=source_name,
         project_name=project_name,
     )
 
     # Ensure parent directory exists
-    lock_file.parent.mkdir(parents=True, exist_ok=True)
+    lock_file_path.parent.mkdir(parents=True, exist_ok=True)
+    # Convert lock data to TOML string and write to file
+    toml_string = toml_writer.dumps(lock_data)
+    lock_file_path.write_bytes(toml_string.encode("utf-8"))
 
-    # Set path for local target schema file
-    requirements_dir = resources.get_requirements_dir(
-        source_name=source_name,
-        project_name=project_name,
-    )
-    Path(requirements_dir).mkdir(parents=True, exist_ok=True)
-
-    download_target_schema(
-        source_name=source_name,
-        project_name=project_name,
-        if_not_exists=True,
-    )
-
-    # Generate lock file
-    try:
-        update_lock_file_for_project(
-            source_name=source_name,
-            project_name=project_name,
-        )
-    except ValueError as e:
-        console.print(f"Error generating lock file: {e}", style="bold red")
+    console.print(f"Generated lock file for {source_name}", style="green")

@@ -77,12 +77,11 @@ annotations:
   evaluation:
     source_stream_name: campaigns
     target_table_name: campaign
-    table_match_score: 1.0
-    completion_score: 0.78
-    explanation: The table matches perfectly with a score of 1.00. Completion score
-      is based on the ratio of correctly mapped fields to the total fields in the
-      table. There are 7 fields which stood unmatched with 'Missing' expression resulting
-      in the score of 0.78.
+    table_match_score: 0.7
+    completion_score: 0.6
+    explanation: Several fields have direct mappings, but the presence of many 'MISSING'
+      expression mappings and differences across similar but not identical fields
+      impacts both the table match and completion scores.
     field_mapping_evals:
       - name: _fivetran_deleted
         expression: MISSING
@@ -91,13 +90,11 @@ annotations:
       - name: campaign_type
         expression: campaigns.type
         score: 1.0
-        explanation: Campaign type is perfectly mapped from 'campaigns.type' with
-          the score of 1.00
+        explanation: Direct mapping available.
       - name: created
         expression: campaigns.attributes.created_at
         score: 1.0
-        explanation: Created is perfectly mapped from 'campaigns.attributes.created_at'
-          with the score of 1.00
+        explanation: Direct mapping available.
       - name: email_template_id
         expression: MISSING
         score: 0.0
@@ -113,28 +110,25 @@ annotations:
       - name: id
         expression: campaigns.id
         score: 1.0
-        explanation: Id is perfectly mapped from 'campaigns.id' with the score of
-          1.00
+        explanation: Direct mapping available.
       - name: name
         expression: campaigns.attributes.name
         score: 1.0
-        explanation: Name is perfectly mapped from 'campaigns.attributes.name' with
-          the score of 1.00
+        explanation: Direct mapping available.
       - name: send_time
         expression: campaigns.attributes.send_time
-        score: 1.0
-        explanation: Send time is perfectly mapped from 'campaigns.attributes.send_time'
-          with the score of 1.00
+        score: 0.7
+        explanation: Partial match, consider a similarity in usage but not a perfect
+          one.
       - name: sent_at
         expression: campaigns.attributes.scheduled_at
         score: 1.0
-        explanation: Sent at is perfectly mapped from 'campaigns.attributes.scheduled_at'
-          with the score of 1.00
+        explanation: Direct mapping available.
       - name: status
         expression: campaigns.attributes.status
-        score: 1.0
-        explanation: Status is perfectly mapped from 'campaigns.attributes.status'
-          with the score of 1.00
+        score: 0.7
+        explanation: Partial match, consider a similarity in usage but not a perfect
+          one.
       - name: status_id
         expression: MISSING
         score: 0.0
@@ -146,20 +140,17 @@ annotations:
       - name: subject
         expression: campaigns.attributes.message
         score: 1.0
-        explanation: Subject is perfectly mapped from 'campaigns.attributes.message'
-          with the score of 1.00
+        explanation: Direct mapping available.
       - name: updated
         expression: campaigns.attributes.updated_at
         score: 1.0
-        explanation: Updated is perfectly mapped from 'campaigns.attributes.updated_at'
-          with the score of 1.00
+        explanation: Direct mapping available.
       - name: archived
         expression: campaigns.attributes.archived
-        score: 1.0
-        explanation: Archived is perfectly mapped from 'campaigns.attributes.archived'
-          with the score of 1.00
+        score: 0.7
+        explanation: Partial match, ambiguity in the nature of 'archived' status between
+          implementations.
       - name: scheduled
         expression: campaigns.attributes.scheduled_at
         score: 1.0
-        explanation: Scheduled is perfectly mapped from 'campaigns.attributes.scheduled_at'
-          with the score of 1.00
+        explanation: Direct mapping available.

@@ -210,7 +210,7 @@ class TestTableMappingAudit:
         )
 
         # Verify all fields are populated correctly
-        assert set(audit.unused_source_table_columns) == {
+        assert set(audit.unused_source_table_columns[table_mapping.source_stream_name]) == {
             "created_at",
             "updated_at",
             "metadata",

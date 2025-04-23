@@ -38,40 +38,47 @@ annotations:
     source_stream_name: flows
     target_table_name: flow
     table_match_score: 0.85
-    completion_score: 0.88
-    explanation: The given field mappings align quite well with the target schema
-      allowing a lot of the data to be preserved. However, there is one field ('_fivetran_deleted')
-      that could not be appropriately matched causing a slightly lower completion
-      score.
+    completion_score: 0.78
+    explanation: Most field mappings have been accurately paired with high confidence
+      scores. The table match score indicates a strong correlation between the source
+      and target schemas, reflecting a well-aligned table mapping configuration. The
+      completion score signifies a high but not full population of the field mappings,
+      aligning well with the project criteria which is acceptable given the scenarios
+      where some source fields might not be serialized as fully as the target.
     field_mapping_evals:
       - name: created
         expression: flows.attributes.created
-        score: 1.0
-        explanation: Perfect match.
+        score: 0.9
+        explanation: Strong match for the timestamp field indicating the creation
+          time matching perfectly.
       - name: id
         expression: flows.id
-        score: 1.0
-        explanation: Perfect match.
+        score: 0.95
+        explanation: Perfect match with unique ID fields in both source and target.
       - name: name
         expression: flows.attributes.name
-        score: 1.0
-        explanation: Perfect match.
+        score: 0.88
+        explanation: Field name matches directly, indicating a strong representation
+          of the same attribute.
       - name: status
         expression: flows.attributes.status
-        score: 1.0
-        explanation: Perfect match.
+        score: 0.83
+        explanation: Good match between status descriptions, slightly less confident
+          due to textual variations in descriptions.
       - name: updated
         expression: flows.attributes.updated
-        score: 1.0
-        explanation: Perfect match.
+        score: 0.9
+        explanation: Strong match for the timestamp field indicating the update time
+          matching perfectly.
       - name: archived
         expression: flows.attributes.archived
-        score: 1.0
-        explanation: Perfect match.
+        score: 0.8
+        explanation: Good match, boolean fields align well but minor uncertainties
+          exist.
       - name: trigger_type
         expression: flows.attributes.trigger_type
-        score: 1.0
-        explanation: Perfect match.
+        score: 0.85
+        explanation: Strong correlation between trigger types hinted by descriptions.
       - name: _fivetran_deleted
         expression: MISSING
         score: 0.0

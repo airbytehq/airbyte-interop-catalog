@@ -49,6 +49,7 @@ campaigns = [
     "_airbyte_extracted_at",
     "_airbyte_meta",
     "_airbyte_raw_id",
+    "attributes",
     "attributes.audiences",
     "attributes.audiences.excluded",
     "attributes.audiences.included",
@@ -91,44 +92,53 @@ campaigns = [
 
 [mappings.event]
 source_file = "src/transforms/klaviyo/transforms/event.yml"
-source_file_hash = "1657c19a711a38fe241be710a69b690c50919a024d4405741c82267932a0407d"
+source_file_hash = "49bcbbfef3821f42849b31e840d6b9763d25e8c3e506814ac75a33a5272df584"
 unmapped_target_fields = [
     "_fivetran_deleted",
     "_variation",
     "campaign_id",
     "flow_id",
     "flow_message_id",
+    "metric_id",
+    "person_id",
+    "property_value",
 ]
 omitted_target_fields = []
 erroneous_source_table_columns = []
 
 [mappings.event.mapped_target_fields]
-datetime = "events.attributes.datetime"
+datetime = "events.datetime"
 timestamp = "events.attributes.timestamp"
 id = "events.id"
-metric_id = "events.relationships.metric.data.id"
-person_id = "events.relationships.profile.data.id"
 type = "events.type"
 uuid = "events.attributes.uuid"
-property_value = "events.attributes.event_properties"
 
 [mappings.event.unused_source_fields]
 events = [
     "_airbyte_extracted_at",
     "_airbyte_meta",
     "_airbyte_raw_id",
-    "datetime",
+    "attributes",
+    "attributes.datetime",
+    "attributes.event_properties",
     "links",
     "links.self",
+    "relationships",
     "relationships.attributions",
     "relationships.attributions.data",
     "relationships.attributions.links",
     "relationships.attributions.links.related",
     "relationships.attributions.links.self",
+    "relationships.metric",
+    "relationships.metric.data",
+    "relationships.metric.data.id",
     "relationships.metric.data.type",
     "relationships.metric.links",
     "relationships.metric.links.related",
     "relationships.metric.links.self",
+    "relationships.profile",
+    "relationships.profile.data",
+    "relationships.profile.data.id",
     "relationships.profile.data.type",
     "relationships.profile.links",
     "relationships.profile.links.related",
@@ -137,7 +147,7 @@ events = [
 
 [mappings.flow]
 source_file = "src/transforms/klaviyo/transforms/flow.yml"
-source_file_hash = "85947ce7dee9cc18d89d1973068ba356686408ff27aa31a31c06d67c179162ed"
+source_file_hash = "35b422fc271d60fbd30182816df07c95ddf05694478015a7dcf5de93e7166a01"
 unmapped_target_fields = [
     "_fivetran_deleted",
 ]
@@ -158,6 +168,7 @@ flows = [
     "_airbyte_extracted_at",
     "_airbyte_meta",
     "_airbyte_raw_id",
+    "attributes",
     "links",
     "links.self",
     "relationships",
@@ -177,9 +188,8 @@ flows = [
 
 [mappings.metric]
 source_file = "src/transforms/klaviyo/transforms/metric.yml"
-source_file_hash = "22091971b3ecc7e5a7e1b993aada5fd06854139d15d3f6a1551dbda70d0507f3"
+source_file_hash = "efb56088f22e43872f339c31299cf4a94553b9d7c3814038c2605c609dc3ca53"
 unmapped_target_fields = [
-    "created",
     "integration_category",
     "integration_id",
     "integration_name",
@@ -188,6 +198,7 @@ omitted_target_fields = []
 erroneous_source_table_columns = []
 
 [mappings.metric.mapped_target_fields]
+created = "metrics.attributes.created"
 id = "metrics.id"
 name = "metrics.attributes.name"
 updated = "metrics.updated"
@@ -197,7 +208,7 @@ _fivetran_deleted = "metrics._airbyte_extracted_at"
 metrics = [
     "_airbyte_meta",
     "_airbyte_raw_id",
-    "attributes.created",
+    "attributes",
     "attributes.integration",
     "attributes.updated",
     "links",
@@ -215,15 +226,15 @@ metrics = [
 
 [mappings.person]
 source_file = "src/transforms/klaviyo/transforms/person.yml"
-source_file_hash = "2c13260c44697b1a5de5d87ece49fac9e30d9ba74dce0f4d2be85cf7a1627eed"
+source_file_hash = "fe7b7401512558bc04a1f0f8b69d15e79713bf4a16d21ae0e8a2ff25ab827299"
 unmapped_target_fields = [
     "_fivetran_deleted",
+    "id",
 ]
 omitted_target_fields = []
 erroneous_source_table_columns = []
 
 [mappings.person.mapped_target_fields]
-id = "profiles.id"
 address_1 = "profiles.attributes.location.address1"
 address_2 = "profiles.attributes.location.address2"
 city = "profiles.attributes.location.city"
@@ -248,10 +259,12 @@ profiles = [
     "_airbyte_extracted_at",
     "_airbyte_meta",
     "_airbyte_raw_id",
+    "attributes",
     "attributes.anonymous_id",
     "attributes.external_id",
     "attributes.image",
     "attributes.locale",
+    "attributes.location",
     "attributes.location.ip",
     "attributes.predictive_analytics",
     "attributes.predictive_analytics.average_days_between_orders",
@@ -300,6 +313,7 @@ profiles = [
     "attributes.subscriptions.sms.transactional.method",
     "attributes.subscriptions.sms.transactional.method_detail",
     "attributes.subscriptions.sms.transactional.timestamp",
+    "id",
     "links",
     "links.self",
     "relationships",
