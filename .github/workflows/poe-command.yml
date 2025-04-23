@@ -11,10 +11,6 @@ on:
         description: "Comment ID (Optional)"
         type: string
         required: false
-      comment-text:
-        description: "Full slash command, starting with '/poe'."
-        type: string
-        required: false
 
 permissions:
   contents: write
@@ -27,17 +23,9 @@ jobs:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
     runs-on: ubuntu-latest
     steps:
-      - name: Get Poe Command
-        id: get-command
-        run: |
-            poe_command=$(echo "${{ github.event.inputs.comment-text }}" | sed -n '1s/^\/poe //p' | head -n 1)
-            echo "Resolved command: ${poe_command}"
-            echo "poe-command=${poe_command}" >> $GITHUB_OUTPUT
-
       - name: Run Poe Slash Command Processor
-        uses: aaronsteers/poe-command-processor@main
+        uses: aaronsteers/poe-command-processor@feat/infer-command-from-comment-id
         with:
-          command: ${{ steps.get-command.outputs.poe-command }}
           pr: ${{ github.event.inputs.pr }}
           comment-id: ${{ github.event.inputs.comment-id }}
           github-token: ${{ secrets.GH_PAT_MAINTENANCE_OCTAVIA }}
