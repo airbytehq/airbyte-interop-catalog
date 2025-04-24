@@ -1,6 +1,6 @@
 # Welcome to the Airbyte Interop Catalog
 
-Airbyte Morph is a proprietary AI-driven solution that helps users migrate across different database schemas.
+Airbyte Morph is an [open source](./LICENSE.md) AI-powered catalog of migration guides which helps users migrate across different database schemas. The Airbyte Interop Catalog contains tools, guides, and reusable dbt packages that help users combine and compare Airbyte datasets with 3rd party dataset schemas.
 
 ## Transformation Catalog
 
