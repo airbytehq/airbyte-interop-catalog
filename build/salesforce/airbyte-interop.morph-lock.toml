@@ -1,0 +1,749 @@
+[project]
+source_name = "salesforce"
+project_name = "airbyte-interop"
+requirements_file = "build/salesforce/requirements/airbyte-interop/src_dbt_requirements.yml"
+requirements_file_hash = "17d08bfe527e469ace42ebd0b7ae9a01b379527b7f3719267b9daa2b04fff312"
+airbyte_source_file = "build/salesforce/src_airbyte_raw_salesforce.yml"
+airbyte_source_file_hash = "1de7f444cc079dd197a5a5c6715af205b3fc8e2e44b93752ec0a6e127c2256a0"
+
+[coverage]
+unused_source_streams = [
+    "ActiveFeatureLicenseMetric",
+    "ActivePermSetLicenseMetric",
+    "ActiveProfileMetric",
+    "ActiveScratchOrg",
+    "ActiveScratchOrgFeed",
+    "ActiveScratchOrgHistory",
+    "ActiveScratchOrgShare",
+    "AppDefinition",
+    "Asset",
+    "Describe",
+    "FormulaFunctionAllowedType",
+    "ObjectPermissions",
+    "PermissionSetTabSetting",
+]
+unmapped_target_tables = []
+
+[mappings.account]
+source_file = "src/transforms/salesforce/transforms/account.yml"
+source_file_hash = "21e147f53aaab55de696d39c7cb26ae9a949f1248957d6c94c2cb349c46f3e98"
+source_stream = "Account"
+unmapped_target_fields = [
+    "billing_country_code",
+    "billing_state_code",
+    "record_type_id",
+    "shipping_country_code",
+    "shipping_state_code",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.account.mapped_target_fields]
+id = "Account.Id"
+_fivetran_synced = "Account._airbyte_extracted_at"
+_fivetran_active = "Account.Active__c"
+account_number = "Account.AccountNumber"
+account_source = "Account.AccountSource"
+annual_revenue = "Account.AnnualRevenue"
+billing_city = "Account.BillingCity"
+billing_country = "Account.BillingCountry"
+billing_geocode_accuracy = "Account.BillingGeocodeAccuracy"
+billing_latitude = "Account.BillingLatitude"
+billing_longitude = "Account.BillingLongitude"
+billing_postal_code = "Account.BillingPostalCode"
+billing_state = "Account.BillingState"
+billing_street = "Account.BillingStreet"
+description = "Account.Description"
+fax = "Account.Fax"
+industry = "Account.Industry"
+is_deleted = "Account.IsDeleted"
+jigsaw_company_id = "Account.JigsawCompanyId"
+last_activity_date = "Account.LastActivityDate"
+last_referenced_date = "Account.LastReferencedDate"
+last_viewed_date = "Account.LastViewedDate"
+master_record_id = "Account.MasterRecordId"
+name = "Account.Name"
+number_of_employees = "Account.NumberOfEmployees"
+owner_id = "Account.OwnerId"
+ownership = "Account.Ownership"
+parent_id = "Account.ParentId"
+phone = "Account.Phone"
+photo_url = "Account.PhotoUrl"
+rating = "Account.Rating"
+shipping_city = "Account.ShippingCity"
+shipping_country = "Account.ShippingCountry"
+shipping_geocode_accuracy = "Account.ShippingGeocodeAccuracy"
+shipping_latitude = "Account.ShippingLatitude"
+shipping_longitude = "Account.ShippingLongitude"
+shipping_postal_code = "Account.ShippingPostalCode"
+shipping_state = "Account.ShippingState"
+shipping_street = "Account.ShippingStreet"
+sic = "Account.Sic"
+sic_desc = "Account.SicDesc"
+site = "Account.Site"
+ticker_symbol = "Account.TickerSymbol"
+type = "Account.Type"
+website = "Account.Website"
+
+[mappings.account.unused_source_fields]
+Account = [
+    "BillingAddress",
+    "BillingAddress.city",
+    "BillingAddress.country",
+    "BillingAddress.geocodeAccuracy",
+    "BillingAddress.latitude",
+    "BillingAddress.longitude",
+    "BillingAddress.postalCode",
+    "BillingAddress.state",
+    "BillingAddress.street",
+    "CleanStatus",
+    "CreatedById",
+    "CreatedDate",
+    "CustomerPriority__c",
+    "DandbCompanyId",
+    "DunsNumber",
+    "Jigsaw",
+    "LastModifiedById",
+    "LastModifiedDate",
+    "NaicsCode",
+    "NaicsDesc",
+    "NumberofLocations__c",
+    "OperatingHoursId",
+    "SLAExpirationDate__c",
+    "SLASerialNumber__c",
+    "SLA__c",
+    "ShippingAddress",
+    "ShippingAddress.city",
+    "ShippingAddress.country",
+    "ShippingAddress.geocodeAccuracy",
+    "ShippingAddress.latitude",
+    "ShippingAddress.longitude",
+    "ShippingAddress.postalCode",
+    "ShippingAddress.state",
+    "ShippingAddress.street",
+    "SystemModstamp",
+    "Tradestyle",
+    "UpsellOpportunity__c",
+    "YearStarted",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+]
+
+[mappings.contact]
+source_file = "src/transforms/salesforce/transforms/contact.yml"
+source_file_hash = "ac2a32a9425c05a339689731952bb71ab87322542ab1452259868ab420c34c9e"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "_fivetran_active",
+    "_fivetran_synced",
+    "account_id",
+    "assistant_name",
+    "assistant_phone",
+    "birthdate",
+    "department",
+    "description",
+    "do_not_call",
+    "email",
+    "email_bounced_date",
+    "email_bounced_reason",
+    "fax",
+    "first_name",
+    "has_opted_out_of_email",
+    "has_opted_out_of_fax",
+    "home_phone",
+    "id",
+    "individual_id",
+    "is_deleted",
+    "is_email_bounced",
+    "jigsaw",
+    "jigsaw_contact_id",
+    "last_activity_date",
+    "last_curequest_date",
+    "last_cuupdate_date",
+    "last_modified_by_id",
+    "last_modified_date",
+    "last_name",
+    "last_referenced_date",
+    "last_viewed_date",
+    "lead_source",
+    "mailing_city",
+    "mailing_country",
+    "mailing_country_code",
+    "mailing_geocode_accuracy",
+    "mailing_latitude",
+    "mailing_longitude",
+    "mailing_postal_code",
+    "mailing_state",
+    "mailing_state_code",
+    "mailing_street",
+    "master_record_id",
+    "mobile_phone",
+    "name",
+    "other_city",
+    "other_country",
+    "other_geocode_accuracy",
+    "other_latitude",
+    "other_longitude",
+    "other_phone",
+    "other_postal_code",
+    "other_state",
+    "other_street",
+    "owner_id",
+    "phone",
+    "photo_url",
+    "reports_to_id",
+    "salutation",
+    "system_modstamp",
+    "title",
+]
+
+[mappings.contact.mapped_target_fields]
+
+[mappings.contact.unused_source_fields]
+
+[mappings.contact.omitted_target_fields]
+
+[mappings.contact.erroneous_source_table_columns]
+
+[mappings.event]
+source_file = "src/transforms/salesforce/transforms/event.yml"
+source_file_hash = "ff27f1d17c0293abab15c86e349529683a40b71442c70981655073a5d02a25a0"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "_fivetran_active",
+    "_fivetran_synced",
+    "account_id",
+    "activity_date",
+    "activity_date_time",
+    "created_by_id",
+    "created_date",
+    "description",
+    "duration_in_minutes",
+    "end_date",
+    "end_date_time",
+    "event_subtype",
+    "group_event_type",
+    "id",
+    "is_archived",
+    "is_child",
+    "is_deleted",
+    "is_group_event",
+    "is_private",
+    "is_recurrence",
+    "is_recurrence_2",
+    "is_recurrence_2_exception",
+    "is_recurrence_2_exclusion",
+    "is_reminder_set",
+    "last_modified_by_id",
+    "last_modified_date",
+    "location",
+    "owner_id",
+    "recurrence_2_pattern_start_date",
+    "recurrence_2_pattern_text",
+    "recurrence_2_pattern_time_zone",
+    "recurrence_2_pattern_version",
+    "recurrence_activity_id",
+    "recurrence_day_of_month",
+    "recurrence_day_of_week_mask",
+    "recurrence_end_date_only",
+    "recurrence_instance",
+    "recurrence_interval",
+    "recurrence_month_of_year",
+    "recurrence_start_date_time",
+    "recurrence_time_zone_sid_key",
+    "recurrence_type",
+    "reminder_date_time",
+    "show_as",
+    "start_date_time",
+    "subject",
+    "system_modstamp",
+    "type",
+    "what_count",
+    "what_id",
+    "who_count",
+    "who_id",
+]
+
+[mappings.event.mapped_target_fields]
+
+[mappings.event.unused_source_fields]
+
+[mappings.event.omitted_target_fields]
+
+[mappings.event.erroneous_source_table_columns]
+
+[mappings.fivetran_formula]
+source_file = "src/transforms/salesforce/transforms/fivetran_formula.yml"
+source_file_hash = "63dfc0b1158d351f36e857a6b8076df64fe3ff4a537521561dc7545fd2be5187"
+source_stream = "MISSING"
+unmapped_target_fields = []
+
+[mappings.fivetran_formula.mapped_target_fields]
+
+[mappings.fivetran_formula.unused_source_fields]
+
+[mappings.fivetran_formula.omitted_target_fields]
+
+[mappings.fivetran_formula.erroneous_source_table_columns]
+
+[mappings.fivetran_formula_model]
+source_file = "src/transforms/salesforce/transforms/fivetran_formula_model.yml"
+source_file_hash = "7cd8d69bac4ee99fd8da198b319230ce644c671b9b1b136ec23216ba602e9577"
+source_stream = "MISSING"
+unmapped_target_fields = []
+
+[mappings.fivetran_formula_model.mapped_target_fields]
+
+[mappings.fivetran_formula_model.unused_source_fields]
+
+[mappings.fivetran_formula_model.omitted_target_fields]
+
+[mappings.fivetran_formula_model.erroneous_source_table_columns]
+
+[mappings.lead]
+source_file = "src/transforms/salesforce/transforms/lead.yml"
+source_file_hash = "ffd339a3fb31998f7c1c1648217bc4c30eaa57140b331d0b704def570facfc91"
+source_stream = "LeadHistory"
+unmapped_target_fields = [
+    "annual_revenue",
+    "city",
+    "company",
+    "converted_account_id",
+    "converted_contact_id",
+    "converted_date",
+    "converted_opportunity_id",
+    "country",
+    "country_code",
+    "description",
+    "email",
+    "email_bounced_date",
+    "email_bounced_reason",
+    "fax",
+    "first_name",
+    "geocode_accuracy",
+    "has_opted_out_of_email",
+    "individual_id",
+    "industry",
+    "is_converted",
+    "is_deleted",
+    "is_unread_by_owner",
+    "jigsaw_contact_id",
+    "last_activity_date",
+    "last_modified_by_id",
+    "last_modified_date",
+    "last_name",
+    "last_referenced_date",
+    "last_viewed_date",
+    "latitude",
+    "lead_source",
+    "longitude",
+    "master_record_id",
+    "mobile_phone",
+    "name",
+    "number_of_employees",
+    "owner_id",
+    "phone",
+    "photo_url",
+    "postal_code",
+    "salutation",
+    "state",
+    "state_code",
+    "status",
+    "street",
+    "system_modstamp",
+    "title",
+    "website",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.lead.mapped_target_fields]
+id = "LeadHistory.Id"
+_fivetran_synced = "LeadHistory._airbyte_extracted_at"
+_fivetran_active = "LeadHistory.IsDeleted"
+created_by_id = "LeadHistory.CreatedById"
+created_date = "LeadHistory.CreatedDate"
+
+[mappings.lead.unused_source_fields]
+LeadHistory = [
+    "DataType",
+    "Field",
+    "LeadId",
+    "NewValue",
+    "OldValue",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+]
+
+[mappings.opportunity]
+source_file = "src/transforms/salesforce/transforms/opportunity.yml"
+source_file_hash = "89fed862f86a6a1486ac46df920dff2608ec580165aa58c0b82d62f2577677ae"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "Pricebook2Id",
+    "_fivetran_active",
+    "_fivetran_synced",
+    "account_id",
+    "amount",
+    "campaign_id",
+    "close_date",
+    "created_date",
+    "description",
+    "expected_revenue",
+    "fiscal",
+    "fiscal_quarter",
+    "fiscal_year",
+    "forecast_category",
+    "forecast_category_name",
+    "has_open_activity",
+    "has_opportunity_line_item",
+    "has_overdue_task",
+    "id",
+    "is_closed",
+    "is_deleted",
+    "is_excluded_from_territory_2_filter",
+    "is_won",
+    "last_activity_date",
+    "last_referenced_date",
+    "last_viewed_date",
+    "lead_source",
+    "name",
+    "next_step",
+    "owner_id",
+    "pricebook_2_id",
+    "probability",
+    "record_type_id",
+    "stage_name",
+    "synced_quote_id",
+    "territory_2_id",
+    "type",
+]
+
+[mappings.opportunity.mapped_target_fields]
+
+[mappings.opportunity.unused_source_fields]
+
+[mappings.opportunity.omitted_target_fields]
+
+[mappings.opportunity.erroneous_source_table_columns]
+
+[mappings.opportunity_line_item]
+source_file = "src/transforms/salesforce/transforms/opportunity_line_item.yml"
+source_file_hash = "eddc9181908e095917d35977cd71d57e74f09c6aee6f28a1db7fb4e57844159e"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "_fivetran_active",
+    "_fivetran_synced",
+    "created_by_id",
+    "created_date",
+    "description",
+    "discount",
+    "has_quantity_schedule",
+    "has_revenue_schedule",
+    "has_schedule",
+    "id",
+    "is_deleted",
+    "last_modified_by_id",
+    "last_modified_date",
+    "last_referenced_date",
+    "last_viewed_date",
+    "list_price",
+    "name",
+    "opportunity_id",
+    "pricebook_entry_id",
+    "product_2_id",
+    "product_code",
+    "quantity",
+    "service_date",
+    "sort_order",
+    "system_modstamp",
+    "total_price",
+    "unit_price",
+]
+
+[mappings.opportunity_line_item.mapped_target_fields]
+
+[mappings.opportunity_line_item.unused_source_fields]
+
+[mappings.opportunity_line_item.omitted_target_fields]
+
+[mappings.opportunity_line_item.erroneous_source_table_columns]
+
+[mappings.order]
+source_file = "src/transforms/salesforce/transforms/order.yml"
+source_file_hash = "fc5525a939fd536b0213c7a85eed30fa60f10ea2048be354ebb75cfe26e5691f"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "_fivetran_active",
+    "_fivetran_synced",
+    "account_id",
+    "activated_by_id",
+    "activated_date",
+    "billing_city",
+    "billing_country",
+    "billing_country_code",
+    "billing_geocode_accuracy",
+    "billing_latitude",
+    "billing_longitude",
+    "billing_postal_code",
+    "billing_state",
+    "billing_state_code",
+    "billing_street",
+    "company_authorized_by_id",
+    "contract_id",
+    "created_by_id",
+    "created_date",
+    "customer_authorized_by_id",
+    "description",
+    "effective_date",
+    "end_date",
+    "id",
+    "is_deleted",
+    "is_reduction_order",
+    "last_modified_by_id",
+    "last_modified_date",
+    "last_referenced_date",
+    "last_viewed_date",
+    "opportunity_id",
+    "order_number",
+    "original_order_id",
+    "owner_id",
+    "pricebook_2_id",
+    "shipping_city",
+    "shipping_country",
+    "shipping_country_code",
+    "shipping_geocode_accuracy",
+    "shipping_latitude",
+    "shipping_longitude",
+    "shipping_postal_code",
+    "shipping_state",
+    "shipping_state_code",
+    "shipping_street",
+    "status",
+    "status_code",
+    "system_modstamp",
+    "total_amount",
+    "type",
+]
+
+[mappings.order.mapped_target_fields]
+
+[mappings.order.unused_source_fields]
+
+[mappings.order.omitted_target_fields]
+
+[mappings.order.erroneous_source_table_columns]
+
+[mappings.product_2]
+source_file = "src/transforms/salesforce/transforms/product_2.yml"
+source_file_hash = "1f07b8cc9f041657b02d85ffc0a271d64d20df7f9c837bfe31064db74827ed86"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "_fivetran_active",
+    "_fivetran_synced",
+    "created_by_id",
+    "created_date",
+    "description",
+    "display_url",
+    "external_data_source_id",
+    "external_id",
+    "family",
+    "id",
+    "is_active",
+    "is_archived",
+    "is_deleted",
+    "last_modified_by_id",
+    "last_modified_date",
+    "last_referenced_date",
+    "last_viewed_date",
+    "name",
+    "number_of_quantity_installments",
+    "number_of_revenue_installments",
+    "product_code",
+    "quantity_installment_period",
+    "quantity_schedule_type",
+    "quantity_unit_of_measure",
+    "record_type_id",
+    "revenue_installment_period",
+    "revenue_schedule_type",
+    "stock_keeping_unit",
+    "system_modstamp",
+]
+
+[mappings.product_2.mapped_target_fields]
+
+[mappings.product_2.unused_source_fields]
+
+[mappings.product_2.omitted_target_fields]
+
+[mappings.product_2.erroneous_source_table_columns]
+
+[mappings.task]
+source_file = "src/transforms/salesforce/transforms/task.yml"
+source_file_hash = "d5c8e9a9758250e0f8d458f1bfa06fb7580a2516a51fad359f2137cb1c4c958b"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "_fivetran_active",
+    "_fivetran_synced",
+    "account_id",
+    "activity_date",
+    "call_disposition",
+    "call_duration_in_seconds",
+    "call_object",
+    "call_type",
+    "completed_date_time",
+    "created_by_id",
+    "created_date",
+    "description",
+    "id",
+    "is_archived",
+    "is_closed",
+    "is_deleted",
+    "is_high_priority",
+    "is_recurrence",
+    "is_reminder_set",
+    "last_modified_by_id",
+    "last_modified_date",
+    "owner_id",
+    "priority",
+    "record_type_id",
+    "recurrence_activity_id",
+    "recurrence_day_of_month",
+    "recurrence_day_of_week_mask",
+    "recurrence_end_date_only",
+    "recurrence_instance",
+    "recurrence_interval",
+    "recurrence_month_of_year",
+    "recurrence_regenerated_type",
+    "recurrence_start_date_only",
+    "recurrence_time_zone_sid_key",
+    "recurrence_type",
+    "reminder_date_time",
+    "status",
+    "subject",
+    "system_modstamp",
+    "task_subtype",
+    "type",
+    "what_count",
+    "what_id",
+    "who_count",
+    "who_id",
+]
+
+[mappings.task.mapped_target_fields]
+
+[mappings.task.unused_source_fields]
+
+[mappings.task.omitted_target_fields]
+
+[mappings.task.erroneous_source_table_columns]
+
+[mappings.user]
+source_file = "src/transforms/salesforce/transforms/user.yml"
+source_file_hash = "79ed6ae8eac58876e7074c7799c56904e74dc45f12cc23df43d9472625ed150f"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "_fivetran_active",
+    "_fivetran_deleted",
+    "_fivetran_synced",
+    "about_me",
+    "account_id",
+    "alias",
+    "badge_text",
+    "banner_photo_url",
+    "call_center_id",
+    "city",
+    "community_nickname",
+    "company_name",
+    "contact_id",
+    "country",
+    "country_code",
+    "default_group_notification_frequency",
+    "delegated_approver_id",
+    "department",
+    "digest_frequency",
+    "division",
+    "email",
+    "email_encoding_key",
+    "email_preferences_auto_bcc",
+    "employee_number",
+    "extension",
+    "fax",
+    "federation_identifier",
+    "first_name",
+    "forecast_enabled",
+    "full_photo_url",
+    "geocode_accuracy",
+    "id",
+    "individual_id",
+    "is_active",
+    "is_profile_photo_active",
+    "language_locale_key",
+    "last_login_date",
+    "last_name",
+    "last_referenced_date",
+    "last_viewed_date",
+    "latitude",
+    "locale_sid_key",
+    "longitude",
+    "manager_id",
+    "medium_banner_photo_url",
+    "mobile_phone",
+    "name",
+    "offline_trial_expiration_date",
+    "phone",
+    "postal_code",
+    "profile_id",
+    "receives_admin_info_emails",
+    "receives_info_emails",
+    "sender_email",
+    "sender_name",
+    "signature",
+    "small_banner_photo_url",
+    "small_photo_url",
+    "state",
+    "state_code",
+    "street",
+    "time_zone_sid_key",
+    "title",
+    "user_role_id",
+    "user_type",
+    "username",
+]
+
+[mappings.user.mapped_target_fields]
+
+[mappings.user.unused_source_fields]
+
+[mappings.user.omitted_target_fields]
+
+[mappings.user.erroneous_source_table_columns]
+
+[mappings.user_role]
+source_file = "src/transforms/salesforce/transforms/user_role.yml"
+source_file_hash = "aee0062542c690b1380e7abaa58beb6d9229201d42b73824cedb5d7ef02b857b"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "_fivetran_active",
+    "_fivetran_deleted",
+    "_fivetran_synced",
+    "case_access_for_account_owner",
+    "contact_access_for_account_owner",
+    "developer_name",
+    "forecast_user_id",
+    "id",
+    "may_forecast_manager_share",
+    "name",
+    "opportunity_access_for_account_owner",
+    "parent_role_id",
+    "portal_type",
+    "rollup_description",
+]
+
+[mappings.user_role.mapped_target_fields]
+
+[mappings.user_role.unused_source_fields]
+
+[mappings.user_role.omitted_target_fields]
+
+[mappings.user_role.erroneous_source_table_columns]

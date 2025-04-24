@@ -1,0 +1,238 @@
+domain: salesforce.airbyte-interop
+transforms:
+  - name: user
+    from:
+      - MISSING: salesforce.MISSING
+    fields:
+      id:
+        expression: MISSING
+        description: The unique, system-generated ID assigned during creation.
+      _fivetran_synced:
+        expression: MISSING
+        description: The time at which fivetran last synced this record
+      _fivetran_active:
+        expression: MISSING
+        description: True if record is active, used to filter out only active records
+          if History Mode is enabled
+      _fivetran_deleted:
+        expression: MISSING
+        description: True, if this field has been deleted
+      about_me:
+        expression: MISSING
+        description: Information about the user, such as areas of interest or skills.
+      account_id:
+        expression: MISSING
+        description: ID of the Account associated with a Customer Portal user. This
+          field is null for Salesforce users.
+      alias:
+        expression: MISSING
+        description: Required. The user’s alias. For example, jsmith.
+      badge_text:
+        expression: MISSING
+        description: The community role, displayed on the user profile page just below
+          the user name.
+      banner_photo_url:
+        expression: MISSING
+        description: The URL for the user's banner photo.
+      call_center_id:
+        expression: MISSING
+        description: If Salesforce CRM Call Center is enabled, represents the call
+          center to which this user is assigned.
+      city:
+        expression: MISSING
+        description: The city associated with the user. Up to 40 characters allowed.
+      community_nickname:
+        expression: MISSING
+        description: Name used to identify this user in the Community application,
+          which includes the ideas and answers features.
+      company_name:
+        expression: MISSING
+        description: The name of the user’s company.
+      contact_id:
+        expression: MISSING
+        description: ID of the Contact associated with this account. The contact must
+          have a value in the AccountId field or an error occurs.
+      country:
+        expression: MISSING
+        description: The country associated with the user.
+      country_code:
+        expression: MISSING
+        description: The ISO country code associated with the user.
+      default_group_notification_frequency:
+        expression: MISSING
+        description: The default frequency for sending the user's Chatter group email
+          notifications when the user joins groups.
+      delegated_approver_id:
+        expression: MISSING
+        description: Id of the user who is a delegated approver for this user.
+      department:
+        expression: MISSING
+        description: The company department associated with the user.
+      digest_frequency:
+        expression: MISSING
+        description: The frequency at which the system sends the user’s Chatter personal
+          email digest.
+      division:
+        expression: MISSING
+        description: The division associated with this user, similar to Department
+          and unrelated to DefaultDivision.
+      email:
+        expression: MISSING
+        description: Required. The user’s email address.
+      email_encoding_key:
+        expression: MISSING
+        description: Required. The email encoding for the user, such as ISO-8859-1
+          or UTF-8.
+      email_preferences_auto_bcc:
+        expression: MISSING
+        description: Determines whether the user receives copies of sent emails. This
+          option applies only if compliance BCC emails are not enabled.
+      employee_number:
+        expression: MISSING
+        description: The user’s employee number.
+      extension:
+        expression: MISSING
+        description: The user’s phone extension number.
+      fax:
+        expression: MISSING
+        description: The user’s fax number.
+      federation_identifier:
+        expression: MISSING
+        description: Indicates the value that must be listed in the Subject element
+          of a Security Assertion Markup Language (SAML) IDP certificate to authenticate
+          the user for a client application using single sign-on.
+      first_name:
+        expression: MISSING
+        description: The user’s first name.
+      forecast_enabled:
+        expression: MISSING
+        description: Indicates whether the user is enabled as a forecast manager (true)
+          or not (false).
+      full_photo_url:
+        expression: MISSING
+        description: The URL for the user's profile photo.
+      geocode_accuracy:
+        expression: MISSING
+        description: The level of accuracy of a location’s geographical coordinates
+          compared with its physical address.
+      individual_id:
+        expression: MISSING
+        description: ID of the data privacy record associated with this user. This
+          field is available if Data Protection and Privacy is enabled.
+      is_active:
+        expression: MISSING
+        description: Indicates whether the user has access to log in (true) or not
+          (false).
+      is_profile_photo_active:
+        expression: MISSING
+        description: Indicates whether a user has a profile photo (true) or not (false).
+      language_locale_key:
+        expression: MISSING
+        description: Required. The user’s language, such as “French” or “Chinese (Traditional).”
+      last_login_date:
+        expression: MISSING
+        description: The date and time when the user last successfully logged in.
+          This value is updated if 60 seconds have elapsed since the user’s last login.
+      last_name:
+        expression: MISSING
+        description: Required. The user’s last name.
+      last_referenced_date:
+        expression: MISSING
+        description: The timestamp for when the current user last viewed a record
+          related to this record.
+      last_viewed_date:
+        expression: MISSING
+        description: The timestamp for when the current user last viewed this record.
+          If this value is null, this record might only have been referenced (LastReferencedDate)
+          and not viewed.
+      latitude:
+        expression: MISSING
+        description: Used with Longitude to specify the precise geolocation of an
+          address.
+      locale_sid_key:
+        expression: MISSING
+        description: Required. This field is a restricted picklist field. The value
+          of the field affects formatting and parsing of values, especially numeric
+          values, in the user interface.
+      longitude:
+        expression: MISSING
+        description: Used with Latitude to specify the precise geolocation of an address.
+      manager_id:
+        expression: MISSING
+        description: The Id of the user who manages this user.
+      medium_banner_photo_url:
+        expression: MISSING
+        description: The URL for the medium-sized user profile banner photo.
+      mobile_phone:
+        expression: MISSING
+        description: The user’s mobile or cellular phone number.
+      name:
+        expression: MISSING
+        description: Concatenation of FirstName and LastName.
+      offline_trial_expiration_date:
+        expression: MISSING
+        description: The date and time when the user’s Connect Offline trial expires.
+      phone:
+        expression: MISSING
+        description: The user’s phone number.
+      postal_code:
+        expression: MISSING
+        description: The user’s postal or ZIP code.
+      profile_id:
+        expression: MISSING
+        description: Required. ID of the user’s Profile. Use this value to cache metadata
+          based on profile. In earlier releases, this was RoleId.
+      receives_admin_info_emails:
+        expression: MISSING
+        description: Indicates whether the user receives email for administrators
+          from Salesforce (true) or not (false).
+      receives_info_emails:
+        expression: MISSING
+        description: Indicates whether the user receives informational email from
+          Salesforce (true) or not (false).
+      sender_email:
+        expression: MISSING
+        description: The email address used as the From address when the user sends
+          emails. This address is the same value shown in Setup on the My Email Settings
+          page.
+      sender_name:
+        expression: MISSING
+        description: The name used as the email sender when the user sends emails.
+          This name is the same value shown in Setup on the My Email Settings page.
+      signature:
+        expression: MISSING
+        description: The signature text added to emails.
+      small_banner_photo_url:
+        expression: MISSING
+        description: The URL for the small user profile banner photo.
+      small_photo_url:
+        expression: MISSING
+        description: The URL for a thumbnail of the user's profile photo.
+      state:
+        expression: MISSING
+        description: The state associated with the User.
+      state_code:
+        expression: MISSING
+        description: The ISO state code associated with the user.
+      street:
+        expression: MISSING
+        description: The street address associated with the User.
+      time_zone_sid_key:
+        expression: MISSING
+        description: Required. This field is a restricted picklist field. A User time
+          zone affects the offset used when displaying or entering times in the user
+          interface.
+      title:
+        expression: MISSING
+        description: The user’s business title, such as “Vice President.”
+      username:
+        expression: MISSING
+        description: Contains the name that a user enters to log in. The value for
+          this field must be in the form of an email address, using all lowercase
+          characters. It must also be unique across all organizations.
+      user_role_id:
+        expression: MISSING
+        description: ID of the user’s UserRole.
+      user_type:
+        expression: MISSING
+        description: The category of user license.
