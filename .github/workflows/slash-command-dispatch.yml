@@ -16,7 +16,7 @@ jobs:
           repository: ${{ github.repository }}
           token: ${{ github.token }}
           dispatch-type: workflow
-          issue-type: pull-request
+          issue-type: both
           commands: |
             fix
             lock
@@ -24,8 +24,8 @@ jobs:
             generate
             poe
           static-args: |
-            pr=${{ github.event.issue.number }}
             comment-id=${{ github.event.comment.id }}
+            pr=${{ github.event.issue.pull_request != null && github.event.issue.number || '' }}
           # Only run for users with 'write' permission on the main repository
           permission: write
 
