@@ -1,0 +1,90 @@
+domain: recurly.airbyte-interop
+transforms:
+  - name: coupon_redemption_history
+    from:
+      - account_coupon_redemptions: recurly.account_coupon_redemptions
+    fields:
+      id:
+        expression: account_coupon_redemptions.id
+        description: Unique identifier for the coupon redemption created.
+      account_id:
+        expression: account_coupon_redemptions.account.id
+        description: Account associated with the coupon being redeemed.
+      coupon_id:
+        expression: account_coupon_redemptions.coupon.id
+        description: Coupon being redeemed.
+      created_at:
+        expression: account_coupon_redemptions.created_at
+        description: Time coupon was being redeemed.
+      currency:
+        expression: account_coupon_redemptions.currency
+        description: 3-letter ISO 4217 currency code (USD for US Dollar).
+      discounted:
+        expression: account_coupon_redemptions.discounted
+        description: Amount discounted from coupon redemption.
+      removed_at:
+        expression: account_coupon_redemptions.removed_at
+        description: If a coupon is removed from a customer, time of removal.
+      state:
+        expression: account_coupon_redemptions.state
+        description: Current state of coupon redemption (usually active or inactive)
+      updated_at:
+        expression: account_coupon_redemptions.updated_at
+        description: Time coupon redemption last updated.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: account_coupon_redemptions
+    target_table_name: coupon_redemption_history
+    table_match_score: 0.8
+    completion_score: 0.85
+    explanation: The table mapping demonstrates a high correlation between source
+      and target schema, indicative of a good level of understanding and stringent
+      application of mapping criteria. The majority of fields are accurately mapped,
+      though some non-critical fields lack mapping which slightly reduces the completion
+      score.
+    field_mapping_evals:
+      - name: id
+        expression: account_coupon_redemptions.id
+        score: 1.0
+        explanation: Direct mapping of unique identifiers provided optimal confidence.
+      - name: account_id
+        expression: account_coupon_redemptions.account.id
+        score: 0.95
+        explanation: Correct mapping to 'account.id'; minor discrepancy in path hints
+          minimal risk of misinterpretation.
+      - name: coupon_id
+        expression: account_coupon_redemptions.coupon.id
+        score: 0.95
+        explanation: Proper alignment with 'coupon.id', showing compatibility of ID
+          fields across schemas.
+      - name: created_at
+        expression: account_coupon_redemptions.created_at
+        score: 1.0
+        explanation: Exact match based on field use and naming, representing creation
+          timestamp.
+      - name: currency
+        expression: account_coupon_redemptions.currency
+        score: 0.7
+        explanation: Identical currency code usage ensures a high confidence match
+          despite potential variations in field labeling across regions.
+      - name: discounted
+        expression: account_coupon_redemptions.discounted
+        score: 0.95
+        explanation: Close semantics between the sources, represented accurately.
+      - name: removed_at
+        expression: account_coupon_redemptions.removed_at
+        score: 0.8
+        explanation: Slightly ambiguous mapping due to commonality of timestamp fields,
+          yet highly relevant within context.
+      - name: state
+        expression: account_coupon_redemptions.state
+        score: 0.75
+        explanation: Mapped suitably, though the generic nature of state descriptors
+          necessitates slight caution.
+      - name: updated_at
+        expression: account_coupon_redemptions.updated_at
+        score: 1.0
+        explanation: Timestamp fields precisely mapped ensuring continuous timeline
+          integrity across systems.

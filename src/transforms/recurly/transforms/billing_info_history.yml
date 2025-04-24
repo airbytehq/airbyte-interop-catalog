@@ -1,0 +1,230 @@
+domain: recurly.airbyte-interop
+transforms:
+  - name: billing_info_history
+    from:
+      - billing_infos: recurly.billing_infos
+    fields:
+      id:
+        expression: billing_infos.id
+        description: Unique identifier for the billing info object.
+      account_id:
+        expression: billing_infos.account_id
+        description: Account identifier for the billing info.
+      billing_city:
+        expression: billing_infos.address.city
+        description: Billing city of the card on file for the account.
+      billing_country:
+        expression: billing_infos.address.country
+        description: Billing country of the card on file for the account.
+      billing_first_name:
+        expression: MISSING
+        description: First name at billing address on account.
+      billing_last_name:
+        expression: MISSING
+        description: Last name at billing address on account.
+      billing_phone:
+        expression: billing_infos.address.phone
+        description: Phone number of the account.
+      billing_postal_code:
+        expression: billing_infos.address.postal_code
+        description: Billing postal code of the card on file for the account.
+      billing_region:
+        expression: billing_infos.address.region
+        description: Billing region of the card on file for the account, like state
+          in the US or province in Canada.
+      billing_street_1:
+        expression: billing_infos.address.street1
+        description: First address line of the card on file for the account.
+      billing_street_2:
+        expression: billing_infos.address.street2
+        description: Second address line of the card on file for the account.
+      company:
+        expression: billing_infos.company
+        description: Company name of the account.
+      created_at:
+        expression: billing_infos.created_at
+        description: Date customer's billing information was added to the account.
+      first_name:
+        expression: billing_infos.first_name
+        description: First name of the cardholder for the account.
+      fraud_decision:
+        expression: MISSING
+        description: Decision made on whether billing info triggers a fraud alert.
+      fraud_risk_rules_triggered:
+        expression: MISSING
+        description: The rules that are triggered for fraud if an alert is raised.
+      fraud_score:
+        expression: MISSING
+        description: Fraud score on card based on risk inquiries.
+      last_name:
+        expression: billing_infos.last_name
+        description: Last name of the cardholder for the account.
+      payment_method_card_type:
+        expression: billing_infos.payment_method.card_type
+        description: Card type of payment method, like Visa or Mastercard.
+      payment_method_exp_month:
+        expression: billing_infos.payment_method.exp_month
+        description: Month the payment method is expected to expire.
+      payment_method_exp_year:
+        expression: billing_infos.payment_method.exp_year
+        description: Year the payment method is expected to expire.
+      payment_method_first_six:
+        expression: billing_infos.payment_method.first_six
+        description: First six numbers of the credit card used to process the transaction.
+      payment_method_last_four:
+        expression: billing_infos.payment_method.last_four
+        description: Last four digits of the credit card number stored on customer's
+          account.
+      payment_method_object:
+        expression: billing_infos.payment_method.object
+        description: Object type of payment method, like credit card or debit card.
+      updated_at:
+        expression: billing_infos.updated_at
+        description: Date customer's billing information was last updated on the account.
+      updated_by_country:
+        expression: billing_infos.updated_by.country
+        description: Country from which latest billing info update came from.
+      updated_by_ip:
+        expression: billing_infos.updated_by.ip
+        description: IP address from which latest billing info update came from.
+      valid:
+        expression: billing_infos.valid
+        description: Is the card valid? Boolean object.
+      vat_number:
+        expression: billing_infos.vat_number
+        description: (for EU companies), VAT number provider by customer.
+annotations:
+  approved: false
+  missing_fields:
+    - billing_first_name
+    - billing_last_name
+    - fraud_decision
+    - fraud_risk_rules_triggered
+    - fraud_score
+  evaluation:
+    source_stream_name: billing_infos
+    target_table_name: billing_info_history
+    table_match_score: 0.8
+    completion_score: 0.7
+    explanation: The mapping adheres well to the source and target schema conventions
+      with high confidence in the relationships between similarly defined tables.
+      Despite some fields being marked 'MISSING', it is overall a robust mapping alignment.Detailed
+      high confidence is evident in key identity and transactional fields, however,
+      missing fields due to no good match found lower the completion score.
+    field_mapping_evals:
+      - name: id
+        expression: billing_infos.id
+        score: 1.0
+        explanation: Direct mapping to source field, identical meaning and structure.
+      - name: account_id
+        expression: billing_infos.account_id
+        score: 1.0
+        explanation: High confidence due to identical functional context.
+      - name: payment_method_card_type
+        expression: billing_infos.payment_method.card_type
+        score: 1.0
+        explanation: High confidence from exact match and context relevance.
+      - name: billing_city
+        expression: billing_infos.address.city
+        score: 0.95
+        explanation: Closely related fields and clear alignment in purpose.
+      - name: billing_country
+        expression: billing_infos.address.country
+        score: 0.95
+        explanation: Closely related fields and clear alignment in purpose.
+      - name: billing_postal_code
+        expression: billing_infos.address.postal_code
+        score: 0.95
+        explanation: Closely related fields and clear alignment in purpose.
+      - name: billing_region
+        expression: billing_infos.address.region
+        score: 0.95
+        explanation: Closely related fields and clear alignment in purpose.
+      - name: billing_street_1
+        expression: billing_infos.address.street1
+        score: 0.95
+        explanation: Closely related fields and clear alignment in purpose.
+      - name: billing_street_2
+        expression: billing_infos.address.street2
+        score: 0.95
+        explanation: Closely related fields and clear alignment in purpose.
+      - name: company
+        expression: billing_infos.company
+        score: 1.0
+        explanation: Direct mapping validated by the identical functional context.
+      - name: created_at
+        expression: billing_infos.created_at
+        score: 1.0
+        explanation: Prefix matches and serves identical temporal contextual purpose.
+      - name: first_name
+        expression: billing_infos.first_name
+        score: 1.0
+        explanation: Exact match and contextually relevant.
+      - name: last_name
+        expression: billing_infos.last_name
+        score: 1.0
+        explanation: Exact match and contextually relevant.
+      - name: updated_at
+        expression: billing_infos.updated_at
+        score: 1.0
+        explanation: Direct match providing identical function.
+      - name: updated_by_country
+        expression: billing_infos.updated_by.country
+        score: 0.95
+        explanation: Direct match of region-specific data, high relevance.
+      - name: updated_by_ip
+        expression: billing_infos.updated_by.ip
+        score: 0.95
+        explanation: Exact contextual match for update provenance.
+      - name: valid
+        expression: billing_infos.valid
+        score: 0.9
+        explanation: Direct boolean attribute mapping, high relevance.
+      - name: vat_number
+        expression: billing_infos.vat_number
+        score: 0.9
+        explanation: Direct mapping of regulatory attribute, high confidence.
+      - name: billing_phone
+        expression: billing_infos.address.phone
+        score: 0.9
+        explanation: Direct match, strong relevance to billing information context.
+      - name: payment_method_exp_month
+        expression: billing_infos.payment_method.exp_month
+        score: 1.0
+        explanation: Perfect alignment with expiry context in the payment schema.
+      - name: payment_method_exp_year
+        expression: billing_infos.payment_method.exp_year
+        score: 1.0
+        explanation: Perfect alignment with expiry context in the payment schema.
+      - name: payment_method_first_six
+        expression: billing_infos.payment_method.first_six
+        score: 0.95
+        explanation: Direct match for payment card details, high functional similarity.
+      - name: payment_method_last_four
+        expression: billing_infos.payment_method.last_four
+        score: 0.95
+        explanation: Direct match for payment card details, high functional similarity.
+      - name: payment_method_object
+        expression: billing_infos.payment_method.object
+        score: 0.9
+        explanation: Direct match, high relevance in payment type classification.
+      - name: billing_first_name
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: billing_last_name
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: fraud_decision
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: fraud_risk_rules_triggered
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: fraud_score
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

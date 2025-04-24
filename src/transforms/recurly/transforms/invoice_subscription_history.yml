@@ -1,0 +1,15 @@
+domain: recurly.airbyte-interop
+transforms:
+  - name: invoice_subscription_history
+    from:
+      - MISSING: recurly.MISSING
+    fields:
+      invoice_id:
+        expression: MISSING
+        description: The id of the invoice associated with the subscription.
+      invoice_updated_at:
+        expression: MISSING
+        description: When the invoice was updated.
+      subscription_id:
+        expression: MISSING
+        description: The id of the subscription associated with the invoice.

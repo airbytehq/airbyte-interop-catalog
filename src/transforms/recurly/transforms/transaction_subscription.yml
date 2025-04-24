@@ -1,0 +1,37 @@
+domain: recurly.airbyte-interop
+transforms:
+  - name: transaction_subscription
+    from:
+      - transactions: recurly.transactions
+    fields:
+      transaction_id:
+        expression: transactions.id
+        description: The id of the transaction associated with the subscription.
+      subscription_id:
+        expression: transactions.subscription_ids
+        description: The id of the subscription associated with the transaction.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: transactions
+    target_table_name: transaction_subscription
+    table_match_score: 0.8
+    completion_score: 0.8
+    explanation: Both mappings point towards a transaction-related context, implying
+      a reasonably high likelihood that they refer to the same data context. Although
+      the expressions involve IDs linked with transactions and subscriptions, which
+      are usually tightly connected, the specific distinction ensures a less than
+      perfect score.
+    field_mapping_evals:
+      - name: transaction_id
+        expression: transactions.id
+        score: 0.9
+        explanation: The expression 'transactions.id' indicates a direct and meaningful
+          mapping for 'transaction_id'.
+      - name: subscription_id
+        expression: transactions.subscription_ids
+        score: 0.6
+        explanation: While 'transactions.subscription_ids' signifies a potential match
+          for 'subscription_id', the pluralization in 'subscription_ids' might suggest
+          an array or multiple entries, presenting some uncertainty.

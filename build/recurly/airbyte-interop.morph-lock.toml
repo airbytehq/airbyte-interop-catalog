@@ -1,0 +1,1261 @@
+[project]
+source_name = "recurly"
+project_name = "airbyte-interop"
+requirements_file = "build/recurly/requirements/airbyte-interop/src_dbt_requirements.yml"
+requirements_file_hash = "206212c4662ed7671ef141c1318edd0a2bb10c1dc3c22041ca85394d232bc536"
+airbyte_source_file = "build/recurly/src_airbyte_raw_recurly.yml"
+airbyte_source_file_hash = "e6645361b8b4001a538fb4a8bcc4afd9af1bb73ee067150383a23013ed564272"
+
+[coverage]
+unused_source_streams = [
+    "add_ons",
+    "export_dates",
+    "measured_units",
+    "shipping_addresses",
+    "shipping_methods",
+    "unique_coupons",
+    "unique_coupons_parent",
+]
+unmapped_target_tables = []
+
+[mappings.account_balance_history]
+source_file = "src/transforms/recurly/transforms/account_balance_history.yml"
+source_file_hash = "d13910059372dbd143846034ffd7d23f93770f4f8e9f762a84130487efab5b01"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "account_id",
+    "account_updated_at",
+    "amount",
+    "currency",
+    "past_due",
+]
+
+[mappings.account_balance_history.mapped_target_fields]
+
+[mappings.account_balance_history.unused_source_fields]
+
+[mappings.account_balance_history.omitted_target_fields]
+
+[mappings.account_balance_history.erroneous_source_table_columns]
+
+[mappings.account_history]
+source_file = "src/transforms/recurly/transforms/account_history.yml"
+source_file_hash = "562e57261d5a3e8110884d65a3daee0eaebc9bdf97962f693944418d962764f9"
+source_stream = "accounts"
+unmapped_target_fields = [
+    "bill_to",
+    "cc_emails",
+    "code",
+    "company",
+    "created_at",
+    "deleted_at",
+    "email",
+    "exemption_certificate",
+    "first_name",
+    "hosted_login_token",
+    "last_name",
+    "preferred_locale",
+    "state",
+    "tax_exempt",
+    "username",
+    "vat_number",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.account_history.mapped_target_fields]
+id = "accounts.id"
+updated_at = "accounts.updated_at"
+account_city = "accounts.address.city"
+account_country = "accounts.address.country"
+account_first_name = "accounts.billing_info.first_name"
+account_last_name = "accounts.billing_info.last_name"
+account_phone = "accounts.billing_info.address.phone"
+account_postal_code = "accounts.billing_info.address.postal_code"
+account_region = "accounts.billing_info.address.region"
+account_street_1 = "accounts.billing_info.address.street1"
+account_street_2 = "accounts.billing_info.address.street2"
+
+[mappings.account_history.unused_source_fields]
+accounts = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "address",
+    "address.geo_code",
+    "address.phone",
+    "address.postal_code",
+    "address.region",
+    "address.street1",
+    "address.street2",
+    "bill_to",
+    "billing_info",
+    "billing_info.account_id",
+    "billing_info.address",
+    "billing_info.address.city",
+    "billing_info.address.country",
+    "billing_info.backup_payment_method",
+    "billing_info.company",
+    "billing_info.created_at",
+    "billing_info.fraud",
+    "billing_info.fraud.decision",
+    "billing_info.fraud.risk_rules_triggered",
+    "billing_info.fraud.score",
+    "billing_info.id",
+    "billing_info.object",
+    "billing_info.payment_method",
+    "billing_info.payment_method.account_type",
+    "billing_info.payment_method.billing_agreement_id",
+    "billing_info.payment_method.card_type",
+    "billing_info.payment_method.cc_bin_country",
+    "billing_info.payment_method.exp_month",
+    "billing_info.payment_method.exp_year",
+    "billing_info.payment_method.first_six",
+    "billing_info.payment_method.gateway_code",
+    "billing_info.payment_method.gateway_token",
+    "billing_info.payment_method.last_four",
+    "billing_info.payment_method.last_two",
+    "billing_info.payment_method.name_on_account",
+    "billing_info.payment_method.object",
+    "billing_info.payment_method.routing_number",
+    "billing_info.payment_method.routing_number_bank",
+    "billing_info.primary_payment_method",
+    "billing_info.updated_at",
+    "billing_info.updated_by",
+    "billing_info.updated_by.country",
+    "billing_info.updated_by.ip",
+    "billing_info.valid",
+    "billing_info.vat_number",
+    "cc_emails",
+    "code",
+    "company",
+    "created_at",
+    "custom_fields",
+    "deleted_at",
+    "dunning_campaign_id",
+    "email",
+    "exemption_certificate",
+    "external_accounts",
+    "first_name",
+    "has_active_subscription",
+    "has_canceled_subscription",
+    "has_future_subscription",
+    "has_live_subscription",
+    "has_past_due_invoice",
+    "has_paused_subscription",
+    "hosted_login_token",
+    "invoice_template_id",
+    "last_name",
+    "object",
+    "override_business_entity_id",
+    "parent_account_id",
+    "preferred_locale",
+    "preferred_time_zone",
+    "shipping_addresses",
+    "state",
+    "tax_exempt",
+    "username",
+    "vat_number",
+]
+
+[mappings.account_note_history]
+source_file = "src/transforms/recurly/transforms/account_note_history.yml"
+source_file_hash = "97b7f6212c7ee497d6f50998a7f1b744af09be5313375eff3a0cf017a24a7287"
+source_stream = "account_notes"
+unmapped_target_fields = [
+    "account_updated_at",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.account_note_history.mapped_target_fields]
+id = "account_notes.id"
+account_id = "account_notes.account_id"
+created_at = "account_notes.created_at"
+message = "account_notes.message"
+object = "account_notes.object"
+user_id = "account_notes.user.id"
+user_email = "account_notes.user.email"
+
+[mappings.account_note_history.unused_source_fields]
+account_notes = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "user",
+    "user.created_at",
+    "user.deleted_at",
+    "user.first_name",
+    "user.last_name",
+    "user.object",
+    "user.time_zone",
+]
+
+[mappings.billing_info_history]
+source_file = "src/transforms/recurly/transforms/billing_info_history.yml"
+source_file_hash = "84cfdef67853928aeb96ba4fa38dd2fa9d45123dc876276213292996e7f409cb"
+source_stream = "billing_infos"
+unmapped_target_fields = [
+    "billing_first_name",
+    "billing_last_name",
+    "fraud_decision",
+    "fraud_risk_rules_triggered",
+    "fraud_score",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.billing_info_history.mapped_target_fields]
+id = "billing_infos.id"
+account_id = "billing_infos.account_id"
+billing_city = "billing_infos.address.city"
+billing_country = "billing_infos.address.country"
+billing_phone = "billing_infos.address.phone"
+billing_postal_code = "billing_infos.address.postal_code"
+billing_region = "billing_infos.address.region"
+billing_street_1 = "billing_infos.address.street1"
+billing_street_2 = "billing_infos.address.street2"
+company = "billing_infos.company"
+created_at = "billing_infos.created_at"
+first_name = "billing_infos.first_name"
+last_name = "billing_infos.last_name"
+payment_method_card_type = "billing_infos.payment_method.card_type"
+payment_method_exp_month = "billing_infos.payment_method.exp_month"
+payment_method_exp_year = "billing_infos.payment_method.exp_year"
+payment_method_first_six = "billing_infos.payment_method.first_six"
+payment_method_last_four = "billing_infos.payment_method.last_four"
+payment_method_object = "billing_infos.payment_method.object"
+updated_at = "billing_infos.updated_at"
+updated_by_country = "billing_infos.updated_by.country"
+updated_by_ip = "billing_infos.updated_by.ip"
+valid = "billing_infos.valid"
+vat_number = "billing_infos.vat_number"
+
+[mappings.billing_info_history.unused_source_fields]
+billing_infos = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "address",
+    "backup_payment_method",
+    "fraud",
+    "fraud.decision",
+    "fraud.risk_rules_triggered",
+    "fraud.score",
+    "object",
+    "payment_method",
+    "payment_method.account_type",
+    "payment_method.billing_agreement_id",
+    "payment_method.cc_bin_country",
+    "payment_method.gateway_code",
+    "payment_method.gateway_token",
+    "payment_method.last_two",
+    "payment_method.name_on_account",
+    "payment_method.routing_number",
+    "payment_method.routing_number_bank",
+    "primary_payment_method",
+    "updated_by",
+]
+
+[mappings.coupon_discount]
+source_file = "src/transforms/recurly/transforms/coupon_discount.yml"
+source_file_hash = "007c7455949a4791b6bd6431c9eafafc92e8086e5894d844f69b13b3f80eb907"
+source_stream = "coupons"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.coupon_discount.mapped_target_fields]
+coupon_id = "coupons.id"
+fivetran_id = "coupons.id"
+amount = "coupons.discount"
+currency = "coupons.discount.currencies"
+percentage = "coupons.discount.percent"
+trial_length = "coupons.discount.trial.length"
+trial_unit = "coupons.discount.trial.unit"
+type = "coupons.discount.type"
+
+[mappings.coupon_discount.unused_source_fields]
+coupons = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "applies_to_all_items",
+    "applies_to_all_plans",
+    "applies_to_non_plan_charges",
+    "code",
+    "coupon_type",
+    "created_at",
+    "discount.trial",
+    "duration",
+    "expired_at",
+    "free_trial_amount",
+    "free_trial_unit",
+    "hosted_page_description",
+    "invoice_description",
+    "items",
+    "max_redemptions",
+    "max_redemptions_per_account",
+    "name",
+    "object",
+    "plans",
+    "redeem_by",
+    "redemption_resource",
+    "state",
+    "temporal_amount",
+    "temporal_unit",
+    "unique_code_template",
+    "unique_coupon_code",
+    "unique_coupon_code.bulk_coupon_code",
+    "unique_coupon_code.bulk_coupon_id",
+    "unique_coupon_code.code",
+    "unique_coupon_code.created_at",
+    "unique_coupon_code.expired_at",
+    "unique_coupon_code.id",
+    "unique_coupon_code.object",
+    "unique_coupon_code.redeemed_at",
+    "unique_coupon_code.state",
+    "unique_coupon_code.updated_at",
+    "unique_coupon_codes_count",
+    "updated_at",
+]
+
+[mappings.coupon_redemption_history]
+source_file = "src/transforms/recurly/transforms/coupon_redemption_history.yml"
+source_file_hash = "129ed2c338978580e80a0acd95560c485bdfcfcad20d07adb78f9326151dfd06"
+source_stream = "account_coupon_redemptions"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.coupon_redemption_history.mapped_target_fields]
+id = "account_coupon_redemptions.id"
+account_id = "account_coupon_redemptions.account.id"
+coupon_id = "account_coupon_redemptions.coupon.id"
+created_at = "account_coupon_redemptions.created_at"
+currency = "account_coupon_redemptions.currency"
+discounted = "account_coupon_redemptions.discounted"
+removed_at = "account_coupon_redemptions.removed_at"
+state = "account_coupon_redemptions.state"
+updated_at = "account_coupon_redemptions.updated_at"
+
+[mappings.coupon_redemption_history.unused_source_fields]
+account_coupon_redemptions = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "account",
+    "account.bill_to",
+    "account.code",
+    "account.company",
+    "account.dunning_campaign_id",
+    "account.email",
+    "account.first_name",
+    "account.last_name",
+    "account.object",
+    "account.parent_account_id",
+    "coupon",
+    "coupon.applies_to_all_items",
+    "coupon.applies_to_all_plans",
+    "coupon.applies_to_non_plan_charges",
+    "coupon.code",
+    "coupon.coupon_type",
+    "coupon.created_at",
+    "coupon.discount",
+    "coupon.discount.currencies",
+    "coupon.discount.percent",
+    "coupon.discount.trial",
+    "coupon.discount.trial.length",
+    "coupon.discount.trial.unit",
+    "coupon.discount.type",
+    "coupon.duration",
+    "coupon.expired_at",
+    "coupon.free_trial_amount",
+    "coupon.free_trial_unit",
+    "coupon.hosted_page_description",
+    "coupon.invoice_description",
+    "coupon.items",
+    "coupon.max_redemptions",
+    "coupon.max_redemptions_per_account",
+    "coupon.name",
+    "coupon.object",
+    "coupon.plans",
+    "coupon.redeem_by",
+    "coupon.redemption_resource",
+    "coupon.state",
+    "coupon.temporal_amount",
+    "coupon.temporal_unit",
+    "coupon.unique_code_template",
+    "coupon.unique_coupon_code",
+    "coupon.unique_coupon_code.bulk_coupon_code",
+    "coupon.unique_coupon_code.bulk_coupon_id",
+    "coupon.unique_coupon_code.code",
+    "coupon.unique_coupon_code.created_at",
+    "coupon.unique_coupon_code.expired_at",
+    "coupon.unique_coupon_code.id",
+    "coupon.unique_coupon_code.object",
+    "coupon.unique_coupon_code.redeemed_at",
+    "coupon.unique_coupon_code.state",
+    "coupon.unique_coupon_code.updated_at",
+    "coupon.unique_coupon_codes_count",
+    "coupon.updated_at",
+    "object",
+    "subscription_id",
+]
+
+[mappings.credit_payment_history]
+source_file = "src/transforms/recurly/transforms/credit_payment_history.yml"
+source_file_hash = "b4f4e922803e6a8cf3e41616d9629b906d73643f33727efaaf7bcd731774f877"
+source_stream = "credit_payments"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.credit_payment_history.mapped_target_fields]
+id = "credit_payments.id"
+account_id = "credit_payments.account.id"
+action = "credit_payments.action"
+amount = "credit_payments.amount"
+applied_to_invoice_id = "credit_payments.applied_to_invoice.id"
+created_at = "credit_payments.created_at"
+currency = "credit_payments.currency"
+original_credit_payment_id = "credit_payments.original_credit_payment_id"
+original_invoice_id = "credit_payments.original_invoice.id"
+refund_transaction_id = "credit_payments.refund_transaction.id"
+updated_at = "credit_payments.updated_at"
+uuid = "credit_payments.uuid"
+voided_at = "credit_payments.voided_at"
+
+[mappings.credit_payment_history.unused_source_fields]
+credit_payments = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "account",
+    "account.code",
+    "applied_to_invoice",
+    "applied_to_invoice.number",
+    "original_invoice",
+    "original_invoice.number",
+    "refund_transaction",
+    "refund_transaction.uuid",
+]
+
+[mappings.invoice_coupon_redemption_history]
+source_file = "src/transforms/recurly/transforms/invoice_coupon_redemption_history.yml"
+source_file_hash = "95b33e494f3918cde5d4b48cb9ba4c0c72a2727555618df7c032453ad862b5da"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "coupon_redemption_id",
+    "invoice_id",
+    "invoice_updated_at",
+]
+
+[mappings.invoice_coupon_redemption_history.mapped_target_fields]
+
+[mappings.invoice_coupon_redemption_history.unused_source_fields]
+
+[mappings.invoice_coupon_redemption_history.omitted_target_fields]
+
+[mappings.invoice_coupon_redemption_history.erroneous_source_table_columns]
+
+[mappings.invoice_history]
+source_file = "src/transforms/recurly/transforms/invoice_history.yml"
+source_file_hash = "1412d3d143c27d6692faed401e913c019760f24e9a120d025dd18bd3d9ca6ac1"
+source_stream = "invoices"
+unmapped_target_fields = [
+    "account_id",
+    "amount",
+    "balance",
+    "closed_at",
+    "collection_method",
+    "created_at",
+    "currency",
+    "customer_notes",
+    "discount",
+    "due_at",
+    "id",
+    "invoice_city",
+    "invoice_country",
+    "invoice_first_name",
+    "invoice_last_name",
+    "invoice_name_on_account",
+    "invoice_phone",
+    "invoice_postal_code",
+    "invoice_region",
+    "invoice_street_1",
+    "invoice_street_2",
+    "net_terms",
+    "number",
+    "origin",
+    "paid",
+    "po_number",
+    "previous_invoice_id",
+    "refundable_amount",
+    "state",
+    "subtotal",
+    "tax",
+    "tax_rate",
+    "tax_region",
+    "tax_type",
+    "terms_and_conditions",
+    "total",
+    "type",
+    "updated_at",
+    "vat_reverse_charge_notes",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.invoice_history.mapped_target_fields]
+
+[mappings.invoice_history.unused_source_fields]
+invoices = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "account",
+    "account.bill_to",
+    "account.code",
+    "account.company",
+    "account.dunning_campaign_id",
+    "account.email",
+    "account.first_name",
+    "account.id",
+    "account.last_name",
+    "account.object",
+    "account.parent_account_id",
+    "address",
+    "address.city",
+    "address.company",
+    "address.country",
+    "address.first_name",
+    "address.last_name",
+    "address.name_on_account",
+    "address.phone",
+    "address.postal_code",
+    "address.region",
+    "address.street1",
+    "address.street2",
+    "balance",
+    "billing_info_id",
+    "business_entity_id",
+    "closed_at",
+    "collection_method",
+    "created_at",
+    "credit_payments",
+    "currency",
+    "customer_notes",
+    "discount",
+    "due_at",
+    "dunning_campaign_id",
+    "dunning_events_sent",
+    "final_dunning_event",
+    "has_more_line_items",
+    "id",
+    "line_items",
+    "net_terms",
+    "number",
+    "object",
+    "origin",
+    "paid",
+    "po_number",
+    "previous_invoice_id",
+    "refundable_amount",
+    "shipping_address",
+    "shipping_address.id",
+    "state",
+    "subscription_ids",
+    "subtotal",
+    "tax",
+    "tax_info",
+    "tax_info.rate",
+    "tax_info.region",
+    "tax_info.tax_details",
+    "tax_info.type",
+    "terms_and_conditions",
+    "total",
+    "transactions",
+    "type",
+    "updated_at",
+    "used_tax_service",
+    "uuid",
+    "vat_number",
+    "vat_reverse_charge_notes",
+]
+
+[mappings.invoice_subscription_history]
+source_file = "src/transforms/recurly/transforms/invoice_subscription_history.yml"
+source_file_hash = "3ec584569fb477efcb88802032153870f8f2c9c854dd2453614cc1ca9e498bd4"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "invoice_id",
+    "invoice_updated_at",
+    "subscription_id",
+]
+
+[mappings.invoice_subscription_history.mapped_target_fields]
+
+[mappings.invoice_subscription_history.unused_source_fields]
+
+[mappings.invoice_subscription_history.omitted_target_fields]
+
+[mappings.invoice_subscription_history.erroneous_source_table_columns]
+
+[mappings.line_item_history]
+source_file = "src/transforms/recurly/transforms/line_item_history.yml"
+source_file_hash = "35c52d36055431c840fa99bd9ccb1c260e96bd8f666999bb974a42948ef2ae14"
+source_stream = "line_items"
+unmapped_target_fields = [
+    "origin",
+    "original_line_item_invoice_id",
+    "plan_code",
+    "plan_id",
+    "previous_line_item_id",
+    "product_code",
+    "proration_rate",
+    "quantity",
+    "refund",
+    "refunded_quantity",
+    "start_date",
+    "state",
+    "subscription_id",
+    "subtotal",
+    "tax",
+    "tax_code",
+    "tax_exempt",
+    "tax_rate",
+    "tax_region",
+    "tax_type",
+    "taxable",
+    "type",
+    "unit_amount",
+    "uuid",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.line_item_history.mapped_target_fields]
+id = "line_items.id"
+updated_at = "line_items.updated_at"
+account_id = "line_items.account.id"
+accounting_code = "line_items.accounting_code"
+add_on_code = "line_items.add_on_code"
+add_on_id = "line_items.add_on_id"
+amount = "line_items.amount"
+created_at = "line_items.created_at"
+credit_applied = "line_items.credit_applied"
+credit_reason_code = "line_items.credit_reason_code"
+currency = "line_items.currency"
+description = "line_items.description"
+discount = "line_items.discount"
+end_date = "line_items.end_date"
+invoice_id = "line_items.invoice_id"
+invoice_number = "line_items.invoice_number"
+legacy_category = "line_items.legacy_category"
+
+[mappings.line_item_history.unused_source_fields]
+line_items = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "account",
+    "account.bill_to",
+    "account.code",
+    "account.company",
+    "account.dunning_campaign_id",
+    "account.email",
+    "account.first_name",
+    "account.last_name",
+    "account.object",
+    "account.parent_account_id",
+    "bill_for_account_id",
+    "custom_fields",
+    "external_sku",
+    "item_code",
+    "item_id",
+    "object",
+    "origin",
+    "original_line_item_invoice_id",
+    "plan_code",
+    "plan_id",
+    "previous_line_item_id",
+    "product_code",
+    "proration_rate",
+    "quantity",
+    "refund",
+    "refunded_quantity",
+    "revenue_schedule_type",
+    "shipping_address",
+    "shipping_address.id",
+    "start_date",
+    "state",
+    "subscription_id",
+    "subtotal",
+    "tax",
+    "tax_code",
+    "tax_exempt",
+    "tax_info",
+    "tax_info.rate",
+    "tax_info.region",
+    "tax_info.tax_details",
+    "tax_info.type",
+    "taxable",
+    "type",
+    "unit_amount",
+    "unit_amount_decimal",
+    "uuid",
+]
+
+[mappings.plan_currency_history]
+source_file = "src/transforms/recurly/transforms/plan_currency_history.yml"
+source_file_hash = "0d417717c7a9c101f766a9ee1c63f67f36e2092f9e2bc5d3fe67626646b0496a"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "currency",
+    "plan_id",
+    "plan_updated_at",
+    "setup_fees",
+    "unit_amount",
+]
+
+[mappings.plan_currency_history.mapped_target_fields]
+
+[mappings.plan_currency_history.unused_source_fields]
+
+[mappings.plan_currency_history.omitted_target_fields]
+
+[mappings.plan_currency_history.erroneous_source_table_columns]
+
+[mappings.plan_history]
+source_file = "src/transforms/recurly/transforms/plan_history.yml"
+source_file_hash = "bf3833bf95bc5323c255c5809466c820cb9476ca4630bacbc38e9f4d2d78d3db"
+source_stream = "plans"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.plan_history.mapped_target_fields]
+id = "plans.id"
+updated_at = "plans.updated_at"
+accounting_code = "plans.accounting_code"
+auto_renew = "plans.auto_renew"
+code = "plans.code"
+created_at = "plans.created_at"
+deleted_at = "plans.deleted_at"
+description = "plans.description"
+hosted_pages_bypass_confirmation = "plans.hosted_pages.bypass_confirmation"
+hosted_pages_cancel_url = "plans.hosted_pages.cancel_url"
+hosted_pages_display_quantity = "plans.hosted_pages.display_quantity"
+hosted_pages_success_url = "plans.hosted_pages.success_url"
+interval_length = "plans.interval_length"
+interval_unit = "plans.interval_unit"
+name = "plans.name"
+setup_fee_accounting_code = "plans.setup_fee_accounting_code"
+state = "plans.state"
+tax_code = "plans.tax_code"
+tax_exempt = "plans.tax_exempt"
+total_billing_cycles = "plans.total_billing_cycles"
+trial_length = "plans.trial_length"
+trial_unit = "plans.trial_unit"
+
+[mappings.plan_history.unused_source_fields]
+plans = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "allow_any_item_on_subscriptions",
+    "avalara_service_type",
+    "avalara_transaction_type",
+    "currencies",
+    "custom_fields",
+    "dunning_campaign_id",
+    "hosted_pages",
+    "object",
+    "pricing_model",
+    "ramp_intervals",
+    "revenue_schedule_type",
+    "setup_fee_revenue_schedule_type",
+    "trial_requires_billing_info",
+]
+
+[mappings.subscription_add_on_history]
+source_file = "src/transforms/recurly/transforms/subscription_add_on_history.yml"
+source_file_hash = "47aa104d1595296b2b4db15becc636eebaef924ae11e5386c3f50c4f61dc222f"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "created_at",
+    "expired_at",
+    "id",
+    "object",
+    "plan_add_on_id",
+    "quantity",
+    "subscription_id",
+    "unit_amount",
+    "updated_at",
+]
+
+[mappings.subscription_add_on_history.mapped_target_fields]
+
+[mappings.subscription_add_on_history.unused_source_fields]
+
+[mappings.subscription_add_on_history.omitted_target_fields]
+
+[mappings.subscription_add_on_history.erroneous_source_table_columns]
+
+[mappings.subscription_change_history]
+source_file = "src/transforms/recurly/transforms/subscription_change_history.yml"
+source_file_hash = "35e6caadd7293a37c2f40aed7e48244abf5a066b51463786b32ff6310c24aa4e"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "activate_at",
+    "activated",
+    "created_at",
+    "deleted_at",
+    "id",
+    "object",
+    "plan_id",
+    "quantity",
+    "subscription_id",
+    "unit_amount",
+    "updated_at",
+]
+
+[mappings.subscription_change_history.mapped_target_fields]
+
+[mappings.subscription_change_history.unused_source_fields]
+
+[mappings.subscription_change_history.omitted_target_fields]
+
+[mappings.subscription_change_history.erroneous_source_table_columns]
+
+[mappings.subscription_history]
+source_file = "src/transforms/recurly/transforms/subscription_history.yml"
+source_file_hash = "ddab4671144bfdfcd824ae82e360fbcc5f8bf80b32e6430f5df3088d6c900e81"
+source_stream = "subscriptions"
+unmapped_target_fields = [
+    "customer_notes",
+    "expiration_reason",
+    "expires_at",
+    "net_terms",
+    "object",
+    "paused_at",
+    "plan_id",
+    "po_number",
+    "quantity",
+    "remaining_billing_cycles",
+    "remaining_pause_cycles",
+    "renewal_billing_cycles",
+    "shipping_address_id",
+    "state",
+    "subtotal",
+    "terms_and_conditions",
+    "total_billing_cycles",
+    "trial_ends_at",
+    "trial_started_at",
+    "unit_amount",
+    "uuid",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.subscription_history.mapped_target_fields]
+id = "subscriptions.id"
+updated_at = "subscriptions.updated_at"
+account_id = "subscriptions.account.id"
+activated_at = "subscriptions.activated_at"
+add_ons_total = "subscriptions.add_ons_total"
+auto_renew = "subscriptions.auto_renew"
+bank_account_authorized_at = "subscriptions.bank_account_authorized_at"
+canceled_at = "subscriptions.canceled_at"
+collection_method = "subscriptions.collection_method"
+created_at = "subscriptions.created_at"
+currency = "subscriptions.currency"
+current_period_ends_at = "subscriptions.current_period_ends_at"
+current_period_started_at = "subscriptions.current_period_started_at"
+current_term_ends_at = "subscriptions.current_term_ends_at"
+current_term_started_at = "subscriptions.current_term_started_at"
+
+[mappings.subscription_history.unused_source_fields]
+subscriptions = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "account",
+    "account.bill_to",
+    "account.code",
+    "account.company",
+    "account.dunning_campaign_id",
+    "account.email",
+    "account.first_name",
+    "account.last_name",
+    "account.object",
+    "account.parent_account_id",
+    "action_result",
+    "active_invoice_id",
+    "add_ons",
+    "billing_info_id",
+    "converted_at",
+    "coupon_redemptions",
+    "coupon_redemptions.coupon",
+    "coupon_redemptions.coupon.code",
+    "coupon_redemptions.coupon.coupon_type",
+    "coupon_redemptions.coupon.discount",
+    "coupon_redemptions.coupon.discount.currencies",
+    "coupon_redemptions.coupon.discount.percent",
+    "coupon_redemptions.coupon.discount.trial",
+    "coupon_redemptions.coupon.discount.trial.length",
+    "coupon_redemptions.coupon.discount.trial.unit",
+    "coupon_redemptions.coupon.discount.type",
+    "coupon_redemptions.coupon.expired_at",
+    "coupon_redemptions.coupon.id",
+    "coupon_redemptions.coupon.name",
+    "coupon_redemptions.coupon.object",
+    "coupon_redemptions.coupon.state",
+    "coupon_redemptions.created_at",
+    "coupon_redemptions.discounted",
+    "coupon_redemptions.id",
+    "coupon_redemptions.object",
+    "coupon_redemptions.state",
+    "custom_fields",
+    "customer_notes",
+    "expiration_reason",
+    "expires_at",
+    "gateway_code",
+    "net_terms",
+    "net_terms_type",
+    "object",
+    "paused_at",
+    "pending_change",
+    "pending_change.activate_at",
+    "pending_change.activated",
+    "pending_change.created_at",
+    "pending_change.deleted_at",
+    "pending_change.id",
+    "pending_change.subscription_id",
+    "pending_change.updated_at",
+    "plan",
+    "plan.code",
+    "plan.id",
+    "plan.name",
+    "plan.object",
+    "po_number",
+    "quantity",
+    "ramp_intervals",
+    "remaining_billing_cycles",
+    "remaining_pause_cycles",
+    "renewal_billing_cycles",
+    "revenue_schedule_type",
+    "shipping",
+    "shipping.address",
+    "shipping.address.account_id",
+    "shipping.address.city",
+    "shipping.address.company",
+    "shipping.address.country",
+    "shipping.address.created_at",
+    "shipping.address.email",
+    "shipping.address.first_name",
+    "shipping.address.geo_code",
+    "shipping.address.id",
+    "shipping.address.last_name",
+    "shipping.address.nickname",
+    "shipping.address.object",
+    "shipping.address.phone",
+    "shipping.address.postal_code",
+    "shipping.address.region",
+    "shipping.address.street1",
+    "shipping.address.street2",
+    "shipping.address.updated_at",
+    "shipping.address.vat_number",
+    "shipping.amount",
+    "shipping.method",
+    "shipping.method.code",
+    "shipping.method.id",
+    "shipping.method.name",
+    "shipping.method.object",
+    "shipping.object",
+    "started_with_gift",
+    "state",
+    "subtotal",
+    "tax",
+    "tax_inclusive",
+    "tax_info",
+    "tax_info.rate",
+    "tax_info.region",
+    "tax_info.tax_details",
+    "tax_info.type",
+    "terms_and_conditions",
+    "total",
+    "total_billing_cycles",
+    "trial_ends_at",
+    "trial_started_at",
+    "unit_amount",
+    "uuid",
+]
+
+[mappings.transaction]
+source_file = "src/transforms/recurly/transforms/transaction.yml"
+source_file_hash = "5e0af8f85302711f952fa065bf846a6d51b7a46fb04ee688b7757e538f5a9bce"
+source_stream = "transactions"
+unmapped_target_fields = [
+    "account_id",
+    "avs_check",
+    "collected_at",
+    "collection_method",
+    "created_at",
+    "currency",
+    "customer_message",
+    "customer_message_locale",
+    "cvv_check",
+    "gateway_approval_code",
+    "gateway_message",
+    "gateway_reference",
+    "gateway_response_code",
+    "gateway_response_time",
+    "gateway_response_values",
+    "invoice_id",
+    "ip_address_country",
+    "ip_address_v_4",
+    "origin",
+    "original_transaction_id",
+    "payment_gateway_id",
+    "payment_gateway_name",
+    "payment_gateway_type",
+    "payment_method_card_type",
+    "payment_method_exp_month",
+    "payment_method_exp_year",
+    "payment_method_first_six",
+    "payment_method_last_four",
+    "payment_method_object",
+    "refunded",
+    "status",
+    "status_code",
+    "status_message",
+    "success",
+    "type",
+    "uuid",
+    "voided_at",
+    "voided_by_invoice_id",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.transaction.mapped_target_fields]
+id = "transactions.account.id"
+amount = "transactions.amount"
+billing_city = "transactions.billing_address.city"
+billing_country = "transactions.billing_address.country"
+billing_first_name = "transactions.billing_address.first_name"
+billing_last_name = "transactions.billing_address.last_name"
+billing_phone = "transactions.billing_address.phone"
+billing_postal_code = "transactions.billing_address.postal_code"
+billing_region = "transactions.billing_address.region"
+billing_street_1 = "transactions.billing_address.street1"
+billing_street_2 = "transactions.billing_address.street2"
+
+[mappings.transaction.unused_source_fields]
+transactions = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "account",
+    "account.bill_to",
+    "account.code",
+    "account.company",
+    "account.dunning_campaign_id",
+    "account.email",
+    "account.first_name",
+    "account.last_name",
+    "account.object",
+    "account.parent_account_id",
+    "action_result",
+    "avs_check",
+    "backup_payment_method_used",
+    "billing_address",
+    "billing_address.geo_code",
+    "collected_at",
+    "collection_method",
+    "created_at",
+    "currency",
+    "customer_message",
+    "customer_message_locale",
+    "cvv_check",
+    "fraud_info",
+    "fraud_info.decision",
+    "fraud_info.object",
+    "fraud_info.reference",
+    "fraud_info.risk_rules_triggered",
+    "fraud_info.score",
+    "gateway_approval_code",
+    "gateway_message",
+    "gateway_reference",
+    "gateway_response_code",
+    "gateway_response_time",
+    "gateway_response_values",
+    "id",
+    "invoice",
+    "invoice.business_entity_id",
+    "invoice.id",
+    "invoice.number",
+    "invoice.state",
+    "invoice.type",
+    "ip_address_country",
+    "ip_address_v4",
+    "object",
+    "origin",
+    "original_transaction_id",
+    "payment_gateway",
+    "payment_gateway.id",
+    "payment_gateway.name",
+    "payment_gateway.object",
+    "payment_gateway.type",
+    "payment_method",
+    "payment_method.account_type",
+    "payment_method.billing_agreement_id",
+    "payment_method.card_type",
+    "payment_method.cc_bin_country",
+    "payment_method.exp_month",
+    "payment_method.exp_year",
+    "payment_method.first_six",
+    "payment_method.gateway_code",
+    "payment_method.gateway_token",
+    "payment_method.last_four",
+    "payment_method.last_two",
+    "payment_method.name_on_account",
+    "payment_method.object",
+    "payment_method.routing_number",
+    "payment_method.routing_number_bank",
+    "payment_method.username",
+    "refunded",
+    "status",
+    "status_code",
+    "status_message",
+    "subscription_ids",
+    "success",
+    "type",
+    "updated_at",
+    "uuid",
+    "vat_number",
+    "voided_at",
+    "voided_by_invoice",
+    "voided_by_invoice.business_entity_id",
+    "voided_by_invoice.id",
+    "voided_by_invoice.number",
+    "voided_by_invoice.object",
+    "voided_by_invoice.state",
+    "voided_by_invoice.type",
+]
+
+[mappings.transaction_subscription]
+source_file = "src/transforms/recurly/transforms/transaction_subscription.yml"
+source_file_hash = "eb9eaad9de054dc5131e91a931cf3c1d6813ea39d7faf5e9e63b9155041268a0"
+source_stream = "transactions"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.transaction_subscription.mapped_target_fields]
+transaction_id = "transactions.id"
+subscription_id = "transactions.subscription_ids"
+
+[mappings.transaction_subscription.unused_source_fields]
+transactions = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "account",
+    "account.bill_to",
+    "account.code",
+    "account.company",
+    "account.dunning_campaign_id",
+    "account.email",
+    "account.first_name",
+    "account.id",
+    "account.last_name",
+    "account.object",
+    "account.parent_account_id",
+    "action_result",
+    "amount",
+    "avs_check",
+    "backup_payment_method_used",
+    "billing_address",
+    "billing_address.city",
+    "billing_address.country",
+    "billing_address.first_name",
+    "billing_address.geo_code",
+    "billing_address.last_name",
+    "billing_address.phone",
+    "billing_address.postal_code",
+    "billing_address.region",
+    "billing_address.street1",
+    "billing_address.street2",
+    "collected_at",
+    "collection_method",
+    "created_at",
+    "currency",
+    "customer_message",
+    "customer_message_locale",
+    "cvv_check",
+    "fraud_info",
+    "fraud_info.decision",
+    "fraud_info.object",
+    "fraud_info.reference",
+    "fraud_info.risk_rules_triggered",
+    "fraud_info.score",
+    "gateway_approval_code",
+    "gateway_message",
+    "gateway_reference",
+    "gateway_response_code",
+    "gateway_response_time",
+    "gateway_response_values",
+    "invoice",
+    "invoice.business_entity_id",
+    "invoice.id",
+    "invoice.number",
+    "invoice.state",
+    "invoice.type",
+    "ip_address_country",
+    "ip_address_v4",
+    "object",
+    "origin",
+    "original_transaction_id",
+    "payment_gateway",
+    "payment_gateway.id",
+    "payment_gateway.name",
+    "payment_gateway.object",
+    "payment_gateway.type",
+    "payment_method",
+    "payment_method.account_type",
+    "payment_method.billing_agreement_id",
+    "payment_method.card_type",
+    "payment_method.cc_bin_country",
+    "payment_method.exp_month",
+    "payment_method.exp_year",
+    "payment_method.first_six",
+    "payment_method.gateway_code",
+    "payment_method.gateway_token",
+    "payment_method.last_four",
+    "payment_method.last_two",
+    "payment_method.name_on_account",
+    "payment_method.object",
+    "payment_method.routing_number",
+    "payment_method.routing_number_bank",
+    "payment_method.username",
+    "refunded",
+    "status",
+    "status_code",
+    "status_message",
+    "success",
+    "type",
+    "updated_at",
+    "uuid",
+    "vat_number",
+    "voided_at",
+    "voided_by_invoice",
+    "voided_by_invoice.business_entity_id",
+    "voided_by_invoice.id",
+    "voided_by_invoice.number",
+    "voided_by_invoice.object",
+    "voided_by_invoice.state",
+    "voided_by_invoice.type",
+]

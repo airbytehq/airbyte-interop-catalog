@@ -1,0 +1,87 @@
+domain: recurly.airbyte-interop
+transforms:
+  - name: coupon_discount
+    from:
+      - coupons: recurly.coupons
+    fields:
+      coupon_id:
+        expression: coupons.id
+        description: Unique identifier for the coupon created.
+      fivetran_id:
+        expression: coupons.id
+        description: Combined unique surrogate key for the model.
+      amount:
+        expression: coupons.discount
+        description: Fixed amount discount being applied, if applicable. Percentage
+          would be null if amount exists.
+      currency:
+        expression: coupons.discount.currencies
+        description: 3-letter ISO 4217 currency code (USD for US Dollar).
+      percentage:
+        expression: coupons.discount.percent
+        description: Percentage discount being applied, if applicable. Amount would
+          be null if percentage exists.
+      trial_length:
+        expression: coupons.discount.trial.length
+        description: Period of time that coupon will discount eligible purchases by
+          customer.
+      trial_unit:
+        expression: coupons.discount.trial.unit
+        description: Unit of time associated with trial time ('day', 'week', 'month')
+      type:
+        expression: coupons.discount.type
+        description: Delineates between which type of discount is being applied ('fixed'
+          for amount discount, 'percent' for percentage discount)
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: coupons
+    target_table_name: coupon_discount
+    table_match_score: 0.82
+    completion_score: 0.93
+    explanation: The table matching for coupon discounts appears to be highly accurate
+      with both source and target covering similar aspects of discount details, though
+      lacking some fields in either implementation. Hence a slightly lower completion
+      score.
+    field_mapping_evals:
+      - name: coupon_id
+        expression: coupons.id
+        score: 1.0
+        explanation: Exact match for identifiers in both schemas, ensuring a unique
+          reference.
+      - name: fivetran_id
+        expression: coupons.id
+        score: 0.95
+        explanation: Almost exact match, minor discrepancies may be due to naming
+          conventions.
+      - name: amount
+        expression: coupons.discount
+        score: 0.9
+        explanation: Close match with slight possibility due to different formatting
+          or data presentation in source vs. target.
+      - name: currency
+        expression: coupons.discount.currencies
+        score: 0.9
+        explanation: Correct identification of currency, with minor uncertainty in
+          structural representation between source and target.
+      - name: percentage
+        expression: coupons.discount.percent
+        score: 0.9
+        explanation: Direct match for data type and purpose, but small variances in
+          implementation or detail might exist.
+      - name: trial_length
+        expression: coupons.discount.trial.length
+        score: 0.87
+        explanation: Overall good match, but could vary slightly in terms of exact
+          value or unit interpretation in different contexts.
+      - name: trial_unit
+        expression: coupons.discount.trial.unit
+        score: 0.87
+        explanation: Correct category match, some differences may arise on how units
+          are possibly categorized or abbreviated.
+      - name: type
+        expression: coupons.discount.type
+        score: 0.85
+        explanation: Correct type matching although there might be minor distinctions
+          in how types are defined or utilized across schemas.

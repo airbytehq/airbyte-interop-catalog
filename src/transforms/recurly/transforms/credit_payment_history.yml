@@ -1,0 +1,120 @@
+domain: recurly.airbyte-interop
+transforms:
+  - name: credit_payment_history
+    from:
+      - credit_payments: recurly.credit_payments
+    fields:
+      id:
+        expression: credit_payments.id
+        description: Unique identifier for the credit payment.
+      account_id:
+        expression: credit_payments.account.id
+        description: The id of the account the credit payment is associated with.
+      action:
+        expression: credit_payments.action
+        description: "The action that resulted in the credit payment being created.
+          Enum: \"payment\", \"gift_card\", \"write_off\", \"reduction\", \"refund\"\
+          \ \n"
+      amount:
+        expression: credit_payments.amount
+        description: The amount of the credit payment, which will always be positive.
+      applied_to_invoice_id:
+        expression: credit_payments.applied_to_invoice.id
+        description: "The invoice the credit payment was applied to.  If action is
+          payment, gift_card, or write_off, this is a charge invoice.  If action is
+          reduction or refund, this is a credit invoice.\n"
+      created_at:
+        expression: credit_payments.created_at
+        description: The date and time the credit payment was created.
+      currency:
+        expression: credit_payments.currency
+        description: 3-letter ISO 4217 currency code (USD for US Dollar).
+      original_credit_payment_id:
+        expression: credit_payments.original_credit_payment_id
+        description: "The unique id of the credit payment the refund action credit
+          payment is refunding.  Will only populate if the action on the row is \"\
+          refund\".\n"
+      original_invoice_id:
+        expression: credit_payments.original_invoice.id
+        description: The invoice of the credit invoice the credit payment came from.
+      refund_transaction_id:
+        expression: credit_payments.refund_transaction.id
+        description: "The unique id of the new refund transaction the refund action
+          credit payment is transferring value to.  Will only populate if the action
+          on the row is \"refund\".\n"
+      updated_at:
+        expression: credit_payments.updated_at
+        description: Time credit payment last updated.
+      uuid:
+        expression: credit_payments.uuid
+        description: Unique id of credit payment.
+      voided_at:
+        expression: credit_payments.voided_at
+        description: Time when a credit payment is voided.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: credit_payments
+    target_table_name: credit_payment_history
+    table_match_score: 0.75
+    completion_score: 0.9
+    explanation: The table match score is relatively high as the source and target
+      tables are likely describing related financial transactions related to credit
+      payments, though not all fields are populated, hence the lower completion score.
+      The field mappings are well-matched, accounting for differences in field naming
+      conventions and hierarchy.
+    field_mapping_evals:
+      - name: id
+        expression: credit_payments.id
+        score: 0.95
+        explanation: Direct match found.
+      - name: account_id
+        expression: credit_payments.account.id
+        score: 0.9
+        explanation: Direct match considering the same source and target IDs.
+      - name: action
+        expression: credit_payments.action
+        score: 0.85
+        explanation: Direct match with correct enumeration handling.
+      - name: amount
+        expression: credit_payments.amount
+        score: 0.95
+        explanation: Direct match for the field representing a numeric value.
+      - name: applied_to_invoice_id
+        expression: credit_payments.applied_to_invoice.id
+        score: 0.9
+        explanation: Direct match for ID field, appropriate consideration given to
+          different types of invoices.
+      - name: created_at
+        expression: credit_payments.created_at
+        score: 0.95
+        explanation: Direct match for date/time field.
+      - name: currency
+        expression: credit_payments.currency
+        score: 0.95
+        explanation: Direct match for ISO currency code.
+      - name: original_credit_payment_id
+        expression: credit_payments.original_credit_payment_id
+        score: 0.85
+        explanation: Direct match but conditionally populated based on action type.
+      - name: original_invoice_id
+        expression: credit_payments.original_invoice.id
+        score: 0.85
+        explanation: Good match, slightly nuanced based on invoice types.
+      - name: refund_transaction_id
+        expression: credit_payments.refund_transaction.id
+        score: 0.75
+        explanation: Conditional field based on specific action, reasonably matched.
+      - name: updated_at
+        expression: credit_payments.updated_at
+        score: 0.95
+        explanation: Direct match for timestamp update.
+      - name: uuid
+        expression: credit_payments.uuid
+        score: 0.95
+        explanation: Direct match for universal identifier.
+      - name: voided_at
+        expression: credit_payments.voided_at
+        score: 0.9
+        explanation: Direct match, considering the specific context of voiding dates.

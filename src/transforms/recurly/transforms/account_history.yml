@@ -1,0 +1,236 @@
+domain: recurly.airbyte-interop
+transforms:
+  - name: account_history
+    from:
+      - accounts: recurly.accounts
+    fields:
+      id:
+        expression: accounts.id
+        description: Uniquely identifies your customers in Recurly. No two customers
+          can share the same account id. Part of the PK
+      updated_at:
+        expression: accounts.updated_at
+        description: When the account was last changed.
+      account_city:
+        expression: accounts.address.city
+        description: The city the account was registered in.
+      account_country:
+        expression: accounts.address.country
+        description: The country the account was registered in.
+      account_first_name:
+        expression: accounts.billing_info.first_name
+        description: The first name for who registered the account.
+      account_last_name:
+        expression: accounts.billing_info.last_name
+        description: The last name for who registered the account.
+      account_phone:
+        expression: accounts.billing_info.address.phone
+        description: The contact phone number registered on the account.
+      account_postal_code:
+        expression: accounts.billing_info.address.postal_code
+        description: The contact postal code registered on the account.
+      account_region:
+        expression: accounts.billing_info.address.region
+        description: The region registered with the account, like state in the US
+          or province in Canada.
+      account_street_1:
+        expression: accounts.billing_info.address.street1
+        description: The first street line registered with the account.
+      account_street_2:
+        expression: accounts.billing_info.address.street2
+        description: The second street line registered with the account.
+      bill_to:
+        expression: MISSING
+        description: "An enumerable describing the billing behavior of the account,\
+          \  specifically whether the account is self-paying or will rely on the parent
+          account to pay.\n"
+      cc_emails:
+        expression: MISSING
+        description: "Additional email address that should receive account correspondence.\
+          \  These should be separated only by commas.  These CC emails will receive
+          all emails that the email field also receives.         \n"
+      code:
+        expression: MISSING
+        description: "The unique identifier of the account. This cannot be changed
+          once the account is created. Provided during account creation.\n"
+      company:
+        expression: MISSING
+        description: The company related with the account.
+      created_at:
+        expression: MISSING
+        description: When the account was created.
+      deleted_at:
+        expression: MISSING
+        description: If present, when the account was last marked inactive.
+      email:
+        expression: MISSING
+        description: "The email address used for communicating with this customer.\
+          \  The customer will also use this email address to log into your hosted
+          account management pages.  This value does not need to be unique.\n"
+      exemption_certificate:
+        expression: MISSING
+        description: "Exemption certificate to prove that the business is tax exempt.\n"
+      first_name:
+        expression: MISSING
+        description: The first name of the customer related to the account.
+      hosted_login_token:
+        expression: MISSING
+        description: Custom URL on your site that logs the user directly into their
+          account
+      last_name:
+        expression: MISSING
+        description: The last name of the customer related to the account.
+      preferred_locale:
+        expression: MISSING
+        description: The language code and country code for this account, like en-US.
+      state:
+        expression: MISSING
+        description: Accounts can be either active or inactive.
+      tax_exempt:
+        expression: MISSING
+        description: The tax status of the account. true exempts tax on the account,
+          false applies tax on the account.
+      username:
+        expression: MISSING
+        description: A secondary value for the account.
+      vat_number:
+        expression: MISSING
+        description: The VAT number of the account (to avoid having the VAT applied).
+          This is only used for manually collected invoices.
+annotations:
+  approved: false
+  missing_fields:
+    - bill_to
+    - cc_emails
+    - code
+    - company
+    - created_at
+    - deleted_at
+    - email
+    - exemption_certificate
+    - first_name
+    - hosted_login_token
+    - last_name
+    - preferred_locale
+    - state
+    - tax_exempt
+    - username
+    - vat_number
+  evaluation:
+    source_stream_name: accounts
+    target_table_name: account_history
+    table_match_score: 0.75
+    completion_score: 0.4
+    explanation: The table match score indicates a reasonable level of confidence
+      that the source and target tables are describing the same subject matter, but
+      the low completion score is due to many fields set to 'MISSING' indicating incomplete
+      field mappings.
+    field_mapping_evals:
+      - name: id
+        expression: accounts.id
+        score: 1.0
+        explanation: Direct mapping available.
+      - name: updated_at
+        expression: accounts.updated_at
+        score: 1.0
+        explanation: Direct mapping available.
+      - name: account_city
+        expression: accounts.address.city
+        score: 1.0
+        explanation: Direct mapping available.
+      - name: account_country
+        expression: accounts.address.country
+        score: 1.0
+        explanation: Direct mapping available.
+      - name: account_first_name
+        expression: accounts.billing_info.first_name
+        score: 1.0
+        explanation: Direct mapping available.
+      - name: account_last_name
+        expression: accounts.billing_info.last_name
+        score: 1.0
+        explanation: Direct mapping available.
+      - name: account_phone
+        expression: accounts.billing_info.address.phone
+        score: 1.0
+        explanation: Direct mapping available.
+      - name: account_postal_code
+        expression: accounts.billing_info.address.postal_code
+        score: 1.0
+        explanation: Direct mapping available.
+      - name: account_region
+        expression: accounts.billing_info.address.region
+        score: 1.0
+        explanation: Direct mapping available.
+      - name: account_street_1
+        expression: accounts.billing_info.address.street1
+        score: 1.0
+        explanation: Direct mapping available.
+      - name: account_street_2
+        expression: accounts.billing_info.address.street2
+        score: 1.0
+        explanation: Direct mapping available.
+      - name: bill_to
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: cc_emails
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: code
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: company
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: created_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: deleted_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: email
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: exemption_certificate
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: first_name
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: hosted_login_token
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: last_name
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: preferred_locale
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: state
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: tax_exempt
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: username
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: vat_number
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

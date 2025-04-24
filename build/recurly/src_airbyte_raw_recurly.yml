@@ -1,0 +1,2442 @@
+# This file was auto-generated using the morph cli.
+# Please do not edit manually.
+
+version: 2
+sources:
+  - name: recurly
+    schema: "{{ var('airbyte_recurly_schema', default='recurly_raw') }}"
+    database: "{{ var('airbyte_recurly_database', default='recurly') }}"
+    tables:
+      - name: account_coupon_redemptions
+        columns:
+          - name: account
+            description: The account associated with the coupon redemption
+            data_type: json
+            meta:
+              subcolumns:
+                - name: bill_to
+                  data_type: varchar
+                - name: code
+                  data_type: varchar
+                - name: company
+                  data_type: varchar
+                - name: dunning_campaign_id
+                  data_type: varchar
+                - name: email
+                  data_type: varchar
+                - name: first_name
+                  data_type: varchar
+                - name: id
+                  data_type: varchar
+                - name: last_name
+                  data_type: varchar
+                - name: object
+                  data_type: varchar
+                - name: parent_account_id
+                  data_type: varchar
+          - name: coupon
+            description: The coupon being redeemed
+            data_type: json
+            meta:
+              subcolumns:
+                - name: applies_to_all_items
+                  data_type: boolean
+                - name: applies_to_all_plans
+                  data_type: boolean
+                - name: applies_to_non_plan_charges
+                  data_type: boolean
+                - name: code
+                  data_type: varchar
+                - name: coupon_type
+                  data_type: varchar
+                - name: created_at
+                  data_type: timestamp
+                - name: discount
+                  description: "Details of the discount a coupon applies. Will contain
+                    a `type`\nproperty and one of the following properties: `percent`,
+                    `fixed`, `trial`.\n"
+                  data_type: json
+                  subcolumns:
+                    - name: type
+                      data_type: varchar
+                    - name: currencies
+                      description: This is only present when `type=fixed`.
+                      data_type: array
+                    - name: percent
+                      description: This is only present when `type=percent`.
+                      data_type: integer
+                    - name: trial
+                      description: This is only present when `type=free_trial`.
+                      data_type: json
+                      subcolumns:
+                        - name: length
+                          description: Trial length measured in the units specified
+                            by the sibling `unit` property
+                          data_type: integer
+                        - name: unit
+                          description: Temporal unit of the free trial
+                          data_type: varchar
+                - name: duration
+                  data_type: varchar
+                - name: expired_at
+                  data_type: timestamp
+                - name: free_trial_amount
+                  data_type: float
+                - name: free_trial_unit
+                  data_type: varchar
+                - name: hosted_page_description
+                  data_type: varchar
+                - name: id
+                  data_type: varchar
+                - name: invoice_description
+                  data_type: varchar
+                - name: items
+                  description: "A list of items for which this coupon applies. This
+                    will be\n`null` if `applies_to_all_items=true`.\n"
+                  data_type: array
+                - name: max_redemptions
+                  data_type: float
+                - name: max_redemptions_per_account
+                  data_type: float
+                - name: name
+                  data_type: varchar
+                - name: object
+                  data_type: varchar
+                - name: plans
+                  description: A list of plans for which this coupon applies. This
+                    will be `null` if `applies_to_all_plans=true`.
+                  data_type: array
+                - name: redeem_by
+                  data_type: varchar
+                - name: redemption_resource
+                  data_type: varchar
+                - name: state
+                  data_type: varchar
+                - name: temporal_amount
+                  data_type: float
+                - name: temporal_unit
+                  data_type: varchar
+                - name: unique_code_template
+                  data_type: varchar
+                - name: unique_coupon_code
+                  description: A unique coupon code for a bulk coupon.
+                  data_type: json
+                  subcolumns:
+                    - name: bulk_coupon_code
+                      description: The Coupon code of the parent Bulk Coupon
+                      data_type: varchar
+                    - name: bulk_coupon_id
+                      description: The Coupon ID of the parent Bulk Coupon
+                      data_type: varchar
+                    - name: code
+                      description: The code the customer enters to redeem the coupon.
+                      data_type: varchar
+                    - name: created_at
+                      data_type: timestamp
+                    - name: expired_at
+                      description: The date and time the coupon was expired early
+                        or reached its `max_redemptions`.
+                      data_type: timestamp
+                    - name: id
+                      data_type: varchar
+                    - name: object
+                      data_type: varchar
+                    - name: redeemed_at
+                      description: The date and time the unique coupon code was redeemed.
+                      data_type: timestamp
+                    - name: state
+                      description: Indicates if the unique coupon code is redeemable
+                        or why not.
+                      data_type: varchar
+                    - name: updated_at
+                      data_type: timestamp
+                - name: unique_coupon_codes_count
+                  data_type: float
+                - name: updated_at
+                  data_type: timestamp
+          - name: created_at
+            description: The date and time when the redemption was created
+            data_type: timestamp
+          - name: currency
+            description: The currency in which the redemption was made
+            data_type: varchar
+          - name: discounted
+            description: The amount discounted by the coupon
+            data_type: float
+          - name: id
+            description: The unique identifier for the redemption
+            data_type: varchar
+          - name: object
+            description: The type of object this represents
+            data_type: varchar
+          - name: removed_at
+            description: The date and time when the redemption was removed (if applicable)
+            data_type: timestamp
+          - name: state
+            description: The current state of the redemption
+            data_type: varchar
+          - name: subscription_id
+            description: The subscription associated with the redemption
+            data_type: varchar
+          - name: updated_at
+            description: The date and time when the redemption was last updated
+            data_type: timestamp
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: account_notes
+        columns:
+          - name: account_id
+            description: The unique identifier of the account associated with this
+              note.
+            data_type: varchar
+          - name: created_at
+            description: The date and time when the note was created.
+            data_type: timestamp
+          - name: id
+            description: The unique identifier for this note.
+            data_type: varchar
+          - name: message
+            description: The content or message of the note.
+            data_type: varchar
+          - name: object
+            description: Represents the object type, in this case, 'note'.
+            data_type: varchar
+          - name: user
+            description: The user who created the note.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: created_at
+                  data_type: timestamp
+                - name: deleted_at
+                  data_type: timestamp
+                - name: email
+                  data_type: varchar
+                - name: first_name
+                  data_type: varchar
+                - name: id
+                  data_type: varchar
+                - name: last_name
+                  data_type: varchar
+                - name: object
+                  data_type: varchar
+                - name: time_zone
+                  data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: accounts
+        columns:
+          - name: address
+            description: The address details of the account
+            data_type: json
+            meta:
+              subcolumns:
+                - name: city
+                  description: City of the address
+                  data_type: varchar
+                - name: country
+                  description: Country, 2-letter ISO 3166-1 alpha-2 code.
+                  data_type: varchar
+                - name: geo_code
+                  description: Geographical coordinates of the address
+                  data_type: varchar
+                - name: phone
+                  description: Phone number associated with the address
+                  data_type: varchar
+                - name: postal_code
+                  description: Zip or postal code.
+                  data_type: varchar
+                - name: region
+                  description: State or province.
+                  data_type: varchar
+                - name: street1
+                  description: First line of the street address
+                  data_type: varchar
+                - name: street2
+                  description: Second line of the street address
+                  data_type: varchar
+          - name: bill_to
+            description: The billing details
+            data_type: varchar
+          - name: billing_info
+            description: Billing information
+            data_type: json
+            meta:
+              subcolumns:
+                - name: account_id
+                  data_type: varchar
+                - name: address
+                  data_type: json
+                  subcolumns:
+                    - name: city
+                      data_type: varchar
+                    - name: country
+                      description: Country, 2-letter ISO 3166-1 alpha-2 code.
+                      data_type: varchar
+                    - name: phone
+                      data_type: varchar
+                    - name: postal_code
+                      description: Zip or postal code.
+                      data_type: varchar
+                    - name: region
+                      description: State or province.
+                      data_type: varchar
+                    - name: street1
+                      data_type: varchar
+                    - name: street2
+                      data_type: varchar
+                - name: backup_payment_method
+                  description: The `backup_payment_method` field is used to indicate
+                    a billing info as a backup on the account that will be tried if
+                    the initial billing info used for an invoice is declined.
+                  data_type: boolean
+                - name: company
+                  data_type: varchar
+                - name: created_at
+                  description: When the billing information was created.
+                  data_type: timestamp
+                - name: first_name
+                  data_type: varchar
+                - name: fraud
+                  description: Most recent fraud result.
+                  data_type: json
+                  subcolumns:
+                    - name: decision
+                      data_type: varchar
+                    - name: risk_rules_triggered
+                      data_type: json
+                    - name: score
+                      data_type: integer
+                - name: id
+                  data_type: varchar
+                - name: last_name
+                  data_type: varchar
+                - name: object
+                  data_type: varchar
+                - name: payment_method
+                  data_type: json
+                  subcolumns:
+                    - name: account_type
+                      description: The bank account type. Only present for ACH payment
+                        methods.
+                      data_type: varchar
+                    - name: billing_agreement_id
+                      description: Billing Agreement identifier. Only present for
+                        Amazon or Paypal payment methods.
+                      data_type: varchar
+                    - name: card_type
+                      description: Visa, MasterCard, American Express, Discover, JCB,
+                        etc.
+                      data_type: varchar
+                    - name: cc_bin_country
+                      description: The 2-letter ISO 3166-1 alpha-2 country code associated
+                        with the credit card BIN, if known by Recurly. Available on
+                        the BillingInfo object only. Available when the BIN country
+                        lookup feature is enabled.
+                      data_type: varchar
+                    - name: exp_month
+                      description: Expiration month.
+                      data_type: integer
+                    - name: exp_year
+                      description: Expiration year.
+                      data_type: integer
+                    - name: first_six
+                      description: Credit card number's first six digits.
+                      data_type: varchar
+                    - name: gateway_code
+                      description: An identifier for a specific payment gateway.
+                      data_type: varchar
+                    - name: gateway_token
+                      description: A token used in place of a credit card in order
+                        to perform transactions.
+                      data_type: varchar
+                    - name: last_four
+                      description: Credit card number's last four digits. Will refer
+                        to bank account if payment method is ACH.
+                      data_type: varchar
+                    - name: last_two
+                      description: The IBAN bank account's last two digits.
+                      data_type: varchar
+                    - name: name_on_account
+                      description: The name associated with the bank account.
+                      data_type: varchar
+                    - name: object
+                      data_type: varchar
+                    - name: routing_number
+                      description: The bank account's routing number. Only present
+                        for ACH payment methods.
+                      data_type: varchar
+                    - name: routing_number_bank
+                      description: The bank name of this routing number.
+                      data_type: varchar
+                - name: primary_payment_method
+                  description: The `primary_payment_method` field is used to indicate
+                    the primary billing info on the account. The first billing info
+                    created on an account will always become primary. This payment
+                    method will be used
+                  data_type: boolean
+                - name: updated_at
+                  description: When the billing information was last changed.
+                  data_type: timestamp
+                - name: updated_by
+                  data_type: json
+                  subcolumns:
+                    - name: country
+                      data_type: varchar
+                    - name: ip
+                      data_type: varchar
+                - name: valid
+                  data_type: boolean
+                - name: vat_number
+                  description: Customer's VAT number (to avoid having the VAT applied).
+                    This is only used for automatically collected invoices.
+                  data_type: varchar
+          - name: cc_emails
+            description: Email addresses for carbon copy (CC)
+            data_type: varchar
+          - name: code
+            description: Unique code assigned to the account
+            data_type: varchar
+          - name: company
+            description: Company associated with the account
+            data_type: varchar
+          - name: created_at
+            description: Date and time when the account was created
+            data_type: timestamp
+          - name: custom_fields
+            description: Custom fields associated with the account
+            data_type: array
+          - name: deleted_at
+            description: Date and time when the account was deleted
+            data_type: timestamp
+          - name: dunning_campaign_id
+            description: Campaign ID for dunning management
+            data_type: varchar
+          - name: email
+            description: Email address of the account holder
+            data_type: varchar
+          - name: exemption_certificate
+            description: Exemption certificate details
+            data_type: varchar
+          - name: external_accounts
+            description: External accounts associated with the account
+            data_type: array
+          - name: first_name
+            description: First name of the account holder
+            data_type: varchar
+          - name: has_active_subscription
+            description: Flag indicating if the account has an active subscription
+            data_type: boolean
+          - name: has_canceled_subscription
+            description: Flag indicating if the account has a canceled subscription
+            data_type: boolean
+          - name: has_future_subscription
+            description: Flag indicating if the account has a future subscription
+            data_type: boolean
+          - name: has_live_subscription
+            description: Flag indicating if the account has a live subscription
+            data_type: boolean
+          - name: has_past_due_invoice
+            description: Flag indicating if the account has a past due invoice
+            data_type: boolean
+          - name: has_paused_subscription
+            description: Flag indicating if the account has a paused subscription
+            data_type: boolean
+          - name: hosted_login_token
+            description: Token for hosted login functionality
+            data_type: varchar
+          - name: id
+            description: Unique identifier of the account
+            data_type: varchar
+          - name: invoice_template_id
+            description: ID of the invoice template used
+            data_type: varchar
+          - name: last_name
+            description: Last name of the account holder
+            data_type: varchar
+          - name: object
+            description: Type of object
+            data_type: varchar
+          - name: override_business_entity_id
+            description: ID for overriding business entity
+            data_type: varchar
+          - name: parent_account_id
+            description: ID of the parent account
+            data_type: varchar
+          - name: preferred_locale
+            description: Preferred language/locale of the account holder
+            data_type: varchar
+          - name: preferred_time_zone
+            description: Preferred time zone of the account holder
+            data_type: varchar
+          - name: shipping_addresses
+            description: Addresses for shipping
+            data_type: array
+          - name: state
+            description: State/province of the account address
+            data_type: varchar
+          - name: tax_exempt
+            description: Flag indicating if the account is tax exempt
+            data_type: boolean
+          - name: updated_at
+            description: Date and time when the account was last updated
+            data_type: timestamp
+          - name: username
+            description: Username of the account holder
+            data_type: varchar
+          - name: vat_number
+            description: VAT (Value Added Tax) number of the account
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: add_ons
+        columns:
+          - name: accounting_code
+            description: Accounting code for invoice line items for this add-on. If
+              no value is provided, it defaults to add-on's code.
+            data_type: varchar
+          - name: add_on_type
+            description: Whether the add-on type is fixed, or usage-based.
+            data_type: varchar
+          - name: avalara_service_type
+            description: Used by Avalara for Communications taxes. The transaction
+              type in combination with the service type describe how the add-on is
+              taxed. Refer to [the 
+              documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types)
+              for more available t/s types.
+            data_type: varchar
+          - name: avalara_transaction_type
+            description: Used by Avalara for Communications taxes. The transaction
+              type in combination with the service type describe how the add-on is
+              taxed. Refer to [the 
+              documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types)
+              for more available t/s types.
+            data_type: varchar
+          - name: code
+            description: The unique identifier for the add-on within its plan.
+            data_type: varchar
+          - name: created_at
+            description: The date and time when the add-on was created.
+            data_type: timestamp
+          - name: currencies
+            description: This is only present when `type=fixed`.
+            data_type: array
+          - name: default_quantity
+            description: Default quantity for the hosted pages.
+            data_type: integer
+          - name: deleted_at
+            description: The date and time when the add-on was deleted, if applicable.
+            data_type: timestamp
+          - name: display_quantity
+            description: Determines if the quantity field is displayed on the hosted
+              pages for the add-on.
+            data_type: boolean
+          - name: id
+            description: The unique identifier for the add-on.
+            data_type: varchar
+          - name: measured_unit_id
+            description: System-generated unique identifier for an measured unit associated
+              with the add-on.
+            data_type: varchar
+          - name: name
+            description: Describes your add-on and will appear in subscribers' invoices.
+            data_type: varchar
+          - name: optional
+            description: Whether the add-on is optional for the customer to include
+              in their purchase on the hosted payment page. If false, the add-on will
+              be included when a subscription is created through the Recurly UI. However,
+              the add-on will not be included when a subscription is created through
+              the API.
+            data_type: boolean
+          - name: plan_id
+            description: The ID of the plan to which the add-on is associated.
+            data_type: varchar
+          - name: revenue_schedule_type
+            description: When this add-on is invoiced, the line item will use this
+              revenue schedule. If `item_code`/`item_id` is part of the request then
+              `revenue_schedule_type` must be absent in the request as the value will
+              be set from the item.
+            data_type: varchar
+          - name: state
+            description: Add-ons can be either active or inactive.
+            data_type: varchar
+          - name: tax_code
+            description: Used by Avalara, Vertex, and Recurly’s EU VAT tax feature.
+              The tax code values are specific to each tax system. If you are using
+              Recurly’s EU VAT feature you can use `unknown`, `physical`, or `digital`.
+            data_type: varchar
+          - name: tier_type
+            description: "The pricing model for the add-on.  For more information,\n
+              [click here](https://docs.recurly.com/docs/billing-models#section-quantity-based).
+              See our\n[Guide](https://developers.recurly.com/guides/item-addon-guide.html)
+              for an overview of how\nto configure quantity-based pricing models.\n"
+            data_type: varchar
+          - name: updated_at
+            description: The date and time when the add-on was last updated.
+            data_type: timestamp
+          - name: usage_percentage
+            description: The percentage taken of the monetary amount of usage tracked.
+              This can be up to 4 decimal places. A value between 0.0 and 100.0.
+            data_type: float
+          - name: usage_type
+            description: Type of usage, returns usage type if `add_on_type` is `usage`.
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: billing_infos
+        columns:
+          - name: account_id
+            data_type: varchar
+          - name: address
+            data_type: json
+            meta:
+              subcolumns:
+                - name: city
+                  data_type: varchar
+                - name: country
+                  description: Country, 2-letter ISO 3166-1 alpha-2 code.
+                  data_type: varchar
+                - name: phone
+                  data_type: varchar
+                - name: postal_code
+                  description: Zip or postal code.
+                  data_type: varchar
+                - name: region
+                  description: State or province.
+                  data_type: varchar
+                - name: street1
+                  data_type: varchar
+                - name: street2
+                  data_type: varchar
+          - name: backup_payment_method
+            description: The `backup_payment_method` field is used to indicate a billing
+              info as a backup on the account that will be tried if the initial billing
+              info used for an invoice is declined.
+            data_type: boolean
+          - name: company
+            data_type: varchar
+          - name: created_at
+            description: When the billing information was created.
+            data_type: timestamp
+          - name: first_name
+            data_type: varchar
+          - name: fraud
+            description: Most recent fraud result.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: decision
+                  data_type: varchar
+                - name: risk_rules_triggered
+                  data_type: json
+                - name: score
+                  data_type: integer
+          - name: id
+            data_type: varchar
+          - name: last_name
+            data_type: varchar
+          - name: object
+            data_type: varchar
+          - name: payment_method
+            data_type: json
+            meta:
+              subcolumns:
+                - name: account_type
+                  description: The bank account type. Only present for ACH payment
+                    methods.
+                  data_type: varchar
+                - name: billing_agreement_id
+                  description: Billing Agreement identifier. Only present for Amazon
+                    or Paypal payment methods.
+                  data_type: varchar
+                - name: card_type
+                  description: Visa, MasterCard, American Express, Discover, JCB,
+                    etc.
+                  data_type: varchar
+                - name: cc_bin_country
+                  description: The 2-letter ISO 3166-1 alpha-2 country code associated
+                    with the credit card BIN, if known by Recurly. Available on the
+                    BillingInfo object only. Available when the BIN country lookup
+                    feature is enabled.
+                  data_type: varchar
+                - name: exp_month
+                  description: Expiration month.
+                  data_type: integer
+                - name: exp_year
+                  description: Expiration year.
+                  data_type: integer
+                - name: first_six
+                  description: Credit card number's first six digits.
+                  data_type: varchar
+                - name: gateway_code
+                  description: An identifier for a specific payment gateway.
+                  data_type: varchar
+                - name: gateway_token
+                  description: A token used in place of a credit card in order to
+                    perform transactions.
+                  data_type: varchar
+                - name: last_four
+                  description: Credit card number's last four digits. Will refer to
+                    bank account if payment method is ACH.
+                  data_type: varchar
+                - name: last_two
+                  description: The IBAN bank account's last two digits.
+                  data_type: varchar
+                - name: name_on_account
+                  description: The name associated with the bank account.
+                  data_type: varchar
+                - name: object
+                  data_type: varchar
+                - name: routing_number
+                  description: The bank account's routing number. Only present for
+                    ACH payment methods.
+                  data_type: varchar
+                - name: routing_number_bank
+                  description: The bank name of this routing number.
+                  data_type: varchar
+          - name: primary_payment_method
+            description: The `primary_payment_method` field is used to indicate the
+              primary billing info on the account. The first billing info created
+              on an account will always become primary. This payment method will be
+              used
+            data_type: boolean
+          - name: updated_at
+            description: When the billing information was last changed.
+            data_type: timestamp
+          - name: updated_by
+            data_type: json
+            meta:
+              subcolumns:
+                - name: country
+                  data_type: varchar
+                - name: ip
+                  data_type: varchar
+          - name: valid
+            data_type: boolean
+          - name: vat_number
+            description: Customer's VAT number (to avoid having the VAT applied).
+              This is only used for automatically collected invoices.
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: coupons
+        columns:
+          - name: applies_to_all_items
+            data_type: boolean
+          - name: applies_to_all_plans
+            data_type: boolean
+          - name: applies_to_non_plan_charges
+            data_type: boolean
+          - name: code
+            data_type: varchar
+          - name: coupon_type
+            data_type: varchar
+          - name: created_at
+            data_type: timestamp
+          - name: discount
+            description: "Details of the discount a coupon applies. Will contain a
+              `type`\nproperty and one of the following properties: `percent`, `fixed`,
+              `trial`.\n"
+            data_type: json
+            meta:
+              subcolumns:
+                - name: type
+                  data_type: varchar
+                - name: currencies
+                  description: This is only present when `type=fixed`.
+                  data_type: array
+                - name: percent
+                  description: This is only present when `type=percent`.
+                  data_type: integer
+                - name: trial
+                  description: This is only present when `type=free_trial`.
+                  data_type: json
+                  subcolumns:
+                    - name: length
+                      description: Trial length measured in the units specified by
+                        the sibling `unit` property
+                      data_type: integer
+                    - name: unit
+                      description: Temporal unit of the free trial
+                      data_type: varchar
+          - name: duration
+            data_type: varchar
+          - name: expired_at
+            data_type: timestamp
+          - name: free_trial_amount
+            data_type: float
+          - name: free_trial_unit
+            data_type: varchar
+          - name: hosted_page_description
+            data_type: varchar
+          - name: id
+            data_type: varchar
+          - name: invoice_description
+            data_type: varchar
+          - name: items
+            description: "A list of items for which this coupon applies. This will
+              be\n`null` if `applies_to_all_items=true`.\n"
+            data_type: array
+          - name: max_redemptions
+            data_type: float
+          - name: max_redemptions_per_account
+            data_type: float
+          - name: name
+            data_type: varchar
+          - name: object
+            data_type: varchar
+          - name: plans
+            description: A list of plans for which this coupon applies. This will
+              be `null` if `applies_to_all_plans=true`.
+            data_type: array
+          - name: redeem_by
+            data_type: varchar
+          - name: redemption_resource
+            data_type: varchar
+          - name: state
+            data_type: varchar
+          - name: temporal_amount
+            data_type: float
+          - name: temporal_unit
+            data_type: varchar
+          - name: unique_code_template
+            data_type: varchar
+          - name: unique_coupon_code
+            description: A unique coupon code for a bulk coupon.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: bulk_coupon_code
+                  description: The Coupon code of the parent Bulk Coupon
+                  data_type: varchar
+                - name: bulk_coupon_id
+                  description: The Coupon ID of the parent Bulk Coupon
+                  data_type: varchar
+                - name: code
+                  description: The code the customer enters to redeem the coupon.
+                  data_type: varchar
+                - name: created_at
+                  data_type: timestamp
+                - name: expired_at
+                  description: The date and time the coupon was expired early or reached
+                    its `max_redemptions`.
+                  data_type: timestamp
+                - name: id
+                  data_type: varchar
+                - name: object
+                  data_type: varchar
+                - name: redeemed_at
+                  description: The date and time the unique coupon code was redeemed.
+                  data_type: timestamp
+                - name: state
+                  description: Indicates if the unique coupon code is redeemable or
+                    why not.
+                  data_type: varchar
+                - name: updated_at
+                  data_type: timestamp
+          - name: unique_coupon_codes_count
+            data_type: float
+          - name: updated_at
+            data_type: timestamp
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: credit_payments
+        columns:
+          - name: account
+            description: Details about the account associated with the credit payment.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: code
+                  description: The unique identifier of the account.
+                  data_type: varchar
+                - name: id
+                  description: The ID of the account associated with the credit payment.
+                  data_type: varchar
+          - name: action
+            description: The action for which the credit was created.
+            data_type: varchar
+          - name: amount
+            description: Total credit payment amount applied to the charge invoice.
+            data_type: float
+          - name: applied_to_invoice
+            description: Details about the invoice to which the credit payment is
+              applied.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: id
+                  description: The ID of the invoice to which the credit payment is
+                    applied.
+                  data_type: varchar
+                - name: number
+                  description: The number of the invoice to which the credit payment
+                    is applied.
+                  data_type: varchar
+          - name: created_at
+            description: The date and time when the credit payment was created.
+            data_type: timestamp
+          - name: currency
+            description: 3-letter ISO 4217 currency code.
+            data_type: varchar
+          - name: id
+            description: The unique identifier of the credit payment.
+            data_type: varchar
+          - name: original_credit_payment_id
+            description: For credit payments with action `refund`, this is the credit
+              payment that was refunded.
+            data_type: varchar
+          - name: original_invoice
+            description: Details about the original invoice for which the credit payment
+              is made.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: id
+                  description: The ID of the original invoice for which the credit
+                    payment was made.
+                  data_type: varchar
+                - name: number
+                  description: The number of the original invoice for which the credit
+                    payment was made.
+                  data_type: varchar
+          - name: refund_transaction
+            description: Details about the refund transaction associated with the
+              credit payment.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: id
+                  description: The ID of the refund transaction associated with the
+                    credit payment.
+                  data_type: varchar
+                - name: uuid
+                  description: The UUID is useful for matching data with the CSV exports
+                    and building URLs into Recurly's UI.
+                  data_type: varchar
+          - name: updated_at
+            description: The date and time when the credit payment was last updated.
+            data_type: timestamp
+          - name: uuid
+            description: The UUID is useful for matching data with the CSV exports
+              and building URLs into Recurly's UI.
+            data_type: varchar
+          - name: voided_at
+            description: The date and time when the credit payment was voided.
+            data_type: timestamp
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: export_dates
+        columns:
+          - name: dates
+            description: List of export dates
+            data_type: array
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: invoices
+        columns:
+          - name: type
+            description: Invoices are either charge, credit, or legacy invoices.
+            data_type: varchar
+          - name: account
+            description: The account associated with the invoice.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: bill_to
+                  data_type: varchar
+                - name: code
+                  data_type: varchar
+                - name: company
+                  data_type: varchar
+                - name: dunning_campaign_id
+                  data_type: varchar
+                - name: email
+                  data_type: varchar
+                - name: first_name
+                  data_type: varchar
+                - name: id
+                  data_type: varchar
+                - name: last_name
+                  data_type: varchar
+                - name: object
+                  data_type: varchar
+                - name: parent_account_id
+                  data_type: varchar
+          - name: address
+            description: The address details related to the invoice recipient.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: city
+                  description: The city in the address.
+                  data_type: varchar
+                - name: company
+                  description: The company name in the address.
+                  data_type: varchar
+                - name: country
+                  description: Country, 2-letter ISO 3166-1 alpha-2 code.
+                  data_type: varchar
+                - name: first_name
+                  description: The first name of the recipient.
+                  data_type: varchar
+                - name: last_name
+                  description: The last name of the recipient.
+                  data_type: varchar
+                - name: name_on_account
+                  description: The name on the account.
+                  data_type: varchar
+                - name: phone
+                  description: The phone number associated with the address.
+                  data_type: varchar
+                - name: postal_code
+                  description: Zip or postal code.
+                  data_type: varchar
+                - name: region
+                  description: State or province.
+                  data_type: varchar
+                - name: street1
+                  description: The first line of the street address.
+                  data_type: varchar
+                - name: street2
+                  description: The second line of the street address.
+                  data_type: varchar
+          - name: balance
+            description: The outstanding balance remaining on this invoice.
+            data_type: float
+          - name: billing_info_id
+            description: The `billing_info_id` is the value that represents a specific
+              billing info for an end customer. When `billing_info_id` is used to
+              assign billing info to the subscription, all future billing events for
+              the subscription will bill to the specified billing info. `billing_info_id`
+              can ONLY be used for sites utilizing the Wallet feature.
+            data_type: varchar
+          - name: business_entity_id
+            description: The business entity ID linked to the invoice.
+            data_type: varchar
+          - name: closed_at
+            description: Date invoice was marked paid or failed.
+            data_type: timestamp
+          - name: collection_method
+            description: An automatic invoice means a corresponding transaction is
+              run using the account's billing information at the same time the invoice
+              is created. Manual invoices are created without a corresponding transaction.
+              The merchant must enter a manual payment transaction or have the customer
+              pay the invoice with an automatic method, like credit card, PayPal,
+              Amazon, or ACH bank payment.
+            data_type: varchar
+          - name: created_at
+            description: The date and time when the invoice was created.
+            data_type: timestamp
+          - name: credit_payments
+            description: The credit payments related to the invoice.
+            data_type: array
+          - name: currency
+            description: 3-letter ISO 4217 currency code.
+            data_type: varchar
+          - name: customer_notes
+            description: This will default to the Customer Notes text specified on
+              the Invoice Settings. Specify custom notes to add or override Customer
+              Notes.
+            data_type: varchar
+          - name: discount
+            description: Total discounts applied to this invoice.
+            data_type: float
+          - name: due_at
+            description: Date invoice is due. This is the date the net terms are reached.
+            data_type: timestamp
+          - name: dunning_campaign_id
+            description: Unique ID to identify the dunning campaign used when dunning
+              the invoice. Available when the Dunning Campaigns feature is enabled.
+              For sites without multiple dunning campaigns enabled, this will always
+              be the default dunning campaign.
+            data_type: varchar
+          - name: dunning_events_sent
+            description: The number of dunning events sent for the invoice.
+            data_type: integer
+          - name: final_dunning_event
+            description: The final dunning event related to the invoice if applicable.
+            data_type: boolean
+          - name: has_more_line_items
+            description: Indicates if there are more line items in the invoice.
+            data_type: boolean
+          - name: id
+            description: The unique ID of the invoice.
+            data_type: varchar
+          - name: line_items
+            description: The line items included in the invoice.
+            data_type: array
+          - name: net_terms
+            description: Integer representing the number of days after an invoice's
+              creation that the invoice will become past due. If an invoice's net
+              terms are set to '0', it is due 'On Receipt' and will become past due
+              24 hours after it’s created. If an invoice is due net 30, it will become
+              past due at 31 days exactly.
+            data_type: integer
+          - name: number
+            description: 'If VAT taxation and the Country Invoice Sequencing feature
+              are enabled, invoices will have country-specific invoice numbers for
+              invoices billed to EU countries (ex: FR1001). Non-EU invoices will continue
+              to use the site-level invoice number sequence.'
+            data_type: varchar
+          - name: object
+            description: The type of object, in this case, an invoice.
+            data_type: varchar
+          - name: origin
+            description: The event that created the invoice.
+            data_type: varchar
+          - name: paid
+            description: The total amount of successful payments transaction on this
+              invoice.
+            data_type: float
+          - name: po_number
+            description: For manual invoicing, this identifies the PO number associated
+              with the subscription.
+            data_type: varchar
+          - name: previous_invoice_id
+            description: On refund invoices, this value will exist and show the invoice
+              ID of the purchase invoice the refund was created from.
+            data_type: varchar
+          - name: refundable_amount
+            description: The refundable amount on a charge invoice. It will be null
+              for all other invoices.
+            data_type: float
+          - name: shipping_address
+            description: The shipping address details for the invoice delivery.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: id
+                  description: The ID of the shipping address.
+                  data_type: varchar
+          - name: state
+            description: The current state of the invoice.
+            data_type: varchar
+          - name: subscription_ids
+            description: If the invoice is charging or refunding for one or more subscriptions,
+              these are their IDs.
+            data_type: array
+          - name: subtotal
+            description: The summation of charges and credits, before discounts and
+              taxes.
+            data_type: float
+          - name: tax
+            description: The total tax on this invoice.
+            data_type: float
+          - name: tax_info
+            description: Tax information related to the invoice.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: type
+                  description: Provides the tax type as "vat" for EU VAT, "usst" for
+                    U.S. Sales Tax, or the 2 letter country code for country level
+                    tax types like Canada, Australia, New Zealand, Israel, and all
+                    non-EU European countries.
+                  data_type: varchar
+                - name: rate
+                  description: The tax rate applied to the invoice.
+                  data_type: float
+                - name: region
+                  description: Provides the tax region applied on an invoice. For
+                    U.S. Sales Tax, this will be the 2 letter state code. For EU VAT
+                    this will be the 2 letter country code. For all country level
+                    tax types, this will display the regional tax, like VAT, GST,
+                    or PST.
+                  data_type: varchar
+                - name: tax_details
+                  description: Provides additional tax details for Canadian Sales
+                    Tax when there is tax applied at both the country and province
+                    levels. This will only be populated for the Invoice response when
+                    fetching a single invoice and not for the InvoiceList or LineItem.
+                  data_type: array
+          - name: terms_and_conditions
+            description: This will default to the Terms and Conditions text specified
+              on the Invoice Settings page in your Recurly admin. Specify custom notes
+              to add or override Terms and Conditions.
+            data_type: varchar
+          - name: total
+            description: The final total on this invoice. The summation of invoice
+              charges, discounts, credits, and tax.
+            data_type: float
+          - name: transactions
+            description: The transactions associated with the invoice.
+            data_type: array
+          - name: updated_at
+            description: The date and time when the invoice was last updated.
+            data_type: timestamp
+          - name: used_tax_service
+            description: Indicates if a tax service was used for the invoice.
+            data_type: boolean
+          - name: uuid
+            description: The universally unique identifier (UUID) of the invoice.
+            data_type: varchar
+          - name: vat_number
+            description: VAT registration number for the customer on this invoice.
+              This will come from the VAT Number field in the Billing Info or the
+              Account Info depending on your tax settings and the invoice collection
+              method.
+            data_type: varchar
+          - name: vat_reverse_charge_notes
+            description: VAT Reverse Charge Notes only appear if you have EU VAT enabled
+              or are using your own Avalara AvaTax account and the customer is in
+              the EU, has a VAT number, and is in a different country than your own.
+              This will default to the VAT Reverse Charge Notes text specified on
+              the Tax Settings page in your Recurly admin, unless custom notes were
+              created with the original subscription.
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: line_items
+        columns:
+          - name: type
+            description: Charges are positive line items that debit the account. Credits
+              are negative line items that credit the account.
+            data_type: varchar
+          - name: description
+            description: Description that appears on the invoice. For subscription
+              related items this will be filled in automatically.
+            data_type: varchar
+          - name: account
+            data_type: json
+            meta:
+              subcolumns:
+                - name: bill_to
+                  data_type: varchar
+                - name: code
+                  data_type: varchar
+                - name: company
+                  data_type: varchar
+                - name: dunning_campaign_id
+                  data_type: varchar
+                - name: email
+                  data_type: varchar
+                - name: first_name
+                  data_type: varchar
+                - name: id
+                  data_type: varchar
+                - name: last_name
+                  data_type: varchar
+                - name: object
+                  data_type: varchar
+                - name: parent_account_id
+                  data_type: varchar
+          - name: accounting_code
+            description: Internal accounting code to help you reconcile your revenue
+              to the correct ledger. Line items created as part of a subscription
+              invoice will use the plan or add-on's accounting code, otherwise the
+              value will only be present if you define an accounting code when creating
+              the line item.
+            data_type: varchar
+          - name: add_on_code
+            description: If the line item is a charge or credit for an add-on, this
+              is its code.
+            data_type: varchar
+          - name: add_on_id
+            description: If the line item is a charge or credit for an add-on this
+              is its ID.
+            data_type: varchar
+          - name: amount
+            description: '`(quantity * unit_amount) - (discount + tax)`'
+            data_type: float
+          - name: bill_for_account_id
+            description: The UUID of the account responsible for originating the line
+              item.
+            data_type: varchar
+          - name: created_at
+            description: When the line item was created.
+            data_type: timestamp
+          - name: credit_applied
+            description: The amount of credit from this line item that was applied
+              to the invoice.
+            data_type: float
+          - name: credit_reason_code
+            description: The reason the credit was given when line item is `type=credit`.
+            data_type: varchar
+          - name: currency
+            description: 3-letter ISO 4217 currency code.
+            data_type: varchar
+          - name: custom_fields
+            data_type: array
+          - name: discount
+            description: The discount applied to the line item.
+            data_type: float
+          - name: end_date
+            description: If this date is provided, it indicates the end of a time
+              range.
+            data_type: timestamp
+          - name: external_sku
+            description: Optional Stock Keeping Unit assigned to an item. Available
+              when the Credit Invoices and Subscription Billing Terms features are
+              enabled.
+            data_type: varchar
+          - name: id
+            data_type: varchar
+          - name: invoice_id
+            description: Once the line item has been invoiced this will be the invoice's
+              ID.
+            data_type: varchar
+          - name: invoice_number
+            description: "Once the line item has been invoiced this will be the invoice's
+              number. If VAT taxation and the Country Invoice Sequencing feature are
+              enabled, invoices will have country-specific invoice numbers for invoices
+              billed to EU countries (ex: FR1001). Non-EU invoices will continue to
+              use the site-level invoice number sequence."
+            data_type: varchar
+          - name: item_code
+            description: Unique code to identify an item. Available when the Credit
+              Invoices and Subscription Billing Terms features are enabled.
+            data_type: varchar
+          - name: item_id
+            description: System-generated unique identifier for an item. Available
+              when the Credit Invoices and Subscription Billing Terms features are
+              enabled.
+            data_type: varchar
+          - name: legacy_category
+            description: "Category to describe the role of a line item on a legacy
+              invoice:\n- \"charges\" refers to charges being billed for on this invoice.\n
+              - \"credits\" refers to refund or proration credits. This portion of
+              the invoice can be considered a credit memo.\n- \"applied_credits\"
+              refers to previous credits applied to this invoice. See their original_line_item_id
+              to determine where the credit first originated.\n- \"carryforwards\"\
+              \ can be ignored. They exist to consume any remaining credit balance.
+              A new credit with the same amount will be created and placed back on
+              the account.\n"
+            data_type: varchar
+          - name: object
+            data_type: varchar
+          - name: origin
+            description: A credit created from an original charge will have the value
+              of the charge's origin.
+            data_type: varchar
+          - name: original_line_item_invoice_id
+            description: The invoice where the credit originated. Will only have a
+              value if the line item is a credit created from a previous credit, or
+              if the credit was created from a charge refund.
+            data_type: varchar
+          - name: plan_code
+            description: If the line item is a charge or credit for a plan or add-on,
+              this is the plan's code.
+            data_type: varchar
+          - name: plan_id
+            description: If the line item is a charge or credit for a plan or add-on,
+              this is the plan's ID.
+            data_type: varchar
+          - name: previous_line_item_id
+            description: Will only have a value if the line item is a credit created
+              from a previous credit, or if the credit was created from a charge refund.
+            data_type: varchar
+          - name: product_code
+            description: For plan-related line items this will be the plan's code,
+              for add-on related line items it will be the add-on's code. For item-related
+              line items it will be the item's `external_sku`.
+            data_type: varchar
+          - name: proration_rate
+            description: When a line item has been prorated, this is the rate of the
+              proration. Proration rates were made available for line items created
+              after March 30, 2017. For line items created prior to that date, the
+              proration rate will be `null`, even if the line item was prorated.
+            data_type: float
+          - name: quantity
+            description: This number will be multiplied by the unit amount to compute
+              the subtotal before any discounts or taxes.
+            data_type: integer
+          - name: refund
+            data_type: boolean
+          - name: refunded_quantity
+            description: For refund charges, the quantity being refunded. For non-refund
+              charges, the total quantity refunded (possibly over multiple refunds).
+            data_type: integer
+          - name: revenue_schedule_type
+            data_type: varchar
+          - name: shipping_address
+            data_type: json
+            meta:
+              subcolumns:
+                - name: id
+                  data_type: varchar
+          - name: start_date
+            description: If an end date is present, this is value indicates the beginning
+              of a billing time range. If no end date is present it indicates billing
+              for a specific date.
+            data_type: timestamp
+          - name: state
+            description: Pending line items are charges or credits on an account that
+              have not been applied to an invoice yet. Invoiced line items will always
+              have an `invoice_id` value.
+            data_type: varchar
+          - name: subscription_id
+            description: If the line item is a charge or credit for a subscription,
+              this is its ID.
+            data_type: varchar
+          - name: subtotal
+            description: '`quantity * unit_amount`'
+            data_type: float
+          - name: tax
+            description: The tax amount for the line item.
+            data_type: float
+          - name: tax_code
+            description: Used by Avalara, Vertex, and Recurly’s EU VAT tax feature.
+              The tax code values are specific to each tax system. If you are using
+              Recurly’s EU VAT feature you can use `unknown`, `physical`, or `digital`.
+            data_type: varchar
+          - name: tax_exempt
+            description: '`true` exempts tax on charges, `false` applies tax on charges.
+              If not defined, then defaults to the Plan and Site settings. This attribute
+              does not work for credits (negative line items). Credits are always
+              applied post-tax. Pre-tax discounts should use the Coupons feature.'
+            data_type: boolean
+          - name: tax_info
+            data_type: json
+            meta:
+              subcolumns:
+                - name: type
+                  data_type: varchar
+                - name: rate
+                  data_type: float
+                - name: region
+                  data_type: varchar
+                - name: tax_details
+                  data_type: array
+          - name: taxable
+            description: '`true` if the line item is taxable, `false` if it is not.'
+            data_type: boolean
+          - name: unit_amount
+            description: Positive amount for a charge, negative amount for a credit.
+            data_type: float
+          - name: unit_amount_decimal
+            description: Positive amount for a charge, negative amount for a credit.
+            data_type: varchar
+          - name: updated_at
+            description: When the line item was last changed.
+            data_type: timestamp
+          - name: uuid
+            description: The UUID is useful for matching data with the CSV exports
+              and building URLs into Recurly's UI.
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: measured_units
+        columns:
+          - name: description
+            description: Description of the measured unit
+            data_type: varchar
+          - name: created_at
+            description: Timestamp indicating when the measured unit was created
+            data_type: timestamp
+          - name: deleted_at
+            description: Timestamp indicating when the measured unit was deleted (if
+              applicable)
+            data_type: timestamp
+          - name: display_name
+            description: Human-readable name used for display purposes
+            data_type: varchar
+          - name: id
+            description: Unique identifier for the measured unit
+            data_type: varchar
+          - name: name
+            description: Internal name used to identify the measured unit
+            data_type: varchar
+          - name: object
+            description: Type of object, in this case, 'measured_unit'
+            data_type: varchar
+          - name: state
+            description: Current state of the measured unit
+            data_type: varchar
+          - name: updated_at
+            description: Timestamp indicating when the measured unit was last updated
+            data_type: timestamp
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: plans
+        columns:
+          - name: description
+            description: Description of the plan.
+            data_type: varchar
+          - name: accounting_code
+            description: The accounting code associated with the plan.
+            data_type: varchar
+          - name: allow_any_item_on_subscriptions
+            description: Determines if any item can be added to subscriptions using
+              this plan.
+            data_type: boolean
+          - name: auto_renew
+            description: Indicates whether the plan should automatically renew.
+            data_type: boolean
+          - name: avalara_service_type
+            description: The Avalara service type used for tax calculation.
+            data_type: float
+          - name: avalara_transaction_type
+            description: The Avalara transaction type used for tax calculation.
+            data_type: float
+          - name: code
+            description: Unique identifier code for the plan.
+            data_type: varchar
+          - name: created_at
+            description: Timestamp indicating when the plan was created.
+            data_type: timestamp
+          - name: currencies
+            description: Contains information about the currencies supported by the
+              plan.
+            data_type: array
+          - name: custom_fields
+            description: Includes any custom fields associated with the plan.
+            data_type: array
+          - name: deleted_at
+            description: Timestamp indicating when the plan was deleted.
+            data_type: timestamp
+          - name: dunning_campaign_id
+            description: ID of the dunning campaign associated with the plan.
+            data_type: varchar
+          - name: hosted_pages
+            description: Provides details about hosted pages related to the plan.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: bypass_confirmation
+                  description: Determines if confirmation is bypassed on hosted pages.
+                  data_type: boolean
+                - name: cancel_url
+                  description: URL to redirect when a user cancels during hosted page
+                    process.
+                  data_type: varchar
+                - name: display_quantity
+                  description: Determines if quantity is displayed on hosted pages.
+                  data_type: boolean
+                - name: success_url
+                  description: URL to redirect when a user successfully completes
+                    hosted page process.
+                  data_type: varchar
+          - name: id
+            description: Unique identifier of the plan.
+            data_type: varchar
+          - name: interval_length
+            description: Length of the billing interval for the plan.
+            data_type: float
+          - name: interval_unit
+            description: Unit of the billing interval for the plan.
+            data_type: varchar
+          - name: name
+            description: Name of the plan.
+            data_type: varchar
+          - name: object
+            description: Indicates the type of object which in this case is 'plan'.
+            data_type: varchar
+          - name: pricing_model
+            description: The pricing model used for the plan.
+            data_type: varchar
+          - name: ramp_intervals
+            description: Specifies ramp intervals for the plan.
+            data_type: array
+          - name: revenue_schedule_type
+            description: Type of revenue schedule for the plan.
+            data_type: varchar
+          - name: setup_fee_accounting_code
+            description: The accounting code associated with the setup fee.
+            data_type: varchar
+          - name: setup_fee_revenue_schedule_type
+            description: Revenue schedule type for the setup fee.
+            data_type: varchar
+          - name: state
+            description: The current state of the plan.
+            data_type: varchar
+          - name: tax_code
+            description: Tax code used for the plan.
+            data_type: varchar
+          - name: tax_exempt
+            description: Determines if the plan is tax exempt.
+            data_type: boolean
+          - name: total_billing_cycles
+            description: Total number of billing cycles the plan will run for.
+            data_type: float
+          - name: trial_length
+            description: Length of the trial period for the plan.
+            data_type: float
+          - name: trial_requires_billing_info
+            description: Determines if billing information is required for the trial.
+            data_type: boolean
+          - name: trial_unit
+            description: Unit of the trial period for the plan.
+            data_type: varchar
+          - name: updated_at
+            description: Timestamp indicating when the plan was last updated.
+            data_type: timestamp
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: shipping_addresses
+        columns:
+          - name: account_id
+            data_type: varchar
+          - name: city
+            data_type: varchar
+          - name: company
+            data_type: varchar
+          - name: country
+            description: Country, 2-letter ISO 3166-1 alpha-2 code.
+            data_type: varchar
+          - name: created_at
+            data_type: timestamp
+          - name: email
+            data_type: varchar
+          - name: first_name
+            data_type: varchar
+          - name: geo_code
+            data_type: varchar
+          - name: id
+            data_type: varchar
+          - name: last_name
+            data_type: varchar
+          - name: nickname
+            data_type: varchar
+          - name: object
+            data_type: varchar
+          - name: phone
+            data_type: varchar
+          - name: postal_code
+            description: Zip or postal code.
+            data_type: varchar
+          - name: region
+            description: State or province.
+            data_type: varchar
+          - name: street1
+            data_type: varchar
+          - name: street2
+            data_type: varchar
+          - name: updated_at
+            data_type: timestamp
+          - name: vat_number
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: shipping_methods
+        columns:
+          - name: accounting_code
+            description: Accounting code for shipping method.
+            data_type: varchar
+          - name: code
+            description: The internal name used identify the shipping method.
+            data_type: varchar
+          - name: created_at
+            description: Timestamp indicating when the shipping method was created
+            data_type: timestamp
+          - name: deleted_at
+            description: Timestamp indicating when the shipping method was deleted
+            data_type: timestamp
+          - name: id
+            description: Unique identifier for the shipping method
+            data_type: varchar
+          - name: name
+            description: The name of the shipping method displayed to customers.
+            data_type: varchar
+          - name: tax_code
+            description: "Used by Avalara, Vertex, and Recurly’s built-in tax feature.
+              The tax\ncode values are specific to each tax system. If you are using
+              Recurly’s\nbuilt-in taxes the values are:\n\n- `FR` – Common Carrier
+              FOB Destination\n- `FR022000` – Common Carrier FOB Origin\n- `FR020400`
+              – Non Common Carrier FOB Destination\n- `FR020500` – Non Common Carrier
+              FOB Origin\n- `FR010100` – Delivery by Company Vehicle Before Passage
+              of Title\n- `FR010200` – Delivery by Company Vehicle After Passage of
+              Title\n- `NT` – Non-Taxable\n"
+            data_type: varchar
+          - name: updated_at
+            description: Timestamp indicating when the shipping method was last updated
+            data_type: timestamp
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: subscriptions
+        columns:
+          - name: account
+            description: Information about the associated account for the subscription
+            data_type: json
+            meta:
+              subcolumns:
+                - name: bill_to
+                  data_type: varchar
+                - name: code
+                  data_type: varchar
+                - name: company
+                  data_type: varchar
+                - name: dunning_campaign_id
+                  data_type: varchar
+                - name: email
+                  data_type: varchar
+                - name: first_name
+                  data_type: varchar
+                - name: id
+                  data_type: varchar
+                - name: last_name
+                  data_type: varchar
+                - name: object
+                  data_type: varchar
+                - name: parent_account_id
+                  data_type: varchar
+          - name: action_result
+            description: Result of the action performed on the subscription.
+            data_type: json
+          - name: activated_at
+            description: Timestamp when the subscription was activated
+            data_type: timestamp
+          - name: active_invoice_id
+            description: ID of the active invoice associated with the subscription.
+            data_type: varchar
+          - name: add_ons
+            description: Any additional services or items added to the subscription.
+            data_type: array
+          - name: add_ons_total
+            description: Total amount charged for the additional services or items.
+            data_type: float
+          - name: auto_renew
+            description: Flag indicating whether the subscription auto renews.
+            data_type: boolean
+          - name: bank_account_authorized_at
+            description: Timestamp when bank account authorization occurred
+            data_type: timestamp
+          - name: billing_info_id
+            description: ID of the billing information associated with the subscription.
+            data_type: varchar
+          - name: canceled_at
+            description: Timestamp when the subscription was canceled
+            data_type: timestamp
+          - name: collection_method
+            description: Method used for collecting payments for the subscription.
+            data_type: varchar
+          - name: converted_at
+            description: Timestamp when the subscription was converted
+            data_type: timestamp
+          - name: coupon_redemptions
+            description: Details of any coupons redeemed for the subscription.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: coupon
+                  data_type: json
+                  subcolumns:
+                    - name: code
+                      data_type: varchar
+                    - name: coupon_type
+                      data_type: varchar
+                    - name: discount
+                      data_type: json
+                      subcolumns:
+                        - name: type
+                          data_type: varchar
+                        - name: currencies
+                          data_type: array
+                        - name: percent
+                          data_type: integer
+                        - name: trial
+                          data_type: json
+                          subcolumns:
+                            - name: length
+                              data_type: integer
+                            - name: unit
+                              data_type: varchar
+                    - name: expired_at
+                      data_type: timestamp
+                    - name: id
+                      data_type: varchar
+                    - name: name
+                      data_type: varchar
+                    - name: object
+                      data_type: varchar
+                    - name: state
+                      data_type: varchar
+                - name: created_at
+                  data_type: timestamp
+                - name: discounted
+                  data_type: float
+                - name: id
+                  data_type: varchar
+                - name: object
+                  data_type: varchar
+                - name: state
+                  data_type: varchar
+          - name: created_at
+            description: Timestamp when the subscription was created
+            data_type: timestamp
+          - name: currency
+            description: Currency used for billing the subscription.
+            data_type: varchar
+          - name: current_period_ends_at
+            description: Timestamp when the current period ends
+            data_type: timestamp
+          - name: current_period_started_at
+            description: Timestamp when the current period started
+            data_type: timestamp
+          - name: current_term_ends_at
+            description: Timestamp when the current term ends
+            data_type: timestamp
+          - name: current_term_started_at
+            description: Timestamp when the current term started
+            data_type: timestamp
+          - name: custom_fields
+            description: Custom fields associated with the subscription
+            data_type: array
+          - name: customer_notes
+            description: Any notes or comments added by the customer.
+            data_type: varchar
+          - name: expiration_reason
+            description: Reason for the subscription expiration.
+            data_type: varchar
+          - name: expires_at
+            description: Timestamp when the subscription expires
+            data_type: timestamp
+          - name: gateway_code
+            description: Code associated with the payment gateway used for processing
+              payments.
+            data_type: varchar
+          - name: id
+            description: Unique identifier for the subscription.
+            data_type: varchar
+          - name: net_terms
+            description: Number of net terms for payment.
+            data_type: float
+          - name: net_terms_type
+            description: Type of net terms (e.g., days).
+            data_type: varchar
+          - name: object
+            description: Indicates the type of object (subscription).
+            data_type: varchar
+          - name: paused_at
+            description: Timestamp when the subscription was paused
+            data_type: timestamp
+          - name: pending_change
+            description: Information about any pending changes to the subscription
+            data_type: json
+            meta:
+              subcolumns:
+                - name: activate_at
+                  description: Timestamp when the pending change will be activated
+                  data_type: timestamp
+                - name: activated
+                  description: Returns `true` if the subscription change is activated.
+                  data_type: boolean
+                - name: created_at
+                  description: Timestamp when the pending change was created
+                  data_type: timestamp
+                - name: deleted_at
+                  description: Timestamp when the pending change was deleted
+                  data_type: timestamp
+                - name: id
+                  description: The ID of the Subscription Change.
+                  data_type: varchar
+                - name: subscription_id
+                  description: The ID of the subscription that is going to be changed.
+                  data_type: varchar
+                - name: updated_at
+                  description: Timestamp when the pending change was last updated
+                  data_type: timestamp
+          - name: plan
+            description: Information about the plan associated with the subscription
+            data_type: json
+            meta:
+              subcolumns:
+                - name: code
+                  data_type: varchar
+                - name: id
+                  data_type: varchar
+                - name: name
+                  data_type: varchar
+                - name: object
+                  data_type: varchar
+          - name: po_number
+            description: Purchase order number associated with the subscription.
+            data_type: varchar
+          - name: quantity
+            description: Number of units or items included in the subscription.
+            data_type: float
+          - name: ramp_intervals
+            description: Information about any ramp intervals associated with the
+              subscription
+            data_type: array
+          - name: remaining_billing_cycles
+            description: Number of billing cycles remaining before subscription ends.
+            data_type: float
+          - name: remaining_pause_cycles
+            description: Number of pause cycles remaining for the subscription.
+            data_type: float
+          - name: renewal_billing_cycles
+            description: Number of billing cycles in the renewal period.
+            data_type: float
+          - name: revenue_schedule_type
+            description: Type of revenue schedule for the subscription.
+            data_type: varchar
+          - name: shipping
+            description: Information about the shipping associated with the subscription
+            data_type: json
+            meta:
+              subcolumns:
+                - name: address
+                  data_type: json
+                  subcolumns:
+                    - name: account_id
+                      data_type: varchar
+                    - name: city
+                      data_type: varchar
+                    - name: company
+                      data_type: varchar
+                    - name: country
+                      description: Country, 2-letter ISO 3166-1 alpha-2 code.
+                      data_type: varchar
+                    - name: created_at
+                      data_type: timestamp
+                    - name: email
+                      data_type: varchar
+                    - name: first_name
+                      data_type: varchar
+                    - name: geo_code
+                      data_type: varchar
+                    - name: id
+                      data_type: varchar
+                    - name: last_name
+                      data_type: varchar
+                    - name: nickname
+                      data_type: varchar
+                    - name: object
+                      data_type: varchar
+                    - name: phone
+                      data_type: varchar
+                    - name: postal_code
+                      description: Zip or postal code.
+                      data_type: varchar
+                    - name: region
+                      description: State or province.
+                      data_type: varchar
+                    - name: street1
+                      data_type: varchar
+                    - name: street2
+                      data_type: varchar
+                    - name: updated_at
+                      data_type: timestamp
+                    - name: vat_number
+                      data_type: varchar
+                - name: amount
+                  data_type: float
+                - name: method
+                  description: Information about the shipping method
+                  data_type: json
+                  subcolumns:
+                    - name: code
+                      data_type: varchar
+                    - name: id
+                      data_type: varchar
+                    - name: name
+                      data_type: varchar
+                    - name: object
+                      data_type: varchar
+                - name: object
+                  data_type: varchar
+          - name: started_with_gift
+            description: Indicates if the subscription started with a gift or promotion.
+            data_type: boolean
+          - name: state
+            description: Current state of the subscription (e.g., active, cancelled).
+            data_type: varchar
+          - name: subtotal
+            description: Subtotal amount before taxes and additional charges.
+            data_type: float
+          - name: tax
+            description: Total tax amount applied to the subscription.
+            data_type: float
+          - name: tax_inclusive
+            description: Flag indicating if taxes are included in the total amount.
+            data_type: boolean
+          - name: tax_info
+            description: Details of the tax information for the subscription.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: type
+                  data_type: varchar
+                - name: rate
+                  data_type: float
+                - name: region
+                  data_type: varchar
+                - name: tax_details
+                  data_type: array
+          - name: terms_and_conditions
+            description: Terms and conditions agreed upon for the subscription.
+            data_type: varchar
+          - name: total
+            description: Total amount including taxes and additional charges.
+            data_type: float
+          - name: total_billing_cycles
+            description: Total number of billing cycles for the subscription.
+            data_type: float
+          - name: trial_ends_at
+            description: Timestamp when the trial period ends
+            data_type: timestamp
+          - name: trial_started_at
+            description: Timestamp when the trial period started
+            data_type: timestamp
+          - name: unit_amount
+            description: Amount charged per unit for the subscription.
+            data_type: float
+          - name: updated_at
+            description: Timestamp when the subscription was last updated
+            data_type: timestamp
+          - name: uuid
+            description: Universally unique identifier for the subscription.
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: transactions
+        columns:
+          - name: type
+            description: Type of transaction
+            data_type: varchar
+          - name: account
+            description: Details of the account associated with the transaction
+            data_type: json
+            meta:
+              subcolumns:
+                - name: bill_to
+                  data_type: varchar
+                - name: code
+                  data_type: varchar
+                - name: company
+                  data_type: varchar
+                - name: dunning_campaign_id
+                  data_type: varchar
+                - name: email
+                  data_type: varchar
+                - name: first_name
+                  data_type: varchar
+                - name: id
+                  data_type: varchar
+                - name: last_name
+                  data_type: varchar
+                - name: object
+                  data_type: varchar
+                - name: parent_account_id
+                  data_type: varchar
+          - name: action_result
+            description: Result of the action taken for the transaction
+            data_type: json
+          - name: amount
+            description: Amount of the transaction
+            data_type: float
+          - name: avs_check
+            description: Result of the Address Verification System check
+            data_type: varchar
+          - name: backup_payment_method_used
+            description: Indicates whether a backup payment method was used
+            data_type: boolean
+          - name: billing_address
+            description: Billing address details of the transaction
+            data_type: json
+            meta:
+              subcolumns:
+                - name: city
+                  data_type: varchar
+                - name: country
+                  data_type: varchar
+                - name: first_name
+                  data_type: varchar
+                - name: geo_code
+                  data_type: varchar
+                - name: last_name
+                  data_type: varchar
+                - name: phone
+                  data_type: varchar
+                - name: postal_code
+                  data_type: varchar
+                - name: region
+                  data_type: varchar
+                - name: street1
+                  data_type: varchar
+                - name: street2
+                  data_type: varchar
+          - name: collected_at
+            description: Date and time when the transaction was collected
+            data_type: timestamp
+          - name: collection_method
+            description: Method used to collect the transaction
+            data_type: varchar
+          - name: created_at
+            description: Date and time when the transaction was created
+            data_type: timestamp
+          - name: currency
+            description: Currency used for the transaction
+            data_type: varchar
+          - name: customer_message
+            description: Message for the customer related to the transaction
+            data_type: varchar
+          - name: customer_message_locale
+            description: Locale of the customer message
+            data_type: varchar
+          - name: cvv_check
+            description: Result of the CVV check
+            data_type: varchar
+          - name: fraud_info
+            description: Information related to fraud check for the transaction
+            data_type: json
+            meta:
+              subcolumns:
+                - name: decision
+                  data_type: varchar
+                - name: object
+                  data_type: varchar
+                - name: reference
+                  data_type: varchar
+                - name: risk_rules_triggered
+                  data_type: array
+                - name: score
+                  data_type: integer
+          - name: gateway_approval_code
+            description: Approval code provided by the payment gateway
+            data_type: varchar
+          - name: gateway_message
+            description: Message returned by the payment gateway
+            data_type: varchar
+          - name: gateway_reference
+            description: Reference number provided by the payment gateway
+            data_type: varchar
+          - name: gateway_response_code
+            description: Response code from the payment gateway
+            data_type: varchar
+          - name: gateway_response_time
+            description: Time taken for the payment gateway to respond
+            data_type: float
+          - name: gateway_response_values
+            description: Additional values in the gateway response
+            data_type: json
+          - name: id
+            description: Unique identifier for the transaction
+            data_type: varchar
+          - name: invoice
+            description: Details of the invoice associated with the transaction
+            data_type: json
+            meta:
+              subcolumns:
+                - name: type
+                  data_type: varchar
+                - name: business_entity_id
+                  data_type: varchar
+                - name: id
+                  data_type: varchar
+                - name: number
+                  data_type: varchar
+                - name: state
+                  data_type: varchar
+          - name: ip_address_country
+            description: Country of the IP address used for the transaction
+            data_type: varchar
+          - name: ip_address_v4
+            description: IPv4 address of the transaction
+            data_type: varchar
+          - name: object
+            description: Type of object (transaction)
+            data_type: varchar
+          - name: origin
+            description: Source or origin of the transaction
+            data_type: varchar
+          - name: original_transaction_id
+            description: ID of the original transaction, if applicable
+            data_type: varchar
+          - name: payment_gateway
+            description: Details of the payment gateway used for the transaction
+            data_type: json
+            meta:
+              subcolumns:
+                - name: type
+                  data_type: varchar
+                - name: id
+                  data_type: varchar
+                - name: name
+                  data_type: varchar
+                - name: object
+                  data_type: varchar
+          - name: payment_method
+            description: Details of the payment method used for the transaction
+            data_type: json
+            meta:
+              subcolumns:
+                - name: account_type
+                  data_type: varchar
+                - name: billing_agreement_id
+                  data_type: varchar
+                - name: card_type
+                  data_type: varchar
+                - name: cc_bin_country
+                  data_type: varchar
+                - name: exp_month
+                  data_type: float
+                - name: exp_year
+                  data_type: float
+                - name: first_six
+                  data_type: varchar
+                - name: gateway_code
+                  data_type: varchar
+                - name: gateway_token
+                  data_type: varchar
+                - name: last_four
+                  data_type: varchar
+                - name: last_two
+                  data_type: varchar
+                - name: name_on_account
+                  data_type: varchar
+                - name: object
+                  data_type: varchar
+                - name: routing_number
+                  data_type: varchar
+                - name: routing_number_bank
+                  data_type: varchar
+                - name: username
+                  data_type: varchar
+          - name: refunded
+            description: Indicates whether the transaction has been refunded
+            data_type: boolean
+          - name: status
+            description: Current status of the transaction
+            data_type: varchar
+          - name: status_code
+            description: Status code of the transaction
+            data_type: varchar
+          - name: status_message
+            description: Message related to the status of the transaction
+            data_type: varchar
+          - name: subscription_ids
+            description: List of subscription IDs associated with the transaction
+            data_type: array
+          - name: success
+            description: Indicates the success status of the transaction
+            data_type: boolean
+          - name: updated_at
+            description: Date and time of the last update to the transaction
+            data_type: timestamp
+          - name: uuid
+            description: Universally unique identifier for the transaction
+            data_type: varchar
+          - name: vat_number
+            description: VAT number associated with the transaction
+            data_type: varchar
+          - name: voided_at
+            description: Date and time when the transaction was voided
+            data_type: timestamp
+          - name: voided_by_invoice
+            description: Details of the invoice that voided the transaction
+            data_type: json
+            meta:
+              subcolumns:
+                - name: type
+                  data_type: varchar
+                - name: business_entity_id
+                  data_type: varchar
+                - name: id
+                  data_type: varchar
+                - name: number
+                  data_type: varchar
+                - name: object
+                  data_type: varchar
+                - name: state
+                  data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: unique_coupons
+        columns:
+          - name: bulk_coupon_code
+            description: The Coupon code of the parent Bulk Coupon
+            data_type: varchar
+          - name: bulk_coupon_id
+            description: The Coupon ID of the parent Bulk Coupon
+            data_type: varchar
+          - name: code
+            description: The code the customer enters to redeem the coupon.
+            data_type: varchar
+          - name: created_at
+            data_type: timestamp
+          - name: expired_at
+            description: The date and time the coupon was expired early or reached
+              its `max_redemptions`.
+            data_type: timestamp
+          - name: id
+            data_type: varchar
+          - name: object
+            data_type: varchar
+          - name: redeemed_at
+            description: The date and time the unique coupon code was redeemed.
+            data_type: timestamp
+          - name: state
+            description: Indicates if the unique coupon code is redeemable or why
+              not.
+            data_type: varchar
+          - name: updated_at
+            data_type: timestamp
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+        description: A unique coupon code for a bulk coupon.
+      - name: unique_coupons_parent
+        columns:
+          - name: applies_to_all_items
+            data_type: boolean
+          - name: applies_to_all_plans
+            data_type: boolean
+          - name: applies_to_non_plan_charges
+            data_type: boolean
+          - name: code
+            data_type: varchar
+          - name: coupon_type
+            data_type: varchar
+          - name: created_at
+            data_type: varchar
+          - name: discount
+            data_type: json
+            meta:
+              subcolumns:
+                - name: type
+                  data_type: varchar
+                - name: currencies
+                  data_type: array
+          - name: duration
+            data_type: varchar
+          - name: hosted_page_description
+            data_type: varchar
+          - name: id
+            data_type: varchar
+          - name: invoice_description
+            data_type: varchar
+          - name: max_redemptions_per_account
+            data_type: float
+          - name: name
+            data_type: varchar
+          - name: object
+            data_type: varchar
+          - name: redemption_resource
+            data_type: varchar
+          - name: state
+            data_type: varchar
+          - name: unique_code_template
+            data_type: varchar
+          - name: unique_coupon_codes_count
+            data_type: float
+          - name: updated_at
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar

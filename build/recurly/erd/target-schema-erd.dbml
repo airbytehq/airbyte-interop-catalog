@@ -1,0 +1,435 @@
+Table "account_balance_history" {
+    "account_id" unknown [note: 'The account the balance update is associated with.']
+    "account_updated_at" unknown [note: 'When the account balance was last changed.']
+    "amount" unknown [note: 'The combined amount of charge or credit adjustments that are left uninvoiced and open on the account.']
+    "currency" unknown [note: '3-letter ISO 4217 currency code (USD for US Dollar)']
+    "past_due" unknown [note: 'Is the existing amount of this balance due?']
+}
+
+Table "account_history" {
+    "id" unknown [note: 'Uniquely identifies your customers in Recurly. No two customers can share the same account id. Part of the PK']
+    "updated_at" unknown [note: 'When the account was last changed.']
+    "account_city" unknown [note: 'The city the account was registered in.']
+    "account_country" unknown [note: 'The country the account was registered in.']
+    "account_first_name" unknown [note: 'The first name for who registered the account.']
+    "account_last_name" unknown [note: 'The last name for who registered the account.']
+    "account_phone" unknown [note: 'The contact phone number registered on the account.']
+    "account_postal_code" unknown [note: 'The contact postal code registered on the account.']
+    "account_region" unknown [note: 'The region registered with the account, like state in the US or province in Canada.']
+    "account_street_1" unknown [note: 'The first street line registered with the account.']
+    "account_street_2" unknown [note: 'The second street line registered with the account.']
+    "bill_to" unknown [note: '''An enumerable describing the billing behavior of the account,  specifically whether the account is self-paying or will rely on the parent account to pay.
+    ''']
+    "cc_emails" unknown [note: '''Additional email address that should receive account correspondence.  These should be separated only by commas.  These CC emails will receive all emails that the email field also receives.         
+    ''']
+    "code" unknown [note: '''The unique identifier of the account. This cannot be changed once the account is created. Provided during account creation.
+    ''']
+    "company" unknown [note: 'The company related with the account.']
+    "created_at" unknown [note: 'When the account was created.']
+    "deleted_at" unknown [note: 'If present, when the account was last marked inactive.']
+    "email" unknown [note: '''The email address used for communicating with this customer.  The customer will also use this email address to log into your hosted account management pages.  This value does not need to be unique.
+    ''']
+    "exemption_certificate" unknown [note: '''Exemption certificate to prove that the business is tax exempt.
+    ''']
+    "first_name" unknown [note: 'The first name of the customer related to the account.']
+    "hosted_login_token" unknown [note: 'Custom URL on your site that logs the user directly into their account']
+    "last_name" unknown [note: 'The last name of the customer related to the account.']
+    "preferred_locale" unknown [note: 'The language code and country code for this account, like en-US.']
+    "state" unknown [note: 'Accounts can be either active or inactive.']
+    "tax_exempt" unknown [note: 'The tax status of the account. true exempts tax on the account, false applies tax on the account.']
+    "username" unknown [note: 'A secondary value for the account.']
+    "vat_number" unknown [note: 'The VAT number of the account (to avoid having the VAT applied). This is only used for manually collected invoices.']
+}
+
+Table "account_note_history" {
+    "id" unknown [note: 'Uniquely identifies the account note created.']
+    "account_id" unknown [note: 'Account associated with the note created.']
+    "account_updated_at" unknown [note: 'Last time the account note was updated.']
+    "created_at" unknown [note: 'Date/time When the note was created.']
+    "message" unknown [note: 'Contents of the note created.']
+    "object" unknown [note: 'Object type of account note.']
+    "user_id" unknown [note: 'Id associated with who created the note.']
+    "user_email" unknown [note: 'Email associated with who created the note.']
+}
+
+Table "billing_info_history" {
+    "id" unknown [note: 'Unique identifier for the billing info object.']
+    "account_id" unknown [note: 'Account identifier for the billing info.']
+    "billing_city" unknown [note: 'Billing city of the card on file for the account.']
+    "billing_country" unknown [note: 'Billing country of the card on file for the account.']
+    "billing_first_name" unknown [note: 'First name at billing address on account.']
+    "billing_last_name" unknown [note: 'Last name at billing address on account.']
+    "billing_phone" unknown [note: 'Phone number of the account.']
+    "billing_postal_code" unknown [note: 'Billing postal code of the card on file for the account.']
+    "billing_region" unknown [note: 'Billing region of the card on file for the account, like state in the US or province in Canada.']
+    "billing_street_1" unknown [note: 'First address line of the card on file for the account.']
+    "billing_street_2" unknown [note: 'Second address line of the card on file for the account.']
+    "company" unknown [note: 'Company name of the account.']
+    "created_at" unknown [note: 'Date customer\'s billing information was added to the account.']
+    "first_name" unknown [note: 'First name of the cardholder for the account.']
+    "fraud_decision" unknown [note: 'Decision made on whether billing info triggers a fraud alert.']
+    "fraud_risk_rules_triggered" unknown [note: 'The rules that are triggered for fraud if an alert is raised.']
+    "fraud_score" unknown [note: 'Fraud score on card based on risk inquiries.']
+    "last_name" unknown [note: 'Last name of the cardholder for the account.']
+    "payment_method_card_type" unknown [note: 'Card type of payment method, like Visa or Mastercard.']
+    "payment_method_exp_month" unknown [note: 'Month the payment method is expected to expire.']
+    "payment_method_exp_year" unknown [note: 'Year the payment method is expected to expire.']
+    "payment_method_first_six" unknown [note: 'First six numbers of the credit card used to process the transaction.']
+    "payment_method_last_four" unknown [note: 'Last four digits of the credit card number stored on customer\'s account.']
+    "payment_method_object" unknown [note: 'Object type of payment method, like credit card or debit card.']
+    "updated_at" unknown [note: 'Date customer\'s billing information was last updated on the account.']
+    "updated_by_country" unknown [note: 'Country from which latest billing info update came from.']
+    "updated_by_ip" unknown [note: 'IP address from which latest billing info update came from.']
+    "valid" unknown [note: 'Is the card valid? Boolean object.']
+    "vat_number" unknown [note: '(for EU companies), VAT number provider by customer.']
+}
+
+Table "coupon_discount" {
+    "coupon_id" unknown [note: 'Unique identifier for the coupon created.']
+    "fivetran_id" unknown [note: 'Combined unique surrogate key for the model.']
+    "amount" unknown [note: 'Fixed amount discount being applied, if applicable. Percentage would be null if amount exists.']
+    "currency" unknown [note: '3-letter ISO 4217 currency code (USD for US Dollar).']
+    "percentage" unknown [note: 'Percentage discount being applied, if applicable. Amount would be null if percentage exists.']
+    "trial_length" unknown [note: 'Period of time that coupon will discount eligible purchases by customer.']
+    "trial_unit" unknown [note: 'Unit of time associated with trial time (\'day\', \'week\', \'month\')']
+    "type" unknown [note: 'Delineates between which type of discount is being applied (\'fixed\' for amount discount, \'percent\' for percentage discount)']
+}
+
+Table "coupon_redemption_history" {
+    "id" unknown [note: 'Unique identifier for the coupon redemption created.']
+    "account_id" unknown [note: 'Account associated with the coupon being redeemed.']
+    "coupon_id" unknown [note: 'Coupon being redeemed.']
+    "created_at" unknown [note: 'Time coupon was being redeemed.']
+    "currency" unknown [note: '3-letter ISO 4217 currency code (USD for US Dollar).']
+    "discounted" unknown [note: 'Amount discounted from coupon redemption.']
+    "removed_at" unknown [note: 'If a coupon is removed from a customer, time of removal.']
+    "state" unknown [note: 'Current state of coupon redemption (usually active or inactive)']
+    "updated_at" unknown [note: 'Time coupon redemption last updated.']
+}
+
+Table "credit_payment_history" {
+    "id" unknown [note: 'Unique identifier for the credit payment.']
+    "account_id" unknown [note: 'The id of the account the credit payment is associated with.']
+    "action" unknown [note: '''The action that resulted in the credit payment being created. Enum: "payment", "gift_card", "write_off", "reduction", "refund" 
+    ''']
+    "amount" unknown [note: 'The amount of the credit payment, which will always be positive.']
+    "applied_to_invoice_id" unknown [note: '''The invoice the credit payment was applied to.  If action is payment, gift_card, or write_off, this is a charge invoice.  If action is reduction or refund, this is a credit invoice.
+    ''']
+    "created_at" unknown [note: 'The date and time the credit payment was created.']
+    "currency" unknown [note: '3-letter ISO 4217 currency code (USD for US Dollar).']
+    "original_credit_payment_id" unknown [note: '''The unique id of the credit payment the refund action credit payment is refunding.  Will only populate if the action on the row is "refund".
+    ''']
+    "original_invoice_id" unknown [note: 'The invoice of the credit invoice the credit payment came from.']
+    "refund_transaction_id" unknown [note: '''The unique id of the new refund transaction the refund action credit payment is transferring value to.  Will only populate if the action on the row is "refund".
+    ''']
+    "updated_at" unknown [note: 'Time credit payment last updated.']
+    "uuid" unknown [note: 'Unique id of credit payment.']
+    "voided_at" unknown [note: 'Time when a credit payment is voided.']
+}
+
+Table "invoice_coupon_redemption_history" {
+    "coupon_redemption_id" unknown [note: 'Unique identifier for the credit payment.']
+    "invoice_id" unknown [note: 'Invoice the coupon redemption is associated with.']
+    "invoice_updated_at" unknown [note: 'Last time the invoice was updated.']
+}
+
+Table "invoice_history" {
+    "id" unknown [note: 'Unique identifier for the object.']
+    "updated_at" unknown [note: 'When the invoice was updated.']
+    "account_id" unknown [note: 'The account this invoice belongs to.']
+    "amount" unknown [note: 'Total after discounts and taxes (quantity * unit_amount) - (discount + tax).']
+    "balance" unknown [note: 'The outstanding balance remaining on this invoice.']
+    "closed_at" unknown [note: 'Date invoice was marked paid or failed.']
+    "collection_method" unknown [note: '''An automatic invoice means a corresponding transaction is run using the account\'s billing information  at the same time the invoice is created. Manual invoices are created without a corresponding transaction.  The merchant must enter a manual payment transaction or have the customer pay the invoice with an automatic method,  like credit card, PayPal, Amazon, or ACH bank payment. Default: "automatic" Enum: "automatic", "manual"
+    ''']
+    "created_at" unknown [note: 'When the invoice was created.']
+    "currency" unknown [note: '3-letter ISO 4217 currency code.']
+    "customer_notes" unknown [note: 'Notes section available for any details account wants to add.']
+    "discount" unknown [note: 'Total discounts applied to this invoice.']
+    "due_at" unknown [note: 'Date invoice is due. This is the date the net terms are reached.']
+    "invoice_city" unknown [note: 'City of the customer\'s address on the invoice.']
+    "invoice_country" unknown [note: 'The 2 letter country code for the country of the customer\'s address on the invoice.']
+    "invoice_first_name" unknown [note: 'First name from account associated with that invoice.']
+    "invoice_last_name" unknown [note: 'Last name from account associated with that invoice.']
+    "invoice_name_on_account" unknown
+    "invoice_phone" unknown [note: 'Phone number associated with that invoice.']
+    "invoice_postal_code" unknown [note: 'Postal code of the customer\'s address on the invoice.']
+    "invoice_region" unknown [note: 'State or province of the customer\'s address on the invoice.']
+    "invoice_street_1" unknown [note: 'Address line 1 of the customer\'s address on the invoice.']
+    "invoice_street_2" unknown [note: 'Address line 2 of the customer\'s address on the invoice.']
+    "net_terms" unknown [note: '''Integer representing the number of days after an invoice\'s creation that the invoice will become past due.  If an invoice\'s net terms are set to \'0\', it is due \'On Receipt\' and will become past due 24 hours after it’s created.  If an invoice is due net 30, it will become past due at 31 days exactly. Default: 0
+    ''']
+    "number" unknown [note: '''If VAT taxation and the Country Invoice Sequencing feature are enabled,  invoices will have country-specific invoice numbers for invoices billed to EU countries (e.g. FR1001).  Non-EU invoices will continue to use the site-level invoice number sequence.
+    ''']
+    "origin" unknown [note: '''The event that created the invoice. Enum: "credit", "gift_card", "immediate_change", "line_item_refund", "open_amount_refund",  "purchase", "renewal", "termination", "write_off", "prepayment".
+    ''']
+    "paid" unknown [note: 'The total amount of successful payments transaction on this invoice.']
+    "po_number" unknown [note: 'For manual invoicing, this identifies the PO number associated with the subscription.']
+    "previous_invoice_id" unknown [note: 'On refund invoices, this value will exist and show the invoice ID of the purchase invoice the refund was created from.']
+    "refundable_amount" unknown [note: 'The refundable amount on a charge invoice. It will be null for all other invoices.']
+    "state" unknown [note: '''The invoice state.  Enum: "open", "pending", "processing", "past_due", "paid", "closed", "failed", "voided"
+    ''']
+    "subtotal" unknown [note: 'The summation of charges, discounts, and credits, before tax.']
+    "tax" unknown [note: 'The total tax on this invoice.']
+    "tax_rate" unknown [note: 'The rate of the tax.']
+    "tax_region" unknown [note: '''Provides the tax region applied on an invoice. For U.S. Sales Tax,  this will be the 2 letter state code.  For EU VAT this will be the 2 letter country code.  For all country level tax types, this will display the regional tax, like VAT, GST, or PST.
+    ''']
+    "tax_type" unknown [note: '''Provides the tax type as "vat" for EU VAT, "usst" for U.S. Sales Tax,  or the 2 letter country code for country level tax types like Canada, Australia, New Zealand, Israel, and all non-EU European countries.
+    ''']
+    "terms_and_conditions" unknown [note: 'A notes section available to you for any details you would like to add.']
+    "total" unknown [note: '''The final total on this invoice. The summation of invoice charges, discounts, credits, and tax. Alternative the summation of subtotal and tax.
+    ''']
+    "type" unknown [note: 'Invoices are either "charge", "credit", or "legacy" invoices.']
+    "vat_reverse_charge_notes" unknown [note: 'Notes section if you are using Recurly\'s EU VAT feature for tax collection.']
+}
+
+Table "invoice_subscription_history" {
+    "invoice_id" unknown [note: 'The id of the invoice associated with the subscription.']
+    "invoice_updated_at" unknown [note: 'When the invoice was updated.']
+    "subscription_id" unknown [note: 'The id of the subscription associated with the invoice.']
+}
+
+Table "line_item_history" {
+    "id" unknown [note: 'Unique identifier for the object.']
+    "updated_at" unknown [note: 'When the line item was updated.']
+    "account_id" unknown [note: 'The account this line item belongs to.']
+    "accounting_code" unknown [note: 'Internal accounting code to help you reconcile your revenue to the correct ledger.']
+    "add_on_code" unknown [note: 'If the line item is a charge or credit for an add-on, this is its code.']
+    "add_on_id" unknown [note: 'If the line item is a charge or credit for an add-on this is its ID.']
+    "amount" unknown [note: 'Total after discounts and taxes (quantity * unit_amount) - (discount + tax).']
+    "created_at" unknown [note: 'When the line item was created.']
+    "credit_applied" unknown [note: 'The amount of credit from this line item that was applied to the invoice.']
+    "credit_reason_code" unknown [note: 'The reason the credit was given.']
+    "currency" unknown [note: '3-letter ISO 4217 currency code.']
+    "description" unknown [note: 'Description that appears on the invoice. For subscription related items this will be filled in automatically.']
+    "discount" unknown [note: 'The discount applied to the line item.']
+    "end_date" unknown [note: 'If this date is provided, it indicates the end of a time range.']
+    "invoice_id" unknown [note: 'Once the line item has been invoiced this will be the invoice\'s ID.']
+    "invoice_number" unknown [note: '''Once the line item has been invoiced this will be the invoice\'s number.  If VAT taxation and the Country Invoice Sequencing feature are enabled,  invoices will have country-specific invoice numbers for invoices billed to EU countries (e.g. FR1001).  Non-EU invoices will continue to use the site-level invoice number sequence.
+    ''']
+    "legacy_category" unknown [note: '''Category to describe the role of a line item on a legacy invoice. “charges” refers to charges being billed for on this invoice.
+    ''']
+    "origin" unknown [note: '''A credit created from an original charge will have the value of the charge\'s origin. Enum: "add_on", "add_on_trial", "carryforward", "coupon", "credit", "debit", "one_time",  "plan", "plan_trial", "setup_fee", "prepayment"
+    ''']
+    "original_line_item_invoice_id" unknown [note: '''The invoice where the credit originated.  Will only have a value if the line item is a credit created from a previous credit,  or if the credit was created from a charge refund.
+    ''']
+    "plan_code" unknown [note: 'If the line item is a charge or credit for a plan or add-on, this is the plan\'s code.']
+    "plan_id" unknown [note: 'If the line item is a charge or credit for a plan or add-on, this is the plan\'s ID.']
+    "previous_line_item_id" unknown [note: '''Will only have a value if the line item is a credit created from a previous credit,  or if the credit was created from a charge refund.
+    ''']
+    "product_code" unknown [note: '''For plan-related line items this will be the plan\'s code, for add-on related line items it will be the add-on\'s code.  For item-related line items it will be the item\'s external_sku.
+    ''']
+    "proration_rate" unknown [note: '''When a line item has been prorated, this is the rate of the proration.  Proration rates were made available for line items created after March 30, 2017.  For line items created prior to that date, the proration rate will be null, even if the line item was prorated.
+    ''']
+    "quantity" unknown [note: '''This number will be multiplied by the unit amount to compute the subtotal before any discounts or taxes. Default: 1
+    ''']
+    "refund" unknown [note: 'true if the line item is refund, false if it is not.']
+    "refunded_quantity" unknown [note: 'For refund charges, the quantity being refunded. For non-refund charges, the total quantity refunded (possibly over multiple refunds).']
+    "start_date" unknown [note: '''If an end date is present, this is value indicates the beginning of a billing time range.  If no end date is present it indicates billing for a specific date.
+    ''']
+    "state" unknown [note: '''Pending line items are charges or credits on an account that have not been applied to an invoice yet.  Invoiced line items will always have an invoice_id value. Enum: "invoiced", "pending"
+    ''']
+    "subscription_id" unknown [note: 'If the line item is a charge or credit for a subscription, this is its ID.']
+    "subtotal" unknown [note: 'Total before discounts and taxes (quantity * unit_amount).']
+    "tax" unknown [note: 'The tax amount for the line item.']
+    "tax_code" unknown [note: '''Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The tax code values are specific to each tax system.  If you are using Recurly’s EU VAT feature you can use unknown, physical, or digital.
+    ''']
+    "tax_exempt" unknown [note: '''true exempts tax on charges, false applies tax on charges. If not defined, then defaults to the Plan and Site settings.  This attribute does not work for credits (negative line items). Credits are always applied post-tax.  Pre-tax discounts should use the Coupons feature.
+    ''']
+    "tax_rate" unknown [note: 'Tax rate']
+    "tax_region" unknown [note: '''Provides the tax region applied on an invoice.  For U.S. Sales Tax, this will be the 2 letter state code.  For EU VAT this will be the 2 letter country code.  For all country level tax types, this will display the regional tax, like VAT, GST, or PST.
+    ''']
+    "tax_type" unknown [note: '''Provides the tax type as "vat" for EU VAT, "usst" for U.S. Sales Tax, or the 2 letter country code for country level tax types  like Canada, Australia, New Zealand, Israel, and all non-EU European countries.
+    ''']
+    "taxable" unknown [note: 'true if the line item is taxable, false if it is not.']
+    "type" unknown [note: '''Charges are positive line items that debit the account.  Credits are negative line items that credit the account. Enum: "charge", "credit"
+    ''']
+    "unit_amount" unknown [note: 'Positive amount for a charge, negative amount for a credit.']
+    "uuid" unknown [note: 'The UUID is useful for matching data with the CSV exports and building URLs into Recurly\'s UI. Used in HTB database.']
+}
+
+Table "plan_currency_history" {
+    "plan_id" unknown [note: 'The id of the plan.']
+    "plan_updated_at" unknown [note: 'Last time plan updated.']
+    "currency" unknown [note: '3-letter ISO 4217 currency code.']
+    "setup_fees" unknown [note: 'Fee automatically charged at the beginning of a subscription billing cycle.']
+    "unit_amount" unknown [note: 'Amount for one plan.']
+}
+
+Table "plan_history" {
+    "id" unknown [note: 'Unique identifier for the object.']
+    "updated_at" unknown [note: 'When the plan was updated.']
+    "accounting_code" unknown [note: 'Accounting code for invoice line items for the plan. If no value is provided, it defaults to plan\'s code.']
+    "auto_renew" unknown [note: '''Subscriptions will automatically inherit this value once they are active.  If auto_renew is true, then a subscription will automatically renew its term at renewal.  If auto_renew is false, then a subscription will expire at the end of its term.  auto_renew can be overridden on the subscription record itself. Default: true
+    ''']
+    "code" unknown [note: 'Unique code to identify the plan. This is used in Hosted Payment Page URLs and in the invoice exports.']
+    "created_at" unknown [note: 'When the plan was created.']
+    "deleted_at" unknown [note: 'When the plan was deleted.']
+    "description" unknown [note: 'Optional description, not displayed.']
+    "hosted_pages_bypass_confirmation" unknown [note: 'Returns true if you use Recurly\'s Hosted Payment Pages and use custom return URL.']
+    "hosted_pages_cancel_url" unknown [note: 'If customer cancels subscription via Hosted Page, Recurly redirects customer to specific URL.']
+    "hosted_pages_display_quantity" unknown [note: 'Number of hosted pages under plan.']
+    "hosted_pages_success_url" unknown [note: 'If customer successfully subscribes via Hosted Page, Recurly redirects customer to specific URL']
+    "interval_length" unknown [note: '''Length of the plan\'s billing interval in interval_unit. Default: 1
+    ''']
+    "interval_unit" unknown [note: '''Unit for the plan\'s billing interval. Default: "months" Enum: "days", "months"
+    ''']
+    "name" unknown [note: 'This name describes your plan and will appear on the Hosted Payment Page and the subscriber\'s invoice.']
+    "setup_fee_accounting_code" unknown [note: 'Accounting code for invoice line items for the plan\'s setup fee. If no value is provided, it defaults to plan\'s accounting code.']
+    "state" unknown [note: '''The current state of the plan. Enum: "active", "inactive"
+    ''']
+    "tax_code" unknown [note: '''Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The tax code values are specific to each tax system.  If you are using Recurly’s EU VAT feature you can use unknown, physical, or digital.
+    ''']
+    "tax_exempt" unknown [note: 'true exempts tax on the plan, false applies tax on the plan.']
+    "total_billing_cycles" unknown [note: '''Automatically terminate subscriptions after a defined number of billing cycles.  Number of billing cycles before the plan automatically stops renewing, defaults to null for continuous, automatic renewal.
+    ''']
+    "trial_length" unknown [note: '''Length of plan\'s trial period in trial_units. 0 means no trial. Default: 0
+    ''']
+    "trial_unit" unknown [note: '''Units for the plan\'s trial period. Default: "months" Enum: "days", "months"
+    ''']
+}
+
+Table "subscription_add_on_history" {
+    "id" unknown [note: 'Unique identifier for subscription add-on.']
+    "updated_at" unknown [note: 'The date/time the add-on was last modified.']
+    "created_at" unknown [note: 'The date/time the add-on was last created.']
+    "expired_at" unknown [note: 'Date and time the subscription was/ will churn.']
+    "object" unknown [note: 'Object type of subscription add-on.']
+    "plan_add_on_id" unknown [note: 'Plan add-on ID associated with subscription add-on ID.']
+    "quantity" unknown [note: 'Number of add-ons added to the subscription.']
+    "subscription_id" unknown [note: 'Subscription ID associated with add-on.']
+    "unit_amount" unknown [note: 'Amount of one unit of the add-on.']
+}
+
+Table "subscription_change_history" {
+    "id" unknown [note: 'Unique identifier for subscription change.']
+    "activate_at" unknown [note: 'Date at which subscription changes.']
+    "activated" unknown [note: 'Is the subscription change currently active?']
+    "created_at" unknown [note: 'When the subscription was last created.']
+    "deleted_at" unknown [note: 'When subscription was rendered to be inactive.']
+    "object" unknown [note: 'Object type of subscription change.']
+    "plan_id" unknown [note: 'Plan id associated with subscription change.']
+    "quantity" unknown [note: 'Quantity of subscriptions changed']
+    "subscription_id" unknown [note: 'subscription ID associated with subscription change.']
+    "unit_amount" unknown [note: 'Amount of one unit subscription.']
+    "updated_at" unknown [note: 'Last modification of subscription change.']
+}
+
+Table "subscription_history" {
+    "id" unknown [note: 'Unique identifier for the object.']
+    "updated_at" unknown [note: 'When the subscription was updated.']
+    "account_id" unknown [note: 'The account this subscription belongs to.']
+    "activated_at" unknown [note: 'When the subscription was activated.']
+    "add_ons_total" unknown [note: 'Total price of add-ons. Greater or equal to 0.']
+    "auto_renew" unknown [note: '''Whether the subscription renews at the end of its term. Default: true
+    ''']
+    "bank_account_authorized_at" unknown [note: '''Merchants importing recurring subscriptions paid with ACH into Recurly can  backdate the subscription\'s authorization with this attribute using an ISO 8601 timestamp.  This timestamp is used for alerting customers to reauthorize in 3 years in accordance  with NACHA rules. If a subscription becomes inactive or the billing info is no longer  a bank account, this timestamp is cleared.
+    ''']
+    "canceled_at" unknown [note: 'When the subscription was canceled. Can take future dates']
+    "collection_method" unknown [note: '''Default: "automatic" Enum: "automatic", "manual"
+    ''']
+    "created_at" unknown [note: 'When the subscription was created.']
+    "currency" unknown [note: '3-letter ISO 4217 currency code.']
+    "current_period_ends_at" unknown [note: 'Date/time current billing period ends at.']
+    "current_period_started_at" unknown [note: 'Date/time current billing period started at.']
+    "current_term_ends_at" unknown [note: '''When the term ends. This is calculated by a plan\'s interval and total_billing_cycles in a term.  Subscription changes with a timeframe=renewal will be applied on this date.
+    ''']
+    "current_term_started_at" unknown [note: '''The start date of the term when the first billing period starts.  The subscription term is the length of time that a customer will be committed to a subscription.  A term can span multiple billing periods.
+    ''']
+    "customer_notes" unknown [note: '''This will default to the Customer Notes text specified on the Invoice Settings page. Custom notes will stay with a subscription on all renewals.
+    ''']
+    "expiration_reason" unknown [note: 'Expiration reason']
+    "expires_at" unknown [note: 'When the subscription has expired. Can take future dates.']
+    "net_terms" unknown [note: 'Identifies the agreement associated with the subscription.']
+    "object" unknown [note: 'The object type, in this case only "subscription"']
+    "paused_at" unknown [note: 'Null unless subscription is paused or will pause at the end of the current billing period.']
+    "plan_id" unknown [note: 'The plan this subscription belongs to.']
+    "po_number" unknown [note: 'For manual invoicing, this identifies the PO number associated with the subscription.']
+    "quantity" unknown [note: 'Subscription quantity. Greater or equal to 0.']
+    "remaining_billing_cycles" unknown [note: 'The remaining billing cycles in the current term.']
+    "remaining_pause_cycles" unknown [note: 'Null unless subscription is paused or will pause at the end of the current billing period.']
+    "renewal_billing_cycles" unknown [note: '''If auto_renew=true, when a term completes, total_billing_cycles takes this value as the length of subsequent terms.  Defaults to the plan\'s total_billing_cycles.
+    ''']
+    "shipping_address_id" unknown [note: 'Unique id assigned to shipping address.']
+    "state" unknown [note: '''The current state of the subscription. Enum: "active", "canceled", "expired", "failed", "future", "paused"
+    ''']
+    "subtotal" unknown [note: 'Estimated total, before tax.']
+    "terms_and_conditions" unknown [note: '''Optional notes field.  This will default to the Terms and Conditions text specified on the Invoice Settings page.
+    ''']
+    "total_billing_cycles" unknown [note: '''The number of cycles/billing periods in a term.  When remaining_billing_cycles=0, if auto_renew=true the subscription will renew and a new term will begin,  otherwise the subscription will expire.
+    ''']
+    "trial_ends_at" unknown [note: 'Trial period ends at']
+    "trial_started_at" unknown [note: 'Trial period started at']
+    "unit_amount" unknown [note: 'Subscription unit price']
+    "uuid" unknown [note: 'The UUID is useful for matching data with the CSV exports and building URLs into Recurly\'s UI.']
+}
+
+Table "transaction_subscription" {
+    "transaction_id" unknown [note: 'The id of the transaction associated with the subscription.']
+    "subscription_id" unknown [note: 'The id of the subscription associated with the transaction.']
+}
+
+Table "transaction" {
+    "id" unknown [note: 'Unique identifier for the object.']
+    "account_id" unknown [note: 'The account_id this transaction belongs to.']
+    "amount" unknown [note: 'Total transaction amount sent to the payment gateway.']
+    "avs_check" unknown [note: '''When processed, result from checking the overall AVS on the transaction. Enum: "N", "P", "D"
+    ''']
+    "billing_city" unknown [note: 'Billing info - City']
+    "billing_country" unknown [note: 'Billing info - Country, 2-letter ISO code.']
+    "billing_first_name" unknown [note: 'Billing info - First name']
+    "billing_last_name" unknown [note: 'Billing info - Last name']
+    "billing_phone" unknown [note: 'Billing info - Phone']
+    "billing_postal_code" unknown [note: 'Billing info - Zip or postal code.']
+    "billing_region" unknown [note: 'Billing info - State or province.']
+    "billing_street_1" unknown [note: 'Billing info - Address Street 1']
+    "billing_street_2" unknown [note: 'Billing info - Address Street 2']
+    "collected_at" unknown [note: 'When the transaction was collected.']
+    "collection_method" unknown [note: '''The method by which the payment was collected. Enum: "automatic", "manual"
+    ''']
+    "created_at" unknown [note: 'When the transaction was created.']
+    "currency" unknown [note: '3-letter ISO 4217 currency code.']
+    "customer_message" unknown [note: 'For declined (success=false) transactions, the message displayed to the customer.']
+    "customer_message_locale" unknown [note: 'Language code for the message']
+    "cvv_check" unknown [note: '''When processed, result from checking the CVV/CVC value on the transaction. Enum: "M", "N"
+    ''']
+    "gateway_approval_code" unknown [note: 'Transaction approval code from the payment gateway.']
+    "gateway_message" unknown [note: 'Transaction message from the payment gateway.']
+    "gateway_reference" unknown [note: 'Transaction reference number from the payment gateway.']
+    "gateway_response_code" unknown [note: 'For declined transactions (`success=false`), this field lists the gateway error code.']
+    "gateway_response_time" unknown [note: 'Time, in seconds, for gateway to process the transaction.']
+    "gateway_response_values" unknown [note: 'The values in this field will vary from gateway to gateway.']
+    "invoice_id" unknown [note: 'The invoice_id this transaction belongs to.']
+    "ip_address_country" unknown [note: 'When provided, the country associated with the IP address of customer\'s location when processing transaction.']
+    "ip_address_v_4" unknown [note: 'When provided, the IP address when processing transaction.']
+    "origin" unknown [note: '''Describes how the transaction was triggered. Enum: "api", "chargeback", "force_collect", "hpp", "merchant", "recurly_admin", "recurlyjs", "recurring", "refunded_externally", "transparent"
+    ''']
+    "original_transaction_id" unknown [note: 'If this transaction is a refund (type=refund), this will be the ID of the original transaction on the invoice being refunded.']
+    "payment_gateway_id" unknown [note: 'Payment gateway id']
+    "payment_gateway_name" unknown [note: 'Payment gateway name']
+    "payment_gateway_type" unknown [note: 'Payment gateway type']
+    "payment_method_card_type" unknown [note: 'Card type of payment method.']
+    "payment_method_exp_month" unknown [note: 'Expiration month of payment method.']
+    "payment_method_exp_year" unknown [note: 'Expiration year of payment method.']
+    "payment_method_first_six" unknown [note: 'First six numbers of payment method.']
+    "payment_method_last_four" unknown [note: 'Last four digits of payment method.']
+    "payment_method_object" unknown [note: '''Enum: "amazon", "amazon_billing_agreement", "apple_pay", "bank_account_info", "check", "credit_card", "eft",  "gateway_token", "iban_bank_account", "money_order", "other", "paypal", "paypal_billing_agreement", "roku",  "sepadirectdebit", "wire_transfer"
+    ''']
+    "refunded" unknown [note: 'Indicates if part or all of this transaction was refunded.']
+    "status" unknown [note: '''The current transaction status. Note that the status may change, e.g. a pending transaction may become declined or success may later become void. Enum: "chargeback", "declined", "error", "pending", "processing", "scheduled", "success", "void"
+    ''']
+    "status_code" unknown [note: 'Status code of the transaction']
+    "status_message" unknown [note: 'For declined (success=false) transactions, the message displayed to the merchant.']
+    "success" unknown [note: 'Did this transaction complete successfully?']
+    "type" unknown [note: '''Transaction types:
+      authorization - verifies billing information and places a hold on money in the customer\'s account.
+      capture - captures funds held by an authorization and completes a purchase.
+      purchase - combines the authorization and capture in one transaction.
+      refund - returns all or a portion of the money collected in a previous transaction to the customer.
+      verify - a $0 or $1 transaction used to verify billing information which is immediately voided.
+    Enum: "authorization", "capture", "purchase", "refund", "verify"
+    ''']
+    "uuid" unknown [note: 'The UUID is useful for matching data with the CSV exports and building URLs into Recurly\'s UI.']
+    "voided_at" unknown [note: 'When the transaction was voided.']
+    "voided_by_invoice_id" unknown [note: 'The invoice_id this transaction was voided.']
+}

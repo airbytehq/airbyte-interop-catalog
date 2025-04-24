@@ -1,0 +1,74 @@
+domain: recurly.airbyte-interop
+transforms:
+  - name: account_note_history
+    from:
+      - account_notes: recurly.account_notes
+    fields:
+      id:
+        expression: account_notes.id
+        description: Uniquely identifies the account note created.
+      account_id:
+        expression: account_notes.account_id
+        description: Account associated with the note created.
+      account_updated_at:
+        expression: MISSING
+        description: Last time the account note was updated.
+      created_at:
+        expression: account_notes.created_at
+        description: Date/time When the note was created.
+      message:
+        expression: account_notes.message
+        description: Contents of the note created.
+      object:
+        expression: account_notes.object
+        description: Object type of account note.
+      user_id:
+        expression: account_notes.user.id
+        description: Id associated with who created the note.
+      user_email:
+        expression: account_notes.user.email
+        description: Email associated with who created the note.
+annotations:
+  approved: true
+  missing_fields:
+    - account_updated_at
+  evaluation:
+    source_stream_name: account_notes
+    target_table_name: account_note_history
+    table_match_score: 0.75
+    completion_score: 0.86
+    explanation: The mappings are mostly accurate, but some fields such as 'account_updated_at'
+      reflect missing data, reducing the completion score.
+    field_mapping_evals:
+      - name: id
+        expression: account_notes.id
+        score: 1.0
+        explanation: Perfect direct mapping.
+      - name: account_id
+        expression: account_notes.account_id
+        score: 1.0
+        explanation: Perfect direct mapping.
+      - name: account_updated_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: created_at
+        expression: account_notes.created_at
+        score: 1.0
+        explanation: Perfect direct mapping.
+      - name: message
+        expression: account_notes.message
+        score: 1.0
+        explanation: Perfect direct mapping.
+      - name: object
+        expression: account_notes.object
+        score: 1.0
+        explanation: Perfect direct mapping.
+      - name: user_id
+        expression: account_notes.user.id
+        score: 0.9
+        explanation: Good match with some contextual evidence.
+      - name: user_email
+        expression: account_notes.user.email
+        score: 0.9
+        explanation: Good match with some contextual evidence.

@@ -1,0 +1,22 @@
+domain: recurly.airbyte-interop
+transforms:
+  - name: plan_currency_history
+    from:
+      - MISSING: recurly.MISSING
+    fields:
+      plan_id:
+        expression: MISSING
+        description: The id of the plan.
+      plan_updated_at:
+        expression: MISSING
+        description: Last time plan updated.
+      currency:
+        expression: MISSING
+        description: 3-letter ISO 4217 currency code.
+      setup_fees:
+        expression: MISSING
+        description: Fee automatically charged at the beginning of a subscription
+          billing cycle.
+      unit_amount:
+        expression: MISSING
+        description: Amount for one plan.

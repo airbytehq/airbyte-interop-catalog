@@ -1,0 +1,15 @@
+domain: recurly.airbyte-interop
+transforms:
+  - name: invoice_coupon_redemption_history
+    from:
+      - MISSING: recurly.MISSING
+    fields:
+      coupon_redemption_id:
+        expression: MISSING
+        description: Unique identifier for the credit payment.
+      invoice_id:
+        expression: MISSING
+        description: Invoice the coupon redemption is associated with.
+      invoice_updated_at:
+        expression: MISSING
+        description: Last time the invoice was updated.

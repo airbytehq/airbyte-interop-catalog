@@ -1,0 +1,375 @@
+domain: recurly.airbyte-interop
+transforms:
+  - name: line_item_history
+    from:
+      - line_items: recurly.line_items
+    fields:
+      id:
+        expression: line_items.id
+        description: Unique identifier for the object.
+      updated_at:
+        expression: line_items.updated_at
+        description: When the line item was updated.
+      account_id:
+        expression: line_items.account.id
+        description: The account this line item belongs to.
+      accounting_code:
+        expression: line_items.accounting_code
+        description: Internal accounting code to help you reconcile your revenue to
+          the correct ledger.
+      add_on_code:
+        expression: line_items.add_on_code
+        description: If the line item is a charge or credit for an add-on, this is
+          its code.
+      add_on_id:
+        expression: line_items.add_on_id
+        description: If the line item is a charge or credit for an add-on this is
+          its ID.
+      amount:
+        expression: line_items.amount
+        description: Total after discounts and taxes (quantity * unit_amount) - (discount
+          + tax).
+      created_at:
+        expression: line_items.created_at
+        description: When the line item was created.
+      credit_applied:
+        expression: line_items.credit_applied
+        description: The amount of credit from this line item that was applied to
+          the invoice.
+      credit_reason_code:
+        expression: line_items.credit_reason_code
+        description: The reason the credit was given.
+      currency:
+        expression: line_items.currency
+        description: 3-letter ISO 4217 currency code.
+      description:
+        expression: line_items.description
+        description: Description that appears on the invoice. For subscription related
+          items this will be filled in automatically.
+      discount:
+        expression: line_items.discount
+        description: The discount applied to the line item.
+      end_date:
+        expression: line_items.end_date
+        description: If this date is provided, it indicates the end of a time range.
+      invoice_id:
+        expression: line_items.invoice_id
+        description: Once the line item has been invoiced this will be the invoice's
+          ID.
+      invoice_number:
+        expression: line_items.invoice_number
+        description: "Once the line item has been invoiced this will be the invoice's
+          number.  If VAT taxation and the Country Invoice Sequencing feature are
+          enabled,  invoices will have country-specific invoice numbers for invoices
+          billed to EU countries (e.g. FR1001).  Non-EU invoices will continue to
+          use the site-level invoice number sequence.\n"
+      legacy_category:
+        expression: line_items.legacy_category
+        description: "Category to describe the role of a line item on a legacy invoice.
+          “charges” refers to charges being billed for on this invoice.\n"
+      origin:
+        expression: MISSING
+        description: "A credit created from an original charge will have the value
+          of the charge's origin. Enum: \"add_on\", \"add_on_trial\", \"carryforward\"\
+          , \"coupon\", \"credit\", \"debit\", \"one_time\",  \"plan\", \"plan_trial\"\
+          , \"setup_fee\", \"prepayment\"\n"
+      original_line_item_invoice_id:
+        expression: MISSING
+        description: "The invoice where the credit originated.  Will only have a value
+          if the line item is a credit created from a previous credit,  or if the
+          credit was created from a charge refund.\n"
+      plan_code:
+        expression: MISSING
+        description: If the line item is a charge or credit for a plan or add-on,
+          this is the plan's code.
+      plan_id:
+        expression: MISSING
+        description: If the line item is a charge or credit for a plan or add-on,
+          this is the plan's ID.
+      previous_line_item_id:
+        expression: MISSING
+        description: "Will only have a value if the line item is a credit created
+          from a previous credit,  or if the credit was created from a charge refund.\n"
+      product_code:
+        expression: MISSING
+        description: "For plan-related line items this will be the plan's code, for
+          add-on related line items it will be the add-on's code.  For item-related
+          line items it will be the item's external_sku.\n"
+      proration_rate:
+        expression: MISSING
+        description: "When a line item has been prorated, this is the rate of the
+          proration.  Proration rates were made available for line items created after
+          March 30, 2017.  For line items created prior to that date, the proration
+          rate will be null, even if the line item was prorated.\n"
+      quantity:
+        expression: MISSING
+        description: "This number will be multiplied by the unit amount to compute
+          the subtotal before any discounts or taxes. Default: 1\n"
+      refund:
+        expression: MISSING
+        description: true if the line item is refund, false if it is not.
+      refunded_quantity:
+        expression: MISSING
+        description: For refund charges, the quantity being refunded. For non-refund
+          charges, the total quantity refunded (possibly over multiple refunds).
+      start_date:
+        expression: MISSING
+        description: "If an end date is present, this is value indicates the beginning
+          of a billing time range.  If no end date is present it indicates billing
+          for a specific date.\n"
+      state:
+        expression: MISSING
+        description: "Pending line items are charges or credits on an account that
+          have not been applied to an invoice yet.  Invoiced line items will always
+          have an invoice_id value. Enum: \"invoiced\", \"pending\"\n"
+      subscription_id:
+        expression: MISSING
+        description: If the line item is a charge or credit for a subscription, this
+          is its ID.
+      subtotal:
+        expression: MISSING
+        description: Total before discounts and taxes (quantity * unit_amount).
+      tax:
+        expression: MISSING
+        description: The tax amount for the line item.
+      tax_code:
+        expression: MISSING
+        description: "Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The
+          tax code values are specific to each tax system.  If you are using Recurly’s
+          EU VAT feature you can use unknown, physical, or digital.\n"
+      tax_exempt:
+        expression: MISSING
+        description: "true exempts tax on charges, false applies tax on charges. If
+          not defined, then defaults to the Plan and Site settings.  This attribute
+          does not work for credits (negative line items). Credits are always applied
+          post-tax.  Pre-tax discounts should use the Coupons feature.\n"
+      tax_rate:
+        expression: MISSING
+        description: Tax rate
+      tax_region:
+        expression: MISSING
+        description: "Provides the tax region applied on an invoice.  For U.S. Sales
+          Tax, this will be the 2 letter state code.  For EU VAT this will be the
+          2 letter country code.  For all country level tax types, this will display
+          the regional tax, like VAT, GST, or PST.\n"
+      tax_type:
+        expression: MISSING
+        description: "Provides the tax type as \"vat\" for EU VAT, \"usst\" for U.S.
+          Sales Tax, or the 2 letter country code for country level tax types  like
+          Canada, Australia, New Zealand, Israel, and all non-EU European countries.\n"
+      taxable:
+        expression: MISSING
+        description: true if the line item is taxable, false if it is not.
+      type:
+        expression: MISSING
+        description: "Charges are positive line items that debit the account.  Credits
+          are negative line items that credit the account. Enum: \"charge\", \"credit\"\
+          \n"
+      unit_amount:
+        expression: MISSING
+        description: Positive amount for a charge, negative amount for a credit.
+      uuid:
+        expression: MISSING
+        description: The UUID is useful for matching data with the CSV exports and
+          building URLs into Recurly's UI. Used in HTB database.
+annotations:
+  approved: false
+  missing_fields:
+    - origin
+    - original_line_item_invoice_id
+    - plan_code
+    - plan_id
+    - previous_line_item_id
+    - product_code
+    - proration_rate
+    - quantity
+    - refund
+    - refunded_quantity
+    - start_date
+    - state
+    - subscription_id
+    - subtotal
+    - tax
+    - tax_code
+    - tax_exempt
+    - tax_rate
+    - tax_region
+    - tax_type
+    - taxable
+    - type
+    - unit_amount
+    - uuid
+  evaluation:
+    source_stream_name: line_items
+    target_table_name: line_item_history
+    table_match_score: 0.8
+    completion_score: 0.5
+    explanation: The table match has a strong score as the core identifiers and business
+      logic seem consistent, but the completion score is somewhat low due to several
+      missing mappings where the fields from the source implementation could not be
+      mapped appropriately to the target schema.
+    field_mapping_evals:
+      - name: id
+        expression: line_items.id
+        score: 1.0
+        explanation: Direct mapping of identifiers
+      - name: updated_at
+        expression: line_items.updated_at
+        score: 1.0
+        explanation: Direct mapping of date properties
+      - name: account_id
+        expression: line_items.account.id
+        score: 1.0
+        explanation: Correct relational mapping
+      - name: accounting_code
+        expression: line_items.accounting_code
+        score: 1.0
+        explanation: Direct mapping of account-specific properties
+      - name: add_on_code
+        expression: line_items.add_on_code
+        score: 0.8
+        explanation: High confidence for matching category
+      - name: add_on_id
+        expression: line_items.add_on_id
+        score: 0.8
+        explanation: High confidence for matching category
+      - name: amount
+        expression: line_items.amount
+        score: 1.0
+        explanation: Direct computation or property matching
+      - name: created_at
+        expression: line_items.created_at
+        score: 1.0
+        explanation: Direct mapping of date properties
+      - name: credit_applied
+        expression: line_items.credit_applied
+        score: 0.0
+        explanation: No good match found.
+      - name: credit_reason_code
+        expression: line_items.credit_reason_code
+        score: 0.0
+        explanation: No good match found.
+      - name: currency
+        expression: line_items.currency
+        score: 1.0
+        explanation: Standard currency code matching
+      - name: description
+        expression: line_items.description
+        score: 1.0
+        explanation: Direct text property assignment
+      - name: discount
+        expression: line_items.discount
+        score: 1.0
+        explanation: Matching financial terms
+      - name: end_date
+        expression: line_items.end_date
+        score: 1.0
+        explanation: Correct temporal mapping
+      - name: invoice_id
+        expression: line_items.invoice_id
+        score: 1.0
+        explanation: Direct referential matching
+      - name: invoice_number
+        expression: line_items.invoice_number
+        score: 1.0
+        explanation: Direct referential matching
+      - name: legacy_category
+        expression: line_items.legacy_category
+        score: 0.0
+        explanation: No good match found.
+      - name: origin
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: original_line_item_invoice_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: plan_code
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: plan_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: previous_line_item_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: product_code
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: proration_rate
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: quantity
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: refund
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: refunded_quantity
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: start_date
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: state
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: subscription_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: subtotal
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: tax
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: tax_code
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: tax_exempt
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: tax_rate
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: tax_region
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: tax_type
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: taxable
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: type
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: unit_amount
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: uuid
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

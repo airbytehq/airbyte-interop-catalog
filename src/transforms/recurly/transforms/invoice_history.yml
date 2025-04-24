@@ -1,0 +1,360 @@
+domain: recurly.airbyte-interop
+transforms:
+  - name: invoice_history
+    from:
+      - invoices: recurly.invoices
+    fields:
+      id:
+        expression: MISSING
+        description: Unique identifier for the object.
+      updated_at:
+        expression: MISSING
+        description: When the invoice was updated.
+      account_id:
+        expression: MISSING
+        description: The account this invoice belongs to.
+      amount:
+        expression: MISSING
+        description: Total after discounts and taxes (quantity * unit_amount) - (discount
+          + tax).
+      balance:
+        expression: MISSING
+        description: The outstanding balance remaining on this invoice.
+      closed_at:
+        expression: MISSING
+        description: Date invoice was marked paid or failed.
+      collection_method:
+        expression: MISSING
+        description: "An automatic invoice means a corresponding transaction is run
+          using the account's billing information  at the same time the invoice is
+          created. Manual invoices are created without a corresponding transaction.\
+          \  The merchant must enter a manual payment transaction or have the customer
+          pay the invoice with an automatic method,  like credit card, PayPal, Amazon,
+          or ACH bank payment. Default: \"automatic\" Enum: \"automatic\", \"manual\"\
+          \n"
+      created_at:
+        expression: MISSING
+        description: When the invoice was created.
+      currency:
+        expression: MISSING
+        description: 3-letter ISO 4217 currency code.
+      customer_notes:
+        expression: MISSING
+        description: Notes section available for any details account wants to add.
+      discount:
+        expression: MISSING
+        description: Total discounts applied to this invoice.
+      due_at:
+        expression: MISSING
+        description: Date invoice is due. This is the date the net terms are reached.
+      invoice_city:
+        expression: MISSING
+        description: City of the customer's address on the invoice.
+      invoice_country:
+        expression: MISSING
+        description: The 2 letter country code for the country of the customer's address
+          on the invoice.
+      invoice_first_name:
+        expression: MISSING
+        description: First name from account associated with that invoice.
+      invoice_last_name:
+        expression: MISSING
+        description: Last name from account associated with that invoice.
+      invoice_name_on_account:
+        expression: MISSING
+        description:
+      invoice_phone:
+        expression: MISSING
+        description: Phone number associated with that invoice.
+      invoice_postal_code:
+        expression: MISSING
+        description: Postal code of the customer's address on the invoice.
+      invoice_region:
+        expression: MISSING
+        description: State or province of the customer's address on the invoice.
+      invoice_street_1:
+        expression: MISSING
+        description: Address line 1 of the customer's address on the invoice.
+      invoice_street_2:
+        expression: MISSING
+        description: Address line 2 of the customer's address on the invoice.
+      net_terms:
+        expression: MISSING
+        description: "Integer representing the number of days after an invoice's creation
+          that the invoice will become past due.  If an invoice's net terms are set
+          to '0', it is due 'On Receipt' and will become past due 24 hours after it’s
+          created.  If an invoice is due net 30, it will become past due at 31 days
+          exactly. Default: 0\n"
+      number:
+        expression: MISSING
+        description: "If VAT taxation and the Country Invoice Sequencing feature are
+          enabled,  invoices will have country-specific invoice numbers for invoices
+          billed to EU countries (e.g. FR1001).  Non-EU invoices will continue to
+          use the site-level invoice number sequence.\n"
+      origin:
+        expression: MISSING
+        description: "The event that created the invoice. Enum: \"credit\", \"gift_card\"\
+          , \"immediate_change\", \"line_item_refund\", \"open_amount_refund\",  \"\
+          purchase\", \"renewal\", \"termination\", \"write_off\", \"prepayment\"\
+          .\n"
+      paid:
+        expression: MISSING
+        description: The total amount of successful payments transaction on this invoice.
+      po_number:
+        expression: MISSING
+        description: For manual invoicing, this identifies the PO number associated
+          with the subscription.
+      previous_invoice_id:
+        expression: MISSING
+        description: On refund invoices, this value will exist and show the invoice
+          ID of the purchase invoice the refund was created from.
+      refundable_amount:
+        expression: MISSING
+        description: The refundable amount on a charge invoice. It will be null for
+          all other invoices.
+      state:
+        expression: MISSING
+        description: "The invoice state.  Enum: \"open\", \"pending\", \"processing\"\
+          , \"past_due\", \"paid\", \"closed\", \"failed\", \"voided\"\n"
+      subtotal:
+        expression: MISSING
+        description: The summation of charges, discounts, and credits, before tax.
+      tax:
+        expression: MISSING
+        description: The total tax on this invoice.
+      tax_rate:
+        expression: MISSING
+        description: The rate of the tax.
+      tax_region:
+        expression: MISSING
+        description: "Provides the tax region applied on an invoice. For U.S. Sales
+          Tax,  this will be the 2 letter state code.  For EU VAT this will be the
+          2 letter country code.  For all country level tax types, this will display
+          the regional tax, like VAT, GST, or PST.\n"
+      tax_type:
+        expression: MISSING
+        description: "Provides the tax type as \"vat\" for EU VAT, \"usst\" for U.S.
+          Sales Tax,  or the 2 letter country code for country level tax types like
+          Canada, Australia, New Zealand, Israel, and all non-EU European countries.\n"
+      terms_and_conditions:
+        expression: MISSING
+        description: A notes section available to you for any details you would like
+          to add.
+      total:
+        expression: MISSING
+        description: "The final total on this invoice. The summation of invoice charges,
+          discounts, credits, and tax. Alternative the summation of subtotal and tax.\n"
+      type:
+        expression: MISSING
+        description: Invoices are either "charge", "credit", or "legacy" invoices.
+      vat_reverse_charge_notes:
+        expression: MISSING
+        description: Notes section if you are using Recurly's EU VAT feature for tax
+          collection.
+annotations:
+  approved: false
+  missing_fields:
+    - account_id
+    - amount
+    - balance
+    - closed_at
+    - collection_method
+    - created_at
+    - currency
+    - customer_notes
+    - discount
+    - due_at
+    - id
+    - invoice_city
+    - invoice_country
+    - invoice_first_name
+    - invoice_last_name
+    - invoice_name_on_account
+    - invoice_phone
+    - invoice_postal_code
+    - invoice_region
+    - invoice_street_1
+    - invoice_street_2
+    - net_terms
+    - number
+    - origin
+    - paid
+    - po_number
+    - previous_invoice_id
+    - refundable_amount
+    - state
+    - subtotal
+    - tax
+    - tax_rate
+    - tax_region
+    - tax_type
+    - terms_and_conditions
+    - total
+    - type
+    - updated_at
+    - vat_reverse_charge_notes
+  evaluation:
+    source_stream_name: invoices
+    target_table_name: invoice_history
+    table_match_score: 0.0
+    completion_score: 0.0
+    explanation: Since all provided fields have an expression set to 'MISSING', indicating
+      no mappings have been successfully established, the confidence in both the table
+      match and the completion of field mappings is zero.
+    field_mapping_evals:
+      - name: id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: updated_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: account_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: amount
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: balance
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: closed_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: collection_method
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: created_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: currency
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: customer_notes
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: discount
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: due_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: invoice_city
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: invoice_country
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: invoice_first_name
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: invoice_last_name
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: invoice_name_on_account
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: invoice_phone
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: invoice_postal_code
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: invoice_region
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: invoice_street_1
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: invoice_street_2
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: net_terms
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: number
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: origin
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: paid
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: po_number
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: previous_invoice_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: refundable_amount
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: state
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: subtotal
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: tax
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: tax_rate
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: tax_region
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: tax_type
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: terms_and_conditions
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: total
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: type
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: vat_reverse_charge_notes
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

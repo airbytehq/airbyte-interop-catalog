@@ -1,0 +1,426 @@
+domain: recurly.airbyte-interop
+transforms:
+  - name: transaction
+    from:
+      - transactions: recurly.transactions
+    fields:
+      id:
+        expression: transactions.account.id
+        description: Unique identifier for the object.
+      account_id:
+        expression: MISSING
+        description: The account_id this transaction belongs to.
+      amount:
+        expression: transactions.amount
+        description: Total transaction amount sent to the payment gateway.
+      avs_check:
+        expression: MISSING
+        description: "When processed, result from checking the overall AVS on the
+          transaction. Enum: \"N\", \"P\", \"D\"\n"
+      billing_city:
+        expression: transactions.billing_address.city
+        description: Billing info - City
+      billing_country:
+        expression: transactions.billing_address.country
+        description: Billing info - Country, 2-letter ISO code.
+      billing_first_name:
+        expression: transactions.billing_address.first_name
+        description: Billing info - First name
+      billing_last_name:
+        expression: transactions.billing_address.last_name
+        description: Billing info - Last name
+      billing_phone:
+        expression: transactions.billing_address.phone
+        description: Billing info - Phone
+      billing_postal_code:
+        expression: transactions.billing_address.postal_code
+        description: Billing info - Zip or postal code.
+      billing_region:
+        expression: transactions.billing_address.region
+        description: Billing info - State or province.
+      billing_street_1:
+        expression: transactions.billing_address.street1
+        description: Billing info - Address Street 1
+      billing_street_2:
+        expression: transactions.billing_address.street2
+        description: Billing info - Address Street 2
+      collected_at:
+        expression: MISSING
+        description: When the transaction was collected.
+      collection_method:
+        expression: MISSING
+        description: "The method by which the payment was collected. Enum: \"automatic\"\
+          , \"manual\"\n"
+      created_at:
+        expression: MISSING
+        description: When the transaction was created.
+      currency:
+        expression: MISSING
+        description: 3-letter ISO 4217 currency code.
+      customer_message:
+        expression: MISSING
+        description: For declined (success=false) transactions, the message displayed
+          to the customer.
+      customer_message_locale:
+        expression: MISSING
+        description: Language code for the message
+      cvv_check:
+        expression: MISSING
+        description: "When processed, result from checking the CVV/CVC value on the
+          transaction. Enum: \"M\", \"N\"\n"
+      gateway_approval_code:
+        expression: MISSING
+        description: Transaction approval code from the payment gateway.
+      gateway_message:
+        expression: MISSING
+        description: Transaction message from the payment gateway.
+      gateway_reference:
+        expression: MISSING
+        description: Transaction reference number from the payment gateway.
+      gateway_response_code:
+        expression: MISSING
+        description: For declined transactions (`success=false`), this field lists
+          the gateway error code.
+      gateway_response_time:
+        expression: MISSING
+        description: Time, in seconds, for gateway to process the transaction.
+      gateway_response_values:
+        expression: MISSING
+        description: The values in this field will vary from gateway to gateway.
+      invoice_id:
+        expression: MISSING
+        description: The invoice_id this transaction belongs to.
+      ip_address_country:
+        expression: MISSING
+        description: When provided, the country associated with the IP address of
+          customer's location when processing transaction.
+      ip_address_v_4:
+        expression: MISSING
+        description: When provided, the IP address when processing transaction.
+      origin:
+        expression: MISSING
+        description: "Describes how the transaction was triggered. Enum: \"api\",
+          \"chargeback\", \"force_collect\", \"hpp\", \"merchant\", \"recurly_admin\"\
+          , \"recurlyjs\", \"recurring\", \"refunded_externally\", \"transparent\"\
+          \n"
+      original_transaction_id:
+        expression: MISSING
+        description: If this transaction is a refund (type=refund), this will be the
+          ID of the original transaction on the invoice being refunded.
+      payment_gateway_id:
+        expression: MISSING
+        description: Payment gateway id
+      payment_gateway_name:
+        expression: MISSING
+        description: Payment gateway name
+      payment_gateway_type:
+        expression: MISSING
+        description: Payment gateway type
+      payment_method_card_type:
+        expression: MISSING
+        description: Card type of payment method.
+      payment_method_exp_month:
+        expression: MISSING
+        description: Expiration month of payment method.
+      payment_method_exp_year:
+        expression: MISSING
+        description: Expiration year of payment method.
+      payment_method_first_six:
+        expression: MISSING
+        description: First six numbers of payment method.
+      payment_method_last_four:
+        expression: MISSING
+        description: Last four digits of payment method.
+      payment_method_object:
+        expression: MISSING
+        description: "Enum: \"amazon\", \"amazon_billing_agreement\", \"apple_pay\"\
+          , \"bank_account_info\", \"check\", \"credit_card\", \"eft\",  \"gateway_token\"\
+          , \"iban_bank_account\", \"money_order\", \"other\", \"paypal\", \"paypal_billing_agreement\"\
+          , \"roku\",  \"sepadirectdebit\", \"wire_transfer\"\n"
+      refunded:
+        expression: MISSING
+        description: Indicates if part or all of this transaction was refunded.
+      status:
+        expression: MISSING
+        description: "The current transaction status. Note that the status may change,
+          e.g. a pending transaction may become declined or success may later become
+          void. Enum: \"chargeback\", \"declined\", \"error\", \"pending\", \"processing\"\
+          , \"scheduled\", \"success\", \"void\"\n"
+      status_code:
+        expression: MISSING
+        description: Status code of the transaction
+      status_message:
+        expression: MISSING
+        description: For declined (success=false) transactions, the message displayed
+          to the merchant.
+      success:
+        expression: MISSING
+        description: Did this transaction complete successfully?
+      type:
+        expression: MISSING
+        description: "Transaction types:\n  authorization - verifies billing information
+          and places a hold on money in the customer's account.\n  capture - captures
+          funds held by an authorization and completes a purchase.\n  purchase - combines
+          the authorization and capture in one transaction.\n  refund - returns all
+          or a portion of the money collected in a previous transaction to the customer.\n\
+          \  verify - a $0 or $1 transaction used to verify billing information which
+          is immediately voided.\nEnum: \"authorization\", \"capture\", \"purchase\"\
+          , \"refund\", \"verify\"\n"
+      uuid:
+        expression: MISSING
+        description: The UUID is useful for matching data with the CSV exports and
+          building URLs into Recurly's UI.
+      voided_at:
+        expression: MISSING
+        description: When the transaction was voided.
+      voided_by_invoice_id:
+        expression: MISSING
+        description: The invoice_id this transaction was voided.
+annotations:
+  approved: false
+  missing_fields:
+    - account_id
+    - avs_check
+    - collected_at
+    - collection_method
+    - created_at
+    - currency
+    - customer_message
+    - customer_message_locale
+    - cvv_check
+    - gateway_approval_code
+    - gateway_message
+    - gateway_reference
+    - gateway_response_code
+    - gateway_response_time
+    - gateway_response_values
+    - invoice_id
+    - ip_address_country
+    - ip_address_v_4
+    - origin
+    - original_transaction_id
+    - payment_gateway_id
+    - payment_gateway_name
+    - payment_gateway_type
+    - payment_method_card_type
+    - payment_method_exp_month
+    - payment_method_exp_year
+    - payment_method_first_six
+    - payment_method_last_four
+    - payment_method_object
+    - refunded
+    - status
+    - status_code
+    - status_message
+    - success
+    - type
+    - uuid
+    - voided_at
+    - voided_by_invoice_id
+  evaluation:
+    source_stream_name: transactions
+    target_table_name: transaction
+    table_match_score: 0.5
+    completion_score: 0.2
+    explanation: Most field mappings are set to 'MISSING' indicating lack of good
+      matches or unavailability of fields, reflecting a low confidence in proper field
+      correspondence. The table matching score suggests only moderate confidence that
+      the source and target tables describe the same subject matter.
+    field_mapping_evals:
+      - name: id
+        expression: transactions.account.id
+        score: 1.0
+        explanation: Proper mapping of unique identifier.
+      - name: account_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: amount
+        expression: transactions.amount
+        score: 1.0
+        explanation: Proper mapping of transaction amount.
+      - name: avs_check
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: billing_city
+        expression: transactions.billing_address.city
+        score: 1.0
+        explanation: Correct city mapping in billing address.
+      - name: billing_country
+        expression: transactions.billing_address.country
+        score: 1.0
+        explanation: Correct country mapping in billing address.
+      - name: billing_first_name
+        expression: transactions.billing_address.first_name
+        score: 1.0
+        explanation: Correct first name mapping in billing address.
+      - name: billing_last_name
+        expression: transactions.billing_address.last_name
+        score: 1.0
+        explanation: Correct last name mapping in billing address.
+      - name: billing_phone
+        expression: transactions.billing_address.phone
+        score: 1.0
+        explanation: Correct phone mapping in billing address.
+      - name: billing_postal_code
+        expression: transactions.billing_address.postal_code
+        score: 1.0
+        explanation: Correct postal code mapping in billing address.
+      - name: billing_region
+        expression: transactions.billing_address.region
+        score: 1.0
+        explanation: Correct region mapping in billing address.
+      - name: billing_street_1
+        expression: transactions.billing_address.street1
+        score: 1.0
+        explanation: Correct street address mapping in billing address.
+      - name: billing_street_2
+        expression: transactions.billing_address.street2
+        score: 1.0
+        explanation: Correct street address mapping for additional line in billing
+          address.
+      - name: collected_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: collection_method
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: created_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: currency
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: customer_message
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: customer_message_locale
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: cvv_check
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: gateway_approval_code
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: gateway_message
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: gateway_reference
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: gateway_response_code
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: gateway_response_time
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: gateway_response_values
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: invoice_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: ip_address_country
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: ip_address_v_4
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: origin
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: original_transaction_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: payment_gateway_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: payment_gateway_name
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: payment_gateway_type
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: payment_method_card_type
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: payment_method_exp_month
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: payment_method_exp_year
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: payment_method_first_six
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: payment_method_last_four
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: payment_method_object
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: refunded
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: status
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: status_code
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: status_message
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: success
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: type
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: uuid
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: voided_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: voided_by_invoice_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
