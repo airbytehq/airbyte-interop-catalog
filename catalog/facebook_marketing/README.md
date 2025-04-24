@@ -20,10 +20,10 @@ This can be helpful if:
 
 In any of these cases, you can use the below mapping logic to shape your new data to fit old data schema requirements and **save time** in your migration.
 
-> ![Tip]
+> [!Tip]
 > Use the right-hand navigation to quickly browse available dataset mappings.
 
-> ![Warning]
+> [!Warning]
 > AI-generated results may contain errors. Please sanity check results and adapt these resources to your needs accordingly.
 
 ### Mapping: Airbyte `campaigns` to Fivetran `campaign_history`

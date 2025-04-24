@@ -24,7 +24,7 @@ In any of these cases, you can use the below mapping logic to shape your new dat
 >
 > Use the right-hand navigation to quickly browse available dataset mappings.
 
-> ![Warning]
+> [!Warning]
 > AI-generated results may contain errors. Please sanity check results and adapt these resources to your needs accordingly.
 
 
