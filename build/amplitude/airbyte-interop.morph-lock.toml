@@ -1,0 +1,135 @@
+[project]
+source_name = "amplitude"
+project_name = "airbyte-interop"
+requirements_file = "build/amplitude/requirements/airbyte-interop/src_dbt_requirements.yml"
+requirements_file_hash = "fe6dba4dc66e833f92b3c1df5e4ee7fe1568aa25df18c311ebc9a0f0c2b6db6a"
+airbyte_source_file = "build/amplitude/src_airbyte_raw_amplitude.yml"
+airbyte_source_file_hash = "5bf71a531e4abad9823d827ed2796b02f6028a162bac619b66a1b95bc7e08cbe"
+
+[coverage]
+unused_source_streams = [
+    "active_users",
+    "annotations",
+    "average_session_length",
+    "cohorts",
+]
+unmapped_target_tables = []
+
+[mappings.event]
+source_file = "src/transforms/amplitude/transforms/event.yml"
+source_file_hash = "73dd008b332f3bdf567bd4f7b9efcd96432c0b9cf836cf798e7c165b098fc4fd"
+source_stream = "events"
+unmapped_target_fields = [
+    "_fivetran_deleted",
+    "ad_id",
+    "id",
+    "project_name",
+    "schema",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = [
+    "event_type_id",
+]
+
+[mappings.event.mapped_target_fields]
+_fivetran_synced = "events._airbyte_extracted_at"
+amplitude_id = "events.amplitude_id"
+amplitude_attribution_ids = "events.amplitude_attribution_ids"
+app = "events.app"
+city = "events.city"
+client_event_time = "events.client_event_time"
+client_upload_time = "events.client_upload_time"
+country = "events.country"
+data = "events.data"
+device_brand = "events.device_brand"
+device_carrier = "events.device_carrier"
+device_family = "events.device_family"
+device_id = "events.device_id"
+device_manufacturer = "events.device_manufacturer"
+device_model = "events.device_model"
+device_type = "events.device_type"
+dma = "events.dma"
+event_properties = "events.event_properties"
+event_time = "events.event_time"
+event_type = "events.event_type"
+event_type_id = "events.event_type_id"
+group_properties = "events.group_properties"
+groups = "events.groups"
+idfa = "events.idfa"
+_insert_id = "events._insert_id"
+ip_address = "events.ip_address"
+is_attribution_event = "events.is_attribution_event"
+language = "events.language"
+library = "events.library"
+location_lat = "events.location_lat"
+location_lng = "events.location_lng"
+os_name = "events.os_name"
+os_version = "events.os_version"
+paying = "events.paying"
+platform = "events.platform"
+processed_time = "events.processed_time"
+region = "events.region"
+server_received_time = "events.server_received_time"
+server_upload_time = "events.server_upload_time"
+session_id = "events.session_id"
+start_version = "events.start_version"
+user_creation_time = "events.user_creation_time"
+user_id = "events.user_id"
+user_properties = "events.user_properties"
+uuid = "events.uuid"
+version_name = "events.version_name"
+
+[mappings.event.unused_source_fields]
+events = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "_insert_key",
+    "_schema",
+    "adid",
+    "amplitude_event_type",
+    "data_type",
+    "event_id",
+    "global_user_properties",
+    "partner_id",
+    "plan",
+    "plan.branch",
+    "plan.source",
+    "plan.version",
+    "sample_rate",
+    "source_id",
+]
+
+[mappings.event_type]
+source_file = "src/transforms/amplitude/transforms/event_type.yml"
+source_file_hash = "05bccd2d8ad62f430fbf07ec2ab255754b02543b9b33d280063074423ef85012"
+source_stream = "events_list"
+unmapped_target_fields = [
+    "_fivetran_deleted",
+    "project_name",
+    "waitroom_approved",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.event_type.mapped_target_fields]
+_fivetran_synced = "events_list._airbyte_extracted_at"
+autohidden = "events_list.autohidden"
+deleted = "events_list.deleted"
+display = "events_list.display"
+flow_hidden = "events_list.flow_hidden"
+hidden = "events_list.hidden"
+id = "events_list.id"
+in_waitroom = "events_list.in_waitroom"
+name = "events_list.name"
+non_active = "events_list.non_active"
+timeline_hidden = "events_list.timeline_hidden"
+totals = "events_list.totals"
+totals_delta = "events_list.totals_delta"
+value = "events_list.value"
+
+[mappings.event_type.unused_source_fields]
+events_list = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "clusters_hidden",
+]

@@ -1,0 +1,229 @@
+domain: amplitude.airbyte-interop
+transforms:
+  - name: event
+    from:
+      - events: amplitude.events
+    fields:
+      _fivetran_deleted:
+        expression: MISSING
+        description: Timestamp of when Fivetran marked a record as deleted.
+      _fivetran_synced:
+        expression: events._airbyte_extracted_at
+        description: Timestamp of when Fivetran synced a record.
+      amplitude_id:
+        expression: events.amplitude_id
+        description: An internal ID used to count unique users.
+      ad_id:
+        expression: MISSING
+        description: "(Android) Google Play Services advertising ID (AdID). This usually
+          is wiped after ingestion and therefore will be blank\n"
+      amplitude_attribution_ids:
+        expression: events.amplitude_attribution_ids
+        description: "Anonymized hash of the advertising IDs that Amplitude stores
+          for internal purposes; not useful for customers by any means. But this will
+          appear if advertising IDs were sent which proves that adid/idfv existed
+          even though currently wiped\n"
+      app:
+        expression: events.app
+        description: Project ID found in your project's Settings page
+      city:
+        expression: events.city
+        description: City where event was registered.
+      client_event_time:
+        expression: events.client_event_time
+        description: "Local timestamp (UTC) of when the device logged the event.\n"
+      client_upload_time:
+        expression: events.client_upload_time
+        description: The local timestamp (UTC) of when the device uploaded the event.
+      country:
+        expression: events.country
+        description: Country where event was registered.
+      data:
+        expression: events.data
+        description: "Dictionary where certain fields such as first_event and merged_amplitude_id
+          are stored. Ex, {\"first_event\":true}\n"
+      device_brand:
+        expression: events.device_brand
+        description: Brand of device where event was registered on.
+      device_carrier:
+        expression: events.device_carrier
+        description: Carrier of device where event was registered on.
+      device_family:
+        expression: events.device_family
+        description: Device family. Ex, Apple iPhone
+      device_id:
+        expression: events.device_id
+        description: The device specific identifier
+      device_manufacturer:
+        expression: events.device_manufacturer
+        description: Manufacturer of device where event was registered on.
+      device_model:
+        expression: events.device_model
+        description: The model of device where event was registered on.
+      device_type:
+        expression: events.device_type
+        description: Type of device where event was registered on.
+      dma:
+        expression: events.dma
+        description: Designated marketing area (DMA)
+      id:
+        expression: MISSING
+        description: A counter that distinguishes events
+      event_properties:
+        expression: events.event_properties
+        description: "Event properties are attributes of the events your users fire,
+          and which you then send to Amplitude. Each event will have its own set of
+          event properties. The nature of these properties depends on both the type
+          of product you have, and the specific information you're most interested
+          in discovering. For instance, if Swipe is an event you're tracking, the
+          event property Direction could have the values Left or Right. Some example
+          event properties are description, category, type, duration, level, percent
+          completed, count, source, status, number, lives, authenticated, error number,
+          rank, action, and mode. \n"
+      event_time:
+        expression: events.event_time
+        description: "Amplitude timestamp (UTC) which is the client_event_time adjusted
+          by the difference between server_received_time and client_upload_time, specifically:
+          event_time = client_event_time + (server_received_time - client_upload_time)
+          2015-08-10T12:00:00.000000 We use this timestamp to organize events on Amplitude
+          charts. Note: If the difference between server_received_time and client_upload_time
+          is less than 60 seconds, the event_time will not be adjusted and will equal
+          the client_event_time\n"
+      event_type:
+        expression: events.event_type
+        description: The assigned type of event. Example 'Add Friend'
+      event_type_id:
+        expression: events.event_type_id
+        description: Internal identifier on Amplitude.
+      group_properties:
+        expression: events.group_properties
+        description: A dictionary of key-value pairs that represent data tied to the
+          group. Each distinct value appears as a group segment on the Amplitude dashboard.
+          You can store property values in an array, and date values are transformed
+          into string values.
+      groups:
+        expression: events.groups
+        description: Group types. See the Accounts documentation for more information.
+      idfa:
+        expression: events.idfa
+        description: "(iOS) Identifier for Advertiser. This usually is wiped after
+          ingestion and therefore will be blank\n"
+      _insert_id:
+        expression: events._insert_id
+        description: "A unique identifier for the event. Amplitude deduplicates subsequent
+          events sent with the same device_id and insert_id within the past 7 days.
+          Amplitude recommends generating a UUID or using some combination of device_id,
+          user_id, event_type, event_id, and time.  \n"
+      ip_address:
+        expression: events.ip_address
+        description: IP address
+      is_attribution_event:
+        expression: events.is_attribution_event
+        description: Boolean of whether event was an attribution event
+      language:
+        expression: events.language
+        description: The language set by the user
+      library:
+        expression: events.library
+        description: Library being used to send the event data.
+      location_lat:
+        expression: events.location_lat
+        description: Latitude
+      location_lng:
+        expression: events.location_lng
+        description: Longitude
+      os_name:
+        expression: events.os_name
+        description: OS name where event was registered on.
+      os_version:
+        expression: events.os_version
+        description: OS version where event was registered on.
+      paying:
+        expression: events.paying
+        description: Boolean of whether the user has ever logged any revenue, otherwise
+          '(none)'. Note the property value can be modified via the\_Identify API.
+      platform:
+        expression: events.platform
+        description: Platform of the device.
+      processed_time:
+        expression: events.processed_time
+        description: Time of when event was processed
+      project_name:
+        expression: MISSING
+        description: Project ID
+      region:
+        expression: events.region
+        description: Region where event was registered on.
+      schema:
+        expression: MISSING
+        description: Schema ID
+      server_received_time:
+        expression: events.server_received_time
+        description: Amplitude timestamp (UTC) of when servers received the event
+      server_upload_time:
+        expression: events.server_upload_time
+        description: Amplitude timestamp (UTC) of when the event data was uploaded
+          to Amplitude servers
+      session_id:
+        expression: events.session_id
+        description: The session start time in milliseconds since epoch
+      start_version:
+        expression: events.start_version
+        description: App version the user was first tracked on
+      user_creation_time:
+        expression: events.user_creation_time
+        description: Event_time (UTC) of the user's first event
+      user_id:
+        expression: events.user_id
+        description: A readable ID specified by you
+      user_properties:
+        expression: events.user_properties
+        description: An attribute that describes a useful detail about the user it's
+          attached to. Amplitude sends user properties with every event.
+      uuid:
+        expression: events.uuid
+        description: A unique identifier per row (event sent)
+      version_name:
+        expression: events.version_name
+        description: The app version
+annotations:
+  approved: false
+  missing_fields:
+    - _fivetran_deleted
+    - ad_id
+    - id
+    - project_name
+    - schema
+  evaluation:
+    source_stream_name: events
+    target_table_name: event
+    table_match_score: 0.9
+    completion_score: 0.8
+    explanation: The fields evaluated generally match well, but some unique Airbyte-specific
+      contexts are absent in the Fivetran target schema, indicating incomplete but
+      highly accurate mapping. The overall table subject matter alignment is strong.
+    field_mapping_evals:
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _fivetran_synced
+        expression: events._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping for all tables, matched exactly with _airbyte_extracted_at.
+      - name: amplitude_id
+        expression: events.amplitude_id
+        score: 0.8
+        explanation: Direct match found with a high confidence level.
+      - name: ad_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: amplitude_attribution_ids
+        expression: events.amplitude_attribution_ids
+        score: 0.8
+        explanation: Direct match found with a high confidence level.
+      - name: app
+        expression: events.app
+        score: 0.9
+        explanation: Direct match found, strong relevance to the context

@@ -1,0 +1,19 @@
+default:
+  target: duckdb
+  outputs:
+    duckdb:
+      type: duckdb
+      # Assume we are running from `catalog/{source-name}/dbt_project/`
+      # and that repo root is 3 levels up.
+      path: ../../../.data/amplitude.duckdb
+      extensions:
+        - httpfs
+        - parquet
+    motherduck:
+      type: duckdb
+      path: "md:airbyte_amplitude"
+      extensions:
+        - httpfs
+        - parquet
+      settings:
+        motherduck_token: ${MOTHERDUCK_TOKEN}
