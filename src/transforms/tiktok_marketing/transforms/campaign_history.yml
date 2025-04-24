@@ -1,0 +1,113 @@
+domain: tiktok_marketing.airbyte-interop
+transforms:
+  - name: campaign_history
+    from:
+      - campaigns: tiktok_marketing.campaigns
+    fields:
+      campaign_id:
+        expression: campaigns.campaign_id
+        description: Campaign ID
+      updated_at:
+        expression: campaigns.modify_time
+        description: Time the record was updated.
+      advertiser_id:
+        expression: campaigns.advertiser_id
+        description: Advertiser ID
+      budget:
+        expression: campaigns.budget
+        description: Campaign budget
+      budget_mode:
+        expression: campaigns.budget_mode
+        description: Budget type
+      campaign_name:
+        expression: campaigns.campaign_name
+        description: Campaign name
+      campaign_type:
+        expression: campaigns.campaign_type
+        description: Campaign Type, indicates the campaign is a regular campaign or
+          iOS 14 campaign.
+      create_time:
+        expression: campaigns.create_time
+        description: Time at which the campaign was created.
+      is_new_structure:
+        expression: campaigns.is_new_structure
+        description: Whether the campaign is a new structure (for the same campaign,
+          the structure of campaign, adgroups and ads are the same)
+      objective_type:
+        expression: campaigns.objective_type
+        description: Advertising objective.
+      opt_status:
+        expression: campaigns.operation_status
+        description: Operation status.
+      status:
+        expression: campaigns.secondary_status
+        description: Campaign status
+      split_test_variable:
+        expression: campaigns.split_test_variable
+        description: Split Test variables. Optional values; TARGETING, BIDDING_OPTIMIZATION
+          , CREATIVE.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: campaigns
+    target_table_name: campaign_history
+    table_match_score: 0.85
+    completion_score: 0.9
+    explanation: The table mapping score is high indicating a good correspondence
+      between source and target schema fields. The completion score is also high,
+      showing most fields have been successfully mapped with high confidence.
+    field_mapping_evals:
+      - name: campaign_id
+        expression: campaigns.campaign_id
+        score: 1.0
+        explanation: Exact match on field name and context.
+      - name: updated_at
+        expression: campaigns.modify_time
+        score: 0.95
+        explanation: Close match, slight difference in time descriptors but same context.
+      - name: advertiser_id
+        expression: campaigns.advertiser_id
+        score: 1.0
+        explanation: Exact match on field name and context.
+      - name: budget
+        expression: campaigns.budget
+        score: 1.0
+        explanation: Exact match on field name and context.
+      - name: budget_mode
+        expression: campaigns.budget_mode
+        score: 0.9
+        explanation: Slight terminological difference but same concept.
+      - name: campaign_name
+        expression: campaigns.campaign_name
+        score: 1.0
+        explanation: Exact match on field name and context.
+      - name: campaign_type
+        expression: campaigns.campaign_type
+        score: 0.8
+        explanation: Terminological nuances between regular and iOS 14 campaign considered.
+      - name: create_time
+        expression: campaigns.create_time
+        score: 0.95
+        explanation: Close match, slight difference in time descriptors but same context.
+      - name: is_new_structure
+        expression: campaigns.is_new_structure
+        score: 1.0
+        explanation: Exact match on field name and context.
+      - name: objective_type
+        expression: campaigns.objective_type
+        score: 0.9
+        explanation: Slight terminological difference but same objective.
+      - name: opt_status
+        expression: campaigns.operation_status
+        score: 0.8
+        explanation: Close match but slight differences in status terminology.
+      - name: status
+        expression: campaigns.secondary_status
+        score: 0.7
+        explanation: Generic term with potential overlaps in meaning is guarded.
+      - name: split_test_variable
+        expression: campaigns.split_test_variable
+        score: 0.75
+        explanation: Contextual evidence supports similarity in testing variables
+          despite different categorical terminology.
