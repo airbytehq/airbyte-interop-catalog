@@ -1,0 +1,152 @@
+domain: iterable.airbyte-interop
+transforms:
+  - name: event
+    from:
+      - events: iterable.events
+    fields:
+      _fivetran_id:
+        expression: events._airbyte_raw_id
+        description: A Fivetran-created unique identifier derived from hashing campaign_id,
+          created_at, and event_name.
+      campaign_id:
+        expression: MISSING
+        description: Reference to the campaign from which the event originated
+      content_id:
+        expression: MISSING
+        description: Reference to the content the event is associated with.
+      created_at:
+        expression: events.createdAt
+        description: Creation timestamp
+      email:
+        expression: events.email
+        description: The user's email. User identifier, for email-based projects.
+          Previously was the unique identifier for user records, for Iterable customers
+          before August 2023.  Exists if using the history version of the table.
+      additional_properties:
+        expression: events.data
+        description: json object containing addition event properties
+      event_name:
+        expression: events._type
+        description: Name provided to the individual event
+      message_bus_id:
+        expression: MISSING
+        description: Reference to the message bus associated with the event
+      message_id:
+        expression: MISSING
+        description: Reference to the message the event is associated with
+      message_type_id:
+        expression: MISSING
+        description: Reference to the type of message the event is associated with
+      recipient_state:
+        expression: MISSING
+        description: The state of the recipient upon receiving the event
+      status:
+        expression: MISSING
+        description: Status of the event
+      transactional_data:
+        expression: MISSING
+        description: Transactional data associated with the event
+      unsub_source:
+        expression: MISSING
+        description: Source of the unsubscribe event
+      user_agent:
+        expression: MISSING
+        description: User agent associated with the event
+      user_agent_device:
+        expression: MISSING
+        description: The device of the user agent
+      _fivetran_user_id:
+        expression: events.userId
+        description: A Fivetran-created unique identifier for users, derived from
+          hashing user_id and/or email, depending on project type.
+annotations:
+  approved: false
+  missing_fields:
+    - campaign_id
+    - content_id
+    - message_bus_id
+    - message_id
+    - message_type_id
+    - recipient_state
+    - status
+    - transactional_data
+    - unsub_source
+    - user_agent
+    - user_agent_device
+  evaluation:
+    source_stream_name: events
+    target_table_name: event
+    table_match_score: 0.7
+    completion_score: 0.5
+    explanation: The table matching moderately aligns with the target schema, reflecting
+      some coherent data mapping. However, there are several missing FIELD expressions,
+      indicating partial completion.
+    field_mapping_evals:
+      - name: _fivetran_id
+        expression: events._airbyte_raw_id
+        score: 0.9
+        explanation: Direct match found with minor adjustments.
+      - name: campaign_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: content_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: created_at
+        expression: events.createdAt
+        score: 1.0
+        explanation: Perfect match.
+      - name: email
+        expression: events.email
+        score: 1.0
+        explanation: Perfect match.
+      - name: additional_properties
+        expression: events.data
+        score: 1.0
+        explanation: Direct mapping from a compatible field.
+      - name: event_name
+        expression: events._type
+        score: 1.0
+        explanation: Direct mapping of event types.
+      - name: message_bus_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: message_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: message_type_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: recipient_state
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: status
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: transactional_data
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: unsub_source
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: user_agent
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: user_agent_device
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _fivetran_user_id
+        expression: events.userId
+        score: 1.0
+        explanation: Proper mapping of user ID based on project type.

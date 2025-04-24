@@ -1,0 +1,35 @@
+domain: iterable.airbyte-interop
+transforms:
+  - name: user_history
+    from:
+      - MISSING: iterable.MISSING
+    fields:
+      email:
+        expression: MISSING
+        description: The user's email. Previously was the unique identifier for the
+          user records, for Iterable customers before August 2023. This has since
+          been replaced by iterable_user_id.
+      user_id:
+        expression: MISSING
+        description: User defined identifier of the user. This is not a unique field
+      iterable_user_id:
+        expression: MISSING
+        description: The unique identifier of the user
+      first_name:
+        expression: MISSING
+        description: First name of the user
+      last_name:
+        expression: MISSING
+        description: Last name of the user
+      email_list_ids:
+        expression: MISSING
+        description: Array of references to the lists associated with the user
+      signup_date:
+        expression: MISSING
+        description: Timestamp of when the user signed up
+      signup_source:
+        expression: MISSING
+        description: Source where the user signed up
+      updated_at:
+        expression: MISSING
+        description: Last update timestamp

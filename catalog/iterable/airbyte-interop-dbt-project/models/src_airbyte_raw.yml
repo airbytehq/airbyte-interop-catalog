@@ -1,0 +1,2120 @@
+# This file was auto-generated using the morph cli.
+# Please do not edit manually.
+
+version: 2
+sources:
+  - name: iterable
+    schema: "{{ var('airbyte_iterable_schema', default='iterable_raw') }}"
+    database: "{{ var('airbyte_iterable_database', default='iterable') }}"
+    tables:
+      - name: campaigns
+        columns:
+          - name: id
+            description: The unique identifier of the campaign
+            data_type: integer
+          - name: createdAt
+            description: The timestamp when the campaign was created
+            data_type: integer
+          - name: updatedAt
+            description: The timestamp when the campaign was last updated
+            data_type: integer
+          - name: startAt
+            description: The timestamp when the campaign will start
+            data_type: integer
+          - name: endedAt
+            description: The timestamp when the campaign ended
+            data_type: integer
+          - name: name
+            description: The name of the campaign
+            data_type: varchar
+          - name: templateId
+            description: The ID of the template used for the campaign
+            data_type: integer
+          - name: messageMedium
+            description: The medium used to deliver the campaign message (e.g., email,
+              SMS)
+            data_type: varchar
+          - name: createdByUserId
+            description: The ID of the user who created the campaign
+            data_type: varchar
+          - name: updatedByUserId
+            description: The ID of the user who last updated the campaign
+            data_type: varchar
+          - name: campaignState
+            description: The current state of the campaign (e.g., draft, active, paused)
+            data_type: varchar
+          - name: listIds
+            description: List of IDs of the lists targeted by the campaign
+            data_type: array
+          - name: suppressionListIds
+            description: List of IDs of suppression lists for the campaign
+            data_type: array
+          - name: sendSize
+            description: The size of the audience targeted by the campaign
+            data_type: float
+          - name: recurringCampaignId
+            description: If the campaign is recurring, the ID of the parent recurring
+              campaign
+            data_type: float
+          - name: workflowId
+            description: The ID of the workflow associated with the campaign
+            data_type: float
+          - name: labels
+            description: List of labels associated with the campaign
+            data_type: array
+          - name: type
+            description: The type of campaign (e.g., one-time, recurring)
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: campaigns_metrics
+        columns:
+          - name: data
+            description: Contains the campaign metrics data
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: channels
+        columns:
+          - name: id
+            description: The unique identifier of the channel.
+            data_type: float
+          - name: name
+            description: The name or title of the channel.
+            data_type: varchar
+          - name: channelType
+            description: The type of channel, such as email, SMS, or push notification.
+            data_type: varchar
+          - name: messageMedium
+            description: The medium used to deliver messages through this channel,
+              such as text, image, or video.
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: custom_event
+        columns:
+          - name: itblInternal
+            description: Internal details related to the event
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp when the related document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp when the related document was last updated
+                  data_type: timestamp
+          - name: _type
+            description: Type of the event data
+            data_type: varchar
+          - name: createdAt
+            description: Timestamp when the event was created
+            data_type: timestamp
+          - name: email
+            description: Email address related to the event
+            data_type: varchar
+          - name: userId
+            description: User ID associated with the event
+            data_type: varchar
+          - name: data
+            description: Event-specific data associated with the event
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: email_bounce
+        columns:
+          - name: createdAt
+            description: The date and time when the email bounce data was created.
+            data_type: timestamp
+          - name: campaignId
+            description: The unique identifier of the campaign associated with the
+              email bounce data.
+            data_type: integer
+          - name: itblInternal
+            description: Internal information related to Iterable.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: The date and time when the internal document for Iterable
+                    was created.
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: The date and time when the internal document for Iterable
+                    was last updated.
+                  data_type: timestamp
+          - name: messageId
+            description: The unique identifier of the message associated with the
+              email bounce data.
+            data_type: varchar
+          - name: templateId
+            description: The unique identifier of the email template associated with
+              the bounce data.
+            data_type: integer
+          - name: email
+            description: The email address that encountered a bounce.
+            data_type: varchar
+          - name: userId
+            description: The unique identifier of the user associated with the bounced
+              email address.
+            data_type: varchar
+          - name: recipientState
+            description: The state of the recipient email address at the time of the
+              bounce (e.g., active, inactive).
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: email_click
+        columns:
+          - name: country
+            description: The country from where the email click was recorded.
+            data_type: varchar
+          - name: city
+            description: The city from where the email click was recorded.
+            data_type: varchar
+          - name: campaignId
+            description: The unique identifier of the campaign associated with the
+              email click data.
+            data_type: integer
+          - name: itblInternal
+            description: Internal data related to the iterable service.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: The date and time when the internal document was created.
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: The date and time when the internal document was last
+                    updated.
+                  data_type: timestamp
+          - name: ip
+            description: The IP address from where the email click was recorded.
+            data_type: varchar
+          - name: contentId
+            description: The identifier of the content clicked within the email.
+            data_type: integer
+          - name: userAgentDevice
+            description: The device information of the user agent used for the email
+              click.
+            data_type: varchar
+          - name: messageId
+            description: The unique identifier of the message that contained the email.
+            data_type: varchar
+          - name: hrefIndex
+            description: The index of the href link within the email content.
+            data_type: integer
+          - name: userAgent
+            description: The user agent of the browser or application used for the
+              email click.
+            data_type: varchar
+          - name: templateId
+            description: The identifier of the email template used in the campaign.
+            data_type: integer
+          - name: url
+            description: The URL that was clicked within the email.
+            data_type: varchar
+          - name: createdAt
+            description: The date and time when the email click event occurred.
+            data_type: timestamp
+          - name: region
+            description: The region from where the email click was recorded.
+            data_type: varchar
+          - name: email
+            description: The email address of the user who clicked the email link.
+            data_type: varchar
+          - name: userId
+            description: The unique identifier of the user who clicked the email link.
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: email_complaint
+        columns:
+          - name: createdAt
+            description: Timestamp indicating when the email complaint was created
+            data_type: timestamp
+          - name: campaignId
+            description: Unique identifier for the campaign associated with the email
+              complaint data
+            data_type: integer
+          - name: itblInternal
+            description: Holds internal metadata related to the iterable data being
+              accessed.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp indicating when the internal document was
+                    created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp indicating when the internal document was
+                    last updated
+                  data_type: timestamp
+          - name: messageId
+            description: Unique identifier for the email message associated with the
+              complaint
+            data_type: varchar
+          - name: templateId
+            description: Unique identifier for the email template used in the campaign
+            data_type: integer
+          - name: email
+            description: Email address of the recipient who lodged the complaint
+            data_type: varchar
+          - name: userId
+            description: Unique identifier for the user who lodged the email complaint
+            data_type: varchar
+          - name: recipientState
+            description: State or status of the recipient associated with the complaint
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: email_open
+        columns:
+          - name: country
+            description: The country from which the email was opened.
+            data_type: varchar
+          - name: createdAt
+            description: The timestamp when the email_open event occurred.
+            data_type: timestamp
+          - name: city
+            description: The city from which the email was opened.
+            data_type: varchar
+          - name: campaignId
+            description: The unique identifier of the campaign to which the email_open
+              event belongs.
+            data_type: integer
+          - name: itblInternal
+            description: Internal data related to the email open event.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: The timestamp when the ITBL internal document was created.
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: The timestamp when the ITBL internal document was last
+                    updated.
+                  data_type: timestamp
+          - name: ip
+            description: The IP address from which the email was opened.
+            data_type: varchar
+          - name: userAgentDevice
+            description: The device information from which the email was opened.
+            data_type: varchar
+          - name: messageId
+            description: The unique identifier of the email message.
+            data_type: varchar
+          - name: userAgent
+            description: The user agent string of the browser used to open the email.
+            data_type: varchar
+          - name: templateId
+            description: The unique identifier of the email template used.
+            data_type: integer
+          - name: region
+            description: The region from which the email was opened.
+            data_type: varchar
+          - name: email
+            description: The email address of the user who opened the email.
+            data_type: varchar
+          - name: userId
+            description: The unique identifier of the user who opened the email.
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: email_send
+        columns:
+          - name: createdAt
+            description: The timestamp when the email was created.
+            data_type: timestamp
+          - name: campaignId
+            description: The identifier of the campaign associated with the email_send
+              data.
+            data_type: integer
+          - name: itblInternal
+            description: Internal information related to ITBL (Iterable).
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: The timestamp when the document was created.
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: The timestamp when the document was last updated.
+                  data_type: timestamp
+          - name: messageTypeId
+            description: The identifier of the message type associated with the email_send
+              data.
+            data_type: integer
+          - name: transactionalData
+            description: Transactional data related to the email_send.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: inventory
+                  description: The quantity of the product in stock.
+                  data_type: integer
+                - name: eventName
+                  description: The name of the event associated with the transaction.
+                  data_type: varchar
+                - name: name
+                  description: The name of the product.
+                  data_type: varchar
+                - name: sku
+                  description: The stock keeping unit (SKU) of the product.
+                  data_type: varchar
+                - name: email
+                  description: The email address associated with the transaction.
+                  data_type: varchar
+                - name: url
+                  description: The URL related to the transaction or product.
+                  data_type: varchar
+                - name: description
+                  description: Description of the product or transaction.
+                  data_type: varchar
+                - name: price
+                  description: The price of the product.
+                  data_type: integer
+                - name: product_type
+                  description: The type or category of the product.
+                  data_type: varchar
+                - name: compare_at_price
+                  description: The original price of the product being transacted.
+                  data_type: float
+                - name: id
+                  description: The unique identifier of the transactional data.
+                  data_type: varchar
+                - name: templateId
+                  description: The identifier of the template used for the transactional
+                    data.
+                  data_type: integer
+                - name: product_id
+                  description: The identifier of the product.
+                  data_type: varchar
+                - name: categories
+                  description: Categories related to the transactional data.
+                  data_type: array
+                - name: createdAt
+                  description: The timestamp when the transactional data was created.
+                  data_type: timestamp
+                - name: campaignId
+                  description: The identifier of the campaign associated with the
+                    transactional data.
+                  data_type: integer
+                - name: vendor
+                  description: The vendor or seller of the product.
+                  data_type: varchar
+                - name: eventUpdatedAt
+                  description: The timestamp when the event was last updated.
+                  data_type: timestamp
+                - name: discount
+                  description: The discount applied to the product.
+                  data_type: integer
+                - name: imageUrl
+                  description: The URL of the image related to the product.
+                  data_type: varchar
+                - name: itblInternal
+                  description: Internal information related to ITBL (Iterable) for
+                    transactional data.
+                  data_type: json
+                  subcolumns:
+                    - name: documentCreatedAt
+                      description: The timestamp when the document related to transactional
+                        data was created.
+                      data_type: timestamp
+                    - name: documentUpdatedAt
+                      description: The timestamp when the document related to transactional
+                        data was last updated.
+                      data_type: timestamp
+                - name: handle
+                  description: A unique identifier for the transaction or product.
+                  data_type: varchar
+          - name: contentId
+            description: The identifier of the content related to the email being
+              sent.
+            data_type: integer
+          - name: messageId
+            description: The unique identifier of the message.
+            data_type: varchar
+          - name: messageBusId
+            description: The identifier of the message bus associated with the email_send
+              data.
+            data_type: varchar
+          - name: templateId
+            description: The identifier of the template used for the email content.
+            data_type: integer
+          - name: email
+            description: The email address of the recipient.
+            data_type: varchar
+          - name: userId
+            description: The identifier of the user to whom the email is being sent.
+            data_type: varchar
+          - name: channelId
+            description: The identifier of the channel through which the email was
+              sent.
+            data_type: integer
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: email_send_skip
+        columns:
+          - name: reason
+            description: Reason for skipping the email send.
+            data_type: varchar
+          - name: createdAt
+            description: Date and time when the email send skip data was created.
+            data_type: timestamp
+          - name: campaignId
+            description: Unique identifier for the campaign associated with the email
+              send skip data.
+            data_type: integer
+          - name: itblInternal
+            description: Internal iterable properties associated with the email send
+              skip data.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Date and time when the document was created.
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Date and time when the document was last updated.
+                  data_type: timestamp
+          - name: messageTypeId
+            description: Identifier for the type of message sent.
+            data_type: integer
+          - name: transactionalData
+            description: Transactional data associated with the email send skip.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: inventory
+                  description: Inventory details of the transactional data.
+                  data_type: integer
+                - name: eventName
+                  description: Name of the event associated with the transactional
+                    data.
+                  data_type: varchar
+                - name: name
+                  description: Name of the product associated with the transactional
+                    data.
+                  data_type: varchar
+                - name: sku
+                  description: Stock Keeping Unit (SKU) associated with the transactional
+                    data.
+                  data_type: varchar
+                - name: email
+                  description: Email address associated with the transactional data.
+                  data_type: varchar
+                - name: url
+                  description: URL associated with the transactional data.
+                  data_type: varchar
+                - name: description
+                  description: Description of the transactional data.
+                  data_type: varchar
+                - name: price
+                  description: Price of the product in the transactional data.
+                  data_type: integer
+                - name: product_type
+                  description: Type of the product in the transactional data.
+                  data_type: varchar
+                - name: compare_at_price
+                  description: Comparison price for the transactional data.
+                  data_type: float
+                - name: id
+                  description: Unique identifier for the transactional data.
+                  data_type: varchar
+                - name: templateId
+                  description: Identifier for the template used for the transactional
+                    data.
+                  data_type: integer
+                - name: product_id
+                  description: Identifier for the product associated with the transactional
+                    data.
+                  data_type: varchar
+                - name: categories
+                  description: Categories associated with the transactional data.
+                  data_type: array
+                - name: createdAt
+                  description: Date and time when the transactional data was created.
+                  data_type: timestamp
+                - name: campaignId
+                  description: Unique identifier for the campaign associated with
+                    the transactional data.
+                  data_type: integer
+                - name: vendor
+                  description: Vendor of the product in the transactional data.
+                  data_type: varchar
+                - name: eventUpdatedAt
+                  description: Date and time when the event was last updated.
+                  data_type: timestamp
+                - name: discount
+                  description: Discount applied in the transactional data.
+                  data_type: integer
+                - name: imageUrl
+                  description: URL for the image associated with the transactional
+                    data.
+                  data_type: varchar
+                - name: itblInternal
+                  description: Internal iterable properties associated with the transactional
+                    data.
+                  data_type: json
+                  subcolumns:
+                    - name: documentCreatedAt
+                      description: Date and time when the document was created.
+                      data_type: timestamp
+                    - name: documentUpdatedAt
+                      description: Date and time when the document was last updated.
+                      data_type: timestamp
+                - name: handle
+                  description: Handle of the transactional data.
+                  data_type: varchar
+          - name: contentId
+            description: Identifier for the content associated with the email send
+              skip data.
+            data_type: integer
+          - name: messageId
+            description: Unique identifier for the message related to the email send
+              skip data.
+            data_type: varchar
+          - name: templateId
+            description: Identifier for the template used in the email send skip data.
+            data_type: integer
+          - name: email
+            description: Email address to which the email send skip data corresponds.
+            data_type: varchar
+          - name: userId
+            description: Identifier for the user associated with the email send skip
+              data.
+            data_type: varchar
+          - name: channelId
+            description: Identifier for the channel through which the email was sent.
+            data_type: integer
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: email_subscribe
+        columns:
+          - name: createdAt
+            description: The timestamp when the email subscription was created
+            data_type: timestamp
+          - name: signupSource
+            description: The source where the subscriber signed up for the emails
+            data_type: varchar
+          - name: emailListIds
+            description: List of email list identifiers the subscriber belongs to
+            data_type: array
+          - name: itblInternal
+            description: Internal properties related to the subscription
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: The timestamp when the internal document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: The timestamp when the internal document was last updated
+                  data_type: timestamp
+          - name: emailListId
+            description: The unique identifier of the email list
+            data_type: integer
+          - name: email
+            description: The email address of the subscriber
+            data_type: varchar
+          - name: userId
+            description: The unique identifier of the subscriber user
+            data_type: varchar
+          - name: profileUpdatedAt
+            description: The timestamp when the subscriber profile was last updated
+            data_type: timestamp
+          - name: workflowId
+            description: The identifier of the workflow associated with the subscription
+            data_type: integer
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: email_unsubscribe
+        columns:
+          - name: unsubSource
+            description: The source from which the email unsubscribe request originated.
+            data_type: varchar
+          - name: createdAt
+            description: The timestamp indicating when the email unsubscribe data
+              was created.
+            data_type: timestamp
+          - name: campaignId
+            description: The unique identifier for the campaign associated with the
+              email unsubscribe data.
+            data_type: integer
+          - name: itblInternal
+            description: Internal properties specific to Iterable.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: The timestamp indicating when the document was created
+                    within Iterable.
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: The timestamp indicating when the document was last
+                    updated within Iterable.
+                  data_type: timestamp
+          - name: emailListId
+            description: The unique identifier for the email list associated with
+              the email unsubscribe data.
+            data_type: integer
+          - name: emailListIds
+            description: The list of unique identifiers for multiple email lists associated
+              with the email unsubscribe data.
+            data_type: array
+          - name: workflowId
+            description: The unique identifier for the workflow associated with the
+              email unsubscribe data.
+            data_type: integer
+          - name: messageId
+            description: The unique identifier for the message associated with the
+              email unsubscribe data.
+            data_type: varchar
+          - name: templateId
+            description: The unique identifier for the template associated with the
+              email unsubscribe data.
+            data_type: integer
+          - name: channelIds
+            description: The list of unique identifiers for multiple channels associated
+              with the email unsubscribe data.
+            data_type: array
+          - name: email
+            description: The email address for which the user unsubscribed.
+            data_type: varchar
+          - name: userId
+            description: The unique identifier for the user who unsubscribed from
+              the email list.
+            data_type: varchar
+          - name: channelId
+            description: The unique identifier for the channel associated with the
+              email unsubscribe data.
+            data_type: integer
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: events
+        columns:
+          - name: itblInternal
+            description: Internal details related to the event
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp when the related document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp when the related document was last updated
+                  data_type: timestamp
+          - name: _type
+            description: Type of the event data
+            data_type: varchar
+          - name: createdAt
+            description: Timestamp when the event was created
+            data_type: timestamp
+          - name: email
+            description: Email address related to the event
+            data_type: varchar
+          - name: userId
+            description: User ID associated with the event
+            data_type: varchar
+          - name: data
+            description: Event-specific data associated with the event
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: hosted_unsubscribe_click
+        columns:
+          - name: itblInternal
+            description: Internal details related to the event
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp when the related document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp when the related document was last updated
+                  data_type: timestamp
+          - name: _type
+            description: Type of the event data
+            data_type: varchar
+          - name: createdAt
+            description: Timestamp when the event was created
+            data_type: timestamp
+          - name: email
+            description: Email address related to the event
+            data_type: varchar
+          - name: userId
+            description: User ID associated with the event
+            data_type: varchar
+          - name: data
+            description: Event-specific data associated with the event
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: in_app_click
+        columns:
+          - name: itblInternal
+            description: Internal details related to the event
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp when the related document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp when the related document was last updated
+                  data_type: timestamp
+          - name: _type
+            description: Type of the event data
+            data_type: varchar
+          - name: createdAt
+            description: Timestamp when the event was created
+            data_type: timestamp
+          - name: email
+            description: Email address related to the event
+            data_type: varchar
+          - name: userId
+            description: User ID associated with the event
+            data_type: varchar
+          - name: data
+            description: Event-specific data associated with the event
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: in_app_close
+        columns:
+          - name: itblInternal
+            description: Internal details related to the event
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp when the related document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp when the related document was last updated
+                  data_type: timestamp
+          - name: _type
+            description: Type of the event data
+            data_type: varchar
+          - name: createdAt
+            description: Timestamp when the event was created
+            data_type: timestamp
+          - name: email
+            description: Email address related to the event
+            data_type: varchar
+          - name: userId
+            description: User ID associated with the event
+            data_type: varchar
+          - name: data
+            description: Event-specific data associated with the event
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: in_app_delete
+        columns:
+          - name: itblInternal
+            description: Internal details related to the event
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp when the related document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp when the related document was last updated
+                  data_type: timestamp
+          - name: _type
+            description: Type of the event data
+            data_type: varchar
+          - name: createdAt
+            description: Timestamp when the event was created
+            data_type: timestamp
+          - name: email
+            description: Email address related to the event
+            data_type: varchar
+          - name: userId
+            description: User ID associated with the event
+            data_type: varchar
+          - name: data
+            description: Event-specific data associated with the event
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: in_app_delivery
+        columns:
+          - name: itblInternal
+            description: Internal details related to the event
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp when the related document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp when the related document was last updated
+                  data_type: timestamp
+          - name: _type
+            description: Type of the event data
+            data_type: varchar
+          - name: createdAt
+            description: Timestamp when the event was created
+            data_type: timestamp
+          - name: email
+            description: Email address related to the event
+            data_type: varchar
+          - name: userId
+            description: User ID associated with the event
+            data_type: varchar
+          - name: data
+            description: Event-specific data associated with the event
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: in_app_open
+        columns:
+          - name: itblInternal
+            description: Internal details related to the event
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp when the related document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp when the related document was last updated
+                  data_type: timestamp
+          - name: _type
+            description: Type of the event data
+            data_type: varchar
+          - name: createdAt
+            description: Timestamp when the event was created
+            data_type: timestamp
+          - name: email
+            description: Email address related to the event
+            data_type: varchar
+          - name: userId
+            description: User ID associated with the event
+            data_type: varchar
+          - name: data
+            description: Event-specific data associated with the event
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: in_app_send
+        columns:
+          - name: itblInternal
+            description: Internal details related to the event
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp when the related document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp when the related document was last updated
+                  data_type: timestamp
+          - name: _type
+            description: Type of the event data
+            data_type: varchar
+          - name: createdAt
+            description: Timestamp when the event was created
+            data_type: timestamp
+          - name: email
+            description: Email address related to the event
+            data_type: varchar
+          - name: userId
+            description: User ID associated with the event
+            data_type: varchar
+          - name: data
+            description: Event-specific data associated with the event
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: in_app_send_skip
+        columns:
+          - name: itblInternal
+            description: Internal details related to the event
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp when the related document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp when the related document was last updated
+                  data_type: timestamp
+          - name: _type
+            description: Type of the event data
+            data_type: varchar
+          - name: createdAt
+            description: Timestamp when the event was created
+            data_type: timestamp
+          - name: email
+            description: Email address related to the event
+            data_type: varchar
+          - name: userId
+            description: User ID associated with the event
+            data_type: varchar
+          - name: data
+            description: Event-specific data associated with the event
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: inbox_message_impression
+        columns:
+          - name: itblInternal
+            description: Internal details related to the event
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp when the related document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp when the related document was last updated
+                  data_type: timestamp
+          - name: _type
+            description: Type of the event data
+            data_type: varchar
+          - name: createdAt
+            description: Timestamp when the event was created
+            data_type: timestamp
+          - name: email
+            description: Email address related to the event
+            data_type: varchar
+          - name: userId
+            description: User ID associated with the event
+            data_type: varchar
+          - name: data
+            description: Event-specific data associated with the event
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: inbox_session
+        columns:
+          - name: itblInternal
+            description: Internal details related to the event
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp when the related document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp when the related document was last updated
+                  data_type: timestamp
+          - name: _type
+            description: Type of the event data
+            data_type: varchar
+          - name: createdAt
+            description: Timestamp when the event was created
+            data_type: timestamp
+          - name: email
+            description: Email address related to the event
+            data_type: varchar
+          - name: userId
+            description: User ID associated with the event
+            data_type: varchar
+          - name: data
+            description: Event-specific data associated with the event
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: list_users
+        columns:
+          - name: email
+            description: The email address of the user.
+            data_type: varchar
+          - name: listId
+            description: The unique identifier of the list to which the user belongs.
+            data_type: integer
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: lists
+        columns:
+          - name: id
+            description: The unique identifier of the list.
+            data_type: integer
+          - name: name
+            description: The name or title of the list.
+            data_type: varchar
+          - name: createdAt
+            description: The date and time when the list was created.
+            data_type: integer
+          - name: listType
+            description: The type or category of the list.
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: message_types
+        columns:
+          - name: id
+            description: The unique identifier for the message type.
+            data_type: float
+          - name: name
+            description: The display name for the message type.
+            data_type: varchar
+          - name: channelId
+            description: The unique identifier for the channel the message belongs
+              to.
+            data_type: float
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: metadata
+        columns:
+          - name: name
+            description: The name of the metadata
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: purchase
+        columns:
+          - name: itblInternal
+            description: Internal details related to the event
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp when the related document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp when the related document was last updated
+                  data_type: timestamp
+          - name: _type
+            description: Type of the event data
+            data_type: varchar
+          - name: createdAt
+            description: Timestamp when the event was created
+            data_type: timestamp
+          - name: email
+            description: Email address related to the event
+            data_type: varchar
+          - name: userId
+            description: User ID associated with the event
+            data_type: varchar
+          - name: data
+            description: Event-specific data associated with the event
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: push_bounce
+        columns:
+          - name: itblInternal
+            description: Internal details related to the event
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp when the related document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp when the related document was last updated
+                  data_type: timestamp
+          - name: _type
+            description: Type of the event data
+            data_type: varchar
+          - name: createdAt
+            description: Timestamp when the event was created
+            data_type: timestamp
+          - name: email
+            description: Email address related to the event
+            data_type: varchar
+          - name: userId
+            description: User ID associated with the event
+            data_type: varchar
+          - name: data
+            description: Event-specific data associated with the event
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: push_open
+        columns:
+          - name: itblInternal
+            description: Internal details related to the event
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp when the related document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp when the related document was last updated
+                  data_type: timestamp
+          - name: _type
+            description: Type of the event data
+            data_type: varchar
+          - name: createdAt
+            description: Timestamp when the event was created
+            data_type: timestamp
+          - name: email
+            description: Email address related to the event
+            data_type: varchar
+          - name: userId
+            description: User ID associated with the event
+            data_type: varchar
+          - name: data
+            description: Event-specific data associated with the event
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: push_send
+        columns:
+          - name: itblInternal
+            description: Internal details related to the event
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp when the related document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp when the related document was last updated
+                  data_type: timestamp
+          - name: _type
+            description: Type of the event data
+            data_type: varchar
+          - name: createdAt
+            description: Timestamp when the event was created
+            data_type: timestamp
+          - name: email
+            description: Email address related to the event
+            data_type: varchar
+          - name: userId
+            description: User ID associated with the event
+            data_type: varchar
+          - name: data
+            description: Event-specific data associated with the event
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: push_send_skip
+        columns:
+          - name: itblInternal
+            description: Internal details related to the event
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp when the related document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp when the related document was last updated
+                  data_type: timestamp
+          - name: _type
+            description: Type of the event data
+            data_type: varchar
+          - name: createdAt
+            description: Timestamp when the event was created
+            data_type: timestamp
+          - name: email
+            description: Email address related to the event
+            data_type: varchar
+          - name: userId
+            description: User ID associated with the event
+            data_type: varchar
+          - name: data
+            description: Event-specific data associated with the event
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: push_uninstall
+        columns:
+          - name: itblInternal
+            description: Internal details related to the event
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp when the related document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp when the related document was last updated
+                  data_type: timestamp
+          - name: _type
+            description: Type of the event data
+            data_type: varchar
+          - name: createdAt
+            description: Timestamp when the event was created
+            data_type: timestamp
+          - name: email
+            description: Email address related to the event
+            data_type: varchar
+          - name: userId
+            description: User ID associated with the event
+            data_type: varchar
+          - name: data
+            description: Event-specific data associated with the event
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: sms_bounce
+        columns:
+          - name: itblInternal
+            description: Internal details related to the event
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp when the related document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp when the related document was last updated
+                  data_type: timestamp
+          - name: _type
+            description: Type of the event data
+            data_type: varchar
+          - name: createdAt
+            description: Timestamp when the event was created
+            data_type: timestamp
+          - name: email
+            description: Email address related to the event
+            data_type: varchar
+          - name: userId
+            description: User ID associated with the event
+            data_type: varchar
+          - name: data
+            description: Event-specific data associated with the event
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: sms_click
+        columns:
+          - name: itblInternal
+            description: Internal details related to the event
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp when the related document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp when the related document was last updated
+                  data_type: timestamp
+          - name: _type
+            description: Type of the event data
+            data_type: varchar
+          - name: createdAt
+            description: Timestamp when the event was created
+            data_type: timestamp
+          - name: email
+            description: Email address related to the event
+            data_type: varchar
+          - name: userId
+            description: User ID associated with the event
+            data_type: varchar
+          - name: data
+            description: Event-specific data associated with the event
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: sms_received
+        columns:
+          - name: itblInternal
+            description: Internal details related to the event
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp when the related document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp when the related document was last updated
+                  data_type: timestamp
+          - name: _type
+            description: Type of the event data
+            data_type: varchar
+          - name: createdAt
+            description: Timestamp when the event was created
+            data_type: timestamp
+          - name: email
+            description: Email address related to the event
+            data_type: varchar
+          - name: userId
+            description: User ID associated with the event
+            data_type: varchar
+          - name: data
+            description: Event-specific data associated with the event
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: sms_send
+        columns:
+          - name: itblInternal
+            description: Internal details related to the event
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp when the related document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp when the related document was last updated
+                  data_type: timestamp
+          - name: _type
+            description: Type of the event data
+            data_type: varchar
+          - name: createdAt
+            description: Timestamp when the event was created
+            data_type: timestamp
+          - name: email
+            description: Email address related to the event
+            data_type: varchar
+          - name: userId
+            description: User ID associated with the event
+            data_type: varchar
+          - name: data
+            description: Event-specific data associated with the event
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: sms_send_skip
+        columns:
+          - name: itblInternal
+            description: Internal details related to the event
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp when the related document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp when the related document was last updated
+                  data_type: timestamp
+          - name: _type
+            description: Type of the event data
+            data_type: varchar
+          - name: createdAt
+            description: Timestamp when the event was created
+            data_type: timestamp
+          - name: email
+            description: Email address related to the event
+            data_type: varchar
+          - name: userId
+            description: User ID associated with the event
+            data_type: varchar
+          - name: data
+            description: Event-specific data associated with the event
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: sms_usage_info
+        columns:
+          - name: itblInternal
+            description: Internal details related to the event
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp when the related document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp when the related document was last updated
+                  data_type: timestamp
+          - name: _type
+            description: Type of the event data
+            data_type: varchar
+          - name: createdAt
+            description: Timestamp when the event was created
+            data_type: timestamp
+          - name: email
+            description: Email address related to the event
+            data_type: varchar
+          - name: userId
+            description: User ID associated with the event
+            data_type: varchar
+          - name: data
+            description: Event-specific data associated with the event
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: templates
+        columns:
+          - name: templateId
+            description: The unique identifier for the template.
+            data_type: float
+          - name: createdAt
+            description: The date and time when the template was created.
+            data_type: timestamp
+          - name: updatedAt
+            description: The date and time when the template was last updated.
+            data_type: integer
+          - name: name
+            description: The name/title of the template.
+            data_type: varchar
+          - name: creatorUserId
+            description: The ID of the user who created the template.
+            data_type: varchar
+          - name: messageTypeId
+            description: The type of message associated with the template.
+            data_type: float
+          - name: campaignId
+            description: The unique identifier for the campaign associated with the
+              template.
+            data_type: float
+          - name: clientTemplateId
+            description: The identifier specific to the client for the template.
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: users
+        columns:
+          - name: country
+            description: Country name.
+            data_type: varchar
+          - name: firstOrderDate
+            description: Date and time of the first order.
+            data_type: timestamp
+          - name: addresses
+            description: List of addresses associated with the user
+            data_type: array
+          - name: emailAcquiredDate
+            description: Date and time when the email was acquired.
+            data_type: timestamp
+          - name: emailSegmentStatus
+            description: Status of the email segment.
+            data_type: varchar
+          - name: admin_graphql_api_id
+            description: Admin GraphQL API ID.
+            data_type: varchar
+          - name: id
+            description: User ID.
+            data_type: varchar
+          - name: mostRecentEmailList
+            description: Most recent email list the user is part of.
+            data_type: varchar
+          - name: mostRecentEmailSegment
+            description: Most recent email segment the user is part of.
+            data_type: varchar
+          - name: aov
+            description: Average order value.
+            data_type: float
+          - name: firstCampaign
+            description: First campaign the user interacted with.
+            data_type: varchar
+          - name: thirdMostRecentOrderDate
+            description: Date and time of the third most recent order.
+            data_type: timestamp
+          - name: firstPurchaseDate
+            description: Date and time of the first purchase made by the user.
+            data_type: timestamp
+          - name: firstMedium
+            description: First medium through which the user interacted.
+            data_type: varchar
+          - name: default_address
+            description: Default address of the user
+            data_type: json
+            meta:
+              subcolumns:
+                - name: first_name
+                  description: First name of the user associated with the address.
+                  data_type: varchar
+                - name: city
+                  description: City name.
+                  data_type: varchar
+                - name: name
+                  description: Full name associated with the address.
+                  data_type: varchar
+                - name: zip
+                  description: Postal code or ZIP code.
+                  data_type: varchar
+                - name: country
+                  description: Country name of the address.
+                  data_type: varchar
+                - name: address2
+                  description: Address line 2.
+                  data_type: varchar
+                - name: company
+                  description: Company name associated with the address.
+                  data_type: varchar
+                - name: country_code
+                  description: Country code of the address.
+                  data_type: varchar
+                - name: id
+                  description: Unique identifier for the address.
+                  data_type: varchar
+                - name: last_name
+                  description: Last name of the user associated with the address.
+                  data_type: varchar
+                - name: address1
+                  description: Address line 1.
+                  data_type: varchar
+                - name: default
+                  description: Indicates if this is the default address.
+                  data_type: boolean
+                - name: province
+                  description: Province or state of the address.
+                  data_type: varchar
+                - name: province_code
+                  description: Province or state code of the address.
+                  data_type: varchar
+                - name: country_name
+                  description: Full name of the country.
+                  data_type: varchar
+                - name: phone
+                  description: Contact phone number.
+                  data_type: varchar
+          - name: emailListIds
+            description: List of email list IDs subscribed by the user
+            data_type: array
+          - name: accepts_marketing
+            description: Indicates whether the user has consented to receive marketing
+              communications.
+            data_type: boolean
+          - name: secondMostRecentOrderDate
+            description: Date and time of the second most recent order.
+            data_type: timestamp
+          - name: state
+            description: State name.
+            data_type: varchar
+          - name: mostRecentCampaign
+            description: Most recent campaign the user interacted with.
+            data_type: varchar
+          - name: zip
+            description: Postal code or ZIP code.
+            data_type: varchar
+          - name: total_spent
+            description: Total amount spent by the user.
+            data_type: float
+          - name: mostRecentOrderDate
+            description: Date and time of the most recent order.
+            data_type: timestamp
+          - name: last_order_id
+            description: ID of the user's last order.
+            data_type: varchar
+          - name: tax_exempt
+            description: Indicates if the user is tax exempt.
+            data_type: boolean
+          - name: mostRecentSource
+            description: Most recent source of user interaction.
+            data_type: varchar
+          - name: twelveMonthLtr
+            description: Lifetime total revenue for the past twelve months.
+            data_type: integer
+          - name: verified_email
+            description: Indicates if the user's email address is verified.
+            data_type: boolean
+          - name: mostRecentMedium
+            description: Most recent medium of user interaction.
+            data_type: varchar
+          - name: orders_count
+            description: Total number of orders made by the user.
+            data_type: integer
+          - name: firstName
+            description: User's first name.
+            data_type: varchar
+          - name: lastInteractionTs
+            description: Date and time of the last interaction with the user.
+            data_type: timestamp
+          - name: boughtSas
+            description: Indicates if the user has purchased a specific product or
+              service.
+            data_type: boolean
+          - name: secondMostRecentOrderCards
+            description: Details of the second most recent order cards related to
+              the user
+            data_type: array
+          - name: unsubscribedChannelIds
+            description: List of channel IDs the user has unsubscribed from
+            data_type: array
+          - name: lastName
+            description: User's last name.
+            data_type: varchar
+          - name: last_order_name
+            description: Name of the user's last order.
+            data_type: varchar
+          - name: secondOrderDate
+            description: Date and time of the second order.
+            data_type: timestamp
+          - name: hasAccount
+            description: Indicates if the user has an account.
+            data_type: boolean
+          - name: city
+            description: City name.
+            data_type: varchar
+          - name: mostRecentOrderCards
+            description: Details of the most recent order cards related to the user
+            data_type: array
+          - name: itblInternal
+            description: Internal details specific to the platform
+            data_type: json
+            meta:
+              subcolumns:
+                - name: emailDomain
+                  description: Domain of the user's email address.
+                  data_type: varchar
+                - name: documentUpdatedAt
+                  description: Date and time when the document was last updated.
+                  data_type: timestamp
+                - name: documentCreatedAt
+                  description: Date and time when the document was created.
+                  data_type: timestamp
+          - name: hasReminder
+            description: Indicates if the user has set a reminder.
+            data_type: boolean
+          - name: thirdOrderDate
+            description: Date and time of the third order.
+            data_type: timestamp
+          - name: subscribedMessageTypeIds
+            description: List of message type IDs user has subscribed to
+            data_type: array
+          - name: firstSource
+            description: First source of user interaction.
+            data_type: varchar
+          - name: unsubscribedMessageTypeIds
+            description: List of message type IDs the user has unsubscribed from
+            data_type: array
+          - name: first_name
+            description: User's first name.
+            data_type: varchar
+          - name: email
+            description: User's email address.
+            data_type: varchar
+          - name: thirdMostRecentOrderCards
+            description: Details of the third most recent order cards related to the
+              user
+            data_type: array
+          - name: profileUpdatedAt
+            description: Date and time when the profile was last updated.
+            data_type: timestamp
+          - name: signupDate
+            description: Date and time when the user signed up.
+            data_type: timestamp
+          - name: businessLines
+            description: List of business lines the user is associated with
+            data_type: array
+          - name: secondOrderCards
+            description: Details of the second order cards related to the user
+            data_type: array
+          - name: address1
+            description: Primary address line of the user.
+            data_type: varchar
+          - name: last_name
+            description: User's last name.
+            data_type: varchar
+          - name: ltr
+            description: Lifetime total revenue.
+            data_type: integer
+          - name: userId
+            description: User's unique identifier.
+            data_type: varchar
+          - name: shopify_created_at
+            description: Date and time when the user was created in Shopify.
+            data_type: timestamp
+          - name: signupSource
+            description: Source through which the user signed up.
+            data_type: varchar
+          - name: thirdOrderCards
+            description: Details of the third order cards related to the user
+            data_type: array
+          - name: firstOrderCards
+            description: Details of the first order cards related to the user
+            data_type: array
+          - name: totalOrders
+            description: Total number of orders made by the user.
+            data_type: integer
+          - name: shopify_updated_at
+            description: Date and time when the user was last updated in Shopify.
+            data_type: timestamp
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: web_push_click
+        columns:
+          - name: itblInternal
+            description: Internal details related to the event
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp when the related document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp when the related document was last updated
+                  data_type: timestamp
+          - name: _type
+            description: Type of the event data
+            data_type: varchar
+          - name: createdAt
+            description: Timestamp when the event was created
+            data_type: timestamp
+          - name: email
+            description: Email address related to the event
+            data_type: varchar
+          - name: userId
+            description: User ID associated with the event
+            data_type: varchar
+          - name: data
+            description: Event-specific data associated with the event
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: web_push_send
+        columns:
+          - name: itblInternal
+            description: Internal details related to the event
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp when the related document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp when the related document was last updated
+                  data_type: timestamp
+          - name: _type
+            description: Type of the event data
+            data_type: varchar
+          - name: createdAt
+            description: Timestamp when the event was created
+            data_type: timestamp
+          - name: email
+            description: Email address related to the event
+            data_type: varchar
+          - name: userId
+            description: User ID associated with the event
+            data_type: varchar
+          - name: data
+            description: Event-specific data associated with the event
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: web_push_send_skip
+        columns:
+          - name: itblInternal
+            description: Internal details related to the event
+            data_type: json
+            meta:
+              subcolumns:
+                - name: documentCreatedAt
+                  description: Timestamp when the related document was created
+                  data_type: timestamp
+                - name: documentUpdatedAt
+                  description: Timestamp when the related document was last updated
+                  data_type: timestamp
+          - name: _type
+            description: Type of the event data
+            data_type: varchar
+          - name: createdAt
+            description: Timestamp when the event was created
+            data_type: timestamp
+          - name: email
+            description: Email address related to the event
+            data_type: varchar
+          - name: userId
+            description: User ID associated with the event
+            data_type: varchar
+          - name: data
+            description: Event-specific data associated with the event
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar

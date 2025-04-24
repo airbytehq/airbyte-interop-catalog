@@ -1,0 +1,472 @@
+domain: iterable.airbyte-interop
+transforms:
+  - name: event_extension
+    from:
+      - events: iterable.events
+    fields:
+      _fivetran_id:
+        expression: MISSING
+        description: A Fivetran-created unique identifier derived from hashing campaign_id,
+          created_at, and event_name.
+      app_already_running:
+        expression: MISSING
+        description: Boolean indicating if the app is currently running or not
+      badge:
+        expression: MISSING
+        description: Badge associated with the event
+      canonical_url_id:
+        expression: MISSING
+        description: Reference to the url associated with the event
+      content_available:
+        expression: MISSING
+        description: Content available from the event
+      content_id:
+        expression: MISSING
+        description: Reference to the content associated with the event
+      deeplink_android:
+        expression: MISSING
+        description: Deeplink associated with the event from an android device
+      deeplink_ios:
+        expression: MISSING
+        description: Deeplink associated with the event from an ios device
+      device:
+        expression: MISSING
+        description: The device associated with the event
+      email_id:
+        expression: MISSING
+        description: Reference to the email associated with the event
+      email_subject:
+        expression: MISSING
+        description: Subject of the email associated with the event
+      experiment_id:
+        expression: MISSING
+        description: Reference to the experiment used if the event is an experiment
+      from_phone_number_id:
+        expression: MISSING
+        description: Reference to the phone number which the event is from
+      from_smssender_id:
+        expression: MISSING
+        description: Reference to the sms sender which the event is from
+      image_url:
+        expression: MISSING
+        description: Image url of the event
+      is_ghost_push:
+        expression: MISSING
+        description: Boolean indicating if the event is a result of a ghost push
+      link_id:
+        expression: MISSING
+        description: Reference to the link associated with the event
+      link_url:
+        expression: MISSING
+        description: Url of the link associated with the event
+      locale:
+        expression: MISSING
+        description: Locale associated with the event
+      payload:
+        expression: MISSING
+        description: Payload resulted from the event
+      platform_endpoint:
+        expression: MISSING
+        description: The specific platform endpoint of the event
+      push_message:
+        expression: MISSING
+        description: Boolean indicating if the event is a push message
+      region:
+        expression: MISSING
+        description: Region of the event
+      sms_message:
+        expression: MISSING
+        description: Boolean indicating if the event is an sms message
+      sms_provider_response_code:
+        expression: MISSING
+        description: sms provider response code from the event
+      sms_provider_response_message:
+        expression: MISSING
+        description: sms provider response message from the event
+      sms_provider_response_more_info:
+        expression: MISSING
+        description: sms provider response addition info from the event
+      sms_provider_response_status:
+        expression: MISSING
+        description: Status of the sms provider response from the event
+      sound:
+        expression: MISSING
+        description: Boolean indicating if a sound was used with the event
+      to_phone_number:
+        expression: MISSING
+        description: To phone number associated with the event
+      url:
+        expression: MISSING
+        description: Url associated with the event
+      workflow_id:
+        expression: MISSING
+        description: Reference to the workflow which the event originated
+      workflow_name:
+        expression: MISSING
+        description: Name of the workflow which the event originated
+      catalog_collection_count:
+        expression: MISSING
+        description: The count of products or items collected in a catalog associated
+          with the event.
+      catalog_lookup_count:
+        expression: MISSING
+        description: The count of times a catalog was looked up or queried during
+          the event.
+      city:
+        expression: MISSING
+        description: The city associated with the event, which could be the location
+          of the recipient.
+      clicked_url:
+        expression: MISSING
+        description: The URL that was clicked by the recipient in response to the
+          marketing message.
+      country:
+        expression: MISSING
+        description: The country associated with the event, which could be the location
+          of the recipient.
+      error_code:
+        expression: MISSING
+        description: The error code or message indicating any issues or errors encountered
+          during the event.
+      expires_at:
+        expression: MISSING
+        description: The date and time when the event or message is set to expire
+          or become invalid.
+      from_phone_number:
+        expression: MISSING
+        description: The phone number from which the SMS message was sent.
+      in_app_body:
+        expression: MISSING
+        description: The content or body of an in-app message that was sent as part
+          of the event.
+      is_sms_estimation:
+        expression: MISSING
+        description: A boolean indicating whether the SMS message is an estimation
+          or not.
+      labels:
+        expression: MISSING
+        description: Any labels or tags associated with the event, which can be used
+          for categorization or organization.
+      message_context:
+        expression: MISSING
+        description: Additional contextual information related to the marketing message
+          or event.
+      message_status:
+        expression: MISSING
+        description: The status of the marketing message, such as sent, delivered,
+          opened, etc.
+      mms_send_count:
+        expression: MISSING
+        description: The count of multimedia messages (MMS) sent as part of the event.
+      product_recommendation_count:
+        expression: MISSING
+        description: The count of product recommendations included in the message.
+      proxy_source:
+        expression: MISSING
+        description: Information about the source or proxy used for sending the message.
+      reason:
+        expression: MISSING
+        description: The reason or cause associated with a specific event or action.
+      sms_send_count:
+        expression: MISSING
+        description: The count of SMS messages sent as part of the event.
+      web_push_body:
+        expression: MISSING
+        description: The content or body of a web push notification sent as part of
+          the event.
+      web_push_click_action:
+        expression: MISSING
+        description: The action triggered when a recipient clicks a web push notification.
+      web_push_icon:
+        expression: MISSING
+        description: The icon or image associated with the web push notification.
+      web_push_message:
+        expression: MISSING
+        description: The message or notification sent to web users as part of the
+          event.
+annotations:
+  approved: false
+  missing_fields:
+    - _fivetran_id
+    - app_already_running
+    - badge
+    - canonical_url_id
+    - catalog_collection_count
+    - catalog_lookup_count
+    - city
+    - clicked_url
+    - content_available
+    - content_id
+    - country
+    - deeplink_android
+    - deeplink_ios
+    - device
+    - email_id
+    - email_subject
+    - error_code
+    - experiment_id
+    - expires_at
+    - from_phone_number
+    - from_phone_number_id
+    - from_smssender_id
+    - image_url
+    - in_app_body
+    - is_ghost_push
+    - is_sms_estimation
+    - labels
+    - link_id
+    - link_url
+    - locale
+    - message_context
+    - message_status
+    - mms_send_count
+    - payload
+    - platform_endpoint
+    - product_recommendation_count
+    - proxy_source
+    - push_message
+    - reason
+    - region
+    - sms_message
+    - sms_provider_response_code
+    - sms_provider_response_message
+    - sms_provider_response_more_info
+    - sms_provider_response_status
+    - sms_send_count
+    - sound
+    - to_phone_number
+    - url
+    - web_push_body
+    - web_push_click_action
+    - web_push_icon
+    - web_push_message
+    - workflow_id
+    - workflow_name
+  evaluation:
+    source_stream_name: events
+    target_table_name: event_extension
+    table_match_score: 0.0
+    completion_score: 0.0
+    explanation: All fields are marked as 'MISSING', indicating no mapping was found.
+      Hence, both scores for table and completion are zero.
+    field_mapping_evals:
+      - name: _fivetran_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: app_already_running
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: badge
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: canonical_url_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: content_available
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: content_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: deeplink_android
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: deeplink_ios
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: device
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: email_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: email_subject
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: experiment_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: from_phone_number_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: from_smssender_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: image_url
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: is_ghost_push
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: link_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: link_url
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: locale
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: payload
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: platform_endpoint
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: push_message
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: region
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: sms_message
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: sms_provider_response_code
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: sms_provider_response_message
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: sms_provider_response_more_info
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: sms_provider_response_status
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: sound
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: to_phone_number
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: url
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: workflow_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: workflow_name
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: catalog_collection_count
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: catalog_lookup_count
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: city
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: clicked_url
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: country
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: error_code
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: expires_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: from_phone_number
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: in_app_body
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: is_sms_estimation
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: labels
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: message_context
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: message_status
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: mms_send_count
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: product_recommendation_count
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: proxy_source
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: reason
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: sms_send_count
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: web_push_body
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: web_push_click_action
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: web_push_icon
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: web_push_message
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

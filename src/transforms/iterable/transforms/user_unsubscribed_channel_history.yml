@@ -1,0 +1,43 @@
+domain: iterable.airbyte-interop
+transforms:
+  - name: user_unsubscribed_channel_history
+    from:
+      - email_unsubscribe: iterable.email_unsubscribe
+    fields:
+      channel_id:
+        expression: email_unsubscribe.channelId
+        description: Reference to the channel from which the user unsubscribed
+      email:
+        expression: email_unsubscribe.email
+        description: Unique identifier of the user
+      updated_at:
+        expression: email_unsubscribe._airbyte_extracted_at
+        description: Last update timestamp
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: email_unsubscribe
+    target_table_name: user_unsubscribed_channel_history
+    table_match_score: 0.8
+    completion_score: 0.8
+    explanation: The table mapping score is high given that the source and target
+      schema both derive from similar APIs ensuring a good field mapping alignment.
+      Except for '_airbyte_extracted_at' aliasing to '_fivetran_synced', the other
+      fields matched relatively closely.
+    field_mapping_evals:
+      - name: channel_id
+        expression: email_unsubscribe.channelId
+        score: 0.7
+        explanation: Fuzzy match to 'channelId' is reasonable, as both refer to identifiers
+          of a channel in slightly different notations.
+      - name: email
+        expression: email_unsubscribe.email
+        score: 0.7
+        explanation: Direct mapping to 'email' is accurate and common across different
+          schemas since this is a standard field identifying unique users.
+      - name: updated_at
+        expression: email_unsubscribe._airbyte_extracted_at
+        score: 1.0
+        explanation: "'_airbyte_extracted_at' directly maps to '_fivetran_synced'
+          ensuring a perfect sync of timestamp data across systems."

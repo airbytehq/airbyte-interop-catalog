@@ -1,0 +1,183 @@
+Table "campaign_history" {
+    "id" unknown [note: 'Unique identifier of the campaign record']
+    "updated_at" unknown [note: 'Last update\'s timestamp']
+    "name" unknown [note: 'User defined name of the campaign.']
+    "campaign_state" unknown [note: 'State of the campaign. Can be Draft, Ready, Scheduled, Running, Finished, Starting, Aborted or Recurring']
+    "type" unknown [note: 'The campaign type. Can be Blast or Triggered']
+    "send_size" unknown [note: 'Size of the campaign. Number of individuals included in the campaign']
+    "start_at" unknown [note: 'Start timestamp']
+    "ended_at" unknown [note: 'Ended timestamp']
+    "created_at" unknown [note: 'Creation timestamp']
+    "recurring_campaign_id" unknown [note: 'Reference to the recurring campaign, if applicable']
+    "created_by_user_id" unknown [note: 'Reference to the user who created the campaign']
+    "template_id" unknown [note: 'Reference to the campaign template']
+    "updated_by_user_id" unknown [note: 'ID of the user who updated this record']
+    "message_medium" unknown [note: 'The medium that this message was sent via, for example Email or InApp']
+}
+
+Table "campaign_label_history" {
+    "campaign_id" unknown [note: 'Reference to the campaign associated with the label']
+    "label" unknown [note: 'Name of the label']
+    "updated_at" unknown [note: 'Last update timestamp']
+}
+
+Table "campaign_list_history" {
+    "campaign_id" unknown [note: 'Reference to the campaign associated with the label']
+    "list_id" unknown [note: 'Reference to the list used']
+    "updated_at" unknown [note: 'Last update timestamp']
+}
+
+Table "campaign_suppression_list_history" {
+    "campaign_id" unknown [note: 'Reference to the campaign associated with the label']
+    "suppressed_list_id" unknown [note: 'Reference to the list used']
+    "updated_at" unknown [note: 'Last update timestamp']
+}
+
+Table "channel" {
+    "id" unknown [note: 'Unique identifier of the channel']
+    "name" unknown [note: 'User defined name of the channel']
+    "channel_type" unknown [note: 'The channel type']
+    "message_medium" unknown [note: 'The message medium associated with the channel']
+}
+
+Table "event" {
+    "_fivetran_id" unknown [note: 'A Fivetran-created unique identifier derived from hashing campaign_id, created_at, and event_name.']
+    "campaign_id" unknown [note: 'Reference to the campaign from which the event originated']
+    "content_id" unknown [note: 'Reference to the content the event is associated with.']
+    "created_at" unknown [note: 'Creation timestamp']
+    "email" unknown [note: 'The user\'s email. User identifier, for email-based projects. Previously was the unique identifier for user records, for Iterable customers before August 2023.  Exists if using the history version of the table.']
+    "additional_properties" unknown [note: 'json object containing addition event properties']
+    "event_name" unknown [note: 'Name provided to the individual event']
+    "message_bus_id" unknown [note: 'Reference to the message bus associated with the event']
+    "message_id" unknown [note: 'Reference to the message the event is associated with']
+    "message_type_id" unknown [note: 'Reference to the type of message the event is associated with']
+    "recipient_state" unknown [note: 'The state of the recipient upon receiving the event']
+    "status" unknown [note: 'Status of the event']
+    "transactional_data" unknown [note: 'Transactional data associated with the event']
+    "unsub_source" unknown [note: 'Source of the unsubscribe event']
+    "user_agent" unknown [note: 'User agent associated with the event']
+    "user_agent_device" unknown [note: 'The device of the user agent']
+    "_fivetran_user_id" unknown [note: 'A Fivetran-created unique identifier for users, derived from hashing user_id and/or email, depending on project type.']
+}
+
+Table "event_extension" {
+    "_fivetran_id" unknown [note: 'A Fivetran-created unique identifier derived from hashing campaign_id, created_at, and event_name.']
+    "app_already_running" unknown [note: 'Boolean indicating if the app is currently running or not']
+    "badge" unknown [note: 'Badge associated with the event']
+    "canonical_url_id" unknown [note: 'Reference to the url associated with the event']
+    "content_available" unknown [note: 'Content available from the event']
+    "content_id" unknown [note: 'Reference to the content associated with the event']
+    "deeplink_android" unknown [note: 'Deeplink associated with the event from an android device']
+    "deeplink_ios" unknown [note: 'Deeplink associated with the event from an ios device']
+    "device" unknown [note: 'The device associated with the event']
+    "email_id" unknown [note: 'Reference to the email associated with the event']
+    "email_subject" unknown [note: 'Subject of the email associated with the event']
+    "experiment_id" unknown [note: 'Reference to the experiment used if the event is an experiment']
+    "from_phone_number_id" unknown [note: 'Reference to the phone number which the event is from']
+    "from_smssender_id" unknown [note: 'Reference to the sms sender which the event is from']
+    "image_url" unknown [note: 'Image url of the event']
+    "is_ghost_push" unknown [note: 'Boolean indicating if the event is a result of a ghost push']
+    "link_id" unknown [note: 'Reference to the link associated with the event']
+    "link_url" unknown [note: 'Url of the link associated with the event']
+    "locale" unknown [note: 'Locale associated with the event']
+    "payload" unknown [note: 'Payload resulted from the event']
+    "platform_endpoint" unknown [note: 'The specific platform endpoint of the event']
+    "push_message" unknown [note: 'Boolean indicating if the event is a push message']
+    "region" unknown [note: 'Region of the event']
+    "sms_message" unknown [note: 'Boolean indicating if the event is an sms message']
+    "sms_provider_response_code" unknown [note: 'sms provider response code from the event']
+    "sms_provider_response_message" unknown [note: 'sms provider response message from the event']
+    "sms_provider_response_more_info" unknown [note: 'sms provider response addition info from the event']
+    "sms_provider_response_status" unknown [note: 'Status of the sms provider response from the event']
+    "sound" unknown [note: 'Boolean indicating if a sound was used with the event']
+    "to_phone_number" unknown [note: 'To phone number associated with the event']
+    "url" unknown [note: 'Url associated with the event']
+    "workflow_id" unknown [note: 'Reference to the workflow which the event originated']
+    "workflow_name" unknown [note: 'Name of the workflow which the event originated']
+    "catalog_collection_count" unknown [note: 'The count of products or items collected in a catalog associated with the event.']
+    "catalog_lookup_count" unknown [note: 'The count of times a catalog was looked up or queried during the event.']
+    "city" unknown [note: 'The city associated with the event, which could be the location of the recipient.']
+    "clicked_url" unknown [note: 'The URL that was clicked by the recipient in response to the marketing message.']
+    "country" unknown [note: 'The country associated with the event, which could be the location of the recipient.']
+    "error_code" unknown [note: 'The error code or message indicating any issues or errors encountered during the event.']
+    "expires_at" unknown [note: 'The date and time when the event or message is set to expire or become invalid.']
+    "from_phone_number" unknown [note: 'The phone number from which the SMS message was sent.']
+    "in_app_body" unknown [note: 'The content or body of an in-app message that was sent as part of the event.']
+    "is_sms_estimation" unknown [note: 'A boolean indicating whether the SMS message is an estimation or not.']
+    "labels" unknown [note: 'Any labels or tags associated with the event, which can be used for categorization or organization.']
+    "message_context" unknown [note: 'Additional contextual information related to the marketing message or event.']
+    "message_status" unknown [note: 'The status of the marketing message, such as sent, delivered, opened, etc.']
+    "mms_send_count" unknown [note: 'The count of multimedia messages (MMS) sent as part of the event.']
+    "product_recommendation_count" unknown [note: 'The count of product recommendations included in the message.']
+    "proxy_source" unknown [note: 'Information about the source or proxy used for sending the message.']
+    "reason" unknown [note: 'The reason or cause associated with a specific event or action.']
+    "sms_send_count" unknown [note: 'The count of SMS messages sent as part of the event.']
+    "web_push_body" unknown [note: 'The content or body of a web push notification sent as part of the event.']
+    "web_push_click_action" unknown [note: 'The action triggered when a recipient clicks a web push notification.']
+    "web_push_icon" unknown [note: 'The icon or image associated with the web push notification.']
+    "web_push_message" unknown [note: 'The message or notification sent to web users as part of the event.']
+}
+
+Table "list" {
+    "id" unknown [note: 'Unique identifier of the list']
+    "name" unknown [note: 'User defined name of the list']
+    "list_type" unknown [note: 'The list type']
+    "created_at" unknown [note: 'Creation timestamp']
+    "description" unknown [note: 'Information about the list']
+}
+
+Table "message_type" {
+    "id" unknown [note: 'Unique identifer of the message type']
+    "name" unknown [note: 'User defined name of the message type']
+    "channel_id" unknown [note: 'Channel that this message type belongs to']
+    "created_at" unknown [note: 'Time when the message type was initially created']
+    "frequency_cap" unknown [note: 'The maximum number of times a message of this type can be sent to a recipient within a specified time period to prevent over-messaging']
+    "rate_limit_per_minute" unknown [note: 'The maximum number of messages of this type that can be sent to recipients in a minute, ensuring controlled message delivery']
+    "subscription_policy" unknown [note: 'Information about the policy or rules governing how users can subscribe to or unsubscribe from this specific message type, like OptOut']
+    "updated_at" unknown [note: 'Time when the message type was last updated or modified']
+}
+
+Table "template_history" {
+    "id" unknown [note: 'Unique identifer of the template']
+    "name" unknown [note: 'User defined name of the template']
+    "template_type" unknown [note: 'The type of the template']
+    "created_at" unknown [note: 'Creation timestamp']
+    "client_template_id" unknown [note: 'Reference to the client template']
+    "creator_user_id" unknown [note: 'Reference to the user who created the template']
+    "message_type_id" unknown [note: 'Reference to the message type associated with the template']
+    "updated_at" unknown [note: 'Last update timestamp']
+}
+
+Table "user_history" {
+    "email" unknown [note: 'The user\'s email. Previously was the unique identifier for the user records, for Iterable customers before August 2023. This has since been replaced by iterable_user_id.']
+    "user_id" unknown [note: 'User defined identifier of the user. This is not a unique field']
+    "iterable_user_id" unknown [note: 'The unique identifier of the user']
+    "first_name" unknown [note: 'First name of the user']
+    "last_name" unknown [note: 'Last name of the user']
+    "email_list_ids" unknown [note: 'Array of references to the lists associated with the user']
+    "signup_date" unknown [note: 'Timestamp of when the user signed up']
+    "signup_source" unknown [note: 'Source where the user signed up']
+    "updated_at" unknown [note: 'Last update timestamp']
+}
+
+Table "user_unsubscribed_channel" {
+    "_fivetran_id" unknown [note: 'A Fivetran-created unique identifier for users, derived from hashing user_id and/or email, depending on project type.']
+    "channel_id" unknown [note: 'Reference to the channel from which the user unsubscribed']
+}
+
+Table "user_unsubscribed_message_type" {
+    "_fivetran_id" unknown [note: 'A Fivetran-created unique identifier for users, derived from hashing user_id and/or email, depending on project type.']
+    "message_type_id" unknown [note: 'Reference to the message type from which the user unsubscribed']
+}
+
+Table "user_unsubscribed_channel_history" {
+    "channel_id" unknown [note: 'Reference to the channel from which the user unsubscribed']
+    "email" unknown [note: 'Unique identifier of the user']
+    "updated_at" unknown [note: 'Last update timestamp']
+}
+
+Table "user_unsubscribed_message_type_history" {
+    "message_type_id" unknown [note: 'Reference to the message type from which the user unsubscribed']
+    "email" unknown [note: 'Unique identifier of the user']
+    "updated_at" unknown [note: 'Last update timestamp']
+}

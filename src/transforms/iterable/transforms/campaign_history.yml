@@ -1,0 +1,128 @@
+domain: iterable.airbyte-interop
+transforms:
+  - name: campaign_history
+    from:
+      - campaigns: iterable.campaigns
+    fields:
+      id:
+        expression: campaigns.id
+        description: Unique identifier of the campaign record
+      updated_at:
+        expression: campaigns.updatedAt
+        description: Last update's timestamp
+      name:
+        expression: campaigns.name
+        description: User defined name of the campaign.
+      campaign_state:
+        expression: campaigns.campaignState
+        description: State of the campaign. Can be Draft, Ready, Scheduled, Running,
+          Finished, Starting, Aborted or Recurring
+      type:
+        expression: campaigns.type
+        description: The campaign type. Can be Blast or Triggered
+      send_size:
+        expression: campaigns.sendSize
+        description: Size of the campaign. Number of individuals included in the campaign
+      start_at:
+        expression: campaigns.startAt
+        description: Start timestamp
+      ended_at:
+        expression: campaigns.endedAt
+        description: Ended timestamp
+      created_at:
+        expression: campaigns.createdAt
+        description: Creation timestamp
+      recurring_campaign_id:
+        expression: campaigns.recurringCampaignId
+        description: Reference to the recurring campaign, if applicable
+      created_by_user_id:
+        expression: campaigns.createdByUserId
+        description: Reference to the user who created the campaign
+      template_id:
+        expression: campaigns.templateId
+        description: Reference to the campaign template
+      updated_by_user_id:
+        expression: campaigns.updatedByUserId
+        description: ID of the user who updated this record
+      message_medium:
+        expression: campaigns.messageMedium
+        description: The medium that this message was sent via, for example Email
+          or InApp
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: campaigns
+    target_table_name: campaign_history
+    table_match_score: 0.9
+    completion_score: 0.85
+    explanation: The table mapping between source campaigns and target campaigns is
+      highly aligned, indicating a strong correlation in the subject matter across
+      both datasets. Fields such as 'id', 'name', and 'updated_at' have direct equivalents,
+      contributing to a high table match score. The completion score is slightly lower
+      due to missing mappings for certain specific fields that could not be accurately
+      matched or were not present in the source.
+    field_mapping_evals:
+      - name: id
+        expression: campaigns.id
+        score: 1.0
+        explanation: Direct mapping with identical field names and purposes.
+      - name: updated_at
+        expression: campaigns.updatedAt
+        score: 0.95
+        explanation: Direct mapping with only slight differences in notation (underscore
+          vs camelCase).
+      - name: name
+        expression: campaigns.name
+        score: 1.0
+        explanation: Perfect match between field names and purposes.
+      - name: campaign_state
+        expression: campaigns.campaignState
+        score: 0.8
+        explanation: Good match considering likely synonyms in different schema implementations.
+      - name: type
+        expression: campaigns.type
+        score: 0.7
+        explanation: Reasonable match, although 'type' can be general, the context
+          makes it sufficiently specific.
+      - name: send_size
+        expression: campaigns.sendSize
+        score: 0.85
+        explanation: Strong match based on field purpose and context.
+      - name: start_at
+        expression: campaigns.startAt
+        score: 0.95
+        explanation: Very close match, minor notation differences.
+      - name: ended_at
+        expression: campaigns.endedAt
+        score: 0.95
+        explanation: Very close match, minor notation differences.
+      - name: created_at
+        expression: campaigns.createdAt
+        score: 0.95
+        explanation: Very close match, minor notation differences.
+      - name: recurring_campaign_id
+        expression: campaigns.recurringCampaignId
+        score: 0.65
+        explanation: A specific match that slightly depends on the overall schema
+          understanding.
+      - name: created_by_user_id
+        expression: campaigns.createdByUserId
+        score: 0.6
+        explanation: Adequate mapping, close relevance but slightly ambiguous without
+          additional context.
+      - name: template_id
+        expression: campaigns.templateId
+        score: 0.65
+        explanation: Reasonable confidence, assuming 'template' refers commonly to
+          a structural element in campaigns.
+      - name: updated_by_user_id
+        expression: campaigns.updatedByUserId
+        score: 0.6
+        explanation: Adequate mapping, close relevance could vary based on schema
+          definitions.
+      - name: message_medium
+        expression: campaigns.messageMedium
+        score: 0.5
+        explanation: Borderline acceptable, given the generic nature of 'medium' and
+          specific use in campaign context.

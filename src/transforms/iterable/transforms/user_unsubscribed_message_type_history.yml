@@ -1,0 +1,41 @@
+domain: iterable.airbyte-interop
+transforms:
+  - name: user_unsubscribed_message_type_history
+    from:
+      - email_unsubscribe: iterable.email_unsubscribe
+    fields:
+      message_type_id:
+        expression: MISSING
+        description: Reference to the message type from which the user unsubscribed
+      email:
+        expression: email_unsubscribe.email
+        description: Unique identifier of the user
+      updated_at:
+        expression: MISSING
+        description: Last update timestamp
+annotations:
+  approved: false
+  missing_fields:
+    - message_type_id
+    - updated_at
+  evaluation:
+    source_stream_name: email_unsubscribe
+    target_table_name: user_unsubscribed_message_type_history
+    table_match_score: 0.6
+    completion_score: 0.33
+    explanation: The table mapping shows moderate confidence with some fields correctly
+      identified. However, two critical fields are marked as MISSING, significantly
+      lowering the completion score.
+    field_mapping_evals:
+      - name: message_type_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: email
+        expression: email_unsubscribe.email
+        score: 1.0
+        explanation: Direct match found, confidence is high.
+      - name: updated_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

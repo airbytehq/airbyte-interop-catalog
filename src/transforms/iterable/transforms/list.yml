@@ -1,0 +1,58 @@
+domain: iterable.airbyte-interop
+transforms:
+  - name: list
+    from:
+      - lists: iterable.lists
+    fields:
+      id:
+        expression: lists.id
+        description: Unique identifier of the list
+      name:
+        expression: lists.name
+        description: User defined name of the list
+      list_type:
+        expression: lists.listType
+        description: The list type
+      created_at:
+        expression: lists.createdAt
+        description: Creation timestamp
+      description:
+        expression: MISSING
+        description: Information about the list
+annotations:
+  approved: true
+  missing_fields:
+    - description
+  evaluation:
+    source_stream_name: lists
+    target_table_name: list
+    table_match_score: 0.9
+    completion_score: 0.8
+    explanation: The table match score is high at 0.9, indicating a strong likelihood
+      that the source and target tables are describing the same content. The completion
+      score is 0.8, reflecting that most but not all field mappings are confidently
+      populated.
+    field_mapping_evals:
+      - name: id
+        expression: lists.id
+        score: 1.0
+        explanation: Direct match found with exact name and context matching between
+          lists.id and target id field, no casing difference.
+      - name: name
+        expression: lists.name
+        score: 1.0
+        explanation: Exact name match and explicit context alignment between lists.name
+          and target name field.
+      - name: list_type
+        expression: lists.listType
+        score: 0.9
+        explanation: High confidence due to semantic closeness of 'listType' to 'list_type'.
+      - name: created_at
+        expression: lists.createdAt
+        score: 0.9
+        explanation: Field name casing difference is not penalized, and context supports
+          high match confidence between 'createdAt' and 'created_at'.
+      - name: description
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
