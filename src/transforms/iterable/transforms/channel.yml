@@ -1,0 +1,50 @@
+domain: iterable.airbyte-interop
+transforms:
+  - name: channel
+    from:
+      - channels: iterable.channels
+    fields:
+      id:
+        expression: channels.id
+        description: Unique identifier of the channel
+      name:
+        expression: channels.name
+        description: User defined name of the channel
+      channel_type:
+        expression: channels.channelType
+        description: The channel type
+      message_medium:
+        expression: channels.messageMedium
+        description: The message medium associated with the channel
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: channels
+    target_table_name: channel
+    table_match_score: 0.9
+    completion_score: 0.8
+    explanation: Based on the detailed matching criteria provided, there is a relative
+      high confidence that the source and target tables are about the same subject
+      matter, and most expected fields are aligned. Some discrepancies in completeness
+      reduce the total score.
+    field_mapping_evals:
+      - name: id
+        expression: channels.id
+        score: 0.95
+        explanation: Direct match on field 'id' with proper correspondence in schema.
+      - name: name
+        expression: channels.name
+        score: 0.9
+        explanation: Field 'name' matches well, and case insensitivity does not affect
+          the score.
+      - name: channel_type
+        expression: channels.channelType
+        score: 0.85
+        explanation: Field 'channel_type' has a good semantic match even though the
+          terms are not identical.
+      - name: message_medium
+        expression: channels.messageMedium
+        score: 0.7
+        explanation: Field 'message_medium' matches, but the correspondence is less
+          obvious, hence a lower score.

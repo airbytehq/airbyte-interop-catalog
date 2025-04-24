@@ -1,0 +1,83 @@
+domain: iterable.airbyte-interop
+transforms:
+  - name: template_history
+    from:
+      - templates: iterable.templates
+    fields:
+      id:
+        expression: templates.templateId
+        description: Unique identifer of the template
+      name:
+        expression: templates.name
+        description: User defined name of the template
+      template_type:
+        expression: MISSING
+        description: The type of the template
+      created_at:
+        expression: templates.createdAt
+        description: Creation timestamp
+      client_template_id:
+        expression: templates.clientTemplateId
+        description: Reference to the client template
+      creator_user_id:
+        expression: templates.creatorUserId
+        description: Reference to the user who created the template
+      message_type_id:
+        expression: templates.messageTypeId
+        description: Reference to the message type associated with the template
+      updated_at:
+        expression: templates.updatedAt
+        description: Last update timestamp
+annotations:
+  approved: true
+  missing_fields:
+    - template_type
+  evaluation:
+    source_stream_name: templates
+    target_table_name: template_history
+    table_match_score: 0.8
+    completion_score: 0.57
+    explanation: The table match score is relatively high, indicating a good overall
+      match in terms of data subject matter between source and target. However, the
+      completion score is moderately low, reflecting incomplete field mappings, possibly
+      due to missing data serialization in the source compared to the target.
+    field_mapping_evals:
+      - name: id
+        expression: templates.templateId
+        score: 0.9
+        explanation: 'High confidence: Direct match found with field names and data
+          type.'
+      - name: name
+        expression: templates.name
+        score: 0.9
+        explanation: 'High confidence: Direct match found with field names and data
+          type.'
+      - name: template_type
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: created_at
+        expression: templates.createdAt
+        score: 0.8
+        explanation: 'High confidence: Direct match in names indicating a timestamp
+          field.'
+      - name: client_template_id
+        expression: templates.clientTemplateId
+        score: 0.7
+        explanation: 'High confidence: Names suggest a direct reference ID match,
+          slightly nuanced due to potential differences in ID types.'
+      - name: creator_user_id
+        expression: templates.creatorUserId
+        score: 0.7
+        explanation: 'Reasonable match: The names indicate a user ID reference; however,
+          there might be small nuances in the exact type of user referenced.'
+      - name: message_type_id
+        expression: templates.messageTypeId
+        score: 0.7
+        explanation: 'Reasonable match: Names imply a direct correlation to message
+          type IDs, although exact match is slightly uncertain.'
+      - name: updated_at
+        expression: templates.updatedAt
+        score: 0.8
+        explanation: 'High confidence: Clearly a timestamp update field, matched directly
+          by name.'

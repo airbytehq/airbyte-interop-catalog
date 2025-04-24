@@ -1,0 +1,34 @@
+domain: iterable.airbyte-interop
+transforms:
+  - name: user_unsubscribed_channel
+    from:
+      - email_unsubscribe: iterable.email_unsubscribe
+    fields:
+      _fivetran_id:
+        expression: MISSING
+        description: A Fivetran-created unique identifier for users, derived from
+          hashing user_id and/or email, depending on project type.
+      channel_id:
+        expression: email_unsubscribe.channelId
+        description: Reference to the channel from which the user unsubscribed
+annotations:
+  approved: false
+  missing_fields:
+    - _fivetran_id
+  evaluation:
+    source_stream_name: email_unsubscribe
+    target_table_name: user_unsubscribed_channel
+    table_match_score: 0.5
+    completion_score: 0.45
+    explanation: Field mappings show variance in confidence due to incomplete or incorrect
+      matches. 'MISSING' mappings significantly lower the confidence.
+    field_mapping_evals:
+      - name: _fivetran_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: channel_id
+        expression: email_unsubscribe.channelId
+        score: 0.55
+        explanation: Potentially correct mapping, minor penalties due to uncertainties
+          about table structures.

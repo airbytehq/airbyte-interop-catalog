@@ -1,0 +1,15 @@
+domain: iterable.airbyte-interop
+transforms:
+  - name: campaign_label_history
+    from:
+      - MISSING: iterable.MISSING
+    fields:
+      campaign_id:
+        expression: MISSING
+        description: Reference to the campaign associated with the label
+      label:
+        expression: MISSING
+        description: Name of the label
+      updated_at:
+        expression: MISSING
+        description: Last update timestamp

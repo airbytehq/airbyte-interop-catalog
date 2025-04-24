@@ -1,0 +1,513 @@
+[project]
+source_name = "iterable"
+project_name = "airbyte-interop"
+requirements_file = "build/iterable/requirements/airbyte-interop/src_dbt_requirements.yml"
+requirements_file_hash = "5f79082cb213528ba3af348782e77a43e15308b26eb8b1402e9aa9803b5d750f"
+airbyte_source_file = "build/iterable/src_airbyte_raw_iterable.yml"
+airbyte_source_file_hash = "797188f021daa50eee4dbac84ef58dfa0d4123c5a2670727bc802d096555aa1a"
+
+[coverage]
+unused_source_streams = [
+    "campaigns_metrics",
+    "custom_event",
+    "email_bounce",
+    "email_click",
+    "email_complaint",
+    "email_open",
+    "email_send",
+    "email_send_skip",
+    "email_subscribe",
+    "hosted_unsubscribe_click",
+    "in_app_click",
+    "in_app_close",
+    "in_app_delete",
+    "in_app_delivery",
+    "in_app_open",
+    "in_app_send",
+    "in_app_send_skip",
+    "inbox_message_impression",
+    "inbox_session",
+    "list_users",
+    "metadata",
+    "purchase",
+    "push_bounce",
+    "push_open",
+    "push_send",
+    "push_send_skip",
+    "push_uninstall",
+    "sms_bounce",
+    "sms_click",
+    "sms_received",
+    "sms_send",
+    "sms_send_skip",
+    "sms_usage_info",
+    "users",
+    "web_push_click",
+    "web_push_send",
+    "web_push_send_skip",
+]
+unmapped_target_tables = []
+
+[mappings.campaign_history]
+source_file = "src/transforms/iterable/transforms/campaign_history.yml"
+source_file_hash = "f6134b7ad90316ed9cf18102c47d4cbb1838f8869952929d3cb7b44bfaabf9fc"
+source_stream = "campaigns"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.campaign_history.mapped_target_fields]
+id = "campaigns.id"
+updated_at = "campaigns.updatedAt"
+name = "campaigns.name"
+campaign_state = "campaigns.campaignState"
+type = "campaigns.type"
+send_size = "campaigns.sendSize"
+start_at = "campaigns.startAt"
+ended_at = "campaigns.endedAt"
+created_at = "campaigns.createdAt"
+recurring_campaign_id = "campaigns.recurringCampaignId"
+created_by_user_id = "campaigns.createdByUserId"
+template_id = "campaigns.templateId"
+updated_by_user_id = "campaigns.updatedByUserId"
+message_medium = "campaigns.messageMedium"
+
+[mappings.campaign_history.unused_source_fields]
+campaigns = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "labels",
+    "listIds",
+    "suppressionListIds",
+    "workflowId",
+]
+
+[mappings.campaign_label_history]
+source_file = "src/transforms/iterable/transforms/campaign_label_history.yml"
+source_file_hash = "f14150a9bd4fec9253915133251a09fa8c8df29152d82bd6b0af8a781dffbe20"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "campaign_id",
+    "label",
+    "updated_at",
+]
+
+[mappings.campaign_label_history.mapped_target_fields]
+
+[mappings.campaign_label_history.unused_source_fields]
+
+[mappings.campaign_label_history.omitted_target_fields]
+
+[mappings.campaign_label_history.erroneous_source_table_columns]
+
+[mappings.campaign_list_history]
+source_file = "src/transforms/iterable/transforms/campaign_list_history.yml"
+source_file_hash = "8f834a407768802e6381ef516c67b0921ccdc5ac18070718062feb76a7eda99e"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "campaign_id",
+    "list_id",
+    "updated_at",
+]
+
+[mappings.campaign_list_history.mapped_target_fields]
+
+[mappings.campaign_list_history.unused_source_fields]
+
+[mappings.campaign_list_history.omitted_target_fields]
+
+[mappings.campaign_list_history.erroneous_source_table_columns]
+
+[mappings.campaign_suppression_list_history]
+source_file = "src/transforms/iterable/transforms/campaign_suppression_list_history.yml"
+source_file_hash = "a37c7674010c3c13ab674a422a95df48d121b50fa2a792bde6387f7e4cbc2e17"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "campaign_id",
+    "suppressed_list_id",
+    "updated_at",
+]
+
+[mappings.campaign_suppression_list_history.mapped_target_fields]
+
+[mappings.campaign_suppression_list_history.unused_source_fields]
+
+[mappings.campaign_suppression_list_history.omitted_target_fields]
+
+[mappings.campaign_suppression_list_history.erroneous_source_table_columns]
+
+[mappings.channel]
+source_file = "src/transforms/iterable/transforms/channel.yml"
+source_file_hash = "944d46ec7f2a62cf1fabfc5b8a037416c6fe55ca3954451a1e10c9748f9b1141"
+source_stream = "channels"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.channel.mapped_target_fields]
+id = "channels.id"
+name = "channels.name"
+channel_type = "channels.channelType"
+message_medium = "channels.messageMedium"
+
+[mappings.channel.unused_source_fields]
+channels = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+]
+
+[mappings.event]
+source_file = "src/transforms/iterable/transforms/event.yml"
+source_file_hash = "47fdf3c48e7f7b9e7ae6e779f16f667652c15817303c26cfe0f2f509c902e6aa"
+source_stream = "events"
+unmapped_target_fields = [
+    "campaign_id",
+    "content_id",
+    "message_bus_id",
+    "message_id",
+    "message_type_id",
+    "recipient_state",
+    "status",
+    "transactional_data",
+    "unsub_source",
+    "user_agent",
+    "user_agent_device",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.event.mapped_target_fields]
+_fivetran_id = "events._airbyte_raw_id"
+created_at = "events.createdAt"
+email = "events.email"
+additional_properties = "events.data"
+event_name = "events._type"
+_fivetran_user_id = "events.userId"
+
+[mappings.event.unused_source_fields]
+events = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "itblInternal",
+    "itblInternal.documentCreatedAt",
+    "itblInternal.documentUpdatedAt",
+]
+
+[mappings.event_extension]
+source_file = "src/transforms/iterable/transforms/event_extension.yml"
+source_file_hash = "02a2434f9facc71980a37dd91c211ce2104f49c4bbd51312dcbb1530e7adca9d"
+source_stream = "events"
+unmapped_target_fields = [
+    "_fivetran_id",
+    "app_already_running",
+    "badge",
+    "canonical_url_id",
+    "catalog_collection_count",
+    "catalog_lookup_count",
+    "city",
+    "clicked_url",
+    "content_available",
+    "content_id",
+    "country",
+    "deeplink_android",
+    "deeplink_ios",
+    "device",
+    "email_id",
+    "email_subject",
+    "error_code",
+    "experiment_id",
+    "expires_at",
+    "from_phone_number",
+    "from_phone_number_id",
+    "from_smssender_id",
+    "image_url",
+    "in_app_body",
+    "is_ghost_push",
+    "is_sms_estimation",
+    "labels",
+    "link_id",
+    "link_url",
+    "locale",
+    "message_context",
+    "message_status",
+    "mms_send_count",
+    "payload",
+    "platform_endpoint",
+    "product_recommendation_count",
+    "proxy_source",
+    "push_message",
+    "reason",
+    "region",
+    "sms_message",
+    "sms_provider_response_code",
+    "sms_provider_response_message",
+    "sms_provider_response_more_info",
+    "sms_provider_response_status",
+    "sms_send_count",
+    "sound",
+    "to_phone_number",
+    "url",
+    "web_push_body",
+    "web_push_click_action",
+    "web_push_icon",
+    "web_push_message",
+    "workflow_id",
+    "workflow_name",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.event_extension.mapped_target_fields]
+
+[mappings.event_extension.unused_source_fields]
+events = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "_type",
+    "createdAt",
+    "data",
+    "email",
+    "itblInternal",
+    "itblInternal.documentCreatedAt",
+    "itblInternal.documentUpdatedAt",
+    "userId",
+]
+
+[mappings.list]
+source_file = "src/transforms/iterable/transforms/list.yml"
+source_file_hash = "99c135e444e7ada96fa3dc0f3af92fceb9c11751d732051aee700a983d732a3a"
+source_stream = "lists"
+unmapped_target_fields = [
+    "description",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.list.mapped_target_fields]
+id = "lists.id"
+name = "lists.name"
+list_type = "lists.listType"
+created_at = "lists.createdAt"
+
+[mappings.list.unused_source_fields]
+lists = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+]
+
+[mappings.message_type]
+source_file = "src/transforms/iterable/transforms/message_type.yml"
+source_file_hash = "deae93a0ce81d1533453ca584ee95d231c34f69709c14a8d6ab7e660c9251f40"
+source_stream = "message_types"
+unmapped_target_fields = [
+    "created_at",
+    "frequency_cap",
+    "rate_limit_per_minute",
+    "subscription_policy",
+    "updated_at",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.message_type.mapped_target_fields]
+id = "message_types.id"
+name = "message_types.name"
+channel_id = "message_types.channelId"
+
+[mappings.message_type.unused_source_fields]
+message_types = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+]
+
+[mappings.template_history]
+source_file = "src/transforms/iterable/transforms/template_history.yml"
+source_file_hash = "f084f027b843f2b1667334a8ca848c81d9b0822eb07abd6945164d68bf4900ea"
+source_stream = "templates"
+unmapped_target_fields = [
+    "template_type",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.template_history.mapped_target_fields]
+id = "templates.templateId"
+name = "templates.name"
+created_at = "templates.createdAt"
+client_template_id = "templates.clientTemplateId"
+creator_user_id = "templates.creatorUserId"
+message_type_id = "templates.messageTypeId"
+updated_at = "templates.updatedAt"
+
+[mappings.template_history.unused_source_fields]
+templates = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "campaignId",
+]
+
+[mappings.user_history]
+source_file = "src/transforms/iterable/transforms/user_history.yml"
+source_file_hash = "c246783fda4a00ad2290181f72349b292a2f0b1837b75037d60bb3e076a0d08f"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "email",
+    "email_list_ids",
+    "first_name",
+    "iterable_user_id",
+    "last_name",
+    "signup_date",
+    "signup_source",
+    "updated_at",
+    "user_id",
+]
+
+[mappings.user_history.mapped_target_fields]
+
+[mappings.user_history.unused_source_fields]
+
+[mappings.user_history.omitted_target_fields]
+
+[mappings.user_history.erroneous_source_table_columns]
+
+[mappings.user_unsubscribed_channel]
+source_file = "src/transforms/iterable/transforms/user_unsubscribed_channel.yml"
+source_file_hash = "57d9cf4331c835e1f412628ddd5c6d5b8b02df4fdb903b14ea7cc337849b2a20"
+source_stream = "email_unsubscribe"
+unmapped_target_fields = [
+    "_fivetran_id",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.user_unsubscribed_channel.mapped_target_fields]
+channel_id = "email_unsubscribe.channelId"
+
+[mappings.user_unsubscribed_channel.unused_source_fields]
+email_unsubscribe = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "campaignId",
+    "channelIds",
+    "createdAt",
+    "email",
+    "emailListId",
+    "emailListIds",
+    "itblInternal",
+    "itblInternal.documentCreatedAt",
+    "itblInternal.documentUpdatedAt",
+    "messageId",
+    "templateId",
+    "unsubSource",
+    "userId",
+    "workflowId",
+]
+
+[mappings.user_unsubscribed_channel_history]
+source_file = "src/transforms/iterable/transforms/user_unsubscribed_channel_history.yml"
+source_file_hash = "de062dc6b961ebeae556794946a2f081c362c47f0198872e4871beb1b3cb810e"
+source_stream = "email_unsubscribe"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.user_unsubscribed_channel_history.mapped_target_fields]
+channel_id = "email_unsubscribe.channelId"
+email = "email_unsubscribe.email"
+updated_at = "email_unsubscribe._airbyte_extracted_at"
+
+[mappings.user_unsubscribed_channel_history.unused_source_fields]
+email_unsubscribe = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "campaignId",
+    "channelIds",
+    "createdAt",
+    "emailListId",
+    "emailListIds",
+    "itblInternal",
+    "itblInternal.documentCreatedAt",
+    "itblInternal.documentUpdatedAt",
+    "messageId",
+    "templateId",
+    "unsubSource",
+    "userId",
+    "workflowId",
+]
+
+[mappings.user_unsubscribed_message_type]
+source_file = "src/transforms/iterable/transforms/user_unsubscribed_message_type.yml"
+source_file_hash = "5c7c6b8a9fee4133ad88b4269f4ea6a7e3aedd683ac94898a3bd31a3434ecd41"
+source_stream = "email_unsubscribe"
+unmapped_target_fields = [
+    "_fivetran_id",
+    "message_type_id",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.user_unsubscribed_message_type.mapped_target_fields]
+
+[mappings.user_unsubscribed_message_type.unused_source_fields]
+email_unsubscribe = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "campaignId",
+    "channelId",
+    "channelIds",
+    "createdAt",
+    "email",
+    "emailListId",
+    "emailListIds",
+    "itblInternal",
+    "itblInternal.documentCreatedAt",
+    "itblInternal.documentUpdatedAt",
+    "messageId",
+    "templateId",
+    "unsubSource",
+    "userId",
+    "workflowId",
+]
+
+[mappings.user_unsubscribed_message_type_history]
+source_file = "src/transforms/iterable/transforms/user_unsubscribed_message_type_history.yml"
+source_file_hash = "d696605bd1be197860336eae049b70e3f0c4ddc9435ab2d8abf869afd3668de2"
+source_stream = "email_unsubscribe"
+unmapped_target_fields = [
+    "message_type_id",
+    "updated_at",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.user_unsubscribed_message_type_history.mapped_target_fields]
+email = "email_unsubscribe.email"
+
+[mappings.user_unsubscribed_message_type_history.unused_source_fields]
+email_unsubscribe = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "campaignId",
+    "channelId",
+    "channelIds",
+    "createdAt",
+    "emailListId",
+    "emailListIds",
+    "itblInternal",
+    "itblInternal.documentCreatedAt",
+    "itblInternal.documentUpdatedAt",
+    "messageId",
+    "templateId",
+    "unsubSource",
+    "userId",
+    "workflowId",
+]

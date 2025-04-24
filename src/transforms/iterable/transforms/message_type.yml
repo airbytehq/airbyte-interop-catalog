@@ -1,0 +1,82 @@
+domain: iterable.airbyte-interop
+transforms:
+  - name: message_type
+    from:
+      - message_types: iterable.message_types
+    fields:
+      id:
+        expression: message_types.id
+        description: Unique identifer of the message type
+      name:
+        expression: message_types.name
+        description: User defined name of the message type
+      channel_id:
+        expression: message_types.channelId
+        description: Channel that this message type belongs to
+      created_at:
+        expression: MISSING
+        description: Time when the message type was initially created
+      frequency_cap:
+        expression: MISSING
+        description: The maximum number of times a message of this type can be sent
+          to a recipient within a specified time period to prevent over-messaging
+      rate_limit_per_minute:
+        expression: MISSING
+        description: The maximum number of messages of this type that can be sent
+          to recipients in a minute, ensuring controlled message delivery
+      subscription_policy:
+        expression: MISSING
+        description: Information about the policy or rules governing how users can
+          subscribe to or unsubscribe from this specific message type, like OptOut
+      updated_at:
+        expression: MISSING
+        description: Time when the message type was last updated or modified
+annotations:
+  approved: false
+  missing_fields:
+    - created_at
+    - frequency_cap
+    - rate_limit_per_minute
+    - subscription_policy
+    - updated_at
+  evaluation:
+    source_stream_name: message_types
+    target_table_name: message_type
+    table_match_score: 0.8
+    completion_score: 0.5
+    explanation: The table match has a high confidence considering the alignments
+      of some core fields. However, several key fields missing appropriate mappings
+      significantly reduce the completion score.
+    field_mapping_evals:
+      - name: id
+        expression: message_types.id
+        score: 1.0
+        explanation: Exact match found for 'id'.
+      - name: name
+        expression: message_types.name
+        score: 1.0
+        explanation: Exact match found for 'name'.
+      - name: channel_id
+        expression: message_types.channelId
+        score: 0.8
+        explanation: A reasonable match found based on the provided column guidelines.
+      - name: created_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: frequency_cap
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: rate_limit_per_minute
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: subscription_policy
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: updated_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

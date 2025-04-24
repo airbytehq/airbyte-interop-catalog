@@ -1,0 +1,621 @@
+Table "campaigns" {
+    "id" integer [note: 'The unique identifier of the campaign']
+    "createdAt" integer [note: 'The timestamp when the campaign was created']
+    "updatedAt" integer [note: 'The timestamp when the campaign was last updated']
+    "startAt" integer [note: 'The timestamp when the campaign will start']
+    "endedAt" integer [note: 'The timestamp when the campaign ended']
+    "name" varchar [note: 'The name of the campaign']
+    "templateId" integer [note: 'The ID of the template used for the campaign']
+    "messageMedium" varchar [note: 'The medium used to deliver the campaign message (e.g., email, SMS)']
+    "createdByUserId" varchar [note: 'The ID of the user who created the campaign']
+    "updatedByUserId" varchar [note: 'The ID of the user who last updated the campaign']
+    "campaignState" varchar [note: 'The current state of the campaign (e.g., draft, active, paused)']
+    "listIds" array [note: 'List of IDs of the lists targeted by the campaign']
+    "suppressionListIds" array [note: 'List of IDs of suppression lists for the campaign']
+    "sendSize" float [note: 'The size of the audience targeted by the campaign']
+    "recurringCampaignId" float [note: 'If the campaign is recurring, the ID of the parent recurring campaign']
+    "workflowId" float [note: 'The ID of the workflow associated with the campaign']
+    "labels" array [note: 'List of labels associated with the campaign']
+    "type" varchar [note: 'The type of campaign (e.g., one-time, recurring)']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "campaigns_metrics" {
+    "data" json [note: 'Contains the campaign metrics data']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "channels" {
+    "id" float [note: 'The unique identifier of the channel.']
+    "name" varchar [note: 'The name or title of the channel.']
+    "channelType" varchar [note: 'The type of channel, such as email, SMS, or push notification.']
+    "messageMedium" varchar [note: 'The medium used to deliver messages through this channel, such as text, image, or video.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "custom_event" {
+    "itblInternal" json [note: 'Internal details related to the event']
+    "_type" varchar [note: 'Type of the event data']
+    "createdAt" timestamp [note: 'Timestamp when the event was created']
+    "email" varchar [note: 'Email address related to the event']
+    "userId" varchar [note: 'User ID associated with the event']
+    "data" json [note: 'Event-specific data associated with the event']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "email_bounce" {
+    "createdAt" timestamp [note: 'The date and time when the email bounce data was created.']
+    "campaignId" integer [note: 'The unique identifier of the campaign associated with the email bounce data.']
+    "itblInternal" json [note: 'Internal information related to Iterable.']
+    "messageId" varchar [note: 'The unique identifier of the message associated with the email bounce data.']
+    "templateId" integer [note: 'The unique identifier of the email template associated with the bounce data.']
+    "email" varchar [note: 'The email address that encountered a bounce.']
+    "userId" varchar [note: 'The unique identifier of the user associated with the bounced email address.']
+    "recipientState" varchar [note: 'The state of the recipient email address at the time of the bounce (e.g., active, inactive).']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "email_click" {
+    "country" varchar [note: 'The country from where the email click was recorded.']
+    "city" varchar [note: 'The city from where the email click was recorded.']
+    "campaignId" integer [note: 'The unique identifier of the campaign associated with the email click data.']
+    "itblInternal" json [note: 'Internal data related to the iterable service.']
+    "ip" varchar [note: 'The IP address from where the email click was recorded.']
+    "contentId" integer [note: 'The identifier of the content clicked within the email.']
+    "userAgentDevice" varchar [note: 'The device information of the user agent used for the email click.']
+    "messageId" varchar [note: 'The unique identifier of the message that contained the email.']
+    "hrefIndex" integer [note: 'The index of the href link within the email content.']
+    "userAgent" varchar [note: 'The user agent of the browser or application used for the email click.']
+    "templateId" integer [note: 'The identifier of the email template used in the campaign.']
+    "url" varchar [note: 'The URL that was clicked within the email.']
+    "createdAt" timestamp [note: 'The date and time when the email click event occurred.']
+    "region" varchar [note: 'The region from where the email click was recorded.']
+    "email" varchar [note: 'The email address of the user who clicked the email link.']
+    "userId" varchar [note: 'The unique identifier of the user who clicked the email link.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "email_complaint" {
+    "createdAt" timestamp [note: 'Timestamp indicating when the email complaint was created']
+    "campaignId" integer [note: 'Unique identifier for the campaign associated with the email complaint data']
+    "itblInternal" json [note: 'Holds internal metadata related to the iterable data being accessed.']
+    "messageId" varchar [note: 'Unique identifier for the email message associated with the complaint']
+    "templateId" integer [note: 'Unique identifier for the email template used in the campaign']
+    "email" varchar [note: 'Email address of the recipient who lodged the complaint']
+    "userId" varchar [note: 'Unique identifier for the user who lodged the email complaint']
+    "recipientState" varchar [note: 'State or status of the recipient associated with the complaint']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "email_open" {
+    "country" varchar [note: 'The country from which the email was opened.']
+    "createdAt" timestamp [note: 'The timestamp when the email_open event occurred.']
+    "city" varchar [note: 'The city from which the email was opened.']
+    "campaignId" integer [note: 'The unique identifier of the campaign to which the email_open event belongs.']
+    "itblInternal" json [note: 'Internal data related to the email open event.']
+    "ip" varchar [note: 'The IP address from which the email was opened.']
+    "userAgentDevice" varchar [note: 'The device information from which the email was opened.']
+    "messageId" varchar [note: 'The unique identifier of the email message.']
+    "userAgent" varchar [note: 'The user agent string of the browser used to open the email.']
+    "templateId" integer [note: 'The unique identifier of the email template used.']
+    "region" varchar [note: 'The region from which the email was opened.']
+    "email" varchar [note: 'The email address of the user who opened the email.']
+    "userId" varchar [note: 'The unique identifier of the user who opened the email.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "email_send" {
+    "createdAt" timestamp [note: 'The timestamp when the email was created.']
+    "campaignId" integer [note: 'The identifier of the campaign associated with the email_send data.']
+    "itblInternal" json [note: 'Internal information related to ITBL (Iterable).']
+    "messageTypeId" integer [note: 'The identifier of the message type associated with the email_send data.']
+    "transactionalData" json [note: 'Transactional data related to the email_send.']
+    "contentId" integer [note: 'The identifier of the content related to the email being sent.']
+    "messageId" varchar [note: 'The unique identifier of the message.']
+    "messageBusId" varchar [note: 'The identifier of the message bus associated with the email_send data.']
+    "templateId" integer [note: 'The identifier of the template used for the email content.']
+    "email" varchar [note: 'The email address of the recipient.']
+    "userId" varchar [note: 'The identifier of the user to whom the email is being sent.']
+    "channelId" integer [note: 'The identifier of the channel through which the email was sent.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "email_send_skip" {
+    "reason" varchar [note: 'Reason for skipping the email send.']
+    "createdAt" timestamp [note: 'Date and time when the email send skip data was created.']
+    "campaignId" integer [note: 'Unique identifier for the campaign associated with the email send skip data.']
+    "itblInternal" json [note: 'Internal iterable properties associated with the email send skip data.']
+    "messageTypeId" integer [note: 'Identifier for the type of message sent.']
+    "transactionalData" json [note: 'Transactional data associated with the email send skip.']
+    "contentId" integer [note: 'Identifier for the content associated with the email send skip data.']
+    "messageId" varchar [note: 'Unique identifier for the message related to the email send skip data.']
+    "templateId" integer [note: 'Identifier for the template used in the email send skip data.']
+    "email" varchar [note: 'Email address to which the email send skip data corresponds.']
+    "userId" varchar [note: 'Identifier for the user associated with the email send skip data.']
+    "channelId" integer [note: 'Identifier for the channel through which the email was sent.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "email_subscribe" {
+    "createdAt" timestamp [note: 'The timestamp when the email subscription was created']
+    "signupSource" varchar [note: 'The source where the subscriber signed up for the emails']
+    "emailListIds" array [note: 'List of email list identifiers the subscriber belongs to']
+    "itblInternal" json [note: 'Internal properties related to the subscription']
+    "emailListId" integer [note: 'The unique identifier of the email list']
+    "email" varchar [note: 'The email address of the subscriber']
+    "userId" varchar [note: 'The unique identifier of the subscriber user']
+    "profileUpdatedAt" timestamp [note: 'The timestamp when the subscriber profile was last updated']
+    "workflowId" integer [note: 'The identifier of the workflow associated with the subscription']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "email_unsubscribe" {
+    "unsubSource" varchar [note: 'The source from which the email unsubscribe request originated.']
+    "createdAt" timestamp [note: 'The timestamp indicating when the email unsubscribe data was created.']
+    "campaignId" integer [note: 'The unique identifier for the campaign associated with the email unsubscribe data.']
+    "itblInternal" json [note: 'Internal properties specific to Iterable.']
+    "emailListId" integer [note: 'The unique identifier for the email list associated with the email unsubscribe data.']
+    "emailListIds" array [note: 'The list of unique identifiers for multiple email lists associated with the email unsubscribe data.']
+    "workflowId" integer [note: 'The unique identifier for the workflow associated with the email unsubscribe data.']
+    "messageId" varchar [note: 'The unique identifier for the message associated with the email unsubscribe data.']
+    "templateId" integer [note: 'The unique identifier for the template associated with the email unsubscribe data.']
+    "channelIds" array [note: 'The list of unique identifiers for multiple channels associated with the email unsubscribe data.']
+    "email" varchar [note: 'The email address for which the user unsubscribed.']
+    "userId" varchar [note: 'The unique identifier for the user who unsubscribed from the email list.']
+    "channelId" integer [note: 'The unique identifier for the channel associated with the email unsubscribe data.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "events" {
+    "itblInternal" json [note: 'Internal details related to the event']
+    "_type" varchar [note: 'Type of the event data']
+    "createdAt" timestamp [note: 'Timestamp when the event was created']
+    "email" varchar [note: 'Email address related to the event']
+    "userId" varchar [note: 'User ID associated with the event']
+    "data" json [note: 'Event-specific data associated with the event']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "hosted_unsubscribe_click" {
+    "itblInternal" json [note: 'Internal details related to the event']
+    "_type" varchar [note: 'Type of the event data']
+    "createdAt" timestamp [note: 'Timestamp when the event was created']
+    "email" varchar [note: 'Email address related to the event']
+    "userId" varchar [note: 'User ID associated with the event']
+    "data" json [note: 'Event-specific data associated with the event']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "in_app_click" {
+    "itblInternal" json [note: 'Internal details related to the event']
+    "_type" varchar [note: 'Type of the event data']
+    "createdAt" timestamp [note: 'Timestamp when the event was created']
+    "email" varchar [note: 'Email address related to the event']
+    "userId" varchar [note: 'User ID associated with the event']
+    "data" json [note: 'Event-specific data associated with the event']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "in_app_close" {
+    "itblInternal" json [note: 'Internal details related to the event']
+    "_type" varchar [note: 'Type of the event data']
+    "createdAt" timestamp [note: 'Timestamp when the event was created']
+    "email" varchar [note: 'Email address related to the event']
+    "userId" varchar [note: 'User ID associated with the event']
+    "data" json [note: 'Event-specific data associated with the event']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "in_app_delete" {
+    "itblInternal" json [note: 'Internal details related to the event']
+    "_type" varchar [note: 'Type of the event data']
+    "createdAt" timestamp [note: 'Timestamp when the event was created']
+    "email" varchar [note: 'Email address related to the event']
+    "userId" varchar [note: 'User ID associated with the event']
+    "data" json [note: 'Event-specific data associated with the event']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "in_app_delivery" {
+    "itblInternal" json [note: 'Internal details related to the event']
+    "_type" varchar [note: 'Type of the event data']
+    "createdAt" timestamp [note: 'Timestamp when the event was created']
+    "email" varchar [note: 'Email address related to the event']
+    "userId" varchar [note: 'User ID associated with the event']
+    "data" json [note: 'Event-specific data associated with the event']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "in_app_open" {
+    "itblInternal" json [note: 'Internal details related to the event']
+    "_type" varchar [note: 'Type of the event data']
+    "createdAt" timestamp [note: 'Timestamp when the event was created']
+    "email" varchar [note: 'Email address related to the event']
+    "userId" varchar [note: 'User ID associated with the event']
+    "data" json [note: 'Event-specific data associated with the event']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "in_app_send" {
+    "itblInternal" json [note: 'Internal details related to the event']
+    "_type" varchar [note: 'Type of the event data']
+    "createdAt" timestamp [note: 'Timestamp when the event was created']
+    "email" varchar [note: 'Email address related to the event']
+    "userId" varchar [note: 'User ID associated with the event']
+    "data" json [note: 'Event-specific data associated with the event']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "in_app_send_skip" {
+    "itblInternal" json [note: 'Internal details related to the event']
+    "_type" varchar [note: 'Type of the event data']
+    "createdAt" timestamp [note: 'Timestamp when the event was created']
+    "email" varchar [note: 'Email address related to the event']
+    "userId" varchar [note: 'User ID associated with the event']
+    "data" json [note: 'Event-specific data associated with the event']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "inbox_message_impression" {
+    "itblInternal" json [note: 'Internal details related to the event']
+    "_type" varchar [note: 'Type of the event data']
+    "createdAt" timestamp [note: 'Timestamp when the event was created']
+    "email" varchar [note: 'Email address related to the event']
+    "userId" varchar [note: 'User ID associated with the event']
+    "data" json [note: 'Event-specific data associated with the event']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "inbox_session" {
+    "itblInternal" json [note: 'Internal details related to the event']
+    "_type" varchar [note: 'Type of the event data']
+    "createdAt" timestamp [note: 'Timestamp when the event was created']
+    "email" varchar [note: 'Email address related to the event']
+    "userId" varchar [note: 'User ID associated with the event']
+    "data" json [note: 'Event-specific data associated with the event']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "list_users" {
+    "email" varchar [note: 'The email address of the user.']
+    "listId" integer [note: 'The unique identifier of the list to which the user belongs.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "lists" {
+    "id" integer [note: 'The unique identifier of the list.']
+    "name" varchar [note: 'The name or title of the list.']
+    "createdAt" integer [note: 'The date and time when the list was created.']
+    "listType" varchar [note: 'The type or category of the list.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "message_types" {
+    "id" float [note: 'The unique identifier for the message type.']
+    "name" varchar [note: 'The display name for the message type.']
+    "channelId" float [note: 'The unique identifier for the channel the message belongs to.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "metadata" {
+    "name" varchar [note: 'The name of the metadata']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "purchase" {
+    "itblInternal" json [note: 'Internal details related to the event']
+    "_type" varchar [note: 'Type of the event data']
+    "createdAt" timestamp [note: 'Timestamp when the event was created']
+    "email" varchar [note: 'Email address related to the event']
+    "userId" varchar [note: 'User ID associated with the event']
+    "data" json [note: 'Event-specific data associated with the event']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "push_bounce" {
+    "itblInternal" json [note: 'Internal details related to the event']
+    "_type" varchar [note: 'Type of the event data']
+    "createdAt" timestamp [note: 'Timestamp when the event was created']
+    "email" varchar [note: 'Email address related to the event']
+    "userId" varchar [note: 'User ID associated with the event']
+    "data" json [note: 'Event-specific data associated with the event']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "push_open" {
+    "itblInternal" json [note: 'Internal details related to the event']
+    "_type" varchar [note: 'Type of the event data']
+    "createdAt" timestamp [note: 'Timestamp when the event was created']
+    "email" varchar [note: 'Email address related to the event']
+    "userId" varchar [note: 'User ID associated with the event']
+    "data" json [note: 'Event-specific data associated with the event']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "push_send" {
+    "itblInternal" json [note: 'Internal details related to the event']
+    "_type" varchar [note: 'Type of the event data']
+    "createdAt" timestamp [note: 'Timestamp when the event was created']
+    "email" varchar [note: 'Email address related to the event']
+    "userId" varchar [note: 'User ID associated with the event']
+    "data" json [note: 'Event-specific data associated with the event']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "push_send_skip" {
+    "itblInternal" json [note: 'Internal details related to the event']
+    "_type" varchar [note: 'Type of the event data']
+    "createdAt" timestamp [note: 'Timestamp when the event was created']
+    "email" varchar [note: 'Email address related to the event']
+    "userId" varchar [note: 'User ID associated with the event']
+    "data" json [note: 'Event-specific data associated with the event']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "push_uninstall" {
+    "itblInternal" json [note: 'Internal details related to the event']
+    "_type" varchar [note: 'Type of the event data']
+    "createdAt" timestamp [note: 'Timestamp when the event was created']
+    "email" varchar [note: 'Email address related to the event']
+    "userId" varchar [note: 'User ID associated with the event']
+    "data" json [note: 'Event-specific data associated with the event']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "sms_bounce" {
+    "itblInternal" json [note: 'Internal details related to the event']
+    "_type" varchar [note: 'Type of the event data']
+    "createdAt" timestamp [note: 'Timestamp when the event was created']
+    "email" varchar [note: 'Email address related to the event']
+    "userId" varchar [note: 'User ID associated with the event']
+    "data" json [note: 'Event-specific data associated with the event']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "sms_click" {
+    "itblInternal" json [note: 'Internal details related to the event']
+    "_type" varchar [note: 'Type of the event data']
+    "createdAt" timestamp [note: 'Timestamp when the event was created']
+    "email" varchar [note: 'Email address related to the event']
+    "userId" varchar [note: 'User ID associated with the event']
+    "data" json [note: 'Event-specific data associated with the event']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "sms_received" {
+    "itblInternal" json [note: 'Internal details related to the event']
+    "_type" varchar [note: 'Type of the event data']
+    "createdAt" timestamp [note: 'Timestamp when the event was created']
+    "email" varchar [note: 'Email address related to the event']
+    "userId" varchar [note: 'User ID associated with the event']
+    "data" json [note: 'Event-specific data associated with the event']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "sms_send" {
+    "itblInternal" json [note: 'Internal details related to the event']
+    "_type" varchar [note: 'Type of the event data']
+    "createdAt" timestamp [note: 'Timestamp when the event was created']
+    "email" varchar [note: 'Email address related to the event']
+    "userId" varchar [note: 'User ID associated with the event']
+    "data" json [note: 'Event-specific data associated with the event']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "sms_send_skip" {
+    "itblInternal" json [note: 'Internal details related to the event']
+    "_type" varchar [note: 'Type of the event data']
+    "createdAt" timestamp [note: 'Timestamp when the event was created']
+    "email" varchar [note: 'Email address related to the event']
+    "userId" varchar [note: 'User ID associated with the event']
+    "data" json [note: 'Event-specific data associated with the event']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "sms_usage_info" {
+    "itblInternal" json [note: 'Internal details related to the event']
+    "_type" varchar [note: 'Type of the event data']
+    "createdAt" timestamp [note: 'Timestamp when the event was created']
+    "email" varchar [note: 'Email address related to the event']
+    "userId" varchar [note: 'User ID associated with the event']
+    "data" json [note: 'Event-specific data associated with the event']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "templates" {
+    "templateId" float [note: 'The unique identifier for the template.']
+    "createdAt" timestamp [note: 'The date and time when the template was created.']
+    "updatedAt" integer [note: 'The date and time when the template was last updated.']
+    "name" varchar [note: 'The name/title of the template.']
+    "creatorUserId" varchar [note: 'The ID of the user who created the template.']
+    "messageTypeId" float [note: 'The type of message associated with the template.']
+    "campaignId" float [note: 'The unique identifier for the campaign associated with the template.']
+    "clientTemplateId" varchar [note: 'The identifier specific to the client for the template.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "users" {
+    "country" varchar [note: 'Country name.']
+    "firstOrderDate" timestamp [note: 'Date and time of the first order.']
+    "addresses" array [note: 'List of addresses associated with the user']
+    "emailAcquiredDate" timestamp [note: 'Date and time when the email was acquired.']
+    "emailSegmentStatus" varchar [note: 'Status of the email segment.']
+    "admin_graphql_api_id" varchar [note: 'Admin GraphQL API ID.']
+    "id" varchar [note: 'User ID.']
+    "mostRecentEmailList" varchar [note: 'Most recent email list the user is part of.']
+    "mostRecentEmailSegment" varchar [note: 'Most recent email segment the user is part of.']
+    "aov" float [note: 'Average order value.']
+    "firstCampaign" varchar [note: 'First campaign the user interacted with.']
+    "thirdMostRecentOrderDate" timestamp [note: 'Date and time of the third most recent order.']
+    "firstPurchaseDate" timestamp [note: 'Date and time of the first purchase made by the user.']
+    "firstMedium" varchar [note: 'First medium through which the user interacted.']
+    "default_address" json [note: 'Default address of the user']
+    "emailListIds" array [note: 'List of email list IDs subscribed by the user']
+    "accepts_marketing" boolean [note: 'Indicates whether the user has consented to receive marketing communications.']
+    "secondMostRecentOrderDate" timestamp [note: 'Date and time of the second most recent order.']
+    "state" varchar [note: 'State name.']
+    "mostRecentCampaign" varchar [note: 'Most recent campaign the user interacted with.']
+    "zip" varchar [note: 'Postal code or ZIP code.']
+    "total_spent" float [note: 'Total amount spent by the user.']
+    "mostRecentOrderDate" timestamp [note: 'Date and time of the most recent order.']
+    "last_order_id" varchar [note: 'ID of the user\'s last order.']
+    "tax_exempt" boolean [note: 'Indicates if the user is tax exempt.']
+    "mostRecentSource" varchar [note: 'Most recent source of user interaction.']
+    "twelveMonthLtr" integer [note: 'Lifetime total revenue for the past twelve months.']
+    "verified_email" boolean [note: 'Indicates if the user\'s email address is verified.']
+    "mostRecentMedium" varchar [note: 'Most recent medium of user interaction.']
+    "orders_count" integer [note: 'Total number of orders made by the user.']
+    "firstName" varchar [note: 'User\'s first name.']
+    "lastInteractionTs" timestamp [note: 'Date and time of the last interaction with the user.']
+    "boughtSas" boolean [note: 'Indicates if the user has purchased a specific product or service.']
+    "secondMostRecentOrderCards" array [note: 'Details of the second most recent order cards related to the user']
+    "unsubscribedChannelIds" array [note: 'List of channel IDs the user has unsubscribed from']
+    "lastName" varchar [note: 'User\'s last name.']
+    "last_order_name" varchar [note: 'Name of the user\'s last order.']
+    "secondOrderDate" timestamp [note: 'Date and time of the second order.']
+    "hasAccount" boolean [note: 'Indicates if the user has an account.']
+    "city" varchar [note: 'City name.']
+    "mostRecentOrderCards" array [note: 'Details of the most recent order cards related to the user']
+    "itblInternal" json [note: 'Internal details specific to the platform']
+    "hasReminder" boolean [note: 'Indicates if the user has set a reminder.']
+    "thirdOrderDate" timestamp [note: 'Date and time of the third order.']
+    "subscribedMessageTypeIds" array [note: 'List of message type IDs user has subscribed to']
+    "firstSource" varchar [note: 'First source of user interaction.']
+    "unsubscribedMessageTypeIds" array [note: 'List of message type IDs the user has unsubscribed from']
+    "first_name" varchar [note: 'User\'s first name.']
+    "email" varchar [note: 'User\'s email address.']
+    "thirdMostRecentOrderCards" array [note: 'Details of the third most recent order cards related to the user']
+    "profileUpdatedAt" timestamp [note: 'Date and time when the profile was last updated.']
+    "signupDate" timestamp [note: 'Date and time when the user signed up.']
+    "businessLines" array [note: 'List of business lines the user is associated with']
+    "secondOrderCards" array [note: 'Details of the second order cards related to the user']
+    "address1" varchar [note: 'Primary address line of the user.']
+    "last_name" varchar [note: 'User\'s last name.']
+    "ltr" integer [note: 'Lifetime total revenue.']
+    "userId" varchar [note: 'User\'s unique identifier.']
+    "shopify_created_at" timestamp [note: 'Date and time when the user was created in Shopify.']
+    "signupSource" varchar [note: 'Source through which the user signed up.']
+    "thirdOrderCards" array [note: 'Details of the third order cards related to the user']
+    "firstOrderCards" array [note: 'Details of the first order cards related to the user']
+    "totalOrders" integer [note: 'Total number of orders made by the user.']
+    "shopify_updated_at" timestamp [note: 'Date and time when the user was last updated in Shopify.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "web_push_click" {
+    "itblInternal" json [note: 'Internal details related to the event']
+    "_type" varchar [note: 'Type of the event data']
+    "createdAt" timestamp [note: 'Timestamp when the event was created']
+    "email" varchar [note: 'Email address related to the event']
+    "userId" varchar [note: 'User ID associated with the event']
+    "data" json [note: 'Event-specific data associated with the event']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "web_push_send" {
+    "itblInternal" json [note: 'Internal details related to the event']
+    "_type" varchar [note: 'Type of the event data']
+    "createdAt" timestamp [note: 'Timestamp when the event was created']
+    "email" varchar [note: 'Email address related to the event']
+    "userId" varchar [note: 'User ID associated with the event']
+    "data" json [note: 'Event-specific data associated with the event']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "web_push_send_skip" {
+    "itblInternal" json [note: 'Internal details related to the event']
+    "_type" varchar [note: 'Type of the event data']
+    "createdAt" timestamp [note: 'Timestamp when the event was created']
+    "email" varchar [note: 'Email address related to the event']
+    "userId" varchar [note: 'User ID associated with the event']
+    "data" json [note: 'Event-specific data associated with the event']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}

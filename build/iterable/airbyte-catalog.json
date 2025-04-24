@@ -1,0 +1,4806 @@
+{
+  "streams": [
+    {
+      "name": "lists",
+      "json_schema": {
+        "properties": {
+          "id": {
+            "description": "The unique identifier of the list.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "name": {
+            "description": "The name or title of the list.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "The date and time when the list was created.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "listType": {
+            "description": "The type or category of the list.",
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh"
+      ],
+      "source_defined_cursor": null,
+      "default_cursor_field": null,
+      "source_defined_primary_key": [
+        [
+          "id"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "list_users",
+      "json_schema": {
+        "properties": {
+          "email": {
+            "description": "The email address of the user.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "listId": {
+            "description": "The unique identifier of the list to which the user belongs.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh"
+      ],
+      "source_defined_cursor": null,
+      "default_cursor_field": null,
+      "source_defined_primary_key": [
+        [
+          "listId"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": false
+    },
+    {
+      "name": "campaigns",
+      "json_schema": {
+        "properties": {
+          "id": {
+            "description": "The unique identifier of the campaign",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "createdAt": {
+            "description": "The timestamp when the campaign was created",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "updatedAt": {
+            "description": "The timestamp when the campaign was last updated",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "startAt": {
+            "description": "The timestamp when the campaign will start",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "endedAt": {
+            "description": "The timestamp when the campaign ended",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "name": {
+            "description": "The name of the campaign",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "templateId": {
+            "description": "The ID of the template used for the campaign",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "messageMedium": {
+            "description": "The medium used to deliver the campaign message (e.g., email, SMS)",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdByUserId": {
+            "description": "The ID of the user who created the campaign",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "updatedByUserId": {
+            "description": "The ID of the user who last updated the campaign",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "campaignState": {
+            "description": "The current state of the campaign (e.g., draft, active, paused)",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "listIds": {
+            "description": "List of IDs of the lists targeted by the campaign",
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {}
+          },
+          "suppressionListIds": {
+            "description": "List of IDs of suppression lists for the campaign",
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {}
+          },
+          "sendSize": {
+            "description": "The size of the audience targeted by the campaign",
+            "type": [
+              "null",
+              "number"
+            ]
+          },
+          "recurringCampaignId": {
+            "description": "If the campaign is recurring, the ID of the parent recurring campaign",
+            "type": [
+              "null",
+              "number"
+            ]
+          },
+          "workflowId": {
+            "description": "The ID of the workflow associated with the campaign",
+            "type": [
+              "null",
+              "number"
+            ]
+          },
+          "labels": {
+            "description": "List of labels associated with the campaign",
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {}
+          },
+          "type": {
+            "description": "The type of campaign (e.g., one-time, recurring)",
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh"
+      ],
+      "source_defined_cursor": null,
+      "default_cursor_field": null,
+      "source_defined_primary_key": [
+        [
+          "id"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "channels",
+      "json_schema": {
+        "properties": {
+          "id": {
+            "description": "The unique identifier of the channel.",
+            "type": [
+              "null",
+              "number"
+            ]
+          },
+          "name": {
+            "description": "The name or title of the channel.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "channelType": {
+            "description": "The type of channel, such as email, SMS, or push notification.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "messageMedium": {
+            "description": "The medium used to deliver messages through this channel, such as text, image, or video.",
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh"
+      ],
+      "source_defined_cursor": null,
+      "default_cursor_field": null,
+      "source_defined_primary_key": [
+        [
+          "id"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "message_types",
+      "json_schema": {
+        "properties": {
+          "id": {
+            "description": "The unique identifier for the message type.",
+            "type": [
+              "null",
+              "number"
+            ]
+          },
+          "name": {
+            "description": "The display name for the message type.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "channelId": {
+            "description": "The unique identifier for the channel the message belongs to.",
+            "type": [
+              "null",
+              "number"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh"
+      ],
+      "source_defined_cursor": null,
+      "default_cursor_field": null,
+      "source_defined_primary_key": [
+        [
+          "id"
+        ]
+      ],
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "metadata",
+      "json_schema": {
+        "properties": {
+          "name": {
+            "description": "The name of the metadata",
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh"
+      ],
+      "source_defined_cursor": null,
+      "default_cursor_field": null,
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "users",
+      "json_schema": {
+        "properties": {
+          "country": {
+            "description": "Country name.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "firstOrderDate": {
+            "description": "Date and time of the first order.",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "addresses": {
+            "description": "List of addresses associated with the user",
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": [
+                "null",
+                "object"
+              ],
+              "properties": {
+                "first_name": {
+                  "description": "First name of the user associated with the address.",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "city": {
+                  "description": "City name.",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "name": {
+                  "description": "Full name associated with the address.",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "zip": {
+                  "description": "Postal code or ZIP code.",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "country": {
+                  "description": "Country name of the address.",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "address1": {
+                  "description": "Address line 1.",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "address2": {
+                  "description": "Address line 2.",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "company": {
+                  "description": "Company name associated with the address.",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "country_code": {
+                  "description": "Country code of the address.",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "default": {
+                  "description": "Indicates if this is the default address.",
+                  "type": [
+                    "null",
+                    "boolean"
+                  ]
+                },
+                "id": {
+                  "description": "Unique identifier for the address.",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "last_name": {
+                  "description": "Last name of the user associated with the address.",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "province": {
+                  "description": "Province or state of the address.",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "province_code": {
+                  "description": "Province or state code of the address.",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "country_name": {
+                  "description": "Full name of the country.",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "phone": {
+                  "description": "Contact phone number.",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                }
+              }
+            }
+          },
+          "emailAcquiredDate": {
+            "description": "Date and time when the email was acquired.",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "emailSegmentStatus": {
+            "description": "Status of the email segment.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "admin_graphql_api_id": {
+            "description": "Admin GraphQL API ID.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "id": {
+            "description": "User ID.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "mostRecentEmailList": {
+            "description": "Most recent email list the user is part of.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "mostRecentEmailSegment": {
+            "description": "Most recent email segment the user is part of.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "aov": {
+            "description": "Average order value.",
+            "type": [
+              "null",
+              "number"
+            ]
+          },
+          "firstCampaign": {
+            "description": "First campaign the user interacted with.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "thirdMostRecentOrderDate": {
+            "description": "Date and time of the third most recent order.",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "firstPurchaseDate": {
+            "description": "Date and time of the first purchase made by the user.",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "firstMedium": {
+            "description": "First medium through which the user interacted.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "default_address": {
+            "description": "Default address of the user",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "first_name": {
+                "description": "First name of the user associated with the address.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "city": {
+                "description": "City name.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "name": {
+                "description": "Full name associated with the address.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "zip": {
+                "description": "Postal code or ZIP code.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "country": {
+                "description": "Country name of the address.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "address2": {
+                "description": "Address line 2.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "company": {
+                "description": "Company name associated with the address.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "country_code": {
+                "description": "Country code of the address.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "id": {
+                "description": "Unique identifier for the address.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "last_name": {
+                "description": "Last name of the user associated with the address.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "address1": {
+                "description": "Address line 1.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "default": {
+                "description": "Indicates if this is the default address.",
+                "type": [
+                  "null",
+                  "boolean"
+                ]
+              },
+              "province": {
+                "description": "Province or state of the address.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "province_code": {
+                "description": "Province or state code of the address.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "country_name": {
+                "description": "Full name of the country.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "phone": {
+                "description": "Contact phone number.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              }
+            }
+          },
+          "emailListIds": {
+            "description": "List of email list IDs subscribed by the user",
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "description": "IDs of the email lists associated with the user."
+            }
+          },
+          "accepts_marketing": {
+            "description": "Indicates whether the user has consented to receive marketing communications.",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "secondMostRecentOrderDate": {
+            "description": "Date and time of the second most recent order.",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "state": {
+            "description": "State name.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "mostRecentCampaign": {
+            "description": "Most recent campaign the user interacted with.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "zip": {
+            "description": "Postal code or ZIP code.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "total_spent": {
+            "description": "Total amount spent by the user.",
+            "type": [
+              "null",
+              "number"
+            ]
+          },
+          "mostRecentOrderDate": {
+            "description": "Date and time of the most recent order.",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "last_order_id": {
+            "description": "ID of the user's last order.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "tax_exempt": {
+            "description": "Indicates if the user is tax exempt.",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "mostRecentSource": {
+            "description": "Most recent source of user interaction.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "twelveMonthLtr": {
+            "description": "Lifetime total revenue for the past twelve months.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "verified_email": {
+            "description": "Indicates if the user's email address is verified.",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "mostRecentMedium": {
+            "description": "Most recent medium of user interaction.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "orders_count": {
+            "description": "Total number of orders made by the user.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "firstName": {
+            "description": "User's first name.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastInteractionTs": {
+            "description": "Date and time of the last interaction with the user.",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "boughtSas": {
+            "description": "Indicates if the user has purchased a specific product or service.",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "secondMostRecentOrderCards": {
+            "description": "Details of the second most recent order cards related to the user",
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "description": "Details of the second most recent order cards."
+            }
+          },
+          "unsubscribedChannelIds": {
+            "description": "List of channel IDs the user has unsubscribed from",
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "description": "IDs of the channels from which the user unsubscribed."
+            }
+          },
+          "lastName": {
+            "description": "User's last name.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "last_order_name": {
+            "description": "Name of the user's last order.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "secondOrderDate": {
+            "description": "Date and time of the second order.",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "hasAccount": {
+            "description": "Indicates if the user has an account.",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "city": {
+            "description": "City name.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "mostRecentOrderCards": {
+            "description": "Details of the most recent order cards related to the user",
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "description": "Details of the most recent order cards."
+            }
+          },
+          "itblInternal": {
+            "description": "Internal details specific to the platform",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "emailDomain": {
+                "description": "Domain of the user's email address.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "documentUpdatedAt": {
+                "description": "Date and time when the document was last updated.",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentCreatedAt": {
+                "description": "Date and time when the document was created.",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "hasReminder": {
+            "description": "Indicates if the user has set a reminder.",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "thirdOrderDate": {
+            "description": "Date and time of the third order.",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "subscribedMessageTypeIds": {
+            "description": "List of message type IDs user has subscribed to",
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "description": "IDs of the message types the user is subscribed to."
+            }
+          },
+          "firstSource": {
+            "description": "First source of user interaction.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "unsubscribedMessageTypeIds": {
+            "description": "List of message type IDs the user has unsubscribed from",
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "description": "IDs of the message types from which the user unsubscribed."
+            }
+          },
+          "first_name": {
+            "description": "User's first name.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "email": {
+            "description": "User's email address.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "thirdMostRecentOrderCards": {
+            "description": "Details of the third most recent order cards related to the user",
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "description": "Details of the third most recent order cards."
+            }
+          },
+          "profileUpdatedAt": {
+            "description": "Date and time when the profile was last updated.",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "signupDate": {
+            "description": "Date and time when the user signed up.",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "businessLines": {
+            "description": "List of business lines the user is associated with",
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "description": "Business lines associated with the user."
+            }
+          },
+          "secondOrderCards": {
+            "description": "Details of the second order cards related to the user",
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "description": "Details of the second order cards."
+            }
+          },
+          "address1": {
+            "description": "Primary address line of the user.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "last_name": {
+            "description": "User's last name.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "ltr": {
+            "description": "Lifetime total revenue.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "userId": {
+            "description": "User's unique identifier.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "shopify_created_at": {
+            "description": "Date and time when the user was created in Shopify.",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "signupSource": {
+            "description": "Source through which the user signed up.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "thirdOrderCards": {
+            "description": "Details of the third order cards related to the user",
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "description": "Details of the third order cards."
+            }
+          },
+          "firstOrderCards": {
+            "description": "Details of the first order cards related to the user",
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "description": "Details of the first order cards."
+            }
+          },
+          "totalOrders": {
+            "description": "Total number of orders made by the user.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "shopify_updated_at": {
+            "description": "Date and time when the user was last updated in Shopify.",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "profileUpdatedAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "events",
+      "json_schema": {
+        "properties": {
+          "itblInternal": {
+            "description": "Internal details related to the event",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp when the related document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp when the related document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "_type": {
+            "description": "Type of the event data",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Timestamp when the event was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "email": {
+            "description": "Email address related to the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "User ID associated with the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "description": "Event-specific data associated with the event",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh"
+      ],
+      "source_defined_cursor": null,
+      "default_cursor_field": null,
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": false
+    },
+    {
+      "name": "campaigns_metrics",
+      "json_schema": {
+        "properties": {
+          "data": {
+            "description": "Contains the campaign metrics data",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh"
+      ],
+      "source_defined_cursor": null,
+      "default_cursor_field": null,
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "templates",
+      "json_schema": {
+        "properties": {
+          "templateId": {
+            "description": "The unique identifier for the template.",
+            "type": [
+              "null",
+              "number"
+            ]
+          },
+          "createdAt": {
+            "description": "The date and time when the template was created.",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "description": "The date and time when the template was last updated.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "name": {
+            "description": "The name/title of the template.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "creatorUserId": {
+            "description": "The ID of the user who created the template.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "messageTypeId": {
+            "description": "The type of message associated with the template.",
+            "type": [
+              "null",
+              "number"
+            ]
+          },
+          "campaignId": {
+            "description": "The unique identifier for the campaign associated with the template.",
+            "type": [
+              "null",
+              "number"
+            ]
+          },
+          "clientTemplateId": {
+            "description": "The identifier specific to the client for the template.",
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "email_bounce",
+      "json_schema": {
+        "properties": {
+          "createdAt": {
+            "description": "The date and time when the email bounce data was created.",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "campaignId": {
+            "description": "The unique identifier of the campaign associated with the email bounce data.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "itblInternal": {
+            "description": "Internal information related to Iterable.",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "The date and time when the internal document for Iterable was created.",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "The date and time when the internal document for Iterable was last updated.",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "messageId": {
+            "description": "The unique identifier of the message associated with the email bounce data.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "templateId": {
+            "description": "The unique identifier of the email template associated with the bounce data.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "email": {
+            "description": "The email address that encountered a bounce.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "The unique identifier of the user associated with the bounced email address.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "recipientState": {
+            "description": "The state of the recipient email address at the time of the bounce (e.g., active, inactive).",
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "email_click",
+      "json_schema": {
+        "properties": {
+          "country": {
+            "description": "The country from where the email click was recorded.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "city": {
+            "description": "The city from where the email click was recorded.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "campaignId": {
+            "description": "The unique identifier of the campaign associated with the email click data.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "itblInternal": {
+            "description": "Internal data related to the iterable service.",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "The date and time when the internal document was created.",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "The date and time when the internal document was last updated.",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "ip": {
+            "description": "The IP address from where the email click was recorded.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "contentId": {
+            "description": "The identifier of the content clicked within the email.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "userAgentDevice": {
+            "description": "The device information of the user agent used for the email click.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "messageId": {
+            "description": "The unique identifier of the message that contained the email.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "hrefIndex": {
+            "description": "The index of the href link within the email content.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "userAgent": {
+            "description": "The user agent of the browser or application used for the email click.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "templateId": {
+            "description": "The identifier of the email template used in the campaign.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "url": {
+            "description": "The URL that was clicked within the email.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "The date and time when the email click event occurred.",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "region": {
+            "description": "The region from where the email click was recorded.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "email": {
+            "description": "The email address of the user who clicked the email link.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "The unique identifier of the user who clicked the email link.",
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "email_complaint",
+      "json_schema": {
+        "properties": {
+          "createdAt": {
+            "description": "Timestamp indicating when the email complaint was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "campaignId": {
+            "description": "Unique identifier for the campaign associated with the email complaint data",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "itblInternal": {
+            "description": "Holds internal metadata related to the iterable data being accessed.",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp indicating when the internal document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp indicating when the internal document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "messageId": {
+            "description": "Unique identifier for the email message associated with the complaint",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "templateId": {
+            "description": "Unique identifier for the email template used in the campaign",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "email": {
+            "description": "Email address of the recipient who lodged the complaint",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "Unique identifier for the user who lodged the email complaint",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "recipientState": {
+            "description": "State or status of the recipient associated with the complaint",
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "email_open",
+      "json_schema": {
+        "properties": {
+          "country": {
+            "description": "The country from which the email was opened.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "The timestamp when the email_open event occurred.",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "city": {
+            "description": "The city from which the email was opened.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "campaignId": {
+            "description": "The unique identifier of the campaign to which the email_open event belongs.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "itblInternal": {
+            "description": "Internal data related to the email open event.",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "The timestamp when the ITBL internal document was created.",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "The timestamp when the ITBL internal document was last updated.",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "ip": {
+            "description": "The IP address from which the email was opened.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userAgentDevice": {
+            "description": "The device information from which the email was opened.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "messageId": {
+            "description": "The unique identifier of the email message.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userAgent": {
+            "description": "The user agent string of the browser used to open the email.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "templateId": {
+            "description": "The unique identifier of the email template used.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "region": {
+            "description": "The region from which the email was opened.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "email": {
+            "description": "The email address of the user who opened the email.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "The unique identifier of the user who opened the email.",
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "email_send",
+      "json_schema": {
+        "properties": {
+          "createdAt": {
+            "description": "The timestamp when the email was created.",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "campaignId": {
+            "description": "The identifier of the campaign associated with the email_send data.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "itblInternal": {
+            "description": "Internal information related to ITBL (Iterable).",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "The timestamp when the document was created.",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "The timestamp when the document was last updated.",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "messageTypeId": {
+            "description": "The identifier of the message type associated with the email_send data.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "transactionalData": {
+            "description": "Transactional data related to the email_send.",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "inventory": {
+                "description": "The quantity of the product in stock.",
+                "type": [
+                  "null",
+                  "integer"
+                ]
+              },
+              "eventName": {
+                "description": "The name of the event associated with the transaction.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "name": {
+                "description": "The name of the product.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "sku": {
+                "description": "The stock keeping unit (SKU) of the product.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "email": {
+                "description": "The email address associated with the transaction.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "url": {
+                "description": "The URL related to the transaction or product.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "description": {
+                "description": "Description of the product or transaction.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "price": {
+                "description": "The price of the product.",
+                "type": [
+                  "null",
+                  "integer"
+                ]
+              },
+              "product_type": {
+                "description": "The type or category of the product.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "compare_at_price": {
+                "description": "The original price of the product being transacted.",
+                "type": [
+                  "null",
+                  "number"
+                ]
+              },
+              "id": {
+                "description": "The unique identifier of the transactional data.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "templateId": {
+                "description": "The identifier of the template used for the transactional data.",
+                "type": [
+                  "null",
+                  "integer"
+                ]
+              },
+              "product_id": {
+                "description": "The identifier of the product.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "categories": {
+                "description": "Categories related to the transactional data.",
+                "type": [
+                  "null",
+                  "array"
+                ],
+                "items": {}
+              },
+              "createdAt": {
+                "description": "The timestamp when the transactional data was created.",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "campaignId": {
+                "description": "The identifier of the campaign associated with the transactional data.",
+                "type": [
+                  "null",
+                  "integer"
+                ]
+              },
+              "vendor": {
+                "description": "The vendor or seller of the product.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "eventUpdatedAt": {
+                "description": "The timestamp when the event was last updated.",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "discount": {
+                "description": "The discount applied to the product.",
+                "type": [
+                  "null",
+                  "integer"
+                ]
+              },
+              "imageUrl": {
+                "description": "The URL of the image related to the product.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "itblInternal": {
+                "description": "Internal information related to ITBL (Iterable) for transactional data.",
+                "type": [
+                  "null",
+                  "object"
+                ],
+                "properties": {
+                  "documentCreatedAt": {
+                    "description": "The timestamp when the document related to transactional data was created.",
+                    "type": [
+                      "null",
+                      "string"
+                    ],
+                    "format": "date-time"
+                  },
+                  "documentUpdatedAt": {
+                    "description": "The timestamp when the document related to transactional data was last updated.",
+                    "type": [
+                      "null",
+                      "string"
+                    ],
+                    "format": "date-time"
+                  }
+                }
+              },
+              "handle": {
+                "description": "A unique identifier for the transaction or product.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              }
+            }
+          },
+          "contentId": {
+            "description": "The identifier of the content related to the email being sent.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "messageId": {
+            "description": "The unique identifier of the message.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "messageBusId": {
+            "description": "The identifier of the message bus associated with the email_send data.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "templateId": {
+            "description": "The identifier of the template used for the email content.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "email": {
+            "description": "The email address of the recipient.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "The identifier of the user to whom the email is being sent.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "channelId": {
+            "description": "The identifier of the channel through which the email was sent.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "email_send_skip",
+      "json_schema": {
+        "properties": {
+          "reason": {
+            "description": "Reason for skipping the email send.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Date and time when the email send skip data was created.",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "campaignId": {
+            "description": "Unique identifier for the campaign associated with the email send skip data.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "itblInternal": {
+            "description": "Internal iterable properties associated with the email send skip data.",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Date and time when the document was created.",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Date and time when the document was last updated.",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "messageTypeId": {
+            "description": "Identifier for the type of message sent.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "transactionalData": {
+            "description": "Transactional data associated with the email send skip.",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "inventory": {
+                "description": "Inventory details of the transactional data.",
+                "type": [
+                  "null",
+                  "integer"
+                ]
+              },
+              "eventName": {
+                "description": "Name of the event associated with the transactional data.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "name": {
+                "description": "Name of the product associated with the transactional data.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "sku": {
+                "description": "Stock Keeping Unit (SKU) associated with the transactional data.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "email": {
+                "description": "Email address associated with the transactional data.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "url": {
+                "description": "URL associated with the transactional data.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "description": {
+                "description": "Description of the transactional data.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "price": {
+                "description": "Price of the product in the transactional data.",
+                "type": [
+                  "null",
+                  "integer"
+                ]
+              },
+              "product_type": {
+                "description": "Type of the product in the transactional data.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "compare_at_price": {
+                "description": "Comparison price for the transactional data.",
+                "type": [
+                  "null",
+                  "number"
+                ]
+              },
+              "id": {
+                "description": "Unique identifier for the transactional data.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "templateId": {
+                "description": "Identifier for the template used for the transactional data.",
+                "type": [
+                  "null",
+                  "integer"
+                ]
+              },
+              "product_id": {
+                "description": "Identifier for the product associated with the transactional data.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "categories": {
+                "description": "Categories associated with the transactional data.",
+                "type": [
+                  "null",
+                  "array"
+                ],
+                "items": {}
+              },
+              "createdAt": {
+                "description": "Date and time when the transactional data was created.",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "campaignId": {
+                "description": "Unique identifier for the campaign associated with the transactional data.",
+                "type": [
+                  "null",
+                  "integer"
+                ]
+              },
+              "vendor": {
+                "description": "Vendor of the product in the transactional data.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "eventUpdatedAt": {
+                "description": "Date and time when the event was last updated.",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "discount": {
+                "description": "Discount applied in the transactional data.",
+                "type": [
+                  "null",
+                  "integer"
+                ]
+              },
+              "imageUrl": {
+                "description": "URL for the image associated with the transactional data.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "itblInternal": {
+                "description": "Internal iterable properties associated with the transactional data.",
+                "type": [
+                  "null",
+                  "object"
+                ],
+                "properties": {
+                  "documentCreatedAt": {
+                    "description": "Date and time when the document was created.",
+                    "type": [
+                      "null",
+                      "string"
+                    ],
+                    "format": "date-time"
+                  },
+                  "documentUpdatedAt": {
+                    "description": "Date and time when the document was last updated.",
+                    "type": [
+                      "null",
+                      "string"
+                    ],
+                    "format": "date-time"
+                  }
+                }
+              },
+              "handle": {
+                "description": "Handle of the transactional data.",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              }
+            }
+          },
+          "contentId": {
+            "description": "Identifier for the content associated with the email send skip data.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "messageId": {
+            "description": "Unique identifier for the message related to the email send skip data.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "templateId": {
+            "description": "Identifier for the template used in the email send skip data.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "email": {
+            "description": "Email address to which the email send skip data corresponds.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "Identifier for the user associated with the email send skip data.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "channelId": {
+            "description": "Identifier for the channel through which the email was sent.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "email_subscribe",
+      "json_schema": {
+        "properties": {
+          "createdAt": {
+            "description": "The timestamp when the email subscription was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "signupSource": {
+            "description": "The source where the subscriber signed up for the emails",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "emailListIds": {
+            "description": "List of email list identifiers the subscriber belongs to",
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {}
+          },
+          "itblInternal": {
+            "description": "Internal properties related to the subscription",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "The timestamp when the internal document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "The timestamp when the internal document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "emailListId": {
+            "description": "The unique identifier of the email list",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "email": {
+            "description": "The email address of the subscriber",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "The unique identifier of the subscriber user",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "profileUpdatedAt": {
+            "description": "The timestamp when the subscriber profile was last updated",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "workflowId": {
+            "description": "The identifier of the workflow associated with the subscription",
+            "type": [
+              "null",
+              "integer"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "email_unsubscribe",
+      "json_schema": {
+        "properties": {
+          "unsubSource": {
+            "description": "The source from which the email unsubscribe request originated.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "The timestamp indicating when the email unsubscribe data was created.",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "campaignId": {
+            "description": "The unique identifier for the campaign associated with the email unsubscribe data.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "itblInternal": {
+            "description": "Internal properties specific to Iterable.",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "The timestamp indicating when the document was created within Iterable.",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "The timestamp indicating when the document was last updated within Iterable.",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "emailListId": {
+            "description": "The unique identifier for the email list associated with the email unsubscribe data.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "emailListIds": {
+            "description": "The list of unique identifiers for multiple email lists associated with the email unsubscribe data.",
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {}
+          },
+          "workflowId": {
+            "description": "The unique identifier for the workflow associated with the email unsubscribe data.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "messageId": {
+            "description": "The unique identifier for the message associated with the email unsubscribe data.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "templateId": {
+            "description": "The unique identifier for the template associated with the email unsubscribe data.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "channelIds": {
+            "description": "The list of unique identifiers for multiple channels associated with the email unsubscribe data.",
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {}
+          },
+          "email": {
+            "description": "The email address for which the user unsubscribed.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "The unique identifier for the user who unsubscribed from the email list.",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "channelId": {
+            "description": "The unique identifier for the channel associated with the email unsubscribe data.",
+            "type": [
+              "null",
+              "integer"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "push_send",
+      "json_schema": {
+        "properties": {
+          "itblInternal": {
+            "description": "Internal details related to the event",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp when the related document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp when the related document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "_type": {
+            "description": "Type of the event data",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Timestamp when the event was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "email": {
+            "description": "Email address related to the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "User ID associated with the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "description": "Event-specific data associated with the event",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "push_send_skip",
+      "json_schema": {
+        "properties": {
+          "itblInternal": {
+            "description": "Internal details related to the event",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp when the related document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp when the related document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "_type": {
+            "description": "Type of the event data",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Timestamp when the event was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "email": {
+            "description": "Email address related to the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "User ID associated with the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "description": "Event-specific data associated with the event",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "push_open",
+      "json_schema": {
+        "properties": {
+          "itblInternal": {
+            "description": "Internal details related to the event",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp when the related document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp when the related document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "_type": {
+            "description": "Type of the event data",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Timestamp when the event was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "email": {
+            "description": "Email address related to the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "User ID associated with the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "description": "Event-specific data associated with the event",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "push_uninstall",
+      "json_schema": {
+        "properties": {
+          "itblInternal": {
+            "description": "Internal details related to the event",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp when the related document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp when the related document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "_type": {
+            "description": "Type of the event data",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Timestamp when the event was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "email": {
+            "description": "Email address related to the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "User ID associated with the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "description": "Event-specific data associated with the event",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "push_bounce",
+      "json_schema": {
+        "properties": {
+          "itblInternal": {
+            "description": "Internal details related to the event",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp when the related document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp when the related document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "_type": {
+            "description": "Type of the event data",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Timestamp when the event was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "email": {
+            "description": "Email address related to the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "User ID associated with the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "description": "Event-specific data associated with the event",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "web_push_send",
+      "json_schema": {
+        "properties": {
+          "itblInternal": {
+            "description": "Internal details related to the event",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp when the related document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp when the related document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "_type": {
+            "description": "Type of the event data",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Timestamp when the event was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "email": {
+            "description": "Email address related to the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "User ID associated with the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "description": "Event-specific data associated with the event",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "web_push_click",
+      "json_schema": {
+        "properties": {
+          "itblInternal": {
+            "description": "Internal details related to the event",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp when the related document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp when the related document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "_type": {
+            "description": "Type of the event data",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Timestamp when the event was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "email": {
+            "description": "Email address related to the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "User ID associated with the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "description": "Event-specific data associated with the event",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "web_push_send_skip",
+      "json_schema": {
+        "properties": {
+          "itblInternal": {
+            "description": "Internal details related to the event",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp when the related document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp when the related document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "_type": {
+            "description": "Type of the event data",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Timestamp when the event was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "email": {
+            "description": "Email address related to the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "User ID associated with the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "description": "Event-specific data associated with the event",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "in_app_send",
+      "json_schema": {
+        "properties": {
+          "itblInternal": {
+            "description": "Internal details related to the event",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp when the related document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp when the related document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "_type": {
+            "description": "Type of the event data",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Timestamp when the event was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "email": {
+            "description": "Email address related to the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "User ID associated with the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "description": "Event-specific data associated with the event",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "in_app_open",
+      "json_schema": {
+        "properties": {
+          "itblInternal": {
+            "description": "Internal details related to the event",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp when the related document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp when the related document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "_type": {
+            "description": "Type of the event data",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Timestamp when the event was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "email": {
+            "description": "Email address related to the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "User ID associated with the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "description": "Event-specific data associated with the event",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "in_app_click",
+      "json_schema": {
+        "properties": {
+          "itblInternal": {
+            "description": "Internal details related to the event",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp when the related document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp when the related document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "_type": {
+            "description": "Type of the event data",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Timestamp when the event was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "email": {
+            "description": "Email address related to the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "User ID associated with the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "description": "Event-specific data associated with the event",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "in_app_close",
+      "json_schema": {
+        "properties": {
+          "itblInternal": {
+            "description": "Internal details related to the event",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp when the related document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp when the related document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "_type": {
+            "description": "Type of the event data",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Timestamp when the event was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "email": {
+            "description": "Email address related to the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "User ID associated with the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "description": "Event-specific data associated with the event",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "in_app_delete",
+      "json_schema": {
+        "properties": {
+          "itblInternal": {
+            "description": "Internal details related to the event",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp when the related document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp when the related document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "_type": {
+            "description": "Type of the event data",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Timestamp when the event was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "email": {
+            "description": "Email address related to the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "User ID associated with the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "description": "Event-specific data associated with the event",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "in_app_delivery",
+      "json_schema": {
+        "properties": {
+          "itblInternal": {
+            "description": "Internal details related to the event",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp when the related document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp when the related document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "_type": {
+            "description": "Type of the event data",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Timestamp when the event was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "email": {
+            "description": "Email address related to the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "User ID associated with the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "description": "Event-specific data associated with the event",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "in_app_send_skip",
+      "json_schema": {
+        "properties": {
+          "itblInternal": {
+            "description": "Internal details related to the event",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp when the related document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp when the related document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "_type": {
+            "description": "Type of the event data",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Timestamp when the event was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "email": {
+            "description": "Email address related to the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "User ID associated with the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "description": "Event-specific data associated with the event",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "inbox_session",
+      "json_schema": {
+        "properties": {
+          "itblInternal": {
+            "description": "Internal details related to the event",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp when the related document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp when the related document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "_type": {
+            "description": "Type of the event data",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Timestamp when the event was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "email": {
+            "description": "Email address related to the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "User ID associated with the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "description": "Event-specific data associated with the event",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "inbox_message_impression",
+      "json_schema": {
+        "properties": {
+          "itblInternal": {
+            "description": "Internal details related to the event",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp when the related document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp when the related document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "_type": {
+            "description": "Type of the event data",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Timestamp when the event was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "email": {
+            "description": "Email address related to the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "User ID associated with the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "description": "Event-specific data associated with the event",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "sms_send",
+      "json_schema": {
+        "properties": {
+          "itblInternal": {
+            "description": "Internal details related to the event",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp when the related document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp when the related document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "_type": {
+            "description": "Type of the event data",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Timestamp when the event was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "email": {
+            "description": "Email address related to the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "User ID associated with the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "description": "Event-specific data associated with the event",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "sms_bounce",
+      "json_schema": {
+        "properties": {
+          "itblInternal": {
+            "description": "Internal details related to the event",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp when the related document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp when the related document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "_type": {
+            "description": "Type of the event data",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Timestamp when the event was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "email": {
+            "description": "Email address related to the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "User ID associated with the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "description": "Event-specific data associated with the event",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "sms_click",
+      "json_schema": {
+        "properties": {
+          "itblInternal": {
+            "description": "Internal details related to the event",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp when the related document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp when the related document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "_type": {
+            "description": "Type of the event data",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Timestamp when the event was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "email": {
+            "description": "Email address related to the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "User ID associated with the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "description": "Event-specific data associated with the event",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "sms_received",
+      "json_schema": {
+        "properties": {
+          "itblInternal": {
+            "description": "Internal details related to the event",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp when the related document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp when the related document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "_type": {
+            "description": "Type of the event data",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Timestamp when the event was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "email": {
+            "description": "Email address related to the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "User ID associated with the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "description": "Event-specific data associated with the event",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "sms_send_skip",
+      "json_schema": {
+        "properties": {
+          "itblInternal": {
+            "description": "Internal details related to the event",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp when the related document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp when the related document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "_type": {
+            "description": "Type of the event data",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Timestamp when the event was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "email": {
+            "description": "Email address related to the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "User ID associated with the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "description": "Event-specific data associated with the event",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "sms_usage_info",
+      "json_schema": {
+        "properties": {
+          "itblInternal": {
+            "description": "Internal details related to the event",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp when the related document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp when the related document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "_type": {
+            "description": "Type of the event data",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Timestamp when the event was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "email": {
+            "description": "Email address related to the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "User ID associated with the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "description": "Event-specific data associated with the event",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "purchase",
+      "json_schema": {
+        "properties": {
+          "itblInternal": {
+            "description": "Internal details related to the event",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp when the related document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp when the related document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "_type": {
+            "description": "Type of the event data",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Timestamp when the event was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "email": {
+            "description": "Email address related to the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "User ID associated with the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "description": "Event-specific data associated with the event",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "custom_event",
+      "json_schema": {
+        "properties": {
+          "itblInternal": {
+            "description": "Internal details related to the event",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp when the related document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp when the related document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "_type": {
+            "description": "Type of the event data",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Timestamp when the event was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "email": {
+            "description": "Email address related to the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "User ID associated with the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "description": "Event-specific data associated with the event",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    },
+    {
+      "name": "hosted_unsubscribe_click",
+      "json_schema": {
+        "properties": {
+          "itblInternal": {
+            "description": "Internal details related to the event",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "documentCreatedAt": {
+                "description": "Timestamp when the related document was created",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "documentUpdatedAt": {
+                "description": "Timestamp when the related document was last updated",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "_type": {
+            "description": "Type of the event data",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "description": "Timestamp when the event was created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "email": {
+            "description": "Email address related to the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "description": "User ID associated with the event",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "description": "Event-specific data associated with the event",
+            "type": [
+              "null",
+              "object"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ]
+      },
+      "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+      ],
+      "source_defined_cursor": true,
+      "default_cursor_field": [
+        "createdAt"
+      ],
+      "source_defined_primary_key": null,
+      "namespace": null,
+      "is_resumable": true
+    }
+  ]
+}

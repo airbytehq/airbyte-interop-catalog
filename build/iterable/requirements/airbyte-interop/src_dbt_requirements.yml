@@ -1,0 +1,375 @@
+# This file was auto-generated using the morph cli.
+# Please do not edit manually.
+version: 2
+
+sources:
+  - name: iterable
+    database: "{% if target.type != 'spark' %}{{ var('iterable_database', target.database)}}{% endif %}"
+    schema: "{{var ('iterable_schema', 'iterable')}}"
+
+    loader: fivetran
+    loaded_at_field: _fivetran_synced
+
+    tables:
+      - name: campaign_history
+        identifier: "{{ var('iterable_campaign_history_identifier', 'campaign_history')}}"
+        description: Table containing a history of campaigns.
+        columns:
+          - name: id
+            description: Unique identifier of the campaign record
+          - name: updated_at
+            description: Last update's timestamp
+          - name: name
+            description: User defined name of the campaign.
+          - name: campaign_state
+            description: State of the campaign. Can be Draft, Ready, Scheduled, Running, Finished, Starting, Aborted or Recurring
+          - name: type
+            description: The campaign type. Can be Blast or Triggered
+          - name: send_size
+            description: Size of the campaign. Number of individuals included in the campaign
+          - name: start_at
+            description: Start timestamp
+          - name: ended_at
+            description: Ended timestamp
+          - name: created_at
+            description: Creation timestamp
+          - name: recurring_campaign_id
+            description: Reference to the recurring campaign, if applicable
+          - name: created_by_user_id
+            description: Reference to the user who created the campaign
+          - name: template_id
+            description: Reference to the campaign template
+          - name: updated_by_user_id
+            description: ID of the user who updated this record
+          - name: message_medium
+            description: The medium that this message was sent via, for example Email or InApp
+
+      - name: campaign_label_history
+        identifier: "{{ var('iterable_campaign_label_history_identifier', 'campaign_label_history')}}"
+        description: Table containing a history of labels.
+        config:
+          enabled: "{{ var('iterable__using_campaign_label_history', true) }}"
+        columns:
+          - name: campaign_id
+            description: Reference to the campaign associated with the label
+          - name: label
+            description: Name of the label
+          - name: updated_at
+            description: Last update timestamp
+
+      - name: campaign_list_history
+        identifier: "{{ var('iterable_campaign_list_history_identifier', 'campaign_list_history')}}"
+        description: Table containing a history of lists.
+        columns:
+          - name: campaign_id
+            description: Reference to the campaign associated with the label
+          - name: list_id
+            description: Reference to the list used
+          - name: updated_at
+            description: Last update timestamp
+
+      - name: campaign_suppression_list_history  # this is the correct spelling
+        identifier: "{{ var('iterable_campaign_suppression_list_history_identifier', 'campaign_suppression_list_history') }}"
+        description: >
+          Table containing a history of suppression lists.
+        columns:
+          - name: campaign_id
+            description: Reference to the campaign associated with the label
+          - name: suppressed_list_id
+            description: Reference to the list used
+          - name: updated_at
+            description: Last update timestamp
+
+      - name: channel
+        identifier: "{{ var('iterable_channel_identifier', 'channel')}}"
+        description: Table containing unique channels.     
+        columns:
+          - name: id
+            description: Unique identifier of the channel
+          - name: name
+            description: User defined name of the channel
+          - name: channel_type
+            description: The channel type
+          - name: message_medium
+            description: The message medium associated with the channel
+
+      - name: event
+        identifier: "{{ var('iterable_event_identifier', 'event')}}"
+        description: Table containing individual events within campaigns.     
+        columns:
+          - name: _fivetran_id
+            description: A Fivetran-created unique identifier derived from hashing campaign_id, created_at, and event_name. 
+          - name: campaign_id
+            description: Reference to the campaign from which the event originated
+          - name: content_id
+            description: Reference to the content the event is associated with.
+          - name: created_at
+            description: Creation timestamp
+          - name: email
+            description: The user's email. User identifier, for email-based projects. Previously was the unique identifier for user records, for Iterable customers before August 2023.  Exists if using the history version of the table.
+          - name: additional_properties
+            description: json object containing addition event properties
+          - name: event_name
+            description: Name provided to the individual event
+          - name: message_bus_id
+            description: Reference to the message bus associated with the event
+          - name: message_id
+            description: Reference to the message the event is associated with
+          - name: message_type_id
+            description: Reference to the type of message the event is associated with
+          - name: recipient_state
+            description: The state of the recipient upon receiving the event
+          - name: status
+            description: Status of the event
+          - name: transactional_data
+            description: Transactional data associated with the event
+          - name: unsub_source
+            description: Source of the unsubscribe event
+          - name: user_agent
+            description: User agent associated with the event
+          - name: user_agent_device
+            description: The device of the user agent
+          - name: _fivetran_user_id
+            description: A Fivetran-created unique identifier for users, derived from hashing user_id and/or email, depending on project type.
+      
+      - name: event_extension
+        identifier: "{{ var('iterable_event_extension_identifier', 'event_extension')}}"
+        description: Table containing additional properties from the event table.
+        config:
+          enabled: "{{ var('iterable__using_event_extension', true) }}"
+        columns:
+          - name: _fivetran_id
+            description: A Fivetran-created unique identifier derived from hashing campaign_id, created_at, and event_name. 
+          - name: app_already_running
+            description: Boolean indicating if the app is currently running or not
+          - name: badge
+            description: Badge associated with the event
+          - name: canonical_url_id
+            description: Reference to the url associated with the event
+          - name: content_available
+            description: Content available from the event
+          - name: content_id
+            description: Reference to the content associated with the event
+          - name: deeplink_android
+            description: Deeplink associated with the event from an android device
+          - name: deeplink_ios
+            description: Deeplink associated with the event from an ios device
+          - name: device
+            description: The device associated with the event
+          - name: email_id
+            description: Reference to the email associated with the event
+          - name: email_subject
+            description: Subject of the email associated with the event
+          - name: experiment_id
+            description: Reference to the experiment used if the event is an experiment
+          - name: from_phone_number_id
+            description: Reference to the phone number which the event is from
+          - name: from_smssender_id
+            description: Reference to the sms sender which the event is from
+          - name: image_url
+            description: Image url of the event
+          - name: is_ghost_push
+            description: Boolean indicating if the event is a result of a ghost push
+          - name: link_id
+            description: Reference to the link associated with the event
+          - name: link_url
+            description: Url of the link associated with the event
+          - name: locale
+            description: Locale associated with the event
+          - name: payload
+            description: Payload resulted from the event
+          - name: platform_endpoint
+            description: The specific platform endpoint of the event
+          - name: push_message
+            description: Boolean indicating if the event is a push message
+          - name: region
+            description: Region of the event
+          - name: sms_message
+            description: Boolean indicating if the event is an sms message
+          - name: sms_provider_response_code
+            description: sms provider response code from the event
+          - name: sms_provider_response_message
+            description: sms provider response message from the event
+          - name: sms_provider_response_more_info
+            description: sms provider response addition info from the event
+          - name: sms_provider_response_status
+            description: Status of the sms provider response from the event
+          - name: sound
+            description: Boolean indicating if a sound was used with the event
+          - name: to_phone_number
+            description: To phone number associated with the event
+          - name: url
+            description: Url associated with the event
+          - name: workflow_id
+            description: Reference to the workflow which the event originated
+          - name: workflow_name
+            description: Name of the workflow which the event originated
+          - name: catalog_collection_count 
+            description: The count of products or items collected in a catalog associated with the event.
+          - name: catalog_lookup_count 
+            description: The count of times a catalog was looked up or queried during the event.
+          - name: city 
+            description: The city associated with the event, which could be the location of the recipient.
+          - name: clicked_url 
+            description: The URL that was clicked by the recipient in response to the marketing message.
+          - name: country 
+            description: The country associated with the event, which could be the location of the recipient.
+          - name: error_code 
+            description: The error code or message indicating any issues or errors encountered during the event.
+          - name: expires_at 
+            description: The date and time when the event or message is set to expire or become invalid.
+          - name: from_phone_number 
+            description: The phone number from which the SMS message was sent.
+          - name: in_app_body 
+            description: The content or body of an in-app message that was sent as part of the event.
+          - name: is_sms_estimation 
+            description: A boolean indicating whether the SMS message is an estimation or not.
+          - name: labels 
+            description: Any labels or tags associated with the event, which can be used for categorization or organization.
+          - name: message_context 
+            description: Additional contextual information related to the marketing message or event.
+          - name: message_status 
+            description: The status of the marketing message, such as sent, delivered, opened, etc.
+          - name: mms_send_count 
+            description: The count of multimedia messages (MMS) sent as part of the event.
+          - name: product_recommendation_count 
+            description: The count of product recommendations included in the message.
+          - name: proxy_source 
+            description: Information about the source or proxy used for sending the message.
+          - name: reason 
+            description: The reason or cause associated with a specific event or action.
+          - name: sms_send_count 
+            description: The count of SMS messages sent as part of the event.
+          - name: web_push_body 
+            description: The content or body of a web push notification sent as part of the event.
+          - name: web_push_click_action 
+            description: The action triggered when a recipient clicks a web push notification.
+          - name: web_push_icon 
+            description: The icon or image associated with the web push notification.
+          - name: web_push_message 
+            description: The message or notification sent to web users as part of the event.
+
+      - name: list
+        identifier: "{{ var('iterable_list_identifier', 'list')}}"
+        description: Table containing users and the lists the users are associated with.
+        columns:
+          - name: id
+            description: Unique identifier of the list
+          - name: name
+            description: User defined name of the list
+          - name: list_type
+            description: The list type
+          - name: created_at
+            description: Creation timestamp
+          - name: description
+            description: Information about the list
+
+      - name: message_type
+        identifier: "{{ var('iterable_message_type_identifier', 'message_type')}}"
+        description: Table containing unique message types.
+        columns:
+          - name: id
+            description: Unique identifer of the message type
+          - name: name
+            description: User defined name of the message type
+          - name: channel_id
+            description: Channel that this message type belongs to
+          - name: created_at
+            description: Time when the message type was initially created
+          - name: frequency_cap
+            description: The maximum number of times a message of this type can be sent to a recipient within a specified time period to prevent over-messaging
+          - name: rate_limit_per_minute
+            description: The maximum number of messages of this type that can be sent to recipients in a minute, ensuring controlled message delivery
+          - name: subscription_policy
+            description: Information about the policy or rules governing how users can subscribe to or unsubscribe from this specific message type, like OptOut
+          - name: updated_at
+            description: Time when the message type was last updated or modified
+
+      - name: template_history
+        identifier: "{{ var('iterable_template_history_identifier', 'template_history')}}"
+        description: Table containing unique templates used across campaigns.
+        columns:
+          - name: id
+            description: Unique identifer of the template
+          - name: name
+            description: User defined name of the template
+          - name: template_type
+            description: The type of the template
+          - name: created_at
+            description: Creation timestamp
+          - name: client_template_id
+            description: Reference to the client template
+          - name: creator_user_id
+            description: Reference to the user who created the template
+          - name: message_type_id
+            description: Reference to the message type associated with the template
+          - name: updated_at
+            description: Last update timestamp
+
+      - name: user_history
+        identifier: "{{ var('iterable_user_history_identifier', 'user_history')}}"
+        description: Table containing individual user history information.
+        columns:
+          - name: email
+            description: The user's email. Previously was the unique identifier for the user records, for Iterable customers before August 2023. This has since been replaced by iterable_user_id.
+          - name: user_id
+            description: User defined identifier of the user. This is not a unique field
+          - name: iterable_user_id
+            description: The unique identifier of the user
+          - name: first_name
+            description: First name of the user
+          - name: last_name
+            description: Last name of the user
+          - name: email_list_ids
+            description: Array of references to the lists associated with the user
+          - name: signup_date
+            description: Timestamp of when the user signed up
+          - name: signup_source
+            description: Source where the user signed up
+          - name: updated_at
+            description: Last update timestamp
+
+      - name: user_unsubscribed_channel
+        identifier: "{{ var('iterable_user_unsubscribed_channel_identifier', 'user_unsubscribed_channel')}}"
+        description: Table containing the channels from which a user has unsubscribed.
+        columns:
+          - name: _fivetran_id
+            description: A Fivetran-created unique identifier for users, derived from hashing user_id and/or email, depending on project type.
+          - name: channel_id
+            description: Reference to the channel from which the user unsubscribed
+
+      - name: user_unsubscribed_message_type
+        identifier: "{{ var('iterable_user_unsubscribed_message_type_identifier', 'user_unsubscribed_message_type')}}"
+        description: Table containing the message types from which a user has unsubscribed.
+        config:
+          enabled: "{{ var('iterable__using_user_unsubscribed_message_type', true) }}"
+        columns:
+          - name: _fivetran_id
+            description: A Fivetran-created unique identifier for users, derived from hashing user_id and/or email, depending on project type.
+          - name: message_type_id
+            description: Reference to the message type from which the user unsubscribed
+
+
+      - name: user_unsubscribed_channel_history
+        identifier: "{{ var('iterable_user_unsubscribed_channel_history_identifier', 'user_unsubscribed_channel_history')}}"
+        description: Table containing the history of channels from which a user has unsubscribed.
+        columns:
+          - name: channel_id
+            description: Reference to the channel from which the user unsubscribed
+          - name: email
+            description: Unique identifier of the user
+          - name: updated_at
+            description: Last update timestamp
+
+      - name: user_unsubscribed_message_type_history
+        identifier: "{{ var('iterable_user_unsubscribed_message_type_history_identifier', 'user_unsubscribed_message_type_history')}}"
+        description: Table containing the history of message types from which a user has unsubscribed.
+        config:
+          enabled: "{{ var('iterable__using_user_unsubscribed_message_type', true) }}"
+        columns:
+          - name: message_type_id
+            description: Reference to the message type from which the user unsubscribed
+          - name: email
+            description: Unique identifier of the user
+          - name: updated_at
+            description: Last update timestamp
