@@ -1,0 +1,386 @@
+domain: tiktok_marketing.airbyte-interop
+transforms:
+  - name: adgroup_report_hourly
+    from:
+      - ad_groups_reports_hourly: tiktok_marketing.ad_groups_reports_hourly
+    fields:
+      adgroup_id:
+        expression: ad_groups_reports_hourly.adgroup_id
+        description: Ad group id
+      stat_time_hour:
+        expression: ad_groups_reports_hourly.stat_time_hour
+        description: Hour of activity
+      cost_per_conversion:
+        expression: ad_groups_reports_hourly.metrics.cost_per_conversion
+        description: "The average amount of money you've spent on a conversion.  (The
+          total count is calculated based on the time each ad impression occurred.)\n"
+      real_time_conversion:
+        expression: ad_groups_reports_hourly.metrics.real_time_conversion
+        description: Number of times your ad resulted in the optimization event you
+          selected.
+      cpc:
+        expression: ad_groups_reports_hourly.metrics.cpc
+        description: The average amount of money you've spent on a click.
+      video_play_actions:
+        expression: ad_groups_reports_hourly.metrics.video_play_actions
+        description: The number of times your video starts to play. Replays will not
+          be counted.
+      conversion_rate:
+        expression: ad_groups_reports_hourly.metrics.conversion_rate
+        description: The percentage of results you received out of all the clicks
+          of your ads. (The total count is calculated based on the time each ad impression
+          occurred.)
+      video_views_p_75:
+        expression: ad_groups_reports_hourly.metrics.video_views_p75
+        description: The number of times your video was played at 75% of its length.
+          Replays will not be counted.
+      result:
+        expression: ad_groups_reports_hourly.metrics.result
+        description: "The number of times your ad achieved an outcome, based on the
+          optimization goal  you selected. As one campaign may have a number of different
+          optimization goals,  this statistic is not supported for campaigns. Please
+          go to ad groups or ads to view the results.  (The total count is calculated
+          based on the time each ad impression occurred.)\n"
+      video_views_p_50:
+        expression: ad_groups_reports_hourly.metrics.video_views_p50
+        description: The number of times your video was played at 50% of its length.
+          Replays will not be counted.
+      impressions:
+        expression: ad_groups_reports_hourly.metrics.impressions
+        description: The number of times your ads were on screen.
+      comments:
+        expression: ad_groups_reports_hourly.metrics.comments
+        description: The number of comments your video creative received within 1
+          day of a user seeing a paid ad.
+      real_time_cost_per_result:
+        expression: ad_groups_reports_hourly.metrics.real_time_cost_per_result
+        description: "As a campaign may have different optimization goals, the total
+          number of result  is not supported in campaign section now, please go to
+          the ad group section to view the cost  per Result. (The total count is based
+          on when the conversion actually happened.)\n"
+      conversion:
+        expression: ad_groups_reports_hourly.metrics.conversion
+        description: "The number of times your ad achieved an outcome, based on the
+          secondary goal you selected.  As one campaign may have a number of different
+          secondary goals, this statistic is not supported for campaigns.  Please
+          go to ad groups or ads to view. (The total count is calculated based on
+          the time each ad impression occurred.)\n"
+      real_time_result:
+        expression: ad_groups_reports_hourly.metrics.real_time_result
+        description: "The number of times your ad achieved an outcome, based on the
+          optimization goal you selected.  As a campaign may have different optimization
+          goals, the total number of result is not supported in campaign section now
+          , Please go to the ad group section to view the result. (The total count
+          is based on when the conversion actually happened.)\n"
+      video_view_p_100:
+        expression: ad_groups_reports_hourly.metrics.video_views_p100
+        description: The number of times your video was played at 100% of its length.
+          Replays will not be counted.
+      shares:
+        expression: ad_groups_reports_hourly.metrics.shares
+        description: The number of shares your video creative received within 1 day
+          of a user seeing a paid ad.
+      real_time_conversion_rate:
+        expression: ad_groups_reports_hourly.metrics.real_time_conversion_rate
+        description: The percentage of results you received out of all the clicks
+          of your ads. (The total count is based on when the conversion actually happened.)
+      cost_per_secondary_goal_result:
+        expression: ad_groups_reports_hourly.metrics.cost_per_secondary_goal_result
+        description: "The average cost for each secondary goal result from your adverts.
+          As one campaign may have a number of different secondary goals,  this statistic
+          is not supported for campaigns. Please go to ad groups or ads to view. (The
+          total count is calculated based on the time each ad impression occurred.)\n"
+      secondary_goal_result_rate:
+        expression: ad_groups_reports_hourly.metrics.secondary_goal_result_rate
+        description: "The percentage of secondary goal results you achieved out of
+          all of the installs of your adverts. As one campaign may have a number \
+          \ of different secondary goals, this statistic is not supported for campaigns.
+          Please go to ad groups or ads to view. The total count is calculated based
+          on the time each ad impression occurred.\n"
+      clicks:
+        expression: ad_groups_reports_hourly.metrics.clicks
+        description: The number of clicks on your ads.
+      cost_per_1000_reached:
+        expression: ad_groups_reports_hourly.metrics.cost_per_1000_reached
+        description: The average cost to reach 1,000 unique users. This metric is
+          estimated.
+      video_views_p_25:
+        expression: ad_groups_reports_hourly.metrics.video_views_p25
+        description: The number of times your video was played at 25% of its length.
+          Replays will not be counted.
+      reach:
+        expression: ad_groups_reports_hourly.metrics.reach
+        description: The number of unique users who saw your ads at least once. This
+          metric is estimated.
+      real_time_cost_per_conversion:
+        expression: ad_groups_reports_hourly.metrics.real_time_cost_per_conversion
+        description: The average amount of money you've spent on a conversion. (The
+          total count is based on when the conversion actually happened.)
+      profile_visits_rate:
+        expression: ad_groups_reports_hourly.metrics.profile_visits_rate
+        description: The rate of profile visits per impression the paid ad drove during
+          the campaign. This metric is only for Boosted TikToks.
+      average_video_play:
+        expression: ad_groups_reports_hourly.metrics.average_video_play
+        description: The average time your video was played per single video view,
+          including any time spent replaying the video.
+      profile_visits:
+        expression: ad_groups_reports_hourly.metrics.profile_visits
+        description: The number of profile visits the ad drove during the campaign.
+          This metric is only for Boosted TikToks.
+      cpm:
+        expression: ad_groups_reports_hourly.metrics.cpm
+        description: The average amount of money you've spent per 1,000 impressions.
+      ctr:
+        expression: ad_groups_reports_hourly.metrics.ctr
+        description: The percentage of times people saw your ad and performed a click.
+      video_watched_2_s:
+        expression: ad_groups_reports_hourly.metrics.video_watched_2s
+        description: The number of times your video played for at least 2 seconds.
+          Replays will not be counted.
+      follows:
+        expression: ad_groups_reports_hourly.metrics.follows
+        description: The number of new followers that were gained within 1 day of
+          a user seeing a paid ad. This metric is only for Boosted TikToks.
+      result_rate:
+        expression: ad_groups_reports_hourly.metrics.result_rate
+        description: "The percentage of results you achieved out of all of the views/clicks
+          on your ads. As one campaign may have a number  of different optimization
+          goals, this statistic is not supported for campaigns. Please go to ad groups
+          or ads to view the result rate.  (The total count is calculated based on
+          the time each ad impression occurred.)\n"
+      video_watched_6_s:
+        expression: ad_groups_reports_hourly.metrics.video_watched_6s
+        description: The number of times your video played for at least 6 seconds,
+          or completely played. Replays will not be counted.
+      secondary_goal_result:
+        expression: ad_groups_reports_hourly.metrics.secondary_goal_result
+        description: "The number of times your ad achieved an outcome, based on the
+          secondary goal you selected. As one campaign may have a number  of different
+          secondary goals, this statistic is not supported for campaigns. Please go
+          to ad groups or ads to view. (The total count is  calculated based on the
+          time each ad impression occurred.)\n"
+      cost_per_result:
+        expression: ad_groups_reports_hourly.metrics.cost_per_result
+        description: "The average cost for each result from your ads. As one campaign
+          may have a number of different optimization goals, this statistic  is not
+          supported for campaigns. Please go to ad groups or ads to view the cost
+          per result. (The total count is calculated based on the time each ad impression
+          occurred.)\n"
+      average_video_play_per_user:
+        expression: ad_groups_reports_hourly.metrics.average_video_play_per_user
+        description: The average time your video was played per person, including
+          any time spent replaying the video. This metric is estimated.
+      real_time_result_rate:
+        expression: ad_groups_reports_hourly.metrics.real_time_result_rate
+        description: "As a campaign may have different optimization goals, the total
+          number of result is not supported in campaign section now ,Please go to
+          the ad group section to view the Result Rate.  (The total count is based
+          on when the conversion actually happened.)\n"
+      spend:
+        expression: ad_groups_reports_hourly.metrics.spend
+        description: The estimated total amount of money you've spent on your campaign,
+          ad group or ad during its schedule.
+      likes:
+        expression: ad_groups_reports_hourly.metrics.likes
+        description: The number of likes your video creative received within 1 day
+          of a user seeing a paid ad.
+      _fivetran_synced:
+        expression: ad_groups_reports_hourly._airbyte_extracted_at
+        description: Timestamp of when Fivetran synced a record.
+      total_purchase_value:
+        expression: MISSING
+        description: The total value of purchase events that occurred in your app
+          that were recorded by your measurement partner.
+      total_sales_lead_value:
+        expression: MISSING
+        description: The monetary worth or potential value assigned to a lead generated
+          through ads.
+annotations:
+  approved: true
+  missing_fields:
+    - total_purchase_value
+    - total_sales_lead_value
+  evaluation:
+    source_stream_name: ad_groups_reports_hourly
+    target_table_name: adgroup_report_hourly
+    table_match_score: 0.9
+    completion_score: 0.95
+    explanation: High level of conformity between source and target fields. Given
+      that most fields match structurally, adjustments for a few fields with divergences
+      are recommended to enhance mutual interoperability.
+    field_mapping_evals:
+      - name: adgroup_id
+        expression: ad_groups_reports_hourly.adgroup_id
+        score: 1.0
+        explanation: Exact match on primary key field mapping.
+      - name: stat_time_hour
+        expression: ad_groups_reports_hourly.stat_time_hour
+        score: 1.0
+        explanation: Mapped directly with time field.
+      - name: cost_per_conversion
+        expression: ad_groups_reports_hourly.metrics.cost_per_conversion
+        score: 1.0
+        explanation: Exact match found.
+      - name: real_time_conversion
+        expression: ad_groups_reports_hourly.metrics.real_time_conversion
+        score: 1.0
+        explanation: Mapped directly to its reporting metric field.
+      - name: cpc
+        expression: ad_groups_reports_hourly.metrics.cpc
+        score: 1.0
+        explanation: Cost per click aligns exactly with recorded metric field.
+      - name: video_play_actions
+        expression: ad_groups_reports_hourly.metrics.video_play_actions
+        score: 1.0
+        explanation: Metric matches directly with the target field.
+      - name: conversion_rate
+        expression: ad_groups_reports_hourly.metrics.conversion_rate
+        score: 1.0
+        explanation: Conversion rate field matched appropriately.
+      - name: video_views_p_75
+        expression: ad_groups_reports_hourly.metrics.video_views_p75
+        score: 1.0
+        explanation: Video play to 75% matches directly.
+      - name: result
+        expression: ad_groups_reports_hourly.metrics.result
+        score: 1.0
+        explanation: Result outcomes match effectively with the target ad performance
+          metric.
+      - name: video_views_p_50
+        expression: ad_groups_reports_hourly.metrics.video_views_p50
+        score: 1.0
+        explanation: Direct match found for video playback to 50% of its length.
+      - name: impressions
+        expression: ad_groups_reports_hourly.metrics.impressions
+        score: 1.0
+        explanation: Mapped directly with the impressions metric field.
+      - name: comments
+        expression: ad_groups_reports_hourly.metrics.comments
+        score: 1.0
+        explanation: Directly mapped to comments received metric.
+      - name: real_time_cost_per_result
+        expression: ad_groups_reports_hourly.metrics.real_time_cost_per_result
+        score: 1.0
+        explanation: Appropriate mapping to metric that represents real-time ad spend
+          per result achieved.
+      - name: conversion
+        expression: ad_groups_reports_hourly.metrics.conversion
+        score: 0.95
+        explanation: High probability match for secondary goal outcomes in ads.
+      - name: real_time_result
+        expression: ad_groups_reports_hourly.metrics.real_time_result
+        score: 1.0
+        explanation: Direct match to the real-time results metric.
+      - name: video_view_p_100
+        expression: ad_groups_reports_hourly.metrics.video_views_p100
+        score: 1.0
+        explanation: Matches exactly for video plays to 100%.
+      - name: shares
+        expression: ad_groups_reports_hourly.metrics.shares
+        score: 1.0
+        explanation: Shares metric maps directly.
+      - name: real_time_conversion_rate
+        expression: ad_groups_reports_hourly.metrics.real_time_conversion_rate
+        score: 1.0
+        explanation: Mapped directly to real-time performance metric.
+      - name: cost_per_secondary_goal_result
+        expression: ad_groups_reports_hourly.metrics.cost_per_secondary_goal_result
+        score: 0.9
+        explanation: High probability match to secondary goal result cost.
+      - name: secondary_goal_result_rate
+        expression: ad_groups_reports_hourly.metrics.secondary_goal_result_rate
+        score: 1.0
+        explanation: Mapped appropriately to secondary goal result rate.
+      - name: clicks
+        expression: ad_groups_reports_hourly.metrics.clicks
+        score: 1.0
+        explanation: Clicks metric linked directly.
+      - name: cost_per_1000_reached
+        expression: ad_groups_reports_hourly.metrics.cost_per_1000_reached
+        score: 1.0
+        explanation: Mapped appropriately for cost estimates per 1,000 reached.
+      - name: video_views_p_25
+        expression: ad_groups_reports_hourly.metrics.video_views_p25
+        score: 1.0
+        explanation: Direct match found for 25% video play.
+      - name: reach
+        expression: ad_groups_reports_hourly.metrics.reach
+        score: 1.0
+        explanation: Mapped directly to unique user reach metric.
+      - name: real_time_cost_per_conversion
+        expression: ad_groups_reports_hourly.metrics.real_time_cost_per_conversion
+        score: 1.0
+        explanation: Mapped appropriately to real-time ad spend on conversions.
+      - name: profile_visits_rate
+        expression: ad_groups_reports_hourly.metrics.profile_visits_rate
+        score: 1.0
+        explanation: Profile visits per impression metric matches directly.
+      - name: average_video_play
+        expression: ad_groups_reports_hourly.metrics.average_video_play
+        score: 1.0
+        explanation: Average play time per video view mapped effectively.
+      - name: profile_visits
+        expression: ad_groups_reports_hourly.metrics.profile_visits
+        score: 1.0
+        explanation: Matches directly with the profile visits driven metric.
+      - name: cpm
+        expression: ad_groups_reports_hourly.metrics.cpm
+        score: 1.0
+        explanation: Mapped to cost per thousand impressions with exact alignment.
+      - name: ctr
+        expression: ad_groups_reports_hourly.metrics.ctr
+        score: 1.0
+        explanation: Click-through rate mapped directly.
+      - name: video_watched_2_s
+        expression: ad_groups_reports_hourly.metrics.video_watched_2s
+        score: 1.0
+        explanation: Mapped to metric for minimum video watch duration of 2 seconds.
+      - name: follows
+        expression: ad_groups_reports_hourly.metrics.follows
+        score: 1.0
+        explanation: Mapped effectively to follows gained within a day of ad engagement.
+      - name: result_rate
+        expression: ad_groups_reports_hourly.metrics.result_rate
+        score: 1.0
+        explanation: Result rate statistic aligned well.
+      - name: video_watched_6_s
+        expression: ad_groups_reports_hourly.metrics.video_watched_6s
+        score: 1.0
+        explanation: Mapped to 6 seconds minimum play or until the end.
+      - name: secondary_goal_result
+        expression: ad_groups_reports_hourly.metrics.secondary_goal_result
+        score: 0.8
+        explanation: Mapped with high confidence to secondary goal outcome field.
+      - name: cost_per_result
+        expression: ad_groups_reports_hourly.metrics.cost_per_result
+        score: 1.0
+        explanation: Directly mapped to cost per ad result metric.
+      - name: average_video_play_per_user
+        expression: ad_groups_reports_hourly.metrics.average_video_play_per_user
+        score: 1.0
+        explanation: Mapped effectively to average play duration per user.
+      - name: real_time_result_rate
+        expression: ad_groups_reports_hourly.metrics.real_time_result_rate
+        score: 1.0
+        explanation: Mapped directly to real-time result rate based on conversions.
+      - name: spend
+        expression: ad_groups_reports_hourly.metrics.spend
+        score: 1.0
+        explanation: Mapped to approximate total campaign spend.
+      - name: likes
+        expression: ad_groups_reports_hourly.metrics.likes
+        score: 1.0
+        explanation: Mapped to likes received from ad exposure.
+      - name: _fivetran_synced
+        expression: ad_groups_reports_hourly._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping for table synchronization timestamps.
+      - name: total_purchase_value
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: total_sales_lead_value
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

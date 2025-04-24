@@ -1,0 +1,205 @@
+domain: tiktok_marketing.airbyte-interop
+transforms:
+  - name: advertiser
+    from:
+      - advertisers: tiktok_marketing.advertisers
+    fields:
+      id:
+        expression: advertisers.advertiser_id
+        description: Advertiser ID
+      address:
+        expression: advertisers.address
+        description: Advertiser address information
+      balance:
+        expression: MISSING
+        description: Account available balance
+      cellphone_number:
+        expression: advertisers.cellphone_number
+        description: "Contact mobile number, desensitised data. This is the newest
+          version of the field `phone_number`, which was renamed after the Tiktok
+          Ads v1.3 API release.\n"
+      company:
+        expression: advertisers.company
+        description: Advertiser's company name
+      contacter:
+        expression: advertisers.contacter
+        description: Contact Person
+      country:
+        expression: advertisers.country
+        description: The advertiser's country
+      create_time:
+        expression: advertisers.create_time
+        description: Advertiser's create time
+      currency:
+        expression: advertisers.currency
+        description: Type of currency used by advertisers
+      description:
+        expression: advertisers.description
+        description: Brand description, i.e. promotional content
+      email:
+        expression: advertisers.email
+        description: Advertiser contact email, desensitised data
+      industry:
+        expression: advertisers.industry
+        description: Advertiser industry category
+      language:
+        expression: advertisers.language
+        description: Language used by advertisers
+      license_no:
+        expression: advertisers.license_no
+        description: License number
+      license_url:
+        expression: advertisers.license_url
+        description: License preview address, the link is valid for an hour by default.
+      name:
+        expression: advertisers.name
+        description: Advertiser name
+      phone_number:
+        expression: MISSING
+        description: "Contact mobile number, desensitised data. IMPORTANT: This field
+          will not be populated for connectors utilizing the Tiktok Ads v1.3 API version,
+          as the column was renamed.  The new column name is `cellphone_number`.\n"
+      promotion_area:
+        expression: advertisers.promotion_area
+        description: Operation area
+      reason:
+        expression: advertisers.rejection_reason
+        description: Reason for rejection
+      role:
+        expression: advertisers.role
+        description: Advertiser role
+      status:
+        expression: advertisers.status
+        description: Advertiser status
+      telephone:
+        expression: advertisers.telephone_number
+        description: "Fixed phone number, desensitised data IMPORTANT: This field
+          will not be populated for connectors utilizing the Tiktok Ads v1.3 API version,
+          as the column was renamed.  The new column name is `telephone_number`.\n"
+      telephone_number:
+        expression: advertisers.telephone_number
+        description: "Fixed phone number, desensitised data This is the newest version
+          of the field `telephone`, which was renamed after the Tiktok Ads v1.3 API
+          release.\n"
+      timezone:
+        expression: advertisers.timezone
+        description: Ad account time zone including GMT offset
+      _fivetran_synced:
+        expression: advertisers._airbyte_extracted_at
+        description: Timestamp of when Fivetran synced a record.
+annotations:
+  approved: true
+  missing_fields:
+    - balance
+    - phone_number
+  evaluation:
+    source_stream_name: advertisers
+    target_table_name: advertiser
+    table_match_score: 0.7
+    completion_score: 0.8
+    explanation: The overall table match is quite high, suggesting the source and
+      target are closely related. The completion score reflects a majority of fields
+      mapped, although some are missing or poorly matched
+    field_mapping_evals:
+      - name: id
+        expression: advertisers.advertiser_id
+        score: 1.0
+        explanation: Exact match on customer identifier
+      - name: address
+        expression: advertisers.address
+        score: 1.0
+        explanation: Exact match on advertiser's address
+      - name: balance
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found
+      - name: cellphone_number
+        expression: advertisers.cellphone_number
+        score: 0.6
+        explanation: Since 'phone_number' was renamed in newer API versions, the match
+          is plausible but not certain
+      - name: company
+        expression: advertisers.company
+        score: 1.0
+        explanation: Exact match on advertiser's company name
+      - name: contacter
+        expression: advertisers.contacter
+        score: 1.0
+        explanation: Exact match on contact person
+      - name: country
+        expression: advertisers.country
+        score: 1.0
+        explanation: Exact match on advertiser's country
+      - name: create_time
+        expression: advertisers.create_time
+        score: 1.0
+        explanation: Exact match on advertiser's create time
+      - name: currency
+        expression: advertisers.currency
+        score: 1.0
+        explanation: Exact match on the type of currency used
+      - name: description
+        expression: advertisers.description
+        score: 1.0
+        explanation: Exact match on brand description
+      - name: email
+        expression: advertisers.email
+        score: 1.0
+        explanation: Exact match on advertiser contact email
+      - name: industry
+        expression: advertisers.industry
+        score: 1.0
+        explanation: Exact match on advertiser industry category
+      - name: language
+        expression: advertisers.language
+        score: 1.0
+        explanation: Exact match on language used
+      - name: license_no
+        expression: advertisers.license_no
+        score: 1.0
+        explanation: Exact match on license number
+      - name: license_url
+        expression: advertisers.license_url
+        score: 1.0
+        explanation: Exact match on license preview address
+      - name: name
+        expression: advertisers.name
+        score: 1.0
+        explanation: Exact match on advertiser name
+      - name: phone_number
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found as it is not used due to renamed field 'cellphone_number'
+      - name: promotion_area
+        expression: advertisers.promotion_area
+        score: 1.0
+        explanation: Exact match on operation area
+      - name: reason
+        expression: advertisers.rejection_reason
+        score: 1.0
+        explanation: Exact match on reason for rejection
+      - name: role
+        expression: advertisers.role
+        score: 1.0
+        explanation: Exact match on advertiser role
+      - name: status
+        expression: advertisers.status
+        score: 1.0
+        explanation: Exact match on advertiser status
+      - name: telephone
+        expression: advertisers.telephone_number
+        score: 0.0
+        explanation: No good match found as it is not used due to renamed field 'telephone_number'
+      - name: telephone_number
+        expression: advertisers.telephone_number
+        score: 0.6
+        explanation: Due to renaming, this match is plausible but not certain
+      - name: timezone
+        expression: advertisers.timezone
+        score: 1.0
+        explanation: Exact match on time zone
+      - name: _fivetran_synced
+        expression: advertisers._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping between '_fivetran_synced' and '_airbyte_extracted_at'
+          matches perfectly.

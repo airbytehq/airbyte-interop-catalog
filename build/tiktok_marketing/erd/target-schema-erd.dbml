@@ -1,0 +1,330 @@
+Table "advertiser" {
+    "id" unknown [note: 'Advertiser ID']
+    "address" unknown [note: 'Advertiser address information']
+    "balance" unknown [note: 'Account available balance']
+    "cellphone_number" unknown [note: '''Contact mobile number, desensitised data. This is the newest version of the field `phone_number`, which was renamed after the Tiktok Ads v1.3 API release.
+    ''']
+    "company" unknown [note: 'Advertiser\'s company name']
+    "contacter" unknown [note: 'Contact Person']
+    "country" unknown [note: 'The advertiser\'s country']
+    "create_time" unknown [note: 'Advertiser\'s create time']
+    "currency" unknown [note: 'Type of currency used by advertisers']
+    "description" unknown [note: 'Brand description, i.e. promotional content']
+    "email" unknown [note: 'Advertiser contact email, desensitised data']
+    "industry" unknown [note: 'Advertiser industry category']
+    "language" unknown [note: 'Language used by advertisers']
+    "license_no" unknown [note: 'License number']
+    "license_url" unknown [note: 'License preview address, the link is valid for an hour by default.']
+    "name" unknown [note: 'Advertiser name']
+    "phone_number" unknown [note: '''Contact mobile number, desensitised data. IMPORTANT: This field will not be populated for connectors utilizing the Tiktok Ads v1.3 API version, as the column was renamed.  The new column name is `cellphone_number`.
+    ''']
+    "promotion_area" unknown [note: 'Operation area']
+    "reason" unknown [note: 'Reason for rejection']
+    "role" unknown [note: 'Advertiser role']
+    "status" unknown [note: 'Advertiser status']
+    "telephone" unknown [note: '''Fixed phone number, desensitised data IMPORTANT: This field will not be populated for connectors utilizing the Tiktok Ads v1.3 API version, as the column was renamed.  The new column name is `telephone_number`.
+    ''']
+    "telephone_number" unknown [note: '''Fixed phone number, desensitised data This is the newest version of the field `telephone`, which was renamed after the Tiktok Ads v1.3 API release.
+    ''']
+    "timezone" unknown [note: 'Ad account time zone including GMT offset']
+    "_fivetran_synced" unknown [note: 'Timestamp of when Fivetran synced a record.']
+}
+
+Table "campaign_history" {
+    "campaign_id" unknown [note: 'Campaign ID']
+    "updated_at" unknown [note: 'Time the record was updated.']
+    "advertiser_id" unknown [note: 'Advertiser ID']
+    "budget" unknown [note: 'Campaign budget']
+    "budget_mode" unknown [note: 'Budget type']
+    "campaign_name" unknown [note: 'Campaign name']
+    "campaign_type" unknown [note: 'Campaign Type, indicates the campaign is a regular campaign or iOS 14 campaign.']
+    "create_time" unknown [note: 'Time at which the campaign was created.']
+    "is_new_structure" unknown [note: 'Whether the campaign is a new structure (for the same campaign, the structure of campaign, adgroups and ads are the same)']
+    "objective_type" unknown [note: 'Advertising objective.']
+    "opt_status" unknown [note: 'Operation status.']
+    "status" unknown [note: 'Campaign status']
+    "split_test_variable" unknown [note: 'Split Test variables. Optional values; TARGETING, BIDDING_OPTIMIZATION , CREATIVE.']
+}
+
+Table "adgroup_history" {
+    "adgroup_id" unknown [note: 'Ad group ID']
+    "updated_at" unknown [note: 'Time the record was updated.']
+    "advertiser_id" unknown [note: 'Advertiser ID']
+    "campaign_id" unknown [note: 'The Ad group\'s campaign ID.']
+    "action_categories" unknown [note: 'IDs of the action categories (behaviors) that you want to target.']
+    "action_days" unknown [note: 'The number of days of the time period to include action from.']
+    "adgroup_name" unknown [note: 'Ad group name. Character limit is 512 and cannot contain emoji.']
+    "age_groups" unknown [note: '''Age groups you want to target. This is the newest version of the field `age`, which was renamed after the Tiktok Ads v1.3 API release.
+    ''']
+    "android_osv" unknown [note: 'Minimum Android version.']
+    "app_download_url" unknown [note: 'App download link']
+    "app_id" unknown [note: 'The Application id of the promoted app']
+    "app_name" unknown [note: 'App name.']
+    "app_type" unknown [note: 'App type.']
+    "audience" unknown [note: 'A list of audience IDs.']
+    "audience_type" unknown [note: 'Audience Type']
+    "bid" unknown [note: 'CPC, CPM bidding, oCPM learning bidding']
+    "bid_type" unknown [note: 'Bidding Strategy']
+    "billing_event" unknown [note: 'Bid method.']
+    "budget" unknown [note: 'Ad budget. Returns 0.0 when Campaign Budget Optimization (budget_optimize_switch) is on.']
+    "budget_mode" unknown [note: 'Budget mode. This field will be ignored when Campaign Budget Optimization (budget_optimize_switch) is enabled.']
+    "carriers" unknown [note: 'Carriers that you want to target.']
+    "category" unknown [note: 'Ad group category.']
+    "click_tracking_url" unknown [note: 'Click monitoring URL.']
+    "connection_type" unknown [note: 'Device connection types that you want to target. Default; unlimited.']
+    "conversion_bid" unknown [note: 'oCPM conversion bid']
+    "cpv_video_duration" unknown [note: '''Video playback duration, required if optimize_goal is VIDEO_VIEW.  Allowed values; SIX_SECONDS (video playback 6s), TWO_SECONDS (video playback 2s)
+    ''']
+    "creative_material_mode" unknown [note: 'Creative delivery mode.']
+    "dayparting" unknown [note: 'Ad delivery period, the default is always and the format is 48 * 7 character string, represented by 0 or 1. > That is, with half an hour as the minimum granularity, a day (24 hours) is divided by the minimum granularity(30 mins) from Monday to Sunday. Resulting in a 48*7 format.0 represents not to be delivered, 1 represents delivery. no transmission, full transmission 0, full transmission 1 all represent full time delivery']
+    "deep_bid_type" unknown [note: 'Bidding strategy for in-app events.']
+    "deep_cpabid" unknown [note: 'Deep bid']
+    "deep_external_action" unknown [note: 'Deep conversion event.']
+    "display_name" unknown [note: 'Display name of ad group.']
+    "enable_inventory_filter" unknown [note: 'Inventory filtering (Unsafe videos will not be displayed).']
+    "excluded_audience" unknown [note: 'A list of audience ID to be excluded.']
+    "external_action" unknown [note: 'Conversion event for the ad group. It is required when the promoted object is an app with tracking urls, or when pixel_id is specified.']
+    "fallback_type" unknown [note: '''Fallback Type. If the audience do not have the app installed, you can have them fall back to install the app, or to view a specific web page. Not applicable for Deferred Deeplink. Allowed values; APP_INSTALL, WEBSITE, UNSET. If website is chosen, you need to specify the url via landing_page_url field.
+    ''']
+    "frequency" unknown [note: '''frequency, together with frequency_schedule, controls how often people see your ad (only available for REACH ads).  For example, frequency = 2 frequency_schedule = 3 means "show ads no more than twice every 3 day".
+    ''']
+    "frequency_schedule" unknown [note: 'frequency, together with frequency, controls how often people see your ad (only available for REACH ads).']
+    "gender" unknown [note: 'Gender that you want to target.']
+    "impression_tracking_url" unknown [note: 'Display monitoring URL.']
+    "interest_category_v2" unknown [note: 'Interest classification. If the interest is specified, users that do not meet interest target will be excluded during delivery.']
+    "ios_osv" unknown [note: 'Minimum iOS version.']
+    "is_comment_disable" unknown [note: 'Whether to allow comments on your ads on TikTok, Vigo, Helo.']
+    "is_hfss" unknown [note: 'Whether the promoted content is HFSS foods (foods that are high in fat, salt, or sugar).']
+    "is_new_structure" unknown [note: 'Whether the campaign is a new structure.']
+    "keywords" unknown [note: 'Keywords used.']
+    "landing_page_url" unknown [note: 'Landing page URL.']
+    "languages" unknown [note: 'Codes of the languages that you want to target.']
+    "location" unknown [note: 'IDs of the locations that you want to target.']
+    "open_url" unknown [note: 'The specific location where you want your audience to go if they have your app installed.']
+    "open_url_type" unknown [note: 'The open URL type.']
+    "operation_system" unknown [note: 'Device operating systems that you want to target.']
+    "opt_status" unknown [note: 'Operation status.']
+    "optimize_goal" unknown [note: 'Optimization goal.']
+    "pacing" unknown [note: '''You can choose between PACING_MODE_SMOOTH and PACING_MODE_FAST. For PACING_MODE_SMOOTH, the budget is allocated evenly within the scheduled time.  PACING_MODE_FAST would consume budget and produce results as soon as possible. 
+    ''']
+    "package" unknown [note: 'Package name.']
+    "pangle_block_app_list_id" unknown [note: 'Pangle app block list ID.']
+    "pixel_id" unknown [note: 'Pixel ID. Only application for landing pages.']
+    "placement" unknown [note: 'The apps where you want to deliver your ads.']
+    "placement_type" unknown [note: 'Placement type.']
+    "profile_image" unknown [note: 'Avatar URL.']
+    "schedule_end_time" unknown [note: 'Ad delivery end time (UTC+0). Format should be YYYY-MM-DD HH:MM:SS']
+    "schedule_start_time" unknown [note: 'Ad delivery start time (UTC+0). Format should be YYYY-MM-DD HH:MM:SS']
+    "schedule_type" unknown [note: 'The schedule type, which can be either SCHEDULE_START_END or SCHEDULE_FROM_NOW.']
+    "skip_learning_phase" unknown [note: 'Whether to skip the learning stage.']
+    "statistic_type" unknown [note: 'conversion bid statistic type']
+    "status" unknown [note: 'Ad group status']
+    "video_actions" unknown [note: 'Number of video actions.']
+    "video_download" unknown [note: 'Whether users can download your video ads on TikTok(cannot be updated once created).']
+}
+
+Table "ad_history" {
+    "ad_id" unknown [note: 'Ad ID']
+    "updated_at" unknown [note: 'Time the record was updated.']
+    "adgroup_id" unknown [note: 'Ad group ID']
+    "advertiser_id" unknown [note: 'Advertiser ID']
+    "campaign_id" unknown [note: 'Campaign ID']
+    "ad_name" unknown [note: 'Ad Name.']
+    "ad_text" unknown [note: 'The ad text.']
+    "app_name" unknown [note: 'The display name of app download ad.']
+    "call_to_action" unknown [note: 'Call to action values.']
+    "click_tracking_url" unknown [note: 'Click monitoring URL.']
+    "create_time" unknown [note: 'Time at which the ad was created.']
+    "display_name" unknown [note: 'The display name of landing page or pure exposure ad.']
+    "image_ids" unknown [note: 'A list of image IDs.']
+    "impression_tracking_url" unknown [note: 'Display monitoring URL.']
+    "is_aco" unknown [note: 'Whether the ad is an automated ad.']
+    "is_creative_authorized" unknown [note: '''Whether you grant displaying some of your ads in our TikTok For Business Creative Center. Only valid for non-US advertisers, the default value is false.
+    ''']
+    "is_new_structure" unknown [note: 'Whether the campaign is a new structure.']
+    "landing_page_url" unknown [note: 'Landing page URL.']
+    "open_url" unknown [note: 'The specific location where you want your audience to go if they have your app installed.']
+    "opt_status" unknown [note: 'Operation status.']
+    "playable_url" unknown [note: 'Playable material url.']
+    "profile_image" unknown [note: 'Avatar URL.']
+    "status" unknown [note: 'Ad status.']
+    "video_id" unknown [note: 'The video ID.']
+}
+
+Table "ad_report_hourly" {
+    "ad_id" unknown [note: 'Ad id']
+    "stat_time_hour" unknown [note: 'Hour of activity']
+    "cost_per_conversion" unknown [note: '''The average amount of money you\'ve spent on a conversion.  (The total count is calculated based on the time each ad impression occurred.)
+    ''']
+    "real_time_conversion" unknown [note: '''The number of times your ad achieved an outcome,  based on the objective and settings you selected. (The total count is based on when the conversion actually happened.)
+    ''']
+    "cpc" unknown [note: 'The average amount of money you\'ve spent on a click.']
+    "video_play_actions" unknown [note: 'The number of times your video starts to play. Replays will not be counted.']
+    "conversion_rate" unknown [note: '''The percentage of results you received out of all the clicks of your ads.   (The total count is calculated based on the time each ad impression occurred.)
+    ''']
+    "video_views_p_75" unknown [note: 'The number of times your video was played at 75% of its length. Replays will not be counted.']
+    "result" unknown [note: '''The number of times your ad achieved an outcome, based on the optimization goal  you selected. As one campaign may have a number of different optimization goals,  this statistic is not supported for campaigns. Please go to ad groups or ads to view the results.  (The total count is calculated based on the time each ad impression occurred.)
+    ''']
+    "video_views_p_50" unknown [note: 'The number of times your video was played at 50% of its length. Replays will not be counted.']
+    "impressions" unknown [note: 'The number of times your ads were on screen.']
+    "comments" unknown [note: 'The number of comments your video creative received within 1 day of a user seeing a paid ad.']
+    "real_time_cost_per_result" unknown [note: '''As a campaign may have different optimization goals, the total number of result   is not supported in campaign section now, please go to the ad group section to view the cost per Result. (The total count is based on when the conversion actually happened.)
+    ''']
+    "conversion" unknown [note: '''The number of times your ad achieved an outcome, based on the secondary goal you selected.  As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns.  Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+    ''']
+    "real_time_result" unknown [note: '''The number of times your ad achieved an outcome, based on the optimization goal you selected.  As a campaign may have different optimization goals, the total number of result is not supported in campaign section now , Please go to the ad group section to view the result. (The total count is based on when the conversion actually happened.)
+    ''']
+    "video_view_p_100" unknown [note: 'The number of times your video was played at 100% of its length. Replays will not be counted.']
+    "shares" unknown [note: 'The number of shares your video creative received within 1 day of a user seeing a paid ad.']
+    "real_time_conversion_rate" unknown [note: 'The percentage of results you received out of all the clicks of your ads. (The total count is based on when the conversion actually happened.)']
+    "cost_per_secondary_goal_result" unknown [note: '''The average cost for each secondary goal result from your adverts. As one campaign may have a number of different secondary goals,  this statistic is not supported for campaigns. Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+    ''']
+    "secondary_goal_result_rate" unknown [note: '''The percentage of secondary goal results you achieved out of all of the installs of your adverts. As one campaign may have a number  of different secondary goals, this statistic is not supported for campaigns. Please go to ad groups or ads to view. The total count is calculated based on the time each ad impression occurred.
+    ''']
+    "clicks" unknown [note: 'The number of clicks on your ads.']
+    "cost_per_1000_reached" unknown [note: 'The average cost to reach 1,000 unique users. This metric is estimated.']
+    "video_views_p_25" unknown [note: 'The number of times your video was played at 25% of its length. Replays will not be counted.']
+    "reach" unknown [note: 'The number of unique users who saw your ads at least once. This metric is estimated.']
+    "real_time_cost_per_conversion" unknown [note: 'The average amount of money you\'ve spent on a conversion. (The total count is based on when the conversion actually happened.)']
+    "profile_visits_rate" unknown [note: 'The rate of profile visits per impression the paid ad drove during the campaign. This metric is only for Boosted TikToks.']
+    "average_video_play" unknown [note: 'The average time your video was played per single video view, including any time spent replaying the video.']
+    "profile_visits" unknown [note: 'The number of profile visits the ad drove during the campaign. This metric is only for Boosted TikToks.']
+    "cpm" unknown [note: 'The average amount of money you\'ve spent per 1,000 impressions.']
+    "ctr" unknown [note: 'The percentage of times people saw your ad and performed a click.']
+    "video_watched_2_s" unknown [note: 'The number of times your video played for at least 2 seconds. Replays will not be counted.']
+    "follows" unknown [note: 'The number of new followers that were gained within 1 day of a user seeing a paid ad. This metric is only for Boosted TikToks.']
+    "result_rate" unknown [note: '''The percentage of results you achieved out of all of the views/clicks on your ads. As one campaign may have a number  of different optimization goals, this statistic is not supported for campaigns. Please go to ad groups or ads to view the result rate.  (The total count is calculated based on the time each ad impression occurred.)
+    ''']
+    "video_watched_6_s" unknown [note: 'The number of times your video played for at least 6 seconds, or completely played. Replays will not be counted.']
+    "secondary_goal_result" unknown [note: '''The number of times your ad achieved an outcome, based on the secondary goal you selected. As one campaign may have a number  of different secondary goals, this statistic is not supported for campaigns. Please go to ad groups or ads to view. (The total count is  calculated based on the time each ad impression occurred.)
+    ''']
+    "cost_per_result" unknown [note: '''The average cost for each result from your ads. As one campaign may have a number of different optimization goals, this statistic  is not supported for campaigns. Please go to ad groups or ads to view the cost per result. (The total count is calculated based on the time each ad impression occurred.)
+    ''']
+    "average_video_play_per_user" unknown [note: 'The average time your video was played per person, including any time spent replaying the video. This metric is estimated.']
+    "real_time_result_rate" unknown [note: 'As a campaign may have different optimization goals, the total number of result is not supported in campaign section now ,Please go to the ad group section to view the Result Rate. (The total count is based on when the conversion actually happened.)']
+    "spend" unknown [note: 'The estimated total amount of money you\'ve spent on your campaign, ad group or ad during its schedule.']
+    "likes" unknown [note: 'The number of likes your video creative received within 1 day of a user seeing a paid ad.']
+    "_fivetran_synced" unknown [note: 'Timestamp of when Fivetran synced a record.']
+    "real_time_conversion" unknown [note: 'Number of times your ad resulted in the optimization event you selected.']
+    "total_purchase_value" unknown [note: 'The total value of purchase events that occurred in your app that were recorded by your measurement partner.']
+    "total_sales_lead_value" unknown [note: 'The monetary worth or potential value assigned to a lead generated through ads.']
+}
+
+Table "campaign_report_hourly" {
+    "campaign_id" unknown [note: 'Campaign id']
+    "stat_time_hour" unknown [note: 'Hour of activity']
+    "cost_per_conversion" unknown [note: '''The average amount of money you\'ve spent on a conversion.  (The total count is calculated based on the time each ad impression occurred.)
+    ''']
+    "real_time_conversion" unknown [note: '''The number of times your ad achieved an outcome,  based on the objective and settings you selected. (The total count is based on when the conversion actually happened.)
+    ''']
+    "cpc" unknown [note: 'The average amount of money you\'ve spent on a click.']
+    "video_play_actions" unknown [note: 'The number of times your video starts to play. Replays will not be counted.']
+    "conversion_rate" unknown [note: '''The percentage of results you received out of all the clicks of your ads.   (The total count is calculated based on the time each ad impression occurred.)
+    ''']
+    "video_views_p_75" unknown [note: 'The number of times your video was played at 75% of its length. Replays will not be counted.']
+    "result" unknown [note: '''The number of times your ad achieved an outcome, based on the optimization goal  you selected. As one campaign may have a number of different optimization goals,  this statistic is not supported for campaigns. Please go to ad groups or ads to view the results.  (The total count is calculated based on the time each ad impression occurred.)
+    ''']
+    "video_views_p_50" unknown [note: 'The number of times your video was played at 50% of its length. Replays will not be counted.']
+    "impressions" unknown [note: 'The number of times your ads were on screen.']
+    "comments" unknown [note: 'The number of comments your video creative received within 1 day of a user seeing a paid ad.']
+    "real_time_cost_per_result" unknown [note: '''As a campaign may have different optimization goals, the total number of result  is not supported in campaign section now, please go to the ad group section to view the cost  per Result. (The total count is based on when the conversion actually happened.)
+    ''']
+    "conversion" unknown [note: '''The number of times your ad achieved an outcome, based on the secondary goal you selected.  As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+    ''']
+    "real_time_result" unknown [note: '''The number of times your ad achieved an outcome, based on the optimization goal you selected.  As a campaign may have different optimization goals, the total number of result is not supported in campaign section now , Please go to the ad group section to view the result. (The total count is based on when the conversion actually happened.)
+    ''']
+    "video_view_p_100" unknown [note: 'The number of times your video was played at 100% of its length. Replays will not be counted.']
+    "shares" unknown [note: 'The number of shares your video creative received within 1 day of a user seeing a paid ad.']
+    "real_time_conversion_rate" unknown [note: 'The percentage of results you received out of all the clicks of your ads. (The total count is based on when the conversion actually happened.)']
+    "cost_per_secondary_goal_result" unknown [note: '''The average cost for each secondary goal result from your adverts. As one campaign may have a number of different secondary goals,  this statistic is not supported for campaigns. Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+    ''']
+    "secondary_goal_result_rate" unknown [note: '''The percentage of secondary goal results you achieved out of all of the installs of your adverts. As one campaign may have a number  of different secondary goals, this statistic is not supported for campaigns. Please go to ad groups or ads to view. The total count is calculated based on the time each ad impression occurred.
+    ''']
+    "clicks" unknown [note: 'The number of clicks on your ads.']
+    "cost_per_1000_reached" unknown [note: 'The average cost to reach 1,000 unique users. This metric is estimated.']
+    "video_views_p_25" unknown [note: 'The number of times your video was played at 25% of its length. Replays will not be counted.']
+    "reach" unknown [note: 'The number of unique users who saw your ads at least once. This metric is estimated.']
+    "real_time_cost_per_conversion" unknown [note: 'The average amount of money you\'ve spent on a conversion. (The total count is based on when the conversion actually happened.)']
+    "profile_visits_rate" unknown [note: 'The rate of profile visits per impression the paid ad drove during the campaign. This metric is only for Boosted TikToks.']
+    "average_video_play" unknown [note: 'The average time your video was played per single video view, including any time spent replaying the video.']
+    "profile_visits" unknown [note: 'The number of profile visits the ad drove during the campaign. This metric is only for Boosted TikToks.']
+    "cpm" unknown [note: 'The average amount of money you\'ve spent per 1,000 impressions.']
+    "ctr" unknown [note: 'The percentage of times people saw your ad and performed a click.']
+    "video_watched_2_s" unknown [note: 'The number of times your video played for at least 2 seconds. Replays will not be counted.']
+    "follows" unknown [note: 'The number of new followers that were gained within 1 day of a user seeing a paid ad. This metric is only for Boosted TikToks.']
+    "result_rate" unknown [note: '''The percentage of results you achieved out of all of the views/clicks on your ads. As one campaign may have a number  of different optimization goals, this statistic is not supported for campaigns. Please go to ad groups or ads to view the result rate.  (The total count is calculated based on the time each ad impression occurred.)
+    ''']
+    "video_watched_6_s" unknown [note: 'The number of times your video played for at least 6 seconds, or completely played. Replays will not be counted.']
+    "secondary_goal_result" unknown [note: '''The number of times your ad achieved an outcome, based on the secondary goal you selected. As one campaign may have a number  of different secondary goals, this statistic is not supported for campaigns. Please go to ad groups or ads to view. (The total count is  calculated based on the time each ad impression occurred.)
+    ''']
+    "cost_per_result" unknown [note: '''The average cost for each result from your ads. As one campaign may have a number of different optimization goals, this statistic  is not supported for campaigns. Please go to ad groups or ads to view the cost per result. (The total count is calculated based on the time each ad impression occurred.)
+    ''']
+    "average_video_play_per_user" unknown [note: 'The average time your video was played per person, including any time spent replaying the video. This metric is estimated.']
+    "real_time_result_rate" unknown [note: '''As a campaign may have different optimization goals, the total number of result is not supported in campaign section now ,Please go to the ad group section to  view the Result Rate. (The total count is based on when the conversion actually happened.)
+    ''']
+    "spend" unknown [note: 'The estimated total amount of money you\'ve spent on your campaign, ad group or ad during its schedule.']
+    "likes" unknown [note: 'The number of likes your video creative received within 1 day of a user seeing a paid ad.']
+    "_fivetran_synced" unknown [note: 'Timestamp of when Fivetran synced a record.']
+    "real_time_conversion" unknown [note: 'Number of times your ad resulted in the optimization event you selected.']
+    "total_purchase_value" unknown [note: 'The total value of purchase events that occurred in your app that were recorded by your measurement partner.']
+    "total_sales_lead_value" unknown [note: 'The monetary worth or potential value assigned to a lead generated through ads.']
+}
+
+Table "adgroup_report_hourly" {
+    "adgroup_id" unknown [note: 'Ad group id']
+    "stat_time_hour" unknown [note: 'Hour of activity']
+    "cost_per_conversion" unknown [note: '''The average amount of money you\'ve spent on a conversion.  (The total count is calculated based on the time each ad impression occurred.)
+    ''']
+    "real_time_conversion" unknown [note: '''The number of times your ad achieved an outcome,  based on the objective and settings you selected. (The total count is based on when the conversion actually happened.)
+    ''']
+    "cpc" unknown [note: 'The average amount of money you\'ve spent on a click.']
+    "video_play_actions" unknown [note: 'The number of times your video starts to play. Replays will not be counted.']
+    "conversion_rate" unknown [note: 'The percentage of results you received out of all the clicks of your ads. (The total count is calculated based on the time each ad impression occurred.)']
+    "video_views_p_75" unknown [note: 'The number of times your video was played at 75% of its length. Replays will not be counted.']
+    "result" unknown [note: '''The number of times your ad achieved an outcome, based on the optimization goal  you selected. As one campaign may have a number of different optimization goals,  this statistic is not supported for campaigns. Please go to ad groups or ads to view the results.  (The total count is calculated based on the time each ad impression occurred.)
+    ''']
+    "video_views_p_50" unknown [note: 'The number of times your video was played at 50% of its length. Replays will not be counted.']
+    "impressions" unknown [note: 'The number of times your ads were on screen.']
+    "comments" unknown [note: 'The number of comments your video creative received within 1 day of a user seeing a paid ad.']
+    "real_time_cost_per_result" unknown [note: '''As a campaign may have different optimization goals, the total number of result  is not supported in campaign section now, please go to the ad group section to view the cost  per Result. (The total count is based on when the conversion actually happened.)
+    ''']
+    "conversion" unknown [note: '''The number of times your ad achieved an outcome, based on the secondary goal you selected.  As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns.  Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+    ''']
+    "real_time_result" unknown [note: '''The number of times your ad achieved an outcome, based on the optimization goal you selected.  As a campaign may have different optimization goals, the total number of result is not supported in campaign section now , Please go to the ad group section to view the result. (The total count is based on when the conversion actually happened.)
+    ''']
+    "video_view_p_100" unknown [note: 'The number of times your video was played at 100% of its length. Replays will not be counted.']
+    "shares" unknown [note: 'The number of shares your video creative received within 1 day of a user seeing a paid ad.']
+    "real_time_conversion_rate" unknown [note: 'The percentage of results you received out of all the clicks of your ads. (The total count is based on when the conversion actually happened.)']
+    "cost_per_secondary_goal_result" unknown [note: '''The average cost for each secondary goal result from your adverts. As one campaign may have a number of different secondary goals,  this statistic is not supported for campaigns. Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+    ''']
+    "secondary_goal_result_rate" unknown [note: '''The percentage of secondary goal results you achieved out of all of the installs of your adverts. As one campaign may have a number  of different secondary goals, this statistic is not supported for campaigns. Please go to ad groups or ads to view. The total count is calculated based on the time each ad impression occurred.
+    ''']
+    "clicks" unknown [note: 'The number of clicks on your ads.']
+    "cost_per_1000_reached" unknown [note: 'The average cost to reach 1,000 unique users. This metric is estimated.']
+    "video_views_p_25" unknown [note: 'The number of times your video was played at 25% of its length. Replays will not be counted.']
+    "reach" unknown [note: 'The number of unique users who saw your ads at least once. This metric is estimated.']
+    "real_time_cost_per_conversion" unknown [note: 'The average amount of money you\'ve spent on a conversion. (The total count is based on when the conversion actually happened.)']
+    "profile_visits_rate" unknown [note: 'The rate of profile visits per impression the paid ad drove during the campaign. This metric is only for Boosted TikToks.']
+    "average_video_play" unknown [note: 'The average time your video was played per single video view, including any time spent replaying the video.']
+    "profile_visits" unknown [note: 'The number of profile visits the ad drove during the campaign. This metric is only for Boosted TikToks.']
+    "cpm" unknown [note: 'The average amount of money you\'ve spent per 1,000 impressions.']
+    "ctr" unknown [note: 'The percentage of times people saw your ad and performed a click.']
+    "video_watched_2_s" unknown [note: 'The number of times your video played for at least 2 seconds. Replays will not be counted.']
+    "follows" unknown [note: 'The number of new followers that were gained within 1 day of a user seeing a paid ad. This metric is only for Boosted TikToks.']
+    "result_rate" unknown [note: '''The percentage of results you achieved out of all of the views/clicks on your ads. As one campaign may have a number  of different optimization goals, this statistic is not supported for campaigns. Please go to ad groups or ads to view the result rate.  (The total count is calculated based on the time each ad impression occurred.)
+    ''']
+    "video_watched_6_s" unknown [note: 'The number of times your video played for at least 6 seconds, or completely played. Replays will not be counted.']
+    "secondary_goal_result" unknown [note: '''The number of times your ad achieved an outcome, based on the secondary goal you selected. As one campaign may have a number  of different secondary goals, this statistic is not supported for campaigns. Please go to ad groups or ads to view. (The total count is  calculated based on the time each ad impression occurred.)
+    ''']
+    "cost_per_result" unknown [note: '''The average cost for each result from your ads. As one campaign may have a number of different optimization goals, this statistic  is not supported for campaigns. Please go to ad groups or ads to view the cost per result. (The total count is calculated based on the time each ad impression occurred.)
+    ''']
+    "average_video_play_per_user" unknown [note: 'The average time your video was played per person, including any time spent replaying the video. This metric is estimated.']
+    "real_time_result_rate" unknown [note: '''As a campaign may have different optimization goals, the total number of result is not supported in campaign section now ,Please go to the ad group section to view the Result Rate.  (The total count is based on when the conversion actually happened.)
+    ''']
+    "spend" unknown [note: 'The estimated total amount of money you\'ve spent on your campaign, ad group or ad during its schedule.']
+    "likes" unknown [note: 'The number of likes your video creative received within 1 day of a user seeing a paid ad.']
+    "_fivetran_synced" unknown [note: 'Timestamp of when Fivetran synced a record.']
+    "real_time_conversion" unknown [note: 'Number of times your ad resulted in the optimization event you selected.']
+    "total_purchase_value" unknown [note: 'The total value of purchase events that occurred in your app that were recorded by your measurement partner.']
+    "total_sales_lead_value" unknown [note: 'The monetary worth or potential value assigned to a lead generated through ads.']
+}

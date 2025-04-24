@@ -1,0 +1,860 @@
+[project]
+source_name = "tiktok_marketing"
+project_name = "airbyte-interop"
+requirements_file = "build/tiktok_marketing/requirements/airbyte-interop/src_dbt_requirements.yml"
+requirements_file_hash = "0d922b54ab642a78c4671b74ac4047442ceaa90062bc509a93b6c4474f421eaa"
+airbyte_source_file = "build/tiktok_marketing/src_airbyte_raw_tiktok_marketing.yml"
+airbyte_source_file_hash = "7137ea3aa0637950e73249fa034ddd13922bd6fdbee7eda48eefd5fa646f0abc"
+
+[coverage]
+unused_source_streams = [
+    "ad_group_audience_reports_by_country_daily",
+    "ad_group_audience_reports_by_platform_daily",
+    "ad_group_audience_reports_daily",
+    "ad_groups_reports_daily",
+    "ad_groups_reports_lifetime",
+    "ads_audience_reports_by_country_daily",
+    "ads_audience_reports_by_platform_daily",
+    "ads_audience_reports_by_province_daily",
+    "ads_audience_reports_daily",
+    "ads_reports_daily",
+    "ads_reports_lifetime",
+    "advertiser_ids",
+    "advertisers_audience_reports_by_country_daily",
+    "advertisers_audience_reports_by_platform_daily",
+    "advertisers_audience_reports_daily",
+    "advertisers_audience_reports_lifetime",
+    "advertisers_reports_daily",
+    "advertisers_reports_hourly",
+    "advertisers_reports_lifetime",
+    "audiences",
+    "campaigns_audience_reports_by_country_daily",
+    "campaigns_audience_reports_by_platform_daily",
+    "campaigns_audience_reports_daily",
+    "campaigns_reports_daily",
+    "campaigns_reports_lifetime",
+    "creative_assets_images",
+    "creative_assets_music",
+    "creative_assets_portfolios",
+    "creative_assets_videos",
+    "pixel_events_statistics",
+    "pixel_instant_page_events",
+    "pixels",
+    "spark_ads",
+]
+unmapped_target_tables = []
+
+[mappings.ad_history]
+source_file = "src/transforms/tiktok_marketing/transforms/ad_history.yml"
+source_file_hash = "a046b383caadbd1a6dad1d2e3ff43e6b8e033609c2731e2baa0eef11edb8d7e2"
+source_stream = "ads"
+unmapped_target_fields = [
+    "ad_text",
+    "app_name",
+    "display_name",
+    "is_creative_authorized",
+    "is_new_structure",
+    "open_url",
+    "opt_status",
+    "updated_at",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.ad_history.mapped_target_fields]
+ad_id = "ads.ad_id"
+adgroup_id = "ads.adgroup_id"
+advertiser_id = "ads.advertiser_id"
+campaign_id = "ads.campaign_id"
+ad_name = "ads.ad_name"
+call_to_action = "ads.call_to_action"
+click_tracking_url = "ads.click_tracking_url"
+create_time = "ads.create_time"
+image_ids = "ads.image_ids"
+impression_tracking_url = "ads.impression_tracking_url"
+is_aco = "ads.is_aco"
+landing_page_url = "ads.landing_page_url"
+playable_url = "ads.playable_url"
+profile_image = "ads.profile_image_url"
+status = "ads.secondary_status"
+video_id = "ads.video_id"
+
+[mappings.ad_history.unused_source_fields]
+ads = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "ad_format",
+    "ad_text",
+    "ad_texts",
+    "adgroup_name",
+    "app_name",
+    "avatar_icon_web_uri",
+    "brand_safety_postbid_partner",
+    "brand_safety_vast_url",
+    "branded_content_disabled",
+    "call_to_action_id",
+    "campaign_name",
+    "card_id",
+    "carousel_image_index",
+    "catalog_id",
+    "creative_authorized",
+    "creative_type",
+    "dark_post_status",
+    "deeplink",
+    "deeplink_type",
+    "disclaimer_clickable_texts",
+    "disclaimer_clickable_texts.text",
+    "disclaimer_clickable_texts.url",
+    "disclaimer_text",
+    "disclaimer_text.text",
+    "disclaimer_type",
+    "display_name",
+    "dynamic_destination",
+    "dynamic_format",
+    "fallback_type",
+    "identity_authorized_bc_id",
+    "identity_id",
+    "identity_type",
+    "image_mode",
+    "is_new_structure",
+    "item_duet_status",
+    "item_group_ids",
+    "item_stitch_status",
+    "landing_page_urls",
+    "modify_time",
+    "music_id",
+    "operation_status",
+    "optimization_event",
+    "page_id",
+    "phone_number",
+    "phone_region_calling_code",
+    "phone_region_code",
+    "premium_badge_id",
+    "product_set_id",
+    "product_specific_type",
+    "promotional_music_disabled",
+    "shopping_ads_deeplink_type",
+    "shopping_ads_fallback_type",
+    "shopping_ads_video_package_id",
+    "shopping_deeplink_type",
+    "showcase_products",
+    "showcase_products.catalog_id",
+    "showcase_products.item_group_id",
+    "showcase_products.store_id",
+    "sku_ids",
+    "tiktok_item_id",
+    "tiktok_page_category",
+    "tracking_app_id",
+    "tracking_offline_event_set_ids",
+    "tracking_pixel_id",
+    "utm_params",
+    "vast_moat_enabled",
+    "vertical_video_strategy",
+    "viewability_postbid_partner",
+    "viewability_vast_url",
+]
+
+[mappings.ad_report_hourly]
+source_file = "src/transforms/tiktok_marketing/transforms/ad_report_hourly.yml"
+source_file_hash = "275a428b6b5a53bdd29c54206040ea60b64445e6f56ac8b2eeb6cd25c82057b8"
+source_stream = "ads_reports_hourly"
+unmapped_target_fields = [
+    "ad_id",
+    "average_video_play",
+    "average_video_play_per_user",
+    "clicks",
+    "comments",
+    "conversion",
+    "conversion_rate",
+    "cost_per_1000_reached",
+    "cost_per_conversion",
+    "cost_per_result",
+    "cost_per_secondary_goal_result",
+    "cpc",
+    "cpm",
+    "ctr",
+    "follows",
+    "impressions",
+    "likes",
+    "profile_visits",
+    "profile_visits_rate",
+    "reach",
+    "real_time_conversion",
+    "real_time_conversion_rate",
+    "real_time_cost_per_conversion",
+    "real_time_cost_per_result",
+    "real_time_result",
+    "real_time_result_rate",
+    "result",
+    "result_rate",
+    "secondary_goal_result",
+    "secondary_goal_result_rate",
+    "shares",
+    "spend",
+    "stat_time_hour",
+    "total_purchase_value",
+    "total_sales_lead_value",
+    "video_play_actions",
+    "video_view_p_100",
+    "video_views_p_25",
+    "video_views_p_50",
+    "video_views_p_75",
+    "video_watched_2_s",
+    "video_watched_6_s",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.ad_report_hourly.mapped_target_fields]
+_fivetran_synced = "ads_reports_hourly._airbyte_extracted_at"
+
+[mappings.ad_report_hourly.unused_source_fields]
+ads_reports_hourly = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "ad_id",
+    "adgroup_id",
+    "advertiser_id",
+    "campaign_id",
+    "dimensions",
+    "dimensions.ad_id",
+    "dimensions.adgroup_id",
+    "dimensions.advertiser_id",
+    "dimensions.campaign_id",
+    "dimensions.stat_time_day",
+    "dimensions.stat_time_hour",
+    "metrics",
+    "metrics.ad_name",
+    "metrics.ad_text",
+    "metrics.adgroup_id",
+    "metrics.adgroup_name",
+    "metrics.app_install",
+    "metrics.average_video_play",
+    "metrics.average_video_play_per_user",
+    "metrics.campaign_id",
+    "metrics.campaign_name",
+    "metrics.cash_spend",
+    "metrics.clicks",
+    "metrics.clicks_on_music_disc",
+    "metrics.comments",
+    "metrics.complete_payment",
+    "metrics.conversion",
+    "metrics.conversion_rate",
+    "metrics.cost_per_1000_reached",
+    "metrics.cost_per_app_install",
+    "metrics.cost_per_conversion",
+    "metrics.cost_per_purchase",
+    "metrics.cost_per_registration",
+    "metrics.cost_per_result",
+    "metrics.cost_per_sales_lead",
+    "metrics.cost_per_secondary_goal_result",
+    "metrics.cost_per_total_app_event_add_to_cart",
+    "metrics.cost_per_total_sales_lead",
+    "metrics.cpc",
+    "metrics.cpm",
+    "metrics.cta_conversion",
+    "metrics.cta_purchase",
+    "metrics.ctr",
+    "metrics.dpa_target_audience_type",
+    "metrics.follows",
+    "metrics.frequency",
+    "metrics.impressions",
+    "metrics.likes",
+    "metrics.mobile_app_id",
+    "metrics.onsite_shopping",
+    "metrics.placement_type",
+    "metrics.profile_visits",
+    "metrics.profile_visits_rate",
+    "metrics.promotion_type",
+    "metrics.purchase",
+    "metrics.purchase_rate",
+    "metrics.reach",
+    "metrics.real_time_app_install",
+    "metrics.real_time_app_install_cost",
+    "metrics.real_time_conversion",
+    "metrics.real_time_conversion_rate",
+    "metrics.real_time_cost_per_conversion",
+    "metrics.real_time_cost_per_result",
+    "metrics.real_time_result",
+    "metrics.real_time_result_rate",
+    "metrics.registration",
+    "metrics.registration_rate",
+    "metrics.result",
+    "metrics.result_rate",
+    "metrics.sales_lead",
+    "metrics.sales_lead_rate",
+    "metrics.secondary_goal_result",
+    "metrics.secondary_goal_result_rate",
+    "metrics.shares",
+    "metrics.spend",
+    "metrics.total_app_event_add_to_cart",
+    "metrics.total_complete_payment_rate",
+    "metrics.total_onsite_shopping_value",
+    "metrics.total_pageview",
+    "metrics.total_purchase_value",
+    "metrics.tt_app_id",
+    "metrics.tt_app_name",
+    "metrics.value_per_complete_payment",
+    "metrics.video_play_actions",
+    "metrics.video_views_p100",
+    "metrics.video_views_p25",
+    "metrics.video_views_p50",
+    "metrics.video_views_p75",
+    "metrics.video_watched_2s",
+    "metrics.video_watched_6s",
+    "metrics.voucher_spend",
+    "metrics.vta_conversion",
+    "metrics.vta_purchase",
+    "stat_time_day",
+    "stat_time_hour",
+]
+
+[mappings.adgroup_history]
+source_file = "src/transforms/tiktok_marketing/transforms/adgroup_history.yml"
+source_file_hash = "7f78ac0f82f5e7b61fd70f613037ff839ff7077c062dfee6d5301c1edb833f46"
+source_stream = "ad_groups"
+unmapped_target_fields = [
+    "action_categories",
+    "action_days",
+    "age_groups",
+    "android_osv",
+    "app_name",
+    "app_type",
+    "audience",
+    "audience_type",
+    "bid",
+    "bid_type",
+    "billing_event",
+    "budget",
+    "budget_mode",
+    "carriers",
+    "category",
+    "click_tracking_url",
+    "connection_type",
+    "conversion_bid",
+    "cpv_video_duration",
+    "creative_material_mode",
+    "dayparting",
+    "deep_bid_type",
+    "deep_cpabid",
+    "deep_external_action",
+    "display_name",
+    "enable_inventory_filter",
+    "excluded_audience",
+    "external_action",
+    "fallback_type",
+    "frequency",
+    "frequency_schedule",
+    "gender",
+    "impression_tracking_url",
+    "interest_category_v2",
+    "ios_osv",
+    "is_comment_disable",
+    "is_hfss",
+    "is_new_structure",
+    "keywords",
+    "landing_page_url",
+    "languages",
+    "location",
+    "open_url",
+    "open_url_type",
+    "operation_system",
+    "opt_status",
+    "optimize_goal",
+    "pacing",
+    "pangle_block_app_list_id",
+    "placement_type",
+    "profile_image",
+    "schedule_end_time",
+    "schedule_start_time",
+    "schedule_type",
+    "skip_learning_phase",
+    "statistic_type",
+    "status",
+    "updated_at",
+    "video_actions",
+    "video_download",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.adgroup_history.mapped_target_fields]
+adgroup_id = "ad_groups.adgroup_id"
+advertiser_id = "ad_groups.advertiser_id"
+campaign_id = "ad_groups.campaign_id"
+adgroup_name = "ad_groups.adgroup_name"
+app_download_url = "ad_groups.app_download_url"
+app_id = "ad_groups.app_id"
+package = "ad_groups.package"
+pixel_id = "ad_groups.pixel_id"
+placement = "ad_groups.placements"
+
+[mappings.adgroup_history.unused_source_fields]
+ad_groups = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "action_category_ids",
+    "action_days",
+    "actions",
+    "adgroup_app_profile_page_state",
+    "age_groups",
+    "app_type",
+    "audience_ids",
+    "audience_rule",
+    "audience_type",
+    "auto_targeting_enabled",
+    "bid_display_mode",
+    "bid_price",
+    "bid_type",
+    "billing_event",
+    "blocked_pangle_app_ids",
+    "brand_safety_partner",
+    "brand_safety_type",
+    "budget",
+    "budget_mode",
+    "campaign_name",
+    "carrier_ids",
+    "carriers",
+    "catalog_authorized_bc_id",
+    "catalog_id",
+    "category_exclusion_ids",
+    "category_id",
+    "comment_disabled",
+    "contextual_tag_ids",
+    "conversion_bid_price",
+    "conversion_window",
+    "cpv_video_duration",
+    "create_time",
+    "creative_material_mode",
+    "dayparting",
+    "deep_bid_type",
+    "deep_cpa_bid",
+    "delivery_mode",
+    "device_model_ids",
+    "device_price_ranges",
+    "excluded_audience_ids",
+    "excluded_custom_actions",
+    "excluded_pangle_audience_package_ids",
+    "feed_type",
+    "frequency",
+    "frequency_schedule",
+    "gender",
+    "household_income",
+    "included_custom_actions",
+    "included_pangle_audience_package_ids",
+    "interest_category_ids",
+    "interest_keyword_ids",
+    "inventory_filter_enabled",
+    "ios14_quota_type",
+    "ios14_targeting",
+    "ios_quota_type",
+    "is_hfss",
+    "is_new_structure",
+    "is_smart_performance_campaign",
+    "isp_ids",
+    "keywords",
+    "languages",
+    "location_ids",
+    "min_android_version",
+    "min_ios_version",
+    "modify_time",
+    "network_types",
+    "next_day_retention",
+    "operating_systems",
+    "operation_status",
+    "optimization_event",
+    "optimization_goal",
+    "pacing",
+    "placement_type",
+    "product_set_id",
+    "promotion_type",
+    "promotion_website_type",
+    "purchased_impression",
+    "purchased_reach",
+    "rf_estimated_cpr",
+    "rf_estimated_frequency",
+    "rf_purchased_type",
+    "roas_bid",
+    "schedule_end_time",
+    "schedule_infos",
+    "schedule_start_time",
+    "schedule_type",
+    "scheduled_budget",
+    "search_result_enabled",
+    "secondary_optimization_event",
+    "secondary_status",
+    "share_disabled",
+    "shopping_ads_retargeting_type",
+    "skip_learning_phase",
+    "spending_power",
+    "split_test_adgroup_ids",
+    "statistic_type",
+    "targeting_expansion",
+    "targeting_expansion.expansion_enabled",
+    "targeting_expansion.expansion_types",
+    "video_actions",
+    "video_download_disabled",
+    "zipcode_ids",
+]
+
+[mappings.adgroup_report_hourly]
+source_file = "src/transforms/tiktok_marketing/transforms/adgroup_report_hourly.yml"
+source_file_hash = "e82ac4c5c87f85856df16bd76085c85a1c5f03d001eadb6794b2d1a14a16711a"
+source_stream = "ad_groups_reports_hourly"
+unmapped_target_fields = [
+    "total_purchase_value",
+    "total_sales_lead_value",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.adgroup_report_hourly.mapped_target_fields]
+adgroup_id = "ad_groups_reports_hourly.adgroup_id"
+stat_time_hour = "ad_groups_reports_hourly.stat_time_hour"
+cost_per_conversion = "ad_groups_reports_hourly.metrics.cost_per_conversion"
+real_time_conversion = "ad_groups_reports_hourly.metrics.real_time_conversion"
+cpc = "ad_groups_reports_hourly.metrics.cpc"
+video_play_actions = "ad_groups_reports_hourly.metrics.video_play_actions"
+conversion_rate = "ad_groups_reports_hourly.metrics.conversion_rate"
+video_views_p_75 = "ad_groups_reports_hourly.metrics.video_views_p75"
+result = "ad_groups_reports_hourly.metrics.result"
+video_views_p_50 = "ad_groups_reports_hourly.metrics.video_views_p50"
+impressions = "ad_groups_reports_hourly.metrics.impressions"
+comments = "ad_groups_reports_hourly.metrics.comments"
+real_time_cost_per_result = "ad_groups_reports_hourly.metrics.real_time_cost_per_result"
+conversion = "ad_groups_reports_hourly.metrics.conversion"
+real_time_result = "ad_groups_reports_hourly.metrics.real_time_result"
+video_view_p_100 = "ad_groups_reports_hourly.metrics.video_views_p100"
+shares = "ad_groups_reports_hourly.metrics.shares"
+real_time_conversion_rate = "ad_groups_reports_hourly.metrics.real_time_conversion_rate"
+cost_per_secondary_goal_result = "ad_groups_reports_hourly.metrics.cost_per_secondary_goal_result"
+secondary_goal_result_rate = "ad_groups_reports_hourly.metrics.secondary_goal_result_rate"
+clicks = "ad_groups_reports_hourly.metrics.clicks"
+cost_per_1000_reached = "ad_groups_reports_hourly.metrics.cost_per_1000_reached"
+video_views_p_25 = "ad_groups_reports_hourly.metrics.video_views_p25"
+reach = "ad_groups_reports_hourly.metrics.reach"
+real_time_cost_per_conversion = "ad_groups_reports_hourly.metrics.real_time_cost_per_conversion"
+profile_visits_rate = "ad_groups_reports_hourly.metrics.profile_visits_rate"
+average_video_play = "ad_groups_reports_hourly.metrics.average_video_play"
+profile_visits = "ad_groups_reports_hourly.metrics.profile_visits"
+cpm = "ad_groups_reports_hourly.metrics.cpm"
+ctr = "ad_groups_reports_hourly.metrics.ctr"
+video_watched_2_s = "ad_groups_reports_hourly.metrics.video_watched_2s"
+follows = "ad_groups_reports_hourly.metrics.follows"
+result_rate = "ad_groups_reports_hourly.metrics.result_rate"
+video_watched_6_s = "ad_groups_reports_hourly.metrics.video_watched_6s"
+secondary_goal_result = "ad_groups_reports_hourly.metrics.secondary_goal_result"
+cost_per_result = "ad_groups_reports_hourly.metrics.cost_per_result"
+average_video_play_per_user = "ad_groups_reports_hourly.metrics.average_video_play_per_user"
+real_time_result_rate = "ad_groups_reports_hourly.metrics.real_time_result_rate"
+spend = "ad_groups_reports_hourly.metrics.spend"
+likes = "ad_groups_reports_hourly.metrics.likes"
+_fivetran_synced = "ad_groups_reports_hourly._airbyte_extracted_at"
+
+[mappings.adgroup_report_hourly.unused_source_fields]
+ad_groups_reports_hourly = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "ad_id",
+    "advertiser_id",
+    "campaign_id",
+    "dimensions",
+    "dimensions.ad_id",
+    "dimensions.adgroup_id",
+    "dimensions.advertiser_id",
+    "dimensions.campaign_id",
+    "dimensions.stat_time_day",
+    "dimensions.stat_time_hour",
+    "metrics",
+    "metrics.ad_name",
+    "metrics.ad_text",
+    "metrics.adgroup_id",
+    "metrics.adgroup_name",
+    "metrics.app_install",
+    "metrics.campaign_id",
+    "metrics.campaign_name",
+    "metrics.cash_spend",
+    "metrics.clicks_on_music_disc",
+    "metrics.complete_payment",
+    "metrics.cost_per_app_install",
+    "metrics.cost_per_purchase",
+    "metrics.cost_per_registration",
+    "metrics.cost_per_sales_lead",
+    "metrics.cost_per_total_app_event_add_to_cart",
+    "metrics.cost_per_total_sales_lead",
+    "metrics.cta_conversion",
+    "metrics.cta_purchase",
+    "metrics.dpa_target_audience_type",
+    "metrics.frequency",
+    "metrics.mobile_app_id",
+    "metrics.onsite_shopping",
+    "metrics.placement_type",
+    "metrics.promotion_type",
+    "metrics.purchase",
+    "metrics.purchase_rate",
+    "metrics.real_time_app_install",
+    "metrics.real_time_app_install_cost",
+    "metrics.registration",
+    "metrics.registration_rate",
+    "metrics.sales_lead",
+    "metrics.sales_lead_rate",
+    "metrics.total_app_event_add_to_cart",
+    "metrics.total_complete_payment_rate",
+    "metrics.total_onsite_shopping_value",
+    "metrics.total_pageview",
+    "metrics.total_purchase_value",
+    "metrics.tt_app_id",
+    "metrics.tt_app_name",
+    "metrics.value_per_complete_payment",
+    "metrics.voucher_spend",
+    "metrics.vta_conversion",
+    "metrics.vta_purchase",
+    "stat_time_day",
+]
+
+[mappings.advertiser]
+source_file = "src/transforms/tiktok_marketing/transforms/advertiser.yml"
+source_file_hash = "e4728b2c302d143fbc31b0ab24ac8edf301c2b0a3e890c3a65ebb01edf8f86f2"
+source_stream = "advertisers"
+unmapped_target_fields = [
+    "balance",
+    "phone_number",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.advertiser.mapped_target_fields]
+id = "advertisers.advertiser_id"
+address = "advertisers.address"
+cellphone_number = "advertisers.cellphone_number"
+company = "advertisers.company"
+contacter = "advertisers.contacter"
+country = "advertisers.country"
+create_time = "advertisers.create_time"
+currency = "advertisers.currency"
+description = "advertisers.description"
+email = "advertisers.email"
+industry = "advertisers.industry"
+language = "advertisers.language"
+license_no = "advertisers.license_no"
+license_url = "advertisers.license_url"
+name = "advertisers.name"
+promotion_area = "advertisers.promotion_area"
+reason = "advertisers.rejection_reason"
+role = "advertisers.role"
+status = "advertisers.status"
+telephone = "advertisers.telephone_number"
+telephone_number = "advertisers.telephone_number"
+timezone = "advertisers.timezone"
+_fivetran_synced = "advertisers._airbyte_extracted_at"
+
+[mappings.advertiser.unused_source_fields]
+advertisers = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "advertiser_account_type",
+    "balance",
+    "brand",
+    "display_timezone",
+    "license_city",
+    "license_province",
+    "promotion_center_city",
+    "promotion_center_province",
+]
+
+[mappings.campaign_history]
+source_file = "src/transforms/tiktok_marketing/transforms/campaign_history.yml"
+source_file_hash = "13ae818c24144420967975a6471515901d868455273e8dc66aa55adf816da2d6"
+source_stream = "campaigns"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.campaign_history.mapped_target_fields]
+campaign_id = "campaigns.campaign_id"
+updated_at = "campaigns.modify_time"
+advertiser_id = "campaigns.advertiser_id"
+budget = "campaigns.budget"
+budget_mode = "campaigns.budget_mode"
+campaign_name = "campaigns.campaign_name"
+campaign_type = "campaigns.campaign_type"
+create_time = "campaigns.create_time"
+is_new_structure = "campaigns.is_new_structure"
+objective_type = "campaigns.objective_type"
+opt_status = "campaigns.operation_status"
+status = "campaigns.secondary_status"
+split_test_variable = "campaigns.split_test_variable"
+
+[mappings.campaign_history.unused_source_fields]
+campaigns = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "app_promotion_type",
+    "bid_type",
+    "budget_optimize_on",
+    "deep_bid_type",
+    "is_search_campaign",
+    "is_smart_performance_campaign",
+    "objective",
+    "optimization_goal",
+    "rf_campaign_type",
+    "roas_bid",
+]
+
+[mappings.campaign_report_hourly]
+source_file = "src/transforms/tiktok_marketing/transforms/campaign_report_hourly.yml"
+source_file_hash = "f30336a6c3b5a8455f554607e4c33bb79608521f1632e1205226d051e8e97401"
+source_stream = "campaigns_reports_hourly"
+unmapped_target_fields = [
+    "average_video_play",
+    "average_video_play_per_user",
+    "campaign_id",
+    "clicks",
+    "comments",
+    "conversion",
+    "conversion_rate",
+    "cost_per_1000_reached",
+    "cost_per_conversion",
+    "cost_per_result",
+    "cost_per_secondary_goal_result",
+    "cpc",
+    "cpm",
+    "ctr",
+    "follows",
+    "impressions",
+    "likes",
+    "profile_visits",
+    "profile_visits_rate",
+    "reach",
+    "real_time_conversion",
+    "real_time_conversion_rate",
+    "real_time_cost_per_conversion",
+    "real_time_cost_per_result",
+    "real_time_result",
+    "real_time_result_rate",
+    "result",
+    "result_rate",
+    "secondary_goal_result",
+    "secondary_goal_result_rate",
+    "shares",
+    "spend",
+    "stat_time_hour",
+    "total_purchase_value",
+    "total_sales_lead_value",
+    "video_play_actions",
+    "video_view_p_100",
+    "video_views_p_25",
+    "video_views_p_50",
+    "video_views_p_75",
+    "video_watched_2_s",
+    "video_watched_6_s",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.campaign_report_hourly.mapped_target_fields]
+_fivetran_synced = "campaigns_reports_hourly._airbyte_extracted_at"
+
+[mappings.campaign_report_hourly.unused_source_fields]
+campaigns_reports_hourly = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "ad_id",
+    "adgroup_id",
+    "advertiser_id",
+    "campaign_id",
+    "dimensions",
+    "dimensions.ad_id",
+    "dimensions.adgroup_id",
+    "dimensions.advertiser_id",
+    "dimensions.campaign_id",
+    "dimensions.stat_time_day",
+    "dimensions.stat_time_hour",
+    "metrics",
+    "metrics.ad_name",
+    "metrics.ad_text",
+    "metrics.adgroup_id",
+    "metrics.adgroup_name",
+    "metrics.app_install",
+    "metrics.average_video_play",
+    "metrics.average_video_play_per_user",
+    "metrics.campaign_id",
+    "metrics.campaign_name",
+    "metrics.cash_spend",
+    "metrics.clicks",
+    "metrics.clicks_on_music_disc",
+    "metrics.comments",
+    "metrics.complete_payment",
+    "metrics.conversion",
+    "metrics.conversion_rate",
+    "metrics.cost_per_1000_reached",
+    "metrics.cost_per_app_install",
+    "metrics.cost_per_conversion",
+    "metrics.cost_per_purchase",
+    "metrics.cost_per_registration",
+    "metrics.cost_per_result",
+    "metrics.cost_per_sales_lead",
+    "metrics.cost_per_secondary_goal_result",
+    "metrics.cost_per_total_app_event_add_to_cart",
+    "metrics.cost_per_total_sales_lead",
+    "metrics.cpc",
+    "metrics.cpm",
+    "metrics.cta_conversion",
+    "metrics.cta_purchase",
+    "metrics.ctr",
+    "metrics.dpa_target_audience_type",
+    "metrics.follows",
+    "metrics.frequency",
+    "metrics.impressions",
+    "metrics.likes",
+    "metrics.mobile_app_id",
+    "metrics.onsite_shopping",
+    "metrics.placement_type",
+    "metrics.profile_visits",
+    "metrics.profile_visits_rate",
+    "metrics.promotion_type",
+    "metrics.purchase",
+    "metrics.purchase_rate",
+    "metrics.reach",
+    "metrics.real_time_app_install",
+    "metrics.real_time_app_install_cost",
+    "metrics.real_time_conversion",
+    "metrics.real_time_conversion_rate",
+    "metrics.real_time_cost_per_conversion",
+    "metrics.real_time_cost_per_result",
+    "metrics.real_time_result",
+    "metrics.real_time_result_rate",
+    "metrics.registration",
+    "metrics.registration_rate",
+    "metrics.result",
+    "metrics.result_rate",
+    "metrics.sales_lead",
+    "metrics.sales_lead_rate",
+    "metrics.secondary_goal_result",
+    "metrics.secondary_goal_result_rate",
+    "metrics.shares",
+    "metrics.spend",
+    "metrics.total_app_event_add_to_cart",
+    "metrics.total_complete_payment_rate",
+    "metrics.total_onsite_shopping_value",
+    "metrics.total_pageview",
+    "metrics.total_purchase_value",
+    "metrics.tt_app_id",
+    "metrics.tt_app_name",
+    "metrics.value_per_complete_payment",
+    "metrics.video_play_actions",
+    "metrics.video_views_p100",
+    "metrics.video_views_p25",
+    "metrics.video_views_p50",
+    "metrics.video_views_p75",
+    "metrics.video_watched_2s",
+    "metrics.video_watched_6s",
+    "metrics.voucher_spend",
+    "metrics.vta_conversion",
+    "metrics.vta_purchase",
+    "stat_time_day",
+    "stat_time_hour",
+]
