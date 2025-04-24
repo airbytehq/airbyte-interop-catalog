@@ -1,0 +1,47 @@
+domain: recharge.airbyte-interop
+transforms:
+  - name: charge_order_attribute
+    from:
+      - orders: recharge.orders
+    fields:
+      charge_id:
+        expression: orders.charge_id
+        description: "{{ doc('charge_id') }}"
+      index:
+        expression: MISSING
+        description: A unique numeric row produced for every concurrent charge_id.
+      order_attribute:
+        expression: orders.order_attributes
+        description: An array of name-value pairs of order attributes on the charge.
+      _fivetran_synced:
+        expression: orders._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+annotations:
+  approved: true
+  missing_fields:
+    - index
+  evaluation:
+    source_stream_name: orders
+    target_table_name: charge_order_attribute
+    table_match_score: 0.8
+    completion_score: 0.8
+    explanation: The table mapping is done accurately. Most of the field mappings
+      are filled properly, with a high level of confidence in the accuracy of the
+      mappings.
+    field_mapping_evals:
+      - name: charge_id
+        expression: orders.charge_id
+        score: 1.0
+        explanation: Perfect mapping, direct match.
+      - name: index
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: order_attribute
+        expression: orders.order_attributes
+        score: 0.7
+        explanation: Matching field, slight differences in schema terminology.
+      - name: _fivetran_synced
+        expression: orders._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping for synchronization timestamp.

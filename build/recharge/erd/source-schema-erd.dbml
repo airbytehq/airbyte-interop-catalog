@@ -1,0 +1,398 @@
+Table "addresses" {
+    "id" integer
+    "address1" varchar
+    "address2" varchar
+    "cart_note" varchar
+    "city" varchar
+    "company" varchar
+    "country" varchar
+    "customer_id" integer
+    "created_at" timestamp
+    "discount_id" integer
+    "first_name" varchar
+    "last_name" varchar
+    "note_attributes" array
+    "phone" varchar
+    "province" varchar
+    "shipping_lines_override" array
+    "shipping_lines_conserved" array
+    "updated_at" timestamp
+    "zip" varchar
+    "country_code" varchar
+    "discounts" array
+    "order_attributes" array
+    "order_note" varchar
+    "payment_method_id" integer
+    "presentment_currency" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "bundle_selections" {
+    "id" integer
+    "bundle_variant" integer
+    "purchase_item_id" integer
+    "created_at" timestamp
+    "external_product_id" varchar
+    "external_variant_id" varchar
+    "items" array
+    "updated_at" timestamp
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "charges" {
+    "id" integer
+    "address_id" integer
+    "analytics_data" json
+    "billing_address" json
+    "charge_attempts" integer
+    "currency" varchar
+    "customer" json
+    "discounts" array
+    "external_order_id" json
+    "external_transaction_id" json
+    "external_variant_id_not_found" boolean
+    "external_variant_not_found" boolean
+    "has_uncommitted_changes" boolean
+    "last_charge_attempt" timestamp
+    "merged_at" timestamp
+    "order_attributes" array
+    "orders_count" integer
+    "payment_processor" varchar
+    "total_duties" varchar
+    "total_weight_grams" integer
+    "taxable" boolean
+    "taxes_included" boolean
+    "client_details" json
+    "created_at" timestamp
+    "customer_hash" varchar
+    "customer_id" integer
+    "discount_codes" array
+    "email" varchar
+    "error" varchar
+    "error_type" varchar
+    "first_name" varchar
+    "last_name" varchar
+    "last_charge_attempt_date" timestamp
+    "line_items" array
+    "has_uncommited_changes" boolean
+    "note" varchar
+    "note_attributes" array
+    "number_times_tried" integer
+    "processed_at" timestamp
+    "processor_name" varchar
+    "retry_date" timestamp
+    "scheduled_at" varchar
+    "shipments_count" integer
+    "shipping_address" json
+    "shipping_lines" array
+    "shopify_order_id" varchar
+    "shopify_variant_id_not_found" varchar
+    "status" varchar
+    "subtotal_price" varchar
+    "tags" varchar
+    "tax_lines" varchar
+    "total_discounts" varchar
+    "total_line_items_price" varchar
+    "total_price" varchar
+    "total_refunds" varchar
+    "total_tax" varchar
+    "total_weight" integer
+    "transaction_id" varchar
+    "type" varchar
+    "updated_at" timestamp
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "collections" {
+    "id" integer
+    "name" varchar
+    "description" varchar
+    "title" varchar
+    "type" varchar
+    "created_at" timestamp
+    "updated_at" timestamp
+    "sort_order" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "customers" {
+    "id" integer
+    "accepts_marketing" integer
+    "analytics_data" json
+    "billing_address1" varchar
+    "billing_address2" varchar
+    "billing_city" varchar
+    "billing_company" varchar
+    "billing_country" varchar
+    "billing_first_name" varchar
+    "billing_last_name" varchar
+    "billing_phone" varchar
+    "billing_province" varchar
+    "billing_zip" varchar
+    "created_at" timestamp
+    "email" varchar
+    "first_charge_processed_at" timestamp
+    "first_name" varchar
+    "has_card_error_in_dunning" boolean
+    "has_valid_payment_method" boolean
+    "hash" varchar
+    "last_name" varchar
+    "number_active_subscriptions" integer
+    "number_subscriptions" integer
+    "processor_type" varchar
+    "reason_payment_method_not_valid" varchar
+    "shopify_customer_id" varchar
+    "status" varchar
+    "stripe_customer_token" varchar
+    "updated_at" timestamp
+    "apply_credit_to_next_recurring_charge" boolean
+    "apply_credit_to_next_checkout_charge" boolean
+    "external_customer_id" json
+    "has_payment_method_in_dunning" boolean
+    "phone" varchar
+    "subscriptions_active_count" integer
+    "subscriptions_total_count" integer
+    "tax_exempt" boolean
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "discounts" {
+    "id" integer
+    "applies_to" varchar
+    "applies_to_id" integer
+    "applies_to_product_type" varchar
+    "applies_to_resource" varchar
+    "channel_settings" json
+    "code" varchar
+    "created_at" timestamp
+    "discount_type" varchar
+    "duration" varchar
+    "duration_usage_limit" integer
+    "ends_at" timestamp
+    "external_discount_id" varchar
+    "external_discount_source" varchar
+    "first_time_customer_restriction" varchar
+    "once_per_customer" boolean
+    "prerequisite_subtotal_min" float
+    "starts_at" timestamp
+    "status" varchar
+    "times_used" float
+    "updated_at" timestamp
+    "usage_limit" float
+    "value" float
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "events" {
+    "id" integer
+    "customer_id" integer
+    "object_id" integer
+    "created_at" timestamp
+    "custom_attributes" array
+    "description" varchar
+    "object_type" varchar
+    "source" json
+    "updated_attributes" array
+    "verb" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "metafields" {
+    "id" integer
+    "created_at" timestamp
+    "description" varchar
+    "key" varchar
+    "namespace" varchar
+    "owner_id" varchar
+    "owner_resource" varchar
+    "updated_at" timestamp
+    "value" varchar
+    "value_type" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "onetimes" {
+    "id" integer
+    "address_id" varchar
+    "created_at" timestamp
+    "customer_id" varchar
+    "next_charge_scheduled_at" timestamp
+    "price" varchar
+    "product_title" varchar
+    "properties" array
+    "quantity" integer
+    "recharge_product_id" integer
+    "shopify_product_id" integer
+    "shopify_variant_id" integer
+    "sku" varchar
+    "status" varchar
+    "updated_at" timestamp
+    "variant_title" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "orders" {
+    "id" integer
+    "accepts_marketing" boolean
+    "send_email_welcome" boolean
+    "verified_email" boolean
+    "phone" varchar
+    "address_id" integer
+    "address_is_active" integer
+    "billing_address" json
+    "browser_ip" varchar
+    "charge" json
+    "client_details" json
+    "discounts" array
+    "error" varchar
+    "external_cart_token" varchar
+    "external_order_id" json
+    "external_order_name" json
+    "external_order_number" json
+    "order_attributes" array
+    "taxable" boolean
+    "total_duties" varchar
+    "total_weight_grams" integer
+    "charge_id" integer
+    "charge_status" varchar
+    "currency" varchar
+    "created_at" timestamp
+    "customer" json
+    "customer_id" integer
+    "discount_codes" array
+    "email" varchar
+    "first_name" varchar
+    "hash" varchar
+    "is_prepaid" integer
+    "last_name" varchar
+    "line_items" array
+    "note" varchar
+    "note_attributes" array
+    "payment_processor" varchar
+    "processed_at" timestamp
+    "redacted" boolean
+    "scheduled_at" timestamp
+    "shipped_date" timestamp
+    "shipping_address" json
+    "shipping_lines" array
+    "shopify_cart_token" varchar
+    "shopify_customer_id" varchar
+    "shopify_order_id" varchar
+    "shopify_order_number" integer
+    "status" varchar
+    "subtotal_price" float
+    "tags" varchar
+    "tax_lines" array
+    "transaction_id" varchar
+    "total_discounts" float
+    "total_line_items_price" float
+    "total_price" float
+    "total_refunds" varchar
+    "total_tax" varchar
+    "total_weight" integer
+    "type" varchar
+    "updated_at" timestamp
+    "shipping_date" timestamp
+    "shopify_id" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "products" {
+    "id" integer
+    "product_id" integer
+    "charge_interval_frequency" integer
+    "collection_id" integer
+    "created_at" timestamp
+    "cutoff_day_of_month" integer
+    "cutoff_day_of_week" integer
+    "discount_amount" float
+    "discount_type" varchar
+    "expire_after_specific_number_of_charges" integer
+    "handle" varchar
+    "images" json
+    "modifiable_properties" array
+    "order_day_of_month" integer
+    "order_day_of_week" integer
+    "order_interval_frequency_options" array
+    "order_interval_unit" varchar
+    "shopify_product_id" integer
+    "storefront_purchase_options" varchar
+    "subscription_defaults" json
+    "title" varchar
+    "updated_at" timestamp
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "shop" {
+    "shop" json
+    "store" json
+    "id" integer
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "subscriptions" {
+    "id" integer
+    "address_id" integer
+    "analytics_data" json
+    "cancellation_reason" varchar
+    "cancellation_reason_comments" varchar
+    "cancelled_at" timestamp
+    "charge_interval_frequency" varchar
+    "created_at" timestamp
+    "commit_update" boolean
+    "customer_id" integer
+    "email" varchar
+    "expire_after_specific_number_of_charges" integer
+    "external_product_id" json
+    "external_variant_id" json
+    "presentment_currency" varchar
+    "has_queued_charges" integer
+    "is_prepaid" boolean
+    "is_skippable" boolean
+    "is_swappable" boolean
+    "max_retries_reached" integer
+    "next_charge_scheduled_at" varchar
+    "order_day_of_month" integer
+    "order_day_of_week" integer
+    "order_interval_frequency" varchar
+    "order_interval_unit" varchar
+    "price" float
+    "product_title" varchar
+    "properties" array
+    "quantity" integer
+    "recharge_product_id" integer
+    "shopify_product_id" integer
+    "shopify_variant_id" integer
+    "sku" varchar
+    "sku_override" boolean
+    "status" varchar
+    "updated_at" timestamp
+    "variant_title" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}

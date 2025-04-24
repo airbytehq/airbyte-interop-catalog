@@ -1,0 +1,158 @@
+domain: recharge.airbyte-interop
+transforms:
+  - name: checkout
+    from:
+      - orders: recharge.orders
+    fields:
+      token:
+        expression: MISSING
+        description: Unique token for the Checkout
+      charge_id:
+        expression: orders.charge.id
+        description: ID for the Charge resulting from processing the Checkout.
+      buyer_accepts_marketing:
+        expression: orders.customer.accepts_marketing
+        description: Boolean if the buyer accept marketing, newsletters etc.
+      completed_at:
+        expression: MISSING
+        description: Timestamp for when the Checkout was processed.
+      created_at:
+        expression: orders.created_at
+        description: Timestamp for when the Checkout was created.
+      currency:
+        expression: orders.currency
+        description: Currency of the Checkout.
+      discount_code:
+        expression: MISSING
+        description: Discount code to be used on the checkout, e.g. “DISCOUNT20”.
+      email:
+        expression: orders.customer.email
+        description: Email address for the customer.
+      external_checkout_id:
+        expression: MISSING
+        description: Represents the external cart token.
+      external_checkout_source:
+        expression: MISSING
+        description: Represents the source for external_checkout_id.
+      external_transaction_id_payment_processor:
+        expression: orders.charge.external_transaction_id.payment_processor
+        description: Transaction ID of the external payment processor.
+      order_attributes:
+        expression: MISSING
+        description: Structured custom notes.
+      phone:
+        expression: orders.customer.phone
+        description: Customer phone number.
+      requires_shipping:
+        expression: MISSING
+        description: Boolean if the Checkout contains items that require shipping.
+      subtotal_price:
+        expression: orders.subtotal_price
+        description: Value of the Checkout minus shipping and tax.
+      taxes_included:
+        expression: MISSING
+        description: Boolean if the tax is included in the price of the items.
+      total_price:
+        expression: orders.total_price
+        description: Full price of the Checkout including shipping and tax.
+      total_tax:
+        expression: orders.total_tax
+        description: Tax charged on the Checkout.
+      updated_at:
+        expression: orders.updated_at
+        description: Timestamp for the latest Checkout update.
+annotations:
+  approved: false
+  missing_fields:
+    - completed_at
+    - discount_code
+    - external_checkout_id
+    - external_checkout_source
+    - order_attributes
+    - requires_shipping
+    - taxes_included
+    - token
+  evaluation:
+    source_stream_name: orders
+    target_table_name: checkout
+    table_match_score: 0.75
+    completion_score: 0.5
+    explanation: The table evaluates to a high confidence in matching the general
+      schema but lacks completion in field mappings, with several missing direct mappings.
+    field_mapping_evals:
+      - name: token
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: charge_id
+        expression: orders.charge.id
+        score: 1.0
+        explanation: Direct mapping found.
+      - name: buyer_accepts_marketing
+        expression: orders.customer.accepts_marketing
+        score: 1.0
+        explanation: Direct mapping found.
+      - name: completed_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: created_at
+        expression: orders.created_at
+        score: 1.0
+        explanation: Direct mapping found.
+      - name: currency
+        expression: orders.currency
+        score: 1.0
+        explanation: Direct mapping found.
+      - name: discount_code
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: email
+        expression: orders.customer.email
+        score: 1.0
+        explanation: Direct mapping found.
+      - name: external_checkout_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: external_checkout_source
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: external_transaction_id_payment_processor
+        expression: orders.charge.external_transaction_id.payment_processor
+        score: 1.0
+        explanation: Direct mapping found.
+      - name: order_attributes
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: phone
+        expression: orders.customer.phone
+        score: 1.0
+        explanation: Direct mapping found.
+      - name: requires_shipping
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: subtotal_price
+        expression: orders.subtotal_price
+        score: 1.0
+        explanation: Direct mapping found.
+      - name: taxes_included
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: total_price
+        expression: orders.total_price
+        score: 1.0
+        explanation: Direct mapping found.
+      - name: total_tax
+        expression: orders.total_tax
+        score: 1.0
+        explanation: Direct mapping found.
+      - name: updated_at
+        expression: orders.updated_at
+        score: 1.0
+        explanation: Direct mapping found.

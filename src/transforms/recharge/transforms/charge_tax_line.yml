@@ -1,0 +1,24 @@
+domain: recharge.airbyte-interop
+transforms:
+  - name: charge_tax_line
+    from:
+      - MISSING: recharge.MISSING
+    fields:
+      charge_id:
+        expression: MISSING
+        description: "{{ doc('charge_id') }}"
+      index:
+        expression: MISSING
+        description: A unique numeric row produced for every concurrent charge_id.
+      price:
+        expression: MISSING
+        description: The total tax associated with the listed jurisdiction.
+      rate:
+        expression: MISSING
+        description: The tax rate associated with the listed jurisdiction.
+      title:
+        expression: MISSING
+        description: The title/name of the taxing jurisdiction.
+      _fivetran_synced:
+        expression: MISSING
+        description: "{{ doc('_fivetran_synced') }}"

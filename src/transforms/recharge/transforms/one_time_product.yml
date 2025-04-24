@@ -1,0 +1,129 @@
+domain: recharge.airbyte-interop
+transforms:
+  - name: one_time_product
+    from:
+      - onetimes: recharge.onetimes
+    fields:
+      id:
+        expression: onetimes.id
+        description: The unique numeric identifier for the onetime purchase.
+      address_id:
+        expression: onetimes.address_id
+        description: The unique identifier of the address. Cannot be used with `next_charge_scheduled_at`.
+      customer_id:
+        expression: onetimes.customer_id
+        description: "{{ doc('customer_id') }}"
+      is_deleted:
+        expression: MISSING
+        description: Boolean indicating if the onetime is deleted.
+      created_at:
+        expression: onetimes.created_at
+        description: The time the onetime item was first created.
+      updated_at:
+        expression: onetimes.updated_at
+        description: The time the onetime item was last updated.
+      next_charge_scheduled_at:
+        expression: onetimes.next_charge_scheduled_at
+        description: Date of the onetime purchase execution.
+      product_title:
+        expression: onetimes.product_title
+        description: The name of the product in a shop's catalog.
+      variant_title:
+        expression: onetimes.variant_title
+        description: The name of the variant in a shop's catalog.
+      price:
+        expression: onetimes.price
+        description: The price of the item before discounts, taxes, or shipping have
+          been applied.
+      quantity:
+        expression: onetimes.quantity
+        description: The number of items in the onetime purchase.
+      external_product_id_ecommerce:
+        expression: MISSING
+        description: The product ID that links to your external ecommerce platform.
+      external_variant_id_ecommerce:
+        expression: MISSING
+        description: The variant ID that links to your external ecommerce platform.
+      sku:
+        expression: onetimes.sku
+        description: The unique identifier of the item in fulfillment.
+      _fivetran_synced:
+        expression: onetimes._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+annotations:
+  approved: false
+  missing_fields:
+    - external_product_id_ecommerce
+    - external_variant_id_ecommerce
+    - is_deleted
+  evaluation:
+    source_stream_name: onetimes
+    target_table_name: one_time_product
+    table_match_score: 0.85
+    completion_score: 0.92
+    explanation: Most fields are accurately mapped with correct expressions, ensuring
+      high confidence in table matching and high completion rate of field mappings.
+      The table seems to cover all required aspects of the onetime purchase entity
+      and aligns well with the target schema.
+    field_mapping_evals:
+      - name: id
+        expression: onetimes.id
+        score: 1.0
+        explanation: Direct and exact match.
+      - name: address_id
+        expression: onetimes.address_id
+        score: 1.0
+        explanation: Direct and exact match.
+      - name: customer_id
+        expression: onetimes.customer_id
+        score: 1.0
+        explanation: Direct and exact match.
+      - name: is_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: created_at
+        expression: onetimes.created_at
+        score: 1.0
+        explanation: Direct and exact match.
+      - name: updated_at
+        expression: onetimes.updated_at
+        score: 1.0
+        explanation: Direct and exact match.
+      - name: next_charge_scheduled_at
+        expression: onetimes.next_charge_scheduled_at
+        score: 1.0
+        explanation: Direct and exact match.
+      - name: product_title
+        expression: onetimes.product_title
+        score: 1.0
+        explanation: Direct and exact match.
+      - name: variant_title
+        expression: onetimes.variant_title
+        score: 1.0
+        explanation: Direct and exact match.
+      - name: price
+        expression: onetimes.price
+        score: 1.0
+        explanation: Direct and exact match.
+      - name: quantity
+        expression: onetimes.quantity
+        score: 1.0
+        explanation: Direct and exact match.
+      - name: external_product_id_ecommerce
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: external_variant_id_ecommerce
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: sku
+        expression: onetimes.sku
+        score: 0.6
+        explanation: Reasonable match identified, slightly vague but aligning in context.
+      - name: _fivetran_synced
+        expression: onetimes._airbyte_extracted_at
+        score: 1.0
+        explanation: This is a standard perfect match for all tables as per specifications,
+          mapping _fivetran_synced to _airbyte_extracted_at.

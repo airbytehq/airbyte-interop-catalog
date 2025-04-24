@@ -1,0 +1,69 @@
+domain: recharge.airbyte-interop
+transforms:
+  - name: charge_discount
+    from:
+      - discounts: recharge.discounts
+    fields:
+      charge_id:
+        expression: MISSING
+        description: "{{ doc('charge_id') }}"
+      index:
+        expression: MISSING
+        description: A unique numeric row produced for every concurrent charge_id.
+      id:
+        expression: discounts.id
+        description: "{{ doc('discount_id') }}"
+      code:
+        expression: discounts.code
+        description: The code used to apply the discount.
+      value:
+        expression: discounts.value
+        description: The discounted value to be applied.
+      value_type:
+        expression: MISSING
+        description: Possible values - FIXED_AMOUNT, PERCENTAGE, SHIPPING
+      _fivetran_synced:
+        expression: discounts._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+annotations:
+  approved: false
+  missing_fields:
+    - charge_id
+    - index
+    - value_type
+  evaluation:
+    source_stream_name: discounts
+    target_table_name: charge_discount
+    table_match_score: 0.85
+    completion_score: 0.71
+    explanation: Table match and field-level mappings generally exhibit a strong relevance
+      and alignment with minor mismatches that do not cause a severe impact.
+    field_mapping_evals:
+      - name: charge_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: index
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: id
+        expression: discounts.id
+        score: 0.9
+        explanation: Direct mapping with minimal contextual difference.
+      - name: code
+        expression: discounts.code
+        score: 0.9
+        explanation: Direct mapping with minimal contextual difference.
+      - name: value
+        expression: discounts.value
+        score: 0.9
+        explanation: Direct mapping with minimal contextual difference.
+      - name: value_type
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _fivetran_synced
+        expression: discounts._airbyte_extracted_at
+        score: 1.0
+        explanation: Best practice mapping for synchronization timestamp elements.

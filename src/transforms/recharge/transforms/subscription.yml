@@ -1,0 +1,203 @@
+domain: recharge.airbyte-interop
+transforms:
+  - name: subscription
+    from:
+      - subscriptions: recharge.subscriptions
+    fields:
+      id:
+        expression: subscriptions.id
+        description: "{{ doc('subscription_id') }}"
+      address_id:
+        expression: subscriptions.address_id
+        description: "{{ doc('address_id') }}"
+      customer_id:
+        expression: subscriptions.customer_id
+        description: "{{ doc('customer_id') }}"
+      created_at:
+        expression: subscriptions.created_at
+        description: The date and time when the subscription was created.
+      cancelled_at:
+        expression: subscriptions.cancelled_at
+        description: The date and time when the subscription was cancelled.
+      next_charge_scheduled_at:
+        expression: subscriptions.next_charge_scheduled_at
+        description: Date of the next charge for the subscription.
+      price:
+        expression: subscriptions.price
+        description: The price of the item before discounts, taxes, or shipping have
+          been applied.
+      quantity:
+        expression: subscriptions.quantity
+        description: The number of items in the subscription.
+      status:
+        expression: subscriptions.status
+        description: "{{ doc('subscription_status') }}"
+      cancellation_reason:
+        expression: subscriptions.cancellation_reason
+        description: Reason provided for cancellation.
+      cancellation_reason_comments:
+        expression: subscriptions.cancellation_reason_comments
+        description: Additional comment for cancellation.
+      product_title:
+        expression: subscriptions.product_title
+        description: The name of the product in a shop's catalog.
+      variant_title:
+        expression: subscriptions.variant_title
+        description: The name of the variant in a shop's catalog.
+      external_product_id_ecommerce:
+        expression: subscriptions.external_product_id.ecommerce
+        description: Unique numeric identifier of the product in your external ecommerce
+          platform.
+      external_variant_id_ecommerce:
+        expression: subscriptions.external_variant_id.ecommerce
+        description: Unique numeric identifier of the product variant in your external
+          ecommerce platform.
+      sku:
+        expression: subscriptions.sku
+        description: A unique identifier of the item in fulfillment.
+      order_interval_unit:
+        expression: subscriptions.order_interval_unit
+        description: The frequency with which a subscription should have the order
+          created with (valid values are “day”, “week”, and “month”).
+      order_interval_frequency:
+        expression: subscriptions.order_interval_frequency
+        description: The number of units (specified in order_interval_unit) between
+          each order, e.g. order_interval_unit = 'month' and order_interval frequency
+          = 3 indicates an order every 3 months.
+      charge_interval_frequency:
+        expression: subscriptions.charge_interval_frequency
+        description: The number of units (specified in order_interval_unit) between
+          each charge.
+      order_day_of_week:
+        expression: subscriptions.order_day_of_week
+        description: The set day of the week order is created. This is only applicable
+          to subscriptions with order_interval_unit = “week”.
+      order_day_of_month:
+        expression: subscriptions.order_day_of_month
+        description: The set day of the month order is created. This is only applicable
+          to subscriptions with order_interval_unit = “month”.
+      expire_after_specific_number_of_charges:
+        expression: subscriptions.expire_after_specific_number_of_charges
+        description: Set number of charges until subscription expires.
+      updated_at:
+        expression: subscriptions.updated_at
+        description: The date and time when the subscription was created.
+      _fivetran_deleted:
+        expression: MISSING
+        description: "{{ doc('_fivetran_deleted') }}"
+      _fivetran_synced:
+        expression: subscriptions._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+annotations:
+  approved: true
+  missing_fields:
+    - _fivetran_deleted
+  evaluation:
+    source_stream_name: subscriptions
+    target_table_name: subscription
+    table_match_score: 0.85
+    completion_score: 0.78
+    explanation: The evaluation reflects a strong match in subject matter between
+      the source and target schemas with the majority of fields mapped properly. However,
+      some fields lack good matches, affecting the completion score.
+    field_mapping_evals:
+      - name: id
+        expression: subscriptions.id
+        score: 1.0
+        explanation: Direct mapping.
+      - name: address_id
+        expression: subscriptions.address_id
+        score: 1.0
+        explanation: Direct mapping.
+      - name: customer_id
+        expression: subscriptions.customer_id
+        score: 1.0
+        explanation: Direct mapping.
+      - name: created_at
+        expression: subscriptions.created_at
+        score: 1.0
+        explanation: Direct mapping.
+      - name: cancelled_at
+        expression: subscriptions.cancelled_at
+        score: 1.0
+        explanation: Direct mapping.
+      - name: next_charge_scheduled_at
+        expression: subscriptions.next_charge_scheduled_at
+        score: 1.0
+        explanation: Direct mapping.
+      - name: price
+        expression: subscriptions.price
+        score: 1.0
+        explanation: Direct mapping.
+      - name: quantity
+        expression: subscriptions.quantity
+        score: 1.0
+        explanation: Direct mapping.
+      - name: status
+        expression: subscriptions.status
+        score: 1.0
+        explanation: Direct mapping.
+      - name: cancellation_reason
+        expression: subscriptions.cancellation_reason
+        score: 1.0
+        explanation: Direct mapping.
+      - name: cancellation_reason_comments
+        expression: subscriptions.cancellation_reason_comments
+        score: 1.0
+        explanation: Direct mapping.
+      - name: product_title
+        expression: subscriptions.product_title
+        score: 1.0
+        explanation: Direct mapping.
+      - name: variant_title
+        expression: subscriptions.variant_title
+        score: 1.0
+        explanation: Direct mapping.
+      - name: external_product_id_ecommerce
+        expression: subscriptions.external_product_id.ecommerce
+        score: 1.0
+        explanation: Direct mapping.
+      - name: external_variant_id_ecommerce
+        expression: subscriptions.external_variant_id.ecommerce
+        score: 1.0
+        explanation: Direct mapping.
+      - name: sku
+        expression: subscriptions.sku
+        score: 1.0
+        explanation: Direct mapping.
+      - name: order_interval_unit
+        expression: subscriptions.order_interval_unit
+        score: 1.0
+        explanation: Direct mapping.
+      - name: order_interval_frequency
+        expression: subscriptions.order_interval_frequency
+        score: 1.0
+        explanation: Direct mapping.
+      - name: charge_interval_frequency
+        expression: subscriptions.charge_interval_frequency
+        score: 1.0
+        explanation: Direct mapping.
+      - name: order_day_of_week
+        expression: subscriptions.order_day_of_week
+        score: 0.7
+        explanation: Potential mismatch in underlined semantics despite similar names.
+      - name: order_day_of_month
+        expression: subscriptions.order_day_of_month
+        score: 0.7
+        explanation: Potential mismatch in underlined semantics despite similar names.
+      - name: expire_after_specific_number_of_charges
+        expression: subscriptions.expire_after_specific_number_of_charges
+        score: 1.0
+        explanation: Direct mapping.
+      - name: updated_at
+        expression: subscriptions.updated_at
+        score: 1.0
+        explanation: Direct mapping.
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _fivetran_synced
+        expression: subscriptions._airbyte_extracted_at
+        score: 1.0
+        explanation: Exact match expected as a standard mapping.

@@ -1,0 +1,1121 @@
+# This file was auto-generated using the morph cli.
+# Please do not edit manually.
+
+version: 2
+sources:
+  - name: recharge
+    schema: "{{ var('airbyte_recharge_schema', default='recharge_raw') }}"
+    database: "{{ var('airbyte_recharge_database', default='recharge') }}"
+    tables:
+      - name: addresses
+        columns:
+          - name: id
+            data_type: integer
+          - name: address1
+            data_type: varchar
+          - name: address2
+            data_type: varchar
+          - name: cart_note
+            data_type: varchar
+          - name: city
+            data_type: varchar
+          - name: company
+            data_type: varchar
+          - name: country
+            data_type: varchar
+          - name: customer_id
+            data_type: integer
+          - name: created_at
+            data_type: timestamp
+          - name: discount_id
+            data_type: integer
+          - name: first_name
+            data_type: varchar
+          - name: last_name
+            data_type: varchar
+          - name: note_attributes
+            data_type: array
+          - name: phone
+            data_type: varchar
+          - name: province
+            data_type: varchar
+          - name: shipping_lines_override
+            data_type: array
+          - name: shipping_lines_conserved
+            data_type: array
+          - name: updated_at
+            data_type: timestamp
+          - name: zip
+            data_type: varchar
+          - name: country_code
+            data_type: varchar
+          - name: discounts
+            data_type: array
+          - name: order_attributes
+            data_type: array
+          - name: order_note
+            data_type: varchar
+          - name: payment_method_id
+            data_type: integer
+          - name: presentment_currency
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: bundle_selections
+        columns:
+          - name: id
+            data_type: integer
+          - name: bundle_variant
+            data_type: integer
+          - name: purchase_item_id
+            data_type: integer
+          - name: created_at
+            data_type: timestamp
+          - name: external_product_id
+            data_type: varchar
+          - name: external_variant_id
+            data_type: varchar
+          - name: items
+            data_type: array
+          - name: updated_at
+            data_type: timestamp
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: charges
+        columns:
+          - name: id
+            data_type: integer
+          - name: address_id
+            data_type: integer
+          - name: analytics_data
+            data_type: json
+          - name: billing_address
+            data_type: json
+            meta:
+              subcolumns:
+                - name: id
+                  data_type: integer
+                - name: address1
+                  data_type: varchar
+                - name: address2
+                  data_type: varchar
+                - name: cart_note
+                  data_type: varchar
+                - name: city
+                  data_type: varchar
+                - name: company
+                  data_type: varchar
+                - name: country
+                  data_type: varchar
+                - name: country_code
+                  data_type: varchar
+                - name: customer_id
+                  data_type: integer
+                - name: created_at
+                  data_type: timestamp
+                - name: discount_id
+                  data_type: integer
+                - name: first_name
+                  data_type: varchar
+                - name: last_name
+                  data_type: varchar
+                - name: note_attributes
+                  data_type: array
+                - name: phone
+                  data_type: varchar
+                - name: province
+                  data_type: varchar
+                - name: shipping_lines_override
+                  data_type: array
+                - name: updated_at
+                  data_type: timestamp
+                - name: zip
+                  data_type: varchar
+          - name: charge_attempts
+            data_type: integer
+          - name: currency
+            data_type: varchar
+          - name: customer
+            data_type: json
+            meta:
+              subcolumns:
+                - name: email
+                  data_type: varchar
+                - name: external_customer_id
+                  data_type: json
+                  subcolumns:
+                    - name: ecommerce
+                      data_type: varchar
+                - name: hash
+                  data_type: varchar
+                - name: id
+                  data_type: integer
+          - name: discounts
+            data_type: array
+          - name: external_order_id
+            data_type: json
+            meta:
+              subcolumns:
+                - name: ecommerce
+                  data_type: varchar
+          - name: external_transaction_id
+            data_type: json
+            meta:
+              subcolumns:
+                - name: payment_processor
+                  data_type: varchar
+          - name: external_variant_id_not_found
+            data_type: boolean
+          - name: external_variant_not_found
+            data_type: boolean
+          - name: has_uncommitted_changes
+            data_type: boolean
+          - name: last_charge_attempt
+            data_type: timestamp
+          - name: merged_at
+            data_type: timestamp
+          - name: order_attributes
+            data_type: array
+          - name: orders_count
+            data_type: integer
+          - name: payment_processor
+            data_type: varchar
+          - name: total_duties
+            data_type: varchar
+          - name: total_weight_grams
+            data_type: integer
+          - name: taxable
+            data_type: boolean
+          - name: taxes_included
+            data_type: boolean
+          - name: client_details
+            data_type: json
+          - name: created_at
+            data_type: timestamp
+          - name: customer_hash
+            data_type: varchar
+          - name: customer_id
+            data_type: integer
+          - name: discount_codes
+            data_type: array
+          - name: email
+            data_type: varchar
+          - name: error
+            data_type: varchar
+          - name: error_type
+            data_type: varchar
+          - name: first_name
+            data_type: varchar
+          - name: last_name
+            data_type: varchar
+          - name: last_charge_attempt_date
+            data_type: timestamp
+          - name: line_items
+            data_type: array
+          - name: has_uncommited_changes
+            data_type: boolean
+          - name: note
+            data_type: varchar
+          - name: note_attributes
+            data_type: array
+          - name: number_times_tried
+            data_type: integer
+          - name: processed_at
+            data_type: timestamp
+          - name: processor_name
+            data_type: varchar
+          - name: retry_date
+            data_type: timestamp
+          - name: scheduled_at
+            data_type: varchar
+          - name: shipments_count
+            data_type: integer
+          - name: shipping_address
+            data_type: json
+            meta:
+              subcolumns:
+                - name: id
+                  data_type: integer
+                - name: address1
+                  data_type: varchar
+                - name: address2
+                  data_type: varchar
+                - name: cart_note
+                  data_type: varchar
+                - name: city
+                  data_type: varchar
+                - name: company
+                  data_type: varchar
+                - name: country
+                  data_type: varchar
+                - name: country_code
+                  data_type: varchar
+                - name: customer_id
+                  data_type: integer
+                - name: created_at
+                  data_type: timestamp
+                - name: discount_id
+                  data_type: integer
+                - name: first_name
+                  data_type: varchar
+                - name: last_name
+                  data_type: varchar
+                - name: note_attributes
+                  data_type: array
+                - name: phone
+                  data_type: varchar
+                - name: province
+                  data_type: varchar
+                - name: shipping_lines_override
+                  data_type: array
+                - name: updated_at
+                  data_type: timestamp
+                - name: zip
+                  data_type: varchar
+          - name: shipping_lines
+            data_type: array
+          - name: shopify_order_id
+            data_type: varchar
+          - name: shopify_variant_id_not_found
+            data_type: varchar
+          - name: status
+            data_type: varchar
+          - name: subtotal_price
+            data_type: varchar
+          - name: tags
+            data_type: varchar
+          - name: tax_lines
+            data_type: varchar
+          - name: total_discounts
+            data_type: varchar
+          - name: total_line_items_price
+            data_type: varchar
+          - name: total_price
+            data_type: varchar
+          - name: total_refunds
+            data_type: varchar
+          - name: total_tax
+            data_type: varchar
+          - name: total_weight
+            data_type: integer
+          - name: transaction_id
+            data_type: varchar
+          - name: type
+            data_type: varchar
+          - name: updated_at
+            data_type: timestamp
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: collections
+        columns:
+          - name: id
+            data_type: integer
+          - name: name
+            data_type: varchar
+          - name: description
+            data_type: varchar
+          - name: title
+            data_type: varchar
+          - name: type
+            data_type: varchar
+          - name: created_at
+            data_type: timestamp
+          - name: updated_at
+            data_type: timestamp
+          - name: sort_order
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: customers
+        columns:
+          - name: id
+            data_type: integer
+          - name: accepts_marketing
+            data_type: integer
+          - name: analytics_data
+            data_type: json
+          - name: billing_address1
+            data_type: varchar
+          - name: billing_address2
+            data_type: varchar
+          - name: billing_city
+            data_type: varchar
+          - name: billing_company
+            data_type: varchar
+          - name: billing_country
+            data_type: varchar
+          - name: billing_first_name
+            data_type: varchar
+          - name: billing_last_name
+            data_type: varchar
+          - name: billing_phone
+            data_type: varchar
+          - name: billing_province
+            data_type: varchar
+          - name: billing_zip
+            data_type: varchar
+          - name: created_at
+            data_type: timestamp
+          - name: email
+            data_type: varchar
+          - name: first_charge_processed_at
+            data_type: timestamp
+          - name: first_name
+            data_type: varchar
+          - name: has_card_error_in_dunning
+            data_type: boolean
+          - name: has_valid_payment_method
+            data_type: boolean
+          - name: hash
+            data_type: varchar
+          - name: last_name
+            data_type: varchar
+          - name: number_active_subscriptions
+            data_type: integer
+          - name: number_subscriptions
+            data_type: integer
+          - name: processor_type
+            data_type: varchar
+          - name: reason_payment_method_not_valid
+            data_type: varchar
+          - name: shopify_customer_id
+            data_type: varchar
+          - name: status
+            data_type: varchar
+          - name: stripe_customer_token
+            data_type: varchar
+          - name: updated_at
+            data_type: timestamp
+          - name: apply_credit_to_next_recurring_charge
+            data_type: boolean
+          - name: apply_credit_to_next_checkout_charge
+            data_type: boolean
+          - name: external_customer_id
+            data_type: json
+            meta:
+              subcolumns:
+                - name: ecommerce
+                  data_type: varchar
+          - name: has_payment_method_in_dunning
+            data_type: boolean
+          - name: phone
+            data_type: varchar
+          - name: subscriptions_active_count
+            data_type: integer
+          - name: subscriptions_total_count
+            data_type: integer
+          - name: tax_exempt
+            data_type: boolean
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: discounts
+        columns:
+          - name: id
+            data_type: integer
+          - name: applies_to
+            data_type: varchar
+          - name: applies_to_id
+            data_type: integer
+          - name: applies_to_product_type
+            data_type: varchar
+          - name: applies_to_resource
+            data_type: varchar
+          - name: channel_settings
+            data_type: json
+            meta:
+              subcolumns:
+                - name: api
+                  data_type: json
+                  subcolumns:
+                    - name: can_apply
+                      data_type: boolean
+                - name: checkout_page
+                  data_type: json
+                  subcolumns:
+                    - name: can_apply
+                      data_type: boolean
+                - name: customer_portal
+                  data_type: json
+                  subcolumns:
+                    - name: can_apply
+                      data_type: boolean
+                - name: merchant_portal
+                  data_type: json
+                  subcolumns:
+                    - name: can_apply
+                      data_type: boolean
+          - name: code
+            data_type: varchar
+          - name: created_at
+            data_type: timestamp
+          - name: discount_type
+            data_type: varchar
+          - name: duration
+            data_type: varchar
+          - name: duration_usage_limit
+            data_type: integer
+          - name: ends_at
+            data_type: timestamp
+          - name: external_discount_id
+            data_type: varchar
+          - name: external_discount_source
+            data_type: varchar
+          - name: first_time_customer_restriction
+            data_type: varchar
+          - name: once_per_customer
+            data_type: boolean
+          - name: prerequisite_subtotal_min
+            data_type: float
+          - name: starts_at
+            data_type: timestamp
+          - name: status
+            data_type: varchar
+          - name: times_used
+            data_type: float
+          - name: updated_at
+            data_type: timestamp
+          - name: usage_limit
+            data_type: float
+          - name: value
+            data_type: float
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: events
+        columns:
+          - name: id
+            data_type: integer
+          - name: customer_id
+            data_type: integer
+          - name: object_id
+            data_type: integer
+          - name: created_at
+            data_type: timestamp
+          - name: custom_attributes
+            data_type: array
+          - name: description
+            data_type: varchar
+          - name: object_type
+            data_type: varchar
+          - name: source
+            data_type: json
+            meta:
+              subcolumns:
+                - name: account_id
+                  data_type: integer
+                - name: api_token_id
+                  data_type: integer
+                - name: account_email
+                  data_type: varchar
+                - name: api_token_name
+                  data_type: varchar
+                - name: origin
+                  data_type: varchar
+                - name: user_type
+                  data_type: varchar
+          - name: updated_attributes
+            data_type: array
+          - name: verb
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: metafields
+        columns:
+          - name: id
+            data_type: integer
+          - name: created_at
+            data_type: timestamp
+          - name: description
+            data_type: varchar
+          - name: key
+            data_type: varchar
+          - name: namespace
+            data_type: varchar
+          - name: owner_id
+            data_type: varchar
+          - name: owner_resource
+            data_type: varchar
+          - name: updated_at
+            data_type: timestamp
+          - name: value
+            data_type: varchar
+          - name: value_type
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: onetimes
+        columns:
+          - name: id
+            data_type: integer
+          - name: address_id
+            data_type: varchar
+          - name: created_at
+            data_type: timestamp
+          - name: customer_id
+            data_type: varchar
+          - name: next_charge_scheduled_at
+            data_type: timestamp
+          - name: price
+            data_type: varchar
+          - name: product_title
+            data_type: varchar
+          - name: properties
+            data_type: array
+          - name: quantity
+            data_type: integer
+          - name: recharge_product_id
+            data_type: integer
+          - name: shopify_product_id
+            data_type: integer
+          - name: shopify_variant_id
+            data_type: integer
+          - name: sku
+            data_type: varchar
+          - name: status
+            data_type: varchar
+          - name: updated_at
+            data_type: timestamp
+          - name: variant_title
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: orders
+        columns:
+          - name: id
+            data_type: integer
+          - name: accepts_marketing
+            data_type: boolean
+          - name: send_email_welcome
+            data_type: boolean
+          - name: verified_email
+            data_type: boolean
+          - name: phone
+            data_type: varchar
+          - name: address_id
+            data_type: integer
+          - name: address_is_active
+            data_type: integer
+          - name: billing_address
+            data_type: json
+            meta:
+              subcolumns:
+                - name: id
+                  data_type: integer
+                - name: address1
+                  data_type: varchar
+                - name: address2
+                  data_type: varchar
+                - name: cart_note
+                  data_type: varchar
+                - name: city
+                  data_type: varchar
+                - name: company
+                  data_type: varchar
+                - name: country
+                  data_type: varchar
+                - name: country_code
+                  data_type: varchar
+                - name: customer_id
+                  data_type: integer
+                - name: created_at
+                  data_type: timestamp
+                - name: discount_id
+                  data_type: integer
+                - name: first_name
+                  data_type: varchar
+                - name: last_name
+                  data_type: varchar
+                - name: note_attributes
+                  data_type: array
+                - name: phone
+                  data_type: varchar
+                - name: province
+                  data_type: varchar
+                - name: shipping_lines_override
+                  data_type: array
+                - name: updated_at
+                  data_type: timestamp
+                - name: zip
+                  data_type: varchar
+          - name: browser_ip
+            data_type: varchar
+          - name: charge
+            data_type: json
+            meta:
+              subcolumns:
+                - name: id
+                  data_type: integer
+                - name: external_transaction_id
+                  data_type: json
+                  subcolumns:
+                    - name: payment_processor
+                      data_type: varchar
+                - name: payment_processor_name
+                  data_type: varchar
+                - name: status
+                  data_type: varchar
+          - name: client_details
+            data_type: json
+            meta:
+              subcolumns:
+                - name: browser_ip
+                  data_type: varchar
+                - name: user_agent
+                  data_type: varchar
+          - name: discounts
+            data_type: array
+          - name: error
+            data_type: varchar
+          - name: external_cart_token
+            data_type: varchar
+          - name: external_order_id
+            data_type: json
+            meta:
+              subcolumns:
+                - name: ecommerce
+                  data_type: varchar
+          - name: external_order_name
+            data_type: json
+            meta:
+              subcolumns:
+                - name: ecommerce
+                  data_type: varchar
+          - name: external_order_number
+            data_type: json
+            meta:
+              subcolumns:
+                - name: ecommerce
+                  data_type: varchar
+          - name: order_attributes
+            data_type: array
+          - name: taxable
+            data_type: boolean
+          - name: total_duties
+            data_type: varchar
+          - name: total_weight_grams
+            data_type: integer
+          - name: charge_id
+            data_type: integer
+          - name: charge_status
+            data_type: varchar
+          - name: currency
+            data_type: varchar
+          - name: created_at
+            data_type: timestamp
+          - name: customer
+            data_type: json
+            meta:
+              subcolumns:
+                - name: id
+                  data_type: integer
+                - name: accepts_marketing
+                  data_type: boolean
+                - name: send_email_welcome
+                  data_type: boolean
+                - name: verified_email
+                  data_type: boolean
+                - name: phone
+                  data_type: varchar
+                - name: external_customer_id
+                  data_type: json
+                  subcolumns:
+                    - name: ecommerce
+                      data_type: varchar
+                - name: billing_address1
+                  data_type: varchar
+                - name: billing_address2
+                  data_type: varchar
+                - name: billing_city
+                  data_type: varchar
+                - name: billing_company
+                  data_type: varchar
+                - name: billing_country
+                  data_type: varchar
+                - name: billing_first_name
+                  data_type: varchar
+                - name: billing_last_name
+                  data_type: varchar
+                - name: billing_phone
+                  data_type: varchar
+                - name: billing_province
+                  data_type: varchar
+                - name: billing_zip
+                  data_type: varchar
+                - name: created_at
+                  data_type: timestamp
+                - name: email
+                  data_type: varchar
+                - name: first_charge_processed_at
+                  data_type: timestamp
+                - name: first_name
+                  data_type: varchar
+                - name: has_card_error_in_dunning
+                  data_type: boolean
+                - name: has_valid_payment_method
+                  data_type: boolean
+                - name: hash
+                  data_type: varchar
+                - name: last_name
+                  data_type: varchar
+                - name: number_active_subscriptions
+                  data_type: integer
+                - name: number_subscriptions
+                  data_type: integer
+                - name: processor_type
+                  data_type: varchar
+                - name: reason_payment_method_not_valid
+                  data_type: varchar
+                - name: shopify_customer_id
+                  data_type: varchar
+                - name: status
+                  data_type: varchar
+                - name: updated_at
+                  data_type: timestamp
+          - name: customer_id
+            data_type: integer
+          - name: discount_codes
+            data_type: array
+          - name: email
+            data_type: varchar
+          - name: first_name
+            data_type: varchar
+          - name: hash
+            data_type: varchar
+          - name: is_prepaid
+            data_type: integer
+          - name: last_name
+            data_type: varchar
+          - name: line_items
+            data_type: array
+          - name: note
+            data_type: varchar
+          - name: note_attributes
+            data_type: array
+          - name: payment_processor
+            data_type: varchar
+          - name: processed_at
+            data_type: timestamp
+          - name: redacted
+            data_type: boolean
+          - name: scheduled_at
+            data_type: timestamp
+          - name: shipped_date
+            data_type: timestamp
+          - name: shipping_address
+            data_type: json
+            meta:
+              subcolumns:
+                - name: id
+                  data_type: integer
+                - name: address1
+                  data_type: varchar
+                - name: address2
+                  data_type: varchar
+                - name: cart_note
+                  data_type: varchar
+                - name: city
+                  data_type: varchar
+                - name: company
+                  data_type: varchar
+                - name: country
+                  data_type: varchar
+                - name: country_code
+                  data_type: varchar
+                - name: customer_id
+                  data_type: integer
+                - name: created_at
+                  data_type: timestamp
+                - name: discount_id
+                  data_type: integer
+                - name: first_name
+                  data_type: varchar
+                - name: last_name
+                  data_type: varchar
+                - name: note_attributes
+                  data_type: array
+                - name: phone
+                  data_type: varchar
+                - name: province
+                  data_type: varchar
+                - name: shipping_lines_override
+                  data_type: array
+                - name: updated_at
+                  data_type: timestamp
+                - name: zip
+                  data_type: varchar
+          - name: shipping_lines
+            data_type: array
+          - name: shopify_cart_token
+            data_type: varchar
+          - name: shopify_customer_id
+            data_type: varchar
+          - name: shopify_order_id
+            data_type: varchar
+          - name: shopify_order_number
+            data_type: integer
+          - name: status
+            data_type: varchar
+          - name: subtotal_price
+            data_type: float
+          - name: tags
+            data_type: varchar
+          - name: tax_lines
+            data_type: array
+          - name: transaction_id
+            data_type: varchar
+          - name: total_discounts
+            data_type: float
+          - name: total_line_items_price
+            data_type: float
+          - name: total_price
+            data_type: float
+          - name: total_refunds
+            data_type: varchar
+          - name: total_tax
+            data_type: varchar
+          - name: total_weight
+            data_type: integer
+          - name: type
+            data_type: varchar
+          - name: updated_at
+            data_type: timestamp
+          - name: shipping_date
+            data_type: timestamp
+          - name: shopify_id
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: products
+        columns:
+          - name: id
+            data_type: integer
+          - name: product_id
+            data_type: integer
+          - name: charge_interval_frequency
+            data_type: integer
+          - name: collection_id
+            data_type: integer
+          - name: created_at
+            data_type: timestamp
+          - name: cutoff_day_of_month
+            data_type: integer
+          - name: cutoff_day_of_week
+            data_type: integer
+          - name: discount_amount
+            data_type: float
+          - name: discount_type
+            data_type: varchar
+          - name: expire_after_specific_number_of_charges
+            data_type: integer
+          - name: handle
+            data_type: varchar
+          - name: images
+            data_type: json
+          - name: modifiable_properties
+            data_type: array
+          - name: order_day_of_month
+            data_type: integer
+          - name: order_day_of_week
+            data_type: integer
+          - name: order_interval_frequency_options
+            data_type: array
+          - name: order_interval_unit
+            data_type: varchar
+          - name: shopify_product_id
+            data_type: integer
+          - name: storefront_purchase_options
+            data_type: varchar
+          - name: subscription_defaults
+            data_type: json
+          - name: title
+            data_type: varchar
+          - name: updated_at
+            data_type: timestamp
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: shop
+        columns:
+          - name: shop
+            data_type: json
+          - name: store
+            data_type: json
+          - name: id
+            data_type: integer
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: subscriptions
+        columns:
+          - name: id
+            data_type: integer
+          - name: address_id
+            data_type: integer
+          - name: analytics_data
+            data_type: json
+          - name: cancellation_reason
+            data_type: varchar
+          - name: cancellation_reason_comments
+            data_type: varchar
+          - name: cancelled_at
+            data_type: timestamp
+          - name: charge_interval_frequency
+            data_type: varchar
+          - name: created_at
+            data_type: timestamp
+          - name: commit_update
+            data_type: boolean
+          - name: customer_id
+            data_type: integer
+          - name: email
+            data_type: varchar
+          - name: expire_after_specific_number_of_charges
+            data_type: integer
+          - name: external_product_id
+            data_type: json
+            meta:
+              subcolumns:
+                - name: ecommerce
+                  data_type: varchar
+          - name: external_variant_id
+            data_type: json
+            meta:
+              subcolumns:
+                - name: ecommerce
+                  data_type: varchar
+          - name: presentment_currency
+            data_type: varchar
+          - name: has_queued_charges
+            data_type: integer
+          - name: is_prepaid
+            data_type: boolean
+          - name: is_skippable
+            data_type: boolean
+          - name: is_swappable
+            data_type: boolean
+          - name: max_retries_reached
+            data_type: integer
+          - name: next_charge_scheduled_at
+            data_type: varchar
+          - name: order_day_of_month
+            data_type: integer
+          - name: order_day_of_week
+            data_type: integer
+          - name: order_interval_frequency
+            data_type: varchar
+          - name: order_interval_unit
+            data_type: varchar
+          - name: price
+            data_type: float
+          - name: product_title
+            data_type: varchar
+          - name: properties
+            data_type: array
+          - name: quantity
+            data_type: integer
+          - name: recharge_product_id
+            data_type: integer
+          - name: shopify_product_id
+            data_type: integer
+          - name: shopify_variant_id
+            data_type: integer
+          - name: sku
+            data_type: varchar
+          - name: sku_override
+            data_type: boolean
+          - name: status
+            data_type: varchar
+          - name: updated_at
+            data_type: timestamp
+          - name: variant_title
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
