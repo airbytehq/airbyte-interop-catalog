@@ -1,0 +1,117 @@
+domain: twilio.airbyte-interop
+transforms:
+  - name: usage_record
+    from:
+      - usage_records: twilio.usage_records
+    fields:
+      _fivetran_synced:
+        expression: usage_records._airbyte_extracted_at
+        description: Timestamp of when fivetran synced a record.
+      account_id:
+        expression: MISSING
+        description: The unique identifier of the account associated with the usage
+          record.
+      as_of:
+        expression: usage_records.as_of
+        description: Usage records up to date as of this timestamp, formatted as YYYY-MM-DDTHH:MM:SS+00:00.
+          All timestamps are in GMT
+      category:
+        expression: usage_records.category
+        description: The category of usage.
+      count:
+        expression: usage_records.count
+        description: The number of usage events, such as the number of calls.
+      count_unit:
+        expression: usage_records.count_unit
+        description: The units in which count is measured, such as calls for calls
+          or messages for SMS.
+      description:
+        expression: usage_records.description
+        description: A brief description or summary of the usage record.
+      end_date:
+        expression: usage_records.end_date
+        description: The end date of the usage period for the record.
+      price:
+        expression: usage_records.price
+        description: The cost or price associated with the resource usage.
+      price_unit:
+        expression: usage_records.price_unit
+        description: The currency unit for the price.
+      start_date:
+        expression: usage_records.start_date
+        description: The first date for which usage is included in this UsageRecord.
+          The date is specified in GMT and formatted as YYYY-MM-DD.
+      usage:
+        expression: usage_records.usage
+        description: The amount used to bill usage and measured in units described
+          in usage_unit.
+      usage_unit:
+        expression: usage_records.usage_unit
+        description: The units in which usage is measured, such as minutes for calls
+          or messages for SMS.
+annotations:
+  approved: true
+  missing_fields:
+    - account_id
+  evaluation:
+    source_stream_name: usage_records
+    target_table_name: usage_record
+    table_match_score: 0.85
+    completion_score: 0.9
+    explanation: The provided field mappings from source 'usage_records' to target
+      '_fivetran_synced' are well-matched, reflecting a good understanding of the
+      source data. Only minor gaps in field mappings reduce the completion score.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: usage_records._airbyte_extracted_at
+        score: 1.0
+        explanation: Perfect match as per standard practice mapping `_airbyte_extracted_at`.
+      - name: account_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: as_of
+        expression: usage_records.as_of
+        score: 0.9
+        explanation: Direct match based on field name and data format.
+      - name: category
+        expression: usage_records.category
+        score: 0.9
+        explanation: Direct match based on field name and usage context.
+      - name: count
+        expression: usage_records.count
+        score: 0.9
+        explanation: Direct match based on field name and measurement context.
+      - name: count_unit
+        expression: usage_records.count_unit
+        score: 0.9
+        explanation: Direct match based on field name, context of unit measurement
+          matches.
+      - name: description
+        expression: usage_records.description
+        score: 0.9
+        explanation: Descriptive match based on usage and semantics.
+      - name: end_date
+        expression: usage_records.end_date
+        score: 0.9
+        explanation: Direct match based on field name and date context.
+      - name: price
+        expression: usage_records.price
+        score: 0.9
+        explanation: Direct match based on field name and financial context.
+      - name: price_unit
+        expression: usage_records.price_unit
+        score: 0.9
+        explanation: Direct match given unit context.
+      - name: start_date
+        expression: usage_records.start_date
+        score: 0.9
+        explanation: Direct match based on field name and date context.
+      - name: usage
+        expression: usage_records.usage
+        score: 0.9
+        explanation: Direct field semantic match.
+      - name: usage_unit
+        expression: usage_records.usage_unit
+        score: 0.9
+        explanation: Direct match focused on unit measurement context.

@@ -1,0 +1,220 @@
+domain: twilio.airbyte-interop
+transforms:
+  - name: call
+    from:
+      - calls: twilio.calls
+    fields:
+      _fivetran_synced:
+        expression: calls._airbyte_extracted_at
+        description: Timestamp of when fivetran synced a record.
+      account_id:
+        expression: calls.account_sid
+        description: The unique identifier for the Account responsible for this Call.
+      annotation:
+        expression: calls.annotation
+        description: A user-defined string that provides additional information about
+          the Call.
+      answered_by:
+        expression: calls.answered_by
+        description: The identity of the recipient that answered the Call.
+      caller_name:
+        expression: calls.caller_name
+        description: The caller's name, if available.
+      created_at:
+        expression: calls.date_created
+        description: The date and time when the Call was created, given as GMT in
+          RFC 2822 format.
+      direction:
+        expression: calls.direction
+        description: The direction of the Call - `inbound` for incoming calls, `outbound-api`
+          for calls initiated via the REST API, and `outbound-dial` for calls initiated
+          by a TwiML `<Dial` verb.
+      duration:
+        expression: calls.duration
+        description: The duration of the Call in seconds.
+      end_time:
+        expression: calls.end_time
+        description: The date and time when the Call ended, given as GMT in RFC 2822
+          format.
+      forwarded_from:
+        expression: MISSING
+        description: The phone number that initiated the Call, if applicable.
+      from:
+        expression: calls.from
+        description: The phone number or client identifier that made the Call.
+      from_formatted:
+        expression: calls.from_formatted
+        description: The formatted version of the `from` phone number or client identifier.
+      group_id:
+        expression: calls.group_sid
+        description: The unique identifier for the grouping of related Calls.
+      id:
+        expression: calls.sid
+        description: The unique identifier for the Call resource.
+      outgoing_caller_id:
+        expression: MISSING
+        description: The unique identifier for the Outgoing Caller ID resource associated
+          with the Call.
+      parent_call_id:
+        expression: calls.parent_call_sid
+        description: The unique identifier for the Call that created this Call as
+          a result of executing TwiML.
+      price:
+        expression: calls.price
+        description: The cost of the Call in the specified `price_unit`.
+      price_unit:
+        expression: calls.price_unit
+        description: The currency unit in which the `price` is measured.
+      queue_time:
+        expression: calls.queue_time
+        description: The time spent in the queue before the Call is placed, in milliseconds.
+      start_time:
+        expression: calls.start_time
+        description: The date and time when the Call started, given as GMT in RFC
+          2822 format.
+      status:
+        expression: calls.status
+        description: The current status of the Call - `queued`, `ringing`, `in-progress`,
+          `completed`, `busy`, `failed`, `no-answer`, or `canceled`.
+      to:
+        expression: calls.to
+        description: The phone number or client identifier that received the Call.
+      to_formatted:
+        expression: calls.to_formatted
+        description: The formatted version of the `to` phone number or client identifier.
+      trunk_id:
+        expression: MISSING
+        description: The unique identifier for the Trunk resource associated with
+          the Call.
+      updated_at:
+        expression: calls.date_updated
+        description: The date and time when the Call record was last updated, given
+          as GMT in RFC 2822 format.
+annotations:
+  approved: false
+  missing_fields:
+    - forwarded_from
+    - outgoing_caller_id
+    - trunk_id
+  evaluation:
+    source_stream_name: calls
+    target_table_name: call
+    table_match_score: 0.9
+    completion_score: 0.8
+    explanation: Overall, the mappings provided accurately represent the intrinsic
+      relationships between source and target schemas, ensuring comprehensive but
+      cautious transformation of data from the Airbyte source to the Fivetran-like
+      schema.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: calls._airbyte_extracted_at
+        score: 1.0
+        explanation: Perfect match of standardized syncing timestamps.
+      - name: account_id
+        expression: calls.account_sid
+        score: 0.95
+        explanation: Direct match between source and target for unique account identifiers.
+      - name: annotation
+        expression: calls.annotation
+        score: 0.9
+        explanation: The descriptions and field names align very well between source
+          and target.
+      - name: answered_by
+        expression: calls.answered_by
+        score: 0.9
+        explanation: The semantic meaning and role of this field in call handling
+          are consistent between the two systems.
+      - name: caller_name
+        expression: calls.caller_name
+        score: 0.88
+        explanation: Name mapping is generally consistent, with high confidence of
+          identical data roles.
+      - name: created_at
+        expression: calls.date_created
+        score: 0.95
+        explanation: Direct mapping of creation timestamps with high relevance and
+          format consistency.
+      - name: direction
+        expression: calls.direction
+        score: 0.9
+        explanation: Field meaning is directly transferable and description is exactly
+          matching.
+      - name: duration
+        expression: calls.duration
+        score: 0.95
+        explanation: Unambiguous match of call duration fields, directly comparable.
+      - name: end_time
+        expression: calls.end_time
+        score: 0.95
+        explanation: Highly consistent mapping for end timing of events, ensuring
+          data synchronization.
+      - name: forwarded_from
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: from
+        expression: calls.from
+        score: 0.95
+        explanation: Direct correspondence found in originating identifiers.
+      - name: from_formatted
+        expression: calls.from_formatted
+        score: 0.95
+        explanation: The formatted version of the from field matches perfectly.
+      - name: group_id
+        expression: calls.group_sid
+        score: 0.9
+        explanation: Unique identifiers for group relations are consistent across
+          schemas.
+      - name: id
+        expression: calls.sid
+        score: 0.95
+        explanation: Direct mapping of unique call identifiers.
+      - name: outgoing_caller_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: parent_call_id
+        expression: calls.parent_call_sid
+        score: 0.9
+        explanation: Hierarchical relationship preserved with high confidence in mapping.
+      - name: price
+        expression: calls.price
+        score: 0.9
+        explanation: The price fields align well in terms of currency context and
+          value meaning.
+      - name: price_unit
+        expression: calls.price_unit
+        score: 0.9
+        explanation: Currencies representation matches with complete semantic alignment.
+      - name: queue_time
+        expression: calls.queue_time
+        score: 0.9
+        explanation: Timestamp significance and role accurately mapped from source
+          to target.
+      - name: start_time
+        expression: calls.start_time
+        score: 0.95
+        explanation: The start times sync perfectly across the temporal context of
+          both schemas.
+      - name: status
+        expression: calls.status
+        score: 0.95
+        explanation: Status fields correlate well, reflecting similar stages in the
+          call lifecycle between schemas.
+      - name: to
+        expression: calls.to
+        score: 0.95
+        explanation: Recipient identifier mappings are concise and accurate.
+      - name: to_formatted
+        expression: calls.to_formatted
+        score: 0.95
+        explanation: Formatted recipient information matches perfectly, reflecting
+          a clear and direct equivalence.
+      - name: trunk_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: updated_at
+        expression: calls.date_updated
+        score: 0.95
+        explanation: Update timestamps match with high relevance and similar formatting.

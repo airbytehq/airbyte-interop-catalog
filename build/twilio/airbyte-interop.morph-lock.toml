@@ -1,0 +1,387 @@
+[project]
+source_name = "twilio"
+project_name = "airbyte-interop"
+requirements_file = "build/twilio/requirements/airbyte-interop/src_dbt_requirements.yml"
+requirements_file_hash = "9c363775abe3c6921f0bcf54074fdb1078e40b08ea31d420fd6d0a73bfd40772"
+airbyte_source_file = "build/twilio/src_airbyte_raw_twilio.yml"
+airbyte_source_file_hash = "41c3f9a9027c2af795f24aabfbd2cf620e0f08cc0e74a0aab4135e92c0545995"
+
+[coverage]
+unused_source_streams = [
+    "alerts",
+    "applications",
+    "available_phone_number_countries",
+    "available_phone_numbers_local",
+    "available_phone_numbers_mobile",
+    "available_phone_numbers_toll_free",
+    "conference_participants",
+    "conferences",
+    "conversation_messages",
+    "conversation_participants",
+    "dependent_phone_numbers",
+    "executions",
+    "flows",
+    "keys",
+    "message_media",
+    "queues",
+    "recordings",
+    "roles",
+    "services",
+    "step",
+    "transcriptions",
+    "trunks",
+    "usage_triggers",
+    "user_conversations",
+    "users",
+    "verify_services",
+]
+unmapped_target_tables = []
+
+[mappings.account_history]
+source_file = "src/transforms/twilio/transforms/account_history.yml"
+source_file_hash = "219ed37f385b533cb699faf99d004a928ed2458c482eda76c559c9bb533ced77"
+source_stream = "accounts"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.account_history.mapped_target_fields]
+_fivetran_synced = "accounts._airbyte_extracted_at"
+created_at = "accounts.date_created"
+friendly_name = "accounts.friendly_name"
+id = "accounts.sid"
+owner_account_id = "accounts.owner_account_sid"
+status = "accounts.status"
+type = "accounts.type"
+updated_at = "accounts.date_updated"
+
+[mappings.account_history.unused_source_fields]
+accounts = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "auth_token",
+    "subresource_uris",
+    "subresource_uris.addresses",
+    "subresource_uris.applications",
+    "subresource_uris.authorized_connect_apps",
+    "subresource_uris.available_phone_numbers",
+    "subresource_uris.balance",
+    "subresource_uris.calls",
+    "subresource_uris.conferences",
+    "subresource_uris.connect_apps",
+    "subresource_uris.incoming_phone_numbers",
+    "subresource_uris.keys",
+    "subresource_uris.messages",
+    "subresource_uris.notifications",
+    "subresource_uris.outgoing_caller_ids",
+    "subresource_uris.queues",
+    "subresource_uris.recordings",
+    "subresource_uris.short_codes",
+    "subresource_uris.signing_keys",
+    "subresource_uris.sip",
+    "subresource_uris.transcriptions",
+    "subresource_uris.usage",
+    "uri",
+]
+
+[mappings.address]
+source_file = "src/transforms/twilio/transforms/address.yml"
+source_file_hash = "2e4d836e24a9fcbf68808ee204df1d8d79a810ce86471735312d55782d6cd818"
+source_stream = "addresses"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.address.mapped_target_fields]
+_fivetran_synced = "addresses._airbyte_extracted_at"
+account_id = "addresses.account_sid"
+city = "addresses.city"
+created_at = "addresses.date_created"
+customer_name = "addresses.customer_name"
+emergency_enabled = "addresses.emergency_enabled"
+friendly_name = "addresses.friendly_name"
+id = "addresses.sid"
+iso_country = "addresses.iso_country"
+postal_code = "addresses.postal_code"
+region = "addresses.region"
+street = "addresses.street"
+updated_at = "addresses.date_updated"
+validated = "addresses.validated"
+verified = "addresses.verified"
+
+[mappings.address.unused_source_fields]
+addresses = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "street_secondary",
+    "uri",
+]
+
+[mappings.call]
+source_file = "src/transforms/twilio/transforms/call.yml"
+source_file_hash = "ef276a6c70bdcde49ee128ee40af9ad22c2b51d778a048172f36519aedce0622"
+source_stream = "calls"
+unmapped_target_fields = [
+    "forwarded_from",
+    "outgoing_caller_id",
+    "trunk_id",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.call.mapped_target_fields]
+_fivetran_synced = "calls._airbyte_extracted_at"
+account_id = "calls.account_sid"
+annotation = "calls.annotation"
+answered_by = "calls.answered_by"
+caller_name = "calls.caller_name"
+created_at = "calls.date_created"
+direction = "calls.direction"
+duration = "calls.duration"
+end_time = "calls.end_time"
+from = "calls.from"
+from_formatted = "calls.from_formatted"
+group_id = "calls.group_sid"
+id = "calls.sid"
+parent_call_id = "calls.parent_call_sid"
+price = "calls.price"
+price_unit = "calls.price_unit"
+queue_time = "calls.queue_time"
+start_time = "calls.start_time"
+status = "calls.status"
+to = "calls.to"
+to_formatted = "calls.to_formatted"
+updated_at = "calls.date_updated"
+
+[mappings.call.unused_source_fields]
+calls = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "api_version",
+    "forwarded_from",
+    "phone_number_sid",
+    "subresource_uris",
+    "subresource_uris.events",
+    "subresource_uris.feedback",
+    "subresource_uris.feedback_summaries",
+    "subresource_uris.notifications",
+    "subresource_uris.payments",
+    "subresource_uris.recordings",
+    "subresource_uris.siprec",
+    "subresource_uris.streams",
+    "subresource_uris.user_defined_message_subscriptions",
+    "subresource_uris.user_defined_messages",
+    "trunk_sid",
+    "uri",
+]
+
+[mappings.incoming_phone_number]
+source_file = "src/transforms/twilio/transforms/incoming_phone_number.yml"
+source_file_hash = "3d218129fe8a06d1415f540f30711f1bf14044742622de2c41ecfc4af38e3dc2"
+source_stream = "incoming_phone_numbers"
+unmapped_target_fields = [
+    "address_id",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.incoming_phone_number.mapped_target_fields]
+_fivetran_synced = "incoming_phone_numbers._airbyte_extracted_at"
+account_id = "incoming_phone_numbers.account_sid"
+address_requirements = "incoming_phone_numbers.address_requirements"
+beta = "incoming_phone_numbers.beta"
+capabilities_mms = "incoming_phone_numbers.capabilities.mms"
+capabilities_sms = "incoming_phone_numbers.capabilities.sms"
+capabilities_voice = "incoming_phone_numbers.capabilities.voice"
+created_at = "incoming_phone_numbers.date_created"
+emergency_address_id = "incoming_phone_numbers.emergency_address_sid"
+emergency_status = "incoming_phone_numbers.emergency_status"
+friendly_name = "incoming_phone_numbers.friendly_name"
+id = "incoming_phone_numbers.sid"
+origin = "incoming_phone_numbers.origin"
+phone_number = "incoming_phone_numbers.phone_number"
+trunk_id = "incoming_phone_numbers.trunk_sid"
+updated_at = "incoming_phone_numbers.date_updated"
+voice_caller_id_lookup = "incoming_phone_numbers.voice_caller_id_lookup"
+voice_url = "incoming_phone_numbers.voice_url"
+
+[mappings.incoming_phone_number.unused_source_fields]
+incoming_phone_numbers = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "address_sid",
+    "api_version",
+    "bundle_sid",
+    "capabilities",
+    "capabilities.fax",
+    "emergency_address_status",
+    "identity_sid",
+    "sms_application_sid",
+    "sms_fallback_method",
+    "sms_fallback_url",
+    "sms_method",
+    "sms_url",
+    "status",
+    "status_callback",
+    "status_callback_method",
+    "subresource_uris",
+    "subresource_uris.assigned_add_ons",
+    "uri",
+    "voice_application_sid",
+    "voice_fallback_method",
+    "voice_fallback_url",
+    "voice_method",
+    "voice_receive_mode",
+]
+
+[mappings.message]
+source_file = "src/transforms/twilio/transforms/message.yml"
+source_file_hash = "05ff0cd0bba00477400886c2fa7f351ffce31338df46122223bb6b5204ede227"
+source_stream = "messages"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.message.mapped_target_fields]
+_fivetran_synced = "messages._airbyte_extracted_at"
+account_id = "messages.account_sid"
+body = "messages.body"
+created_at = "messages.date_created"
+date_sent = "messages.date_sent"
+direction = "messages.direction"
+error_code = "messages.error_code"
+error_message = "messages.error_message"
+from = "messages.from"
+id = "messages.sid"
+messaging_service_sid = "messages.messaging_service_sid"
+num_media = "messages.num_media"
+num_segments = "messages.num_segments"
+price = "messages.price"
+price_unit = "messages.price_unit"
+status = "messages.status"
+to = "messages.to"
+updated_at = "messages.date_updated"
+
+[mappings.message.unused_source_fields]
+messages = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "api_version",
+    "subresource_uris",
+    "subresource_uris.feedback",
+    "subresource_uris.media",
+    "uri",
+]
+
+[mappings.messaging_service]
+source_file = "src/transforms/twilio/transforms/messaging_service.yml"
+source_file_hash = "3d5db94d669401187dbac545689954f2829ef4632f42b32e9e18353f9e623ed5"
+source_stream = "conversations"
+unmapped_target_fields = [
+    "area_code_geomatch",
+    "fallback_method",
+    "fallback_to_long_code",
+    "fallback_url",
+    "inbound_method",
+    "inbound_request_url",
+    "mms_converter",
+    "scan_message_content",
+    "smart_encoding",
+    "status_callback",
+    "sticky_sender",
+    "synchronous_validation",
+    "us_app_to_person_registered",
+    "use_inbound_webhook_on_number",
+    "usecase",
+    "validity_period",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.messaging_service.mapped_target_fields]
+_fivetran_synced = "conversations._airbyte_extracted_at"
+account_id = "conversations.account_sid"
+created_at = "conversations.date_created"
+friendly_name = "conversations.friendly_name"
+id = "conversations.messaging_service_sid"
+updated_at = "conversations.date_updated"
+
+[mappings.messaging_service.unused_source_fields]
+conversations = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "attributes",
+    "bindings",
+    "chat_service_sid",
+    "sid",
+    "state",
+    "timers",
+    "unique_name",
+    "url",
+]
+
+[mappings.outgoing_caller_id]
+source_file = "src/transforms/twilio/transforms/outgoing_caller_id.yml"
+source_file_hash = "34780a54ba06712c2c33c4560bfcccfb6851cde194aad6af545f8b3ba4b8d214"
+source_stream = "outgoing_caller_ids"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.outgoing_caller_id.mapped_target_fields]
+_fivetran_synced = "outgoing_caller_ids._airbyte_extracted_at"
+created_at = "outgoing_caller_ids.date_created"
+friendly_name = "outgoing_caller_ids.friendly_name"
+id = "outgoing_caller_ids.sid"
+phone_number = "outgoing_caller_ids.phone_number"
+updated_at = "outgoing_caller_ids.date_updated"
+
+[mappings.outgoing_caller_id.unused_source_fields]
+outgoing_caller_ids = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "account_sid",
+    "uri",
+]
+
+[mappings.usage_record]
+source_file = "src/transforms/twilio/transforms/usage_record.yml"
+source_file_hash = "d3416a71ad2d274fcc0a190b1e181ef4ea3406d802a0a5191aded24c4fa6ceaf"
+source_stream = "usage_records"
+unmapped_target_fields = [
+    "account_id",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.usage_record.mapped_target_fields]
+_fivetran_synced = "usage_records._airbyte_extracted_at"
+as_of = "usage_records.as_of"
+category = "usage_records.category"
+count = "usage_records.count"
+count_unit = "usage_records.count_unit"
+description = "usage_records.description"
+end_date = "usage_records.end_date"
+price = "usage_records.price"
+price_unit = "usage_records.price_unit"
+start_date = "usage_records.start_date"
+usage = "usage_records.usage"
+usage_unit = "usage_records.usage_unit"
+
+[mappings.usage_record.unused_source_fields]
+usage_records = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "account_sid",
+    "api_version",
+    "subresource_uris",
+    "subresource_uris.all_time",
+    "subresource_uris.daily",
+    "subresource_uris.last_month",
+    "subresource_uris.monthly",
+    "subresource_uris.this_month",
+    "subresource_uris.today",
+    "subresource_uris.yearly",
+    "subresource_uris.yesterday",
+    "uri",
+]

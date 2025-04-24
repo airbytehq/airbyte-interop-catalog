@@ -1,0 +1,165 @@
+domain: twilio.airbyte-interop
+transforms:
+  - name: incoming_phone_number
+    from:
+      - incoming_phone_numbers: twilio.incoming_phone_numbers
+    fields:
+      _fivetran_synced:
+        expression: incoming_phone_numbers._airbyte_extracted_at
+        description: Timestamp of when fivetran synced a record.
+      account_id:
+        expression: incoming_phone_numbers.account_sid
+        description: The unique identifier of the Account that owns this phone number
+          resource.
+      address_id:
+        expression: MISSING
+        description: The unique identifier of the Address resource responsible for
+          the phone number.
+      address_requirements:
+        expression: incoming_phone_numbers.address_requirements
+        description: The specific requirements for the Address on this phone number.
+      beta:
+        expression: incoming_phone_numbers.beta
+        description: Whether this phone number is a beta number.
+      capabilities_mms:
+        expression: incoming_phone_numbers.capabilities.mms
+        description: Indicates whether this phone number is capable of sending and
+          receiving MMS messages.
+      capabilities_sms:
+        expression: incoming_phone_numbers.capabilities.sms
+        description: Indicates whether this phone number is capable of sending and
+          receiving SMS messages.
+      capabilities_voice:
+        expression: incoming_phone_numbers.capabilities.voice
+        description: Indicates whether this phone number is capable of making and
+          receiving voice calls.
+      created_at:
+        expression: incoming_phone_numbers.date_created
+        description: The date and time this phone number resource was created.
+      emergency_address_id:
+        expression: incoming_phone_numbers.emergency_address_sid
+        description: The unique identifier of the Address resource to be used in case
+          of an emergency.
+      emergency_status:
+        expression: incoming_phone_numbers.emergency_status
+        description: The emergency status of the phone number.
+      friendly_name:
+        expression: incoming_phone_numbers.friendly_name
+        description: A human-readable name associated with the phone number.
+      id:
+        expression: incoming_phone_numbers.sid
+        description: The unique identifier for this phone number resource.
+      origin:
+        expression: incoming_phone_numbers.origin
+        description: The origination type of the phone number.
+      phone_number:
+        expression: incoming_phone_numbers.phone_number
+        description: The phone number in E.164 format.
+      trunk_id:
+        expression: incoming_phone_numbers.trunk_sid
+        description: The unique identifier of the Trunk resource responsible for the
+          phone number.
+      updated_at:
+        expression: incoming_phone_numbers.date_updated
+        description: The date and time this phone number resource was last updated.
+      voice_caller_id_lookup:
+        expression: incoming_phone_numbers.voice_caller_id_lookup
+        description: Indicates whether the phone number performs a lookup of the caller
+          ID.
+      voice_url:
+        expression: incoming_phone_numbers.voice_url
+        description: The URL Twilio will request when receiving a voice call to this
+          phone number.
+annotations:
+  approved: true
+  missing_fields:
+    - address_id
+  evaluation:
+    source_stream_name: incoming_phone_numbers
+    target_table_name: incoming_phone_number
+    table_match_score: 0.85
+    completion_score: 0.75
+    explanation: The overall confidence in the table mapping is high due to a strong
+      correlation in the intended use of the source and target schemas, and most field
+      mappings have been successfully aligned. However, the presence of some field
+      mappings marked as 'MISSING' slightly lowers the completion score.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: incoming_phone_numbers._airbyte_extracted_at
+        score: 1.0
+        explanation: Correct standard mapping for all tables.
+      - name: account_id
+        expression: incoming_phone_numbers.account_sid
+        score: 0.95
+        explanation: Direct match found for the account identifier.
+      - name: address_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: address_requirements
+        expression: incoming_phone_numbers.address_requirements
+        score: 0.8
+        explanation: Field names suggest a match in requirements specifications.
+      - name: beta
+        expression: incoming_phone_numbers.beta
+        score: 0.9
+        explanation: Exact match found in field names and purpose.
+      - name: capabilities_mms
+        expression: incoming_phone_numbers.capabilities.mms
+        score: 0.9
+        explanation: Exact field found matching capabilities for MMS.
+      - name: capabilities_sms
+        expression: incoming_phone_numbers.capabilities.sms
+        score: 0.9
+        explanation: Exact field found matching capabilities for SMS.
+      - name: capabilities_voice
+        expression: incoming_phone_numbers.capabilities.voice
+        score: 0.9
+        explanation: Exact field found matching capabilities for voice services.
+      - name: created_at
+        expression: incoming_phone_numbers.date_created
+        score: 0.9
+        explanation: Mapping date fields which represent similar creation timestamp
+          information.
+      - name: emergency_address_id
+        expression: incoming_phone_numbers.emergency_address_sid
+        score: 0.0
+        explanation: No good match found.
+      - name: emergency_status
+        expression: incoming_phone_numbers.emergency_status
+        score: 0.8
+        explanation: Both fields detail the emergency status, aligning well in functionality.
+      - name: friendly_name
+        expression: incoming_phone_numbers.friendly_name
+        score: 0.9
+        explanation: Direct match found for the descriptor name of the phone number.
+      - name: id
+        expression: incoming_phone_numbers.sid
+        score: 1.0
+        explanation: Exact match for the main identifier of the resource.
+      - name: origin
+        expression: incoming_phone_numbers.origin
+        score: 0.7
+        explanation: Both fields refer to the source or origin, suitable match.
+      - name: phone_number
+        expression: incoming_phone_numbers.phone_number
+        score: 0.9
+        explanation: Exact match for standard phone number representation in E.164
+          format.
+      - name: trunk_id
+        expression: incoming_phone_numbers.trunk_sid
+        score: 0.0
+        explanation: No good match found.
+      - name: updated_at
+        expression: incoming_phone_numbers.date_updated
+        score: 0.9
+        explanation: Fields represent the same concept of the last update time.
+      - name: voice_caller_id_lookup
+        expression: incoming_phone_numbers.voice_caller_id_lookup
+        score: 0.8
+        explanation: Both fields relate to caller ID lookup functionality.
+      - name: voice_url
+        expression: incoming_phone_numbers.voice_url
+        score: 0.85
+        explanation: Both fields specify the URL for handling voice calls, aligning
+          well.

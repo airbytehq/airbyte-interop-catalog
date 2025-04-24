@@ -1,0 +1,69 @@
+domain: twilio.airbyte-interop
+transforms:
+  - name: outgoing_caller_id
+    from:
+      - outgoing_caller_ids: twilio.outgoing_caller_ids
+    fields:
+      _fivetran_synced:
+        expression: outgoing_caller_ids._airbyte_extracted_at
+        description: Timestamp of when fivetran synced a record.
+      created_at:
+        expression: outgoing_caller_ids.date_created
+        description: The date that this resource was created, given in RFC 2822 format.
+      friendly_name:
+        expression: outgoing_caller_ids.friendly_name
+        description: A human readable descriptive text for this resource, up to 64
+          characters long. By default, the FriendlyName is a nicely formatted version
+          of the phone number.
+      id:
+        expression: outgoing_caller_ids.sid
+        description: The unique string that identifies this resource.
+      phone_number:
+        expression: outgoing_caller_ids.phone_number
+        description: The incoming phone number. Formatted with a '+' and country code
+          e.g., +16175551212 (E.164 format).
+      updated_at:
+        expression: outgoing_caller_ids.date_updated
+        description: The date that this resource was last updated, given in RFC 2822
+          format.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: outgoing_caller_ids
+    target_table_name: outgoing_caller_id
+    table_match_score: 0.95
+    completion_score: 0.9
+    explanation: The table mapping is highly reliable with a near-identical structure
+      and format between the source and target schemas, which are derived from comparable
+      API implementations. Most fields are well-aligned, though not all from the source
+      are present in the target, explaining the slightly less than perfect completion
+      score.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: outgoing_caller_ids._airbyte_extracted_at
+        score: 1.0
+        explanation: Direct standard mapping of sync times between systems.
+      - name: created_at
+        expression: outgoing_caller_ids.date_created
+        score: 0.9
+        explanation: Direct match in intent and schema position for date creation
+          fields.
+      - name: friendly_name
+        expression: outgoing_caller_ids.friendly_name
+        score: 0.85
+        explanation: High relevance mapping, minor doubts about consistent usage across
+          contexts.
+      - name: id
+        expression: outgoing_caller_ids.sid
+        score: 1.0
+        explanation: Universal identifier field, perfectly matched.
+      - name: phone_number
+        expression: outgoing_caller_ids.phone_number
+        score: 0.9
+        explanation: Exact match in data representation and purpose between schemas.
+      - name: updated_at
+        expression: outgoing_caller_ids.date_updated
+        score: 0.85
+        explanation: Direct mapping with high confidence; slight uncertainty due to
+          various update triggers across systems.
