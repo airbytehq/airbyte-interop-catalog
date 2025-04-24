@@ -1,0 +1,138 @@
+Table "active_users" {
+    "date" date [note: 'The date for which the active user data is reported']
+    "statistics" json [note: 'The statistics related to the active users for the given date']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "annotations" {
+    "date" date [note: 'The date when the annotation was made']
+    "details" varchar [note: 'Additional details or information related to the annotation']
+    "id" integer [note: 'The unique identifier for the annotation']
+    "label" varchar [note: 'The label assigned to the annotation']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "average_session_length" {
+    "date" timestamp [note: 'The date on which the session occurred']
+    "length" float [note: 'The duration of the session in seconds']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "cohorts" {
+    "appId" integer [note: 'The unique identifier of the application.']
+    "archived" boolean [note: 'Indicates if the cohort data is archived or not.']
+    "definition" json [note: 'The specific definition or criteria for the cohort.']
+    "description" varchar [note: 'A brief explanation or summary of the cohort data.']
+    "finished" boolean [note: 'Indicates if the cohort data has been finalized.']
+    "id" varchar [note: 'The unique identifier for the cohort.']
+    "name" varchar [note: 'The name or title of the cohort.']
+    "owners" array [note: 'The owners or administrators of the cohort.']
+    "published" boolean [note: 'Status indicating if the cohort data is published or not.']
+    "size" integer [note: 'Size or scale of the cohort data.']
+    "type" varchar [note: 'The type or category of the cohort.']
+    "lastMod" integer [note: 'Timestamp of the last modification made to the cohort.']
+    "lastComputed" integer [note: 'Timestamp of the last computation of cohort data.']
+    "hidden" boolean [note: 'Flag to determine if the cohort is hidden from view.']
+    "is_predictive" boolean [note: 'Flag to indicate if the cohort is predictive in nature.']
+    "is_official_content" boolean [note: 'Indicates if the cohort data is official content.']
+    "chart_id" varchar [note: 'The identifier of the chart associated with the cohort.']
+    "createdAt" integer [note: 'The timestamp when the cohort was created.']
+    "edit_id" varchar [note: 'The ID for editing purposes or version control.']
+    "last_viewed" integer [note: 'Timestamp when the cohort was last viewed.']
+    "location_id" varchar [note: 'Identifier of the location associated with the cohort.']
+    "metadata" array [note: 'Additional information or data related to the cohort.']
+    "popularity" integer [note: 'Popularity rank or score of the cohort.']
+    "shortcut_ids" array [note: 'Identifiers of any shortcuts associated with the cohort.']
+    "view_count" integer [note: 'The total count of views on the cohort data.']
+    "viewers" array [note: 'Users or viewers who have access to the cohort data.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "events" {
+    "server_received_time" timestamp [note: 'The timestamp when the event data was received by the server']
+    "app" integer [note: 'Information related to the application where the event originated']
+    "device_carrier" varchar [note: 'The mobile carrier used by the device']
+    "_schema" integer [note: 'The schema version used for the event data']
+    "city" varchar [note: 'The city where the event occurred']
+    "user_id" varchar [note: 'The unique identifier for the user']
+    "uuid" varchar [note: 'The universally unique identifier for the event']
+    "event_time" timestamp [note: 'The timestamp when the event occurred']
+    "platform" varchar [note: 'The platform where the event occurred (e.g., iOS, Android)']
+    "os_version" varchar [note: 'The version of the operating system on the user\'s device']
+    "amplitude_id" integer [note: 'The unique identifier assigned by Amplitude for the event']
+    "processed_time" timestamp [note: 'The timestamp when the event data was processed']
+    "user_creation_time" timestamp [note: 'The timestamp when the user account was created']
+    "version_name" varchar [note: 'The name or label of the version associated with the event']
+    "ip_address" varchar [note: 'The IP address from which the event was triggered']
+    "paying" boolean [note: 'Flag indicating if the user is a paying customer']
+    "dma" varchar [note: 'The Designated Market Area where the event occurred']
+    "group_properties" json [note: 'Properties related to grouping events']
+    "user_properties" json [note: 'Additional properties associated with the user']
+    "client_upload_time" timestamp [note: 'The timestamp when the event data was uploaded from the client to the server']
+    "_insert_id" varchar [note: 'The unique identifier assigned by Amplitude for each event insertion']
+    "event_type" varchar [note: 'The type/category of the event']
+    "library" varchar [note: 'Information about the library/version used for event tracking']
+    "amplitude_attribution_ids" varchar [note: 'IDs that Amplitude uses for attributing conversions to various ad networks']
+    "device_type" varchar [note: 'The type of device (e.g., smartphone, tablet)']
+    "device_manufacturer" varchar [note: 'The manufacturer of the device']
+    "start_version" varchar [note: 'The version at which the user started using the application']
+    "location_lng" float [note: 'Longitude coordinate of the event location']
+    "server_upload_time" timestamp [note: 'The timestamp when the event data was uploaded to the server']
+    "event_id" integer [note: 'The unique identifier assigned to the event']
+    "location_lat" float [note: 'Latitude coordinate of the event location']
+    "os_name" varchar [note: 'The name of the operating system on the user\'s device']
+    "amplitude_event_type" varchar [note: 'The specific type of event tracked by Amplitude']
+    "device_brand" varchar [note: 'The brand of the user\'s device']
+    "groups" json [note: 'Groups to which the event belongs']
+    "event_properties" json [note: 'Additional properties associated with the event']
+    "data" json [note: 'Custom data associated with the event']
+    "device_id" varchar [note: 'The unique identifier assigned to the device']
+    "language" varchar [note: 'The language set on the user\'s device']
+    "device_model" varchar [note: 'The model of the device']
+    "country" varchar [note: 'The country where the event occurred']
+    "region" varchar [note: 'The region where the event occurred']
+    "is_attribution_event" boolean [note: 'Flag indicating if the event is an attribution event']
+    "adid" varchar [note: 'The advertising identifier associated with the user\'s device']
+    "session_id" float [note: 'The unique identifier for the user session']
+    "device_family" varchar [note: 'The family of the device model']
+    "sample_rate" varchar [note: 'The sampling rate used for the event data']
+    "idfa" varchar [note: 'The Identifier for Advertisers associated with the user\'s device']
+    "client_event_time" timestamp [note: 'The timestamp when the event occurred on the client side']
+    "_insert_key" varchar [note: 'The key used for identifying the event insertion']
+    "data_type" varchar [note: 'The type of data associated with the event']
+    "plan" json [note: 'Information related to the user\'s plan']
+    "source_id" varchar [note: 'The unique identifier for the event source']
+    "partner_id" varchar [note: 'The unique identifier for a partner associated with the event']
+    "global_user_properties" json [note: 'Global properties associated with the user']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "events_list" {
+    "autohidden" boolean
+    "clusters_hidden" boolean
+    "deleted" boolean
+    "display" varchar
+    "flow_hidden" boolean
+    "hidden" boolean
+    "id" float
+    "in_waitroom" boolean
+    "name" varchar
+    "non_active" boolean
+    "timeline_hidden" boolean
+    "totals" float
+    "totals_delta" float
+    "value" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}

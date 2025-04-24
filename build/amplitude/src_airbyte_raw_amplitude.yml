@@ -1,0 +1,392 @@
+# This file was auto-generated using the morph cli.
+# Please do not edit manually.
+
+version: 2
+sources:
+  - name: amplitude
+    schema: "{{ var('airbyte_amplitude_schema', default='amplitude_raw') }}"
+    database: "{{ var('airbyte_amplitude_database', default='amplitude') }}"
+    tables:
+      - name: active_users
+        columns:
+          - name: date
+            description: The date for which the active user data is reported
+            data_type: date
+          - name: statistics
+            description: The statistics related to the active users for the given
+              date
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: annotations
+        columns:
+          - name: date
+            description: The date when the annotation was made
+            data_type: date
+          - name: details
+            description: Additional details or information related to the annotation
+            data_type: varchar
+          - name: id
+            description: The unique identifier for the annotation
+            data_type: integer
+          - name: label
+            description: The label assigned to the annotation
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: average_session_length
+        columns:
+          - name: date
+            description: The date on which the session occurred
+            data_type: timestamp
+          - name: length
+            description: The duration of the session in seconds
+            data_type: float
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: cohorts
+        columns:
+          - name: appId
+            description: The unique identifier of the application.
+            data_type: integer
+          - name: archived
+            description: Indicates if the cohort data is archived or not.
+            data_type: boolean
+          - name: definition
+            description: The specific definition or criteria for the cohort.
+            data_type: json
+          - name: description
+            description: A brief explanation or summary of the cohort data.
+            data_type: varchar
+          - name: finished
+            description: Indicates if the cohort data has been finalized.
+            data_type: boolean
+          - name: id
+            description: The unique identifier for the cohort.
+            data_type: varchar
+          - name: name
+            description: The name or title of the cohort.
+            data_type: varchar
+          - name: owners
+            description: The owners or administrators of the cohort.
+            data_type: array
+          - name: published
+            description: Status indicating if the cohort data is published or not.
+            data_type: boolean
+          - name: size
+            description: Size or scale of the cohort data.
+            data_type: integer
+          - name: type
+            description: The type or category of the cohort.
+            data_type: varchar
+          - name: lastMod
+            description: Timestamp of the last modification made to the cohort.
+            data_type: integer
+          - name: lastComputed
+            description: Timestamp of the last computation of cohort data.
+            data_type: integer
+          - name: hidden
+            description: Flag to determine if the cohort is hidden from view.
+            data_type: boolean
+          - name: is_predictive
+            description: Flag to indicate if the cohort is predictive in nature.
+            data_type: boolean
+          - name: is_official_content
+            description: Indicates if the cohort data is official content.
+            data_type: boolean
+          - name: chart_id
+            description: The identifier of the chart associated with the cohort.
+            data_type: varchar
+          - name: createdAt
+            description: The timestamp when the cohort was created.
+            data_type: integer
+          - name: edit_id
+            description: The ID for editing purposes or version control.
+            data_type: varchar
+          - name: last_viewed
+            description: Timestamp when the cohort was last viewed.
+            data_type: integer
+          - name: location_id
+            description: Identifier of the location associated with the cohort.
+            data_type: varchar
+          - name: metadata
+            description: Additional information or data related to the cohort.
+            data_type: array
+          - name: popularity
+            description: Popularity rank or score of the cohort.
+            data_type: integer
+          - name: shortcut_ids
+            description: Identifiers of any shortcuts associated with the cohort.
+            data_type: array
+          - name: view_count
+            description: The total count of views on the cohort data.
+            data_type: integer
+          - name: viewers
+            description: Users or viewers who have access to the cohort data.
+            data_type: array
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: events
+        columns:
+          - name: server_received_time
+            description: The timestamp when the event data was received by the server
+            data_type: timestamp
+          - name: app
+            description: Information related to the application where the event originated
+            data_type: integer
+          - name: device_carrier
+            description: The mobile carrier used by the device
+            data_type: varchar
+          - name: _schema
+            description: The schema version used for the event data
+            data_type: integer
+            meta:
+              original_name: $schema
+          - name: city
+            description: The city where the event occurred
+            data_type: varchar
+          - name: user_id
+            description: The unique identifier for the user
+            data_type: varchar
+          - name: uuid
+            description: The universally unique identifier for the event
+            data_type: varchar
+          - name: event_time
+            description: The timestamp when the event occurred
+            data_type: timestamp
+          - name: platform
+            description: The platform where the event occurred (e.g., iOS, Android)
+            data_type: varchar
+          - name: os_version
+            description: The version of the operating system on the user's device
+            data_type: varchar
+          - name: amplitude_id
+            description: The unique identifier assigned by Amplitude for the event
+            data_type: integer
+          - name: processed_time
+            description: The timestamp when the event data was processed
+            data_type: timestamp
+          - name: user_creation_time
+            description: The timestamp when the user account was created
+            data_type: timestamp
+          - name: version_name
+            description: The name or label of the version associated with the event
+            data_type: varchar
+          - name: ip_address
+            description: The IP address from which the event was triggered
+            data_type: varchar
+          - name: paying
+            description: Flag indicating if the user is a paying customer
+            data_type: boolean
+          - name: dma
+            description: The Designated Market Area where the event occurred
+            data_type: varchar
+          - name: group_properties
+            description: Properties related to grouping events
+            data_type: json
+          - name: user_properties
+            description: Additional properties associated with the user
+            data_type: json
+          - name: client_upload_time
+            description: The timestamp when the event data was uploaded from the client
+              to the server
+            data_type: timestamp
+          - name: _insert_id
+            description: The unique identifier assigned by Amplitude for each event
+              insertion
+            data_type: varchar
+            meta:
+              original_name: $insert_id
+          - name: event_type
+            description: The type/category of the event
+            data_type: varchar
+          - name: library
+            description: Information about the library/version used for event tracking
+            data_type: varchar
+          - name: amplitude_attribution_ids
+            description: IDs that Amplitude uses for attributing conversions to various
+              ad networks
+            data_type: varchar
+          - name: device_type
+            description: The type of device (e.g., smartphone, tablet)
+            data_type: varchar
+          - name: device_manufacturer
+            description: The manufacturer of the device
+            data_type: varchar
+          - name: start_version
+            description: The version at which the user started using the application
+            data_type: varchar
+          - name: location_lng
+            description: Longitude coordinate of the event location
+            data_type: float
+          - name: server_upload_time
+            description: The timestamp when the event data was uploaded to the server
+            data_type: timestamp
+          - name: event_id
+            description: The unique identifier assigned to the event
+            data_type: integer
+          - name: location_lat
+            description: Latitude coordinate of the event location
+            data_type: float
+          - name: os_name
+            description: The name of the operating system on the user's device
+            data_type: varchar
+          - name: amplitude_event_type
+            description: The specific type of event tracked by Amplitude
+            data_type: varchar
+          - name: device_brand
+            description: The brand of the user's device
+            data_type: varchar
+          - name: groups
+            description: Groups to which the event belongs
+            data_type: json
+          - name: event_properties
+            description: Additional properties associated with the event
+            data_type: json
+          - name: data
+            description: Custom data associated with the event
+            data_type: json
+          - name: device_id
+            description: The unique identifier assigned to the device
+            data_type: varchar
+          - name: language
+            description: The language set on the user's device
+            data_type: varchar
+          - name: device_model
+            description: The model of the device
+            data_type: varchar
+          - name: country
+            description: The country where the event occurred
+            data_type: varchar
+          - name: region
+            description: The region where the event occurred
+            data_type: varchar
+          - name: is_attribution_event
+            description: Flag indicating if the event is an attribution event
+            data_type: boolean
+          - name: adid
+            description: The advertising identifier associated with the user's device
+            data_type: varchar
+          - name: session_id
+            description: The unique identifier for the user session
+            data_type: float
+          - name: device_family
+            description: The family of the device model
+            data_type: varchar
+          - name: sample_rate
+            description: The sampling rate used for the event data
+            data_type: varchar
+          - name: idfa
+            description: The Identifier for Advertisers associated with the user's
+              device
+            data_type: varchar
+          - name: client_event_time
+            description: The timestamp when the event occurred on the client side
+            data_type: timestamp
+          - name: _insert_key
+            description: The key used for identifying the event insertion
+            data_type: varchar
+            meta:
+              original_name: $insert_key
+          - name: data_type
+            description: The type of data associated with the event
+            data_type: varchar
+          - name: plan
+            description: Information related to the user's plan
+            data_type: json
+            meta:
+              subcolumns:
+                - name: branch
+                  description: The branch of the user's plan
+                  data_type: varchar
+                - name: source
+                  description: The source of the user's plan
+                  data_type: varchar
+                - name: version
+                  description: The version of the user's plan
+                  data_type: varchar
+          - name: source_id
+            description: The unique identifier for the event source
+            data_type: varchar
+          - name: partner_id
+            description: The unique identifier for a partner associated with the event
+            data_type: varchar
+          - name: global_user_properties
+            description: Global properties associated with the user
+            data_type: json
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: events_list
+        columns:
+          - name: autohidden
+            data_type: boolean
+          - name: clusters_hidden
+            data_type: boolean
+          - name: deleted
+            data_type: boolean
+          - name: display
+            data_type: varchar
+          - name: flow_hidden
+            data_type: boolean
+          - name: hidden
+            data_type: boolean
+          - name: id
+            data_type: float
+          - name: in_waitroom
+            data_type: boolean
+          - name: name
+            data_type: varchar
+          - name: non_active
+            data_type: boolean
+          - name: timeline_hidden
+            data_type: boolean
+          - name: totals
+            data_type: float
+          - name: totals_delta
+            data_type: float
+          - name: value
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar

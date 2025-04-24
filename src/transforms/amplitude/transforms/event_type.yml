@@ -1,0 +1,141 @@
+domain: amplitude.airbyte-interop
+transforms:
+  - name: event_type
+    from:
+      - events_list: amplitude.events_list
+    fields:
+      _fivetran_deleted:
+        expression: MISSING
+        description: Timestamp of when Fivetran marked a record as deleted
+      _fivetran_synced:
+        expression: events_list._airbyte_extracted_at
+        description: Timestamp of when Fivetran synced a record
+      autohidden:
+        expression: events_list.autohidden
+        description: Whether event type is hidden
+      deleted:
+        expression: events_list.deleted
+        description: Whether event type is deleted
+      display:
+        expression: events_list.display
+        description: The display name of the event
+      flow_hidden:
+        expression: events_list.flow_hidden
+        description: If the event is hidden from Pathfinder/Pathfinder Users or not
+      hidden:
+        expression: events_list.hidden
+        description: If the event is hidden or not.
+      id:
+        expression: events_list.id
+        description: Event type ID
+      in_waitroom:
+        expression: events_list.in_waitroom
+        description: Whether event type is in waitroom
+      name:
+        expression: events_list.name
+        description: Event name
+      non_active:
+        expression: events_list.non_active
+        description: If the event is marked inactive or not
+      project_name:
+        expression: MISSING
+        description: Project name
+      timeline_hidden:
+        expression: events_list.timeline_hidden
+        description: If the event is hidden or not
+      totals:
+        expression: events_list.totals
+        description: The total number of times the event has happened this week
+      totals_delta:
+        expression: events_list.totals_delta
+        description: This represents the change in event volume from the previous
+          week.
+      value:
+        expression: events_list.value
+        description: Name of the event in the raw data.
+      waitroom_approved:
+        expression: MISSING
+        description: Waitroom approved
+annotations:
+  approved: false
+  missing_fields:
+    - _fivetran_deleted
+    - project_name
+    - waitroom_approved
+  evaluation:
+    source_stream_name: events_list
+    target_table_name: event_type
+    table_match_score: 0.85
+    completion_score: 0.94
+    explanation: The mappings generally align well with the target schema, with a
+      high degree of match confidence across the majority of fields.
+    field_mapping_evals:
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _fivetran_synced
+        expression: events_list._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping used.
+      - name: autohidden
+        expression: events_list.autohidden
+        score: 0.7
+        explanation: Field likely refers to the same concept as in the source schema.
+      - name: deleted
+        expression: events_list.deleted
+        score: 0.7
+        explanation: Field likely refers to the same concept as in the source schema.
+      - name: display
+        expression: events_list.display
+        score: 0.9
+        explanation: High-level match of display names of events.
+      - name: flow_hidden
+        expression: events_list.flow_hidden
+        score: 0.7
+        explanation: Field likely refers to similar visibility control.
+      - name: hidden
+        expression: events_list.hidden
+        score: 0.7
+        explanation: There is a high probability these fields mean the same thing
+          across schemas.
+      - name: id
+        expression: events_list.id
+        score: 0.95
+        explanation: Identifiers across systems are commonly synonymous.
+      - name: in_waitroom
+        expression: events_list.in_waitroom
+        score: 0.7
+        explanation: Likely describes similar allocation of event type to a waitroom.
+      - name: name
+        expression: events_list.name
+        score: 1.0
+        explanation: Perfect match of event names across systems.
+      - name: non_active
+        expression: events_list.non_active
+        score: 0.7
+        explanation: Refers to the same status of activity level, likely same use.
+      - name: project_name
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: timeline_hidden
+        expression: events_list.timeline_hidden
+        score: 0.7
+        explanation: Likely the same use in context of event visibility in timelines.
+      - name: totals
+        expression: events_list.totals
+        score: 0.8
+        explanation: Refers to aggregate numbers; closely matched concepts.
+      - name: totals_delta
+        expression: events_list.totals_delta
+        score: 0.8
+        explanation: Change in event volume is a directly comparable metric.
+      - name: value
+        expression: events_list.value
+        score: 1.0
+        explanation: Direct match of event descriptions.
+      - name: waitroom_approved
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
