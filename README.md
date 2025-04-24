@@ -2,7 +2,7 @@
 
 The Airbyte Interop Catalog is an [open source](./LICENSE.md), AI-powered catalog of resources which help users compare and convert data across different database schemas. The Interop Catalog contains tools, guides, and reusable dbt packages. See the [Catalog](./catalog/README.md) for a list of supported sources.
 
-## Transformation Catalog
+## Locating Catalog Resources
 
 See the [catalog](./catalog) directory for reusable dbt packages and data mapping guides. Browse this catalog to find and use transformation packages for various data sources.
 
