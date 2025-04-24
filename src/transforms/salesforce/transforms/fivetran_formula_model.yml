@@ -1,6 +1,0 @@
-domain: salesforce.airbyte-interop
-transforms:
-  - name: fivetran_formula_model
-    from:
-      - MISSING: salesforce.MISSING
-    fields: {}
