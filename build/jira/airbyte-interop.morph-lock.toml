@@ -1,0 +1,873 @@
+[project]
+source_name = "jira"
+project_name = "airbyte-interop"
+requirements_file = "build/jira/requirements/airbyte-interop/src_dbt_requirements.yml"
+requirements_file_hash = "3c25e359f5a6d729b88978497496cf6b279013d398d62dbe586e8e07a130fd8c"
+airbyte_source_file = "build/jira/src_airbyte_raw_jira.yml"
+airbyte_source_file_hash = "b9e1c347c7a9a2b09d230b7fc141a5e5a481f8497786872a700b4a0bfb31c398"
+
+[coverage]
+unused_source_streams = [
+    "application_roles",
+    "avatars",
+    "board_issues",
+    "boards",
+    "dashboards",
+    "filter_sharing",
+    "filters",
+    "groups",
+    "issue_custom_field_contexts",
+    "issue_field_configurations",
+    "issue_link_types",
+    "issue_navigator_settings",
+    "issue_notification_schemes",
+    "issue_properties",
+    "issue_remote_links",
+    "issue_security_schemes",
+    "issue_transitions",
+    "issue_type_schemes",
+    "issue_type_screen_schemes",
+    "issue_votes",
+    "issue_watchers",
+    "issue_worklogs",
+    "jira_settings",
+    "labels",
+    "permission_schemes",
+    "permissions",
+    "project_avatars",
+    "project_categories",
+    "project_email",
+    "project_permission_schemes",
+    "project_roles",
+    "project_types",
+    "screen_schemes",
+    "screen_tab_fields",
+    "screen_tabs",
+    "screens",
+    "sprint_issues",
+    "time_tracking",
+    "users_groups_detailed",
+    "workflow_schemes",
+    "workflows",
+]
+unmapped_target_tables = []
+
+[mappings.comment]
+source_file = "src/transforms/jira/transforms/comment.yml"
+source_file_hash = "6e5592cc279e1f5c68e4afb450b8ec654943ae28e04e2a123394e3e322fa2d5b"
+source_stream = "issue_comments"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.comment.mapped_target_fields]
+id = "issue_comments.id"
+author_id = "issue_comments.author"
+body = "issue_comments.body"
+created = "issue_comments.created"
+is_public = "issue_comments.jsdPublic"
+issue_id = "issue_comments.issueId"
+update_author_id = "issue_comments.updateAuthor"
+updated = "issue_comments.updated"
+
+[mappings.comment.unused_source_fields]
+issue_comments = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "properties",
+    "renderedBody",
+    "self",
+    "visibility",
+    "visibility.type",
+    "visibility.value",
+]
+
+[mappings.component]
+source_file = "src/transforms/jira/transforms/component.yml"
+source_file_hash = "5afdee5167e1c4ad764f1628c2c71a77c12c5099ce778e87db6c5e381f1c029b"
+source_stream = "project_components"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.component.mapped_target_fields]
+id = "project_components.id"
+description = "project_components.description"
+name = "project_components.name"
+project_id = "project_components.projectId"
+
+[mappings.component.unused_source_fields]
+project_components = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "assignee",
+    "assignee.accountId",
+    "assignee.accountType",
+    "assignee.active",
+    "assignee.applicationRoles",
+    "assignee.applicationRoles.callback",
+    "assignee.applicationRoles.items",
+    "assignee.applicationRoles.max-results",
+    "assignee.applicationRoles.pagingCallback",
+    "assignee.applicationRoles.size",
+    "assignee.avatarUrls",
+    "assignee.avatarUrls.16x16",
+    "assignee.avatarUrls.24x24",
+    "assignee.avatarUrls.32x32",
+    "assignee.avatarUrls.48x48",
+    "assignee.displayName",
+    "assignee.emailAddress",
+    "assignee.expand",
+    "assignee.groups",
+    "assignee.groups.callback",
+    "assignee.groups.items",
+    "assignee.groups.max-results",
+    "assignee.groups.pagingCallback",
+    "assignee.groups.size",
+    "assignee.key",
+    "assignee.locale",
+    "assignee.name",
+    "assignee.self",
+    "assignee.timeZone",
+    "assigneeType",
+    "componentBean",
+    "isAssigneeTypeValid",
+    "issueCount",
+    "lead",
+    "lead.accountId",
+    "lead.accountType",
+    "lead.active",
+    "lead.applicationRoles",
+    "lead.applicationRoles.callback",
+    "lead.applicationRoles.items",
+    "lead.applicationRoles.max-results",
+    "lead.applicationRoles.pagingCallback",
+    "lead.applicationRoles.size",
+    "lead.avatarUrls",
+    "lead.avatarUrls.16x16",
+    "lead.avatarUrls.24x24",
+    "lead.avatarUrls.32x32",
+    "lead.avatarUrls.48x48",
+    "lead.displayName",
+    "lead.emailAddress",
+    "lead.expand",
+    "lead.groups",
+    "lead.groups.callback",
+    "lead.groups.items",
+    "lead.groups.max-results",
+    "lead.groups.pagingCallback",
+    "lead.groups.size",
+    "lead.key",
+    "lead.locale",
+    "lead.name",
+    "lead.self",
+    "lead.timeZone",
+    "leadAccountId",
+    "leadUserName",
+    "project",
+    "realAssignee",
+    "realAssigneeType",
+    "self",
+]
+
+[mappings.field]
+source_file = "src/transforms/jira/transforms/field.yml"
+source_file_hash = "e8feddc6a8ec9c014472f896b1de3bddd279af422d7dfdab3b688d6a6ef9b1c4"
+source_stream = "issue_fields"
+unmapped_target_fields = [
+    "is_array",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.field.mapped_target_fields]
+id = "issue_fields.id"
+is_custom = "issue_fields.custom"
+name = "issue_fields.name"
+
+[mappings.field.unused_source_fields]
+issue_fields = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "clauseNames",
+    "key",
+    "navigable",
+    "orderable",
+    "schema",
+    "schema.configuration",
+    "schema.custom",
+    "schema.customId",
+    "schema.items",
+    "schema.system",
+    "schema.type",
+    "scope",
+    "scope.project",
+    "scope.project.avatarUrls",
+    "scope.project.avatarUrls.16x16",
+    "scope.project.avatarUrls.24x24",
+    "scope.project.avatarUrls.32x32",
+    "scope.project.avatarUrls.48x48",
+    "scope.project.id",
+    "scope.project.key",
+    "scope.project.name",
+    "scope.project.projectCategory",
+    "scope.project.projectCategory.description",
+    "scope.project.projectCategory.id",
+    "scope.project.projectCategory.name",
+    "scope.project.projectCategory.self",
+    "scope.project.projectTypeKey",
+    "scope.project.self",
+    "scope.project.simplified",
+    "scope.type",
+    "searchable",
+    "untranslatedName",
+]
+
+[mappings.field_option]
+source_file = "src/transforms/jira/transforms/field_option.yml"
+source_file_hash = "044e87f25e860e1ff93052b755e3b70719d15ca22706cb72e99855eb981c64a1"
+source_stream = "issue_custom_field_options"
+unmapped_target_fields = [
+    "parent_id",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = [
+    "name",
+]
+
+[mappings.field_option.mapped_target_fields]
+id = "issue_custom_field_options.id"
+name = "issue_custom_field_options.name"
+
+[mappings.field_option.unused_source_fields]
+issue_custom_field_options = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "contextId",
+    "disabled",
+    "fieldId",
+    "optionId",
+    "value",
+]
+
+[mappings.issue]
+source_file = "src/transforms/jira/transforms/issue.yml"
+source_file_hash = "e800ba00fdc4df5d2ab1b640e30d82c9a873656b0c21666160452394a7121292"
+source_stream = "issues"
+unmapped_target_fields = [
+    "_fivetran_deleted",
+    "parent_id",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = [
+    "fields.duedate",
+    "fields.environment",
+]
+
+[mappings.issue.mapped_target_fields]
+id = "issues.id"
+assignee = "issues.fields.assignee.accountId"
+created = "issues.fields.created"
+creator = "issues.fields.creator.accountId"
+description = "issues.fields.description.content"
+due_date = "issues.fields.duedate"
+environment = "issues.fields.environment"
+issue_type = "issues.fields.issuetype.id"
+key = "issues.key"
+last_viewed = "issues.fields.lastViewed"
+original_estimate = "issues.fields.timeoriginalestimate"
+priority = "issues.fields.priority.id"
+project = "issues.fields.project.id"
+remaining_estimate = "issues.fields.timeestimate"
+reporter = "issues.fields.reporter.accountId"
+resolution = "issues.fields.resolution.id"
+resolved = "issues.fields.resolutiondate"
+status = "issues.fields.status.id"
+status_category_changed = "issues.fields.statuscategorychangedate"
+summary = "issues.fields.summary"
+time_spent = "issues.fields.timespent"
+updated = "issues.fields.updated"
+work_ratio = "issues.fields.workratio"
+
+[mappings.issue.unused_source_fields]
+issues = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "changelog",
+    "changelog.histories",
+    "changelog.maxResults",
+    "changelog.startAt",
+    "changelog.total",
+    "created",
+    "editmeta",
+    "expand",
+    "fields",
+    "fields.aggregateprogress",
+    "fields.aggregateprogress.percent",
+    "fields.aggregateprogress.progress",
+    "fields.aggregateprogress.total",
+    "fields.aggregatetimeestimate",
+    "fields.aggregatetimeoriginalestimate",
+    "fields.aggregatetimespent",
+    "fields.assignee",
+    "fields.assignee.accountType",
+    "fields.assignee.active",
+    "fields.assignee.avatarUrls",
+    "fields.assignee.avatarUrls.16x16",
+    "fields.assignee.avatarUrls.24x24",
+    "fields.assignee.avatarUrls.32x32",
+    "fields.assignee.avatarUrls.48x48",
+    "fields.assignee.displayName",
+    "fields.assignee.emailAddress",
+    "fields.assignee.self",
+    "fields.assignee.timeZone",
+    "fields.attachment",
+    "fields.comment",
+    "fields.comment.comments",
+    "fields.comment.maxResults",
+    "fields.comment.self",
+    "fields.comment.startAt",
+    "fields.comment.total",
+    "fields.components",
+    "fields.creator",
+    "fields.creator.accountType",
+    "fields.creator.active",
+    "fields.creator.avatarUrls",
+    "fields.creator.avatarUrls.16x16",
+    "fields.creator.avatarUrls.24x24",
+    "fields.creator.avatarUrls.32x32",
+    "fields.creator.avatarUrls.48x48",
+    "fields.creator.displayName",
+    "fields.creator.emailAddress",
+    "fields.creator.self",
+    "fields.creator.timeZone",
+    "fields.description",
+    "fields.description.type",
+    "fields.description.version",
+    "fields.fixVersions",
+    "fields.issuelinks",
+    "fields.issuerestriction",
+    "fields.issuerestriction.issuerestrictions",
+    "fields.issuerestriction.shouldDisplay",
+    "fields.issuetype",
+    "fields.issuetype.avatarId",
+    "fields.issuetype.description",
+    "fields.issuetype.entityId",
+    "fields.issuetype.hierarchyLevel",
+    "fields.issuetype.iconUrl",
+    "fields.issuetype.name",
+    "fields.issuetype.self",
+    "fields.issuetype.subtask",
+    "fields.labels",
+    "fields.priority",
+    "fields.priority.iconUrl",
+    "fields.priority.name",
+    "fields.priority.self",
+    "fields.progress",
+    "fields.progress.percent",
+    "fields.progress.progress",
+    "fields.progress.total",
+    "fields.project",
+    "fields.project.avatarUrls",
+    "fields.project.avatarUrls.16x16",
+    "fields.project.avatarUrls.24x24",
+    "fields.project.avatarUrls.32x32",
+    "fields.project.avatarUrls.48x48",
+    "fields.project.key",
+    "fields.project.name",
+    "fields.project.projectCategory",
+    "fields.project.projectCategory.description",
+    "fields.project.projectCategory.id",
+    "fields.project.projectCategory.name",
+    "fields.project.projectCategory.self",
+    "fields.project.projectTypeKey",
+    "fields.project.self",
+    "fields.project.simplified",
+    "fields.reporter",
+    "fields.reporter.accountType",
+    "fields.reporter.active",
+    "fields.reporter.avatarUrls",
+    "fields.reporter.avatarUrls.16x16",
+    "fields.reporter.avatarUrls.24x24",
+    "fields.reporter.avatarUrls.32x32",
+    "fields.reporter.avatarUrls.48x48",
+    "fields.reporter.displayName",
+    "fields.reporter.emailAddress",
+    "fields.reporter.self",
+    "fields.reporter.timeZone",
+    "fields.resolution",
+    "fields.resolution.description",
+    "fields.resolution.name",
+    "fields.resolution.self",
+    "fields.status",
+    "fields.status.description",
+    "fields.status.iconUrl",
+    "fields.status.name",
+    "fields.status.self",
+    "fields.status.statusCategory",
+    "fields.status.statusCategory.colorName",
+    "fields.status.statusCategory.id",
+    "fields.status.statusCategory.key",
+    "fields.status.statusCategory.name",
+    "fields.status.statusCategory.self",
+    "fields.subtasks",
+    "fields.timetracking",
+    "fields.timetracking.originalEstimate",
+    "fields.timetracking.originalEstimateSeconds",
+    "fields.timetracking.remainingEstimate",
+    "fields.timetracking.remainingEstimateSeconds",
+    "fields.timetracking.timeSpent",
+    "fields.timetracking.timeSpentSeconds",
+    "fields.versions",
+    "fields.votes",
+    "fields.votes.hasVoted",
+    "fields.votes.self",
+    "fields.votes.votes",
+    "fields.watches",
+    "fields.watches.isWatching",
+    "fields.watches.self",
+    "fields.watches.watchCount",
+    "fields.worklog",
+    "fields.worklog.maxResults",
+    "fields.worklog.startAt",
+    "fields.worklog.total",
+    "fields.worklog.worklogs",
+    "fieldsToInclude",
+    "names",
+    "operations",
+    "projectId",
+    "projectKey",
+    "properties",
+    "renderedFields",
+    "renderedFields.aggregateprogress",
+    "renderedFields.aggregatetimeestimate",
+    "renderedFields.aggregatetimeoriginalestimate",
+    "renderedFields.aggregatetimespent",
+    "renderedFields.assignee",
+    "renderedFields.attachment",
+    "renderedFields.comment",
+    "renderedFields.comment.comments",
+    "renderedFields.comment.maxResults",
+    "renderedFields.comment.self",
+    "renderedFields.comment.startAt",
+    "renderedFields.comment.total",
+    "renderedFields.components",
+    "renderedFields.created",
+    "renderedFields.creator",
+    "renderedFields.description",
+    "renderedFields.duedate",
+    "renderedFields.environment",
+    "renderedFields.fixVersions",
+    "renderedFields.issuelinks",
+    "renderedFields.issuerestriction",
+    "renderedFields.issuetype",
+    "renderedFields.labels",
+    "renderedFields.lastViewed",
+    "renderedFields.priority",
+    "renderedFields.progress",
+    "renderedFields.project",
+    "renderedFields.reporter",
+    "renderedFields.resolution",
+    "renderedFields.resolutiondate",
+    "renderedFields.security",
+    "renderedFields.status",
+    "renderedFields.statuscategorychangedate",
+    "renderedFields.subtasks",
+    "renderedFields.summary",
+    "renderedFields.timeestimate",
+    "renderedFields.timeoriginalestimate",
+    "renderedFields.timespent",
+    "renderedFields.timetracking",
+    "renderedFields.updated",
+    "renderedFields.versions",
+    "renderedFields.votes",
+    "renderedFields.watches",
+    "renderedFields.worklog",
+    "renderedFields.worklog.maxResults",
+    "renderedFields.worklog.startAt",
+    "renderedFields.worklog.total",
+    "renderedFields.worklog.worklogs",
+    "renderedFields.workratio",
+    "schema",
+    "self",
+    "transitions",
+    "updated",
+    "versionedRepresentations",
+]
+
+[mappings.issue_field_history]
+source_file = "src/transforms/jira/transforms/issue_field_history.yml"
+source_file_hash = "2126c37d24a18e2a9320264fd7658fe4067de8ee46d320b413db30d2d5e1a83b"
+source_stream = "issue_custom_field_options"
+unmapped_target_fields = [
+    "issue_id",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.issue_field_history.mapped_target_fields]
+field_id = "issue_custom_field_options.fieldId"
+time = "issue_custom_field_options._airbyte_extracted_at"
+value = "issue_custom_field_options.value"
+
+[mappings.issue_field_history.unused_source_fields]
+issue_custom_field_options = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "contextId",
+    "disabled",
+    "id",
+    "optionId",
+]
+
+[mappings.issue_link]
+source_file = "src/transforms/jira/transforms/issue_link.yml"
+source_file_hash = "df647b9f5c61e8db7284909bac287fdf0df503f91fbda7cca813fc9c637c9911"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "issue_id",
+    "related_issue_id",
+    "relationship",
+]
+
+[mappings.issue_link.mapped_target_fields]
+
+[mappings.issue_link.unused_source_fields]
+
+[mappings.issue_link.omitted_target_fields]
+
+[mappings.issue_link.erroneous_source_table_columns]
+
+[mappings.issue_multiselect_history]
+source_file = "src/transforms/jira/transforms/issue_multiselect_history.yml"
+source_file_hash = "9cfdc06e480be2fdd4dd6418a5e2e3400d3af60dace07b729c7582e3be82d4b1"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "_fivetran_id",
+    "field_id",
+    "issue_id",
+    "time",
+    "value",
+]
+
+[mappings.issue_multiselect_history.mapped_target_fields]
+
+[mappings.issue_multiselect_history.unused_source_fields]
+
+[mappings.issue_multiselect_history.omitted_target_fields]
+
+[mappings.issue_multiselect_history.erroneous_source_table_columns]
+
+[mappings.issue_type]
+source_file = "src/transforms/jira/transforms/issue_type.yml"
+source_file_hash = "e4fd52fd436eb9afb5b64d264f5c6ee76f7ca9e9af42d9adde0d4ee0cf8e4579"
+source_stream = "issue_types"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.issue_type.mapped_target_fields]
+id = "issue_types.id"
+description = "issue_types.description"
+name = "issue_types.name"
+subtask = "issue_types.subtask"
+
+[mappings.issue_type.unused_source_fields]
+issue_types = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "avatarId",
+    "entityId",
+    "hierarchyLevel",
+    "iconUrl",
+    "scope",
+    "scope.project",
+    "scope.project.avatarUrls",
+    "scope.project.avatarUrls.16x16",
+    "scope.project.avatarUrls.24x24",
+    "scope.project.avatarUrls.32x32",
+    "scope.project.avatarUrls.48x48",
+    "scope.project.id",
+    "scope.project.key",
+    "scope.project.name",
+    "scope.project.projectCategory",
+    "scope.project.projectCategory.description",
+    "scope.project.projectCategory.id",
+    "scope.project.projectCategory.name",
+    "scope.project.projectCategory.self",
+    "scope.project.projectTypeKey",
+    "scope.project.self",
+    "scope.project.simplified",
+    "scope.type",
+    "self",
+    "untranslatedName",
+]
+
+[mappings.priority]
+source_file = "src/transforms/jira/transforms/priority.yml"
+source_file_hash = "bf4529a413d99056f47646e0bf3d3015da3c6be40023866b3b425bfea4e37235"
+source_stream = "issue_priorities"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.priority.mapped_target_fields]
+id = "issue_priorities.id"
+description = "issue_priorities.description"
+name = "issue_priorities.name"
+
+[mappings.priority.unused_source_fields]
+issue_priorities = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "iconUrl",
+    "isDefault",
+    "self",
+    "statusColor",
+]
+
+[mappings.project]
+source_file = "src/transforms/jira/transforms/project.yml"
+source_file_hash = "6d6c041ea791aeb4cd2ab4dee8819dba2589cd9c2b76ab174e30d0e95942c910"
+source_stream = "projects"
+unmapped_target_fields = [
+    "lead_id",
+    "permission_scheme_id",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.project.mapped_target_fields]
+id = "projects.id"
+description = "projects.description"
+key = "projects.key"
+name = "projects.name"
+project_category_id = "projects.projectCategory"
+project_type_key = "projects.projectTypeKey"
+
+[mappings.project.unused_source_fields]
+projects = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "archived",
+    "archivedBy",
+    "archivedDate",
+    "assigneeType",
+    "avatarUrls",
+    "components",
+    "deleted",
+    "deletedBy",
+    "deletedDate",
+    "email",
+    "entityId",
+    "expand",
+    "favourite",
+    "insight",
+    "isPrivate",
+    "issueTypeHierarchy",
+    "issueTypes",
+    "lead",
+    "permissions",
+    "properties",
+    "retentionTillDate",
+    "roles",
+    "self",
+    "simplified",
+    "style",
+    "url",
+    "uuid",
+    "versions",
+]
+
+[mappings.resolution]
+source_file = "src/transforms/jira/transforms/resolution.yml"
+source_file_hash = "45e9616755b21a0d373f07688570bc345b2e69fac6f65a43de26b932c066a254"
+source_stream = "issue_resolutions"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.resolution.mapped_target_fields]
+id = "issue_resolutions.id"
+description = "issue_resolutions.description"
+name = "issue_resolutions.name"
+
+[mappings.resolution.unused_source_fields]
+issue_resolutions = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "isDefault",
+    "self",
+]
+
+[mappings.sprint]
+source_file = "src/transforms/jira/transforms/sprint.yml"
+source_file_hash = "e227465205b2eddc0461ea4fd27930739ffa3bbea2af6d3bf5ac7eeaedac7bf6"
+source_stream = "sprints"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.sprint.mapped_target_fields]
+id = "sprints.id"
+board_id = "sprints.boardId"
+complete_date = "sprints.completeDate"
+end_date = "sprints.endDate"
+name = "sprints.name"
+start_date = "sprints.startDate"
+
+[mappings.sprint.unused_source_fields]
+sprints = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "createdDate",
+    "goal",
+    "originBoardId",
+    "self",
+    "state",
+]
+
+[mappings.status]
+source_file = "src/transforms/jira/transforms/status.yml"
+source_file_hash = "322d4a4d04f239e8d27a83c8cca10588204c1671f21743719a295332ff892d0d"
+source_stream = "workflow_statuses"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.status.mapped_target_fields]
+id = "workflow_statuses.id"
+description = "workflow_statuses.description"
+name = "workflow_statuses.name"
+status_category_id = "workflow_statuses.statusCategory.id"
+
+[mappings.status.unused_source_fields]
+workflow_statuses = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "iconUrl",
+    "scope",
+    "self",
+    "statusCategory",
+    "statusCategory.colorName",
+    "statusCategory.key",
+    "statusCategory.name",
+    "statusCategory.self",
+    "untranslatedName",
+]
+
+[mappings.status_category]
+source_file = "src/transforms/jira/transforms/status_category.yml"
+source_file_hash = "daf2a2546ebb7cd98d7920cb56167715828ca09c988a95a558b2fe2fd3665cf2"
+source_stream = "workflow_status_categories"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.status_category.mapped_target_fields]
+id = "workflow_status_categories.id"
+name = "workflow_status_categories.name"
+
+[mappings.status_category.unused_source_fields]
+workflow_status_categories = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "colorName",
+    "key",
+    "self",
+]
+
+[mappings.user]
+source_file = "src/transforms/jira/transforms/user.yml"
+source_file_hash = "f3c25e6281b9dbc79d3474ac45cf576e0ca398e01243c9a9503deb0421fe2978"
+source_stream = "users"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.user.mapped_target_fields]
+id = "users.accountId"
+email = "users.emailAddress"
+locale = "users.locale"
+name = "users.name"
+time_zone = "users.timeZone"
+username = "users.key"
+
+[mappings.user.unused_source_fields]
+users = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "accountType",
+    "active",
+    "applicationRoles",
+    "applicationRoles.callback",
+    "applicationRoles.items",
+    "applicationRoles.max-results",
+    "applicationRoles.pagingCallback",
+    "applicationRoles.size",
+    "avatarUrls",
+    "avatarUrls.16x16",
+    "avatarUrls.24x24",
+    "avatarUrls.32x32",
+    "avatarUrls.48x48",
+    "displayName",
+    "expand",
+    "groups",
+    "groups.callback",
+    "groups.items",
+    "groups.max-results",
+    "groups.pagingCallback",
+    "groups.size",
+    "self",
+]
+
+[mappings.version]
+source_file = "src/transforms/jira/transforms/version.yml"
+source_file_hash = "295a0d160c82de5327b2a2b1757be2b7d20b279db485b7ab9fdb60e588704ade"
+source_stream = "project_versions"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.version.mapped_target_fields]
+archived = "project_versions.archived"
+description = "project_versions.description"
+id = "project_versions.id"
+name = "project_versions.name"
+overdue = "project_versions.overdue"
+project_id = "project_versions.projectId"
+release_date = "project_versions.releaseDate"
+released = "project_versions.released"
+start_date = "project_versions.startDate"
+
+[mappings.version.unused_source_fields]
+project_versions = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "expand",
+    "issuesStatusForFixVersion",
+    "issuesStatusForFixVersion.done",
+    "issuesStatusForFixVersion.inProgress",
+    "issuesStatusForFixVersion.toDo",
+    "issuesStatusForFixVersion.unmapped",
+    "moveUnfixedIssuesTo",
+    "operations",
+    "project",
+    "self",
+    "userReleaseDate",
+    "userStartDate",
+]

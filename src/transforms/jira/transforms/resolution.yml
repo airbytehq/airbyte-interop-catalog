@@ -1,0 +1,45 @@
+domain: jira.airbyte-interop
+transforms:
+  - name: resolution
+    from:
+      - issue_resolutions: jira.issue_resolutions
+    fields:
+      id:
+        expression: issue_resolutions.id
+        description: Unique ID of the resolution type.
+      description:
+        expression: issue_resolutions.description
+        description: Description given to the resolution.
+      name:
+        expression: issue_resolutions.name
+        description: Display name of the resolution.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: issue_resolutions
+    target_table_name: resolution
+    table_match_score: 0.7
+    completion_score: 0.9
+    explanation: The table match score is high as the source and target tables appear
+      to describe the same type of information about issue resolutions. Completion
+      score is good, reflecting the complete mapping of all major fields which hold
+      significant information and meaning between the source and target schemes. The
+      given expressions map directly to the source fields, ensuring a high integrity
+      of data translation.
+    field_mapping_evals:
+      - name: id
+        expression: issue_resolutions.id
+        score: 1.0
+        explanation: Perfect direct mapping from 'issue_resolutions.id' to 'id' with
+          exact field name match and alignment in meaning.
+      - name: description
+        expression: issue_resolutions.description
+        score: 1.0
+        explanation: Direct mapping from 'issue_resolutions.description' to 'description'.
+          The expressions and meanings are identical.
+      - name: name
+        expression: issue_resolutions.name
+        score: 1.0
+        explanation: Direct mapping from 'issue_resolutions.name' to 'name'. The field
+          names and meanings align perfectly.

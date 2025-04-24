@@ -1,0 +1,80 @@
+domain: jira.airbyte-interop
+transforms:
+  - name: project
+    from:
+      - projects: jira.projects
+    fields:
+      id:
+        expression: projects.id
+        description: Unique ID of the project.
+      description:
+        expression: projects.description
+        description: Description of the project, if given.
+      key:
+        expression: projects.key
+        description: UI-facing ID of the project. This becomes the default prefix
+          for tasks created within this project.
+      lead_id:
+        expression: MISSING
+        description: Foreign key referencing the ID of the `user` who leads this project.
+      name:
+        expression: projects.name
+        description: Title of the project.
+      permission_scheme_id:
+        expression: MISSING
+        description: Foreign key referencing the ID of the `permission_scheme` that
+          the project ascribes to.
+      project_category_id:
+        expression: projects.projectCategory
+        description: Foreign key referencing the ID of the `project_category` that
+          the project is associated with, if any.
+      project_type_key:
+        expression: projects.projectTypeKey
+        description: ID of the type of project (ie 'software').
+annotations:
+  approved: true
+  missing_fields:
+    - lead_id
+    - permission_scheme_id
+  evaluation:
+    source_stream_name: projects
+    target_table_name: project
+    table_match_score: 0.7
+    completion_score: 0.57
+    explanation: The table match is moderately confident due to consistent naming
+      and contextual overlap, but the completion score is lowered by two 'MISSING'
+      mappings which indicate incomplete data correspondence.
+    field_mapping_evals:
+      - name: id
+        expression: projects.id
+        score: 1.0
+        explanation: Direct match on naming and usage context.
+      - name: description
+        expression: projects.description
+        score: 1.0
+        explanation: Direct match on naming and usage context.
+      - name: key
+        expression: projects.key
+        score: 1.0
+        explanation: Direct match on naming and usage context.
+      - name: lead_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: name
+        expression: projects.name
+        score: 1.0
+        explanation: Direct match on naming and usage context.
+      - name: permission_scheme_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: project_category_id
+        expression: projects.projectCategory
+        score: 1.0
+        explanation: Direct match on naming and usage context.
+      - name: project_type_key
+        expression: projects.projectTypeKey
+        score: 0.7
+        explanation: Moderate confidence due to partial match of wording and use case,
+          although there might be contextually different uses in different systems.

@@ -1,0 +1,62 @@
+domain: jira.airbyte-interop
+transforms:
+  - name: user
+    from:
+      - users: jira.users
+    fields:
+      id:
+        expression: users.accountId
+        description: Unique ID of the user.
+      email:
+        expression: users.emailAddress
+        description: Email associated with the user account.
+      locale:
+        expression: users.locale
+        description: The Java locale of the user.
+      name:
+        expression: users.name
+        description: Name of the user as it appears in the UI.
+      time_zone:
+        expression: users.timeZone
+        description: The user's timezone, as defined in their settings.
+      username:
+        expression: users.key
+        description: Account username.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: users
+    target_table_name: user
+    table_match_score: 0.85
+    completion_score: 1.0
+    explanation: Overall, the mappings provided are both comprehensive and accurately
+      matched to relevant fields. Each field from the source aligns closely with the
+      intended target mapping, ensuring data integrity and meaning are maintained.
+    field_mapping_evals:
+      - name: id
+        expression: users.accountId
+        score: 1.0
+        explanation: Perfect one-to-one mapping of unique identifiers.
+      - name: email
+        expression: users.emailAddress
+        score: 1.0
+        explanation: Direct correspondence between user emails.
+      - name: locale
+        expression: users.locale
+        score: 0.95
+        explanation: Locale settings matched exactly, minor considerations for format
+          differences.
+      - name: name
+        expression: users.name
+        score: 0.95
+        explanation: Names are mapped directly and effectively.
+      - name: time_zone
+        expression: users.timeZone
+        score: 0.95
+        explanation: Timezone data matched with high confidence.
+      - name: username
+        expression: users.key
+        score: 0.9
+        explanation: Username keys are matched, slight ambiguity in term usage but
+          highly likely to be correct.

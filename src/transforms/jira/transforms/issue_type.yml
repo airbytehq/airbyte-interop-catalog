@@ -1,0 +1,46 @@
+domain: jira.airbyte-interop
+transforms:
+  - name: issue_type
+    from:
+      - issue_types: jira.issue_types
+    fields:
+      id:
+        expression: issue_types.id
+        description: Unique ID of the issue type.
+      description:
+        expression: issue_types.description
+        description: Project-level description given to the issue type.
+      name:
+        expression: issue_types.name
+        description: Name of the issue type (ie Epic, Task, Subtask, any custom types)
+      subtask:
+        expression: issue_types.subtask
+        description: Boolean that is true if this type of issue is a subtask.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: issue_types
+    target_table_name: issue_type
+    table_match_score: 0.9
+    completion_score: 0.75
+    explanation: The table match score is high due to the strong mapping between the
+      source and target schemas. However, the completion score is slightly lower as
+      not all source fields have been populated perfectly.
+    field_mapping_evals:
+      - name: id
+        expression: issue_types.id
+        score: 1.0
+        explanation: Perfect match for identity column.
+      - name: description
+        expression: issue_types.description
+        score: 0.8
+        explanation: Good lexical match for descriptive fields.
+      - name: name
+        expression: issue_types.name
+        score: 0.9
+        explanation: Exact textual match with very clear meaning alignment.
+      - name: subtask
+        expression: issue_types.subtask
+        score: 1.0
+        explanation: Direct and clear corresponding boolean field with identical purpose.

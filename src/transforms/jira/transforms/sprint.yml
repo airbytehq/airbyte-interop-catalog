@@ -1,0 +1,63 @@
+domain: jira.airbyte-interop
+transforms:
+  - name: sprint
+    from:
+      - sprints: jira.sprints
+    fields:
+      id:
+        expression: sprints.id
+        description: Unique ID of the sprint.
+      board_id:
+        expression: sprints.boardId
+        description: Foreign key referencing the ID of the `board` that the sprint
+          lives in.
+      complete_date:
+        expression: sprints.completeDate
+        description: Timestamp of when the sprint was completed.
+      end_date:
+        expression: sprints.endDate
+        description: Timestamp of when the sprint is planned to end.
+      name:
+        expression: sprints.name
+        description: Title of the sprint.
+      start_date:
+        expression: sprints.startDate
+        description: Timestamp of when the sprint began.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: sprints
+    target_table_name: sprint
+    table_match_score: 0.9
+    completion_score: 0.8
+    explanation: The table match score is high, indicating a strong match between
+      the source and target tables. The completion score reflects that most fields
+      are accurately mapped, although there are some fields not perfectly aligned.
+    field_mapping_evals:
+      - name: id
+        expression: sprints.id
+        score: 1.0
+        explanation: Exact match on field names and description.
+      - name: board_id
+        expression: sprints.boardId
+        score: 1.0
+        explanation: Fields directly match by description and name alignment.
+      - name: complete_date
+        expression: sprints.completeDate
+        score: 0.95
+        explanation: High confidence match due to identical column naming conventions
+          and compatible data format.
+      - name: end_date
+        expression: sprints.endDate
+        score: 0.95
+        explanation: High confidence due to identical definitions across schemas.
+      - name: name
+        expression: sprints.name
+        score: 1.0
+        explanation: Direct match on field name with exact alignment in meaning.
+      - name: start_date
+        expression: sprints.startDate
+        score: 0.9
+        explanation: The field names are nearly identical, and descriptions suggest
+          the same usage scenario.

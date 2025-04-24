@@ -1,0 +1,812 @@
+Table "application_roles" {
+    "key" varchar [note: 'The key identifier of the application role.']
+    "groups" array [note: 'The groups associated with the application role.']
+    "name" varchar [note: 'The display name of the application role.']
+    "defaultGroups" array [note: 'The groups that are granted default access for this application role.']
+    "selectedByDefault" boolean [note: 'Determines if this application role should be selected by default on user creation.']
+    "defined" boolean [note: 'Deprecated.']
+    "numberOfSeats" integer [note: 'The maximum count of users allowed on the license.']
+    "remainingSeats" integer [note: 'The count of remaining user seats on the license.']
+    "userCount" integer [note: 'The total count of users that are counted against the license limit.']
+    "userCountDescription" varchar [note: 'Describes the type of users being counted against your license. For more information, refer to the provided link.']
+    "hasUnlimitedSeats" boolean [note: 'Indicates if the application role has unlimited user seats.']
+    "platform" boolean [note: 'Indicates if the application role belongs to Jira platform (`jira-core`).']
+    "groupDetails" array [note: 'Details about the groups associated with the application role.']
+    "defaultGroupsDetails" array [note: 'Details of default groups assigned to application roles.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "avatars" {
+    "id" varchar [note: 'The ID of the avatar.']
+    "owner" varchar [note: 'The owner of the avatar. For a system avatar, the owner is null (and nothing is returned). For non-system avatars, this is the appropriate identifier, such as the ID for a project or the account ID for a user.']
+    "isSystemAvatar" boolean [note: 'Whether the avatar is a system avatar.']
+    "isSelected" boolean [note: 'Whether the avatar is used in Jira. For example, shown as a project\'s avatar.']
+    "isDeletable" boolean [note: 'Whether the avatar can be deleted.']
+    "fileName" varchar [note: 'The file name of the avatar icon. Returned for system avatars.']
+    "urls" json [note: 'The list of avatar icon URLs.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "board_issues" {
+    "expand" varchar [note: 'A parameter indicating the details to be included in the response']
+    "id" varchar [note: 'The unique identifier of the issue']
+    "self" varchar [note: 'URL of the issue']
+    "key" varchar [note: 'The unique key of the issue']
+    "fields" json [note: 'Fields associated with the issues on the board']
+    "boardId" integer [note: 'The unique identifier of the board where the issue belongs']
+    "created" timestamp [note: 'The date and time when the issue was created']
+    "updated" timestamp [note: 'The date and time when the issue was last updated']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "boards" {
+    "id" integer [note: 'Unique identifier of the board.']
+    "self" varchar [note: 'URI that points to the board data.']
+    "name" varchar [note: 'Name of the board.']
+    "type" varchar [note: 'Type of the board.']
+    "projectId" varchar [note: 'ID of the project to which the board belongs.']
+    "projectKey" varchar [note: 'Key of the project to which the board belongs.']
+    "location" json [note: 'Information about the location of the board.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "dashboards" {
+    "description" varchar [note: 'The description of the dashboard.']
+    "id" varchar [note: 'The ID of the dashboard.']
+    "isFavourite" boolean [note: 'Indicates whether the dashboard is marked as a favorite by the user.']
+    "name" varchar [note: 'The name of the dashboard.']
+    "owner" json [note: 'Details of the owner of the dashboard.']
+    "popularity" integer [note: 'The number of users who have marked this dashboard as a favorite.']
+    "rank" integer [note: 'The rank of the dashboard.']
+    "self" varchar [note: 'The URL of the dashboard details.']
+    "sharePermissions" array [note: 'Details of any share permissions for the dashboard.']
+    "view" varchar [note: 'The URL of the dashboard.']
+    "editpermission" array [note: 'List of items representing the specific edit permissions assigned for the dashboard.']
+    "isWritable" boolean [note: 'Indicates whether the dashboard is writable.']
+    "systemDashboard" boolean [note: 'Information about the system dashboard.']
+    "editPermissions" array [note: 'Details about the users/groups who have edit permissions for the dashboard.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "filter_sharing" {
+    "id" integer [note: 'The unique identifier of the share permission.']
+    "filterId" varchar [note: 'Id of the related filter']
+    "type" varchar [note: '''The type of share permission:
+
+     *  `group` Shared with a group. If set in a request, then specify `sharePermission.group` as well.
+     *  `project` Shared with a project. If set in a request, then specify `sharePermission.project` as well.
+     *  `projectRole` Share with a project role in a project. This value is not returned in responses. It is used in requests, where it needs to be specify with `projectId` and `projectRoleId`.
+     *  `global` Shared globally. If set in a request, no other `sharePermission` properties need to be specified.
+     *  `loggedin` Shared with all logged-in users. Note: This value is set in a request by specifying `authenticated` as the `type`.
+     *  `project-unknown` Shared with a project that the user does not have access to. Cannot be set in a request.''']
+    "project" json [note: '''The project that the filter is shared with. This is similar to the project object returned by [Get project](#api-rest-api-3-project-projectIdOrKey-get) but it contains a subset of the properties, which are: `self`, `id`, `key`, `assigneeType`, `name`, `roles`, `avatarUrls`, `projectType`, `simplified`.  
+    For a request, specify the `id` for the project.''']
+    "role" json [note: '''The project role that the filter is shared with.  
+    For a request, specify the `id` for the role. You must also specify the `project` object and `id` for the project that the role is in.''']
+    "group" json [note: 'The group that the filter is shared with. For a request, specify the `name` property for the group.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "filters" {
+    "expand" varchar [note: 'Expands the additional information about the filter']
+    "self" varchar [note: 'The URL of the filter.']
+    "id" varchar [note: 'The unique identifier for the filter.']
+    "name" varchar [note: 'The name of the filter. Must be unique.']
+    "description" varchar [note: 'A description of the filter.']
+    "owner" json [note: 'The user who owns the filter. This is defaulted to the creator of the filter, however Jira administrators can change the owner of a shared filter in the admin settings.']
+    "jql" varchar [note: 'The JQL query for the filter. For example, *project = SSP AND issuetype = Bug*.']
+    "viewUrl" varchar [note: 'A URL to view the filter results in Jira, using the ID of the filter. For example, *https://your-domain.atlassian.net/issues/?filter=10100*.']
+    "searchUrl" varchar [note: 'A URL to view the filter results in Jira, using the [Search for issues using JQL](#api-rest-api-3-filter-search-get) operation with the filter\'s JQL string to return the filter results. For example, *https://your-domain.atlassian.net/rest/api/3/search?jql=project+%3D+SSP+AND+issuetype+%3D+Bug*.']
+    "favourite" boolean [note: 'Whether the filter is selected as a favorite by any users, not including the filter owner.']
+    "favouritedCount" integer [note: 'The count of how many users have selected this filter as a favorite, including the filter owner.']
+    "sharePermissions" array [note: 'The groups and projects that the filter is shared with. This can be specified when updating a filter, but not when creating a filter.']
+    "isWritable" boolean [note: 'Indicates if the filter is writable or read-only']
+    "approximateLastUsed" timestamp [note: 'The approximate last time the filter was used']
+    "subscriptions" array [note: 'The users that are subscribed to the filter.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "groups" {
+    "name" varchar [note: 'The name of the group.']
+    "groupId" varchar [note: 'The ID of the group, if available, which uniquely identifies the group across all Atlassian products. For example, *952d12c3-5b5b-4d04-bb32-44d383afc4b2*.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "issue_comments" {
+    "self" varchar [note: 'The URL of the comment.']
+    "id" varchar [note: 'The ID of the comment.']
+    "issueId" varchar [note: 'Id of the related issue.']
+    "author" varchar [note: 'The ID of the user who created the comment.']
+    "body" json [note: 'The comment text in Atlassian Document Format.']
+    "renderedBody" varchar [note: 'The rendered version of the comment.']
+    "updateAuthor" json [note: 'The ID of the user who updated the comment last.']
+    "created" timestamp [note: 'The date and time at which the comment was created.']
+    "updated" timestamp [note: 'The date and time at which the comment was updated last.']
+    "visibility" json [note: 'The group or role to which this item is visible.']
+    "jsdPublic" boolean [note: 'Whether the comment is visible in Jira Service Desk. Defaults to true when comments are created in the Jira Cloud Platform.']
+    "properties" array [note: 'A list of comment properties. Optional on create and update.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "issue_custom_field_contexts" {
+    "id" varchar [note: 'The ID of the context.']
+    "fieldId" varchar [note: 'Id of the related field']
+    "name" varchar [note: 'The name of the context.']
+    "description" varchar [note: 'The description of the context.']
+    "isGlobalContext" boolean [note: 'Whether the context is global.']
+    "isAnyIssueType" boolean [note: 'Whether the context applies to all issue types.']
+    "fieldType" varchar [note: 'The type of the related field']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "issue_custom_field_options" {
+    "id" varchar [note: 'The ID of the custom field option.']
+    "value" varchar [note: 'The value of the custom field option.']
+    "optionId" varchar [note: 'For cascading options, the ID of the custom field option containing the cascading option.']
+    "disabled" boolean [note: 'Whether the option is disabled.']
+    "fieldId" varchar [note: 'The ID of the custom field to which the option belongs.']
+    "contextId" varchar [note: 'The ID of the context to which the custom field option belongs.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "issue_field_configurations" {
+    "id" integer [note: 'The ID of the field configuration.']
+    "name" varchar [note: 'The name of the field configuration.']
+    "description" varchar [note: 'The description of the field configuration.']
+    "isDefault" boolean [note: 'Whether the field configuration is the default.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "issue_fields" {
+    "id" varchar [note: 'The ID of the field.']
+    "key" varchar [note: 'The key of the field.']
+    "name" varchar [note: 'The name of the field.']
+    "custom" boolean [note: 'Whether the field is a custom field.']
+    "orderable" boolean [note: 'Whether the content of the field can be used to order lists.']
+    "navigable" boolean [note: 'Whether the field can be used as a column on the issue navigator.']
+    "searchable" boolean [note: 'Whether the content of the field can be searched.']
+    "clauseNames" array [note: 'The names that can be used to reference the field in an advanced search. For more information, see [Advanced searching - fields reference](https://confluence.atlassian.com/x/gwORLQ).']
+    "scope" json [note: 'The scope of the field.']
+    "schema" json [note: 'The data schema for the field.']
+    "untranslatedName" varchar [note: 'The untranslated name of the field.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "issue_link_types" {
+    "id" varchar [note: 'The ID of the issue link type. Used as the type of issue link in `issueLink` resource. Required on create when `name` isn\'t provided. Otherwise, read only.']
+    "name" varchar [note: 'The name of the issue link type. Used as the type of issue link in `issueLink` resource. Required on create when `id` isn\'t provided. Otherwise, read only.']
+    "inward" varchar [note: 'The description of the issue link type inward link. Read only in `issueLink` resource. Required on create and optional on update in `issueLinkType` resource. Otherwise, read only.']
+    "outward" varchar [note: 'The description of the issue link type outward link. Read only in `issueLink` resource. Required on create and optional on update in `issueLinkType` resource. Otherwise, read only.']
+    "self" varchar [note: 'The URL of the issue link type. Read only.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "issue_navigator_settings" {
+    "label" varchar [note: 'The label representing the data displayed in the issue navigator column.']
+    "value" varchar [note: 'The actual value/data associated with the label in the issue navigator column.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "issue_notification_schemes" {
+    "expand" varchar [note: 'Expand options that include additional notification scheme details in the response.']
+    "id" integer [note: 'The ID of the notification scheme.']
+    "self" varchar
+    "name" varchar [note: 'The name of the notification scheme.']
+    "description" varchar [note: 'The description of the notification scheme.']
+    "notificationSchemeEvents" array [note: 'The notification events and associated recipients.']
+    "scope" json [note: 'The scope of the notification scheme.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "issue_priorities" {
+    "self" varchar [note: 'The URL of the issue priority.']
+    "statusColor" varchar [note: 'The color used to indicate the issue priority.']
+    "description" varchar [note: 'The description of the issue priority.']
+    "iconUrl" varchar [note: 'The URL of the icon for the issue priority.']
+    "name" varchar [note: 'The name of the issue priority.']
+    "id" varchar [note: 'The ID of the issue priority.']
+    "isDefault" boolean [note: 'Indicates if this issue priority is the default.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "issue_properties" {
+    "key" varchar [note: 'The key of the property. Required on create and update.']
+    "issueId" varchar [note: 'Id of the related issue.']
+    "value" varchar [note: 'The value of the property. Required on create and update.']
+    "isdefault" boolean [note: 'Indicates if the property is the default property.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "issue_remote_links" {
+    "id" integer [note: 'The ID of the link.']
+    "issueId" varchar [note: 'Id of the related issue.']
+    "self" varchar [note: 'The URL of the link.']
+    "globalId" varchar [note: 'The global ID of the link, such as the ID of the item on the remote system.']
+    "application" json [note: 'Details of the remote application the linked item is in.']
+    "relationship" varchar [note: 'Description of the relationship between the issue and the linked item.']
+    "object" json [note: 'Details of the item linked to.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "issue_resolutions" {
+    "self" varchar [note: 'The URL of the issue resolution.']
+    "id" varchar [note: 'The ID of the issue resolution.']
+    "description" varchar [note: 'The description of the issue resolution.']
+    "name" varchar [note: 'The name of the issue resolution.']
+    "isDefault" boolean [note: 'Indicates if this is the default issue resolution.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "issue_security_schemes" {
+    "self" varchar [note: 'The URL of the issue security scheme.']
+    "id" integer [note: 'The ID of the issue security scheme.']
+    "name" varchar [note: 'The name of the issue security scheme.']
+    "description" varchar [note: 'The description of the issue security scheme.']
+    "defaultSecurityLevelId" integer [note: 'The ID of the default security level.']
+    "levels" array [note: 'The issue security levels associated with the security scheme.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "issue_transitions" {
+    "fields" varchar [note: 'Represents the custom fields associated with the issue transition']
+    "hasScreen" boolean [note: 'Indicates if the transition has an associated screen']
+    "id" varchar [note: 'Unique identifier for the issue transition']
+    "issueId" varchar [note: 'Identifier of the issue associated with the transition']
+    "isAvailable" boolean [note: 'Indicates if the transition is available']
+    "isConditional" boolean [note: 'Indicates if the transition is conditional']
+    "isGlobal" boolean [note: 'Indicates if the transition is global']
+    "isInitial" boolean [note: 'Indicates if the transition is the initial transition']
+    "isLooped" boolean [note: 'Indicates if the transition is a loop transition']
+    "name" varchar [note: 'Name of the issue transition']
+    "to" json [note: 'Represents the destination status of the issue transition.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "issue_type_schemes" {
+    "id" varchar [note: 'The unique identifier for the issue type scheme.']
+    "name" varchar [note: 'The name given to the issue type scheme.']
+    "description" varchar [note: 'A brief description of the issue type scheme.']
+    "defaultIssueTypeId" varchar [note: 'The ID of the default issue type associated with the issue type scheme.']
+    "isDefault" boolean [note: 'Indicates whether the issue type scheme is set as the default.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "issue_type_screen_schemes" {
+    "id" varchar [note: 'The ID of the issue type screen scheme.']
+    "name" varchar [note: 'The name of the issue type screen scheme.']
+    "description" varchar [note: 'The description of the issue type screen scheme.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "issue_types" {
+    "avatarId" integer [note: 'The ID of the issue type\'s avatar.']
+    "description" varchar [note: 'The description of the issue type.']
+    "entityId" varchar [note: 'Unique ID for next-gen projects.']
+    "hierarchyLevel" integer [note: 'Hierarchy level of the issue type.']
+    "iconUrl" varchar [note: 'The URL of the issue type\'s avatar.']
+    "id" varchar [note: 'The ID of the issue type.']
+    "name" varchar [note: 'The name of the issue type.']
+    "self" varchar [note: 'The URL of these issue type details.']
+    "subtask" boolean [note: 'The URL of these issue type details.']
+    "scope" json [note: 'Details of the next-gen projects the issue type is available in.']
+    "untranslatedName" varchar [note: 'The untranslated name of the issue type.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "issue_votes" {
+    "self" varchar [note: 'The URL of these issue vote details.']
+    "issueId" varchar [note: 'Id of the related issue.']
+    "votes" integer [note: 'The number of votes on the issue.']
+    "hasVoted" boolean [note: 'Whether the user making this request has voted on the issue.']
+    "voters" array [note: 'List of the users who have voted on this issue. An empty list is returned when the calling user doesn\'t have the *View voters and watchers* project permission.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "issue_watchers" {
+    "self" varchar [note: 'The URL of these issue watcher details.']
+    "issueId" varchar [note: 'Id of the related issue.']
+    "isWatching" boolean [note: 'Whether the calling user is watching this issue.']
+    "watchCount" integer [note: 'The number of users watching this issue.']
+    "watchers" array [note: 'Details of the users watching this issue.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "issue_worklogs" {
+    "self" varchar [note: 'The URL of the worklog item.']
+    "author" json [note: 'Details of the user who created the worklog.']
+    "updateAuthor" json [note: 'Details of the user who last updated the worklog.']
+    "comment" json [note: 'A comment about the worklog in [Atlassian Document Format](https://developer.atlassian.com/cloud/jira/platform/apis/document/structure/). Optional when creating or updating a worklog.']
+    "created" timestamp [note: 'The datetime on which the worklog was created.']
+    "updated" timestamp [note: 'The datetime on which the worklog was last updated.']
+    "visibility" json [note: 'Details about any restrictions in the visibility of the worklog. Optional when creating or updating a worklog.']
+    "started" timestamp [note: 'The datetime on which the worklog effort was started. Required when creating a worklog. Optional when updating a worklog.']
+    "timeSpent" varchar [note: 'The time spent working on the issue as days (#d), hours (#h), or minutes (#m or #). Required when creating a worklog if `timeSpentSeconds` isn\'t provided. Optional when updating a worklog. Cannot be provided if `timeSpentSecond` is provided.']
+    "timeSpentSeconds" integer [note: 'The time in seconds spent working on the issue. Required when creating a worklog if `timeSpent` isn\'t provided. Optional when updating a worklog. Cannot be provided if `timeSpent` is provided.']
+    "id" varchar [note: 'The ID of the worklog record.']
+    "issueId" varchar [note: 'The ID of the issue this worklog is for.']
+    "properties" array [note: 'Details of properties for the worklog. Optional when creating or updating a worklog.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "issues" {
+    "expand" varchar [note: 'Expand options that include additional issue details in the response.']
+    "id" varchar [note: 'The unique ID of the issue.']
+    "self" varchar [note: 'The URL of the issue details.']
+    "key" varchar [note: 'The unique key of the issue.']
+    "renderedFields" json [note: 'The rendered value of each field present on the issue.']
+    "properties" json [note: 'Details of the issue properties identified in the request.']
+    "names" json [note: 'The ID and name of each field present on the issue.']
+    "schema" json [note: 'The schema describing each field present on the issue.']
+    "transitions" array [note: 'The transitions that can be performed on the issue.']
+    "operations" json [note: 'The operations that can be performed on the issue.']
+    "editmeta" json [note: 'The metadata for the fields on the issue that can be amended.']
+    "changelog" json [note: 'Details of changelogs associated with the issue.']
+    "versionedRepresentations" json [note: 'The versions of each field on the issue.']
+    "fieldsToInclude" json [note: 'Specify the fields to include in the fetched issues data. Use specific field names or \'all\' to include all fields.']
+    "fields" json [note: 'Details of various fields associated with the issue.']
+    "projectId" varchar [note: 'The ID of the project containing the issue.']
+    "projectKey" varchar [note: 'The key of the project containing the issue.']
+    "created" timestamp [note: 'The timestamp when the issue was created.']
+    "updated" timestamp [note: 'The timestamp when the issue was last updated.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "jira_settings" {
+    "id" varchar [note: 'The unique ID of the application property. The ID is the same as the key.']
+    "key" varchar [note: 'The key identifier of the application property. The key is the same as the ID.']
+    "value" varchar [note: 'The new value assigned to the application property.']
+    "name" varchar [note: 'The name or title of the application property.']
+    "desc" varchar [note: 'The description of the application property.']
+    "type" varchar [note: 'The data type (e.g., string, number) of the application property.']
+    "defaultValue" varchar [note: 'The default value of the application property.']
+    "example" varchar [note: 'An example or sample value for the application property.']
+    "allowedValues" array [note: 'The allowed values for the application property, if applicable.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "labels" {
+    "label" varchar [note: 'The label associated with the issue in Jira.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "permission_schemes" {
+    "expand" varchar [note: 'The expand options available for the permission scheme.']
+    "id" integer [note: 'The ID of the permission scheme.']
+    "self" varchar [note: 'The URL of the permission scheme.']
+    "name" varchar [note: 'The name of the permission scheme. Must be unique.']
+    "description" varchar [note: 'A description for the permission scheme.']
+    "scope" json [note: 'The scope of the permission scheme.']
+    "permissions" array [note: 'The permission scheme to create or update. See [About permission schemes and grants](#about-permission-schemes-and-grants) for more information.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "permissions" {
+    "key" varchar [note: 'Unique key identifier for the permission']
+    "name" varchar [note: 'Name of the permission']
+    "type" varchar [note: 'Type of permission']
+    "description" varchar [note: 'Description of the permission']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "project_avatars" {
+    "id" varchar [note: 'The ID of the avatar.']
+    "projectId" varchar [note: 'Id of the related project.']
+    "owner" varchar [note: 'The owner of the avatar. For a system avatar the owner is null (and nothing is returned). For non-system avatars this is the appropriate identifier, such as the ID for a project or the account ID for a user.']
+    "isSystemAvatar" boolean [note: 'Whether the avatar is a system avatar.']
+    "isSelected" boolean [note: 'Whether the avatar is used in Jira. For example, shown as a project\'s avatar.']
+    "isDeletable" boolean [note: 'Whether the avatar can be deleted.']
+    "fileName" varchar [note: 'The file name of the avatar icon. Returned for system avatars.']
+    "urls" json [note: 'The list of avatar icon URLs.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "project_categories" {
+    "self" varchar [note: 'The URL of the project category.']
+    "id" varchar [note: 'The ID of the project category.']
+    "name" varchar [note: 'The name of the project category. Required on create, optional on update.']
+    "description" varchar [note: 'The description of the project category. Required on create, optional on update.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "project_components" {
+    "self" varchar [note: 'The URL of the component.']
+    "id" varchar [note: 'The unique identifier for the component.']
+    "name" varchar [note: 'The unique name for the component in the project. Required when creating a component. Optional when updating a component. The maximum length is 255 characters.']
+    "description" varchar [note: 'The description for the component. Optional when creating or updating a component.']
+    "lead" json [note: 'The user details for the component\'s lead user.']
+    "leadUserName" varchar [note: 'This property is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.']
+    "leadAccountId" varchar [note: 'The accountId of the component\'s lead user. The accountId uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*.']
+    "assigneeType" varchar [note: '''The nominal user type used to determine the assignee for issues created with this component. See `realAssigneeType` for details on how the type of the user, and hence the user, assigned to issues is determined. Can take the following values:
+
+     *  `PROJECT_LEAD` the assignee to any issues created with this component is nominally the lead for the project the component is in.
+     *  `COMPONENT_LEAD` the assignee to any issues created with this component is nominally the lead for the component.
+     *  `UNASSIGNED` an assignee is not set for issues created with this component.
+     *  `PROJECT_DEFAULT` the assignee to any issues created with this component is nominally the default assignee for the project that the component is in.
+
+    Default value: `PROJECT_DEFAULT`.  
+    Optional when creating or updating a component.''']
+    "assignee" json [note: 'The details of the user associated with `assigneeType`, if any. See `realAssignee` for details of the user assigned to issues created with this component.']
+    "realAssigneeType" varchar [note: '''The type of the assignee that is assigned to issues created with this component, when an assignee cannot be set from the `assigneeType`. For example, `assigneeType` is set to `COMPONENT_LEAD` but no component lead is set. This property is set to one of the following values:
+
+     *  `PROJECT_LEAD` when `assigneeType` is `PROJECT_LEAD` and the project lead has permission to be assigned issues in the project that the component is in.
+     *  `COMPONENT_LEAD` when `assignee`Type is `COMPONENT_LEAD` and the component lead has permission to be assigned issues in the project that the component is in.
+     *  `UNASSIGNED` when `assigneeType` is `UNASSIGNED` and Jira is configured to allow unassigned issues.
+     *  `PROJECT_DEFAULT` when none of the preceding cases are true.''']
+    "realAssignee" json [note: 'The user assigned to issues created with this component, when `assigneeType` does not identify a valid assignee.']
+    "isAssigneeTypeValid" boolean [note: 'Whether a user is associated with `assigneeType`. For example, if the `assigneeType` is set to `COMPONENT_LEAD` but the component lead is not set, then `false` is returned.']
+    "project" varchar [note: 'The key of the project the component is assigned to. Required when creating a component. Can\'t be updated.']
+    "projectId" integer [note: 'The ID of the project the component is assigned to.']
+    "componentBean" json [note: 'Contains information about the component associated with the project.']
+    "issueCount" integer [note: 'The total count of issues related to the project component.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "project_email" {
+    "projectId" varchar [note: 'The unique identifier for the project.']
+    "emailAddress" varchar [note: 'The email address of the project.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "project_permission_schemes" {
+    "self" varchar [note: 'The URL of the issue level security item.']
+    "projectId" varchar [note: 'Id of the related project.']
+    "id" varchar [note: 'The ID of the issue level security item.']
+    "description" varchar [note: 'The description of the issue level security item.']
+    "name" varchar [note: 'The name of the issue level security item.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "project_roles" {
+    "actors" array [note: 'A list of actors assigned to the project role']
+    "admin" boolean [note: 'Flag indicating if the user has admin role.']
+    "currentUserRole" boolean [note: 'The role assigned to the current user.']
+    "default" boolean [note: 'Flag indicating if it is the default role.']
+    "description" varchar [note: 'The description of the project role.']
+    "id" integer [note: 'The ID of the project role.']
+    "name" varchar [note: 'The name of the project role.']
+    "roleConfigurable" boolean [note: 'Flag indicating if the role is configurable.']
+    "scope" json [note: 'Details of the next-gen projects the issue type is available in.']
+    "self" varchar [note: 'The URL of the project role details.']
+    "translatedName" varchar [note: 'The translated name of the project role.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "project_types" {
+    "key" varchar [note: 'The key of the project type.']
+    "formattedKey" varchar [note: 'The formatted key of the project type.']
+    "descriptionI18nKey" varchar [note: 'The key of the project type\'s description.']
+    "icon" varchar [note: 'The icon of the project type.']
+    "color" varchar [note: 'The color of the project type.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "project_versions" {
+    "expand" varchar [note: 'Use expand parameter to include additional information about the version in the response. Optional field for creation and update. Expand options include operations and issuesstatus.']
+    "self" varchar [note: 'The URL of the version.']
+    "id" varchar [note: 'The unique ID of the version.']
+    "description" varchar [note: 'The description of the version. Optional field for creating or updating a version.']
+    "name" varchar [note: 'The unique name assigned to the version. Required field for version creation, optional for version update. Maximum length is 255 characters.']
+    "archived" boolean [note: 'Indicates whether the version is archived. Optional field for creating or updating a version.']
+    "released" boolean [note: 'Indicates whether the version has been released. A request to release it again will be ignored. Not applicable during version creation. Optional field for version update.']
+    "startDate" date [note: 'The start date of the version in ISO 8601 format (yyyy-mm-dd). Optional field for creating or updating a version.']
+    "releaseDate" date [note: 'The release date of the version in ISO 8601 format (yyyy-mm-dd). Optional field for creating or updating a version.']
+    "overdue" boolean [note: 'Indicates whether the version is overdue.']
+    "userStartDate" varchar [note: 'The date when work on this version is expected to begin, expressed in the instance\'s Day/Month/Year format.']
+    "userReleaseDate" varchar [note: 'The date when work on this version is expected to finish, expressed in the instance\'s Day/Month/Year format.']
+    "project" varchar [note: 'Deprecated field. Use projectId instead.']
+    "projectId" integer [note: 'The ID of the project to which this version is connected. Required for version creation, not applicable for version update.']
+    "moveUnfixedIssuesTo" varchar [note: 'The URL of the self link to the version where all unfixed issues are moved when the version gets released. Not used during version creation. Optional field for version update.']
+    "operations" array [note: 'If \'operations\' is expanded, provides a list of available operations for this version.']
+    "issuesStatusForFixVersion" json [note: 'If \'issuesstatus\' is expanded, provides counts of issues in this version for status categories: to do, in progress, done, and unmapped.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "projects" {
+    "expand" varchar [note: 'Expand options that include additional project details in the response.']
+    "self" varchar [note: 'The URL of the project details.']
+    "id" varchar [note: 'The ID of the project.']
+    "key" varchar [note: 'The key of the project.']
+    "description" varchar [note: 'A brief description of the project.']
+    "lead" varchar [note: 'The username of the project lead.']
+    "components" array [note: 'List of the components contained in the project.']
+    "issueTypes" array [note: 'List of the issue types available in the project.']
+    "url" varchar [note: 'A link to information about this project, such as project documentation.']
+    "email" varchar [note: 'An email address associated with the project.']
+    "assigneeType" varchar [note: 'The default assignee when creating issues for this project.']
+    "versions" array [note: 'The versions defined in the project. For more information, see [Create version](#api-rest-api-3-version-post).']
+    "name" varchar [note: 'The name of the project.']
+    "roles" json [note: 'The name and self URL for each role defined in the project. For more information, see [Create project role](#api-rest-api-3-role-post).']
+    "avatarUrls" varchar [note: 'The URLs of the project\'s avatars.']
+    "projectCategory" varchar [note: 'The category the project belongs to.']
+    "projectTypeKey" varchar [note: 'The [project type](https://confluence.atlassian.com/x/GwiiLQ#Jiraapplicationsoverview-Productfeaturesandprojecttypes) of the project.']
+    "simplified" boolean [note: 'Whether the project is simplified.']
+    "style" varchar [note: 'The type of the project.']
+    "favourite" boolean [note: 'Whether the project is selected as a favorite.']
+    "isPrivate" boolean [note: 'Whether the project is private.']
+    "issueTypeHierarchy" varchar [note: 'The issue type hierarchy for the project']
+    "permissions" varchar [note: 'User permissions on the project']
+    "properties" json [note: 'Map of project properties']
+    "uuid" varchar [note: 'Unique ID for next-gen projects.']
+    "insight" varchar [note: 'Insights about the project.']
+    "deleted" boolean [note: 'Whether the project is marked as deleted.']
+    "retentionTillDate" timestamp [note: 'The date when the project is deleted permanently.']
+    "deletedDate" timestamp [note: 'The date when the project was marked as deleted.']
+    "deletedBy" varchar [note: 'The user who marked the project as deleted.']
+    "archived" boolean [note: 'Whether the project is archived.']
+    "archivedDate" timestamp [note: 'The date when the project was archived.']
+    "archivedBy" varchar [note: 'The user who archived the project.']
+    "entityId" varchar [note: 'The unique identifier of the project entity.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "screen_schemes" {
+    "id" integer [note: 'The ID of the screen scheme.']
+    "name" varchar [note: 'The name of the screen scheme.']
+    "description" varchar [note: 'The description of the screen scheme.']
+    "screens" json [note: 'The IDs of the screens for the screen types of the screen scheme.']
+    "issueTypeScreenSchemes" json [note: 'Issue type screen schemes associated with the screen scheme.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "screen_tab_fields" {
+    "id" varchar [note: 'The ID of the screen tab field.']
+    "name" varchar [note: 'The name of the screen tab field. Required on create and update. The maximum length is 255 characters.']
+    "screenId" integer [note: 'ID of the related screen.']
+    "tabId" integer [note: 'ID of the related tab.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "screen_tabs" {
+    "id" integer [note: 'The ID of the screen tab.']
+    "name" varchar [note: 'The name of the screen tab. The maximum length is 255 characters.']
+    "screenId" integer [note: 'Id of the related screen.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "screens" {
+    "id" integer [note: 'The ID of the screen.']
+    "name" varchar [note: 'The name of the screen.']
+    "description" varchar [note: 'The description of the screen.']
+    "scope" json [note: 'The scope of the screen.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "sprint_issues" {
+    "expand" varchar [note: 'Expand options for the issue']
+    "id" varchar [note: 'ID of the issue']
+    "self" varchar [note: 'URL of the issue']
+    "key" varchar [note: 'Key of the issue']
+    "fields" json [note: 'Contains various field values associated with the sprint issue']
+    "issueId" varchar [note: 'ID of the issue']
+    "sprintId" integer [note: 'ID of the sprint associated with the issue']
+    "created" timestamp [note: 'Date and time when the issue was created']
+    "updated" timestamp [note: 'Date and time when the issue was last updated']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "sprints" {
+    "id" integer [note: 'The unique identifier for the sprint.']
+    "self" varchar [note: 'The URL link to fetch more details about the sprint.']
+    "state" varchar [note: 'The current state/status of the sprint.']
+    "name" varchar [note: 'The name or title of the sprint.']
+    "startDate" timestamp [note: 'The date and time when the sprint is scheduled to start.']
+    "endDate" timestamp [note: 'The date and time when the sprint is expected to end.']
+    "completeDate" timestamp [note: 'The date and time when the sprint was completed.']
+    "originBoardId" integer [note: 'The original board ID the sprint belongs to.']
+    "boardId" integer [note: 'Used to determine which board the sprint is a part of. (Not always the same as originBoardId)']
+    "goal" varchar [note: 'The goal or objective of the sprint.']
+    "createdDate" timestamp [note: 'The date and time when the sprint was created.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "time_tracking" {
+    "key" varchar [note: 'The key associated with the time tracking provider.']
+    "name" varchar [note: 'The name of the time tracking provider.']
+    "url" varchar [note: 'The URL of the configuration page for the time tracking provider app. This property is only returned if the `adminPageKey` property is set in the module descriptor of the time tracking provider app.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "users" {
+    "self" varchar [note: 'The URL of the user.']
+    "key" varchar [note: 'Deprecated property. See the deprecation notice for details.']
+    "accountId" varchar [note: 'The account ID of the user, uniquely identifying the user across all Atlassian products. Required in requests.']
+    "accountType" varchar [note: '''The user account type. Can be one of: 
+    - `atlassian`: regular Atlassian user account 
+    - `app`: system account used for Connect applications and OAuth 
+    - `customer`: Jira Service Desk account representing an external service desk''']
+    "name" varchar [note: 'Deprecated property. See the deprecation notice for details.']
+    "emailAddress" varchar [note: 'The email address of the user. May be null based on privacy settings.']
+    "avatarUrls" json [note: 'The avatars of the user.']
+    "displayName" varchar [note: 'The display name of the user. May return an alternative value based on privacy settings.']
+    "active" boolean [note: 'Indicates whether the user is active.']
+    "timeZone" varchar [note: 'The time zone specified in the user\'s profile. May be null based on privacy settings.']
+    "locale" varchar [note: 'The locale of the user. May be null based on privacy settings.']
+    "groups" json [note: 'The groups to which the user belongs.']
+    "applicationRoles" json [note: 'The application roles assigned to the user.']
+    "expand" varchar [note: 'Options to include additional user details in the response.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "users_groups_detailed" {
+    "self" varchar [note: 'The URL of the user.']
+    "key" varchar [note: 'This property is no longer available and will be removed from the documentation soon. See the deprecation notice for details.']
+    "accountId" varchar [note: 'The account ID of the user, uniquely identifying the user across all Atlassian products. Required in requests.']
+    "accountType" varchar [note: 'The user account type. Possible values are \'atlassian\' for regular Atlassian user account, \'app\' for a system account used for Connect applications and OAuth, and \'customer\' for a Jira Service Desk account representing an external service desk.']
+    "name" varchar [note: 'This property is no longer available and will be removed from the documentation soon. See the deprecation notice for details.']
+    "emailAddress" varchar [note: 'The email address of the user. Depending on the user\'s privacy setting, this may be returned as null.']
+    "avatarUrls" json [note: 'The avatars of the user.']
+    "displayName" varchar [note: 'The display name of the user. Depending on the user\'s privacy setting, this may return an alternative value.']
+    "active" boolean [note: 'Indicates whether the user is active.']
+    "timeZone" varchar [note: 'The time zone specified in the user\'s profile. Depending on the user\'s privacy setting, this may be returned as null.']
+    "locale" varchar [note: 'The locale of the user. Depending on the user\'s privacy setting, this may be returned as null.']
+    "groups" json [note: 'The groups that the user belongs to.']
+    "applicationRoles" json [note: 'The application roles assigned to the user.']
+    "expand" varchar [note: 'Expand options that include additional user details in the response.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "workflow_schemes" {
+    "id" integer [note: 'The ID of the workflow scheme.']
+    "name" varchar [note: 'The name of the workflow scheme. The name must be unique. The maximum length is 255 characters. Required when creating a workflow scheme.']
+    "description" varchar [note: 'The description of the workflow scheme.']
+    "defaultWorkflow" varchar [note: 'The name of the default workflow for the workflow scheme. The default workflow has *All Unassigned Issue Types* assigned to it in Jira. If `defaultWorkflow` is not specified when creating a workflow scheme, it is set to *Jira Workflow (jira)*.']
+    "issueTypeMappings" json [note: 'The issue type to workflow mappings, where each mapping is an issue type ID and workflow name pair. Note that an issue type can only be mapped to one workflow in a workflow scheme.']
+    "originalDefaultWorkflow" varchar [note: 'For draft workflow schemes, this property is the name of the default workflow for the original workflow scheme. The default workflow has *All Unassigned Issue Types* assigned to it in Jira.']
+    "originalIssueTypeMappings" json [note: 'For draft workflow schemes, this property is the issue type to workflow mappings for the original workflow scheme, where each mapping is an issue type ID and workflow name pair. Note that an issue type can only be mapped to one workflow in a workflow scheme.']
+    "draft" boolean [note: 'Whether the workflow scheme is a draft or not.']
+    "lastModifiedUser" json [note: 'The user that last modified the draft workflow scheme. A modification is a change to the issue type-project mappings only. This property does not apply to non-draft workflows.']
+    "lastModified" varchar [note: 'The date-time that the draft workflow scheme was last modified. A modification is a change to the issue type-project mappings only. This property does not apply to non-draft workflows.']
+    "self" varchar [note: 'URL of the workflow scheme resource.']
+    "updateDraftIfNeeded" boolean [note: '''Whether to create or update a draft workflow scheme when updating an active workflow scheme. An active workflow scheme is a workflow scheme that is used by at least one project. The following examples show how this property works:
+
+     *  Update an active workflow scheme with `updateDraftIfNeeded` set to `true`: If a draft workflow scheme exists, it is updated. Otherwise, a draft workflow scheme is created.
+     *  Update an active workflow scheme with `updateDraftIfNeeded` set to `false`: An error is returned, as active workflow schemes cannot be updated.
+     *  Update an inactive workflow scheme with `updateDraftIfNeeded` set to `true`: The workflow scheme is updated, as inactive workflow schemes do not require drafts to update.
+
+    Defaults to `false`.''']
+    "issueTypes" json [note: 'The issue types available in Jira.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "workflow_status_categories" {
+    "self" varchar [note: 'The URL of the status category.']
+    "id" integer [note: 'The ID of the status category.']
+    "key" varchar [note: 'The key of the status category.']
+    "colorName" varchar [note: 'The name of the color used to represent the status category.']
+    "name" varchar [note: 'The name of the status category.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "workflow_statuses" {
+    "self" varchar [note: 'The URL of the status.']
+    "description" varchar [note: 'The description of the status.']
+    "iconUrl" varchar [note: 'The URL of the icon used to represent the status.']
+    "name" varchar [note: 'The name of the status.']
+    "id" varchar [note: 'The ID of the status.']
+    "statusCategory" json [note: 'The category assigned to the status.']
+    "scope" json [note: 'The scope of the status.']
+    "untranslatedName" varchar [note: 'The untranslated name of the status.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "workflows" {
+    "id" json [note: 'The unique identifier and name of the workflow.']
+    "entityId" varchar [note: 'The unique identifier of the workflow.']
+    "name" varchar [note: 'The unique name the workflow.']
+    "description" varchar [note: 'The detailed description of the workflow.']
+    "transitions" array [note: 'The transitions available within the workflow.']
+    "statuses" array [note: 'The various statuses that the workflow can have.']
+    "created" timestamp [note: 'The date and time when the workflow was created.']
+    "updated" timestamp [note: 'The date and time when the workflow was last updated.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}

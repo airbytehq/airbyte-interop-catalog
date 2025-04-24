@@ -1,0 +1,85 @@
+domain: jira.airbyte-interop
+transforms:
+  - name: version
+    from:
+      - project_versions: jira.project_versions
+    fields:
+      archived:
+        expression: project_versions.archived
+        description: Boolean that is true if the project version has been archived.
+      description:
+        expression: project_versions.description
+        description: The optional description given to the version.
+      id:
+        expression: project_versions.id
+        description: Unique ID of the version.
+      name:
+        expression: project_versions.name
+        description: Unique name of the version.
+      overdue:
+        expression: project_versions.overdue
+        description: Boolean that is true if the version is past its optional release
+          date, false if it is not or if it does not have a due date.
+      project_id:
+        expression: project_versions.projectId
+        description: Foreign key referencing the `PROJECT` to which this version is
+          attached.
+      release_date:
+        expression: project_versions.releaseDate
+        description: The optional release date of the version. Expressed in ISO 8601
+          format (yyyy-mm-dd).
+      released:
+        expression: project_versions.released
+        description: Boolean that is true if the version has been released. If the
+          version is released a request to release again is ignored
+      start_date:
+        expression: project_versions.startDate
+        description: The start date of the version. Expressed in ISO 8601 format (yyyy-mm-dd).
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: project_versions
+    target_table_name: version
+    table_match_score: 0.95
+    completion_score: 0.9
+    explanation: The table mapping configuration evaluates to a high level of confidence
+      with field mappings closely matching their intended targets, well-aligned semantic
+      meanings, and no major mismatches identified.
+    field_mapping_evals:
+      - name: archived
+        expression: project_versions.archived
+        score: 0.7
+        explanation: Direct match with consistent naming and meaning.
+      - name: description
+        expression: project_versions.description
+        score: 0.9
+        explanation: Direct match, very high confidence in mapping.
+      - name: id
+        expression: project_versions.id
+        score: 1.0
+        explanation: Perfect identifier match.
+      - name: name
+        expression: project_versions.name
+        score: 1.0
+        explanation: Perfect name alignment.
+      - name: overdue
+        expression: project_versions.overdue
+        score: 0.8
+        explanation: Good semantic match, close field descriptions.
+      - name: project_id
+        expression: project_versions.projectId
+        score: 0.9
+        explanation: High confidence, straightforward foreign key mapping.
+      - name: release_date
+        expression: project_versions.releaseDate
+        score: 0.7
+        explanation: Date formatting aligns well, good semantic match.
+      - name: released
+        expression: project_versions.released
+        score: 0.6
+        explanation: Sufficient semantic match despite potential ambiguity.
+      - name: start_date
+        expression: project_versions.startDate
+        score: 0.7
+        explanation: Aligns well in terms of date formatting and relevancy.

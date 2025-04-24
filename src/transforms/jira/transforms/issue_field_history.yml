@@ -1,0 +1,50 @@
+domain: jira.airbyte-interop
+transforms:
+  - name: issue_field_history
+    from:
+      - issue_custom_field_options: jira.issue_custom_field_options
+    fields:
+      field_id:
+        expression: issue_custom_field_options.fieldId
+        description: Foreign key referencing the ID of the `field` that was changed.
+      issue_id:
+        expression: MISSING
+        description: Foreign key referencing the ID of the `issue` whose field was
+          updated.
+      time:
+        expression: issue_custom_field_options._airbyte_extracted_at
+        description: Timestamp of when the issue field was set to this value.
+      value:
+        expression: issue_custom_field_options.value
+        description: Content of the value of that the field was set to.
+annotations:
+  approved: true
+  missing_fields:
+    - issue_id
+  evaluation:
+    source_stream_name: issue_custom_field_options
+    target_table_name: issue_field_history
+    table_match_score: 0.9
+    completion_score: 0.75
+    explanation: The mappings show a strong correlation between the source and target
+      schemas, with good recognition of key fields. However, one crucial field mapping
+      (`issue_id`) is missing, leading to a deduction in the completion score.
+    field_mapping_evals:
+      - name: field_id
+        expression: issue_custom_field_options.fieldId
+        score: 0.9
+        explanation: Correct mapping of `field_id` to `issue_custom_field_options.fieldId`.
+      - name: issue_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: time
+        expression: issue_custom_field_options._airbyte_extracted_at
+        score: 1.0
+        explanation: Perfect match of `time` to `issue_custom_field_options._airbyte_extracted_at`
+          as per standard practices.
+      - name: value
+        expression: issue_custom_field_options.value
+        score: 0.8
+        explanation: Strong match of `value` to `issue_custom_field_options.value`,
+          aligning data context appropriately.

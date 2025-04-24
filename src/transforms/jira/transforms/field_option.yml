@@ -1,0 +1,39 @@
+domain: jira.airbyte-interop
+transforms:
+  - name: field_option
+    from:
+      - issue_custom_field_options: jira.issue_custom_field_options
+    fields:
+      id:
+        expression: issue_custom_field_options.id
+        description: The ID of the custom field.
+      parent_id:
+        expression: MISSING
+        description: The ID of the parent custom field.
+      name:
+        expression: issue_custom_field_options.name
+        description: Name of the field option.
+annotations:
+  approved: false
+  missing_fields:
+    - parent_id
+  evaluation:
+    source_stream_name: issue_custom_field_options
+    target_table_name: field_option
+    table_match_score: 0.65
+    completion_score: 0.67
+    explanation: The table has a moderate match score due to partial mapping completion
+      and a mix of precise and absent field matches.
+    field_mapping_evals:
+      - name: id
+        expression: issue_custom_field_options.id
+        score: 1.0
+        explanation: Direct mapping to source field 'issue_custom_field_options.id'.
+      - name: parent_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: name
+        expression: issue_custom_field_options.name
+        score: 1.0
+        explanation: Direct mapping to source field 'issue_custom_field_options.name'.

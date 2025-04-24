@@ -1,0 +1,217 @@
+domain: jira.airbyte-interop
+transforms:
+  - name: issue
+    from:
+      - issues: jira.issues
+    fields:
+      id:
+        expression: issues.id
+        description: Unique ID of the issue.
+      _fivetran_deleted:
+        expression: MISSING
+        description: Boolean that is true if the row has been soft-deleted from the
+          source.
+      assignee:
+        expression: issues.fields.assignee.accountId
+        description: Foreign key referencing the ID of the `user` currently assigned
+          to this task.
+      created:
+        expression: issues.fields.created
+        description: Timestamp of when the issue was created (in UTC).
+      creator:
+        expression: issues.fields.creator.accountId
+        description: Foreign key referencing the `user` who first created the issue.
+          Cannot be changed.
+      description:
+        expression: issues.fields.description.content
+        description: The issue description, if given.
+      due_date:
+        expression: issues.fields.duedate
+        description: Calendar day on which the issue is due, if a due date is provided.
+      environment:
+        expression: issues.fields.environment
+        description: Text field describing the environment in which the issue occurred
+          (ie "IE9 on Windows 7").
+      issue_type:
+        expression: issues.fields.issuetype.id
+        description: Foreign key referencing the ID of the `issue_type`.
+      key:
+        expression: issues.key
+        description: UI-facing id of the issue.
+      last_viewed:
+        expression: issues.fields.lastViewed
+        description: Timestamp of when the user who set up the connector last viewed
+          the issue.
+      original_estimate:
+        expression: issues.fields.timeoriginalestimate
+        description: The original estimate of how long working on this issue would
+          take, in seconds.
+      parent_id:
+        expression: MISSING
+        description: Self-referencing ID of the parent `issue`.
+      priority:
+        expression: issues.fields.priority.id
+        description: Foreign key referencing the ID of the issue's current `priority`.
+      project:
+        expression: issues.fields.project.id
+        description: Foreign key referencing the ID of the `project` that the issue
+          belongs to.
+      remaining_estimate:
+        expression: issues.fields.timeestimate
+        description: The estimate of how much longer working on this issue will take,
+          in seconds.
+      reporter:
+        expression: issues.fields.reporter.accountId
+        description: "Foreign key referencing the ID of the `user` who reported the
+          issue. This differs from the `creator` column  in that the reporter can
+          be changed in-app.\n"
+      resolution:
+        expression: issues.fields.resolution.id
+        description: Foreign key referencing the ID of the issue's type of `resolution`.
+      resolved:
+        expression: issues.fields.resolutiondate
+        description: "Timestamp of when the issue was resolved (ie completed, marked
+          as duplicate). If an  issue is marked as un-resolved, this is null.\n"
+      status:
+        expression: issues.fields.status.id
+        description: "Foreign key referencing the ID of the issue's `status` (the
+          step that the issue is currently at  in the project's workflow).\n"
+      status_category_changed:
+        expression: issues.fields.statuscategorychangedate
+        description: Timestamp of when the status was last changed.
+      summary:
+        expression: issues.fields.summary
+        description: Title of the issue.
+      time_spent:
+        expression: issues.fields.timespent
+        description: The time that was spent working on this issue, in seconds.
+      updated:
+        expression: issues.fields.updated
+        description: Timestamp of when the issue was last updated in some way.
+      work_ratio:
+        expression: issues.fields.workratio
+        description: "The percentage of work that has been logged against the issue
+          (time_spent) vs the original estimate of worktime. Equals -1.0 when the
+          fields required for calculation are not provided.\n"
+annotations:
+  approved: true
+  missing_fields:
+    - _fivetran_deleted
+    - parent_id
+  evaluation:
+    source_stream_name: issues
+    target_table_name: issue
+    table_match_score: 0.85
+    completion_score: 0.8
+    explanation: The target schema closely reflects the source schema with minor differences
+      in field serialization and naming conventions. Most fields are mapped accurately,
+      though some are marked as 'MISSING' due to lack of exact correspondence. The
+      understanding of the project context and additional mapping instructions has
+      been pivotal in generating precise mappings and providing reasonable confidence
+      levels.
+    field_mapping_evals:
+      - name: id
+        expression: issues.id
+        score: 1.0
+        explanation: Direct match found with precise correlation.
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: assignee
+        expression: issues.fields.assignee.accountId
+        score: 0.8
+        explanation: Nested identifiers match correctly with the project schema.
+      - name: created
+        expression: issues.fields.created
+        score: 0.9
+        explanation: Direct and precise mapping of timestamp fields.
+      - name: creator
+        expression: issues.fields.creator.accountId
+        score: 0.8
+        explanation: Foreign key relation mapped with high confidence.
+      - name: description
+        expression: issues.fields.description.content
+        score: 0.7
+        explanation: Content descriptor matches well within contextual boundaries.
+      - name: due_date
+        expression: issues.fields.duedate
+        score: 0.9
+        explanation: Field matches directly to the target date field, highly accurate.
+      - name: environment
+        expression: issues.fields.environment
+        score: 0.7
+        explanation: Broad match, acceptable within similar applications.
+      - name: issue_type
+        expression: issues.fields.issuetype.id
+        score: 0.7
+        explanation: ID matching provides reasonable assurance of proper mapping.
+      - name: key
+        expression: issues.key
+        score: 1.0
+        explanation: Identifiers match perfectly.
+      - name: last_viewed
+        expression: issues.fields.lastViewed
+        score: 0.9
+        explanation: Timestamp fields align directly.
+      - name: original_estimate
+        expression: issues.fields.timeoriginalestimate
+        score: 0.9
+        explanation: Time-related fields match appropriately with validating units.
+      - name: parent_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: priority
+        expression: issues.fields.priority.id
+        score: 0.8
+        explanation: Direct match with source data ensuring the integrity of priority
+          linkage.
+      - name: project
+        expression: issues.fields.project.id
+        score: 0.8
+        explanation: Direct match of foreign key references ensures accurate project
+          mapping.
+      - name: remaining_estimate
+        expression: issues.fields.timeestimate
+        score: 0.9
+        explanation: The correlation between estimated time fields is high due to
+          similar units and naming conventions.
+      - name: reporter
+        expression: issues.fields.reporter.accountId
+        score: 0.75
+        explanation: Foreign key references match but with lesser confidence than
+          creator.
+      - name: resolution
+        expression: issues.fields.resolution.id
+        score: 0.7
+        explanation: The type and ID fields correspond reasonably well.
+      - name: resolved
+        expression: issues.fields.resolutiondate
+        score: 0.9
+        explanation: Resolved dates match precisely between source and target.
+      - name: status
+        expression: issues.fields.status.id
+        score: 0.7
+        explanation: Matching status identifiers with high relevance to the workflow
+          states.
+      - name: status_category_changed
+        expression: issues.fields.statuscategorychangedate
+        score: 0.9
+        explanation: Timestamp for status changes align closely between the models.
+      - name: summary
+        expression: issues.fields.summary
+        score: 1.0
+        explanation: Exact match of issue titles.
+      - name: time_spent
+        expression: issues.fields.timespent
+        score: 0.9
+        explanation: Time logging fields align perfectly.
+      - name: updated
+        expression: issues.fields.updated
+        score: 0.9
+        explanation: Update timestamps correlate directly between source and target.
+      - name: work_ratio
+        expression: issues.fields.workratio
+        score: 0.6
+        explanation: Approximated mapping based on available data calculations.

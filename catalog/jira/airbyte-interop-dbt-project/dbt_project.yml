@@ -1,0 +1,29 @@
+name: "airbyte_jira"
+version: "1.0.0"
+config-version: 2
+
+profile: "default"
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  airbyte_jira:
+    +materialized: view
+
+    # Rejected mappings (mappings that did not meet approval criteria)
+    rejected:
+      +enabled: false  # Rejected mappings are disabled by default
+
+vars:
+  airbyte_jira_database: "jira"
+  airbyte_jira_schema: "jira_raw"

@@ -1,0 +1,18 @@
+domain: jira.airbyte-interop
+transforms:
+  - name: issue_link
+    from:
+      - MISSING: jira.MISSING
+    fields:
+      issue_id:
+        expression: MISSING
+        description: Foreign key referencing the ID of the `issue` that is the subject
+          of this relationship (the linker).
+      related_issue_id:
+        expression: MISSING
+        description: Foreign key referencing the ID of the `issue` that is the object
+          of this relationship (the linkee).
+      relationship:
+        expression: MISSING
+        description: The nature of the link between the two issues ("blocks", "is
+          duplicated by", "relates to", etc.)
