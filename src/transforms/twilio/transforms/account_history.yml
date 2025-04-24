@@ -1,0 +1,80 @@
+domain: twilio.airbyte-interop
+transforms:
+  - name: account_history
+    from:
+      - accounts: twilio.accounts
+    fields:
+      _fivetran_synced:
+        expression: accounts._airbyte_extracted_at
+        description: Timestamp of when fivetran synced a record.
+      created_at:
+        expression: accounts.date_created
+        description: The date and time when the account history record was created.
+      friendly_name:
+        expression: accounts.friendly_name
+        description: A user-friendly name or label associated with the account history
+          event.
+      id:
+        expression: accounts.sid
+        description: The unique identifier for the account history record.
+      owner_account_id:
+        expression: accounts.owner_account_sid
+        description: The unique id that represents the parent of this account. The
+          OwnerAccountSid of a parent account is it's own sid.
+      status:
+        expression: accounts.status
+        description: The status or state of the account history event.
+      type:
+        expression: accounts.type
+        description: The type or category of the account history event.
+      updated_at:
+        expression: accounts.date_updated
+        description: The date and time when the account history record was last updated.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: accounts
+    target_table_name: account_history
+    table_match_score: 0.9
+    completion_score: 0.85
+    explanation: The table mapping significantly aligns with the target schema with
+      minor differences in field completeness. Most source fields appropriately match
+      the target fields, hinting at a strong semantic correlation.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: accounts._airbyte_extracted_at
+        score: 1.0
+        explanation: Perfect mapping of standard timestamp fields across systems.
+      - name: created_at
+        expression: accounts.date_created
+        score: 0.9
+        explanation: Direct mapping of creation date fields, highly reliable match.
+      - name: friendly_name
+        expression: accounts.friendly_name
+        score: 0.8
+        explanation: Good semantic match for descriptive labels of accounts.
+      - name: id
+        expression: accounts.sid
+        score: 1.0
+        explanation: Direct mapping of unique identifiers, exact match.
+      - name: owner_account_id
+        expression: accounts.owner_account_sid
+        score: 0.7
+        explanation: Likely mapping of parent account identifiers, slight potential
+          for misinterpretation.
+      - name: status
+        expression: accounts.status
+        score: 0.7
+        explanation: General term matched to a specific status field, strong likelihood
+          of accurate mapping but not absolute.
+      - name: type
+        expression: accounts.type
+        score: 0.7
+        explanation: Conceptual match between type categories, mostly accurate but
+          with room for ambiguity.
+      - name: updated_at
+        expression: accounts.date_updated
+        score: 0.9
+        explanation: Direct match for fields indicating the last update time, very
+          reliable mapping.

@@ -1,0 +1,124 @@
+domain: twilio.airbyte-interop
+transforms:
+  - name: address
+    from:
+      - addresses: twilio.addresses
+    fields:
+      _fivetran_synced:
+        expression: addresses._airbyte_extracted_at
+        description: Timestamp of when fivetran synced a record.
+      account_id:
+        expression: addresses.account_sid
+        description: The unique identifier of the account associated with the address.
+      city:
+        expression: addresses.city
+        description: The city or locality of the address.
+      created_at:
+        expression: addresses.date_created
+        description: The timestamp indicating when the address record was created.
+      customer_name:
+        expression: addresses.customer_name
+        description: The name of the customer or contact associated with the address.
+      emergency_enabled:
+        expression: addresses.emergency_enabled
+        description: A boolean value indicating whether emergency services are enabled
+          for the address.
+      friendly_name:
+        expression: addresses.friendly_name
+        description: A user-friendly name or label associated with the address.
+      id:
+        expression: addresses.sid
+        description: The unique identifier for the address record.
+      iso_country:
+        expression: addresses.iso_country
+        description: The ISO country code of the address.
+      postal_code:
+        expression: addresses.postal_code
+        description: The postal code or ZIP code of the address.
+      region:
+        expression: addresses.region
+        description: The region or state of the address.
+      street:
+        expression: addresses.street
+        description: The street address.
+      updated_at:
+        expression: addresses.date_updated
+        description: The timestamp indicating when the address record was last updated.
+      validated:
+        expression: addresses.validated
+        description: A boolean value indicating whether the address has been validated.
+      verified:
+        expression: addresses.verified
+        description: A boolean value indicating whether the address has been verified.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: addresses
+    target_table_name: address
+    table_match_score: 0.9
+    completion_score: 0.85
+    explanation: The source and target tables are closely matching since they originate
+      from APIs serving similar structures. Most fields have clear and highly compatible
+      mappings, but a complete perfection in field population was not achieved.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: addresses._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping that perfectly matches the requirement.
+      - name: account_id
+        expression: addresses.account_sid
+        score: 0.9
+        explanation: Direct match of account identifiers.
+      - name: city
+        expression: addresses.city
+        score: 0.7
+        explanation: Direct mapping of city/locality names.
+      - name: created_at
+        expression: addresses.date_created
+        score: 0.9
+        explanation: Direct mapping of creation timestamps.
+      - name: customer_name
+        expression: addresses.customer_name
+        score: 0.8
+        explanation: Clear match for customer names.
+      - name: emergency_enabled
+        expression: addresses.emergency_enabled
+        score: 0.6
+        explanation: Boolean values aligned correctly, moderate certainty in context.
+      - name: friendly_name
+        expression: addresses.friendly_name
+        score: 0.8
+        explanation: Names match well, given their descriptive nature.
+      - name: id
+        expression: addresses.sid
+        score: 0.9
+        explanation: Direct match of unique identifiers.
+      - name: iso_country
+        expression: addresses.iso_country
+        score: 0.7
+        explanation: ISO country codes are standardized.
+      - name: postal_code
+        expression: addresses.postal_code
+        score: 0.8
+        explanation: Direct match of postal code fields.
+      - name: region
+        expression: addresses.region
+        score: 0.65
+        explanation: Good fit, though some ambiguity in regional terminology.
+      - name: street
+        expression: addresses.street
+        score: 0.8
+        explanation: Direct mapping of street address fields.
+      - name: updated_at
+        expression: addresses.date_updated
+        score: 0.9
+        explanation: Direct mapping of update timestamps.
+      - name: validated
+        expression: addresses.validated
+        score: 0.6
+        explanation: Boolean value representing validation status aligns well.
+      - name: verified
+        expression: addresses.verified
+        score: 0.6
+        explanation: Boolean values for verification status are appropriately matched.

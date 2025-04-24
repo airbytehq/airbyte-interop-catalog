@@ -1,0 +1,2435 @@
+# This file was auto-generated using the morph cli.
+# Please do not edit manually.
+
+version: 2
+sources:
+  - name: twilio
+    schema: "{{ var('airbyte_twilio_schema', default='twilio_raw') }}"
+    database: "{{ var('airbyte_twilio_database', default='twilio') }}"
+    tables:
+      - name: accounts
+        columns:
+          - name: auth_token
+            description: The authentication token for the account
+            data_type: varchar
+          - name: date_created
+            description: The timestamp when the account was created
+            data_type: timestamp
+          - name: date_updated
+            description: The timestamp when the account was last updated
+            data_type: timestamp
+          - name: friendly_name
+            description: A user-defined friendly name for the account
+            data_type: varchar
+          - name: owner_account_sid
+            description: The SID of the owner account
+            data_type: varchar
+          - name: sid
+            description: The unique identifier for the account
+            data_type: varchar
+          - name: status
+            description: The current status of the account
+            data_type: varchar
+          - name: subresource_uris
+            description: URIs for accessing various subresources related to the account
+            data_type: json
+            meta:
+              subcolumns:
+                - name: addresses
+                  data_type: varchar
+                - name: conferences
+                  data_type: varchar
+                - name: signing_keys
+                  data_type: varchar
+                - name: transcriptions
+                  data_type: varchar
+                - name: connect_apps
+                  data_type: varchar
+                - name: sip
+                  data_type: varchar
+                - name: authorized_connect_apps
+                  data_type: varchar
+                - name: usage
+                  data_type: varchar
+                - name: keys
+                  data_type: varchar
+                - name: applications
+                  data_type: varchar
+                - name: recordings
+                  data_type: varchar
+                - name: short_codes
+                  data_type: varchar
+                - name: calls
+                  data_type: varchar
+                - name: notifications
+                  data_type: varchar
+                - name: incoming_phone_numbers
+                  data_type: varchar
+                - name: queues
+                  data_type: varchar
+                - name: messages
+                  data_type: varchar
+                - name: outgoing_caller_ids
+                  data_type: varchar
+                - name: available_phone_numbers
+                  data_type: varchar
+                - name: balance
+                  data_type: varchar
+          - name: type
+            description: The type of the account
+            data_type: varchar
+          - name: uri
+            description: The URI for accessing the account resource
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: addresses
+        columns:
+          - name: account_sid
+            description: The unique identifier of the account associated with this
+              address.
+            data_type: varchar
+          - name: city
+            description: The city of the address.
+            data_type: varchar
+          - name: customer_name
+            description: The name of the customer associated with this address.
+            data_type: varchar
+          - name: date_created
+            description: The date and time when the address was created.
+            data_type: timestamp
+          - name: date_updated
+            description: The date and time when the address was last updated.
+            data_type: timestamp
+          - name: emergency_enabled
+            description: Indicates whether emergency services are enabled for this
+              address.
+            data_type: boolean
+          - name: friendly_name
+            description: A friendly name or label for the address.
+            data_type: varchar
+          - name: iso_country
+            description: The ISO 3166-1 alpha-2 country code of the address.
+            data_type: varchar
+          - name: postal_code
+            description: The postal code of the address.
+            data_type: varchar
+          - name: region
+            description: The region or state of the address.
+            data_type: varchar
+          - name: sid
+            description: The unique identifier of the address.
+            data_type: varchar
+          - name: street
+            description: The street address.
+            data_type: varchar
+          - name: street_secondary
+            description: Additional information about the street address, such as
+              suite number.
+            data_type: varchar
+          - name: validated
+            description: Indicates whether the address has been validated.
+            data_type: boolean
+          - name: verified
+            description: Indicates whether the address has been verified.
+            data_type: boolean
+          - name: uri
+            description: The URI of the address resource.
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: alerts
+        columns:
+          - name: log_level
+            description: The severity level of the alert (info, warning, error)
+            data_type: varchar
+          - name: resource_sid
+            description: The SID of the specific resource associated with the alert
+            data_type: varchar
+          - name: date_updated
+            description: The date and time when the alert was last updated
+            data_type: timestamp
+          - name: account_sid
+            description: The unique identifier for the account associated with the
+              alert
+            data_type: varchar
+          - name: url
+            description: The URL or endpoint related to the alert
+            data_type: varchar
+          - name: request_method
+            description: The method used in the HTTP request that triggered the alert
+            data_type: varchar
+          - name: date_generated
+            description: The date and time when the alert data was generated
+            data_type: timestamp
+          - name: alert_text
+            description: The actual content or text of the alert message
+            data_type: varchar
+          - name: sid
+            description: The unique identifier (SID) for the alert entry
+            data_type: varchar
+          - name: date_created
+            description: The date and time when the alert was created
+            data_type: timestamp
+          - name: request_url
+            description: The URL that was requested and triggered the alert
+            data_type: varchar
+          - name: service_sid
+            description: The SID of the Twilio service related to the alert
+            data_type: varchar
+          - name: error_code
+            description: The code representing the error, if an error occurred
+            data_type: varchar
+          - name: api_version
+            description: The version of the Twilio API used for the alert
+            data_type: varchar
+          - name: more_info
+            description: Additional information or details related to the alert
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: applications
+        columns:
+          - name: account_sid
+            description: The unique identifier of the Twilio account associated with
+              the application.
+            data_type: varchar
+          - name: api_version
+            description: The version of the Twilio API being used for the application.
+            data_type: varchar
+          - name: date_created
+            description: The date and time when the application was created.
+            data_type: timestamp
+          - name: date_updated
+            description: The date and time when the application was last updated.
+            data_type: timestamp
+          - name: friendly_name
+            description: A user-friendly name assigned to the application for identification.
+            data_type: varchar
+          - name: message_status_callback
+            description: The URL where status updates for outgoing messages will be
+              sent.
+            data_type: varchar
+          - name: sid
+            description: A unique identifier for the application.
+            data_type: varchar
+          - name: sms_fallback_method
+            description: The HTTP method used to send a fallback URL if an error occurs
+              during SMS delivery.
+            data_type: varchar
+          - name: sms_fallback_url
+            description: The URL that Twilio will request if an error occurs during
+              SMS delivery.
+            data_type: varchar
+          - name: sms_method
+            description: The HTTP method used to send SMS messages for the application.
+            data_type: varchar
+          - name: public_application_connect_enabled
+            description: Indicates whether public application connect is enabled for
+              the application.
+            data_type: boolean
+          - name: sms_status_callback
+            description: The URL where status updates for incoming SMS messages will
+              be sent.
+            data_type: varchar
+          - name: sms_url
+            description: The URL that Twilio will request when receiving an incoming
+              SMS message.
+            data_type: varchar
+          - name: status_callback
+            description: The URL where status updates for calls will be sent.
+            data_type: varchar
+          - name: status_callback_method
+            description: The HTTP method used to send status updates for calls.
+            data_type: varchar
+          - name: uri
+            description: The URI of the application resource.
+            data_type: varchar
+          - name: voice_caller_id_lookup
+            description: Indicates whether or not caller ID information will be looked
+              up for incoming calls.
+            data_type: boolean
+          - name: voice_fallback_method
+            description: The HTTP method used to send a fallback URL if an error occurs
+              during voice call handling.
+            data_type: varchar
+          - name: voice_fallback_url
+            description: The URL that Twilio will request if an error occurs during
+              voice call handling.
+            data_type: varchar
+          - name: voice_method
+            description: The HTTP method used for voice call handling.
+            data_type: varchar
+          - name: voice_url
+            description: The URL that Twilio will request for voice call handling.
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: available_phone_number_countries
+        columns:
+          - name: country_code
+            description: The country code associated with the country.
+            data_type: varchar
+          - name: country
+            description: The name of the country for which phone number data is provided.
+            data_type: varchar
+          - name: uri
+            description: The URI to fetch more details about phone numbers in the
+              country.
+            data_type: varchar
+          - name: beta
+            description: Whether the phone number country data is in beta phase or
+              not.
+            data_type: boolean
+          - name: subresource_uris
+            description: URIs for accessing different types of phone numbers in the
+              country.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: local
+                  description: URI for fetching local phone numbers in the country.
+                  data_type: varchar
+                - name: mobile
+                  description: URI for fetching mobile phone numbers in the country.
+                  data_type: varchar
+                - name: toll_free
+                  description: URI for fetching toll-free phone numbers in the country.
+                  data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: available_phone_numbers_local
+        columns:
+          - name: friendly_name
+            description: A user-friendly nickname for the phone number
+            data_type: varchar
+          - name: phone_number
+            description: The phone number itself
+            data_type: varchar
+          - name: lata
+            description: Local access and transport area code for the phone number
+            data_type: varchar
+          - name: rate_center
+            description: Rate center for the phone number
+            data_type: varchar
+          - name: latitude
+            description: Latitude coordinate of the phone number's location
+            data_type: varchar
+          - name: longitude
+            description: Longitude coordinate of the phone number's location
+            data_type: varchar
+          - name: locality
+            description: Locality or city associated with the phone number
+            data_type: varchar
+          - name: region
+            description: Region or state associated with the phone number
+            data_type: varchar
+          - name: postal_code
+            description: Postal code of the phone number's location
+            data_type: varchar
+          - name: iso_country
+            description: ISO country code of the phone number
+            data_type: varchar
+          - name: address_requirements
+            description: The requirements related to the address associated with the
+              phone number
+            data_type: varchar
+          - name: beta
+            description: Indicator showing if the phone number is in beta testing
+            data_type: boolean
+          - name: capabilities
+            description: Object containing the capabilities of the available phone
+              number
+            data_type: json
+            meta:
+              subcolumns:
+                - name: voice
+                  description: Capability for Voice calls
+                  data_type: boolean
+                - name: SMS
+                  description: Capability for Short Message Service (Texting)
+                  data_type: boolean
+                - name: MMS
+                  description: Capability for Multimedia Messaging Service
+                  data_type: boolean
+                - name: fax
+                  description: Capability for Facsimile (Faxing)
+                  data_type: boolean
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: available_phone_numbers_mobile
+        columns:
+          - name: friendly_name
+            description: A user-friendly name for the phone number
+            data_type: varchar
+          - name: phone_number
+            description: The phone number in E.164 format
+            data_type: varchar
+          - name: lata
+            description: Local access and transport area code
+            data_type: varchar
+          - name: rate_center
+            description: Rate center associated with the phone number
+            data_type: varchar
+          - name: latitude
+            description: Latitude coordinate of the phone number's location
+            data_type: varchar
+          - name: longitude
+            description: Longitude coordinate of the phone number's location
+            data_type: varchar
+          - name: locality
+            description: Locality or city where the phone number is based
+            data_type: varchar
+          - name: region
+            description: Region or state where the phone number is located
+            data_type: varchar
+          - name: postal_code
+            description: Postal code of the phone number's area
+            data_type: varchar
+          - name: iso_country
+            description: The ISO country code for the phone number
+            data_type: varchar
+          - name: address_requirements
+            description: Address requirements for purchasing the phone number
+            data_type: varchar
+          - name: beta
+            description: Indicates if the phone number is in beta testing phase
+            data_type: boolean
+          - name: capabilities
+            description: Represents the capabilities of the available mobile phone
+              numbers such as SMS and voice services
+            data_type: json
+            meta:
+              subcolumns:
+                - name: voice
+                  description: Indicates if voice calling capability is available
+                  data_type: boolean
+                - name: SMS
+                  description: Indicates if SMS messaging is supported
+                  data_type: boolean
+                - name: MMS
+                  description: Indicates if MMS messaging is supported
+                  data_type: boolean
+                - name: fax
+                  description: Indicates if fax capability is available
+                  data_type: boolean
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: available_phone_numbers_toll_free
+        columns:
+          - name: friendly_name
+            description: A user-friendly name associated with the phone number for
+              easy identification.
+            data_type: varchar
+          - name: phone_number
+            description: The toll-free phone number that can be used for communication.
+            data_type: varchar
+          - name: lata
+            description: The Local Access and Transport Area code of the phone number's
+              location.
+            data_type: varchar
+          - name: rate_center
+            description: The rate center associated with the phone number.
+            data_type: varchar
+          - name: latitude
+            description: The latitude coordinate of the phone number's location.
+            data_type: varchar
+          - name: longitude
+            description: The longitude coordinate of the phone number's location.
+            data_type: varchar
+          - name: locality
+            description: The locality (city/town) where the phone number is located.
+            data_type: varchar
+          - name: region
+            description: The region (state/province) where the phone number is located.
+            data_type: varchar
+          - name: postal_code
+            description: The postal code of the phone number's location.
+            data_type: varchar
+          - name: iso_country
+            description: The ISO country code of the phone number's location.
+            data_type: varchar
+          - name: address_requirements
+            description: Specifies the requirements related to the address associated
+              with the phone number.
+            data_type: varchar
+          - name: beta
+            description: Indicates if the phone number is in beta testing phase.
+            data_type: boolean
+          - name: capabilities
+            description: Represents the capabilities of the toll-free phone numbers
+              available
+            data_type: json
+            meta:
+              subcolumns:
+                - name: voice
+                  description: Indicates if the phone number supports voice calls.
+                  data_type: boolean
+                - name: SMS
+                  description: Indicates if the phone number supports Short Message
+                    Service (text messaging).
+                  data_type: boolean
+                - name: MMS
+                  description: Indicates if the phone number supports Multimedia Messaging
+                    Service.
+                  data_type: boolean
+                - name: fax
+                  description: Indicates if the phone number supports fax communication.
+                  data_type: boolean
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: calls
+        columns:
+          - name: sid
+            description: The unique identifier for the call.
+            data_type: varchar
+          - name: date_created
+            description: The date and time when the call record was created.
+            data_type: timestamp
+          - name: date_updated
+            description: The date and time when the call record was last updated.
+            data_type: timestamp
+          - name: parent_call_sid
+            description: The SID of the parent call if this call is part of a conference.
+            data_type: varchar
+          - name: account_sid
+            description: The unique identifier for the account associated with the
+              call.
+            data_type: varchar
+          - name: to
+            description: The phone number that received the call.
+            data_type: varchar
+          - name: to_formatted
+            description: The formatted version of the 'to' phone number.
+            data_type: varchar
+          - name: from
+            description: The phone number that made the call.
+            data_type: varchar
+          - name: from_formatted
+            description: The formatted version of the 'from' phone number.
+            data_type: varchar
+          - name: phone_number_sid
+            description: The SID of the phone number used for the call.
+            data_type: varchar
+          - name: status
+            description: The current status of the call, such as 'completed' or 'in-progress'.
+            data_type: varchar
+          - name: start_time
+            description: The date and time when the call started.
+            data_type: timestamp
+          - name: end_time
+            description: The date and time when the call ended.
+            data_type: timestamp
+          - name: duration
+            description: The duration of the call in seconds.
+            data_type: integer
+          - name: price
+            description: The cost of the call.
+            data_type: float
+          - name: price_unit
+            description: The currency unit of the call cost.
+            data_type: varchar
+          - name: direction
+            description: The direction of the call, either 'inbound' or 'outbound'.
+            data_type: varchar
+          - name: answered_by
+            description: The name of the entity or system that answered the call.
+            data_type: varchar
+          - name: annotation
+            description: Any additional notes or context added to the call.
+            data_type: varchar
+          - name: api_version
+            description: The version of the Twilio API used for this call.
+            data_type: varchar
+          - name: forwarded_from
+            description: The phone number that initiated the call forwarding.
+            data_type: varchar
+          - name: group_sid
+            description: The unique identifier of the call group to which this call
+              belongs.
+            data_type: varchar
+          - name: caller_name
+            description: The name of the caller as supplied by the caller ID service.
+            data_type: varchar
+          - name: queue_time
+            description: The time the call spent in a queue before being answered.
+            data_type: integer
+          - name: trunk_sid
+            description: The unique identifier of the trunk used for the call.
+            data_type: varchar
+          - name: uri
+            description: The URI for this call record.
+            data_type: varchar
+          - name: subresource_uris
+            description: Contains URIs for related subresources such as recordings
+              or notifications.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: recordings
+                  description: URI for call recordings related to this call.
+                  data_type: varchar
+                - name: notifications
+                  description: URI for call notifications related to this call.
+                  data_type: varchar
+                - name: feedback
+                  description: URI for call feedback related to this call.
+                  data_type: varchar
+                - name: payments
+                  description: URI for call payments related to this call.
+                  data_type: varchar
+                - name: siprec
+                  description: URI for call SIP recording related to this call.
+                  data_type: varchar
+                - name: events
+                  description: URI for call events related to this call.
+                  data_type: varchar
+                - name: feedback_summaries
+                  description: URI for call feedback summaries related to this call.
+                  data_type: varchar
+                - name: streams
+                  description: URI for call streams related to this call.
+                  data_type: varchar
+                - name: user_defined_message_subscriptions
+                  description: URI for user-defined message subscriptions related
+                    to this call.
+                  data_type: varchar
+                - name: user_defined_messages
+                  description: URI for user-defined messages related to this call.
+                  data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: conference_participants
+        columns:
+          - name: account_sid
+            description: The unique identifier for the Twilio account associated with
+              the conference participant.
+            data_type: varchar
+          - name: call_sid
+            description: The unique identifier for the call made by the participant.
+            data_type: varchar
+          - name: label
+            description: A custom label assigned to the participant for identification.
+            data_type: varchar
+          - name: conference_sid
+            description: The unique identifier for the conference the participant
+              is a part of.
+            data_type: varchar
+          - name: date_created
+            description: The date and time when the participant was added to the conference.
+            data_type: timestamp
+          - name: date_updated
+            description: The date and time when the participant's information was
+              last updated.
+            data_type: timestamp
+          - name: end_conference_on_exit
+            description: Indicates whether the conference will end when the participant
+              exits.
+            data_type: boolean
+          - name: muted
+            description: Indicates whether the participant's audio is muted.
+            data_type: boolean
+          - name: hold
+            description: Indicates whether the participant is on hold.
+            data_type: boolean
+          - name: status
+            description: The current status of the participant in the conference.
+            data_type: varchar
+          - name: start_conference_on_enter
+            description: Indicates whether the conference will start when the participant
+              enters.
+            data_type: boolean
+          - name: coaching
+            description: Indicates whether the participant is in coaching mode.
+            data_type: boolean
+          - name: call_sid_to_coach
+            description: The unique identifier for the call made to the coach.
+            data_type: varchar
+          - name: uri
+            description: The URI for accessing the details of the conference participant.
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: conferences
+        columns:
+          - name: account_sid
+            description: The unique identifier of the account associated with the
+              conference.
+            data_type: varchar
+          - name: date_created
+            description: The date and time when the conference was created.
+            data_type: timestamp
+          - name: date_updated
+            description: The date and time when the conference was last updated.
+            data_type: timestamp
+          - name: api_version
+            description: The version of the Twilio API used for the conference.
+            data_type: varchar
+          - name: friendly_name
+            description: A user-defined friendly name for the conference.
+            data_type: varchar
+          - name: region
+            description: The region where the conference is hosted.
+            data_type: varchar
+          - name: sid
+            description: The unique identifier (SID) of the conference.
+            data_type: varchar
+          - name: status
+            description: The current status of the conference.
+            data_type: varchar
+          - name: uri
+            description: The URI to access the conference resource.
+            data_type: varchar
+          - name: reason_conference_ended
+            description: The reason for the conference ending, if available.
+            data_type: varchar
+          - name: call_sid_ending_conference
+            description: The SID of the call that ended the conference, if applicable.
+            data_type: varchar
+          - name: subresource_uris
+            description: Contains URLs for accessing subresources related to conferences
+            data_type: json
+            meta:
+              subcolumns:
+                - name: participants
+                  description: URI to access the participants associated with the
+                    conference.
+                  data_type: varchar
+                - name: recordings
+                  description: URI to access the recordings of the conference.
+                  data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: conversation_messages
+        columns:
+          - name: sid
+            description: The unique identifier of the conversation_message.
+            data_type: varchar
+          - name: account_sid
+            description: The unique identifier of the account associated with the
+              conversation_messages data.
+            data_type: varchar
+          - name: conversation_sid
+            description: The unique identifier of the conversation to which the message
+              belongs.
+            data_type: varchar
+          - name: body
+            description: The textual content of the conversation message.
+            data_type: varchar
+          - name: media
+            description: List of media items attached to the message
+            data_type: array
+          - name: author
+            description: The author or sender of the conversation message.
+            data_type: varchar
+          - name: participant_sid
+            description: The unique identifier of the participant associated with
+              the message.
+            data_type: varchar
+          - name: attributes
+            description: Additional attributes or metadata related to the conversation
+              message.
+            data_type: varchar
+          - name: date_created
+            description: The date and time when the message was created.
+            data_type: varchar
+          - name: date_updated
+            description: The date and time when the message was last updated.
+            data_type: varchar
+          - name: index
+            description: The index of the message within the conversation.
+            data_type: integer
+          - name: delivery
+            description: Information related to message delivery
+            data_type: json
+            meta:
+              subcolumns:
+                - name: total
+                  description: Total number of delivery attempts.
+                  data_type: integer
+                - name: sent
+                  description: Number of successful delivery attempts.
+                  data_type: varchar
+                - name: delivered
+                  description: Whether the message was successfully delivered.
+                  data_type: varchar
+                - name: read
+                  description: Whether the message has been read by the recipient.
+                  data_type: varchar
+                - name: failed
+                  description: Number of failed delivery attempts.
+                  data_type: varchar
+                - name: undelivered
+                  description: Number of undelivered message attempts.
+                  data_type: varchar
+          - name: content_sid
+            description: The unique identifier of the content associated with the
+              conversation message.
+            data_type: varchar
+          - name: url
+            description: The URL of the conversation message for accessing or viewing.
+            data_type: varchar
+          - name: links
+            description: Links related to the conversation
+            data_type: json
+            meta:
+              subcolumns:
+                - name: delivery_receipts
+                  description: Receipts and status of message delivery.
+                  data_type: varchar
+                - name: channel_metadata
+                  description: Metadata specific to the communication channel.
+                  data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: conversation_participants
+        columns:
+          - name: account_sid
+            description: The Twilio account SID of the conversation participant.
+            data_type: varchar
+          - name: conversation_sid
+            description: The SID of the conversation the participant belongs to.
+            data_type: varchar
+          - name: sid
+            description: The unique SID of the conversation participant.
+            data_type: varchar
+          - name: identity
+            description: The identity of the participant in the conversation.
+            data_type: varchar
+          - name: attributes
+            description: Additional attributes related to the conversation participant.
+            data_type: varchar
+          - name: messaging_binding
+            description: Details about the messaging binding for the conversation
+              participant.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: type
+                  description: The type of the messaging binding (e.g., SMS, email).
+                  data_type: varchar
+                - name: address
+                  description: The address associated with the participant's messaging
+                    binding.
+                  data_type: varchar
+                - name: proxy_address
+                  description: The proxy address for the messaging binding.
+                  data_type: varchar
+          - name: role_sid
+            description: The SID of the role assigned to the participant in the conversation.
+            data_type: varchar
+          - name: date_created
+            description: The date and time when the conversation participant was created.
+            data_type: timestamp
+          - name: date_updated
+            description: The date and time when the conversation participant was last
+              updated.
+            data_type: timestamp
+          - name: url
+            description: The URL for accessing more details about the conversation
+              participant.
+            data_type: varchar
+          - name: last_read_message_index
+            description: The index of the last message that the participant has read.
+            data_type: varchar
+          - name: last_read_timestamp
+            description: The timestamp when the participant last read a message.
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: conversations
+        columns:
+          - name: sid
+            description: The unique identifier for the conversation.
+            data_type: varchar
+          - name: account_sid
+            description: The unique identifier for the account associated with the
+              conversation.
+            data_type: varchar
+          - name: chat_service_sid
+            description: The SID (Service Identifier) for the chat service to which
+              the conversation belongs.
+            data_type: varchar
+          - name: messaging_service_sid
+            description: The SID for the messaging service associated with the conversation.
+            data_type: varchar
+          - name: friendly_name
+            description: A human-readable name assigned to the conversation.
+            data_type: varchar
+          - name: unique_name
+            description: A unique name assigned to the conversation for easy identification.
+            data_type: varchar
+          - name: attributes
+            description: Additional attributes or metadata associated with the conversation.
+            data_type: varchar
+          - name: date_created
+            description: The date and time when the conversation was created.
+            data_type: timestamp
+          - name: date_updated
+            description: The date and time when the conversation was last updated.
+            data_type: timestamp
+          - name: state
+            description: The current state of the conversation (e.g., active, inactive).
+            data_type: varchar
+          - name: timers
+            description: Information about timers set for the conversation.
+            data_type: json
+          - name: bindings
+            description: Information about the communication channels bound to the
+              conversation.
+            data_type: json
+          - name: url
+            description: The URL endpoint for accessing or interacting with the conversation
+              data.
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: dependent_phone_numbers
+        columns:
+          - name: sid
+            description: The unique identifier (SID) for the phone number resource.
+            data_type: varchar
+          - name: account_sid
+            description: The unique identifier for the account this phone number belongs
+              to.
+            data_type: varchar
+          - name: friendly_name
+            description: A user-friendly name for the phone number.
+            data_type: varchar
+          - name: phone_number
+            description: The phone number itself.
+            data_type: varchar
+          - name: voice_url
+            description: The URL to call when a call comes in to the phone number.
+            data_type: varchar
+          - name: voice_method
+            description: The HTTP method to use for the voice URL.
+            data_type: varchar
+          - name: voice_fallback_url
+            description: The URL to call if an error occurs while handling incoming
+              voice calls.
+            data_type: varchar
+          - name: voice_fallback_method
+            description: The HTTP method to use for the voice fallback URL.
+            data_type: varchar
+          - name: voice_caller_id_lookup
+            description: Indicates whether the phone number performs caller ID lookup
+              on incoming calls.
+            data_type: boolean
+          - name: date_created
+            description: The date and time when the phone number was created.
+            data_type: timestamp
+          - name: date_updated
+            description: The date and time when the phone number was last updated.
+            data_type: timestamp
+          - name: sms_url
+            description: The URL to call when a message comes in to the phone number.
+            data_type: varchar
+          - name: sms_method
+            description: The HTTP method to use for the SMS URL.
+            data_type: varchar
+          - name: sms_fallback_url
+            description: The URL to call if an error occurs while handling incoming
+              SMS messages.
+            data_type: varchar
+          - name: sms_fallback_method
+            description: The HTTP method to use for the SMS fallback URL.
+            data_type: varchar
+          - name: address_requirements
+            description: Requirements for the address associated with the phone number.
+            data_type: varchar
+          - name: capabilities
+            description: List of capabilities supported by the phone number.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: Voice
+                  description: Support for voice calling.
+                  data_type: boolean
+                - name: SMS
+                  description: Support for text messaging (SMS).
+                  data_type: boolean
+                - name: MMS
+                  description: Support for multimedia messaging (MMS).
+                  data_type: boolean
+          - name: status_callback
+            description: The URL to send status callbacks to for events related to
+              the phone number.
+            data_type: varchar
+          - name: status_callback_method
+            description: The HTTP method to use for status callback requests.
+            data_type: varchar
+          - name: api_version
+            description: The version of the Twilio API being used.
+            data_type: varchar
+          - name: voice_application_sid
+            description: The SID of the voice application to handle incoming calls.
+            data_type: varchar
+          - name: sms_application_sid
+            description: The SID of the SMS application to handle incoming messages.
+            data_type: varchar
+          - name: trunk_sid
+            description: The SID of the Trunk containing this phone number.
+            data_type: varchar
+          - name: emergency_status
+            description: The emergency status of the phone number.
+            data_type: varchar
+          - name: emergency_address_sid
+            description: The SID of the emergency address associated with the phone
+              number.
+            data_type: varchar
+          - name: uri
+            description: The URI of the phone number resource.
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: executions
+        columns:
+          - name: sid
+            description: The unique identifier for the execution.
+            data_type: varchar
+          - name: account_sid
+            description: The unique identifier for the account associated with the
+              execution.
+            data_type: varchar
+          - name: flow_sid
+            description: The unique identifier for the flow associated with the execution.
+            data_type: varchar
+          - name: contact_sid
+            description: The unique identifier for the contact associated with the
+              execution.
+            data_type: varchar
+          - name: contact_channel_address
+            description: The contact channel address where the execution is targeted.
+            data_type: varchar
+          - name: status
+            description: The status of the execution process.
+            data_type: varchar
+          - name: context
+            description: Additional context or data related to the execution.
+            data_type: json
+          - name: date_created
+            description: The date and time when the execution was created.
+            data_type: timestamp
+          - name: date_updated
+            description: The date and time when the execution was last updated.
+            data_type: timestamp
+          - name: url
+            description: The URL endpoint for accessing detailed information about
+              the execution.
+            data_type: varchar
+          - name: links
+            description: Contains related hypermedia links associated with the executions
+              data.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: execution_context
+                  description: Link to the execution context data.
+                  data_type: varchar
+                - name: steps
+                  description: Link to the steps involved in the execution.
+                  data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: flows
+        columns:
+          - name: sid
+            description: Unique identifier for the flow.
+            data_type: varchar
+          - name: account_sid
+            description: Unique identifier for the account associated with the flow.
+            data_type: varchar
+          - name: date_created
+            description: Date and time when the flow was created.
+            data_type: timestamp
+          - name: date_updated
+            description: Date and time when the flow was last updated.
+            data_type: timestamp
+          - name: friendly_name
+            description: A user-friendly name given to the flow.
+            data_type: varchar
+          - name: status
+            description: Status of the flow (e.g., active, inactive).
+            data_type: varchar
+          - name: version
+            description: Version number of the flow.
+            data_type: integer
+          - name: url
+            description: URL endpoint for the flow.
+            data_type: varchar
+          - name: links
+            description: Represents links related to the flow data.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: steps
+                  description: Link to the steps included in the flow.
+                  data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: incoming_phone_numbers
+        columns:
+          - name: sid
+            description: The SID of this phone number.
+            data_type: varchar
+          - name: account_sid
+            description: The SID of the account that owns this phone number.
+            data_type: varchar
+          - name: friendly_name
+            description: A user-assigned friendly name for this phone number.
+            data_type: varchar
+          - name: phone_number
+            description: The phone number.
+            data_type: varchar
+          - name: voice_url
+            description: URL to make requests to when an incoming voice call is received.
+            data_type: varchar
+          - name: voice_method
+            description: HTTP method to use when making requests to the voice_url.
+            data_type: varchar
+          - name: voice_fallback_url
+            description: URL to make requests to when an error occurs while processing
+              an incoming voice call.
+            data_type: varchar
+          - name: voice_fallback_method
+            description: HTTP method to use when making requests to the voice_fallback_url.
+            data_type: varchar
+          - name: voice_caller_id_lookup
+            description: Caller ID lookup setting for voice calls made from this phone
+              number.
+            data_type: boolean
+          - name: date_created
+            description: The date and time when this phone number was created.
+            data_type: timestamp
+          - name: date_updated
+            description: The date and time when this phone number was last updated.
+            data_type: timestamp
+          - name: sms_url
+            description: URL to make requests to when an incoming SMS message is received.
+            data_type: varchar
+          - name: sms_method
+            description: HTTP method to use when making requests to the sms_url.
+            data_type: varchar
+          - name: sms_fallback_url
+            description: URL to make requests to when an error occurs while processing
+              an incoming SMS message.
+            data_type: varchar
+          - name: sms_fallback_method
+            description: HTTP method to use when making requests to the sms_fallback_url.
+            data_type: varchar
+          - name: address_requirements
+            description: Indicates the address requirements for this phone number.
+            data_type: varchar
+          - name: beta
+            description: Flag indicating beta status of this phone number.
+            data_type: boolean
+          - name: capabilities
+            description: Capabilities of this phone number.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: voice
+                  description: Capability for making and receiving voice calls.
+                  data_type: boolean
+                - name: sms
+                  description: Capability for sending and receiving SMS messages.
+                  data_type: boolean
+                - name: mms
+                  description: Capability for sending and receiving MMS messages.
+                  data_type: boolean
+                - name: fax
+                  description: Capability for faxing.
+                  data_type: boolean
+          - name: voice_receive_mode
+            description: Receive mode setting for this phone number.
+            data_type: varchar
+          - name: status_callback
+            description: URL to make requests to when certain events happen related
+              to this phone number.
+            data_type: varchar
+          - name: status_callback_method
+            description: HTTP method to use when making requests to the status_callback
+              URL.
+            data_type: varchar
+          - name: api_version
+            description: The version of the Twilio API being used for this phone number.
+            data_type: varchar
+          - name: voice_application_sid
+            description: The SID of the application to handle incoming voice calls
+              for this phone number.
+            data_type: varchar
+          - name: sms_application_sid
+            description: The SID of the application to handle incoming SMS messages
+              for this phone number.
+            data_type: varchar
+          - name: origin
+            description: Indicates the origin of this phone number.
+            data_type: varchar
+          - name: trunk_sid
+            description: The SID of the trunk associated with this phone number.
+            data_type: varchar
+          - name: emergency_status
+            description: Emergency status of this phone number.
+            data_type: varchar
+          - name: emergency_address_sid
+            description: The SID of the emergency address associated with this phone
+              number.
+            data_type: varchar
+          - name: emergency_address_status
+            description: Status of the emergency address associated with this phone
+              number.
+            data_type: varchar
+          - name: address_sid
+            description: The SID of the address associated with this phone number.
+            data_type: varchar
+          - name: identity_sid
+            description: The SID of the identity associated with this phone number.
+            data_type: varchar
+          - name: bundle_sid
+            description: The SID of the bundle associated with this phone number.
+            data_type: varchar
+          - name: uri
+            description: The URI of this phone number.
+            data_type: varchar
+          - name: status
+            description: Status of this phone number.
+            data_type: varchar
+          - name: subresource_uris
+            description: URIs for related sub-resources.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: assigned_add_ons
+                  description: URI for accessing assigned add-ons for this phone number.
+                  data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: keys
+        columns:
+          - name: date_created
+            description: The date and time when the key was created.
+            data_type: timestamp
+          - name: date_updated
+            description: The date and time when the key was last updated.
+            data_type: timestamp
+          - name: friendly_name
+            description: The user-friendly name associated with the key.
+            data_type: varchar
+          - name: sid
+            description: The unique identifier for the key (System ID).
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: message_media
+        columns:
+          - name: sid
+            description: The unique identifier of the message media.
+            data_type: varchar
+          - name: account_sid
+            description: The unique identifier of the account associated with this
+              message media.
+            data_type: varchar
+          - name: parent_sid
+            description: The unique identifier of the parent message associated with
+              this media.
+            data_type: varchar
+          - name: content_type
+            description: The MIME type of the media content.
+            data_type: varchar
+          - name: date_created
+            description: The date and time when the message media was created.
+            data_type: timestamp
+          - name: date_updated
+            description: The date and time when the message media was last updated.
+            data_type: timestamp
+          - name: uri
+            description: The URI that can be used to access this message media resource.
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: messages
+        columns:
+          - name: account_sid
+            description: The unique identifier for the account associated with this
+              message.
+            data_type: varchar
+          - name: api_version
+            description: The version of the Twilio API being used to send or receive
+              this message.
+            data_type: varchar
+          - name: body
+            description: The text body of the message.
+            data_type: varchar
+          - name: date_created
+            description: The date and time when the message was created.
+            data_type: timestamp
+          - name: date_sent
+            description: The date and time when the message was sent.
+            data_type: timestamp
+          - name: date_updated
+            description: The date and time when the message was last updated.
+            data_type: timestamp
+          - name: direction
+            description: The direction of the message, whether it's incoming or outgoing.
+            data_type: varchar
+          - name: error_code
+            description: The error code associated with the message, if any.
+            data_type: varchar
+          - name: error_message
+            description: The error message description if the message failed to send.
+            data_type: varchar
+          - name: from
+            description: The phone number or sender ID that the message originated
+              from.
+            data_type: varchar
+          - name: messaging_service_sid
+            description: The unique identifier for the messaging service associated
+              with the message.
+            data_type: varchar
+          - name: price_unit
+            description: The currency unit used for pricing of the message.
+            data_type: varchar
+          - name: num_media
+            description: The number of media files (e.g., images, videos) included
+              in the message.
+            data_type: integer
+          - name: num_segments
+            description: The number of message segments if the message exceeds 160
+              characters.
+            data_type: integer
+          - name: price
+            description: The cost of sending the message.
+            data_type: float
+          - name: sid
+            description: The unique identifier for this message.
+            data_type: varchar
+          - name: status
+            description: The status of the message (e.g., sent, delivered, failed).
+            data_type: varchar
+          - name: subresource_uris
+            description: Contains links to the subresources related to the message.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: feedback
+                  description: URI to access feedback related to the message.
+                  data_type: varchar
+                - name: media
+                  description: URI to access media files associated with the message.
+                  data_type: varchar
+          - name: to
+            description: The phone number or recipient ID that the message was sent
+              to.
+            data_type: varchar
+          - name: uri
+            description: The URI for accessing detailed information about this message.
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: outgoing_caller_ids
+        columns:
+          - name: account_sid
+            description: The unique identifier for the Twilio account associated with
+              this outgoing caller ID.
+            data_type: varchar
+          - name: date_created
+            description: The date and time when the outgoing caller ID was created.
+            data_type: timestamp
+          - name: date_updated
+            description: The date and time when the outgoing caller ID was last updated.
+            data_type: timestamp
+          - name: friendly_name
+            description: A user-defined friendly name for the outgoing caller ID.
+            data_type: varchar
+          - name: phone_number
+            description: The phone number associated with the outgoing caller ID.
+            data_type: varchar
+          - name: sid
+            description: The unique identifier for the outgoing caller ID.
+            data_type: varchar
+          - name: uri
+            description: The URI for accessing detailed information about the outgoing
+              caller ID.
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: queues
+        columns:
+          - name: account_sid
+            description: The unique identifier of the account that owns this queue.
+            data_type: varchar
+          - name: average_wait_time
+            description: The average time, in seconds, that callers have spent waiting
+              in this queue.
+            data_type: integer
+          - name: current_size
+            description: The current number of callers waiting in this queue.
+            data_type: integer
+          - name: date_created
+            description: The date and time when this queue was created.
+            data_type: timestamp
+          - name: date_updated
+            description: The date and time when this queue was last updated.
+            data_type: timestamp
+          - name: friendly_name
+            description: A user-defined human-readable name for this queue.
+            data_type: varchar
+          - name: max_size
+            description: The maximum number of callers allowed in this queue.
+            data_type: integer
+          - name: sid
+            description: A unique identifier for this queue.
+            data_type: varchar
+          - name: uri
+            description: The URI for this queue resource.
+            data_type: varchar
+          - name: subresource_uris
+            description: Contains URIs for related subresources of this queue.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: members
+                  description: A URI to fetch the members (callers) of this queue.
+                  data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: recordings
+        columns:
+          - name: account_sid
+            description: The unique identifier of the account that owns the recording.
+            data_type: varchar
+          - name: api_version
+            description: The version of the Twilio API used when the recording was
+              created.
+            data_type: varchar
+          - name: call_sid
+            description: The unique identifier of the call associated with the recording.
+            data_type: varchar
+          - name: conference_sid
+            description: The unique identifier of the conference, if the recording
+              is part of a conference.
+            data_type: varchar
+          - name: date_created
+            description: The date and time when the recording was created.
+            data_type: timestamp
+          - name: date_updated
+            description: The date and time when the recording was last updated.
+            data_type: timestamp
+          - name: start_time
+            description: The date and time when the recording started.
+            data_type: timestamp
+          - name: duration
+            description: The duration of the recording in seconds.
+            data_type: integer
+          - name: sid
+            description: The unique identifier of the recording.
+            data_type: varchar
+          - name: price
+            description: The cost of storing the recording.
+            data_type: float
+          - name: price_unit
+            description: The unit in which the cost is measured (e.g., USD).
+            data_type: varchar
+          - name: status
+            description: The status of the recording (e.g., completed, in-progress).
+            data_type: varchar
+          - name: channels
+            description: The number of audio channels in the recording.
+            data_type: integer
+          - name: source
+            description: The source of the recording (e.g., twilio).
+            data_type: varchar
+          - name: error_code
+            description: The error code, if any, associated with the recording.
+            data_type: integer
+          - name: media_url
+            description: The URL where the recording audio file can be accessed.
+            data_type: varchar
+          - name: uri
+            description: The URI of the recording resource.
+            data_type: varchar
+          - name: encryption_details
+            description: Details about the encryption used for the recording.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: type
+                  description: The type of encryption used.
+                  data_type: varchar
+                - name: encryption_public_key_sid
+                  description: The SID of the public key used for encryption.
+                  data_type: varchar
+                - name: encryption_cek
+                  description: The Content Encryption Key used for encryption.
+                  data_type: varchar
+                - name: iv
+                  description: The Initialization Vector used for encryption.
+                  data_type: varchar
+          - name: subresource_uris
+            description: URIs for subresources related to the recording.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: transcriptions
+                  description: The URI to fetch transcriptions of the recording.
+                  data_type: varchar
+                - name: add_on_results
+                  description: The URI to fetch add-on results related to the recording.
+                  data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: roles
+        columns:
+          - name: sid
+            description: The unique identifier for the role.
+            data_type: varchar
+          - name: account_sid
+            description: The unique identifier for the account associated with the
+              role.
+            data_type: varchar
+          - name: service_sid
+            description: The unique identifier for the service associated with the
+              role.
+            data_type: varchar
+          - name: friendly_name
+            description: A user-friendly name assigned to the role.
+            data_type: varchar
+          - name: type
+            description: The type or category of the role.
+            data_type: varchar
+          - name: permissions
+            description: The list of permissions assigned to the role.
+            data_type: array
+          - name: date_created
+            description: The date and time when the role was created.
+            data_type: timestamp
+          - name: date_updated
+            description: The date and time when the role was last updated.
+            data_type: timestamp
+          - name: url
+            description: The URL for accessing the role data.
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: services
+        columns:
+          - name: account_sid
+            description: The unique identifier of the account related to the service.
+            data_type: varchar
+          - name: consumption_report_interval
+            description: The interval at which consumption reports are generated.
+            data_type: float
+          - name: date_created
+            description: The date and time when the service was created.
+            data_type: timestamp
+          - name: date_updated
+            description: The date and time when the service was last updated.
+            data_type: timestamp
+          - name: default_channel_creator_role_sid
+            description: The default role assigned to the creator of a channel.
+            data_type: varchar
+          - name: default_channel_role_sid
+            description: The default role assigned to all users in a channel.
+            data_type: varchar
+          - name: default_service_role_sid
+            description: The default role assigned to users of the service.
+            data_type: varchar
+          - name: friendly_name
+            description: A user-friendly name given to the service.
+            data_type: varchar
+          - name: limits
+            description: Limits applied to the service.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: channel_members
+                  description: Maximum number of members allowed in a channel.
+                  data_type: float
+                - name: user_channels
+                  description: Maximum number of channels a user can belong to.
+                  data_type: float
+          - name: links
+            description: Links to different resources related to the service.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: channels
+                  description: Links related to channels.
+                  data_type: varchar
+                - name: users
+                  description: Links related to users.
+                  data_type: varchar
+                - name: roles
+                  description: Links related to roles.
+                  data_type: varchar
+                - name: bindings
+                  description: Links related to bindings.
+                  data_type: varchar
+          - name: notifications
+            description: Notification settings for users.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: users
+                  description: Users to receive notifications.
+                  data_type: varchar
+          - name: post_webhook_url
+            description: URL for the post webhook.
+            data_type: varchar
+          - name: pre_webhook_url
+            description: URL for the pre webhook.
+            data_type: varchar
+          - name: pre_webhook_retry_count
+            description: Number of retries for the pre webhook.
+            data_type: float
+          - name: post_webhook_retry_count
+            description: Number of retries for the post webhook.
+            data_type: float
+          - name: reachability_enabled
+            description: Flag indicating if reachability is enabled.
+            data_type: boolean
+          - name: read_status_enabled
+            description: Flag indicating if read status is enabled.
+            data_type: boolean
+          - name: sid
+            description: The unique identifier of the service.
+            data_type: varchar
+          - name: typing_indicator_timeout
+            description: Timeout duration for typing indicators.
+            data_type: float
+          - name: url
+            description: URL of the service.
+            data_type: varchar
+          - name: webhook_filters
+            description: Filters for webhooks.
+            data_type: array
+          - name: webhook_method
+            description: HTTP method used for webhooks.
+            data_type: varchar
+          - name: media
+            description: Media settings for the service.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: size_limit_mb
+                  description: Maximum size limit for media in megabytes.
+                  data_type: float
+                - name: compatibility_message
+                  description: Message to display for incompatible media.
+                  data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: step
+        columns:
+          - name: parent_step_sid
+            description: The SID of the parent step if this step is nested within
+              another step.
+            data_type: varchar
+          - name: name
+            description: The name or identifier of the step.
+            data_type: varchar
+          - name: date_updated
+            description: The date and time when the step was last updated.
+            data_type: varchar
+          - name: transitioned_to
+            description: The state to which the step transitioned.
+            data_type: varchar
+          - name: account_sid
+            description: The SID of the account associated with the step data.
+            data_type: varchar
+          - name: url
+            description: The URL for accessing detailed information about the step.
+            data_type: varchar
+          - name: context
+            description: Additional context or metadata related to the step.
+            data_type: varchar
+          - name: sid
+            description: The unique identifier (SID) of the step.
+            data_type: varchar
+          - name: transitioned_from
+            description: The previous state from which the step transitioned.
+            data_type: varchar
+          - name: date_created
+            description: The date and time when the step was created.
+            data_type: varchar
+          - name: execution_sid
+            description: The SID of the execution this step belongs to.
+            data_type: varchar
+          - name: flow_sid
+            description: The SID of the flow to which this step belongs.
+            data_type: varchar
+          - name: links
+            description: Contains related hypermedia links to navigate through the
+              step data.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: step_context
+                  description: Link to additional contextual information related to
+                    the step.
+                  data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: transcriptions
+        columns:
+          - name: account_sid
+            description: The unique identifier for the account associated with the
+              transcription data.
+            data_type: varchar
+          - name: api_version
+            description: The version of the Twilio API used for the transcription.
+            data_type: varchar
+          - name: date_created
+            description: The date and time when the transcription was created.
+            data_type: timestamp
+          - name: date_updated
+            description: The date and time when the transcription was last updated.
+            data_type: timestamp
+          - name: duration
+            description: The duration of the audio recording for which the transcription
+              was generated.
+            data_type: integer
+          - name: price
+            description: The cost of the transcription service.
+            data_type: float
+          - name: price_unit
+            description: The currency unit used for pricing the transcription service.
+            data_type: varchar
+          - name: recording_sid
+            description: The unique identifier for the recording associated with the
+              transcription.
+            data_type: varchar
+          - name: sid
+            description: The unique identifier for the transcription data.
+            data_type: varchar
+          - name: status
+            description: The current status of the transcription (e.g., in-progress,
+              completed).
+            data_type: varchar
+          - name: transcription_text
+            description: The text content of the transcription generated from the
+              audio recording.
+            data_type: varchar
+          - name: type
+            description: The type of transcription (e.g., automatic, human-generated).
+            data_type: varchar
+          - name: uri
+            description: The URI where the transcription data can be accessed.
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: trunks
+        columns:
+          - name: sid
+            description: The unique identifier for the trunk.
+            data_type: varchar
+          - name: account_sid
+            description: The unique identifier of the account associated with the
+              trunk.
+            data_type: varchar
+          - name: domain_name
+            description: The domain name associated with the trunk.
+            data_type: varchar
+          - name: disaster_recovery_method
+            description: The method used for disaster recovery for this trunk.
+            data_type: varchar
+          - name: disaster_recovery_url
+            description: The URL set up for disaster recovery in case of trunk failure.
+            data_type: varchar
+          - name: friendly_name
+            description: A user-friendly name for the trunk.
+            data_type: varchar
+          - name: secure
+            description: Indicates whether the trunk connection is secure.
+            data_type: boolean
+          - name: cnam_lookup_enabled
+            description: Indicates whether Caller ID Name (CNAM) lookup is enabled
+              for this trunk.
+            data_type: boolean
+          - name: recording
+            description: Settings related to call recording on the trunk.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: mode
+                  description: The mode used for recording calls on this trunk.
+                  data_type: varchar
+                - name: trim
+                  description: Indicates whether recorded calls should be trimmed.
+                  data_type: varchar
+          - name: transfer_mode
+            description: The mode used for call transfer on this trunk.
+            data_type: varchar
+          - name: transfer_caller_id
+            description: The Caller ID used when transferring calls through this trunk.
+            data_type: varchar
+          - name: auth_type
+            description: The authentication type used for this trunk.
+            data_type: varchar
+          - name: auth_type_set
+            description: A set of authentication types associated with the trunk.
+            data_type: array
+          - name: date_created
+            description: The date and time the trunk was created.
+            data_type: timestamp
+          - name: date_updated
+            description: The date and time the trunk was last updated.
+            data_type: timestamp
+          - name: url
+            description: The URL of the trunk.
+            data_type: varchar
+          - name: links
+            description: Links to related resources associated with the trunk.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: origination_urls
+                  description: Endpoint for managing origination URLs associated with
+                    the trunk.
+                  data_type: varchar
+                - name: credential_lists
+                  description: Endpoint for managing credential lists associated with
+                    the trunk.
+                  data_type: varchar
+                - name: ip_access_control_lists
+                  description: Endpoint for managing IP Access Control Lists (ACLs)
+                    associated with the trunk.
+                  data_type: varchar
+                - name: phone_numbers
+                  description: Endpoint for managing phone numbers associated with
+                    the trunk.
+                  data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: usage_records
+        columns:
+          - name: category
+            description: The category to which the usage data belongs, such as calls,
+              SMS, or recordings.
+            data_type: varchar
+          - name: count
+            description: The number of units consumed in the usage record.
+            data_type: integer
+          - name: price_unit
+            description: The currency unit in which the price is denoted, such as
+              USD or EUR.
+            data_type: varchar
+          - name: subresource_uris
+            description: Contains references to sub-resources related to the usage
+              record.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: yesterday
+                  description: The resource URI for fetching yesterday's usage records.
+                  data_type: varchar
+                - name: all_time
+                  description: The resource URI for fetching usage records spanning
+                    all time periods.
+                  data_type: varchar
+                - name: today
+                  description: The resource URI for fetching today's usage records.
+                  data_type: varchar
+                - name: yearly
+                  description: The resource URI for fetching yearly usage records.
+                  data_type: varchar
+                - name: this_month
+                  description: The resource URI for fetching usage records for the
+                    current month.
+                  data_type: varchar
+                - name: monthly
+                  description: The resource URI for fetching monthly usage records.
+                  data_type: varchar
+                - name: daily
+                  description: The resource URI for fetching daily usage records.
+                  data_type: varchar
+                - name: last_month
+                  description: The resource URI for fetching usage records for the
+                    last month.
+                  data_type: varchar
+          - name: description
+            description: A brief explanation or summary of the usage record data.
+            data_type: varchar
+          - name: end_date
+            description: The end date of the usage record period.
+            data_type: date
+          - name: usage_unit
+            description: The unit of measurement for the usage field, corresponding
+              to the usage count unit.
+            data_type: varchar
+          - name: price
+            description: The total price incurred for the consumed units in the usage
+              record.
+            data_type: float
+          - name: uri
+            description: The unique resource identifier for the usage record.
+            data_type: varchar
+          - name: account_sid
+            description: The unique identifier for the account associated with the
+              usage record.
+            data_type: varchar
+          - name: usage
+            description: The total usage value, which could be a cumulative count
+              or a sum of values depending on the category.
+            data_type: float
+          - name: start_date
+            description: The start date and time of the usage record period.
+            data_type: timestamp
+          - name: count_unit
+            description: The unit of measurement for the count field, such as minutes,
+              messages, or bytes.
+            data_type: varchar
+          - name: as_of
+            description: The timestamp indicating the date and time up to which the
+              usage data is accurate.
+            data_type: varchar
+          - name: api_version
+            description: The version of the Twilio API used in the interaction that
+              generated the usage record.
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: usage_triggers
+        columns:
+          - name: usage_record_uri
+            description: The URI of the associated usage record.
+            data_type: varchar
+          - name: date_updated
+            description: The date and time when the trigger was last updated.
+            data_type: timestamp
+          - name: date_fired
+            description: The date and time when the trigger was last fired.
+            data_type: timestamp
+          - name: friendly_name
+            description: A user-friendly name for the trigger.
+            data_type: varchar
+          - name: uri
+            description: The URI of the usage trigger resource.
+            data_type: varchar
+          - name: account_sid
+            description: The unique identifier for the account associated with the
+              usage trigger.
+            data_type: varchar
+          - name: callback_method
+            description: The HTTP method used for callback notifications.
+            data_type: varchar
+          - name: trigger_by
+            description: The attribute by which the trigger condition is evaluated.
+            data_type: varchar
+          - name: sid
+            description: The unique identifier for the trigger.
+            data_type: varchar
+          - name: current_value
+            description: The current value for the trigger condition.
+            data_type: float
+          - name: date_created
+            description: The date and time when the trigger was created.
+            data_type: timestamp
+          - name: callback_url
+            description: The URL where callback notifications are sent.
+            data_type: varchar
+          - name: recurring
+            description: Indicates if the trigger is set to recur periodically.
+            data_type: varchar
+          - name: usage_category
+            description: The category under which the usage falls.
+            data_type: varchar
+          - name: trigger_value
+            description: The value that triggers the condition.
+            data_type: float
+          - name: api_version
+            description: The version of the Twilio API used for the trigger.
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: user_conversations
+        columns:
+          - name: notification_level
+            description: The level of notification settings for the conversation.
+            data_type: varchar
+          - name: unique_name
+            description: A unique name assigned to the conversation.
+            data_type: varchar
+          - name: user_sid
+            description: The unique identifier of the user associated with the conversation.
+            data_type: varchar
+          - name: friendly_name
+            description: A user-friendly name or alias for the conversation.
+            data_type: varchar
+          - name: conversation_sid
+            description: The unique identifier of the conversation.
+            data_type: varchar
+          - name: unread_messages_count
+            description: The count of unread messages in the conversation.
+            data_type: integer
+          - name: created_by
+            description: The user or entity that created the conversation.
+            data_type: varchar
+          - name: account_sid
+            description: The unique identifier of the Twilio account the conversation
+              belongs to.
+            data_type: varchar
+          - name: last_read_message_index
+            description: The index of the last message in the conversation that has
+              been read by the user.
+            data_type: integer
+          - name: date_created
+            description: The date and time when the conversation was initially created.
+            data_type: varchar
+          - name: timers
+            description: Contains timers or time-related information for the user
+              conversation.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: chat_service_sid
+                  description: Additional timer related to the chat service.
+                  data_type: varchar
+          - name: url
+            description: The URL to access the conversation details.
+            data_type: varchar
+          - name: date_updated
+            description: The date and time when the conversation was last updated.
+            data_type: varchar
+          - name: attributes
+            description: Additional metadata or attributes associated with the conversation.
+            data_type: varchar
+          - name: participant_sid
+            description: The unique identifier of the participant in the conversation.
+            data_type: varchar
+          - name: conversation_state
+            description: The current state or status of the conversation.
+            data_type: varchar
+          - name: chat_service_sid
+            description: The unique identifier of the chat service associated with
+              the conversation.
+            data_type: varchar
+          - name: links
+            description: Contains links related to the user conversation data.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: conversation
+                  description: Link to access detailed information about the conversation.
+                  data_type: varchar
+                - name: participant
+                  description: Link to access participant information related to the
+                    conversation.
+                  data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: users
+        columns:
+          - name: is_notifiable
+            description: Indicates whether the user is set to receive notifications
+            data_type: varchar
+          - name: date_updated
+            description: The date and time when the user was last updated
+            data_type: varchar
+          - name: is_online
+            description: Indicates whether the user is currently online
+            data_type: varchar
+          - name: friendly_name
+            description: A user-friendly name for the user
+            data_type: varchar
+          - name: account_sid
+            description: The unique identifier for the user's account
+            data_type: varchar
+          - name: url
+            description: URL to access the user's detailed information
+            data_type: varchar
+          - name: date_created
+            description: The date and time when the user was created
+            data_type: varchar
+          - name: role_sid
+            description: The unique identifier for the role assigned to the user
+            data_type: varchar
+          - name: sid
+            description: The unique identifier for the user
+            data_type: varchar
+          - name: attributes
+            description: Additional attributes or metadata associated with the user
+            data_type: varchar
+          - name: identity
+            description: The identity or username of the user
+            data_type: varchar
+          - name: chat_service_sid
+            description: The unique identifier for the chat service the user is associated
+              with
+            data_type: varchar
+          - name: links
+            description: Contains URLs to related resources for the user data.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: user_conversations
+                  description: URL to retrieve the conversations associated with the
+                    user
+                  data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar
+      - name: verify_services
+        columns:
+          - name: default_template_sid
+            description: The unique identifier for the default template used for verification
+              messages.
+            data_type: varchar
+          - name: tts_name
+            description: The name used for text-to-speech (TTS) in verification calls.
+            data_type: varchar
+          - name: psd2_enabled
+            description: Indicates if PSD2 (Payment Services Directive 2) verification
+              is enabled.
+            data_type: boolean
+          - name: do_not_share_warning_enabled
+            description: Indicates if the 'do not share' warning is enabled for verification
+              codes.
+            data_type: boolean
+          - name: mailer_sid
+            description: Unique identifier for the mailer service associated with
+              the verify service.
+            data_type: varchar
+          - name: friendly_name
+            description: A user-friendly name for the verify service.
+            data_type: varchar
+          - name: url
+            description: The URL associated with the verify service.
+            data_type: varchar
+          - name: account_sid
+            description: Unique identifier for the account associated with the verify
+              service.
+            data_type: varchar
+          - name: date_updated
+            description: The date and time when the verify service was last updated.
+            data_type: varchar
+          - name: totp
+            description: Object containing configuration settings for Time-based One-Time
+              Password (TOTP) verification method.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: time_step
+                  description: The time step interval for generating TOTP codes.
+                  data_type: float
+                - name: skew
+                  description: The time skew allowed for TOTP code validation.
+                  data_type: float
+                - name: code_length
+                  description: The number of digits in the TOTP (Time-based One-Time
+                    Password) code.
+                  data_type: float
+                - name: issuer
+                  description: The issuer name included in TOTP messages.
+                  data_type: varchar
+          - name: code_length
+            description: The number of digits in the verification code sent to users.
+            data_type: float
+          - name: custom_code_enabled
+            description: Indicates whether custom verification codes are enabled.
+            data_type: boolean
+          - name: sid
+            description: Unique identifier for the verify service.
+            data_type: varchar
+          - name: push
+            description: Object containing configuration settings for push verification
+              method.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: apn_credential_sid
+                  description: Unique identifier for the APN (Apple Push Notification)
+                    credential associated with the verify service.
+                  data_type: varchar
+                - name: include_date
+                  description: Indicates if the date should be included in push notifications.
+                  data_type: boolean
+                - name: fcm_credential_sid
+                  description: Unique identifier for the FCM (Firebase Cloud Messaging)
+                    credential associated with the verify service.
+                  data_type: varchar
+          - name: date_created
+            description: The date and time when the verify service was created.
+            data_type: varchar
+          - name: dtmf_input_required
+            description: Indicates whether DTMF input is required during verification.
+            data_type: boolean
+          - name: skip_sms_to_landlines
+            description: Indicates whether SMS messages are skipped for landline numbers
+              during verification.
+            data_type: boolean
+          - name: lookup_enabled
+            description: Indicates if phone number lookup is enabled for the verify
+              service.
+            data_type: boolean
+          - name: links
+            description: Object containing related hyperlinks for verify_services
+              data.
+            data_type: json
+            meta:
+              subcolumns:
+                - name: verification_checks
+                  description: Links related to verification checks for the verify
+                    service.
+                  data_type: varchar
+                - name: rate_limits
+                  description: Links related to rate limits for the verify service.
+                  data_type: varchar
+                - name: entities
+                  description: Links related to entities associated with the verify
+                    service.
+                  data_type: varchar
+                - name: access_tokens
+                  description: Links related to access tokens for the verify service.
+                  data_type: varchar
+                - name: verifications
+                  description: Links related to verifications performed using the
+                    verify service.
+                  data_type: varchar
+                - name: webhooks
+                  description: Links related to webhooks for the verify service.
+                  data_type: varchar
+                - name: messaging_configurations
+                  description: Links related to messaging configurations for the verify
+                    service.
+                  data_type: varchar
+          - name: _airbyte_extracted_at
+            description: Timestamp when the record was extracted from the source
+            data_type: timestamp
+          - name: _airbyte_meta
+            description: Metadata about the record
+            data_type: json
+          - name: _airbyte_raw_id
+            description: Unique identifier for the raw record
+            data_type: varchar

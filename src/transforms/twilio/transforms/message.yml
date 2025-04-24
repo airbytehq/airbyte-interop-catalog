@@ -1,0 +1,174 @@
+domain: twilio.airbyte-interop
+transforms:
+  - name: message
+    from:
+      - messages: twilio.messages
+    fields:
+      _fivetran_synced:
+        expression: messages._airbyte_extracted_at
+        description: Timestamp of when fivetran synced a record.
+      account_id:
+        expression: messages.account_sid
+        description: The unique identifier of the Account that sent or received the
+          message.
+      body:
+        expression: messages.body
+        description: The text of the message.
+      created_at:
+        expression: messages.date_created
+        description: The timestamp indicating when the message was created.
+      date_sent:
+        expression: messages.date_sent
+        description: The timestamp indicating when the message was sent.
+      direction:
+        expression: messages.direction
+        description: The direction of the message.  Can be inbound for incoming messages,
+          outbound-api for messages initiated by a REST API, outbound-call for messages
+          initiated during a call, or outbound-reply for messages initiated in response
+          to an incoming message.
+      error_code:
+        expression: messages.error_code
+        description: The error code associated with the message, if applicable.
+      error_message:
+        expression: messages.error_message
+        description: The description of the error_code if your message status is failed
+          or undelivered. If the message was successful, this value is null.
+      from:
+        expression: messages.from
+        description: The phone number or sender ID that sent the message.
+      id:
+        expression: messages.sid
+        description: The unique identifier for the message.
+      messaging_service_sid:
+        expression: messages.messaging_service_sid
+        description: The unique identifier of the messaging service associated with
+          the message.
+      num_media:
+        expression: messages.num_media
+        description: The number of media (e.g., images, videos) included in the message.
+      num_segments:
+        expression: messages.num_segments
+        description: The number of segments the message contains. A message body that
+          is too large to be sent in a single SMS message is segmented and charged
+          as multiple messages. Inbound messages over 160 characters are reassembled
+          when the message is received. Note, when using a Messaging Service to send
+          messages, num_segments will always be 0 in Twilio's response to your API
+          request.
+      price:
+        expression: messages.price
+        description: The cost of the message.
+      price_unit:
+        expression: messages.price_unit
+        description: The currency unit for the message cost.
+      status:
+        expression: messages.status
+        description: The status of the message. Can be accepted, scheduled, canceled,
+          queued, sending, sent, failed, delivered, undelivered, receiving, received,
+          or read (WhatsApp only).
+      to:
+        expression: messages.to
+        description: The phone number or recipient ID that received the message.
+      updated_at:
+        expression: messages.date_updated
+        description: The timestamp indicating when the message was last updated.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: messages
+    target_table_name: message
+    table_match_score: 0.85
+    completion_score: 0.95
+    explanation: Table match is highly compatible based on field comparisons and matching
+      specific data elements. Almost all fields have high-confidence mappings except
+      a few which couldn't be mapped.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: messages._airbyte_extracted_at
+        score: 1.0
+        explanation: Direct mapping from messages._airbyte_extracted_at, as specified.
+      - name: account_id
+        expression: messages.account_sid
+        score: 1.0
+        explanation: Direct mapping from messages.account_sid, perfectly aligns with
+          target schema.
+      - name: body
+        expression: messages.body
+        score: 1.0
+        explanation: Direct mapping from messages.body, perfectly aligns with target
+          schema.
+      - name: created_at
+        expression: messages.date_created
+        score: 1.0
+        explanation: Direct mapping from messages.date_created, perfectly aligns with
+          target schema.
+      - name: date_sent
+        expression: messages.date_sent
+        score: 1.0
+        explanation: Direct mapping from messages.date_sent, perfectly aligns with
+          target schema.
+      - name: direction
+        expression: messages.direction
+        score: 1.0
+        explanation: Direct mapping from messages.direction, perfectly aligns with
+          target schema.
+      - name: error_code
+        expression: messages.error_code
+        score: 1.0
+        explanation: Direct mapping from messages.error_code, perfectly aligns with
+          target schema.
+      - name: error_message
+        expression: messages.error_message
+        score: 1.0
+        explanation: Direct mapping from messages.error_message, perfectly aligns
+          with target schema.
+      - name: from
+        expression: messages.from
+        score: 1.0
+        explanation: Direct mapping from messages.from, perfectly aligns with target
+          schema.
+      - name: id
+        expression: messages.sid
+        score: 1.0
+        explanation: Direct mapping from messages.sid, perfectly aligns with target
+          schema.
+      - name: messaging_service_sid
+        expression: messages.messaging_service_sid
+        score: 1.0
+        explanation: Direct mapping from messages.messaging_service_sid, perfectly
+          aligns with target schema.
+      - name: num_media
+        expression: messages.num_media
+        score: 1.0
+        explanation: Direct mapping from messages.num_media, perfectly aligns with
+          target schema.
+      - name: num_segments
+        expression: messages.num_segments
+        score: 1.0
+        explanation: Direct mapping from messages.num_segments, perfectly aligns with
+          target schema.
+      - name: price
+        expression: messages.price
+        score: 0.6
+        explanation: Mapping from messages.price, slightly lower score due to potential
+          differences in precision and format.
+      - name: price_unit
+        expression: messages.price_unit
+        score: 0.6
+        explanation: Mapping from messages.price_unit, slightly lower score due to
+          potential differences in currency format.
+      - name: status
+        expression: messages.status
+        score: 1.0
+        explanation: Direct mapping from messages.status, perfectly aligns with target
+          schema.
+      - name: to
+        expression: messages.to
+        score: 1.0
+        explanation: Direct mapping from messages.to, perfectly aligns with target
+          schema.
+      - name: updated_at
+        expression: messages.date_updated
+        score: 1.0
+        explanation: Direct mapping from messages.date_updated, perfectly aligns with
+          target schema.
