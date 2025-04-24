@@ -22,7 +22,7 @@ jobs:
 
     steps:
       - name: Run Poe Slash Command Processor
-        uses: aaronsteers/poe-command-processor@v1.0.0
+        uses: aaronsteers/poe-command-processor@v1.1.0
         with:
           command: "fix"
           pr: ${{ github.event.inputs.pr }}

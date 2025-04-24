@@ -25,7 +25,7 @@ jobs:
 
     steps:
       - name: Run Poe Slash Command Processor
-        uses: aaronsteers/poe-command-processor@feat/handle-prs-from-comments
+        uses: aaronsteers/poe-command-processor@v1.1.0
         env:
           GCP_GSM_CREDENTIALS: ${{ secrets.GCP_GSM_CREDENTIALS }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}

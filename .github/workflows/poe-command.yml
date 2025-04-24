@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run Poe Slash Command Processor
-        uses: aaronsteers/poe-command-processor@v1.0.0
+        uses: aaronsteers/poe-command-processor@v1.1.0
         with:
           pr: ${{ github.event.inputs.pr }}
           comment-id: ${{ github.event.inputs.comment-id }}
