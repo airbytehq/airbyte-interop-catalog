@@ -1,0 +1,22 @@
+domain: recurly.airbyte-interop
+transforms:
+  - name: account_balance_history
+    from:
+      - MISSING: recurly.MISSING
+    fields:
+      account_id:
+        expression: MISSING
+        description: The account the balance update is associated with.
+      account_updated_at:
+        expression: MISSING
+        description: When the account balance was last changed.
+      amount:
+        expression: MISSING
+        description: The combined amount of charge or credit adjustments that are
+          left uninvoiced and open on the account.
+      currency:
+        expression: MISSING
+        description: 3-letter ISO 4217 currency code (USD for US Dollar)
+      past_due:
+        expression: MISSING
+        description: Is the existing amount of this balance due?

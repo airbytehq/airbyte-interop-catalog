@@ -1,0 +1,33 @@
+domain: recurly.airbyte-interop
+transforms:
+  - name: subscription_add_on_history
+    from:
+      - MISSING: recurly.MISSING
+    fields:
+      id:
+        expression: MISSING
+        description: Unique identifier for subscription add-on.
+      updated_at:
+        expression: MISSING
+        description: The date/time the add-on was last modified.
+      created_at:
+        expression: MISSING
+        description: The date/time the add-on was last created.
+      expired_at:
+        expression: MISSING
+        description: Date and time the subscription was/ will churn.
+      object:
+        expression: MISSING
+        description: Object type of subscription add-on.
+      plan_add_on_id:
+        expression: MISSING
+        description: Plan add-on ID associated with subscription add-on ID.
+      quantity:
+        expression: MISSING
+        description: Number of add-ons added to the subscription.
+      subscription_id:
+        expression: MISSING
+        description: Subscription ID associated with add-on.
+      unit_amount:
+        expression: MISSING
+        description: Amount of one unit of the add-on.

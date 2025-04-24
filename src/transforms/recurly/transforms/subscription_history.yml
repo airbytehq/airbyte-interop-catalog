@@ -1,0 +1,319 @@
+domain: recurly.airbyte-interop
+transforms:
+  - name: subscription_history
+    from:
+      - subscriptions: recurly.subscriptions
+    fields:
+      id:
+        expression: subscriptions.id
+        description: Unique identifier for the object.
+      updated_at:
+        expression: subscriptions.updated_at
+        description: When the subscription was updated.
+      account_id:
+        expression: subscriptions.account.id
+        description: The account this subscription belongs to.
+      activated_at:
+        expression: subscriptions.activated_at
+        description: When the subscription was activated.
+      add_ons_total:
+        expression: subscriptions.add_ons_total
+        description: Total price of add-ons. Greater or equal to 0.
+      auto_renew:
+        expression: subscriptions.auto_renew
+        description: "Whether the subscription renews at the end of its term. Default:
+          true\n"
+      bank_account_authorized_at:
+        expression: subscriptions.bank_account_authorized_at
+        description: "Merchants importing recurring subscriptions paid with ACH into
+          Recurly can  backdate the subscription's authorization with this attribute
+          using an ISO 8601 timestamp.  This timestamp is used for alerting customers
+          to reauthorize in 3 years in accordance  with NACHA rules. If a subscription
+          becomes inactive or the billing info is no longer  a bank account, this
+          timestamp is cleared.\n"
+      canceled_at:
+        expression: subscriptions.canceled_at
+        description: When the subscription was canceled. Can take future dates
+      collection_method:
+        expression: subscriptions.collection_method
+        description: "Default: \"automatic\" Enum: \"automatic\", \"manual\"\n"
+      created_at:
+        expression: subscriptions.created_at
+        description: When the subscription was created.
+      currency:
+        expression: subscriptions.currency
+        description: 3-letter ISO 4217 currency code.
+      current_period_ends_at:
+        expression: subscriptions.current_period_ends_at
+        description: Date/time current billing period ends at.
+      current_period_started_at:
+        expression: subscriptions.current_period_started_at
+        description: Date/time current billing period started at.
+      current_term_ends_at:
+        expression: subscriptions.current_term_ends_at
+        description: "When the term ends. This is calculated by a plan's interval
+          and total_billing_cycles in a term.  Subscription changes with a timeframe=renewal
+          will be applied on this date.\n"
+      current_term_started_at:
+        expression: subscriptions.current_term_started_at
+        description: "The start date of the term when the first billing period starts.\
+          \  The subscription term is the length of time that a customer will be committed
+          to a subscription.  A term can span multiple billing periods.\n"
+      customer_notes:
+        expression: MISSING
+        description: "This will default to the Customer Notes text specified on the
+          Invoice Settings page. Custom notes will stay with a subscription on all
+          renewals.\n"
+      expiration_reason:
+        expression: MISSING
+        description: Expiration reason
+      expires_at:
+        expression: MISSING
+        description: When the subscription has expired. Can take future dates.
+      net_terms:
+        expression: MISSING
+        description: Identifies the agreement associated with the subscription.
+      object:
+        expression: MISSING
+        description: The object type, in this case only "subscription"
+      paused_at:
+        expression: MISSING
+        description: Null unless subscription is paused or will pause at the end of
+          the current billing period.
+      plan_id:
+        expression: MISSING
+        description: The plan this subscription belongs to.
+      po_number:
+        expression: MISSING
+        description: For manual invoicing, this identifies the PO number associated
+          with the subscription.
+      quantity:
+        expression: MISSING
+        description: Subscription quantity. Greater or equal to 0.
+      remaining_billing_cycles:
+        expression: MISSING
+        description: The remaining billing cycles in the current term.
+      remaining_pause_cycles:
+        expression: MISSING
+        description: Null unless subscription is paused or will pause at the end of
+          the current billing period.
+      renewal_billing_cycles:
+        expression: MISSING
+        description: "If auto_renew=true, when a term completes, total_billing_cycles
+          takes this value as the length of subsequent terms.  Defaults to the plan's
+          total_billing_cycles.\n"
+      shipping_address_id:
+        expression: MISSING
+        description: Unique id assigned to shipping address.
+      state:
+        expression: MISSING
+        description: "The current state of the subscription. Enum: \"active\", \"\
+          canceled\", \"expired\", \"failed\", \"future\", \"paused\"\n"
+      subtotal:
+        expression: MISSING
+        description: Estimated total, before tax.
+      terms_and_conditions:
+        expression: MISSING
+        description: "Optional notes field.  This will default to the Terms and Conditions
+          text specified on the Invoice Settings page.\n"
+      total_billing_cycles:
+        expression: MISSING
+        description: "The number of cycles/billing periods in a term.  When remaining_billing_cycles=0,
+          if auto_renew=true the subscription will renew and a new term will begin,\
+          \  otherwise the subscription will expire.\n"
+      trial_ends_at:
+        expression: MISSING
+        description: Trial period ends at
+      trial_started_at:
+        expression: MISSING
+        description: Trial period started at
+      unit_amount:
+        expression: MISSING
+        description: Subscription unit price
+      uuid:
+        expression: MISSING
+        description: The UUID is useful for matching data with the CSV exports and
+          building URLs into Recurly's UI.
+annotations:
+  approved: false
+  missing_fields:
+    - customer_notes
+    - expiration_reason
+    - expires_at
+    - net_terms
+    - object
+    - paused_at
+    - plan_id
+    - po_number
+    - quantity
+    - remaining_billing_cycles
+    - remaining_pause_cycles
+    - renewal_billing_cycles
+    - shipping_address_id
+    - state
+    - subtotal
+    - terms_and_conditions
+    - total_billing_cycles
+    - trial_ends_at
+    - trial_started_at
+    - unit_amount
+    - uuid
+  evaluation:
+    source_stream_name: subscriptions
+    target_table_name: subscription_history
+    table_match_score: 0.8
+    completion_score: 0.6
+    explanation: The table mapping demonstrates a high level of confidence due to
+      clear connections between commonly named attributes such as 'id', 'created_at',
+      and 'updated_at', which are reliable indicators of a subscription-related table.
+      However, there are several key fields missing, impacting the overall completion
+      score. The fields that have direct matches exhibit well-mapped relations, suggesting
+      that the source and target schemas are describing similar subscription-related
+      information but the completeness of the field mapping is not fully achieved.
+    field_mapping_evals:
+      - name: id
+        expression: subscriptions.id
+        score: 1.0
+        explanation: Direct match on the field name and context.
+      - name: updated_at
+        expression: subscriptions.updated_at
+        score: 1.0
+        explanation: Direct match on the field name and context.
+      - name: account_id
+        expression: subscriptions.account.id
+        score: 0.9
+        explanation: The expressions and descriptions suggest a close mapping, though
+          not perfectly identical.
+      - name: activated_at
+        expression: subscriptions.activated_at
+        score: 1.0
+        explanation: Direct match on the field name and context.
+      - name: add_ons_total
+        expression: subscriptions.add_ons_total
+        score: 0.95
+        explanation: Exact name match and similar context related to subscriptions.
+      - name: auto_renew
+        expression: subscriptions.auto_renew
+        score: 1.0
+        explanation: Field name and meaning are perfectly aligned.
+      - name: bank_account_authorized_at
+        expression: subscriptions.bank_account_authorized_at
+        score: 0.7
+        explanation: The field names are slightly different but closely related in
+          purpose within the context of subscriptions.
+      - name: canceled_at
+        expression: subscriptions.canceled_at
+        score: 1.0
+        explanation: Direct match on the field name and context.
+      - name: collection_method
+        expression: subscriptions.collection_method
+        score: 0.8
+        explanation: Very closely related, detailed in the enumeration values.
+      - name: created_at
+        expression: subscriptions.created_at
+        score: 1.0
+        explanation: Direct match on the field name and context.
+      - name: currency
+        expression: subscriptions.currency
+        score: 0.9
+        explanation: Very closely related in context and matches the field name.
+      - name: current_period_ends_at
+        expression: subscriptions.current_period_ends_at
+        score: 1.0
+        explanation: Direct match on the field name and context.
+      - name: current_period_started_at
+        expression: subscriptions.current_period_started_at
+        score: 1.0
+        explanation: Direct match on the field name and context.
+      - name: current_term_ends_at
+        expression: subscriptions.current_term_ends_at
+        score: 0.9
+        explanation: Alignment with billing cycle context despite slight naming variation.
+      - name: current_term_started_at
+        expression: subscriptions.current_term_started_at
+        score: 0.9
+        explanation: Alignment with billing cycle context despite slight naming variation.
+      - name: customer_notes
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: expiration_reason
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: expires_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: net_terms
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: object
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: paused_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: plan_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: po_number
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: quantity
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: remaining_billing_cycles
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: remaining_pause_cycles
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: renewal_billing_cycles
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: shipping_address_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: state
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: subtotal
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: terms_and_conditions
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: total_billing_cycles
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: trial_ends_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: trial_started_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: unit_amount
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: uuid
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

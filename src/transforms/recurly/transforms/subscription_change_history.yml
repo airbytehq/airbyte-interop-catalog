@@ -1,0 +1,39 @@
+domain: recurly.airbyte-interop
+transforms:
+  - name: subscription_change_history
+    from:
+      - MISSING: recurly.MISSING
+    fields:
+      id:
+        expression: MISSING
+        description: Unique identifier for subscription change.
+      activate_at:
+        expression: MISSING
+        description: Date at which subscription changes.
+      activated:
+        expression: MISSING
+        description: Is the subscription change currently active?
+      created_at:
+        expression: MISSING
+        description: When the subscription was last created.
+      deleted_at:
+        expression: MISSING
+        description: When subscription was rendered to be inactive.
+      object:
+        expression: MISSING
+        description: Object type of subscription change.
+      plan_id:
+        expression: MISSING
+        description: Plan id associated with subscription change.
+      quantity:
+        expression: MISSING
+        description: Quantity of subscriptions changed
+      subscription_id:
+        expression: MISSING
+        description: subscription ID associated with subscription change.
+      unit_amount:
+        expression: MISSING
+        description: Amount of one unit subscription.
+      updated_at:
+        expression: MISSING
+        description: Last modification of subscription change.

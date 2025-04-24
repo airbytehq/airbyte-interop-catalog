@@ -1,0 +1,544 @@
+Table "account_coupon_redemptions" {
+    "account" json [note: 'The account associated with the coupon redemption']
+    "coupon" json [note: 'The coupon being redeemed']
+    "created_at" timestamp [note: 'The date and time when the redemption was created']
+    "currency" varchar [note: 'The currency in which the redemption was made']
+    "discounted" float [note: 'The amount discounted by the coupon']
+    "id" varchar [note: 'The unique identifier for the redemption']
+    "object" varchar [note: 'The type of object this represents']
+    "removed_at" timestamp [note: 'The date and time when the redemption was removed (if applicable)']
+    "state" varchar [note: 'The current state of the redemption']
+    "subscription_id" varchar [note: 'The subscription associated with the redemption']
+    "updated_at" timestamp [note: 'The date and time when the redemption was last updated']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "account_notes" {
+    "account_id" varchar [note: 'The unique identifier of the account associated with this note.']
+    "created_at" timestamp [note: 'The date and time when the note was created.']
+    "id" varchar [note: 'The unique identifier for this note.']
+    "message" varchar [note: 'The content or message of the note.']
+    "object" varchar [note: 'Represents the object type, in this case, \'note\'.']
+    "user" json [note: 'The user who created the note.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "accounts" {
+    "address" json [note: 'The address details of the account']
+    "bill_to" varchar [note: 'The billing details']
+    "billing_info" json [note: 'Billing information']
+    "cc_emails" varchar [note: 'Email addresses for carbon copy (CC)']
+    "code" varchar [note: 'Unique code assigned to the account']
+    "company" varchar [note: 'Company associated with the account']
+    "created_at" timestamp [note: 'Date and time when the account was created']
+    "custom_fields" array [note: 'Custom fields associated with the account']
+    "deleted_at" timestamp [note: 'Date and time when the account was deleted']
+    "dunning_campaign_id" varchar [note: 'Campaign ID for dunning management']
+    "email" varchar [note: 'Email address of the account holder']
+    "exemption_certificate" varchar [note: 'Exemption certificate details']
+    "external_accounts" array [note: 'External accounts associated with the account']
+    "first_name" varchar [note: 'First name of the account holder']
+    "has_active_subscription" boolean [note: 'Flag indicating if the account has an active subscription']
+    "has_canceled_subscription" boolean [note: 'Flag indicating if the account has a canceled subscription']
+    "has_future_subscription" boolean [note: 'Flag indicating if the account has a future subscription']
+    "has_live_subscription" boolean [note: 'Flag indicating if the account has a live subscription']
+    "has_past_due_invoice" boolean [note: 'Flag indicating if the account has a past due invoice']
+    "has_paused_subscription" boolean [note: 'Flag indicating if the account has a paused subscription']
+    "hosted_login_token" varchar [note: 'Token for hosted login functionality']
+    "id" varchar [note: 'Unique identifier of the account']
+    "invoice_template_id" varchar [note: 'ID of the invoice template used']
+    "last_name" varchar [note: 'Last name of the account holder']
+    "object" varchar [note: 'Type of object']
+    "override_business_entity_id" varchar [note: 'ID for overriding business entity']
+    "parent_account_id" varchar [note: 'ID of the parent account']
+    "preferred_locale" varchar [note: 'Preferred language/locale of the account holder']
+    "preferred_time_zone" varchar [note: 'Preferred time zone of the account holder']
+    "shipping_addresses" array [note: 'Addresses for shipping']
+    "state" varchar [note: 'State/province of the account address']
+    "tax_exempt" boolean [note: 'Flag indicating if the account is tax exempt']
+    "updated_at" timestamp [note: 'Date and time when the account was last updated']
+    "username" varchar [note: 'Username of the account holder']
+    "vat_number" varchar [note: 'VAT (Value Added Tax) number of the account']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "add_ons" {
+    "accounting_code" varchar [note: 'Accounting code for invoice line items for this add-on. If no value is provided, it defaults to add-on\'s code.']
+    "add_on_type" varchar [note: 'Whether the add-on type is fixed, or usage-based.']
+    "avalara_service_type" varchar [note: 'Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the add-on is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types.']
+    "avalara_transaction_type" varchar [note: 'Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the add-on is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types.']
+    "code" varchar [note: 'The unique identifier for the add-on within its plan.']
+    "created_at" timestamp [note: 'The date and time when the add-on was created.']
+    "currencies" array [note: 'This is only present when `type=fixed`.']
+    "default_quantity" integer [note: 'Default quantity for the hosted pages.']
+    "deleted_at" timestamp [note: 'The date and time when the add-on was deleted, if applicable.']
+    "display_quantity" boolean [note: 'Determines if the quantity field is displayed on the hosted pages for the add-on.']
+    "id" varchar [note: 'The unique identifier for the add-on.']
+    "measured_unit_id" varchar [note: 'System-generated unique identifier for an measured unit associated with the add-on.']
+    "name" varchar [note: 'Describes your add-on and will appear in subscribers\' invoices.']
+    "optional" boolean [note: 'Whether the add-on is optional for the customer to include in their purchase on the hosted payment page. If false, the add-on will be included when a subscription is created through the Recurly UI. However, the add-on will not be included when a subscription is created through the API.']
+    "plan_id" varchar [note: 'The ID of the plan to which the add-on is associated.']
+    "revenue_schedule_type" varchar [note: 'When this add-on is invoiced, the line item will use this revenue schedule. If `item_code`/`item_id` is part of the request then `revenue_schedule_type` must be absent in the request as the value will be set from the item.']
+    "state" varchar [note: 'Add-ons can be either active or inactive.']
+    "tax_code" varchar [note: 'Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The tax code values are specific to each tax system. If you are using Recurly’s EU VAT feature you can use `unknown`, `physical`, or `digital`.']
+    "tier_type" varchar [note: '''The pricing model for the add-on.  For more information,
+     [click here](https://docs.recurly.com/docs/billing-models#section-quantity-based). See our
+    [Guide](https://developers.recurly.com/guides/item-addon-guide.html) for an overview of how
+    to configure quantity-based pricing models.
+    ''']
+    "updated_at" timestamp [note: 'The date and time when the add-on was last updated.']
+    "usage_percentage" float [note: 'The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0.']
+    "usage_type" varchar [note: 'Type of usage, returns usage type if `add_on_type` is `usage`.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "billing_infos" {
+    "account_id" varchar
+    "address" json
+    "backup_payment_method" boolean [note: 'The `backup_payment_method` field is used to indicate a billing info as a backup on the account that will be tried if the initial billing info used for an invoice is declined.']
+    "company" varchar
+    "created_at" timestamp [note: 'When the billing information was created.']
+    "first_name" varchar
+    "fraud" json [note: 'Most recent fraud result.']
+    "id" varchar
+    "last_name" varchar
+    "object" varchar
+    "payment_method" json
+    "primary_payment_method" boolean [note: 'The `primary_payment_method` field is used to indicate the primary billing info on the account. The first billing info created on an account will always become primary. This payment method will be used']
+    "updated_at" timestamp [note: 'When the billing information was last changed.']
+    "updated_by" json
+    "valid" boolean
+    "vat_number" varchar [note: 'Customer\'s VAT number (to avoid having the VAT applied). This is only used for automatically collected invoices.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "coupons" {
+    "applies_to_all_items" boolean
+    "applies_to_all_plans" boolean
+    "applies_to_non_plan_charges" boolean
+    "code" varchar
+    "coupon_type" varchar
+    "created_at" timestamp
+    "discount" json [note: '''Details of the discount a coupon applies. Will contain a `type`
+    property and one of the following properties: `percent`, `fixed`, `trial`.
+    ''']
+    "duration" varchar
+    "expired_at" timestamp
+    "free_trial_amount" float
+    "free_trial_unit" varchar
+    "hosted_page_description" varchar
+    "id" varchar
+    "invoice_description" varchar
+    "items" array [note: '''A list of items for which this coupon applies. This will be
+    `null` if `applies_to_all_items=true`.
+    ''']
+    "max_redemptions" float
+    "max_redemptions_per_account" float
+    "name" varchar
+    "object" varchar
+    "plans" array [note: 'A list of plans for which this coupon applies. This will be `null` if `applies_to_all_plans=true`.']
+    "redeem_by" varchar
+    "redemption_resource" varchar
+    "state" varchar
+    "temporal_amount" float
+    "temporal_unit" varchar
+    "unique_code_template" varchar
+    "unique_coupon_code" json [note: 'A unique coupon code for a bulk coupon.']
+    "unique_coupon_codes_count" float
+    "updated_at" timestamp
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "credit_payments" {
+    "account" json [note: 'Details about the account associated with the credit payment.']
+    "action" varchar [note: 'The action for which the credit was created.']
+    "amount" float [note: 'Total credit payment amount applied to the charge invoice.']
+    "applied_to_invoice" json [note: 'Details about the invoice to which the credit payment is applied.']
+    "created_at" timestamp [note: 'The date and time when the credit payment was created.']
+    "currency" varchar [note: '3-letter ISO 4217 currency code.']
+    "id" varchar [note: 'The unique identifier of the credit payment.']
+    "original_credit_payment_id" varchar [note: 'For credit payments with action `refund`, this is the credit payment that was refunded.']
+    "original_invoice" json [note: 'Details about the original invoice for which the credit payment is made.']
+    "refund_transaction" json [note: 'Details about the refund transaction associated with the credit payment.']
+    "updated_at" timestamp [note: 'The date and time when the credit payment was last updated.']
+    "uuid" varchar [note: 'The UUID is useful for matching data with the CSV exports and building URLs into Recurly\'s UI.']
+    "voided_at" timestamp [note: 'The date and time when the credit payment was voided.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "export_dates" {
+    "dates" array [note: 'List of export dates']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "invoices" {
+    "type" varchar [note: 'Invoices are either charge, credit, or legacy invoices.']
+    "account" json [note: 'The account associated with the invoice.']
+    "address" json [note: 'The address details related to the invoice recipient.']
+    "balance" float [note: 'The outstanding balance remaining on this invoice.']
+    "billing_info_id" varchar [note: 'The `billing_info_id` is the value that represents a specific billing info for an end customer. When `billing_info_id` is used to assign billing info to the subscription, all future billing events for the subscription will bill to the specified billing info. `billing_info_id` can ONLY be used for sites utilizing the Wallet feature.']
+    "business_entity_id" varchar [note: 'The business entity ID linked to the invoice.']
+    "closed_at" timestamp [note: 'Date invoice was marked paid or failed.']
+    "collection_method" varchar [note: 'An automatic invoice means a corresponding transaction is run using the account\'s billing information at the same time the invoice is created. Manual invoices are created without a corresponding transaction. The merchant must enter a manual payment transaction or have the customer pay the invoice with an automatic method, like credit card, PayPal, Amazon, or ACH bank payment.']
+    "created_at" timestamp [note: 'The date and time when the invoice was created.']
+    "credit_payments" array [note: 'The credit payments related to the invoice.']
+    "currency" varchar [note: '3-letter ISO 4217 currency code.']
+    "customer_notes" varchar [note: 'This will default to the Customer Notes text specified on the Invoice Settings. Specify custom notes to add or override Customer Notes.']
+    "discount" float [note: 'Total discounts applied to this invoice.']
+    "due_at" timestamp [note: 'Date invoice is due. This is the date the net terms are reached.']
+    "dunning_campaign_id" varchar [note: 'Unique ID to identify the dunning campaign used when dunning the invoice. Available when the Dunning Campaigns feature is enabled. For sites without multiple dunning campaigns enabled, this will always be the default dunning campaign.']
+    "dunning_events_sent" integer [note: 'The number of dunning events sent for the invoice.']
+    "final_dunning_event" boolean [note: 'The final dunning event related to the invoice if applicable.']
+    "has_more_line_items" boolean [note: 'Indicates if there are more line items in the invoice.']
+    "id" varchar [note: 'The unique ID of the invoice.']
+    "line_items" array [note: 'The line items included in the invoice.']
+    "net_terms" integer [note: 'Integer representing the number of days after an invoice\'s creation that the invoice will become past due. If an invoice\'s net terms are set to \'0\', it is due \'On Receipt\' and will become past due 24 hours after it’s created. If an invoice is due net 30, it will become past due at 31 days exactly.']
+    "number" varchar [note: 'If VAT taxation and the Country Invoice Sequencing feature are enabled, invoices will have country-specific invoice numbers for invoices billed to EU countries (ex: FR1001). Non-EU invoices will continue to use the site-level invoice number sequence.']
+    "object" varchar [note: 'The type of object, in this case, an invoice.']
+    "origin" varchar [note: 'The event that created the invoice.']
+    "paid" float [note: 'The total amount of successful payments transaction on this invoice.']
+    "po_number" varchar [note: 'For manual invoicing, this identifies the PO number associated with the subscription.']
+    "previous_invoice_id" varchar [note: 'On refund invoices, this value will exist and show the invoice ID of the purchase invoice the refund was created from.']
+    "refundable_amount" float [note: 'The refundable amount on a charge invoice. It will be null for all other invoices.']
+    "shipping_address" json [note: 'The shipping address details for the invoice delivery.']
+    "state" varchar [note: 'The current state of the invoice.']
+    "subscription_ids" array [note: 'If the invoice is charging or refunding for one or more subscriptions, these are their IDs.']
+    "subtotal" float [note: 'The summation of charges and credits, before discounts and taxes.']
+    "tax" float [note: 'The total tax on this invoice.']
+    "tax_info" json [note: 'Tax information related to the invoice.']
+    "terms_and_conditions" varchar [note: 'This will default to the Terms and Conditions text specified on the Invoice Settings page in your Recurly admin. Specify custom notes to add or override Terms and Conditions.']
+    "total" float [note: 'The final total on this invoice. The summation of invoice charges, discounts, credits, and tax.']
+    "transactions" array [note: 'The transactions associated with the invoice.']
+    "updated_at" timestamp [note: 'The date and time when the invoice was last updated.']
+    "used_tax_service" boolean [note: 'Indicates if a tax service was used for the invoice.']
+    "uuid" varchar [note: 'The universally unique identifier (UUID) of the invoice.']
+    "vat_number" varchar [note: 'VAT registration number for the customer on this invoice. This will come from the VAT Number field in the Billing Info or the Account Info depending on your tax settings and the invoice collection method.']
+    "vat_reverse_charge_notes" varchar [note: 'VAT Reverse Charge Notes only appear if you have EU VAT enabled or are using your own Avalara AvaTax account and the customer is in the EU, has a VAT number, and is in a different country than your own. This will default to the VAT Reverse Charge Notes text specified on the Tax Settings page in your Recurly admin, unless custom notes were created with the original subscription.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "line_items" {
+    "type" varchar [note: 'Charges are positive line items that debit the account. Credits are negative line items that credit the account.']
+    "description" varchar [note: 'Description that appears on the invoice. For subscription related items this will be filled in automatically.']
+    "account" json
+    "accounting_code" varchar [note: 'Internal accounting code to help you reconcile your revenue to the correct ledger. Line items created as part of a subscription invoice will use the plan or add-on\'s accounting code, otherwise the value will only be present if you define an accounting code when creating the line item.']
+    "add_on_code" varchar [note: 'If the line item is a charge or credit for an add-on, this is its code.']
+    "add_on_id" varchar [note: 'If the line item is a charge or credit for an add-on this is its ID.']
+    "amount" float [note: '`(quantity * unit_amount) - (discount + tax)`']
+    "bill_for_account_id" varchar [note: 'The UUID of the account responsible for originating the line item.']
+    "created_at" timestamp [note: 'When the line item was created.']
+    "credit_applied" float [note: 'The amount of credit from this line item that was applied to the invoice.']
+    "credit_reason_code" varchar [note: 'The reason the credit was given when line item is `type=credit`.']
+    "currency" varchar [note: '3-letter ISO 4217 currency code.']
+    "custom_fields" array
+    "discount" float [note: 'The discount applied to the line item.']
+    "end_date" timestamp [note: 'If this date is provided, it indicates the end of a time range.']
+    "external_sku" varchar [note: 'Optional Stock Keeping Unit assigned to an item. Available when the Credit Invoices and Subscription Billing Terms features are enabled.']
+    "id" varchar
+    "invoice_id" varchar [note: 'Once the line item has been invoiced this will be the invoice\'s ID.']
+    "invoice_number" varchar [note: 'Once the line item has been invoiced this will be the invoice\'s number. If VAT taxation and the Country Invoice Sequencing feature are enabled, invoices will have country-specific invoice numbers for invoices billed to EU countries (ex: FR1001). Non-EU invoices will continue to use the site-level invoice number sequence.']
+    "item_code" varchar [note: 'Unique code to identify an item. Available when the Credit Invoices and Subscription Billing Terms features are enabled.']
+    "item_id" varchar [note: 'System-generated unique identifier for an item. Available when the Credit Invoices and Subscription Billing Terms features are enabled.']
+    "legacy_category" varchar [note: '''Category to describe the role of a line item on a legacy invoice:
+    - "charges" refers to charges being billed for on this invoice.
+     - "credits" refers to refund or proration credits. This portion of the invoice can be considered a credit memo.
+    - "applied_credits" refers to previous credits applied to this invoice. See their original_line_item_id to determine where the credit first originated.
+    - "carryforwards" can be ignored. They exist to consume any remaining credit balance. A new credit with the same amount will be created and placed back on the account.
+    ''']
+    "object" varchar
+    "origin" varchar [note: 'A credit created from an original charge will have the value of the charge\'s origin.']
+    "original_line_item_invoice_id" varchar [note: 'The invoice where the credit originated. Will only have a value if the line item is a credit created from a previous credit, or if the credit was created from a charge refund.']
+    "plan_code" varchar [note: 'If the line item is a charge or credit for a plan or add-on, this is the plan\'s code.']
+    "plan_id" varchar [note: 'If the line item is a charge or credit for a plan or add-on, this is the plan\'s ID.']
+    "previous_line_item_id" varchar [note: 'Will only have a value if the line item is a credit created from a previous credit, or if the credit was created from a charge refund.']
+    "product_code" varchar [note: 'For plan-related line items this will be the plan\'s code, for add-on related line items it will be the add-on\'s code. For item-related line items it will be the item\'s `external_sku`.']
+    "proration_rate" float [note: 'When a line item has been prorated, this is the rate of the proration. Proration rates were made available for line items created after March 30, 2017. For line items created prior to that date, the proration rate will be `null`, even if the line item was prorated.']
+    "quantity" integer [note: 'This number will be multiplied by the unit amount to compute the subtotal before any discounts or taxes.']
+    "refund" boolean
+    "refunded_quantity" integer [note: 'For refund charges, the quantity being refunded. For non-refund charges, the total quantity refunded (possibly over multiple refunds).']
+    "revenue_schedule_type" varchar
+    "shipping_address" json
+    "start_date" timestamp [note: 'If an end date is present, this is value indicates the beginning of a billing time range. If no end date is present it indicates billing for a specific date.']
+    "state" varchar [note: 'Pending line items are charges or credits on an account that have not been applied to an invoice yet. Invoiced line items will always have an `invoice_id` value.']
+    "subscription_id" varchar [note: 'If the line item is a charge or credit for a subscription, this is its ID.']
+    "subtotal" float [note: '`quantity * unit_amount`']
+    "tax" float [note: 'The tax amount for the line item.']
+    "tax_code" varchar [note: 'Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The tax code values are specific to each tax system. If you are using Recurly’s EU VAT feature you can use `unknown`, `physical`, or `digital`.']
+    "tax_exempt" boolean [note: '`true` exempts tax on charges, `false` applies tax on charges. If not defined, then defaults to the Plan and Site settings. This attribute does not work for credits (negative line items). Credits are always applied post-tax. Pre-tax discounts should use the Coupons feature.']
+    "tax_info" json
+    "taxable" boolean [note: '`true` if the line item is taxable, `false` if it is not.']
+    "unit_amount" float [note: 'Positive amount for a charge, negative amount for a credit.']
+    "unit_amount_decimal" varchar [note: 'Positive amount for a charge, negative amount for a credit.']
+    "updated_at" timestamp [note: 'When the line item was last changed.']
+    "uuid" varchar [note: 'The UUID is useful for matching data with the CSV exports and building URLs into Recurly\'s UI.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "measured_units" {
+    "description" varchar [note: 'Description of the measured unit']
+    "created_at" timestamp [note: 'Timestamp indicating when the measured unit was created']
+    "deleted_at" timestamp [note: 'Timestamp indicating when the measured unit was deleted (if applicable)']
+    "display_name" varchar [note: 'Human-readable name used for display purposes']
+    "id" varchar [note: 'Unique identifier for the measured unit']
+    "name" varchar [note: 'Internal name used to identify the measured unit']
+    "object" varchar [note: 'Type of object, in this case, \'measured_unit\'']
+    "state" varchar [note: 'Current state of the measured unit']
+    "updated_at" timestamp [note: 'Timestamp indicating when the measured unit was last updated']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "plans" {
+    "description" varchar [note: 'Description of the plan.']
+    "accounting_code" varchar [note: 'The accounting code associated with the plan.']
+    "allow_any_item_on_subscriptions" boolean [note: 'Determines if any item can be added to subscriptions using this plan.']
+    "auto_renew" boolean [note: 'Indicates whether the plan should automatically renew.']
+    "avalara_service_type" float [note: 'The Avalara service type used for tax calculation.']
+    "avalara_transaction_type" float [note: 'The Avalara transaction type used for tax calculation.']
+    "code" varchar [note: 'Unique identifier code for the plan.']
+    "created_at" timestamp [note: 'Timestamp indicating when the plan was created.']
+    "currencies" array [note: 'Contains information about the currencies supported by the plan.']
+    "custom_fields" array [note: 'Includes any custom fields associated with the plan.']
+    "deleted_at" timestamp [note: 'Timestamp indicating when the plan was deleted.']
+    "dunning_campaign_id" varchar [note: 'ID of the dunning campaign associated with the plan.']
+    "hosted_pages" json [note: 'Provides details about hosted pages related to the plan.']
+    "id" varchar [note: 'Unique identifier of the plan.']
+    "interval_length" float [note: 'Length of the billing interval for the plan.']
+    "interval_unit" varchar [note: 'Unit of the billing interval for the plan.']
+    "name" varchar [note: 'Name of the plan.']
+    "object" varchar [note: 'Indicates the type of object which in this case is \'plan\'.']
+    "pricing_model" varchar [note: 'The pricing model used for the plan.']
+    "ramp_intervals" array [note: 'Specifies ramp intervals for the plan.']
+    "revenue_schedule_type" varchar [note: 'Type of revenue schedule for the plan.']
+    "setup_fee_accounting_code" varchar [note: 'The accounting code associated with the setup fee.']
+    "setup_fee_revenue_schedule_type" varchar [note: 'Revenue schedule type for the setup fee.']
+    "state" varchar [note: 'The current state of the plan.']
+    "tax_code" varchar [note: 'Tax code used for the plan.']
+    "tax_exempt" boolean [note: 'Determines if the plan is tax exempt.']
+    "total_billing_cycles" float [note: 'Total number of billing cycles the plan will run for.']
+    "trial_length" float [note: 'Length of the trial period for the plan.']
+    "trial_requires_billing_info" boolean [note: 'Determines if billing information is required for the trial.']
+    "trial_unit" varchar [note: 'Unit of the trial period for the plan.']
+    "updated_at" timestamp [note: 'Timestamp indicating when the plan was last updated.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "shipping_addresses" {
+    "account_id" varchar
+    "city" varchar
+    "company" varchar
+    "country" varchar [note: 'Country, 2-letter ISO 3166-1 alpha-2 code.']
+    "created_at" timestamp
+    "email" varchar
+    "first_name" varchar
+    "geo_code" varchar
+    "id" varchar
+    "last_name" varchar
+    "nickname" varchar
+    "object" varchar
+    "phone" varchar
+    "postal_code" varchar [note: 'Zip or postal code.']
+    "region" varchar [note: 'State or province.']
+    "street1" varchar
+    "street2" varchar
+    "updated_at" timestamp
+    "vat_number" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "shipping_methods" {
+    "accounting_code" varchar [note: 'Accounting code for shipping method.']
+    "code" varchar [note: 'The internal name used identify the shipping method.']
+    "created_at" timestamp [note: 'Timestamp indicating when the shipping method was created']
+    "deleted_at" timestamp [note: 'Timestamp indicating when the shipping method was deleted']
+    "id" varchar [note: 'Unique identifier for the shipping method']
+    "name" varchar [note: 'The name of the shipping method displayed to customers.']
+    "tax_code" varchar [note: '''Used by Avalara, Vertex, and Recurly’s built-in tax feature. The tax
+    code values are specific to each tax system. If you are using Recurly’s
+    built-in taxes the values are:
+
+    - `FR` – Common Carrier FOB Destination
+    - `FR022000` – Common Carrier FOB Origin
+    - `FR020400` – Non Common Carrier FOB Destination
+    - `FR020500` – Non Common Carrier FOB Origin
+    - `FR010100` – Delivery by Company Vehicle Before Passage of Title
+    - `FR010200` – Delivery by Company Vehicle After Passage of Title
+    - `NT` – Non-Taxable
+    ''']
+    "updated_at" timestamp [note: 'Timestamp indicating when the shipping method was last updated']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "subscriptions" {
+    "account" json [note: 'Information about the associated account for the subscription']
+    "action_result" json [note: 'Result of the action performed on the subscription.']
+    "activated_at" timestamp [note: 'Timestamp when the subscription was activated']
+    "active_invoice_id" varchar [note: 'ID of the active invoice associated with the subscription.']
+    "add_ons" array [note: 'Any additional services or items added to the subscription.']
+    "add_ons_total" float [note: 'Total amount charged for the additional services or items.']
+    "auto_renew" boolean [note: 'Flag indicating whether the subscription auto renews.']
+    "bank_account_authorized_at" timestamp [note: 'Timestamp when bank account authorization occurred']
+    "billing_info_id" varchar [note: 'ID of the billing information associated with the subscription.']
+    "canceled_at" timestamp [note: 'Timestamp when the subscription was canceled']
+    "collection_method" varchar [note: 'Method used for collecting payments for the subscription.']
+    "converted_at" timestamp [note: 'Timestamp when the subscription was converted']
+    "coupon_redemptions" json [note: 'Details of any coupons redeemed for the subscription.']
+    "created_at" timestamp [note: 'Timestamp when the subscription was created']
+    "currency" varchar [note: 'Currency used for billing the subscription.']
+    "current_period_ends_at" timestamp [note: 'Timestamp when the current period ends']
+    "current_period_started_at" timestamp [note: 'Timestamp when the current period started']
+    "current_term_ends_at" timestamp [note: 'Timestamp when the current term ends']
+    "current_term_started_at" timestamp [note: 'Timestamp when the current term started']
+    "custom_fields" array [note: 'Custom fields associated with the subscription']
+    "customer_notes" varchar [note: 'Any notes or comments added by the customer.']
+    "expiration_reason" varchar [note: 'Reason for the subscription expiration.']
+    "expires_at" timestamp [note: 'Timestamp when the subscription expires']
+    "gateway_code" varchar [note: 'Code associated with the payment gateway used for processing payments.']
+    "id" varchar [note: 'Unique identifier for the subscription.']
+    "net_terms" float [note: 'Number of net terms for payment.']
+    "net_terms_type" varchar [note: 'Type of net terms (e.g., days).']
+    "object" varchar [note: 'Indicates the type of object (subscription).']
+    "paused_at" timestamp [note: 'Timestamp when the subscription was paused']
+    "pending_change" json [note: 'Information about any pending changes to the subscription']
+    "plan" json [note: 'Information about the plan associated with the subscription']
+    "po_number" varchar [note: 'Purchase order number associated with the subscription.']
+    "quantity" float [note: 'Number of units or items included in the subscription.']
+    "ramp_intervals" array [note: 'Information about any ramp intervals associated with the subscription']
+    "remaining_billing_cycles" float [note: 'Number of billing cycles remaining before subscription ends.']
+    "remaining_pause_cycles" float [note: 'Number of pause cycles remaining for the subscription.']
+    "renewal_billing_cycles" float [note: 'Number of billing cycles in the renewal period.']
+    "revenue_schedule_type" varchar [note: 'Type of revenue schedule for the subscription.']
+    "shipping" json [note: 'Information about the shipping associated with the subscription']
+    "started_with_gift" boolean [note: 'Indicates if the subscription started with a gift or promotion.']
+    "state" varchar [note: 'Current state of the subscription (e.g., active, cancelled).']
+    "subtotal" float [note: 'Subtotal amount before taxes and additional charges.']
+    "tax" float [note: 'Total tax amount applied to the subscription.']
+    "tax_inclusive" boolean [note: 'Flag indicating if taxes are included in the total amount.']
+    "tax_info" json [note: 'Details of the tax information for the subscription.']
+    "terms_and_conditions" varchar [note: 'Terms and conditions agreed upon for the subscription.']
+    "total" float [note: 'Total amount including taxes and additional charges.']
+    "total_billing_cycles" float [note: 'Total number of billing cycles for the subscription.']
+    "trial_ends_at" timestamp [note: 'Timestamp when the trial period ends']
+    "trial_started_at" timestamp [note: 'Timestamp when the trial period started']
+    "unit_amount" float [note: 'Amount charged per unit for the subscription.']
+    "updated_at" timestamp [note: 'Timestamp when the subscription was last updated']
+    "uuid" varchar [note: 'Universally unique identifier for the subscription.']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "transactions" {
+    "type" varchar [note: 'Type of transaction']
+    "account" json [note: 'Details of the account associated with the transaction']
+    "action_result" json [note: 'Result of the action taken for the transaction']
+    "amount" float [note: 'Amount of the transaction']
+    "avs_check" varchar [note: 'Result of the Address Verification System check']
+    "backup_payment_method_used" boolean [note: 'Indicates whether a backup payment method was used']
+    "billing_address" json [note: 'Billing address details of the transaction']
+    "collected_at" timestamp [note: 'Date and time when the transaction was collected']
+    "collection_method" varchar [note: 'Method used to collect the transaction']
+    "created_at" timestamp [note: 'Date and time when the transaction was created']
+    "currency" varchar [note: 'Currency used for the transaction']
+    "customer_message" varchar [note: 'Message for the customer related to the transaction']
+    "customer_message_locale" varchar [note: 'Locale of the customer message']
+    "cvv_check" varchar [note: 'Result of the CVV check']
+    "fraud_info" json [note: 'Information related to fraud check for the transaction']
+    "gateway_approval_code" varchar [note: 'Approval code provided by the payment gateway']
+    "gateway_message" varchar [note: 'Message returned by the payment gateway']
+    "gateway_reference" varchar [note: 'Reference number provided by the payment gateway']
+    "gateway_response_code" varchar [note: 'Response code from the payment gateway']
+    "gateway_response_time" float [note: 'Time taken for the payment gateway to respond']
+    "gateway_response_values" json [note: 'Additional values in the gateway response']
+    "id" varchar [note: 'Unique identifier for the transaction']
+    "invoice" json [note: 'Details of the invoice associated with the transaction']
+    "ip_address_country" varchar [note: 'Country of the IP address used for the transaction']
+    "ip_address_v4" varchar [note: 'IPv4 address of the transaction']
+    "object" varchar [note: 'Type of object (transaction)']
+    "origin" varchar [note: 'Source or origin of the transaction']
+    "original_transaction_id" varchar [note: 'ID of the original transaction, if applicable']
+    "payment_gateway" json [note: 'Details of the payment gateway used for the transaction']
+    "payment_method" json [note: 'Details of the payment method used for the transaction']
+    "refunded" boolean [note: 'Indicates whether the transaction has been refunded']
+    "status" varchar [note: 'Current status of the transaction']
+    "status_code" varchar [note: 'Status code of the transaction']
+    "status_message" varchar [note: 'Message related to the status of the transaction']
+    "subscription_ids" array [note: 'List of subscription IDs associated with the transaction']
+    "success" boolean [note: 'Indicates the success status of the transaction']
+    "updated_at" timestamp [note: 'Date and time of the last update to the transaction']
+    "uuid" varchar [note: 'Universally unique identifier for the transaction']
+    "vat_number" varchar [note: 'VAT number associated with the transaction']
+    "voided_at" timestamp [note: 'Date and time when the transaction was voided']
+    "voided_by_invoice" json [note: 'Details of the invoice that voided the transaction']
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "unique_coupons" {
+    "bulk_coupon_code" varchar [note: 'The Coupon code of the parent Bulk Coupon']
+    "bulk_coupon_id" varchar [note: 'The Coupon ID of the parent Bulk Coupon']
+    "code" varchar [note: 'The code the customer enters to redeem the coupon.']
+    "created_at" timestamp
+    "expired_at" timestamp [note: 'The date and time the coupon was expired early or reached its `max_redemptions`.']
+    "id" varchar
+    "object" varchar
+    "redeemed_at" timestamp [note: 'The date and time the unique coupon code was redeemed.']
+    "state" varchar [note: 'Indicates if the unique coupon code is redeemable or why not.']
+    "updated_at" timestamp
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
+
+Table "unique_coupons_parent" {
+    "applies_to_all_items" boolean
+    "applies_to_all_plans" boolean
+    "applies_to_non_plan_charges" boolean
+    "code" varchar
+    "coupon_type" varchar
+    "created_at" varchar
+    "discount" json
+    "duration" varchar
+    "hosted_page_description" varchar
+    "id" varchar
+    "invoice_description" varchar
+    "max_redemptions_per_account" float
+    "name" varchar
+    "object" varchar
+    "redemption_resource" varchar
+    "state" varchar
+    "unique_code_template" varchar
+    "unique_coupon_codes_count" float
+    "updated_at" varchar
+    "_airbyte_extracted_at" timestamp [note: 'Timestamp when the record was extracted from the source']
+    "_airbyte_meta" json [note: 'Metadata about the record']
+    "_airbyte_raw_id" varchar [note: 'Unique identifier for the raw record']
+}
