@@ -1,0 +1,51 @@
+domain: jira.airbyte-interop
+transforms:
+  - name: status
+    from:
+      - workflow_statuses: jira.workflow_statuses
+    fields:
+      id:
+        expression: workflow_statuses.id
+        description: Unique ID of the project status.
+      description:
+        expression: workflow_statuses.description
+        description: "Description of the project status. Different projects may all
+          have a status called \"Backlog\", but their definitions  of \"backlog\"
+          may differ.\n"
+      name:
+        expression: workflow_statuses.name
+        description: Title of the status.
+      status_category_id:
+        expression: workflow_statuses.statusCategory.id
+        description: Foreign key referencing the ID of the `status_category` that
+          this project status falls under.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: workflow_statuses
+    target_table_name: status
+    table_match_score: 0.8
+    completion_score: 0.75
+    explanation: The table mapping shows strong correlation among the mentioned fields
+      aligning nicely with the target schema, with good coverage but with some fields
+      having ambiguous mappings not fully covered.
+    field_mapping_evals:
+      - name: id
+        expression: workflow_statuses.id
+        score: 1.0
+        explanation: Exact match of ID fields, perfect mapping.
+      - name: description
+        expression: workflow_statuses.description
+        score: 0.9
+        explanation: Good match in descriptions, slight differences might be present
+          in context but not significant.
+      - name: name
+        expression: workflow_statuses.name
+        score: 1.0
+        explanation: Exact match of Name fields, clear mapping.
+      - name: status_category_id
+        expression: workflow_statuses.statusCategory.id
+        score: 0.7
+        explanation: Correct alignment based on foreign key relationship, although
+          requires additional context to ensure accuracy.

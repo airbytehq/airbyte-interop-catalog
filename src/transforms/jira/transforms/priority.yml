@@ -1,0 +1,42 @@
+domain: jira.airbyte-interop
+transforms:
+  - name: priority
+    from:
+      - issue_priorities: jira.issue_priorities
+    fields:
+      id:
+        expression: issue_priorities.id
+        description: Unique ID of the priority level.
+      description:
+        expression: issue_priorities.description
+        description: Description of the priority level.
+      name:
+        expression: issue_priorities.name
+        description: Name of the priority as it appears in the UI.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: issue_priorities
+    target_table_name: priority
+    table_match_score: 0.8
+    completion_score: 0.7
+    explanation: The field mappings are close and compatible with the target schema,
+      and most source fields have been successfully mapped, suggesting a high degree
+      of confidence in the table match.
+    field_mapping_evals:
+      - name: id
+        expression: issue_priorities.id
+        score: 0.9
+        explanation: Direct mapping of 'issue_priorities.id' to 'id' with perfect
+          structural and semantic alignment.
+      - name: description
+        expression: issue_priorities.description
+        score: 0.9
+        explanation: Direct mapping of 'issue_priorities.description' to 'description'
+          ensures semantic integrity maintained.
+      - name: name
+        expression: issue_priorities.name
+        score: 0.9
+        explanation: Direct mapping of 'issue_priorities.name' to 'name' accurately
+          reflects the UI representation.

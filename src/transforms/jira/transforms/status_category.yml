@@ -1,0 +1,38 @@
+domain: jira.airbyte-interop
+transforms:
+  - name: status_category
+    from:
+      - workflow_status_categories: jira.workflow_status_categories
+    fields:
+      id:
+        expression: workflow_status_categories.id
+        description: Unique ID of the status category.
+      name:
+        expression: workflow_status_categories.name
+        description: Title of the status category.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: workflow_status_categories
+    target_table_name: status_category
+    table_match_score: 0.7
+    completion_score: 0.9
+    explanation: Mapping confidence is moderately high with some matching issues due
+      to possibly differing meanings, though the fields 'id' and 'name' are well aligned
+      with respective schema requirements. 70% confidence is based on the possibility
+      that 'id' and 'name' correctly correspond to target schema fields, but there
+      remains some uncertainty.
+    field_mapping_evals:
+      - name: id
+        expression: workflow_status_categories.id
+        score: 0.7
+        explanation: The 'id' from 'workflow_status_categories.id' matches standard
+          ID conventions in the target schema, though exact table match cannot be
+          fully confirmed.
+      - name: name
+        expression: workflow_status_categories.name
+        score: 0.7
+        explanation: The 'name' mapping from 'workflow_status_categories.name' aligns
+          well by naming convention, suggesting a proper descriptor role in the target
+          schema.

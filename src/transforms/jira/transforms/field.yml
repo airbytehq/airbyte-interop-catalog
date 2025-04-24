@@ -1,0 +1,55 @@
+domain: jira.airbyte-interop
+transforms:
+  - name: field
+    from:
+      - issue_fields: jira.issue_fields
+    fields:
+      id:
+        expression: issue_fields.id
+        description: "Unique ID of the field. Default fields will have descriptive
+          IDs, whereas custom field IDs will be `'customfield_#####'`.\n"
+      is_array:
+        expression: MISSING
+        description: Boolean that is true if a field can have multiple values (is
+          mulitselect).
+      is_custom:
+        expression: issue_fields.custom
+        description: "Boolean that is true if the field is custom to this organization,
+          and false if  it is default to Jira.\n"
+      name:
+        expression: issue_fields.name
+        description: Name of the field as it appears on issue cards.
+annotations:
+  approved: false
+  missing_fields:
+    - is_array
+  evaluation:
+    source_stream_name: issue_fields
+    target_table_name: field
+    table_match_score: 0.65
+    completion_score: 0.75
+    explanation: The table match score reflects a moderate level of confidence that
+      the source and target tables are describing the same subject matter, with most
+      fields properly mapped but some missing critical mappings. The completion score
+      indicates a reasonable but not full coverage of field mappings between source
+      and target schemas.
+    field_mapping_evals:
+      - name: id
+        expression: issue_fields.id
+        score: 0.95
+        explanation: The field 'id' maps directly and specifically to an identical
+          field in the target schema, ensuring a high confidence score.
+      - name: is_array
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: is_custom
+        expression: issue_fields.custom
+        score: 0.7
+        explanation: Although 'is_custom' maps to 'issue_fields.custom', the semantic
+          alignment is not perfect, reflecting a good but cautious confidence score.
+      - name: name
+        expression: issue_fields.name
+        score: 0.85
+        explanation: The field 'name' directly correlates with 'issue_fields.name',
+          aligning well semantically and structurally.

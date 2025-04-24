@@ -1,0 +1,49 @@
+domain: jira.airbyte-interop
+transforms:
+  - name: component
+    from:
+      - project_components: jira.project_components
+    fields:
+      id:
+        expression: project_components.id
+        description: ID of the component.
+      description:
+        expression: project_components.description
+        description: Description given to the component.
+      name:
+        expression: project_components.name
+        description: UI-facing name of the component.
+      project_id:
+        expression: project_components.projectId
+        description: Foreign key referencing the id of the component's `project`.
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: project_components
+    target_table_name: component
+    table_match_score: 0.85
+    completion_score: 0.9
+    explanation: The table mapping between project_components and a similar schema
+      is highly aligned with a small disparity in field completeness.
+    field_mapping_evals:
+      - name: id
+        expression: project_components.id
+        score: 1.0
+        explanation: Direct match found for 'id' as 'project_components.id'.
+      - name: description
+        expression: project_components.description
+        score: 0.95
+        explanation: Direct match found for 'description' as 'project_components.description',
+          aligning perfectly with the schema requirement.
+      - name: name
+        expression: project_components.name
+        score: 0.9
+        explanation: Direct mapping located for 'name' as 'project_components.name',
+          fitting well within schema requirements.
+      - name: project_id
+        expression: project_components.projectId
+        score: 0.7
+        explanation: Mapped 'project_id' to 'project_components.projectId', likely
+          same due to context but presence of 'project' in both field names indicates
+          a close but not perfect match.

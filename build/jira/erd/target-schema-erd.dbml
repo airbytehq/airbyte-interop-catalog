@@ -1,0 +1,158 @@
+Table "comment" {
+    "id" unknown [note: 'Unique ID of the comment.']
+    "author_id" unknown [note: 'Foreign key referencing the `user` id of the comment\'s author.']
+    "body" unknown [note: 'Content of the comment.']
+    "created" unknown [note: 'Timestamp of when the comment was created.']
+    "is_public" unknown [note: 'Boolean that is true if the comment is visible to all users.']
+    "issue_id" unknown [note: 'Foreign key referencing the id of the `issue` that was commented on.']
+    "update_author_id" unknown [note: 'Foreign key referencing the id of the `user` who last updated this comment.']
+    "updated" unknown [note: 'Timestamp of when the comment was last updated.']
+}
+
+Table "component" {
+    "id" unknown [note: 'ID of the component.']
+    "description" unknown [note: 'Description given to the component.']
+    "name" unknown [note: 'UI-facing name of the component.']
+    "project_id" unknown [note: 'Foreign key referencing the id of the component\'s `project`.']
+}
+
+Table "field" {
+    "id" unknown [note: '''Unique ID of the field. Default fields will have descriptive IDs, whereas custom field IDs will be `\'customfield_#####\'`.
+    ''']
+    "is_array" unknown [note: 'Boolean that is true if a field can have multiple values (is mulitselect).']
+    "is_custom" unknown [note: '''Boolean that is true if the field is custom to this organization, and false if  it is default to Jira.
+    ''']
+    "name" unknown [note: 'Name of the field as it appears on issue cards.']
+}
+
+Table "field_option" {
+    "id" unknown [note: 'The ID of the custom field.']
+    "parent_id" unknown [note: 'The ID of the parent custom field.']
+    "name" unknown [note: 'Name of the field option.']
+}
+
+Table "issue" {
+    "id" unknown [note: 'Unique ID of the issue.']
+    "_fivetran_deleted" unknown [note: 'Boolean that is true if the row has been soft-deleted from the source.']
+    "assignee" unknown [note: 'Foreign key referencing the ID of the `user` currently assigned to this task.']
+    "created" unknown [note: 'Timestamp of when the issue was created (in UTC).']
+    "creator" unknown [note: 'Foreign key referencing the `user` who first created the issue. Cannot be changed.']
+    "description" unknown [note: 'The issue description, if given.']
+    "due_date" unknown [note: 'Calendar day on which the issue is due, if a due date is provided.']
+    "environment" unknown [note: 'Text field describing the environment in which the issue occurred (ie "IE9 on Windows 7").']
+    "issue_type" unknown [note: 'Foreign key referencing the ID of the `issue_type`.']
+    "key" unknown [note: 'UI-facing id of the issue.']
+    "last_viewed" unknown [note: 'Timestamp of when the user who set up the connector last viewed the issue.']
+    "original_estimate" unknown [note: 'The original estimate of how long working on this issue would take, in seconds.']
+    "parent_id" unknown [note: 'Self-referencing ID of the parent `issue`.']
+    "priority" unknown [note: 'Foreign key referencing the ID of the issue\'s current `priority`.']
+    "project" unknown [note: 'Foreign key referencing the ID of the `project` that the issue belongs to.']
+    "remaining_estimate" unknown [note: 'The estimate of how much longer working on this issue will take, in seconds.']
+    "reporter" unknown [note: '''Foreign key referencing the ID of the `user` who reported the issue. This differs from the `creator` column  in that the reporter can be changed in-app.
+    ''']
+    "resolution" unknown [note: 'Foreign key referencing the ID of the issue\'s type of `resolution`.']
+    "resolved" unknown [note: '''Timestamp of when the issue was resolved (ie completed, marked as duplicate). If an  issue is marked as un-resolved, this is null.
+    ''']
+    "status" unknown [note: '''Foreign key referencing the ID of the issue\'s `status` (the step that the issue is currently at  in the project\'s workflow).
+    ''']
+    "status_category_changed" unknown [note: 'Timestamp of when the status was last changed.']
+    "summary" unknown [note: 'Title of the issue.']
+    "time_spent" unknown [note: 'The time that was spent working on this issue, in seconds.']
+    "updated" unknown [note: 'Timestamp of when the issue was last updated in some way.']
+    "work_ratio" unknown [note: '''The percentage of work that has been logged against the issue (time_spent) vs the original estimate of worktime. Equals -1.0 when the fields required for calculation are not provided.
+    ''']
+}
+
+Table "issue_field_history" {
+    "field_id" unknown [note: 'Foreign key referencing the ID of the `field` that was changed.']
+    "issue_id" unknown [note: 'Foreign key referencing the ID of the `issue` whose field was updated.']
+    "time" unknown [note: 'Timestamp of when the issue field was set to this value.']
+    "value" unknown [note: 'Content of the value of that the field was set to.']
+}
+
+Table "issue_link" {
+    "issue_id" unknown [note: 'Foreign key referencing the ID of the `issue` that is the subject of this relationship (the linker).']
+    "related_issue_id" unknown [note: 'Foreign key referencing the ID of the `issue` that is the object of this relationship (the linkee).']
+    "relationship" unknown [note: 'The nature of the link between the two issues ("blocks", "is duplicated by", "relates to", etc.)']
+}
+
+Table "issue_multiselect_history" {
+    "_fivetran_id" unknown [note: 'Fivetran-generated ID hashed on field, issue, and value.']
+    "time" unknown [note: 'Timestamp of when the issue field was updated to included this value.']
+    "field_id" unknown [note: 'Foreign key referencing the ID of the `field` that was changed.']
+    "issue_id" unknown [note: 'Foreign key referencing the ID of the `issue` whose field was updated.']
+    "value" unknown [note: 'Content of the value of that the field was set to.']
+}
+
+Table "issue_type" {
+    "id" unknown [note: 'Unique ID of the issue type.']
+    "description" unknown [note: 'Project-level description given to the issue type.']
+    "name" unknown [note: 'Name of the issue type (ie Epic, Task, Subtask, any custom types)']
+    "subtask" unknown [note: 'Boolean that is true if this type of issue is a subtask.']
+}
+
+Table "priority" {
+    "id" unknown [note: 'Unique ID of the priority level.']
+    "description" unknown [note: 'Description of the priority level.']
+    "name" unknown [note: 'Name of the priority as it appears in the UI.']
+}
+
+Table "project" {
+    "id" unknown [note: 'Unique ID of the project.']
+    "description" unknown [note: 'Description of the project, if given.']
+    "key" unknown [note: 'UI-facing ID of the project. This becomes the default prefix for tasks created within this project.']
+    "lead_id" unknown [note: 'Foreign key referencing the ID of the `user` who leads this project.']
+    "name" unknown [note: 'Title of the project.']
+    "permission_scheme_id" unknown [note: 'Foreign key referencing the ID of the `permission_scheme` that the project ascribes to.']
+    "project_category_id" unknown [note: 'Foreign key referencing the ID of the `project_category` that the project is associated with, if any.']
+    "project_type_key" unknown [note: 'ID of the type of project (ie \'software\').']
+}
+
+Table "resolution" {
+    "id" unknown [note: 'Unique ID of the resolution type.']
+    "description" unknown [note: 'Description given to the resolution.']
+    "name" unknown [note: 'Display name of the resolution.']
+}
+
+Table "sprint" {
+    "id" unknown [note: 'Unique ID of the sprint.']
+    "board_id" unknown [note: 'Foreign key referencing the ID of the `board` that the sprint lives in.']
+    "complete_date" unknown [note: 'Timestamp of when the sprint was completed.']
+    "end_date" unknown [note: 'Timestamp of when the sprint is planned to end.']
+    "name" unknown [note: 'Title of the sprint.']
+    "start_date" unknown [note: 'Timestamp of when the sprint began.']
+}
+
+Table "status" {
+    "id" unknown [note: 'Unique ID of the project status.']
+    "description" unknown [note: '''Description of the project status. Different projects may all have a status called "Backlog", but their definitions  of "backlog" may differ.
+    ''']
+    "name" unknown [note: 'Title of the status.']
+    "status_category_id" unknown [note: 'Foreign key referencing the ID of the `status_category` that this project status falls under.']
+}
+
+Table "status_category" {
+    "id" unknown [note: 'Unique ID of the status category.']
+    "name" unknown [note: 'Title of the status category.']
+}
+
+Table "user" {
+    "id" unknown [note: 'Unique ID of the user.']
+    "email" unknown [note: 'Email associated with the user account.']
+    "locale" unknown [note: 'The Java locale of the user.']
+    "name" unknown [note: 'Name of the user as it appears in the UI.']
+    "time_zone" unknown [note: 'The user\'s timezone, as defined in their settings.']
+    "username" unknown [note: 'Account username.']
+}
+
+Table "version" {
+    "archived" unknown [note: 'Boolean that is true if the project version has been archived.']
+    "description" unknown [note: 'The optional description given to the version.']
+    "id" unknown [note: 'Unique ID of the version.']
+    "name" unknown [note: 'Unique name of the version.']
+    "overdue" unknown [note: 'Boolean that is true if the version is past its optional release date, false if it is not or if it does not have a due date.']
+    "project_id" unknown [note: 'Foreign key referencing the `PROJECT` to which this version is attached.']
+    "release_date" unknown [note: 'The optional release date of the version. Expressed in ISO 8601 format (yyyy-mm-dd).']
+    "released" unknown [note: 'Boolean that is true if the version has been released. If the version is released a request to release again is ignored']
+    "start_date" unknown [note: 'The start date of the version. Expressed in ISO 8601 format (yyyy-mm-dd).']
+}

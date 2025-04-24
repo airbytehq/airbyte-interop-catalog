@@ -1,0 +1,23 @@
+domain: jira.airbyte-interop
+transforms:
+  - name: issue_multiselect_history
+    from:
+      - MISSING: jira.MISSING
+    fields:
+      _fivetran_id:
+        expression: MISSING
+        description: Fivetran-generated ID hashed on field, issue, and value.
+      time:
+        expression: MISSING
+        description: Timestamp of when the issue field was updated to included this
+          value.
+      field_id:
+        expression: MISSING
+        description: Foreign key referencing the ID of the `field` that was changed.
+      issue_id:
+        expression: MISSING
+        description: Foreign key referencing the ID of the `issue` whose field was
+          updated.
+      value:
+        expression: MISSING
+        description: Content of the value of that the field was set to.
