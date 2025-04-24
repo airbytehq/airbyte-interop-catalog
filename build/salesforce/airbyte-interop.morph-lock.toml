@@ -26,47 +26,14 @@ unmapped_target_tables = []
 
 [mappings.account]
 source_file = "src/transforms/salesforce/transforms/account.yml"
-source_file_hash = "00e6c00dd3697124b532a5860368faeb9c8259f5c82833e6ce1773bdbe3bf569"
+source_file_hash = "21e147f53aaab55de696d39c7cb26ae9a949f1248957d6c94c2cb349c46f3e98"
 source_stream = "Account"
 unmapped_target_fields = [
-    "_fivetran_active",
-    "account_source",
-    "annual_revenue",
-    "billing_city",
-    "billing_country",
     "billing_country_code",
-    "billing_geocode_accuracy",
-    "billing_latitude",
-    "billing_longitude",
-    "billing_postal_code",
-    "billing_state",
     "billing_state_code",
-    "billing_street",
-    "jigsaw_company_id",
-    "last_activity_date",
-    "last_referenced_date",
-    "last_viewed_date",
-    "master_record_id",
-    "number_of_employees",
-    "ownership",
-    "parent_id",
-    "photo_url",
-    "rating",
     "record_type_id",
-    "shipping_city",
-    "shipping_country",
     "shipping_country_code",
-    "shipping_geocode_accuracy",
-    "shipping_latitude",
-    "shipping_longitude",
-    "shipping_postal_code",
-    "shipping_state",
     "shipping_state_code",
-    "shipping_street",
-    "sic",
-    "sic_desc",
-    "site",
-    "ticker_symbol",
 ]
 omitted_target_fields = []
 erroneous_source_table_columns = []
@@ -74,22 +41,52 @@ erroneous_source_table_columns = []
 [mappings.account.mapped_target_fields]
 id = "Account.Id"
 _fivetran_synced = "Account._airbyte_extracted_at"
+_fivetran_active = "Account.Active__c"
 account_number = "Account.AccountNumber"
+account_source = "Account.AccountSource"
+annual_revenue = "Account.AnnualRevenue"
+billing_city = "Account.BillingCity"
+billing_country = "Account.BillingCountry"
+billing_geocode_accuracy = "Account.BillingGeocodeAccuracy"
+billing_latitude = "Account.BillingLatitude"
+billing_longitude = "Account.BillingLongitude"
+billing_postal_code = "Account.BillingPostalCode"
+billing_state = "Account.BillingState"
+billing_street = "Account.BillingStreet"
 description = "Account.Description"
 fax = "Account.Fax"
 industry = "Account.Industry"
 is_deleted = "Account.IsDeleted"
+jigsaw_company_id = "Account.JigsawCompanyId"
+last_activity_date = "Account.LastActivityDate"
+last_referenced_date = "Account.LastReferencedDate"
+last_viewed_date = "Account.LastViewedDate"
+master_record_id = "Account.MasterRecordId"
 name = "Account.Name"
+number_of_employees = "Account.NumberOfEmployees"
 owner_id = "Account.OwnerId"
+ownership = "Account.Ownership"
+parent_id = "Account.ParentId"
 phone = "Account.Phone"
+photo_url = "Account.PhotoUrl"
+rating = "Account.Rating"
+shipping_city = "Account.ShippingCity"
+shipping_country = "Account.ShippingCountry"
+shipping_geocode_accuracy = "Account.ShippingGeocodeAccuracy"
+shipping_latitude = "Account.ShippingLatitude"
+shipping_longitude = "Account.ShippingLongitude"
+shipping_postal_code = "Account.ShippingPostalCode"
+shipping_state = "Account.ShippingState"
+shipping_street = "Account.ShippingStreet"
+sic = "Account.Sic"
+sic_desc = "Account.SicDesc"
+site = "Account.Site"
+ticker_symbol = "Account.TickerSymbol"
 type = "Account.Type"
 website = "Account.Website"
 
 [mappings.account.unused_source_fields]
 Account = [
-    "AccountSource",
-    "Active__c",
-    "AnnualRevenue",
     "BillingAddress",
     "BillingAddress.city",
     "BillingAddress.country",
@@ -99,14 +96,6 @@ Account = [
     "BillingAddress.postalCode",
     "BillingAddress.state",
     "BillingAddress.street",
-    "BillingCity",
-    "BillingCountry",
-    "BillingGeocodeAccuracy",
-    "BillingLatitude",
-    "BillingLongitude",
-    "BillingPostalCode",
-    "BillingState",
-    "BillingStreet",
     "CleanStatus",
     "CreatedById",
     "CreatedDate",
@@ -114,22 +103,12 @@ Account = [
     "DandbCompanyId",
     "DunsNumber",
     "Jigsaw",
-    "JigsawCompanyId",
-    "LastActivityDate",
     "LastModifiedById",
     "LastModifiedDate",
-    "LastReferencedDate",
-    "LastViewedDate",
-    "MasterRecordId",
     "NaicsCode",
     "NaicsDesc",
-    "NumberOfEmployees",
     "NumberofLocations__c",
     "OperatingHoursId",
-    "Ownership",
-    "ParentId",
-    "PhotoUrl",
-    "Rating",
     "SLAExpirationDate__c",
     "SLASerialNumber__c",
     "SLA__c",
@@ -142,19 +121,7 @@ Account = [
     "ShippingAddress.postalCode",
     "ShippingAddress.state",
     "ShippingAddress.street",
-    "ShippingCity",
-    "ShippingCountry",
-    "ShippingGeocodeAccuracy",
-    "ShippingLatitude",
-    "ShippingLongitude",
-    "ShippingPostalCode",
-    "ShippingState",
-    "ShippingStreet",
-    "Sic",
-    "SicDesc",
-    "Site",
     "SystemModstamp",
-    "TickerSymbol",
     "Tradestyle",
     "UpsellOpportunity__c",
     "YearStarted",
@@ -335,7 +302,7 @@ unmapped_target_fields = []
 
 [mappings.lead]
 source_file = "src/transforms/salesforce/transforms/lead.yml"
-source_file_hash = "8a69b26686e80e3f22af725d6350d1c1519639ecd92f4e0fc5cd1aecaf27759f"
+source_file_hash = "ffd339a3fb31998f7c1c1648217bc4c30eaa57140b331d0b704def570facfc91"
 source_stream = "LeadHistory"
 unmapped_target_fields = [
     "annual_revenue",
@@ -347,8 +314,6 @@ unmapped_target_fields = [
     "converted_opportunity_id",
     "country",
     "country_code",
-    "created_by_id",
-    "created_date",
     "description",
     "email",
     "email_bounced_date",
@@ -396,11 +361,11 @@ erroneous_source_table_columns = []
 id = "LeadHistory.Id"
 _fivetran_synced = "LeadHistory._airbyte_extracted_at"
 _fivetran_active = "LeadHistory.IsDeleted"
+created_by_id = "LeadHistory.CreatedById"
+created_date = "LeadHistory.CreatedDate"
 
 [mappings.lead.unused_source_fields]
 LeadHistory = [
-    "CreatedById",
-    "CreatedDate",
     "DataType",
     "Field",
     "LeadId",

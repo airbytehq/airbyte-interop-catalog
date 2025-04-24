@@ -11,7 +11,7 @@ transforms:
         expression: Account._airbyte_extracted_at
         description: The time at which fivetran last synced this record
       _fivetran_active:
-        expression: MISSING
+        expression: Account.Active__c
         description: True if record is active, used to filter out only active records
           if History Mode is enabled
       account_number:
@@ -19,45 +19,45 @@ transforms:
         description: Account number assigned to this account (not the unique, system-generated
           ID assigned during creation).
       account_source:
-        expression: MISSING
+        expression: Account.AccountSource
         description: The source of the account record. For example, Advertisement,
           Data.com, or Trade Show.
       annual_revenue:
-        expression: MISSING
+        expression: Account.AnnualRevenue
         description: Estimated annual revenue of the account.
       billing_city:
-        expression: MISSING
+        expression: Account.BillingCity
         description: Details for the billing address of this account.
       billing_country:
-        expression: MISSING
+        expression: Account.BillingCountry
         description: Details for the billing address of this account.
       billing_country_code:
         expression: MISSING
         description: The ISO country code for the account’s billing address.
       billing_geocode_accuracy:
-        expression: MISSING
+        expression: Account.BillingGeocodeAccuracy
         description: Accuracy level of the geocode for the billing address. See Compound
           Field Considerations and Limitations for details on geolocation compound
           fields.
       billing_latitude:
-        expression: MISSING
+        expression: Account.BillingLatitude
         description: Used with BillingLongitude to specify the precise geolocation
           of a billing address.
       billing_longitude:
-        expression: MISSING
+        expression: Account.BillingLongitude
         description: Used with BillingLatitude to specify the precise geolocation
           of a billing address.
       billing_postal_code:
-        expression: MISSING
+        expression: Account.BillingPostalCode
         description: Details for the billing address of this account.
       billing_state:
-        expression: MISSING
+        expression: Account.BillingState
         description: Details for the billing address of this account.
       billing_state_code:
         expression: MISSING
         description: The ISO state code for the account’s billing address.
       billing_street:
-        expression: MISSING
+        expression: Account.BillingStreet
         description: Street address for the billing address of this account.
       description:
         expression: Account.Description
@@ -73,23 +73,23 @@ transforms:
         description: Indicates whether the object has been moved to the Recycle Bin
           (true) or not (false).
       jigsaw_company_id:
-        expression: MISSING
+        expression: Account.JigsawCompanyId
         description: References the ID of a company in Data.com. If an account has
           a value in this field, it means that the account was imported from Data.com.
       last_activity_date:
-        expression: MISSING
+        expression: Account.LastActivityDate
         description: Value is one of the following, whichever is the most recent
       last_referenced_date:
-        expression: MISSING
+        expression: Account.LastReferencedDate
         description: The timestamp when the current user last accessed this record,
           a record related to this record, or a list view.
       last_viewed_date:
-        expression: MISSING
+        expression: Account.LastViewedDate
         description: The timestamp when the current user last viewed this record or
           list view. If this value is null, the user might have only accessed this
           record or list view (LastReferencedDate) but not viewed it.
       master_record_id:
-        expression: MISSING
+        expression: Account.MasterRecordId
         description: If this object was deleted as the result of a merge, this field
           contains the ID of the record that was kept. If this object was deleted
           for any other reason, or has not been deleted, the value is null.
@@ -97,78 +97,78 @@ transforms:
         expression: Account.Name
         description: Required. Name of the account.
       number_of_employees:
-        expression: MISSING
+        expression: Account.NumberOfEmployees
         description: Number of employees working at the company represented by this
           account.
       owner_id:
         expression: Account.OwnerId
         description: The ID of the user who currently owns this account.
       ownership:
-        expression: MISSING
+        expression: Account.Ownership
         description: Ownership type for the account, for example Private, Public,
           or Subsidiary.
       parent_id:
-        expression: MISSING
+        expression: Account.ParentId
         description: ID of the parent object, if any.
       phone:
         expression: Account.Phone
         description: Phone number for this account.
       photo_url:
-        expression: MISSING
+        expression: Account.PhotoUrl
         description: Path to be combined with the URL of a Salesforce instance (for
           example, https://yourInstance.salesforce.com/) to generate a URL to request
           the social network profile image associated with the account.
       rating:
-        expression: MISSING
+        expression: Account.Rating
         description: The account’s prospect rating, for example Hot, Warm, or Cold.
       record_type_id:
         expression: MISSING
         description: ID of the record type assigned to this object.
       shipping_city:
-        expression: MISSING
+        expression: Account.ShippingCity
         description: Details of the shipping address for this account
       shipping_country:
-        expression: MISSING
+        expression: Account.ShippingCountry
         description: Details of the shipping address for this account. Country
       shipping_country_code:
         expression: MISSING
         description: The ISO country code for the account’s shipping address.
       shipping_geocode_accuracy:
-        expression: MISSING
+        expression: Account.ShippingGeocodeAccuracy
         description: Accuracy level of the geocode for the shipping address.
       shipping_latitude:
-        expression: MISSING
+        expression: Account.ShippingLatitude
         description: Used with ShippingLongitude to specify the precise geolocation
           of a shipping address.
       shipping_longitude:
-        expression: MISSING
+        expression: Account.ShippingLongitude
         description: Used with ShippingLatitude to specify the precise geolocation
           of an address.
       shipping_postal_code:
-        expression: MISSING
+        expression: Account.ShippingPostalCode
         description: Details of the shipping address for this account. Postal code
       shipping_state:
-        expression: MISSING
+        expression: Account.ShippingState
         description: Details of the shipping address for this account. State
       shipping_state_code:
         expression: MISSING
         description: The ISO state code for the account’s shipping address.
       shipping_street:
-        expression: MISSING
+        expression: Account.ShippingStreet
         description: The street address of the shipping address for this account.
       sic:
-        expression: MISSING
+        expression: Account.Sic
         description: Standard Industrial Classification code of the company’s main
           business categorization, for example, 57340 for Electronics.
       sic_desc:
-        expression: MISSING
+        expression: Account.SicDesc
         description: A brief description of an organization’s line of business, based
           on its SIC code.
       site:
-        expression: MISSING
+        expression: Account.Site
         description: Name of the account’s location, for example Headquarters or London.
       ticker_symbol:
-        expression: MISSING
+        expression: Account.TickerSymbol
         description: The stock market symbol for this account. This field is available
           on business accounts, not person accounts.
       type:
@@ -180,258 +180,217 @@ transforms:
 annotations:
   approved: false
   missing_fields:
-    - _fivetran_active
-    - account_source
-    - annual_revenue
-    - billing_city
-    - billing_country
     - billing_country_code
-    - billing_geocode_accuracy
-    - billing_latitude
-    - billing_longitude
-    - billing_postal_code
-    - billing_state
     - billing_state_code
-    - billing_street
-    - jigsaw_company_id
-    - last_activity_date
-    - last_referenced_date
-    - last_viewed_date
-    - master_record_id
-    - number_of_employees
-    - ownership
-    - parent_id
-    - photo_url
-    - rating
     - record_type_id
-    - shipping_city
-    - shipping_country
     - shipping_country_code
-    - shipping_geocode_accuracy
-    - shipping_latitude
-    - shipping_longitude
-    - shipping_postal_code
-    - shipping_state
     - shipping_state_code
-    - shipping_street
-    - sic
-    - sic_desc
-    - site
-    - ticker_symbol
   evaluation:
     source_stream_name: Account
     target_table_name: account
-    table_match_score: 0.75
-    completion_score: 0.3
-    explanation: The primary field mappings including key identifiers have been successfully
-      matched, although several fields crucial to the completeness of the dataset,
-      such as numerous billing and shipping details, remain unmatched, indicating
-      partial mapping completeness.
+    table_match_score: 1.0
+    completion_score: 0.82
+    explanation: Most fields matched well indicating a successful match of the source
+      and target table. However, several fields have no good match found hence a lower
+      completion score.
     field_mapping_evals:
       - name: id
         expression: Account.Id
         score: 1.0
-        explanation: Direct match found based on standard identifiers and consistent
-          naming.
+        explanation: Direct match with unique ID
       - name: _fivetran_synced
         expression: Account._airbyte_extracted_at
         score: 1.0
-        explanation: Standard mapping for synchronization timestamps.
+        explanation: Standard mapping for all tables
       - name: _fivetran_active
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.Active__c
+        score: 0.7
+        explanation: Likely represents an active record status
       - name: account_number
         expression: Account.AccountNumber
-        score: 1.0
-        explanation: Direct match found based on consistent naming and usage across
-          systems.
+        score: 0.9
+        explanation: Direct match on account identification
       - name: account_source
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.AccountSource
+        score: 0.9
+        explanation: Direct match indicating the origin of the account
       - name: annual_revenue
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.AnnualRevenue
+        score: 0.9
+        explanation: Direct match on economic attribute of the account
       - name: billing_city
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.BillingCity
+        score: 1.0
+        explanation: Exact match on geographical attribute
       - name: billing_country
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.BillingCountry
+        score: 1.0
+        explanation: Exact match on geographical attribute
       - name: billing_country_code
         expression: MISSING
         score: 0.0
         explanation: No good match found.
       - name: billing_geocode_accuracy
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.BillingGeocodeAccuracy
+        score: 0.8
+        explanation: High likelihood of matching description
       - name: billing_latitude
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.BillingLatitude
+        score: 1.0
+        explanation: Exact match on geographical coordinates
       - name: billing_longitude
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.BillingLongitude
+        score: 1.0
+        explanation: Exact match on geographical coordinates
       - name: billing_postal_code
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.BillingPostalCode
+        score: 1.0
+        explanation: Exact match on geographical attribute
       - name: billing_state
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.BillingState
+        score: 1.0
+        explanation: Exact match on geographical attribute
       - name: billing_state_code
         expression: MISSING
         score: 0.0
         explanation: No good match found.
       - name: billing_street
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.BillingStreet
+        score: 1.0
+        explanation: Exact match on geographical attribute
       - name: description
         expression: Account.Description
-        score: 1.0
-        explanation: Direct match found based on descriptive consistency across sources.
+        score: 0.92
+        explanation: Direct match on textual description
       - name: fax
         expression: Account.Fax
-        score: 1.0
-        explanation: Direct match located with identical naming and semantic relevance.
+        score: 0.8
+        explanation: Commonly matched to contact information
       - name: industry
         expression: Account.Industry
-        score: 1.0
-        explanation: Consistent field across sources with identical interpretations.
+        score: 0.9
+        explanation: Direct match linking business sector
       - name: is_deleted
         expression: Account.IsDeleted
-        score: 1.0
-        explanation: Matching based on common deletion flag semantics across systems.
+        score: 0.65
+        explanation: Indicative of record status, moderately matched
       - name: jigsaw_company_id
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.JigsawCompanyId
+        score: 0.4
+        explanation: Potential integrative data identifier but unclear match
       - name: last_activity_date
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.LastActivityDate
+        score: 0.9
+        explanation: Direct match on account activity
       - name: last_referenced_date
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.LastReferencedDate
+        score: 1.0
+        explanation: Direct match indicating last interaction
       - name: last_viewed_date
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.LastViewedDate
+        score: 1.0
+        explanation: Direct match indicating last view interaction
       - name: master_record_id
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.MasterRecordId
+        score: 0.6
+        explanation: Associated with merged records, moderately matched
       - name: name
         expression: Account.Name
         score: 1.0
-        explanation: Direct mapping assures high confidence due to consistent naming
-          convention.
+        explanation: Identically matches the primary identifier
       - name: number_of_employees
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.NumberOfEmployees
+        score: 0.9
+        explanation: Matches business scale attribute
       - name: owner_id
         expression: Account.OwnerId
         score: 1.0
-        explanation: Exact match found due to identical purpose and naming pattern
-          in source and target schemas.
+        explanation: Matches ownership data
       - name: ownership
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.Ownership
+        score: 1.0
+        explanation: Matches descriptive ownership type
       - name: parent_id
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.ParentId
+        score: 0.7
+        explanation: Indicative of hierarchical link, likely match
       - name: phone
         expression: Account.Phone
         score: 1.0
-        explanation: High confidence achieved due to consistent presence and identical
-          naming across sources.
+        explanation: Exact match on contact information
       - name: photo_url
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.PhotoUrl
+        score: 0.8
+        explanation: Matches representation data
       - name: rating
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.Rating
+        score: 0.8
+        explanation: Reflects an evaluative attribute
       - name: record_type_id
         expression: MISSING
         score: 0.0
-        explanation: No good match found.
+        explanation: No good match found
       - name: shipping_city
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.ShippingCity
+        score: 1.0
+        explanation: Exact match on geographical attribute
       - name: shipping_country
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.ShippingCountry
+        score: 1.0
+        explanation: Exact match on geographical attribute
       - name: shipping_country_code
         expression: MISSING
         score: 0.0
         explanation: No good match found.
       - name: shipping_geocode_accuracy
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.ShippingGeocodeAccuracy
+        score: 0.8
+        explanation: High likelihood of matching description
       - name: shipping_latitude
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.ShippingLatitude
+        score: 1.0
+        explanation: Exact match on geographical coordinates
       - name: shipping_longitude
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.ShippingLongitude
+        score: 1.0
+        explanation: Exact match on geographical coordinates
       - name: shipping_postal_code
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.ShippingPostalCode
+        score: 1.0
+        explanation: Exact match on geographical attribute
       - name: shipping_state
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.ShippingState
+        score: 1.0
+        explanation: Exact match on geographical attribute
       - name: shipping_state_code
         expression: MISSING
         score: 0.0
         explanation: No good match found.
       - name: shipping_street
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.ShippingStreet
+        score: 1.0
+        explanation: Exact match on geographical attribute
       - name: sic
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.Sic
+        score: 0.9
+        explanation: Direct business categorization match
       - name: sic_desc
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.SicDesc
+        score: 0.9
+        explanation: Matches descriptive business categorization
       - name: site
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.Site
+        score: 0.8
+        explanation: Representative of location-based attribute
       - name: ticker_symbol
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: Account.TickerSymbol
+        score: 0.7
+        explanation: Reflects financial market identification
       - name: type
         expression: Account.Type
         score: 1.0
-        explanation: Consistency in type classification across sources ensures high
-          confidence.
+        explanation: Matches type categorization directly
       - name: website
         expression: Account.Website
         score: 1.0
-        explanation: Consistent field present in both source and target, ensuring
-          high confidence.
+        explanation: Matches digital contact attribute directly

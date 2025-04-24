@@ -45,10 +45,10 @@ transforms:
         expression: MISSING
         description: The ISO country code for the lead’s address.
       created_by_id:
-        expression: MISSING
+        expression: LeadHistory.CreatedById
         description: Created By ID
       created_date:
-        expression: MISSING
+        expression: LeadHistory.CreatedDate
         description: Created Date
       description:
         expression: MISSING
@@ -199,8 +199,6 @@ annotations:
     - converted_opportunity_id
     - country
     - country_code
-    - created_by_id
-    - created_date
     - description
     - email
     - email_bounced_date
@@ -244,25 +242,26 @@ annotations:
     source_stream_name: LeadHistory
     target_table_name: lead
     table_match_score: 0.5
-    completion_score: 0.15
-    explanation: The table match score indicates a moderate likelihood that the source
-      and target tables describe the same subject matter, however, the majority of
-      fields are labeled as 'MISSING' indicating a low completion score.
+    completion_score: 0.4
+    explanation: Given the high number of fields with an expression set to 'MISSING',
+      indicating a lack of a direct or satisfactory match, the overall mapping confidence
+      is moderate. The table match suggests some relation, reflective of a typical
+      Airbyte to Fivetran syncing scenario; however, several critical data points
+      for effective transformation could not be adequately mapped.
     field_mapping_evals:
       - name: id
         expression: LeadHistory.Id
-        score: 1.0
-        explanation: Perfect match found for unique system-generated ID fields.
+        score: 0.8
+        explanation: Direct mapping available from 'LeadHistory.Id'
       - name: _fivetran_synced
         expression: LeadHistory._airbyte_extracted_at
         score: 1.0
-        explanation: Standard mapping for '_fivetran_synced' to '_airbyte_extracted_at'
-          is always correct.
+        explanation: Standard mapping to '_airbyte_extracted_at' as per guidelines.
       - name: _fivetran_active
         expression: LeadHistory.IsDeleted
         score: 0.7
-        explanation: Reasonable match for indicating active records, mapped with minor
-          contextual adjustment.
+        explanation: Mapping 'LeadHistory.IsDeleted' to '_fivetran_active' reasonably
+          captures the active status based on deletion flag.
       - name: annual_revenue
         expression: MISSING
         score: 0.0
@@ -300,13 +299,13 @@ annotations:
         score: 0.0
         explanation: No good match found.
       - name: created_by_id
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: LeadHistory.CreatedById
+        score: 0.8
+        explanation: Direct mapping available from 'LeadHistory.CreatedById'
       - name: created_date
-        expression: MISSING
-        score: 0.0
-        explanation: No good match found.
+        expression: LeadHistory.CreatedDate
+        score: 0.8
+        explanation: Direct mapping available from 'LeadHistory.CreatedDate'
       - name: description
         expression: MISSING
         score: 0.0
