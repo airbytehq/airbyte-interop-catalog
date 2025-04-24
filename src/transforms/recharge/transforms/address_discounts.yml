@@ -1,0 +1,56 @@
+domain: recharge.airbyte-interop
+transforms:
+  - name: address_discounts
+    from:
+      - discounts: recharge.discounts
+    fields:
+      address_id:
+        expression: MISSING
+        description: "{{ doc('address_id') }}"
+      index:
+        expression: MISSING
+        description: A unique numeric row produced for every concurrent address_id.
+      id:
+        expression: discounts.id
+        description: "{{ doc('discount_id') }}"
+      _fivetran_deleted:
+        expression: MISSING
+        description: "{{ doc('_fivetran_deleted') }}"
+      _fivetran_synced:
+        expression: discounts._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+annotations:
+  approved: false
+  missing_fields:
+    - _fivetran_deleted
+    - address_id
+    - index
+  evaluation:
+    source_stream_name: discounts
+    target_table_name: address_discounts
+    table_match_score: 0.6
+    completion_score: 0.6
+    explanation: The table match score reflects a moderate confidence based on the
+      similarity of the source and target schema. The completion score indicates that
+      only some fields were mapped with a high level of confidence.
+    field_mapping_evals:
+      - name: address_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: index
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: id
+        expression: discounts.id
+        score: 0.7
+        explanation: Mapped successfully to a matching column in the target schema.
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _fivetran_synced
+        expression: discounts._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping according to system specifications.

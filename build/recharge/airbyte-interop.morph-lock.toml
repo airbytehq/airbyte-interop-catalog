@@ -1,0 +1,1614 @@
+[project]
+source_name = "recharge"
+project_name = "airbyte-interop"
+requirements_file = "build/recharge/requirements/airbyte-interop/src_dbt_requirements.yml"
+requirements_file_hash = "094866c69c0d44250455dade673b60301f44ab77ce679ec1f8f5c5bebdb0e87a"
+airbyte_source_file = "build/recharge/src_airbyte_raw_recharge.yml"
+airbyte_source_file_hash = "ad57e78a571e704cfe814edbeabbf2c4e505816973b46fbfe3e06803f6816cbc"
+
+[coverage]
+unused_source_streams = [
+    "bundle_selections",
+    "collections",
+    "events",
+    "metafields",
+    "products",
+    "shop",
+]
+unmapped_target_tables = []
+
+[mappings.address]
+source_file = "src/transforms/recharge/transforms/address.yml"
+source_file_hash = "8be535d9470e43a59b2d0469a940037b5d09a6c952e6c4f519efd2199934b516"
+source_stream = "addresses"
+unmapped_target_fields = [
+    "_fivetran_deleted",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.address.mapped_target_fields]
+id = "addresses.id"
+customer_id = "addresses.customer_id"
+first_name = "addresses.first_name"
+last_name = "addresses.last_name"
+address_1 = "addresses.address1"
+address_2 = "addresses.address2"
+city = "addresses.city"
+province = "addresses.province"
+country_code = "addresses.country_code"
+zip = "addresses.zip"
+company = "addresses.company"
+phone = "addresses.phone"
+created_at = "addresses.created_at"
+updated_at = "addresses.updated_at"
+_fivetran_synced = "addresses._airbyte_extracted_at"
+
+[mappings.address.unused_source_fields]
+addresses = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "cart_note",
+    "country",
+    "discount_id",
+    "discounts",
+    "note_attributes",
+    "order_attributes",
+    "order_note",
+    "payment_method_id",
+    "presentment_currency",
+    "shipping_lines_conserved",
+    "shipping_lines_override",
+]
+
+[mappings.address_discounts]
+source_file = "src/transforms/recharge/transforms/address_discounts.yml"
+source_file_hash = "fe4e1ef3ae254b650e4c662f054012225bc6b26ca6e79d18bdbc6f4daac3c84c"
+source_stream = "discounts"
+unmapped_target_fields = [
+    "_fivetran_deleted",
+    "address_id",
+    "index",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.address_discounts.mapped_target_fields]
+id = "discounts.id"
+_fivetran_synced = "discounts._airbyte_extracted_at"
+
+[mappings.address_discounts.unused_source_fields]
+discounts = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "applies_to",
+    "applies_to_id",
+    "applies_to_product_type",
+    "applies_to_resource",
+    "channel_settings",
+    "channel_settings.api",
+    "channel_settings.api.can_apply",
+    "channel_settings.checkout_page",
+    "channel_settings.checkout_page.can_apply",
+    "channel_settings.customer_portal",
+    "channel_settings.customer_portal.can_apply",
+    "channel_settings.merchant_portal",
+    "channel_settings.merchant_portal.can_apply",
+    "code",
+    "created_at",
+    "discount_type",
+    "duration",
+    "duration_usage_limit",
+    "ends_at",
+    "external_discount_id",
+    "external_discount_source",
+    "first_time_customer_restriction",
+    "once_per_customer",
+    "prerequisite_subtotal_min",
+    "starts_at",
+    "status",
+    "times_used",
+    "updated_at",
+    "usage_limit",
+    "value",
+]
+
+[mappings.address_shipping_line]
+source_file = "src/transforms/recharge/transforms/address_shipping_line.yml"
+source_file_hash = "971a0cdc26281594b5830612e45dbb8c366818dea84aac9a99501396035d723e"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "_fivetran_deleted",
+    "_fivetran_synced",
+    "address_id",
+    "code",
+    "index",
+    "price",
+    "title",
+]
+
+[mappings.address_shipping_line.mapped_target_fields]
+
+[mappings.address_shipping_line.unused_source_fields]
+
+[mappings.address_shipping_line.omitted_target_fields]
+
+[mappings.address_shipping_line.erroneous_source_table_columns]
+
+[mappings.charge]
+source_file = "src/transforms/recharge/transforms/charge.yml"
+source_file_hash = "712e242e1100e21b80def5190e3159569194b197cc0a3dad4dd771813d7e3ac7"
+source_stream = "charges"
+unmapped_target_fields = [
+    "address_id",
+    "charge_attempts",
+    "client_details_browser_ip",
+    "client_details_user_agent",
+    "created_at",
+    "customer_hash",
+    "customer_id",
+    "email",
+    "error",
+    "error_type",
+    "external_order_id_ecommerce",
+    "external_transaction_id_payment_processor",
+    "external_variant_id_not_found",
+    "has_uncommited_changes",
+    "id",
+    "last_charge_attempt_date",
+    "note",
+    "orders_count",
+    "payment_processor",
+    "processed_at",
+    "retry_date",
+    "scheduled_at",
+    "status",
+    "subtotal_price",
+    "tags",
+    "tax_lines",
+    "total_discounts",
+    "total_line_items_price",
+    "total_price",
+    "total_refunds",
+    "total_tax",
+    "total_weight_grams",
+    "type",
+    "updated_at",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.charge.mapped_target_fields]
+_fivetran_synced = "charges._airbyte_extracted_at"
+
+[mappings.charge.unused_source_fields]
+charges = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "address_id",
+    "analytics_data",
+    "billing_address",
+    "billing_address.address1",
+    "billing_address.address2",
+    "billing_address.cart_note",
+    "billing_address.city",
+    "billing_address.company",
+    "billing_address.country",
+    "billing_address.country_code",
+    "billing_address.created_at",
+    "billing_address.customer_id",
+    "billing_address.discount_id",
+    "billing_address.first_name",
+    "billing_address.id",
+    "billing_address.last_name",
+    "billing_address.note_attributes",
+    "billing_address.phone",
+    "billing_address.province",
+    "billing_address.shipping_lines_override",
+    "billing_address.updated_at",
+    "billing_address.zip",
+    "charge_attempts",
+    "client_details",
+    "created_at",
+    "currency",
+    "customer",
+    "customer.email",
+    "customer.external_customer_id",
+    "customer.external_customer_id.ecommerce",
+    "customer.hash",
+    "customer.id",
+    "customer_hash",
+    "customer_id",
+    "discount_codes",
+    "discounts",
+    "email",
+    "error",
+    "error_type",
+    "external_order_id",
+    "external_order_id.ecommerce",
+    "external_transaction_id",
+    "external_transaction_id.payment_processor",
+    "external_variant_id_not_found",
+    "external_variant_not_found",
+    "first_name",
+    "has_uncommited_changes",
+    "has_uncommitted_changes",
+    "id",
+    "last_charge_attempt",
+    "last_charge_attempt_date",
+    "last_name",
+    "line_items",
+    "merged_at",
+    "note",
+    "note_attributes",
+    "number_times_tried",
+    "order_attributes",
+    "orders_count",
+    "payment_processor",
+    "processed_at",
+    "processor_name",
+    "retry_date",
+    "scheduled_at",
+    "shipments_count",
+    "shipping_address",
+    "shipping_address.address1",
+    "shipping_address.address2",
+    "shipping_address.cart_note",
+    "shipping_address.city",
+    "shipping_address.company",
+    "shipping_address.country",
+    "shipping_address.country_code",
+    "shipping_address.created_at",
+    "shipping_address.customer_id",
+    "shipping_address.discount_id",
+    "shipping_address.first_name",
+    "shipping_address.id",
+    "shipping_address.last_name",
+    "shipping_address.note_attributes",
+    "shipping_address.phone",
+    "shipping_address.province",
+    "shipping_address.shipping_lines_override",
+    "shipping_address.updated_at",
+    "shipping_address.zip",
+    "shipping_lines",
+    "shopify_order_id",
+    "shopify_variant_id_not_found",
+    "status",
+    "subtotal_price",
+    "tags",
+    "tax_lines",
+    "taxable",
+    "taxes_included",
+    "total_discounts",
+    "total_duties",
+    "total_line_items_price",
+    "total_price",
+    "total_refunds",
+    "total_tax",
+    "total_weight",
+    "total_weight_grams",
+    "transaction_id",
+    "type",
+    "updated_at",
+]
+
+[mappings.charge_discount]
+source_file = "src/transforms/recharge/transforms/charge_discount.yml"
+source_file_hash = "aa840aef6d0dcc1c4aa96b0e9851f05e1ae7e8f4f1e5cfadb4502a7d5c87f5e6"
+source_stream = "discounts"
+unmapped_target_fields = [
+    "charge_id",
+    "index",
+    "value_type",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.charge_discount.mapped_target_fields]
+id = "discounts.id"
+code = "discounts.code"
+value = "discounts.value"
+_fivetran_synced = "discounts._airbyte_extracted_at"
+
+[mappings.charge_discount.unused_source_fields]
+discounts = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "applies_to",
+    "applies_to_id",
+    "applies_to_product_type",
+    "applies_to_resource",
+    "channel_settings",
+    "channel_settings.api",
+    "channel_settings.api.can_apply",
+    "channel_settings.checkout_page",
+    "channel_settings.checkout_page.can_apply",
+    "channel_settings.customer_portal",
+    "channel_settings.customer_portal.can_apply",
+    "channel_settings.merchant_portal",
+    "channel_settings.merchant_portal.can_apply",
+    "created_at",
+    "discount_type",
+    "duration",
+    "duration_usage_limit",
+    "ends_at",
+    "external_discount_id",
+    "external_discount_source",
+    "first_time_customer_restriction",
+    "once_per_customer",
+    "prerequisite_subtotal_min",
+    "starts_at",
+    "status",
+    "times_used",
+    "updated_at",
+    "usage_limit",
+]
+
+[mappings.charge_line_item]
+source_file = "src/transforms/recharge/transforms/charge_line_item.yml"
+source_file_hash = "a981cf50ca60e55cf14c6c0f1559900b5b0d86c462675b2cb004ec5da6ee7e9b"
+source_stream = "charges"
+unmapped_target_fields = [
+    "external_product_id_ecommerce",
+    "external_variant_id_ecommerce",
+    "grams",
+    "index",
+    "purchase_item_id",
+    "purchase_item_type",
+    "quantity",
+    "sku",
+    "tax_due",
+    "taxable_amount",
+    "title",
+    "total_price",
+    "unit_price",
+    "unit_price_includes_tax",
+    "variant_title",
+    "vendor",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.charge_line_item.mapped_target_fields]
+charge_id = "charges.id"
+taxable = "charges.taxable"
+_fivetran_synced = "charges._airbyte_extracted_at"
+
+[mappings.charge_line_item.unused_source_fields]
+charges = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "address_id",
+    "analytics_data",
+    "billing_address",
+    "billing_address.address1",
+    "billing_address.address2",
+    "billing_address.cart_note",
+    "billing_address.city",
+    "billing_address.company",
+    "billing_address.country",
+    "billing_address.country_code",
+    "billing_address.created_at",
+    "billing_address.customer_id",
+    "billing_address.discount_id",
+    "billing_address.first_name",
+    "billing_address.id",
+    "billing_address.last_name",
+    "billing_address.note_attributes",
+    "billing_address.phone",
+    "billing_address.province",
+    "billing_address.shipping_lines_override",
+    "billing_address.updated_at",
+    "billing_address.zip",
+    "charge_attempts",
+    "client_details",
+    "created_at",
+    "currency",
+    "customer",
+    "customer.email",
+    "customer.external_customer_id",
+    "customer.external_customer_id.ecommerce",
+    "customer.hash",
+    "customer.id",
+    "customer_hash",
+    "customer_id",
+    "discount_codes",
+    "discounts",
+    "email",
+    "error",
+    "error_type",
+    "external_order_id",
+    "external_order_id.ecommerce",
+    "external_transaction_id",
+    "external_transaction_id.payment_processor",
+    "external_variant_id_not_found",
+    "external_variant_not_found",
+    "first_name",
+    "has_uncommited_changes",
+    "has_uncommitted_changes",
+    "last_charge_attempt",
+    "last_charge_attempt_date",
+    "last_name",
+    "line_items",
+    "merged_at",
+    "note",
+    "note_attributes",
+    "number_times_tried",
+    "order_attributes",
+    "orders_count",
+    "payment_processor",
+    "processed_at",
+    "processor_name",
+    "retry_date",
+    "scheduled_at",
+    "shipments_count",
+    "shipping_address",
+    "shipping_address.address1",
+    "shipping_address.address2",
+    "shipping_address.cart_note",
+    "shipping_address.city",
+    "shipping_address.company",
+    "shipping_address.country",
+    "shipping_address.country_code",
+    "shipping_address.created_at",
+    "shipping_address.customer_id",
+    "shipping_address.discount_id",
+    "shipping_address.first_name",
+    "shipping_address.id",
+    "shipping_address.last_name",
+    "shipping_address.note_attributes",
+    "shipping_address.phone",
+    "shipping_address.province",
+    "shipping_address.shipping_lines_override",
+    "shipping_address.updated_at",
+    "shipping_address.zip",
+    "shipping_lines",
+    "shopify_order_id",
+    "shopify_variant_id_not_found",
+    "status",
+    "subtotal_price",
+    "tags",
+    "tax_lines",
+    "taxes_included",
+    "total_discounts",
+    "total_duties",
+    "total_line_items_price",
+    "total_price",
+    "total_refunds",
+    "total_tax",
+    "total_weight",
+    "total_weight_grams",
+    "transaction_id",
+    "type",
+    "updated_at",
+]
+
+[mappings.charge_order_attribute]
+source_file = "src/transforms/recharge/transforms/charge_order_attribute.yml"
+source_file_hash = "a51cc563425ee9f485899133b38e9b11a453c3b52323773e7894bf088bd76124"
+source_stream = "orders"
+unmapped_target_fields = [
+    "index",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.charge_order_attribute.mapped_target_fields]
+charge_id = "orders.charge_id"
+order_attribute = "orders.order_attributes"
+_fivetran_synced = "orders._airbyte_extracted_at"
+
+[mappings.charge_order_attribute.unused_source_fields]
+orders = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "accepts_marketing",
+    "address_id",
+    "address_is_active",
+    "billing_address",
+    "billing_address.address1",
+    "billing_address.address2",
+    "billing_address.cart_note",
+    "billing_address.city",
+    "billing_address.company",
+    "billing_address.country",
+    "billing_address.country_code",
+    "billing_address.created_at",
+    "billing_address.customer_id",
+    "billing_address.discount_id",
+    "billing_address.first_name",
+    "billing_address.id",
+    "billing_address.last_name",
+    "billing_address.note_attributes",
+    "billing_address.phone",
+    "billing_address.province",
+    "billing_address.shipping_lines_override",
+    "billing_address.updated_at",
+    "billing_address.zip",
+    "browser_ip",
+    "charge",
+    "charge.external_transaction_id",
+    "charge.external_transaction_id.payment_processor",
+    "charge.id",
+    "charge.payment_processor_name",
+    "charge.status",
+    "charge_status",
+    "client_details",
+    "client_details.browser_ip",
+    "client_details.user_agent",
+    "created_at",
+    "currency",
+    "customer",
+    "customer.accepts_marketing",
+    "customer.billing_address1",
+    "customer.billing_address2",
+    "customer.billing_city",
+    "customer.billing_company",
+    "customer.billing_country",
+    "customer.billing_first_name",
+    "customer.billing_last_name",
+    "customer.billing_phone",
+    "customer.billing_province",
+    "customer.billing_zip",
+    "customer.created_at",
+    "customer.email",
+    "customer.external_customer_id",
+    "customer.external_customer_id.ecommerce",
+    "customer.first_charge_processed_at",
+    "customer.first_name",
+    "customer.has_card_error_in_dunning",
+    "customer.has_valid_payment_method",
+    "customer.hash",
+    "customer.id",
+    "customer.last_name",
+    "customer.number_active_subscriptions",
+    "customer.number_subscriptions",
+    "customer.phone",
+    "customer.processor_type",
+    "customer.reason_payment_method_not_valid",
+    "customer.send_email_welcome",
+    "customer.shopify_customer_id",
+    "customer.status",
+    "customer.updated_at",
+    "customer.verified_email",
+    "customer_id",
+    "discount_codes",
+    "discounts",
+    "email",
+    "error",
+    "external_cart_token",
+    "external_order_id",
+    "external_order_id.ecommerce",
+    "external_order_name",
+    "external_order_name.ecommerce",
+    "external_order_number",
+    "external_order_number.ecommerce",
+    "first_name",
+    "hash",
+    "id",
+    "is_prepaid",
+    "last_name",
+    "line_items",
+    "note",
+    "note_attributes",
+    "payment_processor",
+    "phone",
+    "processed_at",
+    "redacted",
+    "scheduled_at",
+    "send_email_welcome",
+    "shipped_date",
+    "shipping_address",
+    "shipping_address.address1",
+    "shipping_address.address2",
+    "shipping_address.cart_note",
+    "shipping_address.city",
+    "shipping_address.company",
+    "shipping_address.country",
+    "shipping_address.country_code",
+    "shipping_address.created_at",
+    "shipping_address.customer_id",
+    "shipping_address.discount_id",
+    "shipping_address.first_name",
+    "shipping_address.id",
+    "shipping_address.last_name",
+    "shipping_address.note_attributes",
+    "shipping_address.phone",
+    "shipping_address.province",
+    "shipping_address.shipping_lines_override",
+    "shipping_address.updated_at",
+    "shipping_address.zip",
+    "shipping_date",
+    "shipping_lines",
+    "shopify_cart_token",
+    "shopify_customer_id",
+    "shopify_id",
+    "shopify_order_id",
+    "shopify_order_number",
+    "status",
+    "subtotal_price",
+    "tags",
+    "tax_lines",
+    "taxable",
+    "total_discounts",
+    "total_duties",
+    "total_line_items_price",
+    "total_price",
+    "total_refunds",
+    "total_tax",
+    "total_weight",
+    "total_weight_grams",
+    "transaction_id",
+    "type",
+    "updated_at",
+    "verified_email",
+]
+
+[mappings.charge_shipping_line]
+source_file = "src/transforms/recharge/transforms/charge_shipping_line.yml"
+source_file_hash = "748f7a30df19c509e07b0203b4a10c3e4786dd77b0c7ec53d68b8194ffa6ffd0"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "_fivetran_synced",
+    "charge_id",
+    "code",
+    "index",
+    "price",
+    "title",
+]
+
+[mappings.charge_shipping_line.mapped_target_fields]
+
+[mappings.charge_shipping_line.unused_source_fields]
+
+[mappings.charge_shipping_line.omitted_target_fields]
+
+[mappings.charge_shipping_line.erroneous_source_table_columns]
+
+[mappings.charge_tax_line]
+source_file = "src/transforms/recharge/transforms/charge_tax_line.yml"
+source_file_hash = "2eda64cfef79636f2daf6d96166dec5fa093f7b8a63b879daf0f795f9469c036"
+source_stream = "MISSING"
+unmapped_target_fields = [
+    "_fivetran_synced",
+    "charge_id",
+    "index",
+    "price",
+    "rate",
+    "title",
+]
+
+[mappings.charge_tax_line.mapped_target_fields]
+
+[mappings.charge_tax_line.unused_source_fields]
+
+[mappings.charge_tax_line.omitted_target_fields]
+
+[mappings.charge_tax_line.erroneous_source_table_columns]
+
+[mappings.checkout]
+source_file = "src/transforms/recharge/transforms/checkout.yml"
+source_file_hash = "d2bffeed3b298061b7ee48cc8564c128976be62a7d792c3afdd9350bf196ef8d"
+source_stream = "orders"
+unmapped_target_fields = [
+    "completed_at",
+    "discount_code",
+    "external_checkout_id",
+    "external_checkout_source",
+    "order_attributes",
+    "requires_shipping",
+    "taxes_included",
+    "token",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.checkout.mapped_target_fields]
+charge_id = "orders.charge.id"
+buyer_accepts_marketing = "orders.customer.accepts_marketing"
+created_at = "orders.created_at"
+currency = "orders.currency"
+email = "orders.customer.email"
+external_transaction_id_payment_processor = "orders.charge.external_transaction_id.payment_processor"
+phone = "orders.customer.phone"
+subtotal_price = "orders.subtotal_price"
+total_price = "orders.total_price"
+total_tax = "orders.total_tax"
+updated_at = "orders.updated_at"
+
+[mappings.checkout.unused_source_fields]
+orders = [
+    "_airbyte_extracted_at",
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "accepts_marketing",
+    "address_id",
+    "address_is_active",
+    "billing_address",
+    "billing_address.address1",
+    "billing_address.address2",
+    "billing_address.cart_note",
+    "billing_address.city",
+    "billing_address.company",
+    "billing_address.country",
+    "billing_address.country_code",
+    "billing_address.created_at",
+    "billing_address.customer_id",
+    "billing_address.discount_id",
+    "billing_address.first_name",
+    "billing_address.id",
+    "billing_address.last_name",
+    "billing_address.note_attributes",
+    "billing_address.phone",
+    "billing_address.province",
+    "billing_address.shipping_lines_override",
+    "billing_address.updated_at",
+    "billing_address.zip",
+    "browser_ip",
+    "charge",
+    "charge.external_transaction_id",
+    "charge.payment_processor_name",
+    "charge.status",
+    "charge_id",
+    "charge_status",
+    "client_details",
+    "client_details.browser_ip",
+    "client_details.user_agent",
+    "customer",
+    "customer.billing_address1",
+    "customer.billing_address2",
+    "customer.billing_city",
+    "customer.billing_company",
+    "customer.billing_country",
+    "customer.billing_first_name",
+    "customer.billing_last_name",
+    "customer.billing_phone",
+    "customer.billing_province",
+    "customer.billing_zip",
+    "customer.created_at",
+    "customer.external_customer_id",
+    "customer.external_customer_id.ecommerce",
+    "customer.first_charge_processed_at",
+    "customer.first_name",
+    "customer.has_card_error_in_dunning",
+    "customer.has_valid_payment_method",
+    "customer.hash",
+    "customer.id",
+    "customer.last_name",
+    "customer.number_active_subscriptions",
+    "customer.number_subscriptions",
+    "customer.processor_type",
+    "customer.reason_payment_method_not_valid",
+    "customer.send_email_welcome",
+    "customer.shopify_customer_id",
+    "customer.status",
+    "customer.updated_at",
+    "customer.verified_email",
+    "customer_id",
+    "discount_codes",
+    "discounts",
+    "email",
+    "error",
+    "external_cart_token",
+    "external_order_id",
+    "external_order_id.ecommerce",
+    "external_order_name",
+    "external_order_name.ecommerce",
+    "external_order_number",
+    "external_order_number.ecommerce",
+    "first_name",
+    "hash",
+    "id",
+    "is_prepaid",
+    "last_name",
+    "line_items",
+    "note",
+    "note_attributes",
+    "order_attributes",
+    "payment_processor",
+    "phone",
+    "processed_at",
+    "redacted",
+    "scheduled_at",
+    "send_email_welcome",
+    "shipped_date",
+    "shipping_address",
+    "shipping_address.address1",
+    "shipping_address.address2",
+    "shipping_address.cart_note",
+    "shipping_address.city",
+    "shipping_address.company",
+    "shipping_address.country",
+    "shipping_address.country_code",
+    "shipping_address.created_at",
+    "shipping_address.customer_id",
+    "shipping_address.discount_id",
+    "shipping_address.first_name",
+    "shipping_address.id",
+    "shipping_address.last_name",
+    "shipping_address.note_attributes",
+    "shipping_address.phone",
+    "shipping_address.province",
+    "shipping_address.shipping_lines_override",
+    "shipping_address.updated_at",
+    "shipping_address.zip",
+    "shipping_date",
+    "shipping_lines",
+    "shopify_cart_token",
+    "shopify_customer_id",
+    "shopify_id",
+    "shopify_order_id",
+    "shopify_order_number",
+    "status",
+    "tags",
+    "tax_lines",
+    "taxable",
+    "total_discounts",
+    "total_duties",
+    "total_line_items_price",
+    "total_refunds",
+    "total_weight",
+    "total_weight_grams",
+    "transaction_id",
+    "type",
+    "verified_email",
+]
+
+[mappings.customer]
+source_file = "src/transforms/recharge/transforms/customer.yml"
+source_file_hash = "14d3e43a233f192948e3e43cdaf178d143b232ee43cf3bbfa1d06e8127384e11"
+source_stream = "customers"
+unmapped_target_fields = [
+    "_fivetran_deleted",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.customer.mapped_target_fields]
+id = "customers.id"
+hash = "customers.hash"
+external_customer_id_ecommerce = "customers.external_customer_id.ecommerce"
+email = "customers.email"
+created_at = "customers.created_at"
+updated_at = "customers.updated_at"
+first_charge_processed_at = "customers.first_charge_processed_at"
+first_name = "customers.first_name"
+last_name = "customers.last_name"
+subscriptions_active_count = "customers.number_active_subscriptions"
+subscriptions_total_count = "customers.number_subscriptions"
+has_valid_payment_method = "customers.has_valid_payment_method"
+has_payment_method_in_dunning = "customers.has_card_error_in_dunning"
+tax_exempt = "customers.tax_exempt"
+_fivetran_synced = "customers._airbyte_extracted_at"
+
+[mappings.customer.unused_source_fields]
+customers = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "accepts_marketing",
+    "analytics_data",
+    "apply_credit_to_next_checkout_charge",
+    "apply_credit_to_next_recurring_charge",
+    "billing_address1",
+    "billing_address2",
+    "billing_city",
+    "billing_company",
+    "billing_country",
+    "billing_first_name",
+    "billing_last_name",
+    "billing_phone",
+    "billing_province",
+    "billing_zip",
+    "external_customer_id",
+    "has_payment_method_in_dunning",
+    "phone",
+    "processor_type",
+    "reason_payment_method_not_valid",
+    "shopify_customer_id",
+    "status",
+    "stripe_customer_token",
+    "subscriptions_active_count",
+    "subscriptions_total_count",
+]
+
+[mappings.discount]
+source_file = "src/transforms/recharge/transforms/discount.yml"
+source_file_hash = "fbf672b83270a2fbede775fed4998cacde32e6bbd26d474f673d3c2d8cd52ced"
+source_stream = "discounts"
+unmapped_target_fields = []
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.discount.mapped_target_fields]
+id = "discounts.id"
+created_at = "discounts.created_at"
+updated_at = "discounts.updated_at"
+starts_at = "discounts.starts_at"
+ends_at = "discounts.ends_at"
+code = "discounts.code"
+value = "discounts.value"
+status = "discounts.status"
+usage_limits = "discounts.usage_limit"
+applies_to = "discounts.applies_to"
+applies_to_resource = "discounts.applies_to_resource"
+applies_to_id = "discounts.applies_to_id"
+applies_to_product_type = "discounts.applies_to_product_type"
+minimum_order_amount = "discounts.prerequisite_subtotal_min"
+_fivetran_synced = "discounts._airbyte_extracted_at"
+
+[mappings.discount.unused_source_fields]
+discounts = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "channel_settings",
+    "channel_settings.api",
+    "channel_settings.api.can_apply",
+    "channel_settings.checkout_page",
+    "channel_settings.checkout_page.can_apply",
+    "channel_settings.customer_portal",
+    "channel_settings.customer_portal.can_apply",
+    "channel_settings.merchant_portal",
+    "channel_settings.merchant_portal.can_apply",
+    "discount_type",
+    "duration",
+    "duration_usage_limit",
+    "external_discount_id",
+    "external_discount_source",
+    "first_time_customer_restriction",
+    "once_per_customer",
+    "times_used",
+]
+
+[mappings.one_time_product]
+source_file = "src/transforms/recharge/transforms/one_time_product.yml"
+source_file_hash = "4438e22079a8f5bcaa94d89cbed69273fa4e7bd3868b1aac5b945a0a88cfe97e"
+source_stream = "onetimes"
+unmapped_target_fields = [
+    "external_product_id_ecommerce",
+    "external_variant_id_ecommerce",
+    "is_deleted",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.one_time_product.mapped_target_fields]
+id = "onetimes.id"
+address_id = "onetimes.address_id"
+customer_id = "onetimes.customer_id"
+created_at = "onetimes.created_at"
+updated_at = "onetimes.updated_at"
+next_charge_scheduled_at = "onetimes.next_charge_scheduled_at"
+product_title = "onetimes.product_title"
+variant_title = "onetimes.variant_title"
+price = "onetimes.price"
+quantity = "onetimes.quantity"
+sku = "onetimes.sku"
+_fivetran_synced = "onetimes._airbyte_extracted_at"
+
+[mappings.one_time_product.unused_source_fields]
+onetimes = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "properties",
+    "recharge_product_id",
+    "shopify_product_id",
+    "shopify_variant_id",
+    "status",
+]
+
+[mappings.order]
+source_file = "src/transforms/recharge/transforms/order.yml"
+source_file_hash = "a2782b72ee83f5f839e268f748e5c3628d24b61a30400b868e5fe6afe36b1f9e"
+source_stream = "orders"
+unmapped_target_fields = [
+    "is_deleted",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.order.mapped_target_fields]
+id = "orders.id"
+customer_id = "orders.customer.id"
+address_id = "orders.address_id"
+charge_id = "orders.charge.id"
+email = "orders.email"
+transaction_id = "orders.transaction_id"
+charge_status = "orders.charge.status"
+is_prepaid = "orders.is_prepaid"
+status = "orders.status"
+total_price = "orders.total_price"
+type = "orders.type"
+external_order_id_ecommerce = "orders.external_order_id.ecommerce"
+external_order_number_ecommerce = "orders.external_order_number.ecommerce"
+created_at = "orders.created_at"
+updated_at = "orders.updated_at"
+processed_at = "orders.processed_at"
+scheduled_at = "orders.scheduled_at"
+shipped_date = "orders.shipped_date"
+_fivetran_synced = "orders._airbyte_extracted_at"
+
+[mappings.order.unused_source_fields]
+orders = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "accepts_marketing",
+    "address_is_active",
+    "billing_address",
+    "billing_address.address1",
+    "billing_address.address2",
+    "billing_address.cart_note",
+    "billing_address.city",
+    "billing_address.company",
+    "billing_address.country",
+    "billing_address.country_code",
+    "billing_address.created_at",
+    "billing_address.customer_id",
+    "billing_address.discount_id",
+    "billing_address.first_name",
+    "billing_address.id",
+    "billing_address.last_name",
+    "billing_address.note_attributes",
+    "billing_address.phone",
+    "billing_address.province",
+    "billing_address.shipping_lines_override",
+    "billing_address.updated_at",
+    "billing_address.zip",
+    "browser_ip",
+    "charge",
+    "charge.external_transaction_id",
+    "charge.external_transaction_id.payment_processor",
+    "charge.payment_processor_name",
+    "charge_id",
+    "charge_status",
+    "client_details",
+    "client_details.browser_ip",
+    "client_details.user_agent",
+    "currency",
+    "customer",
+    "customer.accepts_marketing",
+    "customer.billing_address1",
+    "customer.billing_address2",
+    "customer.billing_city",
+    "customer.billing_company",
+    "customer.billing_country",
+    "customer.billing_first_name",
+    "customer.billing_last_name",
+    "customer.billing_phone",
+    "customer.billing_province",
+    "customer.billing_zip",
+    "customer.created_at",
+    "customer.email",
+    "customer.external_customer_id",
+    "customer.external_customer_id.ecommerce",
+    "customer.first_charge_processed_at",
+    "customer.first_name",
+    "customer.has_card_error_in_dunning",
+    "customer.has_valid_payment_method",
+    "customer.hash",
+    "customer.last_name",
+    "customer.number_active_subscriptions",
+    "customer.number_subscriptions",
+    "customer.phone",
+    "customer.processor_type",
+    "customer.reason_payment_method_not_valid",
+    "customer.send_email_welcome",
+    "customer.shopify_customer_id",
+    "customer.status",
+    "customer.updated_at",
+    "customer.verified_email",
+    "customer_id",
+    "discount_codes",
+    "discounts",
+    "error",
+    "external_cart_token",
+    "external_order_id",
+    "external_order_name",
+    "external_order_name.ecommerce",
+    "external_order_number",
+    "first_name",
+    "hash",
+    "last_name",
+    "line_items",
+    "note",
+    "note_attributes",
+    "order_attributes",
+    "payment_processor",
+    "phone",
+    "redacted",
+    "send_email_welcome",
+    "shipping_address",
+    "shipping_address.address1",
+    "shipping_address.address2",
+    "shipping_address.cart_note",
+    "shipping_address.city",
+    "shipping_address.company",
+    "shipping_address.country",
+    "shipping_address.country_code",
+    "shipping_address.created_at",
+    "shipping_address.customer_id",
+    "shipping_address.discount_id",
+    "shipping_address.first_name",
+    "shipping_address.id",
+    "shipping_address.last_name",
+    "shipping_address.note_attributes",
+    "shipping_address.phone",
+    "shipping_address.province",
+    "shipping_address.shipping_lines_override",
+    "shipping_address.updated_at",
+    "shipping_address.zip",
+    "shipping_date",
+    "shipping_lines",
+    "shopify_cart_token",
+    "shopify_customer_id",
+    "shopify_id",
+    "shopify_order_id",
+    "shopify_order_number",
+    "subtotal_price",
+    "tags",
+    "tax_lines",
+    "taxable",
+    "total_discounts",
+    "total_duties",
+    "total_line_items_price",
+    "total_refunds",
+    "total_tax",
+    "total_weight",
+    "total_weight_grams",
+    "verified_email",
+]
+
+[mappings.order_line_item]
+source_file = "src/transforms/recharge/transforms/order_line_item.yml"
+source_file_hash = "8bc4f34ab56b80c94ede67052bd046aedc22768f58cd89c9624384614f05072e"
+source_stream = "orders"
+unmapped_target_fields = [
+    "external_product_id_ecommerce",
+    "external_variant_id_ecommerce",
+    "grams",
+    "index",
+    "order_id",
+    "purchase_item_id",
+    "purchase_item_type",
+    "quantity",
+    "sku",
+    "tax_due",
+    "taxable_amount",
+    "title",
+    "total_price",
+    "unit_price",
+    "unit_price_includes_tax",
+    "variant_title",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.order_line_item.mapped_target_fields]
+taxable = "orders.taxable"
+_fivetran_synced = "orders._airbyte_extracted_at"
+
+[mappings.order_line_item.unused_source_fields]
+orders = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "accepts_marketing",
+    "address_id",
+    "address_is_active",
+    "billing_address",
+    "billing_address.address1",
+    "billing_address.address2",
+    "billing_address.cart_note",
+    "billing_address.city",
+    "billing_address.company",
+    "billing_address.country",
+    "billing_address.country_code",
+    "billing_address.created_at",
+    "billing_address.customer_id",
+    "billing_address.discount_id",
+    "billing_address.first_name",
+    "billing_address.id",
+    "billing_address.last_name",
+    "billing_address.note_attributes",
+    "billing_address.phone",
+    "billing_address.province",
+    "billing_address.shipping_lines_override",
+    "billing_address.updated_at",
+    "billing_address.zip",
+    "browser_ip",
+    "charge",
+    "charge.external_transaction_id",
+    "charge.external_transaction_id.payment_processor",
+    "charge.id",
+    "charge.payment_processor_name",
+    "charge.status",
+    "charge_id",
+    "charge_status",
+    "client_details",
+    "client_details.browser_ip",
+    "client_details.user_agent",
+    "created_at",
+    "currency",
+    "customer",
+    "customer.accepts_marketing",
+    "customer.billing_address1",
+    "customer.billing_address2",
+    "customer.billing_city",
+    "customer.billing_company",
+    "customer.billing_country",
+    "customer.billing_first_name",
+    "customer.billing_last_name",
+    "customer.billing_phone",
+    "customer.billing_province",
+    "customer.billing_zip",
+    "customer.created_at",
+    "customer.email",
+    "customer.external_customer_id",
+    "customer.external_customer_id.ecommerce",
+    "customer.first_charge_processed_at",
+    "customer.first_name",
+    "customer.has_card_error_in_dunning",
+    "customer.has_valid_payment_method",
+    "customer.hash",
+    "customer.id",
+    "customer.last_name",
+    "customer.number_active_subscriptions",
+    "customer.number_subscriptions",
+    "customer.phone",
+    "customer.processor_type",
+    "customer.reason_payment_method_not_valid",
+    "customer.send_email_welcome",
+    "customer.shopify_customer_id",
+    "customer.status",
+    "customer.updated_at",
+    "customer.verified_email",
+    "customer_id",
+    "discount_codes",
+    "discounts",
+    "email",
+    "error",
+    "external_cart_token",
+    "external_order_id",
+    "external_order_id.ecommerce",
+    "external_order_name",
+    "external_order_name.ecommerce",
+    "external_order_number",
+    "external_order_number.ecommerce",
+    "first_name",
+    "hash",
+    "id",
+    "is_prepaid",
+    "last_name",
+    "line_items",
+    "note",
+    "note_attributes",
+    "order_attributes",
+    "payment_processor",
+    "phone",
+    "processed_at",
+    "redacted",
+    "scheduled_at",
+    "send_email_welcome",
+    "shipped_date",
+    "shipping_address",
+    "shipping_address.address1",
+    "shipping_address.address2",
+    "shipping_address.cart_note",
+    "shipping_address.city",
+    "shipping_address.company",
+    "shipping_address.country",
+    "shipping_address.country_code",
+    "shipping_address.created_at",
+    "shipping_address.customer_id",
+    "shipping_address.discount_id",
+    "shipping_address.first_name",
+    "shipping_address.id",
+    "shipping_address.last_name",
+    "shipping_address.note_attributes",
+    "shipping_address.phone",
+    "shipping_address.province",
+    "shipping_address.shipping_lines_override",
+    "shipping_address.updated_at",
+    "shipping_address.zip",
+    "shipping_date",
+    "shipping_lines",
+    "shopify_cart_token",
+    "shopify_customer_id",
+    "shopify_id",
+    "shopify_order_id",
+    "shopify_order_number",
+    "status",
+    "subtotal_price",
+    "tags",
+    "tax_lines",
+    "total_discounts",
+    "total_duties",
+    "total_line_items_price",
+    "total_price",
+    "total_refunds",
+    "total_tax",
+    "total_weight",
+    "total_weight_grams",
+    "transaction_id",
+    "type",
+    "updated_at",
+    "verified_email",
+]
+
+[mappings.orders]
+source_file = "src/transforms/recharge/transforms/orders.yml"
+source_file_hash = "b7d68812fdd26ad1d6cf32379b09181320f3b181ef8d73c8ca89bc8ff9a089b7"
+source_stream = "orders"
+unmapped_target_fields = [
+    "email",
+    "is_deleted",
+    "transaction_id",
+    "type",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.orders.mapped_target_fields]
+id = "orders.id"
+customer_id = "orders.customer_id"
+address_id = "orders.billing_address.id"
+charge_id = "orders.charge.id"
+charge_status = "orders.charge.status"
+is_prepaid = "orders.is_prepaid"
+status = "orders.status"
+total_price = "orders.total_price"
+external_order_id_ecommerce = "orders.external_order_id.ecommerce"
+external_order_number_ecommerce = "orders.external_order_number.ecommerce"
+created_at = "orders.created_at"
+updated_at = "orders.updated_at"
+processed_at = "orders.processed_at"
+scheduled_at = "orders.scheduled_at"
+shipped_date = "orders.shipping_date"
+_fivetran_synced = "orders._airbyte_extracted_at"
+
+[mappings.orders.unused_source_fields]
+orders = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "accepts_marketing",
+    "address_id",
+    "address_is_active",
+    "billing_address",
+    "billing_address.address1",
+    "billing_address.address2",
+    "billing_address.cart_note",
+    "billing_address.city",
+    "billing_address.company",
+    "billing_address.country",
+    "billing_address.country_code",
+    "billing_address.created_at",
+    "billing_address.customer_id",
+    "billing_address.discount_id",
+    "billing_address.first_name",
+    "billing_address.last_name",
+    "billing_address.note_attributes",
+    "billing_address.phone",
+    "billing_address.province",
+    "billing_address.shipping_lines_override",
+    "billing_address.updated_at",
+    "billing_address.zip",
+    "browser_ip",
+    "charge",
+    "charge.external_transaction_id",
+    "charge.external_transaction_id.payment_processor",
+    "charge.payment_processor_name",
+    "charge_id",
+    "charge_status",
+    "client_details",
+    "client_details.browser_ip",
+    "client_details.user_agent",
+    "currency",
+    "customer",
+    "customer.accepts_marketing",
+    "customer.billing_address1",
+    "customer.billing_address2",
+    "customer.billing_city",
+    "customer.billing_company",
+    "customer.billing_country",
+    "customer.billing_first_name",
+    "customer.billing_last_name",
+    "customer.billing_phone",
+    "customer.billing_province",
+    "customer.billing_zip",
+    "customer.created_at",
+    "customer.email",
+    "customer.external_customer_id",
+    "customer.external_customer_id.ecommerce",
+    "customer.first_charge_processed_at",
+    "customer.first_name",
+    "customer.has_card_error_in_dunning",
+    "customer.has_valid_payment_method",
+    "customer.hash",
+    "customer.id",
+    "customer.last_name",
+    "customer.number_active_subscriptions",
+    "customer.number_subscriptions",
+    "customer.phone",
+    "customer.processor_type",
+    "customer.reason_payment_method_not_valid",
+    "customer.send_email_welcome",
+    "customer.shopify_customer_id",
+    "customer.status",
+    "customer.updated_at",
+    "customer.verified_email",
+    "discount_codes",
+    "discounts",
+    "email",
+    "error",
+    "external_cart_token",
+    "external_order_id",
+    "external_order_name",
+    "external_order_name.ecommerce",
+    "external_order_number",
+    "first_name",
+    "hash",
+    "last_name",
+    "line_items",
+    "note",
+    "note_attributes",
+    "order_attributes",
+    "payment_processor",
+    "phone",
+    "redacted",
+    "send_email_welcome",
+    "shipped_date",
+    "shipping_address",
+    "shipping_address.address1",
+    "shipping_address.address2",
+    "shipping_address.cart_note",
+    "shipping_address.city",
+    "shipping_address.company",
+    "shipping_address.country",
+    "shipping_address.country_code",
+    "shipping_address.created_at",
+    "shipping_address.customer_id",
+    "shipping_address.discount_id",
+    "shipping_address.first_name",
+    "shipping_address.id",
+    "shipping_address.last_name",
+    "shipping_address.note_attributes",
+    "shipping_address.phone",
+    "shipping_address.province",
+    "shipping_address.shipping_lines_override",
+    "shipping_address.updated_at",
+    "shipping_address.zip",
+    "shipping_lines",
+    "shopify_cart_token",
+    "shopify_customer_id",
+    "shopify_id",
+    "shopify_order_id",
+    "shopify_order_number",
+    "subtotal_price",
+    "tags",
+    "tax_lines",
+    "taxable",
+    "total_discounts",
+    "total_duties",
+    "total_line_items_price",
+    "total_refunds",
+    "total_tax",
+    "total_weight",
+    "total_weight_grams",
+    "transaction_id",
+    "type",
+    "verified_email",
+]
+
+[mappings.subscription]
+source_file = "src/transforms/recharge/transforms/subscription.yml"
+source_file_hash = "3a2238048277e211b58dd5260e5bc584b941ee8ffd78c9b3d78e166aac6608dd"
+source_stream = "subscriptions"
+unmapped_target_fields = [
+    "_fivetran_deleted",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.subscription.mapped_target_fields]
+id = "subscriptions.id"
+address_id = "subscriptions.address_id"
+customer_id = "subscriptions.customer_id"
+created_at = "subscriptions.created_at"
+cancelled_at = "subscriptions.cancelled_at"
+next_charge_scheduled_at = "subscriptions.next_charge_scheduled_at"
+price = "subscriptions.price"
+quantity = "subscriptions.quantity"
+status = "subscriptions.status"
+cancellation_reason = "subscriptions.cancellation_reason"
+cancellation_reason_comments = "subscriptions.cancellation_reason_comments"
+product_title = "subscriptions.product_title"
+variant_title = "subscriptions.variant_title"
+external_product_id_ecommerce = "subscriptions.external_product_id.ecommerce"
+external_variant_id_ecommerce = "subscriptions.external_variant_id.ecommerce"
+sku = "subscriptions.sku"
+order_interval_unit = "subscriptions.order_interval_unit"
+order_interval_frequency = "subscriptions.order_interval_frequency"
+charge_interval_frequency = "subscriptions.charge_interval_frequency"
+order_day_of_week = "subscriptions.order_day_of_week"
+order_day_of_month = "subscriptions.order_day_of_month"
+expire_after_specific_number_of_charges = "subscriptions.expire_after_specific_number_of_charges"
+updated_at = "subscriptions.updated_at"
+_fivetran_synced = "subscriptions._airbyte_extracted_at"
+
+[mappings.subscription.unused_source_fields]
+subscriptions = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "analytics_data",
+    "commit_update",
+    "email",
+    "external_product_id",
+    "external_variant_id",
+    "has_queued_charges",
+    "is_prepaid",
+    "is_skippable",
+    "is_swappable",
+    "max_retries_reached",
+    "presentment_currency",
+    "properties",
+    "recharge_product_id",
+    "shopify_product_id",
+    "shopify_variant_id",
+    "sku_override",
+]
+
+[mappings.subscription_history]
+source_file = "src/transforms/recharge/transforms/subscription_history.yml"
+source_file_hash = "53516845be3d235f2138776be8f197dd326d9599ad5873c2b676f6a33bb86ed0"
+source_stream = "subscriptions"
+unmapped_target_fields = [
+    "_fivetran_deleted",
+]
+omitted_target_fields = []
+erroneous_source_table_columns = []
+
+[mappings.subscription_history.mapped_target_fields]
+subscription_id = "subscriptions.id"
+updated_at = "subscriptions.updated_at"
+address_id = "subscriptions.address_id"
+customer_id = "subscriptions.customer_id"
+created_at = "subscriptions.created_at"
+cancelled_at = "subscriptions.cancelled_at"
+next_charge_scheduled_at = "subscriptions.next_charge_scheduled_at"
+price = "subscriptions.price"
+quantity = "subscriptions.quantity"
+cancellation_reason = "subscriptions.cancellation_reason"
+status = "subscriptions.status"
+cancellation_reason_comments = "subscriptions.cancellation_reason_comments"
+product_title = "subscriptions.product_title"
+variant_title = "subscriptions.variant_title"
+external_product_id_ecommerce = "subscriptions.external_product_id.ecommerce"
+external_variant_id_ecommerce = "subscriptions.external_variant_id.ecommerce"
+sku = "subscriptions.sku"
+order_interval_unit = "subscriptions.order_interval_unit"
+order_interval_frequency = "subscriptions.order_interval_frequency"
+charge_interval_frequency = "subscriptions.charge_interval_frequency"
+order_day_of_week = "subscriptions.order_day_of_week"
+order_day_of_month = "subscriptions.order_day_of_month"
+expire_after_specific_number_of_charges = "subscriptions.expire_after_specific_number_of_charges"
+_fivetran_synced = "subscriptions._airbyte_extracted_at"
+
+[mappings.subscription_history.unused_source_fields]
+subscriptions = [
+    "_airbyte_meta",
+    "_airbyte_raw_id",
+    "analytics_data",
+    "commit_update",
+    "email",
+    "external_product_id",
+    "external_variant_id",
+    "has_queued_charges",
+    "is_prepaid",
+    "is_skippable",
+    "is_swappable",
+    "max_retries_reached",
+    "presentment_currency",
+    "properties",
+    "recharge_product_id",
+    "shopify_product_id",
+    "shopify_variant_id",
+    "sku_override",
+]

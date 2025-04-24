@@ -1,0 +1,137 @@
+domain: recharge.airbyte-interop
+transforms:
+  - name: customer
+    from:
+      - customers: recharge.customers
+    fields:
+      id:
+        expression: customers.id
+        description: The unique ID of the customer.
+      hash:
+        expression: customers.hash
+        description: The unique string identifier used in a customer portal link.
+      external_customer_id_ecommerce:
+        expression: customers.external_customer_id.ecommerce
+        description: External platform's unique identifier for the customer.
+      email:
+        expression: customers.email
+        description: The email address of the customer.
+      created_at:
+        expression: customers.created_at
+        description: The date and time when the customer was created.
+      updated_at:
+        expression: customers.updated_at
+        description: The date and time when the customer was last updated.
+      first_charge_processed_at:
+        expression: customers.first_charge_processed_at
+        description: Date when first charge was processed for the customer.
+      first_name:
+        expression: customers.first_name
+        description: The customer's first name.
+      last_name:
+        expression: customers.last_name
+        description: The customer's last name.
+      subscriptions_active_count:
+        expression: customers.number_active_subscriptions
+        description: The number of active subscriptions associated with the customer.
+      subscriptions_total_count:
+        expression: customers.number_subscriptions
+        description: The total number of subscriptions associated with the customer.
+      has_valid_payment_method:
+        expression: customers.has_valid_payment_method
+        description: Boolean indicating if the payment value is valid.
+      has_payment_method_in_dunning:
+        expression: customers.has_card_error_in_dunning
+        description: Boolean indicating if the customer has a credit card in dunning.
+      tax_exempt:
+        expression: customers.tax_exempt
+        description: Boolean indicating if the customer is tax exempt.
+      _fivetran_deleted:
+        expression: MISSING
+        description: "{{ doc('_fivetran_deleted') }}"
+      _fivetran_synced:
+        expression: customers._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+annotations:
+  approved: true
+  missing_fields:
+    - _fivetran_deleted
+  evaluation:
+    source_stream_name: customers
+    target_table_name: customer
+    table_match_score: 0.9
+    completion_score: 0.85
+    explanation: The table mapping demonstrates a high quality of alignment between
+      the source and target schemas, indicating they are likely from similar data
+      streams. The completion score is slightly lower due to some fields like '_fivetran_deleted'
+      not having a proper mapping, indicating that not all fields from the source
+      are currently being utilized or mapped in the target schema.
+    field_mapping_evals:
+      - name: id
+        expression: customers.id
+        score: 1.0
+        explanation: Direct mapping of customer IDs.
+      - name: hash
+        expression: customers.hash
+        score: 1.0
+        explanation: Direct mapping of unique identifier hashes.
+      - name: external_customer_id_ecommerce
+        expression: customers.external_customer_id.ecommerce
+        score: 1.0
+        explanation: Direct correlation to an external platform identifier for customers.
+      - name: email
+        expression: customers.email
+        score: 1.0
+        explanation: Direct mapping of customer email addresses.
+      - name: created_at
+        expression: customers.created_at
+        score: 1.0
+        explanation: Direct mapping of the customer creation timestamp.
+      - name: updated_at
+        expression: customers.updated_at
+        score: 1.0
+        explanation: Direct mapping of the last update timestamp.
+      - name: first_charge_processed_at
+        expression: customers.first_charge_processed_at
+        score: 1.0
+        explanation: Direct mapping to the date of first charge processing.
+      - name: first_name
+        expression: customers.first_name
+        score: 1.0
+        explanation: Direct mapping of first names.
+      - name: last_name
+        expression: customers.last_name
+        score: 1.0
+        explanation: Direct mapping of last names.
+      - name: subscriptions_active_count
+        expression: customers.number_active_subscriptions
+        score: 0.7
+        explanation: Likely mapping of active subscriptions, as the confidence is
+          lower due to potential nuances in definitions between active subscriptions
+          documented across platforms.
+      - name: subscriptions_total_count
+        expression: customers.number_subscriptions
+        score: 0.7
+        explanation: Likely mapping of total subscription counts, with a reduced confidence
+          due to differences in the potential definition or coverage of 'total subscriptions'
+          across implementations.
+      - name: has_valid_payment_method
+        expression: customers.has_valid_payment_method
+        score: 1.0
+        explanation: Direct mapping of a boolean indicator for valid payment methods.
+      - name: has_payment_method_in_dunning
+        expression: customers.has_card_error_in_dunning
+        score: 1.0
+        explanation: Direct mapping of a boolean indicating credit card issues.
+      - name: tax_exempt
+        expression: customers.tax_exempt
+        score: 1.0
+        explanation: Direct mapping of tax exemption status.
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _fivetran_synced
+        expression: customers._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping of extracted times to Airbyte sync times.

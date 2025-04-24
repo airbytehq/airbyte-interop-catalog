@@ -1,0 +1,24 @@
+domain: recharge.airbyte-interop
+transforms:
+  - name: charge_shipping_line
+    from:
+      - MISSING: recharge.MISSING
+    fields:
+      charge_id:
+        expression: MISSING
+        description: "{{ doc('charge_id') }}"
+      index:
+        expression: MISSING
+        description: A unique numeric row produced for every concurrent charge_id.
+      price:
+        expression: MISSING
+        description: The price of th shipping line of a charge.
+      code:
+        expression: MISSING
+        description: The code associated with the shipping line of a charge.
+      title:
+        expression: MISSING
+        description: The title of the shipping line.
+      _fivetran_synced:
+        expression: MISSING
+        description: "{{ doc('_fivetran_synced') }}"

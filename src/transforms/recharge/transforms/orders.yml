@@ -1,0 +1,163 @@
+domain: recharge.airbyte-interop
+transforms:
+  - name: orders
+    from:
+      - orders: recharge.orders
+    fields:
+      id:
+        expression: orders.id
+        description: "{{ doc('order_id') }}"
+      customer_id:
+        expression: orders.customer_id
+        description: "{{ doc('customer_id') }}"
+      address_id:
+        expression: orders.billing_address.id
+        description: "{{ doc('address_id') }}"
+      charge_id:
+        expression: orders.charge.id
+        description: The unique numeric identifier of the charge.
+      is_deleted:
+        expression: MISSING
+        description: Boolean indicating if the order (record) is deleted.
+      email:
+        expression: MISSING
+        description: The email address of the customer.
+      transaction_id:
+        expression: MISSING
+        description: The unique alphanumeric identifier of the transaction.
+      charge_status:
+        expression: orders.charge.status
+        description: "{{ doc('charge_status') }}"
+      is_prepaid:
+        expression: orders.is_prepaid
+        description: Boolean indicating if the Order is prepaid.
+      status:
+        expression: orders.status
+        description: "{{ doc('order_status') }}"
+      total_price:
+        expression: orders.total_price
+        description: The sum of all prices of the item in the order with taxes and
+          discounts included (must be positive).
+      type:
+        expression: MISSING
+        description: "{{ doc('type') }}"
+      external_order_id_ecommerce:
+        expression: orders.external_order_id.ecommerce
+        description: Unique numeric identifier within your external ecommerce platform
+          for the order.
+      external_order_number_ecommerce:
+        expression: orders.external_order_number.ecommerce
+        description: The unique order number within your external ecommerce platform.
+      created_at:
+        expression: orders.created_at
+        description: The date and time when the order was created.
+      updated_at:
+        expression: orders.updated_at
+        description: The date and time when the order was last updated.
+      processed_at:
+        expression: orders.processed_at
+        description: The date and time when the order was submitted.
+      scheduled_at:
+        expression: orders.scheduled_at
+        description: The date and time when the order will be shipped.
+      shipped_date:
+        expression: orders.shipping_date
+        description: The date when the order will be processed.
+      _fivetran_synced:
+        expression: orders._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+annotations:
+  approved: false
+  missing_fields:
+    - email
+    - is_deleted
+    - transaction_id
+    - type
+  evaluation:
+    source_stream_name: orders
+    target_table_name: orders
+    table_match_score: 0.85
+    completion_score: 0.92
+    explanation: The tables and most fields are well-matched, suggesting they are
+      describing the same subject matter with only a few missing mappings.
+    field_mapping_evals:
+      - name: id
+        expression: orders.id
+        score: 1.0
+        explanation: Exact match of the field found.
+      - name: customer_id
+        expression: orders.customer_id
+        score: 1.0
+        explanation: Exact match of the field found.
+      - name: address_id
+        expression: orders.billing_address.id
+        score: 1.0
+        explanation: Exact match at the nested level found.
+      - name: charge_id
+        expression: orders.charge.id
+        score: 1.0
+        explanation: Exact match at the nested level found.
+      - name: is_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: email
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: transaction_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: charge_status
+        expression: orders.charge.status
+        score: 1.0
+        explanation: Exact match at the nested level found.
+      - name: is_prepaid
+        expression: orders.is_prepaid
+        score: 1.0
+        explanation: Exact match of the field found.
+      - name: status
+        expression: orders.status
+        score: 1.0
+        explanation: Exact match of the field found.
+      - name: total_price
+        expression: orders.total_price
+        score: 1.0
+        explanation: Exact match of the field found.
+      - name: type
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: external_order_id_ecommerce
+        expression: orders.external_order_id.ecommerce
+        score: 0.9
+        explanation: Close match found, within acceptable parameter variations.
+      - name: external_order_number_ecommerce
+        expression: orders.external_order_number.ecommerce
+        score: 0.9
+        explanation: Close match found, within acceptable parameter variations.
+      - name: created_at
+        expression: orders.created_at
+        score: 1.0
+        explanation: Exact match of the field found.
+      - name: updated_at
+        expression: orders.updated_at
+        score: 1.0
+        explanation: Exact match of the field found.
+      - name: processed_at
+        expression: orders.processed_at
+        score: 1.0
+        explanation: Exact match of the field found.
+      - name: scheduled_at
+        expression: orders.scheduled_at
+        score: 1.0
+        explanation: Exact match of the field found.
+      - name: shipped_date
+        expression: orders.shipping_date
+        score: 1.0
+        explanation: Exact match of the field found.
+      - name: _fivetran_synced
+        expression: orders._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping, exact sync column match found.

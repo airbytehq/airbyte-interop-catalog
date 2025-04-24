@@ -1,0 +1,212 @@
+domain: recharge.airbyte-interop
+transforms:
+  - name: subscription_history
+    from:
+      - subscriptions: recharge.subscriptions
+    fields:
+      subscription_id:
+        expression: subscriptions.id
+        description: "{{ doc('subscription_id') }}"
+      updated_at:
+        expression: subscriptions.updated_at
+        description: The date time at which the purchase_item record was last updated.
+      address_id:
+        expression: subscriptions.address_id
+        description: "{{ doc('address_id') }}"
+      customer_id:
+        expression: subscriptions.customer_id
+        description: "{{ doc('customer_id') }}"
+      created_at:
+        expression: subscriptions.created_at
+        description: The date and time the subscription was created.
+      cancelled_at:
+        expression: subscriptions.cancelled_at
+        description: The date and time the subscription was cancelled.
+      next_charge_scheduled_at:
+        expression: subscriptions.next_charge_scheduled_at
+        description: Date of the next charge for the subscription.
+      price:
+        expression: subscriptions.price
+        description: The price of the item before discounts, taxes, or shipping have
+          been applied.
+      quantity:
+        expression: subscriptions.quantity
+        description: The number of items in the subscription.
+      cancellation_reason:
+        expression: subscriptions.cancellation_reason
+        description: Reason provided for cancellation.
+      status:
+        expression: subscriptions.status
+        description: "{{ doc('subscription_status') }}"
+      cancellation_reason_comments:
+        expression: subscriptions.cancellation_reason_comments
+        description: Additional comment for cancellation.
+      product_title:
+        expression: subscriptions.product_title
+        description: The name of the product in a store’s catalog.
+      variant_title:
+        expression: subscriptions.variant_title
+        description: The name of the variant in a shop’s catalog.
+      external_product_id_ecommerce:
+        expression: subscriptions.external_product_id.ecommerce
+        description: An object containing the product id as it appears in external
+          platforms.
+      external_variant_id_ecommerce:
+        expression: subscriptions.external_variant_id.ecommerce
+        description: An object containing the variant id as it appears in external
+          platforms.
+      sku:
+        expression: subscriptions.sku
+        description: A unique identifier of the item in the fulfillment. In cases
+          where SKU is blank, it will be dynamically pulled whenever it is used.
+      order_interval_unit:
+        expression: subscriptions.order_interval_unit
+        description: The frequency unit used to determine when a subscription’s order
+          is created.
+      order_interval_frequency:
+        expression: subscriptions.order_interval_frequency
+        description: The number of units (specified in order_interval_unit) between
+          each order. For example, order_interval_unit = month and order_interval_frequency
+          = 3, indicate order every 3 months.
+      charge_interval_frequency:
+        expression: subscriptions.charge_interval_frequency
+        description: The number of units (specified in order_interval_unit) between
+          each Charge. For example, order_interval_unit=month and charge_interval_frequency=3,
+          indicate charge every 3 months.
+      order_day_of_week:
+        expression: subscriptions.order_day_of_week
+        description: The set day of the week order is created. Default is that there
+          isn’t a strict day of the week order is created.
+      order_day_of_month:
+        expression: subscriptions.order_day_of_month
+        description: The set day of the month order is created. Default is that there
+          isn’t a strict day of the month when the order is created.
+      expire_after_specific_number_of_charges:
+        expression: subscriptions.expire_after_specific_number_of_charges
+        description: Set the number of charges until subscription expires.
+      _fivetran_deleted:
+        expression: MISSING
+        description: "{{ doc('_fivetran_deleted') }}"
+      _fivetran_synced:
+        expression: subscriptions._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+annotations:
+  approved: true
+  missing_fields:
+    - _fivetran_deleted
+  evaluation:
+    source_stream_name: subscriptions
+    target_table_name: subscription_history
+    table_match_score: 0.9
+    completion_score: 0.8
+    explanation: Most mappings are conceptually aligned, indicating a high-quality
+      match between source and target schema. A couple of fields show no direct correspondences
+      or are set to 'MISSING', leading to a slightly lower completion score.
+    field_mapping_evals:
+      - name: subscription_id
+        expression: subscriptions.id
+        score: 1.0
+        explanation: Direct match found with precise field names matching.
+      - name: updated_at
+        expression: subscriptions.updated_at
+        score: 0.95
+        explanation: Direct match found with time-based fields matching.
+      - name: address_id
+        expression: subscriptions.address_id
+        score: 1.0
+        explanation: Direct match found with precise field names matching.
+      - name: customer_id
+        expression: subscriptions.customer_id
+        score: 1.0
+        explanation: Direct match found with precise field names matching.
+      - name: created_at
+        expression: subscriptions.created_at
+        score: 1.0
+        explanation: Direct match found with time-based fields matching.
+      - name: cancelled_at
+        expression: subscriptions.cancelled_at
+        score: 1.0
+        explanation: Direct match found with time-based fields matching.
+      - name: next_charge_scheduled_at
+        expression: subscriptions.next_charge_scheduled_at
+        score: 1.0
+        explanation: Direct match found with time-based fields matching.
+      - name: price
+        expression: subscriptions.price
+        score: 1.0
+        explanation: Direct match found with monetary terms matching.
+      - name: quantity
+        expression: subscriptions.quantity
+        score: 1.0
+        explanation: Direct match found reflecting count.
+      - name: cancellation_reason
+        expression: subscriptions.cancellation_reason
+        score: 1.0
+        explanation: Direct match found for description fields.
+      - name: status
+        expression: subscriptions.status
+        score: 0.7
+        explanation: Match found. Slight ambiguity in categorical status fields could
+          bring variations but are generally reflective of similar attributes.
+      - name: cancellation_reason_comments
+        expression: subscriptions.cancellation_reason_comments
+        score: 1.0
+        explanation: Direct match found for description fields.
+      - name: product_title
+        expression: subscriptions.product_title
+        score: 1.0
+        explanation: Direct match found reflecting item identification.
+      - name: variant_title
+        expression: subscriptions.variant_title
+        score: 1.0
+        explanation: Direct match found reflecting detailed item identification.
+      - name: external_product_id_ecommerce
+        expression: subscriptions.external_product_id.ecommerce
+        score: 0.6
+        explanation: Mapped with a nested structure indicating external ID connection,
+          less confident due to nested fields but acceptable.
+      - name: external_variant_id_ecommerce
+        expression: subscriptions.external_variant_id.ecommerce
+        score: 0.6
+        explanation: Mapped with a nested structure indicating external ID connection,
+          less confident due to nested fields but acceptable.
+      - name: sku
+        expression: subscriptions.sku
+        score: 1.0
+        explanation: Direct match found reflecting unique inventory identifier.
+      - name: order_interval_unit
+        expression: subscriptions.order_interval_unit
+        score: 0.6
+        explanation: Mapped considering similar function and conceptual usage in subscription
+          settings.
+      - name: order_interval_frequency
+        expression: subscriptions.order_interval_frequency
+        score: 0.6
+        explanation: Mapped considering similar frequency determinations in subscription
+          contexts.
+      - name: charge_interval_frequency
+        expression: subscriptions.charge_interval_frequency
+        score: 0.6
+        explanation: Mapped considering similar frequency determinations in charge
+          contexts.
+      - name: order_day_of_week
+        expression: subscriptions.order_day_of_week
+        score: 1.0
+        explanation: Direct match found considering identical specific day scheduling.
+      - name: order_day_of_month
+        expression: subscriptions.order_day_of_month
+        score: 1.0
+        explanation: Direct match found considering identical specific day scheduling.
+      - name: expire_after_specific_number_of_charges
+        expression: subscriptions.expire_after_specific_number_of_charges
+        score: 1.0
+        explanation: Direct match found considering identical charge condition.
+      - name: _fivetran_deleted
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _fivetran_synced
+        expression: subscriptions._airbyte_extracted_at
+        score: 1.0
+        explanation: Direct mapping to '_airbyte_extracted_at' as per standard schema
+          requirements.

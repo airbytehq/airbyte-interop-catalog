@@ -1,0 +1,132 @@
+domain: recharge.airbyte-interop
+transforms:
+  - name: discount
+    from:
+      - discounts: recharge.discounts
+    fields:
+      id:
+        expression: discounts.id
+        description: "{{ doc('discount_id') }}"
+      created_at:
+        expression: discounts.created_at
+        description: The date and time when the discount was created.
+      updated_at:
+        expression: discounts.updated_at
+        description: The date and time when the discount was last updated.
+      starts_at:
+        expression: discounts.starts_at
+        description: The date when the discount becomes active.
+      ends_at:
+        expression: discounts.ends_at
+        description: The expiration time of the discount, past this time the discount
+          can no longer be redeemed, once the time of the discount has passed the
+          status of the discount will go from 'active' to 'disabled'.
+      code:
+        expression: discounts.code
+        description: The code used to apply the discount.
+      value:
+        expression: discounts.value
+        description: The discounted value to be applied.
+      status:
+        expression: discounts.status
+        description: "{{ doc('discount_status') }}"
+      usage_limits:
+        expression: discounts.usage_limit
+        description: An integer indicating how many times the discount can been used.
+      applies_to:
+        expression: discounts.applies_to
+        description: Indicates where the discount applies.
+      applies_to_resource:
+        expression: discounts.applies_to_resource
+        description: An indicator of the type of resource which applies_to_id refers.
+      applies_to_id:
+        expression: discounts.applies_to_id
+        description: A list of ids of the type indicated in applies_to_resource for
+          which the discount can be applied.
+      applies_to_product_type:
+        expression: discounts.applies_to_product_type
+        description: Indicates which product types the discount applies to.
+      minimum_order_amount:
+        expression: discounts.prerequisite_subtotal_min
+        description: The minimum cart subtotal needed for the discount to be applicable.
+          `duration` has to be `single_use` and the discount must apply to the entire
+          order.
+      _fivetran_synced:
+        expression: discounts._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+annotations:
+  approved: true
+  missing_fields: []
+  evaluation:
+    source_stream_name: discounts
+    target_table_name: discount
+    table_match_score: 0.85
+    completion_score: 0.9
+    explanation: The table mapping effectively matches the source and target schema
+      based on similar subject matter. All key fields have been appropriately mapped,
+      with high confidence in the mapping's integrity.
+    field_mapping_evals:
+      - name: id
+        expression: discounts.id
+        score: 1.0
+        explanation: Perfect match of field names and context.
+      - name: created_at
+        expression: discounts.created_at
+        score: 1.0
+        explanation: Exact match of field name and context.
+      - name: updated_at
+        expression: discounts.updated_at
+        score: 1.0
+        explanation: Exact match of field name and context.
+      - name: starts_at
+        expression: discounts.starts_at
+        score: 1.0
+        explanation: Exact match of field names, accurately reflecting the intended
+          usage.
+      - name: ends_at
+        expression: discounts.ends_at
+        score: 1.0
+        explanation: Perfect alignment of field name and meaning.
+      - name: code
+        expression: discounts.code
+        score: 1.0
+        explanation: Direct correlation between the field names and usage.
+      - name: value
+        expression: discounts.value
+        score: 1.0
+        explanation: Field names and contexts are identical, ensuring a flawless mapping.
+      - name: status
+        expression: discounts.status
+        score: 1.0
+        explanation: Field names and contexts align perfectly.
+      - name: usage_limits
+        expression: discounts.usage_limit
+        score: 0.6
+        explanation: Adequate match with some differences in naming but similar context.
+      - name: applies_to
+        expression: discounts.applies_to
+        score: 0.6
+        explanation: Sufficient similarity in application context, despite minor differences.
+      - name: applies_to_resource
+        expression: discounts.applies_to_resource
+        score: 0.6
+        explanation: Reasonable alignment, suitable for mapping despite slight variances.
+      - name: applies_to_id
+        expression: discounts.applies_to_id
+        score: 0.6
+        explanation: Enough similarities are present to justify mapping, with minor
+          discrepancies.
+      - name: applies_to_product_type
+        expression: discounts.applies_to_product_type
+        score: 0.6
+        explanation: Correspondence in function between the fields supports a viable
+          mapping.
+      - name: minimum_order_amount
+        expression: discounts.prerequisite_subtotal_min
+        score: 0.6
+        explanation: Matches in intent and usage, suitable for mapping.
+      - name: _fivetran_synced
+        expression: discounts._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping for all tables, perfectly matches the `_airbyte_extracted_at`
+          column.

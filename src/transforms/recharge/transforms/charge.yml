@@ -1,0 +1,307 @@
+domain: recharge.airbyte-interop
+transforms:
+  - name: charge
+    from:
+      - charges: recharge.charges
+    fields:
+      id:
+        expression: MISSING
+        description: "{{ doc('charge_id') }}"
+      address_id:
+        expression: MISSING
+        description: "{{ doc('address_id') }}"
+      customer_id:
+        expression: MISSING
+        description: "{{ doc('customer_id') }}"
+      customer_hash:
+        expression: MISSING
+        description: The hash of the customer associated with the charge.
+      note:
+        expression: MISSING
+        description: Shows the next order in sequence.
+      created_at:
+        expression: MISSING
+        description: Date and time when the charge was created.
+      updated_at:
+        expression: MISSING
+        description: Date and time when the charge was last updated.
+      processed_at:
+        expression: MISSING
+        description: Date and time when the charge was processed.
+      scheduled_at:
+        expression: MISSING
+        description: The date time of when the associated charge is/was scheduled
+          to process.
+      orders_count:
+        expression: MISSING
+        description: The number of orders generated from this charge (Will be >1 for
+          prepaid).
+      external_order_id_ecommerce:
+        expression: MISSING
+        description: The unique numeric identifier within your external ecommerce
+          platform for the charge.
+      subtotal_price:
+        expression: MISSING
+        description: The combined price of all order line_items minus any discounts.
+          Does not include taxes and shipping.
+      tags:
+        expression: MISSING
+        description: A comma-separated list of tags on the charge.
+      tax_lines:
+        expression: MISSING
+        description: An array of tax lines that apply to the charge.
+      total_discounts:
+        expression: MISSING
+        description: The sum of the discounts applied to the charge.
+      total_line_items_price:
+        expression: MISSING
+        description: The sum of all the prices of all the items in the charge.
+      total_price:
+        expression: MISSING
+        description: The sum of all the prices of all the items in the charge, taxes
+          and discounts included (must be positive).
+      total_tax:
+        expression: MISSING
+        description: The total tax due associated with the charge.
+      total_weight_grams:
+        expression: MISSING
+        description: The total weight of all items in the charge in grams.
+      type:
+        expression: MISSING
+        description: "{{ doc('type') }}"
+      status:
+        expression: MISSING
+        description: "{{ doc('charge_status') }}"
+      total_refunds:
+        expression: MISSING
+        description: The sum of all refunds that were applied to the charge.
+      external_transaction_id_payment_processor:
+        expression: MISSING
+        description: The unique identifier of the transaction.
+      email:
+        expression: MISSING
+        description: The email address of the customer.
+      payment_processor:
+        expression: MISSING
+        description: The payment processor used on the charge.
+      has_uncommited_changes:
+        expression: MISSING
+        description: Specifies whether the charge is scheduled for regeneration (if
+          the subscription is related to the charge was updated in the last 5 seconds
+          using "commit_update":false).
+      last_charge_attempt_date:
+        expression: MISSING
+        description: The date when the charge was last attempted.
+      retry_date:
+        expression: MISSING
+        description: The date when the next attempt will be placed.
+      error_type:
+        expression: MISSING
+        description: Structured reason why the charge failed such as customer_needs_to_updated_card.
+      error:
+        expression: MISSING
+        description: Error reason as sentence text (typically returned directly from
+          the payment processor - e.g. "customer needs to update credit card").
+      charge_attempts:
+        expression: MISSING
+        description: Shows how many times an attempt to charge was placed.
+      external_variant_id_not_found:
+        expression: MISSING
+        description: Indicates if Recharge was able to find the external_variant_id_ecommerce
+          from the charge.
+      client_details_browser_ip:
+        expression: MISSING
+        description: The IP address of the buyer detected in checkout.
+      client_details_user_agent:
+        expression: MISSING
+        description: The user agent detected during checkout.
+      _fivetran_synced:
+        expression: charges._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+annotations:
+  approved: false
+  missing_fields:
+    - address_id
+    - charge_attempts
+    - client_details_browser_ip
+    - client_details_user_agent
+    - created_at
+    - customer_hash
+    - customer_id
+    - email
+    - error
+    - error_type
+    - external_order_id_ecommerce
+    - external_transaction_id_payment_processor
+    - external_variant_id_not_found
+    - has_uncommited_changes
+    - id
+    - last_charge_attempt_date
+    - note
+    - orders_count
+    - payment_processor
+    - processed_at
+    - retry_date
+    - scheduled_at
+    - status
+    - subtotal_price
+    - tags
+    - tax_lines
+    - total_discounts
+    - total_line_items_price
+    - total_price
+    - total_refunds
+    - total_tax
+    - total_weight_grams
+    - type
+    - updated_at
+  evaluation:
+    source_stream_name: charges
+    target_table_name: charge
+    table_match_score: 0.0
+    completion_score: 0.0
+    explanation: All mappings have the expression 'MISSING' indicating that no good
+      matches were found. This results in a 0.00 confidence score for both table and
+      completion.
+    field_mapping_evals:
+      - name: _fivetran_synced
+        expression: charges._airbyte_extracted_at
+        score: 1.0
+        explanation: "Exact match: `_fivetran_synced` mapped directly to a source
+          stream's `_airbyte_extracted_at` column."
+      - name: id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: address_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: customer_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: customer_hash
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: note
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: created_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: updated_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: processed_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: scheduled_at
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: orders_count
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: external_order_id_ecommerce
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: subtotal_price
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: tags
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: tax_lines
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: total_discounts
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: total_line_items_price
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: total_price
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: total_tax
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: total_weight_grams
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: type
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: status
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: total_refunds
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: external_transaction_id_payment_processor
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: email
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: payment_processor
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: has_uncommited_changes
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: last_charge_attempt_date
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: retry_date
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: error_type
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: error
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: charge_attempts
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: external_variant_id_not_found
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: client_details_browser_ip
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: client_details_user_agent
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.

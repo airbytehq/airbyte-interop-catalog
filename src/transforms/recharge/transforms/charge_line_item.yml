@@ -1,0 +1,169 @@
+domain: recharge.airbyte-interop
+transforms:
+  - name: charge_line_item
+    from:
+      - charges: recharge.charges
+    fields:
+      charge_id:
+        expression: charges.id
+        description: "{{ doc('charge_id') }}"
+      index:
+        expression: MISSING
+        description: A unique numeric row produced for every concurrent charge_id.
+      variant_title:
+        expression: MISSING
+        description: The name of the product variant that links to your external ecommerce
+          platform.
+      title:
+        expression: MISSING
+        description: The product title that links to your external ecommerce platform.
+      grams:
+        expression: MISSING
+        description: The weight of the charge's line item in grams.
+      quantity:
+        expression: MISSING
+        description: The quantity of the line_item.
+      total_price:
+        expression: MISSING
+        description: The total price of the line_item including tax.
+      unit_price:
+        expression: MISSING
+        description: The unit price of the line_item.
+      tax_due:
+        expression: MISSING
+        description: The total tax due associated with the line_item.
+      taxable:
+        expression: charges.taxable
+        description: A boolean indicating if the line_item is taxable or non-taxable.
+      taxable_amount:
+        expression: MISSING
+        description: The taxable revenue associated with the line_item.
+      unit_price_includes_tax:
+        expression: MISSING
+        description: A boolean indicator if tax is included in the price of an item.
+      purchase_item_id:
+        expression: MISSING
+        description: The subscription or onetime ID associated with the line_item.
+      purchase_item_type:
+        expression: MISSING
+        description: Possible values are SUBSCRIPTION, ONETIME.
+      sku:
+        expression: MISSING
+        description: The SKU (stock keeping unit) of the product associated with the
+          charge's line item.
+      external_product_id_ecommerce:
+        expression: MISSING
+        description: The product ID that links to your external ecommerce platform.
+      external_variant_id_ecommerce:
+        expression: MISSING
+        description: The variant ID that links to your external ecommerce platform.
+      vendor:
+        expression: MISSING
+        description: The name of the seller.
+      _fivetran_synced:
+        expression: charges._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+annotations:
+  approved: false
+  missing_fields:
+    - external_product_id_ecommerce
+    - external_variant_id_ecommerce
+    - grams
+    - index
+    - purchase_item_id
+    - purchase_item_type
+    - quantity
+    - sku
+    - tax_due
+    - taxable_amount
+    - title
+    - total_price
+    - unit_price
+    - unit_price_includes_tax
+    - variant_title
+    - vendor
+  evaluation:
+    source_stream_name: charges
+    target_table_name: charge_line_item
+    table_match_score: 0.4
+    completion_score: 0.12
+    explanation: Given the significant number of fields mapped to 'MISSING', the overall
+      confidence in table mapping is low. This indicates a poor match or incomplete
+      information provided by the source versus the expected target schema.
+    field_mapping_evals:
+      - name: charge_id
+        expression: charges.id
+        score: 0.7
+        explanation: Mapped correctly.
+      - name: index
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: variant_title
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: title
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: grams
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: quantity
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: total_price
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: unit_price
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: tax_due
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: taxable
+        expression: charges.taxable
+        score: 0.7
+        explanation: Mapped correctly to a logical equivalent field.
+      - name: taxable_amount
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: unit_price_includes_tax
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: purchase_item_id
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: purchase_item_type
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: sku
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: external_product_id_ecommerce
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: external_variant_id_ecommerce
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: vendor
+        expression: MISSING
+        score: 0.0
+        explanation: No good match found.
+      - name: _fivetran_synced
+        expression: charges._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard field mapping between '_fivetran_synced' and 'charges._airbyte_extracted_at'.

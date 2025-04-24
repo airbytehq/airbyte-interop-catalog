@@ -1,0 +1,127 @@
+domain: recharge.airbyte-interop
+transforms:
+  - name: address
+    from:
+      - addresses: recharge.addresses
+    fields:
+      id:
+        expression: addresses.id
+        description: Unique numeric identifier for the address.
+      customer_id:
+        expression: addresses.customer_id
+        description: "{{ doc('customer_id') }}"
+      first_name:
+        expression: addresses.first_name
+        description: The customer's first name.
+      last_name:
+        expression: addresses.last_name
+        description: The customer's last name.
+      address_1:
+        expression: addresses.address1
+        description: The street associated with the address.
+      address_2:
+        expression: addresses.address2
+        description: Any additional information associated with the address.
+      city:
+        expression: addresses.city
+        description: The city associated with the address.
+      province:
+        expression: addresses.province
+        description: The state or province associated with the address.
+      country_code:
+        expression: addresses.country_code
+        description: The country code associated with the address.
+      zip:
+        expression: addresses.zip
+        description: The zip or postal code associated with the address.
+      company:
+        expression: addresses.company
+        description: The company associated with the address.
+      phone:
+        expression: addresses.phone
+        description: The phone number associated with the address.
+      created_at:
+        expression: addresses.created_at
+        description: The date and time when the address was created.
+      updated_at:
+        expression: addresses.updated_at
+        description: The date and time when the address was last updated.
+      _fivetran_deleted:
+        expression: MISSING
+        description: "{{ doc('_fivetran_deleted') }}"
+      _fivetran_synced:
+        expression: addresses._airbyte_extracted_at
+        description: "{{ doc('_fivetran_synced') }}"
+annotations:
+  approved: true
+  missing_fields:
+    - _fivetran_deleted
+  evaluation:
+    source_stream_name: addresses
+    target_table_name: address
+    table_match_score: 1.0
+    completion_score: 0.9333333333333333
+    explanation: The table match score is high as the fields closely resemble each
+      other from the source to the target. However, completion is slightly lowered
+      due to one missing field mapping.
+    field_mapping_evals:
+      - name: id
+        expression: addresses.id
+        score: 1.0
+        explanation: Direct match found.
+      - name: customer_id
+        expression: addresses.customer_id
+        score: 0.7
+        explanation: Fuzzy match found with acceptable contextual similarity.
+      - name: first_name
+        expression: addresses.first_name
+        score: 1.0
+        explanation: Direct match found.
+      - name: last_name
+        expression: addresses.last_name
+        score: 1.0
+        explanation: Direct match found.
+      - name: address_1
+        expression: addresses.address1
+        score: 1.0
+        explanation: Direct match found.
+      - name: address_2
+        expression: addresses.address2
+        score: 1.0
+        explanation: Direct match found.
+      - name: city
+        expression: addresses.city
+        score: 1.0
+        explanation: Direct match found.
+      - name: province
+        expression: addresses.province
+        score: 1.0
+        explanation: Direct match found.
+      - name: country_code
+        expression: addresses.country_code
+        score: 1.0
+        explanation: Direct match found.
+      - name: zip
+        expression: addresses.zip
+        score: 1.0
+        explanation: Direct match found.
+      - name: company
+        expression: addresses.company
+        score: 1.0
+        explanation: Direct match found.
+      - name: phone
+        expression: addresses.phone
+        score: 1.0
+        explanation: Direct match found.
+      - name: created_at
+        expression: addresses.created_at
+        score: 1.0
+        explanation: Direct match found.
+      - name: updated_at
+        expression: addresses.updated_at
+        score: 1.0
+        explanation: Direct match found.
+      - name: _fivetran_synced
+        expression: addresses._airbyte_extracted_at
+        score: 1.0
+        explanation: Standard mapping as per requirements.
