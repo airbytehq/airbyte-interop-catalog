@@ -1,0 +1,58 @@
+# Raw tables from source-faker
+raw_users:
+  type: ibis.TableDataset
+  table_name: raw_users
+  connection: ${_duckdb}
+  save_args:
+    materialized: table
+
+raw_products:
+  type: ibis.TableDataset
+  table_name: raw_products
+  connection: ${_duckdb}
+  save_args:
+    materialized: table
+
+raw_purchases:
+  type: ibis.TableDataset
+  table_name: raw_purchases
+  connection: ${_duckdb}
+  save_args:
+    materialized: table
+
+# Staging tables
+stg_users:
+  type: ibis.TableDataset
+  table_name: stg_users
+  connection: ${_duckdb}
+  save_args:
+    materialized: view
+
+stg_products:
+  type: ibis.TableDataset
+  table_name: stg_products
+  connection: ${_duckdb}
+  save_args:
+    materialized: view
+
+stg_purchases:
+  type: ibis.TableDataset
+  table_name: stg_purchases
+  connection: ${_duckdb}
+  save_args:
+    materialized: view
+
+# Fact tables
+fct_user_purchases:
+  type: ibis.TableDataset
+  table_name: fct_user_purchases
+  connection: ${_duckdb}
+  save_args:
+    materialized: table
+
+fct_product_sales:
+  type: ibis.TableDataset
+  table_name: fct_product_sales
+  connection: ${_duckdb}
+  save_args:
+    materialized: table

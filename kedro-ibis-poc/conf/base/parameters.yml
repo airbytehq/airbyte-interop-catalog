@@ -1,0 +1,4 @@
+source_faker:
+  count: 1000
+  seed: 12345
+  parallelism: 1

@@ -1,0 +1,4 @@
+_duckdb:
+  backend: duckdb
+  database: data/kedro_ibis_poc.duckdb
+  threads: 4
