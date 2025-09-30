@@ -8,11 +8,11 @@ version = "0.1.0"
 description = "Kedro+Ibis POC with source-faker integration"
 requires-python = ">=3.10,<3.12"
 dependencies = [
-    "kedro~=0.19.0",
-    "kedro-datasets[ibis-duckdb]~=4.0",
-    "airbyte~=0.24.2",
-    "ibis-framework[duckdb]~=9.0",
-    "duckdb~=1.0",
+    "kedro>=1.0.0",
+    "kedro-datasets[ibis-duckdb]~=8.1",
+    "airbyte>=0.31.0",
+    "ibis-framework[duckdb]~=9.5",
+    "duckdb~=1.1",
 ]
 
 [project.optional-dependencies]
@@ -25,7 +25,7 @@ dev = [
 [tool.kedro]
 package_name = "kedro_ibis_poc"
 project_name = "Kedro Ibis POC"
-kedro_init_version = "0.19.0"
+kedro_init_version = "1.0.0"
 
 [tool.ruff]
 line-length = 100
@@ -34,3 +34,6 @@ target-version = "py310"
 [tool.ruff.lint]
 select = ["E", "F", "I", "N", "W"]
 ignore = []
+
+[tool.kedro_telemetry]
+project_id = "3825707566c44685835214e2f9c0bf7a"

@@ -38,7 +38,7 @@ def create_fct_product_sales(
         ]
     ).aggregate(
         total_sales=product_sales.purchase_id.count(),
-        total_revenue=(product_sales.price * product_sales.purchase_id.count()),
+        total_revenue=product_sales.price.sum(),
         total_returns=product_sales.return_timestamp.count(),
         first_sale_date=product_sales.purchase_timestamp.min(),
         last_sale_date=product_sales.purchase_timestamp.max(),

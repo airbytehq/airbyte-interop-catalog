@@ -21,7 +21,7 @@ def create_stg_products(raw_products: ibis.Table) -> ibis.Table:
     """Transform raw products to staging."""
     return raw_products.select(
         raw_products.id.name("product_id"),
-        raw_products.name.name("product_name"),
+        (raw_products.make.concat(" ", raw_products.model)).name("product_name"),
         raw_products.price.cast("decimal(10,2)").name("price"),
         raw_products.year,
         raw_products.make,
@@ -41,4 +41,5 @@ def create_stg_purchases(raw_purchases: ibis.Table) -> ibis.Table:
         raw_purchases.returned_at.name("return_timestamp"),
         raw_purchases.added_to_cart_at.name("cart_timestamp"),
         raw_purchases.created_at,
+        raw_purchases.updated_at,
     )
