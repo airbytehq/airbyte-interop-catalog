@@ -23,7 +23,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 dependencies = [
-    "airbyte==0.24.2",
+    "airbyte==0.35.5",
     "click>=8.0.0",
     "copier>=9.6.0",
     "jinja2>=3.0.0",
